@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Estudio · N64 Juegos que no llegaron a Latam</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,210,63,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  z-index: 200;
+  background: rgba(6, 3, 15, 0.97);
+  border-bottom: 2px solid var(--ye);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+.hdr-logo {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--mg);
+  text-shadow: 0 0 14px rgba(255,46,136,.6);
+  letter-spacing: 3px;
+}
+.hdr-tag {
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: var(--ye);
+  letter-spacing: 3px;
+}
+.hdr-rec {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--ye);
+}
+.dot {
+  width: 10px; height: 10px;
+  background: var(--ye);
+  border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+.deck {
+  position: fixed;
+  top: 56px; left: 0; right: 0; bottom: 64px;
+  overflow: hidden;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: 32px 48px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.slide-num {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  color: rgba(255,255,255,.22);
+  letter-spacing: 2px;
+}
+
+/* PORTADA */
+.portada {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+.portada .ep-tag {
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  color: var(--ye);
+  letter-spacing: 5px;
+  margin-bottom: 22px;
+}
+.portada .ep-title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 60px;
+  letter-spacing: 1.5px;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 18px;
+  max-width: 1100px;
+}
+.portada .ep-title .accent {
+  color: var(--ye);
+  text-shadow: 0 0 22px rgba(255,210,63,.55);
+}
+.portada .ep-sub {
+  font-family: 'Share Tech Mono';
+  font-size: 18px;
+  color: var(--mg);
+  letter-spacing: 4px;
+}
+
+/* SEPARADOR */
+.divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+.divider .pre {
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  letter-spacing: 6px;
+  margin-bottom: 24px;
+  color: var(--ye);
+}
+.divider .title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 68px;
+  letter-spacing: 2px;
+  line-height: 1;
+  color: var(--ye);
+  text-shadow: 0 0 22px rgba(255,210,63,.5);
+  margin-bottom: 22px;
+}
+.divider .sub {
+  font-family: 'Share Tech Mono';
+  font-size: 18px;
+  color: rgba(255,255,255,.7);
+  letter-spacing: 2px;
+  max-width: 880px;
+  line-height: 1.6;
+}
+
+/* SLIDE ITEM */
+.slide-item {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  height: 100%;
+  padding: 20px 56px 24px;
+  gap: 14px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.item-pos {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: var(--ye);
+  text-shadow: 0 0 20px rgba(255,210,63,.55);
+}
+.item-pos .hash {
+  font-size: 28px;
+  color: rgba(255,255,255,.35);
+  text-shadow: none;
+  margin-right: 4px;
+}
+.item-block-label {
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  letter-spacing: 3px;
+  padding: 6px 12px;
+  border: 1px solid var(--ye);
+  color: var(--ye);
+}
+
+.img-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+}
+.frame {
+  position: relative;
+  height: 100%;
+  max-height: 340px;
+  aspect-ratio: 4/3;
+  background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%);
+  border-radius: 8px;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.04),
+    0 18px 50px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  overflow: hidden;
+}
+.frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+}
+.ph {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: linear-gradient(135deg, var(--ph-1, #2D1B69) 0%, var(--ph-2, #4a2a99) 100%);
+  text-align: center;
+  gap: 14px;
+}
+.ph::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 22%;
+  background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 100%);
+  pointer-events: none;
+}
+.ph .ico {
+  font-size: 96px;
+  line-height: 1;
+  z-index: 2;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.45));
+}
+.ph .lbl {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: clamp(18px, 2.2vw, 28px);
+  color: #fff;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0,0,0,.5);
+  z-index: 2;
+}
+.ph .sublbl {
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,.7);
+  z-index: 2;
+}
+.theme-train   { --ph-1:#1a3a4a; --ph-2:#2f6a8a; }
+.theme-treasure{ --ph-1:#4a1a1a; --ph-2:#8a2f2f; }
+.theme-jrpg    { --ph-1:#3a1a4a; --ph-2:#6a2f8a; }
+.theme-goemon  { --ph-1:#4a3a1a; --ph-2:#8a6a2f; }
+.theme-robo    { --ph-1:#2a4a4a; --ph-2:#4a8a8a; }
+.theme-bomb    { --ph-1:#3a1a6b; --ph-2:#5a2a9b; }
+.theme-race    { --ph-1:#1a4a2a; --ph-2:#2f8a4a; }
+.theme-forest  { --ph-1:#2a4a1a; --ph-2:#4a8a2f; }
+.theme-cult    { --ph-1:#7a1a1a; --ph-2:#c42f2f; }
+.theme-mother  { --ph-1:#8b1c4a; --ph-2:#c44e8a; }
+
+.item-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+.item-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.item-title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 26px;
+  color: #fff;
+  letter-spacing: .5px;
+  line-height: 1.1;
+}
+.region-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--mg);
+  text-shadow: 0 0 18px rgba(255,46,136,.5);
+  letter-spacing: 2px;
+  padding: 6px 14px;
+  border: 2px solid var(--mg);
+  border-radius: 4px;
+  background: rgba(255,46,136,.06);
+}
+.region-tag.never {
+  color: #fff;
+  border-color: var(--mg);
+  background: var(--mg);
+  text-shadow: 0 0 18px rgba(255,46,136,.8);
+  letter-spacing: 3px;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 18px rgba(255,46,136,.5); }
+  50%     { box-shadow: 0 0 32px rgba(255,46,136,.9); }
+}
+.item-meta {
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
+  letter-spacing: 2px;
+}
+.item-why {
+  max-width: 940px;
+  padding: 14px 22px;
+  background: rgba(255,210,63,.06);
+  border-left: 4px solid var(--ye);
+  font-family: 'Share Tech Mono';
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255,255,255,.86);
+  text-align: left;
+}
+.item-why .lbl {
+  display: block;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.item-why strong { color: var(--ye); }
+
+/* CIERRE / CHECKLIST */
+.slide h1 {
+  font-family: 'Press Start 2P';
+  font-size: 13px;
+  color: var(--ye);
+  letter-spacing: 4px;
+  margin-bottom: 6px;
+  border-left: 4px solid var(--ye);
+  padding-left: 16px;
+}
+.slide h2 {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 38px;
+  color: var(--ye);
+  text-shadow: 0 0 18px rgba(255,210,63,.45);
+  letter-spacing: 1px;
+  margin: 8px 0 24px 20px;
+  line-height: 1.05;
+}
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 14px;
+}
+.choice-card {
+  background: var(--card-bg);
+  border: 2px solid var(--ye);
+  border-radius: 4px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 0 22px rgba(255,210,63,.15);
+}
+.choice-card h3 {
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.choice-card .big {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 42px;
+  color: var(--mg);
+  text-shadow: 0 0 18px rgba(255,46,136,.4);
+  display: block;
+  margin: 10px 0;
+  line-height: 1;
+}
+.choice-card p {
+  font-family: 'Share Tech Mono';
+  font-size: 13px;
+  color: rgba(255,255,255,.72);
+  line-height: 1.45;
+}
+
+.cam-quote {
+  background: rgba(255,210,63,.07);
+  border-left: 4px solid var(--ye);
+  padding: 22px 26px;
+  margin-top: 22px;
+  font-family: 'Share Tech Mono';
+  font-size: 17px;
+  font-style: italic;
+  color: rgba(255,255,255,.88);
+  line-height: 1.6;
+}
+.cam-quote .lbl {
+  display: block;
+  font-style: normal;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+ul.checklist {
+  list-style: none;
+  margin-top: 10px;
+}
+ul.checklist li {
+  padding: 14px 20px;
+  border-left: 4px solid;
+  margin-bottom: 10px;
+  font-family: 'Share Tech Mono';
+  font-size: 16px;
+  line-height: 1.5;
+}
+ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
+ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
+ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
+ul.checklist li strong.ye { color: var(--ye); }
+ul.checklist li strong.cy { color: var(--cy); }
+ul.checklist li strong.mg { color: var(--mg); }
+
+/* NAV FOOTER */
+nav.footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 64px;
+  background: rgba(6, 3, 15, 0.97);
+  border-top: 2px solid var(--ye);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  z-index: 200;
+}
+.nav-btn {
+  background: transparent;
+  border: 2px solid var(--ye);
+  color: var(--ye);
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  padding: 10px 18px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all .15s;
+  border-radius: 2px;
+}
+.nav-btn:hover:not(:disabled) { background: var(--ye); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  margin: 0 24px;
+}
+.nav-counter {
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  color: var(--mg);
+  letter-spacing: 3px;
+}
+.nav-progress {
+  width: 100%;
+  max-width: 480px;
+  height: 4px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.nav-progress .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--mg), var(--ye));
+  width: 0;
+  transition: width .25s;
+  box-shadow: 0 0 8px rgba(255,210,63,.5);
+}
+.nav-hint {
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: 2px;
+}
+.nav-hint kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 3px;
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: var(--ye);
+  margin: 0 2px;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--ye); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · N64 NO-LATAM · GEN 5</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 PORTADA -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 5 · NINTENDO 64</div>
+      <div class="ep-title">LOS JUEGOS QUE <span class="accent">NUNCA LLEGARON</span> A LATAM</div>
+      <div class="ep-sub">10 DOLORES DE LA GENERACIÓN 5</div>
+    </div>
+  </section>
+
+  <!-- 02 SEPARADOR -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="divider">
+      <div class="pre">10 JUEGOS · ORDEN ASCENDENTE</div>
+      <div class="title">DEL MÁS<br>ACCESIBLE AL<br>MÁS DOLOROSO</div>
+      <div class="sub">Algunos no salieron porque su mecánica solo funcionaba en Japón. Otros tenían anuncio, tráiler, fecha — y nunca llegaron. Cerramos con el que duele de verdad.</div>
+    </div>
+  </section>
+
+  <!-- 03 #10 DENSHA DE GO! 64 -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos"><span class="hash">#</span>10</div>
+        <div class="item-block-label">JP ONLY</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-no-latam/densha.jpg" alt="Densha de Go! 64" onerror="this.style.display='none'">
+          <div class="ph theme-train">
+            <div class="ico">🚆</div>
+            <div class="lbl">Densha de Go! 64</div>
+            <div class="sublbl">SIMULADOR DE TREN · JP</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Densha de Go! 64</div>
+          <div class="region-tag">JAPÓN ONLY</div>
+        </div>
+        <div class="item-meta">TAITO · 1999 · NECESITABA EL VRU PARA HABLAR AL CONDUCTOR</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ NO LLEGÓ</span>
+          Simulador de manejar trenes de la red JR de Tokyo, calle por calle. Usaba el <strong>VRU</strong> para que le hablaras al conductor en japonés. Localizar el juego implicaba localizar el sistema entero de trenes de Japón, los nombres de las estaciones, las frases del conductor. <strong>Nunca se hizo.</strong> La franquicia Densha de Go! solo cruzó a occidente en 2018 con la versión PS4. 19 años después.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 #9 BANGAI-O -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos"><span class="hash">#</span>9</div>
+        <div class="item-block-label">JP + UK</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-no-latam/bangaio.jpg" alt="Bangai-O" onerror="this.style.display='none'">
+          <div class="ph theme-treasure">
+            <div class="ico">💥</div>
+            <div class="lbl">Bangai-O</div>
+            <div class="sublbl">TREASURE · 1999</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Bangai-O</div>
+          <div class="region-tag">JP + UK</div>
+        </div>
+        <div class="item-meta">TREASURE · 1999 · ARCADE SHOOTER · NUNCA USA · NUNCA LATAM</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ NO LLEGÓ</span>
+          Treasure (los de Gunstar Heroes en Genesis) hizo este shooter arcade caótico para N64 — un robot disparando MILES de misiles a la vez. Salió en Japón en 1999. En UK lo distribuyó Konami Europa con tiraje pequeño. <strong>Nunca llegó a USA, nunca a Latam.</strong> Salió después en Dreamcast pero igual sin Latam. Joya de culto que solo conoce quien siguió a Treasure.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 #8 WONDER PROJECT J2 -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos"><span class="hash">#</span>8</div>
+        <div class="item-block-label">JP ONLY</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-no-latam/wonderproject.jpg" alt="Wonder Project J2" onerror="this.style.display='none'">
+          <div class="ph theme-jrpg">
+            <div class="ico">🤖</div>
+            <div class="lbl">Wonder Project J2</div>
+            <div class="sublbl">ENIX · 1996 · SECUELA DE SNES</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Wonder Project J2: Koruro no Mori no Josette</div>
+          <div class="region-tag">JAPÓN ONLY</div>
+        </div>
+        <div class="item-meta">ALMANIC · ENIX · 1996 · LAUNCH TITLE JAPONÉS DEL N64</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ DUELE</span>
+          Secuela del Wonder Project J de SNES que tampoco había salido fuera de Japón. La premisa: criar a un robot huérfano enseñándole emociones, una respuesta por turno. <strong>Era un Tamagotchi narrativo dos años antes del Tamagotchi.</strong> Salió como launch title japonés del N64 en 1996. Nunca tuvo localización oficial. Hay un fan-translation desde 2018.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 #7 GOEMON GREAT ADVENTURE -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos"><span class="hash">#</span>7</div>
+        <div class="item-block-label">NA LIMITADO</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-no-latam/goemon.jpg" alt="Goemon's Great Adventure" onerror="this.style.display='none'">
+          <div class="ph theme-goemon">
+            <div class="ico">🥷</div>
+            <div class="lbl">Goemon's Great Adventure</div>
+            <div class="sublbl">KONAMI · 1999</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Mystical Ninja Starring Goemon's Great Adventure</div>
+          <div class="region-tag">USA + PAL · NO LATAM</div>
+        </div>
+        <div class="item-meta">KONAMI · 1999 · PLATAFORMERO 2.5D · TIRAJE BAJO</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ DUELE</span>
+          Konami sí lo localizó — salió en USA y PAL en 1999. Pero <strong>nunca tuvo distribución oficial en Latam</strong>. El primer Mystical Ninja Starring Goemon llegó a tiendas chilenas; este, su mejor entrega (2 jugadores cooperativo, fase de bonus tipo arcade), no. La generación que jugó el primero esperaba la secuela y nunca la encontró. Hoy el CIB NTSC USA cuesta US$80–120.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 #6 CUSTOM ROBO -->
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos"><span class="hash">#</span>6</div>
+        <div class="item-block-label">JP ONLY</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-no-latam/customrobo.jpg" alt="Custom Robo" onerror="this.style.display='none'">
+          <div class="ph theme-robo">
+            <div class="ico">🤖</div>
+            <div class="lbl">Custom Robo</div>
+            <div class="sublbl">NOISE · 1999 · BASE DE SMASH</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Custom Robo + Custom Robo V2</div>
+          <div class="region-tag">JAPÓN ONLY</div>
+        </div>
+        <div class="item-meta">NOISE · 1999 / 2000 · COMBATE DE ROBOTS PERSONALIZABLES</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ DUELE</span>
+          Construyes tu robot con partes — body, gun, bomb, pod, legs — y peleas con tu setup contra otros. <strong>La mecánica influyó directamente a Smash Bros. (los robots-personajes de Custom Robo son personajes jugables en Smash 4 y Ultimate).</strong> La V2 salió en 2000, mes y medio antes que el N64 dejara de ser relevante en Japón. Custom Robo recién cruzó a occidente en GameCube en 2004 — pero los dos originales del N64 nunca.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 #5 BOMBERMAN SECOND ATTACK -->
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos"><span class="hash">#</span>5</div>
+        <div class="item-block-label">USA LIMITADO</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-no-latam/bomberman-second.jpg" alt="Bomberman 64 Second Attack" onerror="this.style.display='none'">
+          <div class="ph theme-bomb">
+            <div class="ico">💣</div>
+            <div class="lbl">Bomberman 64</div>
+            <div class="sublbl">THE SECOND ATTACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Bomberman 64: The Second Attack</div>
+          <div class="region-tag">USA LIMITADO · NO PAL · NO LATAM</div>
+        </div>
+        <div class="item-meta">HUDSON SOFT · 2000 · HOY CIB ~US$845</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ DUELE</span>
+          <strong>Este lo conocemos del ranking de precios:</strong> el CIB USD pasó de $488 a $990 entre enero y febrero 2022. La razón es exactamente esta — salió a fines del ciclo del N64 con tiraje USA limitadísimo. Nunca llegó a Latam ni a Europa. El Bomberman 64 original sí circuló en Chile como cartucho importado. Su secuela, no. La diferencia: 25 dólares vs. 800.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 #4 F-ZERO X EXPANSION KIT -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos"><span class="hash">#</span>4</div>
+        <div class="item-block-label">64DD JP</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-no-latam/fzeroxexp.jpg" alt="F-Zero X Expansion Kit" onerror="this.style.display='none'">
+          <div class="ph theme-race">
+            <div class="ico">🏎️</div>
+            <div class="lbl">F-Zero X</div>
+            <div class="sublbl">EXPANSION KIT · 64DD</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">F-Zero X Expansion Kit</div>
+          <div class="region-tag">64DD JAPÓN ONLY</div>
+        </div>
+        <div class="item-meta">NINTENDO · 2000 · DLC FÍSICO + EDITOR DE PISTAS</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ DUELE</span>
+          <strong>El primer DLC físico de la historia de Nintendo.</strong> Un disco para el 64DD que agregaba pistas nuevas, autos nuevos y, lo más loco, <strong>un editor de circuitos completo</strong>. Las pistas que diseñabas se podían guardar e intercambiar. Veintidós años antes que Mario Maker. El 64DD vendió 15.000 unidades, así que el universo total de este Expansion Kit es minúsculo. Sin él hoy no se puede crear pistas en F-Zero X — ni siquiera en la versión Virtual Console.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 #3 ANIMAL FOREST -->
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos"><span class="hash">#</span>3</div>
+        <div class="item-block-label">JP ONLY</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-no-latam/animalforest.jpg" alt="Animal Forest" onerror="this.style.display='none'">
+          <div class="ph theme-forest">
+            <div class="ico">🌳</div>
+            <div class="lbl">Dōbutsu no Mori</div>
+            <div class="sublbl">EL ORIGINAL ANIMAL CROSSING</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Animal Forest (Dōbutsu no Mori)</div>
+          <div class="region-tag">JAPÓN ONLY</div>
+        </div>
+        <div class="item-meta">NINTENDO EAD · ABRIL 2001 · ÚLTIMO JUEGO DEL N64 EN JAPÓN</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ DUELE</span>
+          <strong>El Animal Crossing original existió en el N64 antes que en GameCube</strong>. Abril 2001, solo Japón. La versión "completa" que el resto del mundo conoció fue Animal Crossing en GameCube 2002 (una ampliación de este juego). El reloj interno funcionaba en tiempo real — si entrabas a las 3am, los animales estaban durmiendo. Mecánica revolucionaria que nadie afuera de Japón vio en su consola original.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 #2 SIN & PUNISHMENT -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos"><span class="hash">#</span>2</div>
+        <div class="item-block-label">JP ONLY (HASTA 2007)</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-no-latam/sin-punishment.jpg" alt="Sin and Punishment" onerror="this.style.display='none'">
+          <div class="ph theme-cult">
+            <div class="ico">🎯</div>
+            <div class="lbl">Sin and Punishment</div>
+            <div class="sublbl">TREASURE · 罪と罰</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Sin and Punishment</div>
+          <div class="region-tag">JAPÓN ONLY · 7 AÑOS DE ESPERA</div>
+        </div>
+        <div class="item-meta">TREASURE · NOV 2000 · ON-RAILS SHOOTER · TRADUCIDO POR FANS EN 2007</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ DUELE</span>
+          Treasure (otra vez Treasure) hizo este on-rails shooter cinemático en 2000 — uno de los últimos lanzamientos del N64 en Japón. <strong>Nintendo tenía planeado lanzarlo en USA, hicieron tráiler, tenían los textos traducidos. Lo cancelaron a último minuto.</strong> La razón nunca quedó clara — probablemente porque el N64 ya estaba muerto comercialmente. El juego salió en occidente solo en 2007 vía Virtual Console de Wii, siete años tarde. La secuela (Star Successor) sí salió mundial en Wii 2009.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 #1 MOTHER 3 N64 -->
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos"><span class="hash">#</span>1</div>
+        <div class="item-block-label">EL QUE NUNCA SALIÓ</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-no-latam/mother3.jpg" alt="Mother 3 N64" onerror="this.style.display='none'">
+          <div class="ph theme-mother">
+            <div class="ico">💔</div>
+            <div class="lbl">Mother 3</div>
+            <div class="sublbl">CANCELADO · NUNCA SALIÓ EN N64</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Mother 3 (versión N64 + 64DD)</div>
+          <div class="region-tag never">CANCELADO 2000</div>
+        </div>
+        <div class="item-meta">NINTENDO · ANUNCIADO 1996 · CANCELADO ABRIL 2000 · DESPUÉS GBA 2006 SOLO JP</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ DUELE EL #1</span>
+          <strong>El más grande "qué hubiera sido" del N64.</strong> Mother 3 (EarthBound 64 en occidente, antes de la cancelación) se anunció en 1996 como flagship del N64 + 64DD. Tráilers oficiales, capturas, fechas. Iba a ser uno de los primeros RPG completamente en 3D. <strong>En abril de 2000 Nintendo lo canceló oficialmente</strong> — el 64DD había fracasado, el N64 estaba muriendo, el equipo se desmoralizó. Shigesato Itoi lo reescribió desde cero para GBA en 2006 — y esa versión <strong>nunca salió oficialmente fuera de Japón</strong>. El fan-translation de 2008 es la única forma de jugarlo en español. Es el caso N64 que une las dos heridas: lo que se canceló y lo que nunca llegó a Latam.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 CIERRE -->
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <h1>CIERRE · QUÉ HICIMOS EN LATAM</h1>
+    <h2>Lo que jugamos en su lugar</h2>
+    <div class="choice-grid">
+      <div class="choice-card">
+        <h3>IMPORTAR</h3>
+        <div class="big">US$80–500</div>
+        <p>Cartuchos importados con region adapter o consola JP. Era la opción rica.</p>
+      </div>
+      <div class="choice-card">
+        <h3>FAMILIA EN USA</h3>
+        <div class="big">$0</div>
+        <p>El primo en USA mandaba el cartucho con encargo. Funcionaba para Goemon, no para los JP.</p>
+      </div>
+      <div class="choice-card">
+        <h3>EMULACIÓN</h3>
+        <div class="big">1999+</div>
+        <p>Nemu64, Project64. La primera vez que muchos chilenos jugamos un N64 fue emulado en un Pentium III.</p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">FRASE DE CIERRE PARA CÁMARA</span>
+      "Esa es la trampa de la generación 5 para Latam: no era solo que faltaban algunos juegos. Era que la mitad de la creatividad de Nintendo, de Treasure, de Konami, vivía en un sistema postal japonés que nunca cruzó el Pacífico. Mother 3 no es solo un juego cancelado — es el símbolo de una era donde un país decidía qué jugábamos los demás. Y hoy, gracias a Internet, podemos contarlo. Pero esos cartuchos siguen sin estar en nuestras vitrinas."
+    </div>
+  </section>
+
+  <!-- 14 CHECKLIST -->
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <h1>CHECKLIST · PRE-GRABACIÓN</h1>
+    <h2>Antes de prender cámaras</h2>
+    <ul class="checklist">
+      <li class="ye"><strong class="ye">☐ Luis</strong> — episodio con alta carga emocional. Tono nostálgico, no llorón. Memorizar la frase de cierre de Mother 3 — es lo que la gente va a clipear.</li>
+      <li class="ye"><strong class="ye">☐ Koko</strong> — pensar qué juegos importados/emulados tuvo Koko en su época. Si jugó alguno de estos via emulador o copia pirata, anécdota personal corta.</li>
+      <li class="cy"><strong class="cy">☐ Setup</strong> — si tenemos algún cartucho importado físico (de los 10 o de otros JP exclusives), mostrarlo en cámara. Plus de autenticidad.</li>
+      <li class="cy"><strong class="cy">☐ Audio</strong> — lavalier para ambos. Episodio más narrativo que reactivo, audio limpio prioridad.</li>
+      <li class="mg"><strong class="mg">☐ Ritmo</strong> — cronómetro visible. Ritmo objetivo: ~55 seg promedio por juego. Mother 3 (#1) puede tomarse hasta 1:30 — es el clímax del episodio.</li>
+      <li class="mg"><strong class="mg">☐ Frases gancho</strong> — memorizar 3: (1) Densha de Go necesitaba localizar el sistema de trenes de Japón, (2) Bomberman 64 Second Attack pasó de $488 a $990 en un mes, (3) Mother 3 era el flagship del N64+64DD y se canceló en abril de 2000.</li>
+    </ul>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 14</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+
+go(0);
+</script>
+
+</body>
+</html>
