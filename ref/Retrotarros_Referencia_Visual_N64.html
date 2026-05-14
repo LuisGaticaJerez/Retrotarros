@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Referencia Visual N64</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.88);
+  --hdr-h: 56px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dk);
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.10) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.016) 39px, rgba(255,255,255,.016) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.016) 39px, rgba(255,255,255,.016) 40px);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+  padding-top: var(--hdr-h);
+}
+
+/* ══════════════════════════════════════
+   STICKY HEADER — compacto
+══════════════════════════════════════ */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--hdr-h);
+  z-index: 200;
+  background: rgba(6, 3, 15, 0.97);
+  border-bottom: 2px solid var(--mg);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  gap: 20px;
+}
+
+.hdr-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hdr-logo {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--mg);
+  text-shadow: 0 0 14px rgba(255,46,136,.6);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+.hdr-sep { color: rgba(255,255,255,.2); font-size: 18px; }
+.hdr-tag {
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: var(--ye);
+  letter-spacing: 2px;
+}
+
+.hdr-nav {
+  display: flex;
+  gap: 8px;
+}
+.hdr-nav a {
+  font-family: 'Press Start 2P';
+  font-size: 6px;
+  letter-spacing: 1px;
+  padding: 5px 9px;
+  border: 1px solid;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.nav-co { border-color: var(--ye); color: var(--ye); }
+.nav-co:hover { background: var(--ye); color: #000; }
+.nav-ra { border-color: var(--mg); color: var(--mg); }
+.nav-ra:hover { background: var(--mg); color: #000; }
+.nav-st { border-color: var(--cy); color: var(--cy); }
+.nav-st:hover { background: var(--cy); color: #000; }
+
+.hdr-rec {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Press Start 2P';
+  font-size: 7px;
+  color: var(--mg);
+  flex-shrink: 0;
+}
+.dot {
+  width: 8px; height: 8px;
+  background: var(--mg);
+  border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+/* ══════════════════════════════════════
+   CONTENIDO
+══════════════════════════════════════ */
+.page { max-width: 700px; margin: 0 auto; padding: 32px 20px 80px; }
+
+/* ── SECTION TITLE ── */
+.sec {
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  letter-spacing: 3px;
+  padding: 0 0 14px 14px;
+  margin: 40px 0 24px;
+  border-left: 3px solid;
+}
+.sec.co  { color: var(--ye); border-color: var(--ye); }
+.sec.ra  { color: var(--mg); border-color: var(--mg); }
+.sec.std { color: var(--cy); border-color: var(--cy); }
+
+/* ── CARD ── */
+.card {
+  background: var(--card-bg);
+  border: 1px solid;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  backdrop-filter: blur(8px);
+  transition: transform .18s, box-shadow .18s;
+}
+.card:hover { transform: translateY(-3px); }
+.card.co  { border-color: var(--ye); box-shadow: 0 0 16px rgba(255,210,63,.15); }
+.card.ra  { border-color: var(--mg); box-shadow: 0 0 16px rgba(255,46,136,.15); }
+.card.std { border-color: var(--cy); box-shadow: 0 0 12px rgba(0,229,255,.10); }
+
+/* ── IMAGE ── */
+.img-wrap {
+  width: 100%;
+  height: 300px;
+  background: #03020d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .35s;
+}
+.card:hover .img-wrap img { transform: scale(1.04); }
+.img-wrap .ph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: .38;
+}
+.ph .ico { font-size: 64px; }
+.ph span { font-family: 'Press Start 2P'; font-size: 9px; color: var(--cy); letter-spacing: 2px; text-align: center; }
+
+/* corner badge */
+.cb {
+  position: absolute;
+  top: 10px; right: 10px;
+  font-family: 'Press Start 2P';
+  font-size: 7px;
+  padding: 5px 9px;
+  letter-spacing: 1px;
+}
+.cb-jp  { background: #aa0000; color: #fff; }
+.cb-kr  { background: #003087; color: #fff; }
+.cb-us  { background: #1a3a6b; color: #fff; }
+.cb-ye  { background: var(--ye); color: #000; }
+.cb-mg  { background: var(--mg); color: #000; }
+.cb-cy  { background: var(--cy); color: #000; }
+
+/* rank overlay */
+.rank {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 32px 16px 10px;
+  background: linear-gradient(180deg, transparent 0%, rgba(6,3,15,.9) 100%);
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 13px;
+  color: rgba(255,255,255,.55);
+  letter-spacing: 1px;
+}
+
+/* ── BODY ── */
+.body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px; }
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.name {
+  font-family: 'Orbitron';
+  font-weight: 700;
+  font-size: 17px;
+  color: #fff;
+  line-height: 1.25;
+}
+.code { font-size: 11px; color: rgba(255,255,255,.35); margin-top: 3px; }
+.price-col { text-align: right; flex-shrink: 0; }
+.price-big {
+  font-family: 'Orbitron';
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--mg);
+  text-shadow: 0 0 12px rgba(255,46,136,.4);
+  line-height: 1;
+}
+.price-sub { font-size: 10px; color: rgba(255,46,136,.55); margin-top: 3px; }
+
+/* WHY */
+.why {
+  padding: 10px 13px;
+  background: rgba(255,210,63,.07);
+  border-left: 3px solid var(--ye);
+  font-size: 12px;
+  color: rgba(255,255,255,.82);
+  line-height: 1.6;
+}
+.why strong { color: var(--ye); }
+
+/* FACTS */
+.facts { display: flex; flex-direction: column; gap: 5px; }
+.ft { display: grid; grid-template-columns: 90px 1fr; gap: 6px; font-size: 12px; line-height: 1.4; }
+.fl { color: var(--ye); font-size: 10px; text-transform: uppercase; letter-spacing: .4px; }
+.fv { color: rgba(255,255,255,.8); }
+.fv.w { color: var(--ye); }
+.fv.p { color: var(--mg); font-weight: bold; font-size: 13px; }
+
+/* HOOK */
+.hook {
+  padding: 10px 13px;
+  background: rgba(255,46,136,.07);
+  border-left: 3px solid var(--mg);
+  font-size: 12px;
+  color: rgba(255,255,255,.72);
+  line-height: 1.55;
+  font-style: italic;
+}
+.hook strong { color: var(--mg); font-style: normal; }
+
+/* TAGS */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-family: 'Press Start 2P'; font-size: 6px; padding: 4px 8px; letter-spacing: .5px; }
+.t-jp { background: #aa0000; color: #fff; }
+.t-kr { background: #003087; color: #fff; }
+.t-us { background: #1a3a6b; color: #fff; }
+.t-mg { background: var(--mg); color: #000; }
+.t-ye { background: var(--ye); color: #000; }
+.t-cy { background: var(--cy); color: #000; }
+
+/* SECTION ANCHOR OFFSET */
+.anchor { display: block; height: calc(var(--hdr-h) + 20px); margin-top: calc(-1 * var(--hdr-h) - 20px); pointer-events: none; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 28px 20px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  font-size: 10px;
+  color: rgba(255,255,255,.22);
+  letter-spacing: 2px;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ HEADER STICKY ═══════════════════ -->
+<header>
+  <div class="hdr-left">
+    <div class="hdr-logo">RETROTARROS</div>
+    <div class="hdr-sep">·</div>
+    <div class="hdr-tag">referencia visual N64</div>
+  </div>
+  <nav class="hdr-nav">
+    <a href="#consolas" class="nav-co">CONSOLAS</a>
+    <a href="#raros"    class="nav-ra">PERIFÉRICOS RAROS</a>
+    <a href="#std"      class="nav-st">ESTÁNDAR</a>
+  </nav>
+  <div class="hdr-rec"><div class="dot"></div>REC</div>
+</header>
+
+<div class="page">
+
+<!-- ═══════════════════════════════════════════
+     CONSOLAS
+═══════════════════════════════════════════ -->
+<span id="consolas" class="anchor"></span>
+<div class="sec co">🏆 RANKING — CONSOLAS N64 MÁS CARAS</div>
+
+<!-- #1 Pikachu Orange -->
+<div class="card co">
+  <div class="img-wrap">
+    <img src="https://www.svg.com/img/gallery/the-rarest-n64-console-will-cost-you-a-staggering-amount-of-money/l-intro-1664197901.jpg"
+         alt="N64 Pikachu Orange"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">🟠</span><span>PIKACHU<br>ORANGE</span></div>
+    <span class="cb cb-jp">SOLO JAPÓN</span>
+    <div class="rank">#1 MÁS CARO</div>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Nintendo 64 Pikachu Orange</div><div class="code">NUS-101 · Año 2000 · Japón exclusivo</div></div>
+      <div class="price-col"><div class="price-big">US$8.000+</div><div class="price-sub">sealed graded · loose ~US$275</div></div>
+    </div>
+    <div class="tags"><span class="tag t-jp">SOLO JAPÓN</span><span class="tag t-mg">EL MÁS CARO</span></div>
+    <div class="why"><strong>¿POR QUÉ CUESTA TANTO?</strong> Hay dos versiones Pikachu N64 (naranja y azul). La naranja solo salió en Japón — es la más difícil. Un sealed graded llega a US$8.000+. Las mejillas de Pikachu se prenden rojas cuando la consola está encendida. El pie izquierdo es el botón reset. La Poké Ball es el power. Sin puerto de expansión inferior (incompatible con 64DD).</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Loose</span><span class="fv p">~US$275</span></div>
+      <div class="ft"><span class="fl">CIB</span><span class="fv p">~US$425</span></div>
+      <div class="ft"><span class="fl">Sealed</span><span class="fv p">~US$1.200</span></div>
+      <div class="ft"><span class="fl">Graded</span><span class="fv p">US$8.000+</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- #2 Comboy -->
+<div class="card co">
+  <div class="img-wrap">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hyundai-Comboy-64.jpg"
+         alt="Comboy 64 Korea"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">🇰🇷</span><span>COMBOY 64<br>COREA</span></div>
+    <span class="cb cb-kr">SOLO COREA</span>
+    <div class="rank">#2</div>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Nintendo 64 Comboy</div><div class="code">Hyundai Electronics · 1996–1998 · Corea del Sur</div></div>
+      <div class="price-col"><div class="price-big">~US$2.000</div><div class="price-sub">promedio CIB</div></div>
+    </div>
+    <div class="tags"><span class="tag t-kr">SOLO COREA</span><span class="tag t-mg">MUY RARO</span></div>
+    <div class="why"><strong>¿POR QUÉ CUESTA TANTO?</strong> En 1996 Corea del Sur tenía un embargo comercial contra productos japoneses. Nintendo no podía vender directo, así que se asoció con Hyundai Electronics para lanzar el N64 bajo la marca "Comboy". Cuando el embargo se levantó en 1998, los Comboy dejaron de fabricarse. Solo existen unidades del período 1996–1998.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Período</span><span class="fv w">1996–1998 únicamente</span></div>
+      <div class="ft"><span class="fl">Socio</span><span class="fv">Hyundai Electronics (no el Hyundai de autos)</span></div>
+      <div class="ft"><span class="fl">Color</span><span class="fv">Negro carbón estándar — lo raro es el origen</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- #3 JUSCO -->
+<div class="card co">
+  <div class="img-wrap">
+    <img src="https://rarest.org/wp-content/uploads/2023/05/11-of-the-Rarest-Nintendo-64-Consoles.jpg"
+         alt="N64 JUSCO"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">🔘</span><span>N64 JUSCO<br>JAPÓN</span></div>
+    <span class="cb cb-jp">SOLO JAPÓN</span>
+    <div class="rank">#3</div>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Nintendo 64 JUSCO</div><div class="code">1999 · 30° aniversario JUSCO · 1.000–5.000 unidades</div></div>
+      <div class="price-col"><div class="price-big">~US$1.000</div><div class="price-sub">solo tiendas JUSCO · Japón</div></div>
+    </div>
+    <div class="tags"><span class="tag t-jp">SOLO JAPÓN</span><span class="tag t-mg">EXTREMO</span></div>
+    <div class="why"><strong>¿POR QUÉ CUESTA TANTO?</strong> JUSCO (Japan United Stores Company) hizo esta consola para su 30° aniversario y la vendió exclusivamente en sus tiendas. Diseño gris translúcido. Se estiman entre 1.000 y 5.000 unidades fabricadas. Hoy JUSCO no existe — fue rebrandeada como AEON en 2003. La empresa ya desapareció.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Unidades</span><span class="fv w">~1.000–5.000 estimadas</span></div>
+      <div class="ft"><span class="fl">Color</span><span class="fv">Gris translúcido arriba y abajo</span></div>
+      <div class="ft"><span class="fl">Empresa</span><span class="fv w">JUSCO ya no existe (hoy es AEON)</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- #4 Gold -->
+<div class="card co">
+  <div class="img-wrap">
+    <img src="https://static0.thegamerimages.com/wordpress/wp-content/uploads/2021/08/N64-Piece-Header-Image.jpg?w=1200&h=675&fit=crop"
+         alt="N64 Gold"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">🟡</span><span>N64 GOLD<br>ZELDA OoT</span></div>
+    <span class="cb cb-us">TOYS R US</span>
+    <div class="rank">#4</div>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Nintendo 64 Gold</div><div class="code">1998 · Toys R Us exclusive USA · También en Japón</div></div>
+      <div class="price-col"><div class="price-big">~US$600–1.000</div><div class="price-sub">CIB boxed</div></div>
+    </div>
+    <div class="tags"><span class="tag t-us">TOYS R US</span><span class="tag t-jp">JAPÓN</span><span class="tag t-mg">RARO</span></div>
+    <div class="why"><strong>¿POR QUÉ CUESTA TANTO?</strong> En USA fue exclusiva de Toys R Us — y Toys R Us cerró para siempre en 2018. Eso le da valor histórico extra a cualquier bundle de esa tienda. Coincidió con Zelda: Ocarina of Time en 1998. La versión USA venía con dos controles dorados. Nunca llegó a Europa. El coleccionista que la quiere tiene que importarla.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">USA</span><span class="fv w">Solo en Toys R Us (tienda que ya cerró en 2018)</span></div>
+      <div class="ft"><span class="fl">Europa</span><span class="fv">Nunca tuvo esta versión</span></div>
+      <div class="ft"><span class="fl">Bundle</span><span class="fv">Versión USA con dos controles dorados</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- #5 Daiei Hawks -->
+<div class="card co">
+  <div class="img-wrap">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nintendo-64-Daiei-Hawks.jpg"
+         alt="N64 Daiei Hawks"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">🧡</span><span>DAIEI HAWKS<br>JAPÓN</span></div>
+    <span class="cb cb-jp">SOLO JAPÓN</span>
+    <div class="rank">#5</div>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Nintendo 64 Daiei Hawks</div><div class="code">1998 · Naranja + negro · Solo tiendas Daiei · Japón</div></div>
+      <div class="price-col"><div class="price-big">~US$500</div><div class="price-sub">5.000–10.000 unidades</div></div>
+    </div>
+    <div class="tags"><span class="tag t-jp">SOLO JAPÓN</span><span class="tag t-mg">MUY RARO</span></div>
+    <div class="why"><strong>¿POR QUÉ CUESTA TANTO?</strong> El supermercado Daiei era dueño del equipo de baseball Fukuoka Daiei Hawks. Hizo la consola con los colores del equipo (naranja + negro translúcido) y la vendió solo en sus tiendas. Hoy el equipo se llama Fukuoka SoftBank Hawks (cambio de dueño en 2005). Alerta: hay falsificaciones circulando en el mercado — verificar antes de filmar.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Unidades</span><span class="fv w">~5.000–10.000 estimadas</span></div>
+      <div class="ft"><span class="fl">Colores</span><span class="fv">Naranja translúcido arriba · negro translúcido abajo</span></div>
+      <div class="ft"><span class="fl">⚠️ Alerta</span><span class="fv w">Hay falsificaciones — verificar UV/tornillos antes de filmar</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- #6 Pikachu Blue -->
+<div class="card co">
+  <div class="img-wrap">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/N64-Pikachu-Blue.jpg"
+         alt="N64 Pikachu Blue"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">🔵</span><span>PIKACHU BLUE<br>JP · NA · PAL</span></div>
+    <span class="cb cb-jp">JP · NA · PAL</span>
+    <div class="rank">#6</div>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Nintendo 64 Pikachu Blue</div><div class="code">NUS-101 · Año 2000 · Japón / NA / PAL</div></div>
+      <div class="price-col"><div class="price-big">~US$400–900</div><div class="price-sub">según región y condición</div></div>
+    </div>
+    <div class="tags"><span class="tag t-jp">JP</span><span class="tag t-us">NA</span><span class="tag t-mg">RARO</span></div>
+    <div class="why"><strong>¿POR QUÉ CUESTA?</strong> Es el hermano más accesible del Pikachu Orange, pero igual raro. La versión japonesa (azul claro) y la occidental (azul oscuro) tienen colores distintos. Una unidad en Alemania se remató en US$445. Misma mecánica que la naranja: mejillas que se iluminan, pie-reset, Poké Ball power.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Versiones</span><span class="fv">Azul claro (JP) · Azul oscuro (NA/PAL)</span></div>
+      <div class="ft"><span class="fl">Venta doc.</span><span class="fv">US$445 en Alemania (TheGamer, 2021)</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PERIFÉRICOS RAROS
+═══════════════════════════════════════════ -->
+<span id="raros" class="anchor"></span>
+<div class="sec ra">★ PERIFÉRICOS RAROS — JAPÓN</div>
+
+<!-- 64DD -->
+<div class="card ra">
+  <div class="img-wrap">
+    <img src="https://jrra.zone/n64/i/l/64dd-front.jpg" alt="Nintendo 64DD"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">💾</span><span>64DD</span></div>
+    <span class="cb cb-jp">SOLO JAPÓN</span>
+    <div class="rank">EL MÁS CARO</div>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Nintendo 64DD</div><div class="code">NUS-010 · Disk Drive · Diciembre 1999 · 14 meses de vida</div></div>
+      <div class="price-col"><div class="price-big">US$7.830+</div><div class="price-sub">sealed · loose ~US$1.500</div></div>
+    </div>
+    <div class="tags"><span class="tag t-jp">SOLO JAPÓN</span><span class="tag t-mg">EL MÁS CARO</span></div>
+    <div class="why"><strong>¿POR QUÉ CUESTA TANTO?</strong> De 100.000 unidades planeadas, solo se vendieron ~15.000. Las otras 85.000 fueron descartadas. Se vendía principalmente por suscripción postal (servicio Randnet: internet + email + juego online desde el N64). Cuando Randnet cerró en febrero de 2001, Nintendo compró de vuelta la mayoría de las unidades. Las pocas que no se devolvieron son las que circulan hoy.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Loose</span><span class="fv p">~US$1.500</span></div>
+      <div class="ft"><span class="fl">CIB</span><span class="fv p">~US$2.900</span></div>
+      <div class="ft"><span class="fl">Sealed</span><span class="fv p">US$7.830+</span></div>
+      <div class="ft"><span class="fl">Unidades</span><span class="fv w">~15.000 de 100.000 planeadas</span></div>
+      <div class="ft"><span class="fl">Vida útil</span><span class="fv">Dic 1999 → Feb 2001 · solo 14 meses</span></div>
+      <div class="ft"><span class="fl">Juegos</span><span class="fv w">Solo 9 discos lanzados en total</span></div>
+    </div>
+    <div class="hook"><strong>HOOK:</strong> "Nintendo descartó 85.000 unidades en silencio. Cada una de las que sobrevivieron hoy vale US$1.500 o más."</div>
+  </div>
+</div>
+
+<!-- Bio Sensor -->
+<div class="card ra">
+  <div class="img-wrap">
+    <img src="https://jrra.zone/n64/i/l/biosensor-pak-closeup.jpg" alt="Bio Sensor"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">💓</span><span>BIO SENSOR</span></div>
+    <span class="cb cb-jp">SOLO JAPÓN</span>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Bio Sensor</div><div class="code">SETA Corp. · 1998 · Clip infrarrojo de oreja</div></div>
+      <div class="price-col"><div class="price-big">~US$105</div><div class="price-sub">sealed (eBay UK 2023)</div></div>
+    </div>
+    <div class="tags"><span class="tag t-jp">SOLO JAPÓN</span><span class="tag t-mg">RARÍSIMO</span></div>
+    <div class="why"><strong>¿POR QUÉ ES DIFÍCIL DE ENCONTRAR?</strong> Solo un juego en el planeta usó este accesorio: Tetris 64, exclusivo de Japón. Se insinuó que más juegos lo adoptarían — nunca pasó. Hoy es buscado por coleccionistas de hardware experimental. El nombre interno en el chip del hardware dice "Biopack". No es médico: es un accesorio de juego.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Juegos</span><span class="fv w">1 en el mundo: Tetris 64</span></div>
+      <div class="ft"><span class="fl">Tecnología</span><span class="fv">Fotopletismografía infrarroja en el lóbulo</span></div>
+      <div class="ft"><span class="fl">Efecto</span><span class="fv w">Más pulsaciones → piezas más difíciles en Tetris</span></div>
+      <div class="ft"><span class="fl">Conexión</span><span class="fv">Puerto Controller Pak del control</span></div>
+    </div>
+    <div class="hook"><strong>HOOK:</strong> "Te conectabas a la oreja y Tetris se ponía más difícil mientras más nervioso estuvieras. 1998."</div>
+  </div>
+</div>
+
+<!-- VRU -->
+<div class="card ra">
+  <div class="img-wrap">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/N64-VRU.jpg" alt="VRU"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">🎤</span><span>VRU</span></div>
+    <span class="cb cb-jp">JP + NA · SIN PAL</span>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Voice Recognition Unit (VRU)</div><div class="code">NUS-020 + NUS-021 · JP 1998 · NA 2000 · Nunca en Europa</div></div>
+      <div class="price-col"><div class="price-big">~US$15–40</div><div class="price-sub">loose · raro por historia, no por precio</div></div>
+    </div>
+    <div class="tags"><span class="tag t-jp">JP + NA</span><span class="tag t-mg">SIN PAL</span></div>
+    <div class="why"><strong>¿POR QUÉ ES ESPECIAL?</strong> Primer intento de Nintendo de control por voz en consola doméstica. Solo 2 juegos compatibles en todo el mundo. Calibrado para voces de niños — adultos fallaban frecuentemente. Nunca llegó a Europa. Y el VRU no pudo ser emulado correctamente en software hasta 2023 — 25 años después de su lanzamiento.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Juegos</span><span class="fv w">2 en el mundo (Hey You Pikachu · Densha de Go!)</span></div>
+      <div class="ft"><span class="fl">Calibrado</span><span class="fv w">Voces agudas · adultos tenían problemas</span></div>
+      <div class="ft"><span class="fl">Region-lock</span><span class="fv">VRU JP no funciona con consola NA</span></div>
+      <div class="ft"><span class="fl">Emulado</span><span class="fv w">Recién funciona en emulador desde 2023</span></div>
+    </div>
+    <div class="hook"><strong>HOOK:</strong> "El 2do juego era un simulador de tren japonés. El micrófono tenía pelotita amarilla de gomaespuma. Solo voces de niños."</div>
+  </div>
+</div>
+
+<!-- N64 Mouse -->
+<div class="card ra">
+  <div class="img-wrap">
+    <img src="https://jrra.zone/n64/i/l/n64-mouse1.jpg" alt="N64 Mouse"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">🖱️</span><span>N64 MOUSE</span></div>
+    <span class="cb cb-jp">SOLO JAPÓN</span>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Nintendo 64 Mouse</div><div class="code">NUS-017 · Mitsumi · 1999 · Pack-in obligatorio</div></div>
+      <div class="price-col"><div class="price-big">Muy raro</div><div class="price-sub">nunca se vendió solo</div></div>
+    </div>
+    <div class="tags"><span class="tag t-jp">SOLO JAPÓN</span><span class="tag t-mg">NUNCA SUELTO</span></div>
+    <div class="why"><strong>¿POR QUÉ ES TAN DIFÍCIL?</strong> Es el periférico de un periférico. Para tenerlo necesitas encontrar un Mario Artist: Paint Studio completo con caja — ese juego solo existe para el 64DD, que vendió ~15.000 unidades. El universo total de este mouse es menor que el universo total del 64DD. Nunca se vendió por separado, en ninguna región, en ninguna época.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Solo con</span><span class="fv w">Mario Artist: Paint Studio (64DD exclusivo)</span></div>
+      <div class="ft"><span class="fl">Nunca suelto</span><span class="fv">Nunca se vendió por separado</span></div>
+      <div class="ft"><span class="fl">Aspecto</span><span class="fv">Mouse estándar 2 botones · logo Nintendo al centro</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Randnet Modem -->
+<div class="card ra">
+  <div class="img-wrap">
+    <img src="https://jrra.zone/n64/i/l/pRuOspy.jpg" alt="Randnet Modem"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">📞</span><span>MODEM</span></div>
+    <span class="cb cb-jp">SOLO JAPÓN</span>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Randnet Modem</div><div class="code">NUS-029 · Cartucho con módem 28.8 kbps · 1999</div></div>
+      <div class="price-col"><div class="price-big">Muy raro</div><div class="price-sub">solo Yahoo Auctions Japan</div></div>
+    </div>
+    <div class="tags"><span class="tag t-jp">SOLO JAPÓN</span><span class="tag t-mg">RARÍSIMO</span></div>
+    <div class="why"><strong>¿POR QUÉ ES ESPECIAL?</strong> Es un cartucho N64 con un módem de internet adentro. El número de teléfono al que marcaba (03-3568-5050, Tokyo) está grabado en el ROM del chip y no se puede cambiar. Si lo conectaras hoy a una línea telefónica, marcaría ese número que lleva más de 20 años sin existir. Hardware cuyo único propósito murió en 2001.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Aspecto</span><span class="fv">Cartucho N64 normal con puerto RJ-11 en la trasera</span></div>
+      <div class="ft"><span class="fl">Teléfono</span><span class="fv w">03-3568-5050 Tokyo · grabado en ROM · ya no existe</span></div>
+      <div class="ft"><span class="fl">Función</span><span class="fv">Email + web + juego online en Randnet</span></div>
+    </div>
+    <div class="hook"><strong>HOOK:</strong> "Si lo enchufas hoy a una línea telefónica, marca ese número de Tokyo. Que lleva más de 20 años sin contestar."</div>
+  </div>
+</div>
+
+<!-- Keyboard -->
+<div class="card ra">
+  <div class="img-wrap">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nintendo-64-Keyboard.jpg" alt="N64 Keyboard"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">⌨️</span><span>KEYBOARD</span></div>
+    <span class="cb cb-jp">SOLO JAPÓN</span>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">N64 Keyboard</div><div class="code">RND-001 · RandnetDD Co. · 1999 · Solo 14 meses útil</div></div>
+      <div class="price-col"><div class="price-big">Extremo</div><div class="price-sub">Yahoo Auctions Japan únicamente</div></div>
+    </div>
+    <div class="tags"><span class="tag t-jp">SOLO JAPÓN</span><span class="tag t-mg">EXTREMO</span></div>
+    <div class="why"><strong>¿POR QUÉ ES TAN RARO?</strong> Solo sirvió para el servicio Randnet. Cuando Randnet cerró en febrero de 2001, el teclado quedó sin ningún uso posible. No existe en el mercado occidental. Si aparece en venta, es que alguien lo guardó desde 1999. Virtualmente invisible afuera de Yahoo Auctions Japan.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Función</span><span class="fv">Email + web + Randnet desde la N64</span></div>
+      <div class="ft"><span class="fl">Inútil desde</span><span class="fv w">Febrero 2001 cuando cerró Randnet</span></div>
+      <div class="ft"><span class="fl">Dónde</span><span class="fv w">Yahoo Auctions Japan · único mercado activo</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Capture Cassette -->
+<div class="card ra">
+  <div class="img-wrap">
+    <img src="https://jrra.zone/n64/i/l/64dd-capture1.jpg" alt="Capture Cassette"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">📹</span><span>CAPTURE<br>CASSETTE</span></div>
+    <span class="cb cb-jp">SOLO JAPÓN</span>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Capture Cassette</div><div class="code">NUS-028 · Pack-in Mario Artist: Talent Studio · 1999</div></div>
+      <div class="price-col"><div class="price-big">El más raro</div><div class="price-sub">del periférico del periférico</div></div>
+    </div>
+    <div class="tags"><span class="tag t-jp">SOLO JAPÓN</span><span class="tag t-mg">MÁS DIFÍCIL</span></div>
+    <div class="why"><strong>¿POR QUÉ ES EL MÁS DIFÍCIL DE TODOS?</strong> Para tenerlo necesitas Talent Studio completo → ese disco solo existe para el 64DD → el 64DD vendió ~15.000 unidades → Talent Studio no fue el disco más popular del ecosistema. Es literalmente el accesorio de un juego de un periférico fallido. El universo total de este hardware es minúsculo.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Solo con</span><span class="fv w">Mario Artist: Talent Studio (64DD exclusivo)</span></div>
+      <div class="ft"><span class="fl">Aspecto</span><span class="fv">Cartucho N64 con puertos AV en los laterales</span></div>
+      <div class="ft"><span class="fl">Función</span><span class="fv">Captura tu cara en video y la pega en un modelo 3D</span></div>
+    </div>
+    <div class="hook"><strong>DATO:</strong> Deepfake casero en 1999: escaneabas tu cara con la cámara y la pegabas sobre un personaje 3D animado dentro del juego.</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     ESTÁNDAR
+═══════════════════════════════════════════ -->
+<span id="std" class="anchor"></span>
+<div class="sec std">◆ ACCESORIOS ESTÁNDAR DEL N64</div>
+
+<!-- Expansion Pak -->
+<div class="card std">
+  <div class="img-wrap">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/N64-Expansion-Pak.jpg" alt="Expansion Pak"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">🧠</span><span>EXPANSION PAK</span></div>
+    <span class="cb cb-ye">REQUERIDO ×3</span>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Expansion Pak</div><div class="code">NUS-007 · +4 MB RAM → 8 MB total · 1998 · Mundial</div></div>
+      <div class="price-col"><div class="price-big">~US$25</div><div class="price-sub">loose · fácil de encontrar</div></div>
+    </div>
+    <div class="tags"><span class="tag t-ye">OBLIGATORIO</span><span class="tag t-cy">MUNDIAL</span></div>
+    <div class="why"><strong>¿POR QUÉ IMPORTA?</strong> Tres juegos no corren sin él: Donkey Kong 64, Majora's Mask y Perfect Dark. No es mejora opcional — es requisito absoluto. Sin Expansion Pak no puedes jugar la campaña de Perfect Dark. Sin él Majora's Mask no arranca. Nintendo lo diseñó originalmente para el 64DD, pero los juegos en cartucho terminaron necesitándolo también.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Requerido</span><span class="fv w">DK64 · Majora's Mask · Perfect Dark</span></div>
+      <div class="ft"><span class="fl">Reemplaza</span><span class="fv">Jumper Pak (termina el bus RAMBUS)</span></div>
+      <div class="ft"><span class="fl">Incluía</span><span class="fv">Ejector Tool NUS-012 para sacar el Jumper Pak</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Jumper Pak -->
+<div class="card std">
+  <div class="img-wrap">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/N64-Jumper-Pak.jpg" alt="Jumper Pak"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">🔌</span><span>JUMPER PAK</span></div>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Jumper Pak</div><div class="code">NUS-008 · Terminador RAMBUS · Venía instalado de fábrica</div></div>
+      <div class="price-col"><div class="price-big">~US$5</div><div class="price-sub">viene con la consola</div></div>
+    </div>
+    <div class="tags"><span class="tag t-cy">DE FÁBRICA</span></div>
+    <div class="why"><strong>¿POR QUÉ IMPORTA?</strong> Sin él la consola no enciende. No tiene ninguna función de juego — solo existe para terminar el bus RAMBUS. Es el accesorio más importante que nadie sabe que tiene. Muchos N64 circulan sin él (sacado al instalar el Expansion Pak) y el Ejector Tool NUS-012 original es hoy más difícil de encontrar que el propio Expansion Pak.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Función</span><span class="fv w">Ninguna de juego — solo termina el bus de RAM</span></div>
+      <div class="ft"><span class="fl">Sin él</span><span class="fv w">La consola no enciende</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Rumble Pak -->
+<div class="card std">
+  <div class="img-wrap">
+    <img src="https://retroravengames.com/cdn/shop/files/rumble_pak_third_party_1200x1200.jpg?v=1767718968" alt="Rumble Pak"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">📳</span><span>RUMBLE PAK</span></div>
+    <span class="cb cb-ye">1° EN EL MUNDO</span>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Rumble Pak</div><div class="code">NUS-013 · 1997 · Primera vibración en consola doméstica del mundo</div></div>
+      <div class="price-col"><div class="price-big">~US$15</div><div class="price-sub">loose · muy común</div></div>
+    </div>
+    <div class="tags"><span class="tag t-ye">PRIMERO EN EL MUNDO</span><span class="tag t-cy">MUNDIAL</span></div>
+    <div class="why"><strong>¿POR QUÉ ES HISTÓRICO?</strong> Fue el primer accesorio de vibración en una consola doméstica, en todo el mundo. Hoy cada DualSense, Joy-Con y Xbox controller tiene vibración — todo eso viene de acá. Nintendo lo incluyó dentro de la caja de Star Fox 64 en Japón y USA en 1997. Necesita 2 pilas AAA y no comparte slot con el Controller Pak.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Debut</span><span class="fv">Star Fox 64 · incluido con el cartucho JP/NA</span></div>
+      <div class="ft"><span class="fl">Batería</span><span class="fv">2 × AAA · no comparte slot con Controller Pak</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Controller Pak -->
+<div class="card std">
+  <div class="img-wrap">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/N64-Controller-Pak.jpg" alt="Controller Pak"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">💾</span><span>CONTROLLER PAK</span></div>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Controller Pak</div><div class="code">NUS-004 · Memory Card · 1996 · Mundial</div></div>
+      <div class="price-col"><div class="price-big">~US$12</div><div class="price-sub">loose · muy común</div></div>
+    </div>
+    <div class="tags"><span class="tag t-cy">MUNDIAL</span></div>
+    <div class="why"><strong>¿POR QUÉ IMPORTA?</strong> El N64 no tenía sistema de guardado unificado. Algunos juegos guardaban en el cartucho con pila; otros necesitaban el Controller Pak. Sin él no podías guardar los fantasmas en Mario Kart 64 ni tus datos en GoldenEye. Podías tomar los datos y llevarlos a jugar en la consola de un amigo — eso era el Controller Pak.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Almacena</span><span class="fv">32 KB · 123 páginas · 16 saves máx.</span></div>
+      <div class="ft"><span class="fl">Usos clave</span><span class="fv">GoldenEye · Mario Kart 64 · Wave Race 64</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Transfer Pak -->
+<div class="card std">
+  <div class="img-wrap">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/N64-Transfer-Pak.jpg" alt="Transfer Pak"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="ph" style="display:none"><span class="ico">🔄</span><span>TRANSFER PAK</span></div>
+  </div>
+  <div class="body">
+    <div class="card-head">
+      <div><div class="name">Transfer Pak</div><div class="code">NUS-019 · 1999 · N64 ↔ Game Boy Color</div></div>
+      <div class="price-col"><div class="price-big">~US$22</div><div class="price-sub">loose · muy común</div></div>
+    </div>
+    <div class="tags"><span class="tag t-cy">MUNDIAL</span></div>
+    <div class="why"><strong>¿POR QUÉ IMPORTA?</strong> Primera vez en la historia que podías ver tus Pokémon del Game Boy en 3D en televisión. Insertabas el cartucho rojo/azul/amarillo en el Transfer Pak, conectabas al control del N64, y tus Pokémon aparecían en Pokémon Stadium. Fue la primera conexión portátil↔TV de Nintendo. Predecesora directa del Nintendo DS + Wii / Game Boy Advance + GameCube.</div>
+    <div class="facts">
+      <div class="ft"><span class="fl">Usos clave</span><span class="fv">Pokémon Stadium · Mario Golf · Mario Tennis</span></div>
+      <div class="ft"><span class="fl">Innovación</span><span class="fv">Primera transferencia portátil↔TV de Nintendo</span></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<footer>
+  RETROTARROS · retrogames + batería · Documento interno de estudio · Mayo 2026<br>
+  Fuentes: PriceCharting · SlashGear · SVG · TheGamer · Rarest.org · Time Extension · TheFamicast · jrra.zone · Wikipedia
+</footer>
+
+</body>
+</html>
