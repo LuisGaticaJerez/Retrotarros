@@ -42,21 +42,40 @@ Tipografía: logo → Monoton/Press Start 2P · títulos miniatura → Bebas Neu
 
 ## Documentos del proyecto
 
+Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archivados pero no se editan.
+
 | Archivo | Rol |
 |---|---|
-| `Retrotarros_Estrategia.docx` | Documento maestro: nombre, enfoques, formatos, plan 3 meses, Indie Lat, identidad visual. |
-| `Retrotarros_Briefings_Compositores.docx` | Fichas de compositores (Kondo, Uematsu, Mitsuda, Yamaoka, Wise, Kirkhope, etc.). Documento vivo. |
-| `Retrotarros_Guiones_Shorts.docx` | Guiones lane Luis: timings, B-roll, título YouTube, caption, hashtags, datos de respaldo. Documento vivo. |
-| `Retrotarros_Pauta_N64_v3_ranking_corregido.docx` | Pauta episodio largo Top N64 formato game show. |
-| `Retrotarros_Catalogo_Juegos.xlsx` | **Fuente de verdad** de la colección física de Koko. Leer con `openpyxl`/`pandas`. |
-| `Retrotarros_Referencia_Visual_N64.html` | Referencia visual de miniaturas/gráficas episodio N64. |
+| `docs/estrategia.md` | Documento maestro: nombre, enfoques, formatos, plan 3 meses, Indie Lat, identidad visual. |
+| `docs/briefings-compositores.md` | Fichas de compositores (Kondo, Uematsu, Mitsuda, Yamaoka, Wise, Kirkhope, etc.). Documento vivo. |
+| `docs/guiones-shorts.md` | Guiones lane Luis: timings, B-roll, título YouTube, caption, hashtags, datos de respaldo. Documento vivo. |
+| `docs/pauta-{slug}.md` | Pauta operativa de episodio largo (para Claude — denso, tablas, anclas, anexos). |
+| `docs/discusion-{slug}.md` | Versión conversacional de la pauta (para Luis + Koko — bullets, preguntas guía, decisiones pendientes). |
+| `studio/{slug}.html` | Monitor visual del estudio durante la grabación (paleta synthwave, navegable). |
+| `data/coleccion_koko.csv` | **Fuente de verdad** de la colección física de Koko. 899 ítems, 26 plataformas. Leer con `grep`/`csv` directo. |
+| `ref/Retrotarros_Referencia_Visual_N64.html` | Referencia visual estilo (header, cards, paleta) para HTML del estudio. |
+
+## Convención de pautas (obligatoria)
+
+Cada episodio largo se cierra con **tres archivos**, mismo `{slug}`:
+
+1. **`docs/pauta-{slug}.md`** — para Claude. Operativo y denso: rankings, datos precisos, fuentes, anclas históricas, scorecard, tiempos por bloque, anexos. Es lo que Claude lee como contexto.
+2. **`docs/discusion-{slug}.md`** — para Luis + Koko. Conversacional: bullets cortos, preguntas guía para discutir antes de grabar, decisiones pendientes, qué falta cerrar. Es lo que abren impreso o en el celular.
+3. **`studio/{slug}.html`** — para el estudio. Monitor visual que ven Luis y Koko en pantalla durante la grabación. Navegable con teclas ← →. Paleta synthwave (`#FF2E88` / `#00E5FF` / `#FFD23F` / `#06030f`). Base de estilo: `ref/Retrotarros_Referencia_Visual_N64.html`.
+
+**Reglas:**
+- Slug consistente en los tres archivos (ej. `n64-ranking`, `mario-saga`, `kirkhope-rare`).
+- El `.md` de discusión es derivado del `.md` operativo — más corto, más conversacional, sin tablas pesadas.
+- El HTML se actualiza solo cuando los datos del `.md` operativo están cerrados. Fuente de verdad = `pauta-{slug}.md`.
+- Si se agrega un anexo con datos nuevos (precios, listas confirmadas), se actualizan los tres archivos en el mismo commit.
 
 ## Reglas operativas
 
 ### Lectura de archivos
-- **Excel** (`.xlsx`): siempre con `openpyxl` o `pandas`. Nunca asumir contenido sin abrirlo.
-- **Word** (`.docx`): `python-docx` para editar; extracción de texto para lectura.
-- Antes de proponer guiones, **revisar el catálogo Excel** para confirmar que Koko tiene el juego.
+- **Markdown** (`.md`): fuente de verdad de todo el contenido del canal. Leer con `Read` tool.
+- **CSV colección** (`data/coleccion_koko.csv`): leer con `grep` para búsquedas puntuales por plataforma o título.
+- **Word/Excel archivados**: los `.docx` y `.xlsx` originales quedan en sus carpetas pero **no se editan**. Solo lectura si falta info que aún no migró al `.md`.
+- Antes de proponer guiones o pautas, **revisar `data/coleccion_koko.csv`** para confirmar que Koko tiene el juego físico.
 
 ### Creación de contenido
 - Lane Luis y lane Koko son carriles distintos — no mezclar en un short sin indicación explícita.
@@ -70,9 +89,10 @@ Tipografía: logo → Monoton/Press Start 2P · títulos miniatura → Bebas Neu
 - Datos históricos: cruzar mínimo dos fuentes antes de meter número o fecha en cámara.
 
 ### Output esperado
-- `.docx` para pautas, guiones, briefings (materiales que se imprimen y van al rodaje).
-- Markdown para discusión interna o brainstorm.
-- Archivos descargables reales — no solo mostrar contenido en chat.
+- **Pautas de episodio largo** → tres archivos por slug (ver "Convención de pautas"): `docs/pauta-{slug}.md` + `docs/discusion-{slug}.md` + `studio/{slug}.html`.
+- **Guiones de shorts y briefings de compositores** → se agregan al documento vivo correspondiente (`docs/guiones-shorts.md`, `docs/briefings-compositores.md`).
+- **Brainstorm interno** → Markdown libre en `docs/` con nombre descriptivo.
+- Archivos reales en el repo — no solo mostrar contenido en chat.
 
 ## Anti-patrones — lo que NO hacer
 
@@ -89,8 +109,8 @@ Tipografía: logo → Monoton/Press Start 2P · títulos miniatura → Bebas Neu
 
 Identificar el escenario y revisar archivos relevantes antes de proponer output:
 
-1. **Short nuevo** → preguntar lane (Luis o Koko) + tema + consultar `Retrotarros_Guiones_Shorts.docx`.
-2. **Pauta episodio largo** → `Retrotarros_Estrategia.docx` para formato + `Retrotarros_Catalogo_Juegos.xlsx` para chequear colección.
-3. **Investigar compositor** → `Retrotarros_Briefings_Compositores.docx`, agregar ficha si es nuevo.
+1. **Short nuevo** → preguntar lane (Luis o Koko) + tema + consultar `docs/guiones-shorts.md` para no repetir ángulos.
+2. **Pauta episodio largo** → `docs/estrategia.md` para formato + `data/coleccion_koko.csv` para chequear colección. Generar los tres archivos (pauta + discusión + html) en el mismo flujo, con el mismo slug.
+3. **Investigar compositor** → `docs/briefings-compositores.md`, agregar ficha si es nuevo.
 4. **Brainstorm tendencias** → revisar redes, traer 3–5 formatos que peguen ahora + adaptaciones al canal.
-5. **Producción** (miniaturas, banners, gráficas) → respetar paleta e identidad visual en `docs/identidad-visual.md`.
+5. **Producción** (miniaturas, banners, gráficas, HTML estudio) → respetar paleta e identidad visual en `docs/identidad-visual.md`. Para HTML de estudio, basarse en `ref/Retrotarros_Referencia_Visual_N64.html`.

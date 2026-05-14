@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Estudio · N64 Ranking</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+/* ── HEADER ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  z-index: 200;
+  background: rgba(6, 3, 15, 0.97);
+  border-bottom: 2px solid var(--mg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+.hdr-logo {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--mg);
+  text-shadow: 0 0 14px rgba(255,46,136,.6);
+  letter-spacing: 3px;
+}
+.hdr-tag {
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: var(--ye);
+  letter-spacing: 3px;
+}
+.hdr-rec {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--mg);
+}
+.dot {
+  width: 10px; height: 10px;
+  background: var(--mg);
+  border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+/* ── SLIDE CONTAINER ── */
+.deck {
+  position: fixed;
+  top: 56px; left: 0; right: 0; bottom: 64px;
+  overflow: hidden;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: 40px 56px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.slide-num {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  color: rgba(255,255,255,.18);
+  letter-spacing: 2px;
+}
+.slide h1 {
+  font-family: 'Press Start 2P';
+  font-size: 14px;
+  color: var(--ye);
+  letter-spacing: 4px;
+  margin-bottom: 6px;
+  border-left: 4px solid var(--ye);
+  padding-left: 16px;
+}
+.slide h2 {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 40px;
+  color: #fff;
+  letter-spacing: 1px;
+  margin: 10px 0 28px 20px;
+  line-height: 1.05;
+}
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+
+/* ── PORTADA ── */
+.portada {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  padding: 0;
+}
+.portada .ep-tag {
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  color: var(--cy);
+  letter-spacing: 5px;
+  margin-bottom: 22px;
+}
+.portada .ep-title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 62px;
+  letter-spacing: 1.5px;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 18px;
+  max-width: 1000px;
+}
+.portada .ep-title .vs {
+  color: var(--mg);
+  text-shadow: 0 0 22px rgba(255,46,136,.55);
+}
+.portada .ep-sub {
+  font-family: 'Share Tech Mono';
+  font-size: 18px;
+  color: var(--ye);
+  letter-spacing: 4px;
+  margin-bottom: 60px;
+}
+.portada .ep-meta {
+  display: flex;
+  gap: 50px;
+  font-family: 'Share Tech Mono';
+  font-size: 13px;
+  color: rgba(255,255,255,.6);
+  letter-spacing: 2px;
+}
+.portada .ep-meta span { color: var(--cy); }
+
+/* ── BLOQUE INTRO MECÁNICA ── */
+.mech-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 12px;
+}
+.mech-card {
+  background: var(--card-bg);
+  border: 2px solid var(--mg);
+  border-radius: 4px;
+  padding: 26px 28px;
+  box-shadow: 0 0 22px rgba(255,46,136,.15);
+}
+.mech-card.cy { border-color: var(--cy); box-shadow: 0 0 22px rgba(0,229,255,.15); }
+.mech-card.ye { border-color: var(--ye); box-shadow: 0 0 22px rgba(255,210,63,.15); }
+.mech-card h3 {
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  color: var(--mg);
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.mech-card.cy h3 { color: var(--cy); }
+.mech-card.ye h3 { color: var(--ye); }
+.mech-card p {
+  font-family: 'Share Tech Mono';
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255,255,255,.86);
+}
+.mech-card .big {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 56px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  display: block;
+  margin: 14px 0 8px;
+}
+.mech-card.cy .big { color: var(--cy); }
+.mech-card.mg .big { color: var(--mg); }
+.mech-list {
+  list-style: none;
+  margin-top: 10px;
+}
+.mech-list li {
+  font-family: 'Share Tech Mono';
+  font-size: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.mech-list li:last-child { border: none; }
+.mech-list .pts {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  color: var(--ye);
+}
+
+/* ── RANKING TABLAS ── */
+.rank-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+}
+.rank-table tr {
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.rank-table tr:last-child { border-bottom: none; }
+.rank-table td {
+  padding: 14px 12px;
+  vertical-align: middle;
+}
+.rank-table .pos {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 32px;
+  color: var(--mg);
+  width: 70px;
+  text-shadow: 0 0 12px rgba(255,46,136,.35);
+}
+.rank-table.cy .pos { color: var(--cy); text-shadow: 0 0 12px rgba(0,229,255,.35); }
+.rank-table .game {
+  font-family: 'Orbitron';
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+}
+.rank-table .year {
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: rgba(255,255,255,.45);
+  margin-top: 2px;
+}
+.rank-table .price {
+  font-family: 'Orbitron';
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--ye);
+  text-align: right;
+  width: 130px;
+}
+.rank-table .fact {
+  font-family: 'Share Tech Mono';
+  font-size: 13px;
+  color: rgba(255,255,255,.68);
+  line-height: 1.5;
+  padding-left: 16px;
+  max-width: 50%;
+}
+
+/* ── SCORECARD KOKO ── */
+.scorecard {
+  background: var(--card-bg);
+  border: 2px solid var(--ye);
+  border-radius: 4px;
+  padding: 28px 32px;
+  box-shadow: 0 0 22px rgba(255,210,63,.18);
+  margin-top: 10px;
+}
+.scorecard h3 {
+  font-family: 'Press Start 2P';
+  font-size: 12px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+}
+.score-grid {
+  display: grid;
+  grid-template-columns: 1fr 110px 110px 80px;
+  gap: 0;
+  font-family: 'Share Tech Mono';
+}
+.score-grid .hdr-row {
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--cy);
+  letter-spacing: 2px;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--cy);
+}
+.score-grid .row {
+  display: contents;
+}
+.score-grid .row > div {
+  padding: 12px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  font-size: 15px;
+}
+.score-grid .game-cell {
+  font-family: 'Orbitron';
+  font-weight: 700;
+  color: #fff;
+}
+.score-grid .game-cell .meta {
+  font-family: 'Share Tech Mono';
+  font-weight: 400;
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  margin-top: 2px;
+}
+.score-grid .cib { color: var(--mg); font-weight: 700; }
+.score-grid .world { color: var(--cy); }
+.score-grid .pts-box {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--ye);
+  text-align: center;
+  border-left: 1px dashed rgba(255,210,63,.3);
+}
+.score-total {
+  margin-top: 22px;
+  padding: 16px 20px;
+  background: rgba(255,210,63,.08);
+  border-left: 4px solid var(--ye);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.score-total .lbl {
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  color: var(--ye);
+  letter-spacing: 2px;
+}
+.score-total .val {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 38px;
+  color: var(--ye);
+  text-shadow: 0 0 14px rgba(255,210,63,.5);
+}
+
+/* ── NFR CALLOUT ── */
+.nfr-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 14px;
+}
+.nfr-card {
+  background: rgba(255,46,136,.05);
+  border: 1px solid var(--mg);
+  border-radius: 4px;
+  padding: 20px 22px;
+}
+.nfr-card .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.nfr-card .nfr-name {
+  font-family: 'Orbitron';
+  font-weight: 700;
+  font-size: 17px;
+  color: #fff;
+}
+.nfr-card .nfr-price {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--mg);
+  text-shadow: 0 0 12px rgba(255,46,136,.5);
+}
+.nfr-card .nfr-why {
+  font-family: 'Share Tech Mono';
+  font-size: 13px;
+  color: rgba(255,255,255,.72);
+  line-height: 1.55;
+}
+
+/* ── CIERRE MUSICAL ── */
+.cierre-main {
+  background: linear-gradient(135deg, rgba(255,46,136,.08), rgba(0,229,255,.05));
+  border: 2px solid var(--mg);
+  border-radius: 4px;
+  padding: 32px 36px;
+  margin-top: 14px;
+  box-shadow: 0 0 28px rgba(255,46,136,.22);
+}
+.cierre-main .label {
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  color: var(--ye);
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+.cierre-main .tema {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 38px;
+  color: var(--mg);
+  text-shadow: 0 0 16px rgba(255,46,136,.5);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.cierre-main .desc {
+  font-family: 'Share Tech Mono';
+  font-size: 16px;
+  color: rgba(255,255,255,.85);
+  line-height: 1.6;
+}
+
+.cierre-planb {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 22px;
+}
+.cierre-planb .opt {
+  background: var(--card-bg);
+  border: 1px solid var(--cy);
+  border-radius: 4px;
+  padding: 16px 18px;
+}
+.cierre-planb .opt .if {
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--cy);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.cierre-planb .opt .tema-b {
+  font-family: 'Orbitron';
+  font-weight: 700;
+  font-size: 17px;
+  color: #fff;
+}
+
+/* ── FRASES PARA CÁMARA ── */
+.cam-quote {
+  background: rgba(255,210,63,.07);
+  border-left: 4px solid var(--ye);
+  padding: 22px 26px;
+  margin-top: 22px;
+  font-family: 'Share Tech Mono';
+  font-size: 17px;
+  font-style: italic;
+  color: rgba(255,255,255,.88);
+  line-height: 1.65;
+}
+.cam-quote .lbl {
+  display: block;
+  font-style: normal;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+/* ── NAV FOOTER ── */
+nav.footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 64px;
+  background: rgba(6, 3, 15, 0.97);
+  border-top: 2px solid var(--cy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  z-index: 200;
+}
+.nav-btn {
+  background: transparent;
+  border: 2px solid var(--cy);
+  color: var(--cy);
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  padding: 10px 18px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all .15s;
+  border-radius: 2px;
+}
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-dots {
+  display: flex;
+  gap: 9px;
+}
+.nav-dots .d {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.3);
+  cursor: pointer;
+  transition: all .15s;
+}
+.nav-dots .d.active {
+  background: var(--mg);
+  border-color: var(--mg);
+  box-shadow: 0 0 10px rgba(255,46,136,.65);
+  transform: scale(1.2);
+}
+.nav-hint {
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: 2px;
+}
+.nav-hint kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 3px;
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: var(--ye);
+  margin: 0 2px;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · N64 RANKING · GEN 5</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1 — PORTADA -->
+  <section class="slide active" data-title="Portada">
+    <span class="slide-num">01 / 09</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 5 · NINTENDO 64</div>
+      <div class="ep-title">EL TOP DEL MUNDO <span class="vs">VS.</span> EL TOP DE KOKO</div>
+      <div class="ep-sub">RANKING + PRECIOS + BATERÍA</div>
+      <div class="ep-meta">
+        <div>DURACIÓN <span>18-22 MIN</span></div>
+        <div>FORMATO <span>GAME SHOW</span></div>
+        <div>CIERRE <span>DRUM COVER</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 — MECÁNICA -->
+  <section class="slide" data-title="Mecánica del juego">
+    <span class="slide-num">02 / 09</span>
+    <h1>BLOQUE 2 · SETUP</h1>
+    <h2>La mecánica del game show</h2>
+    <div class="mech-grid">
+      <div class="mech-card mg">
+        <h3>LO QUE TRAE LUIS</h3>
+        <p>Dos sobres sellados con cinta visible — el ranking mundial (consenso 2026) y el ranking de precios (PriceCharting CIB USD).</p>
+      </div>
+      <div class="mech-card cy">
+        <h3>LO QUE TRAE KOKO</h3>
+        <p>Sus 10 mejores N64 físicos, dados vuelta sobre la mesa, ordenados del 10 al 1. Va a la ciega — no sabe los rankings.</p>
+      </div>
+      <div class="mech-card ye" style="grid-column: 1 / -1;">
+        <h3>SISTEMA DE PUNTOS</h3>
+        <ul class="mech-list">
+          <li><span>Posición exacta en el top mundial</span><span class="pts">3 PTS</span></li>
+          <li><span>Está en el top 10 mundial pero en otra posición</span><span class="pts">2 PTS</span></li>
+          <li><span>Está en el top 25 mundial pero no en el top 10</span><span class="pts">1 PT</span></li>
+          <li><span>No aparece en ningún ranking</span><span class="pts">0 PTS</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 — TOP MUNDIAL -->
+  <section class="slide" data-title="Top 10 mundial">
+    <span class="slide-num">03 / 09</span>
+    <h1 style="color: var(--cy); border-color: var(--cy);">BLOQUE 3 · RANKING MUNDIAL</h1>
+    <h2 class="cy">Top 10 consenso crítico 2026</h2>
+    <table class="rank-table cy">
+      <tr><td class="pos">1</td><td><div class="game">Zelda: Ocarina of Time</div><div class="year">1998</div></td><td class="fact">#1 en TODOS los rankings consultados. Koji Kondo (briefing OK).</td></tr>
+      <tr><td class="pos">2</td><td><div class="game">Super Mario 64</div><div class="year">1996</div></td><td class="fact">Launch title. Enseñó al mundo cómo se hace un plataformero 3D.</td></tr>
+      <tr><td class="pos">3</td><td><div class="game">Banjo-Kazooie</div><div class="year">1998</div></td><td class="fact">Rare en su punto más alto. Grant Kirkhope (briefing OK).</td></tr>
+      <tr><td class="pos">4</td><td><div class="game">GoldenEye 007</div><div class="year">1997</div></td><td class="fact">Inventó el FPS de consola y el multiplayer split-screen moderno.</td></tr>
+      <tr><td class="pos">5</td><td><div class="game">Mario Kart 64</div><div class="year">1996</div></td><td class="fact">El que instaló el caparazón azul. Battle Mode arruinó amistades.</td></tr>
+      <tr><td class="pos">6</td><td><div class="game">Super Smash Bros.</div><div class="year">1999</div></td><td class="fact">Empezó como side project de Iwata y Sakurai sin permiso de Nintendo.</td></tr>
+      <tr><td class="pos">7</td><td><div class="game">Majora's Mask</div><div class="year">2000</div></td><td class="fact">Desarrollado en un año por un equipo chico. El Zelda más raro y profundo.</td></tr>
+      <tr><td class="pos">8</td><td><div class="game">Paper Mario</div><div class="year">2000</div></td><td class="fact">Last hurrah del N64. RPG accesible, humor inteligente.</td></tr>
+      <tr><td class="pos">9</td><td><div class="game">Perfect Dark</div><div class="year">2000</div></td><td class="fact">N64 exprimido al límite. Sucesor de GoldenEye con bots — años antes que Halo.</td></tr>
+      <tr><td class="pos">10</td><td><div class="game">Star Fox 64</div><div class="year">1997</div></td><td class="fact">"Do a barrel roll". Kondo + Yokota. Primer juego con Rumble Pak.</td></tr>
+    </table>
+  </section>
+
+  <!-- SLIDE 4 — TOP PRECIOS -->
+  <section class="slide" data-title="Top 10 precios">
+    <span class="slide-num">04 / 09</span>
+    <h1>BLOQUE 4 · RANKING DE PRECIOS</h1>
+    <h2 class="mg">Top 10 CIB USD · coleccionismo 2026</h2>
+    <table class="rank-table">
+      <tr><td class="pos">1</td><td><div class="game">ClayFighter 63⅓: Sculptor's Cut</div></td><td class="price">$4,800</td><td class="fact">Solo en alquiler en Blockbuster. El más raro del N64 retail.</td></tr>
+      <tr><td class="pos">2</td><td><div class="game">Stunt Racer 64</div></td><td class="price">$2,300</td><td class="fact">Otro exclusivo Blockbuster. Cuando cerraron, se perdieron casi todas.</td></tr>
+      <tr><td class="pos">3</td><td><div class="game">Super Bowling</div></td><td class="price">$1,836</td><td class="fact">Tirada microscópica de THQ. Marzo 1999, sin marketing.</td></tr>
+      <tr><td class="pos">4</td><td><div class="game">F1 Racing Championship</div></td><td class="price">$1,706</td><td class="fact">NTSC USA cancelado a último minuto. La versión NTSC llegó SOLO a Brasil.</td></tr>
+      <tr><td class="pos">5</td><td><div class="game">Worms Armageddon</div></td><td class="price">$1,017</td><td class="fact">La PAL vale $50. La NTSC es la cara. Diferencia regional brutal.</td></tr>
+      <tr><td class="pos">6</td><td><div class="game">Bomberman 64: Second Attack</div></td><td class="price">$845</td><td class="fact">Pasó de $488 a $990 en enero-febrero 2022. Las cajas son lo escaso.</td></tr>
+      <tr><td class="pos">7</td><td><div class="game">Transformers: Beast Wars Transmetals</div></td><td class="price">$693</td><td class="fact">Juego de pelea sin reputación basado en serie animada. Tirada baja.</td></tr>
+      <tr><td class="pos">8</td><td><div class="game">Rat Attack!</div></td><td class="price">$685</td><td class="fact">Puzzle de Mindscape (2000). Vendió mal, rareza por accidente.</td></tr>
+      <tr><td class="pos">9</td><td><div class="game">International Superstar Soccer 2000</div></td><td class="price">$650</td><td class="fact">Tirada baja, nunca pegó frente a FIFA. La inglesa NTSC es la que vale.</td></tr>
+      <tr><td class="pos">10</td><td><div class="game">Conker's Bad Fur Day</div></td><td class="price">$338</td><td class="fact">El único de la lista que es realmente JUGADO hoy. Rating M en consola de niños.</td></tr>
+    </table>
+  </section>
+
+  <!-- SLIDE 5 — NFR KICKER -->
+  <section class="slide" data-title="NFR Kicker">
+    <span class="slide-num">05 / 09</span>
+    <h1>BLOQUE 4 · KICKER</h1>
+    <h2 class="mg">Las variantes "Not For Resale"</h2>
+    <p style="font-family:'Share Tech Mono'; font-size:15px; color: rgba(255,255,255,.7); line-height:1.6; margin: 0 0 18px 20px;">
+      Cartuchos grises de kioscos de demo. NUNCA estuvieron a la venta. Son el dato bomba del bloque de precios.
+    </p>
+    <div class="nfr-grid">
+      <div class="nfr-card">
+        <div class="top">
+          <div class="nfr-name">ClayFighter Sculptor's Cut sealed</div>
+          <div class="nfr-price">$9,199</div>
+        </div>
+        <div class="nfr-why">Una subasta cerró en $9,199. La versión retail más cara jamás vendida del N64.</div>
+      </div>
+      <div class="nfr-card">
+        <div class="top">
+          <div class="nfr-name">Majora's Mask Gray "NFR"</div>
+          <div class="nfr-price">$8,500</div>
+        </div>
+        <div class="nfr-why">Cartucho gris de demo con contenido beta. Solo a empleados de tiendas.</div>
+      </div>
+      <div class="nfr-card">
+        <div class="top">
+          <div class="nfr-name">Donkey Kong 64 Gray "NFR"</div>
+          <div class="nfr-price">~$2,000</div>
+        </div>
+        <div class="nfr-why">Cartucho gris de demo con contenido beta. Si Koko tiene uno gris, la cámara enloquece.</div>
+      </div>
+      <div class="nfr-card">
+        <div class="top">
+          <div class="nfr-name">Turok 2 Gray "NFR"</div>
+          <div class="nfr-price">~$1,800</div>
+        </div>
+        <div class="nfr-why">Segunda más rara de las NFR. Etiqueta blanca sin arte final, prelanzamiento.</div>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">FRASE DE CIERRE DEL BLOQUE</span>
+      "El juego más caro del N64 cuesta más de NUEVE MIL DÓLARES, y es un juego de peleas con muñecos de plastilina que solo se podía arrendar en Blockbuster. Y el cartucho de demo más caro es un Majora's Mask gris que NUNCA estaba a la venta. El mundo del N64 caro es un universo paralelo al N64 que nosotros jugamos."
+    </div>
+  </section>
+
+  <!-- SLIDE 6 — SCORECARD KOKO -->
+  <section class="slide" data-title="Scorecard Koko">
+    <span class="slide-num">06 / 09</span>
+    <h1>ANEXO A · LISTA CONFIRMADA</h1>
+    <h2>Los 10 cartuchos de Koko</h2>
+    <div class="scorecard">
+      <h3>SCORECARD EN VIVO</h3>
+      <div class="score-grid">
+        <div class="hdr-row">JUEGO</div>
+        <div class="hdr-row">CIB USD</div>
+        <div class="hdr-row">TOP MUNDIAL</div>
+        <div class="hdr-row">PTS</div>
+
+        <div class="row"><div class="game-cell">Zelda: Ocarina of Time<div class="meta">★ top mundial</div></div><div class="cib">$147</div><div class="world">#1</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Zelda: Majora's Mask<div class="meta">★ top mundial</div></div><div class="cib">$208</div><div class="world">#7</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Killer Instinct Gold<div class="meta">— carta solitaria</div></div><div class="cib">$49</div><div class="world">no aparece</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Conker's Bad Fur Day<div class="meta">○ top 15-20 · #10 caro</div></div><div class="cib">$338</div><div class="world">~#15</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Super Mario 64<div class="meta">★ top mundial</div></div><div class="cib">$142</div><div class="world">#2</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Mario Kart 64<div class="meta">★ top mundial</div></div><div class="cib">$107</div><div class="world">#5</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Diddy Kong Racing<div class="meta">○ top 12-15</div></div><div class="cib">$112</div><div class="world">~#13</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Donkey Kong 64<div class="meta">○ top 15-20</div></div><div class="cib">$120</div><div class="world">~#18</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Super Smash Bros.<div class="meta">★ top mundial</div></div><div class="cib">$160</div><div class="world">#6</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">GoldenEye 007<div class="meta">★ top mundial</div></div><div class="cib">$87</div><div class="world">#4</div><div class="pts-box">__</div></div>
+      </div>
+      <div class="score-total">
+        <div class="lbl">TOTAL KOKO · TARGET 17</div>
+        <div class="val">__ / 30</div>
+      </div>
+      <div style="margin-top: 14px; font-family: 'Share Tech Mono'; font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.5;">
+        &lt; 12 pts → "oído chileno" (en buena, irónico) · &gt; 20 pts → "oído de crítico gringo"
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7 — VALOR COLECCIÓN -->
+  <section class="slide" data-title="Valor de la colección">
+    <span class="slide-num">07 / 09</span>
+    <h1>ANEXO A · DATO DE CIERRE</h1>
+    <h2 class="mg">El valor de los 10 cartuchos en la mesa</h2>
+    <div style="display: flex; gap: 30px; margin-top: 20px;">
+      <div class="mech-card mg" style="flex: 1; text-align: center;">
+        <h3>CIB TOTAL USD</h3>
+        <div class="big">$1,470</div>
+        <p>mercado mundial NTSC USA · mayo 2026</p>
+      </div>
+      <div class="mech-card ye" style="flex: 1; text-align: center;">
+        <h3>EQUIVALENTE CLP</h3>
+        <div class="big">$1.400.000</div>
+        <p>Un millón cuatrocientas mil lucas chilenas</p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">FRASE ANTES DEL CIERRE MUSICAL</span>
+      "Antes de que Koko se ponga a tocar — sepan que lo que acaban de ver sobre esta mesa, en condición de caja completa, vale UN MILLÓN CUATROCIENTAS MIL LUCAS chilenas en el mercado mundial. Y esto es solo lo que él trajo hoy. Su colección entera vale… vamos a hacer un episodio especial sobre eso."
+    </div>
+  </section>
+
+  <!-- SLIDE 8 — CIERRE MUSICAL -->
+  <section class="slide" data-title="Cierre musical">
+    <span class="slide-num">08 / 09</span>
+    <h1>BLOQUE 5 · CIERRE MUSICAL</h1>
+    <h2 class="mg">Lo que toca Koko en batería</h2>
+    <div class="cierre-main">
+      <div class="label">RECOMENDACIÓN PRINCIPAL</div>
+      <div class="tema">Killer Instinct Gold — KI Theme / Cinder Theme</div>
+      <div class="desc">
+        Si Koko pone KI Gold en su top 3 (probable: es el único "raro" de su lista), este es el cierre.
+        Robin Beanland + Graeme Norgate hicieron metal/industrial puro — la OST más bateril del N64.
+        Da el ángulo del episodio entero: "el ranking no lo conoce, los coleccionistas no lo cotizan, acá lo despedimos".
+      </div>
+    </div>
+    <div class="cierre-planb">
+      <div class="opt">
+        <div class="if">SI KOKO PONE #1 → OCARINA</div>
+        <div class="tema-b">Gerudo Valley</div>
+      </div>
+      <div class="opt">
+        <div class="if">SI KOKO PONE #1 → MARIO 64</div>
+        <div class="tema-b">Bob-omb Battlefield</div>
+      </div>
+      <div class="opt">
+        <div class="if">SI KOKO PONE #1 → CONKER</div>
+        <div class="tema-b">Sloprano</div>
+      </div>
+      <div class="opt">
+        <div class="if">SI KOKO PONE #1 → GOLDENEYE</div>
+        <div class="tema-b">Pause Music · 30s</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 9 — CHECKLIST -->
+  <section class="slide" data-title="Checklist pre-grabación">
+    <span class="slide-num">09 / 09</span>
+    <h1>CHECKLIST · PRE-GRABACIÓN</h1>
+    <h2 class="cy">Antes de prender cámaras</h2>
+    <ul style="list-style: none; margin-top: 10px;">
+      <li style="padding: 14px 20px; border-left: 4px solid var(--ye); background: rgba(255,210,63,.05); margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;">
+        <strong style="color: var(--ye);">☐ Koko</strong> — preparar tu top 10 personal en privado. NO compartir con Luis hasta cámara.
+      </li>
+      <li style="padding: 14px 20px; border-left: 4px solid var(--ye); background: rgba(255,210,63,.05); margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;">
+        <strong style="color: var(--ye);">☐ Luis</strong> — imprimir los dos rankings, meterlos en sobres físicos sellados con cinta visible.
+      </li>
+      <li style="padding: 14px 20px; border-left: 4px solid var(--cy); background: rgba(0,229,255,.05); margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;">
+        <strong style="color: var(--cy);">☐ Setup</strong> — verificar que los 10 cartuchos encienden en consola. Si alguno falla, gag en cámara: "este vale 200 lucas y no prende, típico po".
+      </li>
+      <li style="padding: 14px 20px; border-left: 4px solid var(--cy); background: rgba(0,229,255,.05); margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;">
+        <strong style="color: var(--cy);">☐ Audio</strong> — lavalier para ambos. Setup batería: OH stereo + kick + snare para el cierre.
+      </li>
+      <li style="padding: 14px 20px; border-left: 4px solid var(--mg); background: rgba(255,46,136,.05); margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;">
+        <strong style="color: var(--mg);">☐ Ritmo</strong> — cronómetro visible para Luis. Bloque 3 a ritmo 1:20 promedio por juego. Si nos colgamos, el video se va a 28 min.
+      </li>
+      <li style="padding: 14px 20px; border-left: 4px solid var(--mg); background: rgba(255,46,136,.05); margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;">
+        <strong style="color: var(--mg);">☐ Cierre</strong> — NO grabar el drum cover antes del juego en cámara. La elección final depende de lo que Koko ponga #1.
+      </li>
+    </ul>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-dots" id="dots"></div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('dots');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+let current = 0;
+
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'd' + (i === 0 ? ' active' : '');
+  d.addEventListener('click', () => go(i));
+  dotsContainer.appendChild(d);
+});
+
+const dots = document.querySelectorAll('.nav-dots .d');
+
+function go(i) {
+  if (i < 0 || i >= slides.length) return;
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === slides.length - 1;
+}
+
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(slides.length - 1); }
+});
+
+prevBtn.disabled = true;
+</script>
+
+</body>
+</html>
