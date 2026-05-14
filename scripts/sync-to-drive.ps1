@@ -17,11 +17,12 @@
 $ErrorActionPreference = "Stop"
 
 # === CONFIG ===
-$RepoRoot   = Join-Path $PSScriptRoot ".."
-$RepoStudio = Join-Path $RepoRoot "studio"
-$RepoDocs   = Join-Path $RepoRoot "docs"
-$DriveRoot  = "G:\Mi unidad\Studio"
-$DrivePautas = Join-Path $DriveRoot "pautas"
+$RepoRoot       = Join-Path $PSScriptRoot ".."
+$RepoStudio     = Join-Path $RepoRoot "studio"
+$RepoDocs       = Join-Path $RepoRoot "docs"
+$RepoTemplate   = Join-Path $RepoStudio "templates\reference.docx"
+$DriveRoot      = "G:\Mi unidad\Studio"
+$DrivePautas    = Join-Path $DriveRoot "pautas"
 
 # Buscar pandoc en ubicaciones comunes
 $PandocExe = $null
@@ -92,13 +93,20 @@ if (-not $PandocExe) {
     Write-Host "  Instalá pandoc: winget install JohnMacFarlane.Pandoc" -ForegroundColor Yellow
 } else {
     Write-Host "  Usando pandoc: $PandocExe" -ForegroundColor Gray
+    if (Test-Path $RepoTemplate) {
+        Write-Host "  Template:      $RepoTemplate" -ForegroundColor Gray
+        $pandocArgs = @("-f", "gfm", "-t", "docx", "--reference-doc=$RepoTemplate")
+    } else {
+        Write-Host "  WARN: reference.docx no encontrado. Usando estilos default de pandoc." -ForegroundColor Yellow
+        $pandocArgs = @("-f", "gfm", "-t", "docx")
+    }
     $mdPattern = @("pauta-*.md", "discusion-*.md")
     foreach ($pattern in $mdPattern) {
         $mds = Get-ChildItem -Path $RepoDocs -Filter $pattern -File
         foreach ($md in $mds) {
             $base = [System.IO.Path]::GetFileNameWithoutExtension($md.Name)
             $outDocx = Join-Path $DrivePautas "$base.docx"
-            & $PandocExe -f gfm -t docx $md.FullName -o $outDocx 2>$null
+            & $PandocExe @pandocArgs $md.FullName -o $outDocx 2>$null
             if ($LASTEXITCODE -eq 0) {
                 $size = (Get-Item $outDocx).Length
                 Write-Host ("  DOCX → {0}  ({1:N0} bytes)" -f "$base.docx", $size) -ForegroundColor Cyan
