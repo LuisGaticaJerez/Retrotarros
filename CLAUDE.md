@@ -69,6 +69,25 @@ Cada episodio largo se cierra con **tres archivos**, mismo `{slug}`:
 - El HTML se actualiza solo cuando los datos del `.md` operativo están cerrados. Fuente de verdad = `pauta-{slug}.md`.
 - Si se agrega un anexo con datos nuevos (precios, listas confirmadas), se actualizan los tres archivos en el mismo commit.
 
+## Sincronización con Drive del estudio
+
+El PC del estudio Retrotarros consume el contenido desde Google Drive (`G:\Mi unidad\Studio\`). El script `scripts/sync-to-drive.ps1` automatiza la copia:
+
+```
+G:\Mi unidad\Studio\
+├── <slug>/<slug>.html              ← monitor visual
+├── <slug>/img/<slug>/*.{jpg,png}   ← box arts / hardware
+└── pautas/
+    ├── pauta-<slug>.docx           ← pauta operativa convertida MD→DOCX
+    └── discusion-<slug>.docx       ← documento de reunión convertido MD→DOCX
+```
+
+**Reglas:**
+- La fuente de verdad sigue siendo el `.md` en el repo. Los `.docx` se generan con pandoc (`scripts/sync-to-drive.ps1`).
+- Los `.docx` están en `.gitignore` — no se commitean al repo, se regeneran cuando se necesite.
+- Requiere pandoc instalado: `winget install JohnMacFarlane.Pandoc`.
+- Correr el script después de cerrar cambios en cualquier `pauta-*.md` / `discusion-*.md` / `*.html` de `studio/`.
+
 ## Reglas operativas
 
 ### Lectura de archivos

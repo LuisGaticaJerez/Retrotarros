@@ -1,19 +1,39 @@
 # scripts/sync-to-drive.ps1
-# Copia el contenido de studio/ a la carpeta de Google Drive sincronizada.
-# Drive Desktop se encarga de subir a la nube automáticamente.
+# Copia el contenido de studio/ a la carpeta de Google Drive sincronizada,
+# y convierte las pautas/discusiones MD a DOCX para que el PC del estudio
+# las pueda abrir en Word.
 #
 # Uso:
 #   .\scripts\sync-to-drive.ps1
 #
-# Estructura resultante en Drive:
-#   G:\Mi unidad\Studio\<slug>\<slug>.html
-#   G:\Mi unidad\Studio\<slug>\img\<slug>\*.{jpg,png}
+# Estructura resultante en Drive (G:\Mi unidad\Studio\):
+#   <slug>/<slug>.html
+#   <slug>/img/<slug>/*.{jpg,png}
+#   pautas/pauta-<slug>.docx
+#   pautas/discusion-<slug>.docx
+#
+# Requiere: pandoc instalado (winget install JohnMacFarlane.Pandoc)
 
 $ErrorActionPreference = "Stop"
 
 # === CONFIG ===
-$RepoStudio = Join-Path $PSScriptRoot "..\studio"
+$RepoRoot   = Join-Path $PSScriptRoot ".."
+$RepoStudio = Join-Path $RepoRoot "studio"
+$RepoDocs   = Join-Path $RepoRoot "docs"
 $DriveRoot  = "G:\Mi unidad\Studio"
+$DrivePautas = Join-Path $DriveRoot "pautas"
+
+# Buscar pandoc en ubicaciones comunes
+$PandocExe = $null
+$pandocCandidates = @(
+  "$env:LOCALAPPDATA\Pandoc\pandoc.exe",
+  "$env:ProgramFiles\Pandoc\pandoc.exe",
+  "pandoc.exe"
+)
+foreach ($p in $pandocCandidates) {
+  $found = Get-Command $p -ErrorAction SilentlyContinue
+  if ($found) { $PandocExe = $found.Source; break }
+}
 
 # === VERIFICACIONES ===
 if (-not (Test-Path "G:\Mi unidad")) {
@@ -26,19 +46,18 @@ if (-not (Test-Path $RepoStudio)) {
     exit 1
 }
 
-# Crear raíz Studio si no existe
 if (-not (Test-Path $DriveRoot)) {
     New-Item -ItemType Directory -Path $DriveRoot -Force | Out-Null
-    Write-Host "Creada carpeta raíz: $DriveRoot" -ForegroundColor Green
+    Write-Host "Creada carpeta raíz en Drive: $DriveRoot" -ForegroundColor Green
 }
 
-# === COPIAR CADA HTML CON SU CARPETA DE IMÁGENES ===
+if (-not (Test-Path $DrivePautas)) {
+    New-Item -ItemType Directory -Path $DrivePautas -Force | Out-Null
+}
+
+# === 1. COPIAR HTML + IMAGENES POR SLUG ===
+Write-Host "`n[1/2] Copiando HTML + imágenes..." -ForegroundColor Yellow
 $htmlFiles = Get-ChildItem -Path $RepoStudio -Filter "*.html" -File
-
-if ($htmlFiles.Count -eq 0) {
-    Write-Host "No se encontraron archivos .html en $RepoStudio" -ForegroundColor Yellow
-    exit 0
-}
 
 foreach ($html in $htmlFiles) {
     $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
@@ -46,21 +65,18 @@ foreach ($html in $htmlFiles) {
     $destImgDir = Join-Path $destDir "img\$slug"
     $srcImgDir = Join-Path $RepoStudio "img\$slug"
 
-    # Crear carpeta del slug
     if (-not (Test-Path $destDir)) {
         New-Item -ItemType Directory -Path $destDir -Force | Out-Null
     }
 
-    # Copiar HTML
     Copy-Item -Path $html.FullName -Destination $destDir -Force
     Write-Host "  HTML → $destDir\$($html.Name)" -ForegroundColor Cyan
 
-    # Copiar imágenes si existen
     if (Test-Path $srcImgDir) {
         if (-not (Test-Path $destImgDir)) {
             New-Item -ItemType Directory -Path $destImgDir -Force | Out-Null
         }
-        $imgs = Get-ChildItem -Path $srcImgDir -File -Recurse
+        $imgs = Get-ChildItem -Path $srcImgDir -File -Recurse -ErrorAction SilentlyContinue
         if ($imgs.Count -gt 0) {
             Copy-Item -Path "$srcImgDir\*" -Destination $destImgDir -Recurse -Force
             Write-Host "  IMG  → $destImgDir ($($imgs.Count) archivos)" -ForegroundColor Cyan
@@ -68,6 +84,30 @@ foreach ($html in $htmlFiles) {
     }
 }
 
-Write-Host ""
-Write-Host "Sincronización completa. Drive Desktop subirá los cambios a la nube." -ForegroundColor Green
+# === 2. CONVERTIR PAUTAS Y DISCUSIONES MD → DOCX ===
+Write-Host "`n[2/2] Convirtiendo pautas/discusiones a DOCX..." -ForegroundColor Yellow
+
+if (-not $PandocExe) {
+    Write-Host "  WARN: pandoc no encontrado. Saltando conversión a DOCX." -ForegroundColor Yellow
+    Write-Host "  Instalá pandoc: winget install JohnMacFarlane.Pandoc" -ForegroundColor Yellow
+} else {
+    Write-Host "  Usando pandoc: $PandocExe" -ForegroundColor Gray
+    $mdPattern = @("pauta-*.md", "discusion-*.md")
+    foreach ($pattern in $mdPattern) {
+        $mds = Get-ChildItem -Path $RepoDocs -Filter $pattern -File
+        foreach ($md in $mds) {
+            $base = [System.IO.Path]::GetFileNameWithoutExtension($md.Name)
+            $outDocx = Join-Path $DrivePautas "$base.docx"
+            & $PandocExe -f gfm -t docx $md.FullName -o $outDocx 2>$null
+            if ($LASTEXITCODE -eq 0) {
+                $size = (Get-Item $outDocx).Length
+                Write-Host ("  DOCX → {0}  ({1:N0} bytes)" -f "$base.docx", $size) -ForegroundColor Cyan
+            } else {
+                Write-Host "  ERR  → $base.docx" -ForegroundColor Red
+            }
+        }
+    }
+}
+
+Write-Host "`nSincronización completa. Drive Desktop subirá los cambios a la nube." -ForegroundColor Green
 Write-Host "Ver en: https://drive.google.com → Mi unidad → Studio" -ForegroundColor Green
