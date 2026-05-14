@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Estudio · N64 Hardware Raro</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  z-index: 200;
+  background: rgba(6, 3, 15, 0.97);
+  border-bottom: 2px solid var(--mg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+.hdr-logo {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--mg);
+  text-shadow: 0 0 14px rgba(255,46,136,.6);
+  letter-spacing: 3px;
+}
+.hdr-tag {
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: var(--ye);
+  letter-spacing: 3px;
+}
+.hdr-rec {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--mg);
+}
+.dot {
+  width: 10px; height: 10px;
+  background: var(--mg);
+  border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+.deck {
+  position: fixed;
+  top: 56px; left: 0; right: 0; bottom: 64px;
+  overflow: hidden;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: 32px 48px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.slide-num {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  color: rgba(255,255,255,.22);
+  letter-spacing: 2px;
+}
+
+/* ── PORTADA ── */
+.portada {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  padding: 0;
+}
+.portada .ep-tag {
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  color: var(--cy);
+  letter-spacing: 5px;
+  margin-bottom: 22px;
+}
+.portada .ep-title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 62px;
+  letter-spacing: 1.5px;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 18px;
+  max-width: 1100px;
+}
+.portada .ep-title .accent {
+  color: var(--mg);
+  text-shadow: 0 0 22px rgba(255,46,136,.55);
+}
+.portada .ep-sub {
+  font-family: 'Share Tech Mono';
+  font-size: 18px;
+  color: var(--ye);
+  letter-spacing: 4px;
+}
+
+/* ── SEPARADOR ── */
+.divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+.divider .pre {
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  letter-spacing: 6px;
+  margin-bottom: 24px;
+}
+.divider .pre.cy { color: var(--cy); }
+.divider .pre.mg { color: var(--mg); }
+.divider .pre.ye { color: var(--ye); }
+.divider .title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 70px;
+  letter-spacing: 2px;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 22px;
+}
+.divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
+.divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.divider .title.ye { color: var(--ye); text-shadow: 0 0 22px rgba(255,210,63,.5); }
+.divider .sub {
+  font-family: 'Share Tech Mono';
+  font-size: 18px;
+  color: rgba(255,255,255,.7);
+  letter-spacing: 2px;
+  max-width: 880px;
+  line-height: 1.6;
+}
+
+/* ── SLIDE HARDWARE ── */
+.slide-item {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  height: 100%;
+  padding: 20px 56px 24px;
+  gap: 14px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.item-pos {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+.item-pos.cy { color: var(--cy); text-shadow: 0 0 20px rgba(0,229,255,.55); }
+.item-pos.mg { color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.6); }
+.item-pos.ye { color: var(--ye); text-shadow: 0 0 20px rgba(255,210,63,.5); }
+.item-pos .hash {
+  font-size: 28px;
+  color: rgba(255,255,255,.35);
+  text-shadow: none;
+  margin-right: 4px;
+}
+.item-block-label {
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  letter-spacing: 3px;
+  padding: 6px 12px;
+  border: 1px solid;
+}
+.item-block-label.cy { color: var(--cy); border-color: var(--cy); }
+.item-block-label.mg { color: var(--mg); border-color: var(--mg); }
+.item-block-label.ye { color: var(--ye); border-color: var(--ye); }
+
+/* IMAGEN / PLACEHOLDER */
+.img-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+}
+.frame {
+  position: relative;
+  height: 100%;
+  max-height: 340px;
+  aspect-ratio: 4/3;
+  background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%);
+  border-radius: 8px;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.04),
+    0 18px 50px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  overflow: hidden;
+}
+.frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+}
+.ph {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: linear-gradient(135deg, var(--ph-1, #2D1B69) 0%, var(--ph-2, #4a2a99) 100%);
+  text-align: center;
+  gap: 14px;
+}
+.ph::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 22%;
+  background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 100%);
+  pointer-events: none;
+}
+.ph .ico {
+  font-size: 96px;
+  line-height: 1;
+  z-index: 2;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.45));
+}
+.ph .lbl {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: clamp(18px, 2.2vw, 28px);
+  color: #fff;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0,0,0,.5);
+  z-index: 2;
+}
+.ph .sublbl {
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,.7);
+  z-index: 2;
+  margin-top: 4px;
+}
+
+/* Variantes de placeholder por tema */
+.theme-orange   { --ph-1:#c25c00; --ph-2:#ff8a1f; }
+.theme-blue     { --ph-1:#1a3a6b; --ph-2:#3a5fa0; }
+.theme-gold     { --ph-1:#8b6914; --ph-2:#e8b04a; }
+.theme-translu  { --ph-1:#3a3a40; --ph-2:#7a7a8a; }
+.theme-jpred    { --ph-1:#7a0a0a; --ph-2:#c41e1e; }
+.theme-korea    { --ph-1:#0d2a4a; --ph-2:#1f4a8a; }
+.theme-tech     { --ph-1:#1a4a4a; --ph-2:#2f7a7a; }
+.theme-modem    { --ph-1:#2a1a4a; --ph-2:#4a2f8a; }
+.theme-bio      { --ph-1:#8a1a4a; --ph-2:#c42f7a; }
+.theme-mouse    { --ph-1:#3a2a4a; --ph-2:#5a3a8a; }
+.theme-key      { --ph-1:#2a3a2a; --ph-2:#4a6a4a; }
+.theme-pak      { --ph-1:#4a3a1a; --ph-2:#8a6a2f; }
+.theme-rumble   { --ph-1:#4a1a1a; --ph-2:#8a2f2f; }
+.theme-mem      { --ph-1:#1a2a4a; --ph-2:#2f4a8a; }
+.theme-transfer { --ph-1:#2a4a1a; --ph-2:#4a8a2f; }
+.theme-expansion{ --ph-1:#4a1a3a; --ph-2:#8a2f6a; }
+.theme-jumper   { --ph-1:#2a2a3a; --ph-2:#4a4a6a; }
+
+/* INFO BLOCK */
+.item-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+.item-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.item-title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 28px;
+  color: #fff;
+  letter-spacing: .5px;
+  line-height: 1.1;
+}
+.price-tag {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 38px;
+  color: var(--mg);
+  text-shadow: 0 0 22px rgba(255,46,136,.55);
+  letter-spacing: 1px;
+  line-height: 1;
+  padding: 4px 14px;
+  border: 2px solid var(--mg);
+  border-radius: 4px;
+  background: rgba(255,46,136,.06);
+}
+.price-tag.ye {
+  color: var(--ye);
+  border-color: var(--ye);
+  text-shadow: 0 0 22px rgba(255,210,63,.5);
+  background: rgba(255,210,63,.06);
+}
+.price-tag .usd-lbl {
+  font-size: 13px;
+  color: rgba(255,46,136,.6);
+  letter-spacing: 3px;
+  text-shadow: none;
+  font-weight: 700;
+}
+.price-tag.ye .usd-lbl { color: rgba(255,210,63,.65); }
+.item-meta {
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
+  letter-spacing: 2px;
+}
+.item-why {
+  max-width: 940px;
+  padding: 14px 22px;
+  background: rgba(255,255,255,.04);
+  border-left: 4px solid var(--ye);
+  font-family: 'Share Tech Mono';
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255,255,255,.86);
+  text-align: left;
+}
+.item-why .lbl {
+  display: block;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.item-why strong { color: var(--ye); }
+
+/* ── CIERRE / CHECKLIST ── */
+.slide h1 {
+  font-family: 'Press Start 2P';
+  font-size: 13px;
+  color: var(--ye);
+  letter-spacing: 4px;
+  margin-bottom: 6px;
+  border-left: 4px solid var(--ye);
+  padding-left: 16px;
+}
+.slide h2 {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 38px;
+  color: #fff;
+  letter-spacing: 1px;
+  margin: 8px 0 24px 20px;
+  line-height: 1.05;
+}
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+.slide h2.ye { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.45); }
+
+.value-grid {
+  display: flex;
+  gap: 22px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.value-card {
+  flex: 1;
+  min-width: 260px;
+  background: var(--card-bg);
+  border: 2px solid;
+  border-radius: 4px;
+  padding: 26px;
+  text-align: center;
+}
+.value-card.mg { border-color: var(--mg); box-shadow: 0 0 22px rgba(255,46,136,.18); }
+.value-card.ye { border-color: var(--ye); box-shadow: 0 0 22px rgba(255,210,63,.18); }
+.value-card.cy { border-color: var(--cy); box-shadow: 0 0 22px rgba(0,229,255,.18); }
+.value-card h3 {
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.value-card.mg h3 { color: var(--mg); }
+.value-card.ye h3 { color: var(--ye); }
+.value-card.cy h3 { color: var(--cy); }
+.value-card .big {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 44px;
+  letter-spacing: 1px;
+  display: block;
+  margin: 12px 0;
+  line-height: 1;
+}
+.value-card.mg .big { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.4); }
+.value-card.ye .big { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.4); }
+.value-card.cy .big { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+.value-card p {
+  font-family: 'Share Tech Mono';
+  font-size: 13px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.45;
+}
+
+.cam-quote {
+  background: rgba(255,210,63,.07);
+  border-left: 4px solid var(--ye);
+  padding: 22px 26px;
+  margin-top: 22px;
+  font-family: 'Share Tech Mono';
+  font-size: 17px;
+  font-style: italic;
+  color: rgba(255,255,255,.88);
+  line-height: 1.6;
+}
+.cam-quote .lbl {
+  display: block;
+  font-style: normal;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+ul.checklist {
+  list-style: none;
+  margin-top: 10px;
+}
+ul.checklist li {
+  padding: 14px 20px;
+  border-left: 4px solid;
+  margin-bottom: 10px;
+  font-family: 'Share Tech Mono';
+  font-size: 16px;
+  line-height: 1.5;
+}
+ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
+ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
+ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
+ul.checklist li strong.ye { color: var(--ye); }
+ul.checklist li strong.cy { color: var(--cy); }
+ul.checklist li strong.mg { color: var(--mg); }
+
+/* NAV FOOTER */
+nav.footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 64px;
+  background: rgba(6, 3, 15, 0.97);
+  border-top: 2px solid var(--cy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  z-index: 200;
+}
+.nav-btn {
+  background: transparent;
+  border: 2px solid var(--cy);
+  color: var(--cy);
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  padding: 10px 18px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all .15s;
+  border-radius: 2px;
+}
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  margin: 0 24px;
+}
+.nav-counter {
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  color: var(--mg);
+  letter-spacing: 3px;
+}
+.nav-progress {
+  width: 100%;
+  max-width: 480px;
+  height: 4px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.nav-progress .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--mg), var(--cy));
+  width: 0;
+  transition: width .25s;
+  box-shadow: 0 0 8px rgba(255,46,136,.5);
+}
+.nav-hint {
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: 2px;
+}
+.nav-hint kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 3px;
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: var(--ye);
+  margin: 0 2px;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · N64 HARDWARE RARO · GEN 5</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 PORTADA -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 5 · NINTENDO 64</div>
+      <div class="ep-title">LAS <span class="accent">CONSOLAS Y PERIFÉRICOS</span> MÁS RAROS</div>
+      <div class="ep-sub">EL HARDWARE QUE NUNCA LLEGÓ A LATAM</div>
+    </div>
+  </section>
+
+  <!-- 02 SEPARADOR CONSOLAS -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="divider">
+      <div class="pre cy">BLOQUE 1 · CONSOLAS</div>
+      <div class="title cy">6 CONSOLAS · 6 PAÍSES</div>
+      <div class="sub">Las versiones del N64 que nunca viste en una vitrina chilena. De la edición más accesible al santo grial. Todas raras, todas con historia.</div>
+    </div>
+  </section>
+
+  <!-- 03 #6 PIKACHU BLUE -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos cy"><span class="hash">#</span>6</div>
+        <div class="item-block-label cy">CONSOLAS</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/pikachu-blue.jpg" alt="Pikachu Blue" onerror="this.style.display='none'">
+          <div class="ph theme-blue">
+            <div class="ico">🔵</div>
+            <div class="lbl">N64 Pikachu Blue</div>
+            <div class="sublbl">JP · NA · PAL</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Nintendo 64 Pikachu Blue</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$400–900</div>
+        </div>
+        <div class="item-meta">NUS-101 · AÑO 2000 · JP / NA / PAL</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES RARO</span>
+          El hermano más accesible del Pikachu Orange, pero igual raro. La versión japonesa (azul claro) y la occidental (azul oscuro) tienen colores distintos. Una unidad en Alemania se remató en US$445. Misma mecánica que la naranja: mejillas que se iluminan al encender, pie izquierdo es reset, Poké Ball es power.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 #5 DAIEI HAWKS -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos cy"><span class="hash">#</span>5</div>
+        <div class="item-block-label cy">CONSOLAS</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/daiei-hawks.jpg" alt="Daiei Hawks" onerror="this.style.display='none'">
+          <div class="ph theme-orange">
+            <div class="ico">🧡</div>
+            <div class="lbl">Daiei Hawks</div>
+            <div class="sublbl">SOLO JAPÓN · 1998</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Nintendo 64 Daiei Hawks</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>~$500</div>
+        </div>
+        <div class="item-meta">1998 · NARANJA + NEGRO · SOLO TIENDAS DAIEI</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES RARO</span>
+          El supermercado Daiei era dueño del equipo de baseball Fukuoka Daiei Hawks. Hizo la consola con los colores del equipo (naranja + negro translúcido) y la vendió solo en sus tiendas. Hoy el equipo se llama Fukuoka SoftBank Hawks (cambio de dueño en 2005). <strong>Alerta:</strong> hay falsificaciones — verificar UV/tornillos antes de filmar.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 #4 GOLD -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos cy"><span class="hash">#</span>4</div>
+        <div class="item-block-label cy">CONSOLAS</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/gold.jpg" alt="N64 Gold" onerror="this.style.display='none'">
+          <div class="ph theme-gold">
+            <div class="ico">🟡</div>
+            <div class="lbl">N64 Gold</div>
+            <div class="sublbl">TOYS R US · 1998</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Nintendo 64 Gold</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$600–1,000</div>
+        </div>
+        <div class="item-meta">1998 · TOYS R US EXCLUSIVE USA · TAMBIÉN EN JAPÓN</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES RARO</span>
+          En USA fue exclusiva de Toys R Us — y Toys R Us cerró para siempre en 2018. Eso le da valor histórico extra a cualquier bundle de esa tienda. Coincidió con Zelda: Ocarina of Time en 1998. La versión USA venía con dos controles dorados. Nunca llegó a Europa.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 #3 JUSCO -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos cy"><span class="hash">#</span>3</div>
+        <div class="item-block-label cy">CONSOLAS</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/jusco.jpg" alt="N64 JUSCO" onerror="this.style.display='none'">
+          <div class="ph theme-translu">
+            <div class="ico">🔘</div>
+            <div class="lbl">N64 JUSCO</div>
+            <div class="sublbl">JAPÓN · 30° ANIV.</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Nintendo 64 JUSCO</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>~$1,000</div>
+        </div>
+        <div class="item-meta">1999 · 30° ANIVERSARIO JUSCO · 1.000–5.000 UNIDADES</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES RARO</span>
+          JUSCO (Japan United Stores Company) hizo esta consola para su 30° aniversario y la vendió exclusivamente en sus tiendas. Diseño gris translúcido. Se estiman entre 1.000 y 5.000 unidades fabricadas. Hoy JUSCO no existe — fue rebrandeada como AEON en 2003. <strong>La empresa que la fabricó ya desapareció.</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 #2 COMBOY -->
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos cy"><span class="hash">#</span>2</div>
+        <div class="item-block-label cy">CONSOLAS</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/comboy.jpg" alt="Comboy 64" onerror="this.style.display='none'">
+          <div class="ph theme-korea">
+            <div class="ico">🇰🇷</div>
+            <div class="lbl">Comboy 64</div>
+            <div class="sublbl">SOLO COREA · HYUNDAI</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Nintendo 64 Comboy</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>~$2,000</div>
+        </div>
+        <div class="item-meta">HYUNDAI ELECTRONICS · 1996–1998 · COREA DEL SUR</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES RARO</span>
+          En 1996 Corea del Sur tenía un embargo comercial contra productos japoneses. Nintendo no podía vender directo, así que se asoció con <strong>Hyundai Electronics</strong> (no el de los autos) para lanzar el N64 bajo la marca "Comboy". Cuando el embargo se levantó en 1998, los Comboy dejaron de fabricarse. Solo existen unidades del período 1996–1998.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 #1 PIKACHU ORANGE -->
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos cy"><span class="hash">#</span>1</div>
+        <div class="item-block-label cy">CONSOLAS · EL SANTO GRIAL</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/pikachu-orange.jpg" alt="Pikachu Orange" onerror="this.style.display='none'">
+          <div class="ph theme-orange">
+            <div class="ico">🟠</div>
+            <div class="lbl">N64 Pikachu Orange</div>
+            <div class="sublbl">SOLO JAPÓN · 2000</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Nintendo 64 Pikachu Orange</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$8,000+</div>
+        </div>
+        <div class="item-meta">NUS-101 · AÑO 2000 · JAPÓN EXCLUSIVO · SEALED GRADED</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES EL #1</span>
+          Hay dos versiones Pikachu N64 (naranja y azul). <strong>La naranja solo salió en Japón — es la más difícil.</strong> Un sealed graded llega a US$8,000+. Loose ~$275, CIB ~$425, sealed ~$1,200, graded $8,000+. Las mejillas de Pikachu se prenden rojas cuando la consola está encendida. El pie izquierdo es reset. La Poké Ball es el power. Sin puerto de expansión inferior (incompatible con 64DD).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 SEPARADOR PERIFÉRICOS -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="divider">
+      <div class="pre mg">BLOQUE 2 · PERIFÉRICOS JAPONESES</div>
+      <div class="title mg">7 PIEZAS · SOLO JAPÓN</div>
+      <div class="sub">El hardware experimental que Nintendo nunca exportó. Desde sensores de pulso hasta módems de internet con número de teléfono grabado en el ROM.</div>
+    </div>
+  </section>
+
+  <!-- 10 #7 VRU -->
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos mg"><span class="hash">#</span>7</div>
+        <div class="item-block-label mg">PERIFÉRICOS</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/vru.jpg" alt="VRU" onerror="this.style.display='none'">
+          <div class="ph theme-tech">
+            <div class="ico">🎤</div>
+            <div class="lbl">VRU</div>
+            <div class="sublbl">VOICE RECOGNITION UNIT</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Voice Recognition Unit (VRU)</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$15–40</div>
+        </div>
+        <div class="item-meta">NUS-020 + NUS-021 · JP 1998 · NA 2000 · NUNCA EN EUROPA</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES ESPECIAL</span>
+          Primer intento de Nintendo de control por voz en consola doméstica. <strong>Solo 2 juegos compatibles en todo el mundo</strong> (Hey You Pikachu + Densha de Go!). Calibrado para voces de niños — adultos fallaban frecuentemente. Nunca llegó a Europa. <strong>No se pudo emular correctamente en software hasta 2023</strong> — 25 años después de su lanzamiento.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 #6 BIO SENSOR -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos mg"><span class="hash">#</span>6</div>
+        <div class="item-block-label mg">PERIFÉRICOS</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/bio-sensor.jpg" alt="Bio Sensor" onerror="this.style.display='none'">
+          <div class="ph theme-bio">
+            <div class="ico">💓</div>
+            <div class="lbl">Bio Sensor</div>
+            <div class="sublbl">SETA · 1998 · SOLO JAPÓN</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Bio Sensor</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>~$105</div>
+        </div>
+        <div class="item-meta">SETA CORP. · 1998 · CLIP INFRARROJO DE OREJA</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES ESPECIAL</span>
+          <strong>Solo un juego en el planeta usó este accesorio:</strong> Tetris 64, exclusivo de Japón. Se insinuó que más juegos lo adoptarían — nunca pasó. El nombre interno en el chip dice "Biopack". Te conectabas a la oreja con un clip infrarrojo y Tetris se ponía <strong>más difícil mientras más nervioso estuvieras</strong>. 1998, weón.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 #5 KEYBOARD -->
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos mg"><span class="hash">#</span>5</div>
+        <div class="item-block-label mg">PERIFÉRICOS</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/keyboard.jpg" alt="N64 Keyboard" onerror="this.style.display='none'">
+          <div class="ph theme-key">
+            <div class="ico">⌨️</div>
+            <div class="lbl">N64 Keyboard</div>
+            <div class="sublbl">RANDNET · 14 MESES ÚTIL</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">N64 Keyboard</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>EXTREMO</div>
+        </div>
+        <div class="item-meta">RND-001 · RANDNETDD CO. · 1999 · SOLO 14 MESES ÚTIL</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES RARO</span>
+          Solo sirvió para el servicio Randnet (internet desde la N64). <strong>Cuando Randnet cerró en febrero de 2001, el teclado quedó sin ningún uso posible</strong>. No existe en el mercado occidental. Si aparece en venta, es que alguien lo guardó desde 1999. Virtualmente invisible afuera de Yahoo Auctions Japan.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 #4 N64 MOUSE -->
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos mg"><span class="hash">#</span>4</div>
+        <div class="item-block-label mg">PERIFÉRICOS</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/n64-mouse.jpg" alt="N64 Mouse" onerror="this.style.display='none'">
+          <div class="ph theme-mouse">
+            <div class="ico">🖱️</div>
+            <div class="lbl">N64 Mouse</div>
+            <div class="sublbl">NUNCA SUELTO</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Nintendo 64 Mouse</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>MUY RARO</div>
+        </div>
+        <div class="item-meta">NUS-017 · MITSUMI · 1999 · PACK-IN OBLIGATORIO</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES RARO</span>
+          Es el <strong>periférico de un periférico</strong>. Para tenerlo necesitas encontrar un Mario Artist: Paint Studio completo con caja — ese juego solo existe para el 64DD, que vendió ~15.000 unidades. <strong>El universo total de este mouse es menor que el universo total del 64DD.</strong> Nunca se vendió por separado, en ninguna región, en ninguna época.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 #3 CAPTURE CASSETTE -->
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos mg"><span class="hash">#</span>3</div>
+        <div class="item-block-label mg">PERIFÉRICOS</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/capture-cassette.jpg" alt="Capture Cassette" onerror="this.style.display='none'">
+          <div class="ph theme-tech">
+            <div class="ico">📹</div>
+            <div class="lbl">Capture Cassette</div>
+            <div class="sublbl">EL DEEPFAKE DE 1999</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Capture Cassette</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>RARÍSIMO</div>
+        </div>
+        <div class="item-meta">NUS-028 · PACK-IN MARIO ARTIST: TALENT STUDIO · 1999</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES EL MÁS DIFÍCIL</span>
+          <strong>El accesorio de un juego de un periférico fallido.</strong> Para tenerlo: necesitas Talent Studio → solo existe en 64DD → 64DD vendió ~15.000 unidades → Talent Studio no fue el disco más popular. Función: <strong>capturaba tu cara en video y la pegaba en un modelo 3D animado</strong>. Deepfake casero en 1999.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 #2 RANDNET MODEM -->
+  <section class="slide">
+    <span class="slide-num">15</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos mg"><span class="hash">#</span>2</div>
+        <div class="item-block-label mg">PERIFÉRICOS</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/randnet.jpg" alt="Randnet Modem" onerror="this.style.display='none'">
+          <div class="ph theme-modem">
+            <div class="ico">📞</div>
+            <div class="lbl">Randnet Modem</div>
+            <div class="sublbl">N64 + INTERNET 28.8 KBPS</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Randnet Modem</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>RARÍSIMO</div>
+        </div>
+        <div class="item-meta">NUS-029 · CARTUCHO CON MÓDEM 28.8 KBPS · 1999</div>
+        <div class="item-why">
+          <span class="lbl">EL DATO BOMBA</span>
+          Es un cartucho N64 con un módem de internet adentro. <strong>El número de teléfono al que marcaba (03-3568-5050, Tokyo) está grabado en el ROM del chip y no se puede cambiar.</strong> Si lo conectaras hoy a una línea telefónica, marcaría ese número que lleva más de 20 años sin existir. Hardware cuyo único propósito murió en 2001.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 #1 64DD -->
+  <section class="slide">
+    <span class="slide-num">16</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos mg"><span class="hash">#</span>1</div>
+        <div class="item-block-label mg">PERIFÉRICOS · EL SANTO GRIAL</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/64dd.jpg" alt="Nintendo 64DD" onerror="this.style.display='none'">
+          <div class="ph theme-translu">
+            <div class="ico">💾</div>
+            <div class="lbl">Nintendo 64DD</div>
+            <div class="sublbl">DISK DRIVE · 14 MESES DE VIDA</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Nintendo 64DD</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$7,830+</div>
+        </div>
+        <div class="item-meta">NUS-010 · DISK DRIVE · DIC 1999 → FEB 2001 · 14 MESES</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES EL #1</span>
+          De <strong>100.000 unidades planeadas, solo se vendieron ~15.000</strong>. Las otras 85.000 fueron descartadas. Se vendía por suscripción postal (Randnet: internet + email + juego online). Cuando Randnet cerró en feb 2001, Nintendo compró de vuelta la mayoría de las unidades. Las que no se devolvieron son las que circulan hoy. <strong>Solo 9 discos lanzados en total.</strong> Sealed: $7,830+. Loose: $1,500. CIB: $2,900.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17 SEPARADOR ESTÁNDAR -->
+  <section class="slide">
+    <span class="slide-num">17</span>
+    <div class="divider">
+      <div class="pre ye">BLOQUE 3 · ACCESORIOS ESTÁNDAR</div>
+      <div class="title ye">LOS QUE TODOS TUVIMOS</div>
+      <div class="sub">Bajamos del exotismo japonés a los accesorios que sí llegaron a Chile. Más baratos, menos raros — pero con historia técnica que casi nadie conoce. El cambio de tono del episodio.</div>
+    </div>
+  </section>
+
+  <!-- 18 JUMPER PAK -->
+  <section class="slide">
+    <span class="slide-num">18</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos ye"><span class="hash">#</span>5</div>
+        <div class="item-block-label ye">ACCESORIOS ESTÁNDAR</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/jumper-pak.jpg" alt="Jumper Pak" onerror="this.style.display='none'">
+          <div class="ph theme-jumper">
+            <div class="ico">🔌</div>
+            <div class="lbl">Jumper Pak</div>
+            <div class="sublbl">DE FÁBRICA · INVISIBLE</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Jumper Pak</div>
+          <div class="price-tag ye"><span class="usd-lbl">USD</span>~$5</div>
+        </div>
+        <div class="item-meta">NUS-008 · TERMINADOR RAMBUS · VENÍA INSTALADO DE FÁBRICA</div>
+        <div class="item-why">
+          <span class="lbl">EL ACCESORIO MÁS IMPORTANTE QUE NADIE SABE QUE TIENE</span>
+          <strong>Sin él la consola no enciende.</strong> No tiene ninguna función de juego — solo existe para terminar el bus RAMBUS. Muchos N64 circulan sin él (sacado al instalar el Expansion Pak) y el Ejector Tool NUS-012 original es hoy más difícil de encontrar que el propio Expansion Pak.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 19 CONTROLLER PAK -->
+  <section class="slide">
+    <span class="slide-num">19</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos ye"><span class="hash">#</span>4</div>
+        <div class="item-block-label ye">ACCESORIOS ESTÁNDAR</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/controller-pak.jpg" alt="Controller Pak" onerror="this.style.display='none'">
+          <div class="ph theme-mem">
+            <div class="ico">💾</div>
+            <div class="lbl">Controller Pak</div>
+            <div class="sublbl">MEMORY CARD · 32 KB</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Controller Pak</div>
+          <div class="price-tag ye"><span class="usd-lbl">USD</span>~$12</div>
+        </div>
+        <div class="item-meta">NUS-004 · MEMORY CARD · 1996 · MUNDIAL · 32 KB / 16 SAVES</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ IMPORTA</span>
+          El N64 no tenía sistema de guardado unificado. Algunos juegos guardaban en cartucho con pila; otros necesitaban el Controller Pak. Sin él no podías guardar los fantasmas en Mario Kart 64 ni tus datos en GoldenEye. <strong>Podías tomar los datos y llevarlos a jugar en la consola de un amigo</strong> — eso era el Controller Pak. 32 KB · 123 páginas · 16 saves máx.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 20 RUMBLE PAK -->
+  <section class="slide">
+    <span class="slide-num">20</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos ye"><span class="hash">#</span>3</div>
+        <div class="item-block-label ye">ACCESORIOS ESTÁNDAR</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/rumble-pak.jpg" alt="Rumble Pak" onerror="this.style.display='none'">
+          <div class="ph theme-rumble">
+            <div class="ico">📳</div>
+            <div class="lbl">Rumble Pak</div>
+            <div class="sublbl">1° VIBRACIÓN EN CONSOLA</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Rumble Pak</div>
+          <div class="price-tag ye"><span class="usd-lbl">USD</span>~$15</div>
+        </div>
+        <div class="item-meta">NUS-013 · 1997 · PRIMERA VIBRACIÓN EN CONSOLA DOMÉSTICA DEL MUNDO</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES HISTÓRICO</span>
+          Fue <strong>el primer accesorio de vibración en una consola doméstica, en todo el mundo</strong>. Hoy cada DualSense, Joy-Con y Xbox controller tiene vibración — todo eso viene de acá. Nintendo lo incluyó dentro de la caja de Star Fox 64 en Japón y USA en 1997. Necesita 2 pilas AAA y no comparte slot con el Controller Pak.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 TRANSFER PAK -->
+  <section class="slide">
+    <span class="slide-num">21</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos ye"><span class="hash">#</span>2</div>
+        <div class="item-block-label ye">ACCESORIOS ESTÁNDAR</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/transfer-pak.jpg" alt="Transfer Pak" onerror="this.style.display='none'">
+          <div class="ph theme-transfer">
+            <div class="ico">🔄</div>
+            <div class="lbl">Transfer Pak</div>
+            <div class="sublbl">N64 ↔ GAME BOY</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Transfer Pak</div>
+          <div class="price-tag ye"><span class="usd-lbl">USD</span>~$22</div>
+        </div>
+        <div class="item-meta">NUS-019 · 1999 · N64 ↔ GAME BOY COLOR</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ IMPORTA</span>
+          <strong>Primera vez en la historia que podías ver tus Pokémon del Game Boy en 3D en televisión.</strong> Insertabas el cartucho rojo/azul/amarillo en el Transfer Pak, conectabas al control del N64, y tus Pokémon aparecían en Pokémon Stadium. Predecesora directa del Nintendo DS + Wii y del GBA + GameCube.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 22 EXPANSION PAK -->
+  <section class="slide">
+    <span class="slide-num">22</span>
+    <div class="slide-item">
+      <div class="item-head">
+        <div class="item-pos ye"><span class="hash">#</span>1</div>
+        <div class="item-block-label ye">ACCESORIOS · EL OBLIGATORIO</div>
+      </div>
+      <div class="img-wrap">
+        <div class="frame">
+          <img src="img/n64-hardware-raro/expansion-pak.jpg" alt="Expansion Pak" onerror="this.style.display='none'">
+          <div class="ph theme-expansion">
+            <div class="ico">🧠</div>
+            <div class="lbl">Expansion Pak</div>
+            <div class="sublbl">+4 MB · OBLIGATORIO ×3</div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-title-row">
+          <div class="item-title">Expansion Pak</div>
+          <div class="price-tag ye"><span class="usd-lbl">USD</span>~$25</div>
+        </div>
+        <div class="item-meta">NUS-007 · +4 MB RAM → 8 MB TOTAL · 1998 · MUNDIAL</div>
+        <div class="item-why">
+          <span class="lbl">POR QUÉ ES EL #1 DE LOS ESTÁNDAR</span>
+          <strong>Tres juegos no corren sin él: Donkey Kong 64, Majora's Mask y Perfect Dark.</strong> No es mejora opcional — es requisito absoluto. Sin Expansion Pak no puedes jugar la campaña de Perfect Dark. Sin él Majora's Mask no arranca. Nintendo lo diseñó originalmente para el 64DD, pero los juegos en cartucho terminaron necesitándolo también. Incluía el Ejector Tool NUS-012 para sacar el Jumper Pak.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 23 CIERRE DATO BOMBA -->
+  <section class="slide">
+    <span class="slide-num">23</span>
+    <h1>CIERRE DEL EPISODIO</h1>
+    <h2 class="mg">El santuario del coleccionista N64</h2>
+    <div class="value-grid">
+      <div class="value-card cy">
+        <h3>CONSOLA #1</h3>
+        <div class="big">$8,000+</div>
+        <p>Pikachu Orange sealed graded</p>
+      </div>
+      <div class="value-card mg">
+        <h3>PERIFÉRICO #1</h3>
+        <div class="big">$7,830+</div>
+        <p>Nintendo 64DD sealed</p>
+      </div>
+      <div class="value-card ye">
+        <h3>SETUP COMPLETO</h3>
+        <div class="big">$25,000+</div>
+        <p>1 de cada item de este episodio,<br>en CIB / sealed según disponibilidad</p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">FRASE DE CIERRE PARA CÁMARA</span>
+      "Lo que acaban de ver en este episodio es el santuario del coleccionista N64. Treinta y seis hardware que la mayoría de chilenos nunca vio en su vida. Y todo esto — desde el Pikachu naranja de 8 mil dólares hasta el cartucho con módem que llamaba a un teléfono de Tokyo que ya no existe — tiene en común una cosa: <strong>nadie en Latam lo tuvo cuando salió</strong>. Pero hoy sí lo podemos contar."
+    </div>
+  </section>
+
+  <!-- 24 CHECKLIST -->
+  <section class="slide">
+    <span class="slide-num">24</span>
+    <h1>CHECKLIST · PRE-GRABACIÓN</h1>
+    <h2 class="cy">Antes de prender cámaras</h2>
+    <ul class="checklist">
+      <li class="ye"><strong class="ye">☐ Luis</strong> — verificar que los 18 slides cargan en Chrome offline. Si Koko o yo subimos fotos reales a <code>studio/img/n64-hardware-raro/</code>, las cargará automáticamente sobre el placeholder.</li>
+      <li class="ye"><strong class="ye">☐ Koko</strong> — pensar qué ítems conocía / no conocía, y cuáles le rompen la cabeza por primera vez. Esa reacción genuina es el oro del episodio.</li>
+      <li class="cy"><strong class="cy">☐ Setup</strong> — si tení algún accesorio estándar físico (Rumble Pak, Controller Pak, Expansion Pak), tenerlo en la mesa para mostrarlo en cámara en el Bloque 3. Plus visual enorme.</li>
+      <li class="cy"><strong class="cy">☐ Audio</strong> — lavalier para ambos. Episodio conversacional puro. Audio limpio prioridad uno.</li>
+      <li class="mg"><strong class="mg">☐ Ritmo</strong> — cronómetro visible. Cada consola/periférico: ~45 seg en cámara. Accesorios estándar: ~30 seg (van más rápido porque son más conocidos).</li>
+      <li class="mg"><strong class="mg">☐ Frases gancho</strong> — memorizar al menos 3: (1) "85.000 unidades del 64DD descartadas en silencio", (2) "Tetris que se ponía más difícil mientras más nervioso estabas", (3) "El teléfono de Tokyo grabado en el ROM que ya no existe".</li>
+    </ul>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 24</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(slides.length - 1); }
+});
+
+go(0);
+</script>
+
+</body>
+</html>
