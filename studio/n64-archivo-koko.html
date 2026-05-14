@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Estudio · El archivo · Colección N64 de Koko</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%; overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace; color: var(--bo);
+}
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(0,229,255,.10) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+header {
+  position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200;
+  background: rgba(6, 3, 15, 0.97); border-bottom: 2px solid var(--cy);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 28px;
+}
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--cy); }
+.dot { width: 10px; height: 10px; background: var(--cy); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 32px 48px; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+
+/* PORTADA */
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 60px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .accent { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; }
+
+/* SLIDE HEADER */
+.slide h1 {
+  font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye);
+  letter-spacing: 4px; margin-bottom: 6px;
+  border-left: 4px solid var(--ye); padding-left: 16px;
+}
+.slide h2 {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 38px; color: #fff;
+  letter-spacing: 1px; margin: 8px 0 20px 20px; line-height: 1.05;
+}
+.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.slide h2.ye { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.45); }
+
+/* STATS */
+.stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 16px;
+}
+.stat-card {
+  background: var(--card-bg); border: 2px solid; border-radius: 4px;
+  padding: 26px; text-align: center;
+}
+.stat-card.cy { border-color: var(--cy); box-shadow: 0 0 22px rgba(0,229,255,.18); }
+.stat-card.mg { border-color: var(--mg); box-shadow: 0 0 22px rgba(255,46,136,.18); }
+.stat-card.ye { border-color: var(--ye); box-shadow: 0 0 22px rgba(255,210,63,.18); }
+.stat-card h3 {
+  font-family: 'Press Start 2P'; font-size: 10px; letter-spacing: 2px; margin-bottom: 14px;
+}
+.stat-card.cy h3 { color: var(--cy); }
+.stat-card.mg h3 { color: var(--mg); }
+.stat-card.ye h3 { color: var(--ye); }
+.stat-card .big {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 56px;
+  letter-spacing: 1px; line-height: 1; display: block; margin: 12px 0;
+}
+.stat-card.cy .big { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+.stat-card.mg .big { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.4); }
+.stat-card.ye .big { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.4); }
+.stat-card p { font-family: 'Share Tech Mono'; font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.5; }
+
+/* CATEGORÍA */
+.cat-card {
+  background: var(--card-bg); border: 2px solid var(--cy);
+  border-radius: 4px; padding: 26px 30px;
+  margin-top: 16px; box-shadow: 0 0 18px rgba(0,229,255,.12);
+}
+.cat-card.mg { border-color: var(--mg); box-shadow: 0 0 18px rgba(255,46,136,.12); }
+.cat-card.ye { border-color: var(--ye); box-shadow: 0 0 18px rgba(255,210,63,.12); }
+.cat-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.cat-label {
+  font-family: 'Press Start 2P'; font-size: 11px; letter-spacing: 2px;
+  color: var(--cy);
+}
+.cat-card.mg .cat-label { color: var(--mg); }
+.cat-card.ye .cat-label { color: var(--ye); }
+.cat-count {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 34px;
+  color: #fff;
+}
+.cat-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 18px;
+  font-family: 'Share Tech Mono'; font-size: 14px;
+}
+.cat-grid .game {
+  padding: 6px 0; color: rgba(255,255,255,.85);
+  border-bottom: 1px dashed rgba(255,255,255,.08);
+}
+.cat-grid .game strong { color: var(--ye); }
+
+/* JOYA / DESTACADO */
+.joya-card {
+  background: linear-gradient(135deg, rgba(255,46,136,.1), rgba(0,229,255,.05));
+  border: 2px solid var(--mg); border-radius: 4px;
+  padding: 32px 36px; margin-top: 14px;
+  box-shadow: 0 0 28px rgba(255,46,136,.22);
+}
+.joya-card .label {
+  font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye);
+  letter-spacing: 3px; margin-bottom: 12px;
+}
+.joya-card .juego {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 40px;
+  color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.5);
+  margin-bottom: 14px; line-height: 1.1;
+}
+.joya-card .desc {
+  font-family: 'Share Tech Mono'; font-size: 16px;
+  color: rgba(255,255,255,.85); line-height: 1.6;
+}
+.joya-card .desc strong { color: var(--ye); }
+
+/* TOP CAROS */
+.top-caros-grid {
+  display: grid; grid-template-columns: 60px 1fr 120px; gap: 0;
+  font-family: 'Share Tech Mono'; margin-top: 14px;
+}
+.top-caros-grid .hdr {
+  font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye);
+  letter-spacing: 2px; padding: 10px 12px; border-bottom: 2px solid var(--ye);
+}
+.top-caros-grid .row { display: contents; }
+.top-caros-grid .row > div {
+  padding: 12px; border-bottom: 1px solid rgba(255,255,255,.06);
+  font-size: 15px;
+}
+.top-caros-grid .pos {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 22px;
+  color: var(--mg); text-align: center;
+}
+.top-caros-grid .name {
+  font-family: 'Orbitron'; font-weight: 700; color: #fff;
+}
+.top-caros-grid .price {
+  font-family: 'Orbitron'; font-weight: 900; color: var(--mg);
+  text-align: right; font-size: 18px;
+}
+
+/* CIERRE / TEASER */
+.cam-quote {
+  background: rgba(255,210,63,.07); border-left: 4px solid var(--ye);
+  padding: 22px 26px; margin-top: 22px;
+  font-family: 'Share Tech Mono'; font-size: 17px; font-style: italic;
+  color: rgba(255,255,255,.88); line-height: 1.6;
+}
+.cam-quote .lbl {
+  display: block; font-style: normal; font-family: 'Press Start 2P'; font-size: 8px;
+  color: var(--ye); letter-spacing: 2px; margin-bottom: 10px;
+}
+
+ul.checklist { list-style: none; margin-top: 10px; }
+ul.checklist li {
+  padding: 14px 20px; border-left: 4px solid; margin-bottom: 10px;
+  font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;
+}
+ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
+ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
+ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
+ul.checklist li strong.ye { color: var(--ye); }
+ul.checklist li strong.cy { color: var(--cy); }
+ul.checklist li strong.mg { color: var(--mg); }
+
+/* NAV FOOTER */
+nav.footer {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 64px;
+  background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; z-index: 200;
+}
+.nav-btn {
+  background: transparent; border: 2px solid var(--cy); color: var(--cy);
+  font-family: 'Press Start 2P'; font-size: 9px;
+  padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px;
+}
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(0,229,255,.5); }
+.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--cy); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · ARCHIVO · COLECCIÓN N64 KOKO · GEN 5</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 PORTADA -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 5 · NINTENDO 64 · EL ARCHIVO</div>
+      <div class="ep-title">LA <span class="accent">COLECCIÓN N64</span> COMPLETA DE KOKO</div>
+      <div class="ep-sub">58 CARTUCHOS · 17 AÑOS DE COLECCIONISMO</div>
+    </div>
+  </section>
+
+  <!-- 02 STATS GENERALES -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <h1>EL ARCHIVO EN NÚMEROS</h1>
+    <h2 class="cy">58 cartuchos sobre la mesa</h2>
+    <div class="stats-grid">
+      <div class="stat-card cy">
+        <h3>CARTUCHOS</h3>
+        <div class="big">58</div>
+        <p>juegos físicos N64 · todos en condición Loose verificada</p>
+      </div>
+      <div class="stat-card mg">
+        <h3>VALOR LOOSE</h3>
+        <div class="big">€1,730</div>
+        <p>~CLP $1.640.000 · precio actual de mercado europeo</p>
+      </div>
+      <div class="stat-card ye">
+        <h3>VALOR CIB</h3>
+        <div class="big">€5,370</div>
+        <p>~CLP $5.100.000 · si todos estuvieran completos en caja</p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">PARA CONTEXTO EN CÁMARA</span>
+      "<strong>Esto que ven sobre la mesa son diecisiete años de coleccionar.</strong> Cincuenta y ocho cartuchos. Si los tuviera todos en caja completa con manual, valdrían CINCO MIL TRESCIENTOS SETENTA EUROS — más de cinco millones de pesos chilenos. Y los tengo todos sueltos. La diferencia entre Loose y CIB es lo que separa a un jugador de un coleccionista."
+    </div>
+  </section>
+
+  <!-- 03 CATEGORÍA · RARE -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <h1>BLOQUE · LA SECCIÓN RARE</h1>
+    <h2 class="mg">El sesgo Rare confirmado</h2>
+    <div class="cat-card mg">
+      <div class="cat-header">
+        <div class="cat-label">RARE EN LA COLECCIÓN DE KOKO</div>
+        <div class="cat-count">7</div>
+      </div>
+      <div class="cat-grid">
+        <div class="game"><strong>Banjo-Kazooie</strong></div>
+        <div class="game"><strong>Blast Corps</strong></div>
+        <div class="game"><strong>Conker's Bad Fur Day</strong></div>
+        <div class="game"><strong>Diddy Kong Racing</strong></div>
+        <div class="game"><strong>Donkey Kong 64</strong></div>
+        <div class="game"><strong>Jet Force Gemini</strong></div>
+        <div class="game"><strong>Killer Instinct Gold</strong></div>
+        <div class="game"><strong>Perfect Dark</strong></div>
+        <div class="game"><strong>GoldenEye 007</strong></div>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">EL DATO</span>
+      <strong>9 de los 58 son Rare</strong> — el 15% de la colección. Rare hizo 18 juegos para N64 en total. Koko tiene la mitad del catálogo de Rare. Eso es lo que define al coleccionista chileno de Generación 5: nuestro N64 era el N64 de Rare.
+    </div>
+  </section>
+
+  <!-- 04 CATEGORÍA · NINTENDO FIRST-PARTY -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <h1>BLOQUE · NINTENDO FIRST-PARTY</h1>
+    <h2 class="cy">Las franquicias del corazón</h2>
+    <div class="cat-card cy">
+      <div class="cat-header">
+        <div class="cat-label">NINTENDO EAD + INTELLIGENT SYSTEMS + HAL</div>
+        <div class="cat-count">11</div>
+      </div>
+      <div class="cat-grid">
+        <div class="game">Super Mario 64</div>
+        <div class="game">Mario Kart 64</div>
+        <div class="game">Mario Party 3</div>
+        <div class="game">Mario Golf</div>
+        <div class="game">Mario Tennis</div>
+        <div class="game">Dr. Mario 64</div>
+        <div class="game">Zelda: Ocarina of Time</div>
+        <div class="game">Zelda: Majora's Mask</div>
+        <div class="game">Super Smash Bros.</div>
+        <div class="game">F-Zero X</div>
+        <div class="game">Pilotwings 64</div>
+        <div class="game">Excitebike 64</div>
+        <div class="game">Wave Race 64</div>
+        <div class="game">Pokémon Stadium</div>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">DATO PARA CÁMARA</span>
+      Las dos sagas de Zelda + cinco juegos con Mario en el título + Smash + F-Zero. <strong>La biblioteca first-party de Nintendo en N64 entera, casi.</strong> Lo que falta: Star Fox 64 y Paper Mario.
+    </div>
+  </section>
+
+  <!-- 05 CATEGORÍA · DEPORTES -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <h1>BLOQUE · DEPORTES</h1>
+    <h2 class="ye">La categoría más grande de Koko</h2>
+    <div class="cat-card ye">
+      <div class="cat-header">
+        <div class="cat-label">SPORTS · LA CATEGORÍA MAYOR</div>
+        <div class="cat-count">17</div>
+      </div>
+      <div class="cat-grid">
+        <div class="game">FIFA Soccer 64</div>
+        <div class="game">ISS '64</div>
+        <div class="game">ISS '98</div>
+        <div class="game"><strong>ISS 2000</strong></div>
+        <div class="game">NBA Hangtime</div>
+        <div class="game">NBA Live 99</div>
+        <div class="game">Kobe Bryant in NBA Courtside</div>
+        <div class="game">NBA Courtside</div>
+        <div class="game">Mario Golf</div>
+        <div class="game">Mario Tennis</div>
+        <div class="game">Pokémon Stadium</div>
+        <div class="game">Wave Race 64</div>
+        <div class="game">1080° Snowboarding</div>
+        <div class="game">Twisted Edge Snowboarding</div>
+        <div class="game">Wayne Gretzky's 3D Hockey</div>
+        <div class="game">Tony Hawk's Pro Skater</div>
+        <div class="game">Tony Hawk's Pro Skater 2</div>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">DATO PARA CÁMARA</span>
+      <strong>17 de 58 son deportes — casi un tercio de la colección.</strong> En los 90 el deporte era cultura central. Cuatro ISS (International Superstar Soccer), tres NBA, dos snowboard, dos Tony Hawk. Y uno de estos, <strong>ISS 2000, vale US$650 en NTSC USA</strong> (apareció en el top precios).
+    </div>
+  </section>
+
+  <!-- 06 CATEGORÍA · RACING + LUCHA -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <h1>BLOQUE · RACING + LUCHA</h1>
+    <h2 class="cy">10 carreras + 6 peleas</h2>
+    <div class="cat-card cy">
+      <div class="cat-header">
+        <div class="cat-label">RACING</div>
+        <div class="cat-count">10</div>
+      </div>
+      <div class="cat-grid">
+        <div class="game">Mario Kart 64</div>
+        <div class="game">Diddy Kong Racing</div>
+        <div class="game">F-Zero X</div>
+        <div class="game">F1 Pole Position 64</div>
+        <div class="game">Cruis'n USA</div>
+        <div class="game">Cruis'n World</div>
+        <div class="game">Cruis'n Exotica</div>
+        <div class="game">Wave Race 64</div>
+        <div class="game">1080° Snowboarding</div>
+        <div class="game">Top Gear Hyper-Bike</div>
+      </div>
+    </div>
+    <div class="cat-card mg">
+      <div class="cat-header">
+        <div class="cat-label">LUCHA + WRESTLING</div>
+        <div class="cat-count">6</div>
+      </div>
+      <div class="cat-grid">
+        <div class="game">Killer Instinct Gold</div>
+        <div class="game">Mortal Kombat 4</div>
+        <div class="game">Mortal Kombat Trilogy</div>
+        <div class="game">War Gods</div>
+        <div class="game">WCW Mayhem</div>
+        <div class="game">WCW/nWo Revenge</div>
+        <div class="game">Ready 2 Rumble Boxing 2</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 STAR WARS + OTROS -->
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <h1>BLOQUE · MICRO-SAGAS</h1>
+    <h2 class="ye">Star Wars · FPS · Aventura</h2>
+    <div class="cat-card ye">
+      <div class="cat-header">
+        <div class="cat-label">LA TRILOGÍA STAR WARS DEL N64</div>
+        <div class="cat-count">3</div>
+      </div>
+      <div class="cat-grid">
+        <div class="game">Star Wars: Shadows of the Empire</div>
+        <div class="game">Star Wars: Rogue Squadron</div>
+        <div class="game">Star Wars Episode I: Racer</div>
+      </div>
+    </div>
+    <div class="cat-card mg">
+      <div class="cat-header">
+        <div class="cat-label">FPS / SHOOTERS</div>
+        <div class="cat-count">3</div>
+      </div>
+      <div class="cat-grid">
+        <div class="game"><strong>GoldenEye 007</strong></div>
+        <div class="game">Perfect Dark</div>
+        <div class="game">Turok: Dinosaur Hunter</div>
+        <div class="game">Duke Nukem 64</div>
+        <div class="game">South Park</div>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">DATO PARA CÁMARA</span>
+      Star Wars en N64 fue el patio de juegos de LucasArts antes que se mudaran a Xbox. <strong>Shadows of the Empire (1996) fue uno de los primeros juegos third-party del N64.</strong> Y Rogue Squadron (1998) sigue siendo el mejor Star Wars 3D que existió.
+    </div>
+  </section>
+
+  <!-- 08 JOYA · ISS 2000 -->
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <h1>LA JOYA OCULTA DE LA COLECCIÓN</h1>
+    <h2 class="mg">Un cartucho de la colección de Koko vale US$650 en USA</h2>
+    <div class="joya-card">
+      <div class="label">EL CONNECT CON EL EPISODIO DE PRECIOS</div>
+      <div class="juego">International Superstar Soccer 2000</div>
+      <div class="desc">
+        Apareció en el top 10 de precios mundiales del N64 — <strong>$650 USD CIB NTSC USA</strong>, posición #9 entre los más caros. La razón: Konami hizo tirada baja en USA porque FIFA tenía el mercado dominado, así que casi nadie lo compró NTSC. <strong>Koko lo tiene en su colección.</strong> Y en Latam los precios son distintos — su copia loose vale €15-20, su CIB europeo vale €245. Pero ese mismo cartucho en versión NTSC USA hoy se vende a 650 dólares.
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">FRASE PARA CÁMARA</span>
+      "<strong>Este cartucho que tengo acá</strong> — uno de mis dieciocho juegos de deportes, que probablemente nunca volví a jugar después del 2002 — <strong>vale 650 dólares en Estados Unidos</strong>. No por buena calidad, sino porque allá nadie lo compró. La rareza es el otro lado del mercado: lo que en Chile fue normal, allá fue olvidado."
+    </div>
+  </section>
+
+  <!-- 09 TOP 8 MÁS CAROS -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <h1>LOS 8 MÁS CAROS DE LA COLECCIÓN</h1>
+    <h2 class="ye">Valor CIB europeo · mayo 2026</h2>
+    <div class="top-caros-grid">
+      <div class="hdr">#</div>
+      <div class="hdr">JUEGO</div>
+      <div class="hdr">CIB €</div>
+      <div class="row"><div class="pos">1</div><div class="name">Conker's Bad Fur Day</div><div class="price">€375</div></div>
+      <div class="row"><div class="pos">2</div><div class="name">Zelda: Majora's Mask</div><div class="price">€247</div></div>
+      <div class="row"><div class="pos">3</div><div class="name">Pokémon Stadium</div><div class="price">€246</div></div>
+      <div class="row"><div class="pos">4</div><div class="name">International Superstar Soccer 2000</div><div class="price">€245</div></div>
+      <div class="row"><div class="pos">5</div><div class="name">Donald Duck: Goin' Quackers</div><div class="price">€178</div></div>
+      <div class="row"><div class="pos">6</div><div class="name">Mario Party 3</div><div class="price">€159</div></div>
+      <div class="row"><div class="pos">7</div><div class="name">Super Smash Bros.</div><div class="price">€156</div></div>
+      <div class="row"><div class="pos">8</div><div class="name">F-Zero X</div><div class="price">€147</div></div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">SORPRESA DEL TOP</span>
+      <strong>Donald Duck en el #5.</strong> Un juego que nadie esperaría caro — pero salió a fines del N64 con tirada baja en Europa, y hoy vale €178 CIB. Es el tipo de joya escondida que tiene una colección bien guardada.
+    </div>
+  </section>
+
+  <!-- 10 CIERRE + TEASER CONSOLAS -->
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <h1>CIERRE · ANTES DE TERMINAR</h1>
+    <h2 class="mg">Una cosa más...</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 18px;">
+      <div style="background: var(--card-bg); border: 2px solid var(--cy); border-radius: 4px; padding: 26px;">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 2px; margin-bottom: 14px;">LO QUE VIERON HOY</h3>
+        <p style="font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6;">58 cartuchos. Sesgo Rare confirmado. ISS 2000 como joya escondida. Donald Duck como sorpresa. <strong style="color: var(--cy);">17 años de coleccionar pacientes.</strong></p>
+      </div>
+      <div style="background: var(--card-bg); border: 2px solid var(--mg); border-radius: 4px; padding: 26px;">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 11px; color: var(--mg); letter-spacing: 2px; margin-bottom: 14px;">LO QUE NO MOSTRAMOS HOY</h3>
+        <p style="font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6;">Las <strong style="color: var(--mg);">6 CONSOLAS N64</strong>. Incluyendo una <strong style="color: var(--mg);">Pikachu N64</strong>, una Gold y las 3 Funtastic. <strong>Eso es otro video.</strong></p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">FRASE DE CIERRE + TEASER</span>
+      "Eso es el archivo de juegos del N64 de Retrotarros. Cincuenta y ocho cartuchos, cinco mil dólares de valor potencial, diecisiete años de paciencia. <strong>Pero esto es solo la mitad.</strong> Porque también tengo seis consolas N64 — una de ellas el santo grial Pikachu que en Japón vendieron unas pocas miles y hoy vale ocho mil dólares. ¿Cuál tengo yo? Eso lo cuento en el próximo episodio: los N64 más raros del mundo, y los que yo tengo."
+    </div>
+  </section>
+
+  <!-- 11 CHECKLIST -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <h1>CHECKLIST · POST-PRODUCCIÓN</h1>
+    <h2 class="cy">Decisiones de edición</h2>
+    <ul class="checklist">
+      <li class="ye"><strong class="ye">☐ Luis</strong> — verificar que en el grabado se mencionan los 5 datos clave: 58 cartuchos · €5,370 CIB total · 9 Rare · 17 sports · ISS 2000 vale $650 NTSC.</li>
+      <li class="ye"><strong class="ye">☐ Koko</strong> — verificar que se cuente anécdota personal sobre cómo se fue armando la colección. Eso humaniza el episodio (no es solo data).</li>
+      <li class="cy"><strong class="cy">☐ B-roll</strong> — closeups de los cartuchos en la mesa. Especialmente: Conker (#1 caro), ISS 2000 (la joya), Donald Duck (la sorpresa).</li>
+      <li class="cy"><strong class="cy">☐ Ritmo</strong> — ~90 seg por bloque de categoría. Slide 8 (la joya ISS 2000) puede tomar 2 min — es el ángulo emocional/narrativo.</li>
+      <li class="mg"><strong class="mg">☐ Teaser consolas</strong> — el cierre tiene que sembrar fuerte el episodio de hardware raro. La Pikachu N64 es el gancho.</li>
+      <li class="mg"><strong class="mg">☐ Orden de publicación</strong> — después de los tres rankings + hardware raro. Es un episodio de "cierre íntimo" del arco, no de apertura.</li>
+    </ul>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 11</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+go(0);
+</script>
+
+</body>
+</html>

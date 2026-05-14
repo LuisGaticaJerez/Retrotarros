@@ -27,11 +27,13 @@ G:\Mi unidad\Studio\pautas\pauta-n64-top-mundial.docx  ← DOCX para imprimir/le
 |------|----------|--------|---------|
 | `n64-top-mundial` | Top 10 N64 según la crítica (Parte 1 de 2) | ✓ Grabado, en edición | [arco](arcos/n64.md) |
 | `n64-top-precios` | Top 10 N64 más caros (Parte 2 de 2) | ✓ Grabado, en edición | [arco](arcos/n64.md) |
+| `n64-retrotarros-vs-mundo` | Game show · Koko vs la crítica | ✓ Grabado, en edición | [arco](arcos/n64.md) |
+| `n64-archivo-koko` | La colección N64 entera de Koko (58 cartuchos) | ✓ Grabado, en edición | [arco](arcos/n64.md) |
 | `n64-hardware-raro` | Consolas y periféricos más raros | ✓ Cerrado para grabar | [arco](arcos/n64.md) |
 | `n64-no-latam` | Juegos que nunca llegaron a Latam | ✓ Cerrado para grabar | [arco](arcos/n64.md) |
-| `n64-kirkhope-rare` | Grant Kirkhope + Rare en su pico | ☐ Pendiente — **próximo recomendado** | [arco](arcos/n64.md) |
+| `n64-joyas-ocultas` | Juegos olvidados pero buenos | ☐ Pendiente — scope a definir | [arco](arcos/n64.md) |
+| `n64-kirkhope-rare` | Grant Kirkhope + Rare en su pico | ☐ Pendiente | [arco](arcos/n64.md) |
 | `n64-nintendo-vs-playstation` | Cómo perdió Nintendo la generación 5 | ☐ Pendiente | [arco](arcos/n64.md) |
-| `n64-archivo-koko` | La colección N64 entera de Koko | ☐ Pendiente | [arco](arcos/n64.md) |
 | `n64-ost-bateria` | OST en batería · Gen 5 (serie paralela) | ☐ Pendiente | [arco](arcos/n64.md) |
 
 ### Otros (futuros)

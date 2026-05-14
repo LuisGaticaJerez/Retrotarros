@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Estudio · Retrotarros vs. el mundo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  z-index: 200;
+  background: rgba(6, 3, 15, 0.97);
+  border-bottom: 2px solid var(--mg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+.hdr-logo {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 20px;
+  color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6);
+  letter-spacing: 3px;
+}
+.hdr-tag {
+  font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px;
+}
+.hdr-rec {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Press Start 2P'; font-size: 8px; color: var(--mg);
+}
+.dot {
+  width: 10px; height: 10px; background: var(--mg); border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+.deck {
+  position: fixed;
+  top: 56px; left: 0; right: 0; bottom: 64px;
+  overflow: hidden;
+}
+.slide {
+  position: absolute; inset: 0;
+  padding: 32px 48px;
+  overflow-y: auto;
+  opacity: 0; pointer-events: none;
+  transition: opacity .22s;
+}
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num {
+  position: absolute; top: 16px; right: 24px;
+  font-family: 'Press Start 2P'; font-size: 9px;
+  color: rgba(255,255,255,.22); letter-spacing: 2px;
+}
+
+/* PORTADA */
+.portada {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; height: 100%;
+}
+.portada .ep-tag {
+  font-family: 'Press Start 2P'; font-size: 11px;
+  color: var(--cy); letter-spacing: 5px; margin-bottom: 22px;
+}
+.portada .ep-title {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 62px;
+  letter-spacing: 1.5px; line-height: 1.05; color: #fff;
+  margin-bottom: 18px; max-width: 1100px;
+}
+.portada .ep-title .vs {
+  color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55);
+}
+.portada .ep-sub {
+  font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px;
+}
+
+/* SETUP */
+.setup-card {
+  background: var(--card-bg);
+  border: 2px solid;
+  border-radius: 4px;
+  padding: 26px 28px;
+  margin-bottom: 18px;
+}
+.setup-card.mg { border-color: var(--mg); box-shadow: 0 0 22px rgba(255,46,136,.15); }
+.setup-card.cy { border-color: var(--cy); box-shadow: 0 0 22px rgba(0,229,255,.15); }
+.setup-card.ye { border-color: var(--ye); box-shadow: 0 0 22px rgba(255,210,63,.15); }
+.setup-card h3 {
+  font-family: 'Press Start 2P'; font-size: 11px;
+  letter-spacing: 2px; margin-bottom: 14px;
+}
+.setup-card.mg h3 { color: var(--mg); }
+.setup-card.cy h3 { color: var(--cy); }
+.setup-card.ye h3 { color: var(--ye); }
+.setup-card p, .setup-card li {
+  font-family: 'Share Tech Mono'; font-size: 15px; line-height: 1.6;
+  color: rgba(255,255,255,.86);
+}
+.points-table {
+  width: 100%; margin-top: 10px;
+  font-family: 'Share Tech Mono'; font-size: 15px;
+}
+.points-table tr {
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.points-table tr:last-child { border: none; }
+.points-table td { padding: 8px 0; }
+.points-table .pts {
+  font-family: 'Orbitron'; font-weight: 900;
+  color: var(--ye); text-align: right;
+}
+
+/* SLIDE JUEGO */
+.slide-game {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  height: 100%;
+  padding: 20px 56px 24px;
+  gap: 14px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.game-head {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
+}
+.koko-label {
+  font-family: 'Press Start 2P'; font-size: 12px;
+  color: var(--ye); letter-spacing: 3px;
+  padding: 8px 14px; border: 2px solid var(--ye);
+  background: rgba(255,210,63,.06);
+}
+.world-pos {
+  font-family: 'Orbitron'; font-weight: 900;
+  font-size: 36px;
+  padding: 6px 18px; border-radius: 4px;
+  letter-spacing: 1px;
+}
+.world-pos.in-top {
+  color: var(--cy); border: 2px solid var(--cy);
+  background: rgba(0,229,255,.08);
+  text-shadow: 0 0 14px rgba(0,229,255,.4);
+}
+.world-pos.outside {
+  color: rgba(255,255,255,.5); border: 2px solid rgba(255,255,255,.3);
+  background: rgba(255,255,255,.04);
+  font-size: 16px;
+}
+.world-pos.solo {
+  color: var(--mg); border: 2px solid var(--mg);
+  background: rgba(255,46,136,.1);
+  text-shadow: 0 0 18px rgba(255,46,136,.55);
+  font-size: 18px;
+  animation: pulse-solo 2s ease-in-out infinite;
+}
+@keyframes pulse-solo {
+  0%,100% { box-shadow: 0 0 18px rgba(255,46,136,.4); }
+  50%     { box-shadow: 0 0 28px rgba(255,46,136,.8); }
+}
+
+.img-wrap {
+  display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden;
+}
+.frame {
+  position: relative;
+  height: 100%; max-height: 340px;
+  aspect-ratio: 5/4;
+  background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%);
+  border-radius: 12px 12px 6px 6px;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.frame::before {
+  content: ""; position: absolute; top: 0; left: 50%;
+  transform: translateX(-50%); width: 78%; height: 14%;
+  background: linear-gradient(180deg, #2a2a2f 0%, #1a1a1f 100%);
+  border-radius: 0 0 6px 6px;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.6);
+  z-index: 3;
+}
+.frame-inner {
+  position: absolute; inset: 14% 10% 10%;
+  border-radius: 4px; overflow: hidden;
+  background: #2D1B69;
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,.07), inset 0 0 0 6px rgba(0,0,0,.25), 0 4px 14px rgba(0,0,0,.4);
+}
+.frame-inner img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.game-info {
+  width: 100%; display: flex; flex-direction: column;
+  align-items: center; gap: 8px; text-align: center;
+}
+.game-title { font-family: 'Orbitron'; font-weight: 900; font-size: 26px; color: #fff; letter-spacing: .5px; line-height: 1.1; }
+.game-meta { font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.5); letter-spacing: 2px; }
+.game-why {
+  max-width: 940px; padding: 12px 22px;
+  background: rgba(255,255,255,.04); border-left: 4px solid var(--ye);
+  font-family: 'Share Tech Mono'; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.86); text-align: left;
+}
+.game-why .lbl {
+  display: block; font-family: 'Press Start 2P'; font-size: 8px;
+  color: var(--ye); letter-spacing: 2px; margin-bottom: 4px;
+}
+.game-why strong { color: var(--ye); }
+
+/* SCORECARD */
+.scorecard {
+  background: var(--card-bg); border: 2px solid var(--ye);
+  border-radius: 4px; padding: 24px 28px;
+  box-shadow: 0 0 22px rgba(255,210,63,.18);
+}
+.scorecard h3 {
+  font-family: 'Press Start 2P'; font-size: 11px;
+  color: var(--ye); letter-spacing: 2px; margin-bottom: 14px;
+}
+.score-grid {
+  display: grid;
+  grid-template-columns: 2fr 90px 140px 80px;
+  gap: 0;
+  font-family: 'Share Tech Mono';
+}
+.score-grid .hdr-row {
+  font-family: 'Press Start 2P'; font-size: 8px;
+  color: var(--cy); letter-spacing: 2px;
+  padding: 8px 10px; border-bottom: 2px solid var(--cy);
+}
+.score-grid .row { display: contents; }
+.score-grid .row > div {
+  padding: 10px 10px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  font-size: 14px;
+}
+.score-grid .game-cell { font-family: 'Orbitron'; font-weight: 700; color: #fff; }
+.score-grid .cib { color: var(--mg); font-weight: 700; }
+.score-grid .world { color: var(--cy); }
+.score-grid .world.solo { color: var(--mg); }
+.score-grid .pts-box {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 20px;
+  color: var(--ye); text-align: center;
+  border-left: 1px dashed rgba(255,210,63,.3);
+}
+.score-total {
+  margin-top: 18px; padding: 14px 18px;
+  background: rgba(255,210,63,.08); border-left: 4px solid var(--ye);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.score-total .lbl { font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 2px; }
+.score-total .val { font-family: 'Orbitron'; font-weight: 900; font-size: 32px; color: var(--ye); text-shadow: 0 0 14px rgba(255,210,63,.5); }
+
+.veredicto-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px;
+}
+.veredicto-card {
+  background: rgba(255,255,255,.03); border: 1px solid; border-radius: 4px;
+  padding: 16px; text-align: center;
+}
+.veredicto-card.bajo { border-color: rgba(255,255,255,.3); }
+.veredicto-card.mid { border-color: rgba(255,210,63,.5); background: rgba(255,210,63,.04); }
+.veredicto-card.alto { border-color: var(--cy); background: rgba(0,229,255,.06); }
+.veredicto-card h4 {
+  font-family: 'Press Start 2P'; font-size: 9px; letter-spacing: 2px;
+  color: rgba(255,255,255,.6); margin-bottom: 6px;
+}
+.veredicto-card.mid h4 { color: var(--ye); }
+.veredicto-card.alto h4 { color: var(--cy); }
+.veredicto-card .puntos { font-family: 'Orbitron'; font-weight: 900; font-size: 22px; color: #fff; }
+.veredicto-card p { font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.7); margin-top: 6px; }
+
+/* CIERRE / CHECKLIST */
+.slide h1 {
+  font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye);
+  letter-spacing: 4px; margin-bottom: 6px;
+  border-left: 4px solid var(--ye); padding-left: 16px;
+}
+.slide h2 {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 38px; color: var(--mg);
+  text-shadow: 0 0 18px rgba(255,46,136,.45);
+  letter-spacing: 1px; margin: 8px 0 24px 20px; line-height: 1.05;
+}
+
+.cam-quote {
+  background: rgba(255,210,63,.07); border-left: 4px solid var(--ye);
+  padding: 22px 26px; margin-top: 22px;
+  font-family: 'Share Tech Mono'; font-size: 17px; font-style: italic;
+  color: rgba(255,255,255,.88); line-height: 1.6;
+}
+.cam-quote .lbl {
+  display: block; font-style: normal; font-family: 'Press Start 2P'; font-size: 8px;
+  color: var(--ye); letter-spacing: 2px; margin-bottom: 10px;
+}
+
+ul.checklist { list-style: none; margin-top: 10px; }
+ul.checklist li {
+  padding: 14px 20px; border-left: 4px solid; margin-bottom: 10px;
+  font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;
+}
+ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
+ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
+ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
+ul.checklist li strong.ye { color: var(--ye); }
+ul.checklist li strong.cy { color: var(--cy); }
+ul.checklist li strong.mg { color: var(--mg); }
+
+/* NAV FOOTER */
+nav.footer {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 64px;
+  background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; z-index: 200;
+}
+.nav-btn {
+  background: transparent; border: 2px solid var(--cy); color: var(--cy);
+  font-family: 'Press Start 2P'; font-size: 9px;
+  padding: 10px 18px; letter-spacing: 2px;
+  cursor: pointer; transition: all .15s; border-radius: 2px;
+}
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress {
+  width: 100%; max-width: 480px; height: 4px;
+  background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden;
+}
+.nav-progress .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--mg), var(--cy));
+  width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(255,46,136,.5);
+}
+.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd {
+  display: inline-block; padding: 2px 8px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+  border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px;
+  color: var(--ye); margin: 0 2px;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · RETROTARROS VS. EL MUNDO · GEN 5</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 PORTADA -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 5 · NINTENDO 64</div>
+      <div class="ep-title">RETROTARROS <span class="vs">VS.</span> EL MUNDO</div>
+      <div class="ep-sub">EL TOP DE KOKO CONTRA LA CRÍTICA</div>
+    </div>
+  </section>
+
+  <!-- 02 SETUP -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <h1>BLOQUE 2 · SETUP</h1>
+    <h2 style="color:#fff; text-shadow:none;">El game show: cómo funciona</h2>
+    <div class="setup-card mg">
+      <h3>LO QUE TRAE KOKO</h3>
+      <p>10 cartuchos N64 favoritos sobre la mesa, dados vuelta. Va revelando uno por uno. <strong style="color:var(--mg);">No sabe</strong> qué dice el ranking mundial.</p>
+    </div>
+    <div class="setup-card cy">
+      <h3>LO QUE TIENE LUIS</h3>
+      <p>El top 10 mundial de la crítica (Nintendo Life · GamesRadar · Dexerto · The Phrasemaker · Cousin Gaming) + el top 25 extendido. Por cada cartucho que Koko revela, Luis abre el ranking.</p>
+    </div>
+    <div class="setup-card ye">
+      <h3>MECÁNICA DE PUNTOS</h3>
+      <table class="points-table">
+        <tr><td>Posición exacta en el top 10 mundial</td><td class="pts">3 PTS</td></tr>
+        <tr><td>Está en el top 10 pero otra posición</td><td class="pts">2 PTS</td></tr>
+        <tr><td>Está en el top 25 pero fuera del top 10</td><td class="pts">1 PT</td></tr>
+        <tr><td>No aparece en ningún ranking — carta solitaria</td><td class="pts">0 PTS</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 03 OCARINA -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="koko-label">KOKO REVELA</div>
+        <div class="world-pos in-top">#1 MUNDIAL · ★</div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-retrotarros-vs-mundo/ocarina.jpg" alt="Ocarina of Time"></div></div></div>
+      <div class="game-info">
+        <div class="game-title">The Legend of Zelda: Ocarina of Time</div>
+        <div class="game-meta">1998 · NINTENDO EAD · KOJI KONDO · $147 CIB</div>
+        <div class="game-why">
+          <span class="lbl">DATO PARA LUIS</span>
+          <strong>#1 en TODOS los rankings consultados.</strong> Koji Kondo compuso el Hyrule Field Theme con música dinámica adaptativa según la dirección de Link — primer uso de música contextual en consola. Si Koko lo pone #1 → 3 puntos.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 SUPER MARIO 64 -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="koko-label">KOKO REVELA</div>
+        <div class="world-pos in-top">#2 MUNDIAL · ★</div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-retrotarros-vs-mundo/mario64.png" alt="Super Mario 64"></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Super Mario 64</div>
+        <div class="game-meta">1996 · NINTENDO EAD · KOJI KONDO · $142 CIB</div>
+        <div class="game-why">
+          <span class="lbl">DATO PARA LUIS</span>
+          Launch title del N64. Iba a ser on-rails. <strong>Miyamoto cambió todo a mitad del desarrollo cuando descubrió que el analógico permitía control libre.</strong> Definió cómo se haría TODO juego 3D después.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 GOLDENEYE -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="koko-label">KOKO REVELA</div>
+        <div class="world-pos in-top">#4 MUNDIAL · ★</div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-retrotarros-vs-mundo/goldeneye.jpg" alt="GoldenEye 007"></div></div></div>
+      <div class="game-info">
+        <div class="game-title">GoldenEye 007</div>
+        <div class="game-meta">1997 · RARE · GRAEME NORGATE · $87 CIB</div>
+        <div class="game-why">
+          <span class="lbl">DATO PARA LUIS</span>
+          <strong>El equipo de Rare nunca había hecho un FPS.</strong> Martin Hollis tenía 30 años con cero experiencia en shooters. Era un experimento. Vendió 8M de copias y reescribió cómo se hacen los FPS de consola.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 MARIO KART 64 -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="koko-label">KOKO REVELA</div>
+        <div class="world-pos in-top">#5 MUNDIAL · ★</div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-retrotarros-vs-mundo/mariokart64.jpg" alt="Mario Kart 64"></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Mario Kart 64</div>
+        <div class="game-meta">1996 · NINTENDO EAD · KENTA NAGATA · $107 CIB</div>
+        <div class="game-why">
+          <span class="lbl">DATO PARA LUIS</span>
+          El que instaló el caparazón azul. <strong>El Spiny Shell se diseñó específicamente para que los novatos pudieran ganarles a los expertos</strong> — decisión política, no técnica. Hoy es el meme más odiado de la saga.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 SUPER SMASH BROS -->
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="koko-label">KOKO REVELA</div>
+        <div class="world-pos in-top">#6 MUNDIAL · ★</div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-retrotarros-vs-mundo/smash.jpg" alt="Super Smash Bros."></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Super Smash Bros.</div>
+        <div class="game-meta">1999 · HAL LABORATORY · HIROKAZU ANDO · $160 CIB</div>
+        <div class="game-why">
+          <span class="lbl">DATO PARA LUIS</span>
+          <strong>Iwata y Sakurai lo hicieron a escondidas de Nintendo.</strong> Lo presentaron como fait accompli. Nintendo dijo que sí porque ya estaba hecho. Hoy es la franquicia más grande del crossover.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 MAJORA'S MASK -->
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="koko-label">KOKO REVELA</div>
+        <div class="world-pos in-top">#7 MUNDIAL · ★</div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-retrotarros-vs-mundo/majora.jpg" alt="Majora's Mask"></div></div></div>
+      <div class="game-info">
+        <div class="game-title">The Legend of Zelda: Majora's Mask</div>
+        <div class="game-meta">2000 · NINTENDO EAD · KOJI KONDO · $208 CIB</div>
+        <div class="game-why">
+          <span class="lbl">DATO PARA LUIS</span>
+          Desarrollado en <strong>UN AÑO</strong> con motor y assets reusados de Ocarina. El sistema de los tres días fue en parte por restricciones de tiempo — pero terminó siendo lo que define al juego. El Zelda más raro y más profundo.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 DIDDY KONG RACING -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="koko-label">KOKO REVELA</div>
+        <div class="world-pos in-top">~#13 MUNDIAL · ○</div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-retrotarros-vs-mundo/diddy.png" alt="Diddy Kong Racing"></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Diddy Kong Racing</div>
+        <div class="game-meta">1997 · RARE · DAVID WISE · $112 CIB</div>
+        <div class="game-why">
+          <span class="lbl">DATO PARA LUIS</span>
+          <strong>Rare hizo su propio Mario Kart un año antes que Mario Kart 64.</strong> Y vendió 4.5 millones. Top 12-15 mundial — fuera del top 10 pero culto absoluto. Si Koko lo pone en su lista → sesgo Rare confirmado.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 DONKEY KONG 64 -->
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="koko-label">KOKO REVELA</div>
+        <div class="world-pos in-top">~#18 MUNDIAL · ○</div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-retrotarros-vs-mundo/dk64.jpg" alt="Donkey Kong 64"></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Donkey Kong 64</div>
+        <div class="game-meta">1999 · RARE · GRANT KIRKHOPE · $120 CIB</div>
+        <div class="game-why">
+          <span class="lbl">DATO PARA LUIS</span>
+          El collectathon llevado al exceso. <strong>Obligaba el Expansion Pak — sin él no funcionaba.</strong> Hoy se considera "demasiado de todo" pero Koko lo trajo igual. El DK Rap es meme eterno.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 CONKER -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="koko-label">KOKO REVELA</div>
+        <div class="world-pos in-top">~#15 MUNDIAL · ○ · #10 PRECIOS</div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-retrotarros-vs-mundo/conker.jpg" alt="Conker's Bad Fur Day"></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Conker's Bad Fur Day</div>
+        <div class="game-meta">2001 · RARE · ROBIN BEANLAND · $338 CIB</div>
+        <div class="game-why">
+          <span class="lbl">DATO PARA LUIS</span>
+          El más caro de los populares ($338 CIB — apareció en top precios). <strong>Rating Mature en consola de niños.</strong> Salió cuando ya miraban GameCube. La prensa lo destrozó, hoy es coleccionable de culto.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 KILLER INSTINCT GOLD — LA CARTA SOLITARIA -->
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="koko-label">KOKO REVELA · LA CARTA SOLITARIA</div>
+        <div class="world-pos solo">NO APARECE · CARTA SOLITARIA</div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-retrotarros-vs-mundo/ki-gold.jpg" alt="Killer Instinct Gold"></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Killer Instinct Gold</div>
+        <div class="game-meta">1996 · RARE · ROBIN BEANLAND + GRAEME NORGATE · $49 CIB</div>
+        <div class="game-why">
+          <span class="lbl">EL DATO BOMBA</span>
+          <strong>El ÚNICO de los 10 que no aparece en ningún ranking mundial.</strong> Y solo vale $49 CIB — el más barato. El mundo lo olvidó, los coleccionistas no lo cotizan, pero Koko lo trajo igual. <strong>Y su OST es probablemente la más bateril del N64</strong> (Beanland + Norgate, metal/industrial puro). Siembra del episodio musical futuro: "algún día Koko se va a sentar en la batería con esto".
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 SCORECARD -->
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <h1>BLOQUE 4 · SCORECARD FINAL</h1>
+    <h2 style="color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.45);">Los 10 de Koko vs. el mundo</h2>
+    <div class="scorecard">
+      <div class="score-grid">
+        <div class="hdr-row">JUEGO</div>
+        <div class="hdr-row">CIB USD</div>
+        <div class="hdr-row">TOP MUNDIAL</div>
+        <div class="hdr-row">PTS</div>
+
+        <div class="row"><div class="game-cell">Ocarina of Time</div><div class="cib">$147</div><div class="world">#1</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Super Mario 64</div><div class="cib">$142</div><div class="world">#2</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">GoldenEye 007</div><div class="cib">$87</div><div class="world">#4</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Mario Kart 64</div><div class="cib">$107</div><div class="world">#5</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Super Smash Bros.</div><div class="cib">$160</div><div class="world">#6</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Majora's Mask</div><div class="cib">$208</div><div class="world">#7</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Diddy Kong Racing</div><div class="cib">$112</div><div class="world">~#13</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Conker's Bad Fur Day</div><div class="cib">$338</div><div class="world">~#15</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Donkey Kong 64</div><div class="cib">$120</div><div class="world">~#18</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Killer Instinct Gold</div><div class="cib">$49</div><div class="world solo">no aparece</div><div class="pts-box">__</div></div>
+      </div>
+      <div class="score-total">
+        <div class="lbl">TOTAL KOKO</div>
+        <div class="val">__ / 30</div>
+      </div>
+    </div>
+    <div class="veredicto-grid">
+      <div class="veredicto-card bajo"><h4>&lt; 12 PTS</h4><div class="puntos">OÍDO CHILENO</div><p>El corazón ganó. La crítica no le dice nada.</p></div>
+      <div class="veredicto-card mid"><h4>13-20 PTS</h4><div class="puntos">OÍDO MIXTO</div><p>Coincide a medias. Tiene gusto pero también identidad.</p></div>
+      <div class="veredicto-card alto"><h4>&gt; 20 PTS</h4><div class="puntos">OÍDO MUNDIAL</div><p>Coincide con la crítica gringa.</p></div>
+    </div>
+  </section>
+
+  <!-- 14 CIERRE -->
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <h1>CIERRE</h1>
+    <h2>Ese es el N64 de Koko</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 18px;">
+      <div style="background: var(--card-bg); border: 2px solid var(--cy); border-radius: 4px; padding: 26px;">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 2px; margin-bottom: 14px;">EL DATO DEL EPISODIO</h3>
+        <p style="font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6;">De los 10 cartuchos de Koko, <strong style="color: var(--cy);">4 NO están en el top 10 mundial</strong>. Y los 4 son de Rare: Killer Instinct Gold, Conker, Diddy Kong Racing, DK64. <strong style="color: var(--mg);">El sesgo Rare</strong> definido en cámara.</p>
+      </div>
+      <div style="background: var(--card-bg); border: 2px solid var(--mg); border-radius: 4px; padding: 26px;">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 11px; color: var(--mg); letter-spacing: 2px; margin-bottom: 14px;">SIEMBRA FUTURA</h3>
+        <p style="font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6;">Killer Instinct Gold es la carta solitaria — y su OST es la más bateril del N64. <strong style="color: var(--mg);">Es el tema que Koko va a tocar en el episodio musical de la Gen 5.</strong></p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">FRASE DE CIERRE PARA CÁMARA</span>
+      "Ese es el N64 de Koko. Diez cartuchos, diez razones personales. Cuatro coinciden con la crítica del mundo, seis no. Y eso es lo más Retrotarros que hay: no traemos lo que el mundo dice que es bueno — traemos lo que nosotros amamos. Si querés comentar TU top 10 personal de N64, los esperamos abajo."
+    </div>
+  </section>
+
+  <!-- 15 CHECKLIST -->
+  <section class="slide">
+    <span class="slide-num">15</span>
+    <h1>CHECKLIST · POST-PRODUCCIÓN</h1>
+    <h2 style="color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4);">Decisiones de edición</h2>
+    <ul class="checklist">
+      <li class="ye"><strong class="ye">☐ Luis</strong> — Verificar que en el grabado se siguió la mecánica de puntos. Si no, simplificar a "está / no está / posición exacta" en edición.</li>
+      <li class="ye"><strong class="ye">☐ Killer Instinct Gold</strong> — slide más importante. Si en el grabado no se le dio energía suficiente, re-grabar 30 seg con Luis solo + siembra del episodio musical.</li>
+      <li class="cy"><strong class="cy">☐ Ritmo</strong> — cada cartucho ~85-90 seg promedio. Solo KI Gold puede tomar 2 min.</li>
+      <li class="cy"><strong class="cy">☐ Audio</strong> — verificar que las reacciones de Koko al revelar cada posición se escuchen claras. Es el oro del episodio.</li>
+      <li class="mg"><strong class="mg">☐ Frase de cierre</strong> — re-grabar si no quedó memorizada palabra por palabra. Son 30 seg de Luis solo.</li>
+      <li class="mg"><strong class="mg">☐ Orden de publicación</strong> — recomendado: tercer ranking del arco, después del top mundial y top precios. Cierre de trilogía.</li>
+    </ul>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 15</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+
+go(0);
+</script>
+
+</body>
+</html>
