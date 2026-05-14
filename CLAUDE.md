@@ -88,6 +88,12 @@ Cada episodio largo se cierra con **tres archivos**, mismo `{slug}`:
 - Precios: fuente primaria PriceCharting + GameRant/The Gamer/Vgprice. Siempre aclarar **NTSC USA, CIB**.
 - Datos históricos: cruzar mínimo dos fuentes antes de meter número o fecha en cámara.
 
+### Git workflow (convención obligatoria)
+- **Claude ejecuta** los `git add`, `git commit`, `git push`, scripts y operaciones de archivo. Luis NO corre comandos manualmente — Claude tiene Bash en el sandbox.
+- **Commits locales no destructivos**: Claude los ejecuta sin pedir permiso explícito, luego informa el SHA.
+- **Operaciones remotas o destructivas** (push, rebase, reset --hard, rm -rf masivo, force push, cualquier acción contra GitHub o que sobreescriba historia): Claude **pide confirmación con un comando concreto** antes de ejecutar. Ejemplo: "¿Pusheo `git push origin master` con los 5 commits acumulados?" — espera "dale" / "sí" / "ok" antes de correr.
+- **Nunca usar** `--force`, `--no-verify`, `commit --amend` (sobre commits ya pusheados), `git reset --hard` sin confirmación explícita en el mismo turno.
+
 ### Output esperado
 - **Pautas de episodio largo** → tres archivos por slug (ver "Convención de pautas"): `docs/pauta-{slug}.md` + `docs/discusion-{slug}.md` + `studio/{slug}.html`.
 - **Guiones de shorts y briefings de compositores** → se agregan al documento vivo correspondiente (`docs/guiones-shorts.md`, `docs/briefings-compositores.md`).
