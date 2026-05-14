@@ -1,0 +1,266 @@
+# Retrotarros — Briefings de compositores
+
+> Documento vivo de trabajo. Revisar la ficha del compositor antes de cada episodio. Agregar ficha cuando entre un compositor nuevo al catálogo.
+
+**Cómo usar:**
+- Antes de grabar → revisar ficha del compositor para entrar con datos frescos.
+- Durante el episodio → 1-2 anclas de cámara como pivotes de conversación.
+- Para shorts → cualquier ancla individual funciona como dato curioso de 30s.
+- Si un compositor acumula 3+ anclas fuertes → material para episodio especial dedicado.
+
+---
+
+## Los gigantes de Japón
+
+Los compositores que definieron la identidad sonora de las grandes franquicias japonesas.
+
+---
+
+### Koji Kondo
+*Nintendo · 1961 · Compositor en planta desde 1984*
+
+Pianista de formación, entró a Nintendo en 1984 cuando la empresa todavía no sabía bien qué hacer con la música. Desde entonces ha definido el sonido de Mario, Zelda y prácticamente cualquier IP importante de la casa. Su estilo: melodías memorables construidas con pocas notas — resultado de las limitaciones del hardware temprano que se convirtieron en su firma. Sigue activo después de más de 40 años; caso casi único en la industria.
+
+**Obras en el catálogo:**
+Super Mario Bros. (1985), Zelda (1986), SMB 3 (1988), Super Mario World (1990), Yoshi's Island (1995), Super Mario 64 (1996), Star Fox 64 (1997, co), Ocarina of Time (1998), Super Smash Bros. (1999, arr.), Majora's Mask (2000), Super Mario Galaxy (2007, con Yokota).
+
+**Anclas para cámara:**
+- El Mario Overworld Theme se compuso en pocas horas, después de que Kondo desechara una versión más compleja porque no encajaba con el ritmo del juego.
+- Kondo dice que casi no juega videojuegos. Sostiene que tener "manos de pianista" lo descalifica para mecánicas rápidas.
+- Inventó el concepto de "motivos recurrentes" en gaming: el Item Catch jingle, el Game Over jingle, el power-up — todo eso es Kondo definiendo el lenguaje sonoro del medio.
+
+**Tema sugerido para Koko:** Overworld Theme (Mario) o Hyrule Field (OoT) — ambos universalmente reconocibles.
+
+---
+
+### Nobuo Uematsu
+*Square / Square Enix · 1959 · Compositor de Final Fantasy I al X*
+
+Compositor autodidacta. Entró a Square en 1986 y compuso la música de casi todos los Final Fantasy hasta el X (2001). Su estilo combina influencias de música clásica europea, prog rock (Emerson, Lake & Palmer; ELO) y baladas de J-pop. Salió de Square Enix en 2004 pero sigue colaborando esporádicamente. Tiene una banda de rock progresivo, The Black Mages, dedicada a tocar arreglos metaleros de su propia música de FF.
+
+**Obras en el catálogo:**
+Final Fantasy VI (1994), Chrono Trigger (1995, en colaboración con Mitsuda), Final Fantasy VII (1997), Final Fantasy VIII (1999), Final Fantasy X (2001, con Hamauzu y Nakano).
+
+**Anclas para cámara:**
+- One-Winged Angel (FF VII) usa coro en latín — referencia directa al Carmina Burana de Carl Orff. El público occidental se dio cuenta antes que el japonés.
+- Es fanático declarado de Elton John y los Beatles. Las baladas de FF tienen claramente esa influencia.
+- To Zanarkand (FF X) lo compuso al piano en una sentada, pensando en su madre que estaba enferma. Es probablemente la pieza más reconocida del medio entero.
+
+**Tema sugerido para Koko:** Terra's Theme (FF VI) o One-Winged Angel (FF VII) — la diferencia entre la balada y la épica que define su rango.
+
+---
+
+### Akira Yamaoka
+*Konami / Grasshopper · 1968 · La voz sonora de Silent Hill*
+
+Empezó como diseñador gráfico y migró a la música de forma autodidacta. Entró a Konami en 1993 y se convirtió en la voz sonora absoluta de la saga Silent Hill. Su estilo: industrial, ambient, fingerpicking acústico melancólico, todo bañado en reverb y distorsión. Salió de Konami en 2009 y sigue componiendo OSTs para Grasshopper Manufacture (Shadow of the Damned, Lollipop Chainsaw, El Shaddai).
+
+**Obras en el catálogo:**
+Silent Hill (1999).
+
+**Anclas para cámara:**
+- Theme of Laura es enteramente acústica — la antítesis del horror sonoro que llena el resto del juego. Yamaoka aprendió guitarra durante el desarrollo: no era guitarrista profesional cuando empezó.
+- Influencia declarada de Angelo Badalamenti (compositor de Twin Peaks). Si conoces Twin Peaks, vas a escuchar la conexión inmediatamente.
+- Maneja una técnica que llama "ruido emotivo": construye atmósferas a partir de samples industriales pasados por filtros hasta que suenan casi orgánicos.
+
+**Tema sugerido para Koko:** Promise (Silent Hill 2) o Theme of Laura — ambos para batería suave o brushes.
+
+---
+
+## La escena Rare (Reino Unido)
+
+Rare es un caso único: un estudio británico pequeño que en los 90s produjo más OSTs memorables que muchas casas japonesas enteras. Tres compositores principales se repartieron el catálogo, cada uno con un estilo perfectamente identificable. Si hacemos un episodio especial sobre Rare, estos son los protagonistas.
+
+---
+
+### David Wise
+*Rare · 1967 · El maestro melódico-atmosférico*
+
+Entró a Rare en 1985 con 18 años, después de tocar en bandas locales. Su estilo: melódico-atmosférico, profundo en samples, capaz tanto de la épica luminosa como del ambient sumergido. Famoso por exprimir cada chip de sonido al máximo — los SNES de DKC suenan a CD audio gracias a sus técnicas de compresión y muestreo. Sigue activo: volvió a la saga con Tropical Freeze (2014).
+
+**Obras en el catálogo:**
+Donkey Kong Country (1994), Donkey Kong Country 2 (1995), Diddy Kong Racing (1997).
+
+**Anclas para cámara:**
+- Aquatic Ambience (DKC) y Stickerbrush Symphony (DKC 2) figuran consistentemente en listas de las mejores OSTs de la historia, no solo de gaming.
+- Para componer los paisajes de DKC trabajó con bibliotecas de samples auto-grabados: él mismo iba al campo a grabar sonidos de naturaleza.
+- Stickerbrush Symphony fue la única pieza que escribió sin saber para qué nivel iba. Se la dio al equipo y ellos eligieron Bramble Blast.
+
+**Tema sugerido para Koko:** Aquatic Ambience (drums tipo brushes) o DK Island Swing (jungle bossa con kit completo).
+
+---
+
+### Grant Kirkhope
+*Rare → Independiente · 1962 · El whimsical escocés*
+
+Entró a Rare en 1995 y se especializó en OSTs whimsical para los plataformas-mascotas de la compañía. Su estilo: orquestación ligera, instrumentación inusual (acordeón, ocarina, glockenspiel), humor musical evidente. Salió de Rare en 2008 y desde entonces compuso para Civilization VI, Yooka-Laylee y muchos juegos indie.
+
+**Obras en el catálogo:**
+GoldenEye 007 (1997, co-compositor), Banjo-Kazooie (1998), Donkey Kong 64 (1999).
+
+**Anclas para cámara:**
+- Compuso, escribió y rapeó el DK Rap. Cuando se viralizó como meme, dijo que estaba sorprendido pero contento porque "al menos la gente recuerda DK 64".
+- Banjo-Kazooie tiene un sistema dinámico: cada zona musical cambia de instrumentación según el contexto (subacuática, en cueva, en altura). Kirkhope inventó eso para resolver limitaciones de memoria del N64.
+- Escribió un musical sobre cuernos eléctricos. En serio.
+
+**Tema sugerido para Koko:** Spiral Mountain (Banjo) — main theme universalmente reconocido. O atreverse con el DK Rap.
+
+---
+
+### Robin Beanland
+*Rare · El irreverente*
+
+Compositor británico que entró a Rare en los 90s. Su estilo: parodia musical, irreverencia, capacidad para componer en cualquier género según lo que pida el juego. Es el yin al yang de Kirkhope dentro de Rare. Aún trabaja allá; es uno de los veteranos sobrevivientes de la era dorada.
+
+**Obras en el catálogo:**
+Killer Instinct (1994), GoldenEye 007 (1997, co), Conker's Bad Fur Day (2001).
+
+**Anclas para cámara:**
+- Sloprano en Conker's BFD es una parodia operática de un boss-fight cantando con voz aguda. Es probablemente la única secuencia de videojuego que ha ganado premios solo por su música.
+- En Killer Instinct trabajó codo a codo con Graeme Norgate haciendo música metal/industrial cuando todavía no era común en gaming — anticipándose a DOOM 2016 por dos décadas.
+- Tiene un canal de YouTube donde sube versiones acústicas de sus propias OSTs.
+
+**Tema sugerido para Koko:** The Instinct (theme con vocales, KI) — perfecto para mostrar el rango entre lo metálico y lo dramático.
+
+---
+
+## La escuela Sega
+
+Si Nintendo apostó por compositores en planta para definir un sonido coherente, Sega optó por la diversidad: compositores con backgrounds muy distintos, libertad para experimentar y un hardware (chip Yamaha YM2612 del Genesis) que exigía creatividad para sonar bien. El resultado es una escuela sonora más arriesgada, con menos cohesión pero con momentos de genialidad inigualables.
+
+---
+
+### Hiroshi "Hiro" Kawaguchi
+*Sega · El padre del FM en arcade*
+
+La voz sonora de los arcades Sega de los 80s. Estilo: melodías largas y memorables sobre fondos de bajo movido — surf-jazz, fusion, optimismo puro. Sigue activo en Sega; hoy es director musical de varias áreas. Tiene una banda paralela, H., que toca arreglos de sus propias composiciones.
+
+**Obras en el catálogo:**
+Out Run (1986).
+
+**Anclas para cámara:**
+- Magical Sound Shower fue probablemente la primera OST de videojuego que la gente eligió como banda sonora para manejar en la vida real.
+- Out Run tenía una mecánica revolucionaria: elegir tu música antes de empezar, como un cassette. Kawaguchi diseñó esa interacción explícitamente.
+- Su técnica de programar el chip Yamaha YM2151 era tan eficiente que otros estudios la copiaron — fue un "secreto a voces" en arcade durante años.
+
+**Tema sugerido para Koko:** Magical Sound Shower o Splash Wave.
+
+---
+
+### Yuzo Koshiro
+*Independiente (Ancient Corp), asociado a Sega · 1967*
+
+Niño prodigio del piano (estudió con la madre de Joe Hisaishi). En los 80s rechazó ofertas de empleo de las grandes para mantenerse independiente — fundó Ancient Corp con su hermana. Pionero absoluto del crossover entre electronic dance music y videojuegos. Su estilo: techno, house, jungle, drum & bass, todo procesado en hardware Sega.
+
+**Obras en el catálogo:**
+Streets of Rage 2 (1992), Streets of Rage 3 (1994).
+
+**Anclas para cámara:**
+- La OST de SoR2 está hecha enteramente en una Atari ST corriendo software que él mismo programó. Clubes europeos pinchaban esos temas en los 90s creyendo que eran tracks de Detroit techno.
+- Es activista del preservacionismo: trabajó en el remaster de Streets of Rage 4 (2020) y colabora en proyectos de archivo de música retro.
+- Dice que su mayor influencia musical no es Detroit ni Frankfurt, sino Joe Hisaishi. La conexión se nota en sus melodías más pausadas.
+
+**Tema sugerido para Koko:** Go Straight (SoR2) — el riff de bajo casi inmoral, perfecto para batería energética.
+
+---
+
+### Masato Nakamura
+*Dreams Come True / Sega · 1958 · El bajista que compuso Sonic*
+
+Es el BAJISTA DE DREAMS COME TRUE — el grupo de J-pop más vendido de los 90s en Japón. Sega lo contrató para componer las OSTs de Sonic 1 y 2 cuando ya era estrella de pop. Estilo: pop-rock optimista, líneas de bajo enérgicas, melodías pegajosas. Dreams Come True sigue activo.
+
+**Obras en el catálogo:**
+Sonic the Hedgehog (1991), Sonic the Hedgehog 2 (1992).
+
+**Anclas para cámara:**
+- Nakamura compuso el famoso jingle de SEGA — los cinco tonos cantados "SE-GAA" — para los anuncios de TV antes de que Sega le pidiera Sonic.
+- En 1991 era impensable contratar a un músico pop top para componer videojuegos. Sega lo hizo apostando a que Sonic necesitaba sonar diferente a Mario. Funcionó: cambió la escala completa de qué se podía esperar de OSTs de plataformas.
+- El bajo de Chemical Plant Zone (Sonic 2) es prácticamente un solo de funk — Nakamura tocando lo que mejor sabe hacer.
+
+**Tema sugerido para Koko:** Green Hill Zone (universal) o Chemical Plant Zone (más groove de bajo para mostrar rango).
+
+---
+
+### Hideki Naganuma
+*Sega → Independiente · 1973 · El sonido del Dreamcast*
+
+Entró a Sega a fines de los 90s y se convirtió en el sonido de la era Dreamcast. Estilo: big beat, breakbeat, hip-hop instrumental, sampling-heavy, todo con humor irreverente. Salió de Sega en 2013 pero volvió a colaborar en Bomb Rush Cyberfunk (2023), el sucesor espiritual de Jet Set Radio.
+
+**Obras en el catálogo:**
+Jet Set Radio (2000).
+
+**Anclas para cámara:**
+- Su técnica favorita es samplear voces aleatorias y hacerlas decir frases sin sentido sobre los beats. Eso definió la estética sonora de Jet Set Radio entera.
+- Hizo música para una skin de Lil Yachty y para campañas de Adidas. La cultura skate y urbana lo adoptó como autoridad estética.
+- Tiene cuenta de TikTok activa donde sube remixes propios. Es de los pocos compositores legacy que se mueve nativo en redes.
+
+**Tema sugerido para Koko:** Humming the Bassline o Funky Dealer — ambos perfectos para groove con escobillas.
+
+---
+
+## Conexiones inesperadas
+
+Compositores que vienen de mundos completamente fuera del gaming. La pregunta "¿sabías que X compuso Y?" es uno de los mejores ganchos virales del canal.
+
+---
+
+### Stewart Copeland
+*★ The Police → cine/TV → gaming · USA, 1952*
+
+Baterista de The Police — la banda detrás de Roxanne, Every Breath You Take y Message in a Bottle. Después de la disolución de The Police (1986), Copeland se dedicó a componer para cine y televisión, y ocasionalmente para videojuegos. Su firma rítmica — hi-hat agudo, snares secos, polirritmias reggae-influenced — está en todo lo que toca.
+
+**Obras en el catálogo:**
+Spyro the Dragon (1998).
+
+**Anclas para cámara:**
+- **★ EL ÁNGULO MÁS VENDEDOR DE TODO EL CATÁLOGO.** La pregunta "¿sabías que el baterista de The Police compuso el Spyro de tu infancia?" se viraliza sola.
+- Spyro fue su primer (y casi único) trabajo en videojuegos. Insomniac Games lo contactó porque querían algo "que no sonara genérico de gaming".
+- Copeland describe el proceso como "más difícil que componer para cine porque tienes que dejar espacio a los sonidos del juego". El espacio rítmico que deja en Spyro es justamente para eso.
+
+**Tema sugerido para Koko:** Sunny Beach o el theme de Artisans Home — Koko puede tocar mientras explica quién es Copeland en cámara. Episodio destinado al viral.
+
+---
+
+## Mini-arcos potenciales para el canal
+
+Cuando un compositor aparece varias veces en el catálogo, hay material natural para un episodio especial.
+
+| Arco | Compositores | Entradas | Idea |
+|------|-------------|----------|------|
+| **Koji Kondo: la firma sonora de Nintendo** | Kondo | 10+ | Recorrido desde Mario 1985 hasta Galaxy 2007 |
+| **Rare: la fábrica británica del N64** | Wise + Kirkhope + Beanland | ~9 | Episodio sobre la cultura del estudio en los 90s |
+| **Final Fantasy: la épica de Uematsu** | Uematsu | 4 | Mini-serie 2-3 eps: evolución 16-bit → 32-bit → PS2 |
+| **Sega vs. Nintendo: la guerra de los chips** | Koshiro/Nakamura vs Kondo/Wise | múltiple | YM2612 vs SPC700, 25 min largos |
+| **Compositores que no son de gaming** | Copeland, Mick Gordon, Nakamura | múltiple | Crossovers: The Police, metal, J-pop |
+| **Drumming icónico en gaming** | Varios | múltiple | F-Zero X, DOOM 2016, Cuphead, Spyro — showcase total para Koko |
+
+---
+
+## Apéndice — Por qué Sega importa para Retrotarros
+
+El chip de sonido del Genesis (Yamaha YM2612 + SN76489 PSG) es radicalmente distinto al del SNES (Sony SPC700). El SNES suena cálido, lleno, casi orquestal. El Genesis suena agresivo, brillante, eléctrico. Esa diferencia técnica forzó a Sega a desarrollar una identidad sonora más rockera y electrónica. La música de Streets of Rage 2 sonaría imposible en SNES; la de Yoshi's Island sonaría apagada en Genesis.
+
+En Latinoamérica el Genesis tuvo presencia importante (especialmente en Brasil, donde Tectoy lo siguió fabricando hasta los 2000s). Sonic, Streets of Rage y NBA Jam fueron experiencias formativas para muchos. Hablar de Sega es hablar de una memoria compartida que el público reconoce.
+
+**El ángulo Michael Jackson en Sonic 3:** Sonic the Hedgehog 3 (1994) tiene una controversia musical no resuelta: Michael Jackson y su equipo trabajaron en parte de la OST. Sega niega oficialmente la atribución pero hay testimonios y análisis musicológicos que confirman su participación, especialmente en Ice Cap Zone (que comparte ADN con un demo de Jam). Material para 15 minutos largos. Presentarlo como exploración de un misterio, no como acusación.
+
+---
+
+## Cómo agregar un compositor nuevo
+
+Cuando el catálogo crezca, sumar ficha con esta estructura:
+
+```
+### Nombre del compositor
+*Estudio · Año de nacimiento · Línea descriptiva corta*
+
+Bio: dónde nació, formación, estilo, estado actual (1 párrafo).
+
+**Obras en el catálogo:** lista con años.
+
+**Anclas para cámara:** 2-3 datos curiosos o anécdotas.
+
+**Tema sugerido para Koko:** qué pieza tiene mejor potencial para el cierre en batería.
+```
+
+Si un compositor llega a 3+ entradas en el catálogo → agregar nota en la sección **Mini-arcos potenciales** indicando qué episodio especial podría salir de ahí.
