@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Estudio · N64 Ranking</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+/* ── HEADER ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  z-index: 200;
+  background: rgba(6, 3, 15, 0.97);
+  border-bottom: 2px solid var(--mg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+.hdr-logo {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--mg);
+  text-shadow: 0 0 14px rgba(255,46,136,.6);
+  letter-spacing: 3px;
+}
+.hdr-tag {
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: var(--ye);
+  letter-spacing: 3px;
+}
+.hdr-rec {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--mg);
+}
+.dot {
+  width: 10px; height: 10px;
+  background: var(--mg);
+  border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+/* ── SLIDE CONTAINER ── */
+.deck {
+  position: fixed;
+  top: 56px; left: 0; right: 0; bottom: 64px;
+  overflow: hidden;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: 32px 48px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.slide-num {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  color: rgba(255,255,255,.22);
+  letter-spacing: 2px;
+}
+
+/* ── PORTADA ── */
+.portada {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  padding: 0;
+}
+.portada .ep-tag {
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  color: var(--cy);
+  letter-spacing: 5px;
+  margin-bottom: 22px;
+}
+.portada .ep-title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 62px;
+  letter-spacing: 1.5px;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 18px;
+  max-width: 1100px;
+}
+.portada .ep-title .vs {
+  color: var(--mg);
+  text-shadow: 0 0 22px rgba(255,46,136,.55);
+}
+.portada .ep-sub {
+  font-family: 'Share Tech Mono';
+  font-size: 18px;
+  color: var(--ye);
+  letter-spacing: 4px;
+  margin-bottom: 60px;
+}
+.portada .ep-meta {
+  display: flex;
+  gap: 50px;
+  font-family: 'Share Tech Mono';
+  font-size: 13px;
+  color: rgba(255,255,255,.6);
+  letter-spacing: 2px;
+}
+.portada .ep-meta span { color: var(--cy); }
+
+/* ── SEPARADOR DE BLOQUE ── */
+.divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+.divider .pre {
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  letter-spacing: 6px;
+  margin-bottom: 24px;
+}
+.divider .pre.cy { color: var(--cy); }
+.divider .pre.mg { color: var(--mg); }
+.divider .title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 78px;
+  letter-spacing: 2px;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 22px;
+}
+.divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
+.divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.divider .sub {
+  font-family: 'Share Tech Mono';
+  font-size: 18px;
+  color: rgba(255,255,255,.7);
+  letter-spacing: 2px;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+/* ── SLIDE JUEGO (cartucho grande + info) ── */
+.slide-game {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  height: 100%;
+  padding: 20px 56px 24px;
+  gap: 14px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.game-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.game-pos {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+.game-pos.cy { color: var(--cy); text-shadow: 0 0 20px rgba(0,229,255,.55); }
+.game-pos.mg { color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.6); }
+.game-pos .hash {
+  font-size: 28px;
+  color: rgba(255,255,255,.35);
+  text-shadow: none;
+  margin-right: 4px;
+}
+.game-block-label {
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  letter-spacing: 3px;
+  padding: 6px 12px;
+  border: 1px solid;
+}
+.game-block-label.cy { color: var(--cy); border-color: var(--cy); }
+.game-block-label.mg { color: var(--mg); border-color: var(--mg); }
+
+/* CARTUCHO */
+.cart-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+}
+.cart {
+  position: relative;
+  height: 100%;
+  max-height: 360px;
+  aspect-ratio: 5/4;
+  background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%);
+  border-radius: 12px 12px 6px 6px;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.04),
+    0 18px 50px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+.cart::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 78%;
+  height: 14%;
+  background: linear-gradient(180deg, #2a2a2f 0%, #1a1a1f 100%);
+  border-radius: 0 0 6px 6px;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.6);
+  z-index: 3;
+}
+.cart-img-wrap {
+  position: absolute;
+  inset: 14% 10% 10%;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--label-1, #2D1B69);
+  box-shadow:
+    inset 0 0 0 3px rgba(255,255,255,.07),
+    inset 0 0 0 6px rgba(0,0,0,.25),
+    0 4px 14px rgba(0,0,0,.4);
+}
+.cart-img-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  background: var(--label-1, #2D1B69);
+}
+.cart-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: linear-gradient(135deg, var(--label-1, #2D1B69) 0%, var(--label-2, #4a2a99) 100%);
+  text-align: center;
+}
+.cart-fallback::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 22%;
+  background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 100%);
+  pointer-events: none;
+}
+.cart-fallback .title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: clamp(16px, 2vw, 24px);
+  line-height: 1.05;
+  color: #fff;
+  letter-spacing: .5px;
+  text-shadow: 0 2px 4px rgba(0,0,0,.5);
+  z-index: 2;
+}
+.cart-fallback .sub {
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,.7);
+  margin-top: 8px;
+  z-index: 2;
+}
+.cart-n64 {
+  position: absolute;
+  bottom: 6px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Press Start 2P';
+  font-size: 7px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,.22);
+  z-index: 4;
+}
+
+/* Variantes de etiqueta por juego (color por marca/franquicia) */
+.lb-zelda    { --label-1:#1a4a1a; --label-2:#2f7a2f; }
+.lb-mario    { --label-1:#a01818; --label-2:#d62828; }
+.lb-rare     { --label-1:#7a3a1a; --label-2:#b85820; }
+.lb-bond     { --label-1:#0d0d0d; --label-2:#2a2a2a; }
+.lb-kart     { --label-1:#c25c00; --label-2:#ff8a1f; }
+.lb-smash    { --label-1:#2a2a2a; --label-2:#5a5a5a; }
+.lb-perfect  { --label-1:#1a3a6b; --label-2:#2f5a9b; }
+.lb-paper    { --label-1:#c2872f; --label-2:#e8b04a; }
+.lb-fox      { --label-1:#1a2a4a; --label-2:#3a5fa0; }
+.lb-clay     { --label-1:#8b1c8b; --label-2:#c44ec4; }
+.lb-stunt    { --label-1:#3a3a3a; --label-2:#6a6a6a; }
+.lb-bowl     { --label-1:#2a4a2a; --label-2:#4a7a4a; }
+.lb-f1       { --label-1:#c20000; --label-2:#ff2a2a; }
+.lb-worms    { --label-1:#8a5a1a; --label-2:#c28030; }
+.lb-bomb     { --label-1:#3a1a6b; --label-2:#5a2a9b; }
+.lb-trans    { --label-1:#1a4a8a; --label-2:#2f7acd; }
+.lb-rat      { --label-1:#4a2a1a; --label-2:#7a4a2a; }
+.lb-iss      { --label-1:#1a6b3a; --label-2:#2f9b5a; }
+.lb-conker   { --label-1:#5a3a1a; --label-2:#8a5a2a; }
+
+/* INFO BLOCK */
+.game-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+.game-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.game-title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 28px;
+  color: #fff;
+  letter-spacing: .5px;
+  line-height: 1.1;
+}
+.price-tag {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 44px;
+  color: var(--mg);
+  text-shadow: 0 0 22px rgba(255,46,136,.55);
+  letter-spacing: 1px;
+  line-height: 1;
+  padding: 4px 16px;
+  border: 2px solid var(--mg);
+  border-radius: 4px;
+  background: rgba(255,46,136,.06);
+}
+.price-tag .usd-lbl {
+  font-size: 14px;
+  color: rgba(255,46,136,.6);
+  letter-spacing: 3px;
+  text-shadow: none;
+  font-weight: 700;
+}
+.game-meta {
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
+  letter-spacing: 2px;
+}
+.game-why {
+  max-width: 920px;
+  padding: 14px 22px;
+  background: rgba(255,255,255,.04);
+  border-left: 4px solid var(--ye);
+  font-family: 'Share Tech Mono';
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255,255,255,.86);
+  text-align: left;
+}
+.game-why .lbl {
+  display: block;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+/* ── NFR / FINAL SLIDES ── */
+.slide h1 {
+  font-family: 'Press Start 2P';
+  font-size: 13px;
+  color: var(--ye);
+  letter-spacing: 4px;
+  margin-bottom: 6px;
+  border-left: 4px solid var(--ye);
+  padding-left: 16px;
+}
+.slide h2 {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 38px;
+  color: #fff;
+  letter-spacing: 1px;
+  margin: 8px 0 24px 20px;
+  line-height: 1.05;
+}
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+
+.nfr-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 14px;
+}
+.nfr-card {
+  background: rgba(255,46,136,.05);
+  border: 1px solid var(--mg);
+  border-radius: 4px;
+  padding: 20px 24px;
+}
+.nfr-card .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.nfr-card .nfr-name {
+  font-family: 'Orbitron';
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+}
+.nfr-card .nfr-price {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 30px;
+  color: var(--mg);
+  text-shadow: 0 0 12px rgba(255,46,136,.5);
+}
+.nfr-card .nfr-why {
+  font-family: 'Share Tech Mono';
+  font-size: 14px;
+  color: rgba(255,255,255,.72);
+  line-height: 1.55;
+}
+
+.cam-quote {
+  background: rgba(255,210,63,.07);
+  border-left: 4px solid var(--ye);
+  padding: 22px 26px;
+  margin-top: 22px;
+  font-family: 'Share Tech Mono';
+  font-size: 17px;
+  font-style: italic;
+  color: rgba(255,255,255,.88);
+  line-height: 1.65;
+}
+.cam-quote .lbl {
+  display: block;
+  font-style: normal;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.value-grid {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+.value-card {
+  flex: 1;
+  background: var(--card-bg);
+  border: 2px solid;
+  border-radius: 4px;
+  padding: 32px 28px;
+  text-align: center;
+}
+.value-card.mg { border-color: var(--mg); box-shadow: 0 0 22px rgba(255,46,136,.18); }
+.value-card.ye { border-color: var(--ye); box-shadow: 0 0 22px rgba(255,210,63,.18); }
+.value-card h3 {
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.value-card.mg h3 { color: var(--mg); }
+.value-card.ye h3 { color: var(--ye); }
+.value-card .big {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 60px;
+  letter-spacing: 2px;
+  display: block;
+  margin: 14px 0 12px;
+}
+.value-card.mg .big { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.4); }
+.value-card.ye .big { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.4); }
+.value-card p {
+  font-family: 'Share Tech Mono';
+  font-size: 14px;
+  color: rgba(255,255,255,.7);
+}
+
+.cierre-main {
+  background: linear-gradient(135deg, rgba(255,46,136,.08), rgba(0,229,255,.05));
+  border: 2px solid var(--mg);
+  border-radius: 4px;
+  padding: 32px 36px;
+  margin-top: 14px;
+  box-shadow: 0 0 28px rgba(255,46,136,.22);
+}
+.cierre-main .label {
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  color: var(--ye);
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+.cierre-main .tema {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 38px;
+  color: var(--mg);
+  text-shadow: 0 0 16px rgba(255,46,136,.5);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.cierre-main .desc {
+  font-family: 'Share Tech Mono';
+  font-size: 16px;
+  color: rgba(255,255,255,.85);
+  line-height: 1.6;
+}
+.cierre-planb {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 22px;
+}
+.cierre-planb .opt {
+  background: var(--card-bg);
+  border: 1px solid var(--cy);
+  border-radius: 4px;
+  padding: 16px 18px;
+}
+.cierre-planb .opt .if {
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--cy);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.cierre-planb .opt .tema-b {
+  font-family: 'Orbitron';
+  font-weight: 700;
+  font-size: 17px;
+  color: #fff;
+}
+
+ul.checklist {
+  list-style: none;
+  margin-top: 10px;
+}
+ul.checklist li {
+  padding: 14px 20px;
+  border-left: 4px solid;
+  margin-bottom: 10px;
+  font-family: 'Share Tech Mono';
+  font-size: 16px;
+  line-height: 1.5;
+}
+ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
+ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
+ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
+ul.checklist li strong.ye { color: var(--ye); }
+ul.checklist li strong.cy { color: var(--cy); }
+ul.checklist li strong.mg { color: var(--mg); }
+
+/* ── NAV FOOTER ── */
+nav.footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 64px;
+  background: rgba(6, 3, 15, 0.97);
+  border-top: 2px solid var(--cy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  z-index: 200;
+}
+.nav-btn {
+  background: transparent;
+  border: 2px solid var(--cy);
+  color: var(--cy);
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  padding: 10px 18px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all .15s;
+  border-radius: 2px;
+}
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+
+.nav-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  margin: 0 24px;
+}
+.nav-counter {
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  color: var(--mg);
+  letter-spacing: 3px;
+}
+.nav-progress {
+  width: 100%;
+  max-width: 480px;
+  height: 4px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.nav-progress .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--mg), var(--cy));
+  width: 0;
+  transition: width .25s;
+  box-shadow: 0 0 8px rgba(255,46,136,.5);
+}
+.nav-hint {
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: 2px;
+}
+.nav-hint kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 3px;
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: var(--ye);
+  margin: 0 2px;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · N64 TOP MUNDIAL · GEN 5</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 PORTADA -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 5 · NINTENDO 64 · PARTE 1 DE 2</div>
+      <div class="ep-title">TOP 10 <span class="vs">N64</span> MUNDIAL</div>
+      <div class="ep-sub">LO QUE LA CRÍTICA AMA · CONSENSO 2026</div>
+    </div>
+  </section>
+
+  <!-- 02 SEPARADOR TOP MUNDIAL -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="divider">
+      <div class="pre cy">CONSENSO CRÍTICO 2026</div>
+      <div class="title cy">DEL #10 AL #1</div>
+      <div class="sub">Cruce de Nintendo Life, GamesRadar, Dexerto, The Phrasemaker y Cousin Gaming. Los primeros cuatro son consenso absoluto. Empezamos desde abajo.</div>
+    </div>
+  </section>
+
+  <!-- ═══════ TOP 10 MUNDIAL ═══════ -->
+
+  <!-- 03 #10 STAR FOX -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>10</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-fox">
+            <img src="img/n64-top-mundial/starfox.jpg" alt="Star Fox 64" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Star Fox 64</div>
+              <div class="sub">DO A BARREL ROLL · 1997</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Star Fox 64</div>
+        <div class="game-meta">1997 · NINTENDO EAD · KOJI KONDO + YOKOTA</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Voice acting de meme eterno ("Do a barrel roll"). Soundtrack de Kondo + Yokota. Primer juego con Rumble Pak — Nintendo lo incluyó GRATIS con el juego porque quería que existiera vibración en su consola y necesitaba que la gente lo tuviera. Star Fox 64 fue el caballo de Troya del rumble en consola.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 #9 PERFECT DARK -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>9</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-perfect">
+            <img src="img/n64-top-mundial/perfectdark.jpg" alt="Perfect Dark" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Perfect Dark</div>
+              <div class="sub">RARE · 2000</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Perfect Dark</div>
+        <div class="game-meta">2000 · RARE · GRAEME NORGATE / DAVID CLYNICK</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          El N64 técnicamente exprimido al límite. Sucesor espiritual de GoldenEye con bots — años antes que Halo. El cartucho del N64 no tenía espacio para voz en alta calidad: la solución de Rare fue Expansion Pak obligatorio. Si no lo tenías, no podías ni completar el primer nivel. Primer juego en obligar upgrade de hardware.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 #8 PAPER MARIO -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>8</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-paper">
+            <img src="img/n64-top-mundial/papermario.jpg" alt="Paper Mario" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Paper Mario</div>
+              <div class="sub">INTELLIGENT SYSTEMS · 2000</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Paper Mario</div>
+        <div class="game-meta">2000 · INTELLIGENT SYSTEMS · YUKA TSUJIYOKO</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Last hurrah del N64. Iba a ser Super Mario RPG 2, secuela del juego de SNES hecho con Square. Cuando Square se fue con Sony, Nintendo cambió el estilo a papel para diferenciarlo. La estética nació de un problema legal, no creativo. Marca el final dorado de la consola.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 #7 MAJORA -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>7</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-zelda">
+            <img src="img/n64-top-mundial/majora.jpg" alt="Majora's Mask" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Zelda</div>
+              <div class="sub">Majora's Mask</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">The Legend of Zelda: Majora's Mask</div>
+        <div class="game-meta">2000 · NINTENDO EAD · KOJI KONDO</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Desarrollado en UN AÑO por un equipo más chico que Ocarina. Lo lograron reusando motor y la mayoría de los assets. El sistema de los tres días fue en parte por restricciones de tiempo de desarrollo, no como decisión artística — pero terminó siendo lo que define al juego. El Zelda más raro y más profundo.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 #6 SMASH -->
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>6</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-smash">
+            <img src="img/n64-top-mundial/smash.jpg" alt="Super Smash Bros." onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Super Smash Bros.</div>
+              <div class="sub">HAL LABORATORY · 1999</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Super Smash Bros.</div>
+        <div class="game-meta">1999 · HAL LABORATORY · HIROKAZU ANDO</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Empezó como side project de Iwata y Sakurai sin permiso de Nintendo. Iwata era programador, Sakurai diseñador. Lo terminaron a escondidas y lo presentaron como fait accompli. Nintendo dijo que sí porque ya estaba hecho. Hoy es la franquicia.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 #5 MARIO KART 64 -->
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>5</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-kart">
+            <img src="img/n64-top-mundial/mariokart64.jpg" alt="Mario Kart 64" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Mario Kart 64</div>
+              <div class="sub">CAPARAZÓN AZUL · 1996</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Mario Kart 64</div>
+        <div class="game-meta">1996 · NINTENDO EAD · KENTA NAGATA</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          El que instaló el caparazón azul. Battle Mode arruinó amistades en todos los continentes. El Spiny Shell se diseñó específicamente para que los jugadores nuevos pudieran ganarles a los expertos — fue una decisión política, no técnica. Hoy es el meme más odiado de la saga.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 #4 GOLDENEYE -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>4</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-bond">
+            <img src="img/n64-top-mundial/goldeneye.jpg" alt="GoldenEye 007" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">GoldenEye 007</div>
+              <div class="sub">RARE · 1997</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">GoldenEye 007</div>
+        <div class="game-meta">1997 · RARE · GRAEME NORGATE</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Inventó el FPS de consola y el multiplayer split-screen moderno. El equipo de Rare nunca había hecho un FPS y el director Martin Hollis tenía 30 años con cero experiencia en shooters. Era literalmente un experimento. Vendió 8 millones de copias y reescribió cómo se hacen los FPS de consola.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 #3 BANJO -->
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>3</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-rare">
+            <img src="img/n64-top-mundial/banjo.png" alt="Banjo-Kazooie" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Banjo-Kazooie</div>
+              <div class="sub">RARE · 1998</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Banjo-Kazooie</div>
+        <div class="game-meta">1998 · RARE · GRANT KIRKHOPE</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Rare en su punto más alto. El collectathon perfecto. Grant Kirkhope inventó un sistema dinámico de instrumentación: cada zona musical cambiaba según el contexto (bajo el agua, en cueva, en altura) para resolver limitaciones de memoria del cartucho. Eso no se había hecho antes en consola.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 #2 MARIO 64 -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>2</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-mario">
+            <img src="img/n64-top-mundial/mario64.png" alt="Super Mario 64" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Super Mario 64</div>
+              <div class="sub">LAUNCH TITLE · 1996</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Super Mario 64</div>
+        <div class="game-meta">1996 · NINTENDO EAD · KOJI KONDO</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Launch title del N64. Le enseñó al mundo cómo se hace un plataformero 3D. Originalmente iba a ser on rails — Miyamoto cambió toda la dirección a mitad del desarrollo cuando descubrió que el analógico permitía control libre. Eso atrasó el juego un año pero definió cómo se haría TODO juego 3D después.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 #1 OCARINA -->
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>1</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-zelda">
+            <img src="img/n64-top-mundial/ocarina.jpg" alt="Ocarina of Time" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">The Legend of Zelda</div>
+              <div class="sub">Ocarina of Time</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">The Legend of Zelda: Ocarina of Time</div>
+        <div class="game-meta">1998 · NINTENDO EAD · KOJI KONDO</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          #1 en TODOS los rankings consultados. Definió el aventura 3D moderno con el target lock-on de Z-targeting que después usaron todos. Koji Kondo compuso el Hyrule Field Theme con música dinámica que cambiaba según la dirección — sistema que después tomaron GTA y Red Dead Redemption.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 CIERRE Y TRANSICIÓN -->
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <h1>CIERRE · LO QUE EL MUNDO AMA</h1>
+    <h2 class="cy">El veredicto de la crítica está dicho</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 18px;">
+      <div style="background: var(--card-bg); border: 2px solid var(--cy); border-radius: 4px; padding: 28px; text-align: center; box-shadow: 0 0 22px rgba(0,229,255,.18);">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 2px; margin-bottom: 18px;">EL VEREDICTO</h3>
+        <p style="font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6;">Cinco rankings consultados. <strong style="color: var(--cy);">Ocarina #1 absoluto.</strong> Mario 64, Banjo y GoldenEye consenso del podio. El resto se mueve entre listas pero siempre adentro del top 10.</p>
+      </div>
+      <div style="background: var(--card-bg); border: 2px solid var(--mg); border-radius: 4px; padding: 28px; text-align: center; box-shadow: 0 0 22px rgba(255,46,136,.18);">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 11px; color: var(--mg); letter-spacing: 2px; margin-bottom: 18px;">PRÓXIMA SEMANA</h3>
+        <p style="font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6;">El mundo ama estos. <strong style="color: var(--mg);">Pero el mercado paga otros.</strong> El top de precios CIB del N64 — donde un solo cartucho vale más que toda la colección de Koko junta.</p>
+      </div>
+    </div>
+    <div style="background: rgba(255,210,63,.07); border-left: 4px solid var(--ye); padding: 22px 26px; margin-top: 22px; font-family: 'Share Tech Mono'; font-size: 17px; font-style: italic; color: rgba(255,255,255,.88); line-height: 1.6;">
+      <span style="display: block; font-style: normal; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 10px;">FRASE DE CIERRE PARA CÁMARA</span>
+      "Ese es el top que la crítica del mundo te diría que tení que jugar antes de morirte. Diez juegos, diez razones. Pero hay otro top — el del bolsillo. El que paga el mercado del coleccionismo. Y casi ninguno de estos diez aparece ahí. La próxima semana revelamos los N64 más caros del planeta. Spoiler: el más caro vale más de nueve mil dólares, y nunca lo viste en una vitrina."
+    </div>
+  </section>
+
+  <!-- 14 CHECKLIST -->
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <h1>CHECKLIST · PRE-GRABACIÓN</h1>
+    <h2 class="cy">Antes de prender cámaras</h2>
+    <ul class="checklist">
+      <li class="ye"><strong class="ye">☐ Luis</strong> — abrir el HTML en Chrome pantalla completa. Probar navegación con flechas. Memorizar la frase de cierre con transición al episodio de precios.</li>
+      <li class="ye"><strong class="ye">☐ Koko</strong> — opinión personal sobre cada uno de los 10 juegos del top mundial. Acuerdos y desacuerdos con la crítica. Si un juego no lo jugó, decir por qué (honestidad pega bien).</li>
+      <li class="cy"><strong class="cy">☐ Setup</strong> — los 10 cartuchos del top mundial físicos sobre la mesa (los que Koko tiene en su colección). Volumen visual.</li>
+      <li class="cy"><strong class="cy">☐ Audio</strong> — lavalier para ambos. Audio limpio es prioridad uno.</li>
+      <li class="mg"><strong class="mg">☐ Ritmo</strong> — cronómetro visible. ~50-60 seg promedio por juego. Episodio target: 18-22 min.</li>
+      <li class="mg"><strong class="mg">☐ Cierre</strong> — sembrar fuerte el episodio de precios para la próxima semana. Es la PARTE 1 de 2 — el cliffhanger es lo que trae a la gente al próximo.</li>
+    </ul>
+  </section>
+
+</section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 14</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+
+go(0);
+</script>
+
+</body>
+</html>

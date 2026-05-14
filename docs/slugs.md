@@ -6,15 +6,15 @@
 
 ## Cómo se usa un slug
 
-Para el episodio con slug `n64-ranking`, los archivos asociados son:
+Para el episodio con slug `n64-top-mundial`, los archivos asociados son:
 
 ```
-docs/pauta-n64-ranking.md          ← pauta operativa (Claude)
-docs/discusion-n64-ranking.md      ← reunión previa (Luis + Koko)
-studio/n64-ranking.html            ← monitor visual del estudio
-studio/img/n64-ranking/            ← box arts del episodio
-G:\Mi unidad\Studio\n64-ranking\   ← versión en Drive (HTML + img)
-G:\Mi unidad\Studio\pautas\pauta-n64-ranking.docx  ← DOCX para imprimir/leer
+docs/pauta-n64-top-mundial.md          ← pauta operativa (Claude)
+docs/discusion-n64-top-mundial.md      ← reunión previa (Luis + Koko)
+studio/n64-top-mundial.html            ← monitor visual del estudio
+studio/img/n64-top-mundial/            ← box arts del episodio
+G:\Mi unidad\Studio\n64-top-mundial\   ← versión en Drive (HTML + img)
+G:\Mi unidad\Studio\pautas\pauta-n64-top-mundial.docx  ← DOCX para imprimir/leer
 ```
 
 ---
@@ -25,9 +25,10 @@ G:\Mi unidad\Studio\pautas\pauta-n64-ranking.docx  ← DOCX para imprimir/leer
 
 | Slug | Episodio | Estado | Tablero |
 |------|----------|--------|---------|
-| `n64-ranking` | Top mundial vs. Retrotarros (ranking + precios) | ✓ Cerrado | [arco](arcos/n64.md) |
-| `n64-hardware-raro` | Consolas y periféricos más raros | ✓ Cerrado | [arco](arcos/n64.md) |
-| `n64-no-latam` | Juegos que nunca llegaron a Latam | ✓ Cerrado | [arco](arcos/n64.md) |
+| `n64-top-mundial` | Top 10 N64 según la crítica (Parte 1 de 2) | ✓ Grabado, en edición | [arco](arcos/n64.md) |
+| `n64-top-precios` | Top 10 N64 más caros (Parte 2 de 2) | ✓ Grabado, en edición | [arco](arcos/n64.md) |
+| `n64-hardware-raro` | Consolas y periféricos más raros | ✓ Cerrado para grabar | [arco](arcos/n64.md) |
+| `n64-no-latam` | Juegos que nunca llegaron a Latam | ✓ Cerrado para grabar | [arco](arcos/n64.md) |
 | `n64-kirkhope-rare` | Grant Kirkhope + Rare en su pico | ☐ Pendiente — **próximo recomendado** | [arco](arcos/n64.md) |
 | `n64-nintendo-vs-playstation` | Cómo perdió Nintendo la generación 5 | ☐ Pendiente | [arco](arcos/n64.md) |
 | `n64-archivo-koko` | La colección N64 entera de Koko | ☐ Pendiente | [arco](arcos/n64.md) |
