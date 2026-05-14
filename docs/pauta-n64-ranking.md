@@ -2,9 +2,9 @@
 
 *retrogames + batería*
 
-**El Top N64 del mundo vs. el Top de Koko**
+**Top mundial vs. Retrotarros — Nintendo 64**
 
-*Generación 5 · Nintendo 64 · Especial ranking + precios*
+*Generación 5 · Nintendo 64 · Ranking + precios*
 
 Documento de trabajo · Luis Balbrigame & Koko
 
@@ -12,28 +12,30 @@ Documento de trabajo · Luis Balbrigame & Koko
 
 ## Propósito de esta pauta
 
-Esta pauta arma un episodio largo (18–22 min) con un formato distinto a los biográficos de IPs que hemos venido haciendo. En vez de hablar de UN juego, jugamos un duelo: el Top 10 mundial de N64 (consenso crítico 2026) y el Top 10 por precio de mercado (PriceCharting, mayo 2026) contra el Top 10 personal de Koko. La gracia es la mecánica de game show simple, el contraste entre lo que la crítica ama y lo que el mercado paga, y cerrar con Koko en batería del tema que él eligió como #1.
+Esta pauta arma un episodio largo (15–18 min) con un formato distinto a los biográficos de IPs que hemos venido haciendo. En vez de hablar de UN juego, presentamos dos rankings cruzados: el Top 10 mundial de N64 (consenso crítico 2026) y el Top 10 por precio de mercado (PriceCharting, mayo 2026). La gracia es el contraste entre lo que la crítica ama y lo que el mercado paga, presentado con los cartuchos físicos de Koko sobre la mesa y cerrando con el dato bomba del valor mundial de su colección.
 
-Es la primera vez que entramos a la 5ta generación. Después de este episodio quedamos sentados para hacer una mini-saga N64 (individual de Mario 64, individual de Banjo, etc.), pero este abre la generación con un episodio lúdico que sirve para que la gente se quede a comentar SU propio top.
+Es la primera vez que entramos a la 5ta generación. Después de este episodio quedamos sentados para hacer una mini-saga N64 (individual de Mario 64, individual de Banjo, etc.). Este episodio abre la generación con un formato ranking que sirve para que la gente se quede a comentar SU propio top.
+
+> **Nota sobre el cierre musical:** este episodio NO cierra con Koko en batería. El cierre con batería queda reservado para una nueva serie paralela del canal: **OST en batería por generación**, un episodio especial por consola donde Koko interpreta el tema icónico de esa generación. Empezamos con N64 después de este episodio.
 
 ---
 
 ## Concepto del episodio
 
-Formato game show casero, sin necesidad de gráficos caros ni edición compleja:
+Formato de presentación visual del coleccionismo retro, sin necesidad de gráficos caros ni edición compleja:
 
-- Luis llega a la mesa con dos rankings sellados: el Top 10 mundial y el Top 10 por precio de mercado (CIB en USD).
-- Koko llega con sus 10 mejores N64, físicos, sacados de su estantería, ordenados del 10 al 1 y dados vuelta sobre la mesa.
-- Vamos revelando uno por uno. Por cada juego que Koko da vuelta, Luis abre el ranking y dice si está en el top mundial, en qué puesto, y cuánto vale hoy en el mercado de coleccionismo.
-- Mecánica de puntos: 3 si coincide la posición exacta, 1 si está en el ranking pero en otra posición, 0 si no aparece.
-- Cierre: scorecard final, debate sobre los desacuerdos, y Koko interpreta en batería el tema del juego que él puso #1 (no el del ranking mundial — porque acá manda el corazón).
+- Luis presenta los dos rankings con el HTML del estudio (`studio/n64-ranking.html`) como soporte visual en pantalla, slide por slide.
+- Koko tiene sus 10 mejores N64 físicos sobre la mesa, visibles a cámara durante todo el episodio.
+- Vamos revelando cada juego de los rankings del **#10 al #1** (suspenso ascendente). Luis lee el dato curioso de cada uno y Koko reacciona desde su experiencia personal con la consola.
+- En el ranking de precios, Koko reacciona en vivo al valor de cada cartucho. Es el bloque más reactivo del episodio.
+- Cierre del episodio: el dato bomba del valor combinado de los 10 cartuchos de Koko + teaser de la serie de OST en batería por generación.
 
 **Por qué este formato funciona ahora**
 
 - Las tendencias 2026 en retrogaming en redes son comparaciones "then vs. now", forgotten gem showcases y retro setup tours — todo eso vive en este episodio.
 - El contraste "juego amado / juego caro" tiene tensión narrativa propia: los más amados son baratísimos, los más caros casi nadie los jugó.
 - Genera engagement automático: la gente comenta SU top y eso es lo que el algoritmo lee como retención.
-- Es replicable como serie: un episodio así por cada generación. Después podemos hacer SNES, PS1, Genesis, GameCube.
+- Es replicable como serie: un episodio así por cada generación (SNES, PS1, Genesis, GameCube). Después podemos cruzar cada uno con su episodio musical en batería.
 - Para Koko es cómodo: él entra con lo que más ama y conoce, no tiene que estudiar nada nuevo. Para Luis es estudio puro: rankings y precios.
 
 ---
@@ -98,67 +100,63 @@ Frase de cierre del bloque de precios para cámara: *"El juego más caro del N64
 
 ---
 
-## Estructura del episodio (18–22 min)
+## Estructura del episodio (15–18 min · 4 bloques)
 
 ### Bloque 1 · Cold open (0:00 – 0:45)
 
-Koko en su estante, espalda a cámara. Saca 10 cartuchos uno por uno. Cada cartucho cae a la mesa con sonido seco. Sin diálogo. Solo gameplay del cartucho cayendo + tema instrumental cortado a beat (idea: medley en batería 4 compases por juego de los OSTs míticos).
+Koko en su estante, espalda a cámara. Saca 10 cartuchos uno por uno. Cada cartucho cae a la mesa con sonido seco. Sin diálogo. Solo gameplay del cartucho cayendo + tema instrumental retro de fondo (música incidental tipo arcade, no batería interpretada — eso va para el episodio especial de OST).
 
 *Cierra cold open: Koko mira a cámara, sonrisa lateral. Corte a logo Retrotarros.*
 
-### Bloque 2 · Setup (0:45 – 2:30)
+### Bloque 2 · Setup (0:45 – 2:00)
 
-- Luis a cámara explica el concepto: dos rankings sellados (mundial + precios) vs. el top personal de Koko.
-- Mostrar visualmente los sobres cerrados encima de la mesa. Que se vea que el secreto es real (no son cartón de utilería).
-- Explicar la mecánica de puntos en 20 segundos. No más. La gente se enrolla con reglas largas.
-- Koko: "yo no tengo idea de qué tengo encontrá ahí, así que vamos a ver po". Plantear que él va a la ciega.
+- Luis a cámara explica el concepto: dos rankings (mundial + precios), revelados en pantalla con el HTML del estudio.
+- Mostrar visualmente la mesa con los cartuchos de Koko al frente. Que se vea volumen físico.
+- Koko: "yo no sé qué orden van a tener, así que vamos a ir comentando po". El énfasis es en su reacción.
 
-### Bloque 3 · Cuenta regresiva del 10 al 1 (2:30 – 16:00)
+### Bloque 3 · Cuenta regresiva del 10 al 1 (2:00 – 13:30)
 
-13–14 minutos para 10 juegos = ~1:20 por juego en promedio. Algunos van a ser más rápidos (los obvios) y otros más largos (los que generen debate o tengan dato curioso jugoso).
+11–12 minutos para 20 juegos (10 mundial + 10 precios) = ~35 seg promedio por juego en mundial + ~50 seg en precios (donde la reacción al valor toma más tiempo).
 
-**Estructura repetible por juego:**
+**Estructura repetible por juego (top mundial):**
 
-- Koko da vuelta el cartucho (cierre de plano del juego físico, con su etiqueta original visible).
-- Koko en 15–20 segundos cuenta por qué eligió ese juego. Nada de review — solo qué le hizo a ÉL en su momento.
-- Luis abre el sobre del ranking mundial: ¿está? ¿en qué puesto? Reaccionar genuino. Anotar puntos.
-- Luis tira UN dato curioso del juego — no más, no es un episodio biográfico. Tiene que ser un dato que la gente se quede pensando.
-- Luis abre el sobre del ranking de precios SOLO si el juego aparece ahí. Si no aparece, no se menciona — guardamos el bloque de precios para el final.
+- Slide en pantalla con la box art del juego en grande + posición + dato curioso.
+- Luis lee el dato curioso del slide.
+- Koko reacciona desde su experiencia personal (15–20 seg). Si lo jugó cuenta el momento, si no lo jugó cuenta por qué.
+- Avanzar al siguiente.
 
-### Bloque 4 · Wildcards y precios (16:00 – 18:30)
+**Estructura repetible por juego (top precios):**
 
-Después de terminar el top de Koko, Luis revela los juegos del top mundial y del top de precios que Koko NO mencionó. Esto da pie a:
+- Slide en pantalla con la box art + el precio gigante en magenta neón.
+- Luis lee el precio antes de revelar el juego (sorpresa).
+- Koko reacciona al precio (las reacciones genuinas son el oro del bloque).
+- Luis explica brevemente por qué cuesta tanto (rareza / distribución / región).
+- Avanzar.
 
-- Reacciones de Koko ("¿en serio Paper Mario está en el top 10? Yo nunca lo jugué").
-- Mostrar la lista de los 10 más caros con cifras reales. Acá entra el dato del Majora's Mask Not for Resale de $8,500.
-- Conclusión sin ser pesados: lo amado y lo caro casi nunca coinciden. El precio premia la rareza, no la calidad.
+### Bloque 4 · NFR Kicker + Valor de la colección + Cierre (13:30 – 17:00)
 
-### Bloque 5 · Scorecard + cierre musical (18:30 – 22:00)
-
-- Sumar puntos a cámara. Si Koko sacó más de 18 puntos, decir que tiene "oído mundial". Si sacó menos de 12, decir que tiene "oído chileno" (en buena, irónico).
-- Anuncio del cierre musical: "El #1 mundial es Ocarina. El #1 de Koko es [X]. Hoy le toca a Koko".
-- Koko se sienta detrás de la batería. Drum cover del tema del juego que él puso #1. 60–90 segundos.
-- Outro: Luis a cámara invitando a comentar SU top de N64. Cierre con la frase fija del canal.
+- Revelar las variantes Not For Resale ($9.199 ClayFighter sealed, $8.500 Majora gris). Es el dato bomba del episodio.
+- Mostrar el valor combinado de los 10 cartuchos de Koko: **US$1.470 / CLP $1.400.000**. Reacción a cámara.
+- Cierre con frase fija + teaser del episodio musical futuro: *"Y para la próxima generación, prepárense — porque Koko se va a sentar en la batería para despedir una de estas OSTs."*
+- Outro: Luis invita a comentar SU top de N64. Cierre con la frase fija del canal.
 
 ---
 
-## Backup: si Koko pone un juego que no está en NINGÚN ranking
+## Backup: si Koko menciona un juego que no está en NINGÚN ranking
 
 Probabilidad alta porque la colección de Koko es chilena y los hábitos de juego en Latam fueron distintos a los del mundo. Juegos que en Chile fueron culto y en el ranking mundial no aparecen:
 
-- WWF No Mercy / WCW vs. nWo World Tour — en Latam el wrestling fue cultura. En el ranking mundial Dexerto/Nintendo Life ni aparecen en top 25.
+- WWF No Mercy / WCW vs. nWo World Tour — en Latam el wrestling fue cultura. En el ranking mundial ni aparecen en top 25.
 - Rayman 2 — más popular en Latam y Europa que en USA. Top 25 mundial pero no top 10.
 - F-Zero X — culto absoluto, no llega al top 10 mundial pero los fans lo ponen primero.
 - 1080° Snowboarding / Wave Race 64 — top 25 mundial, no top 10.
 - Diddy Kong Racing — generalmente top 15 mundial, casi nunca top 10 (lo pisa Mario Kart 64).
 
-*Si Koko pone alguno de estos: tratarlo como descubrimiento, no como error. "Esa es la diferencia entre Chile y el mundo, po." Es un excelente gancho para shorts derivados.*
+*Si Koko menciona alguno: tratarlo como descubrimiento, no como error. "Esa es la diferencia entre Chile y el mundo, po." Es un excelente gancho para shorts derivados.*
 
 ---
 
-## Anclas para cámara — un dato curioso por juego
-
-*Para que Luis tenga un dato listo si Koko menciona uno de los del top mundial. Un dato por juego, no más. Lo que sobra se reutiliza para shorts.*
+## Anclas para cámara — un dato curioso por juego del top mundial
 
 | Juego | Dato curioso para tirar en cámara |
 |-------|-----------------------------------|
@@ -175,23 +173,6 @@ Probabilidad alta porque la colección de Koko es chilena y los hábitos de jueg
 
 ---
 
-## Opciones de cierre musical (a decidir con Koko)
-
-El cierre depende de qué juego Koko ponga #1 en su top personal. Acá los temas más jugables en batería del catálogo N64, con un comentario rápido sobre dificultad y energía.
-
-| Rec | Tema | Comentario para batería |
-|-----|------|-------------------------|
-| ★ | **Gerudo Valley (Ocarina of Time)** | Flamenco con percusión latina. El N64 más bateril del catálogo. Si Koko pone Ocarina #1, este es el cierre obvio. |
-| ★ | **Bob-omb Battlefield (Super Mario 64)** | Tempo medio, groove juguetón, fácil de adaptar a batería con escobillas o palos. Universal y reconocible. |
-| ★ | **Mr. Patch / Treasure Trove Cove (Banjo-Kazooie)** | Grant Kirkhope: melódico, sin complicaciones rítmicas. Perfecto para un cover relajado pero pegajoso. |
-| — | **DK Rap (Donkey Kong 64)** | Si Koko se atreve, este es el viral. La gente lo va a clipear. Es un meme caminando con su propia banda sonora. |
-| ★ | **Star Fox 64 Main Theme** | Fanfarria épica. Si Koko viene con energía alta, este cierre levanta el episodio entero. |
-| — | **GoldenEye Pause Music** | Si Koko quiere ir contraintuitivo. Es meme histórico en TikTok 2026. Lo cortamos a 30 segundos. |
-| — | **Mario Kart 64 Title Theme** | Energía pura, percusión ya está en el original. Buen cierre si Koko pone MK64 alto en su lista. |
-| — | **Smash Bros. Main Theme** | Más complejo. Solo si Koko ya lo tiene practicado. No improvisar acá. |
-
----
-
 ## Shorts derivados (mínimo 6, idealmente 8)
 
 *Un episodio largo como este debe quedar diseñado para sangrar contenido a shorts.*
@@ -203,13 +184,20 @@ El cierre depende de qué juego Koko ponga #1 en su top personal. Acá los temas
 - "El Expansion Pak fue una estafa que cambió el gaming para siempre" — historia de Perfect Dark obligando el upgrade. Conecta con el short #019 sobre DLCs.
 - "Smash Bros. se hizo a escondidas de Nintendo" — Iwata y Sakurai escondidos en una oficina. Gancho irresistible.
 - "Mario 64 iba a ser sobre rieles" — el cambio de dirección a mitad del desarrollo que definió todo el gaming 3D.
+- "F1 Racing solo salió en Brasil" — el origen latinoamericano de un coleccionable mundial.
 
-### Lane Koko (batería, cómo tocar OSTs)
+### Lane Koko — reservados para el episodio musical especial
 
-- "Cómo tocar el Gerudo Valley en batería" — el flamenco que el N64 metió de contrabando.
-- "El DK Rap completo en batería" — meme garantizado si Koko se atreve.
-- "La pause music de GoldenEye que todos olvidaron" — formato calmo, perfecto contraste con el resto de los shorts del lane.
-- "Bob-omb Battlefield en escobillas" — versión jazzy del tema clásico de Mario 64.
+*Los shorts de batería del catálogo N64 se guardan para alimentar el episodio especial "OST en batería · Generación 5 · Nintendo 64". No salen como derivados de este episodio.*
+
+Temas candidatos para ese episodio musical:
+
+- Gerudo Valley (Ocarina of Time) — flamenco con percusión latina, el más bateril.
+- Bob-omb Battlefield (Super Mario 64).
+- Mr. Patch / Treasure Trove Cove (Banjo-Kazooie).
+- DK Rap (Donkey Kong 64).
+- Star Fox 64 Main Theme.
+- GoldenEye Pause Music.
 
 ---
 
@@ -220,97 +208,74 @@ El cierre depende de qué juego Koko ponga #1 en su top personal. Acá los temas
 - Dos cámaras: una fija plano amplio (Luis y Koko sentados frente a la mesa con los cartuchos) + una cámara móvil para closeups de cartuchos y reacciones.
 - Iluminación de tono frío para mantener el look retro-arcade. Una luz LED magenta o cyan de fondo (la paleta de la marca) ayuda en miniatura.
 - Audio: lavalier para ambos. Es un episodio conversacional, audio limpio es prioridad uno. Sonido ambiente del estudio NO.
-- Para el cierre musical: setup de batería con OH stereo + kick mic + snare mic. Si solo hay una mic, plano OH + tema editado con overdubs en post.
+- Monitor secundario: HTML del estudio (`studio/n64-ranking.html`) abierto en Chrome a pantalla completa. Luis lo navega con flechas ← →.
 
 **Props físicos a tener listos**
 
-- Dos sobres tamaño carta con la palabra "RANKING MUNDIAL" y "PRECIOS" en tipografía Bebas Neue. Cerrados con cinta visible.
 - Los 10 cartuchos de Koko, físicos y limpios. Etiquetas legibles. Si alguno está manchado o ilegible, sustituirlo o no usarlo.
-- Pizarra o cuaderno chico donde se vaya anotando el puntaje a cámara. Visual de game show casero.
+- Mesa amplia con buena iluminación de tope. Los cartuchos físicos en frente, visibles durante todo el episodio.
 
 **Miniatura recomendada**
 
 - Lado izquierdo: cartucho de N64 (uno icónico — Ocarina por ejemplo) con etiqueta de precio gigante: "$8.500".
 - Lado derecho: rostro de Koko con expresión de "¿en serio?" — ojos abiertos.
-- Título: "EL TOP MUNDIAL VS. KOKO" en tipografía pesada con contorno. Etiqueta amarillo arcade arriba: "GEN 5".
+- Título: "EL TOP MUNDIAL VS. RETROTARROS" en tipografía pesada con contorno. Etiqueta amarillo arcade arriba: "GEN 5".
 
 **Tendencias actuales que está usando este episodio**
 
 - Then vs. now / lista contra lista — el formato que más comparte en TikTok 2026 con #retrogaming.
 - Retro setup tour — la colección física de Koko en pantalla, que ahora mismo está pegando con audiencia de 28–42 años.
 - Forgotten gem reveal — los juegos caros que nadie conoce son el equivalente al "forgotten gem showcase" que es trending.
-- Reaction format — Koko reaccionando a los rankings sin saberlos antes da el ingrediente reactivo que sin guion premia el algoritmo.
+- Reaction format — Koko reaccionando a los precios sin saberlos antes da el ingrediente reactivo que sin guion premia el algoritmo.
 
 ---
 
 ## Checklist antes de grabar
 
-- [ ] Koko prepara su top 10 personal en privado y NO lo comparte con Luis hasta cámara.
-- [ ] Luis imprime los dos rankings y los mete en sobres físicos sellados antes de la sesión.
-- [ ] Decidir entre Luis y Koko cuál es el tema de cierre — pero NO grabar el cierre antes del juego en cámara. Que la elección final dependa de lo que Koko ponga #1.
-- [ ] Verificar que todos los 10 cartuchos de Koko enciendan en la consola. Si alguno falla, sustituirlo (o usar la falla como gag en cámara — "este vale 200 lucas y no prende, típico po").
-- [ ] Tener un cronómetro o reloj visible para Luis. El bloque del 10 al 1 debe respetar el ritmo de 1:20 promedio por juego — si nos colgamos, el video se va a 28 min y se rompe la atención.
+- [ ] Luis abre el HTML del estudio (`studio/n64-ranking.html`) en Chrome pantalla completa antes de grabar. Probar navegación con flechas.
+- [ ] Verificar que las 20 box arts cargan correctamente desde `studio/img/n64-ranking/`.
+- [ ] Koko prepara su opinión personal sobre cada uno de los 20 juegos. Acuerdos y desacuerdos con la crítica.
+- [ ] Verificar que los 10 cartuchos de Koko encienden en consola. Si alguno falla, gag en cámara: "este vale 200 lucas y no prende, típico po".
+- [ ] Cronómetro visible para Luis. Bloque 3 a ritmo ~35 seg promedio por juego en mundial, ~50 seg en precios. Si nos colgamos, el video se va a 22 min y se rompe la atención.
 - [ ] Confirmar precios PriceCharting en NTSC, no en PAL ni JP. Si alguien comenta el precio en Chile siendo diferente, responder en comentario fijado con dato regional.
+- [ ] Dejar sembrado en el outro el episodio futuro de OST en batería por generación. NO grabar el cierre musical en este episodio.
 
 ---
 
-## ANEXO A — Lista confirmada de Koko · Scorecard precalculado
+## ANEXO A — Datos de la colección de Koko
 
-*Este anexo se agregó después de que Koko confirmara los 10 juegos que va a llevar a la grabación. Los precios son de PriceCharting y Vgprice mayo 2026, NTSC USA, condición CIB (Complete In Box). La posición mundial es el cruce con el top 25 consenso 2026 (Nintendo Life, GamesRadar, Dexerto, The Phrasemaker, Cousin Gaming).*
+*Los 10 cartuchos físicos que Koko trae a cámara. Los precios son de PriceCharting y Vgprice mayo 2026, NTSC USA, condición CIB (Complete In Box). La posición mundial es el cruce con el top 25 consenso 2026 (Nintendo Life, GamesRadar, Dexerto, The Phrasemaker, Cousin Gaming).*
 
 ### A.1 · Los 10 juegos de Koko
 
-*Lista entregada por Koko, sin orden de preferencia todavía. El orden final del 10 al 1 se decide en cámara.*
+| # | Juego | CIB USD | CLP aprox. | Top mundial | Top precios |
+|---|-------|---------|------------|-------------|-------------|
+| 1 | Zelda: Ocarina of Time | $147 | $140k | #1 mundial | — |
+| 2 | Zelda: Majora's Mask | $208 | $199k | #7 mundial | — |
+| 3 | Killer Instinct Gold | $49 | $47k | no aparece | — |
+| 4 | Conker's Bad Fur Day | $338 | $323k | top 15-20 | #10 más caro |
+| 5 | Super Mario 64 | $142 | $135k | #2 mundial | — |
+| 6 | Mario Kart 64 | $107 | $102k | #5 mundial | — |
+| 7 | Diddy Kong Racing | $112 | $107k | top 12-15 | — |
+| 8 | Donkey Kong 64 | $120 | $114k | top 15-20 | — |
+| 9 | Super Smash Bros. | $160 | $153k | #6 mundial | — |
+| 10 | GoldenEye 007 | $87 | $83k | #4 mundial | — |
 
-| # | Juego | CIB USD | CLP aprox. | Top mundial | Top precios | Pts |
-|---|-------|---------|------------|-------------|-------------|-----|
-| 1 | Zelda: Ocarina of Time | $147 | $140k | #1 mundial | — | ★ |
-| 2 | Zelda: Majora's Mask | $208 | $199k | #7 mundial | — | ★ |
-| 3 | Killer Instinct Gold | $49 | $47k | no aparece | — | — |
-| 4 | Conker's Bad Fur Day | $338 | $323k | top 15-20 | #10 más caro | ○ |
-| 5 | Super Mario 64 | $142 | $135k | #2 mundial | — | ★ |
-| 6 | Mario Kart 64 | $107 | $102k | #5 mundial | — | ★ |
-| 7 | Diddy Kong Racing | $112 | $107k | top 12-15 | — | ○ |
-| 8 | Donkey Kong 64 | $120 | $114k | top 15-20 | — | ○ |
-| 9 | Super Smash Bros. | $160 | $153k | #6 mundial | — | ★ |
-| 10 | GoldenEye 007 | $87 | $83k | #4 mundial | — | ★ |
-
-**Leyenda:** ★ en top 10 mundial · ○ en top 25 mundial · — no aparece en ningún ranking.
-
-### A.2 · Scorecard precalculado
-
-**Regla actualizada del game show con esta lista:**
-
-- 3 pts si Koko adivina la posición exacta del juego en el top mundial.
-- 2 pts si el juego está en el top 10 mundial pero Koko le da otra posición.
-- 1 pt si el juego está en el top 25 mundial pero no en el top 10.
-- 0 pts si no aparece en ningún ranking.
-
-**Cómo le va a ir a Koko (escenarios)**
-
-| Escenario | Cómo se da | Puntos |
-|-----------|------------|--------|
-| Mínimo posible | Pone los 6 ★ en posiciones equivocadas + 3 ○ acertados + KI Gold cero | 6×2 + 3×1 + 0 = 15 |
-| Realista (escenario base) | Acierta 2-3 posiciones exactas, el resto del top 10 en otra posición, ○ y KI Gold como esperado | ~17 |
-| Excelente | Acierta 5+ posiciones exactas en el top mundial | 21+ |
-
-*El target es 17 puntos. Si Koko saca menos de 12, lo molestamos en cámara con cariño. Si saca más de 20, le decimos que tiene oído de crítico gringo.*
-
-### A.3 · El valor de la colección
+### A.2 · El valor de la colección
 
 Valor CIB total de los 10 cartuchos de Koko (mayo 2026): **$1,470 USD** ≈ **$1.400.000 CLP**
 
-Este es el dato fijado para el cierre del episodio. Va antes de que Koko se siente a la batería. Frase sugerida en cámara: *"Antes de que Koko se ponga a tocar — sepan que lo que acaban de ver sobre esta mesa, en condición de caja completa, vale UN MILLÓN CUATROCIENTAS MIL LUCAS chilenas en el mercado mundial. Y esto es solo lo que él trajo hoy. Su colección entera vale… vamos a hacer un episodio especial sobre eso."*
+Este es el dato fijado para el cierre del episodio (Bloque 4). Frase sugerida en cámara: *"Lo que acaban de ver sobre esta mesa, en condición de caja completa, vale UN MILLÓN CUATROCIENTAS MIL LUCAS chilenas en el mercado mundial. Y esto es solo lo que Koko trajo hoy. Su colección entera vale… vamos a hacer un episodio especial sobre eso."*
 
 *El último gancho deja sembrado un episodio futuro: el inventario completo de la colección de Koko valorada cartucho por cartucho. Eso ya estaba previsto en la estrategia (Ep 10 del plan: "Top de la colección de Koko") — acá lo amarramos como teaser.*
 
-### A.4 · Insights narrativos para tirar en cámara
+### A.3 · Insights narrativos para tirar en cámara
 
 **1. Killer Instinct Gold es la carta solitaria**
 
 Es el ÚNICO juego de los 10 que no aparece en ningún ranking — ni mundial ni de precios. Y solo vale $49 CIB. Ese es el juego que define a Koko como crítico personal: el mundo lo olvidó, los coleccionistas no lo cotizan, pero él lo trajo igual.
 
-Dato para tirar: Killer Instinct Gold está compuesto musicalmente por Robin Beanland y Graeme Norgate de Rare (briefing ya en el documento de compositores). Es probablemente la OST más bateril del N64 entero: metal/industrial puro, anticipándose por dos décadas al estilo DOOM 2016. Si Koko lo pone alto en su lista, ya sabemos por qué.
+*Dato para tirar:* Killer Instinct Gold está compuesto musicalmente por Robin Beanland y Graeme Norgate de Rare (briefing ya en el documento de compositores). Es probablemente la OST más bateril del N64 entero — buen candidato para el episodio musical especial de la Gen 5.
 
 **2. El sesgo Rare de Koko**
 
@@ -322,56 +287,13 @@ Lectura en cámara: Koko es fan de la cara más raja, más adulta y más experim
 
 $338 CIB. Más caro que Ocarina, más caro que Mario 64. Es el más caro de toda la lista de Koko. Y nunca lo vas a ver mencionado en una conversación seria sobre los mejores N64. Eso es perfecto para el bloque "el ranking del precio no respeta el ranking del corazón".
 
-Dato para tirar: salió a fines de la vida del N64 con rating Mature en una consola de niños. Tiraje bajo, prensa lo destrozó, hoy es coleccionable.
+*Dato para tirar:* salió a fines de la vida del N64 con rating Mature en una consola de niños. Tiraje bajo, prensa lo destrozó, hoy es coleccionable.
 
 **4. Mario Kart 64 a $107 — el caso clásico**
 
 Uno de los juegos más jugados del planeta de su época, hoy vale $107 CIB. Eso es porque vendió MILLONES de copias y hay stock circulando. El mercado premia la rareza, no la fama.
 
-### A.5 · Recomendación de cierre musical
-
-**Recomendación principal: Killer Instinct Gold (KI Theme o Cinder Theme)**
-
-Si Koko pone Killer Instinct Gold en el top 3 de su ranking personal (probable, porque trajo ese juego siendo el único "raro" de la lista), el cierre musical es obvio. Razones:
-
-- Es el juego MÁS BATERIL de la lista — Robin Beanland y Graeme Norgate hicieron metal/industrial puro.
-- Da el ángulo del episodio entero: "el ranking mundial no lo conoce, los coleccionistas no lo cotizan, pero acá en Retrotarros le damos el cierre".
-- Visualmente y sonoramente contrasta con todo el resto del episodio: del Mario Kart al metal de KI es un salto que la gente comparte.
-- Genera material para short derivado: "Cómo tocar Killer Instinct en batería" en lane Koko.
-
-**Plan B (si Koko pone otro #1):**
-
-- Ocarina #1 → Gerudo Valley (ya estaba en la pauta original).
-- Mario 64 #1 → Bob-omb Battlefield.
-- Conker #1 → Sloprano (la parodia operática del boss) — viral garantizado si Koko se atreve.
-- GoldenEye #1 → Pause Music (formato corto, 30s, calmo).
-
-### A.6 · Estructura específica con esta lista
-
-Ajustes al tiempo del Bloque 3 (revelación 10→1) con los juegos confirmados:
-
-| Pos. | Juego de Koko | Tiempo | Foco |
-|------|--------------|--------|------|
-| #10 | El que Koko ponga más abajo | 1:00 | Quick reveal, sin profundizar |
-| #9 | — | 1:00 | Quick reveal |
-| #8 | — | 1:15 | Dato curioso si aplica |
-| #7 | — | 1:15 | Dato curioso si aplica |
-| **#6** | **Probable Killer Instinct Gold** | **2:00** | **Profundizar: Rare, Beanland, OST metalera. AQUÍ ESTÁ LA CARTA SOLITARIA.** |
-| #5 | — | 1:30 | Dato curioso |
-| #4 | — | 1:30 | Dato curioso |
-| #3 | — | 1:45 | Top tier, profundizar |
-| #2 | Probable Mario 64 o Banjo-Kazooie (no está) | 1:45 | Discusión |
-| #1 | Probable Ocarina of Time | 2:00 | Reveal grande + setup del cierre musical |
-
-**Reglas de oro para grabar con esta lista**
-
-- Si Koko pone Killer Instinct Gold en posición alta (#1 a #3): pausar todo y profundizar. Es el ángulo más vendedor del episodio.
-- Si Koko pone Ocarina #1: predecible y bien. Coincide con todo el mundo, score máximo en ese juego.
-- Si Koko pone Conker #1: viral garantizado. Es contraintuitivo y permite el cierre Sloprano.
-- Si Koko pone GoldenEye #1: ángulo del FPS multiplayer en Latam, conexión generacional con la audiencia de 30-40.
-- Ningún #1 de Koko es "mal" #1. El video funciona con cualquiera de los 10.
-
-### A.7 · Comentario fijado de YouTube (preescrito)
+### A.4 · Comentario fijado de YouTube (preescrito)
 
 *Comentario que Luis fija como primer comentario el día del estreno:*
 
@@ -385,5 +307,13 @@ Los precios en Chile y Latam varían — pueden ser hasta 2x más caros en impor
 
 ---
 
+## Conexión con otros episodios del canal
+
+- **Próximo episodio (futuro cercano):** "OST en batería · Generación 5 · Nintendo 64" — Koko interpreta uno de los temas icónicos del catálogo N64. Probable cierre: Gerudo Valley o Killer Instinct Gold (depende de decisión con Koko).
+- **Serie hermana (replicable por generación):** mismo formato ranking + precios aplicado a SNES, PS1, Genesis, GameCube. Cada generación tendrá su episodio ranking + su episodio musical en batería.
+- **Episodio especial pendiente:** "Top de la colección de Koko" (Ep 10 del plan original) — valoración cartucho por cartucho de toda la colección. Este episodio del ranking lo amarra como teaser.
+
+---
+
 *RETROTARROS · pauta de episodio · documento de trabajo*
-*Gen 5 · Nintendo 64 · El Top del mundo vs. el Top de Koko*
+*Gen 5 · Nintendo 64 · Top mundial vs. Retrotarros*

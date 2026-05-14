@@ -86,11 +86,11 @@ header {
 .slide {
   position: absolute;
   inset: 0;
-  padding: 40px 56px;
+  padding: 32px 48px;
   overflow-y: auto;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .25s;
+  transition: opacity .22s;
 }
 .slide.active {
   opacity: 1;
@@ -98,33 +98,13 @@ header {
 }
 .slide-num {
   position: absolute;
-  top: 20px;
-  right: 28px;
+  top: 16px;
+  right: 24px;
   font-family: 'Press Start 2P';
   font-size: 9px;
-  color: rgba(255,255,255,.18);
+  color: rgba(255,255,255,.22);
   letter-spacing: 2px;
 }
-.slide h1 {
-  font-family: 'Press Start 2P';
-  font-size: 14px;
-  color: var(--ye);
-  letter-spacing: 4px;
-  margin-bottom: 6px;
-  border-left: 4px solid var(--ye);
-  padding-left: 16px;
-}
-.slide h2 {
-  font-family: 'Orbitron';
-  font-weight: 900;
-  font-size: 40px;
-  color: #fff;
-  letter-spacing: 1px;
-  margin: 10px 0 28px 20px;
-  line-height: 1.05;
-}
-.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
-.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
 
 /* ── PORTADA ── */
 .portada {
@@ -151,7 +131,7 @@ header {
   line-height: 1.05;
   color: #fff;
   margin-bottom: 18px;
-  max-width: 1000px;
+  max-width: 1100px;
 }
 .portada .ep-title .vs {
   color: var(--mg);
@@ -174,204 +154,302 @@ header {
 }
 .portada .ep-meta span { color: var(--cy); }
 
-/* ── BLOQUE INTRO MECÁNICA ── */
-.mech-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-top: 12px;
+/* ── SEPARADOR DE BLOQUE ── */
+.divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
 }
-.mech-card {
-  background: var(--card-bg);
-  border: 2px solid var(--mg);
-  border-radius: 4px;
-  padding: 26px 28px;
-  box-shadow: 0 0 22px rgba(255,46,136,.15);
-}
-.mech-card.cy { border-color: var(--cy); box-shadow: 0 0 22px rgba(0,229,255,.15); }
-.mech-card.ye { border-color: var(--ye); box-shadow: 0 0 22px rgba(255,210,63,.15); }
-.mech-card h3 {
+.divider .pre {
   font-family: 'Press Start 2P';
   font-size: 11px;
-  color: var(--mg);
+  letter-spacing: 6px;
+  margin-bottom: 24px;
+}
+.divider .pre.cy { color: var(--cy); }
+.divider .pre.mg { color: var(--mg); }
+.divider .title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 78px;
   letter-spacing: 2px;
-  margin-bottom: 14px;
-}
-.mech-card.cy h3 { color: var(--cy); }
-.mech-card.ye h3 { color: var(--ye); }
-.mech-card p {
-  font-family: 'Share Tech Mono';
-  font-size: 15px;
-  line-height: 1.6;
-  color: rgba(255,255,255,.86);
-}
-.mech-card .big {
-  font-family: 'Orbitron';
-  font-weight: 900;
-  font-size: 56px;
-  color: var(--ye);
-  letter-spacing: 2px;
-  display: block;
-  margin: 14px 0 8px;
-}
-.mech-card.cy .big { color: var(--cy); }
-.mech-card.mg .big { color: var(--mg); }
-.mech-list {
-  list-style: none;
-  margin-top: 10px;
-}
-.mech-list li {
-  font-family: 'Share Tech Mono';
-  font-size: 16px;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-}
-.mech-list li:last-child { border: none; }
-.mech-list .pts {
-  font-family: 'Orbitron';
-  font-weight: 900;
-  color: var(--ye);
-}
-
-/* ── RANKING TABLAS ── */
-.rank-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 14px;
-}
-.rank-table tr {
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-.rank-table tr:last-child { border-bottom: none; }
-.rank-table td {
-  padding: 14px 12px;
-  vertical-align: middle;
-}
-.rank-table .pos {
-  font-family: 'Orbitron';
-  font-weight: 900;
-  font-size: 32px;
-  color: var(--mg);
-  width: 70px;
-  text-shadow: 0 0 12px rgba(255,46,136,.35);
-}
-.rank-table.cy .pos { color: var(--cy); text-shadow: 0 0 12px rgba(0,229,255,.35); }
-.rank-table .game {
-  font-family: 'Orbitron';
-  font-weight: 700;
-  font-size: 18px;
+  line-height: 1;
   color: #fff;
+  margin-bottom: 22px;
 }
-.rank-table .year {
+.divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
+.divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.divider .sub {
   font-family: 'Share Tech Mono';
-  font-size: 12px;
-  color: rgba(255,255,255,.45);
-  margin-top: 2px;
-}
-.rank-table .price {
-  font-family: 'Orbitron';
-  font-weight: 700;
-  font-size: 22px;
-  color: var(--ye);
-  text-align: right;
-  width: 130px;
-}
-.rank-table .fact {
-  font-family: 'Share Tech Mono';
-  font-size: 13px;
-  color: rgba(255,255,255,.68);
-  line-height: 1.5;
-  padding-left: 16px;
-  max-width: 50%;
+  font-size: 18px;
+  color: rgba(255,255,255,.7);
+  letter-spacing: 2px;
+  max-width: 800px;
+  line-height: 1.6;
 }
 
-/* ── SCORECARD KOKO ── */
-.scorecard {
-  background: var(--card-bg);
-  border: 2px solid var(--ye);
-  border-radius: 4px;
-  padding: 28px 32px;
-  box-shadow: 0 0 22px rgba(255,210,63,.18);
-  margin-top: 10px;
-}
-.scorecard h3 {
-  font-family: 'Press Start 2P';
-  font-size: 12px;
-  color: var(--ye);
-  letter-spacing: 2px;
-  margin-bottom: 18px;
-}
-.score-grid {
+/* ── SLIDE JUEGO (cartucho grande + info) ── */
+.slide-game {
   display: grid;
-  grid-template-columns: 1fr 110px 110px 80px;
-  gap: 0;
-  font-family: 'Share Tech Mono';
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  height: 100%;
+  padding: 20px 56px 24px;
+  gap: 14px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.score-grid .hdr-row {
+.game-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.game-pos {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+.game-pos.cy { color: var(--cy); text-shadow: 0 0 20px rgba(0,229,255,.55); }
+.game-pos.mg { color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.6); }
+.game-pos .hash {
+  font-size: 28px;
+  color: rgba(255,255,255,.35);
+  text-shadow: none;
+  margin-right: 4px;
+}
+.game-block-label {
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  letter-spacing: 3px;
+  padding: 6px 12px;
+  border: 1px solid;
+}
+.game-block-label.cy { color: var(--cy); border-color: var(--cy); }
+.game-block-label.mg { color: var(--mg); border-color: var(--mg); }
+
+/* CARTUCHO */
+.cart-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
+}
+.cart {
+  position: relative;
+  height: 100%;
+  max-height: 360px;
+  aspect-ratio: 5/4;
+  background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%);
+  border-radius: 12px 12px 6px 6px;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.04),
+    0 18px 50px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+.cart::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 78%;
+  height: 14%;
+  background: linear-gradient(180deg, #2a2a2f 0%, #1a1a1f 100%);
+  border-radius: 0 0 6px 6px;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.6);
+  z-index: 3;
+}
+.cart-img-wrap {
+  position: absolute;
+  inset: 14% 10% 10%;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--label-1, #2D1B69);
+  box-shadow:
+    inset 0 0 0 3px rgba(255,255,255,.07),
+    inset 0 0 0 6px rgba(0,0,0,.25),
+    0 4px 14px rgba(0,0,0,.4);
+}
+.cart-img-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  background: var(--label-1, #2D1B69);
+}
+.cart-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: linear-gradient(135deg, var(--label-1, #2D1B69) 0%, var(--label-2, #4a2a99) 100%);
+  text-align: center;
+}
+.cart-fallback::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 22%;
+  background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 100%);
+  pointer-events: none;
+}
+.cart-fallback .title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: clamp(16px, 2vw, 24px);
+  line-height: 1.05;
+  color: #fff;
+  letter-spacing: .5px;
+  text-shadow: 0 2px 4px rgba(0,0,0,.5);
+  z-index: 2;
+}
+.cart-fallback .sub {
   font-family: 'Press Start 2P';
   font-size: 8px;
-  color: var(--cy);
   letter-spacing: 2px;
-  padding: 8px 12px;
-  border-bottom: 2px solid var(--cy);
+  color: rgba(255,255,255,.7);
+  margin-top: 8px;
+  z-index: 2;
 }
-.score-grid .row {
-  display: contents;
+.cart-n64 {
+  position: absolute;
+  bottom: 6px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Press Start 2P';
+  font-size: 7px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,.22);
+  z-index: 4;
 }
-.score-grid .row > div {
-  padding: 12px 12px;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-  font-size: 15px;
+
+/* Variantes de etiqueta por juego (color por marca/franquicia) */
+.lb-zelda    { --label-1:#1a4a1a; --label-2:#2f7a2f; }
+.lb-mario    { --label-1:#a01818; --label-2:#d62828; }
+.lb-rare     { --label-1:#7a3a1a; --label-2:#b85820; }
+.lb-bond     { --label-1:#0d0d0d; --label-2:#2a2a2a; }
+.lb-kart     { --label-1:#c25c00; --label-2:#ff8a1f; }
+.lb-smash    { --label-1:#2a2a2a; --label-2:#5a5a5a; }
+.lb-perfect  { --label-1:#1a3a6b; --label-2:#2f5a9b; }
+.lb-paper    { --label-1:#c2872f; --label-2:#e8b04a; }
+.lb-fox      { --label-1:#1a2a4a; --label-2:#3a5fa0; }
+.lb-clay     { --label-1:#8b1c8b; --label-2:#c44ec4; }
+.lb-stunt    { --label-1:#3a3a3a; --label-2:#6a6a6a; }
+.lb-bowl     { --label-1:#2a4a2a; --label-2:#4a7a4a; }
+.lb-f1       { --label-1:#c20000; --label-2:#ff2a2a; }
+.lb-worms    { --label-1:#8a5a1a; --label-2:#c28030; }
+.lb-bomb     { --label-1:#3a1a6b; --label-2:#5a2a9b; }
+.lb-trans    { --label-1:#1a4a8a; --label-2:#2f7acd; }
+.lb-rat      { --label-1:#4a2a1a; --label-2:#7a4a2a; }
+.lb-iss      { --label-1:#1a6b3a; --label-2:#2f9b5a; }
+.lb-conker   { --label-1:#5a3a1a; --label-2:#8a5a2a; }
+
+/* INFO BLOCK */
+.game-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
 }
-.score-grid .game-cell {
-  font-family: 'Orbitron';
-  font-weight: 700;
-  color: #fff;
+.game-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
 }
-.score-grid .game-cell .meta {
-  font-family: 'Share Tech Mono';
-  font-weight: 400;
-  font-size: 11px;
-  color: rgba(255,255,255,.4);
-  margin-top: 2px;
-}
-.score-grid .cib { color: var(--mg); font-weight: 700; }
-.score-grid .world { color: var(--cy); }
-.score-grid .pts-box {
+.game-title {
   font-family: 'Orbitron';
   font-weight: 900;
-  font-size: 22px;
-  color: var(--ye);
-  text-align: center;
-  border-left: 1px dashed rgba(255,210,63,.3);
+  font-size: 28px;
+  color: #fff;
+  letter-spacing: .5px;
+  line-height: 1.1;
 }
-.score-total {
-  margin-top: 22px;
-  padding: 16px 20px;
-  background: rgba(255,210,63,.08);
-  border-left: 4px solid var(--ye);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.price-tag {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 44px;
+  color: var(--mg);
+  text-shadow: 0 0 22px rgba(255,46,136,.55);
+  letter-spacing: 1px;
+  line-height: 1;
+  padding: 4px 16px;
+  border: 2px solid var(--mg);
+  border-radius: 4px;
+  background: rgba(255,46,136,.06);
 }
-.score-total .lbl {
-  font-family: 'Press Start 2P';
-  font-size: 10px;
-  color: var(--ye);
+.price-tag .usd-lbl {
+  font-size: 14px;
+  color: rgba(255,46,136,.6);
+  letter-spacing: 3px;
+  text-shadow: none;
+  font-weight: 700;
+}
+.game-meta {
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
   letter-spacing: 2px;
 }
-.score-total .val {
+.game-why {
+  max-width: 920px;
+  padding: 14px 22px;
+  background: rgba(255,255,255,.04);
+  border-left: 4px solid var(--ye);
+  font-family: 'Share Tech Mono';
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255,255,255,.86);
+  text-align: left;
+}
+.game-why .lbl {
+  display: block;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+/* ── NFR / FINAL SLIDES ── */
+.slide h1 {
+  font-family: 'Press Start 2P';
+  font-size: 13px;
+  color: var(--ye);
+  letter-spacing: 4px;
+  margin-bottom: 6px;
+  border-left: 4px solid var(--ye);
+  padding-left: 16px;
+}
+.slide h2 {
   font-family: 'Orbitron';
   font-weight: 900;
   font-size: 38px;
-  color: var(--ye);
-  text-shadow: 0 0 14px rgba(255,210,63,.5);
+  color: #fff;
+  letter-spacing: 1px;
+  margin: 8px 0 24px 20px;
+  line-height: 1.05;
 }
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
 
-/* ── NFR CALLOUT ── */
 .nfr-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -382,7 +460,7 @@ header {
   background: rgba(255,46,136,.05);
   border: 1px solid var(--mg);
   border-radius: 4px;
-  padding: 20px 22px;
+  padding: 20px 24px;
 }
 .nfr-card .top {
   display: flex;
@@ -393,24 +471,83 @@ header {
 .nfr-card .nfr-name {
   font-family: 'Orbitron';
   font-weight: 700;
-  font-size: 17px;
+  font-size: 18px;
   color: #fff;
 }
 .nfr-card .nfr-price {
   font-family: 'Orbitron';
   font-weight: 900;
-  font-size: 28px;
+  font-size: 30px;
   color: var(--mg);
   text-shadow: 0 0 12px rgba(255,46,136,.5);
 }
 .nfr-card .nfr-why {
   font-family: 'Share Tech Mono';
-  font-size: 13px;
+  font-size: 14px;
   color: rgba(255,255,255,.72);
   line-height: 1.55;
 }
 
-/* ── CIERRE MUSICAL ── */
+.cam-quote {
+  background: rgba(255,210,63,.07);
+  border-left: 4px solid var(--ye);
+  padding: 22px 26px;
+  margin-top: 22px;
+  font-family: 'Share Tech Mono';
+  font-size: 17px;
+  font-style: italic;
+  color: rgba(255,255,255,.88);
+  line-height: 1.65;
+}
+.cam-quote .lbl {
+  display: block;
+  font-style: normal;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.value-grid {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+.value-card {
+  flex: 1;
+  background: var(--card-bg);
+  border: 2px solid;
+  border-radius: 4px;
+  padding: 32px 28px;
+  text-align: center;
+}
+.value-card.mg { border-color: var(--mg); box-shadow: 0 0 22px rgba(255,46,136,.18); }
+.value-card.ye { border-color: var(--ye); box-shadow: 0 0 22px rgba(255,210,63,.18); }
+.value-card h3 {
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.value-card.mg h3 { color: var(--mg); }
+.value-card.ye h3 { color: var(--ye); }
+.value-card .big {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 60px;
+  letter-spacing: 2px;
+  display: block;
+  margin: 14px 0 12px;
+}
+.value-card.mg .big { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.4); }
+.value-card.ye .big { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.4); }
+.value-card p {
+  font-family: 'Share Tech Mono';
+  font-size: 14px;
+  color: rgba(255,255,255,.7);
+}
+
 .cierre-main {
   background: linear-gradient(135deg, rgba(255,46,136,.08), rgba(0,229,255,.05));
   border: 2px solid var(--mg);
@@ -441,7 +578,6 @@ header {
   color: rgba(255,255,255,.85);
   line-height: 1.6;
 }
-
 .cierre-planb {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -468,27 +604,24 @@ header {
   color: #fff;
 }
 
-/* ── FRASES PARA CÁMARA ── */
-.cam-quote {
-  background: rgba(255,210,63,.07);
-  border-left: 4px solid var(--ye);
-  padding: 22px 26px;
-  margin-top: 22px;
-  font-family: 'Share Tech Mono';
-  font-size: 17px;
-  font-style: italic;
-  color: rgba(255,255,255,.88);
-  line-height: 1.65;
+ul.checklist {
+  list-style: none;
+  margin-top: 10px;
 }
-.cam-quote .lbl {
-  display: block;
-  font-style: normal;
-  font-family: 'Press Start 2P';
-  font-size: 8px;
-  color: var(--ye);
-  letter-spacing: 2px;
+ul.checklist li {
+  padding: 14px 20px;
+  border-left: 4px solid;
   margin-bottom: 10px;
+  font-family: 'Share Tech Mono';
+  font-size: 16px;
+  line-height: 1.5;
 }
+ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
+ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
+ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
+ul.checklist li strong.ye { color: var(--ye); }
+ul.checklist li strong.cy { color: var(--cy); }
+ul.checklist li strong.mg { color: var(--mg); }
 
 /* ── NAV FOOTER ── */
 nav.footer {
@@ -517,24 +650,35 @@ nav.footer {
 }
 .nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
 .nav-btn:disabled { opacity: .25; cursor: not-allowed; }
-.nav-dots {
+
+.nav-center {
   display: flex;
-  gap: 9px;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  margin: 0 24px;
 }
-.nav-dots .d {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.18);
-  border: 1px solid rgba(255,255,255,.3);
-  cursor: pointer;
-  transition: all .15s;
+.nav-counter {
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  color: var(--mg);
+  letter-spacing: 3px;
 }
-.nav-dots .d.active {
-  background: var(--mg);
-  border-color: var(--mg);
-  box-shadow: 0 0 10px rgba(255,46,136,.65);
-  transform: scale(1.2);
+.nav-progress {
+  width: 100%;
+  max-width: 480px;
+  height: 4px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.nav-progress .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--mg), var(--cy));
+  width: 0;
+  transition: width .25s;
+  box-shadow: 0 0 8px rgba(255,46,136,.5);
 }
 .nav-hint {
   font-family: 'Share Tech Mono';
@@ -570,92 +714,697 @@ nav.footer {
 
 <div class="deck" id="deck">
 
-  <!-- SLIDE 1 — PORTADA -->
-  <section class="slide active" data-title="Portada">
-    <span class="slide-num">01 / 09</span>
+  <!-- 01 PORTADA -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
     <div class="portada">
       <div class="ep-tag">GENERACIÓN 5 · NINTENDO 64</div>
-      <div class="ep-title">EL TOP DEL MUNDO <span class="vs">VS.</span> EL TOP DE KOKO</div>
-      <div class="ep-sub">RANKING + PRECIOS + BATERÍA</div>
-      <div class="ep-meta">
-        <div>DURACIÓN <span>18-22 MIN</span></div>
-        <div>FORMATO <span>GAME SHOW</span></div>
-        <div>CIERRE <span>DRUM COVER</span></div>
+      <div class="ep-title">TOP MUNDIAL <span class="vs">VS.</span> RETROTARROS</div>
+      <div class="ep-sub">EL DUELO POR LA GENERACIÓN 5</div>
+    </div>
+  </section>
+
+  <!-- 02 SEPARADOR TOP MUNDIAL -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="divider">
+      <div class="pre cy">BLOQUE 3 · CONSENSO CRÍTICO 2026</div>
+      <div class="title cy">TOP 10 MUNDIAL</div>
+      <div class="sub">Cruce de Nintendo Life, GamesRadar, Dexerto, The Phrasemaker y Cousin Gaming. Los primeros cuatro son consenso absoluto.</div>
+    </div>
+  </section>
+
+  <!-- ═══════ TOP 10 MUNDIAL ═══════ -->
+
+  <!-- 03 #10 STAR FOX -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>10</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-fox">
+            <img src="img/n64-ranking/starfox.jpg" alt="Star Fox 64" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Star Fox 64</div>
+              <div class="sub">DO A BARREL ROLL · 1997</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Star Fox 64</div>
+        <div class="game-meta">1997 · NINTENDO EAD · KOJI KONDO + YOKOTA</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Voice acting de meme eterno ("Do a barrel roll"). Soundtrack de Kondo + Yokota. Primer juego con Rumble Pak — Nintendo lo incluyó GRATIS con el juego porque quería que existiera vibración en su consola y necesitaba que la gente lo tuviera. Star Fox 64 fue el caballo de Troya del rumble en consola.
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SLIDE 2 — MECÁNICA -->
-  <section class="slide" data-title="Mecánica del juego">
-    <span class="slide-num">02 / 09</span>
-    <h1>BLOQUE 2 · SETUP</h1>
-    <h2>La mecánica del game show</h2>
-    <div class="mech-grid">
-      <div class="mech-card mg">
-        <h3>LO QUE TRAE LUIS</h3>
-        <p>Dos sobres sellados con cinta visible — el ranking mundial (consenso 2026) y el ranking de precios (PriceCharting CIB USD).</p>
+  <!-- 04 #9 PERFECT DARK -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>9</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
       </div>
-      <div class="mech-card cy">
-        <h3>LO QUE TRAE KOKO</h3>
-        <p>Sus 10 mejores N64 físicos, dados vuelta sobre la mesa, ordenados del 10 al 1. Va a la ciega — no sabe los rankings.</p>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-perfect">
+            <img src="img/n64-ranking/perfectdark.jpg" alt="Perfect Dark" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Perfect Dark</div>
+              <div class="sub">RARE · 2000</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
       </div>
-      <div class="mech-card ye" style="grid-column: 1 / -1;">
-        <h3>SISTEMA DE PUNTOS</h3>
-        <ul class="mech-list">
-          <li><span>Posición exacta en el top mundial</span><span class="pts">3 PTS</span></li>
-          <li><span>Está en el top 10 mundial pero en otra posición</span><span class="pts">2 PTS</span></li>
-          <li><span>Está en el top 25 mundial pero no en el top 10</span><span class="pts">1 PT</span></li>
-          <li><span>No aparece en ningún ranking</span><span class="pts">0 PTS</span></li>
-        </ul>
+      <div class="game-info">
+        <div class="game-title">Perfect Dark</div>
+        <div class="game-meta">2000 · RARE · GRAEME NORGATE / DAVID CLYNICK</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          El N64 técnicamente exprimido al límite. Sucesor espiritual de GoldenEye con bots — años antes que Halo. El cartucho del N64 no tenía espacio para voz en alta calidad: la solución de Rare fue Expansion Pak obligatorio. Si no lo tenías, no podías ni completar el primer nivel. Primer juego en obligar upgrade de hardware.
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SLIDE 3 — TOP MUNDIAL -->
-  <section class="slide" data-title="Top 10 mundial">
-    <span class="slide-num">03 / 09</span>
-    <h1 style="color: var(--cy); border-color: var(--cy);">BLOQUE 3 · RANKING MUNDIAL</h1>
-    <h2 class="cy">Top 10 consenso crítico 2026</h2>
-    <table class="rank-table cy">
-      <tr><td class="pos">1</td><td><div class="game">Zelda: Ocarina of Time</div><div class="year">1998</div></td><td class="fact">#1 en TODOS los rankings consultados. Koji Kondo (briefing OK).</td></tr>
-      <tr><td class="pos">2</td><td><div class="game">Super Mario 64</div><div class="year">1996</div></td><td class="fact">Launch title. Enseñó al mundo cómo se hace un plataformero 3D.</td></tr>
-      <tr><td class="pos">3</td><td><div class="game">Banjo-Kazooie</div><div class="year">1998</div></td><td class="fact">Rare en su punto más alto. Grant Kirkhope (briefing OK).</td></tr>
-      <tr><td class="pos">4</td><td><div class="game">GoldenEye 007</div><div class="year">1997</div></td><td class="fact">Inventó el FPS de consola y el multiplayer split-screen moderno.</td></tr>
-      <tr><td class="pos">5</td><td><div class="game">Mario Kart 64</div><div class="year">1996</div></td><td class="fact">El que instaló el caparazón azul. Battle Mode arruinó amistades.</td></tr>
-      <tr><td class="pos">6</td><td><div class="game">Super Smash Bros.</div><div class="year">1999</div></td><td class="fact">Empezó como side project de Iwata y Sakurai sin permiso de Nintendo.</td></tr>
-      <tr><td class="pos">7</td><td><div class="game">Majora's Mask</div><div class="year">2000</div></td><td class="fact">Desarrollado en un año por un equipo chico. El Zelda más raro y profundo.</td></tr>
-      <tr><td class="pos">8</td><td><div class="game">Paper Mario</div><div class="year">2000</div></td><td class="fact">Last hurrah del N64. RPG accesible, humor inteligente.</td></tr>
-      <tr><td class="pos">9</td><td><div class="game">Perfect Dark</div><div class="year">2000</div></td><td class="fact">N64 exprimido al límite. Sucesor de GoldenEye con bots — años antes que Halo.</td></tr>
-      <tr><td class="pos">10</td><td><div class="game">Star Fox 64</div><div class="year">1997</div></td><td class="fact">"Do a barrel roll". Kondo + Yokota. Primer juego con Rumble Pak.</td></tr>
-    </table>
+  <!-- 05 #8 PAPER MARIO -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>8</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-paper">
+            <img src="img/n64-ranking/papermario.jpg" alt="Paper Mario" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Paper Mario</div>
+              <div class="sub">INTELLIGENT SYSTEMS · 2000</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Paper Mario</div>
+        <div class="game-meta">2000 · INTELLIGENT SYSTEMS · YUKA TSUJIYOKO</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Last hurrah del N64. Iba a ser Super Mario RPG 2, secuela del juego de SNES hecho con Square. Cuando Square se fue con Sony, Nintendo cambió el estilo a papel para diferenciarlo. La estética nació de un problema legal, no creativo. Marca el final dorado de la consola.
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- SLIDE 4 — TOP PRECIOS -->
-  <section class="slide" data-title="Top 10 precios">
-    <span class="slide-num">04 / 09</span>
-    <h1>BLOQUE 4 · RANKING DE PRECIOS</h1>
-    <h2 class="mg">Top 10 CIB USD · coleccionismo 2026</h2>
-    <table class="rank-table">
-      <tr><td class="pos">1</td><td><div class="game">ClayFighter 63⅓: Sculptor's Cut</div></td><td class="price">$4,800</td><td class="fact">Solo en alquiler en Blockbuster. El más raro del N64 retail.</td></tr>
-      <tr><td class="pos">2</td><td><div class="game">Stunt Racer 64</div></td><td class="price">$2,300</td><td class="fact">Otro exclusivo Blockbuster. Cuando cerraron, se perdieron casi todas.</td></tr>
-      <tr><td class="pos">3</td><td><div class="game">Super Bowling</div></td><td class="price">$1,836</td><td class="fact">Tirada microscópica de THQ. Marzo 1999, sin marketing.</td></tr>
-      <tr><td class="pos">4</td><td><div class="game">F1 Racing Championship</div></td><td class="price">$1,706</td><td class="fact">NTSC USA cancelado a último minuto. La versión NTSC llegó SOLO a Brasil.</td></tr>
-      <tr><td class="pos">5</td><td><div class="game">Worms Armageddon</div></td><td class="price">$1,017</td><td class="fact">La PAL vale $50. La NTSC es la cara. Diferencia regional brutal.</td></tr>
-      <tr><td class="pos">6</td><td><div class="game">Bomberman 64: Second Attack</div></td><td class="price">$845</td><td class="fact">Pasó de $488 a $990 en enero-febrero 2022. Las cajas son lo escaso.</td></tr>
-      <tr><td class="pos">7</td><td><div class="game">Transformers: Beast Wars Transmetals</div></td><td class="price">$693</td><td class="fact">Juego de pelea sin reputación basado en serie animada. Tirada baja.</td></tr>
-      <tr><td class="pos">8</td><td><div class="game">Rat Attack!</div></td><td class="price">$685</td><td class="fact">Puzzle de Mindscape (2000). Vendió mal, rareza por accidente.</td></tr>
-      <tr><td class="pos">9</td><td><div class="game">International Superstar Soccer 2000</div></td><td class="price">$650</td><td class="fact">Tirada baja, nunca pegó frente a FIFA. La inglesa NTSC es la que vale.</td></tr>
-      <tr><td class="pos">10</td><td><div class="game">Conker's Bad Fur Day</div></td><td class="price">$338</td><td class="fact">El único de la lista que es realmente JUGADO hoy. Rating M en consola de niños.</td></tr>
-    </table>
+  <!-- 06 #7 MAJORA -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>7</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-zelda">
+            <img src="img/n64-ranking/majora.jpg" alt="Majora's Mask" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Zelda</div>
+              <div class="sub">Majora's Mask</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">The Legend of Zelda: Majora's Mask</div>
+        <div class="game-meta">2000 · NINTENDO EAD · KOJI KONDO</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Desarrollado en UN AÑO por un equipo más chico que Ocarina. Lo lograron reusando motor y la mayoría de los assets. El sistema de los tres días fue en parte por restricciones de tiempo de desarrollo, no como decisión artística — pero terminó siendo lo que define al juego. El Zelda más raro y más profundo.
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- SLIDE 5 — NFR KICKER -->
-  <section class="slide" data-title="NFR Kicker">
-    <span class="slide-num">05 / 09</span>
+  <!-- 07 #6 SMASH -->
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>6</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-smash">
+            <img src="img/n64-ranking/smash.jpg" alt="Super Smash Bros." onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Super Smash Bros.</div>
+              <div class="sub">HAL LABORATORY · 1999</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Super Smash Bros.</div>
+        <div class="game-meta">1999 · HAL LABORATORY · HIROKAZU ANDO</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Empezó como side project de Iwata y Sakurai sin permiso de Nintendo. Iwata era programador, Sakurai diseñador. Lo terminaron a escondidas y lo presentaron como fait accompli. Nintendo dijo que sí porque ya estaba hecho. Hoy es la franquicia.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 #5 MARIO KART 64 -->
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>5</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-kart">
+            <img src="img/n64-ranking/mariokart64.jpg" alt="Mario Kart 64" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Mario Kart 64</div>
+              <div class="sub">CAPARAZÓN AZUL · 1996</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Mario Kart 64</div>
+        <div class="game-meta">1996 · NINTENDO EAD · KENTA NAGATA</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          El que instaló el caparazón azul. Battle Mode arruinó amistades en todos los continentes. El Spiny Shell se diseñó específicamente para que los jugadores nuevos pudieran ganarles a los expertos — fue una decisión política, no técnica. Hoy es el meme más odiado de la saga.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 #4 GOLDENEYE -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>4</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-bond">
+            <img src="img/n64-ranking/goldeneye.jpg" alt="GoldenEye 007" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">GoldenEye 007</div>
+              <div class="sub">RARE · 1997</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">GoldenEye 007</div>
+        <div class="game-meta">1997 · RARE · GRAEME NORGATE</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Inventó el FPS de consola y el multiplayer split-screen moderno. El equipo de Rare nunca había hecho un FPS y el director Martin Hollis tenía 30 años con cero experiencia en shooters. Era literalmente un experimento. Vendió 8 millones de copias y reescribió cómo se hacen los FPS de consola.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 #3 BANJO -->
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>3</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-rare">
+            <img src="img/n64-ranking/banjo.png" alt="Banjo-Kazooie" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Banjo-Kazooie</div>
+              <div class="sub">RARE · 1998</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Banjo-Kazooie</div>
+        <div class="game-meta">1998 · RARE · GRANT KIRKHOPE</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Rare en su punto más alto. El collectathon perfecto. Grant Kirkhope inventó un sistema dinámico de instrumentación: cada zona musical cambiaba según el contexto (bajo el agua, en cueva, en altura) para resolver limitaciones de memoria del cartucho. Eso no se había hecho antes en consola.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 #2 MARIO 64 -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>2</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-mario">
+            <img src="img/n64-ranking/mario64.png" alt="Super Mario 64" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Super Mario 64</div>
+              <div class="sub">LAUNCH TITLE · 1996</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">Super Mario 64</div>
+        <div class="game-meta">1996 · NINTENDO EAD · KOJI KONDO</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          Launch title del N64. Le enseñó al mundo cómo se hace un plataformero 3D. Originalmente iba a ser on rails — Miyamoto cambió toda la dirección a mitad del desarrollo cuando descubrió que el analógico permitía control libre. Eso atrasó el juego un año pero definió cómo se haría TODO juego 3D después.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 #1 OCARINA -->
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos cy"><span class="hash">#</span>1</div>
+        <div class="game-block-label cy">TOP MUNDIAL</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-zelda">
+            <img src="img/n64-ranking/ocarina.jpg" alt="Ocarina of Time" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">The Legend of Zelda</div>
+              <div class="sub">Ocarina of Time</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title">The Legend of Zelda: Ocarina of Time</div>
+        <div class="game-meta">1998 · NINTENDO EAD · KOJI KONDO</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ESTÁ EN ESTE PUESTO</span>
+          #1 en TODOS los rankings consultados. Definió el aventura 3D moderno con el target lock-on de Z-targeting que después usaron todos. Koji Kondo compuso el Hyrule Field Theme con música dinámica que cambiaba según la dirección — sistema que después tomaron GTA y Red Dead Redemption.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 SEPARADOR TOP PRECIOS -->
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <div class="divider">
+      <div class="pre mg">BLOQUE 4 · COLECCIONISMO 2026</div>
+      <div class="title mg">TOP 10 PRECIOS</div>
+      <div class="sub">Solo cartuchos retail, NTSC USA, valor CIB. Fuente: PriceCharting + GameRant. CASI NINGUNO aparece en el top mundial — el mercado paga la rareza, no la calidad.</div>
+    </div>
+  </section>
+
+  <!-- ═══════ TOP 10 PRECIOS ═══════ -->
+
+  <!-- 14 #10 CONKER -->
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos mg"><span class="hash">#</span>10</div>
+        <div class="game-block-label mg">TOP PRECIOS</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-conker">
+            <img src="img/n64-ranking/conker.jpg" alt="Conker's Bad Fur Day" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Conker's</div>
+              <div class="sub">Bad Fur Day</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title-row">
+          <div class="game-title">Conker's Bad Fur Day</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$338</div>
+        </div>
+        <div class="game-meta">CIB NTSC USA · RARE · 2001</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ES TAN CARO</span>
+          El más caro de los "populares". Rating Mature en consola de niños, salió cuando ya miraban GameCube. El único de la lista que es realmente JUGADO hoy. Tiraje bajo, prensa lo destrozó, hoy es coleccionable de culto.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 #9 ISS -->
+  <section class="slide">
+    <span class="slide-num">15</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos mg"><span class="hash">#</span>9</div>
+        <div class="game-block-label mg">TOP PRECIOS</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-iss">
+            <img src="img/n64-ranking/iss2000.png" alt="International Superstar Soccer 2000" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">ISS 2000</div>
+              <div class="sub">International Superstar Soccer</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title-row">
+          <div class="game-title">International Superstar Soccer 2000</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$650</div>
+        </div>
+        <div class="game-meta">CIB NTSC USA · KONAMI · 2000</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ES TAN CARO</span>
+          Tirada baja, nunca pegó frente a FIFA en el mercado USA. La versión inglesa NTSC es la que vale — la europea es accesible. Otro caso de diferencia regional donde el mismo juego cuesta diez veces más según el código de región del cartucho.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 #8 RAT ATTACK -->
+  <section class="slide">
+    <span class="slide-num">16</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos mg"><span class="hash">#</span>8</div>
+        <div class="game-block-label mg">TOP PRECIOS</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-rat">
+            <img src="img/n64-ranking/ratattack.jpg" alt="Rat Attack!" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Rat Attack!</div>
+              <div class="sub">MINDSCAPE · 2000</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title-row">
+          <div class="game-title">Rat Attack!</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$685</div>
+        </div>
+        <div class="game-meta">CIB NTSC USA · MINDSCAPE · 2000</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ES TAN CARO</span>
+          Puzzle de Mindscape lanzado en 2000. Vendió mal, distribución mínima, hoy rareza por accidente. Es el ejemplo perfecto del coleccionable involuntario: nadie pensó que esto valdría algo, simplemente quedaron pocas copias.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17 #7 TRANSFORMERS -->
+  <section class="slide">
+    <span class="slide-num">17</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos mg"><span class="hash">#</span>7</div>
+        <div class="game-block-label mg">TOP PRECIOS</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-trans">
+            <img src="img/n64-ranking/transformers.jpg" alt="Transformers Beast Wars Transmetals" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Transformers</div>
+              <div class="sub">Beast Wars Transmetals</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title-row">
+          <div class="game-title">Transformers: Beast Wars Transmetals</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$693</div>
+        </div>
+        <div class="game-meta">CIB NTSC USA · BAM! ENTERTAINMENT · 2000</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ES TAN CARO</span>
+          Juego de pelea sin reputación basado en serie animada. Tirada baja en su momento. La demanda explotó en los últimos años por nostalgia de la serie y por gente que la redescubrió por streaming. Caso de revival cultural pagando el precio del cartucho.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 18 #6 BOMBERMAN -->
+  <section class="slide">
+    <span class="slide-num">18</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos mg"><span class="hash">#</span>6</div>
+        <div class="game-block-label mg">TOP PRECIOS</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-bomb">
+            <img src="img/n64-ranking/bomberman.jpg" alt="Bomberman 64 Second Attack" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Bomberman 64</div>
+              <div class="sub">The Second Attack</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title-row">
+          <div class="game-title">Bomberman 64: The Second Attack</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$845</div>
+        </div>
+        <div class="game-meta">CIB NTSC USA · HUDSON SOFT · 2000</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ES TAN CARO</span>
+          Salió a fines del ciclo del N64 cuando ya nadie miraba la consola. El CIB pasó de US$488 a US$990 entre enero y febrero de 2022 — una de las subidas más rápidas que se hayan registrado. Las cajas son lo escaso, no el cartucho.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 19 #5 WORMS -->
+  <section class="slide">
+    <span class="slide-num">19</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos mg"><span class="hash">#</span>5</div>
+        <div class="game-block-label mg">TOP PRECIOS</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-worms">
+            <img src="img/n64-ranking/worms.jpg" alt="Worms Armageddon" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Worms</div>
+              <div class="sub">Armageddon</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title-row">
+          <div class="game-title">Worms Armageddon</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$1,017</div>
+        </div>
+        <div class="game-meta">CIB NTSC USA · TEAM17 · 2000</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ES TAN CARO</span>
+          Versión PAL es barata (US$50 CIB). La NTSC USA es la cara: distribución limitada, ventas bajas, demanda alta. Diferencia regional brutal — mismo juego, diez veces el precio según de qué lado del Atlántico vino el cartucho.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 20 #4 F1 RACING -->
+  <section class="slide">
+    <span class="slide-num">20</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos mg"><span class="hash">#</span>4</div>
+        <div class="game-block-label mg">TOP PRECIOS</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-f1">
+            <img src="img/n64-ranking/f1racing.png" alt="F1 Racing Championship" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">F1 Racing</div>
+              <div class="sub">Championship</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title-row">
+          <div class="game-title">F1 Racing Championship</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$1,706</div>
+        </div>
+        <div class="game-meta">CIB NTSC · UBI SOFT · 2000</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ES TAN CARO</span>
+          Nunca salió oficialmente en USA — cancelado a último minuto. La versión NTSC llegó SOLO a Brasil. Los pocos cartuchos NTSC en circulación vienen de allá. Latam tiene rol histórico acá: somos parte del origen de un coleccionable mundial.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 #3 SUPER BOWLING -->
+  <section class="slide">
+    <span class="slide-num">21</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos mg"><span class="hash">#</span>3</div>
+        <div class="game-block-label mg">TOP PRECIOS</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-bowl">
+            <img src="img/n64-ranking/superbowling.jpg" alt="Super Bowling" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Super Bowling</div>
+              <div class="sub">THQ · 1999</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title-row">
+          <div class="game-title">Super Bowling</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$1,836</div>
+        </div>
+        <div class="game-meta">CIB NTSC USA · THQ · 1999</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ES TAN CARO</span>
+          Tirada microscópica de THQ. Lanzado en marzo de 1999 sin marketing. Packaging genérico, ventas pésimas, hoy rareza pura. Es el caso clásico de juego olvidado que el mercado redescubre 20 años después y se vuelve coleccionable por accidente.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 22 #2 STUNT RACER -->
+  <section class="slide">
+    <span class="slide-num">22</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos mg"><span class="hash">#</span>2</div>
+        <div class="game-block-label mg">TOP PRECIOS</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-stunt">
+            <img src="img/n64-ranking/stuntracer.jpg" alt="Stunt Racer 64" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">Stunt Racer 64</div>
+              <div class="sub">BOSS GAME STUDIOS · 2000</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title-row">
+          <div class="game-title">Stunt Racer 64</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$2,300</div>
+        </div>
+        <div class="game-meta">CIB NTSC USA · BLOCKBUSTER EXCLUSIVE</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ES TAN CARO</span>
+          Otro exclusivo de Blockbuster. Llegó tarde en la vida del N64. Cuando las tiendas Blockbuster cerraron, se perdieron casi todas las copias en circulación. La rareza es real porque las cajas se botaron con las tiendas.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 23 #1 CLAYFIGHTER -->
+  <section class="slide">
+    <span class="slide-num">23</span>
+    <div class="slide-game">
+      <div class="game-head">
+        <div class="game-pos mg"><span class="hash">#</span>1</div>
+        <div class="game-block-label mg">TOP PRECIOS</div>
+      </div>
+      <div class="cart-wrap">
+        <div class="cart">
+          <div class="cart-img-wrap lb-clay">
+            <img src="img/n64-ranking/clayfighter.jpg" alt="ClayFighter Sculptor's Cut" onerror="this.style.display='none'">
+            <div class="cart-fallback">
+              <div class="title">ClayFighter</div>
+              <div class="sub">63⅓ Sculptor's Cut</div>
+            </div>
+          </div>
+          <div class="cart-n64">NINTENDO 64</div>
+        </div>
+      </div>
+      <div class="game-info">
+        <div class="game-title-row">
+          <div class="game-title">ClayFighter 63⅓: Sculptor's Cut</div>
+          <div class="price-tag"><span class="usd-lbl">USD</span>$4,800</div>
+        </div>
+        <div class="game-meta">CIB NTSC USA · BLOCKBUSTER EXCLUSIVE</div>
+        <div class="game-why">
+          <span class="lbl">POR QUÉ ES TAN CARO</span>
+          Solo distribuido en alquiler en Blockbuster. Versión expandida con 4 personajes nuevos. Considerado el juego retail más raro del N64. Una subasta sealed cerró en US$9,199 — la versión retail más cara jamás vendida del N64.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 24 NFR KICKER -->
+  <section class="slide">
+    <span class="slide-num">24</span>
     <h1>BLOQUE 4 · KICKER</h1>
     <h2 class="mg">Las variantes "Not For Resale"</h2>
     <p style="font-family:'Share Tech Mono'; font-size:15px; color: rgba(255,255,255,.7); line-height:1.6; margin: 0 0 18px 20px;">
-      Cartuchos grises de kioscos de demo. NUNCA estuvieron a la venta. Son el dato bomba del bloque de precios.
+      Cartuchos grises de kioscos de demo. NUNCA estuvieron a la venta. El dato bomba del bloque de precios.
     </p>
     <div class="nfr-grid">
       <div class="nfr-card">
@@ -663,7 +1412,7 @@ nav.footer {
           <div class="nfr-name">ClayFighter Sculptor's Cut sealed</div>
           <div class="nfr-price">$9,199</div>
         </div>
-        <div class="nfr-why">Una subasta cerró en $9,199. La versión retail más cara jamás vendida del N64.</div>
+        <div class="nfr-why">Una subasta cerró en US$9,199. La versión retail más cara jamás vendida del N64.</div>
       </div>
       <div class="nfr-card">
         <div class="top">
@@ -693,121 +1442,41 @@ nav.footer {
     </div>
   </section>
 
-  <!-- SLIDE 6 — SCORECARD KOKO -->
-  <section class="slide" data-title="Scorecard Koko">
-    <span class="slide-num">06 / 09</span>
-    <h1>ANEXO A · LISTA CONFIRMADA</h1>
-    <h2>Los 10 cartuchos de Koko</h2>
-    <div class="scorecard">
-      <h3>SCORECARD EN VIVO</h3>
-      <div class="score-grid">
-        <div class="hdr-row">JUEGO</div>
-        <div class="hdr-row">CIB USD</div>
-        <div class="hdr-row">TOP MUNDIAL</div>
-        <div class="hdr-row">PTS</div>
-
-        <div class="row"><div class="game-cell">Zelda: Ocarina of Time<div class="meta">★ top mundial</div></div><div class="cib">$147</div><div class="world">#1</div><div class="pts-box">__</div></div>
-        <div class="row"><div class="game-cell">Zelda: Majora's Mask<div class="meta">★ top mundial</div></div><div class="cib">$208</div><div class="world">#7</div><div class="pts-box">__</div></div>
-        <div class="row"><div class="game-cell">Killer Instinct Gold<div class="meta">— carta solitaria</div></div><div class="cib">$49</div><div class="world">no aparece</div><div class="pts-box">__</div></div>
-        <div class="row"><div class="game-cell">Conker's Bad Fur Day<div class="meta">○ top 15-20 · #10 caro</div></div><div class="cib">$338</div><div class="world">~#15</div><div class="pts-box">__</div></div>
-        <div class="row"><div class="game-cell">Super Mario 64<div class="meta">★ top mundial</div></div><div class="cib">$142</div><div class="world">#2</div><div class="pts-box">__</div></div>
-        <div class="row"><div class="game-cell">Mario Kart 64<div class="meta">★ top mundial</div></div><div class="cib">$107</div><div class="world">#5</div><div class="pts-box">__</div></div>
-        <div class="row"><div class="game-cell">Diddy Kong Racing<div class="meta">○ top 12-15</div></div><div class="cib">$112</div><div class="world">~#13</div><div class="pts-box">__</div></div>
-        <div class="row"><div class="game-cell">Donkey Kong 64<div class="meta">○ top 15-20</div></div><div class="cib">$120</div><div class="world">~#18</div><div class="pts-box">__</div></div>
-        <div class="row"><div class="game-cell">Super Smash Bros.<div class="meta">★ top mundial</div></div><div class="cib">$160</div><div class="world">#6</div><div class="pts-box">__</div></div>
-        <div class="row"><div class="game-cell">GoldenEye 007<div class="meta">★ top mundial</div></div><div class="cib">$87</div><div class="world">#4</div><div class="pts-box">__</div></div>
-      </div>
-      <div class="score-total">
-        <div class="lbl">TOTAL KOKO · TARGET 17</div>
-        <div class="val">__ / 30</div>
-      </div>
-      <div style="margin-top: 14px; font-family: 'Share Tech Mono'; font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.5;">
-        &lt; 12 pts → "oído chileno" (en buena, irónico) · &gt; 20 pts → "oído de crítico gringo"
-      </div>
-    </div>
-  </section>
-
-  <!-- SLIDE 7 — VALOR COLECCIÓN -->
-  <section class="slide" data-title="Valor de la colección">
-    <span class="slide-num">07 / 09</span>
-    <h1>ANEXO A · DATO DE CIERRE</h1>
-    <h2 class="mg">El valor de los 10 cartuchos en la mesa</h2>
-    <div style="display: flex; gap: 30px; margin-top: 20px;">
-      <div class="mech-card mg" style="flex: 1; text-align: center;">
+  <!-- 25 VALOR COLECCIÓN -->
+  <section class="slide">
+    <span class="slide-num">25</span>
+    <h1>BLOQUE 4 · CIERRE DEL EPISODIO</h1>
+    <h2 class="mg">El valor de los 10 cartuchos de Koko</h2>
+    <div class="value-grid">
+      <div class="value-card mg">
         <h3>CIB TOTAL USD</h3>
         <div class="big">$1,470</div>
         <p>mercado mundial NTSC USA · mayo 2026</p>
       </div>
-      <div class="mech-card ye" style="flex: 1; text-align: center;">
+      <div class="value-card ye">
         <h3>EQUIVALENTE CLP</h3>
         <div class="big">$1.400.000</div>
         <p>Un millón cuatrocientas mil lucas chilenas</p>
       </div>
     </div>
     <div class="cam-quote">
-      <span class="lbl">FRASE ANTES DEL CIERRE MUSICAL</span>
-      "Antes de que Koko se ponga a tocar — sepan que lo que acaban de ver sobre esta mesa, en condición de caja completa, vale UN MILLÓN CUATROCIENTAS MIL LUCAS chilenas en el mercado mundial. Y esto es solo lo que él trajo hoy. Su colección entera vale… vamos a hacer un episodio especial sobre eso."
+      <span class="lbl">FRASE DE CIERRE PARA CÁMARA</span>
+      "Lo que acaban de ver sobre esta mesa, en condición de caja completa, vale UN MILLÓN CUATROCIENTAS MIL LUCAS chilenas en el mercado mundial. Y esto es solo lo que Koko trajo hoy. Su colección entera vale… vamos a hacer un episodio especial sobre eso. Y para la próxima generación, prepárense — porque Koko se va a sentar en la batería para despedir una de estas OSTs."
     </div>
   </section>
 
-  <!-- SLIDE 8 — CIERRE MUSICAL -->
-  <section class="slide" data-title="Cierre musical">
-    <span class="slide-num">08 / 09</span>
-    <h1>BLOQUE 5 · CIERRE MUSICAL</h1>
-    <h2 class="mg">Lo que toca Koko en batería</h2>
-    <div class="cierre-main">
-      <div class="label">RECOMENDACIÓN PRINCIPAL</div>
-      <div class="tema">Killer Instinct Gold — KI Theme / Cinder Theme</div>
-      <div class="desc">
-        Si Koko pone KI Gold en su top 3 (probable: es el único "raro" de su lista), este es el cierre.
-        Robin Beanland + Graeme Norgate hicieron metal/industrial puro — la OST más bateril del N64.
-        Da el ángulo del episodio entero: "el ranking no lo conoce, los coleccionistas no lo cotizan, acá lo despedimos".
-      </div>
-    </div>
-    <div class="cierre-planb">
-      <div class="opt">
-        <div class="if">SI KOKO PONE #1 → OCARINA</div>
-        <div class="tema-b">Gerudo Valley</div>
-      </div>
-      <div class="opt">
-        <div class="if">SI KOKO PONE #1 → MARIO 64</div>
-        <div class="tema-b">Bob-omb Battlefield</div>
-      </div>
-      <div class="opt">
-        <div class="if">SI KOKO PONE #1 → CONKER</div>
-        <div class="tema-b">Sloprano</div>
-      </div>
-      <div class="opt">
-        <div class="if">SI KOKO PONE #1 → GOLDENEYE</div>
-        <div class="tema-b">Pause Music · 30s</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SLIDE 9 — CHECKLIST -->
-  <section class="slide" data-title="Checklist pre-grabación">
-    <span class="slide-num">09 / 09</span>
+  <!-- 26 CHECKLIST -->
+  <section class="slide">
+    <span class="slide-num">26</span>
     <h1>CHECKLIST · PRE-GRABACIÓN</h1>
     <h2 class="cy">Antes de prender cámaras</h2>
-    <ul style="list-style: none; margin-top: 10px;">
-      <li style="padding: 14px 20px; border-left: 4px solid var(--ye); background: rgba(255,210,63,.05); margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;">
-        <strong style="color: var(--ye);">☐ Koko</strong> — preparar tu top 10 personal en privado. NO compartir con Luis hasta cámara.
-      </li>
-      <li style="padding: 14px 20px; border-left: 4px solid var(--ye); background: rgba(255,210,63,.05); margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;">
-        <strong style="color: var(--ye);">☐ Luis</strong> — imprimir los dos rankings, meterlos en sobres físicos sellados con cinta visible.
-      </li>
-      <li style="padding: 14px 20px; border-left: 4px solid var(--cy); background: rgba(0,229,255,.05); margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;">
-        <strong style="color: var(--cy);">☐ Setup</strong> — verificar que los 10 cartuchos encienden en consola. Si alguno falla, gag en cámara: "este vale 200 lucas y no prende, típico po".
-      </li>
-      <li style="padding: 14px 20px; border-left: 4px solid var(--cy); background: rgba(0,229,255,.05); margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;">
-        <strong style="color: var(--cy);">☐ Audio</strong> — lavalier para ambos. Setup batería: OH stereo + kick + snare para el cierre.
-      </li>
-      <li style="padding: 14px 20px; border-left: 4px solid var(--mg); background: rgba(255,46,136,.05); margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;">
-        <strong style="color: var(--mg);">☐ Ritmo</strong> — cronómetro visible para Luis. Bloque 3 a ritmo 1:20 promedio por juego. Si nos colgamos, el video se va a 28 min.
-      </li>
-      <li style="padding: 14px 20px; border-left: 4px solid var(--mg); background: rgba(255,46,136,.05); margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5;">
-        <strong style="color: var(--mg);">☐ Cierre</strong> — NO grabar el drum cover antes del juego en cámara. La elección final depende de lo que Koko ponga #1.
-      </li>
+    <ul class="checklist">
+      <li class="ye"><strong class="ye">☐ Luis</strong> — imprimir o tener visible cada slide del top mundial y top precios. El HTML es la fuente.</li>
+      <li class="ye"><strong class="ye">☐ Koko</strong> — preparar opinión personal sobre cada uno de los 20 juegos. Acuerdos y desacuerdos con la crítica.</li>
+      <li class="cy"><strong class="cy">☐ Setup</strong> — verificar que los 10 cartuchos de Koko encienden en consola. Tener cartuchos físicos a la vista en mesa.</li>
+      <li class="cy"><strong class="cy">☐ Audio</strong> — lavalier para ambos. Episodio conversacional, audio limpio es prioridad uno. Sin sonido ambiente del estudio.</li>
+      <li class="mg"><strong class="mg">☐ Ritmo</strong> — cronómetro visible. Cada juego del top mundial: ~45 seg en cámara. Cada juego del top precios: ~55 seg con la reacción al valor.</li>
+      <li class="mg"><strong class="mg">☐ Teaser</strong> — cerrar dejando sembrado el episodio futuro de OST en batería por generación. No es para este capítulo.</li>
     </ul>
   </section>
 
@@ -815,36 +1484,34 @@ nav.footer {
 
 <nav class="footer">
   <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
-  <div class="nav-dots" id="dots"></div>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 27</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
   <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
   <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
 </nav>
 
 <script>
 const slides = document.querySelectorAll('.slide');
-const dotsContainer = document.getElementById('dots');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
 let current = 0;
+const total = slides.length;
 
-slides.forEach((_, i) => {
-  const d = document.createElement('div');
-  d.className = 'd' + (i === 0 ? ' active' : '');
-  d.addEventListener('click', () => go(i));
-  dotsContainer.appendChild(d);
-});
-
-const dots = document.querySelectorAll('.nav-dots .d');
+function pad(n) { return String(n).padStart(2, '0'); }
 
 function go(i) {
-  if (i < 0 || i >= slides.length) return;
+  if (i < 0 || i >= total) return;
   slides[current].classList.remove('active');
-  dots[current].classList.remove('active');
   current = i;
   slides[current].classList.add('active');
-  dots[current].classList.add('active');
   prevBtn.disabled = current === 0;
-  nextBtn.disabled = current === slides.length - 1;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
 }
 
 prevBtn.addEventListener('click', () => go(current - 1));
@@ -854,10 +1521,10 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
   if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
   if (e.key === 'Home') { go(0); }
-  if (e.key === 'End') { go(slides.length - 1); }
+  if (e.key === 'End') { go(total - 1); }
 });
 
-prevBtn.disabled = true;
+go(0);
 </script>
 
 </body>
