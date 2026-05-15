@@ -55,6 +55,25 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 | `data/coleccion_koko.csv` | **Fuente de verdad** de la colección física de Koko. 899 ítems, 26 plataformas. Leer con `grep`/`csv` directo. |
 | `ref/Retrotarros_Referencia_Visual_N64.html` | Referencia visual estilo (header, cards, paleta) para HTML del estudio. |
 
+## Imágenes en HTMLs de ranking (regla obligatoria)
+
+**En todo HTML que rankee juegos (top mundial, top precios, archivo, joyas, retrotarros-vs-mundo, etc.) la imagen del juego debe ser SIEMPRE la box art real, NUNCA el logo del juego.**
+
+- ✓ Sí: caja NTSC USA del cartucho (Wikipedia `File:<Juego> Cover.png` o equivalente).
+- ✗ No: logo/wordmark del juego (PNG transparente con el título estilizado).
+- ✗ No: screenshot del gameplay.
+- ✗ No: artwork promocional sin la caja.
+
+**Por qué:** la caja física es lo que Koko colecciona y lo que el espectador reconoce visualmente. El logo solo dice el nombre que ya está como texto al lado.
+
+**Cómo encontrar la caja correcta:**
+1. Wikipedia API: `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=<juego>+cover&srnamespace=6&format=json` → buscar `File:<Juego> Cover.png` o `.jpg`.
+2. Si Wikipedia no la tiene → MobyGames, LaunchBox, TheGamesDB, o página específica del juego en Wikipedia (no del compositor/serie).
+3. Verificar con `Read` tool antes de commitear — si sale logo/wordmark/screenshot, descartar y buscar otra.
+4. Si NO existe box art accesible → usar fallback CSS estilizado (ya implementado con clase `cart-fallback`), nunca dejar un logo en su lugar.
+
+**Aplica a rankings ya hechos:** N64 (top-mundial, top-precios, retrotarros-vs-mundo, archivo-koko, joyas-ocultas) + PS Vita (top-mundial, top-precios, retrotarros-vs-mundo, archivo-koko) + futuros SNES, PS1, etc.
+
 ## Convención de pautas (obligatoria)
 
 Cada episodio largo se cierra con **tres archivos**, mismo `{slug}`:
