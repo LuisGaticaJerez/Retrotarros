@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Estudio · N64 vs PlayStation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+  --sony-blue: #003791;
+  --nin-red: #C8202D;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.08) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6, 3, 15, 0.97); border-bottom: 2px solid var(--mg); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--mg); }
+.dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 32px 48px; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--ye); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 62px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .n64 { color: #C8202D; text-shadow: 0 0 22px rgba(200,32,45,.5); }
+.portada .ep-title .ps { color: #00A2E8; text-shadow: 0 0 22px rgba(0,162,232,.5); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; }
+
+.slide h1 { font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye); letter-spacing: 4px; margin-bottom: 6px; border-left: 4px solid var(--ye); padding-left: 16px; }
+.slide h2 { font-family: 'Orbitron'; font-weight: 900; font-size: 38px; color: #fff; letter-spacing: 1px; margin: 8px 0 20px 20px; line-height: 1.05; }
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+.slide h2.ye { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.45); }
+
+/* COMPARATIVA SPECS */
+.specs-table {
+  width: 100%; margin-top: 16px;
+  font-family: 'Share Tech Mono';
+  border-collapse: collapse;
+}
+.specs-table thead th {
+  font-family: 'Press Start 2P'; font-size: 10px; letter-spacing: 2px;
+  padding: 14px 16px; text-align: left;
+}
+.specs-table thead th.spec { color: var(--ye); border-bottom: 2px solid var(--ye); }
+.specs-table thead th.n64 { color: #C8202D; border-bottom: 2px solid #C8202D; text-align: center; }
+.specs-table thead th.ps { color: #00A2E8; border-bottom: 2px solid #00A2E8; text-align: center; }
+.specs-table tbody td {
+  padding: 12px 16px; font-size: 14px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.specs-table tbody td.spec { color: rgba(255,255,255,.6); font-size: 13px; }
+.specs-table tbody td.n64 { color: #fff; text-align: center; }
+.specs-table tbody td.n64.win { color: #C8202D; font-weight: bold; }
+.specs-table tbody td.ps { color: #fff; text-align: center; }
+.specs-table tbody td.ps.win { color: #00A2E8; font-weight: bold; }
+
+/* STATS BIG NUMBERS */
+.battle-row {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; margin-top: 18px;
+  align-items: center;
+}
+.battle-card {
+  background: var(--card-bg); border: 2px solid; border-radius: 4px;
+  padding: 32px 28px; text-align: center;
+}
+.battle-card.n64 { border-color: #C8202D; box-shadow: 0 0 28px rgba(200,32,45,.22); }
+.battle-card.ps { border-color: #00A2E8; box-shadow: 0 0 28px rgba(0,162,232,.22); }
+.battle-card h3 { font-family: 'Press Start 2P'; font-size: 11px; letter-spacing: 2px; margin-bottom: 14px; }
+.battle-card.n64 h3 { color: #C8202D; }
+.battle-card.ps h3 { color: #00A2E8; }
+.battle-card .big { font-family: 'Orbitron'; font-weight: 900; font-size: 64px; letter-spacing: 1px; line-height: 1; margin: 12px 0; }
+.battle-card.n64 .big { color: #C8202D; text-shadow: 0 0 18px rgba(200,32,45,.4); }
+.battle-card.ps .big { color: #00A2E8; text-shadow: 0 0 18px rgba(0,162,232,.4); }
+.battle-card p { font-family: 'Share Tech Mono'; font-size: 14px; color: rgba(255,255,255,.7); }
+.vs-divider {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 42px;
+  color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.5);
+}
+
+/* DECISIONES */
+.decision-card {
+  background: var(--card-bg); border: 2px solid var(--mg);
+  border-radius: 4px; padding: 28px 32px; margin-top: 16px;
+  box-shadow: 0 0 22px rgba(255,46,136,.15);
+}
+.decision-card .num { font-family: 'Orbitron'; font-weight: 900; font-size: 56px; color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.4); line-height: 1; margin-bottom: 10px; }
+.decision-card .titulo { font-family: 'Orbitron'; font-weight: 900; font-size: 26px; color: #fff; margin-bottom: 14px; }
+.decision-card .desc { font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6; }
+.decision-card .desc strong { color: var(--ye); }
+.decision-card .desc em { color: var(--mg); font-style: normal; font-weight: 700; }
+
+/* PS1 EXCLUSIVES GRID */
+.exclusivos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 16px; }
+.exclusivo-card {
+  background: var(--card-bg); border: 2px solid #00A2E8;
+  border-radius: 4px; overflow: hidden;
+  box-shadow: 0 0 18px rgba(0,162,232,.18);
+}
+.exclusivo-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+.exclusivo-card .body { padding: 16px 18px; }
+.exclusivo-card h3 { font-family: 'Press Start 2P'; font-size: 8px; color: #00A2E8; letter-spacing: 2px; margin-bottom: 6px; }
+.exclusivo-card .name { font-family: 'Orbitron'; font-weight: 700; font-size: 16px; color: #fff; }
+.exclusivo-card .year { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.5); margin-top: 4px; }
+.exclusivo-card .why { font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.75); margin-top: 8px; line-height: 1.5; }
+
+/* CRONOLOGÍA SIMPLE */
+.crono-simple { margin-top: 14px; }
+.crono-simple-row {
+  display: grid; grid-template-columns: 80px 1fr; gap: 18px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--cy);
+  background: rgba(0,229,255,.04);
+  margin-bottom: 8px;
+}
+.crono-simple-row.hit { border-left-color: var(--mg); background: rgba(255,46,136,.06); }
+.crono-simple-row .year { font-family: 'Orbitron'; font-weight: 900; font-size: 18px; color: var(--cy); }
+.crono-simple-row.hit .year { color: var(--mg); }
+.crono-simple-row .ev { font-family: 'Share Tech Mono'; font-size: 14px; color: rgba(255,255,255,.85); line-height: 1.5; }
+.crono-simple-row .ev strong { color: var(--ye); }
+
+/* HOY GRID */
+.hoy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 14px; }
+.hoy-card {
+  background: var(--card-bg); border: 1px solid var(--ye);
+  border-radius: 4px; padding: 20px 22px;
+}
+.hoy-card h3 { font-family: 'Press Start 2P'; font-size: 9px; color: var(--ye); letter-spacing: 2px; margin-bottom: 10px; }
+.hoy-card p { font-family: 'Share Tech Mono'; font-size: 14px; color: rgba(255,255,255,.85); line-height: 1.55; }
+
+.cam-quote {
+  background: rgba(255,210,63,.07); border-left: 4px solid var(--ye);
+  padding: 22px 26px; margin-top: 22px;
+  font-family: 'Share Tech Mono'; font-size: 16px; font-style: italic;
+  color: rgba(255,255,255,.88); line-height: 1.6;
+}
+.cam-quote .lbl { display: block; font-style: normal; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 10px; }
+
+ul.checklist { list-style: none; margin-top: 10px; }
+ul.checklist li { padding: 14px 20px; border-left: 4px solid; margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5; }
+ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
+ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
+ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
+ul.checklist li strong.ye { color: var(--ye); }
+ul.checklist li strong.cy { color: var(--cy); }
+ul.checklist li strong.mg { color: var(--mg); }
+
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, #C8202D, #00A2E8); width: 0; transition: width .25s; }
+.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · N64 vs PS1 · GEN 5</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 PORTADA -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 5 · 1994-2002 · LA GUERRA</div>
+      <div class="ep-title"><span class="n64">NINTENDO 64</span> VS. <span class="ps">PLAYSTATION</span></div>
+      <div class="ep-sub">CÓMO NINTENDO PERDIÓ LA GENERACIÓN 5</div>
+    </div>
+  </section>
+
+  <!-- 02 SPECS -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <h1>BLOQUE 2 · LAS DOS CONSOLAS</h1>
+    <h2>Specs comparados · 1996</h2>
+    <table class="specs-table">
+      <thead><tr><th class="spec">CARACTERÍSTICA</th><th class="n64">NINTENDO 64</th><th class="ps">PLAYSTATION</th></tr></thead>
+      <tbody>
+        <tr><td class="spec">CPU</td><td class="n64 win">MIPS R4300i 93.75 MHz</td><td class="ps">MIPS R3000A 33.87 MHz</td></tr>
+        <tr><td class="spec">RAM</td><td class="n64 win">4 MB (+4 Expansion Pak)</td><td class="ps">2 MB + 1 MB VRAM</td></tr>
+        <tr><td class="spec">Almacenamiento</td><td class="n64">Cartucho 8-64 MB</td><td class="ps win">CD-ROM 650 MB</td></tr>
+        <tr><td class="spec">Polígonos/seg</td><td class="n64">~100,000</td><td class="ps win">~360,000 (texturas planas)</td></tr>
+        <tr><td class="spec">Audio</td><td class="n64">16-bit @ 48 kHz</td><td class="ps win">24-channel ADPCM</td></tr>
+        <tr><td class="spec">Lanzamiento Japón</td><td class="n64">Junio 1996</td><td class="ps win">Diciembre 1994</td></tr>
+        <tr><td class="spec">Lanzamiento USA</td><td class="n64">Septiembre 1996</td><td class="ps win">Septiembre 1995</td></tr>
+        <tr><td class="spec">Precio launch USA</td><td class="n64 win">US$199</td><td class="ps">US$299 (luego $199)</td></tr>
+      </tbody>
+    </table>
+    <div class="cam-quote">
+      <span class="lbl">CONCLUSIÓN TÉCNICA</span>
+      El N64 era <strong>más potente en CPU y geometría 3D</strong>. La PS1 era <strong>más lenta pero con más memoria de almacenamiento y mejor para FMV</strong> (cinemáticas). Y llegó dos años antes al mercado — Sony tenía 10M+ unidades vendidas antes de que el N64 saliera en USA.
+    </div>
+  </section>
+
+  <!-- 03 EL VEREDICTO DE VENTAS -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <h1>BLOQUE 3 · EL VEREDICTO</h1>
+    <h2 class="mg">Las ventas lifetime · 1994-2006</h2>
+    <div class="battle-row">
+      <div class="battle-card n64">
+        <h3>NINTENDO 64</h3>
+        <div class="big">33M</div>
+        <p>~32.93 millones · 6 años en mercado (1996-2002)</p>
+      </div>
+      <div class="vs-divider">3.1×</div>
+      <div class="battle-card ps">
+        <h3>PLAYSTATION</h3>
+        <div class="big">102M</div>
+        <p>~102.5 millones · 12 años en mercado (1994-2006)</p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">EL DATO</span>
+      <strong>Sony vendió 3.1× más consolas que Nintendo en la misma generación.</strong> Y eso a pesar de que el N64 era técnicamente más potente y tenía Mario 64, Zelda Ocarina y GoldenEye. <em>El hardware más potente NO ganó la guerra.</em>
+    </div>
+  </section>
+
+  <!-- 04 DECISIÓN 1 — CARTUCHO -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <h1>BLOQUE 4 · DECISIÓN 1</h1>
+    <h2 class="mg">El cartucho — la apuesta que costó la guerra</h2>
+    <div class="decision-card">
+      <div class="num">1</div>
+      <div class="titulo">CARTUCHO vs CD-ROM</div>
+      <div class="desc">
+        <strong>El argumento de Nintendo (1995):</strong> cartuchos eran imposibles de piratear, lectura instantánea, más durables, margen de ganancia más alto.
+        <br><br>
+        <strong>El costo real de esa decisión:</strong>
+        <br>· Cartuchos costaban <em>US$15-25</em> a producir. CDs costaban <em>US$0.50</em>.
+        <br>· Third-parties pagaban más por copia → menos margen → muchos eligieron Sony.
+        <br>· Capacidad: <em>8-64 MB en N64 vs 650 MB en CD</em>. El N64 técnicamente NO podía tener FMV cinemáticas largas, soundtracks orquestales completos ni los RPGs de Square.
+        <br><br>
+        Esta sola decisión determinó <strong>quién podía hacer qué tipo de juego en cada consola</strong> durante 6 años.
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 DECISIÓN 2 — ÉXODO SQUARE -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <h1>BLOQUE 4 · DECISIÓN 2</h1>
+    <h2 class="mg">El éxodo Square — enero de 1996</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px;">
+      <div>
+        <img src="img/n64-nintendo-vs-playstation/ff7.jpg" alt="FF VII" style="width: 100%; max-height: 360px; object-fit: contain; border-radius: 4px; box-shadow: 0 18px 50px rgba(0,0,0,.6);">
+      </div>
+      <div>
+        <div class="decision-card" style="margin-top: 0;">
+          <div class="num">2</div>
+          <div class="titulo">FINAL FANTASY VII A PS1</div>
+          <div class="desc">
+            <strong>Enero 1996:</strong> Squaresoft anunció que Final Fantasy VII iba a Sony, no a Nintendo. Era el RPG más esperado del mundo.
+            <br><br>
+            <strong>Cita de Hironobu Sakaguchi:</strong> <em>"FF VII tiene 40+ minutos de cinemáticas FMV. Necesita el CD. El cartucho de N64 no puede hacerlo."</em>
+            <br><br>
+            <strong>El golpe completo:</strong> Square hizo TODOS sus RPGs para PS1 entre 1997-2001: Chrono Cross, Vagrant Story, FF VIII, IX, Parasite Eve, Saga Frontier. <em>Cero exclusivos N64 de Square.</em>
+            <br><br>
+            El público adulto japonés y americano se cambió a PS1 con Square. <strong>Y nunca volvió.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 DECISIÓN 3 — TR / RE / MGS -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <h1>BLOQUE 4 · DECISIÓN 3</h1>
+    <h2 class="mg">Tomb Raider · Resident Evil · Metal Gear Solid</h2>
+    <p style="font-family:'Share Tech Mono'; font-size:15px; color: rgba(255,255,255,.85); line-height: 1.6; margin: 0 0 16px 20px;">
+      Los tres exclusivos PS1 que definieron al público adulto de la generación 5. <strong>Los tres necesitaban CD</strong> para sus FMVs y voice acting. El N64 técnicamente no podía hacerlos.
+    </p>
+    <div class="exclusivos-grid">
+      <div class="exclusivo-card">
+        <img src="img/n64-nintendo-vs-playstation/tomb-raider.png" alt="Tomb Raider">
+        <div class="body">
+          <h3>EXCLUSIVO PS1</h3>
+          <div class="name">Tomb Raider</div>
+          <div class="year">1996 · CORE DESIGN</div>
+          <div class="why">Primera heroína 3D. Cinemática, FMV cutscenes, voz dramática. Vendió 7M.</div>
+        </div>
+      </div>
+      <div class="exclusivo-card">
+        <img src="img/n64-nintendo-vs-playstation/resident-evil.png" alt="Resident Evil">
+        <div class="body">
+          <h3>EXCLUSIVO PS1</h3>
+          <div class="name">Resident Evil</div>
+          <div class="year">1996 · CAPCOM</div>
+          <div class="why">Inventó el survival horror. FMVs con actores reales. Pre-rendered backgrounds. Vendió 5M.</div>
+        </div>
+      </div>
+      <div class="exclusivo-card">
+        <img src="img/n64-nintendo-vs-playstation/mgs.png" alt="Metal Gear Solid">
+        <div class="body">
+          <h3>EXCLUSIVO PS1</h3>
+          <div class="name">Metal Gear Solid</div>
+          <div class="year">1998 · KONAMI</div>
+          <div class="why">Narrativa cinematográfica de 9 horas con voice acting completo. Cambió el medio. Vendió 6M.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 EL ÚLTIMO GOLPE — GOLDENEYE -->
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <h1>BLOQUE 5 · LA EXCEPCIÓN N64</h1>
+    <h2 class="cy">GoldenEye 007 — el party game que salvó al N64</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px; align-items: center;">
+      <div>
+        <img src="img/n64-nintendo-vs-playstation/goldeneye.jpg" alt="GoldenEye 007" style="width: 100%; max-height: 380px; object-fit: contain; border-radius: 4px; box-shadow: 0 18px 50px rgba(0,0,0,.6);">
+      </div>
+      <div>
+        <div style="font-family: 'Press Start 2P'; font-size: 9px; color: var(--cy); letter-spacing: 2px; margin-bottom: 12px;">EL ÚNICO HIT ADULTO DEL N64</div>
+        <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 32px; color: #fff; line-height: 1.1; margin-bottom: 14px;">GoldenEye 007</div>
+        <div style="font-family: 'Share Tech Mono'; font-size: 14px; color: rgba(255,255,255,.85); line-height: 1.6;">
+          Rare 1997 · Metacritic 96 · <strong style="color: var(--ye);">8 millones vendidos</strong>.
+          <br><br>
+          Multiplayer split-screen que se convirtió en el <em style="color: var(--cy);">party game definitivo</em> para una generación. Inventó el FPS de consola.
+          <br><br>
+          <strong style="color: var(--ye);">Es la razón principal por la que el N64 no terminó en bancarrota.</strong> Pero un juego no salva una consola — y para el 2000 ya no había nada que pudiera hacer.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 CRONOLOGÍA -->
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <h1>BLOQUE 6 · CRONOLOGÍA DE LA GUERRA</h1>
+    <h2 class="ye">1996-2002 · año por año</h2>
+    <div class="crono-simple">
+      <div class="crono-simple-row"><div class="year">1996</div><div class="ev"><strong>N64 sale en USA</strong> (septiembre). PS1 lleva 2 años en mercado, ya vendió 10M+.</div></div>
+      <div class="crono-simple-row hit"><div class="year">1997</div><div class="ev"><strong>FF VII sale solo en PS1</strong>. <strong>Square abandona Nintendo</strong>. GoldenEye vende 8M en N64.</div></div>
+      <div class="crono-simple-row"><div class="year">1998</div><div class="ev">Resident Evil 2 vende 5M en PS1. Banjo-Kazooie en N64 vende 3.6M. Metal Gear Solid debuta.</div></div>
+      <div class="crono-simple-row"><div class="year">1999</div><div class="ev">PS1 baja a US$99. N64 baja a US$129. <strong>Sony era más barato.</strong></div></div>
+      <div class="crono-simple-row hit"><div class="year">2000</div><div class="ev"><strong>PS2 lanza</strong>. Final Fantasy IX cierra la era PS1. Pokémon Crystal extiende el N64 un año más.</div></div>
+      <div class="crono-simple-row"><div class="year">2001</div><div class="ev">Conker's Bad Fur Day — último gran N64. GameCube anunciado.</div></div>
+      <div class="crono-simple-row hit"><div class="year">2002</div><div class="ev"><strong>GameCube + Xbox + PS2</strong> todos en mercado. <strong>N64 oficialmente muerto.</strong></div></div>
+    </div>
+  </section>
+
+  <!-- 09 POR QUÉ IMPORTA HOY -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <h1>BLOQUE 7 · POR QUÉ IMPORTA HOY</h1>
+    <h2 class="cy">El legado de la guerra · 2026</h2>
+    <div class="hoy-grid">
+      <div class="hoy-card">
+        <h3>1 · COLECCIONISMO</h3>
+        <p>Los cartuchos N64 son <strong style="color: var(--ye);">más caros que los CDs PS1</strong> hoy. Por rareza relativa — 33M unidades vendidas vs 102M, hay un tercio del stock en circulación.</p>
+      </div>
+      <div class="hoy-card">
+        <h3>2 · ESCUELAS DE DISEÑO</h3>
+        <p>El N64 enseñó <strong style="color: var(--ye);">cómo se hace 3D jugable</strong> (cámara controlable, multiplayer split-screen, level design 3D). La PS1 enseñó <strong style="color: var(--ye);">cómo se hace narrativa interactiva</strong> (cutscenes, voice acting, FMV). Las dos escuelas viven hoy.</p>
+      </div>
+      <div class="hoy-card">
+        <h3>3 · MERCADO RETRO</h3>
+        <p>GoldenEye, Zelda Ocarina y Mario 64 siguen siendo <strong style="color: var(--ye);">referencias para primera consola 3D bien hecha</strong>. PS1 tiene FF VII, MGS, RE como referencia narrativa de la generación.</p>
+      </div>
+      <div class="hoy-card">
+        <h3>4 · LECCIÓN DE NEGOCIO</h3>
+        <p><strong style="color: var(--mg);">El hardware más potente NO gana.</strong> Gana el que tiene mejor catálogo + precio + relación con third-parties. Nintendo aprendió esto y por eso Switch (y Switch 2) tienen specs modestos con catálogo cuidado.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 CIERRE -->
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <h1>CIERRE</h1>
+    <h2 class="mg">La lección de la generación 5</h2>
+    <div class="cam-quote">
+      <span class="lbl">FRASE DE CIERRE PARA CÁMARA</span>
+      "El Nintendo 64 perdió la generación cinco. <strong>No por mala calidad</strong> — tenía a Ocarina of Time, Mario 64 y GoldenEye, que siguen siendo top de TODOS los rankings hoy. Perdió porque Sony tomó decisiones mejores: <strong>CD, precio bajo, third-party libre, narrativa cinematográfica</strong>. Y treinta años después, la lección sigue siendo la misma: <em>el hardware más potente NO gana</em>. Gana el que combina mejor catálogo, mejor precio y mejor relación con los desarrolladores. Por eso, cuando ves a Nintendo hoy haciendo Switch 2 con specs modestos y un catálogo cuidado, sabés que <strong>aprendieron la lección del N64</strong>."
+    </div>
+  </section>
+
+  <!-- 11 CHECKLIST -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <h1>CHECKLIST · PRE-GRABACIÓN</h1>
+    <h2 class="cy">Antes de prender cámaras</h2>
+    <ul class="checklist">
+      <li class="ye"><strong class="ye">☐ Luis</strong> — memorizar las 10 anclas (datos duros — son el corazón del episodio). Verificar VGChartz lifetime sales el día de grabación.</li>
+      <li class="ye"><strong class="ye">☐ Setup</strong> — N64 + PS1 sobre la mesa en plano lateral. Contraste visual fuerte. Si no hay PS1 prestada, usar foto en B-roll.</li>
+      <li class="cy"><strong class="cy">☐ Koko</strong> — anécdota personal: ¿tuviste N64, PS1 o las dos? Su rol es ser el coleccionista N64 reaccionando al análisis frío.</li>
+      <li class="cy"><strong class="cy">☐ Audio</strong> — episodio narrativo. Audio limpio prioridad. B-roll musical ambient (no temas con copyright).</li>
+      <li class="mg"><strong class="mg">☐ Tono</strong> — análisis FRÍO. NO defensivo Nintendo. Reconocer explícitamente que <strong class="mg">Sony ganó.</strong></li>
+      <li class="mg"><strong class="mg">☐ Ritmo</strong> — episodio largo (20-25 min). Cronómetro visible. Bloque 4 (las 3 decisiones) no más de 8 min total.</li>
+      <li class="mg"><strong class="mg">☐ Frase final</strong> — memorizar palabra por palabra. Re-grabar Luis solo si no quedó natural.</li>
+    </ul>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 11</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+go(0);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Estudio · Kirkhope y Rare</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.10) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6, 3, 15, 0.97); border-bottom: 2px solid var(--mg); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--mg); }
+.dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 32px 48px; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 56px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .accent { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; max-width: 900px; }
+
+.slide h1 { font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye); letter-spacing: 4px; margin-bottom: 6px; border-left: 4px solid var(--ye); padding-left: 16px; }
+.slide h2 { font-family: 'Orbitron'; font-weight: 900; font-size: 38px; color: #fff; letter-spacing: 1px; margin: 8px 0 20px 20px; line-height: 1.05; }
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+.slide h2.ye { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.45); }
+
+/* IMPERIO RARE — grid de juegos */
+.imperio-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px;
+}
+.juego-mini {
+  background: var(--card-bg); border: 1px solid var(--mg); border-radius: 4px;
+  padding: 14px; display: flex; gap: 12px; align-items: center;
+  box-shadow: 0 0 12px rgba(255,46,136,.08);
+}
+.juego-mini img { width: 56px; height: 70px; object-fit: cover; border-radius: 2px; flex-shrink: 0; }
+.juego-mini .info { flex: 1; min-width: 0; }
+.juego-mini .name { font-family: 'Orbitron'; font-weight: 700; font-size: 14px; color: #fff; line-height: 1.2; }
+.juego-mini .year { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.5); margin-top: 2px; }
+.juego-mini .sold { font-family: 'Orbitron'; font-weight: 900; font-size: 16px; color: var(--ye); margin-top: 4px; }
+
+.totales-row {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 18px;
+}
+.total-card {
+  background: var(--card-bg); border: 2px solid; border-radius: 4px;
+  padding: 22px 28px; text-align: center;
+}
+.total-card.mg { border-color: var(--mg); box-shadow: 0 0 22px rgba(255,46,136,.18); }
+.total-card.cy { border-color: var(--cy); box-shadow: 0 0 22px rgba(0,229,255,.18); }
+.total-card h3 { font-family: 'Press Start 2P'; font-size: 10px; letter-spacing: 2px; margin-bottom: 10px; }
+.total-card.mg h3 { color: var(--mg); }
+.total-card.cy h3 { color: var(--cy); }
+.total-card .big { font-family: 'Orbitron'; font-weight: 900; font-size: 44px; letter-spacing: 1px; line-height: 1; margin: 8px 0; }
+.total-card.mg .big { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.4); }
+.total-card.cy .big { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+.total-card p { font-family: 'Share Tech Mono'; font-size: 13px; color: rgba(255,255,255,.7); }
+
+/* CRONOLOGÍA */
+.crono { position: relative; padding-left: 30px; margin-top: 16px; }
+.crono::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--cy), var(--mg)); }
+.crono-item { position: relative; padding-bottom: 16px; padding-left: 8px; }
+.crono-item::before {
+  content: ""; position: absolute; left: -27px; top: 6px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--cy); border: 2px solid var(--dk);
+  box-shadow: 0 0 10px rgba(0,229,255,.6);
+}
+.crono-item.hito::before { background: var(--mg); box-shadow: 0 0 10px rgba(255,46,136,.7); }
+.crono-year { font-family: 'Orbitron'; font-weight: 900; font-size: 18px; color: var(--cy); }
+.crono-item.hito .crono-year { color: var(--mg); }
+.crono-text { font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); margin-top: 2px; line-height: 1.5; }
+.crono-text strong { color: var(--ye); }
+
+/* SLIDE-JUEGO (zoom a un juego icónico) */
+.slide-juego {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  align-items: center; height: 100%; padding: 20px 40px;
+}
+.juego-img-big {
+  display: flex; align-items: center; justify-content: center;
+}
+.juego-img-big img {
+  max-height: 380px; max-width: 100%; object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.juego-detail h3 {
+  font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye);
+  letter-spacing: 2px; margin-bottom: 8px;
+}
+.juego-detail .titulo {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 32px;
+  color: #fff; line-height: 1.1; margin-bottom: 10px;
+}
+.juego-detail .meta {
+  font-family: 'Share Tech Mono'; font-size: 13px; color: rgba(255,255,255,.5);
+  letter-spacing: 2px; margin-bottom: 18px;
+}
+.juego-detail .desc {
+  font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.86);
+  line-height: 1.6; padding: 14px 20px;
+  background: rgba(255,210,63,.06); border-left: 4px solid var(--ye);
+}
+.juego-detail .desc strong { color: var(--ye); }
+.juego-detail .desc em { color: var(--mg); font-style: normal; font-weight: 700; }
+
+/* CIERRE / CHECKLIST */
+.cam-quote {
+  background: rgba(255,210,63,.07); border-left: 4px solid var(--ye);
+  padding: 22px 26px; margin-top: 22px;
+  font-family: 'Share Tech Mono'; font-size: 17px; font-style: italic;
+  color: rgba(255,255,255,.88); line-height: 1.6;
+}
+.cam-quote .lbl { display: block; font-style: normal; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 10px; }
+
+ul.checklist { list-style: none; margin-top: 10px; }
+ul.checklist li { padding: 14px 20px; border-left: 4px solid; margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5; }
+ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
+ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
+ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
+ul.checklist li strong.ye { color: var(--ye); }
+ul.checklist li strong.cy { color: var(--cy); }
+ul.checklist li strong.mg { color: var(--mg); }
+
+nav.footer {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 64px;
+  background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200;
+}
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(255,46,136,.5); }
+.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · KIRKHOPE + RARE · GEN 5</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 PORTADA -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 5 · NINTENDO 64 · BIOGRAFÍA</div>
+      <div class="ep-title">GRANT <span class="accent">KIRKHOPE</span> Y LA ERA DORADA DE RARE</div>
+      <div class="ep-sub">9 JUEGOS · 27 MILLONES VENDIDOS · 5 AÑOS</div>
+    </div>
+  </section>
+
+  <!-- 02 EL IMPERIO RARE -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <h1>BLOQUE 2 · EL IMPERIO</h1>
+    <h2 class="mg">Rare en N64 · 1996-2001</h2>
+    <div class="imperio-grid">
+      <div class="juego-mini"><img src="img/n64-kirkhope-rare/blast-corps.png" alt=""><div class="info"><div class="name">Blast Corps</div><div class="year">1997 · MC 90</div><div class="sold">1M</div></div></div>
+      <div class="juego-mini"><img src="img/n64-kirkhope-rare/goldeneye.jpg" alt=""><div class="info"><div class="name">GoldenEye 007</div><div class="year">1997 · MC 96</div><div class="sold">8M</div></div></div>
+      <div class="juego-mini"><img src="img/n64-kirkhope-rare/diddy.png" alt=""><div class="info"><div class="name">Diddy Kong Racing</div><div class="year">1997 · MC 88</div><div class="sold">4.5M</div></div></div>
+      <div class="juego-mini"><img src="img/n64-kirkhope-rare/banjo.png" alt=""><div class="info"><div class="name">Banjo-Kazooie</div><div class="year">1998 · MC 92</div><div class="sold">3.6M</div></div></div>
+      <div class="juego-mini"><img src="img/n64-kirkhope-rare/jet-force.jpg" alt=""><div class="info"><div class="name">Jet Force Gemini</div><div class="year">1999 · MC 80</div><div class="sold">1M</div></div></div>
+      <div class="juego-mini"><img src="img/n64-kirkhope-rare/dk64.jpg" alt=""><div class="info"><div class="name">Donkey Kong 64</div><div class="year">1999 · MC 88</div><div class="sold">2.5M</div></div></div>
+      <div class="juego-mini"><img src="img/n64-kirkhope-rare/banjo-tooie.png" alt=""><div class="info"><div class="name">Banjo-Tooie</div><div class="year">2000 · MC 90</div><div class="sold">3M</div></div></div>
+      <div class="juego-mini"><img src="img/n64-kirkhope-rare/perfectdark.jpg" alt=""><div class="info"><div class="name">Perfect Dark</div><div class="year">2000 · MC 97</div><div class="sold">2.5M</div></div></div>
+      <div class="juego-mini"><img src="img/n64-kirkhope-rare/conker.jpg" alt=""><div class="info"><div class="name">Conker's BFD</div><div class="year">2001 · MC 90</div><div class="sold">1M</div></div></div>
+    </div>
+    <div class="totales-row">
+      <div class="total-card mg"><h3>VENDIDOS EN 5 AÑOS</h3><div class="big">27M</div><p>copias en 9 juegos</p></div>
+      <div class="total-card cy"><h3>EL TERCER DEL CATÁLOGO</h3><div class="big">⅓</div><p>de las ventas históricas del N64 entero</p></div>
+    </div>
+  </section>
+
+  <!-- 03 CRONOLOGÍA KIRKHOPE -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <h1>BLOQUE 3 · CRONOLOGÍA</h1>
+    <h2 class="cy">Grant Kirkhope · de Edimburgo a Twycross</h2>
+    <div class="crono">
+      <div class="crono-item"><div class="crono-year">1962</div><div class="crono-text">Nace en <strong>Edimburgo, Escocia</strong></div></div>
+      <div class="crono-item"><div class="crono-year">1988-1995</div><div class="crono-text">Sesionista en bandas británicas. Trompetista, tecladista, guitarrista.</div></div>
+      <div class="crono-item hito"><div class="crono-year">1995</div><div class="crono-text"><strong>Entra a Rare</strong> como compositor junior. Tiene 33 años.</div></div>
+      <div class="crono-item"><div class="crono-year">1997</div><div class="crono-text"><strong>GoldenEye 007</strong> — co-compositor con Graeme Norgate y Robin Beanland</div></div>
+      <div class="crono-item hito"><div class="crono-year">1998</div><div class="crono-text"><strong>Banjo-Kazooie</strong> — su primer score solista. Inventa instrumentación dinámica por zona.</div></div>
+      <div class="crono-item hito"><div class="crono-year">1999</div><div class="crono-text"><strong>Donkey Kong 64</strong> — compone, escribe Y rapea el DK Rap.</div></div>
+      <div class="crono-item"><div class="crono-year">2000</div><div class="crono-text">Perfect Dark + Banjo-Tooie (su obra maestra según él mismo)</div></div>
+      <div class="crono-item hito"><div class="crono-year">2002</div><div class="crono-text"><strong>Microsoft compra Rare por US$375M.</strong> Kirkhope se queda.</div></div>
+      <div class="crono-item"><div class="crono-year">2003-2007</div><div class="crono-text">Grabbed by the Ghoulies, Kameo, Viva Piñata, Perfect Dark Zero. Ninguno alcanza el éxito de la era N64.</div></div>
+      <div class="crono-item hito"><div class="crono-year">2008</div><div class="crono-text"><strong>Sale de Rare</strong> después de 13 años.</div></div>
+      <div class="crono-item"><div class="crono-year">2008+</div><div class="crono-text">Civilization Beyond Earth · Civilization VI · Yooka-Laylee · Mario+Rabbids · indie</div></div>
+    </div>
+  </section>
+
+  <!-- 04 BANJO-KAZOOIE -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-juego">
+      <div class="juego-img-big"><img src="img/n64-kirkhope-rare/banjo.png" alt="Banjo-Kazooie"></div>
+      <div class="juego-detail">
+        <h3>1998 · LA OBRA QUE LE DIO IDENTIDAD</h3>
+        <div class="titulo">Banjo-Kazooie</div>
+        <div class="meta">RARE · KIRKHOPE SOLISTA · METACRITIC 92 · 3.6M VENDIDAS</div>
+        <div class="desc">
+          <strong>El problema:</strong> el cartucho del N64 era chico (8-12 MB). Hacer música contextual requería más memoria que la disponible.
+          <br><br>
+          <strong>La solución de Kirkhope:</strong> el mismo tema con <em>variaciones instrumentales que cargaban según contexto</em>. Bajo el agua sonaba con flauta, en cueva con piano, en altura con cuerdas. La melodía no cambiaba, los instrumentos sí.
+          <br><br>
+          <strong>El legado:</strong> primera vez que un juego de consola usaba música verdaderamente adaptativa. <em>Diez años antes que GTA V hiciera lo mismo con su radio dinámica.</em>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 DONKEY KONG 64 -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-juego">
+      <div class="juego-img-big"><img src="img/n64-kirkhope-rare/dk64.jpg" alt="Donkey Kong 64"></div>
+      <div class="juego-detail">
+        <h3>1999 · EL MEME ETERNO</h3>
+        <div class="titulo">Donkey Kong 64</div>
+        <div class="meta">RARE · KIRKHOPE · METACRITIC 88 · 2.5M VENDIDAS</div>
+        <div class="desc">
+          <strong>El dato bomba:</strong> Kirkhope <em>compuso, escribió la letra Y rapeó</em> el DK Rap. Es su voz en el track final.
+          <br><br>
+          <strong>Cita textual de Kirkhope en 2017:</strong> "Pensaba que era una broma interna del estudio. No tenía idea que se iba a viralizar como meme veinte años después."
+          <br><br>
+          <strong>Hoy:</strong> es probablemente el segundo theme song más reconocido del N64 después del Mario 64 main theme. Millones de visitas en YouTube. El meme generacional confirmado.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 PERFECT DARK -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-juego">
+      <div class="juego-img-big"><img src="img/n64-kirkhope-rare/perfectdark.jpg" alt="Perfect Dark"></div>
+      <div class="juego-detail">
+        <h3>2000 · EL TECHO DEL N64</h3>
+        <div class="titulo">Perfect Dark</div>
+        <div class="meta">RARE · KIRKHOPE + GRAEME NORGATE · METACRITIC 97 · 2.5M VENDIDAS</div>
+        <div class="desc">
+          <strong>El contexto:</strong> Perfect Dark obligaba el Expansion Pak — más memoria disponible para audio.
+          <br><br>
+          <strong>El resultado:</strong> Kirkhope y Norgate compusieron una OST con <em>orquestación real</em>, sin las limitaciones del cartucho base. Soundtrack que combina cyberpunk, jazz, ambient.
+          <br><br>
+          <strong>Por qué importa:</strong> marca el techo de lo que el N64 podía hacer sonoramente. Después de Perfect Dark, Rare empezó a mirar a GameCube y Xbox. <em>El N64 ya no daba más.</em>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 EL TRIÁNGULO MUSICAL DE RARE -->
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <h1>BLOQUE 4 · LA CULTURA DEL ESTUDIO</h1>
+    <h2 class="cy">El triángulo musical de Rare</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px;">
+      <div style="background: var(--card-bg); border: 2px solid var(--mg); border-radius: 4px; padding: 22px; box-shadow: 0 0 18px rgba(255,46,136,.15);">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 2px; margin-bottom: 12px;">EL WHIMSICAL</h3>
+        <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 22px; color: #fff; margin-bottom: 10px;">Grant Kirkhope</div>
+        <p style="font-family: 'Share Tech Mono'; font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.55;">Orquestación ligera, humor musical, instrumentos inusuales (acordeón, ocarina, glockenspiel). <strong style="color: var(--mg);">Banjo · DK64 · Banjo-Tooie</strong></p>
+      </div>
+      <div style="background: var(--card-bg); border: 2px solid var(--cy); border-radius: 4px; padding: 22px; box-shadow: 0 0 18px rgba(0,229,255,.15);">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 10px; color: var(--cy); letter-spacing: 2px; margin-bottom: 12px;">EL IRREVERENTE</h3>
+        <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 22px; color: #fff; margin-bottom: 10px;">Robin Beanland</div>
+        <p style="font-family: 'Share Tech Mono'; font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.55;">Parodia musical, capacidad para cualquier género. <strong style="color: var(--cy);">Killer Instinct · Conker (Sloprano)</strong>. Sigue en Rare hoy.</p>
+      </div>
+      <div style="background: var(--card-bg); border: 2px solid var(--ye); border-radius: 4px; padding: 22px; box-shadow: 0 0 18px rgba(255,210,63,.15);">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 2px; margin-bottom: 12px;">EL TÉCNICO</h3>
+        <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 22px; color: #fff; margin-bottom: 10px;">Graeme Norgate</div>
+        <p style="font-family: 'Share Tech Mono'; font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.55;">Música metalera, cinemática, electrónica. <strong style="color: var(--ye);">GoldenEye · Perfect Dark · Killer Instinct</strong></p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">PARA CÁMARA</span>
+      Los tres formaron el sonido entero de Rare entre 1995 y 2008. Kirkhope era el cara visible, pero <strong>cada juego de Rare en N64 lleva crédito de al menos dos de ellos</strong>. Killer Instinct Gold, la carta solitaria de Koko, es Beanland + Norgate — los hermanos musicales de Kirkhope.
+    </div>
+  </section>
+
+  <!-- 08 EL COLAPSO -->
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <h1>BLOQUE 5 · EL DIVORCIO</h1>
+    <h2 class="mg">Septiembre 2002 · Microsoft compra Rare</h2>
+    <div style="background: linear-gradient(135deg, rgba(255,46,136,.08), rgba(0,229,255,.04)); border: 2px solid var(--mg); border-radius: 4px; padding: 32px 36px; margin-top: 16px; box-shadow: 0 0 28px rgba(255,46,136,.22);">
+      <div style="font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 3px; margin-bottom: 12px;">LA TRANSACCIÓN</div>
+      <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 44px; color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.5); line-height: 1.1; margin-bottom: 14px;">US$375.000.000</div>
+      <p style="font-family: 'Share Tech Mono'; font-size: 16px; color: rgba(255,255,255,.85); line-height: 1.6;">
+        En septiembre de 2002, Microsoft compró Rare. Nintendo tenía 49% de la compañía — vendió su parte como condición de la operación. <strong style="color: var(--mg);">El divorcio más grande en la historia de los videojuegos hasta la fecha.</strong>
+      </p>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">EL ARGUMENTO QUE NO SE DICE EN VOZ ALTA</span>
+      Nintendo podría haber comprado el otro 51% de Rare ese año. La oferta de Microsoft no era una sorpresa. <strong>La razón por la que no lo hizo nunca quedó del todo clara</strong> — versiones oficiales mencionan diferencias de visión, problemas internos en Rare con los hermanos Stamper, y el hecho de que el N64 ya estaba muerto comercialmente. La realidad es que <em>Banjo, Conker y Donkey Kong hoy son Xbox</em> por esa decisión.
+    </div>
+  </section>
+
+  <!-- 09 KIRKHOPE POST-RARE -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <h1>BLOQUE 6 · POST-RARE</h1>
+    <h2 class="ye">Kirkhope después de 2008</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 18px;">
+      <div style="background: var(--card-bg); border: 2px solid var(--cy); border-radius: 4px; overflow: hidden;">
+        <img src="img/n64-kirkhope-rare/yooka.jpg" alt="Yooka-Laylee" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+        <div style="padding: 16px;">
+          <div style="font-family: 'Press Start 2P'; font-size: 8px; color: var(--cy); letter-spacing: 2px; margin-bottom: 6px;">EL REGRESO ESPIRITUAL</div>
+          <div style="font-family: 'Orbitron'; font-weight: 700; font-size: 16px; color: #fff;">Yooka-Laylee · 2017</div>
+          <p style="font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.7); margin-top: 6px; line-height: 1.5;">Con sus ex-colegas de Rare en Playtonic. <strong style="color: var(--cy);">Banjo espiritual.</strong></p>
+        </div>
+      </div>
+      <div style="background: var(--card-bg); border: 2px solid var(--mg); border-radius: 4px; overflow: hidden;">
+        <img src="img/n64-kirkhope-rare/mario-rabbids.jpg" alt="Mario + Rabbids" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+        <div style="padding: 16px;">
+          <div style="font-family: 'Press Start 2P'; font-size: 8px; color: var(--mg); letter-spacing: 2px; margin-bottom: 6px;">EL REGRESO A NINTENDO</div>
+          <div style="font-family: 'Orbitron'; font-weight: 700; font-size: 16px; color: #fff;">Mario+Rabbids · 2017+2022</div>
+          <p style="font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.7); margin-top: 6px; line-height: 1.5;">Componiendo otra vez para el Mushroom Kingdom — 22 años después de su primer Mario.</p>
+        </div>
+      </div>
+      <div style="background: var(--card-bg); border: 2px solid var(--ye); border-radius: 4px; padding: 16px;">
+        <div style="font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 8px;">OTROS HITS POST-RARE</div>
+        <ul style="font-family: 'Share Tech Mono'; font-size: 13px; color: rgba(255,255,255,.85); line-height: 1.7; list-style: none;">
+          <li>· <strong style="color: var(--ye);">Civilization VI</strong> (2016)</li>
+          <li>· Civilization Beyond Earth (2014)</li>
+          <li>· Kingdoms of Amalur (2012)</li>
+          <li>· Hey Pikmin (2017)</li>
+          <li>· Decenas de indie y proyectos personales</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 LEGADO + CIERRE -->
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <h1>CIERRE</h1>
+    <h2>El legado de un escocés en Twycross</h2>
+    <div class="cam-quote">
+      <span class="lbl">FRASE DE CIERRE PARA CÁMARA</span>
+      "Eso fue Rare en su mejor década. Veintisiete millones de copias, nueve juegos, una sola voz musical detrás de la mayoría. Y la historia podría haber sido distinta si Nintendo hubiera comprado la otra mitad del estudio en 2002. Pero no lo hizo. Y por eso <strong>Banjo, Conker y Donkey Kong hoy son Xbox</strong>. Grant Kirkhope sigue componiendo — escuchá Yooka-Laylee, escuchá Mario+Rabbids, escuchá Civilization Six. Es la misma persona que rapeaba sobre primates en 1999. <em>Y eso, en este oficio, es un milagro.</em>"
+    </div>
+  </section>
+
+  <!-- 11 CHECKLIST -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <h1>CHECKLIST · PRE-GRABACIÓN</h1>
+    <h2 class="cy">Antes de prender cámaras</h2>
+    <ul class="checklist">
+      <li class="ye"><strong class="ye">☐ Luis</strong> — memorizar las 10 anclas (un dato por slide). Tener DK Rap listo para clip de 3 seg en cold open.</li>
+      <li class="ye"><strong class="ye">☐ Koko</strong> — los 9 cartuchos físicos de Rare en la mesa: Banjo, Blast Corps, Conker, Diddy Kong Racing, DK64, GoldenEye, Jet Force, KI Gold, Perfect Dark.</li>
+      <li class="cy"><strong class="cy">☐ Setup</strong> — episodio narrativo (no game show). Plano fijo + cámara móvil para closeups de cartuchos.</li>
+      <li class="cy"><strong class="cy">☐ Audio</strong> — B-roll musical con clips cortos (3-5 seg) por copyright. Música de Rare es Microsoft hoy.</li>
+      <li class="mg"><strong class="mg">☐ Ritmo</strong> — episodio más largo del arco (20-25 min). Cronómetro visible. Bloque 3 (cronología) no más de 5 min.</li>
+      <li class="mg"><strong class="mg">☐ Tono</strong> — respetuoso, no hagiográfico. Mencionar Perfect Dark Zero (Xbox 2005) como fracaso post-Rare.</li>
+      <li class="mg"><strong class="mg">☐ Frase final</strong> — memorizar palabra por palabra. Re-grabar Luis solo si no quedó natural en cámara.</li>
+    </ul>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 11</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+go(0);
+</script>
+
+</body>
+</html>

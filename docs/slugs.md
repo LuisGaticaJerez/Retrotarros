@@ -32,8 +32,8 @@ G:\Mi unidad\Studio\pautas\pauta-n64-top-mundial.docx  ← DOCX para imprimir/le
 | `n64-hardware-raro` | Consolas y periféricos más raros | ✓ Cerrado para grabar | [arco](arcos/n64.md) |
 | `n64-no-latam` | Juegos que nunca llegaron a Latam | ✓ Cerrado para grabar | [arco](arcos/n64.md) |
 | `n64-joyas-ocultas` | 10 olvidados Metacritic 84+ de la colección de Koko | ✓ Cerrado — pendiente reunión Koko | [arco](arcos/n64.md) |
-| `n64-kirkhope-rare` | Grant Kirkhope + Rare en su pico | ☐ Pendiente | [arco](arcos/n64.md) |
-| `n64-nintendo-vs-playstation` | Cómo perdió Nintendo la generación 5 | ☐ Pendiente | [arco](arcos/n64.md) |
+| `n64-kirkhope-rare` | Grant Kirkhope + era dorada de Rare 1995-2008 | ✓ Cerrado para grabar | [arco](arcos/n64.md) |
+| `n64-nintendo-vs-playstation` | Cómo perdió Nintendo la generación 5 (tanque del arco) | ✓ Cerrado para grabar | [arco](arcos/n64.md) |
 | `n64-ost-bateria` | OST en batería · Gen 5 (serie paralela) | ☐ Pendiente | [arco](arcos/n64.md) |
 
 ### Otros (futuros)
