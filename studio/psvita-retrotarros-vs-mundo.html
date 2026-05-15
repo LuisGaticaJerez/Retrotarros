@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Estudio · Retrotarros vs el mundo · PS Vita</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root { --mg:#FF2E88; --cy:#00E5FF; --ye:#FFD23F; --pu:#2D1B69; --bo:#F5F0E8; --dk:#06030f; --card-bg:rgba(12,6,32,.92); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body { background-image: radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%), repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px), repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px); }
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6,3,15,.97); border-bottom: 2px solid var(--mg); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--mg); }
+.dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 32px 48px; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 60px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .vs { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; }
+
+.slide h1 { font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye); letter-spacing: 4px; margin-bottom: 6px; border-left: 4px solid var(--ye); padding-left: 16px; }
+.slide h2 { font-family: 'Orbitron'; font-weight: 900; font-size: 38px; color: #fff; letter-spacing: 1px; margin: 8px 0 20px 20px; line-height: 1.05; }
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+.slide h2.ye { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.45); }
+
+.mech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 14px; }
+.mech-card { background: var(--card-bg); border: 2px solid var(--mg); border-radius: 4px; padding: 22px 24px; }
+.mech-card.cy { border-color: var(--cy); } .mech-card.ye { border-color: var(--ye); }
+.mech-card h3 { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 2px; margin-bottom: 12px; }
+.mech-card.cy h3 { color: var(--cy); } .mech-card.ye h3 { color: var(--ye); }
+.mech-card p, .mech-card li { font-family: 'Share Tech Mono'; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.85); }
+.points-table { width: 100%; margin-top: 8px; font-family: 'Share Tech Mono'; font-size: 15px; }
+.points-table tr { border-bottom: 1px solid rgba(255,255,255,.07); }
+.points-table tr:last-child { border: none; }
+.points-table td { padding: 7px 0; }
+.points-table .pts { font-family: 'Orbitron'; font-weight: 900; color: var(--ye); text-align: right; }
+
+.slide-game { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; align-items: stretch; height: 100%; padding: 20px 56px 24px; gap: 14px; max-width: 1200px; margin: 0 auto; }
+.game-head { display: flex; align-items: center; justify-content: space-between; }
+.koko-label { font-family: 'Press Start 2P'; font-size: 12px; color: var(--ye); letter-spacing: 3px; padding: 8px 14px; border: 2px solid var(--ye); background: rgba(255,210,63,.06); }
+.world-pos { font-family: 'Orbitron'; font-weight: 900; font-size: 32px; padding: 6px 18px; border-radius: 4px; letter-spacing: 1px; }
+.world-pos.in-top { color: var(--cy); border: 2px solid var(--cy); background: rgba(0,229,255,.08); text-shadow: 0 0 14px rgba(0,229,255,.4); }
+.world-pos.solo { color: var(--mg); border: 2px solid var(--mg); background: rgba(255,46,136,.1); text-shadow: 0 0 18px rgba(255,46,136,.55); font-size: 16px; animation: pulse-solo 2s ease-in-out infinite; }
+@keyframes pulse-solo { 0%,100% { box-shadow: 0 0 18px rgba(255,46,136,.4); } 50% { box-shadow: 0 0 28px rgba(255,46,136,.8); } }
+.cart-wrap { display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden; }
+.cart { position: relative; height: 100%; max-height: 340px; aspect-ratio: 3/4; background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%); border-radius: 8px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6); overflow: hidden; }
+.cart-inner { position: absolute; inset: 6%; border-radius: 4px; overflow: hidden; background: #2D1B69; }
+.cart-inner img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; background: linear-gradient(135deg, var(--ph-1, #2D1B69) 0%, var(--ph-2, #4a2a99) 100%); text-align: center; gap: 12px; }
+.ph .ico { font-size: 72px; }
+.ph .lbl { font-family: 'Orbitron'; font-weight: 900; font-size: 22px; color: #fff; line-height: 1.1; text-shadow: 0 2px 4px rgba(0,0,0,.5); }
+.game-info { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.game-title { font-family: 'Orbitron'; font-weight: 900; font-size: 26px; color: #fff; line-height: 1.1; }
+.game-meta { font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.5); letter-spacing: 2px; }
+.game-why { max-width: 940px; padding: 12px 22px; background: rgba(255,255,255,.04); border-left: 4px solid var(--ye); font-family: 'Share Tech Mono'; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.86); text-align: left; }
+.game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 4px; }
+.game-why strong { color: var(--ye); }
+
+.scorecard { background: var(--card-bg); border: 2px solid var(--ye); border-radius: 4px; padding: 22px 26px; box-shadow: 0 0 22px rgba(255,210,63,.18); }
+.score-grid { display: grid; grid-template-columns: 1fr 110px 130px 70px; gap: 0; font-family: 'Share Tech Mono'; }
+.score-grid .hdr-row { font-family: 'Press Start 2P'; font-size: 8px; color: var(--cy); letter-spacing: 2px; padding: 8px 10px; border-bottom: 2px solid var(--cy); }
+.score-grid .row { display: contents; }
+.score-grid .row > div { padding: 10px; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 14px; }
+.score-grid .game-cell { font-family: 'Orbitron'; font-weight: 700; color: #fff; }
+.score-grid .cib { color: var(--mg); font-weight: 700; }
+.score-grid .world { color: var(--cy); }
+.score-grid .world.solo { color: var(--mg); }
+.score-grid .pts-box { font-family: 'Orbitron'; font-weight: 900; font-size: 18px; color: var(--ye); text-align: center; border-left: 1px dashed rgba(255,210,63,.3); }
+.score-total { margin-top: 16px; padding: 12px 18px; background: rgba(255,210,63,.08); border-left: 4px solid var(--ye); display: flex; justify-content: space-between; align-items: center; }
+.score-total .lbl { font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 2px; }
+.score-total .val { font-family: 'Orbitron'; font-weight: 900; font-size: 30px; color: var(--ye); }
+
+.veredicto-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+.veredicto-card { background: rgba(255,255,255,.03); border: 1px solid; border-radius: 4px; padding: 14px; text-align: center; }
+.veredicto-card.bajo { border-color: rgba(255,255,255,.3); } .veredicto-card.mid { border-color: rgba(255,210,63,.5); background: rgba(255,210,63,.04); } .veredicto-card.alto { border-color: var(--cy); background: rgba(0,229,255,.06); }
+.veredicto-card h4 { font-family: 'Press Start 2P'; font-size: 9px; letter-spacing: 2px; color: rgba(255,255,255,.6); margin-bottom: 6px; }
+.veredicto-card.mid h4 { color: var(--ye); } .veredicto-card.alto h4 { color: var(--cy); }
+.veredicto-card .puntos { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: #fff; }
+.veredicto-card p { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.7); margin-top: 6px; }
+
+.cam-quote { background: rgba(255,210,63,.07); border-left: 4px solid var(--ye); padding: 22px 26px; margin-top: 22px; font-family: 'Share Tech Mono'; font-size: 16px; font-style: italic; color: rgba(255,255,255,.88); line-height: 1.6; }
+.cam-quote .lbl { display: block; font-style: normal; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 10px; }
+
+ul.checklist { list-style: none; margin-top: 10px; }
+ul.checklist li { padding: 14px 20px; border-left: 4px solid; margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5; }
+ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
+ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
+ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
+ul.checklist li strong.ye { color: var(--ye); } ul.checklist li strong.cy { color: var(--cy); } ul.checklist li strong.mg { color: var(--mg); }
+
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6,3,15,.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; } .nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; }
+.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
+::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--dk); } ::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · RETROTARROS vs MUNDO · PSV</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 8 PORTÁTIL · GAME SHOW · CIERRE TRILOGÍA</div>
+      <div class="ep-title">RETROTARROS <span class="vs">VS.</span> EL MUNDO</div>
+      <div class="ep-sub">EL TOP DE KOKO CONTRA LA CRÍTICA · PS VITA</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <h1>BLOQUE 2 · MECÁNICA DEL GAME SHOW</h1>
+    <h2 style="color:#fff; text-shadow:none;">10 cartuchos · 1 sobre cerrado</h2>
+    <div class="mech-grid">
+      <div class="mech-card"><h3>LO QUE TRAE KOKO</h3><p>10 cartuchos PS Vita favoritos · físicos · dados vuelta sobre la mesa · ordenados del #10 al #1. <strong>No sabe</strong> qué dice el ranking mundial cerrado en el sobre de Luis.</p></div>
+      <div class="mech-card cy"><h3>LO QUE TIENE LUIS</h3><p>El top 10 mundial (consenso crítico 2026 · 5 fuentes) impreso y metido en sobre físico cerrado. Por cada cartucho que Koko revela, Luis abre el ranking.</p></div>
+      <div class="mech-card ye" style="grid-column: 1 / -1;"><h3>SISTEMA DE PUNTOS</h3><table class="points-table">
+        <tr><td>Posición exacta en top 10 mundial</td><td class="pts">3 PTS</td></tr>
+        <tr><td>Está en top 10 pero otra posición</td><td class="pts">2 PTS</td></tr>
+        <tr><td>Está en top 25 pero fuera del top 10</td><td class="pts">1 PT</td></tr>
+        <tr><td>No aparece · carta solitaria</td><td class="pts">0 PTS</td></tr>
+      </table></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="koko-label">KOKO REVELA</div><div class="world-pos in-top">#1 MUNDIAL · ★</div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-retrotarros-vs-mundo/persona4-golden.jpg" alt="Persona 4 Golden" onerror="this.style.display='none'"><div class="ph" style="--ph-1:#2a1a4a; --ph-2:#5a3a8a;"><div class="ico">🎴</div><div class="lbl">Persona 4 Golden</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Persona 4 Golden</div>
+        <div class="game-meta">2012 · ATLUS · METACRITIC 93 · €30 CIB</div>
+        <div class="game-why"><span class="lbl">DATO PARA LUIS</span><strong>El consenso #1 universal de PS Vita.</strong> Atlus · 80+ horas. Si Koko lo pone #1 → 3 puntos. El JRPG que pasó al canon histórico.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="koko-label">KOKO REVELA</div><div class="world-pos in-top">#2 MUNDIAL · ★</div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-retrotarros-vs-mundo/tearaway.jpg" alt="Tearaway" onerror="this.style.display='none'"><div class="ph" style="--ph-1:#c2872f; --ph-2:#e8b04a;"><div class="ico">📜</div><div class="lbl">Tearaway</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Tearaway</div>
+        <div class="game-meta">2013 · MEDIA MOLECULE · METACRITIC 87 · €35 CIB</div>
+        <div class="game-why"><span class="lbl">DATO PARA LUIS</span>Los creadores de LittleBigPlanet. <strong>Usa pantalla táctil + touchpad trasero + giroscopio + cámara + micrófono</strong>. El juego que justificaba la consola.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="koko-label">KOKO REVELA</div><div class="world-pos in-top">#3 MUNDIAL · ★</div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-retrotarros-vs-mundo/uncharted-ga.jpg" alt="Uncharted Golden Abyss" onerror="this.style.display='none'"><div class="ph" style="--ph-1:#4a3a1a; --ph-2:#8a6a2f;"><div class="ico">🗺️</div><div class="lbl">Uncharted GA</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Uncharted: Golden Abyss</div>
+        <div class="game-meta">2011 · BEND STUDIO · METACRITIC 80 · €25 CIB</div>
+        <div class="game-why"><span class="lbl">DATO PARA LUIS</span>Launch title del PS Vita. <strong>Demostró que era una consola seria</strong>. Bend Studio (Syphon Filter) usó controles táctiles y giroscopio.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="koko-label">KOKO REVELA</div><div class="world-pos in-top">#4 MUNDIAL · ★</div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-retrotarros-vs-mundo/gravity-rush.jpg" alt="Gravity Rush" onerror="this.style.display='none'"><div class="ph" style="--ph-1:#1a3a6b; --ph-2:#3a5fa0;"><div class="ico">🌀</div><div class="lbl">Gravity Rush</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Gravity Rush</div>
+        <div class="game-meta">2012 · SONY JAPAN STUDIO · METACRITIC 83 · €45 CIB</div>
+        <div class="game-why"><span class="lbl">DATO PARA LUIS</span>Sony Japan Studio · controlás la gravedad para caer en cualquier dirección. <strong>El ángulo más universal de PS Vita.</strong> Premio juego del año portátil en varios sitios.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="koko-label">KOKO REVELA</div><div class="world-pos in-top">#5 MUNDIAL · ★</div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-retrotarros-vs-mundo/killzone-mercenary.jpg" alt="Killzone Mercenary" onerror="this.style.display='none'"><div class="ph" style="--ph-1:#3a3a3a; --ph-2:#6a6a6a;"><div class="ico">🎯</div><div class="lbl">Killzone M.</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Killzone: Mercenary</div>
+        <div class="game-meta">2013 · SONY CAMBRIDGE · METACRITIC 78 · €20 CIB</div>
+        <div class="game-why"><span class="lbl">DATO PARA LUIS</span>El único FPS portátil de su época con tecnología de consola. <strong>Motor Killzone 3 modificado · multiplayer cross-region</strong>.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="koko-label">KOKO REVELA</div><div class="world-pos in-top">#6 MUNDIAL · ★</div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-retrotarros-vs-mundo/ffx-hd.jpg" alt="FF X / X-2 HD" onerror="this.style.display='none'"><div class="ph" style="--ph-1:#1a4a4a; --ph-2:#2f7a7a;"><div class="ico">🎮</div><div class="lbl">FF X / X-2 HD</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Final Fantasy X / X-2 HD Remaster</div>
+        <div class="game-meta">2014 · SQUARE ENIX · METACRITIC 86 · €40 CIB</div>
+        <div class="game-why"><span class="lbl">DATO PARA LUIS</span><strong>Dos JRPGs masivos en un cartucho.</strong> Tu primer FF en cartucho desde Pokemon. La versión PS Vita es la portable definitiva.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="koko-label">KOKO REVELA</div><div class="world-pos in-top">#8 MUNDIAL · ★</div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-retrotarros-vs-mundo/danganronpa-2.jpg" alt="Danganronpa 2" onerror="this.style.display='none'"><div class="ph" style="--ph-1:#7a1a1a; --ph-2:#c41e1e;"><div class="ico">🐻</div><div class="lbl">Danganronpa 2</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Danganronpa 2: Goodbye Despair</div>
+        <div class="game-meta">2014 · SPIKE CHUNSOFT · METACRITIC 86 · €40 CIB</div>
+        <div class="game-why"><span class="lbl">DATO PARA LUIS</span>Visual novel + investigación + juicios en isla tropical. <strong>El doble del primer Danganronpa.</strong> Spike Chunsoft · narrativa con muerte constante.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="koko-label">KOKO REVELA</div><div class="world-pos in-top">#9 MUNDIAL · ★</div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-retrotarros-vs-mundo/soul-sacrifice.jpg" alt="Soul Sacrifice" onerror="this.style.display='none'"><div class="ph" style="--ph-1:#4a1a3a; --ph-2:#8a2f6a;"><div class="ico">🩸</div><div class="lbl">Soul Sacrifice</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Soul Sacrifice (base)</div>
+        <div class="game-meta">2013 · SONY JAPAN STUDIO + COMCEPT · METACRITIC 76 · €18 CIB</div>
+        <div class="game-why"><span class="lbl">DATO PARA LUIS</span>Keiji Inafune (Mega Man) en Comcept con Sony Japan Studio. <strong>Sacrificás aliados por poder mágico</strong>. Koko tiene la base — la Delta vale $230 en top precios.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="koko-label">KOKO REVELA · CARTA SOLITARIA</div><div class="world-pos solo">NO APARECE · #10 PRECIOS</div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-retrotarros-vs-mundo/silent-hill.jpg" alt="Silent Hill BoM" onerror="this.style.display='none'"><div class="ph" style="--ph-1:#2a1a3a; --ph-2:#5a3a6a;"><div class="ico">🕯️</div><div class="lbl">Silent Hill</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Silent Hill: Book of Memories</div>
+        <div class="game-meta">2012 · KONAMI · €93 CIB · $160 EN TOP PRECIOS MUNDIAL</div>
+        <div class="game-why"><span class="lbl">EL DATO BOMBA</span><strong>No aparece en el top mundial</strong> de la crítica · PERO es #10 en el top de precios del mercado ($160). Koko lo trajo igual. <strong>Esa es la diferencia entre coleccionista y crítico</strong>.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="koko-label">KOKO REVELA · CARTA SOLITARIA #1</div><div class="world-pos solo">NO APARECE · #1 PRECIOS MUNDIAL</div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-retrotarros-vs-mundo/invizimals.jpg" alt="Invizimals" onerror="this.style.display='none'"><div class="ph" style="--ph-1:#7a1a1a; --ph-2:#c41e1e;"><div class="ico">👾</div><div class="lbl">Invizimals</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Invizimals: The Alliance</div>
+        <div class="game-meta">2014 · SCEE · €240 CIB · $320 EN TOP PRECIOS MUNDIAL · #1</div>
+        <div class="game-why"><span class="lbl">EL CLÍMAX DEL EPISODIO</span>La crítica no lo menciona. <strong>Pero es el cartucho PS Vita más caro del mundo</strong>. Sony Computer Entertainment Europe lo distribuyó solo en supermercados europeos. Magenta Software cerrado. <strong>Koko lo trajo igual</strong> — pagó €240 cuando estaba más barato. <em>Esto es lo que pasa cuando un coleccionista compra lo que ama, no lo que la crítica recomienda.</em></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <h1>BLOQUE 4 · SCORECARD FINAL</h1>
+    <h2 class="ye">Los 10 de Koko vs el mundo</h2>
+    <div class="scorecard">
+      <div class="score-grid">
+        <div class="hdr-row">JUEGO</div><div class="hdr-row">CIB €</div><div class="hdr-row">TOP MUNDIAL</div><div class="hdr-row">PTS</div>
+        <div class="row"><div class="game-cell">Persona 4 Golden</div><div class="cib">€30</div><div class="world">#1</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Tearaway</div><div class="cib">€35</div><div class="world">#2</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Uncharted: Golden Abyss</div><div class="cib">€25</div><div class="world">#3</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Gravity Rush</div><div class="cib">€45</div><div class="world">#4</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Killzone: Mercenary</div><div class="cib">€20</div><div class="world">#5</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">FF X / X-2 HD Remaster</div><div class="cib">€40</div><div class="world">#6</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Danganronpa 2: Goodbye Despair</div><div class="cib">€40</div><div class="world">#8</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Soul Sacrifice (base)</div><div class="cib">€18</div><div class="world">#9</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Silent Hill: Book of Memories</div><div class="cib">€93</div><div class="world solo">no aparece</div><div class="pts-box">__</div></div>
+        <div class="row"><div class="game-cell">Invizimals: The Alliance</div><div class="cib">€240</div><div class="world solo">no aparece</div><div class="pts-box">__</div></div>
+      </div>
+      <div class="score-total"><div class="lbl">TOTAL KOKO · TARGET 17-20</div><div class="val">__ / 30</div></div>
+    </div>
+    <div class="veredicto-grid">
+      <div class="veredicto-card bajo"><h4>&lt; 12 PTS</h4><div class="puntos">OÍDO SOLITARIO</div><p>Tu corazón ganó. La crítica no te dice nada.</p></div>
+      <div class="veredicto-card mid"><h4>13-20 PTS</h4><div class="puntos">OÍDO MIXTO</div><p>Coincidís a medias. Gusto + identidad.</p></div>
+      <div class="veredicto-card alto"><h4>&gt; 20 PTS</h4><div class="puntos">OÍDO MUNDIAL</div><p>Sos prácticamente crítico gringo.</p></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <h1>CIERRE · LA TRILOGÍA</h1>
+    <h2 class="mg">Tres rankings · una colección</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px;">
+      <div style="background: var(--card-bg); border: 2px solid var(--ye); border-radius: 4px; padding: 18px; text-align: center;">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 9px; color: var(--ye); letter-spacing: 2px; margin-bottom: 10px;">EL ARCHIVO</h3>
+        <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 26px; color: #fff;">91</div>
+        <p style="font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.75); margin-top: 6px;">cartuchos · €2,601 CIB</p>
+      </div>
+      <div style="background: var(--card-bg); border: 2px solid var(--cy); border-radius: 4px; padding: 18px; text-align: center;">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 9px; color: var(--cy); letter-spacing: 2px; margin-bottom: 10px;">LA CRÍTICA</h3>
+        <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 26px; color: #fff;">8/10</div>
+        <p style="font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.75); margin-top: 6px;">del top mundial<br>en mi colección</p>
+      </div>
+      <div style="background: var(--card-bg); border: 2px solid var(--mg); border-radius: 4px; padding: 18px; text-align: center;">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 9px; color: var(--mg); letter-spacing: 2px; margin-bottom: 10px;">EL MERCADO</h3>
+        <div style="font-family: 'Orbitron'; font-weight: 900; font-size: 26px; color: #fff;">4/16</div>
+        <p style="font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.75); margin-top: 6px;">del top precios mundial<br>en mi colección</p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">FRASE DE CIERRE PARA CÁMARA</span>
+      "Diez cartuchos de la colección de Koko. Ocho coinciden con la crítica del mundo. Dos son cartas solitarias — juegos que el mercado paga caro pero la crítica no menciona. <strong>Eso es lo más Retrotarros que hay</strong>: no traemos lo que el mundo dice que es bueno · traemos lo que nosotros amamos. Y resulta que el coleccionista chileno y la crítica gringa <em>coinciden mucho más de lo que pensamos</em>."
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">15</span>
+    <h1>CHECKLIST · PRE-GRABACIÓN</h1>
+    <h2 class="cy">Antes de prender cámaras</h2>
+    <ul class="checklist">
+      <li class="ye"><strong class="ye">☐ Reunión con Koko</strong> — confirmar lista final de 10 personales antes de grabar. La hipótesis del HTML es ESO: hipótesis.</li>
+      <li class="ye"><strong class="ye">☐ Top mundial impreso</strong> · en sobre físico cerrado con cinta. Props game show.</li>
+      <li class="cy"><strong class="cy">☐ Pizarra para puntos</strong> · anotar en cámara · estética casera.</li>
+      <li class="cy"><strong class="cy">☐ Koko NO sabe el ranking</strong> · reacciones genuinas son el oro del episodio.</li>
+      <li class="mg"><strong class="mg">☐ Las cartas solitarias</strong> (Invizimals + Silent Hill BoM) son los slides clave · 1:30 cada uno.</li>
+      <li class="mg"><strong class="mg">☐ Tono</strong> · cómplice, divertido, casero. NO académico ni competitivo.</li>
+      <li class="mg"><strong class="mg">☐ Frase de cierre</strong> · memorizar palabra por palabra · re-grabar si no quedó natural.</li>
+    </ul>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center"><div class="nav-counter" id="counter">01 / 15</div><div class="nav-progress"><div class="bar" id="bar"></div></div></div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn'); const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter'); const bar = document.getElementById('bar');
+let current = 0; const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active'); current = i; slides[current].classList.add('active');
+  prevBtn.disabled = current === 0; nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); } if (e.key === 'End') { go(total - 1); }
+});
+go(0);
+</script>
+</body>
+</html>

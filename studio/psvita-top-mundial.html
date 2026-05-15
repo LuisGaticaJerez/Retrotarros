@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Estudio · Top Mundial PS Vita</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root { --mg:#FF2E88; --cy:#00E5FF; --ye:#FFD23F; --pu:#2D1B69; --bo:#F5F0E8; --dk:#06030f; --card-bg:rgba(12,6,32,.92); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body { background-image: radial-gradient(ellipse 100% 50% at 50% -5%, rgba(0,229,255,.12) 0%, transparent 65%), repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px), repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px); }
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6,3,15,.97); border-bottom: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--cy); }
+.dot { width: 10px; height: 10px; background: var(--cy); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 32px 48px; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 58px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .accent { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; }
+
+.slide h1 { font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye); letter-spacing: 4px; margin-bottom: 6px; border-left: 4px solid var(--ye); padding-left: 16px; }
+.slide h2 { font-family: 'Orbitron'; font-weight: 900; font-size: 38px; color: #fff; letter-spacing: 1px; margin: 8px 0 20px 20px; line-height: 1.05; }
+.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.slide h2.ye { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.45); }
+
+.intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 16px; }
+.intro-card { background: var(--card-bg); border: 2px solid var(--cy); border-radius: 4px; padding: 24px; }
+.intro-card h3 { font-family: 'Press Start 2P'; font-size: 10px; color: var(--cy); letter-spacing: 2px; margin-bottom: 10px; }
+.intro-card p { font-family: 'Share Tech Mono'; font-size: 14px; color: rgba(255,255,255,.85); line-height: 1.55; }
+.intro-card.mg { border-color: var(--mg); }
+.intro-card.mg h3 { color: var(--mg); }
+
+.slide-game { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; align-items: stretch; height: 100%; padding: 20px 56px 24px; gap: 14px; max-width: 1200px; margin: 0 auto; }
+.game-head { display: flex; align-items: center; justify-content: space-between; }
+.game-pos { font-family: 'Orbitron'; font-weight: 900; font-size: 64px; line-height: 1; color: var(--cy); text-shadow: 0 0 20px rgba(0,229,255,.6); }
+.game-pos .hash { font-size: 28px; color: rgba(255,255,255,.35); text-shadow: none; margin-right: 4px; }
+.game-meta-row { display: flex; gap: 10px; }
+.metacritic-tag { display: inline-flex; align-items: center; gap: 6px; font-family: 'Orbitron'; font-weight: 900; font-size: 18px; color: var(--ye); padding: 6px 12px; border: 2px solid var(--ye); background: rgba(255,210,63,.06); }
+.metacritic-tag .num { font-size: 22px; }
+.koko-tag { padding: 6px 12px; font-family: 'Press Start 2P'; font-size: 9px; letter-spacing: 2px; border-radius: 4px; }
+.koko-tag.has { background: var(--cy); color: #000; }
+.koko-tag.no { background: var(--mg); color: #000; }
+.cart-wrap { display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden; }
+.cart { position: relative; height: 100%; max-height: 340px; aspect-ratio: 3/4; background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%); border-radius: 8px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6); overflow: hidden; }
+.cart-inner { position: absolute; inset: 6%; border-radius: 4px; overflow: hidden; background: #2D1B69; }
+.cart-inner img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; background: linear-gradient(135deg, var(--ph-1, #2D1B69) 0%, var(--ph-2, #4a2a99) 100%); text-align: center; gap: 12px; }
+.ph .ico { font-size: 72px; }
+.ph .lbl { font-family: 'Orbitron'; font-weight: 900; font-size: 22px; color: #fff; line-height: 1.1; text-shadow: 0 2px 4px rgba(0,0,0,.5); }
+.lb-persona { --ph-1:#2a1a4a; --ph-2:#5a3a8a; } .lb-papel { --ph-1:#c2872f; --ph-2:#e8b04a; } .lb-uncharted { --ph-1:#4a3a1a; --ph-2:#8a6a2f; } .lb-gravity { --ph-1:#1a3a6b; --ph-2:#3a5fa0; } .lb-killzone { --ph-1:#3a3a3a; --ph-2:#6a6a6a; } .lb-ff { --ph-1:#1a4a4a; --ph-2:#2f7a7a; } .lb-hotline { --ph-1:#7a0a7a; --ph-2:#c41ec4; } .lb-dangan { --ph-1:#7a1a1a; --ph-2:#c41e1e; } .lb-soul { --ph-1:#4a1a3a; --ph-2:#8a2f6a; } .lb-spelunky { --ph-1:#2a4a2a; --ph-2:#4a8a4a; }
+.game-info { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.game-title { font-family: 'Orbitron'; font-weight: 900; font-size: 26px; color: #fff; line-height: 1.1; }
+.game-subtitle { font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.55); letter-spacing: 2px; }
+.game-why { max-width: 940px; padding: 12px 22px; background: rgba(255,255,255,.04); border-left: 4px solid var(--ye); font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,.86); text-align: left; }
+.game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 6px; }
+.game-why strong { color: var(--ye); }
+
+.cierre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 18px; }
+.cierre-card { background: var(--card-bg); border: 2px solid; border-radius: 4px; padding: 26px; }
+.cierre-card.cy { border-color: var(--cy); box-shadow: 0 0 22px rgba(0,229,255,.18); }
+.cierre-card.mg { border-color: var(--mg); box-shadow: 0 0 22px rgba(255,46,136,.18); }
+.cierre-card h3 { font-family: 'Press Start 2P'; font-size: 11px; letter-spacing: 2px; margin-bottom: 14px; }
+.cierre-card.cy h3 { color: var(--cy); } .cierre-card.mg h3 { color: var(--mg); }
+.cierre-card p { font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6; }
+.cierre-card p strong { color: var(--ye); }
+
+.cam-quote { background: rgba(255,210,63,.07); border-left: 4px solid var(--ye); padding: 22px 26px; margin-top: 22px; font-family: 'Share Tech Mono'; font-size: 16px; font-style: italic; color: rgba(255,255,255,.88); line-height: 1.6; }
+.cam-quote .lbl { display: block; font-style: normal; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 10px; }
+
+ul.checklist { list-style: none; margin-top: 10px; }
+ul.checklist li { padding: 14px 20px; border-left: 4px solid; margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5; }
+ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
+ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
+ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
+ul.checklist li strong.ye { color: var(--ye); } ul.checklist li strong.cy { color: var(--cy); } ul.checklist li strong.mg { color: var(--mg); }
+
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6,3,15,.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; } .nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; }
+.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
+::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--dk); } ::-webkit-scrollbar-thumb { background: var(--cy); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · TOP MUNDIAL PSV · GEN 8</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 8 PORTÁTIL · CONSENSO CRÍTICO 2026</div>
+      <div class="ep-title">TOP 10 <span class="accent">PS VITA</span> MUNDIAL</div>
+      <div class="ep-sub">LO QUE LA CRÍTICA AMA · DEL #10 AL #1</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <h1>BLOQUE 2 · SETUP</h1>
+    <h2 class="cy">El consenso de 5 fuentes · y el dato Koko</h2>
+    <div class="intro-grid">
+      <div class="intro-card">
+        <h3>FUENTES CONSULTADAS</h3>
+        <p>IGN · GameSpot · Push Square · Eurogamer · Metacritic. <strong>Los primeros 5 son consenso absoluto</strong>. Del 6 al 10 hay rotación pero estos son los más mencionados.</p>
+      </div>
+      <div class="intro-card mg">
+        <h3>EL DATO KOKO</h3>
+        <p><strong>Koko tiene 8 de los 10</strong> en su colección. Sin haber leído crítica antes. <strong>La crítica acertó con el coleccionista.</strong></p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">PARA CÁMARA</span>
+      "Diez juegos. La crítica del mundo entero coincide en que estos son los mejores de la PS Vita. Y Koko tiene ocho de los diez en su colección sin haber leído ninguna lista. Eso ya es <strong>un dato</strong>."
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="game-pos"><span class="hash">#</span>10</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">90</span></div><div class="koko-tag no">NO TIENE</div></div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-mundial/spelunky.jpg" alt="Spelunky" onerror="this.style.display='none'"><div class="ph lb-spelunky"><div class="ico">⛏️</div><div class="lbl">Spelunky</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Spelunky</div>
+        <div class="game-subtitle">2013 · MOSSMOUTH · ROGUELIKE · INDIE</div>
+        <div class="game-why"><span class="lbl">POR QUÉ LO AMA LA CRÍTICA</span>Roguelike perfecto · cada partida es nueva · física precisa · diseño que enseña a la audiencia sin tutoriales. <strong>Metacritic 90</strong>. PS Vita era la consola ideal para este formato — partida corta, controles físicos. <strong>Koko no lo tiene — recomendación abierta para comentarios.</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="game-pos"><span class="hash">#</span>9</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">84</span></div><div class="koko-tag has">★ KOKO TIENE</div></div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-mundial/soul-sacrifice.jpg" alt="Soul Sacrifice" onerror="this.style.display='none'"><div class="ph lb-soul"><div class="ico">🩸</div><div class="lbl">Soul Sacrifice</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Soul Sacrifice (base + Delta)</div>
+        <div class="game-subtitle">2013-14 · SONY JAPAN STUDIO + COMCEPT · DARK ACTION</div>
+        <div class="game-why"><span class="lbl">POR QUÉ LO AMA LA CRÍTICA</span>Keiji Inafune (Mega Man) en Comcept co-desarrollado con Sony Japan Studio. <strong>Premise oscura: sacrificás a tus aliados por poder mágico</strong>. Cult absoluto. Koko tiene la base (€20 hoy) — pero <strong>Soul Sacrifice Delta vale $230</strong> en el top precios. Diferencia entre versión normal y expandida = $200.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="game-pos"><span class="hash">#</span>8</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">86</span></div><div class="koko-tag has">★ KOKO TIENE</div></div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-mundial/danganronpa-2.jpg" alt="Danganronpa 2" onerror="this.style.display='none'"><div class="ph lb-dangan"><div class="ico">🐻</div><div class="lbl">Danganronpa 2</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Danganronpa 2: Goodbye Despair</div>
+        <div class="game-subtitle">2014 · SPIKE CHUNSOFT · VISUAL NOVEL + INVESTIGACIÓN</div>
+        <div class="game-why"><span class="lbl">POR QUÉ LO AMA LA CRÍTICA</span>Visual novel + investigación + juicios judiciales en una isla tropical. <strong>El doble del primer Danganronpa</strong>. Spike Chunsoft + Kazutaka Kodaka como autor — narrativa con muerte y misterio constante. Cult masivo. Koko tiene esta secuela en su colección.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="game-pos"><span class="hash">#</span>7</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">89</span></div><div class="koko-tag no">NO TIENE</div></div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-mundial/hotline-miami.jpg" alt="Hotline Miami" onerror="this.style.display='none'"><div class="ph lb-hotline"><div class="ico">🌃</div><div class="lbl">Hotline Miami</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Hotline Miami</div>
+        <div class="game-subtitle">2013 · DENNATON · TOP-DOWN VIOLENCIA + SYNTHWAVE</div>
+        <div class="game-why"><span class="lbl">POR QUÉ LO AMA LA CRÍTICA</span><strong>Top-down ultra-violento con OST synthwave</strong> que se volvió referencia cultural. Dennaton Games hizo el indie definitivo de la generación 7-8. Metacritic 89 universal. <strong>Port a PS Vita es la versión preferida por muchos críticos</strong>. Koko no lo tiene — recomendación abierta para comentarios.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="game-pos"><span class="hash">#</span>6</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">86</span></div><div class="koko-tag has">★ KOKO TIENE</div></div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-mundial/ffx-hd.jpg" alt="FF X / X-2 HD" onerror="this.style.display='none'"><div class="ph lb-ff"><div class="ico">🎮</div><div class="lbl">FF X / X-2 HD</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Final Fantasy X / X-2 HD Remaster</div>
+        <div class="game-subtitle">2014 · SQUARE ENIX · DOS JRPG EN UN CARTUCHO</div>
+        <div class="game-why"><span class="lbl">POR QUÉ LO AMA LA CRÍTICA</span>Dos JRPGs masivos en un cartucho. <strong>Final Fantasy X (2001) sigue siendo top 5 de la saga para muchos críticos</strong>. La versión PS Vita es la portable definitiva — Square Enix optimizó la presentación para pantalla chica. <strong>Tu primer FF en cartucho desde Pokemon</strong>.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="game-pos"><span class="hash">#</span>5</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">78</span></div><div class="koko-tag has">★ KOKO TIENE</div></div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-mundial/killzone-mercenary.jpg" alt="Killzone Mercenary" onerror="this.style.display='none'"><div class="ph lb-killzone"><div class="ico">🎯</div><div class="lbl">Killzone Mercenary</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Killzone: Mercenary</div>
+        <div class="game-subtitle">2013 · SONY CAMBRIDGE · FPS · CALIDAD CONSOLA</div>
+        <div class="game-why"><span class="lbl">POR QUÉ LO AMA LA CRÍTICA</span><strong>El único FPS portátil de su época con tecnología de consola</strong>. Sony Cambridge usó el motor Killzone 3 modificado. Multiplayer cross-region. <strong>La crítica lo amó porque demostró que la PS Vita podía hacer juegos AAA</strong>. Lástima que Sony abandonó la consola justo después.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="game-pos"><span class="hash">#</span>4</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">83</span></div><div class="koko-tag has">★ KOKO TIENE</div></div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-mundial/gravity-rush.jpg" alt="Gravity Rush" onerror="this.style.display='none'"><div class="ph lb-gravity"><div class="ico">🌀</div><div class="lbl">Gravity Rush</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Gravity Rush</div>
+        <div class="game-subtitle">2012 · SONY JAPAN STUDIO · ACTION CON GRAVEDAD</div>
+        <div class="game-why"><span class="lbl">POR QUÉ LO AMA LA CRÍTICA</span><strong>El ángulo más universal de PS Vita.</strong> Sony Japan Studio creó un mundo flotante donde controlás la gravedad para caer en cualquier dirección. Premio "Juego del año portátil" en varios sitios. <strong>Inauguró la era de Sony Japan Studio experimentando con PS Vita</strong>. Después vinieron Tearaway y Soul Sacrifice — todos del mismo estudio.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="game-pos"><span class="hash">#</span>3</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">80</span></div><div class="koko-tag has">★ KOKO TIENE</div></div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-mundial/uncharted-ga.jpg" alt="Uncharted Golden Abyss" onerror="this.style.display='none'"><div class="ph lb-uncharted"><div class="ico">🗺️</div><div class="lbl">Uncharted GA</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Uncharted: Golden Abyss</div>
+        <div class="game-subtitle">2011 · BEND STUDIO · LAUNCH TITLE</div>
+        <div class="game-why"><span class="lbl">POR QUÉ LO AMA LA CRÍTICA</span><strong>Launch title canónico de PS Vita</strong>. Bend Studio (los de Syphon Filter) hizo un Uncharted específico para portátil — controles táctiles, giroscopio. <strong>Fue el juego que demostró que PS Vita era una consola de verdad</strong> a la prensa cuando salió. Metacritic 80 al día uno — alto para launch title.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="game-pos"><span class="hash">#</span>2</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">87</span></div><div class="koko-tag has">★ KOKO TIENE</div></div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-mundial/tearaway.jpg" alt="Tearaway" onerror="this.style.display='none'"><div class="ph lb-papel"><div class="ico">📜</div><div class="lbl">Tearaway</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Tearaway</div>
+        <div class="game-subtitle">2013 · MEDIA MOLECULE · PAPELERÍA INTERACTIVA</div>
+        <div class="game-why"><span class="lbl">POR QUÉ LO AMA LA CRÍTICA</span><strong>Los creadores de LittleBigPlanet hicieron este juego donde sos UN mensajero de papel</strong>. Usa la pantalla táctil frontal + el touchpad trasero + giroscopio + cámara + micrófono. <strong>Más características únicas de PS Vita en un solo juego que cualquier otro</strong>. Metacritic 87. Es el "juego que justifica la consola" según muchos críticos.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="slide-game">
+      <div class="game-head"><div class="game-pos"><span class="hash">#</span>1</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">93</span></div><div class="koko-tag has">★ KOKO TIENE</div></div></div>
+      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-mundial/persona4-golden.jpg" alt="Persona 4 Golden" onerror="this.style.display='none'"><div class="ph lb-persona"><div class="ico">🎴</div><div class="lbl">P4 Golden</div></div></div></div></div>
+      <div class="game-info">
+        <div class="game-title">Persona 4 Golden</div>
+        <div class="game-subtitle">2012 · ATLUS · JRPG + SIM SOCIAL · METACRITIC 93</div>
+        <div class="game-why"><span class="lbl">POR QUÉ ES EL #1</span><strong>El consenso #1 universal de PS Vita.</strong> Atlus tomó Persona 4 (2008 PS2), agregó contenido nuevo, nueva persona social, finales nuevos. <strong>Metacritic 93 — el más alto de la consola</strong>. JRPG + simulador social + dungeon crawler en un solo juego. 80+ horas. <strong>El juego que pasó al canon de TODOS los rankings de mejores JRPG de la historia</strong>. Hoy también está en PS4/PS5/Switch/PC, pero la versión PS Vita es la original — y eso le da peso histórico.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <h1>CIERRE · LA PARADOJA DEL CATÁLOGO</h1>
+    <h2 class="cy">Crítica vs. mercado · misma consola, distinto valor</h2>
+    <div class="cierre-grid">
+      <div class="cierre-card cy">
+        <h3>EL VEREDICTO DE LA CRÍTICA</h3>
+        <p>Diez juegos universales. <strong>Tres de Sony Japan Studio</strong> (Gravity Rush, Tearaway con Media Molecule, Soul Sacrifice). <strong>Cuatro JRPG japoneses</strong>. Dos indies de culto. Y Persona 4 Golden como #1 absoluto.</p>
+      </div>
+      <div class="cierre-card mg">
+        <h3>LO QUE TENGO YO</h3>
+        <p><strong>8 de los 10</strong> en mi colección. Sin haber leído crítica antes. Me faltan Hotline Miami y Spelunky. <strong>¿Debería buscarlos?</strong> Comenten abajo.</p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">FRASE DE CIERRE PARA CÁMARA</span>
+      "Diez juegos. <strong>Ocho los tengo en mi colección sin haber leído crítica antes</strong>. La crítica acertó. Pero Koko también tiene <em>su</em> top personal — y eso lo vemos en el próximo episodio del arco PS Vita. <strong>El game show donde él trae sus diez favoritos y descubrimos cuántos coinciden con la opinión del mundo</strong>."
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <h1>CHECKLIST · PRE-GRABACIÓN</h1>
+    <h2 class="cy">Antes de prender cámaras</h2>
+    <ul class="checklist">
+      <li class="ye"><strong class="ye">☐ Luis</strong> — verificar Metacritic mayo 2026. Memorizar 10 anclas + frase fija de cierre con transición.</li>
+      <li class="ye"><strong class="ye">☐ Koko</strong> — los 8 cartuchos físicos que tiene del top 10 a la vista. Anécdota personal por cada uno (15-20 seg).</li>
+      <li class="cy"><strong class="cy">☐ Manejar los 2 que NO tiene</strong> (Hotline Miami #7, Spelunky #10) — reconocer en cámara: "estos me faltan".</li>
+      <li class="cy"><strong class="cy">☐ Slide #9 Soul Sacrifice</strong> — explicar diferencia base vs Delta. Callback a precios.</li>
+      <li class="mg"><strong class="mg">☐ Ritmo</strong> — ~90 seg por slide. Persona 4 Golden (#1) puede tomar 2 min — es el clímax.</li>
+      <li class="mg"><strong class="mg">☐ Frase de cierre</strong> — memorizar palabra por palabra. Es lo que la gente clipea.</li>
+    </ul>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center"><div class="nav-counter" id="counter">01 / 14</div><div class="nav-progress"><div class="bar" id="bar"></div></div></div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn'); const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter'); const bar = document.getElementById('bar');
+let current = 0; const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active'); current = i; slides[current].classList.add('active');
+  prevBtn.disabled = current === 0; nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); } if (e.key === 'End') { go(total - 1); }
+});
+go(0);
+</script>
+</body>
+</html>

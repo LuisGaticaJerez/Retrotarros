@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Estudio · Archivo PS Vita Koko</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root { --mg:#FF2E88; --cy:#00E5FF; --ye:#FFD23F; --pu:#2D1B69; --bo:#F5F0E8; --dk:#06030f; --card-bg:rgba(12,6,32,.92); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body { background-image: radial-gradient(ellipse 100% 50% at 50% -5%, rgba(0,229,255,.10) 0%, transparent 65%), repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px), repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px); }
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6,3,15,.97); border-bottom: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--cy); }
+.dot { width: 10px; height: 10px; background: var(--cy); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 32px 48px; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 58px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .accent { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; }
+
+.slide h1 { font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye); letter-spacing: 4px; margin-bottom: 6px; border-left: 4px solid var(--ye); padding-left: 16px; }
+.slide h2 { font-family: 'Orbitron'; font-weight: 900; font-size: 38px; color: #fff; letter-spacing: 1px; margin: 8px 0 20px 20px; line-height: 1.05; }
+.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.slide h2.ye { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.45); }
+
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 16px; }
+.stat-card { background: var(--card-bg); border: 2px solid; border-radius: 4px; padding: 26px; text-align: center; }
+.stat-card.cy { border-color: var(--cy); box-shadow: 0 0 22px rgba(0,229,255,.18); }
+.stat-card.mg { border-color: var(--mg); box-shadow: 0 0 22px rgba(255,46,136,.18); }
+.stat-card.ye { border-color: var(--ye); box-shadow: 0 0 22px rgba(255,210,63,.18); }
+.stat-card h3 { font-family: 'Press Start 2P'; font-size: 10px; letter-spacing: 2px; margin-bottom: 14px; }
+.stat-card.cy h3 { color: var(--cy); } .stat-card.mg h3 { color: var(--mg); } .stat-card.ye h3 { color: var(--ye); }
+.stat-card .big { font-family: 'Orbitron'; font-weight: 900; font-size: 56px; letter-spacing: 1px; line-height: 1; margin: 12px 0; }
+.stat-card.cy .big { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+.stat-card.mg .big { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.4); }
+.stat-card.ye .big { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.4); }
+.stat-card p { font-family: 'Share Tech Mono'; font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.5; }
+
+.cat-card { background: var(--card-bg); border: 2px solid var(--cy); border-radius: 4px; padding: 22px 26px; margin-top: 14px; box-shadow: 0 0 18px rgba(0,229,255,.12); }
+.cat-card.mg { border-color: var(--mg); box-shadow: 0 0 18px rgba(255,46,136,.12); }
+.cat-card.ye { border-color: var(--ye); box-shadow: 0 0 18px rgba(255,210,63,.12); }
+.cat-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.cat-label { font-family: 'Press Start 2P'; font-size: 10px; letter-spacing: 2px; color: var(--cy); }
+.cat-card.mg .cat-label { color: var(--mg); } .cat-card.ye .cat-label { color: var(--ye); }
+.cat-count { font-family: 'Orbitron'; font-weight: 900; font-size: 32px; color: #fff; }
+.cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px 18px; font-family: 'Share Tech Mono'; font-size: 13px; }
+.cat-grid .game { padding: 5px 0; color: rgba(255,255,255,.85); border-bottom: 1px dashed rgba(255,255,255,.08); }
+.cat-grid .game strong { color: var(--ye); }
+
+.joya-card { background: linear-gradient(135deg, rgba(255,46,136,.1), rgba(0,229,255,.05)); border: 2px solid var(--mg); border-radius: 4px; padding: 32px 36px; margin-top: 14px; box-shadow: 0 0 28px rgba(255,46,136,.22); }
+.joya-card .label { font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 3px; margin-bottom: 12px; }
+.joya-card .juego { font-family: 'Orbitron'; font-weight: 900; font-size: 36px; color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.5); margin-bottom: 14px; line-height: 1.1; }
+.joya-card .desc { font-family: 'Share Tech Mono'; font-size: 16px; color: rgba(255,255,255,.85); line-height: 1.6; }
+.joya-card .desc strong { color: var(--ye); }
+
+.top-caros-grid { display: grid; grid-template-columns: 50px 1fr 120px 150px; gap: 0; font-family: 'Share Tech Mono'; margin-top: 14px; }
+.top-caros-grid .hdr { font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; padding: 10px 12px; border-bottom: 2px solid var(--ye); }
+.top-caros-grid .row { display: contents; }
+.top-caros-grid .row > div { padding: 11px 12px; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 14px; }
+.top-caros-grid .pos { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-align: center; }
+.top-caros-grid .name { font-family: 'Orbitron'; font-weight: 700; color: #fff; }
+.top-caros-grid .price { font-family: 'Orbitron'; font-weight: 900; color: var(--mg); text-align: right; font-size: 16px; }
+.top-caros-grid .origin { color: rgba(255,255,255,.6); font-size: 12px; }
+
+.cam-quote { background: rgba(255,210,63,.07); border-left: 4px solid var(--ye); padding: 22px 26px; margin-top: 22px; font-family: 'Share Tech Mono'; font-size: 17px; font-style: italic; color: rgba(255,255,255,.88); line-height: 1.6; }
+.cam-quote .lbl { display: block; font-style: normal; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 10px; }
+
+ul.checklist { list-style: none; margin-top: 10px; }
+ul.checklist li { padding: 14px 20px; border-left: 4px solid; margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5; }
+ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
+ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
+ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
+ul.checklist li strong.ye { color: var(--ye); } ul.checklist li strong.cy { color: var(--cy); } ul.checklist li strong.mg { color: var(--mg); }
+
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6,3,15,.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; } .nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(0,229,255,.5); }
+.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
+::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--dk); } ::-webkit-scrollbar-thumb { background: var(--cy); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · ARCHIVO PSV · GEN 8</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 8 PORTÁTIL · EL ARCHIVO</div>
+      <div class="ep-title">LA <span class="accent">COLECCIÓN PS VITA</span> COMPLETA</div>
+      <div class="ep-sub">91 CARTUCHOS · 95% IMPORTADOS DE USA</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <h1>EL ARCHIVO EN NÚMEROS</h1>
+    <h2 class="cy">91 cartuchos + 1 consola</h2>
+    <div class="stats-grid">
+      <div class="stat-card cy"><h3>CARTUCHOS</h3><div class="big">91</div><p>juegos PS Vita · 95% NTSC USA importado · 1 Asian + 1 JP + 3 UK</p></div>
+      <div class="stat-card mg"><h3>VALOR LOOSE</h3><div class="big">€2,131</div><p>~CLP $2.030.000 · precio actual de mercado europeo</p></div>
+      <div class="stat-card ye"><h3>VALOR CIB</h3><div class="big">€2,601</div><p>~CLP $2.470.000 · si todos en caja completa</p></div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">PARA CONTEXTO EN CÁMARA</span>
+      "Noventa y un cartuchos. <strong>Ochenta y seis vienen importados de Estados Unidos.</strong> La PS Vita NO se vendió oficialmente en Chile. Sony hizo un intento de lanzamiento en 2012, abandonó en menos de dos años. Lo que ven aquí costó importarse uno por uno."
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <h1>BLOQUE · ACTION + LEGO</h1>
+    <h2 class="mg">El género dominante (46 de 91)</h2>
+    <div class="cat-card mg">
+      <div class="cat-header"><div class="cat-label">ACTION</div><div class="cat-count">46</div></div>
+      <div class="cat-grid">
+        <div class="game"><strong>Persona 4 Golden</strong></div>
+        <div class="game"><strong>Uncharted: Golden Abyss</strong></div>
+        <div class="game"><strong>Gravity Rush</strong></div>
+        <div class="game">Dragon's Crown</div>
+        <div class="game">Killzone: Mercenary</div>
+        <div class="game">Freedom Wars</div>
+        <div class="game">Soul Sacrifice</div>
+        <div class="game">Toukiden: Kiwami</div>
+        <div class="game">God Eater 2 + Rage Burst</div>
+        <div class="game">Ninja Gaiden Sigma Plus</div>
+        <div class="game">Lost Dimension</div>
+        <div class="game">Danganronpa 2</div>
+        <div class="game">Ragnarok Odyssey</div>
+        <div class="game">Resistance: Burning Skies</div>
+        <div class="game">Assassin's Creed III: Liberation</div>
+        <div class="game">Assassin's Creed Chronicles</div>
+        <div class="game">Batman: Arkham Origins Blackgate</div>
+        <div class="game">Minecraft PS Vita Ed.</div>
+        <div class="game">Spy Hunter</div>
+        <div class="game">Mind Zero</div>
+        <div class="game">Terraria</div>
+        <div class="game">Touch My Katamari</div>
+        <div class="game">Unit 13</div>
+        <div class="game">Shantae: Half-Genie Hero</div>
+        <div class="game">Silent Hill: Book of Memories</div>
+        <div class="game">Disney Infinity 2.0 Marvel</div>
+        <div class="game"><strong>Invizimals: The Alliance</strong></div>
+      </div>
+    </div>
+    <div class="cat-card ye" style="margin-top: 14px;">
+      <div class="cat-header"><div class="cat-label">SUB-BLOQUE · LA SAGA LEGO COMPLETA</div><div class="cat-count">10</div></div>
+      <div class="cat-grid">
+        <div class="game">LEGO Batman 2</div>
+        <div class="game">LEGO Batman 3</div>
+        <div class="game">LEGO Harry Potter 5-7</div>
+        <div class="game">LEGO Jurassic World</div>
+        <div class="game">LEGO Marvel Avengers</div>
+        <div class="game">LEGO Marvel Super Heroes</div>
+        <div class="game">LEGO Movie Videogame</div>
+        <div class="game">LEGO Ninjago Nindroids</div>
+        <div class="game">LEGO The Hobbit</div>
+        <div class="game">LEGO The Lord of the Rings</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <h1>BLOQUE · FIGHTING + RPG</h1>
+    <h2 class="cy">10 peleas + 8 RPGs</h2>
+    <div class="cat-card cy">
+      <div class="cat-header"><div class="cat-label">FIGHTING</div><div class="cat-count">10</div></div>
+      <div class="cat-grid">
+        <div class="game">Arcana Heart 3 LOVE MAX</div>
+        <div class="game">BlazBlue: Chrono Phantasma</div>
+        <div class="game">BlazBlue: Continuum Shift Extend</div>
+        <div class="game">Dead or Alive 5 Plus</div>
+        <div class="game">Dengeki Bunko: Fighting Climax</div>
+        <div class="game">Injustice: Gods Among Us (Ult.)</div>
+        <div class="game">Mortal Kombat</div>
+        <div class="game">PlayStation All-Stars Battle</div>
+        <div class="game">Reality Fighters</div>
+        <div class="game">Street Fighter X Tekken</div>
+      </div>
+    </div>
+    <div class="cat-card mg" style="margin-top: 14px;">
+      <div class="cat-header"><div class="cat-label">RPG</div><div class="cat-count">8</div></div>
+      <div class="cat-grid">
+        <div class="game"><strong>Final Fantasy X / X-2 HD Remaster</strong></div>
+        <div class="game">Borderlands 2</div>
+        <div class="game">Criminal Girls: Invite Only</div>
+        <div class="game">God Wars: Future Past</div>
+        <div class="game">Hyperdimension Neptunia Re;Birth2</div>
+        <div class="game">Natural Doctrine</div>
+        <div class="game">Sword Art Online: Lost Song</div>
+        <div class="game">Valhalla Knights 3</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <h1>BLOQUE · SPORTS + RACING + INDIE + RESTO</h1>
+    <h2 class="ye">El catálogo nicho</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 14px;">
+      <div class="cat-card ye">
+        <div class="cat-header"><div class="cat-label">SPORTS</div><div class="cat-count">6</div></div>
+        <div class="cat-grid" style="grid-template-columns: 1fr;">
+          <div class="game"><strong>DoA Xtreme 3: Venus</strong> (Asian)</div>
+          <div class="game">FIFA 15</div>
+          <div class="game">FIFA Soccer</div>
+          <div class="game">Hot Shots Golf: World Inv.</div>
+          <div class="game">MLB 13: The Show</div>
+          <div class="game">Virtua Tennis 4: World Tour</div>
+        </div>
+      </div>
+      <div class="cat-card cy">
+        <div class="cat-header"><div class="cat-label">RACING</div><div class="cat-count">4</div></div>
+        <div class="cat-grid" style="grid-template-columns: 1fr;">
+          <div class="game">F1 2011</div>
+          <div class="game">ModNation Racers: Road Trip</div>
+          <div class="game">Need for Speed: Most Wanted</div>
+          <div class="game">Wipeout 2048</div>
+        </div>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px;">
+      <div class="cat-card mg">
+        <div class="cat-header"><div class="cat-label">PLATFORMER</div><div class="cat-count">3</div></div>
+        <div class="cat-grid" style="grid-template-columns: 1fr;">
+          <div class="game"><strong>Tearaway</strong></div>
+          <div class="game">Rayman Legends</div>
+          <div class="game">Rayman Origins</div>
+        </div>
+      </div>
+      <div class="cat-card cy">
+        <div class="cat-header"><div class="cat-label">ADVENTURE</div><div class="cat-count">4</div></div>
+        <div class="cat-grid" style="grid-template-columns: 1fr;">
+          <div class="game">Child of Light</div>
+          <div class="game">Corpse Party: Blood Drive</div>
+          <div class="game">Walking Dead Telltale S1</div>
+          <div class="game"><strong>Zero Escape: VLR</strong></div>
+        </div>
+      </div>
+      <div class="cat-card ye">
+        <div class="cat-header"><div class="cat-label">OTROS</div><div class="cat-count">8</div></div>
+        <div class="cat-grid" style="grid-template-columns: 1fr; font-size: 12px;">
+          <div class="game">Yomawari: Midnight Shadows</div>
+          <div class="game">Senran Kagura Estival V.</div>
+          <div class="game">Metal Gear Solid HD Coll.</div>
+          <div class="game">Velocity 2X</div>
+          <div class="game">CoD: Black Ops Declassified</div>
+          <div class="game">SUPERBEAT XONiC</div>
+          <div class="game">LittleBigPlanet PSV</div>
+          <div class="game">Smart As / Angry Birds / MJ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <h1>LA JOYA ESCONDIDA</h1>
+    <h2 class="mg">Un cartucho de mi colección vale €240</h2>
+    <div class="joya-card">
+      <div class="label">CALLBACK AL TOP PRECIOS DEL ARCO</div>
+      <div class="juego">Invizimals: The Alliance</div>
+      <div class="desc">
+        <strong>Exclusivo Sony Computer Entertainment Europe.</strong> Nunca tuvo distribución en NA ni JP. Sony hizo este juego de realidad aumentada para PS Vita en 2014 — distribución casi solo en supermercados europeos. Después Sony cerró Magenta Software (el estudio), saga muerta.
+        <br><br>
+        <strong>Hoy vale €240 CIB</strong> — más que TODOS los juegos LEGO de la colección juntos. Los coleccionistas europeos lo redescubrieron en 2020+ y los precios escalaron rápido.
+        <br><br>
+        El cartucho de Koko viene importado de USA por un seller que lo había conseguido de Europa antes. Doble salto regional para llegar acá.
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <h1>LOS 8 MÁS CAROS DE LA COLECCIÓN</h1>
+    <h2 class="mg">Valor CIB · mayo 2026</h2>
+    <div class="top-caros-grid">
+      <div class="hdr">#</div><div class="hdr">JUEGO</div><div class="hdr">CIB €</div><div class="hdr">ORIGEN</div>
+      <div class="row"><div class="pos">1</div><div class="name">Invizimals: The Alliance</div><div class="price">€240</div><div class="origin">SCEE Europa</div></div>
+      <div class="row"><div class="pos">2</div><div class="name">Dead or Alive Xtreme 3: Venus</div><div class="price">€100</div><div class="origin">Taiwan/Asia</div></div>
+      <div class="row"><div class="pos">3</div><div class="name">Silent Hill: Book of Memories</div><div class="price">€93</div><div class="origin">NTSC USA</div></div>
+      <div class="row"><div class="pos">4</div><div class="name">Disney Infinity 2.0: Marvel Super Heroes</div><div class="price">€53</div><div class="origin">NTSC USA</div></div>
+      <div class="row"><div class="pos">5</div><div class="name">Velocity 2X: Critical Mass Edition</div><div class="price">€52</div><div class="origin">Limited Run NTSC</div></div>
+      <div class="row"><div class="pos">6</div><div class="name">God of War Collection</div><div class="price">€50</div><div class="origin">NTSC USA</div></div>
+      <div class="row"><div class="pos">7</div><div class="name">Jak and Daxter Collection</div><div class="price">€48</div><div class="origin">NTSC USA</div></div>
+      <div class="row"><div class="pos">8</div><div class="name">Shantae: Half-Genie Hero (Risky Beats)</div><div class="price">€45</div><div class="origin">Limited Run NTSC</div></div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">SORPRESA DEL TOP</span>
+      <strong>Velocity 2X y Shantae son ediciones Limited Run Games</strong> — distribuidoras especializadas en releases físicos de indies. Esas tiradas son chicas a propósito: 3,000-5,000 copias. Por eso valen lo que valen.
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <h1>CIERRE · LO QUE SIGUE</h1>
+    <h2 class="cy">Una cosa más...</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 18px;">
+      <div style="background: var(--card-bg); border: 2px solid var(--cy); border-radius: 4px; padding: 26px;">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 2px; margin-bottom: 14px;">LA CONSOLA</h3>
+        <p style="font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6;">
+          <strong style="color: var(--cy);">PS Vita Slim White (PCH-2000)</strong> · €223 CIB.<br>
+          La revisión 2013 — pantalla LCD en vez de OLED, más liviana, mejor batería. Una sola en la colección — la que importé de USA.
+        </p>
+      </div>
+      <div style="background: var(--card-bg); border: 2px solid var(--mg); border-radius: 4px; padding: 26px;">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 11px; color: var(--mg); letter-spacing: 2px; margin-bottom: 14px;">LO QUE NO MOSTRAMOS</h3>
+        <p style="font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6;">
+          <strong style="color: var(--mg);">Por qué Sony abandonó la PS Vita en Latam.</strong> Por qué los noventa y un cartuchos están casi todos importados. <strong>Eso lo cuento en el próximo episodio del arco.</strong>
+        </p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">FRASE DE CIERRE + TEASER</span>
+      "Eso es el archivo PS Vita de Retrotarros. Noventa y un cartuchos, una consola, dos millones quinientas mil lucas chilenas de coleccionismo importado. <strong>Todo lo que ven aquí lo trajo el correo</strong>. Porque Sony nunca trajo la PS Vita a Chile en serio. Y la historia de por qué — esa la contamos en el episodio sobre <strong>la consola que nos quitaron</strong>."
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <h1>CHECKLIST · POST-PRODUCCIÓN</h1>
+    <h2 class="cy">Antes de grabar</h2>
+    <ul class="checklist">
+      <li class="ye"><strong class="ye">☐ Luis</strong> — memorizar las 8 anclas + frase fija de cierre. Confirmar precios mayo 2026.</li>
+      <li class="ye"><strong class="ye">☐ Koko</strong> — anécdota sobre cómo importabas los cartuchos USA. ¿Familiar? ¿Courier? ¿Cómo elegías qué traer?</li>
+      <li class="cy"><strong class="cy">☐ B-roll</strong> — plano cenital previo de los 91 cartuchos en grilla.</li>
+      <li class="cy"><strong class="cy">☐ PSV física</strong> — la PCH-2000 Slim White sobre la mesa para el slide 08.</li>
+      <li class="mg"><strong class="mg">☐ Ritmo</strong> — ~2 min por bloque de género. Invizimals (slide 06) puede tomar 2.5 min — es el clímax.</li>
+      <li class="mg"><strong class="mg">☐ Tono</strong> — <strong>celebratorio del coleccionismo de importación</strong>, NO quejoso. "Estos 91 cruzaron el Pacífico".</li>
+      <li class="mg"><strong class="mg">☐ Teaser</strong> — el cierre tiene que sembrar fuerte `psvita-no-latam`. Memorizar palabra por palabra.</li>
+    </ul>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center"><div class="nav-counter" id="counter">01 / 09</div><div class="nav-progress"><div class="bar" id="bar"></div></div></div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn'); const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter'); const bar = document.getElementById('bar');
+let current = 0; const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active'); current = i; slides[current].classList.add('active');
+  prevBtn.disabled = current === 0; nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); } if (e.key === 'End') { go(total - 1); }
+});
+go(0);
+</script>
+</body>
+</html>

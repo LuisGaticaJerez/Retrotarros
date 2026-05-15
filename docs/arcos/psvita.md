@@ -9,7 +9,7 @@
 ## Resumen
 
 - **Episodios planeados:** 8 largos + 1 musical paralelo (total 9).
-- **Cerrados:** 0 de 9 (0%) — arranque del arco.
+- **Cerrados:** 4 de 9 (44%) — los 3 rankings (mundial / precios / Retrotarros vs mundo) + el archivo. Faltan joyas, no-Latam, vs 3DS, biográfico, OST.
 - **Objetivo narrativo:** cubrir la PS Vita desde 7 ángulos complementarios — la crítica, el mercado, la voz personal de Koko, el archivo entero, las joyas ocultas, lo que Sony abandonó en Latam, el contexto vs 3DS y un biográfico.
 - **Cuándo cerramos el arco:** cuando los 9 episodios estén publicados. Después saltamos a **SNES** (114 ítems en colección — el arco más grande).
 
@@ -31,17 +31,17 @@
 
 ## Inventario de episodios (propuesto)
 
-| # | Slug | Tipo | Estado |
-|---|------|------|--------|
-| 1a | `psvita-top-mundial` | Ranking · crítica | ☐ Idea |
-| 1b | `psvita-top-precios` | Ranking · mercado | ☐ Idea |
-| 1c | `psvita-retrotarros-vs-mundo` | Ranking · Koko personal (game show) | ☐ Idea |
-| 2 | `psvita-archivo-koko` | Íntimo · los 91 juegos | ☐ Idea |
-| 3 | `psvita-joyas-ocultas` | Curaduría · joyas Metacritic 80+ de la colección | ☐ Idea |
-| 4 | `psvita-no-latam` | La consola que Sony abandonó en Latam | ☐ Idea |
-| 5 | `psvita-vs-3ds` | Cómo Sony perdió la guerra portátil | ☐ Idea |
-| 6 | `psvita-biografico` | Compositor o studio japonés clave (TBD) | ☐ Idea |
-| 7 | `psvita-ost-bateria` | Musical (serie paralela) | ☐ Idea |
+| # | Slug | Tipo | Estado | Pauta | Discusion | HTML |
+|---|------|------|--------|-------|-----------|------|
+| 1a | `psvita-top-mundial` | Ranking · crítica | ✓ Cerrado para grabar | [pauta](../pauta-psvita-top-mundial.md) | [discusion](../discusion-psvita-top-mundial.md) | [html](../../studio/psvita-top-mundial.html) |
+| 1b | `psvita-top-precios` | Ranking · mercado | ✓ Cerrado para grabar | [pauta](../pauta-psvita-top-precios.md) | [discusion](../discusion-psvita-top-precios.md) | [html](../../studio/psvita-top-precios.html) |
+| 1c | `psvita-retrotarros-vs-mundo` | Ranking · Koko personal (game show) | ✓ Cerrado para grabar | [pauta](../pauta-psvita-retrotarros-vs-mundo.md) | [discusion](../discusion-psvita-retrotarros-vs-mundo.md) | [html](../../studio/psvita-retrotarros-vs-mundo.html) |
+| 2 | `psvita-archivo-koko` | Íntimo · los 91 juegos | ✓ Cerrado para grabar | [pauta](../pauta-psvita-archivo-koko.md) | [discusion](../discusion-psvita-archivo-koko.md) | [html](../../studio/psvita-archivo-koko.html) |
+| 3 | `psvita-joyas-ocultas` | Curaduría · joyas Metacritic 80+ de la colección | ☐ Idea | — | — | — |
+| 4 | `psvita-no-latam` | La consola que Sony abandonó en Latam | ☐ Idea | — | — | — |
+| 5 | `psvita-vs-3ds` | Cómo Sony perdió la guerra portátil | ☐ Idea | — | — | — |
+| 6 | `psvita-biografico` | Compositor o studio japonés clave (TBD) | ☐ Idea | — | — | — |
+| 7 | `psvita-ost-bateria` | Musical (serie paralela) | ☐ Idea | — | — | — |
 
 ---
 

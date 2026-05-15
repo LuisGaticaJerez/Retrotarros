@@ -36,6 +36,20 @@ G:\Mi unidad\Studio\pautas\pauta-n64-top-mundial.docx  ← DOCX para imprimir/le
 | `n64-nintendo-vs-playstation` | Cómo perdió Nintendo la generación 5 (tanque del arco) | ✓ Cerrado para grabar | [arco](arcos/n64.md) |
 | `n64-ost-bateria` | OST en batería · Gen 5 (serie paralela) | ☐ Pendiente | [arco](arcos/n64.md) |
 
+### Arco PS Vita (Gen 8 portátil)
+
+| Slug | Episodio | Estado | Tablero |
+|------|----------|--------|---------|
+| `psvita-archivo-koko` | Los 91 cartuchos · €2,601 CIB | ✓ Cerrado para grabar | [arco](arcos/psvita.md) |
+| `psvita-top-mundial` | Top 10 PS Vita según la crítica | ✓ Cerrado para grabar | [arco](arcos/psvita.md) |
+| `psvita-top-precios` | Top 10 PS Vita más caros del mundo | ✓ Cerrado para grabar | [arco](arcos/psvita.md) |
+| `psvita-retrotarros-vs-mundo` | Game show · Koko vs la crítica | ✓ Cerrado para grabar | [arco](arcos/psvita.md) |
+| `psvita-joyas-ocultas` | Curaduría de joyas de la colección | ☐ Pendiente | [arco](arcos/psvita.md) |
+| `psvita-no-latam` | La consola que Sony abandonó en Latam | ☐ Pendiente | [arco](arcos/psvita.md) |
+| `psvita-vs-3ds` | Cómo Sony perdió la guerra portátil | ☐ Pendiente | [arco](arcos/psvita.md) |
+| `psvita-biografico` | Compositor o studio japonés (TBD) | ☐ Pendiente | [arco](arcos/psvita.md) |
+| `psvita-ost-bateria` | OST en batería · Gen 8 (serie paralela) | ☐ Pendiente | [arco](arcos/psvita.md) |
+
 ### Otros (futuros)
 
 | Slug | Episodio | Estado |
