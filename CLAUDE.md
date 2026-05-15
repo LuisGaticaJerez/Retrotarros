@@ -108,6 +108,42 @@ Ejemplos reales ejecutados (2026-05-15):
 - Paper Mario (25 min) → 41 clips · 61 MB
 - Zelda OoT Espantapájaros → 41 clips · 73 MB
 
+## Capturas de slides para edición (regla obligatoria)
+
+Cada HTML del estudio (`studio/<slug>.html`) genera frames PNG 1920×1080 listos para meter directo en DaVinci como B-roll / cortina entre tomas. Sin rebordes, texto crisp a 2x DPI.
+
+**Comando:**
+```powershell
+python scripts/capture-slides.py <slug>
+```
+
+- **Salida repo:** `studio/captures/<slug>/<slug>-slide-NN.png` (gitignored).
+- **Salida Drive:** `G:\Mi unidad\Studio\<slug>\captures\<slug>-slide-NN.png` (sincronizada manualmente con `cp` o `scripts/sync-to-drive.ps1`).
+
+**Cuándo correrlo (obligatorio):**
+1. Al **crear** un HTML de ranking nuevo (top mundial, top precios, retrotarros-vs-mundo, archivo, joyas, etc.).
+2. Al **modificar** un HTML existente (cambios de texto, box arts, datos, slides nuevos) — re-generar las capturas para que la edición siempre tenga frames actualizados.
+3. Cualquier cambio visible en el HTML pide regenerar captures.
+
+**Por qué importa:** Luis edita en DaVinci con estos PNGs como overlay full-screen. Si las capturas están desactualizadas, el video muestra datos viejos. La fuente de verdad sigue siendo el `.html`, pero las capturas son lo que aparece en pantalla.
+
+**Versiones:**
+- Horizontal video 16:9 (default): `python scripts/capture-slides.py <slug>`
+- Vertical shorts 9:16: `python scripts/capture-slides.py <slug> --width 1080 --height 1920`
+
+**Requisitos (una sola vez):** `pip install playwright && python -m playwright install chromium`.
+
+## Workflow obligatorio al cerrar cambios
+
+Cualquier sesión que modifique HTMLs / imágenes / box arts / pautas / discusiones debe terminar con estos pasos en orden:
+
+1. **Commit + push a GitHub** — Claude ejecuta `git add`, `git commit`, `git push origin master`. Sin esto el equipo no ve los cambios.
+2. **Regenerar capturas** (si tocaste HTMLs) — `python scripts/capture-slides.py <slug>` para cada HTML modificado.
+3. **Sync a Drive** — copiar imágenes, HTMLs, DOCX y **capturas** a `G:\Mi unidad\Studio\<slug>\`. Sin esto el PC del estudio queda desactualizado.
+4. **Avisar a Luis** del SHA del último commit + qué cambió.
+
+**Anti-patrón:** dejar cambios solo en el repo o solo en Drive. Las tres ubicaciones (repo local, GitHub, Drive del estudio) deben quedar sincronizadas al cerrar la sesión.
+
 ## Sincronización con Drive del estudio
 
 El PC del estudio Retrotarros consume el contenido desde Google Drive (`G:\Mi unidad\Studio\`). El script `scripts/sync-to-drive.ps1` automatiza la copia:

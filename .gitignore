@@ -31,3 +31,7 @@ Thumbs.db
 
 # DOCX generados desde MD por sync-to-drive.ps1 (la fuente es el .md)
 studio/pautas/*.docx
+
+# Capturas PNG generadas por capture-slides.py (la fuente es el HTML)
+# Se regeneran con: python scripts/capture-slides.py <slug>
+studio/captures/
