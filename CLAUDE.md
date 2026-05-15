@@ -2,6 +2,22 @@
 
 > Lee este archivo completo antes de cualquier acción. Después lee `HANDOFF.md` y los docs relevantes al escenario.
 
+## Ubicaciones canónicas (importante)
+
+Todo el material Retrotarros vive bajo `D:\Recursos Retrotarros\`:
+
+| Ruta canónica | Contenido |
+|---|---|
+| `D:\Recursos Retrotarros\repo\` | **Este git repo.** Clone de `github.com/LuisGaticaJerez/Retrotarros`. |
+| `D:\Recursos Retrotarros\Drive\` | **Junction** a `G:\Mi unidad\` — espejo del Google Drive. Operaciones internas siguen usando `G:\Mi unidad\Studio\` (es el mismo lugar via Drive Desktop). |
+| `D:\Recursos Retrotarros\videos\` | Source MP4s (gameplays largos, GoPro studio sessions, B-roll bruto). |
+| `D:\Recursos Retrotarros\videos\clips\` | Clips B-roll cortos generados por `scripts/extract-broll.ps1` (carpetas `clips-<slug>\`). |
+| `D:\Recursos Retrotarros\RETROTARROS\` | Material crudo de grabación GoPro. |
+| `D:\Recursos Retrotarros\Cap NN - <título>\` | Proyectos DaVinci por episodio. |
+| `D:\Recursos Retrotarros\musica\` `Imagenes\` | Audio y B-roll de imágenes. |
+
+**El repo NO está más en OneDrive.** El backup es GitHub (`master` siempre pusheado). No buscar el repo en `C:\Users\Balbr\OneDrive\Documentos\GitHub\Retrotarros\` — esa ubicación queda obsoleta.
+
 ## Qué es esto
 
 Canal de YouTube en español sobre **Nostalgia + Juegos + Música** (retrogaming + batería). Proyecto chileno. Ver `docs/proyecto.md` para contexto completo.

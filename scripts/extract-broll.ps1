@@ -3,18 +3,19 @@
 # Detecta cortes de escena/cámara y genera 1 MP4 por escena (sin re-encoding).
 #
 # Uso:
-#   .\scripts\extract-broll.ps1 -Video "C:\ruta\al\video.mp4" -Slug "psvita-uncharted"
-#   .\scripts\extract-broll.ps1 -Video "C:\...\Star Fox 64.mp4" -Slug "starfox" -Threshold 4.0 -MinSceneLen 6
+#   .\scripts\extract-broll.ps1 -Video "D:\Recursos Retrotarros\videos\Star Fox 64.mp4" -Slug "starfox"
+#   .\scripts\extract-broll.ps1 -Video "...mp4" -Slug "starfox" -Threshold 4.0 -MinSceneLen 6
 #
 # Parámetros:
 #   -Video        Ruta absoluta al MP4 fuente (obligatorio).
 #   -Slug         Identificador corto para la carpeta de salida (obligatorio).
-#                 Salida = C:\Users\Balbr\Downloads\Video\clips-<slug>\
+#                 Salida = D:\Recursos Retrotarros\videos\clips\clips-<slug>\
 #   -Threshold    Sensibilidad del detector adaptive (default 5.5).
 #                 Bajalo (3.0-4.0) si querés MÁS clips.
 #                 Subilo (7.0-9.0) si querés MENOS clips.
 #   -MinSceneLen  Duración mínima de cada clip en segundos (default 8).
-#   -OutputBase   Carpeta base donde crear clips-<slug> (default C:\Users\Balbr\Downloads\Video).
+#   -OutputBase   Carpeta base donde crear clips-<slug>
+#                 (default D:\Recursos Retrotarros\videos\clips).
 #
 # Requisitos (una sola vez por máquina):
 #   - Python 3.10+
@@ -36,7 +37,7 @@ param(
 
     [int]$MinSceneLen = 8,
 
-    [string]$OutputBase = "C:\Users\Balbr\Downloads\Video"
+    [string]$OutputBase = "D:\Recursos Retrotarros\videos\clips"
 )
 
 # --- Validaciones ---
