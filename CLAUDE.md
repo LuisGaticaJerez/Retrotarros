@@ -4,7 +4,9 @@
 
 ## Qué es esto
 
-Canal de YouTube en español sobre **retrogaming + batería**. Proyecto chileno. Ver `docs/proyecto.md` para contexto completo.
+Canal de YouTube en español sobre **Nostalgia + Juegos + Música** (retrogaming + batería). Proyecto chileno. Ver `docs/proyecto.md` para contexto completo.
+
+> **Tagline público canónico:** `Nostalgia + Juegos + Música`. Es lo que va en banners, gráficas de inicio/fin, headers de pautas y cualquier touchpoint visible al público. Internamente seguimos describiendo el formato como "retrogaming + batería" porque eso describe la mecánica (juegos retro + Koko tocando), pero el tagline al público es el de arriba.
 
 ## Protagonistas
 

@@ -1,6 +1,6 @@
 # RETROTARROS — Pauta de episodio largo
 
-*retrogames + batería*
+*Nostalgia + Juegos + Música*
 
 **Top 10 N64 Mundial — Lo que la crítica ama**
 

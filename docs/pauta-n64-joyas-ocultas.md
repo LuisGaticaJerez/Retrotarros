@@ -1,6 +1,6 @@
 # RETROTARROS — Pauta de episodio largo
 
-*retrogames + batería*
+*Nostalgia + Juegos + Música*
 
 **Joyas ocultas del N64 — Los juegos buenos que nadie recuerda**
 

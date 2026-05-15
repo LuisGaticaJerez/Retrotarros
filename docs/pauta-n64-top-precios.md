@@ -1,6 +1,6 @@
 # RETROTARROS — Pauta de episodio largo
 
-*retrogames + batería*
+*Nostalgia + Juegos + Música*
 
 **Los N64 más caros del mundo — Lo que el mercado paga**
 

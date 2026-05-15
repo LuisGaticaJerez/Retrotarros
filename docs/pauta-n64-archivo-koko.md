@@ -1,6 +1,6 @@
 # RETROTARROS — Pauta de episodio largo
 
-*retrogames + batería*
+*Nostalgia + Juegos + Música*
 
 **El archivo Retrotarros — La colección N64 completa de Koko**
 

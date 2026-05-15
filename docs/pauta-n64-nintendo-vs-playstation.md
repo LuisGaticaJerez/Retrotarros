@@ -1,6 +1,6 @@
 # RETROTARROS — Pauta de episodio largo
 
-*retrogames + batería*
+*Nostalgia + Juegos + Música*
 
 **Nintendo 64 vs. PlayStation — Cómo Nintendo perdió la generación 5**
 
