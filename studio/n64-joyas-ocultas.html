@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Estudio · Joyas ocultas N64</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,210,63,.10) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+header {
+  position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200;
+  background: rgba(6, 3, 15, 0.97); border-bottom: 2px solid var(--ye);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 28px;
+}
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); }
+.dot { width: 10px; height: 10px; background: var(--ye); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 32px 48px; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--ye); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 60px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .accent { color: var(--ye); text-shadow: 0 0 22px rgba(255,210,63,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--mg); letter-spacing: 4px; }
+
+/* SETUP */
+.criterios-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 16px; }
+.criterio-card {
+  background: var(--card-bg); border: 2px solid var(--ye);
+  border-radius: 4px; padding: 26px 22px; text-align: center;
+  box-shadow: 0 0 22px rgba(255,210,63,.15);
+}
+.criterio-card .num { font-family: 'Orbitron'; font-weight: 900; font-size: 48px; color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.4); line-height: 1; margin-bottom: 12px; }
+.criterio-card h3 { font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 2px; margin-bottom: 10px; }
+.criterio-card p { font-family: 'Share Tech Mono'; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,.82); }
+
+/* SLIDE JOYA */
+.slide-joya {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  height: 100%;
+  padding: 20px 56px 24px;
+  gap: 14px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.joya-head { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.joya-pos { font-family: 'Orbitron'; font-weight: 900; font-size: 64px; line-height: 1; letter-spacing: 1px; color: var(--ye); text-shadow: 0 0 20px rgba(255,210,63,.55); }
+.joya-pos .hash { font-size: 28px; color: rgba(255,255,255,.35); text-shadow: none; margin-right: 4px; }
+.joya-meta-row { display: flex; gap: 10px; }
+.metacritic-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Orbitron'; font-weight: 900; font-size: 18px;
+  color: var(--cy); letter-spacing: 2px;
+  padding: 8px 14px; border: 2px solid var(--cy);
+  background: rgba(0,229,255,.08);
+}
+.metacritic-tag .num { font-size: 26px; text-shadow: 0 0 14px rgba(0,229,255,.45); }
+.eclipsado-tag {
+  font-family: 'Press Start 2P'; font-size: 9px;
+  color: var(--mg); letter-spacing: 2px;
+  padding: 8px 12px; border: 1px solid var(--mg);
+  background: rgba(255,46,136,.06);
+}
+
+.img-wrap { display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden; }
+.frame {
+  position: relative; height: 100%; max-height: 340px; aspect-ratio: 5/4;
+  background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%);
+  border-radius: 12px 12px 6px 6px;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.frame::before {
+  content: ""; position: absolute; top: 0; left: 50%;
+  transform: translateX(-50%); width: 78%; height: 14%;
+  background: linear-gradient(180deg, #2a2a2f 0%, #1a1a1f 100%);
+  border-radius: 0 0 6px 6px;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.6); z-index: 3;
+}
+.frame-inner {
+  position: absolute; inset: 14% 10% 10%;
+  border-radius: 4px; overflow: hidden; background: #2D1B69;
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,.07), inset 0 0 0 6px rgba(0,0,0,.25), 0 4px 14px rgba(0,0,0,.4);
+}
+.frame-inner img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.joya-info { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.joya-title { font-family: 'Orbitron'; font-weight: 900; font-size: 28px; color: #fff; letter-spacing: .5px; line-height: 1.1; }
+.joya-meta { font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.5); letter-spacing: 2px; }
+.joya-why {
+  max-width: 940px; padding: 12px 22px;
+  background: rgba(255,210,63,.06); border-left: 4px solid var(--ye);
+  font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,.86); text-align: left;
+}
+.joya-why .lbl { display: block; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 4px; }
+.joya-why strong { color: var(--ye); }
+.joya-why em { color: var(--mg); font-style: normal; font-weight: 700; }
+
+/* CIERRE */
+.slide h1 {
+  font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye);
+  letter-spacing: 4px; margin-bottom: 6px;
+  border-left: 4px solid var(--ye); padding-left: 16px;
+}
+.slide h2 {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 38px;
+  color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.45);
+  letter-spacing: 1px; margin: 8px 0 20px 20px; line-height: 1.05;
+}
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+
+.cam-quote {
+  background: rgba(255,210,63,.07); border-left: 4px solid var(--ye);
+  padding: 22px 26px; margin-top: 22px;
+  font-family: 'Share Tech Mono'; font-size: 17px; font-style: italic;
+  color: rgba(255,255,255,.88); line-height: 1.6;
+}
+.cam-quote .lbl { display: block; font-style: normal; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 10px; }
+
+ul.checklist { list-style: none; margin-top: 10px; }
+ul.checklist li { padding: 14px 20px; border-left: 4px solid; margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5; }
+ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
+ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
+ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
+ul.checklist li strong.ye { color: var(--ye); }
+ul.checklist li strong.cy { color: var(--cy); }
+ul.checklist li strong.mg { color: var(--mg); }
+
+nav.footer {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 64px;
+  background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--ye);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200;
+}
+.nav-btn { background: transparent; border: 2px solid var(--ye); color: var(--ye); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--ye); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--ye)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(255,210,63,.5); }
+.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--ye); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · JOYAS OCULTAS N64 · GEN 5</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 PORTADA -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 5 · NINTENDO 64 · CURADURÍA</div>
+      <div class="ep-title">10 <span class="accent">JOYAS OCULTAS</span> DEL N64</div>
+      <div class="ep-sub">METACRITIC 84+ · OLVIDADOS POR LA HISTORIA</div>
+    </div>
+  </section>
+
+  <!-- 02 DEFINICIÓN -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <h1>BLOQUE 2 · QUÉ ES UNA JOYA OCULTA</h1>
+    <h2 class="cy">Tres criterios objetivos</h2>
+    <div class="criterios-grid">
+      <div class="criterio-card">
+        <div class="num">1</div>
+        <h3>METACRITIC 84+</h3>
+        <p>La prensa los recomendó cuando salieron. No son guilty pleasures — son juegos objetivamente buenos.</p>
+      </div>
+      <div class="criterio-card">
+        <div class="num">2</div>
+        <h3>HOY OLVIDADOS</h3>
+        <p>Ninguno aparece en los rankings modernos de mejores N64. Eclipsados por contemporáneos del mismo género.</p>
+      </div>
+      <div class="criterio-card">
+        <div class="num">3</div>
+        <h3>EN MI COLECCIÓN</h3>
+        <p>Los diez están en los 58 cartuchos N64 de Koko. Esta lista es vivencial, no teórica.</p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">PARA CÁMARA</span>
+      "Estos diez juegos sacaron <strong>84 puntos o más en Metacritic</strong> cuando salieron, la prensa los recomendó, y hoy nadie los menciona. La razón casi siempre es la misma: <strong>los eclipsó otro juego del mismo estudio o del mismo género</strong>. Esto es lo que pasa cuando un juego bueno nace al lado de un juego perfecto."
+    </div>
+  </section>
+
+  <!-- 03 BLAST CORPS -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-joya">
+      <div class="joya-head">
+        <div class="joya-pos"><span class="hash">#</span>1</div>
+        <div class="joya-meta-row">
+          <div class="metacritic-tag">MC <span class="num">90</span></div>
+          <div class="eclipsado-tag">ECLIPSADO POR BANJO</div>
+        </div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-joyas-ocultas/blast-corps.png" alt="Blast Corps"></div></div></div>
+      <div class="joya-info">
+        <div class="joya-title">Blast Corps</div>
+        <div class="joya-meta">1997 · RARE · METACRITIC 90</div>
+        <div class="joya-why">
+          <span class="lbl">POR QUÉ ES JOYA</span>
+          Manejás vehículos demoliendo edificios para que un misil nuclear fuera de control pueda pasar sin chocar. <strong>Concepto único en toda la historia del gaming.</strong> Cuatro meses después salió Banjo-Kazooie del mismo studio — y todos se olvidaron de Blast Corps. <em>Rare se eclipsó a sí mismo.</em>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 JET FORCE GEMINI -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-joya">
+      <div class="joya-head">
+        <div class="joya-pos"><span class="hash">#</span>2</div>
+        <div class="joya-meta-row">
+          <div class="metacritic-tag">MC <span class="num">80</span></div>
+          <div class="eclipsado-tag">ECLIPSADO POR GOLDENEYE + PERFECT DARK</div>
+        </div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-joyas-ocultas/jet-force.jpg" alt="Jet Force Gemini"></div></div></div>
+      <div class="joya-info">
+        <div class="joya-title">Jet Force Gemini</div>
+        <div class="joya-meta">1999 · RARE · METACRITIC 80</div>
+        <div class="joya-why">
+          <span class="lbl">POR QUÉ ES JOYA</span>
+          Shooter 3D third-person con tres personajes, mundos enormes, mascotas alienígenas para rescatar. <strong>Pre-Halo, pre-Ratchet & Clank.</strong> En cuatro años Rare hizo GoldenEye, Banjo, Conker, Perfect Dark, DK64 y Diddy Kong Racing. <em>Jet Force quedó enterrado abajo del montón.</em>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 F-ZERO X -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-joya">
+      <div class="joya-head">
+        <div class="joya-pos"><span class="hash">#</span>3</div>
+        <div class="joya-meta-row">
+          <div class="metacritic-tag">MC <span class="num">84</span></div>
+          <div class="eclipsado-tag">ECLIPSADO POR MARIO KART 64</div>
+        </div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-joyas-ocultas/f-zero-x.jpg" alt="F-Zero X"></div></div></div>
+      <div class="joya-info">
+        <div class="joya-title">F-Zero X</div>
+        <div class="joya-meta">1998 · NINTENDO EAD · METACRITIC 84</div>
+        <div class="joya-why">
+          <span class="lbl">POR QUÉ ES JOYA</span>
+          <strong>Sesenta cuadros por segundo con treinta naves simultáneas en pantalla. En 1998.</strong> Físicamente imposible para la consola, pero lo hicieron igual sacrificando texturas y resolución. La saga F-Zero quedó <em>eclipsada por Mario Kart</em> para siempre — y luego Nintendo la abandonó completa.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 PILOTWINGS 64 -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-joya">
+      <div class="joya-head">
+        <div class="joya-pos"><span class="hash">#</span>4</div>
+        <div class="joya-meta-row">
+          <div class="metacritic-tag">MC <span class="num">80</span></div>
+          <div class="eclipsado-tag">ECLIPSADO POR SUPER MARIO 64</div>
+        </div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-joyas-ocultas/pilotwings-64.jpg" alt="Pilotwings 64"></div></div></div>
+      <div class="joya-info">
+        <div class="joya-title">Pilotwings 64</div>
+        <div class="joya-meta">1996 · PARADIGM · METACRITIC 80</div>
+        <div class="joya-why">
+          <span class="lbl">POR QUÉ ES JOYA</span>
+          <strong>Launch title del N64.</strong> Simulador de vuelo relajante, hermoso para 1996 — paragliding, gyrocopter, jetpack. La gente compró Mario 64 con la consola. <em>Pilotwings se quedó en la repisa por nacer junto al juego más importante de la generación.</em>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 WAVE RACE 64 -->
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-joya">
+      <div class="joya-head">
+        <div class="joya-pos"><span class="hash">#</span>5</div>
+        <div class="joya-meta-row">
+          <div class="metacritic-tag">MC <span class="num">92</span></div>
+          <div class="eclipsado-tag">ECLIPSADO POR EL TIEMPO</div>
+        </div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-joyas-ocultas/wave-race-64.png" alt="Wave Race 64"></div></div></div>
+      <div class="joya-info">
+        <div class="joya-title">Wave Race 64</div>
+        <div class="joya-meta">1996 · NINTENDO EAD · METACRITIC 92</div>
+        <div class="joya-why">
+          <span class="lbl">POR QUÉ ES JOYA</span>
+          <strong>Metacritic 92.</strong> La física del agua que no se volvió a igualar hasta su sucesor en GameCube — <em>seis años después</em>. Carreras en moto acuática con olas dinámicas que respondían al viento. Nintendo lo abandonó después de Wave Race Blue Storm y la saga murió en silencio.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 1080° SNOWBOARDING -->
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-joya">
+      <div class="joya-head">
+        <div class="joya-pos"><span class="hash">#</span>6</div>
+        <div class="joya-meta-row">
+          <div class="metacritic-tag">MC <span class="num">84</span></div>
+          <div class="eclipsado-tag">ECLIPSADO POR TONY HAWK</div>
+        </div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-joyas-ocultas/1080.jpg" alt="1080° Snowboarding"></div></div></div>
+      <div class="joya-info">
+        <div class="joya-title">1080° Snowboarding</div>
+        <div class="joya-meta">1998 · NINTENDO NST · METACRITIC 84</div>
+        <div class="joya-why">
+          <span class="lbl">POR QUÉ ES JOYA</span>
+          <strong>Primer simulador serio de snowboard en consola doméstica.</strong> Física rigurosa, control análogo, modo de práctica. Un año después salió <em>Tony Hawk's Pro Skater</em> y el género entero se reorganizó alrededor del skate. 1080° quedó como referencia técnica que nadie cita.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 RAYMAN 2 -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-joya">
+      <div class="joya-head">
+        <div class="joya-pos"><span class="hash">#</span>7</div>
+        <div class="joya-meta-row">
+          <div class="metacritic-tag">MC <span class="num">90</span></div>
+          <div class="eclipsado-tag">ECLIPSADO POR MARIO 64 + BANJO</div>
+        </div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-joyas-ocultas/rayman-2.jpg" alt="Rayman 2"></div></div></div>
+      <div class="joya-info">
+        <div class="joya-title">Rayman 2: The Great Escape</div>
+        <div class="joya-meta">1999 · UBISOFT · METACRITIC 90</div>
+        <div class="joya-why">
+          <span class="lbl">POR QUÉ ES JOYA</span>
+          <strong>Metacritic 90.</strong> Hubiera sido el mejor plataformero 3D <em>de cualquier consola</em> que NO tuviera Mario 64 y Banjo. Ubisoft hizo magia con un personaje sin brazos ni piernas, mundo onírico, narrativa adulta. Mala suerte cósmica de nacer entre dos gigantes.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 MARIO PARTY 3 -->
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-joya">
+      <div class="joya-head">
+        <div class="joya-pos"><span class="hash">#</span>8</div>
+        <div class="joya-meta-row">
+          <div class="metacritic-tag">MC <span class="num">79</span></div>
+          <div class="eclipsado-tag">ECLIPSADO POR EL ESTIGMA DEL GÉNERO</div>
+        </div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-joyas-ocultas/mario-party-3.png" alt="Mario Party 3"></div></div></div>
+      <div class="joya-info">
+        <div class="joya-title">Mario Party 3</div>
+        <div class="joya-meta">2000 · HUDSON · METACRITIC 79</div>
+        <div class="joya-why">
+          <span class="lbl">POR QUÉ ES JOYA</span>
+          <strong>El mejor Mario Party de los tres N64.</strong> 71 minijuegos. Duelos 1v1 introducidos por primera vez. Modo Story. La prensa de los 2000 trataba al género "party game" como menor — por eso solo 79 en Metacritic. <em>Pero objetivamente es Nintendo en buena forma.</em>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 EXCITEBIKE 64 -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-joya">
+      <div class="joya-head">
+        <div class="joya-pos"><span class="hash">#</span>9</div>
+        <div class="joya-meta-row">
+          <div class="metacritic-tag">MC <span class="num">84</span></div>
+          <div class="eclipsado-tag">ECLIPSADO POR EL FIN DEL N64</div>
+        </div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-joyas-ocultas/excitebike-64.jpg" alt="Excitebike 64"></div></div></div>
+      <div class="joya-info">
+        <div class="joya-title">Excitebike 64</div>
+        <div class="joya-meta">2000 · LEFT FIELD · METACRITIC 84</div>
+        <div class="joya-why">
+          <span class="lbl">POR QUÉ ES JOYA</span>
+          <strong>Relanzamiento moderno del clásico de NES.</strong> Perfectamente ejecutado: track editor, multijugador, modo single intenso. Pero llegó en agosto del 2000 — <em>el N64 estaba muriendo y GameCube se anunció dos meses después</em>. Nadie compró un juego de N64 sabiendo que venía la nueva consola.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 MARIO TENNIS -->
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="slide-joya">
+      <div class="joya-head">
+        <div class="joya-pos"><span class="hash">#</span>10</div>
+        <div class="joya-meta-row">
+          <div class="metacritic-tag">MC <span class="num">91</span></div>
+          <div class="eclipsado-tag">ECLIPSADO POR EL ESTIGMA "MARIO SPORTS"</div>
+        </div>
+      </div>
+      <div class="img-wrap"><div class="frame"><div class="frame-inner"><img src="img/n64-joyas-ocultas/mario-tennis.jpg" alt="Mario Tennis"></div></div></div>
+      <div class="joya-info">
+        <div class="joya-title">Mario Tennis</div>
+        <div class="joya-meta">2000 · CAMELOT · METACRITIC 91</div>
+        <div class="joya-why">
+          <span class="lbl">POR QUÉ ES JOYA</span>
+          <strong>Metacritic 91.</strong> Camelot — el studio detrás de Golden Sun — <em>definió aquí el formato "Mario sports"</em> que Nintendo va a copiar por veinte años en GameCube, Wii, DS, Switch. La gente lo trata como secundario, pero es un juego de tenis con controles profundos que ganó premio de "mejor sports game del año".
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 CIERRE -->
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <h1>CIERRE</h1>
+    <h2 class="mg">El patrón de los 10</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 18px;">
+      <div style="background: var(--card-bg); border: 2px solid var(--mg); border-radius: 4px; padding: 26px;">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 11px; color: var(--mg); letter-spacing: 2px; margin-bottom: 14px;">EL DATO</h3>
+        <p style="font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6;">
+          De los 10, <strong style="color: var(--mg);">3 son de Rare</strong> (Blast Corps, Jet Force Gemini + otros eclipsados por Banjo y GoldenEye) y <strong style="color: var(--mg);">6 son Nintendo first/second-party de deporte o racing</strong>. El patrón: <em>juegos buenos nacen al lado del juego más grande del mismo estudio</em>.
+        </p>
+      </div>
+      <div style="background: var(--card-bg); border: 2px solid var(--cy); border-radius: 4px; padding: 26px;">
+        <h3 style="font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 2px; margin-bottom: 14px;">EL ARGUMENTO</h3>
+        <p style="font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6;">
+          <strong style="color: var(--cy);">La historia premia al primero, al más vendido, al más recordado.</strong> No al mejor ejecutado. Estos diez son el ejemplo: Metacritic 84+, en mi colección, y ninguno aparece hoy en listas modernas.
+        </p>
+      </div>
+    </div>
+    <div class="cam-quote">
+      <span class="lbl">FRASE DE CIERRE PARA CÁMARA</span>
+      "Estos diez juegos están en mi colección y los volvería a jugar mañana. Ninguno aparece en los rankings de mejores N64. Y eso es lo injusto del coleccionismo: <strong>la historia premia al primero, al más vendido, al más recordado — no al mejor ejecutado</strong>. Si tení uno de estos en tu casa, no lo vendas. Y si no, ya sabés cuáles buscar."
+    </div>
+  </section>
+
+  <!-- 14 CHECKLIST -->
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <h1>CHECKLIST · PRE-GRABACIÓN</h1>
+    <h2 class="cy">Antes de prender cámaras</h2>
+    <ul class="checklist">
+      <li class="ye"><strong class="ye">☐ Reunión con Koko</strong> — confirmar que los 10 le hacen sentido. Si quiere cambiar alguno, ajustar el HTML antes de grabar (slides modulares).</li>
+      <li class="ye"><strong class="ye">☐ Anécdotas personales</strong> — Koko prepara 15-20 seg por joya: ¿cuándo la jugó? ¿con quién? ¿qué le hizo a él?</li>
+      <li class="cy"><strong class="cy">☐ Setup</strong> — los 10 cartuchos físicos sobre la mesa. B-roll inicial: plano cenital de los 10 juntos.</li>
+      <li class="cy"><strong class="cy">☐ Audio</strong> — lavalier para ambos. Episodio conversacional, tono pedagógico-nostálgico.</li>
+      <li class="mg"><strong class="mg">☐ Ritmo</strong> — cronómetro visible. ~90 seg promedio por juego. Solo Blast Corps (#1) puede tomar 2 min (es el arquetipo del episodio).</li>
+      <li class="mg"><strong class="mg">☐ Tono</strong> — pedagógico, NO compensatorio. Evitar "deberían haber sido más famosos" — usar "fueron eclipsados por X".</li>
+      <li class="mg"><strong class="mg">☐ Cierre</strong> — memorizar la frase fija palabra por palabra. Es lo que la gente va a clipear.</li>
+    </ul>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 14</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+go(0);
+</script>
+
+</body>
+</html>
