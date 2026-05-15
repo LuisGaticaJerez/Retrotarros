@@ -69,6 +69,26 @@ Cada episodio largo se cierra con **tres archivos**, mismo `{slug}`:
 - El HTML se actualiza solo cuando los datos del `.md` operativo están cerrados. Fuente de verdad = `pauta-{slug}.md`.
 - Si se agrega un anexo con datos nuevos (precios, listas confirmadas), se actualizan los tres archivos en el mismo commit.
 
+## Extracción de B-roll desde gameplays
+
+Para resumir un gameplay largo (45–60 min de YouTube) en clips cortos listos para edición:
+
+```powershell
+.\scripts\extract-broll.ps1 -Video "C:\Users\Balbr\Downloads\Video\<archivo>.mp4" -Slug "<slug-corto>"
+```
+
+- **Salida:** `C:\Users\Balbr\Downloads\Video\clips-<slug>\` con N clips MP4 (1 por escena detectada, sin re-encoding).
+- **Detector:** PySceneDetect `detect-adaptive` con threshold 5.5 + min-scene-len 8s por defecto.
+- **Ajustes:** `-Threshold 3.5` para más clips · `-Threshold 8.0` para menos · `-MinSceneLen 6` para clips más cortos.
+- **Casos especiales:** carreras/escenas únicas (Mario Kart Rainbow Road) generan pocos clips porque no hay cortes de cámara — bajar threshold si se necesitan más.
+- **Requisitos:** `pip install scenedetect[opencv]` + `winget install Gyan.FFmpeg` (una vez por máquina).
+
+Ejemplos reales ejecutados (2026-05-15):
+- Star Fox 64 (57 min) → 97 clips · 186 MB
+- Perfect Dark (10 min) → 58 clips · 142 MB
+- Paper Mario (25 min) → 41 clips · 61 MB
+- Zelda OoT Espantapájaros → 41 clips · 73 MB
+
 ## Sincronización con Drive del estudio
 
 El PC del estudio Retrotarros consume el contenido desde Google Drive (`G:\Mi unidad\Studio\`). El script `scripts/sync-to-drive.ps1` automatiza la copia:
