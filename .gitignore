@@ -35,3 +35,7 @@ studio/pautas/*.docx
 # Capturas PNG generadas por capture-slides.py (la fuente es el HTML)
 # Se regeneran con: python scripts/capture-slides.py <slug>
 studio/captures/
+
+# Backups generados por update-tagline-images.py
+# El versionado del git es la historia, no necesitamos .bak.png al lado
+assets/*.bak.png
