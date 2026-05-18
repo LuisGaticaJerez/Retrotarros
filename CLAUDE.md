@@ -45,7 +45,9 @@ Output: `D:\Recursos Retrotarros\Drive\Studio\<slug>\teasers\<slug>-tarroteaser-
 | `no-latam` | `no-latam` | "nunca llegó", "exclusivo Japón" |
 | (otro) | `generic` | despedida "vemos", "apóyenos" |
 
-**Cómo lo edita Luis:** importa el MP4 en DaVinci → agrega su intro + outro + lower-thirds + música a gusto. El script entrega solo los cortes, el editor humano hace el polish.
+**Cómo lo edita Luis:** importa el MP4 en **CapCut** (preferido) → agrega su intro + outro + lower-thirds + música a gusto. El script entrega solo los cortes, el editor humano hace el polish.
+
+**Limpiar música de fondo del master:** el audio del teaser viene del master con su música embebida. Para aislarla, aplicar **"Voice Enhancement"** o **"Noise Reduction"** de CapCut sobre los clips importados. NO se hace en el script (probamos Demucs pero requiere torchcodec + ffmpeg full-shared build, no vale la pena vs CapCut nativo).
 
 **Stack:**
 - Whisper local (modelo `small`, 244MB) con cache en `.cache/whisper/` para iteraciones rápidas

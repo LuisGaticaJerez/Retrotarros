@@ -20,7 +20,15 @@ Tipos soportados (auto-detectados del slug):
   generic         → despedida (Apóyenos, vemos, chao)
 
 Output: MP4 vertical 1080x1920 con audio ORIGINAL del master.
-SIN overlays, SIN intro/outro, SIN música agregada. Listo para DaVinci.
+SIN overlays, SIN intro/outro, SIN música agregada. Listo para edición manual.
+
+Workflow esperado:
+    1. python scripts/tarroteaser.py <master.mp4> --slug <slug>
+    2. Importar el MP4 resultante en CapCut (o DaVinci)
+    3. Aplicar "Voice Enhancement" / "Noise Reduction" sobre los clips para
+       reducir la música de fondo del master (la app de edición lo hace mejor
+       que separación AI standalone y sin dependencias extra).
+    4. Agregar intro, outro, lower-thirds, etc.
 
 Uso:
     python scripts/tarroteaser.py <video.mp4> --slug <slug>
@@ -365,19 +373,20 @@ def find_climax(segments: list[dict], video_duration: float,
 def cut_and_verticalize(video: Path, start: float, duration: float,
                          out: Path, ffmpeg: str) -> None:
     """Recorta y convierte directo a vertical 1080x1920 con blur background.
-    Mantiene el audio original.
+    Mantiene el audio original del master tal cual.
     """
-    filter_complex = (
+    vertical_filter = (
         "[0:v]split=2[bg][fg];"
         f"[bg]scale={OUT_W}:{OUT_H}:force_original_aspect_ratio=increase,"
         f"crop={OUT_W}:{OUT_H},boxblur=20:5[bgblur];"
         f"[fg]scale={OUT_W}:-1[fgscaled];"
-        "[bgblur][fgscaled]overlay=(W-w)/2:(H-h)/2"
+        "[bgblur][fgscaled]overlay=(W-w)/2:(H-h)/2[vout]"
     )
     run([
         ffmpeg, "-y", "-ss", f"{start:.2f}", "-i", str(video),
         "-t", f"{duration}",
-        "-filter_complex", filter_complex,
+        "-filter_complex", vertical_filter,
+        "-map", "[vout]", "-map", "0:a?",
         "-c:v", "libx264", "-preset", "medium", "-crf", "18",
         "-c:a", "aac", "-b:a", "192k",
         "-pix_fmt", "yuv420p",
@@ -419,6 +428,9 @@ def main():
                         help="Modelo Whisper (default small - mejor accuracy chileno que base)")
     parser.add_argument("--out-dir", default=None)
     args = parser.parse_args()
+    # Para limpiar la música del master: usar CapCut "Voice Enhance" /
+    # "Noise Reduction" o DaVinci "Voice Isolation" sobre el MP4 importado.
+    # Lo hacemos fuera del script (mejor calidad + menos infra).
 
     video = Path(args.video).resolve()
     if not video.exists():
