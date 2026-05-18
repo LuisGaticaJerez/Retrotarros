@@ -49,6 +49,8 @@ Output: `D:\Recursos Retrotarros\Drive\Studio\<slug>\teasers\<slug>-tarroteaser-
 
 **Limpiar música de fondo del master:** el audio del teaser viene del master con su música embebida. Para aislarla, aplicar **"Voice Enhancement"** o **"Noise Reduction"** de CapCut sobre los clips importados. NO se hace en el script (probamos Demucs pero requiere torchcodec + ffmpeg full-shared build, no vale la pena vs CapCut nativo).
 
+**Generar proyectos CapCut programáticamente:** investigamos cómo automatizar la creación de proyectos `.draft` con Voice Enhancement + lower-thirds + intro/outro pre-cargados. **Pausado** porque el ROI no se justifica para cadencia ~1 teaser/semana. Findings completos en `docs/capcut-automation-research.md` por si en el futuro queremos retomar (3+ teasers/semana o producto SaaS).
+
 **Stack:**
 - Whisper local (modelo `small`, 244MB) con cache en `.cache/whisper/` para iteraciones rápidas
 - ffmpeg para corte + vertical 1080×1920 con blur background
