@@ -39,3 +39,6 @@ studio/captures/
 # Backups generados por update-tagline-images.py
 # El versionado del git es la historia, no necesitamos .bak.png al lado
 assets/*.bak.png
+
+# Cache local de transcripciones Whisper (regenerable, no versionar)
+.cache/

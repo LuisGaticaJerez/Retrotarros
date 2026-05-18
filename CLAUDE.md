@@ -18,6 +18,42 @@ Todo el material Retrotarros vive bajo `D:\Recursos Retrotarros\`:
 
 **El repo NO está más en OneDrive.** El backup es GitHub (`master` siempre pusheado). No buscar el repo en `C:\Users\Balbr\OneDrive\Documentos\GitHub\Retrotarros\` — esa ubicación queda obsoleta.
 
+## TarroTeaser — generador automático de teasers
+
+**Comando atajo:** cuando Luis dice **"hacé el teaser con el tarroteaser"** o **"corré el tarroteaser"**, esto significa ejecutar:
+
+```bash
+python scripts/tarroteaser.py <ruta-al-video-master.mp4> --slug <slug-del-episodio>
+```
+
+**Qué hace:** genera un teaser CRUDO vertical 1080×1920 con 5 cortes concatenados:
+1. **Inicio divertido** del primer tercio del video
+2. **3 highlights** del centro (top score keywords)
+3. **Clímax** según el tipo de episodio (auto-detectado del slug)
+
+Output: `D:\Recursos Retrotarros\Drive\Studio\<slug>\teasers\<slug>-tarroteaser-YYYYMMDD.mp4`
+
+**Tipos de episodio auto-detectados:**
+| Slug contiene | Tipo | Clímax que busca |
+|---|---|---|
+| `top-mundial` o `ranking` | `ranking` | "número uno", "el primero" |
+| `top-precios` | `top-precios` | "el más caro", "valor récord" |
+| `archivo` | `archivo` | "valor total", "vale la colección" |
+| `joyas` | `joyas` | "la joya", "infravalorado" |
+| `vs-mundo` o `retrotarros-vs` | `vs-mundo` | "puntaje final", "ganó Koko/mundo" |
+| `hardware-raro` | `hardware-raro` | "más raro", "única" |
+| `no-latam` | `no-latam` | "nunca llegó", "exclusivo Japón" |
+| (otro) | `generic` | despedida "vemos", "apóyenos" |
+
+**Cómo lo edita Luis:** importa el MP4 en DaVinci → agrega su intro + outro + lower-thirds + música a gusto. El script entrega solo los cortes, el editor humano hace el polish.
+
+**Stack:**
+- Whisper local (modelo `small`, 244MB) con cache en `.cache/whisper/` para iteraciones rápidas
+- ffmpeg para corte + vertical 1080×1920 con blur background
+- Sin OpenAI API, sin internet (Whisper corre local)
+
+**Script complementario:** `scripts/generate-teaser.py` es la versión "todo incluido" (overlays, intro, outro VHS card, música 8 Bits Rock, trivia card). Queda como backup para cuando quieras un teaser completo sin editar. TarroTeaser es la opción por defecto.
+
 ## Qué es esto
 
 Canal de YouTube en español sobre **Nostalgia + Juegos + Música** (retrogaming + batería). Proyecto chileno. Ver `docs/proyecto.md` para contexto completo.
