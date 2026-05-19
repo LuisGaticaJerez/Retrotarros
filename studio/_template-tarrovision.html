@@ -542,9 +542,9 @@ header {
   display: grid;
   grid-template-rows: auto 1fr;
   height: 100%;
-  padding: 14px 32px 18px;
-  gap: 12px;
-  max-width: 1500px;
+  padding: 12px 24px 16px;
+  gap: 10px;
+  max-width: 1900px;
   margin: 0 auto;
   justify-items: center;
 }
@@ -557,7 +557,7 @@ header {
 .triple-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 20px;
   min-height: 0;
   align-items: stretch;
   justify-items: stretch;
@@ -568,36 +568,40 @@ header {
   grid-template-rows: 1fr auto;
   align-items: center;
   justify-items: center;
-  gap: 8px;
+  gap: 10px;
   min-height: 0;
   min-width: 0;
   height: 100%;
   overflow: hidden;
 }
+/* La TV ocupa toda la fila 1fr de la celda, conservando 1:1.
+   max-height: none destraba el cap de 520px de la base. */
 .triple-cell .tarrovision {
+  max-height: none;
   max-width: 100%;
-  max-height: 100%;
+  height: 100%;
   width: auto;
-  height: auto;
   aspect-ratio: 1 / 1;
-  padding: 14px 16px;
-  border-radius: 16px;
-  gap: 8px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  gap: 10px;
+  align-self: center;
+  justify-self: center;
 }
 .triple-cell .tv-brand {
-  font-size: 9px;
-  letter-spacing: 2px;
+  font-size: 10px;
+  letter-spacing: 3px;
 }
 .triple-cell .tv-channel {
-  font-size: 10px;
-  padding: 3px 8px;
+  font-size: 11px;
+  padding: 3px 9px;
 }
 .triple-cell .tv-knob {
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
 }
 .triple-cell .tv-speaker {
-  height: 20px;
+  height: 24px;
 }
 .triple-cell .tv-title {
   font-size: 18px;
