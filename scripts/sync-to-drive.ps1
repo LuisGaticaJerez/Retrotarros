@@ -62,9 +62,16 @@ $htmlFiles = Get-ChildItem -Path $RepoStudio -Filter "*.html" -File
 
 foreach ($html in $htmlFiles) {
     $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
+    # Saltar templates (slug que empieza con _)
+    if ($slug.StartsWith("_")) {
+        Write-Host "  SKIP $slug (template)" -ForegroundColor DarkGray
+        continue
+    }
     $destDir = Join-Path $DriveRoot $slug
     $destImgDir = Join-Path $destDir "img\$slug"
+    $destCapturesDir = Join-Path $destDir "captures"
     $srcImgDir = Join-Path $RepoStudio "img\$slug"
+    $srcCapturesDir = Join-Path $RepoStudio "captures\$slug"
 
     if (-not (Test-Path $destDir)) {
         New-Item -ItemType Directory -Path $destDir -Force | Out-Null
@@ -81,6 +88,19 @@ foreach ($html in $htmlFiles) {
         if ($imgs.Count -gt 0) {
             Copy-Item -Path "$srcImgDir\*" -Destination $destImgDir -Recurse -Force
             Write-Host "  IMG  → $destImgDir ($($imgs.Count) archivos)" -ForegroundColor Cyan
+        }
+    }
+
+    # Capturas PNG (regenerable con scripts/capture-slides.py, va al Drive
+    # porque el editor las usa como overlay en DaVinci/CapCut)
+    if (Test-Path $srcCapturesDir) {
+        if (-not (Test-Path $destCapturesDir)) {
+            New-Item -ItemType Directory -Path $destCapturesDir -Force | Out-Null
+        }
+        $caps = Get-ChildItem -Path $srcCapturesDir -File -Filter "*.png" -ErrorAction SilentlyContinue
+        if ($caps.Count -gt 0) {
+            Copy-Item -Path "$srcCapturesDir\*.png" -Destination $destCapturesDir -Force
+            Write-Host "  CAP  → $destCapturesDir ($($caps.Count) PNGs)" -ForegroundColor Cyan
         }
     }
 }
