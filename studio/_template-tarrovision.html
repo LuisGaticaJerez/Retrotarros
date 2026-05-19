@@ -502,6 +502,13 @@ header {
   gap: 12px;
   max-width: 1500px;
   margin: 0 auto;
+  justify-items: center;
+}
+.triple-head {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .triple-grid {
   display: grid;
@@ -509,6 +516,8 @@ header {
   gap: 16px;
   min-height: 0;
   align-items: center;
+  justify-items: center;
+  width: 100%;
 }
 .triple-cell {
   display: flex;
@@ -875,8 +884,7 @@ nav.footer {
   <section class="slide">
     <span class="slide-num">07</span>
     <div class="slide-triple">
-      <div class="tv-head">
-        <div class="tv-pos ye"><span class="hash">x</span>3</div>
+      <div class="tv-head triple-head">
         <div class="tv-block-label ye">MULTI FEED · 3 CANALES</div>
       </div>
       <div class="triple-grid">
