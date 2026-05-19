@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · SNES · Colección completa</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+/* ── HEADER ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  z-index: 200;
+  background: rgba(6, 3, 15, 0.97);
+  border-bottom: 2px solid var(--mg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--mg); }
+.dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+/* ── DECK / SLIDES ── */
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 28px 44px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+
+/* ── PORTADA ── */
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 68px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .vs { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; margin-bottom: 30px; }
+.portada .ep-count { font-family: 'Press Start 2P'; font-size: 16px; color: var(--mg); letter-spacing: 4px; text-shadow: 0 0 14px rgba(255,46,136,.5); }
+
+/* ── DIVIDER ── */
+.divider { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.divider .pre { font-family: 'Press Start 2P'; font-size: 11px; letter-spacing: 6px; margin-bottom: 24px; }
+.divider .pre.cy { color: var(--cy); } .divider .pre.mg { color: var(--mg); } .divider .pre.ye { color: var(--ye); }
+.divider .title { font-family: 'Orbitron'; font-weight: 900; font-size: 72px; letter-spacing: 2px; line-height: 1; color: #fff; margin-bottom: 22px; }
+.divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
+.divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.divider .sub { font-family: 'Share Tech Mono'; font-size: 18px; color: rgba(255,255,255,.7); letter-spacing: 2px; max-width: 800px; line-height: 1.6; }
+
+/* ═══════════════════════════════════════════════════ */
+/* ÍNDICE · MENÚ CONSOLA "PRESS START"                */
+/* ═══════════════════════════════════════════════════ */
+.idx {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 100%; text-align: center;
+}
+.idx-title {
+  font-family: 'Press Start 2P'; font-size: 16px; color: var(--cy);
+  letter-spacing: 4px; margin-bottom: 50px;
+  text-shadow: 0 0 14px rgba(0,229,255,.4);
+}
+.idx-list { display: flex; flex-direction: column; gap: 18px; margin-bottom: 50px; }
+.idx-item {
+  display: grid; grid-template-columns: 28px 50px 1fr auto;
+  align-items: center; gap: 18px;
+  font-family: 'Press Start 2P'; font-size: 14px; letter-spacing: 2px;
+  color: rgba(255,255,255,.65); min-width: 640px;
+}
+.idx-item.active { color: var(--ye); }
+.idx-cursor { font-size: 16px; color: var(--ye); visibility: hidden; }
+.idx-item.active .idx-cursor { visibility: visible; animation: blink 1s ease-in-out infinite; }
+.idx-num { color: var(--mg); }
+.idx-dots { letter-spacing: 0; color: rgba(255,255,255,.18); }
+.idx-count { font-size: 11px; color: rgba(255,255,255,.45); letter-spacing: 2px; }
+.idx-total {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 32px;
+  color: var(--mg); letter-spacing: 3px;
+  text-shadow: 0 0 18px rgba(255,46,136,.5); margin-bottom: 22px;
+}
+.idx-hint {
+  font-family: 'Press Start 2P'; font-size: 9px; color: var(--cy);
+  letter-spacing: 3px; animation: blink 1.4s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* SLIDE PANEO · TARROVISION GRANDE                   */
+/* ═══════════════════════════════════════════════════ */
+.slide-paneo {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  gap: 14px;
+  padding: 0 20px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.paneo-banner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 22px;
+  padding: 14px 24px;
+  border: 1px solid var(--cy);
+  background: rgba(0,229,255,.05);
+  box-shadow: 0 0 22px rgba(0,229,255,.18);
+}
+.paneo-cat-num {
+  font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy);
+  letter-spacing: 3px; padding: 6px 12px;
+  border: 1px solid var(--cy); background: rgba(0,229,255,.08);
+}
+.paneo-cat-name {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 38px;
+  color: #fff; letter-spacing: 4px; text-align: center;
+  text-shadow: 0 0 18px rgba(255,255,255,.18);
+}
+.paneo-cat-count {
+  font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye);
+  letter-spacing: 2px; text-shadow: 0 0 10px rgba(255,210,63,.4);
+}
+.paneo-tv-wrap {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 0; container-type: size;
+}
+.paneo-tv-wrap .tarrovision {
+  width: min(100cqh, 100cqw);
+  height: min(100cqh, 100cqw);
+  max-width: 100%; max-height: 100%;
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* TARROVISION (estilo base)                          */
+/* ═══════════════════════════════════════════════════ */
+.tarrovision {
+  background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%);
+  border-radius: 22px;
+  padding: 18px 22px;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(0,0,0,.4);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 10px;
+}
+.tv-controls-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px; }
+.tv-led {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, var(--mg) 60%, #7a0030 100%);
+  box-shadow: 0 0 10px rgba(255,46,136,.8), inset 0 0 2px rgba(0,0,0,.5);
+}
+.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size: 11px; color: var(--ye); letter-spacing: 3px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
+.tv-channel { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--cy); letter-spacing: 2px; padding: 3px 9px; border: 1px solid rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
+.tv-screen { position: relative; background: #2a2a2f; border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 2px #3a3a3f, inset 0 0 14px rgba(0,0,0,.6); min-height: 0; }
+.tv-screen-inner {
+  position: relative; width: 100%; height: 100%; background: #000;
+  border-radius: 16px / 8px; overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 40px rgba(0,0,0,.95);
+}
+.tv-screen-inner img, .tv-screen-inner video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tv-screen-inner::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 3px);
+  z-index: 3; mix-blend-mode: multiply;
+}
+.tv-screen-inner::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255,255,255,.08) 0%, transparent 55%), radial-gradient(ellipse 90% 50% at 50% 100%, rgba(0,229,255,.06) 0%, transparent 60%);
+  z-index: 4;
+}
+.tv-noscreen {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 50% 50%, rgba(45,27,105,.6) 0%, #000 80%), repeating-linear-gradient(0deg, #0a0a14 0px, #0a0a14 1px, #14142a 1px, #14142a 2px);
+  color: rgba(255,255,255,.35); text-align: center; padding: 30px; z-index: 2;
+}
+.tv-noscreen .tv-noscreen-big { font-family: 'Press Start 2P'; font-size: 16px; color: var(--mg); letter-spacing: 4px; margin-bottom: 12px; text-shadow: 0 0 12px rgba(255,46,136,.5); }
+.tv-noscreen .tv-noscreen-sub { font-family: 'Share Tech Mono'; font-size: 12px; letter-spacing: 2px; color: rgba(0,229,255,.55); }
+.tv-controls-bottom { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; padding: 2px 4px 0; }
+.tv-knob { width: 30px; height: 30px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #5a5a60 0%, #2a2a30 60%, #0a0a0e 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.6);
+  position: relative;
+}
+.tv-knob::after { content: ""; position: absolute; top: 6px; left: 50%; width: 2px; height: 10px; background: var(--ye); transform-origin: bottom center; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 4px rgba(255,210,63,.6); }
+.tv-knob.cy::after { background: var(--cy); box-shadow: 0 0 4px rgba(0,229,255,.6); transform: translateX(-50%) rotate(-30deg); }
+.tv-speaker { height: 24px; background: repeating-linear-gradient(90deg, #0a0a0e 0px, #0a0a0e 3px, #1a1a1f 3px, #1a1a1f 6px); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6); }
+
+/* Namebox bajo TV */
+.tv-namebox {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 8px 28px;
+  border: 1px solid var(--cy); background: rgba(0,229,255,.04);
+  position: relative; border-radius: 2px; max-width: 90%;
+}
+.tv-namebox::before, .tv-namebox::after {
+  content: ""; position: absolute; width: 7px; height: 7px;
+  background: var(--dk); border: 1px solid var(--cy);
+}
+.tv-namebox::before { top: -4px; left: -4px; }
+.tv-namebox::after { bottom: -4px; right: -4px; }
+.tv-title { font-family: 'Orbitron'; font-weight: 900; font-size: 18px; color: #fff; letter-spacing: .5px; line-height: 1.1; }
+.tv-meta { font-family: 'Share Tech Mono'; font-size: 10.5px; letter-spacing: 3px; color: rgba(0,229,255,.6); }
+.tv-namebox.ye { border-color: var(--ye); background: rgba(255,210,63,.04); }
+.tv-namebox.ye::before, .tv-namebox.ye::after { border-color: var(--ye); }
+.tv-namebox.ye .tv-meta { color: rgba(255,210,63,.6); }
+
+/* ═══════════════════════════════════════════════════ */
+/* SLIDE TRIPLE · 3 JOYAS                             */
+/* ═══════════════════════════════════════════════════ */
+.slide-triple { overflow: hidden; }
+.slide-triple-inner {
+  display: grid; grid-template-rows: auto 1fr; height: 100%;
+  padding: 0 20px; gap: 12px; max-width: 1900px; margin: 0 auto;
+  justify-items: center;
+}
+.triple-head { width: 100%; display: flex; justify-content: center; align-items: center; }
+.tv-block-label {
+  font-family: 'Press Start 2P'; font-size: 10px; letter-spacing: 3px;
+  padding: 6px 14px; border: 1px solid var(--ye);
+  color: var(--ye); background: rgba(255,210,63,.06);
+}
+.triple-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  min-height: 0; align-items: stretch; justify-items: stretch; width: 100%;
+}
+.triple-cell {
+  display: grid; grid-template-rows: 1fr auto;
+  align-items: stretch; justify-items: center; gap: 8px;
+  min-height: 0; min-width: 0; height: 100%; overflow: hidden;
+}
+.tv-fit {
+  container-type: size; min-height: 0; min-width: 0;
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.tv-fit .tarrovision {
+  width: min(100cqh, 100cqw); height: min(100cqh, 100cqw);
+  max-width: none; max-height: none;
+  padding: 16px 18px; border-radius: 18px; gap: 10px;
+}
+.triple-cell .tv-namebox { padding: 6px 16px; gap: 2px; }
+.triple-cell .tv-namebox .tv-title { font-size: 14px; }
+.triple-cell .tv-namebox .tv-meta { font-size: 9px; letter-spacing: 2px; }
+.triple-cell .tv-brand { font-size: 10px; letter-spacing: 3px; }
+.triple-cell .tv-channel { font-size: 11px; padding: 3px 9px; }
+.triple-cell .tv-knob { width: 28px; height: 28px; }
+.triple-cell .tv-speaker { height: 22px; }
+.triple-cell .tv-noscreen .tv-noscreen-big { font-size: 14px; }
+.triple-cell .tv-noscreen .tv-noscreen-sub { font-size: 11px; }
+
+/* ═══════════════════════════════════════════════════ */
+/* NÚMEROS DE LA COLECCIÓN                            */
+/* ═══════════════════════════════════════════════════ */
+.numbers-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  max-width: 1100px; margin: 40px auto 0;
+}
+.num-card {
+  background: var(--card-bg); border: 2px solid; border-radius: 4px;
+  padding: 28px 24px; text-align: center;
+}
+.num-card.mg { border-color: var(--mg); box-shadow: 0 0 22px rgba(255,46,136,.18); }
+.num-card.cy { border-color: var(--cy); box-shadow: 0 0 22px rgba(0,229,255,.18); }
+.num-card.ye { border-color: var(--ye); box-shadow: 0 0 22px rgba(255,210,63,.18); }
+.num-card h3 {
+  font-family: 'Press Start 2P'; font-size: 10px; letter-spacing: 2px; margin-bottom: 14px;
+}
+.num-card.mg h3 { color: var(--mg); } .num-card.cy h3 { color: var(--cy); } .num-card.ye h3 { color: var(--ye); }
+.num-card .big {
+  font-family: 'Orbitron'; font-weight: 900; font-size: 56px;
+  letter-spacing: 2px; display: block; margin: 14px 0 12px;
+}
+.num-card.mg .big { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.4); }
+.num-card.cy .big { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
+.num-card.ye .big { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.4); }
+.num-card p { font-family: 'Share Tech Mono'; font-size: 13px; color: rgba(255,255,255,.7); letter-spacing: 1px; }
+
+.slide h1 { font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye); letter-spacing: 4px; margin-bottom: 6px; border-left: 4px solid var(--ye); padding-left: 16px; }
+.slide h2 { font-family: 'Orbitron'; font-weight: 900; font-size: 38px; color: #fff; letter-spacing: 1px; margin: 8px 0 24px 20px; line-height: 1.05; }
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+
+/* ── NAV FOOTER ── */
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(255,46,136,.5); }
+.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · COLECCIÓN SNES</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 PORTADA -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACIÓN 4 · 16 BITS · NINTENDO</div>
+      <div class="ep-title"><span class="vs">COLECCIÓN</span> SNES</div>
+      <div class="ep-sub">UN PANORAMA POR CATEGORÍAS</div>
+      <div class="ep-count">190 TÍTULOS · 6 CANALES</div>
+    </div>
+  </section>
+
+  <!-- 02 ÍNDICE (Press Start) -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="idx">
+      <div class="idx-title">SELECCIONÁ TU CATEGORÍA</div>
+      <div class="idx-list">
+        <div class="idx-item active">
+          <span class="idx-cursor">▶</span>
+          <span class="idx-num">01</span>
+          <span>RPG <span class="idx-dots">·············································</span></span>
+          <span class="idx-count">42 TÍTULOS</span>
+        </div>
+        <div class="idx-item">
+          <span class="idx-cursor">▶</span>
+          <span class="idx-num">02</span>
+          <span>ACCIÓN <span class="idx-dots">··········································</span></span>
+          <span class="idx-count">38 TÍTULOS</span>
+        </div>
+        <div class="idx-item">
+          <span class="idx-cursor">▶</span>
+          <span class="idx-num">03</span>
+          <span>PLATAFORMAS <span class="idx-dots">·····································</span></span>
+          <span class="idx-count">31 TÍTULOS</span>
+        </div>
+        <div class="idx-item">
+          <span class="idx-cursor">▶</span>
+          <span class="idx-num">04</span>
+          <span>LUCHA <span class="idx-dots">···········································</span></span>
+          <span class="idx-count">22 TÍTULOS</span>
+        </div>
+        <div class="idx-item">
+          <span class="idx-cursor">▶</span>
+          <span class="idx-num">05</span>
+          <span>DEPORTES <span class="idx-dots">········································</span></span>
+          <span class="idx-count">28 TÍTULOS</span>
+        </div>
+        <div class="idx-item">
+          <span class="idx-cursor">▶</span>
+          <span class="idx-num">06</span>
+          <span>CURIOSIDADES <span class="idx-dots">····································</span></span>
+          <span class="idx-count">29 TÍTULOS</span>
+        </div>
+      </div>
+      <div class="idx-total">─── 190 TÍTULOS ───</div>
+      <div class="idx-hint">▶ PRESS START TO BEGIN PANORAMA</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- CATEGORÍA 01 · RPG -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- 03 PANEO RPG -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-paneo">
+      <div class="paneo-banner">
+        <div class="paneo-cat-num">CAT 01/06</div>
+        <div class="paneo-cat-name">R P G</div>
+        <div class="paneo-cat-count">42 TÍTULOS</div>
+      </div>
+      <div class="paneo-tv-wrap">
+        <div class="tarrovision">
+          <div class="tv-controls-top">
+            <span class="tv-led"></span>
+            <span class="tv-brand">TARROVISION</span>
+            <span class="tv-channel">CH 01</span>
+          </div>
+          <div class="tv-screen">
+            <div class="tv-screen-inner">
+              <!-- Reemplazar por: <video src="captures/paneo-rpg.mp4" autoplay muted loop></video> -->
+              <div class="tv-noscreen">
+                <div class="tv-noscreen-big">PANEO RPG</div>
+                <div class="tv-noscreen-sub">Insertar video paneo cámara</div>
+              </div>
+            </div>
+          </div>
+          <div class="tv-controls-bottom">
+            <div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 TRIPLE RPG · 3 joyas -->
+  <section class="slide slide-triple">
+    <span class="slide-num">04</span>
+    <div class="slide-triple-inner">
+      <div class="triple-head">
+        <div class="tv-block-label">RPG · 3 JOYAS DESTACADAS</div>
+      </div>
+      <div class="triple-grid">
+        <!-- JOYA 1 -->
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 1</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye">
+            <div class="tv-title">CHRONO TRIGGER</div>
+            <div class="tv-meta">1995 · SQUARE</div>
+          </div>
+        </div>
+        <!-- JOYA 2 -->
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 2</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye">
+            <div class="tv-title">FINAL FANTASY VI</div>
+            <div class="tv-meta">1994 · SQUARE</div>
+          </div>
+        </div>
+        <!-- JOYA 3 -->
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 3</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye">
+            <div class="tv-title">EARTHBOUND</div>
+            <div class="tv-meta">1994 · APE / HAL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- CATEGORÍA 02 · ACCIÓN -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- 05 PANEO ACCIÓN -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-paneo">
+      <div class="paneo-banner">
+        <div class="paneo-cat-num">CAT 02/06</div>
+        <div class="paneo-cat-name">A C C I Ó N</div>
+        <div class="paneo-cat-count">38 TÍTULOS</div>
+      </div>
+      <div class="paneo-tv-wrap"><div class="tarrovision">
+        <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+        <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">PANEO ACCIÓN</div><div class="tv-noscreen-sub">Insertar video paneo cámara</div></div></div></div>
+        <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 06 TRIPLE ACCIÓN -->
+  <section class="slide slide-triple">
+    <span class="slide-num">06</span>
+    <div class="slide-triple-inner">
+      <div class="triple-head"><div class="tv-block-label">ACCIÓN · 3 JOYAS DESTACADAS</div></div>
+      <div class="triple-grid">
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 1</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">CASTLEVANIA IV</div><div class="tv-meta">1991 · KONAMI</div></div>
+        </div>
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 2</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">CONTRA III</div><div class="tv-meta">1992 · KONAMI</div></div>
+        </div>
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 3</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">ACTRAISER</div><div class="tv-meta">1990 · QUINTET</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- CATEGORÍA 03 · PLATAFORMAS -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- 07 PANEO PLATAFORMAS -->
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-paneo">
+      <div class="paneo-banner">
+        <div class="paneo-cat-num">CAT 03/06</div>
+        <div class="paneo-cat-name">P L A T A F O R M A S</div>
+        <div class="paneo-cat-count">31 TÍTULOS</div>
+      </div>
+      <div class="paneo-tv-wrap"><div class="tarrovision">
+        <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+        <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">PANEO PLATAFORMAS</div><div class="tv-noscreen-sub">Insertar video paneo cámara</div></div></div></div>
+        <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 08 TRIPLE PLATAFORMAS -->
+  <section class="slide slide-triple">
+    <span class="slide-num">08</span>
+    <div class="slide-triple-inner">
+      <div class="triple-head"><div class="tv-block-label">PLATAFORMAS · 3 JOYAS DESTACADAS</div></div>
+      <div class="triple-grid">
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 1</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">SUPER MARIO WORLD</div><div class="tv-meta">1990 · NINTENDO</div></div>
+        </div>
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 2</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">YOSHI'S ISLAND</div><div class="tv-meta">1995 · NINTENDO</div></div>
+        </div>
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 3</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">DKC 2</div><div class="tv-meta">1995 · RARE</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- CATEGORÍA 04 · LUCHA -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- 09 PANEO LUCHA -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-paneo">
+      <div class="paneo-banner">
+        <div class="paneo-cat-num">CAT 04/06</div>
+        <div class="paneo-cat-name">L U C H A</div>
+        <div class="paneo-cat-count">22 TÍTULOS</div>
+      </div>
+      <div class="paneo-tv-wrap"><div class="tarrovision">
+        <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
+        <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">PANEO LUCHA</div><div class="tv-noscreen-sub">Insertar video paneo cámara</div></div></div></div>
+        <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 10 TRIPLE LUCHA -->
+  <section class="slide slide-triple">
+    <span class="slide-num">10</span>
+    <div class="slide-triple-inner">
+      <div class="triple-head"><div class="tv-block-label">LUCHA · 3 JOYAS DESTACADAS</div></div>
+      <div class="triple-grid">
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 1</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">STREET FIGHTER II</div><div class="tv-meta">1992 · CAPCOM</div></div>
+        </div>
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 2</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">KILLER INSTINCT</div><div class="tv-meta">1995 · RARE</div></div>
+        </div>
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 3</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">MORTAL KOMBAT II</div><div class="tv-meta">1994 · MIDWAY</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- CATEGORÍA 05 · DEPORTES -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- 11 PANEO DEPORTES -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-paneo">
+      <div class="paneo-banner">
+        <div class="paneo-cat-num">CAT 05/06</div>
+        <div class="paneo-cat-name">D E P O R T E S</div>
+        <div class="paneo-cat-count">28 TÍTULOS</div>
+      </div>
+      <div class="paneo-tv-wrap"><div class="tarrovision">
+        <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div>
+        <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">PANEO DEPORTES</div><div class="tv-noscreen-sub">Insertar video paneo cámara</div></div></div></div>
+        <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 12 TRIPLE DEPORTES -->
+  <section class="slide slide-triple">
+    <span class="slide-num">12</span>
+    <div class="slide-triple-inner">
+      <div class="triple-head"><div class="tv-block-label">DEPORTES · 3 JOYAS DESTACADAS</div></div>
+      <div class="triple-grid">
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 1</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">NBA JAM</div><div class="tv-meta">1994 · MIDWAY</div></div>
+        </div>
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 2</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">FIFA 96</div><div class="tv-meta">1995 · EA SPORTS</div></div>
+        </div>
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 3</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">SUPER TENNIS</div><div class="tv-meta">1991 · TONKIN HOUSE</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- CATEGORÍA 06 · CURIOSIDADES -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- 13 PANEO CURIOSIDADES -->
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <div class="slide-paneo">
+      <div class="paneo-banner">
+        <div class="paneo-cat-num">CAT 06/06</div>
+        <div class="paneo-cat-name">C U R I O S I D A D E S</div>
+        <div class="paneo-cat-count">29 TÍTULOS</div>
+      </div>
+      <div class="paneo-tv-wrap"><div class="tarrovision">
+        <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 06</span></div>
+        <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">PANEO CURIOSIDADES</div><div class="tv-noscreen-sub">Insertar video paneo cámara</div></div></div></div>
+        <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 14 TRIPLE CURIOSIDADES -->
+  <section class="slide slide-triple">
+    <span class="slide-num">14</span>
+    <div class="slide-triple-inner">
+      <div class="triple-head"><div class="tv-block-label">CURIOSIDADES · 3 JOYAS DESTACADAS</div></div>
+      <div class="triple-grid">
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 1</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">SIM CITY</div><div class="tv-meta">1991 · MAXIS</div></div>
+        </div>
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 2</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">HARVEST MOON</div><div class="tv-meta">1996 · PACK-IN-VIDEO</div></div>
+        </div>
+        <div class="triple-cell">
+          <div class="tv-fit"><div class="tarrovision">
+            <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+            <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">JOYA 3</div><div class="tv-noscreen-sub">gameplay aquí</div></div></div></div>
+            <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+          </div></div>
+          <div class="tv-namebox ye"><div class="tv-title">TETRIS ATTACK</div><div class="tv-meta">1995 · INTELLIGENT SYS</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NÚMEROS + CIERRE -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- 15 NÚMEROS DE LA COLECCIÓN -->
+  <section class="slide">
+    <span class="slide-num">15</span>
+    <h1>BALANCE FINAL</h1>
+    <h2 class="mg">LA COLECCIÓN EN NÚMEROS</h2>
+    <div class="numbers-grid">
+      <div class="num-card mg">
+        <h3>TOTAL</h3>
+        <span class="big">190</span>
+        <p>títulos en la colección</p>
+      </div>
+      <div class="num-card cy">
+        <h3>CATEGORÍAS</h3>
+        <span class="big">6</span>
+        <p>géneros cubiertos</p>
+      </div>
+      <div class="num-card ye">
+        <h3>JOYAS</h3>
+        <span class="big">18</span>
+        <p>destacadas en gameplay</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 CIERRE -->
+  <section class="slide">
+    <span class="slide-num">16</span>
+    <div class="divider">
+      <div class="pre cy">PRÓXIMA COLECCIÓN</div>
+      <div class="title cy" style="font-size:58px;">SEGUIMOS</div>
+      <div class="sub">Comentanos cuál fue tu favorita. Si querés que cubramos otra consola en el próximo capítulo, dejá la sugerencia. Suscríbete para no perderte el panorama N64.</div>
+    </div>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 16</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+go(0);
+</script>
+
+</body>
+</html>
