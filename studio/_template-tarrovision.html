@@ -566,27 +566,38 @@ header {
 .triple-cell {
   display: grid;
   grid-template-rows: 1fr auto;
-  align-items: center;
+  align-items: stretch;
   justify-items: center;
-  gap: 10px;
+  gap: 8px;
   min-height: 0;
   min-width: 0;
   height: 100%;
   overflow: hidden;
 }
-/* La TV ocupa toda la fila 1fr de la celda, conservando 1:1.
-   max-height: none destraba el cap de 520px de la base. */
-.triple-cell .tarrovision {
-  max-height: none;
-  max-width: 100%;
+/* Wrapper con container-type: size para que la TV pueda usar cq units
+   y elegir el menor entre alto y ancho disponible. */
+.triple-cell .tv-fit {
+  container-type: size;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
   height: 100%;
-  width: auto;
-  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.triple-cell .tv-fit .tarrovision {
+  /* min(100cqh, 100cqw) = el menor entre alto y ancho del wrapper.
+     Asi la TV nunca desborda en ningun eje. */
+  width: min(100cqh, 100cqw);
+  height: min(100cqh, 100cqw);
+  max-width: none;
+  max-height: none;
+  aspect-ratio: auto;
   padding: 16px 18px;
   border-radius: 18px;
   gap: 10px;
-  align-self: center;
-  justify-self: center;
 }
 .triple-cell .tv-brand {
   font-size: 10px;
@@ -958,24 +969,26 @@ nav.footer {
       <div class="triple-grid">
         <!-- TV 1 -->
         <div class="triple-cell">
-          <div class="tarrovision">
-            <div class="tv-controls-top">
-              <span class="tv-led"></span>
-              <span class="tv-brand">TARROVISION</span>
-              <span class="tv-channel">CH 01</span>
-            </div>
-            <div class="tv-screen">
-              <div class="tv-screen-inner">
-                <div class="tv-noscreen">
-                  <div class="tv-noscreen-big">CH 01</div>
-                  <div class="tv-noscreen-sub">Canal 1</div>
+          <div class="tv-fit">
+            <div class="tarrovision">
+              <div class="tv-controls-top">
+                <span class="tv-led"></span>
+                <span class="tv-brand">TARROVISION</span>
+                <span class="tv-channel">CH 01</span>
+              </div>
+              <div class="tv-screen">
+                <div class="tv-screen-inner">
+                  <div class="tv-noscreen">
+                    <div class="tv-noscreen-big">CH 01</div>
+                    <div class="tv-noscreen-sub">Canal 1</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="tv-controls-bottom">
-              <div class="tv-knob"></div>
-              <div class="tv-knob cy"></div>
-              <div class="tv-speaker"></div>
+              <div class="tv-controls-bottom">
+                <div class="tv-knob"></div>
+                <div class="tv-knob cy"></div>
+                <div class="tv-speaker"></div>
+              </div>
             </div>
           </div>
           <div class="tv-namebox ye">
@@ -985,24 +998,26 @@ nav.footer {
         </div>
         <!-- TV 2 -->
         <div class="triple-cell">
-          <div class="tarrovision">
-            <div class="tv-controls-top">
-              <span class="tv-led"></span>
-              <span class="tv-brand">TARROVISION</span>
-              <span class="tv-channel">CH 02</span>
-            </div>
-            <div class="tv-screen">
-              <div class="tv-screen-inner">
-                <div class="tv-noscreen">
-                  <div class="tv-noscreen-big">CH 02</div>
-                  <div class="tv-noscreen-sub">Canal 2</div>
+          <div class="tv-fit">
+            <div class="tarrovision">
+              <div class="tv-controls-top">
+                <span class="tv-led"></span>
+                <span class="tv-brand">TARROVISION</span>
+                <span class="tv-channel">CH 02</span>
+              </div>
+              <div class="tv-screen">
+                <div class="tv-screen-inner">
+                  <div class="tv-noscreen">
+                    <div class="tv-noscreen-big">CH 02</div>
+                    <div class="tv-noscreen-sub">Canal 2</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="tv-controls-bottom">
-              <div class="tv-knob"></div>
-              <div class="tv-knob cy"></div>
-              <div class="tv-speaker"></div>
+              <div class="tv-controls-bottom">
+                <div class="tv-knob"></div>
+                <div class="tv-knob cy"></div>
+                <div class="tv-speaker"></div>
+              </div>
             </div>
           </div>
           <div class="tv-namebox ye">
@@ -1012,24 +1027,26 @@ nav.footer {
         </div>
         <!-- TV 3 -->
         <div class="triple-cell">
-          <div class="tarrovision">
-            <div class="tv-controls-top">
-              <span class="tv-led"></span>
-              <span class="tv-brand">TARROVISION</span>
-              <span class="tv-channel">CH 03</span>
-            </div>
-            <div class="tv-screen">
-              <div class="tv-screen-inner">
-                <div class="tv-noscreen">
-                  <div class="tv-noscreen-big">CH 03</div>
-                  <div class="tv-noscreen-sub">Canal 3</div>
+          <div class="tv-fit">
+            <div class="tarrovision">
+              <div class="tv-controls-top">
+                <span class="tv-led"></span>
+                <span class="tv-brand">TARROVISION</span>
+                <span class="tv-channel">CH 03</span>
+              </div>
+              <div class="tv-screen">
+                <div class="tv-screen-inner">
+                  <div class="tv-noscreen">
+                    <div class="tv-noscreen-big">CH 03</div>
+                    <div class="tv-noscreen-sub">Canal 3</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="tv-controls-bottom">
-              <div class="tv-knob"></div>
-              <div class="tv-knob cy"></div>
-              <div class="tv-speaker"></div>
+              <div class="tv-controls-bottom">
+                <div class="tv-knob"></div>
+                <div class="tv-knob cy"></div>
+                <div class="tv-speaker"></div>
+              </div>
             </div>
           </div>
           <div class="tv-namebox ye">
