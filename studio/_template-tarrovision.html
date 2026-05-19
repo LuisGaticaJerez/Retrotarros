@@ -458,6 +458,46 @@ header {
   border-radius: 2px;
   background: rgba(255,210,63,.06);
 }
+
+/* ── NAMEBOX (etiqueta para nombre del juego bajo la TV) ── */
+.tv-namebox {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 28px;
+  border: 1px solid var(--cy);
+  background: rgba(0,229,255,.04);
+  position: relative;
+  border-radius: 2px;
+  max-width: 90%;
+}
+.tv-namebox::before,
+.tv-namebox::after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: var(--dk);
+  border: 1px solid var(--cy);
+}
+.tv-namebox::before { top: -4px; left: -4px; }
+.tv-namebox::after { bottom: -4px; right: -4px; }
+.tv-namebox .tv-title {
+  font-size: 20px;
+  margin: 0;
+}
+.tv-namebox .tv-meta {
+  font-size: 10.5px;
+  letter-spacing: 3px;
+  color: rgba(0,229,255,.6);
+}
+.tv-namebox.mg { border-color: var(--mg); background: rgba(255,46,136,.04); }
+.tv-namebox.mg::before, .tv-namebox.mg::after { border-color: var(--mg); }
+.tv-namebox.mg .tv-meta { color: rgba(255,46,136,.6); }
+.tv-namebox.ye { border-color: var(--ye); background: rgba(255,210,63,.04); }
+.tv-namebox.ye::before, .tv-namebox.ye::after { border-color: var(--ye); }
+.tv-namebox.ye .tv-meta { color: rgba(255,210,63,.6); }
 .tv-caption {
   max-width: 920px;
   padding: 12px 22px;
@@ -494,11 +534,15 @@ header {
 }
 
 /* ── TRIPLE SCREEN (3 TVs juntas) ── */
+.slide.triple-slide,
+.slide-triple {
+  overflow: hidden;
+}
 .slide-triple {
   display: grid;
   grid-template-rows: auto 1fr;
   height: 100%;
-  padding: 16px 40px 20px;
+  padding: 14px 32px 18px;
   gap: 12px;
   max-width: 1500px;
   margin: 0 auto;
@@ -512,25 +556,32 @@ header {
 }
 .triple-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   min-height: 0;
-  align-items: center;
-  justify-items: center;
+  align-items: stretch;
+  justify-items: stretch;
   width: 100%;
 }
 .triple-cell {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr auto;
   align-items: center;
+  justify-items: center;
   gap: 8px;
   min-height: 0;
+  min-width: 0;
   height: 100%;
+  overflow: hidden;
 }
 .triple-cell .tarrovision {
+  max-width: 100%;
   max-height: 100%;
-  padding: 16px 18px;
-  border-radius: 18px;
+  width: auto;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  padding: 14px 16px;
+  border-radius: 16px;
   gap: 8px;
 }
 .triple-cell .tv-brand {
@@ -559,6 +610,17 @@ header {
 }
 .triple-cell .tv-noscreen .tv-noscreen-sub {
   font-size: 11px;
+}
+.triple-cell .tv-namebox {
+  padding: 6px 16px;
+  gap: 2px;
+}
+.triple-cell .tv-namebox .tv-title {
+  font-size: 14px;
+}
+.triple-cell .tv-namebox .tv-meta {
+  font-size: 9px;
+  letter-spacing: 2px;
 }
 
 /* ── DUAL SCREEN (comparativa) ── */
@@ -738,11 +800,10 @@ nav.footer {
         </div>
       </div>
       <div class="tv-info">
-        <div class="tv-title-row">
+        <div class="tv-namebox">
           <div class="tv-title">TÍTULO DEL JUEGO</div>
-          <span class="tv-tag">CLIP 0:14</span>
+          <div class="tv-meta">CONSOLA · AÑO · ESTUDIO</div>
         </div>
-        <div class="tv-meta">CONSOLA · AÑO · ESTUDIO</div>
         <div class="tv-caption">
           <span class="lbl">▶ NOTA</span>
           Descripción corta del gameplay que vemos: qué hace especial al juego, qué se demuestra en este clip, dato curioso o reacción del momento. Máximo 2-3 líneas para no tapar la imagen.
@@ -782,11 +843,10 @@ nav.footer {
         </div>
       </div>
       <div class="tv-info">
-        <div class="tv-title-row">
+        <div class="tv-namebox mg">
           <div class="tv-title">SEGUNDO TÍTULO</div>
-          <span class="tv-tag">CLIP 0:22</span>
+          <div class="tv-meta">CONSOLA · AÑO · ESTUDIO</div>
         </div>
-        <div class="tv-meta">CONSOLA · AÑO · ESTUDIO</div>
       </div>
     </div>
   </section>
@@ -821,8 +881,10 @@ nav.footer {
               <div class="tv-speaker"></div>
             </div>
           </div>
-          <div class="tv-title">JUEGO A</div>
-          <div class="tv-meta">CONSOLA A · AÑO</div>
+          <div class="tv-namebox ye">
+            <div class="tv-title">JUEGO A</div>
+            <div class="tv-meta">CONSOLA A · AÑO</div>
+          </div>
         </div>
         <div class="dual-cell">
           <div class="tarrovision">
@@ -845,8 +907,10 @@ nav.footer {
               <div class="tv-speaker"></div>
             </div>
           </div>
-          <div class="tv-title">JUEGO B</div>
-          <div class="tv-meta">CONSOLA B · AÑO</div>
+          <div class="tv-namebox ye">
+            <div class="tv-title">JUEGO B</div>
+            <div class="tv-meta">CONSOLA B · AÑO</div>
+          </div>
         </div>
       </div>
     </div>
@@ -881,7 +945,7 @@ nav.footer {
   </section>
 
   <!-- 07 TRIPLE TARROVISION -->
-  <section class="slide">
+  <section class="slide triple-slide">
     <span class="slide-num">07</span>
     <div class="slide-triple">
       <div class="tv-head triple-head">
@@ -910,8 +974,10 @@ nav.footer {
               <div class="tv-speaker"></div>
             </div>
           </div>
-          <div class="tv-title">JUEGO 1</div>
-          <div class="tv-meta">CONSOLA · AÑO</div>
+          <div class="tv-namebox ye">
+            <div class="tv-title">JUEGO 1</div>
+            <div class="tv-meta">CONSOLA · AÑO</div>
+          </div>
         </div>
         <!-- TV 2 -->
         <div class="triple-cell">
@@ -935,8 +1001,10 @@ nav.footer {
               <div class="tv-speaker"></div>
             </div>
           </div>
-          <div class="tv-title">JUEGO 2</div>
-          <div class="tv-meta">CONSOLA · AÑO</div>
+          <div class="tv-namebox ye">
+            <div class="tv-title">JUEGO 2</div>
+            <div class="tv-meta">CONSOLA · AÑO</div>
+          </div>
         </div>
         <!-- TV 3 -->
         <div class="triple-cell">
@@ -960,8 +1028,10 @@ nav.footer {
               <div class="tv-speaker"></div>
             </div>
           </div>
-          <div class="tv-title">JUEGO 3</div>
-          <div class="tv-meta">CONSOLA · AÑO</div>
+          <div class="tv-namebox ye">
+            <div class="tv-title">JUEGO 3</div>
+            <div class="tv-meta">CONSOLA · AÑO</div>
+          </div>
         </div>
       </div>
     </div>
