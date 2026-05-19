@@ -97,6 +97,91 @@ header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200;
 .game-why { max-width: 1200px; margin: 0 auto; padding: 12px 22px; background: rgba(255,255,255,.04); border-left: 4px solid var(--ye); font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,.86); text-align: left; }
 .game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 6px; }
 
+/* ═══════════════════════════════════════════════════ */
+/* NFR GRID (fuera del top — variantes/exclusivos)    */
+/* ═══════════════════════════════════════════════════ */
+.slide h1 { font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye); letter-spacing: 4px; margin-bottom: 6px; border-left: 4px solid var(--ye); padding-left: 16px; }
+.slide h2 { font-family: 'Orbitron'; font-weight: 900; font-size: 38px; color: #fff; letter-spacing: 1px; margin: 8px 0 24px 20px; line-height: 1.05; }
+.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.nfr-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 14px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.nfr-card {
+  background: rgba(255,46,136,.05);
+  border: 1px solid var(--mg);
+  border-radius: 4px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+}
+.nfr-card .nfr-img {
+  display: block;
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  background: rgba(0,0,0,.3);
+}
+.nfr-card .nfr-img-fallback {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, rgba(255,46,136,.15) 0%, rgba(45,27,105,.45) 100%);
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  color: rgba(255,255,255,.55);
+  letter-spacing: 3px;
+  text-align: center;
+  padding: 12px;
+}
+.nfr-card .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+  gap: 10px;
+}
+.nfr-card .nfr-name {
+  font-family: 'Orbitron';
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.15;
+  flex: 1;
+}
+.nfr-card .nfr-price {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--mg);
+  text-shadow: 0 0 10px rgba(255,46,136,.5);
+  white-space: nowrap;
+}
+.nfr-card .nfr-cat {
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--cy);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.nfr-card .nfr-why {
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: rgba(255,255,255,.72);
+  line-height: 1.5;
+}
+
 nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
 .nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
 .nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
@@ -140,7 +225,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
     </div>
   </section>
 
-  <!-- 03 #10 HARVEST MOON -->
+  <!-- 03 #10 DEMON'S CREST -->
   <section class="slide">
     <span class="slide-num">03</span>
     <div class="slide-hybrid">
@@ -150,7 +235,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       </div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-grn"><img src="img/snes-top-precios/harvest-moon.png" alt="Harvest Moon SNES box art"></div>
+          <div class="cart-img-wrap lb-purple"><div class="cart-fallback"><div class="title">DEMON'S CREST</div><div class="sub">CAPCOM</div></div></div>
           <div class="cart-console">SNES</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -159,12 +244,12 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">HARVEST MOON</div><div class="game-meta">SNES · 1996 · PACK-IN-VIDEO · CIB ~USD 400</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>Lanzamiento al final del ciclo de vida SNES = tiraje bajo. Boom retroactivo del género farming sim (Stardew Valley, Story of Seasons) disparó la demanda. Loose ronda los $80, CIB sube fácil a 4 cifras.</div>
+      <div class="hybrid-title"><div class="game-title">DEMON'S CREST</div><div class="game-meta">SNES · 1994 · CAPCOM · CIB ~USD 400</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>Spinoff oscuro de Gargoyle's Quest, salido al final del ciclo SNES con poca promo. Tiraje normal pero corto. Gameplay tipo Castlevania en mundo gótico, calidad rara que la comunidad redescubrió post-2010.</div>
     </div>
   </section>
 
-  <!-- 04 #9 SPIDER-MAN / VENOM MAXIMUM CARNAGE -->
+  <!-- 04 #9 HARVEST MOON -->
   <section class="slide">
     <span class="slide-num">04</span>
     <div class="slide-hybrid">
@@ -174,7 +259,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       </div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-red"><img src="img/snes-top-precios/maximum-carnage.jpg" alt="Spider-Man Venom Maximum Carnage SNES box art"></div>
+          <div class="cart-img-wrap lb-grn"><img src="img/snes-top-precios/harvest-moon.png" alt="Harvest Moon SNES box art"></div>
           <div class="cart-console">SNES</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -183,22 +268,22 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SPIDER-MAN / VENOM: MAXIMUM CARNAGE</div><div class="game-meta">SNES · 1994 · LJN / SOFTWARE CREATIONS · CIB ~USD 500</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>El "red cartridge" — variante exclusiva con plástico rojo, no la negra común. Edición limitada para distinguir el producto. La negra vale 1/10. Coleccionistas Marvel + cazadores de variantes hacen subir el rojo.</div>
+      <div class="hybrid-title"><div class="game-title">HARVEST MOON</div><div class="game-meta">SNES · 1996 · PACK-IN-VIDEO · CIB ~USD 500</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>Lanzamiento al final del ciclo de vida SNES = tiraje bajo. Boom retroactivo del género farming sim (Stardew Valley, Story of Seasons) disparó la demanda. Loose ronda los $80, CIB sube fácil a 3-4 cifras.</div>
     </div>
   </section>
 
-  <!-- 05 #8 MEGA MAN X3 -->
+  <!-- 05 #8 SUPER MARIO RPG -->
   <section class="slide">
     <span class="slide-num">05</span>
     <div class="slide-hybrid">
       <div class="hybrid-head">
         <div class="game-pos cy"><span class="hash">#</span>8</div>
-        <div class="price-badge"><span class="usd-lbl">USD</span><span>$1.000</span></div>
+        <div class="price-badge"><span class="usd-lbl">USD</span><span>$700</span></div>
       </div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-blue"><img src="img/snes-top-precios/mega-man-x3.jpg" alt="Mega Man X3 SNES box art"></div>
+          <div class="cart-img-wrap lb-red"><div class="cart-fallback"><div class="title">SUPER MARIO RPG</div><div class="sub">SQUARESOFT</div></div></div>
           <div class="cart-console">SNES</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -207,22 +292,22 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">MEGA MAN X3</div><div class="game-meta">SNES · 1995 · CAPCOM · CIB ~USD 1.000</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>El último de la trilogía X en SNES, lanzado tarde cuando todos miraban PS1. Tiraje NTSC bajísimo (en Japón salió en SNES y en PS1/Saturn, en EEUU solo SNES). Cult favorite + escasez = precios que solo suben.</div>
+      <div class="hybrid-title"><div class="game-title">SUPER MARIO RPG</div><div class="game-meta">SNES · 1996 · SQUARE / NINTENDO · CIB ~USD 700</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>El único Mario RPG en la era 16-bit y la última colaboración Nintendo+Square antes de que Squaresoft se fuera a PlayStation. Late release SNES + culto retroactivo + remake Switch 2023 disparando demanda del original.</div>
     </div>
   </section>
 
-  <!-- 06 #7 AERO FIGHTERS -->
+  <!-- 06 #7 FINAL FANTASY III (FF VI US) -->
   <section class="slide">
     <span class="slide-num">06</span>
     <div class="slide-hybrid">
       <div class="hybrid-head">
         <div class="game-pos cy"><span class="hash">#</span>7</div>
-        <div class="price-badge"><span class="usd-lbl">USD</span><span>$1.200</span></div>
+        <div class="price-badge"><span class="usd-lbl">USD</span><span>$800</span></div>
       </div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-orange"><div class="cart-fallback"><div class="title">AERO FIGHTERS</div><div class="sub">VIDEO SYSTEM</div></div></div>
+          <div class="cart-img-wrap lb-purple"><div class="cart-fallback"><div class="title">FINAL FANTASY III</div><div class="sub">FF VI · US RELEASE</div></div></div>
           <div class="cart-console">SNES</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -231,22 +316,22 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">AERO FIGHTERS</div><div class="game-meta">SNES · 1994 · VIDEO SYSTEM · CIB ~USD 1.200</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>Shoot 'em up port de arcade Neo-Geo, tiraje ridículamente bajo en NTSC. Los shmups SNES son escasos de por sí. Los que quedan en buen estado se subastan entre puristas del género — sin variantes, sin reediciones.</div>
+      <div class="hybrid-title"><div class="game-title">FINAL FANTASY III (FF VI)</div><div class="game-meta">SNES · 1994 · SQUARESOFT · CIB ~USD 800</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>El JRPG más prestigioso del SNES. Tiraje NTSC limitado vs la fama mundial que tiene. Players que lo jugaron de chicos vuelven a comprarlo de adultos para tenerlo CIB. La caja con manual original es difícil de encontrar.</div>
     </div>
   </section>
 
-  <!-- 07 #6 FINAL FIGHT GUY -->
+  <!-- 07 #6 POCKY & ROCKY 2 -->
   <section class="slide">
     <span class="slide-num">07</span>
     <div class="slide-hybrid">
       <div class="hybrid-head">
         <div class="game-pos cy"><span class="hash">#</span>6</div>
-        <div class="price-badge"><span class="usd-lbl">USD</span><span>$1.500</span></div>
+        <div class="price-badge"><span class="usd-lbl">USD</span><span>$1.000</span></div>
       </div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-red"><div class="cart-fallback"><div class="title">FINAL FIGHT GUY</div><div class="sub">BLOCKBUSTER EXCL.</div></div></div>
+          <div class="cart-img-wrap lb-orange"><div class="cart-fallback"><div class="title">POCKY &amp; ROCKY 2</div><div class="sub">NATSUME</div></div></div>
           <div class="cart-console">SNES</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -255,17 +340,89 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">FINAL FIGHT GUY</div><div class="game-meta">SNES · 1994 · CAPCOM · CIB ~USD 1.500</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>Final Fight original le faltaba Guy (uno de los 3 personajes). Capcom lanzó esta versión solo en Blockbuster Video — alquiler exclusivo. Las copias retail son rarísimas. Una pieza definitoria del coleccionismo SNES.</div>
+      <div class="hybrid-title"><div class="game-title">POCKY &amp; ROCKY 2</div><div class="game-meta">SNES · 1994 · NATSUME · CIB ~USD 1.000</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>Secuela de un cult shoot 'em up japonés tipo Pocky and Rocky, con miko anime estética. Tiraje NTSC mínimo. Reconocido entre fans del shmup y del run 'n' gun cute. Cartuchos sueltos sí aparecen, CIB es otro cantar.</div>
     </div>
   </section>
 
-  <!-- 08 #5 WILD GUNS -->
+  <!-- 08 #5 MEGA MAN X3 -->
   <section class="slide">
     <span class="slide-num">08</span>
     <div class="slide-hybrid">
       <div class="hybrid-head">
         <div class="game-pos cy"><span class="hash">#</span>5</div>
+        <div class="price-badge"><span class="usd-lbl">USD</span><span>$1.100</span></div>
+      </div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-blue"><img src="img/snes-top-precios/mega-man-x3.jpg" alt="Mega Man X3 SNES box art"></div>
+          <div class="cart-console">SNES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Insertá gameplay aquí</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">MEGA MAN X3</div><div class="game-meta">SNES · 1995 · CAPCOM · CIB ~USD 1.100</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>El último de la trilogía X en SNES, lanzado tarde cuando todos miraban PS1. Tiraje NTSC bajísimo (en Japón salió en SNES y en PS1/Saturn, en EEUU solo SNES). Cult favorite + escasez = precios que solo suben.</div>
+    </div>
+  </section>
+
+  <!-- 09 #4 CHRONO TRIGGER -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head">
+        <div class="game-pos cy"><span class="hash">#</span>4</div>
+        <div class="price-badge"><span class="usd-lbl">USD</span><span>$1.200</span></div>
+      </div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-purple"><div class="cart-fallback"><div class="title">CHRONO TRIGGER</div><div class="sub">SQUARE · DREAM TEAM</div></div></div>
+          <div class="cart-console">SNES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Insertá gameplay aquí</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">CHRONO TRIGGER</div><div class="game-meta">SNES · 1995 · SQUARE · CIB ~USD 1.200</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>El JRPG perfecto. Status legendario + ports posteriores no matan el deseo de tener el cartucho original con la caja amarilla de Square. Box arts en buen estado son raros porque la caja era brillosa y se rayaba fácil.</div>
+    </div>
+  </section>
+
+  <!-- 10 #3 AERO FIGHTERS -->
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head">
+        <div class="game-pos mg"><span class="hash">#</span>3</div>
+        <div class="price-badge"><span class="usd-lbl">USD</span><span>$1.500</span></div>
+      </div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-orange"><div class="cart-fallback"><div class="title">AERO FIGHTERS</div><div class="sub">VIDEO SYSTEM</div></div></div>
+          <div class="cart-console">SNES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Insertá gameplay aquí</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">AERO FIGHTERS</div><div class="game-meta">SNES · 1994 · VIDEO SYSTEM · CIB ~USD 1.500</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>Shoot 'em up port de arcade Neo-Geo, tiraje ridículamente bajo en NTSC. Los shmups SNES son escasos de por sí. Los que quedan en buen estado se subastan entre puristas del género — sin variantes, sin reediciones.</div>
+    </div>
+  </section>
+
+  <!-- 11 #2 WILD GUNS -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head">
+        <div class="game-pos mg"><span class="hash">#</span>2</div>
         <div class="price-badge"><span class="usd-lbl">USD</span><span>$2.500</span></div>
       </div>
       <div class="hybrid-body">
@@ -274,7 +431,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="cart-console">SNES</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
-          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div>
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
           <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Insertá gameplay aquí</div></div></div></div>
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
@@ -284,12 +441,12 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
     </div>
   </section>
 
-  <!-- 09 #4 EARTHBOUND BIG BOX -->
+  <!-- 12 #1 EARTHBOUND BIG BOX -->
   <section class="slide">
-    <span class="slide-num">09</span>
+    <span class="slide-num">12</span>
     <div class="slide-hybrid">
       <div class="hybrid-head">
-        <div class="game-pos cy"><span class="hash">#</span>4</div>
+        <div class="game-pos mg"><span class="hash">#</span>1</div>
         <div class="price-badge"><span class="usd-lbl">USD</span><span>$3.500</span></div>
       </div>
       <div class="hybrid-body">
@@ -298,7 +455,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="cart-console">SNES</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
-          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
           <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Insertá gameplay aquí</div></div></div></div>
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
@@ -308,89 +465,93 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
     </div>
   </section>
 
-  <!-- 10 #3 HAGANE -->
-  <section class="slide">
-    <span class="slide-num">10</span>
-    <div class="slide-hybrid">
-      <div class="hybrid-head">
-        <div class="game-pos mg"><span class="hash">#</span>3</div>
-        <div class="price-badge"><span class="usd-lbl">USD</span><span>$4.000</span></div>
-      </div>
-      <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-dk"><div class="cart-fallback"><div class="title">HAGANE</div><div class="sub">THE FINAL CONFLICT</div></div></div>
-          <div class="cart-console">SNES</div>
-        </div></div>
-        <div class="tv-wrap"><div class="tarrovision">
-          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
-          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Insertá gameplay aquí</div></div></div></div>
-          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
-        </div></div>
-      </div>
-      <div class="hybrid-title"><div class="game-title">HAGANE: THE FINAL CONFLICT</div><div class="game-meta">SNES · 1994 · HUDSON / CAVE · CIB ~USD 4.000</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>Acción ninja de Cave (sí, los del bullet hell) que en NTSC solo se vendió como exclusiva Blockbuster — nunca retail. Encontrar copia loose ya es caro; CIB es prácticamente unicornio. La caja de Blockbuster vale tanto como el cartucho.</div>
-    </div>
-  </section>
-
-  <!-- 11 #2 DONKEY KONG COUNTRY COMPETITION CART -->
-  <section class="slide">
-    <span class="slide-num">11</span>
-    <div class="slide-hybrid">
-      <div class="hybrid-head">
-        <div class="game-pos mg"><span class="hash">#</span>2</div>
-        <div class="price-badge"><span class="usd-lbl">USD</span><span>$4.500</span></div>
-      </div>
-      <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-grn"><div class="cart-fallback"><div class="title">DKC COMPETITION CART</div><div class="sub">CLAMSHELL VERDE</div></div></div>
-          <div class="cart-console">SNES NFR · 2.500 UND</div>
-        </div></div>
-        <div class="tv-wrap"><div class="tarrovision">
-          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
-          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Insertá gameplay aquí</div></div></div></div>
-          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
-        </div></div>
-      </div>
-      <div class="hybrid-title"><div class="game-title">DONKEY KONG COUNTRY · COMPETITION CARTRIDGE</div><div class="game-meta">SNES · 1995 · RARE / NINTENDO · CIB ~USD 4.500</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>Versión cortada de DKC fabricada para Nintendo PowerFest '94 y Blockbuster World Championships II. Tras los torneos se vendieron 2.500 copias por catálogo Nintendo Power, dentro de una clamshell verde icónica. Muchas clamshells se perdieron — encontrar una completa es casi imposible.</div>
-    </div>
-  </section>
-
-  <!-- 12 #1 EXERTAINMENT MOUNTAIN BIKE RALLY -->
-  <section class="slide">
-    <span class="slide-num">12</span>
-    <div class="slide-hybrid">
-      <div class="hybrid-head">
-        <div class="game-pos mg"><span class="hash">#</span>1</div>
-        <div class="price-badge"><span class="usd-lbl">USD</span><span>$8.000+</span></div>
-      </div>
-      <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-purple"><div class="cart-fallback"><div class="title">EXERTAINMENT</div><div class="sub">MOUNTAIN BIKE RALLY</div></div></div>
-          <div class="cart-console">SNES + LIFE FITNESS</div>
-        </div></div>
-        <div class="tv-wrap"><div class="tarrovision">
-          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
-          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Insertá gameplay aquí</div></div></div></div>
-          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
-        </div></div>
-      </div>
-      <div class="hybrid-title"><div class="game-title">EXERTAINMENT MOUNTAIN BIKE RALLY / SPEED RACER</div><div class="game-meta">SNES · 1995 · LIFE FITNESS · CIB ~USD 8.000+ · SEALED COMBO PACK ~USD 16.000</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUÉ ES CARO</span>Cartucho diseñado para la "Exertainment Life Fitness Bike" — bicicleta estática gamer. Solo se vendió a gimnasios con el periférico, jamás retail común. Una copia sealed combo pack se subastó en noviembre 2022 por USD 15.993. CIB regular se mueve entre $1.000–$4.800; sealed con combo es el unicornio.</div>
-    </div>
-  </section>
-
-  <!-- 13 BONUS · PowerFest 1994 · El Holy Grail -->
+  <!-- 13 NFR KICKER · 6 RAREZAS FUERA DEL TOP -->
   <section class="slide">
     <span class="slide-num">13</span>
+    <h1>FUERA DEL TOP · PERO IMPOSIBLES DE IGNORAR</h1>
+    <h2 class="mg">VARIANTES &amp; EXCLUSIVOS</h2>
+    <div class="nfr-grid">
+      <div class="nfr-card">
+        <img class="nfr-img" src="img/snes-top-precios/maximum-carnage.jpg" alt="Maximum Carnage Red Cart" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="nfr-img-fallback" style="display:none">MAXIMUM CARNAGE<br>RED CART</div>
+        <div class="nfr-cat">VARIANTE COLOR</div>
+        <div class="top">
+          <div class="nfr-name">Spider-Man / Venom: Maximum Carnage</div>
+          <div class="nfr-price">$500</div>
+        </div>
+        <div class="nfr-why">El "red cartridge" — variante exclusiva en plástico rojo, no la negra común. La negra vale 1/10. Coleccionistas Marvel + cazadores de variantes la suben.</div>
+      </div>
+
+      <div class="nfr-card">
+        <img class="nfr-img" src="img/snes-top-precios/doom.jpg" alt="Doom Red Cart" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="nfr-img-fallback" style="display:flex">DOOM<br>RED CART</div>
+        <div class="nfr-cat">VARIANTE COLOR</div>
+        <div class="top">
+          <div class="nfr-name">Doom</div>
+          <div class="nfr-price">$300</div>
+        </div>
+        <div class="nfr-why">Otro cartucho rojo SNES con la novedad de correr el motor de Doom en 16 bits con el chip Super FX 2. Edición especial roja por el "marketing infernal".</div>
+      </div>
+
+      <div class="nfr-card">
+        <img class="nfr-img" src="img/snes-top-precios/final-fight-guy.jpg" alt="Final Fight Guy Blockbuster" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="nfr-img-fallback" style="display:flex">FINAL FIGHT GUY<br>BLOCKBUSTER</div>
+        <div class="nfr-cat">BLOCKBUSTER EXCLUSIVE</div>
+        <div class="top">
+          <div class="nfr-name">Final Fight Guy</div>
+          <div class="nfr-price">$1.500</div>
+        </div>
+        <div class="nfr-why">Final Fight original le faltaba Guy. Capcom lanzó esta versión SOLO en Blockbuster Video como alquiler. Las copias retail son rarísimas.</div>
+      </div>
+
+      <div class="nfr-card">
+        <img class="nfr-img" src="img/snes-top-precios/hagane.jpg" alt="Hagane The Final Conflict" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="nfr-img-fallback" style="display:flex">HAGANE<br>THE FINAL CONFLICT</div>
+        <div class="nfr-cat">BLOCKBUSTER EXCLUSIVE</div>
+        <div class="top">
+          <div class="nfr-name">Hagane: The Final Conflict</div>
+          <div class="nfr-price">$4.000</div>
+        </div>
+        <div class="nfr-why">Acción ninja de Cave en NTSC solo se vendió como exclusiva Blockbuster — nunca retail. Loose es caro, CIB es un unicornio. La caja de Blockbuster vale tanto como el cartucho.</div>
+      </div>
+
+      <div class="nfr-card">
+        <img class="nfr-img" src="img/snes-top-precios/dkc-competition.jpg" alt="DKC Competition Cart" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="nfr-img-fallback" style="display:flex">DKC COMPETITION<br>CLAMSHELL VERDE</div>
+        <div class="nfr-cat">NFR · 2.500 COPIAS</div>
+        <div class="top">
+          <div class="nfr-name">Donkey Kong Country · Competition Cart</div>
+          <div class="nfr-price">$4.500</div>
+        </div>
+        <div class="nfr-why">Versión cortada de DKC para PowerFest '94 + Blockbuster Championships II. 2.500 copias vendidas por catálogo Nintendo Power, en clamshell verde icónica. Muchas clamshells se perdieron.</div>
+      </div>
+
+      <div class="nfr-card">
+        <img class="nfr-img" src="img/snes-top-precios/exertainment.jpg" alt="Exertainment Mountain Bike Rally" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="nfr-img-fallback" style="display:flex">EXERTAINMENT<br>MOUNTAIN BIKE RALLY</div>
+        <div class="nfr-cat">LIFE FITNESS EXCLUSIVE</div>
+        <div class="top">
+          <div class="nfr-name">Exertainment Mountain Bike Rally / Speed Racer</div>
+          <div class="nfr-price">$8.000+</div>
+        </div>
+        <div class="nfr-why">Diseñado para la "Exertainment Life Fitness Bike" — bicicleta estática gamer. Solo se vendió a gimnasios con el periférico. Sealed combo pack subastado en 2022 por USD 15.993.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 POWERFEST '94 · HOLY GRAIL -->
+  <section class="slide">
+    <span class="slide-num">14</span>
     <div class="slide-hybrid">
       <div class="hybrid-head">
-        <div class="game-pos mg" style="font-size:32px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">BONUS</span> HOLY GRAIL</div>
-        <div class="price-badge" style="font-size:30px;"><span class="usd-lbl">USD</span><span>$23.000</span></div>
+        <div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div>
+        <div class="price-badge" style="font-size:32px;"><span class="usd-lbl">USD</span><span>$23.000</span></div>
       </div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-gold"><div class="cart-fallback"><div class="title">POWERFEST '94</div><div class="sub">2 COPIAS CONOCIDAS</div></div></div>
+          <div class="cart-img-wrap lb-gold"><img src="img/snes-top-precios/powerfest94.jpg" alt="Nintendo PowerFest 94 cartridge" onerror="this.style.display='none';this.parentElement.querySelector('.cart-fallback').style.zIndex='5'">
+            <div class="cart-fallback"><div class="title">POWERFEST '94</div><div class="sub">2 COPIAS CONOCIDAS</div></div>
+          </div>
           <div class="cart-console">NINTENDO NFR</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -400,25 +561,27 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
         </div></div>
       </div>
       <div class="hybrid-title"><div class="game-title">NINTENDO POWERFEST '94</div><div class="game-meta">SNES · 1994 · NINTENDO OF AMERICA · NFR · 2 COPIAS EN EL MUNDO</div></div>
-      <div class="game-why"><span class="lbl">▶ FUERA DE CONCURSO</span>Nintendo fabricó 33 cartuchos para el torneo PowerFest '94 (Super Mario Kart + Mario All-Stars + Ken Griffey Jr). De los 33, Nintendo desarmó 31 para repuestos. Solo 2 sobreviven. Última venta documentada en 2026: USD 23.000. El Holy Grail absoluto del coleccionismo SNES.</div>
+      <div class="game-why"><span class="lbl">▶ FUERA DE CONCURSO</span>Nintendo fabricó 33 cartuchos para el torneo PowerFest '94 (Super Mario Kart + Mario All-Stars + Ken Griffey Jr). De los 33, desarmó 31 para repuestos. Solo 2 sobreviven. Última venta documentada en 2026: USD 23.000. El Holy Grail absoluto del coleccionismo SNES — esto ya no es mercado, es museo.</div>
     </div>
   </section>
 
-  <section class="slide">
-    <span class="slide-num">14</span>
-    <div class="divider">
-      <div class="pre mg">ANÁLISIS DEL TOP</div>
-      <div class="title mg" style="font-size:56px;">EL TRUCO DE LA RAREZA</div>
-      <div class="sub">Patrón claro: late releases (final del ciclo), Blockbuster exclusives, variantes (red cart, NFR), competition carts y cultos retroactivos. Calidad del juego importa — pero la escasez física manda. Y arriba de todo, los unicornios como PowerFest, donde solo importa que existan.</div>
-    </div>
-  </section>
-
+  <!-- 15 ANÁLISIS DEL TOP -->
   <section class="slide">
     <span class="slide-num">15</span>
     <div class="divider">
+      <div class="pre mg">ANÁLISIS DEL TOP</div>
+      <div class="title mg" style="font-size:54px;">DOS LIGAS DISTINTAS</div>
+      <div class="sub">Top 10 mercado: late releases + RPGs populares + shmups de tiraje corto. Es lo "comprable" si tenés plata. Lo de afuera (NFR + variantes + Blockbuster + PowerFest) es otro juego — no se compra por catálogo, aparece cuando aparece, y solo importa que exista.</div>
+    </div>
+  </section>
+
+  <!-- 16 CIERRE -->
+  <section class="slide">
+    <span class="slide-num">16</span>
+    <div class="divider">
       <div class="pre cy">PRÓXIMA SEMANA</div>
       <div class="title cy" style="font-size:54px;">SEGUIMOS</div>
-      <div class="sub">Comentanos cuál te sorprendió más del top y si tenés alguno de estos cartuchos en tu colección. Próximo capítulo: arrancamos con SNES NO-LATAM, los que nunca llegaron a Chile.</div>
+      <div class="sub">Comentanos cuál te sorprendió más y si tenés alguno de estos cartuchos en tu colección. Próximo capítulo: arrancamos con SNES NO-LATAM, los que nunca llegaron a Chile.</div>
     </div>
   </section>
 
@@ -427,7 +590,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
 <nav class="footer">
   <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
   <div class="nav-center">
-    <div class="nav-counter" id="counter">01 / 15</div>
+    <div class="nav-counter" id="counter">01 / 16</div>
     <div class="nav-progress"><div class="bar" id="bar"></div></div>
   </div>
   <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
