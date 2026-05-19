@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Demo Índice Colección · 4 opciones</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+/* ── HEADER ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  z-index: 200;
+  background: rgba(6, 3, 15, 0.97);
+  border-bottom: 2px solid var(--mg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+.hdr-logo {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--mg);
+  text-shadow: 0 0 14px rgba(255,46,136,.6);
+  letter-spacing: 3px;
+}
+.hdr-tag {
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: var(--ye);
+  letter-spacing: 3px;
+}
+.hdr-rec {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--mg);
+}
+.dot {
+  width: 10px; height: 10px;
+  background: var(--mg);
+  border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+/* ── SLIDE CONTAINER ── */
+.deck {
+  position: fixed;
+  top: 56px; left: 0; right: 0; bottom: 64px;
+  overflow: hidden;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: 32px 48px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.slide-num {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  color: rgba(255,255,255,.22);
+  letter-spacing: 2px;
+}
+.opt-label {
+  position: absolute;
+  top: 16px;
+  left: 28px;
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  color: var(--ye);
+  letter-spacing: 3px;
+  padding: 6px 12px;
+  border: 1px solid var(--ye);
+  background: rgba(255,210,63,.08);
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* OPCIÓN A · MENÚ CONSOLA "PRESS START"             */
+/* ═══════════════════════════════════════════════════ */
+.opt-a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+.opt-a .opt-a-title {
+  font-family: 'Press Start 2P';
+  font-size: 16px;
+  color: var(--cy);
+  letter-spacing: 4px;
+  margin-bottom: 50px;
+  text-shadow: 0 0 14px rgba(0,229,255,.4);
+}
+.opt-a .opt-a-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 50px;
+}
+.opt-a .opt-a-item {
+  display: grid;
+  grid-template-columns: 28px 50px 1fr auto;
+  align-items: center;
+  gap: 18px;
+  font-family: 'Press Start 2P';
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,.65);
+  min-width: 600px;
+}
+.opt-a .opt-a-item.active {
+  color: var(--ye);
+}
+.opt-a .opt-a-cursor {
+  font-size: 16px;
+  color: var(--ye);
+  visibility: hidden;
+}
+.opt-a .opt-a-item.active .opt-a-cursor {
+  visibility: visible;
+  animation: blink 1s ease-in-out infinite;
+}
+.opt-a .opt-a-num {
+  color: var(--mg);
+}
+.opt-a .opt-a-dots {
+  letter-spacing: 0;
+  color: rgba(255,255,255,.18);
+}
+.opt-a .opt-a-count {
+  font-size: 11px;
+  color: rgba(255,255,255,.45);
+  letter-spacing: 2px;
+}
+.opt-a .opt-a-total {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 32px;
+  color: var(--mg);
+  letter-spacing: 3px;
+  text-shadow: 0 0 18px rgba(255,46,136,.5);
+  margin-bottom: 22px;
+}
+.opt-a .opt-a-hint {
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  color: var(--cy);
+  letter-spacing: 3px;
+  animation: blink 1.4s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* OPCIÓN B · GRID DE MINI TARROVISIONES             */
+/* ═══════════════════════════════════════════════════ */
+.opt-b {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  gap: 20px;
+  padding: 8px 0;
+}
+.opt-b-title {
+  font-family: 'Press Start 2P';
+  font-size: 13px;
+  color: var(--cy);
+  letter-spacing: 4px;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(0,229,255,.4);
+}
+.opt-b-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 22px;
+  min-height: 0;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+.mini-tv {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%);
+  border-radius: 12px;
+  padding: 8px 10px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06);
+  gap: 5px;
+  min-height: 0;
+}
+.mini-tv .mt-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Share Tech Mono';
+  font-size: 9px;
+  color: var(--cy);
+  letter-spacing: 2px;
+}
+.mini-tv .mt-led {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--mg);
+  box-shadow: 0 0 6px rgba(255,46,136,.7);
+}
+.mini-tv .mt-screen {
+  background: #000;
+  border: 2px solid #2a2a2f;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+}
+.mini-tv .mt-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg,
+    transparent 0px, transparent 2px,
+    rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 3px);
+  pointer-events: none;
+}
+.mini-tv .mt-screen .mt-cat {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--ye);
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255,210,63,.55);
+  line-height: 1.1;
+}
+.mini-tv .mt-screen .mt-cat-sub {
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: var(--cy);
+  letter-spacing: 2px;
+  margin-top: 6px;
+}
+.mini-tv .mt-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Share Tech Mono';
+  font-size: 10px;
+  color: rgba(255,255,255,.5);
+  letter-spacing: 1px;
+}
+.mini-tv .mt-bottom strong {
+  color: var(--mg);
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* OPCIÓN C · CARRUSEL "CHANNEL SURFING"             */
+/* ═══════════════════════════════════════════════════ */
+.opt-c {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 40px;
+  padding: 0 50px;
+}
+.opt-c-current {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 38px;
+  color: var(--ye);
+  letter-spacing: 3px;
+  text-shadow: 0 0 22px rgba(255,210,63,.5);
+}
+.opt-c-current .ch-arrow {
+  color: rgba(255,255,255,.3);
+  font-size: 28px;
+}
+.opt-c-current .ch-num {
+  font-family: 'Press Start 2P';
+  font-size: 18px;
+  color: var(--cy);
+  letter-spacing: 4px;
+}
+.opt-c-track {
+  width: 100%;
+  max-width: 1000px;
+  position: relative;
+}
+.opt-c-line {
+  position: absolute;
+  top: 14px;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cy) 10%, var(--cy) 90%, transparent);
+}
+.opt-c-dots {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.opt-c-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.opt-c-dot .dot-circle {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--dk);
+  border: 2px solid var(--cy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  color: var(--cy);
+}
+.opt-c-dot.active .dot-circle {
+  background: var(--ye);
+  border-color: var(--ye);
+  color: var(--dk);
+  box-shadow: 0 0 14px rgba(255,210,63,.7);
+}
+.opt-c-dot .dot-label {
+  font-family: 'Press Start 2P';
+  font-size: 8px;
+  color: rgba(255,255,255,.5);
+  letter-spacing: 2px;
+}
+.opt-c-dot.active .dot-label { color: var(--ye); }
+.opt-c-dot .dot-count {
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: 1px;
+}
+.opt-c-total {
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  color: var(--mg);
+  letter-spacing: 3px;
+  margin-top: 14px;
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* OPCIÓN D · GUÍA DE TV (TV LISTINGS)               */
+/* ═══════════════════════════════════════════════════ */
+.opt-d {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 40px;
+}
+.opt-d-frame {
+  max-width: 1000px;
+  width: 100%;
+  border: 2px solid var(--cy);
+  background: rgba(0,229,255,.04);
+  box-shadow: 0 0 32px rgba(0,229,255,.18);
+}
+.opt-d-frame::before {
+  content: "";
+  display: block;
+  height: 4px;
+  background: var(--cy);
+  box-shadow: 0 0 8px var(--cy);
+}
+.opt-d-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 22px;
+  border-bottom: 1px solid rgba(0,229,255,.3);
+  background: rgba(0,229,255,.06);
+}
+.opt-d-head .od-title {
+  font-family: 'Press Start 2P';
+  font-size: 11px;
+  color: var(--ye);
+  letter-spacing: 3px;
+}
+.opt-d-head .od-time {
+  font-family: 'Share Tech Mono';
+  font-size: 14px;
+  color: var(--cy);
+  letter-spacing: 3px;
+}
+.opt-d-row {
+  display: grid;
+  grid-template-columns: 70px 1fr 220px 90px;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 22px;
+  border-bottom: 1px solid rgba(0,229,255,.12);
+  transition: background .15s;
+}
+.opt-d-row:last-child { border-bottom: none; }
+.opt-d-row:hover { background: rgba(0,229,255,.07); }
+.opt-d-row.now {
+  background: rgba(255,210,63,.06);
+  border-left: 4px solid var(--ye);
+  padding-left: 18px;
+}
+.opt-d-ch {
+  font-family: 'Press Start 2P';
+  font-size: 13px;
+  color: var(--cy);
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 6px 0;
+  border: 1px solid var(--cy);
+  background: rgba(0,229,255,.05);
+}
+.opt-d-row.now .opt-d-ch {
+  color: var(--ye);
+  border-color: var(--ye);
+  background: rgba(255,210,63,.1);
+}
+.opt-d-name {
+  font-family: 'Orbitron';
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  letter-spacing: 2px;
+}
+.opt-d-bar {
+  position: relative;
+  height: 12px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(0,229,255,.25);
+  overflow: hidden;
+}
+.opt-d-bar-fill {
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  background: repeating-linear-gradient(90deg,
+    var(--cy) 0px, var(--cy) 6px,
+    rgba(0,229,255,.4) 6px, rgba(0,229,255,.4) 9px);
+}
+.opt-d-row.now .opt-d-bar-fill {
+  background: repeating-linear-gradient(90deg,
+    var(--ye) 0px, var(--ye) 6px,
+    rgba(255,210,63,.4) 6px, rgba(255,210,63,.4) 9px);
+}
+.opt-d-meta {
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: rgba(255,255,255,.55);
+  letter-spacing: 1px;
+  text-align: right;
+}
+.opt-d-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 22px;
+  border-top: 1px solid rgba(0,229,255,.3);
+  background: rgba(0,229,255,.04);
+  font-family: 'Share Tech Mono';
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
+  letter-spacing: 2px;
+}
+.opt-d-foot .od-total {
+  color: var(--mg);
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 18px;
+}
+
+/* ── NAV FOOTER ── */
+nav.footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 64px;
+  background: rgba(6, 3, 15, 0.97);
+  border-top: 2px solid var(--cy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  z-index: 200;
+}
+.nav-btn {
+  background: transparent;
+  border: 2px solid var(--cy);
+  color: var(--cy);
+  font-family: 'Press Start 2P';
+  font-size: 9px;
+  padding: 10px 18px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all .15s;
+  border-radius: 2px;
+}
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  margin: 0 24px;
+}
+.nav-counter {
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  color: var(--mg);
+  letter-spacing: 3px;
+}
+.nav-progress {
+  width: 100%;
+  max-width: 480px;
+  height: 4px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.nav-progress .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--mg), var(--cy));
+  width: 0;
+  transition: width .25s;
+  box-shadow: 0 0 8px rgba(255,46,136,.5);
+}
+.nav-hint {
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: 2px;
+}
+.nav-hint kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 3px;
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: var(--ye);
+  margin: 0 2px;
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">DEMO · ÍNDICE COLECCIÓN · 4 OPCIONES</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- OPCIÓN A · MENÚ CONSOLA -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="slide active">
+    <span class="opt-label">OPCIÓN A · MENÚ CONSOLA</span>
+    <span class="slide-num">01</span>
+    <div class="opt-a">
+      <div class="opt-a-title">SELECCIONÁ TU CATEGORÍA</div>
+      <div class="opt-a-list">
+        <div class="opt-a-item active">
+          <span class="opt-a-cursor">▶</span>
+          <span class="opt-a-num">01</span>
+          <span>RPG <span class="opt-a-dots">·············································</span></span>
+          <span class="opt-a-count">42 TÍTULOS</span>
+        </div>
+        <div class="opt-a-item">
+          <span class="opt-a-cursor">▶</span>
+          <span class="opt-a-num">02</span>
+          <span>ACCIÓN <span class="opt-a-dots">··········································</span></span>
+          <span class="opt-a-count">38 TÍTULOS</span>
+        </div>
+        <div class="opt-a-item">
+          <span class="opt-a-cursor">▶</span>
+          <span class="opt-a-num">03</span>
+          <span>PLATAFORMAS <span class="opt-a-dots">·····································</span></span>
+          <span class="opt-a-count">31 TÍTULOS</span>
+        </div>
+        <div class="opt-a-item">
+          <span class="opt-a-cursor">▶</span>
+          <span class="opt-a-num">04</span>
+          <span>LUCHA <span class="opt-a-dots">···········································</span></span>
+          <span class="opt-a-count">22 TÍTULOS</span>
+        </div>
+        <div class="opt-a-item">
+          <span class="opt-a-cursor">▶</span>
+          <span class="opt-a-num">05</span>
+          <span>DEPORTES <span class="opt-a-dots">········································</span></span>
+          <span class="opt-a-count">28 TÍTULOS</span>
+        </div>
+        <div class="opt-a-item">
+          <span class="opt-a-cursor">▶</span>
+          <span class="opt-a-num">06</span>
+          <span>CURIOSIDADES <span class="opt-a-dots">····································</span></span>
+          <span class="opt-a-count">29 TÍTULOS</span>
+        </div>
+      </div>
+      <div class="opt-a-total">─── 190 TÍTULOS ───</div>
+      <div class="opt-a-hint">▶ PRESS START TO BEGIN PANORAMA</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- OPCIÓN B · GRID MINI TARROVISIONES -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="slide">
+    <span class="opt-label">OPCIÓN B · GRID DE MINI TVS</span>
+    <span class="slide-num">02</span>
+    <div class="opt-b">
+      <div class="opt-b-title">NUESTRO RECORRIDO · 6 CATEGORÍAS</div>
+      <div class="opt-b-grid">
+        <div class="mini-tv">
+          <div class="mt-top"><span class="mt-led"></span><span>CH 01</span></div>
+          <div class="mt-screen"><div><div class="mt-cat">RPG</div><div class="mt-cat-sub">42 TÍTULOS</div></div></div>
+          <div class="mt-bottom"><span>STEREO</span><strong>HD</strong></div>
+        </div>
+        <div class="mini-tv">
+          <div class="mt-top"><span class="mt-led"></span><span>CH 02</span></div>
+          <div class="mt-screen"><div><div class="mt-cat">ACCIÓN</div><div class="mt-cat-sub">38 TÍTULOS</div></div></div>
+          <div class="mt-bottom"><span>STEREO</span><strong>HD</strong></div>
+        </div>
+        <div class="mini-tv">
+          <div class="mt-top"><span class="mt-led"></span><span>CH 03</span></div>
+          <div class="mt-screen"><div><div class="mt-cat">PLATAFORMAS</div><div class="mt-cat-sub">31 TÍTULOS</div></div></div>
+          <div class="mt-bottom"><span>STEREO</span><strong>HD</strong></div>
+        </div>
+        <div class="mini-tv">
+          <div class="mt-top"><span class="mt-led"></span><span>CH 04</span></div>
+          <div class="mt-screen"><div><div class="mt-cat">LUCHA</div><div class="mt-cat-sub">22 TÍTULOS</div></div></div>
+          <div class="mt-bottom"><span>STEREO</span><strong>HD</strong></div>
+        </div>
+        <div class="mini-tv">
+          <div class="mt-top"><span class="mt-led"></span><span>CH 05</span></div>
+          <div class="mt-screen"><div><div class="mt-cat">DEPORTES</div><div class="mt-cat-sub">28 TÍTULOS</div></div></div>
+          <div class="mt-bottom"><span>STEREO</span><strong>HD</strong></div>
+        </div>
+        <div class="mini-tv">
+          <div class="mt-top"><span class="mt-led"></span><span>CH 06</span></div>
+          <div class="mt-screen"><div><div class="mt-cat">CURIOSIDADES</div><div class="mt-cat-sub">29 TÍTULOS</div></div></div>
+          <div class="mt-bottom"><span>STEREO</span><strong>HD</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- OPCIÓN C · CARRUSEL CHANNEL SURFING -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="slide">
+    <span class="opt-label">OPCIÓN C · CARRUSEL</span>
+    <span class="slide-num">03</span>
+    <div class="opt-c">
+      <div class="opt-c-current">
+        <span class="ch-arrow">◀</span>
+        <span class="ch-num">CH 01</span>
+        <span>RPG</span>
+        <span class="ch-arrow">▶</span>
+      </div>
+      <div class="opt-c-track">
+        <div class="opt-c-line"></div>
+        <div class="opt-c-dots">
+          <div class="opt-c-dot active">
+            <div class="dot-circle">01</div>
+            <div class="dot-label">RPG</div>
+            <div class="dot-count">42</div>
+          </div>
+          <div class="opt-c-dot">
+            <div class="dot-circle">02</div>
+            <div class="dot-label">ACC</div>
+            <div class="dot-count">38</div>
+          </div>
+          <div class="opt-c-dot">
+            <div class="dot-circle">03</div>
+            <div class="dot-label">PLAT</div>
+            <div class="dot-count">31</div>
+          </div>
+          <div class="opt-c-dot">
+            <div class="dot-circle">04</div>
+            <div class="dot-label">LUCH</div>
+            <div class="dot-count">22</div>
+          </div>
+          <div class="opt-c-dot">
+            <div class="dot-circle">05</div>
+            <div class="dot-label">DEP</div>
+            <div class="dot-count">28</div>
+          </div>
+          <div class="opt-c-dot">
+            <div class="dot-circle">06</div>
+            <div class="dot-label">CUR</div>
+            <div class="dot-count">29</div>
+          </div>
+        </div>
+      </div>
+      <div class="opt-c-total">190 TÍTULOS · 6 CANALES</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- OPCIÓN D · GUÍA DE TV (TV LISTINGS) -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <section class="slide">
+    <span class="opt-label">OPCIÓN D · GUÍA DE TV</span>
+    <span class="slide-num">04</span>
+    <div class="opt-d">
+      <div class="opt-d-frame">
+        <div class="opt-d-head">
+          <div class="od-title">PROGRAMACIÓN DE HOY</div>
+          <div class="od-time">SNES · COLECCIÓN COMPLETA</div>
+        </div>
+        <div class="opt-d-row now">
+          <div class="opt-d-ch">CH 01</div>
+          <div class="opt-d-name">RPG</div>
+          <div class="opt-d-bar"><div class="opt-d-bar-fill" style="width:100%"></div></div>
+          <div class="opt-d-meta">42 TÍTULOS</div>
+        </div>
+        <div class="opt-d-row">
+          <div class="opt-d-ch">CH 02</div>
+          <div class="opt-d-name">ACCIÓN</div>
+          <div class="opt-d-bar"><div class="opt-d-bar-fill" style="width:90%"></div></div>
+          <div class="opt-d-meta">38 TÍTULOS</div>
+        </div>
+        <div class="opt-d-row">
+          <div class="opt-d-ch">CH 03</div>
+          <div class="opt-d-name">PLATAFORMAS</div>
+          <div class="opt-d-bar"><div class="opt-d-bar-fill" style="width:74%"></div></div>
+          <div class="opt-d-meta">31 TÍTULOS</div>
+        </div>
+        <div class="opt-d-row">
+          <div class="opt-d-ch">CH 04</div>
+          <div class="opt-d-name">LUCHA</div>
+          <div class="opt-d-bar"><div class="opt-d-bar-fill" style="width:52%"></div></div>
+          <div class="opt-d-meta">22 TÍTULOS</div>
+        </div>
+        <div class="opt-d-row">
+          <div class="opt-d-ch">CH 05</div>
+          <div class="opt-d-name">DEPORTES</div>
+          <div class="opt-d-bar"><div class="opt-d-bar-fill" style="width:66%"></div></div>
+          <div class="opt-d-meta">28 TÍTULOS</div>
+        </div>
+        <div class="opt-d-row">
+          <div class="opt-d-ch">CH 06</div>
+          <div class="opt-d-name">CURIOSIDADES</div>
+          <div class="opt-d-bar"><div class="opt-d-bar-fill" style="width:69%"></div></div>
+          <div class="opt-d-meta">29 TÍTULOS</div>
+        </div>
+        <div class="opt-d-foot">
+          <span>TOTAL EN COLECCIÓN</span>
+          <span class="od-total">190 TÍTULOS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 04</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+
+go(0);
+</script>
+
+</body>
+</html>
