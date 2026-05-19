@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · Top 10 Glorias Navales Retro</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root {
+  --mg: #FF2E88; --cy: #00E5FF; --ye: #FFD23F; --pu: #2D1B69;
+  --bo: #F5F0E8; --dk: #06030f; --card-bg: rgba(12, 6, 32, 0.92);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6, 3, 15, 0.97); border-bottom: 2px solid var(--mg); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--mg); }
+.dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 28px 44px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 62px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .vs { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; }
+.divider { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.divider .pre { font-family: 'Press Start 2P'; font-size: 11px; letter-spacing: 6px; margin-bottom: 24px; }
+.divider .pre.cy { color: var(--cy); } .divider .pre.mg { color: var(--mg); }
+.divider .title { font-family: 'Orbitron'; font-weight: 900; font-size: 78px; letter-spacing: 2px; line-height: 1; color: #fff; margin-bottom: 22px; }
+.divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
+.divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.divider .sub { font-family: 'Share Tech Mono'; font-size: 18px; color: rgba(255,255,255,.7); letter-spacing: 2px; max-width: 800px; line-height: 1.6; }
+
+/* HIBRIDO */
+.slide-hybrid { display: grid; grid-template-rows: auto 1fr auto auto; height: 100%; gap: 14px; max-width: 1400px; margin: 0 auto; }
+.hybrid-head { display: flex; align-items: center; justify-content: space-between; }
+.game-pos { font-family: 'Orbitron'; font-weight: 900; font-size: 64px; line-height: 1; letter-spacing: 1px; }
+.game-pos.cy { color: var(--cy); text-shadow: 0 0 20px rgba(0,229,255,.55); }
+.game-pos.mg { color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.6); }
+.game-pos .hash { font-size: 28px; color: rgba(255,255,255,.35); margin-right: 4px; }
+.game-block-label { font-family: 'Press Start 2P'; font-size: 9px; letter-spacing: 3px; padding: 6px 12px; border: 1px solid; }
+.game-block-label.cy { color: var(--cy); border-color: var(--cy); }
+.game-block-label.mg { color: var(--mg); border-color: var(--mg); }
+.hybrid-body { display: grid; grid-template-columns: 38% 1fr; gap: 32px; align-items: center; justify-items: center; min-height: 0; }
+.cart-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; }
+.cart { position: relative; width: min(100%, 380px); aspect-ratio: 5/4; max-height: 100%; background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%); border-radius: 12px 12px 6px 6px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08); }
+.cart::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 78%; height: 14%; background: linear-gradient(180deg, #2a2a2f 0%, #1a1a1f 100%); border-radius: 0 0 6px 6px; box-shadow: inset 0 -1px 0 rgba(0,0,0,.6); z-index: 3; }
+.cart-img-wrap { position: absolute; inset: 14% 10% 10%; border-radius: 4px; overflow: hidden; background: var(--label-1, #2D1B69); box-shadow: inset 0 0 0 3px rgba(255,255,255,.07), inset 0 0 0 6px rgba(0,0,0,.25), 0 4px 14px rgba(0,0,0,.4); }
+.cart-img-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; background: var(--label-1, #2D1B69); }
+.cart-fallback { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; background: linear-gradient(135deg, var(--label-1, #2D1B69) 0%, var(--label-2, #4a2a99) 100%); text-align: center; }
+.cart-fallback::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 22%; background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 100%); pointer-events: none; }
+.cart-fallback .title { font-family: 'Orbitron'; font-weight: 900; font-size: clamp(14px, 1.8vw, 22px); line-height: 1.05; color: #fff; letter-spacing: .5px; text-shadow: 0 2px 4px rgba(0,0,0,.5); z-index: 2; }
+.cart-fallback .sub { font-family: 'Press Start 2P'; font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,.7); margin-top: 8px; z-index: 2; }
+.cart-console { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-family: 'Press Start 2P'; font-size: 7px; letter-spacing: 3px; color: rgba(255,255,255,.22); z-index: 4; }
+/* Paleta naval / piratera */
+.lb-default { --label-1:#2D1B69; --label-2:#4a2a99; }
+.lb-shark   { --label-1:#7a1a1a; --label-2:#b03030; }  /* tiburon JAWS */
+.lb-cat     { --label-1:#5a1a8a; --label-2:#8a2fc4; }  /* Big purple */
+.lb-sub     { --label-1:#0a0a0e; --label-2:#2a2a3a; }  /* submarino noche */
+.lb-sky     { --label-1:#1a4a8a; --label-2:#2f7acd; }  /* cielo piloto */
+.lb-cave    { --label-1:#5a3a1a; --label-2:#8a5a2a; }  /* cueva tesoro Goonies */
+.lb-water   { --label-1:#0a4a6b; --label-2:#1a8aae; }  /* agua Wave Race */
+.lb-ocean   { --label-1:#0a6b8a; --label-2:#2faecd; }  /* turquesa Ecco */
+.lb-gold    { --label-1:#8a6a00; --label-2:#c2a020; }  /* oro pirata */
+.lb-wood    { --label-1:#7a4a1a; --label-2:#b07530; }  /* madera Monkey Island */
+.lb-croc    { --label-1:#1a6b3a; --label-2:#2f9b5a; }  /* cocodrilo K. Rool */
+
+.tv-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; container-type: size; }
+.tarrovision { width: min(100cqh, 100cqw); height: min(100cqh, 100cqw); max-width: 100%; max-height: 100%; background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%); border-radius: 22px; padding: 18px 22px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(0,0,0,.4); display: grid; grid-template-rows: auto 1fr auto; gap: 10px; }
+.tv-controls-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px; }
+.tv-led { width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, var(--mg) 60%, #7a0030 100%); box-shadow: 0 0 10px rgba(255,46,136,.8), inset 0 0 2px rgba(0,0,0,.5); }
+.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 3px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
+.tv-channel { font-family: 'Share Tech Mono'; font-size: 11px; color: var(--cy); letter-spacing: 2px; padding: 3px 9px; border: 1px solid rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
+.tv-screen { position: relative; background: #2a2a2f; border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 2px #3a3a3f, inset 0 0 14px rgba(0,0,0,.6); min-height: 0; }
+.tv-screen-inner { position: relative; width: 100%; height: 100%; background: #000; border-radius: 16px / 8px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 40px rgba(0,0,0,.95); }
+.tv-screen-inner img, .tv-screen-inner video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tv-screen-inner::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 3px); z-index: 3; mix-blend-mode: multiply; }
+.tv-screen-inner::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255,255,255,.08) 0%, transparent 55%), radial-gradient(ellipse 90% 50% at 50% 100%, rgba(0,229,255,.06) 0%, transparent 60%); z-index: 4; }
+.tv-noscreen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, rgba(45,27,105,.6) 0%, #000 80%), repeating-linear-gradient(0deg, #0a0a14 0px, #0a0a14 1px, #14142a 1px, #14142a 2px); color: rgba(255,255,255,.35); text-align: center; padding: 24px; z-index: 2; }
+.tv-noscreen .tv-noscreen-big { font-family: 'Press Start 2P'; font-size: 14px; color: var(--mg); letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 12px rgba(255,46,136,.5); }
+.tv-noscreen .tv-noscreen-sub { font-family: 'Share Tech Mono'; font-size: 11px; letter-spacing: 2px; color: rgba(0,229,255,.55); }
+.tv-controls-bottom { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; padding: 2px 4px 0; }
+.tv-knob { width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #5a5a60 0%, #2a2a30 60%, #0a0a0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.6); position: relative; }
+.tv-knob::after { content: ""; position: absolute; top: 5px; left: 50%; width: 2px; height: 9px; background: var(--ye); transform-origin: bottom center; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 4px rgba(255,210,63,.6); }
+.tv-knob.cy::after { background: var(--cy); box-shadow: 0 0 4px rgba(0,229,255,.6); transform: translateX(-50%) rotate(-30deg); }
+.tv-speaker { height: 22px; background: repeating-linear-gradient(90deg, #0a0a0e 0px, #0a0a0e 3px, #1a1a1f 3px, #1a1a1f 6px); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6); }
+
+.hybrid-title { text-align: center; display: flex; flex-direction: column; gap: 4px; }
+.game-title { font-family: 'Orbitron'; font-weight: 900; font-size: 26px; color: #fff; letter-spacing: 1px; line-height: 1.1; }
+.game-meta { font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.5); letter-spacing: 2px; }
+.game-why { max-width: 1200px; margin: 0 auto; padding: 12px 22px; background: rgba(255,255,255,.04); border-left: 4px solid var(--ye); font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,.86); text-align: left; }
+.game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 6px; }
+
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(255,46,136,.5); }
+.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · GLORIAS NAVALES RETRO · TODA ERA</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">ESPECIAL · 21 DE MAYO</div>
+      <div class="ep-title">TOP 10 <span class="vs">GLORIAS</span> NAVALES RETRO</div>
+      <div class="ep-sub">LOS MARINEROS, PIRATAS Y BUZOS QUE MAS SE LA JUEGAN</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="divider">
+      <div class="pre cy">HOMENAJE NAVAL</div>
+      <div class="title cy">DEL #10 AL #1</div>
+      <div class="sub">Un saludo a los heroes del mar de los videojuegos retro. Capitanes, pescadores, jet skiers y delfines que se ganaron su puesto a punta de remos, harpones y eco-locacion. Empezamos por el fondo del mar.</div>
+    </div>
+  </section>
+
+  <!-- 03 #10 JAWS -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-shark"><div class="cart-fallback"><div class="title">JAWS</div><div class="sub">LJN · 1987</div></div></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 10</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">JAWS — CHIEF BRODY</div><div class="game-meta">NES · 1987 · LJN / WESTONE · CAZA-TIBURONES</div></div>
+      <div class="game-why"><span class="lbl">▶ HOJA DE SERVICIOS</span>Pescador deportivo reconvertido a cazador de megafauna escualo. Patrulla las aguas de Amity Island con sonar de 8 bits, harpon y un bote que se le inunda solo. Sin GPS, sin sindicato, sin descanso dominical. Bonus: la pelicula original tampoco le pago bien.</div>
+    </div>
+  </section>
+
+  <!-- 04 #9 BIG THE CAT -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-cat"><div class="cart-fallback"><div class="title">BIG THE CAT</div><div class="sub">SONIC ADVENTURE</div></div></div>
+          <div class="cart-console">DREAMCAST</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 09</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">BIG THE CAT — PESCADOR ZEN</div><div class="game-meta">DREAMCAST · 1998 · SONIC TEAM · PESCADOR ZEN</div></div>
+      <div class="game-why"><span class="lbl">▶ HOJA DE SERVICIOS</span>Unico empleado del Sonic Adventure que no corre a 800 km/h. Su unica funcion es pescar a Froggy, su mejor amigo anfibio que escapa cada cierto tiempo. Jornada de 9 a 5 sentado en el muelle con caña y carnada. Cuando lo recupera, Froggy escapa otra vez. Ciclo eterno de paciencia.</div>
+    </div>
+  </section>
+
+  <!-- 05 #8 SILENT SERVICE -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-sub"><div class="cart-fallback"><div class="title">SILENT SERVICE</div><div class="sub">SUBMARINO WWII</div></div></div>
+          <div class="cart-console">NES / PC</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 08</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">SILENT SERVICE — COMANDANTE DE SUBMARINO</div><div class="game-meta">NES · 1989 · MICROPROSE · FLOTA PACIFICO WWII</div></div>
+      <div class="game-why"><span class="lbl">▶ HOJA DE SERVICIOS</span>Capitan de submarino clase Gato. Mision permanente: hundir destructores japoneses, cargueros y transportes en el Pacifico. 18 meses sumergido sin ver tierra firme. Vista exclusiva por periscopio y sonar. El unico marinero retro que conoce de verdad la oscuridad oceanica.</div>
+    </div>
+  </section>
+
+  <!-- 06 #7 CAPTAIN SKYHAWK -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-sky"><div class="cart-fallback"><div class="title">CAPTAIN SKYHAWK</div><div class="sub">RARE · 1989</div></div></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 07</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">CAPTAIN SKYHAWK — PILOTO NAVAL</div><div class="game-meta">NES · 1989 · RARE / MILTON BRADLEY · DEFENSA AEREONAVAL</div></div>
+      <div class="game-why"><span class="lbl">▶ HOJA DE SERVICIOS</span>Piloto de un jet hibrido helicoptero-aeroplano. Mision permanente: defender la base naval del Atlantico Norte de una invasion alienigena. Trabaja en aire, mar y tierra de manera simultanea. Probablemente el unico personaje retro con 3 contratos paralelos.</div>
+    </div>
+  </section>
+
+  <!-- 07 #6 THE GOONIES II -->
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-cave"><div class="cart-fallback"><div class="title">THE GOONIES II</div><div class="sub">KONAMI · 1987</div></div></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 06</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">THE GOONIES — TROPA CAZA-TESOROS</div><div class="game-meta">NES · 1987 · KONAMI · EXPEDICION COSTERA</div></div>
+      <div class="game-why"><span class="lbl">▶ HOJA DE SERVICIOS</span>Equipo juvenil que baja a las cavernas costeras de Astoria para recuperar a Annie y el tesoro del pirata One-Eyed Willy. Riesgos: piratas momificados, fantasmas, alacranes y fontanerias rotas. Salario final: la mitad del cofre, descontados los gastos operativos.</div>
+    </div>
+  </section>
+
+  <!-- 08 #5 WAVE RACE 64 -->
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-water"><div class="cart-fallback"><div class="title">WAVE RACE 64</div><div class="sub">NINTENDO EAD</div></div></div>
+          <div class="cart-console">N64</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">WAVE RACE 64 — CORREDORES DE JET SKI</div><div class="game-meta">N64 · 1996 · NINTENDO EAD · CIRCUITO ACUATICO PRO</div></div>
+      <div class="game-why"><span class="lbl">▶ HOJA DE SERVICIOS</span>Atletas profesionales del jet ski. Jornadas de 8 horas, lluvia o sol, agua salada en los ojos. Boyas a esquivar en orden estricto, olas que voltean al menor error. La unica oficina del catalogo retro con mareas reales.</div>
+    </div>
+  </section>
+
+  <!-- 09 #4 ECCO THE DOLPHIN -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-ocean"><div class="cart-fallback"><div class="title">ECCO THE DOLPHIN</div><div class="sub">NOVOTRADE · 1992</div></div></div>
+          <div class="cart-console">GENESIS</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">ECCO THE DOLPHIN — RESCATISTA OCEANICO</div><div class="game-meta">GENESIS · 1992 · NOVOTRADE · MAR ABIERTO</div></div>
+      <div class="game-why"><span class="lbl">▶ HOJA DE SERVICIOS</span>Mision: salvar a su pod de delfines, viajar en el tiempo, pelear contra los Vortex y conversar con una maquina alienigena. Sin pulgares, sin barco, sin reloj. Solo eco-locacion y voluntad. Probablemente el empleado mas subestimado del catalogo Genesis.</div>
+    </div>
+  </section>
+
+  <!-- 10 #3 SID MEIER'S PIRATES! -->
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO NAVAL</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-gold"><div class="cart-fallback"><div class="title">SID MEIER'S PIRATES!</div><div class="sub">MICROPROSE · 1987</div></div></div>
+          <div class="cart-console">C64 / NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">PIRATES! — CAPITAN FREELANCE DEL CARIBE</div><div class="game-meta">MULTI · 1987 · MICROPROSE / SID MEIER · CONTRATISTA</div></div>
+      <div class="game-why"><span class="lbl">▶ HOJA DE SERVICIOS</span>Multioficio nivel S del oceano. Navega, comercia, asalta galeones españoles, romance con hijas de gobernadores, exhuma tesoros enterrados y escapa de la armada. Todo el sandbox de la vida pirata en una mision sin descanso. Sin sueldo fijo, todo a comision.</div>
+    </div>
+  </section>
+
+  <!-- 11 #2 GUYBRUSH THREEPWOOD -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO NAVAL</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-wood"><div class="cart-fallback"><div class="title">MONKEY ISLAND</div><div class="sub">LUCASFILM · 1990</div></div></div>
+          <div class="cart-console">PC</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">GUYBRUSH THREEPWOOD — APRENDIZ DE PIRATA</div><div class="game-meta">PC · 1990 · LUCASFILM GAMES · POSTULANTE INFINITO</div></div>
+      <div class="game-why"><span class="lbl">▶ HOJA DE SERVICIOS</span>Postulante a pirata mas torpe del Caribe. Aguanta tres pruebas (esgrima de insultos, ladroneria de idolo dorado, busqueda de tesoros) sin sueldo, sin contrato, solo con su nombre raro. Persistencia digna de manual de RRHH. Bonus: aguanta la respiracion exactamente 10 minutos.</div>
+    </div>
+  </section>
+
+  <!-- 12 #1 KAPTAIN K. ROOL -->
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL ALMIRANTAZGO</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-croc"><div class="cart-fallback"><div class="title">KAPTAIN K. ROOL</div><div class="sub">DKC 2 · 1995</div></div></div>
+          <div class="cart-console">SNES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">KAPTAIN K. ROOL — CEO + CAPITAN DE FLOTA</div><div class="game-meta">SNES · 1995 · RARE · DKC 2 · KREMLINGS S.A.</div></div>
+      <div class="game-why"><span class="lbl">▶ HOJA DE SERVICIOS</span>Maneja Kremlings S.A. con turnos de 24/7. Cuatro juegos consecutivos perdiendo contra los Kong y vuelve mas fuerte cada vez. Comercializa cartuchos pirata (Krazy Kremland), explota minas (Krocodile Kore) y captura simios. Liderazgo toxico modelo, pero curiosamente efectivo. El unico capitan del top que llego al cargo a punta de palos.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <div class="divider">
+      <div class="pre mg">ANALISIS DEL TOP</div>
+      <div class="title mg" style="font-size:56px;">EL MAR ES UN MAL JEFE</div>
+      <div class="sub">10 trabajadores oceanicos sin horario fijo, sin descanso dominical y con riesgo letal en cada turno. La conclusion del top: el oceano paga mal pero genera personajes inolvidables. Honor a los que reman, capitanean, pescan y bucean por nosotros.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <div class="divider">
+      <div class="pre cy">CIERRE</div>
+      <div class="title cy" style="font-size:54px;">GRACIAS POR EMBARCAR</div>
+      <div class="sub">Comentanos cual te falto en este top y cual es tu marinero retro favorito. Si te gusto el especial dejanos like y suscripcion. La proxima: volvemos al catalogo retro con SNES NO-LATAM, los cartuchos que nunca cruzaron el Pacifico.</div>
+    </div>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 14</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+go(0);
+</script>
+
+</body>
+</html>
