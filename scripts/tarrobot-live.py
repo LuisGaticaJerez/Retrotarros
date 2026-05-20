@@ -551,32 +551,58 @@ async def audio_finished():
 # ─────────────────────────────────────────────────────────────────────────
 
 _whisper_model = None
+WHISPER_MODEL_SIZE = "small"  # base es rapido pero impreciso. small da +90% accuracy en es.
+
+# Prompt de contexto: le dice a Whisper que esperamos vocabulario retrogaming.
+# Esto mejora notablemente reconocimiento de nombres propios y "TarroBot".
+WHISPER_PROMPT = (
+    "El usuario habla con TarroBot, asistente del canal Retrotarros sobre videojuegos retro. "
+    "Puede mencionar: Mario, Zelda, Sonic, Donkey Kong, EarthBound, Final Fantasy, Chrono Trigger, "
+    "Metroid, Pokemon, Nintendo, Sega, SNES, NES, N64, Genesis, Atari, arcade, cartucho, consola, "
+    "GoldenEye, Banjo, Kazooie, Yoshi, Star Fox, Mario Kart, Smash Bros, Paper Mario, "
+    "Majora's Mask, Ocarina of Time, JAWS, Castlevania, Mega Man, Killer Instinct, "
+    "Doom, Wolfenstein, Tetris, Pac-Man, Pong, Frogger, Q*bert, Dig Dug, BurgerTime, Karnov, "
+    "Tapper, Lakitu, Bowser, Link, Samus, Solid Snake, Crash Bandicoot, Spyro. "
+    "El usuario habla en español chileno y le hace preguntas tipo: "
+    "Hola TarroBot. Chao TarroBot. Cuentame de Super Mario 64. "
+    "Que opinas de Sonic 06. Este vale 5000 dolares. Dame un dato random."
+)
+
 
 def get_whisper():
-    """Lazy load del modelo Whisper. Primera llamada toma ~5s."""
+    """Lazy load del modelo Whisper. Primera llamada toma ~5-10s con small."""
     global _whisper_model
     if _whisper_model is None:
         import whisper
-        print("[STT] cargando modelo Whisper 'base'... (~5s primera vez)")
-        _whisper_model = whisper.load_model("base")
-        print("[STT] modelo Whisper listo")
+        print(f"[STT] cargando modelo Whisper '{WHISPER_MODEL_SIZE}'... (~5-10s primera vez)")
+        _whisper_model = whisper.load_model(WHISPER_MODEL_SIZE)
+        print(f"[STT] modelo Whisper '{WHISPER_MODEL_SIZE}' listo")
     return _whisper_model
 
 
 def transcribir_audio_sync(audio_bytes: bytes) -> str:
-    """Transcribe audio bytes a texto. Usa archivo temp porque Whisper lee path."""
+    """Transcribe audio bytes a texto con Whisper + initial_prompt de contexto."""
     import tempfile
     import os as _os
 
-    # El browser manda webm/opus por defecto. Whisper usa ffmpeg interno.
     with tempfile.NamedTemporaryFile(suffix=".webm", delete=False) as f:
         f.write(audio_bytes)
         tmp_path = f.name
 
     try:
         model = get_whisper()
-        result = model.transcribe(tmp_path, language="es", fp16=False)
-        return result.get("text", "").strip()
+        result = model.transcribe(
+            tmp_path,
+            language="es",
+            fp16=False,
+            temperature=0.0,                # mas determinista, menos alucina
+            initial_prompt=WHISPER_PROMPT,  # contexto de vocabulario retrogaming
+            condition_on_previous_text=False,  # no se "atora" con audio anterior
+            no_speech_threshold=0.4,        # mas tolerante a silencios al final
+        )
+        texto = result.get("text", "").strip()
+        print(f"[STT] transcripcion: '{texto}'")
+        return texto
     finally:
         try:
             _os.unlink(tmp_path)
