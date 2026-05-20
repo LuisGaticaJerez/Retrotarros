@@ -39,6 +39,14 @@ studio/pautas/audio/
 # SRT exportados desde pautas (regenerables con --pauta-srt o /api/queue/srt)
 studio/pautas/*.srt
 
+# MIDI descargados de fan-sites (Ichigos, Ninsheetmusic) — son transcripciones
+# por fans, NO redistribuimos en el repo publico. Cada usuario los baja para si.
+studio/melodias/*.mid
+studio/melodias/*.midi
+
+# Soundfont SNES (~30 MB binario, lo descarga install.bat)
+studio/melodias/*.sf2
+
 # Capturas PNG generadas por capture-slides.py (la fuente es el HTML)
 # Se regeneran con: python scripts/capture-slides.py <slug>
 studio/captures/

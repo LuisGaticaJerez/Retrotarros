@@ -41,25 +41,32 @@ OUT_DIR = REPO / "studio" / "tarrobot-out"
 PAUTAS_DIR = REPO / "studio" / "pautas"
 PAUTAS_AUDIO_DIR = PAUTAS_DIR / "audio"
 
+# Sprint 8.1: melodias (MIDI fans -> MP3 con FluidSynth + soundfont SNES)
+MELODIAS_DIR = REPO / "studio" / "melodias"
+SOUNDFONT_PATH = MELODIAS_DIR / "soundfont.sf2"
+FFMPEG_BIN = REPO / "installers" / "tarrobot-studio" / "bin" / "ffmpeg.exe"  # del instalador
+
 ESTADOS = [
     "idle", "talking", "excited", "sleep", "thinking", "winking",
-    "confused", "glitched", "fact", "happy", "sad", "angry", "loading"
+    "confused", "glitched", "fact", "happy", "sad", "angry", "loading",
+    "whistling",  # Sprint 8.1: tocando melodia (notas saliendo de la boca)
 ]
 
 LABEL_POR_ESTADO = {
-    "idle":     "DATO CURIOSO",
-    "talking":  "DATO CURIOSO",
-    "excited":  "DATO BOMBA · MIND BLOWN",
-    "fact":     "FACT TIME · DATO ESTRELLA",
-    "thinking": "PROCESANDO DATO...",
-    "winking":  "ENTRE NOSOTROS...",
-    "confused": "EN SERIO?",
-    "happy":    "BUENA NOTICIA",
-    "sad":      "QUE PENA",
-    "angry":    "ESTO NO ME GUSTA",
-    "loading":  "BUSCANDO INFO...",
-    "glitched": "SEÑAL CORRUPTA",
-    "sleep":    "DESCANSANDO",
+    "idle":      "DATO CURIOSO",
+    "talking":   "DATO CURIOSO",
+    "excited":   "DATO BOMBA · MIND BLOWN",
+    "fact":      "FACT TIME · DATO ESTRELLA",
+    "thinking":  "PROCESANDO DATO...",
+    "winking":   "ENTRE NOSOTROS...",
+    "confused":  "EN SERIO?",
+    "happy":     "BUENA NOTICIA",
+    "sad":       "QUE PENA",
+    "angry":     "ESTO NO ME GUSTA",
+    "loading":   "BUSCANDO INFO...",
+    "glitched":  "SEÑAL CORRUPTA",
+    "sleep":     "DESCANSANDO",
+    "whistling": "MUSICA DE FONDO ♪",
 }
 
 
@@ -606,6 +613,172 @@ def pauta_to_srt(pauta: dict, session_log: list | None = None, gap_ms: int = 500
     return "\n".join(bloques)
 
 
+# ─────────────────────────────────────────────────────────────────────────
+# Melodias MIDI -> MP3 (Sprint 8.1)
+# ─────────────────────────────────────────────────────────────────────────
+#
+# Flujo:
+#   1. Luis baja un MIDI de Ichigos / Ninsheetmusic en studio/melodias/
+#   2. CLI --melodia-add le pasa el MIDI + recorte (desde + segundos)
+#   3. FluidSynth renderiza con soundfont SNES a WAV temporal
+#   4. ffmpeg recorta a [desde, desde+segundos] y convierte a MP3
+#   5. Se agrega el item a la pauta con tipo="melodia"
+#
+# Para uso "te acuerdas de esa cancion?" → 5-10 segundos por melodia,
+# nunca canciones completas (fair use razonable como referencia).
+
+
+def _which(name: str) -> Optional[str] | None:
+    """Encuentra el binario en PATH o en el bin/ del instalador."""
+    import shutil
+    found = shutil.which(name)
+    if found:
+        return found
+    # Fallback: revisar bin/ del instalador
+    local = REPO / "installers" / "tarrobot-studio" / "bin" / f"{name}.exe"
+    if local.exists():
+        return str(local)
+    return None
+
+
+def _parse_tiempo(s: str) -> float:
+    """Convierte '14', '14.5', '0:14', '1:23' a segundos float."""
+    s = str(s).strip()
+    if ":" in s:
+        partes = s.split(":")
+        if len(partes) == 2:
+            return int(partes[0]) * 60 + float(partes[1])
+        if len(partes) == 3:
+            return int(partes[0]) * 3600 + int(partes[1]) * 60 + float(partes[2])
+    return float(s)
+
+
+def render_midi_a_mp3(midi_path: Path, out_mp3: Path,
+                       desde_s: float = 0.0, segundos: Optional[float] = None,
+                       soundfont: Optional[Path] = None) -> Optional[Path]:
+    """
+    Renderiza un MIDI a MP3 usando FluidSynth + soundfont SNES + ffmpeg.
+    Recorta a [desde_s, desde_s + segundos] si se especifica.
+    Devuelve el path del MP3 o None si fallo.
+    """
+    import subprocess
+    import tempfile
+
+    if not midi_path.exists():
+        print(f"ERROR: MIDI no existe: {midi_path}", file=sys.stderr)
+        return None
+
+    sf = soundfont or SOUNDFONT_PATH
+    if not sf.exists():
+        print(f"ERROR: soundfont SNES no encontrado en {sf}", file=sys.stderr)
+        print(f"       Bajalo con install.bat o pon un .sf2 ahi manualmente.", file=sys.stderr)
+        return None
+
+    fluidsynth = _which("fluidsynth")
+    if not fluidsynth:
+        print("ERROR: fluidsynth no esta instalado.", file=sys.stderr)
+        print("       En Windows: install.bat lo descarga. Manual: https://www.fluidsynth.org/", file=sys.stderr)
+        return None
+
+    ffmpeg = _which("ffmpeg")
+    if not ffmpeg:
+        print("ERROR: ffmpeg no encontrado.", file=sys.stderr)
+        return None
+
+    out_mp3.parent.mkdir(parents=True, exist_ok=True)
+
+    # 1. FluidSynth: MIDI -> WAV completo en tmp
+    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
+        tmp_wav = Path(f.name)
+    try:
+        cmd_fluid = [
+            fluidsynth, "-ni",
+            "-F", str(tmp_wav),
+            "-r", "44100",
+            "-g", "0.8",   # gain (volumen master, 0.8 evita clipping)
+            str(sf), str(midi_path),
+        ]
+        proc = subprocess.run(cmd_fluid, capture_output=True, text=True, timeout=120)
+        if proc.returncode != 0 or not tmp_wav.exists():
+            print(f"ERROR: fluidsynth fallo: {proc.stderr[:300]}", file=sys.stderr)
+            return None
+
+        # 2. ffmpeg: WAV -> MP3 con recorte opcional + fade-in/out
+        cmd_ff = [ffmpeg, "-y", "-i", str(tmp_wav)]
+        if desde_s > 0:
+            cmd_ff += ["-ss", f"{desde_s:.3f}"]
+        if segundos is not None:
+            cmd_ff += ["-t", f"{segundos:.3f}"]
+            # Fade-out de 0.5s al final para que no corte abrupto
+            fade_start = max(0, segundos - 0.5)
+            cmd_ff += ["-af", f"afade=in:st=0:d=0.3,afade=out:st={fade_start:.3f}:d=0.5"]
+        cmd_ff += ["-b:a", "128k", "-ac", "2", str(out_mp3)]
+
+        proc = subprocess.run(cmd_ff, capture_output=True, text=True, timeout=60)
+        if proc.returncode != 0 or not out_mp3.exists():
+            print(f"ERROR: ffmpeg fallo: {proc.stderr[:300]}", file=sys.stderr)
+            return None
+    finally:
+        try:
+            tmp_wav.unlink(missing_ok=True)
+        except Exception:
+            pass
+
+    return out_mp3
+
+
+def pauta_agregar_melodia(pauta: dict, midi_path: Path, desde_s: float = 0.0,
+                           segundos: float = 8.0, titulo: str = "",
+                           consola: str = "", ano: int = 0, editor: str = "") -> dict:
+    """
+    Renderiza un MIDI a MP3 y lo agrega como item tipo=melodia a la pauta.
+    El path del MP3 queda relativo a PAUTAS_DIR para que el server lo sirva.
+    """
+    slug = pauta["slug"]
+    existing = {d["id"] for d in pauta["datos"]}
+    n = len(pauta["datos"]) + 1
+    new_id = f"{slug}-melodia-{n}"
+    while new_id in existing:
+        n += 1
+        new_id = f"{slug}-melodia-{n}"
+
+    out_mp3 = PAUTAS_DIR / "audio" / slug / f"{new_id}.mp3"
+    rendered = render_midi_a_mp3(midi_path, out_mp3, desde_s=desde_s, segundos=segundos)
+    if not rendered:
+        raise RuntimeError(f"No se pudo renderizar {midi_path.name}")
+
+    # Leer duracion real
+    dur_ms = _mp3_duracion_ms(out_mp3) or int(segundos * 1000)
+
+    titulo = titulo or midi_path.stem.replace("-", " ").replace("_", " ").title()
+    rel_mp3 = f"audio/{slug}/{new_id}.mp3"
+    try:
+        midi_rel = str(midi_path.resolve().relative_to(REPO.resolve())).replace("\\", "/")
+    except (ValueError, OSError):
+        midi_rel = str(midi_path)
+
+    dato = {
+        "id": new_id,
+        "tipo": "melodia",  # Sprint 8.1: marca que es musica, no TTS
+        "tema": titulo,
+        "texto": f"[Tocando: {titulo} ({segundos:.0f}s)]",
+        "estado": "whistling",  # Estado visual nuevo en la TV
+        "consola": consola or "",
+        "ano": int(ano or 0),
+        "editor": editor or "",
+        "mp3": rel_mp3,
+        "duracion_ms": dur_ms,
+        "fuente": "midi-render",
+        "midi_source": {
+            "midi": midi_rel,
+            "desde_s": desde_s,
+            "segundos": segundos,
+        },
+    }
+    pauta["datos"].append(dato)
+    return dato
+
+
 def pauta_agregar_dato(pauta: dict, dato_in: dict) -> dict:
     """Agrega un dato a la pauta con id unico y campos por defecto. Mutates pauta."""
     base = pauta["slug"]
@@ -890,6 +1063,65 @@ def cmd_pauta_init(args) -> int:
     return 0
 
 
+def cmd_melodia_add(args) -> int:
+    """Agrega un item de melodia a una pauta. Renderiza el MIDI a MP3 con FluidSynth."""
+    slug = slugify(args.melodia_add)
+    pauta = cargar_pauta(slug)
+    if not pauta:
+        print(f"ERROR: no existe la pauta '{slug}'. Crea una primero con --pauta-init.", file=sys.stderr)
+        return 1
+
+    if not args.midi:
+        print("ERROR: falta --midi <ruta>", file=sys.stderr)
+        return 1
+
+    midi_path = Path(args.midi)
+    if not midi_path.is_absolute():
+        midi_path = (REPO / midi_path).resolve()
+    if not midi_path.exists():
+        print(f"ERROR: MIDI no existe: {midi_path}", file=sys.stderr)
+        return 1
+    if midi_path.suffix.lower() not in (".mid", ".midi"):
+        print(f"ERROR: el archivo debe ser .mid o .midi (recibido: {midi_path.suffix})", file=sys.stderr)
+        return 1
+
+    desde_s = _parse_tiempo(args.desde) if args.desde else 0.0
+    segundos = float(args.segundos) if args.segundos else 8.0
+    if segundos > 30:
+        print(f"[WARN] {segundos}s es bastante para una referencia. Recomendado max 15s.", file=sys.stderr)
+
+    titulo = args.titulo or midi_path.stem.replace("-", " ").replace("_", " ").title()
+
+    print(f"[INFO] Renderizando MIDI...")
+    print(f"       Archivo: {midi_path.name}")
+    print(f"       Recorte: desde {desde_s:.1f}s, duracion {segundos:.1f}s")
+    print(f"       Titulo:  {titulo}")
+    print()
+
+    try:
+        dato = pauta_agregar_melodia(
+            pauta, midi_path,
+            desde_s=desde_s, segundos=segundos,
+            titulo=titulo,
+            consola=args.consola or "",
+            ano=args.ano or 0,
+            editor=args.editor or "",
+        )
+    except RuntimeError as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        return 1
+
+    guardar_pauta(pauta)
+    print(f"[OK] melodia agregada como item {dato['id']}")
+    print(f"     MP3: {PAUTAS_DIR / dato['mp3']}")
+    print(f"     duracion real: {dato['duracion_ms']/1000:.1f}s")
+    print()
+    print(f"En la cola va a aparecer como:")
+    print(f"  [whistling] {dato['tema']}")
+    print(f"  {dato['texto']}")
+    return 0
+
+
 def cmd_pauta_srt(args) -> int:
     slug = slugify(args.pauta_srt)
     pauta = cargar_pauta(slug)
@@ -1064,6 +1296,11 @@ def main():
     parser.add_argument("--concurrency", type=int, help="Cantidad de TTS concurrentes para --pauta-preload (default 3, max razonable 6).")
     parser.add_argument("--pauta-srt", metavar="SLUG", help="Exporta SRT desde una pauta (modo relative, util para preview offline).")
     parser.add_argument("--gap-ms", type=int, help="Milisegundos de pausa entre items en SRT modo relative (default 500).")
+    parser.add_argument("--melodia-add", metavar="SLUG", help="Agrega un item de melodia a la pauta (Sprint 8.1, MIDI->MP3 SNES).")
+    parser.add_argument("--midi", metavar="PATH", help="Ruta al MIDI para --melodia-add.")
+    parser.add_argument("--desde", help="Donde empieza el snippet en el MIDI. Formato: '14', '0:14', '1:23'.")
+    parser.add_argument("--segundos", type=float, help="Duracion del snippet en segundos (default 8, max recomendado 15).")
+    parser.add_argument("--titulo", help="Titulo de la melodia (ej: 'DKC Aquatic Ambience').")
     parser.add_argument("--pauta-list", action="store_true", help="Lista todas las pautas creadas en studio/pautas/")
     parser.add_argument("--pauta-show", metavar="SLUG", help="Muestra el contenido de una pauta")
     parser.add_argument("--episodio", help="Titulo del episodio (para --pauta-init y --pauta-auto)")
@@ -1097,6 +1334,8 @@ def main():
         return cmd_pauta_preload(args)
     if args.pauta_srt:
         return cmd_pauta_srt(args)
+    if args.melodia_add:
+        return cmd_melodia_add(args)
 
     db = cargar_db()
 
