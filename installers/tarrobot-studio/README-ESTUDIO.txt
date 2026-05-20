@@ -94,6 +94,52 @@ Si el mic no funciona en el celu (en algunos browsers
 necesita HTTPS), usa el panel desde el PC en localhost.
 
 ============================================================
+MELODIAS MIDI (tocar musica retro en vivo)
+============================================================
+
+TarroBot puede tocar snippets de musica retro durante el programa,
+estilo: "Koko, te acuerdas de la cancion de DKC? - Yo si, era como..."
+y suena 5-10 segundos de la melodia con sonido SNES.
+
+REQUISITOS (una vez):
+1. FluidSynth ya viene en bin\fluidsynth.exe (install.bat lo baja).
+2. Un soundfont .sf2 (no incluido por temas de derechos).
+   Bajalo de uno de estos sitios:
+     - GeneralUser GS (CC0, libre):  schristiancollins.com/generaluser.php
+     - SNES soundfont:               buscar en archive.org / musescore.com
+   Renombralo a "soundfont.sf2" y copialo en:
+     studio\melodias\soundfont.sf2
+
+USAR:
+1. Baja el MIDI de un sitio de partituras fan:
+     - Ichigos:        ichigos.com         (Final Fantasy y mas)
+     - Ninsheetmusic:  ninsheetmusic.org   (Nintendo)
+   Guardalo en  studio\melodias\<nombre>.mid
+
+2. Agrega la melodia a una pauta del episodio:
+     python scripts\tarrobot.py --melodia-add <slug-pauta> ^
+         --midi studio\melodias\dkc-aquatic.mid ^
+         --desde 0:14 --segundos 8 ^
+         --titulo "DKC Aquatic Ambience" ^
+         --consola SNES --ano 1994 --editor Rare
+
+   Esto renderiza un MP3 de 8s y lo agrega como item tipo=melodia
+   en la pauta. Aparece automatico en la cola del panel control.
+
+3. Durante grabacion, NEXT en la cola hace que TarroBot toque la
+   melodia con estado "whistling" (boca tipo O + notas musicales
+   saliendo) en lugar de hablar.
+
+NOTA LEGAL:
+Las partituras de Ichigos y Ninsheetmusic son transcripciones por fans,
+no son samples originales de Nintendo/Capcom. Tocar 5-15 segundos como
+referencia en un programa de YouTube es razonablemente fair use (es
+comentario sobre el material). Recomendacion:
+  - Snippets cortos (max 15s)
+  - NUNCA canciones completas
+  - Mencionar el juego de origen (lo vas a hacer natural en el comentario)
+
+============================================================
 PROBLEMAS COMUNES
 ============================================================
 
@@ -116,6 +162,17 @@ PROBLEMAS COMUNES
 "Puerto 8765 ocupado"
   -> Cierra otras instancias de TarroBot. Si persiste, edita
      scripts\tarrobot-live.py y cambia PORT a 8766.
+
+"FluidSynth no esta instalado" o "soundfont no encontrado"
+  -> Revisa que bin\fluidsynth.exe existe y que tienes
+     studio\melodias\soundfont.sf2 (o el .sf2 que prefieras).
+     Sin esto las melodias MIDI no andan pero TarroBot anda
+     perfecto en todo lo demas.
+
+"La melodia suena muy distinta a la original"
+  -> Es por el soundfont que usaste. GeneralUser GS suena bien pero
+     no es identico a SNES. Para sonido SNES real, busca un
+     "Super Nintendo Soundfont" especifico.
 
 ============================================================
 ESPACIO EN DISCO
