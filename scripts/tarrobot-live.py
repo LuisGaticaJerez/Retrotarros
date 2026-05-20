@@ -186,6 +186,30 @@ class QueueManager:
 queue = QueueManager()
 
 
+# ─────────────────────────────────────────────────────────────────────────
+# Indicador "procesando" (Sprint 7.1)
+# ─────────────────────────────────────────────────────────────────────────
+#
+# Broadcastea {tipo: "procesando", activo, motivo} al live para que la TV
+# muestre un chip mientras Claude o Whisper estan trabajando. Asi no parece
+# colgado durante los 4-10 segundos que tarda una operacion LLM.
+
+@asynccontextmanager
+async def _procesando(motivo: str):
+    """Async context manager: broadcast procesando=true al entrar, =false al salir."""
+    try:
+        await manager.broadcast_live({"tipo": "procesando", "activo": True, "motivo": motivo})
+    except Exception:
+        pass
+    try:
+        yield
+    finally:
+        try:
+            await manager.broadcast_live({"tipo": "procesando", "activo": False})
+        except Exception:
+            pass
+
+
 def _audio_url_de_pauta(slug: str, dato: dict) -> Optional[str]:
     """
     Devuelve la URL HTTP del MP3 precargado de un dato de pauta, si existe.
@@ -365,7 +389,8 @@ async def cuentame(payload: dict):
         import random
         dato = random.choice(matches)
     elif generate_if_missing:
-        result = generar_con_llm(tema)
+        async with _procesando(f"buscando {tema} con Claude..."):
+            result = await asyncio.to_thread(generar_con_llm, tema)
         if result and result.get("datos"):
             primera = result["datos"][0]
             dato = agregar_dato(
@@ -491,7 +516,8 @@ async def opinar(payload: dict):
     voz = resolver_voz(payload.get("voz") or "catalina")
     tracker.mark_input()
 
-    result = await asyncio.to_thread(generar_opinion_llm, tema)
+    async with _procesando(f"opinando de {tema}..."):
+        result = await asyncio.to_thread(generar_opinion_llm, tema)
     if not result:
         return JSONResponse({"error": "fallo Claude API. Verifica ANTHROPIC_API_KEY y creditos."}, status_code=500)
 
@@ -772,7 +798,8 @@ async def listen(request: Request):
 
     # Transcribir
     try:
-        texto = await asyncio.to_thread(transcribir_audio_sync, audio_bytes)
+        async with _procesando("escuchando..."):
+            texto = await asyncio.to_thread(transcribir_audio_sync, audio_bytes)
     except Exception as e:
         return JSONResponse({"error": f"transcripcion fallo: {e}"}, status_code=500)
 
@@ -837,7 +864,8 @@ async def _reproducir_dato_de_cola(dato: dict, voz_override: Optional[str] = Non
     # 2. Fallback a TTS al vuelo
     if not audio_url:
         print(f"[queue] dato {dato['id']} sin MP3 precargado, generando al vuelo...")
-        mp3 = await asyncio.to_thread(generar_tts, dato, voz)
+        async with _procesando(f"generando audio para {dato['tema'][:30]}..."):
+            mp3 = await asyncio.to_thread(generar_tts, dato, voz)
         audio_url = f"/audio/{mp3.name}" if mp3 else None
 
     tracker.mark_speaking(True)

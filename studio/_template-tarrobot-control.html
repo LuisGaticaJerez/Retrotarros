@@ -247,9 +247,62 @@ select#queueSelect:focus { border-color: var(--ye); }
   text-align: center;
   padding: 8px;
 }
+
+/* ── INDICADOR "PROCESANDO" (Sprint 7.1) ──────────────────────── */
+.proc-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 14px 10px 38px;
+  background: linear-gradient(90deg, rgba(255,210,63,.95), rgba(255,46,136,.95));
+  color: var(--bg);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  z-index: 999;
+  text-shadow: 0 1px 0 rgba(255,255,255,.3);
+  transform: translateY(-100%);
+  transition: transform .25s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 12px rgba(255,46,136,.4);
+}
+.proc-bar.show { transform: translateY(0); }
+.proc-bar::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: var(--bg);
+  animation: proc-pulse 0.8s ease-in-out infinite;
+}
+@keyframes proc-pulse {
+  0%, 100% { transform: scale(0.6); opacity: .5; }
+  50%      { transform: scale(1.0); opacity: 1; }
+}
+.proc-bar .proc-motivo {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .5px;
+  text-transform: none;
+  color: rgba(6,3,15,.85);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 </style>
 </head>
 <body>
+
+<div class="proc-bar" id="procBar">PROCESANDO<span class="proc-motivo" id="procMotivo"></span></div>
 
 <h1>⚡ TARROBOT CONTROL</h1>
 <div class="sub">PANEL EN VIVO · RETROTARROS STUDIO</div>
@@ -393,7 +446,42 @@ function clearLog() {
   while (logEl.firstChild) logEl.removeChild(logEl.firstChild);
 }
 
+// Sprint 7.1: indicador "procesando" para no parecer colgado en operaciones lentas
+const procBar = document.getElementById('procBar');
+const procMotivo = document.getElementById('procMotivo');
+let procCount = 0;   // contador (varias requests concurrentes mantienen la barra)
+
+// Motivos por endpoint (humanos, mejor que la URL pelada)
+const PROC_LABELS = {
+  '/api/cuentame':     'buscando dato...',
+  '/api/opinar':       'pensando opinion...',
+  '/api/random':       'eligiendo dato random...',
+  '/api/precio':       'reaccionando al precio...',
+  '/api/saludar':      'preparando saludo...',
+  '/api/despedir':     'preparando despedida...',
+  '/api/queue/next':   'siguiente item...',
+  '/api/queue/prev':   'item anterior...',
+  '/api/queue/jump':   'saltando...',
+  '/api/queue/load':   'cargando pauta...',
+  '/api/state':        '',  // instantaneo, no mostrar barra
+  '/api/queue/reset':  '',
+  '/api/queue/unload': '',
+};
+
+function showProc(motivo) {
+  procCount++;
+  procMotivo.textContent = motivo ? ('· ' + motivo) : '';
+  procBar.classList.add('show');
+}
+function hideProc() {
+  procCount = Math.max(0, procCount - 1);
+  if (procCount === 0) procBar.classList.remove('show');
+}
+
 async function post(endpoint, body) {
+  const label = PROC_LABELS[endpoint];
+  const showIt = label !== '' && label !== undefined;
+  if (showIt) showProc(label);
   try {
     const r = await fetch(endpoint, {
       method: 'POST',
@@ -409,6 +497,8 @@ async function post(endpoint, body) {
   } catch (e) {
     logMsg('FAIL ' + endpoint + ': ' + e.message, 'err');
     return null;
+  } finally {
+    if (showIt) hideProc();
   }
 }
 
@@ -523,6 +613,7 @@ async function setupMic() {
       micStatus.textContent = 'procesando con Whisper... (~4-10s)';
       micTranscript.style.display = 'none';
       micAction.style.display = 'none';
+      showProc('escuchando voz...');
       try {
         const r = await fetch('/api/listen', {
           method: 'POST',
@@ -548,6 +639,8 @@ async function setupMic() {
       } catch (e) {
         micStatus.textContent = 'fail: ' + e.message;
         logMsg('VOZ fail: ' + e.message, 'err');
+      } finally {
+        hideProc();
       }
     };
     micReady = true;

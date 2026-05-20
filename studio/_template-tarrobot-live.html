@@ -174,11 +174,69 @@ body.mode-overlay .live-caption {
   display: none; /* mostrar con ?debug=1 */
 }
 body.debug .ws-status { display: block; }
+
+/* ── INDICADOR "PROCESANDO" (Sprint 7.1) ──────────────────────── */
+.procesando-chip {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  padding: 6px 12px 6px 28px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--ye);
+  background: rgba(255, 210, 63, .12);
+  border: 1px solid var(--ye);
+  border-radius: 4px;
+  z-index: 250;
+  text-transform: uppercase;
+  box-shadow: 0 0 18px rgba(255, 210, 63, .35);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity .25s, transform .25s;
+  pointer-events: none;
+  max-width: 60vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.procesando-chip.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.procesando-chip::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--ye);
+  box-shadow: 0 0 8px var(--ye);
+  animation: procesando-pulse 0.9s ease-in-out infinite;
+}
+@keyframes procesando-pulse {
+  0%, 100% { transform: scale(0.7); opacity: .4; }
+  50%      { transform: scale(1.0); opacity: 1; }
+}
+.procesando-chip .motivo {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-left: 8px;
+  color: rgba(255, 255, 255, .7);
+  text-transform: none;
+}
 </style>
 </head>
 <body class="mode-overlay">
 
 <div class="ws-status" id="wsStatus">conectando...</div>
+<div class="procesando-chip" id="procesandoChip">
+  PROCESANDO<span class="motivo" id="procesandoMotivo"></span>
+</div>
 
 <div class="stage">
   <div class="tarrovision">
@@ -407,6 +465,17 @@ function handleMessage(msg) {
     if (!estaHablando) {
       setEstado(msg.estado);
       caption.classList.remove('show');
+    }
+  } else if (msg.tipo === 'procesando') {
+    // Sprint 7.1: chip "PROCESANDO" mientras Claude/Whisper trabaja
+    const chip = document.getElementById('procesandoChip');
+    const motivo = document.getElementById('procesandoMotivo');
+    if (msg.activo) {
+      // textContent evita XSS si el motivo viene del server
+      motivo.textContent = msg.motivo ? ('· ' + msg.motivo) : '';
+      chip.classList.add('show');
+    } else {
+      chip.classList.remove('show');
     }
   } else if (msg.tipo === 'hablar') {
     estaHablando = true;
