@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · TarroBot Template</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root {
+  --mg: #FF2E88; --cy: #00E5FF; --ye: #FFD23F; --pu: #2D1B69;
+  --bo: #F5F0E8; --dk: #06030f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+/* HEADER */
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6,3,15,.97); border-bottom: 2px solid var(--mg); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--mg); }
+.dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+/* DECK / SLIDES */
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 24px 40px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+.opt-label { position: absolute; top: 16px; left: 28px; font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 3px; padding: 6px 12px; border: 1px solid var(--ye); background: rgba(255,210,63,.08); }
+
+/* PORTADA */
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 70px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; }
+.portada .ep-title .vs { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; }
+
+/* ═══════════════════════════════════════════════════ */
+/* SLIDE TARROBOT · TV con personaje + dato curioso   */
+/* ═══════════════════════════════════════════════════ */
+.slide-tarrobot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  height: 100%;
+  padding: 30px 30px 10px;
+  align-items: center;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.tarrobot-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 0;
+  container-type: size;
+}
+.tarrobot-stage .tarrovision {
+  width: min(100cqh, 100cqw);
+  height: min(100cqh, 100cqw);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* TARROVISION (estilo base reutilizado) */
+.tarrovision {
+  background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%);
+  border-radius: 22px;
+  padding: 18px 22px;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(0,0,0,.4);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 10px;
+}
+.tv-controls-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px; }
+.tv-led { width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, var(--mg) 60%, #7a0030 100%); box-shadow: 0 0 10px rgba(255,46,136,.8), inset 0 0 2px rgba(0,0,0,.5); }
+.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size: 11px; color: var(--ye); letter-spacing: 3px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
+.tv-channel { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--cy); letter-spacing: 2px; padding: 3px 9px; border: 1px solid rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
+.tv-screen { position: relative; background: #2a2a2f; border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 2px #3a3a3f, inset 0 0 14px rgba(0,0,0,.6); min-height: 0; }
+.tv-screen-inner {
+  position: relative; width: 100%; height: 100%; background: #0a0820;
+  background-image: radial-gradient(circle at 50% 50%, #1a1442 0%, #050310 80%);
+  border-radius: 16px / 8px; overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 40px rgba(0,0,0,.95);
+  display: flex; align-items: center; justify-content: center;
+}
+.tv-screen-inner::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.20) 2px, rgba(0,0,0,.20) 3px);
+  z-index: 10;
+}
+.tv-screen-inner::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255,255,255,.10) 0%, transparent 55%), radial-gradient(ellipse 90% 50% at 50% 100%, rgba(0,229,255,.08) 0%, transparent 60%);
+  z-index: 11;
+}
+.tv-controls-bottom { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; padding: 2px 4px 0; }
+.tv-knob { width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #5a5a60 0%, #2a2a30 60%, #0a0a0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.6); position: relative; }
+.tv-knob::after { content: ""; position: absolute; top: 6px; left: 50%; width: 2px; height: 10px; background: var(--ye); transform-origin: bottom center; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 4px rgba(255,210,63,.6); }
+.tv-knob.cy::after { background: var(--cy); box-shadow: 0 0 4px rgba(0,229,255,.6); transform: translateX(-50%) rotate(-30deg); }
+.tv-speaker { height: 24px; background: repeating-linear-gradient(90deg, #0a0a0e 0px, #0a0a0e 3px, #1a1a1f 3px, #1a1a1f 6px); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6); }
+
+/* ═══════════════════════════════════════════════════ */
+/* TARROBOT · cara pixelada dentro de la TV           */
+/* ═══════════════════════════════════════════════════ */
+.tarrobot-face {
+  position: relative;
+  width: 70%;
+  aspect-ratio: 1.2 / 1;
+  z-index: 5;
+}
+.tarrobot-face svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  shape-rendering: crispEdges; /* mantiene pixeles cuadrados sin antialias */
+  filter: drop-shadow(0 0 12px rgba(0,229,255,.4));
+}
+
+/* Animaciones por estado */
+/* idle: ojos parpadean cada 3s */
+@keyframes tb-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94%, 98% { transform: scaleY(0.1); }
+}
+.tarrobot-face .tb-eye-shape {
+  transform-origin: center;
+  animation: tb-blink 4s ease-in-out infinite;
+}
+
+/* talking: boca abre y cierra */
+@keyframes tb-talk {
+  0%, 100% { transform: scaleY(0.3); }
+  20% { transform: scaleY(1); }
+  40% { transform: scaleY(0.5); }
+  60% { transform: scaleY(1); }
+  80% { transform: scaleY(0.7); }
+}
+.is-talking .tb-mouth-talking {
+  transform-origin: center;
+  animation: tb-talk 0.6s ease-in-out infinite;
+}
+
+/* lentes solo en talking + excited */
+.tb-glasses { opacity: 0; transition: opacity .25s; }
+.is-talking .tb-glasses, .is-excited .tb-glasses { opacity: 1; }
+
+/* boca cambia según estado */
+.tb-mouth-idle, .tb-mouth-talking, .tb-mouth-excited, .tb-mouth-sleep { display: none; }
+.is-idle .tb-mouth-idle { display: block; }
+.is-talking .tb-mouth-talking { display: block; }
+.is-excited .tb-mouth-excited { display: block; }
+.is-sleep .tb-mouth-sleep { display: block; }
+
+/* ojos por estado */
+.tb-eyes-default, .tb-eyes-excited, .tb-eyes-sleep, .tb-eyes-thinking, .tb-eyes-winking, .tb-eyes-confused, .tb-eyes-glitched, .tb-eyes-happy, .tb-eyes-sad, .tb-eyes-angry, .tb-eyes-loading { display: none; }
+.is-idle .tb-eyes-default, .is-talking .tb-eyes-default, .is-fact .tb-eyes-default { display: block; }
+.is-excited .tb-eyes-excited { display: block; }
+.is-sleep .tb-eyes-sleep { display: block; }
+.is-thinking .tb-eyes-thinking { display: block; }
+.is-winking .tb-eyes-winking { display: block; }
+.is-confused .tb-eyes-confused { display: block; }
+.is-glitched .tb-eyes-glitched { display: block; }
+.is-happy .tb-eyes-happy { display: block; }
+.is-sad .tb-eyes-sad { display: block; }
+.is-angry .tb-eyes-angry { display: block; }
+.is-loading .tb-eyes-loading { display: block; }
+
+/* boca por estado */
+.tb-mouth-thinking, .tb-mouth-winking, .tb-mouth-confused, .tb-mouth-glitched, .tb-mouth-fact, .tb-mouth-happy, .tb-mouth-sad, .tb-mouth-angry, .tb-mouth-loading { display: none; }
+.is-thinking .tb-mouth-thinking { display: block; }
+.is-winking .tb-mouth-winking { display: block; }
+.is-confused .tb-mouth-confused { display: block; }
+.is-glitched .tb-mouth-glitched { display: block; }
+.is-fact .tb-mouth-fact { display: block; }
+.is-happy .tb-mouth-happy { display: block; }
+.is-sad .tb-mouth-sad { display: block; }
+.is-angry .tb-mouth-angry { display: block; }
+.is-loading .tb-mouth-loading { display: block; }
+
+/* extras flotando */
+.tb-extras { display: none; }
+.is-thinking .tb-extras-thinking,
+.is-confused .tb-extras-confused,
+.is-fact .tb-extras-fact,
+.is-sad .tb-extras-sad,
+.is-angry .tb-extras-angry,
+.is-loading .tb-extras-loading { display: block; }
+
+/* loading: puntitos giran */
+@keyframes tb-rotate-dots {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.tb-extras-loading {
+  transform-origin: 60px 14px;
+  animation: tb-rotate-dots 1.4s linear infinite;
+}
+
+/* sad: lagrima cae */
+@keyframes tb-tear-drop {
+  0% { transform: translateY(0); opacity: 1; }
+  90% { transform: translateY(40px); opacity: 1; }
+  100% { transform: translateY(45px); opacity: 0; }
+}
+.tb-tear {
+  animation: tb-tear-drop 2s ease-in infinite;
+  transform-origin: center;
+}
+
+/* angry: vibracion sutil */
+@keyframes tb-anger-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+.is-angry .tarrobot-face svg {
+  animation: tb-anger-shake 0.15s ease-in-out infinite;
+}
+
+/* animaciones de extras */
+@keyframes tb-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.tb-extras-thinking, .tb-extras-confused {
+  animation: tb-bounce 1.2s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes tb-flash {
+  0%, 100% { opacity: 0; transform: scale(0.8); }
+  20%, 80% { opacity: 1; transform: scale(1.05); }
+}
+.tb-extras-fact {
+  animation: tb-flash 1.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* glitched: temblequeo + offset rgb */
+@keyframes tb-glitch {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(2px, -1px); }
+  40% { transform: translate(-2px, 1px); }
+  60% { transform: translate(1px, 2px); }
+  80% { transform: translate(-1px, -2px); }
+}
+.is-glitched .tarrobot-face svg {
+  animation: tb-glitch 0.18s ease-in-out infinite;
+}
+.is-glitched .tarrobot-face::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent 0px, transparent 6px, rgba(255,46,136,.15) 6px, rgba(255,46,136,.15) 8px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* BLOQUE DATO CURIOSO (lado derecho del slide)       */
+/* ═══════════════════════════════════════════════════ */
+.tarrobot-dato {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-self: center;
+}
+.td-label {
+  font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye);
+  letter-spacing: 3px; padding: 8px 14px;
+  border: 1px solid var(--ye); background: rgba(255,210,63,.08);
+  display: inline-flex; align-items: center; gap: 8px;
+  align-self: flex-start;
+}
+.td-text {
+  font-family: 'Orbitron'; font-weight: 700;
+  font-size: 28px; line-height: 1.35;
+  color: #fff; letter-spacing: .5px;
+}
+.td-text .quote { color: var(--cy); }
+.td-tag {
+  font-family: 'Press Start 2P'; font-size: 10px;
+  color: var(--mg); letter-spacing: 3px;
+  padding-top: 12px; border-top: 1px dashed rgba(255,46,136,.4);
+}
+
+/* NAV FOOTER (reusado) */
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6,3,15,.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; }
+.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">TARROBOT · TEMPLATE DEMO · 4 ESTADOS</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 PORTADA -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">NUEVO ACTIVO · RETROTARROS</div>
+      <div class="ep-title"><span class="vs">TARRO</span>BOT</div>
+      <div class="ep-sub">VIVE DENTRO DE TARROVISION · CUENTA DATOS CURIOSOS</div>
+    </div>
+  </section>
+
+  <!-- 02 IDLE -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · IDLE</span>
+    <span class="slide-num">02</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top">
+            <span class="tv-led"></span>
+            <span class="tv-brand">TARROBOT</span>
+            <span class="tv-channel">CH 42</span>
+          </div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-idle">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <!-- ojos default -->
+                <g class="tb-eyes-default">
+                  <g class="tb-eye-shape">
+                    <rect x="28" y="34" width="18" height="18" fill="#00E5FF"/>
+                    <rect x="34" y="40" width="6" height="6" fill="#0a0820"/>
+                  </g>
+                  <g class="tb-eye-shape">
+                    <rect x="74" y="34" width="18" height="18" fill="#00E5FF"/>
+                    <rect x="80" y="40" width="6" height="6" fill="#0a0820"/>
+                  </g>
+                </g>
+                <!-- boca idle: sonrisa pixelada -->
+                <g class="tb-mouth-idle">
+                  <rect x="42" y="68" width="6" height="4" fill="#FFD23F"/>
+                  <rect x="48" y="72" width="24" height="4" fill="#FFD23F"/>
+                  <rect x="72" y="68" width="6" height="4" fill="#FFD23F"/>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ ESPERANDO INSTRUCCIONES</div>
+        <div class="td-text">TarroBot esta en modo <span class="quote">idle</span>. Mira el horizonte, parpadea cada cierto tiempo. Esperando que lo invoquen para soltar un dato curioso.</div>
+        <div class="td-tag">ESTADO · IDLE · PARPADEO CADA 4s</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 TALKING (con lentes geek) -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · HABLANDO + LENTES GEEK</span>
+    <span class="slide-num">03</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top">
+            <span class="tv-led"></span>
+            <span class="tv-brand">TARROBOT</span>
+            <span class="tv-channel">CH 42</span>
+          </div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-talking">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <!-- ojos default detras de los lentes -->
+                <g class="tb-eyes-default">
+                  <g class="tb-eye-shape">
+                    <rect x="28" y="34" width="18" height="18" fill="#00E5FF"/>
+                    <rect x="34" y="40" width="6" height="6" fill="#0a0820"/>
+                  </g>
+                  <g class="tb-eye-shape">
+                    <rect x="74" y="34" width="18" height="18" fill="#00E5FF"/>
+                    <rect x="80" y="40" width="6" height="6" fill="#0a0820"/>
+                  </g>
+                </g>
+                <!-- lentes geek -->
+                <g class="tb-glasses">
+                  <!-- marco izq -->
+                  <rect x="24" y="30" width="26" height="26" fill="none" stroke="#0a0820" stroke-width="3"/>
+                  <rect x="26" y="32" width="22" height="22" fill="rgba(255,255,255,.08)"/>
+                  <!-- brillo izq -->
+                  <rect x="30" y="34" width="4" height="4" fill="rgba(255,255,255,.6)"/>
+                  <!-- marco der -->
+                  <rect x="70" y="30" width="26" height="26" fill="none" stroke="#0a0820" stroke-width="3"/>
+                  <rect x="72" y="32" width="22" height="22" fill="rgba(255,255,255,.08)"/>
+                  <rect x="76" y="34" width="4" height="4" fill="rgba(255,255,255,.6)"/>
+                  <!-- puente -->
+                  <rect x="50" y="42" width="20" height="3" fill="#0a0820"/>
+                </g>
+                <!-- boca talking: rectangulo que anima -->
+                <g class="tb-mouth-talking">
+                  <rect x="48" y="68" width="24" height="12" fill="#FFD23F" rx="2"/>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ DATO CURIOSO #042</div>
+        <div class="td-text"><span class="quote">"</span>Super Mario 64 fue el primer juego en usar el analog stick. Antes de eso, todo el mundo manejaba con D-Pad.<span class="quote">"</span></div>
+        <div class="td-tag">N64 · 1996 · NINTENDO EAD</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 EXCITED -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · EXCITADO · DATO BOMBA</span>
+    <span class="slide-num">04</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top">
+            <span class="tv-led"></span>
+            <span class="tv-brand">TARROBOT</span>
+            <span class="tv-channel">CH 42</span>
+          </div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-excited">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <!-- ojos excited: estrellas/brillo -->
+                <g class="tb-eyes-excited">
+                  <!-- ojo izq: cross sparkle -->
+                  <rect x="32" y="30" width="14" height="4" fill="#FFD23F"/>
+                  <rect x="36" y="26" width="6" height="14" fill="#FFD23F"/>
+                  <rect x="34" y="32" width="10" height="2" fill="#fff"/>
+                  <rect x="38" y="28" width="2" height="10" fill="#fff"/>
+                  <!-- ojo der -->
+                  <rect x="74" y="30" width="14" height="4" fill="#FFD23F"/>
+                  <rect x="78" y="26" width="6" height="14" fill="#FFD23F"/>
+                  <rect x="76" y="32" width="10" height="2" fill="#fff"/>
+                  <rect x="80" y="28" width="2" height="10" fill="#fff"/>
+                </g>
+                <!-- lentes con brillo extra -->
+                <g class="tb-glasses">
+                  <rect x="24" y="20" width="26" height="26" fill="none" stroke="#0a0820" stroke-width="3"/>
+                  <rect x="26" y="22" width="22" height="22" fill="rgba(255,210,63,.15)"/>
+                  <rect x="30" y="24" width="6" height="6" fill="rgba(255,255,255,.7)"/>
+                  <rect x="70" y="20" width="26" height="26" fill="none" stroke="#0a0820" stroke-width="3"/>
+                  <rect x="72" y="22" width="22" height="22" fill="rgba(255,210,63,.15)"/>
+                  <rect x="76" y="24" width="6" height="6" fill="rgba(255,255,255,.7)"/>
+                  <rect x="50" y="32" width="20" height="3" fill="#0a0820"/>
+                </g>
+                <!-- boca excited: "ohhh" -->
+                <g class="tb-mouth-excited">
+                  <rect x="50" y="62" width="20" height="18" fill="#FFD23F" rx="10"/>
+                  <rect x="54" y="66" width="12" height="10" fill="#0a0820" rx="5"/>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ DATO BOMBA · MIND BLOWN</div>
+        <div class="td-text">¡<span class="quote">El cartucho mas caro del SNES</span> es el Nintendo PowerFest '94! Solo quedan 2 copias en el mundo y la ultima se vendio en <span class="quote">USD 23.000</span>.</div>
+        <div class="td-tag">SNES · 1994 · NINTENDO NFR</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 SLEEPING -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · DORMIDO · FIN DE EPISODIO</span>
+    <span class="slide-num">05</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top">
+            <span class="tv-led"></span>
+            <span class="tv-brand">TARROBOT</span>
+            <span class="tv-channel">CH --</span>
+          </div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-sleep">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <!-- ojos cerrados: lineas horizontales -->
+                <g class="tb-eyes-sleep">
+                  <rect x="28" y="42" width="18" height="4" fill="#00E5FF"/>
+                  <rect x="74" y="42" width="18" height="4" fill="#00E5FF"/>
+                </g>
+                <!-- Z's de dormir -->
+                <text x="86" y="22" font-family="Press Start 2P, monospace" font-size="14" fill="#FFD23F">Z</text>
+                <text x="96" y="14" font-family="Press Start 2P, monospace" font-size="10" fill="#FFD23F">z</text>
+                <!-- boca sleep: linea simple -->
+                <g class="tb-mouth-sleep">
+                  <rect x="50" y="72" width="20" height="3" fill="#FFD23F"/>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ DESCANSANDO</div>
+        <div class="td-text">TarroBot termino su jornada. Si quieres mas datos curiosos, <span class="quote">activa la campanita</span> y nos vemos en el proximo episodio.</div>
+        <div class="td-tag">RETROTARROS · NOSTALGIA + JUEGOS + MUSICA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 THINKING -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · PENSANDO · "DEJAME RECORDAR..."</span>
+    <span class="slide-num">06</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROBOT</span><span class="tv-channel">CH 42</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-thinking">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <!-- ojos thinking: pupila desplazada hacia arriba derecha -->
+                <g class="tb-eyes-thinking">
+                  <rect x="28" y="34" width="18" height="18" fill="#00E5FF"/>
+                  <rect x="38" y="36" width="6" height="6" fill="#0a0820"/>
+                  <rect x="74" y="34" width="18" height="18" fill="#00E5FF"/>
+                  <rect x="84" y="36" width="6" height="6" fill="#0a0820"/>
+                </g>
+                <!-- boca thinking: pequeña linea descentrada -->
+                <g class="tb-mouth-thinking">
+                  <rect x="50" y="72" width="14" height="3" fill="#FFD23F"/>
+                </g>
+                <!-- signo pregunta flotando arriba derecha -->
+                <g class="tb-extras tb-extras-thinking">
+                  <text x="98" y="20" font-family="Press Start 2P, monospace" font-size="20" fill="#FFD23F">?</text>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ PROCESANDO DATO...</div>
+        <div class="td-text">TarroBot esta <span class="quote">pensando</span>. Cuando le tiras una pregunta dificil, mira al cielo y se le aparece un signo de pregunta flotando.</div>
+        <div class="td-tag">ESTADO · THINKING · IDEAL PARA "DEJAME RECORDAR..."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 WINKING -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · GUIÑO COMPLICE</span>
+    <span class="slide-num">07</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROBOT</span><span class="tv-channel">CH 42</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-winking">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <!-- ojos winking: uno abierto, otro cerrado -->
+                <g class="tb-eyes-winking">
+                  <!-- ojo izq abierto -->
+                  <rect x="28" y="34" width="18" height="18" fill="#00E5FF"/>
+                  <rect x="34" y="40" width="6" height="6" fill="#0a0820"/>
+                  <!-- ojo der guiñando: linea curva -->
+                  <rect x="74" y="42" width="18" height="4" fill="#00E5FF"/>
+                  <rect x="78" y="40" width="2" height="2" fill="#00E5FF"/>
+                  <rect x="86" y="40" width="2" height="2" fill="#00E5FF"/>
+                </g>
+                <!-- boca winking: sonrisa picara (asimetrica) -->
+                <g class="tb-mouth-winking">
+                  <rect x="44" y="68" width="6" height="4" fill="#FFD23F"/>
+                  <rect x="50" y="72" width="18" height="4" fill="#FFD23F"/>
+                  <rect x="68" y="68" width="6" height="6" fill="#FFD23F"/>
+                  <rect x="74" y="64" width="4" height="4" fill="#FFD23F"/>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ ENTRE NOSOTROS...</div>
+        <div class="td-text">TarroBot <span class="quote">te guiña el ojo</span>. Para los datos picaros, los easter eggs o cuando comparte secretos de la industria.</div>
+        <div class="td-tag">ESTADO · WINKING · "SECRETO ENTRE NOSOTROS"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 CONFUSED -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · CONFUNDIDO · "EN SERIO?"</span>
+    <span class="slide-num">08</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROBOT</span><span class="tv-channel">CH ??</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-confused">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <!-- ojos confused: uno mira arriba, otro mira abajo -->
+                <g class="tb-eyes-confused">
+                  <rect x="28" y="34" width="18" height="18" fill="#00E5FF"/>
+                  <rect x="34" y="36" width="6" height="6" fill="#0a0820"/>
+                  <rect x="74" y="34" width="18" height="18" fill="#00E5FF"/>
+                  <rect x="80" y="46" width="6" height="6" fill="#0a0820"/>
+                </g>
+                <!-- boca confused: zigzag -->
+                <g class="tb-mouth-confused">
+                  <rect x="46" y="70" width="4" height="3" fill="#FFD23F"/>
+                  <rect x="50" y="73" width="4" height="3" fill="#FFD23F"/>
+                  <rect x="54" y="70" width="4" height="3" fill="#FFD23F"/>
+                  <rect x="58" y="73" width="4" height="3" fill="#FFD23F"/>
+                  <rect x="62" y="70" width="4" height="3" fill="#FFD23F"/>
+                  <rect x="66" y="73" width="4" height="3" fill="#FFD23F"/>
+                  <rect x="70" y="70" width="4" height="3" fill="#FFD23F"/>
+                </g>
+                <!-- signos "?" y "!" arriba -->
+                <g class="tb-extras tb-extras-confused">
+                  <text x="20" y="18" font-family="Press Start 2P, monospace" font-size="14" fill="#FF2E88">?</text>
+                  <text x="98" y="22" font-family="Press Start 2P, monospace" font-size="16" fill="#FFD23F">!</text>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ ¿¡EN SERIO!?</div>
+        <div class="td-text">TarroBot <span class="quote">no puede creer</span> lo que escucho. Para datos absurdos, decisiones extrañas de la industria o curiosidades sin sentido.</div>
+        <div class="td-tag">ESTADO · CONFUSED · "ESPERA, QUE!?"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 GLITCHED -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · GLITCHED · ERROR VHS RETRO</span>
+    <span class="slide-num">09</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROBOT</span><span class="tv-channel">ERR</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-glitched">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <!-- ojos glitched: offset rgb -->
+                <g class="tb-eyes-glitched">
+                  <rect x="26" y="34" width="18" height="18" fill="#FF2E88" opacity=".7"/>
+                  <rect x="30" y="34" width="18" height="18" fill="#00E5FF" opacity=".7"/>
+                  <rect x="34" y="40" width="6" height="6" fill="#0a0820"/>
+                  <rect x="72" y="34" width="18" height="18" fill="#FF2E88" opacity=".7"/>
+                  <rect x="76" y="34" width="18" height="18" fill="#00E5FF" opacity=".7"/>
+                  <rect x="80" y="40" width="6" height="6" fill="#0a0820"/>
+                </g>
+                <!-- boca glitched: fragmentos -->
+                <g class="tb-mouth-glitched">
+                  <rect x="42" y="70" width="8" height="4" fill="#FFD23F"/>
+                  <rect x="54" y="72" width="4" height="3" fill="#FF2E88"/>
+                  <rect x="62" y="68" width="6" height="5" fill="#FFD23F"/>
+                  <rect x="72" y="71" width="8" height="4" fill="#00E5FF"/>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ SEÑAL CORRUPTA</div>
+        <div class="td-text">Cuando TarroBot se <span class="quote">glitchea</span>: efecto VHS retro, RGB desfasado, scanlines magenta. Ideal para transiciones, errores intencionales, o cuando habla de glitches/bugs famosos.</div>
+        <div class="td-tag">ESTADO · GLITCHED · TRANSICION / BUG TALK</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 FACT-TIME -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · FACT TIME · DATO ESTRELLA</span>
+    <span class="slide-num">10</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROBOT</span><span class="tv-channel">CH 42</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-fact">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <g class="tb-eyes-default">
+                  <g class="tb-eye-shape">
+                    <rect x="28" y="38" width="18" height="18" fill="#00E5FF"/>
+                    <rect x="34" y="44" width="6" height="6" fill="#0a0820"/>
+                  </g>
+                  <g class="tb-eye-shape">
+                    <rect x="74" y="38" width="18" height="18" fill="#00E5FF"/>
+                    <rect x="80" y="44" width="6" height="6" fill="#0a0820"/>
+                  </g>
+                </g>
+                <g class="tb-mouth-fact">
+                  <rect x="48" y="72" width="24" height="4" fill="#FFD23F"/>
+                </g>
+                <!-- flash FACT! arriba -->
+                <g class="tb-extras tb-extras-fact">
+                  <rect x="34" y="6" width="52" height="20" fill="#FFD23F"/>
+                  <text x="42" y="20" font-family="Press Start 2P, monospace" font-size="12" fill="#0a0820">FACT!</text>
+                  <!-- rayitos -->
+                  <rect x="28" y="10" width="4" height="4" fill="#FFD23F"/>
+                  <rect x="88" y="10" width="4" height="4" fill="#FFD23F"/>
+                  <rect x="24" y="16" width="4" height="4" fill="#FFD23F"/>
+                  <rect x="92" y="16" width="4" height="4" fill="#FFD23F"/>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ DATO ESTRELLA</div>
+        <div class="td-text">Cartel <span class="quote">"FACT!"</span> amarillo parpadeando arriba. Para anunciar el dato curioso principal de un episodio, el momento "punchline" donde la info pega fuerte.</div>
+        <div class="td-tag">ESTADO · FACT-TIME · ANUNCIO DE DATO BOMBA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 HAPPY -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · HAPPY · CONTENTO</span>
+    <span class="slide-num">11</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROBOT</span><span class="tv-channel">CH 42</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-happy">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <!-- ojos happy: en forma de ^_^ -->
+                <g class="tb-eyes-happy">
+                  <!-- ojo izq: ^ -->
+                  <rect x="28" y="40" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="32" y="36" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="36" y="32" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="40" y="36" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="44" y="40" width="4" height="3" fill="#00E5FF"/>
+                  <!-- ojo der: ^ -->
+                  <rect x="72" y="40" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="76" y="36" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="80" y="32" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="84" y="36" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="88" y="40" width="4" height="3" fill="#00E5FF"/>
+                </g>
+                <!-- boca happy: sonrison grande -->
+                <g class="tb-mouth-happy">
+                  <rect x="40" y="60" width="40" height="4" fill="#FFD23F"/>
+                  <rect x="36" y="64" width="4" height="4" fill="#FFD23F"/>
+                  <rect x="80" y="64" width="4" height="4" fill="#FFD23F"/>
+                  <rect x="40" y="68" width="40" height="4" fill="#FFD23F"/>
+                  <rect x="44" y="72" width="32" height="4" fill="#FFD23F"/>
+                  <rect x="48" y="76" width="24" height="3" fill="#FF2E88"/>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ TODO BIEN POR ACA</div>
+        <div class="td-text">TarroBot esta <span class="quote">feliz</span>. Ojos en forma de ^_^, sonrison enorme. Ideal para celebrar hitos, agradecer suscripciones, o cuando un dato es alegre.</div>
+        <div class="td-tag">ESTADO · HAPPY · CELEBRACION</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 SAD -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · SAD · NOSTALGIA / TRISTEZA</span>
+    <span class="slide-num">12</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROBOT</span><span class="tv-channel">CH 42</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-sad">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <!-- ojos sad: tristes con cejas caidas -->
+                <g class="tb-eyes-sad">
+                  <!-- ceja izq caida \  -->
+                  <rect x="28" y="24" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="32" y="26" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="36" y="28" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="40" y="30" width="4" height="3" fill="#00E5FF"/>
+                  <!-- ojo izq -->
+                  <rect x="28" y="38" width="18" height="18" fill="#00E5FF"/>
+                  <rect x="34" y="46" width="6" height="6" fill="#0a0820"/>
+                  <!-- ceja der caida / -->
+                  <rect x="76" y="30" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="80" y="28" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="84" y="26" width="4" height="3" fill="#00E5FF"/>
+                  <rect x="88" y="24" width="4" height="3" fill="#00E5FF"/>
+                  <!-- ojo der -->
+                  <rect x="74" y="38" width="18" height="18" fill="#00E5FF"/>
+                  <rect x="80" y="46" width="6" height="6" fill="#0a0820"/>
+                </g>
+                <!-- boca sad: U invertida (frown) -->
+                <g class="tb-mouth-sad">
+                  <rect x="46" y="76" width="4" height="3" fill="#FFD23F"/>
+                  <rect x="50" y="74" width="4" height="3" fill="#FFD23F"/>
+                  <rect x="54" y="72" width="12" height="3" fill="#FFD23F"/>
+                  <rect x="66" y="74" width="4" height="3" fill="#FFD23F"/>
+                  <rect x="70" y="76" width="4" height="3" fill="#FFD23F"/>
+                </g>
+                <!-- lagrima cayendo -->
+                <g class="tb-extras tb-extras-sad">
+                  <g class="tb-tear">
+                    <rect x="40" y="58" width="3" height="6" fill="#00E5FF" opacity=".9"/>
+                    <rect x="40" y="60" width="3" height="2" fill="#fff" opacity=".7"/>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ ME EMOCIONO</div>
+        <div class="td-text">TarroBot <span class="quote">se puso triste</span>. Cejas caidas, lagrima cayendo. Para momentos nostalgicos: cuando recordamos un juego cancelado, una desarrolladora cerrada, etc.</div>
+        <div class="td-tag">ESTADO · SAD · NOSTALGIA / MOMENTO TRISTE</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 ANGRY -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · ANGRY · INDIGNADO</span>
+    <span class="slide-num">13</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROBOT</span><span class="tv-channel">CH 42</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-angry">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <!-- ojos angry: cejas fruncidas (V invertida) -->
+                <g class="tb-eyes-angry">
+                  <!-- ceja izq fruncida \\ -->
+                  <rect x="28" y="22" width="4" height="3" fill="#FF2E88"/>
+                  <rect x="32" y="24" width="4" height="3" fill="#FF2E88"/>
+                  <rect x="36" y="26" width="4" height="3" fill="#FF2E88"/>
+                  <rect x="40" y="28" width="6" height="3" fill="#FF2E88"/>
+                  <!-- ojo izq enojado -->
+                  <rect x="28" y="38" width="18" height="14" fill="#FF2E88"/>
+                  <rect x="34" y="42" width="6" height="6" fill="#0a0820"/>
+                  <!-- ceja der fruncida // -->
+                  <rect x="74" y="28" width="6" height="3" fill="#FF2E88"/>
+                  <rect x="80" y="26" width="4" height="3" fill="#FF2E88"/>
+                  <rect x="84" y="24" width="4" height="3" fill="#FF2E88"/>
+                  <rect x="88" y="22" width="4" height="3" fill="#FF2E88"/>
+                  <!-- ojo der enojado -->
+                  <rect x="74" y="38" width="18" height="14" fill="#FF2E88"/>
+                  <rect x="80" y="42" width="6" height="6" fill="#0a0820"/>
+                </g>
+                <!-- boca angry: linea apretada -->
+                <g class="tb-mouth-angry">
+                  <rect x="46" y="72" width="28" height="4" fill="#FF2E88"/>
+                </g>
+                <!-- vapor de cabeza enojado -->
+                <g class="tb-extras tb-extras-angry">
+                  <rect x="12" y="12" width="4" height="4" fill="#FF2E88" opacity=".8"/>
+                  <rect x="20" y="8" width="4" height="4" fill="#FF2E88" opacity=".7"/>
+                  <rect x="100" y="12" width="4" height="4" fill="#FF2E88" opacity=".8"/>
+                  <rect x="108" y="8" width="4" height="4" fill="#FF2E88" opacity=".7"/>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ ESTO NO ME GUSTA</div>
+        <div class="td-text">TarroBot esta <span class="quote">enojado</span>. Cejas magenta fruncidas, ojos rojos, vapor saliendo de la cabeza. Para criticar decisiones polemicas: ports malos, microtransacciones en juegos retro, etc.</div>
+        <div class="td-tag">ESTADO · ANGRY · CRITICA / INDIGNACION</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 LOADING -->
+  <section class="slide">
+    <span class="opt-label">ESTADO · LOADING · CARGANDO INFO</span>
+    <span class="slide-num">14</span>
+    <div class="slide-tarrobot">
+      <div class="tarrobot-stage">
+        <div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROBOT</span><span class="tv-channel">...</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner">
+            <div class="tarrobot-face is-loading">
+              <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+                <!-- ojos loading: barras horizontales tipo TV vintage -->
+                <g class="tb-eyes-loading">
+                  <rect x="28" y="36" width="18" height="3" fill="#00E5FF"/>
+                  <rect x="28" y="42" width="18" height="3" fill="#00E5FF" opacity=".7"/>
+                  <rect x="28" y="48" width="18" height="3" fill="#00E5FF" opacity=".4"/>
+                  <rect x="74" y="36" width="18" height="3" fill="#00E5FF"/>
+                  <rect x="74" y="42" width="18" height="3" fill="#00E5FF" opacity=".7"/>
+                  <rect x="74" y="48" width="18" height="3" fill="#00E5FF" opacity=".4"/>
+                </g>
+                <!-- boca loading: barra progress simple -->
+                <g class="tb-mouth-loading">
+                  <rect x="44" y="72" width="32" height="4" fill="#0a0820" stroke="#FFD23F" stroke-width="1"/>
+                  <rect x="46" y="73" width="14" height="2" fill="#FFD23F"/>
+                </g>
+                <!-- spinner de 3 puntitos arriba -->
+                <g class="tb-extras tb-extras-loading">
+                  <circle cx="48" cy="14" r="3" fill="#FFD23F"/>
+                  <circle cx="60" cy="14" r="3" fill="#FF2E88"/>
+                  <circle cx="72" cy="14" r="3" fill="#00E5FF"/>
+                </g>
+              </svg>
+            </div>
+          </div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div>
+      </div>
+      <div class="tarrobot-dato">
+        <div class="td-label">⚡ BUSCANDO EN MI BASE DE DATOS...</div>
+        <div class="td-text">TarroBot <span class="quote">esta cargando</span>. Spinner de 3 puntitos rotando, barra de progreso, ojos tipo TV antigua. Para transiciones, "espera un momento", o efecto entre datos.</div>
+        <div class="td-tag">ESTADO · LOADING · TRANSICION / BUSCANDO</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 14</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+go(0);
+</script>
+
+</body>
+</html>
