@@ -346,11 +346,183 @@ async def _hablar_frase(texto: str, estado: str, label: str, voz: str) -> Option
     return audio_url
 
 
+def generar_opinion_llm(tema: str) -> Optional[dict]:
+    """Llama Claude para que TarroBot opine de un tema. Retorna {texto, estado}."""
+    try:
+        import anthropic
+    except ImportError:
+        return None
+    import os
+    import re as _re
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return None
+    client = anthropic.Anthropic(api_key=api_key)
+
+    prompt = f"""Eres TarroBot, mascota del canal de YouTube Retrotarros sobre videojuegos retro.
+Tu humano te pregunta: "¿Que opinas de {tema}?"
+
+Devuelve una OPINION corta y con personalidad (1-2 oraciones, max 200 caracteres total).
+Tambien decide el estado emocional que mejor calza.
+
+Reglas:
+- Español chileno neutro con TUTEO (tu/tienes/sabes). NO uses voseo argentino.
+- SIN tildes (a/e/i/o/u sin acento).
+- Tono curioso, opinion clara, vibe retrogaming.
+- Estados validos: happy, excited, fact, winking, confused, sad, angry, thinking, talking.
+  * Bueno → happy o excited
+  * Malo → sad, angry o confused
+  * Raro/curioso → confused o thinking
+  * Iconico → fact o excited
+
+Devuelve SOLO un JSON valido (sin markdown), formato:
+{{"texto": "...", "estado": "..."}}
+"""
+    try:
+        response = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=300,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw = response.content[0].text.strip()
+        raw = _re.sub(r"^```(?:json)?\s*", "", raw)
+        raw = _re.sub(r"\s*```$", "", raw)
+        return json.loads(raw)
+    except Exception as e:
+        print(f"[opinar] error: {e}")
+        return None
+
+
+@app.post("/api/opinar")
+async def opinar(payload: dict):
+    """
+    Claude opina sobre un tema con tono y estado emocional sugerido.
+    Body: { "tema": "Sonic 06", "voz": "catalina" }
+    """
+    import random as _rnd
+    tema = (payload.get("tema") or "").strip()
+    if not tema:
+        return JSONResponse({"error": "tema vacio"}, status_code=400)
+
+    voz = resolver_voz(payload.get("voz") or "catalina")
+    tracker.mark_input()
+
+    result = await asyncio.to_thread(generar_opinion_llm, tema)
+    if not result:
+        return JSONResponse({"error": "fallo Claude API. Verifica ANTHROPIC_API_KEY y creditos."}, status_code=500)
+
+    texto = result.get("texto", f"No tengo opinion sobre {tema} todavia.")
+    estado = result.get("estado", "talking")
+    if estado not in ESTADOS:
+        estado = "talking"
+
+    audio_url = await _hablar_frase(texto, estado, f"¿QUE OPINO DE {tema.upper()}?", voz)
+    return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url, "tema": tema}
+
+
+@app.post("/api/precio")
+async def precio(payload: dict):
+    """
+    Reacciona segun valor USD. No usa LLM, son frases pregeneradas.
+    Body: { "valor_usd": 4500, "juego": "DKC Competition Cart" (opcional), "voz": ... }
+    """
+    try:
+        valor = int(payload.get("valor_usd", 0))
+    except (TypeError, ValueError):
+        return JSONResponse({"error": "valor_usd invalido"}, status_code=400)
+
+    juego = (payload.get("juego") or "").strip()
+    voz = resolver_voz(payload.get("voz") or "catalina")
+    tracker.mark_input()
+
+    # Reaccion segun rango
+    if valor >= 20000:
+        estado = "confused"
+        texto = f"USD {valor:,}? Eso ya no es coleccionismo, es un museo. Imposible de pagar."
+    elif valor >= 10000:
+        estado = "excited"
+        texto = f"USD {valor:,}! Eso es plata para un auto. Locura total."
+    elif valor >= 5000:
+        estado = "excited"
+        texto = f"USD {valor:,} es una locura. Mind blown total!"
+    elif valor >= 2000:
+        estado = "fact"
+        texto = f"USD {valor:,} ya es para coleccionistas serios. Cartucho serio."
+    elif valor >= 500:
+        estado = "thinking"
+        texto = f"USD {valor:,} esta caro pero no es escandaloso. Razonable para piezas raras."
+    elif valor >= 100:
+        estado = "talking"
+        texto = f"USD {valor:,} es precio normal para retrogaming en buen estado."
+    elif valor > 0:
+        estado = "happy"
+        texto = f"USD {valor:,}? Eso es chollo, comprate dos!"
+    else:
+        estado = "confused"
+        texto = "Sin precio no puedo opinar. Decime cuanto sale."
+
+    if juego:
+        texto = f"{juego} a USD {valor:,}? " + texto
+
+    audio_url = await _hablar_frase(texto, estado, "REACCION PRECIO", voz)
+    return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
+
+
+@app.post("/api/random")
+async def random_dato(payload: dict):
+    """
+    Elige un dato random de la base local, filtrado opcionalmente por categoria.
+    Body: { "categoria": "all|consola|juego|musica|nfr", "voz": ... }
+    """
+    import random as _rnd
+    categoria = (payload.get("categoria") or "all").lower()
+    voz = resolver_voz(payload.get("voz") or "catalina")
+    tracker.mark_input()
+
+    db = cargar_db()
+    if not db.get("datos"):
+        return JSONResponse({"error": "DB vacia"}, status_code=404)
+
+    # Filtrado por categoria (heuristica por consola)
+    candidatos = db["datos"]
+    if categoria == "consola":
+        candidatos = [d for d in db["datos"] if d.get("consola", "").lower() in ("nes", "snes", "n64", "genesis", "dreamcast", "arcade")]
+    elif categoria == "juego":
+        # juegos especificos (no compositores ni "multi")
+        candidatos = [d for d in db["datos"] if d.get("consola", "").lower() not in ("", "multi")]
+    elif categoria == "musica":
+        # heuristica simple: textos que mencionan "banda sonora", "compositor", "musica"
+        kw = ["banda sonora", "compositor", "musica", "soundtrack", "sound"]
+        candidatos = [d for d in db["datos"] if any(k in d.get("texto", "").lower() for k in kw)]
+
+    if not candidatos:
+        candidatos = db["datos"]  # fallback
+
+    dato = _rnd.choice(candidatos)
+
+    mp3 = await asyncio.to_thread(generar_tts, dato, voz)
+    audio_url = f"/audio/{mp3.name}" if mp3 else None
+
+    tracker.mark_speaking(True)
+    await manager.broadcast_live({
+        "tipo": "hablar",
+        "estado": dato["estado"],
+        "texto": dato["texto"],
+        "label": f"DATO RANDOM · {categoria.upper()}",
+        "meta": " · ".join(s for s in [dato.get("consola", ""), str(dato.get("ano", "") or ""), dato.get("editor", "")] if s and s != "0"),
+        "audio_url": audio_url,
+        "tema": dato["tema"],
+    })
+
+    return {"ok": True, "dato": dato, "audio_url": audio_url}
+
+
 @app.post("/api/saludar")
 async def saludar(payload: dict):
     """Reproduce un saludo geek random con estado excited."""
     import random
     voz = resolver_voz(payload.get("voz") or "catalina")
+    tracker.mark_input()
     texto = random.choice(SALUDOS_GEEK)
     audio_url = await _hablar_frase(texto, "excited", "HOLA HOLA", voz)
     return {"ok": True, "texto": texto, "audio_url": audio_url}
@@ -361,6 +533,7 @@ async def despedir(payload: dict):
     """Reproduce una despedida corta random con estado winking."""
     import random
     voz = resolver_voz(payload.get("voz") or "catalina")
+    tracker.mark_input()
     texto = random.choice(DESPEDIDAS_CORTAS)
     audio_url = await _hablar_frase(texto, "winking", "HASTA LUEGO", voz)
     return {"ok": True, "texto": texto, "audio_url": audio_url}

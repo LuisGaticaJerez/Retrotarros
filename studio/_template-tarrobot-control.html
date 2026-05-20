@@ -134,6 +134,41 @@ input[type="text"]:focus, input[type="number"]:focus { border-color: var(--cy); 
   <button class="btn full cy" onclick="cuentame()">CONTAR DATO ▸</button>
 </div>
 
+<!-- OPINAR -->
+<div class="card">
+  <h2>🤔 ¿QUÉ OPINAS DE...?</h2>
+  <input type="text" id="opinarInput" placeholder="Ej: Sonic 06, microtransacciones, Wii U..." autocomplete="off">
+  <button class="btn full ye" onclick="opinar()">OPINAR ▸</button>
+</div>
+
+<!-- PRECIO -->
+<div class="card">
+  <h2>💰 REACCIÓN A PRECIO</h2>
+  <div class="row-inline">
+    <input type="number" id="precioInput" placeholder="USD" style="flex:1" min="0">
+    <input type="text" id="precioJuego" placeholder="juego (opcional)" style="flex:2">
+  </div>
+  <div class="btn-row" style="margin-top:8px;">
+    <button class="btn" onclick="precio(100)">$100</button>
+    <button class="btn" onclick="precio(500)">$500</button>
+    <button class="btn" onclick="precio(2000)">$2K</button>
+    <button class="btn" onclick="precio(5000)">$5K</button>
+    <button class="btn" onclick="precio(20000)">$20K</button>
+  </div>
+  <button class="btn full ye" onclick="precioCustom()" style="margin-top:8px;">REACCIONAR ▸</button>
+</div>
+
+<!-- RANDOM -->
+<div class="card">
+  <h2>🎲 DATO RANDOM</h2>
+  <div class="btn-row">
+    <button class="btn cy" onclick="random_('all')">ALL</button>
+    <button class="btn cy" onclick="random_('consola')">CONSOLA</button>
+    <button class="btn cy" onclick="random_('juego')">JUEGO</button>
+    <button class="btn cy" onclick="random_('musica')">MUSICA</button>
+  </div>
+</div>
+
 <!-- ESTADOS MANUALES -->
 <div class="card">
   <h2>😀 ESTADOS · CARITAS</h2>
@@ -246,6 +281,33 @@ async function despedir() {
   logMsg('despidiendo...');
   const data = await post('/api/despedir', {});
   if (data && data.ok) logMsg('OK chao: "' + data.texto + '"', 'ok');
+}
+
+async function opinar() {
+  const tema = document.getElementById('opinarInput').value.trim();
+  if (!tema) { logMsg('falta el tema para opinar', 'err'); return; }
+  logMsg('opinando de "' + tema + '"... (3-5s)');
+  const data = await post('/api/opinar', { tema: tema });
+  if (data && data.ok) logMsg('OK opinion (' + data.estado + '): "' + data.texto + '"', 'ok');
+}
+
+async function precio(valor) {
+  const juego = document.getElementById('precioJuego').value.trim();
+  logMsg('reaccion a USD ' + valor + (juego ? ' (' + juego + ')' : '') + '...');
+  const data = await post('/api/precio', { valor_usd: valor, juego: juego });
+  if (data && data.ok) logMsg('OK reaccion (' + data.estado + '): "' + data.texto + '"', 'ok');
+}
+
+async function precioCustom() {
+  const valor = parseInt(document.getElementById('precioInput').value || '0');
+  if (!valor) { logMsg('valor USD invalido', 'err'); return; }
+  await precio(valor);
+}
+
+async function random_(categoria) {
+  logMsg('random ' + categoria + '...');
+  const data = await post('/api/random', { categoria: categoria });
+  if (data && data.ok) logMsg('OK random: ' + data.dato.tema + ' (' + data.dato.estado + ')', 'ok');
 }
 
 async function ping() {
