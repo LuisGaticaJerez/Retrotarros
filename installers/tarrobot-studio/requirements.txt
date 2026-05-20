@@ -4,3 +4,4 @@ jinja2>=3.1
 edge-tts>=7.0
 anthropic>=0.39
 openai-whisper>=20240930
+mutagen>=1.47

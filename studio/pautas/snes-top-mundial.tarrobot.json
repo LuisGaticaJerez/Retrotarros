@@ -16,8 +16,8 @@
       "consola": "SNES",
       "ano": 1993,
       "editor": "Nintendo EAD",
-      "mp3": null,
-      "duracion_ms": null,
+      "mp3": "audio/snes-top-mundial/snes-top-mundial-1.mp3",
+      "duracion_ms": 18096,
       "fuente": "pauta-auto"
     },
     {
@@ -28,8 +28,8 @@
       "consola": "SNES",
       "ano": 1992,
       "editor": "Nintendo EAD",
-      "mp3": null,
-      "duracion_ms": null,
+      "mp3": "audio/snes-top-mundial/snes-top-mundial-2.mp3",
+      "duracion_ms": 17496,
       "fuente": "pauta-auto"
     },
     {
@@ -40,8 +40,8 @@
       "consola": "SNES",
       "ano": 1994,
       "editor": "APE",
-      "mp3": null,
-      "duracion_ms": null,
+      "mp3": "audio/snes-top-mundial/snes-top-mundial-3.mp3",
+      "duracion_ms": 17712,
       "fuente": "pauta-auto"
     },
     {
@@ -52,8 +52,8 @@
       "consola": "SNES",
       "ano": 1995,
       "editor": "Rare",
-      "mp3": null,
-      "duracion_ms": null,
+      "mp3": "audio/snes-top-mundial/snes-top-mundial-4.mp3",
+      "duracion_ms": 16175,
       "fuente": "pauta-auto"
     },
     {
@@ -64,8 +64,8 @@
       "consola": "SNES",
       "ano": 1990,
       "editor": "Nintendo EAD",
-      "mp3": null,
-      "duracion_ms": null,
+      "mp3": "audio/snes-top-mundial/snes-top-mundial-5.mp3",
+      "duracion_ms": 16367,
       "fuente": "pauta-auto"
     }
   ]

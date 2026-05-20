@@ -463,6 +463,94 @@ Estados validos: talking, excited, fact, winking, confused, happy, sad, angry, t
     return result
 
 
+def _mp3_duracion_ms(mp3_path: Path) -> int | None:
+    """Lee la duracion de un MP3 en ms. Usa mutagen si esta, sino None."""
+    try:
+        from mutagen.mp3 import MP3
+    except ImportError:
+        return None
+    try:
+        audio = MP3(str(mp3_path))
+        if audio.info and audio.info.length:
+            return int(audio.info.length * 1000)
+    except Exception:
+        return None
+    return None
+
+
+async def _tts_one_async(texto: str, voz: str, pitch: str, rate: str, out_path: Path) -> bool:
+    """Genera UN mp3 con edge-tts (version async, para usar dentro de gather)."""
+    try:
+        import edge_tts
+    except ImportError:
+        return False
+    try:
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        communicate = edge_tts.Communicate(texto, voice=voz, pitch=pitch, rate=rate)
+        await communicate.save(str(out_path))
+        return True
+    except Exception as e:
+        print(f"    [ERROR] {out_path.name}: {e}", file=sys.stderr)
+        return False
+
+
+async def _preload_pauta_async(pauta: dict, force: bool = False, concurrency: int = 3) -> tuple[int, int, int]:
+    """
+    Genera en paralelo todos los MP3s faltantes (o todos si force=True).
+    Devuelve (generados, skipped, errores).
+    """
+    slug = pauta["slug"]
+    audio_dir = pauta_audio_dir(slug)
+    audio_dir.mkdir(parents=True, exist_ok=True)
+
+    voz = pauta.get("voz", VOZ_DEFAULT)
+    pitch = pauta.get("pitch", PITCH_DEFAULT)
+    rate = pauta.get("rate", RATE_DEFAULT)
+
+    # Path relativo a PAUTAS_DIR que se guarda en el JSON (portable)
+    def rel_path_for(dato_id: str) -> str:
+        return f"audio/{slug}/{dato_id}.mp3"
+
+    import asyncio
+    sem = asyncio.Semaphore(concurrency)
+    generados = 0
+    skipped = 0
+    errores = 0
+    lock = asyncio.Lock()
+
+    async def worker(idx: int, dato: dict):
+        nonlocal generados, skipped, errores
+        out_path = audio_dir / f"{dato['id']}.mp3"
+        rel = rel_path_for(dato["id"])
+
+        if out_path.exists() and not force:
+            # Skip pero asegurar que el JSON refleje el path real
+            async with lock:
+                dato["mp3"] = rel
+                if dato.get("duracion_ms") is None:
+                    dato["duracion_ms"] = _mp3_duracion_ms(out_path)
+                skipped += 1
+            print(f"  [{idx:2}/?] SKIP  {dato['id']:35} (ya existe)")
+            return
+
+        async with sem:
+            print(f"  [{idx:2}/?] TTS   {dato['id']:35} ({len(dato['texto'])} chars)")
+            ok = await _tts_one_async(dato["texto"], voz, pitch, rate, out_path)
+
+        async with lock:
+            if ok and out_path.exists():
+                dato["mp3"] = rel
+                dato["duracion_ms"] = _mp3_duracion_ms(out_path)
+                generados += 1
+            else:
+                errores += 1
+                dato["mp3"] = None
+
+    tareas = [worker(i, d) for i, d in enumerate(pauta["datos"], 1)]
+    await asyncio.gather(*tareas)
+    return generados, skipped, errores
+
+
 def pauta_agregar_dato(pauta: dict, dato_in: dict) -> dict:
     """Agrega un dato a la pauta con id unico y campos por defecto. Mutates pauta."""
     base = pauta["slug"]
@@ -747,6 +835,68 @@ def cmd_pauta_init(args) -> int:
     return 0
 
 
+def cmd_pauta_preload(args) -> int:
+    slug = slugify(args.pauta_preload)
+    pauta = cargar_pauta(slug)
+    if not pauta:
+        print(f"ERROR: no existe la pauta '{slug}'", file=sys.stderr)
+        print(f"       (buscada en {pauta_path(slug)})", file=sys.stderr)
+        return 1
+    if not pauta["datos"]:
+        print(f"ERROR: la pauta '{slug}' esta vacia. Usa --pauta-auto o --add primero.", file=sys.stderr)
+        return 1
+
+    # Avisar si falta mutagen (no es bloqueante)
+    try:
+        import mutagen  # noqa: F401
+    except ImportError:
+        print("[WARN] libreria 'mutagen' no instalada -> duracion_ms quedara en null.")
+        print("       Instalala con: pip install mutagen  (recomendado para Sprint 6.3+)")
+        print()
+
+    try:
+        import edge_tts  # noqa: F401
+    except ImportError:
+        print("ERROR: libreria 'edge-tts' no instalada.", file=sys.stderr)
+        print("Instalala con: pip install edge-tts", file=sys.stderr)
+        return 1
+
+    audio_dir = pauta_audio_dir(slug)
+    print(f"=== Precargando MP3s de la pauta '{slug}' ===")
+    print(f"Total datos:   {len(pauta['datos'])}")
+    print(f"Carpeta audio: {audio_dir}")
+    print(f"Voz:           {pauta.get('voz', VOZ_DEFAULT)}  pitch={pauta.get('pitch', PITCH_DEFAULT)}  rate={pauta.get('rate', RATE_DEFAULT)}")
+    print(f"Concurrencia:  {args.concurrency or 3}")
+    print(f"Force:         {args.force}")
+    print()
+
+    import asyncio
+    import time
+    inicio = time.time()
+    try:
+        generados, skipped, errores = asyncio.run(
+            _preload_pauta_async(pauta, force=args.force, concurrency=args.concurrency or 3)
+        )
+    except KeyboardInterrupt:
+        print("\n[CANCEL] interrumpido por el usuario. Guardando lo que alcance...")
+        guardar_pauta(pauta)
+        return 130
+
+    guardar_pauta(pauta)
+    elapsed = time.time() - inicio
+
+    total_ms = sum(d["duracion_ms"] or 0 for d in pauta["datos"])
+    print()
+    print(f"=== Precarga completa en {elapsed:.1f}s ===")
+    print(f"  generados: {generados}")
+    print(f"  skipped:   {skipped}")
+    print(f"  errores:   {errores}")
+    print(f"  duracion total estimada: {total_ms/1000:.1f}s ({total_ms/1000/60:.1f} min)")
+    if errores:
+        return 1
+    return 0
+
+
 def cmd_pauta_auto(args) -> int:
     html_arg = Path(args.pauta_auto)
     if not html_arg.is_absolute():
@@ -831,6 +981,8 @@ def main():
     # Pauta / cola del episodio (Sprint 6)
     parser.add_argument("--pauta-init", metavar="SLUG", help="Crea una pauta vacia con ese slug. Acepta --episodio, --voice, --pitch, --rate.")
     parser.add_argument("--pauta-auto", metavar="HTML", help="Autogenera la pauta desde un HTML de episodio (usa Claude). Acepta --n-datos, --force.")
+    parser.add_argument("--pauta-preload", metavar="SLUG", help="Precarga (genera) todos los MP3 de una pauta en paralelo. Acepta --force, --concurrency.")
+    parser.add_argument("--concurrency", type=int, help="Cantidad de TTS concurrentes para --pauta-preload (default 3, max razonable 6).")
     parser.add_argument("--pauta-list", action="store_true", help="Lista todas las pautas creadas en studio/pautas/")
     parser.add_argument("--pauta-show", metavar="SLUG", help="Muestra el contenido de una pauta")
     parser.add_argument("--episodio", help="Titulo del episodio (para --pauta-init y --pauta-auto)")
@@ -860,6 +1012,8 @@ def main():
         return cmd_pauta_init(args)
     if args.pauta_auto:
         return cmd_pauta_auto(args)
+    if args.pauta_preload:
+        return cmd_pauta_preload(args)
 
     db = cargar_db()
 
