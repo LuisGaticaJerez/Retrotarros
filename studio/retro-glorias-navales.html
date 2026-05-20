@@ -56,7 +56,10 @@ header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200;
 .cart { position: relative; width: min(100%, 380px); aspect-ratio: 5/4; max-height: 100%; background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%); border-radius: 12px 12px 6px 6px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08); }
 .cart::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 78%; height: 14%; background: linear-gradient(180deg, #2a2a2f 0%, #1a1a1f 100%); border-radius: 0 0 6px 6px; box-shadow: inset 0 -1px 0 rgba(0,0,0,.6); z-index: 3; }
 .cart-img-wrap { position: absolute; inset: 14% 10% 10%; border-radius: 4px; overflow: hidden; background: var(--label-1, #2D1B69); box-shadow: inset 0 0 0 3px rgba(255,255,255,.07), inset 0 0 0 6px rgba(0,0,0,.25), 0 4px 14px rgba(0,0,0,.4); }
-.cart-img-wrap img { display: block; width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; background: var(--label-1, #2D1B69); }
+/* Foto integral: la caja se ve completa con object-fit contain */
+.cart-img-wrap img { display: block; width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 2; }
+/* Fondo blureado de la misma imagen (Netflix-style) */
+.cart-img-wrap img.cart-img-bg { object-fit: cover; filter: blur(22px) brightness(0.55) saturate(1.2); transform: scale(1.1); z-index: 1; position: absolute; inset: 0; }
 .cart-fallback { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; background: linear-gradient(135deg, var(--label-1, #2D1B69) 0%, var(--label-2, #4a2a99) 100%); text-align: center; }
 .cart-fallback::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 22%; background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 100%); pointer-events: none; }
 .cart-fallback .title { font-family: 'Orbitron'; font-weight: 900; font-size: clamp(14px, 1.8vw, 22px); line-height: 1.05; color: #fff; letter-spacing: .5px; text-shadow: 0 2px 4px rgba(0,0,0,.5); z-index: 2; }
@@ -151,7 +154,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-shark"><img src="img/retro-glorias-navales/jaws.jpg" alt="JAWS NES box art"></div>
+          <div class="cart-img-wrap lb-shark"><img class="cart-img-bg" src="img/retro-glorias-navales/jaws.jpg" alt="" aria-hidden="true"><img src="img/retro-glorias-navales/jaws.jpg" alt="JAWS NES box art"></div>
           <div class="cart-console">NES</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -172,7 +175,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-cat"><img src="img/retro-glorias-navales/sonic-adventure.png" alt="Sonic Adventure box art"></div>
+          <div class="cart-img-wrap lb-cat"><img class="cart-img-bg" src="img/retro-glorias-navales/sonic-adventure.png" alt="" aria-hidden="true"><img src="img/retro-glorias-navales/sonic-adventure.png" alt="Sonic Adventure box art"></div>
           <div class="cart-console">DREAMCAST</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -193,7 +196,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-sub"><img src="img/retro-glorias-navales/silent-service.jpg" alt="Silent Service box art"></div>
+          <div class="cart-img-wrap lb-sub"><img class="cart-img-bg" src="img/retro-glorias-navales/silent-service.jpg" alt="" aria-hidden="true"><img src="img/retro-glorias-navales/silent-service.jpg" alt="Silent Service box art"></div>
           <div class="cart-console">NES / PC</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -214,7 +217,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-sky"><img src="img/retro-glorias-navales/captain-skyhawk.png" alt="Captain Skyhawk box art"></div>
+          <div class="cart-img-wrap lb-sky"><img class="cart-img-bg" src="img/retro-glorias-navales/captain-skyhawk.png" alt="" aria-hidden="true"><img src="img/retro-glorias-navales/captain-skyhawk.png" alt="Captain Skyhawk box art"></div>
           <div class="cart-console">NES</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -235,7 +238,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-cave"><img src="img/retro-glorias-navales/goonies2.jpg" alt="The Goonies II box art"></div>
+          <div class="cart-img-wrap lb-cave"><img class="cart-img-bg" src="img/retro-glorias-navales/goonies2.jpg" alt="" aria-hidden="true"><img src="img/retro-glorias-navales/goonies2.jpg" alt="The Goonies II box art"></div>
           <div class="cart-console">NES</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -256,7 +259,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-water"><img src="img/retro-glorias-navales/wave-race-64.jpg" alt="Wave Race 64 box art"></div>
+          <div class="cart-img-wrap lb-water"><img class="cart-img-bg" src="img/retro-glorias-navales/wave-race-64.jpg" alt="" aria-hidden="true"><img src="img/retro-glorias-navales/wave-race-64.jpg" alt="Wave Race 64 box art"></div>
           <div class="cart-console">N64</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -277,7 +280,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">FOJA DE SERVICIO</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-ocean"><img src="img/retro-glorias-navales/ecco.jpg" alt="Ecco the Dolphin box art"></div>
+          <div class="cart-img-wrap lb-ocean"><img class="cart-img-bg" src="img/retro-glorias-navales/ecco.jpg" alt="" aria-hidden="true"><img src="img/retro-glorias-navales/ecco.jpg" alt="Ecco the Dolphin box art"></div>
           <div class="cart-console">GENESIS</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -298,7 +301,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO NAVAL</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-gold"><img src="img/retro-glorias-navales/pirates.jpg" alt="Sid Meier's Pirates! NES box art"></div>
+          <div class="cart-img-wrap lb-gold"><img class="cart-img-bg" src="img/retro-glorias-navales/pirates.jpg" alt="" aria-hidden="true"><img src="img/retro-glorias-navales/pirates.jpg" alt="Sid Meier's Pirates! NES box art"></div>
           <div class="cart-console">C64 / NES</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -319,7 +322,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO NAVAL</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-wood"><img src="img/retro-glorias-navales/monkey-island.jpg" alt="The Secret of Monkey Island box art"></div>
+          <div class="cart-img-wrap lb-wood"><img class="cart-img-bg" src="img/retro-glorias-navales/monkey-island.jpg" alt="" aria-hidden="true"><img src="img/retro-glorias-navales/monkey-island.jpg" alt="The Secret of Monkey Island box art"></div>
           <div class="cart-console">PC</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -340,7 +343,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL ALMIRANTAZGO</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-croc"><img src="img/retro-glorias-navales/dkc2.jpg" alt="Donkey Kong Country 2 SNES box art"></div>
+          <div class="cart-img-wrap lb-croc"><img class="cart-img-bg" src="img/retro-glorias-navales/dkc2.jpg" alt="" aria-hidden="true"><img src="img/retro-glorias-navales/dkc2.jpg" alt="Donkey Kong Country 2 SNES box art"></div>
           <div class="cart-console">SNES</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
