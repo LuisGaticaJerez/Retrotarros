@@ -74,6 +74,35 @@ SALUDOS_GEEK = [
     "Sistema operativo: Curiosidad version 8 bits. Listo.",
 ]
 
+# Catchphrases de marca Retrotarros (Sprint 7.3)
+# Frases random para soltar en medio del programa cuando hace falta ritmo
+# o cuando Luis o Koko quieren un "guiño" del personaje a la audiencia.
+CATCHPHRASES = [
+    "Retrotarros se respeta!",
+    "Esto es nostalgia pura, hermano.",
+    "Aprieta Start y pongamosle empeño.",
+    "Game over no existe en Retrotarros.",
+    "Pixel power activado!",
+    "Cartucho clasico, sentimiento eterno.",
+    "Bip bop, datos retro al canto.",
+    "Insert coin, Retrotarros en linea.",
+    "Tarros para el corazon, tarros para la memoria.",
+    "Konami code de la nostalgia!",
+    "Continue? Siempre.",
+    "16 bits de pura emocion.",
+    "Press Start para que arranque la magia.",
+    "Nintendo en el alma, Sega en la sangre.",
+    "Modo arcade activado!",
+    "Tarrobot al servicio del retrogaming.",
+    "Suscribete que un tarro nunca olvida.",
+    "Polvito de cartucho, magia garantizada.",
+    "Aca no se sopla el cartucho, se cuida.",
+]
+
+# Estados emocionales que rotan para las catchphrases (variedad visual)
+CATCHPHRASE_ESTADOS = ["excited", "happy", "winking", "fact"]
+
+
 # Despedidas cortas random
 DESPEDIDAS_CORTAS = [
     "Chao chao. Apagando luces de la TV.",
@@ -247,6 +276,7 @@ HOTKEYS = {
     "f3": ("/api/saludar",     "F3 -> saludo random"),
     "f4": ("/api/despedir",    "F4 -> despedida random"),
     "f5": ("/api/queue/reset", "F5 -> RESET cola"),
+    "f6": ("/api/catchphrase", "F6 -> catchphrase Retrotarros"),
 }
 
 
@@ -720,6 +750,18 @@ async def despedir(payload: dict):
     texto = random.choice(DESPEDIDAS_CORTAS)
     audio_url = await _hablar_frase(texto, "winking", "HASTA LUEGO", voz)
     return {"ok": True, "texto": texto, "audio_url": audio_url}
+
+
+@app.post("/api/catchphrase")
+async def catchphrase(payload: dict):
+    """Reproduce una catchphrase random del canal Retrotarros (Sprint 7.3)."""
+    import random
+    voz = resolver_voz(payload.get("voz") or "catalina")
+    tracker.mark_input()
+    texto = random.choice(CATCHPHRASES)
+    estado = random.choice(CATCHPHRASE_ESTADOS)
+    audio_url = await _hablar_frase(texto, estado, "RETROTARROS!", voz)
+    return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
 
 
 @app.post("/api/audio-finished")

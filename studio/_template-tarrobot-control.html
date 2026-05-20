@@ -341,10 +341,11 @@ select#queueSelect:focus { border-color: var(--ye); }
 
 <!-- SALUDOS Y DESPEDIDAS -->
 <div class="card">
-  <h2>👋 SALUDOS · DESPEDIDAS</h2>
+  <h2>👋 SALUDOS · DESPEDIDAS · MARCA</h2>
   <div class="btn-row">
     <button class="btn ye" onclick="saludar()">👋 HOLA</button>
     <button class="btn cy" onclick="despedir()">😴 CHAO</button>
+    <button class="btn" onclick="catchphrase()">⚡ RETRO!</button>
   </div>
 </div>
 
@@ -459,6 +460,7 @@ const PROC_LABELS = {
   '/api/precio':       'reaccionando al precio...',
   '/api/saludar':      'preparando saludo...',
   '/api/despedir':     'preparando despedida...',
+  '/api/catchphrase':  'catchphrase Retrotarros...',
   '/api/queue/next':   'siguiente item...',
   '/api/queue/prev':   'item anterior...',
   '/api/queue/jump':   'saltando...',
@@ -543,6 +545,12 @@ async function despedir() {
   logMsg('despidiendo...');
   const data = await post('/api/despedir', {});
   if (data && data.ok) logMsg('OK chao: "' + data.texto + '"', 'ok');
+}
+
+async function catchphrase() {
+  logMsg('catchphrase Retrotarros...');
+  const data = await post('/api/catchphrase', {});
+  if (data && data.ok) logMsg('OK [' + data.estado + ']: "' + data.texto + '"', 'ok');
 }
 
 async function opinar() {
