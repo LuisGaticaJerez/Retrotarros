@@ -1,0 +1,13 @@
+# Esta carpeta guarda MIDIs descargados (de Ichigos, Ninsheetmusic, etc.) y
+# el soundfont.sf2 para que FluidSynth los toque con sonido SNES.
+#
+# Ambos tipos de archivo (.mid, .midi, .sf2) estan en .gitignore y NO se
+# versionan en el repo publico:
+#   - MIDIs son transcripciones por fans, no redistribuibles
+#   - Soundfont es pesado (~30 MB) y cada usuario baja el que prefiere
+#
+# Como conseguir un soundfont:
+#   1. GeneralUser GS (libre, CC0): schristiancollins.com/generaluser.php
+#   2. Super Nintendo Soundfont: buscar en archive.org o musescore.com
+#
+# Una vez bajado, renombralo a "soundfont.sf2" y copialo aca.

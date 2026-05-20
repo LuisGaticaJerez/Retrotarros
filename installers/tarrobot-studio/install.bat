@@ -22,7 +22,8 @@ echo   3. Instalar dependencias (FastAPI, Whisper, edge-tts, anthropic)
 echo   4. Descargar ffmpeg portable
 echo   5. Pedirte tu API key de Anthropic
 echo   6. Configurar el repo Retrotarros (Drive sincronizado o local)
-echo   7. Crear acceso directo en escritorio
+echo   7. Descargar FluidSynth portable (para tocar melodias MIDI)
+echo   8. Crear acceso directo en escritorio
 echo.
 echo Espacio en disco necesario: ~800 MB
 echo Tiempo estimado: 5-10 minutos (depende de tu conexion)
@@ -36,7 +37,7 @@ cd /d "%ROOT%"
 
 REM ─── Paso 1: Python ───────────────────────────────────────────
 echo.
-echo [1/7] Verificando Python...
+echo [1/8] Verificando Python...
 where python >nul 2>nul
 if !errorlevel! equ 0 (
     for /f "tokens=2" %%v in ('python --version 2^>^&1') do set "PY_VER=%%v"
@@ -64,7 +65,7 @@ if !errorlevel! equ 0 (
 
 REM ─── Paso 2: Crear entorno virtual ────────────────────────────
 echo.
-echo [2/7] Creando entorno virtual (.venv)...
+echo [2/8] Creando entorno virtual (.venv)...
 if exist ".venv" (
     echo [OK] .venv ya existe, saltando.
 ) else (
@@ -79,7 +80,7 @@ if exist ".venv" (
 
 REM ─── Paso 3: Instalar dependencias Python ─────────────────────
 echo.
-echo [3/7] Instalando dependencias Python (puede tardar 2-5 min)...
+echo [3/8] Instalando dependencias Python (puede tardar 2-5 min)...
 call .venv\Scripts\activate.bat
 python -m pip install --upgrade pip >nul
 pip install -r requirements.txt
@@ -92,7 +93,7 @@ echo [OK] Dependencias instaladas.
 
 REM ─── Paso 4: ffmpeg portable ──────────────────────────────────
 echo.
-echo [4/7] Verificando ffmpeg...
+echo [4/8] Verificando ffmpeg...
 if exist "bin\ffmpeg.exe" (
     echo [OK] ffmpeg ya esta.
 ) else (
@@ -125,7 +126,7 @@ if exist "bin\ffmpeg.exe" (
 
 REM ─── Paso 5: API Key de Anthropic ─────────────────────────────
 echo.
-echo [5/7] Configurando API key de Anthropic...
+echo [5/8] Configurando API key de Anthropic...
 echo.
 echo Necesitas una API key de https://console.anthropic.com/settings/keys
 echo Te recomiendo crear una llamada "tarrobot-studio" especifica para este PC.
@@ -144,7 +145,7 @@ if defined ANTKEY (
 
 REM ─── Paso 6: Configurar repo Retrotarros ──────────────────────
 echo.
-echo [6/7] Configurando ubicacion del repo Retrotarros...
+echo [6/8] Configurando ubicacion del repo Retrotarros...
 echo.
 echo TarroBot puede leer pautas, datos y templates desde:
 echo   A) El paquete local (esta carpeta) - autocontenido, sin internet
@@ -180,9 +181,60 @@ if defined REPOPATH (
     echo      setx RETROTARROS_REPO "ruta al repo"
 )
 
-REM ─── Paso 7: Crear shortcut en escritorio ─────────────────────
+REM ─── Paso 7: FluidSynth portable + soundfont (melodias MIDI) ──
 echo.
-echo [7/7] Creando acceso directo en escritorio...
+echo [7/8] Configurando FluidSynth para tocar melodias MIDI...
+if exist "bin\fluidsynth.exe" (
+    echo [OK] FluidSynth ya esta en bin\fluidsynth.exe
+) else (
+    echo [INFO] Descargando FluidSynth 2.3.5 portable (~25 MB)...
+    if not exist "bin" mkdir bin
+    curl -L -o fluidsynth.zip https://github.com/FluidSynth/fluidsynth/releases/download/v2.3.5/fluidsynth-2.3.5-win10-x64.zip
+    if !errorlevel! neq 0 (
+        echo [WARN] No se pudo descargar FluidSynth. Las melodias MIDI no van a funcionar.
+        echo        Podes bajarlo manual de github.com/FluidSynth/fluidsynth/releases
+        echo        y copiar bin\fluidsynth.exe + las DLLs en esta carpeta\bin\
+        goto :fluidsynth_done
+    )
+    echo [INFO] Extrayendo FluidSynth...
+    powershell -NoProfile -Command "Expand-Archive -Path fluidsynth.zip -DestinationPath fluidsynth-temp -Force"
+    REM Copiar fluidsynth.exe + todas las DLLs necesarias a bin\
+    for /r "fluidsynth-temp" %%f in (fluidsynth.exe) do (
+        copy "%%~dpf*.exe" "bin\" >nul 2>&1
+        copy "%%~dpf*.dll" "bin\" >nul 2>&1
+        goto :fluidsynth_extracted
+    )
+    :fluidsynth_extracted
+    rmdir /s /q fluidsynth-temp 2>nul
+    del fluidsynth.zip 2>nul
+    if exist "bin\fluidsynth.exe" (
+        echo [OK] FluidSynth listo en bin\fluidsynth.exe
+    ) else (
+        echo [WARN] No se pudo extraer FluidSynth correctamente.
+    )
+)
+:fluidsynth_done
+
+REM ─── Soundfont SNES (no se baja automatico por temas de derechos) ─
+echo.
+echo Para tocar melodias necesitas un soundfont .sf2 ^(formato estandar^).
+echo Opciones recomendadas ^(libres / fair use^):
+echo   - GeneralUser GS:  schristiancollins.com/generaluser.php  ^(~30 MB, CC0^)
+echo   - SNES soundfont:  buscar "Super Nintendo Soundfont" sf2
+echo.
+echo Una vez que tengas el .sf2:
+echo   1. Renombralo a "soundfont.sf2"
+echo   2. Copialo a:  %ROOT%\studio\melodias\soundfont.sf2
+echo      ^(o al repo en Drive si usas modo Drive^)
+echo.
+echo Sin el soundfont, las melodias MIDI no van a funcionar pero el
+echo resto de TarroBot anda perfecto.
+echo.
+pause
+
+REM ─── Paso 8: Crear shortcut en escritorio ─────────────────────
+echo.
+echo [8/8] Creando acceso directo en escritorio...
 powershell -NoProfile -Command ^
     "$ws = New-Object -ComObject WScript.Shell;" ^
     "$sc = $ws.CreateShortcut([Environment]::GetFolderPath('Desktop') + '\TarroBot.lnk');" ^
