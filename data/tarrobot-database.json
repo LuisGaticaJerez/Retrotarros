@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "actualizado": "2026-05-20",
+  "datos": [
+    {
+      "id": "smario-64-analog",
+      "tema": "Super Mario 64",
+      "texto": "Super Mario 64 fue el primer juego en usar el analog stick. Antes de eso, todo el mundo manejaba con D-Pad y nadie sabia que se podia controlar en 360 grados.",
+      "estado": "fact",
+      "consola": "N64",
+      "ano": 1996,
+      "editor": "Nintendo EAD",
+      "creado": "2026-05-20",
+      "fuente": "manual"
+    },
+    {
+      "id": "chrono-trigger-multiendings",
+      "tema": "Chrono Trigger",
+      "texto": "Chrono Trigger tiene 13 finales distintos segun el momento en que derrotes al jefe final. Es uno de los primeros JRPG en darte tanta libertad narrativa.",
+      "estado": "excited",
+      "consola": "SNES",
+      "ano": 1995,
+      "editor": "Square",
+      "creado": "2026-05-20",
+      "fuente": "manual"
+    },
+    {
+      "id": "powerfest-94-hg",
+      "tema": "Nintendo PowerFest 94",
+      "texto": "Nintendo solo fabrico 33 cartuchos del PowerFest 94. De esos, desarmo 31 para repuestos. Solo 2 sobreviven en el mundo y el ultimo se vendio en USD 23.000.",
+      "estado": "winking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Nintendo of America",
+      "creado": "2026-05-20",
+      "fuente": "manual"
+    },
+    {
+      "id": "earthbound-scratch",
+      "tema": "EarthBound",
+      "texto": "La caja gigante de EarthBound (Big Box) incluia una player's guide de 160 paginas con stickers scratch-and-sniff. Por eso es la pieza mas buscada del SNES en EE.UU.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "APE / HAL Laboratory",
+      "creado": "2026-05-20",
+      "fuente": "manual"
+    },
+    {
+      "id": "goldeneye-multi",
+      "tema": "GoldenEye 007",
+      "texto": "El modo multijugador de GoldenEye 007 se programo en las ultimas 4 semanas de desarrollo, sin permiso oficial de Nintendo. Termino definiendo el FPS de consola para siempre.",
+      "estado": "excited",
+      "consola": "N64",
+      "ano": 1997,
+      "editor": "Rare",
+      "creado": "2026-05-20",
+      "fuente": "manual"
+    },
+    {
+      "id": "tapper-cola",
+      "tema": "Tapper",
+      "texto": "Tapper salio originalmente como un arcade con marca de Budweiser. Como muchos bares no querian publicidad de cerveza, Bally Midway lanzo Root Beer Tapper para esos lugares.",
+      "estado": "thinking",
+      "consola": "Arcade",
+      "ano": 1983,
+      "editor": "Bally Midway",
+      "creado": "2026-05-20",
+      "fuente": "manual"
+    },
+    {
+      "id": "lakitu-camera",
+      "tema": "Lakitu",
+      "texto": "En Super Mario 64, Lakitu es oficialmente el camarografo. Su rol cambia segun el juego: tira spinies en SMB, marca tiempos en Mario Kart, y rescata pilotos cuando caen al agua.",
+      "estado": "winking",
+      "consola": "Multi",
+      "ano": 1985,
+      "editor": "Nintendo",
+      "creado": "2026-05-20",
+      "fuente": "manual"
+    },
+    {
+      "id": "clayfighter-sculpt",
+      "tema": "ClayFighter Sculptor's Cut",
+      "texto": "ClayFighter 63 1/3 Sculptor's Cut fue exclusivo Blockbuster. Una version sealed se subasto en USD 9.199, lo que la convierte en la version retail mas cara jamas vendida del N64.",
+      "estado": "fact",
+      "consola": "N64",
+      "ano": 1998,
+      "editor": "Interplay",
+      "creado": "2026-05-20",
+      "fuente": "manual"
+    }
+  ]
+}

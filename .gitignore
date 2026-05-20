@@ -42,3 +42,7 @@ assets/*.bak.png
 
 # Cache local de transcripciones Whisper (regenerable, no versionar)
 .cache/
+
+# Slides HTML generados por TarroBot (regenerables desde data/tarrobot-database.json)
+# Se regeneran con: python scripts/tarrobot.py <tema> --slide
+studio/tarrobot-out/
