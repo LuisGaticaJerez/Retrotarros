@@ -107,12 +107,173 @@ input[type="text"]:focus, input[type="number"]:focus { border-color: var(--cy); 
 .toggle-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
 .toggle-row label { font-size: 11px; color: rgba(255,255,255,.7); }
 .toggle-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--cy); }
+
+/* ── COLA DEL EPISODIO ─────────────────────────────────────────── */
+.card.queue {
+  border-color: rgba(255, 210, 63, .35);
+  box-shadow: 0 0 18px rgba(255,210,63,.12);
+}
+.card.queue h2 { color: var(--ye); }
+
+select#queueSelect {
+  width: 100%;
+  background: rgba(0,0,0,.5);
+  border: 1px solid rgba(255,210,63,.35);
+  color: #fff;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  outline: none;
+  margin-bottom: 8px;
+}
+select#queueSelect:focus { border-color: var(--ye); }
+
+#queueState {
+  padding: 8px 10px;
+  background: rgba(0,0,0,.4);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: rgba(255,255,255,.8);
+  letter-spacing: .5px;
+  min-height: 14px;
+}
+#queueState .badge {
+  display: inline-block;
+  background: var(--ye);
+  color: var(--bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  margin-right: 6px;
+}
+#queueProgress {
+  height: 6px;
+  background: rgba(255,255,255,.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 4px 0 10px;
+}
+#queueProgress .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ye), var(--mg));
+  width: 0%;
+  transition: width .25s;
+}
+#queueCurrent {
+  font-size: 12px;
+  color: var(--cy);
+  margin-bottom: 10px;
+  min-height: 14px;
+  font-family: 'Share Tech Mono', monospace;
+  word-break: break-word;
+}
+#queueCurrent .estado-chip {
+  display: inline-block;
+  background: rgba(0,229,255,.18);
+  border: 1px solid var(--cy);
+  color: var(--cy);
+  font-size: 9px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  font-family: 'Press Start 2P', monospace;
+  margin-right: 6px;
+  text-transform: uppercase;
+}
+
+.queue-nav {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.queue-nav .btn { padding: 14px 4px; font-size: 11px; }
+.queue-nav .btn.next {
+  background: rgba(255,210,63,.18);
+  border-color: var(--ye);
+  color: var(--ye);
+  font-size: 13px;
+}
+.queue-nav .btn.next:active { background: var(--ye); color: var(--bg); }
+
+#queueList {
+  margin-top: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  border-top: 1px dashed rgba(255,255,255,.1);
+  padding-top: 8px;
+  display: none;
+}
+#queueList.show { display: block; }
+.queue-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  font-size: 11px;
+  border-radius: 3px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  color: rgba(255,255,255,.8);
+}
+.queue-item:active { background: rgba(255,210,63,.1); }
+.queue-item.actual {
+  background: rgba(255,210,63,.12);
+  border-left-color: var(--ye);
+  color: #fff;
+}
+.queue-item .num {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--mg);
+  min-width: 22px;
+}
+.queue-item .mp3-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  flex-shrink: 0;
+}
+.queue-item .mp3-dot.ready { background: var(--cy); }
+.queue-item .tema { flex: 1; word-break: break-word; }
+.queue-item .est { font-size: 9px; color: rgba(255,255,255,.4); }
+
+.queue-empty {
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  text-align: center;
+  padding: 8px;
+}
 </style>
 </head>
 <body>
 
 <h1>⚡ TARROBOT CONTROL</h1>
 <div class="sub">PANEL EN VIVO · RETROTARROS STUDIO</div>
+
+<!-- COLA DEL EPISODIO -->
+<div class="card queue">
+  <h2>📋 COLA DEL EPISODIO</h2>
+  <select id="queueSelect"><option value="">— sin cola cargada —</option></select>
+  <div class="btn-row" style="margin-bottom:8px;">
+    <button class="btn ye" onclick="queueLoad()">CARGAR ▸</button>
+    <button class="btn" onclick="queueUnload()">DESCARGAR ✕</button>
+    <button class="btn cy" onclick="refreshQueueList()" style="flex:0; padding:12px 10px;">🔄</button>
+  </div>
+  <div id="queueState"><span class="badge">OFF</span>Selecciona una pauta y cargala</div>
+  <div id="queueProgress"><div class="bar"></div></div>
+  <div id="queueCurrent"></div>
+  <div class="queue-nav">
+    <button class="btn" onclick="queuePrev()">⏮ PREV</button>
+    <button class="btn next" onclick="queueNext()">▶ NEXT</button>
+    <button class="btn" onclick="queueReset()">↩ RESET</button>
+  </div>
+  <button class="btn full cy" onclick="toggleQueueList()" id="toggleListBtn" style="font-size:9px; padding:8px;">VER LISTA ▾</button>
+  <div id="queueList"></div>
+</div>
 
 <!-- VOZ · push to talk -->
 <div class="card">
@@ -426,6 +587,195 @@ micBtn.addEventListener('pointercancel', function() { stopRecord(); });
 // Touch events para iOS Safari
 micBtn.addEventListener('touchstart', function(e) { e.preventDefault(); startRecord(); }, { passive: false });
 micBtn.addEventListener('touchend', function(e) { e.preventDefault(); stopRecord(); }, { passive: false });
+
+// ─── COLA DEL EPISODIO ─────────────────────────────────────────────
+const queueSelect    = document.getElementById('queueSelect');
+const queueState     = document.getElementById('queueState');
+const queueProgress  = document.querySelector('#queueProgress .bar');
+const queueCurrent   = document.getElementById('queueCurrent');
+const queueListEl    = document.getElementById('queueList');
+const toggleListBtn  = document.getElementById('toggleListBtn');
+
+let queuePollTimer = null;
+let lastQueueIndice = null;
+
+async function refreshQueueList() {
+  try {
+    const r = await fetch('/api/queue/list');
+    const data = await r.json();
+    // Limpiar select de forma segura
+    while (queueSelect.firstChild) queueSelect.removeChild(queueSelect.firstChild);
+    const def = document.createElement('option');
+    def.value = '';
+    def.textContent = '— elegi una pauta —';
+    queueSelect.appendChild(def);
+    if (!data.pautas || !data.pautas.length) {
+      const o = document.createElement('option');
+      o.value = '';
+      o.textContent = '(no hay pautas creadas)';
+      o.disabled = true;
+      queueSelect.appendChild(o);
+      return;
+    }
+    for (const p of data.pautas) {
+      const o = document.createElement('option');
+      o.value = p.slug;
+      o.textContent = p.slug + '  ·  ' + p.total + ' datos  ·  ' + p.mp3_listos + ' mp3s';
+      queueSelect.appendChild(o);
+    }
+    logMsg('cola: ' + data.pautas.length + ' pauta(s) en disco', 'ok');
+  } catch (e) {
+    logMsg('refreshQueueList fail: ' + e.message, 'err');
+  }
+}
+
+async function queueLoad() {
+  const slug = queueSelect.value;
+  if (!slug) { logMsg('elegi una pauta primero', 'err'); return; }
+  logMsg('cargando pauta ' + slug + '...');
+  const data = await post('/api/queue/load', { slug: slug });
+  if (data && data.ok) {
+    logMsg('OK cola cargada: ' + slug, 'ok');
+    startQueuePoll();
+    pollQueueOnce();
+  }
+}
+
+async function queueUnload() {
+  const data = await post('/api/queue/unload', {});
+  if (data && data.ok) {
+    logMsg('cola descargada', 'ok');
+    stopQueuePoll();
+    renderQueueState({ loaded: false });
+  }
+}
+
+async function queueNext() { const d = await post('/api/queue/next', {}); if (d && d.ok) { logMsg('▶ ' + (d.dato && d.dato.tema), 'ok'); pollQueueOnce(); } }
+async function queuePrev() { const d = await post('/api/queue/prev', {}); if (d && d.ok) { logMsg('⏮ ' + (d.dato && d.dato.tema), 'ok'); pollQueueOnce(); } }
+async function queueReset() { const d = await post('/api/queue/reset', {}); if (d && d.ok) { logMsg('↩ reset', 'ok'); pollQueueOnce(); } }
+
+async function queueJump(idx) {
+  const d = await post('/api/queue/jump', { indice: idx });
+  if (d && d.ok) { logMsg('→ jump ' + idx + ': ' + (d.dato && d.dato.tema), 'ok'); pollQueueOnce(); }
+}
+
+function toggleQueueList() {
+  const shown = queueListEl.classList.toggle('show');
+  toggleListBtn.textContent = shown ? 'OCULTAR LISTA ▴' : 'VER LISTA ▾';
+}
+
+function renderQueueState(status) {
+  // Limpia el bloque de estado
+  while (queueState.firstChild) queueState.removeChild(queueState.firstChild);
+  while (queueCurrent.firstChild) queueCurrent.removeChild(queueCurrent.firstChild);
+
+  if (!status.loaded) {
+    const badge = document.createElement('span');
+    badge.className = 'badge';
+    badge.textContent = 'OFF';
+    queueState.appendChild(badge);
+    queueState.appendChild(document.createTextNode('Selecciona una pauta y cargala'));
+    queueProgress.style.width = '0%';
+    while (queueListEl.firstChild) queueListEl.removeChild(queueListEl.firstChild);
+    return;
+  }
+
+  // Badge ON
+  const badge = document.createElement('span');
+  badge.className = 'badge';
+  badge.textContent = 'ON';
+  queueState.appendChild(badge);
+  const idxDisplay = status.indice < 0 ? 0 : status.indice + 1;
+  queueState.appendChild(document.createTextNode(
+    status.slug + '  ·  ' + idxDisplay + '/' + status.total +
+    '  ·  ' + status.mp3_listos + '/' + status.total + ' mp3s'
+  ));
+
+  // Barra de progreso
+  const pct = status.total ? (idxDisplay / status.total) * 100 : 0;
+  queueProgress.style.width = pct + '%';
+
+  // Item actual
+  if (status.actual) {
+    const chip = document.createElement('span');
+    chip.className = 'estado-chip';
+    chip.textContent = status.actual.estado;
+    queueCurrent.appendChild(chip);
+    queueCurrent.appendChild(document.createTextNode(status.actual.tema));
+  } else {
+    queueCurrent.appendChild(document.createTextNode('(esperando NEXT)'));
+  }
+
+  // Render lista (solo si cambio el indice)
+  if (status.indice !== lastQueueIndice) {
+    renderQueueList(status);
+    lastQueueIndice = status.indice;
+  }
+}
+
+function renderQueueList(status) {
+  while (queueListEl.firstChild) queueListEl.removeChild(queueListEl.firstChild);
+  if (!status.datos || !status.datos.length) {
+    const e = document.createElement('div');
+    e.className = 'queue-empty';
+    e.textContent = '(sin items)';
+    queueListEl.appendChild(e);
+    return;
+  }
+  status.datos.forEach(function(d, i) {
+    const row = document.createElement('div');
+    row.className = 'queue-item' + (i === status.indice ? ' actual' : '');
+    row.addEventListener('click', function() { queueJump(i); });
+
+    const num = document.createElement('span');
+    num.className = 'num';
+    num.textContent = String(i + 1).padStart(2, '0');
+    row.appendChild(num);
+
+    const dot = document.createElement('span');
+    dot.className = 'mp3-dot' + (d.tiene_mp3 ? ' ready' : '');
+    dot.title = d.tiene_mp3 ? 'MP3 listo' : 'sin MP3 (se genera al vuelo)';
+    row.appendChild(dot);
+
+    const tema = document.createElement('span');
+    tema.className = 'tema';
+    tema.textContent = d.tema;
+    row.appendChild(tema);
+
+    const est = document.createElement('span');
+    est.className = 'est';
+    est.textContent = d.estado;
+    row.appendChild(est);
+
+    queueListEl.appendChild(row);
+  });
+}
+
+async function pollQueueOnce() {
+  try {
+    const r = await fetch('/api/queue/status');
+    const data = await r.json();
+    renderQueueState(data);
+  } catch (e) {
+    // silencioso, reintenta en proximo tick
+  }
+}
+
+function startQueuePoll() {
+  stopQueuePoll();
+  queuePollTimer = setInterval(pollQueueOnce, 2500);
+}
+
+function stopQueuePoll() {
+  if (queuePollTimer) {
+    clearInterval(queuePollTimer);
+    queuePollTimer = null;
+  }
+}
+
+// Inicializar cola al cargar
+refreshQueueList();
+pollQueueOnce();
 
 logMsg('Listo. Pulsa un boton.', 'ok');
 ping();
