@@ -47,6 +47,39 @@ STUDIO = REPO / "studio"
 LIVE_HTML = STUDIO / "_template-tarrobot-live.html"
 CONTROL_HTML = STUDIO / "_template-tarrobot-control.html"
 
+# Saludos geek random (chileno neutro, sin tildes)
+SALUDOS_GEEK = [
+    "Hola hola humanos! Insertando moneda virtual.",
+    "Bip bop. Sistema TarroBot iniciado correctamente.",
+    "Saludos, gamers. Cargando datos curiosos...",
+    "Buenos pixels, equipo!",
+    "Press start. Aqui estoy.",
+    "Listo para soltar trivia. ¿Que se cuenta hoy?",
+    "Hola Luis, hola Koko. TarroBot a la orden.",
+    "Conectado y listo. Que empiece la sesion.",
+    "Wii hoo! TarroBot en linea.",
+    "Buenas, retrotarristas. Datos curiosos en 3, 2, 1...",
+    "Reportandome al estudio. ¿Que vamos a investigar?",
+    "Frecuencia 42 megahertz. TarroBot transmitiendo.",
+    "Insertando token. Hola, hola!",
+    "Memoria llena, sed de datos. Pregunta lo que quieras.",
+    "Sistema operativo: Curiosidad version 8 bits. Listo.",
+]
+
+# Despedidas cortas random
+DESPEDIDAS_CORTAS = [
+    "Chao chao. Apagando luces de la TV.",
+    "Hasta la proxima, retrotarristas!",
+    "Modo sleep activado. Hasta luego!",
+    "Bip. Bop. Power off.",
+    "Nos vemos en el proximo episodio.",
+    "Salvo partida. Hasta pronto!",
+    "Game over para hoy. Chao!",
+    "Continue en el proximo capitulo. Chao!",
+    "Apagando consola. Hasta la proxima!",
+    "Eyectando cartucho. Nos vemos!",
+]
+
 app = FastAPI(title="TarroBot Live")
 
 # Servir los MP3 generados (en /audio/<id>.mp3)
@@ -210,6 +243,55 @@ async def cuentame(payload: dict):
     })
 
     return {"ok": True, "dato": dato, "audio_url": audio_url}
+
+
+async def _hablar_frase(texto: str, estado: str, label: str, voz: str) -> Optional[str]:
+    """
+    Genera TTS de una frase suelta (sin tema asociado) y dispara WS.
+    Usado por /api/saludar y /api/despedir.
+    Retorna la URL del audio o None si fallo.
+    """
+    import time
+    fake_dato = {
+        "id": f"frase-{int(time.time() * 1000)}",
+        "tema": "frase",
+        "texto": texto,
+        "estado": estado,
+        "consola": "", "ano": 0, "editor": "",
+    }
+    mp3 = await asyncio.to_thread(generar_tts, fake_dato, voz)
+    audio_url = f"/audio/{mp3.name}" if mp3 else None
+
+    await manager.broadcast_live({
+        "tipo": "hablar",
+        "estado": estado,
+        "texto": texto,
+        "label": label,
+        "meta": "",
+        "audio_url": audio_url,
+        "tema": "",
+    })
+    return audio_url
+
+
+@app.post("/api/saludar")
+async def saludar(payload: dict):
+    """Reproduce un saludo geek random con estado excited."""
+    import random
+    voz = resolver_voz(payload.get("voz") or "catalina")
+    texto = random.choice(SALUDOS_GEEK)
+    audio_url = await _hablar_frase(texto, "excited", "HOLA HOLA", voz)
+    return {"ok": True, "texto": texto, "audio_url": audio_url}
+
+
+@app.post("/api/despedir")
+async def despedir(payload: dict):
+    """Reproduce una despedida corta random con estado winking."""
+    import random
+    voz = resolver_voz(payload.get("voz") or "catalina")
+    texto = random.choice(DESPEDIDAS_CORTAS)
+    audio_url = await _hablar_frase(texto, "winking", "HASTA LUEGO", voz)
+    return {"ok": True, "texto": texto, "audio_url": audio_url}
 
 
 @app.get("/api/ping")

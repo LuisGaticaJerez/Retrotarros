@@ -114,10 +114,19 @@ input[type="text"]:focus, input[type="number"]:focus { border-color: var(--cy); 
 <h1>⚡ TARROBOT CONTROL</h1>
 <div class="sub">PANEL EN VIVO · RETROTARROS STUDIO</div>
 
+<!-- SALUDOS Y DESPEDIDAS -->
+<div class="card">
+  <h2>👋 SALUDOS · DESPEDIDAS</h2>
+  <div class="btn-row">
+    <button class="btn ye" onclick="saludar()">👋 HOLA</button>
+    <button class="btn cy" onclick="despedir()">😴 CHAO</button>
+  </div>
+</div>
+
 <!-- CUENTAME -->
 <div class="card">
   <h2>💬 CUÉNTAME DE...</h2>
-  <input type="text" id="cuentameInput" placeholder="Ej: Super Mario 64, Doom SNES..." autocomplete="off">
+  <input type="text" id="cuentameInput" placeholder="Ej: Super Mario 64, Doom SNES (o escribi 'hola'/'chao')" autocomplete="off">
   <div class="toggle-row">
     <input type="checkbox" id="genIfMissing" checked>
     <label for="genIfMissing">Generar con Claude si no esta en la DB</label>
@@ -201,15 +210,42 @@ async function setState(estado) {
   if (data) logMsg('-> estado: ' + estado, 'ok');
 }
 
+// Palabras atajo que disparan saludo o despedida en lugar de cuentame
+const ATAJOS_HOLA = ['hola', 'hello', 'buenas', 'buenos dias', 'que tal'];
+const ATAJOS_CHAO = ['chao', 'adios', 'bye', 'hasta luego', 'nos vemos'];
+
 async function cuentame() {
-  const tema = document.getElementById('cuentameInput').value.trim();
-  if (!tema) { logMsg('falta el tema', 'err'); return; }
+  const raw = document.getElementById('cuentameInput').value.trim();
+  if (!raw) { logMsg('falta el tema', 'err'); return; }
+
+  const lower = raw.toLowerCase();
+  if (ATAJOS_HOLA.includes(lower)) {
+    document.getElementById('cuentameInput').value = '';
+    return saludar();
+  }
+  if (ATAJOS_CHAO.includes(lower)) {
+    document.getElementById('cuentameInput').value = '';
+    return despedir();
+  }
+
   const gen = document.getElementById('genIfMissing').checked;
-  logMsg('procesando: "' + tema + '"...');
-  const data = await post('/api/cuentame', { tema: tema, generate_if_missing: gen });
+  logMsg('procesando: "' + raw + '"...');
+  const data = await post('/api/cuentame', { tema: raw, generate_if_missing: gen });
   if (data && data.ok) {
     logMsg('OK ' + data.dato.tema + ' (' + data.dato.estado + ')', 'ok');
   }
+}
+
+async function saludar() {
+  logMsg('saludando...');
+  const data = await post('/api/saludar', {});
+  if (data && data.ok) logMsg('OK saludo: "' + data.texto + '"', 'ok');
+}
+
+async function despedir() {
+  logMsg('despidiendo...');
+  const data = await post('/api/despedir', {});
+  if (data && data.ok) logMsg('OK chao: "' + data.texto + '"', 'ok');
 }
 
 async function ping() {
