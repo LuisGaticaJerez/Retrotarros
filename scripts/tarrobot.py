@@ -204,6 +204,71 @@ Estados validos para "estado_recomendado": talking, excited, fact, winking, conf
 
 
 # ─────────────────────────────────────────────────────────────────────────
+# TTS (Edge TTS)
+# ─────────────────────────────────────────────────────────────────────────
+
+# Voces sugeridas para TarroBot (es- latino)
+VOCES_SUGERIDAS = {
+    "catalina":  "es-CL-CatalinaNeural",   # chilena default, calza con el canal
+    "yolanda":   "es-NI-YolandaNeural",    # juvenil nicaraguense
+    "karina":    "es-PR-KarinaNeural",     # juvenil puertorriquena
+    "salome":    "es-CO-SalomeNeural",     # colombiana neutra
+    "dalia":     "es-MX-DaliaNeural",      # mexicana adulta clara
+    "lorenzo":   "es-CL-LorenzoNeural",    # chileno masculino
+    "tomas":     "es-AR-TomasNeural",      # NO usar (argentino - rompe regla canal)
+}
+VOZ_DEFAULT = "es-CL-CatalinaNeural"
+PITCH_DEFAULT = "+12Hz"   # un poco mas joven/curioso
+RATE_DEFAULT = "+0%"
+
+
+def resolver_voz(voz_arg: str) -> str:
+    """Acepta alias corto ('catalina') o nombre completo Edge ('es-CL-...')."""
+    if not voz_arg:
+        return VOZ_DEFAULT
+    if voz_arg in VOCES_SUGERIDAS:
+        return VOCES_SUGERIDAS[voz_arg]
+    return voz_arg
+
+
+def generar_tts(dato: dict, voz: str = VOZ_DEFAULT, pitch: str = PITCH_DEFAULT, rate: str = RATE_DEFAULT) -> Path | None:
+    """
+    Genera MP3 con voz TarroBot usando Edge TTS.
+    Output: studio/tarrobot-out/<id>.mp3
+    """
+    try:
+        import edge_tts
+    except ImportError:
+        print("ERROR: libreria 'edge-tts' no instalada.", file=sys.stderr)
+        print("Instalala con: pip install edge-tts", file=sys.stderr)
+        return None
+
+    import asyncio
+
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = OUT_DIR / f"{dato['id']}.mp3"
+
+    texto = dato["texto"]
+
+    async def _generar():
+        communicate = edge_tts.Communicate(
+            texto,
+            voice=voz,
+            pitch=pitch,
+            rate=rate,
+        )
+        await communicate.save(str(out_path))
+
+    try:
+        asyncio.run(_generar())
+    except Exception as e:
+        print(f"ERROR: TTS fallo: {e}", file=sys.stderr)
+        return None
+
+    return out_path
+
+
+# ─────────────────────────────────────────────────────────────────────────
 # Slide HTML
 # ─────────────────────────────────────────────────────────────────────────
 
@@ -291,6 +356,12 @@ def cmd_add(args, db: dict) -> int:
         out = generar_slide(dato)
         if out:
             print(f"[OK] slide HTML: {out}")
+    if args.tts:
+        voz = resolver_voz(args.voice)
+        print(f"[TTS] generando audio con {voz}...")
+        out = generar_tts(dato, voz=voz, pitch=args.pitch, rate=args.rate)
+        if out:
+            print(f"[OK] audio MP3: {out}")
     return 0
 
 
@@ -311,6 +382,12 @@ def cmd_buscar(args, db: dict) -> int:
             out = generar_slide(matches[0])
             if out:
                 print(f"[OK] slide generado: {out}")
+        if args.tts:
+            voz = resolver_voz(args.voice)
+            print(f"[TTS] generando audio con {voz}...")
+            out = generar_tts(matches[0], voz=voz, pitch=args.pitch, rate=args.rate)
+            if out:
+                print(f"[OK] audio MP3: {out}")
         return 0
 
     # Sin matches
@@ -369,6 +446,12 @@ def cmd_buscar(args, db: dict) -> int:
         out = generar_slide(dato)
         if out:
             print(f"[OK] slide: {out}")
+    if args.tts:
+        voz = resolver_voz(args.voice)
+        print(f"[TTS] generando audio con {voz}...")
+        out = generar_tts(dato, voz=voz, pitch=args.pitch, rate=args.rate)
+        if out:
+            print(f"[OK] audio MP3: {out}")
     return 0
 
 
@@ -386,7 +469,24 @@ def main():
     parser.add_argument("--ano", type=int, help="Anio del dato")
     parser.add_argument("--editor", help="Editor/estudio")
     parser.add_argument("--slide", action="store_true", help="Genera HTML slide standalone listo para CapCut/DaVinci")
+    parser.add_argument("--tts", action="store_true", help="Genera audio MP3 con voz TarroBot (Edge TTS)")
+    parser.add_argument("--voice", help=f"Voz Edge TTS. Alias cortos: {', '.join(VOCES_SUGERIDAS.keys())}. O nombre completo es-XX-NombreNeural. Default: catalina (es-CL).")
+    parser.add_argument("--pitch", default=PITCH_DEFAULT, help=f"Pitch del TTS (default: {PITCH_DEFAULT}). Ej: '+8Hz', '+20Hz'.")
+    parser.add_argument("--rate", default=RATE_DEFAULT, help="Rate del TTS. Default 0 porciento. Acepta +N o -N seguido de porciento.")
+    parser.add_argument("--list-voices", action="store_true", help="Lista voces sugeridas y termina")
     args = parser.parse_args()
+
+    # --list-voices
+    if args.list_voices:
+        print("=== Voces sugeridas TarroBot (alias -> Edge TTS) ===")
+        for alias, full in VOCES_SUGERIDAS.items():
+            nota = ""
+            if "AR" in full:
+                nota = "  (NO usar: argentino, rompe regla del canal)"
+            if alias == "catalina":
+                nota = "  (DEFAULT, chilena)"
+            print(f"  {alias:12} -> {full}{nota}")
+        return 0
 
     db = cargar_db()
 
