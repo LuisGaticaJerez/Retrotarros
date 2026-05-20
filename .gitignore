@@ -46,3 +46,16 @@ assets/*.bak.png
 # Slides HTML generados por TarroBot (regenerables desde data/tarrobot-database.json)
 # Se regeneran con: python scripts/tarrobot.py <tema> --slide
 studio/tarrobot-out/
+
+# Build output del instalador (regenerable con build-package.ps1)
+installers/tarrobot-studio/dist/
+
+# Entornos virtuales Python (no versionar)
+.venv/
+venv/
+ENV/
+__pycache__/
+
+# Binarios portables descargados por el instalador
+bin/ffmpeg.exe
+bin/ffprobe.exe

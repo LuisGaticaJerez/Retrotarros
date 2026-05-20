@@ -1,0 +1,6 @@
+fastapi>=0.110
+uvicorn[standard]>=0.27
+jinja2>=3.1
+edge-tts>=7.0
+anthropic>=0.39
+openai-whisper>=20240930
