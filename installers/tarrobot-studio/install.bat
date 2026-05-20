@@ -21,7 +21,8 @@ echo   2. Crear entorno virtual aislado en esta carpeta
 echo   3. Instalar dependencias (FastAPI, Whisper, edge-tts, anthropic)
 echo   4. Descargar ffmpeg portable
 echo   5. Pedirte tu API key de Anthropic
-echo   6. Crear acceso directo en escritorio
+echo   6. Configurar el repo Retrotarros (Drive sincronizado o local)
+echo   7. Crear acceso directo en escritorio
 echo.
 echo Espacio en disco necesario: ~800 MB
 echo Tiempo estimado: 5-10 minutos (depende de tu conexion)
@@ -35,7 +36,7 @@ cd /d "%ROOT%"
 
 REM ─── Paso 1: Python ───────────────────────────────────────────
 echo.
-echo [1/6] Verificando Python...
+echo [1/7] Verificando Python...
 where python >nul 2>nul
 if !errorlevel! equ 0 (
     for /f "tokens=2" %%v in ('python --version 2^>^&1') do set "PY_VER=%%v"
@@ -63,7 +64,7 @@ if !errorlevel! equ 0 (
 
 REM ─── Paso 2: Crear entorno virtual ────────────────────────────
 echo.
-echo [2/6] Creando entorno virtual (.venv)...
+echo [2/7] Creando entorno virtual (.venv)...
 if exist ".venv" (
     echo [OK] .venv ya existe, saltando.
 ) else (
@@ -78,7 +79,7 @@ if exist ".venv" (
 
 REM ─── Paso 3: Instalar dependencias Python ─────────────────────
 echo.
-echo [3/6] Instalando dependencias Python (puede tardar 2-5 min)...
+echo [3/7] Instalando dependencias Python (puede tardar 2-5 min)...
 call .venv\Scripts\activate.bat
 python -m pip install --upgrade pip >nul
 pip install -r requirements.txt
@@ -91,7 +92,7 @@ echo [OK] Dependencias instaladas.
 
 REM ─── Paso 4: ffmpeg portable ──────────────────────────────────
 echo.
-echo [4/6] Verificando ffmpeg...
+echo [4/7] Verificando ffmpeg...
 if exist "bin\ffmpeg.exe" (
     echo [OK] ffmpeg ya esta.
 ) else (
@@ -124,7 +125,7 @@ if exist "bin\ffmpeg.exe" (
 
 REM ─── Paso 5: API Key de Anthropic ─────────────────────────────
 echo.
-echo [5/6] Configurando API key de Anthropic...
+echo [5/7] Configurando API key de Anthropic...
 echo.
 echo Necesitas una API key de https://console.anthropic.com/settings/keys
 echo Te recomiendo crear una llamada "tarrobot-studio" especifica para este PC.
@@ -141,9 +142,47 @@ if defined ANTKEY (
     echo        setx ANTHROPIC_API_KEY "sk-ant-..."
 )
 
-REM ─── Paso 6: Crear shortcut en escritorio ─────────────────────
+REM ─── Paso 6: Configurar repo Retrotarros ──────────────────────
 echo.
-echo [6/6] Creando acceso directo en escritorio...
+echo [6/7] Configurando ubicacion del repo Retrotarros...
+echo.
+echo TarroBot puede leer pautas, datos y templates desde:
+echo   A) El paquete local (esta carpeta) - autocontenido, sin internet
+echo   B) Tu repo en Google Drive sincronizado - se actualiza solo
+echo.
+echo Si pegas la ruta del repo en Drive, vas a ver automaticamente
+echo las pautas y datos nuevos que Luis genere en su PC.
+echo.
+echo Ejemplos de ruta valida:
+echo   G:\Mi unidad\Recursos Retrotarros\repo
+echo   C:\Users\Estudio\Google Drive\Retrotarros\repo
+echo   D:\Drive\Retrotarros\repo
+echo.
+set /p REPOPATH="Ruta al repo Retrotarros (o presiona Enter para usar local): "
+if defined REPOPATH (
+    REM Limpiar comillas si las pego con drag-drop
+    set "REPOPATH=!REPOPATH:"=!"
+    if exist "!REPOPATH!\scripts\tarrobot-live.py" (
+        if exist "!REPOPATH!\data\tarrobot-database.json" (
+            setx RETROTARROS_REPO "!REPOPATH!" >nul
+            echo [OK] Repo Retrotarros configurado: !REPOPATH!
+            echo      TarroBot va a leer scripts, pautas y datos desde ahi.
+        ) else (
+            echo [WARN] La ruta no parece un repo valido (falta data\tarrobot-database.json^).
+            echo        Usando paquete local.
+        )
+    ) else (
+        echo [WARN] La ruta no parece un repo valido (falta scripts\tarrobot-live.py^).
+        echo        Usando paquete local.
+    )
+) else (
+    echo [OK] Usando paquete local. Puedes configurarlo despues con:
+    echo      setx RETROTARROS_REPO "ruta al repo"
+)
+
+REM ─── Paso 7: Crear shortcut en escritorio ─────────────────────
+echo.
+echo [7/7] Creando acceso directo en escritorio...
 powershell -NoProfile -Command ^
     "$ws = New-Object -ComObject WScript.Shell;" ^
     "$sc = $ws.CreateShortcut([Environment]::GetFolderPath('Desktop') + '\TarroBot.lnk');" ^

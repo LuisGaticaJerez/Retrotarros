@@ -24,6 +24,7 @@ Requiere:
 
 import asyncio
 import json
+import os
 import sys
 import time
 from contextlib import asynccontextmanager
@@ -45,7 +46,10 @@ from tarrobot import (
     OUT_DIR, PAUTAS_DIR, PAUTAS_AUDIO_DIR,
 )
 
-REPO = Path(__file__).parent.parent
+# REPO puede venir de env var (modo Drive) o del path del script. Si tarrobot.py
+# ya resolvio el REPO con la env var, lo reusamos para coherencia entre ambos.
+import tarrobot as _t
+REPO = _t.REPO
 STUDIO = REPO / "studio"
 LIVE_HTML = STUDIO / "_template-tarrobot-live.html"
 CONTROL_HTML = STUDIO / "_template-tarrobot-control.html"

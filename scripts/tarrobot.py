@@ -26,7 +26,15 @@ import sys
 from pathlib import Path
 from datetime import date
 
-REPO = Path(__file__).parent.parent
+# REPO puede venir de env var (modo Drive, estudio compartido) o del path del script.
+# Esto permite que el PC del estudio lea el repo desde el Drive sincronizado y
+# vea automaticamente todas las pautas/datos que generas en tu PC.
+_REPO_FROM_ENV = os.environ.get("RETROTARROS_REPO")
+if _REPO_FROM_ENV and Path(_REPO_FROM_ENV).exists():
+    REPO = Path(_REPO_FROM_ENV).resolve()
+else:
+    REPO = Path(__file__).parent.parent
+
 DB_PATH = REPO / "data" / "tarrobot-database.json"
 TEMPLATE = REPO / "studio" / "_template-tarrobot-slide.html"
 OUT_DIR = REPO / "studio" / "tarrobot-out"

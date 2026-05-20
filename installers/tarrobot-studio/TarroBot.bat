@@ -15,8 +15,28 @@ if not exist ".venv\Scripts\python.exe" (
     pause
     exit /b 1
 )
-if not exist "scripts\tarrobot-live.py" (
-    echo [ERROR] Faltan los archivos del repo. Reinstala el paquete completo.
+
+REM Cargar RETROTARROS_REPO User si esta definida (modo Drive)
+for /f "tokens=*" %%r in ('powershell -NoProfile -Command "[Environment]::GetEnvironmentVariable('RETROTARROS_REPO','User')"') do set "RETROTARROS_REPO=%%r"
+
+REM Decidir desde donde corren los scripts: Drive si esta configurado, sino local
+if defined RETROTARROS_REPO (
+    if exist "!RETROTARROS_REPO!\scripts\tarrobot-live.py" (
+        set "SCRIPT_DIR=!RETROTARROS_REPO!\scripts"
+        echo [INFO] Usando repo desde Drive: !RETROTARROS_REPO!
+    ) else (
+        echo [WARN] RETROTARROS_REPO definido pero la ruta no es valida.
+        echo        Fallback a paquete local.
+        set "SCRIPT_DIR=%ROOT%\scripts"
+        set "RETROTARROS_REPO="
+    )
+) else (
+    set "SCRIPT_DIR=%ROOT%\scripts"
+)
+
+if not exist "!SCRIPT_DIR!\tarrobot-live.py" (
+    echo [ERROR] Faltan los archivos del repo. Reinstala el paquete completo
+    echo         o configura RETROTARROS_REPO apuntando a un repo valido.
     pause
     exit /b 1
 )
@@ -67,7 +87,7 @@ start "" /b cmd /c "timeout /t 4 >nul && start chrome --new-window --kiosk http:
 
 REM Arrancar server (bloqueante - el bat se cierra cuando matas el server)
 call .venv\Scripts\activate.bat
-python scripts\tarrobot-live.py
+python "!SCRIPT_DIR!\tarrobot-live.py"
 
 echo.
 echo TarroBot detenido.
