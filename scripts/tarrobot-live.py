@@ -26,6 +26,7 @@ import asyncio
 import json
 import os
 import sys
+import threading
 import time
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -122,6 +123,9 @@ class ActivityTracker:
 IDLE_BORED_AFTER = 30    # 30s sin input → bored
 IDLE_DROWSY_AFTER = 60   # 60s sin input → drowsy
 IDLE_SLEEP_AFTER = 120   # 120s sin input → sleep
+
+# Puerto del server (constante de modulo asi el thread de hotkeys lo conoce)
+PORT = 8765
 
 tracker = ActivityTracker()
 
@@ -225,6 +229,73 @@ def _audio_url_de_pauta(slug: str, dato: dict) -> Optional[str]:
     return f"/pauta-{rel}"  # ej. /pauta-audio/snes-top-mundial/snes-top-mundial-1.mp3
 
 
+# ─────────────────────────────────────────────────────────────────────────
+# Hotkeys globales (Sprint 7.2)
+# ─────────────────────────────────────────────────────────────────────────
+#
+# Thread aparte que escucha F1-F5 en cualquier app del SO y dispara HTTP
+# al propio server. Asi durante la grabacion, sin tocar el celu ni hacer
+# alt-tab al panel, Luis o Koko pueden navegar la cola y saludar.
+#
+# La libreria 'keyboard' es opcional: si no esta instalada o falla al
+# registrar (a veces requiere admin en Windows), el server arranca igual
+# sin hotkeys. Todo lo demas sigue funcionando via panel mobile.
+
+HOTKEYS = {
+    "f1": ("/api/queue/next",  "F1 -> NEXT cola"),
+    "f2": ("/api/queue/prev",  "F2 -> PREV cola"),
+    "f3": ("/api/saludar",     "F3 -> saludo random"),
+    "f4": ("/api/despedir",    "F4 -> despedida random"),
+    "f5": ("/api/queue/reset", "F5 -> RESET cola"),
+}
+
+
+def _hotkey_worker():
+    """Thread bloqueante: registra hotkeys y dispara HTTP cuando se aprietan."""
+    try:
+        import keyboard
+    except ImportError:
+        print("[HOTKEYS] libreria 'keyboard' no instalada -> hotkeys deshabilitados.")
+        print("          Para activar: pip install keyboard")
+        return
+
+    import urllib.request
+    import urllib.error
+
+    def disparar(endpoint: str, label: str):
+        try:
+            req = urllib.request.Request(
+                f"http://127.0.0.1:{PORT}{endpoint}",
+                data=b"{}",
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=3) as resp:
+                if resp.status == 200:
+                    print(f"[HOTKEY] {label} -> OK")
+                else:
+                    print(f"[HOTKEY] {label} -> HTTP {resp.status}")
+        except urllib.error.HTTPError as e:
+            # Errores esperables: NEXT en ultimo item, PREV en primero, etc.
+            try:
+                detail = e.read().decode("utf-8", errors="ignore")[:80]
+            except Exception:
+                detail = str(e)
+            print(f"[HOTKEY] {label} -> {e.code} ({detail})")
+        except Exception as e:
+            print(f"[HOTKEY] {label} -> error: {e}")
+
+    try:
+        for key, (endpoint, label) in HOTKEYS.items():
+            keyboard.add_hotkey(key, disparar, args=(endpoint, label), suppress=False)
+        keys_str = ", ".join(k.upper() for k in HOTKEYS.keys())
+        print(f"[HOTKEYS] activos: {keys_str}")
+        keyboard.wait()  # bloquea el thread para siempre
+    except Exception as e:
+        print(f"[HOTKEYS] error registrando: {e}")
+        print(f"          (en Windows puede requerir correr el server como admin)")
+
+
 async def idle_worker():
     """
     Background task: cada 5s revisa el tiempo desde el ultimo input.
@@ -245,10 +316,12 @@ async def idle_worker():
 
 @asynccontextmanager
 async def lifespan(app):
-    # Startup: lanzar el worker
+    # Startup: lanzar el idle worker (async) y el hotkey worker (thread)
     task = asyncio.create_task(idle_worker())
+    hk_thread = threading.Thread(target=_hotkey_worker, name="hotkey-worker", daemon=True)
+    hk_thread.start()
     yield
-    # Shutdown: cancelar
+    # Shutdown: cancelar el async task. El thread es daemon -> muere al cerrar.
     task.cancel()
 
 
@@ -1049,7 +1122,6 @@ def get_local_ip():
 
 if __name__ == "__main__":
     ip = get_local_ip()
-    PORT = 8765
     print("=" * 60)
     print(f"  TarroBot Live · server corriendo")
     print("=" * 60)
@@ -1062,6 +1134,10 @@ if __name__ == "__main__":
     print(f"")
     print(f"  Panel control (desde el celu en mismo WiFi):")
     print(f"    http://{ip}:{PORT}/control")
+    print(f"")
+    print(f"  Hotkeys globales (cualquier app activa):")
+    for key, (_, label) in HOTKEYS.items():
+        print(f"    {label}")
     print(f"")
     print(f"  Ping de salud:")
     print(f"    http://localhost:{PORT}/api/ping")

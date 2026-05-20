@@ -59,6 +59,23 @@ Agrega un Browser Source con:
    (fondo transparente, lo metes en una esquina)
 
 ============================================================
+HOTKEYS GLOBALES (funcionan desde cualquier app)
+============================================================
+
+Mientras TarroBot esta corriendo, puedes apretar estas teclas en
+OBS, navegador, o donde sea sin tocar el celu:
+
+  F1   ->  NEXT en la cola del episodio
+  F2   ->  PREV en la cola
+  F3   ->  Saludo random
+  F4   ->  Despedida random
+  F5   ->  RESET cola (vuelve al primer item)
+
+Si en tu PC los hotkeys no responden, cierra TarroBot y vuelve a abrir
+TarroBot.bat haciendo click derecho -> Ejecutar como administrador.
+(la libreria 'keyboard' a veces necesita privilegios elevados)
+
+============================================================
 LISTA DE COMANDOS POR VOZ
 ============================================================
 
