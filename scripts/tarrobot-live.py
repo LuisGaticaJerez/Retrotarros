@@ -40,8 +40,9 @@ sys.path.insert(0, str(Path(__file__).parent))
 from tarrobot import (
     cargar_db, buscar, agregar_dato, generar_con_llm,
     generar_tts, resolver_voz,
+    cargar_pauta, pauta_audio_dir,
     LABEL_POR_ESTADO, ESTADOS, VOZ_DEFAULT, PITCH_DEFAULT, RATE_DEFAULT,
-    OUT_DIR,
+    OUT_DIR, PAUTAS_DIR, PAUTAS_AUDIO_DIR,
 )
 
 REPO = Path(__file__).parent.parent
@@ -121,6 +122,81 @@ IDLE_SLEEP_AFTER = 120   # 120s sin input → sleep
 tracker = ActivityTracker()
 
 
+# ─────────────────────────────────────────────────────────────────────────
+# QueueManager — cola del episodio (Sprint 6.3)
+# ─────────────────────────────────────────────────────────────────────────
+#
+# Coexiste con los endpoints existentes (/api/cuentame, /api/opinar, etc).
+# La cola es opcional: si no esta cargada, todo funciona igual que antes.
+# Si esta cargada, /api/queue/* navega los datos pre-armados de una pauta.
+
+class QueueManager:
+    """Estado en memoria de la cola del episodio cargada actualmente."""
+    def __init__(self):
+        self.pauta: Optional[dict] = None
+        self.slug: Optional[str] = None
+        self.indice: int = -1   # -1 = sin reproducir aun, 0..N-1 = item actual
+        self.lock = asyncio.Lock()
+
+    def loaded(self) -> bool:
+        return self.pauta is not None and bool(self.pauta.get("datos"))
+
+    def total(self) -> int:
+        return len(self.pauta["datos"]) if self.loaded() else 0
+
+    def current_dato(self) -> Optional[dict]:
+        if not self.loaded() or self.indice < 0 or self.indice >= self.total():
+            return None
+        return self.pauta["datos"][self.indice]
+
+    def status(self) -> dict:
+        if not self.loaded():
+            return {"loaded": False, "slug": None, "total": 0, "indice": -1,
+                    "actual": None, "mp3_listos": 0}
+        # Contar mp3s realmente presentes en disco
+        audio_dir = pauta_audio_dir(self.slug)
+        mp3_listos = 0
+        for d in self.pauta["datos"]:
+            if d.get("mp3"):
+                p = PAUTAS_DIR / d["mp3"]
+                if p.exists():
+                    mp3_listos += 1
+        actual = self.current_dato()
+        return {
+            "loaded": True,
+            "slug": self.slug,
+            "episodio": self.pauta.get("episodio", ""),
+            "total": self.total(),
+            "indice": self.indice,
+            "actual": {"id": actual["id"], "tema": actual["tema"], "estado": actual["estado"]} if actual else None,
+            "mp3_listos": mp3_listos,
+            "datos": [
+                {"id": d["id"], "tema": d["tema"], "estado": d["estado"],
+                 "tiene_mp3": bool(d.get("mp3")) and (PAUTAS_DIR / d["mp3"]).exists() if d.get("mp3") else False,
+                 "duracion_ms": d.get("duracion_ms")}
+                for d in self.pauta["datos"]
+            ],
+        }
+
+
+queue = QueueManager()
+
+
+def _audio_url_de_pauta(slug: str, dato: dict) -> Optional[str]:
+    """
+    Devuelve la URL HTTP del MP3 precargado de un dato de pauta, si existe.
+    Sino devuelve None (el caller hace fallback a TTS al vuelo).
+    """
+    rel = dato.get("mp3")
+    if not rel:
+        return None
+    p = PAUTAS_DIR / rel
+    if not p.exists():
+        return None
+    # rel es "audio/<slug>/<id>.mp3" - lo servimos en /pauta-audio/<slug>/<id>.mp3
+    return f"/pauta-{rel}"  # ej. /pauta-audio/snes-top-mundial/snes-top-mundial-1.mp3
+
+
 async def idle_worker():
     """
     Background task: cada 5s revisa el tiempo desde el ultimo input.
@@ -150,8 +226,12 @@ async def lifespan(app):
 
 app = FastAPI(title="TarroBot Live", lifespan=lifespan)
 
-# Servir los MP3 generados (en /audio/<id>.mp3)
+# Servir los MP3 generados al vuelo (en /audio/<id>.mp3)
 app.mount("/audio", StaticFiles(directory=str(OUT_DIR)), name="audio")
+
+# Servir los MP3 precargados de pautas (en /pauta-audio/<slug>/<id>.mp3)
+PAUTAS_AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+app.mount("/pauta-audio", StaticFiles(directory=str(PAUTAS_AUDIO_DIR)), name="pauta-audio")
 
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -735,9 +815,187 @@ async def listen(request: Request):
     }
 
 
+# ─────────────────────────────────────────────────────────────────────────
+# Queue (cola del episodio) — Sprint 6.3
+# ─────────────────────────────────────────────────────────────────────────
+
+async def _reproducir_dato_de_cola(dato: dict, voz_override: Optional[str] = None) -> Optional[str]:
+    """
+    Reproduce un dato de la cola: usa el MP3 precargado si existe, sino
+    genera TTS al vuelo. Dispara el WS 'hablar' a las pantallas live.
+    Devuelve la audio_url usada.
+    """
+    voz = resolver_voz(voz_override) if voz_override else queue.pauta.get("voz", VOZ_DEFAULT)
+
+    # 1. Intentar MP3 precargado
+    audio_url = _audio_url_de_pauta(queue.slug, dato)
+
+    # 2. Fallback a TTS al vuelo
+    if not audio_url:
+        print(f"[queue] dato {dato['id']} sin MP3 precargado, generando al vuelo...")
+        mp3 = await asyncio.to_thread(generar_tts, dato, voz)
+        audio_url = f"/audio/{mp3.name}" if mp3 else None
+
+    tracker.mark_speaking(True)
+    meta = " · ".join(
+        s for s in [dato.get("consola", ""), str(dato.get("ano", "") or ""), dato.get("editor", "")]
+        if s and s != "0"
+    )
+    await manager.broadcast_live({
+        "tipo": "hablar",
+        "estado": dato["estado"],
+        "texto": dato["texto"],
+        "label": LABEL_POR_ESTADO.get(dato["estado"], "DATO CURIOSO"),
+        "meta": meta,
+        "audio_url": audio_url,
+        "tema": dato["tema"],
+    })
+    # Broadcast tambien el status de la cola al panel control (futuro WS panel)
+    return audio_url
+
+
+@app.post("/api/queue/load")
+async def queue_load(payload: dict):
+    """
+    Carga una pauta del disco a la cola activa.
+    Body: { "slug": "snes-top-mundial" }
+    """
+    slug = (payload.get("slug") or "").strip()
+    if not slug:
+        return JSONResponse({"error": "slug vacio"}, status_code=400)
+    pauta = cargar_pauta(slug)
+    if not pauta:
+        return JSONResponse({"error": f"no existe la pauta '{slug}' en studio/pautas/"}, status_code=404)
+    if not pauta.get("datos"):
+        return JSONResponse({"error": f"la pauta '{slug}' esta vacia"}, status_code=400)
+
+    async with queue.lock:
+        queue.pauta = pauta
+        queue.slug = pauta["slug"]
+        queue.indice = -1   # arranca en limbo, primer NEXT salta al 0
+
+    tracker.mark_input()
+    return {"ok": True, "status": queue.status()}
+
+
+@app.post("/api/queue/unload")
+async def queue_unload():
+    """Descarga la cola activa (vuelve al modo libre puro)."""
+    async with queue.lock:
+        queue.pauta = None
+        queue.slug = None
+        queue.indice = -1
+    tracker.mark_input()
+    return {"ok": True}
+
+
+@app.get("/api/queue/status")
+async def queue_status():
+    """Devuelve el estado completo de la cola."""
+    return queue.status()
+
+
+@app.post("/api/queue/next")
+async def queue_next(payload: Optional[dict] = None):
+    """Avanza al siguiente item y lo reproduce. Body opcional: { voz: 'catalina' }"""
+    payload = payload or {}
+    async with queue.lock:
+        if not queue.loaded():
+            return JSONResponse({"error": "no hay cola cargada"}, status_code=400)
+        next_idx = queue.indice + 1
+        if next_idx >= queue.total():
+            return JSONResponse({"error": "ya estas en el ultimo item", "indice": queue.indice}, status_code=400)
+        queue.indice = next_idx
+        dato = queue.current_dato()
+    tracker.mark_input()
+    audio_url = await _reproducir_dato_de_cola(dato, payload.get("voz"))
+    return {"ok": True, "indice": queue.indice, "dato": dato, "audio_url": audio_url}
+
+
+@app.post("/api/queue/prev")
+async def queue_prev(payload: Optional[dict] = None):
+    """Retrocede al item anterior y lo reproduce."""
+    payload = payload or {}
+    async with queue.lock:
+        if not queue.loaded():
+            return JSONResponse({"error": "no hay cola cargada"}, status_code=400)
+        prev_idx = queue.indice - 1
+        if prev_idx < 0:
+            return JSONResponse({"error": "ya estas en el primer item", "indice": queue.indice}, status_code=400)
+        queue.indice = prev_idx
+        dato = queue.current_dato()
+    tracker.mark_input()
+    audio_url = await _reproducir_dato_de_cola(dato, payload.get("voz"))
+    return {"ok": True, "indice": queue.indice, "dato": dato, "audio_url": audio_url}
+
+
+@app.post("/api/queue/jump")
+async def queue_jump(payload: dict):
+    """Salta a un indice especifico. Body: { indice: N, voz?: 'catalina' }"""
+    try:
+        indice = int(payload.get("indice", -1))
+    except (TypeError, ValueError):
+        return JSONResponse({"error": "indice invalido"}, status_code=400)
+    async with queue.lock:
+        if not queue.loaded():
+            return JSONResponse({"error": "no hay cola cargada"}, status_code=400)
+        if indice < 0 or indice >= queue.total():
+            return JSONResponse({"error": f"indice fuera de rango (0..{queue.total()-1})"}, status_code=400)
+        queue.indice = indice
+        dato = queue.current_dato()
+    tracker.mark_input()
+    audio_url = await _reproducir_dato_de_cola(dato, payload.get("voz"))
+    return {"ok": True, "indice": queue.indice, "dato": dato, "audio_url": audio_url}
+
+
+@app.post("/api/queue/reset")
+async def queue_reset():
+    """Vuelve al estado inicial (indice -1, sin reproducir)."""
+    async with queue.lock:
+        if not queue.loaded():
+            return JSONResponse({"error": "no hay cola cargada"}, status_code=400)
+        queue.indice = -1
+    tracker.mark_input()
+    return {"ok": True, "status": queue.status()}
+
+
+@app.get("/api/queue/list")
+async def queue_list():
+    """Lista todas las pautas disponibles en disco (para selector del panel)."""
+    if not PAUTAS_DIR.exists():
+        return {"ok": True, "pautas": []}
+    items = []
+    for f in sorted(PAUTAS_DIR.glob("*.tarrobot.json")):
+        try:
+            p = json.loads(f.read_text(encoding="utf-8"))
+            audio_dir = pauta_audio_dir(p["slug"])
+            mp3s = len(list(audio_dir.glob("*.mp3"))) if audio_dir.exists() else 0
+            items.append({
+                "slug": p["slug"],
+                "episodio": p.get("episodio", ""),
+                "total": len(p.get("datos", [])),
+                "mp3_listos": mp3s,
+                "actualizado": p.get("actualizado", ""),
+            })
+        except Exception:
+            continue
+    return {"ok": True, "pautas": items}
+
+
 @app.get("/api/ping")
 async def ping():
-    return {"ok": True, "live_clients": len(manager.live_clients), "idle_state": tracker.current_idle_state, "is_speaking": tracker.is_speaking}
+    return {
+        "ok": True,
+        "live_clients": len(manager.live_clients),
+        "idle_state": tracker.current_idle_state,
+        "is_speaking": tracker.is_speaking,
+        "queue": {
+            "loaded": queue.loaded(),
+            "slug": queue.slug,
+            "indice": queue.indice,
+            "total": queue.total(),
+        },
+    }
 
 
 # ─────────────────────────────────────────────────────────────────────────
