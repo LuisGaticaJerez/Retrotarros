@@ -89,6 +89,17 @@
       "editor": "Interplay",
       "creado": "2026-05-20",
       "fuente": "manual"
+    },
+    {
+      "id": "doom-snes-1",
+      "tema": "Doom SNES",
+      "texto": "Te voy a contar que Doom en SNES fue lanzado el 15 de septiembre de 1995 solo en Norteamerica, casi 3 anos despues del original de PC. La version tuvo que reducir graficos y sonido bastante para correr en el cartucho de 24 megabits.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1995,
+      "editor": "Williams Entertainment",
+      "creado": "2026-05-20",
+      "fuente": "LLM"
     }
   ]
 }
