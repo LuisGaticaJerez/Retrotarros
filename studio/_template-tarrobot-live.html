@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TarroBot Live</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root {
+  --mg: #FF2E88; --cy: #00E5FF; --ye: #FFD23F; --pu: #2D1B69;
+  --bo: #F5F0E8; --dk: #06030f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+
+/* MODO OVERLAY: fondo transparente (OBS Browser Source) */
+body.mode-overlay { background: transparent !important; }
+body.mode-overlay::before { content: none; }
+
+/* MODO FULLSCREEN: fondo retro completo (TV CRT) */
+body.mode-fullscreen {
+  background: var(--dk);
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+.stage { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px; }
+
+/* ─── TARROVISION ─── */
+.tarrovision {
+  width: min(90vw, 90vh, 600px);
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%);
+  border-radius: 22px;
+  padding: 18px 22px;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(0,0,0,.4);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 10px;
+}
+.tv-controls-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px; }
+.tv-led { width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, var(--mg) 60%, #7a0030 100%); box-shadow: 0 0 10px rgba(255,46,136,.8), inset 0 0 2px rgba(0,0,0,.5); }
+.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size: 11px; color: var(--ye); letter-spacing: 3px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
+.tv-channel { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--cy); letter-spacing: 2px; padding: 3px 9px; border: 1px solid rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
+.tv-screen { position: relative; background: #2a2a2f; border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 2px #3a3a3f, inset 0 0 14px rgba(0,0,0,.6); min-height: 0; }
+.tv-screen-inner { position: relative; width: 100%; height: 100%; background: #0a0820; background-image: radial-gradient(circle at 50% 50%, #1a1442 0%, #050310 80%); border-radius: 16px / 8px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 40px rgba(0,0,0,.95); display: flex; align-items: center; justify-content: center; }
+.tv-screen-inner::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.20) 2px, rgba(0,0,0,.20) 3px); z-index: 10; }
+.tv-screen-inner::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255,255,255,.10) 0%, transparent 55%), radial-gradient(ellipse 90% 50% at 50% 100%, rgba(0,229,255,.08) 0%, transparent 60%); z-index: 11; }
+.tv-controls-bottom { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; padding: 2px 4px 0; }
+.tv-knob { width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #5a5a60 0%, #2a2a30 60%, #0a0a0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.6); position: relative; }
+.tv-knob::after { content: ""; position: absolute; top: 6px; left: 50%; width: 2px; height: 10px; background: var(--ye); transform-origin: bottom center; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 4px rgba(255,210,63,.6); }
+.tv-knob.cy::after { background: var(--cy); box-shadow: 0 0 4px rgba(0,229,255,.6); transform: translateX(-50%) rotate(-30deg); }
+.tv-speaker { height: 24px; background: repeating-linear-gradient(90deg, #0a0a0e 0px, #0a0a0e 3px, #1a1a1f 3px, #1a1a1f 6px); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6); }
+
+/* ─── TARROBOT FACE ─── */
+.tarrobot-face { position: relative; width: 70%; aspect-ratio: 1.2 / 1; z-index: 5; }
+.tarrobot-face svg { width: 100%; height: 100%; display: block; shape-rendering: crispEdges; filter: drop-shadow(0 0 12px rgba(0,229,255,.4)); }
+
+/* Animaciones */
+@keyframes tb-blink { 0%, 92%, 100% { transform: scaleY(1); } 94%, 98% { transform: scaleY(0.1); } }
+.tarrobot-face .tb-eye-shape { transform-origin: center; animation: tb-blink 4s ease-in-out infinite; }
+
+@keyframes tb-talk { 0%, 100% { transform: scaleY(0.3); } 20% { transform: scaleY(1); } 40% { transform: scaleY(0.5); } 60% { transform: scaleY(1); } 80% { transform: scaleY(0.7); } }
+.is-talking .tb-mouth-talking { transform-origin: center; animation: tb-talk 0.6s ease-in-out infinite; }
+
+.tb-glasses { opacity: 0; transition: opacity .25s; }
+.is-talking .tb-glasses, .is-excited .tb-glasses { opacity: 1; }
+
+/* Toggles por estado */
+.tb-mouth-idle, .tb-mouth-talking, .tb-mouth-excited, .tb-mouth-sleep, .tb-mouth-thinking, .tb-mouth-winking, .tb-mouth-confused, .tb-mouth-glitched, .tb-mouth-fact, .tb-mouth-happy, .tb-mouth-sad, .tb-mouth-angry, .tb-mouth-loading { display: none; }
+.is-idle .tb-mouth-idle { display: block; }
+.is-talking .tb-mouth-talking { display: block; }
+.is-excited .tb-mouth-excited { display: block; }
+.is-sleep .tb-mouth-sleep { display: block; }
+.is-thinking .tb-mouth-thinking { display: block; }
+.is-winking .tb-mouth-winking { display: block; }
+.is-confused .tb-mouth-confused { display: block; }
+.is-glitched .tb-mouth-glitched { display: block; }
+.is-fact .tb-mouth-fact { display: block; }
+.is-happy .tb-mouth-happy { display: block; }
+.is-sad .tb-mouth-sad { display: block; }
+.is-angry .tb-mouth-angry { display: block; }
+.is-loading .tb-mouth-loading { display: block; }
+/* bored y drowsy reusan boca thinking/sleep */
+.is-bored .tb-mouth-idle { display: block; }
+.is-drowsy .tb-mouth-sleep { display: block; }
+
+.tb-eyes-default, .tb-eyes-excited, .tb-eyes-sleep, .tb-eyes-thinking, .tb-eyes-winking, .tb-eyes-confused, .tb-eyes-glitched, .tb-eyes-happy, .tb-eyes-sad, .tb-eyes-angry, .tb-eyes-loading { display: none; }
+.is-idle .tb-eyes-default, .is-talking .tb-eyes-default, .is-fact .tb-eyes-default { display: block; }
+.is-excited .tb-eyes-excited { display: block; }
+.is-sleep .tb-eyes-sleep, .is-drowsy .tb-eyes-sleep { display: block; }
+.is-thinking .tb-eyes-thinking, .is-bored .tb-eyes-thinking { display: block; }
+.is-winking .tb-eyes-winking { display: block; }
+.is-confused .tb-eyes-confused { display: block; }
+.is-glitched .tb-eyes-glitched { display: block; }
+.is-happy .tb-eyes-happy { display: block; }
+.is-sad .tb-eyes-sad { display: block; }
+.is-angry .tb-eyes-angry { display: block; }
+.is-loading .tb-eyes-loading { display: block; }
+
+.tb-extras { display: none; }
+.is-thinking .tb-extras-thinking, .is-bored .tb-extras-thinking,
+.is-confused .tb-extras-confused, .is-fact .tb-extras-fact,
+.is-sad .tb-extras-sad, .is-angry .tb-extras-angry,
+.is-loading .tb-extras-loading, .is-sleep .tb-extras-sleep,
+.is-drowsy .tb-extras-sleep { display: block; }
+
+@keyframes tb-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+.tb-extras-thinking, .tb-extras-confused { animation: tb-bounce 1.2s ease-in-out infinite; transform-origin: center; }
+@keyframes tb-flash { 0%,100%{opacity:0;transform:scale(0.8)} 20%,80%{opacity:1;transform:scale(1.05)} }
+.tb-extras-fact { animation: tb-flash 1.5s ease-in-out infinite; transform-origin: center; }
+@keyframes tb-rotate-dots { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+.tb-extras-loading { transform-origin: 60px 14px; animation: tb-rotate-dots 1.4s linear infinite; }
+@keyframes tb-tear-drop { 0%{transform:translateY(0);opacity:1} 90%{transform:translateY(40px);opacity:1} 100%{transform:translateY(45px);opacity:0} }
+.tb-tear { animation: tb-tear-drop 2s ease-in infinite; transform-origin: center; }
+@keyframes tb-glitch { 0%,100%{transform:translate(0,0)} 20%{transform:translate(2px,-1px)} 40%{transform:translate(-2px,1px)} 60%{transform:translate(1px,2px)} 80%{transform:translate(-1px,-2px)} }
+.is-glitched .tarrobot-face svg { animation: tb-glitch 0.18s ease-in-out infinite; }
+@keyframes tb-anger-shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-1px)} 75%{transform:translateX(1px)} }
+.is-angry .tarrobot-face svg { animation: tb-anger-shake 0.15s ease-in-out infinite; }
+
+/* Caption text overlay (cuando habla, muestra el dato debajo) */
+.live-caption {
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 80%;
+  padding: 14px 24px;
+  background: rgba(6, 3, 15, 0.85);
+  border: 1px solid var(--cy);
+  border-radius: 6px;
+  font-family: 'Orbitron'; font-weight: 700; font-size: 22px;
+  color: #fff;
+  letter-spacing: .5px;
+  line-height: 1.4;
+  text-align: center;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity .3s;
+  box-shadow: 0 0 24px rgba(0,229,255,.2);
+}
+.live-caption.show { opacity: 1; }
+.live-caption .label { display: block; font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 3px; margin-bottom: 8px; }
+
+/* En modo overlay, el caption tiene fondo opaco con border */
+body.mode-overlay .live-caption {
+  background: rgba(6, 3, 15, 0.92);
+}
+
+/* Status badge arriba derecha en overlay (debug, oculto en prod) */
+.ws-status {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  font-family: 'Share Tech Mono';
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  background: rgba(0,0,0,.4);
+  border-radius: 3px;
+  z-index: 200;
+  display: none; /* mostrar con ?debug=1 */
+}
+body.debug .ws-status { display: block; }
+</style>
+</head>
+<body class="mode-overlay">
+
+<div class="ws-status" id="wsStatus">conectando...</div>
+
+<div class="stage">
+  <div class="tarrovision">
+    <div class="tv-controls-top">
+      <span class="tv-led"></span>
+      <span class="tv-brand">TARROBOT</span>
+      <span class="tv-channel" id="tvChannel">CH 42</span>
+    </div>
+    <div class="tv-screen"><div class="tv-screen-inner">
+      <div class="tarrobot-face is-idle" id="tarrobotFace">
+        <svg viewBox="0 0 120 100" preserveAspectRatio="xMidYMid meet">
+          <!-- OJOS DEFAULT (idle/talking/fact) -->
+          <g class="tb-eyes-default">
+            <g class="tb-eye-shape"><rect x="28" y="34" width="18" height="18" fill="#00E5FF"/><rect x="34" y="40" width="6" height="6" fill="#0a0820"/></g>
+            <g class="tb-eye-shape"><rect x="74" y="34" width="18" height="18" fill="#00E5FF"/><rect x="80" y="40" width="6" height="6" fill="#0a0820"/></g>
+          </g>
+          <g class="tb-eyes-excited">
+            <rect x="32" y="30" width="14" height="4" fill="#FFD23F"/><rect x="36" y="26" width="6" height="14" fill="#FFD23F"/>
+            <rect x="74" y="30" width="14" height="4" fill="#FFD23F"/><rect x="78" y="26" width="6" height="14" fill="#FFD23F"/>
+          </g>
+          <g class="tb-eyes-sleep">
+            <rect x="28" y="42" width="18" height="4" fill="#00E5FF"/>
+            <rect x="74" y="42" width="18" height="4" fill="#00E5FF"/>
+          </g>
+          <g class="tb-eyes-thinking">
+            <rect x="28" y="34" width="18" height="18" fill="#00E5FF"/><rect x="38" y="36" width="6" height="6" fill="#0a0820"/>
+            <rect x="74" y="34" width="18" height="18" fill="#00E5FF"/><rect x="84" y="36" width="6" height="6" fill="#0a0820"/>
+          </g>
+          <g class="tb-eyes-winking">
+            <rect x="28" y="34" width="18" height="18" fill="#00E5FF"/><rect x="34" y="40" width="6" height="6" fill="#0a0820"/>
+            <rect x="74" y="42" width="18" height="4" fill="#00E5FF"/><rect x="78" y="40" width="2" height="2" fill="#00E5FF"/><rect x="86" y="40" width="2" height="2" fill="#00E5FF"/>
+          </g>
+          <g class="tb-eyes-confused">
+            <rect x="28" y="34" width="18" height="18" fill="#00E5FF"/><rect x="34" y="36" width="6" height="6" fill="#0a0820"/>
+            <rect x="74" y="34" width="18" height="18" fill="#00E5FF"/><rect x="80" y="46" width="6" height="6" fill="#0a0820"/>
+          </g>
+          <g class="tb-eyes-glitched">
+            <rect x="26" y="34" width="18" height="18" fill="#FF2E88" opacity=".7"/><rect x="30" y="34" width="18" height="18" fill="#00E5FF" opacity=".7"/><rect x="34" y="40" width="6" height="6" fill="#0a0820"/>
+            <rect x="72" y="34" width="18" height="18" fill="#FF2E88" opacity=".7"/><rect x="76" y="34" width="18" height="18" fill="#00E5FF" opacity=".7"/><rect x="80" y="40" width="6" height="6" fill="#0a0820"/>
+          </g>
+          <g class="tb-eyes-happy">
+            <rect x="28" y="40" width="4" height="3" fill="#00E5FF"/><rect x="32" y="36" width="4" height="3" fill="#00E5FF"/><rect x="36" y="32" width="4" height="3" fill="#00E5FF"/><rect x="40" y="36" width="4" height="3" fill="#00E5FF"/><rect x="44" y="40" width="4" height="3" fill="#00E5FF"/>
+            <rect x="72" y="40" width="4" height="3" fill="#00E5FF"/><rect x="76" y="36" width="4" height="3" fill="#00E5FF"/><rect x="80" y="32" width="4" height="3" fill="#00E5FF"/><rect x="84" y="36" width="4" height="3" fill="#00E5FF"/><rect x="88" y="40" width="4" height="3" fill="#00E5FF"/>
+          </g>
+          <g class="tb-eyes-sad">
+            <rect x="28" y="24" width="4" height="3" fill="#00E5FF"/><rect x="32" y="26" width="4" height="3" fill="#00E5FF"/><rect x="36" y="28" width="4" height="3" fill="#00E5FF"/><rect x="40" y="30" width="4" height="3" fill="#00E5FF"/>
+            <rect x="28" y="38" width="18" height="18" fill="#00E5FF"/><rect x="34" y="46" width="6" height="6" fill="#0a0820"/>
+            <rect x="76" y="30" width="4" height="3" fill="#00E5FF"/><rect x="80" y="28" width="4" height="3" fill="#00E5FF"/><rect x="84" y="26" width="4" height="3" fill="#00E5FF"/><rect x="88" y="24" width="4" height="3" fill="#00E5FF"/>
+            <rect x="74" y="38" width="18" height="18" fill="#00E5FF"/><rect x="80" y="46" width="6" height="6" fill="#0a0820"/>
+          </g>
+          <g class="tb-eyes-angry">
+            <rect x="28" y="22" width="4" height="3" fill="#FF2E88"/><rect x="32" y="24" width="4" height="3" fill="#FF2E88"/><rect x="36" y="26" width="4" height="3" fill="#FF2E88"/><rect x="40" y="28" width="6" height="3" fill="#FF2E88"/>
+            <rect x="28" y="38" width="18" height="14" fill="#FF2E88"/><rect x="34" y="42" width="6" height="6" fill="#0a0820"/>
+            <rect x="74" y="28" width="6" height="3" fill="#FF2E88"/><rect x="80" y="26" width="4" height="3" fill="#FF2E88"/><rect x="84" y="24" width="4" height="3" fill="#FF2E88"/><rect x="88" y="22" width="4" height="3" fill="#FF2E88"/>
+            <rect x="74" y="38" width="18" height="14" fill="#FF2E88"/><rect x="80" y="42" width="6" height="6" fill="#0a0820"/>
+          </g>
+          <g class="tb-eyes-loading">
+            <rect x="28" y="36" width="18" height="3" fill="#00E5FF"/><rect x="28" y="42" width="18" height="3" fill="#00E5FF" opacity=".7"/><rect x="28" y="48" width="18" height="3" fill="#00E5FF" opacity=".4"/>
+            <rect x="74" y="36" width="18" height="3" fill="#00E5FF"/><rect x="74" y="42" width="18" height="3" fill="#00E5FF" opacity=".7"/><rect x="74" y="48" width="18" height="3" fill="#00E5FF" opacity=".4"/>
+          </g>
+
+          <!-- LENTES -->
+          <g class="tb-glasses">
+            <rect x="24" y="30" width="26" height="26" fill="none" stroke="#0a0820" stroke-width="3"/>
+            <rect x="26" y="32" width="22" height="22" fill="rgba(255,255,255,.08)"/>
+            <rect x="30" y="34" width="4" height="4" fill="rgba(255,255,255,.6)"/>
+            <rect x="70" y="30" width="26" height="26" fill="none" stroke="#0a0820" stroke-width="3"/>
+            <rect x="72" y="32" width="22" height="22" fill="rgba(255,255,255,.08)"/>
+            <rect x="76" y="34" width="4" height="4" fill="rgba(255,255,255,.6)"/>
+            <rect x="50" y="42" width="20" height="3" fill="#0a0820"/>
+          </g>
+
+          <!-- BOCAS -->
+          <g class="tb-mouth-idle"><rect x="42" y="68" width="6" height="4" fill="#FFD23F"/><rect x="48" y="72" width="24" height="4" fill="#FFD23F"/><rect x="72" y="68" width="6" height="4" fill="#FFD23F"/></g>
+          <g class="tb-mouth-talking"><rect x="48" y="68" width="24" height="12" fill="#FFD23F" rx="2"/></g>
+          <g class="tb-mouth-excited"><rect x="50" y="62" width="20" height="18" fill="#FFD23F" rx="10"/><rect x="54" y="66" width="12" height="10" fill="#0a0820" rx="5"/></g>
+          <g class="tb-mouth-sleep"><rect x="50" y="72" width="20" height="3" fill="#FFD23F"/></g>
+          <g class="tb-mouth-thinking"><rect x="50" y="72" width="14" height="3" fill="#FFD23F"/></g>
+          <g class="tb-mouth-winking"><rect x="44" y="68" width="6" height="4" fill="#FFD23F"/><rect x="50" y="72" width="18" height="4" fill="#FFD23F"/><rect x="68" y="68" width="6" height="6" fill="#FFD23F"/><rect x="74" y="64" width="4" height="4" fill="#FFD23F"/></g>
+          <g class="tb-mouth-confused"><rect x="46" y="70" width="4" height="3" fill="#FFD23F"/><rect x="50" y="73" width="4" height="3" fill="#FFD23F"/><rect x="54" y="70" width="4" height="3" fill="#FFD23F"/><rect x="58" y="73" width="4" height="3" fill="#FFD23F"/><rect x="62" y="70" width="4" height="3" fill="#FFD23F"/><rect x="66" y="73" width="4" height="3" fill="#FFD23F"/><rect x="70" y="70" width="4" height="3" fill="#FFD23F"/></g>
+          <g class="tb-mouth-glitched"><rect x="42" y="70" width="8" height="4" fill="#FFD23F"/><rect x="54" y="72" width="4" height="3" fill="#FF2E88"/><rect x="62" y="68" width="6" height="5" fill="#FFD23F"/><rect x="72" y="71" width="8" height="4" fill="#00E5FF"/></g>
+          <g class="tb-mouth-fact"><rect x="48" y="72" width="24" height="4" fill="#FFD23F"/></g>
+          <g class="tb-mouth-happy"><rect x="40" y="60" width="40" height="4" fill="#FFD23F"/><rect x="36" y="64" width="4" height="4" fill="#FFD23F"/><rect x="80" y="64" width="4" height="4" fill="#FFD23F"/><rect x="40" y="68" width="40" height="4" fill="#FFD23F"/><rect x="44" y="72" width="32" height="4" fill="#FFD23F"/><rect x="48" y="76" width="24" height="3" fill="#FF2E88"/></g>
+          <g class="tb-mouth-sad"><rect x="46" y="76" width="4" height="3" fill="#FFD23F"/><rect x="50" y="74" width="4" height="3" fill="#FFD23F"/><rect x="54" y="72" width="12" height="3" fill="#FFD23F"/><rect x="66" y="74" width="4" height="3" fill="#FFD23F"/><rect x="70" y="76" width="4" height="3" fill="#FFD23F"/></g>
+          <g class="tb-mouth-angry"><rect x="46" y="72" width="28" height="4" fill="#FF2E88"/></g>
+          <g class="tb-mouth-loading"><rect x="44" y="72" width="32" height="4" fill="#0a0820" stroke="#FFD23F" stroke-width="1"/><rect x="46" y="73" width="14" height="2" fill="#FFD23F"/></g>
+
+          <!-- EXTRAS -->
+          <g class="tb-extras tb-extras-thinking"><text x="98" y="20" font-family="Press Start 2P, monospace" font-size="20" fill="#FFD23F">?</text></g>
+          <g class="tb-extras tb-extras-confused"><text x="20" y="18" font-family="Press Start 2P, monospace" font-size="14" fill="#FF2E88">?</text><text x="98" y="22" font-family="Press Start 2P, monospace" font-size="16" fill="#FFD23F">!</text></g>
+          <g class="tb-extras tb-extras-fact"><rect x="34" y="6" width="52" height="20" fill="#FFD23F"/><text x="42" y="20" font-family="Press Start 2P, monospace" font-size="12" fill="#0a0820">FACT!</text><rect x="28" y="10" width="4" height="4" fill="#FFD23F"/><rect x="88" y="10" width="4" height="4" fill="#FFD23F"/><rect x="24" y="16" width="4" height="4" fill="#FFD23F"/><rect x="92" y="16" width="4" height="4" fill="#FFD23F"/></g>
+          <g class="tb-extras tb-extras-sad"><g class="tb-tear"><rect x="40" y="58" width="3" height="6" fill="#00E5FF" opacity=".9"/><rect x="40" y="60" width="3" height="2" fill="#fff" opacity=".7"/></g></g>
+          <g class="tb-extras tb-extras-angry"><rect x="12" y="12" width="4" height="4" fill="#FF2E88" opacity=".8"/><rect x="20" y="8" width="4" height="4" fill="#FF2E88" opacity=".7"/><rect x="100" y="12" width="4" height="4" fill="#FF2E88" opacity=".8"/><rect x="108" y="8" width="4" height="4" fill="#FF2E88" opacity=".7"/></g>
+          <g class="tb-extras tb-extras-loading"><circle cx="48" cy="14" r="3" fill="#FFD23F"/><circle cx="60" cy="14" r="3" fill="#FF2E88"/><circle cx="72" cy="14" r="3" fill="#00E5FF"/></g>
+          <g class="tb-extras tb-extras-sleep"><text x="86" y="22" font-family="Press Start 2P, monospace" font-size="14" fill="#FFD23F">Z</text><text x="96" y="14" font-family="Press Start 2P, monospace" font-size="10" fill="#FFD23F">z</text></g>
+        </svg>
+      </div>
+    </div></div>
+    <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+  </div>
+</div>
+
+<div class="live-caption" id="liveCaption">
+  <span class="label" id="captionLabel">DATO CURIOSO</span>
+  <span id="captionText">Esperando...</span>
+</div>
+
+<audio id="ttsAudio" preload="auto"></audio>
+
+<script>
+// Modo desde query string
+const params = new URLSearchParams(window.location.search);
+const mode = params.get('mode') || 'overlay';
+const debug = params.get('debug') === '1';
+
+document.body.className = 'mode-' + mode + (debug ? ' debug' : '');
+
+const face = document.getElementById('tarrobotFace');
+const caption = document.getElementById('liveCaption');
+const captionLabel = document.getElementById('captionLabel');
+const captionText = document.getElementById('captionText');
+const audio = document.getElementById('ttsAudio');
+const statusEl = document.getElementById('wsStatus');
+
+let estadoActual = 'idle';
+let prevEstado = 'idle';
+let captionTimeout = null;
+
+function setEstado(nuevoEstado) {
+  prevEstado = estadoActual;
+  estadoActual = nuevoEstado;
+  face.className = 'tarrobot-face is-' + nuevoEstado;
+}
+
+function setCaption(label, texto, durationMs = 8000) {
+  if (captionTimeout) clearTimeout(captionTimeout);
+  captionLabel.textContent = '⚡ ' + label;
+  captionText.textContent = texto;
+  caption.classList.add('show');
+  if (durationMs > 0) {
+    captionTimeout = setTimeout(() => {
+      caption.classList.remove('show');
+    }, durationMs);
+  }
+}
+
+function connectWebSocket() {
+  const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
+  const ws = new WebSocket(`${proto}://${window.location.host}/ws/live`);
+
+  ws.onopen = () => {
+    statusEl.textContent = 'conectado';
+    statusEl.style.color = '#00E5FF';
+  };
+
+  ws.onclose = () => {
+    statusEl.textContent = 'desconectado · reintentando...';
+    statusEl.style.color = '#FF2E88';
+    setTimeout(connectWebSocket, 2000);
+  };
+
+  ws.onerror = (e) => {
+    console.error('WS error', e);
+  };
+
+  ws.onmessage = (ev) => {
+    try {
+      const msg = JSON.parse(ev.data);
+      handleMessage(msg);
+    } catch (e) {
+      console.error('Mensaje invalido', ev.data);
+    }
+  };
+}
+
+function handleMessage(msg) {
+  console.log('WS msg', msg);
+
+  if (msg.tipo === 'estado') {
+    setEstado(msg.estado);
+    // Si es un estado "silencioso", ocultar caption
+    if (['idle', 'sleep', 'bored', 'drowsy'].includes(msg.estado)) {
+      caption.classList.remove('show');
+    }
+  } else if (msg.tipo === 'hablar') {
+    setEstado(msg.estado || 'talking');
+    setCaption(msg.label || 'DATO CURIOSO', msg.texto || '', 12000);
+    if (msg.audio_url) {
+      audio.src = msg.audio_url + '?t=' + Date.now();
+      audio.play().catch(e => console.error('Audio play fail', e));
+      // Cuando termine el audio, volver a idle
+      audio.onended = () => {
+        setEstado('idle');
+      };
+    }
+  }
+}
+
+connectWebSocket();
+</script>
+
+</body>
+</html>

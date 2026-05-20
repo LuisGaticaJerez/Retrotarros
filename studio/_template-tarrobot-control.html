@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>TarroBot · Control</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root {
+  --mg: #FF2E88; --cy: #00E5FF; --ye: #FFD23F;
+  --bg: #06030f; --card: rgba(20, 10, 40, 0.92);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body {
+  background: var(--bg);
+  background-image: radial-gradient(ellipse at top, rgba(255,46,136,.08), transparent 60%);
+  font-family: 'Share Tech Mono', monospace;
+  color: #fff;
+  min-height: 100vh;
+  padding: 16px;
+  padding-bottom: 60px;
+}
+h1 {
+  font-family: 'Press Start 2P'; font-size: 14px; color: var(--mg);
+  letter-spacing: 3px; text-shadow: 0 0 12px rgba(255,46,136,.5);
+  margin-bottom: 4px;
+}
+.sub { font-size: 11px; color: rgba(255,255,255,.5); letter-spacing: 2px; margin-bottom: 22px; }
+
+.card {
+  background: var(--card);
+  border: 1px solid rgba(0,229,255,.25);
+  border-radius: 8px;
+  padding: 14px 14px 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 0 18px rgba(0,229,255,.08);
+}
+.card h2 {
+  font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy);
+  letter-spacing: 2px; margin-bottom: 12px;
+}
+
+input[type="text"], input[type="number"] {
+  width: 100%;
+  background: rgba(0,0,0,.5);
+  border: 1px solid rgba(0,229,255,.3);
+  color: #fff;
+  font-family: 'Share Tech Mono';
+  font-size: 15px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  outline: none;
+  margin-bottom: 8px;
+}
+input[type="text"]:focus, input[type="number"]:focus { border-color: var(--cy); }
+
+.btn {
+  display: inline-block;
+  background: rgba(255,46,136,.15);
+  border: 1px solid var(--mg);
+  color: var(--mg);
+  font-family: 'Press Start 2P'; font-size: 10px;
+  padding: 12px 16px;
+  letter-spacing: 1.5px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .15s;
+  text-transform: uppercase;
+}
+.btn:active { background: var(--mg); color: var(--bg); transform: scale(0.97); }
+.btn.cy { background: rgba(0,229,255,.12); border-color: var(--cy); color: var(--cy); }
+.btn.cy:active { background: var(--cy); color: var(--bg); }
+.btn.ye { background: rgba(255,210,63,.12); border-color: var(--ye); color: var(--ye); }
+.btn.ye:active { background: var(--ye); color: var(--bg); }
+.btn.full { width: 100%; }
+
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn-row .btn { flex: 1; min-width: 70px; }
+
+.estados-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.estados-grid .btn {
+  font-size: 9px;
+  padding: 12px 4px;
+  letter-spacing: 0.5px;
+}
+
+.row-inline { display: flex; gap: 8px; align-items: center; }
+.row-inline input { flex: 1; margin-bottom: 0; }
+
+.log {
+  font-size: 10px; color: rgba(255,255,255,.4);
+  font-family: 'Share Tech Mono';
+  background: rgba(0,0,0,.4);
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: 6px;
+  max-height: 80px;
+  overflow-y: auto;
+}
+.log .ok { color: var(--cy); }
+.log .err { color: var(--mg); }
+
+.toggle-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.toggle-row label { font-size: 11px; color: rgba(255,255,255,.7); }
+.toggle-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--cy); }
+</style>
+</head>
+<body>
+
+<h1>⚡ TARROBOT CONTROL</h1>
+<div class="sub">PANEL EN VIVO · RETROTARROS STUDIO</div>
+
+<!-- CUENTAME -->
+<div class="card">
+  <h2>💬 CUÉNTAME DE...</h2>
+  <input type="text" id="cuentameInput" placeholder="Ej: Super Mario 64, Doom SNES..." autocomplete="off">
+  <div class="toggle-row">
+    <input type="checkbox" id="genIfMissing" checked>
+    <label for="genIfMissing">Generar con Claude si no esta en la DB</label>
+  </div>
+  <button class="btn full cy" onclick="cuentame()">CONTAR DATO ▸</button>
+</div>
+
+<!-- ESTADOS MANUALES -->
+<div class="card">
+  <h2>😀 ESTADOS · CARITAS</h2>
+  <div class="estados-grid">
+    <button class="btn cy" onclick="setState('idle')">idle</button>
+    <button class="btn cy" onclick="setState('thinking')">thinking</button>
+    <button class="btn cy" onclick="setState('bored')">bored</button>
+    <button class="btn cy" onclick="setState('drowsy')">drowsy</button>
+    <button class="btn cy" onclick="setState('sleep')">sleep</button>
+    <button class="btn cy" onclick="setState('winking')">winking</button>
+    <button class="btn ye" onclick="setState('talking')">talking</button>
+    <button class="btn ye" onclick="setState('happy')">happy</button>
+    <button class="btn ye" onclick="setState('excited')">excited</button>
+    <button class="btn ye" onclick="setState('fact')">fact</button>
+    <button class="btn" onclick="setState('confused')">confused</button>
+    <button class="btn" onclick="setState('sad')">sad</button>
+    <button class="btn" onclick="setState('angry')">angry</button>
+    <button class="btn" onclick="setState('glitched')">glitched</button>
+    <button class="btn" onclick="setState('loading')">loading</button>
+  </div>
+</div>
+
+<!-- DIAGNOSTICO -->
+<div class="card">
+  <h2>📡 DIAGNÓSTICO</h2>
+  <div class="row-inline" style="margin-bottom:8px;">
+    <button class="btn cy" onclick="ping()" style="flex:1">PING</button>
+    <button class="btn ye" onclick="clearLog()" style="flex:0">CLR</button>
+  </div>
+  <div class="log" id="log"></div>
+</div>
+
+<script>
+const logEl = document.getElementById('log');
+
+// Crea linea de log de forma segura (sin innerHTML, evita XSS)
+function logMsg(msg, type) {
+  const time = new Date().toTimeString().slice(0,8);
+  const line = document.createElement('div');
+  if (type) line.className = type;
+  line.textContent = '[' + time + '] ' + msg;
+  logEl.insertBefore(line, logEl.firstChild);
+  // Limitar a 40 lineas
+  while (logEl.childNodes.length > 40) {
+    logEl.removeChild(logEl.lastChild);
+  }
+}
+
+function clearLog() {
+  while (logEl.firstChild) logEl.removeChild(logEl.firstChild);
+}
+
+async function post(endpoint, body) {
+  try {
+    const r = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body || {}),
+    });
+    const data = await r.json();
+    if (!r.ok) {
+      logMsg('ERR ' + endpoint + ': ' + (data.error || r.status), 'err');
+      return null;
+    }
+    return data;
+  } catch (e) {
+    logMsg('FAIL ' + endpoint + ': ' + e.message, 'err');
+    return null;
+  }
+}
+
+async function setState(estado) {
+  const data = await post('/api/state', { estado: estado });
+  if (data) logMsg('-> estado: ' + estado, 'ok');
+}
+
+async function cuentame() {
+  const tema = document.getElementById('cuentameInput').value.trim();
+  if (!tema) { logMsg('falta el tema', 'err'); return; }
+  const gen = document.getElementById('genIfMissing').checked;
+  logMsg('procesando: "' + tema + '"...');
+  const data = await post('/api/cuentame', { tema: tema, generate_if_missing: gen });
+  if (data && data.ok) {
+    logMsg('OK ' + data.dato.tema + ' (' + data.dato.estado + ')', 'ok');
+  }
+}
+
+async function ping() {
+  try {
+    const r = await fetch('/api/ping');
+    const d = await r.json();
+    logMsg('ping OK -- ' + d.live_clients + ' pantalla(s) conectada(s)', 'ok');
+  } catch (e) {
+    logMsg('ping FAIL: ' + e.message, 'err');
+  }
+}
+
+document.getElementById('cuentameInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') cuentame();
+});
+
+logMsg('Listo. Pulsa un boton.', 'ok');
+ping();
+</script>
+
+</body>
+</html>
