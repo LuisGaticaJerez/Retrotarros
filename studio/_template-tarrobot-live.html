@@ -79,7 +79,7 @@ body.lipsync-active.is-talking .tb-mouth-talking {
 .is-talking .tb-glasses, .is-excited .tb-glasses { opacity: 1; }
 
 /* Toggles por estado */
-.tb-mouth-idle, .tb-mouth-talking, .tb-mouth-excited, .tb-mouth-sleep, .tb-mouth-thinking, .tb-mouth-winking, .tb-mouth-confused, .tb-mouth-glitched, .tb-mouth-fact, .tb-mouth-happy, .tb-mouth-sad, .tb-mouth-angry, .tb-mouth-loading, .tb-mouth-bored, .tb-mouth-drowsy { display: none; }
+.tb-mouth-idle, .tb-mouth-talking, .tb-mouth-excited, .tb-mouth-sleep, .tb-mouth-thinking, .tb-mouth-winking, .tb-mouth-confused, .tb-mouth-glitched, .tb-mouth-fact, .tb-mouth-happy, .tb-mouth-sad, .tb-mouth-angry, .tb-mouth-loading, .tb-mouth-bored, .tb-mouth-drowsy, .tb-mouth-whistling { display: none; }
 .is-idle .tb-mouth-idle { display: block; }
 .is-talking .tb-mouth-talking { display: block; }
 .is-excited .tb-mouth-excited { display: block; }
@@ -95,6 +95,28 @@ body.lipsync-active.is-talking .tb-mouth-talking {
 .is-loading .tb-mouth-loading { display: block; }
 .is-bored .tb-mouth-bored { display: block; }
 .is-drowsy .tb-mouth-drowsy { display: block; }
+.is-whistling .tb-mouth-whistling { display: block; }
+
+/* Sprint 8.1b: animacion silbando - la O de la boca pulsa al ritmo */
+@keyframes tb-whistle { 0%, 100% { transform: scale(0.85); } 50% { transform: scale(1.1); } }
+.is-whistling .tb-mouth-whistling { transform-origin: 60px 73px; animation: tb-whistle 0.6s ease-in-out infinite; }
+
+/* Notas musicales saliendo de la boca - solo visibles cuando whistling */
+.tb-notas-musicales { opacity: 0; pointer-events: none; }
+.is-whistling .tb-notas-musicales { opacity: 1; }
+.tb-nota-1, .tb-nota-2, .tb-nota-3 {
+  transform-origin: 60px 70px;
+  animation: tb-nota-flotar 2.4s linear infinite;
+}
+.tb-nota-2 { animation-delay: 0.8s; }
+.tb-nota-3 { animation-delay: 1.6s; }
+@keyframes tb-nota-flotar {
+  0%   { transform: translate(0, 0) rotate(-8deg); opacity: 0; }
+  12%  { opacity: 1; }
+  50%  { transform: translate(14px, -38px) rotate(8deg); opacity: 1; }
+  88%  { opacity: 0.4; }
+  100% { transform: translate(28px, -76px) rotate(-4deg); opacity: 0; }
+}
 
 /* bored: bostezo lento - boca cierra y abre */
 @keyframes tb-yawn { 0%, 100% { transform: scaleY(0.2); } 50% { transform: scaleY(1.4); } }
@@ -361,6 +383,27 @@ body.debug .ws-status { display: block; }
           <g class="tb-mouth-bored"><rect x="50" y="62" width="20" height="20" fill="#FFD23F" rx="10"/><rect x="54" y="66" width="12" height="12" fill="#0a0820" rx="6"/></g>
           <!-- BOCA DROWSY: linea descendente, cansado -->
           <g class="tb-mouth-drowsy"><rect x="46" y="72" width="4" height="4" fill="#FFD23F"/><rect x="50" y="74" width="20" height="3" fill="#FFD23F"/><rect x="70" y="76" width="4" height="3" fill="#FFD23F"/></g>
+          <!-- Sprint 8.1: boca "OoO" silbando (pixel-art SNES style) -->
+          <g class="tb-mouth-whistling">
+            <rect x="54" y="66" width="12" height="12" fill="#FFD23F" rx="6"/>
+            <rect x="57" y="69" width="6" height="6" fill="#0a0820" rx="3"/>
+          </g>
+          <!-- Notas musicales que flotan saliendo de la boca cuando silba -->
+          <g class="tb-notas-musicales">
+            <g class="tb-nota-1">
+              <rect x="78" y="60" width="3" height="14" fill="#FFD23F"/>
+              <rect x="73" y="70" width="8" height="5" fill="#FFD23F" rx="2"/>
+            </g>
+            <g class="tb-nota-2">
+              <rect x="76" y="62" width="3" height="12" fill="#00E5FF"/>
+              <rect x="78" y="62" width="6" height="3" fill="#00E5FF"/>
+              <rect x="71" y="71" width="8" height="5" fill="#00E5FF" rx="2"/>
+            </g>
+            <g class="tb-nota-3">
+              <rect x="80" y="60" width="3" height="14" fill="#FF2E88"/>
+              <rect x="75" y="70" width="8" height="5" fill="#FF2E88" rx="2"/>
+            </g>
+          </g>
 
           <!-- EXTRAS -->
           <g class="tb-extras tb-extras-thinking"><text x="98" y="20" font-family="Press Start 2P, monospace" font-size="20" fill="#FFD23F">?</text></g>

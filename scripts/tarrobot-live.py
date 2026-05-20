@@ -480,8 +480,9 @@ async def set_state(payload: dict):
     Body: { "estado": "idle|talking|excited|sleep|thinking|winking|confused|glitched|fact|happy|sad|angry|loading|bored|drowsy" }
     """
     estado = payload.get("estado", "idle")
-    if estado not in ESTADOS + ["bored", "drowsy"]:
-        return JSONResponse({"error": f"Estado invalido. Validos: {ESTADOS + ['bored', 'drowsy']}"}, status_code=400)
+    estados_validos = ESTADOS + ["bored", "drowsy"]
+    if estado not in estados_validos:
+        return JSONResponse({"error": f"Estado invalido. Validos: {estados_validos}"}, status_code=400)
 
     tracker.mark_input()  # reset idle timer
     tracker.current_idle_state = estado
