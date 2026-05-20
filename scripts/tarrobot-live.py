@@ -546,6 +546,169 @@ async def audio_finished():
     return {"ok": True}
 
 
+# ─────────────────────────────────────────────────────────────────────────
+# STT (Speech-to-Text con Whisper) + Intent parsing
+# ─────────────────────────────────────────────────────────────────────────
+
+_whisper_model = None
+
+def get_whisper():
+    """Lazy load del modelo Whisper. Primera llamada toma ~5s."""
+    global _whisper_model
+    if _whisper_model is None:
+        import whisper
+        print("[STT] cargando modelo Whisper 'base'... (~5s primera vez)")
+        _whisper_model = whisper.load_model("base")
+        print("[STT] modelo Whisper listo")
+    return _whisper_model
+
+
+def transcribir_audio_sync(audio_bytes: bytes) -> str:
+    """Transcribe audio bytes a texto. Usa archivo temp porque Whisper lee path."""
+    import tempfile
+    import os as _os
+
+    # El browser manda webm/opus por defecto. Whisper usa ffmpeg interno.
+    with tempfile.NamedTemporaryFile(suffix=".webm", delete=False) as f:
+        f.write(audio_bytes)
+        tmp_path = f.name
+
+    try:
+        model = get_whisper()
+        result = model.transcribe(tmp_path, language="es", fp16=False)
+        return result.get("text", "").strip()
+    finally:
+        try:
+            _os.unlink(tmp_path)
+        except Exception:
+            pass
+
+
+def parsear_intent(texto: str) -> dict:
+    """
+    Heuristica: detecta accion desde texto transcrito y extrae parametros.
+    Devuelve {"accion": str, "params": dict}.
+    """
+    import re as _re
+    t = texto.lower().strip()
+    # quitar signos
+    t_clean = _re.sub(r"[¿¡\?\!\.\,]", " ", t).strip()
+
+    # 1. Despedida (chequear primero para no confundir con "chao" en medio de frase)
+    for kw in ["chao", "adios", "adiós", "bye", "hasta luego", "nos vemos"]:
+        if kw in t_clean:
+            return {"accion": "despedir", "params": {}}
+
+    # 2. Opinar (antes que saludar porque "opinas" puede contener "h" como "hola")
+    if any(x in t_clean for x in ["que opinas", "opinas", "que piensas", "te parece", "tu opinion"]):
+        # Extraer tema despues de "de" o "sobre" o "del"
+        m = _re.search(r"(?:de|sobre|del|de la|del?)\s+(.+?)$", t_clean)
+        if m:
+            tema = m.group(1).strip()
+            return {"accion": "opinar", "params": {"tema": tema}}
+        return {"accion": "opinar", "params": {"tema": texto.strip()}}
+
+    # 3. Precio
+    if any(x in t_clean for x in ["precio", "vale", "cuanto cuesta", "dolares", "dólares", "usd"]):
+        # Extraer numero
+        m = _re.search(r"(\d[\d\.,]*)\s*(mil|k)?", t_clean)
+        if m:
+            num_str = m.group(1).replace(",", "").replace(".", "")
+            try:
+                valor = int(num_str)
+                # Si dice "mil" o "k" multiplicar por 1000
+                if m.group(2) and m.group(2) in ("mil", "k"):
+                    valor *= 1000
+                return {"accion": "precio", "params": {"valor_usd": valor}}
+            except ValueError:
+                pass
+
+    # 4. Random
+    if any(x in t_clean for x in ["random", "azar", "cualquier", "sorprendeme", "sorpréndeme"]):
+        # Sub-categoria
+        if "consola" in t_clean: cat = "consola"
+        elif "musica" in t_clean or "música" in t_clean: cat = "musica"
+        elif "juego" in t_clean: cat = "juego"
+        else: cat = "all"
+        return {"accion": "random", "params": {"categoria": cat}}
+
+    # 5. Saludo
+    if any(t_clean.startswith(kw) for kw in ["hola", "hello", "buenas", "que tal", "qué tal"]):
+        return {"accion": "saludar", "params": {}}
+
+    # 6. Cuentame de X
+    m = _re.search(r"(?:cuentame|cuéntame|cuenta|cuentanos|cuéntanos|habla|hablame|háblame|dime|que sabes|qué sabes)\s+(?:de\s+|sobre\s+|acerca de\s+)?(.+?)$", t_clean)
+    if m:
+        tema = m.group(1).strip()
+        if tema:
+            return {"accion": "cuentame", "params": {"tema": tema, "generate_if_missing": True}}
+
+    # Fallback: tratar todo como tema de cuentame
+    return {"accion": "cuentame", "params": {"tema": texto.strip(), "generate_if_missing": True}}
+
+
+@app.post("/api/listen")
+async def listen(request: Request):
+    """
+    Recibe audio del browser (mic del celu/PC), transcribe con Whisper local,
+    parsea intent y dispara el endpoint correspondiente.
+    Body: raw bytes (audio webm/opus).
+    """
+    audio_bytes = await request.body()
+    if not audio_bytes or len(audio_bytes) < 1000:
+        return JSONResponse({"error": "audio vacio o muy corto"}, status_code=400)
+
+    tracker.mark_input()
+
+    # Transcribir
+    try:
+        texto = await asyncio.to_thread(transcribir_audio_sync, audio_bytes)
+    except Exception as e:
+        return JSONResponse({"error": f"transcripcion fallo: {e}"}, status_code=500)
+
+    if not texto:
+        return JSONResponse({"transcript": "", "error": "no se reconocio voz"}, status_code=400)
+
+    # Parsear intent
+    intent = parsear_intent(texto)
+    accion = intent["accion"]
+    params = intent["params"]
+
+    # Ejecutar la accion correspondiente
+    try:
+        if accion == "saludar":
+            result = await saludar({})
+        elif accion == "despedir":
+            result = await despedir({})
+        elif accion == "opinar":
+            result = await opinar(params)
+        elif accion == "precio":
+            result = await precio(params)
+        elif accion == "random":
+            result = await random_dato(params)
+        elif accion == "cuentame":
+            result = await cuentame(params)
+        else:
+            result = {"ok": False, "error": "intent desconocido"}
+    except Exception as e:
+        result = {"ok": False, "error": str(e)}
+
+    # Si el endpoint devolvio JSONResponse, sacar el body
+    if hasattr(result, "body"):
+        try:
+            result = json.loads(result.body.decode())
+        except Exception:
+            result = {"ok": False, "error": "respuesta interna invalida"}
+
+    return {
+        "ok": True,
+        "transcript": texto,
+        "accion": accion,
+        "params": params,
+        "result": result,
+    }
+
+
 @app.get("/api/ping")
 async def ping():
     return {"ok": True, "live_clients": len(manager.live_clients), "idle_state": tracker.current_idle_state, "is_speaking": tracker.is_speaking}

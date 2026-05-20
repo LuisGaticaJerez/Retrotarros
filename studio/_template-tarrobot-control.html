@@ -114,6 +114,15 @@ input[type="text"]:focus, input[type="number"]:focus { border-color: var(--cy); 
 <h1>⚡ TARROBOT CONTROL</h1>
 <div class="sub">PANEL EN VIVO · RETROTARROS STUDIO</div>
 
+<!-- VOZ · push to talk -->
+<div class="card">
+  <h2>🎤 HABLAR A TARROBOT</h2>
+  <button class="btn full ye" id="micBtn" style="font-size:13px; padding:22px 8px;">
+    🎤 MANTÉN PRESIONADO Y HABLA
+  </button>
+  <div id="micStatus" style="margin-top:8px; font-size:11px; color: rgba(255,255,255,.6); text-align:center; min-height:14px;"></div>
+</div>
+
 <!-- SALUDOS Y DESPEDIDAS -->
 <div class="card">
   <h2>👋 SALUDOS · DESPEDIDAS</h2>
@@ -323,6 +332,86 @@ async function ping() {
 document.getElementById('cuentameInput').addEventListener('keypress', function(e) {
   if (e.key === 'Enter') cuentame();
 });
+
+// ─── PUSH-TO-TALK · MICROFONO ─────────────────────────────────────
+const micBtn = document.getElementById('micBtn');
+const micStatus = document.getElementById('micStatus');
+let mediaRecorder = null;
+let audioChunks = [];
+let micReady = false;
+
+async function setupMic() {
+  if (micReady) return true;
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+    mediaRecorder.ondataavailable = function(e) {
+      if (e.data && e.data.size > 0) audioChunks.push(e.data);
+    };
+    mediaRecorder.onstop = async function() {
+      const blob = new Blob(audioChunks, { type: 'audio/webm' });
+      audioChunks = [];
+      if (blob.size < 1000) {
+        micStatus.textContent = 'audio muy corto';
+        return;
+      }
+      micStatus.textContent = 'procesando con Whisper... (~3-8s)';
+      try {
+        const r = await fetch('/api/listen', {
+          method: 'POST',
+          headers: { 'Content-Type': 'audio/webm' },
+          body: blob,
+        });
+        const data = await r.json();
+        if (data.ok) {
+          micStatus.textContent = '"' + data.transcript + '" -> ' + data.accion;
+          logMsg('VOZ ok: "' + data.transcript + '" -> ' + data.accion, 'ok');
+        } else {
+          micStatus.textContent = 'err: ' + (data.error || 'desconocido');
+          logMsg('VOZ err: ' + (data.error || 'desconocido'), 'err');
+        }
+      } catch (e) {
+        micStatus.textContent = 'fail: ' + e.message;
+        logMsg('VOZ fail: ' + e.message, 'err');
+      }
+    };
+    micReady = true;
+    return true;
+  } catch (e) {
+    micStatus.textContent = 'mic denegado: ' + e.message;
+    logMsg('mic denegado: ' + e.message, 'err');
+    return false;
+  }
+}
+
+async function startRecord() {
+  if (!micReady) {
+    const ok = await setupMic();
+    if (!ok) return;
+  }
+  if (mediaRecorder.state === 'recording') return;
+  audioChunks = [];
+  mediaRecorder.start();
+  micBtn.style.background = '#FF2E88';
+  micBtn.style.color = '#06030f';
+  micStatus.textContent = 'GRABANDO... (suelta para procesar)';
+}
+
+function stopRecord() {
+  if (mediaRecorder && mediaRecorder.state === 'recording') {
+    mediaRecorder.stop();
+    micBtn.style.background = '';
+    micBtn.style.color = '';
+  }
+}
+
+micBtn.addEventListener('pointerdown', function(e) { e.preventDefault(); startRecord(); });
+micBtn.addEventListener('pointerup', function(e) { e.preventDefault(); stopRecord(); });
+micBtn.addEventListener('pointerleave', function() { stopRecord(); });
+micBtn.addEventListener('pointercancel', function() { stopRecord(); });
+// Touch events para iOS Safari
+micBtn.addEventListener('touchstart', function(e) { e.preventDefault(); startRecord(); }, { passive: false });
+micBtn.addEventListener('touchend', function(e) { e.preventDefault(); stopRecord(); }, { passive: false });
 
 logMsg('Listo. Pulsa un boton.', 'ok');
 ping();
