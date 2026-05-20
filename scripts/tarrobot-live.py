@@ -25,6 +25,8 @@ Requiere:
 import asyncio
 import json
 import sys
+import time
+from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Optional
 
@@ -80,7 +82,73 @@ DESPEDIDAS_CORTAS = [
     "Eyectando cartucho. Nos vemos!",
 ]
 
-app = FastAPI(title="TarroBot Live")
+# ─────────────────────────────────────────────────────────────────────────
+# Idle tracker — TarroBot se aburre y se duerme solo
+# ─────────────────────────────────────────────────────────────────────────
+
+class ActivityTracker:
+    """Lleva cuenta del tiempo desde el ultimo input del usuario."""
+    def __init__(self):
+        self.last_input_ts: float = time.time()
+        self.current_idle_state: str = "idle"
+        self.is_speaking: bool = False  # True mientras hay audio reproduciendose
+
+    def mark_input(self):
+        self.last_input_ts = time.time()
+        self.current_idle_state = "idle"
+
+    def mark_speaking(self, val: bool):
+        self.is_speaking = val
+        if val:
+            self.mark_input()  # hablar tambien reinicia el timer
+
+    def get_idle_state(self) -> str:
+        elapsed = time.time() - self.last_input_ts
+        if elapsed < IDLE_BORED_AFTER:
+            return "idle"
+        if elapsed < IDLE_DROWSY_AFTER:
+            return "bored"
+        if elapsed < IDLE_SLEEP_AFTER:
+            return "drowsy"
+        return "sleep"
+
+
+# Thresholds en segundos (configurables aca)
+IDLE_BORED_AFTER = 30    # 30s sin input → bored
+IDLE_DROWSY_AFTER = 60   # 60s sin input → drowsy
+IDLE_SLEEP_AFTER = 120   # 120s sin input → sleep
+
+tracker = ActivityTracker()
+
+
+async def idle_worker():
+    """
+    Background task: cada 5s revisa el tiempo desde el ultimo input.
+    Si toca cambiar de estado idle y nadie esta hablando, dispara WS.
+    """
+    while True:
+        await asyncio.sleep(5)
+        if tracker.is_speaking:
+            continue  # no interrumpir mientras habla
+        new_state = tracker.get_idle_state()
+        if new_state != tracker.current_idle_state:
+            tracker.current_idle_state = new_state
+            try:
+                await manager.broadcast_live({"tipo": "estado-idle", "estado": new_state})
+            except Exception as e:
+                print(f"[idle_worker] error broadcast: {e}")
+
+
+@asynccontextmanager
+async def lifespan(app):
+    # Startup: lanzar el worker
+    task = asyncio.create_task(idle_worker())
+    yield
+    # Shutdown: cancelar
+    task.cancel()
+
+
+app = FastAPI(title="TarroBot Live", lifespan=lifespan)
 
 # Servir los MP3 generados (en /audio/<id>.mp3)
 app.mount("/audio", StaticFiles(directory=str(OUT_DIR)), name="audio")
@@ -180,6 +248,8 @@ async def set_state(payload: dict):
     if estado not in ESTADOS + ["bored", "drowsy"]:
         return JSONResponse({"error": f"Estado invalido. Validos: {ESTADOS + ['bored', 'drowsy']}"}, status_code=400)
 
+    tracker.mark_input()  # reset idle timer
+    tracker.current_idle_state = estado
     await manager.broadcast_live({"tipo": "estado", "estado": estado})
     return {"ok": True, "estado": estado}
 
@@ -231,6 +301,7 @@ async def cuentame(payload: dict):
     mp3 = await asyncio.to_thread(generar_tts, dato, voz)
     audio_url = f"/audio/{mp3.name}" if mp3 else None
 
+    tracker.mark_speaking(True)
     # Disparar evento al live
     await manager.broadcast_live({
         "tipo": "hablar",
@@ -262,6 +333,7 @@ async def _hablar_frase(texto: str, estado: str, label: str, voz: str) -> Option
     mp3 = await asyncio.to_thread(generar_tts, fake_dato, voz)
     audio_url = f"/audio/{mp3.name}" if mp3 else None
 
+    tracker.mark_speaking(True)
     await manager.broadcast_live({
         "tipo": "hablar",
         "estado": estado,
@@ -294,9 +366,16 @@ async def despedir(payload: dict):
     return {"ok": True, "texto": texto, "audio_url": audio_url}
 
 
+@app.post("/api/audio-finished")
+async def audio_finished():
+    """El cliente HTML llama esto cuando termina de reproducir un MP3."""
+    tracker.mark_speaking(False)
+    return {"ok": True}
+
+
 @app.get("/api/ping")
 async def ping():
-    return {"ok": True, "live_clients": len(manager.live_clients)}
+    return {"ok": True, "live_clients": len(manager.live_clients), "idle_state": tracker.current_idle_state, "is_speaking": tracker.is_speaking}
 
 
 # ─────────────────────────────────────────────────────────────────────────

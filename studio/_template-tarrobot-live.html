@@ -69,7 +69,7 @@ body.mode-fullscreen {
 .is-talking .tb-glasses, .is-excited .tb-glasses { opacity: 1; }
 
 /* Toggles por estado */
-.tb-mouth-idle, .tb-mouth-talking, .tb-mouth-excited, .tb-mouth-sleep, .tb-mouth-thinking, .tb-mouth-winking, .tb-mouth-confused, .tb-mouth-glitched, .tb-mouth-fact, .tb-mouth-happy, .tb-mouth-sad, .tb-mouth-angry, .tb-mouth-loading { display: none; }
+.tb-mouth-idle, .tb-mouth-talking, .tb-mouth-excited, .tb-mouth-sleep, .tb-mouth-thinking, .tb-mouth-winking, .tb-mouth-confused, .tb-mouth-glitched, .tb-mouth-fact, .tb-mouth-happy, .tb-mouth-sad, .tb-mouth-angry, .tb-mouth-loading, .tb-mouth-bored, .tb-mouth-drowsy { display: none; }
 .is-idle .tb-mouth-idle { display: block; }
 .is-talking .tb-mouth-talking { display: block; }
 .is-excited .tb-mouth-excited { display: block; }
@@ -83,15 +83,22 @@ body.mode-fullscreen {
 .is-sad .tb-mouth-sad { display: block; }
 .is-angry .tb-mouth-angry { display: block; }
 .is-loading .tb-mouth-loading { display: block; }
-/* bored y drowsy reusan boca thinking/sleep */
-.is-bored .tb-mouth-idle { display: block; }
-.is-drowsy .tb-mouth-sleep { display: block; }
+.is-bored .tb-mouth-bored { display: block; }
+.is-drowsy .tb-mouth-drowsy { display: block; }
 
-.tb-eyes-default, .tb-eyes-excited, .tb-eyes-sleep, .tb-eyes-thinking, .tb-eyes-winking, .tb-eyes-confused, .tb-eyes-glitched, .tb-eyes-happy, .tb-eyes-sad, .tb-eyes-angry, .tb-eyes-loading { display: none; }
+/* bored: bostezo lento - boca cierra y abre */
+@keyframes tb-yawn { 0%, 100% { transform: scaleY(0.2); } 50% { transform: scaleY(1.4); } }
+.is-bored .tb-mouth-bored { transform-origin: center; animation: tb-yawn 4s ease-in-out infinite; }
+
+/* drowsy: ojos pesados, parpadeo lento largo */
+@keyframes tb-heavy-blink { 0%, 100% { transform: scaleY(1); } 30%, 80% { transform: scaleY(0.15); } }
+.is-drowsy .tb-eyes-drowsy { transform-origin: center; animation: tb-heavy-blink 3s ease-in-out infinite; }
+
+.tb-eyes-default, .tb-eyes-excited, .tb-eyes-sleep, .tb-eyes-thinking, .tb-eyes-winking, .tb-eyes-confused, .tb-eyes-glitched, .tb-eyes-happy, .tb-eyes-sad, .tb-eyes-angry, .tb-eyes-loading, .tb-eyes-bored, .tb-eyes-drowsy { display: none; }
 .is-idle .tb-eyes-default, .is-talking .tb-eyes-default, .is-fact .tb-eyes-default { display: block; }
 .is-excited .tb-eyes-excited { display: block; }
-.is-sleep .tb-eyes-sleep, .is-drowsy .tb-eyes-sleep { display: block; }
-.is-thinking .tb-eyes-thinking, .is-bored .tb-eyes-thinking { display: block; }
+.is-sleep .tb-eyes-sleep { display: block; }
+.is-thinking .tb-eyes-thinking { display: block; }
 .is-winking .tb-eyes-winking { display: block; }
 .is-confused .tb-eyes-confused { display: block; }
 .is-glitched .tb-eyes-glitched { display: block; }
@@ -99,13 +106,16 @@ body.mode-fullscreen {
 .is-sad .tb-eyes-sad { display: block; }
 .is-angry .tb-eyes-angry { display: block; }
 .is-loading .tb-eyes-loading { display: block; }
+.is-bored .tb-eyes-bored { display: block; }
+.is-drowsy .tb-eyes-drowsy { display: block; }
 
 .tb-extras { display: none; }
-.is-thinking .tb-extras-thinking, .is-bored .tb-extras-thinking,
+.is-thinking .tb-extras-thinking,
 .is-confused .tb-extras-confused, .is-fact .tb-extras-fact,
 .is-sad .tb-extras-sad, .is-angry .tb-extras-angry,
 .is-loading .tb-extras-loading, .is-sleep .tb-extras-sleep,
-.is-drowsy .tb-extras-sleep { display: block; }
+.is-bored .tb-extras-bored,
+.is-drowsy .tb-extras-drowsy { display: block; }
 
 @keyframes tb-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
 .tb-extras-thinking, .tb-extras-confused { animation: tb-bounce 1.2s ease-in-out infinite; transform-origin: center; }
@@ -229,6 +239,30 @@ body.debug .ws-status { display: block; }
             <rect x="28" y="36" width="18" height="3" fill="#00E5FF"/><rect x="28" y="42" width="18" height="3" fill="#00E5FF" opacity=".7"/><rect x="28" y="48" width="18" height="3" fill="#00E5FF" opacity=".4"/>
             <rect x="74" y="36" width="18" height="3" fill="#00E5FF"/><rect x="74" y="42" width="18" height="3" fill="#00E5FF" opacity=".7"/><rect x="74" y="48" width="18" height="3" fill="#00E5FF" opacity=".4"/>
           </g>
+          <!-- OJOS BORED (mirando al techo, ceja levantada) -->
+          <g class="tb-eyes-bored">
+            <!-- ceja izquierda levantada -->
+            <rect x="28" y="26" width="18" height="2" fill="#00E5FF" opacity=".6"/>
+            <!-- ojo izq mirando arriba -->
+            <rect x="28" y="34" width="18" height="18" fill="#00E5FF"/>
+            <rect x="34" y="34" width="6" height="6" fill="#0a0820"/>
+            <!-- ceja der levantada -->
+            <rect x="74" y="26" width="18" height="2" fill="#00E5FF" opacity=".6"/>
+            <!-- ojo der mirando arriba -->
+            <rect x="74" y="34" width="18" height="18" fill="#00E5FF"/>
+            <rect x="80" y="34" width="6" height="6" fill="#0a0820"/>
+          </g>
+          <!-- OJOS DROWSY (entrecerrados, parpados pesados) -->
+          <g class="tb-eyes-drowsy">
+            <!-- parpado superior izq cae -->
+            <rect x="28" y="40" width="18" height="8" fill="#00E5FF"/>
+            <rect x="28" y="38" width="18" height="2" fill="#0a0820" opacity=".6"/>
+            <rect x="34" y="42" width="6" height="4" fill="#0a0820"/>
+            <!-- parpado superior der cae -->
+            <rect x="74" y="40" width="18" height="8" fill="#00E5FF"/>
+            <rect x="74" y="38" width="18" height="2" fill="#0a0820" opacity=".6"/>
+            <rect x="80" y="42" width="6" height="4" fill="#0a0820"/>
+          </g>
 
           <!-- LENTES -->
           <g class="tb-glasses">
@@ -255,6 +289,10 @@ body.debug .ws-status { display: block; }
           <g class="tb-mouth-sad"><rect x="46" y="76" width="4" height="3" fill="#FFD23F"/><rect x="50" y="74" width="4" height="3" fill="#FFD23F"/><rect x="54" y="72" width="12" height="3" fill="#FFD23F"/><rect x="66" y="74" width="4" height="3" fill="#FFD23F"/><rect x="70" y="76" width="4" height="3" fill="#FFD23F"/></g>
           <g class="tb-mouth-angry"><rect x="46" y="72" width="28" height="4" fill="#FF2E88"/></g>
           <g class="tb-mouth-loading"><rect x="44" y="72" width="32" height="4" fill="#0a0820" stroke="#FFD23F" stroke-width="1"/><rect x="46" y="73" width="14" height="2" fill="#FFD23F"/></g>
+          <!-- BOCA BORED: ovalo grande de bostezo (anima con scaleY) -->
+          <g class="tb-mouth-bored"><rect x="50" y="62" width="20" height="20" fill="#FFD23F" rx="10"/><rect x="54" y="66" width="12" height="12" fill="#0a0820" rx="6"/></g>
+          <!-- BOCA DROWSY: linea descendente, cansado -->
+          <g class="tb-mouth-drowsy"><rect x="46" y="72" width="4" height="4" fill="#FFD23F"/><rect x="50" y="74" width="20" height="3" fill="#FFD23F"/><rect x="70" y="76" width="4" height="3" fill="#FFD23F"/></g>
 
           <!-- EXTRAS -->
           <g class="tb-extras tb-extras-thinking"><text x="98" y="20" font-family="Press Start 2P, monospace" font-size="20" fill="#FFD23F">?</text></g>
@@ -264,6 +302,10 @@ body.debug .ws-status { display: block; }
           <g class="tb-extras tb-extras-angry"><rect x="12" y="12" width="4" height="4" fill="#FF2E88" opacity=".8"/><rect x="20" y="8" width="4" height="4" fill="#FF2E88" opacity=".7"/><rect x="100" y="12" width="4" height="4" fill="#FF2E88" opacity=".8"/><rect x="108" y="8" width="4" height="4" fill="#FF2E88" opacity=".7"/></g>
           <g class="tb-extras tb-extras-loading"><circle cx="48" cy="14" r="3" fill="#FFD23F"/><circle cx="60" cy="14" r="3" fill="#FF2E88"/><circle cx="72" cy="14" r="3" fill="#00E5FF"/></g>
           <g class="tb-extras tb-extras-sleep"><text x="86" y="22" font-family="Press Start 2P, monospace" font-size="14" fill="#FFD23F">Z</text><text x="96" y="14" font-family="Press Start 2P, monospace" font-size="10" fill="#FFD23F">z</text></g>
+          <!-- EXTRAS BORED: globito de pensamiento vacio (aburrido) -->
+          <g class="tb-extras tb-extras-bored"><text x="90" y="20" font-family="Press Start 2P, monospace" font-size="14" fill="#FFD23F" opacity=".7">...</text></g>
+          <!-- EXTRAS DROWSY: Z pequeno -->
+          <g class="tb-extras tb-extras-drowsy"><text x="92" y="22" font-family="Press Start 2P, monospace" font-size="10" fill="#FFD23F" opacity=".8">z</text></g>
         </svg>
       </div>
     </div></div>
@@ -296,11 +338,18 @@ const statusEl = document.getElementById('wsStatus');
 let estadoActual = 'idle';
 let prevEstado = 'idle';
 let captionTimeout = null;
+let estaHablando = false;  // True mientras hay audio reproduciendose
 
 function setEstado(nuevoEstado) {
   prevEstado = estadoActual;
   estadoActual = nuevoEstado;
   face.className = 'tarrobot-face is-' + nuevoEstado;
+}
+
+async function notifyAudioFinished() {
+  try {
+    await fetch('/api/audio-finished', { method: 'POST' });
+  } catch (e) { /* silencio */ }
 }
 
 function setCaption(label, texto, durationMs = 8000) {
@@ -348,21 +397,36 @@ function handleMessage(msg) {
   console.log('WS msg', msg);
 
   if (msg.tipo === 'estado') {
+    // Cambio manual forzado desde panel: siempre se aplica
     setEstado(msg.estado);
-    // Si es un estado "silencioso", ocultar caption
     if (['idle', 'sleep', 'bored', 'drowsy'].includes(msg.estado)) {
       caption.classList.remove('show');
     }
+  } else if (msg.tipo === 'estado-idle') {
+    // Cambio automatico desde idle worker: solo aplicar si no esta hablando
+    if (!estaHablando) {
+      setEstado(msg.estado);
+      caption.classList.remove('show');
+    }
   } else if (msg.tipo === 'hablar') {
+    estaHablando = true;
     setEstado(msg.estado || 'talking');
     setCaption(msg.label || 'DATO CURIOSO', msg.texto || '', 12000);
     if (msg.audio_url) {
       audio.src = msg.audio_url + '?t=' + Date.now();
       audio.play().catch(e => console.error('Audio play fail', e));
-      // Cuando termine el audio, volver a idle
       audio.onended = () => {
+        estaHablando = false;
+        notifyAudioFinished();
         setEstado('idle');
       };
+    } else {
+      // Sin audio_url, marcar como terminado al cabo de la duracion del caption
+      setTimeout(() => {
+        estaHablando = false;
+        notifyAudioFinished();
+        setEstado('idle');
+      }, 4000);
     }
   }
 }
