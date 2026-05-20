@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "slug": "snes-top-mundial",
+  "episodio": "Top 10 SNES mas caros del mundo",
+  "creado": "2026-05-20",
+  "actualizado": "2026-05-20",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "datos": [
+    {
+      "id": "snes-top-mundial-1",
+      "tema": "Star Fox y el chip Super FX",
+      "texto": "Star Fox fue el primer cartucho SNES que uso el chip Super FX en 1993. Ese procesador extra permitio renderizar poligonos 3D en una consola de 16 bits que tecnicamente no deberia poder hacerlo. Argonaut Software literalmente lo hizo posible.",
+      "estado": "excited",
+      "consola": "SNES",
+      "ano": 1993,
+      "editor": "Nintendo EAD",
+      "mp3": null,
+      "duracion_ms": null,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-mundial-2",
+      "tema": "Super Mario Kart y la formula intacta",
+      "texto": "Super Mario Kart invento el genero en 1992 y su formula sigue tal cual hoy. Los items, la friccion en circuitos cortos, el modo batalla para 2 jugadores... todo lo que ves en Mario Kart 8 viene de las decisiones que NINTENDO EAD tomo hace 34 anos.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1992,
+      "editor": "Nintendo EAD",
+      "mp3": null,
+      "duracion_ms": null,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-mundial-3",
+      "tema": "Earthbound y su fracaso comercial",
+      "texto": "Earthbound fue un fracaso total en 1994 pero hoy es de culto absoluto. APE y HAL Laboratory crearon un RPG en America suburbana con humor absurdo y contador HP en tiempo real. Sin Earthbound, Undertale y cientos de juegos indie no existirian.",
+      "estado": "thinking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "APE",
+      "mp3": null,
+      "duracion_ms": null,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-mundial-4",
+      "tema": "Donkey Kong Country 2 y David Wise",
+      "texto": "La banda sonora de Donkey Kong Country 2 de 1995 es considerada una de las mejores de la historia del videojuego. David Wise compuso esa obra maestra mientras Rare daba vuelta el juego completamente: Diddy y Dixie en vez de DK fue genial.",
+      "estado": "happy",
+      "consola": "SNES",
+      "ano": 1995,
+      "editor": "Rare",
+      "mp3": null,
+      "duracion_ms": null,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-mundial-5",
+      "tema": "Super Mario World y el game design educativo",
+      "texto": "Super Mario World de 1990 tiene un diseno de niveles tan perfecto que escuelas enteras lo usan para ensenar game design profesional. El pack-in de SNES introduce a Yoshi, tiene 96 salidas y su arquitectura sigue siendo estudiada como referencia.",
+      "estado": "winking",
+      "consola": "SNES",
+      "ano": 1990,
+      "editor": "Nintendo EAD",
+      "mp3": null,
+      "duracion_ms": null,
+      "fuente": "pauta-auto"
+    }
+  ]
+}

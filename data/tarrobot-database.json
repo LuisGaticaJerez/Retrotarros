@@ -100,6 +100,116 @@
       "editor": "Williams Entertainment",
       "creado": "2026-05-20",
       "fuente": "LLM"
+    },
+    {
+      "id": "donkey-kong-64-1",
+      "tema": "Donkey kong 64",
+      "texto": "Te voy a contar algo loco: Donkey Kong 64 fue el primer juego que requirio el Expansion Pak obligatoriamente para jugar. Sin ese cartucho extra de memoria no podias ni iniciar el juego, hermano.",
+      "estado": "fact",
+      "consola": "Nintendo 64",
+      "ano": 1999,
+      "editor": "Rare",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "mario-kart-64-1",
+      "tema": "Mario kart 64",
+      "texto": "Mario Kart 64 fue el primer juego de la saga en 3D y se lanzo en Japon el 18 de diciembre de 1996. Fue un titulo de lanzamiento que ayudo a vender la consola Nintendo 64 en sus primeros meses.",
+      "estado": "fact",
+      "consola": "Nintendo 64",
+      "ano": 1996,
+      "editor": "Nintendo",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "wario-where-1",
+      "tema": "Wario where",
+      "texto": "Wario's Woods fue el juego original de Wario en 1992, pero Wario Land: Super Mario Land 3 llegó en 1994 y fue el que consolido a Wario como protagonista. Te voy a contar que Wario Land vendio mas de 5 millones de copias en Game Boy, convirtiendose en una franquicia de oro para Nintendo.",
+      "estado": "talking",
+      "consola": "Game Boy",
+      "ano": 1992,
+      "editor": "Nintendo",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "caca-1",
+      "tema": "Caca",
+      "texto": "Te voy a contar que en Japón existe un videojuego de 1995 llamado literalmente \"Caca\" donde controlas un personaje de ese tipo en aventuras absurdas. Era un juego exclusivo para Famicom que se vendio como \"Unchi\" y se considera un clasico del humor retro japones.",
+      "estado": "excited",
+      "consola": "Nintendo 64",
+      "ano": 1995,
+      "editor": "Retrotarros",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "mono-1",
+      "tema": "Mono",
+      "texto": "Te voy a contar algo que no sabias: Monkey Kong se llamo originalmente \"Donkey Kong\" porque los creadores de Atari querían un nombre que sonara fuerte y absurdo. El termino \"donkey\" significa burro en ingles, y asi nacio uno de los personajes mas iconicos de los videojuegos.",
+      "estado": "talking",
+      "consola": "Arcade",
+      "ano": 1981,
+      "editor": "Atari",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "mono-y-caca-1",
+      "tema": "Mono y caca",
+      "texto": "En Donkey Kong 64, los personajes tiran caca literalmente como mecanica de juego. Cada mono tenia su propia explosión fecal con propiedades distintas: la de Diddy era rapida, la de Chunky era lenta pero poderosa. ¡Una mecanica tan ridicula que funciono perfecto!",
+      "estado": "excited",
+      "consola": "Nintendo 64",
+      "ano": 1999,
+      "editor": "Rare",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "abió-1",
+      "tema": "¡Abió!",
+      "texto": "¡Abio! fue lanzado solo en Japon el 21 de abril de 1990 para Game Boy. Es un puzzle game donde debes emparejar bloques de colores cayendo, similar a Tetris pero con mecanica propia. Muy pocos occidentales lo conocen porque nunca salio fuera de Japon.",
+      "estado": "talking",
+      "consola": "Game Boy",
+      "ano": 1990,
+      "editor": "Nintendo",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "algo-sobre-todas-aquí-el-juego-no-se-me-vienes-ninguna-mente-quiero-1",
+      "tema": "algo sobre       todas aquí el juego  no se me vienes ninguna mente  quiero",
+      "texto": "Te cuento que muchos juegos retro de los 80 y 90 tenian bugs increibles que los programadores dejaban a proposito para que el juego fuera mas dificil. Algunos speedrunners modernos usan esos errores para completar juegos en minutos en lugar de horas.",
+      "estado": "talking",
+      "consola": "Desconocida",
+      "ano": 0,
+      "editor": "Desconocido",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "el-medio-1",
+      "tema": "el medio",
+      "texto": "Te voy a contar algo loco: The Game Boy tenia una pantalla verde fosforescente que causaba problemas de vision a los jugadores despues de largas sesiones. Nintendo tuvo que lanzar versiones mejoradas como la Pocket en 1996 con pantalla gris para solucionar esto.",
+      "estado": "talking",
+      "consola": "The Game Boy",
+      "ano": 1989,
+      "editor": "Nintendo",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "háblemos-sobre-super-mario-1",
+      "tema": "Háblemos sobre Super Mario",
+      "texto": "¿Sabias que Mario no se llamaba asi al principio? En el arcade de Donkey Kong de 1981, el personaje se llamaba \"Jumpman\". Recibio el nombre Mario en honor a Mario Segale, el dueno del almacen donde Nintendo of America rentaba oficinas.",
+      "estado": "talking",
+      "consola": "Nintendo Entertainment System",
+      "ano": 1985,
+      "editor": "Nintendo",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
     }
   ]
 }

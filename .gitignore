@@ -32,6 +32,10 @@ Thumbs.db
 # DOCX generados desde MD por sync-to-drive.ps1 (la fuente es el .md)
 studio/pautas/*.docx
 
+# MP3s precargados de pautas TarroBot (regenerables con --pauta-preload)
+# Los JSON .tarrobot.json SI se versionan, son el guion del episodio
+studio/pautas/audio/
+
 # Capturas PNG generadas por capture-slides.py (la fuente es el HTML)
 # Se regeneran con: python scripts/capture-slides.py <slug>
 studio/captures/

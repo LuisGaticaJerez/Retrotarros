@@ -30,6 +30,8 @@ REPO = Path(__file__).parent.parent
 DB_PATH = REPO / "data" / "tarrobot-database.json"
 TEMPLATE = REPO / "studio" / "_template-tarrobot-slide.html"
 OUT_DIR = REPO / "studio" / "tarrobot-out"
+PAUTAS_DIR = REPO / "studio" / "pautas"
+PAUTAS_AUDIO_DIR = PAUTAS_DIR / "audio"
 
 ESTADOS = [
     "idle", "talking", "excited", "sleep", "thinking", "winking",
@@ -269,6 +271,229 @@ def generar_tts(dato: dict, voz: str = VOZ_DEFAULT, pitch: str = PITCH_DEFAULT, 
 
 
 # ─────────────────────────────────────────────────────────────────────────
+# Pauta (cola del episodio)
+# ─────────────────────────────────────────────────────────────────────────
+#
+# Una pauta es un JSON paralelo a un episodio HTML que contiene la cola de
+# datos pre-armada para que TarroBot los reproduzca en orden durante la
+# grabacion. Vive en studio/pautas/<slug>.tarrobot.json al lado del HTML.
+#
+# Schema:
+#   {
+#     "version": 1, "slug": "...", "episodio": "...", "creado": "...",
+#     "actualizado": "...", "voz": "...", "pitch": "...", "rate": "...",
+#     "datos": [
+#       {
+#         "id": "<slug>-N", "tema": "...", "texto": "...", "estado": "talking",
+#         "consola": "...", "ano": 0, "editor": "...",
+#         "mp3": "audio/<slug>/<id>.mp3"  (relativo a PAUTAS_DIR, null si no precargado),
+#         "duracion_ms": null,
+#         "fuente": "pauta-manual"|"pauta-auto"
+#       }
+#     ]
+#   }
+#
+# Los MP3 viven en studio/pautas/audio/<slug>/ y NO se versionan (regenerables).
+# El JSON SI se versiona — es el guion del episodio.
+
+
+def _path_dentro_repo(p: Path) -> bool:
+    """Valida que un path resuelto este dentro del repo (defensa path traversal)."""
+    try:
+        p.resolve().relative_to(REPO.resolve())
+        return True
+    except (ValueError, OSError):
+        return False
+
+
+def pauta_path(slug: str) -> Path:
+    """Devuelve el path del JSON de pauta para un slug dado."""
+    safe = slugify(slug)
+    return PAUTAS_DIR / f"{safe}.tarrobot.json"
+
+
+def pauta_audio_dir(slug: str) -> Path:
+    """Carpeta donde viven los MP3 precargados de una pauta."""
+    safe = slugify(slug)
+    return PAUTAS_AUDIO_DIR / safe
+
+
+def cargar_pauta(slug: str) -> dict | None:
+    p = pauta_path(slug)
+    if not p.exists():
+        return None
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def guardar_pauta(pauta: dict) -> Path:
+    PAUTAS_DIR.mkdir(parents=True, exist_ok=True)
+    pauta["actualizado"] = str(date.today())
+    p = pauta_path(pauta["slug"])
+    p.write_text(
+        json.dumps(pauta, indent=2, ensure_ascii=False),
+        encoding="utf-8"
+    )
+    return p
+
+
+def crear_pauta_vacia(slug: str, episodio: str, voz: str = VOZ_DEFAULT,
+                      pitch: str = PITCH_DEFAULT, rate: str = RATE_DEFAULT) -> dict:
+    """Crea una pauta vacia con metadata pero sin datos."""
+    return {
+        "version": 1,
+        "slug": slugify(slug),
+        "episodio": episodio,
+        "creado": str(date.today()),
+        "actualizado": str(date.today()),
+        "voz": voz,
+        "pitch": pitch,
+        "rate": rate,
+        "datos": [],
+    }
+
+
+def extraer_contexto_html(html_path: Path, max_chars: int = 6000) -> str:
+    """
+    Lee un HTML de episodio y extrae texto plano relevante (titulo + secciones)
+    para mandar a Claude como contexto. Heuristica simple: saca tags y comprime.
+    """
+    raw = html_path.read_text(encoding="utf-8", errors="ignore")
+
+    # Sacar <script>, <style>, comentarios
+    raw = re.sub(r"<script\b[^>]*>.*?</script>", " ", raw, flags=re.IGNORECASE | re.DOTALL)
+    raw = re.sub(r"<style\b[^>]*>.*?</style>", " ", raw, flags=re.IGNORECASE | re.DOTALL)
+    raw = re.sub(r"<!--.*?-->", " ", raw, flags=re.DOTALL)
+
+    # Reemplazar tags por espacio
+    texto = re.sub(r"<[^>]+>", " ", raw)
+    # Decodificar entities basicas
+    texto = (texto.replace("&nbsp;", " ").replace("&amp;", "&")
+                  .replace("&lt;", "<").replace("&gt;", ">")
+                  .replace("&quot;", '"').replace("&#39;", "'"))
+    # Comprimir whitespace
+    texto = re.sub(r"\s+", " ", texto).strip()
+    return texto[:max_chars]
+
+
+def generar_pauta_con_llm(html_path: Path, n_datos: int = 10) -> dict | None:
+    """
+    Lee el HTML del episodio y le pide a Claude que genere n_datos datos
+    curiosos sincronizados con el contenido del episodio.
+    Devuelve dict con keys: episodio, datos[].
+    """
+    try:
+        import anthropic
+    except ImportError:
+        print("ERROR: libreria 'anthropic' no instalada.", file=sys.stderr)
+        print("Instalala con: pip install anthropic", file=sys.stderr)
+        return None
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print("ERROR: variable de entorno ANTHROPIC_API_KEY no definida.", file=sys.stderr)
+        return None
+
+    contexto = extraer_contexto_html(html_path)
+    if not contexto:
+        print(f"ERROR: no se pudo extraer texto del HTML {html_path}", file=sys.stderr)
+        return None
+
+    client = anthropic.Anthropic(api_key=api_key)
+
+    prompt = f"""Eres TarroBot, mascota del canal de YouTube Retrotarros sobre videojuegos retro.
+Te paso el contenido de un episodio del canal. Tu tarea: generar exactamente {n_datos} datos curiosos cortos para que TarroBot los lance durante la grabacion del programa, en orden, sincronizados con lo que se va presentando en el episodio.
+
+CONTENIDO DEL EPISODIO:
+\"\"\"
+{contexto}
+\"\"\"
+
+Requisitos OBLIGATORIOS para CADA dato:
+- Español chileno neutro con tuteo (NO voseo argentino: nada de "tenes", "queres", "decime", "vos", "che").
+- SIN tildes (a/e/i/o/u sin acento). ESTO ES CRITICO, revisa antes de devolver.
+- Maximo 3 oraciones por dato, alrededor de 200-260 caracteres.
+- Verificable y especifico: fechas, numeros, nombres reales.
+- Tono curioso y entusiasta tipo "te voy a contar algo que no sabias".
+- Cada dato distinto del otro.
+- Los datos deben seguir el ORDEN del episodio (si el episodio lista Top 10, dato 1 = item 10, dato 2 = item 9, etc.).
+- Distribuye los estados emocionales para que no sean todos iguales.
+
+Devuelve SOLO un JSON valido con esta estructura exacta, SIN texto extra ni markdown:
+
+{{
+  "episodio_titulo": "...",
+  "datos": [
+    {{
+      "tema": "Nombre del juego o tema puntual",
+      "texto": "El dato curioso completo, max 260 chars.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Nintendo"
+    }}
+    // ... {n_datos} en total
+  ]
+}}
+
+Estados validos: talking, excited, fact, winking, confused, happy, sad, angry, thinking.
+"""
+
+    try:
+        response = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=4096,
+            messages=[{"role": "user", "content": prompt}],
+        )
+    except Exception as e:
+        print(f"ERROR: llamada a Claude API fallo: {e}", file=sys.stderr)
+        return None
+
+    raw = response.content[0].text.strip()
+    raw = re.sub(r"^```(?:json)?\s*", "", raw)
+    raw = re.sub(r"\s*```$", "", raw)
+    raw = raw.strip()
+
+    try:
+        result = json.loads(raw)
+    except json.JSONDecodeError as e:
+        print(f"ERROR: el LLM devolvio JSON invalido: {e}", file=sys.stderr)
+        print(raw[:800], file=sys.stderr)
+        return None
+
+    return result
+
+
+def pauta_agregar_dato(pauta: dict, dato_in: dict) -> dict:
+    """Agrega un dato a la pauta con id unico y campos por defecto. Mutates pauta."""
+    base = pauta["slug"]
+    existing = {d["id"] for d in pauta["datos"]}
+    n = len(pauta["datos"]) + 1
+    new_id = f"{base}-{n}"
+    while new_id in existing:
+        n += 1
+        new_id = f"{base}-{n}"
+
+    estado = dato_in.get("estado", "talking")
+    if estado not in ESTADOS:
+        estado = "talking"
+
+    dato = {
+        "id": new_id,
+        "tema": dato_in.get("tema", "Sin tema"),
+        "texto": dato_in.get("texto", ""),
+        "estado": estado,
+        "consola": dato_in.get("consola", ""),
+        "ano": int(dato_in.get("ano", 0) or 0),
+        "editor": dato_in.get("editor", ""),
+        "mp3": None,
+        "duracion_ms": None,
+        "fuente": dato_in.get("fuente", "pauta-manual"),
+    }
+    pauta["datos"].append(dato)
+    return dato
+
+
+# ─────────────────────────────────────────────────────────────────────────
 # Slide HTML
 # ─────────────────────────────────────────────────────────────────────────
 
@@ -455,6 +680,134 @@ def cmd_buscar(args, db: dict) -> int:
     return 0
 
 
+def cmd_pauta_list(args) -> int:
+    if not PAUTAS_DIR.exists():
+        print("(no hay pautas creadas)")
+        return 0
+    archivos = sorted(PAUTAS_DIR.glob("*.tarrobot.json"))
+    if not archivos:
+        print("(no hay pautas creadas)")
+        return 0
+    print(f"=== Pautas en {PAUTAS_DIR} ===")
+    print()
+    for f in archivos:
+        try:
+            p = json.loads(f.read_text(encoding="utf-8"))
+        except Exception:
+            print(f"  · [BROKEN] {f.name}")
+            continue
+        n = len(p.get("datos", []))
+        audio_dir = pauta_audio_dir(p["slug"])
+        mp3s = len(list(audio_dir.glob("*.mp3"))) if audio_dir.exists() else 0
+        print(f"  · {p['slug']:30}  {n:3} datos  {mp3s:3} mp3s  ·  {p.get('episodio', '')}")
+    return 0
+
+
+def cmd_pauta_show(args) -> int:
+    pauta = cargar_pauta(args.pauta_show)
+    if not pauta:
+        print(f"ERROR: no existe la pauta '{args.pauta_show}'", file=sys.stderr)
+        print(f"       (buscada en {pauta_path(args.pauta_show)})", file=sys.stderr)
+        return 1
+    print(f"=== Pauta: {pauta['slug']} ===")
+    print(f"Episodio:   {pauta.get('episodio', '')}")
+    print(f"Creada:     {pauta.get('creado', '')}")
+    print(f"Actualizada:{pauta.get('actualizado', '')}")
+    print(f"Voz:        {pauta.get('voz', '')}  pitch={pauta.get('pitch', '')}  rate={pauta.get('rate', '')}")
+    print(f"Datos:      {len(pauta['datos'])}")
+    print()
+    for i, d in enumerate(pauta["datos"], 1):
+        mp3_mark = "[MP3]" if d.get("mp3") and (PAUTAS_DIR / d["mp3"]).exists() else "[   ]"
+        print(f"  {i:2}. {mp3_mark} [{d['estado']:8}] {d['tema'][:40]}")
+        print(f"           {d['texto'][:90]}{'...' if len(d['texto']) > 90 else ''}")
+    return 0
+
+
+def cmd_pauta_init(args) -> int:
+    slug = slugify(args.pauta_init)
+    if not slug:
+        print("ERROR: slug invalido", file=sys.stderr)
+        return 1
+    existing = cargar_pauta(slug)
+    if existing and not args.force:
+        print(f"ERROR: ya existe la pauta '{slug}'. Usa --force para sobrescribir.", file=sys.stderr)
+        return 1
+    episodio = args.episodio or slug.replace("-", " ").title()
+    voz = resolver_voz(args.voice)
+    pauta = crear_pauta_vacia(slug, episodio, voz=voz, pitch=args.pitch, rate=args.rate)
+    p = guardar_pauta(pauta)
+    print(f"[OK] pauta creada: {p}")
+    print(f"     slug:      {pauta['slug']}")
+    print(f"     episodio:  {pauta['episodio']}")
+    print(f"     voz:       {pauta['voz']}")
+    print()
+    print("Proximo paso:")
+    print(f"  python scripts/tarrobot.py --pauta-auto <ruta-html>  (autogenerar datos desde el HTML)")
+    print(f"  python scripts/tarrobot.py --pauta-show {slug}        (verla)")
+    return 0
+
+
+def cmd_pauta_auto(args) -> int:
+    html_arg = Path(args.pauta_auto)
+    if not html_arg.is_absolute():
+        html_path = (REPO / html_arg).resolve()
+    else:
+        html_path = html_arg.resolve()
+
+    if not _path_dentro_repo(html_path):
+        print(f"ERROR: el HTML debe estar dentro del repo ({REPO})", file=sys.stderr)
+        return 1
+    if not html_path.exists():
+        print(f"ERROR: no existe el archivo {html_path}", file=sys.stderr)
+        return 1
+    if html_path.suffix.lower() != ".html":
+        print(f"ERROR: se esperaba un .html, recibi {html_path.suffix}", file=sys.stderr)
+        return 1
+
+    # Derivar slug del filename (sin extension)
+    slug = slugify(html_path.stem)
+    n_datos = max(3, min(args.n_datos or 10, 20))
+
+    print(f"[INFO] Leyendo {html_path.name}...")
+    print(f"[INFO] Pidiendo {n_datos} datos a Claude (haiku-4-5)...")
+
+    result = generar_pauta_con_llm(html_path, n_datos=n_datos)
+    if result is None:
+        return 1
+
+    datos_llm = result.get("datos", [])
+    if not datos_llm:
+        print("ERROR: el LLM no devolvio datos.", file=sys.stderr)
+        return 1
+
+    # Crear o cargar pauta
+    pauta = cargar_pauta(slug)
+    if pauta and not args.force:
+        print(f"ERROR: ya existe la pauta '{slug}' con {len(pauta['datos'])} datos.", file=sys.stderr)
+        print(f"       Usa --force para reemplazar, o --pauta-init <slug> --force primero.", file=sys.stderr)
+        return 1
+
+    episodio = args.episodio or result.get("episodio_titulo") or slug.replace("-", " ").title()
+    voz = resolver_voz(args.voice)
+    pauta = crear_pauta_vacia(slug, episodio, voz=voz, pitch=args.pitch, rate=args.rate)
+
+    for d in datos_llm:
+        d["fuente"] = "pauta-auto"
+        pauta_agregar_dato(pauta, d)
+
+    p = guardar_pauta(pauta)
+    print()
+    print(f"[OK] pauta generada con {len(pauta['datos'])} datos: {p}")
+    print()
+    for i, d in enumerate(pauta["datos"], 1):
+        print(f"  {i:2}. [{d['estado']:8}] {d['tema'][:50]}")
+        print(f"            {d['texto'][:100]}{'...' if len(d['texto']) > 100 else ''}")
+    print()
+    print("Proximo paso (Sprint 6.2):")
+    print(f"  python scripts/tarrobot.py --pauta-preload {slug}     (precargar todos los MP3)")
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="TarroBot - asistente de datos curiosos retro Retrotarros",
@@ -474,6 +827,16 @@ def main():
     parser.add_argument("--pitch", default=PITCH_DEFAULT, help=f"Pitch del TTS (default: {PITCH_DEFAULT}). Ej: '+8Hz', '+20Hz'.")
     parser.add_argument("--rate", default=RATE_DEFAULT, help="Rate del TTS. Default 0 porciento. Acepta +N o -N seguido de porciento.")
     parser.add_argument("--list-voices", action="store_true", help="Lista voces sugeridas y termina")
+
+    # Pauta / cola del episodio (Sprint 6)
+    parser.add_argument("--pauta-init", metavar="SLUG", help="Crea una pauta vacia con ese slug. Acepta --episodio, --voice, --pitch, --rate.")
+    parser.add_argument("--pauta-auto", metavar="HTML", help="Autogenera la pauta desde un HTML de episodio (usa Claude). Acepta --n-datos, --force.")
+    parser.add_argument("--pauta-list", action="store_true", help="Lista todas las pautas creadas en studio/pautas/")
+    parser.add_argument("--pauta-show", metavar="SLUG", help="Muestra el contenido de una pauta")
+    parser.add_argument("--episodio", help="Titulo del episodio (para --pauta-init y --pauta-auto)")
+    parser.add_argument("--n-datos", type=int, help="Cantidad de datos a generar con --pauta-auto (default 10, max 20)")
+    parser.add_argument("--force", action="store_true", help="Sobrescribe la pauta si ya existe")
+
     args = parser.parse_args()
 
     # --list-voices
@@ -487,6 +850,16 @@ def main():
                 nota = "  (DEFAULT, chilena)"
             print(f"  {alias:12} -> {full}{nota}")
         return 0
+
+    # Pauta commands (no requieren DB global)
+    if args.pauta_list:
+        return cmd_pauta_list(args)
+    if args.pauta_show:
+        return cmd_pauta_show(args)
+    if args.pauta_init:
+        return cmd_pauta_init(args)
+    if args.pauta_auto:
+        return cmd_pauta_auto(args)
 
     db = cargar_db()
 
