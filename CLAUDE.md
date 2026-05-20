@@ -71,12 +71,19 @@ Canal de YouTube en español sobre **Nostalgia + Juegos + Música** (retrogaming
 
 ## REGLA INMUTABLE — Tono y lengua
 
-Todo output de cara al público en **español chileno neutro**:
+**Aplica a TODO** lo que Claude produce en este proyecto: HTMLs, copies para YouTube/TikTok/IG, capturas, capciones, commits, y **también el chat con Luis aquí mismo**. No solo al output que va para el público — también las explicaciones, listas y resúmenes que le doy a Luis tienen que estar en chileno neutro.
 
-- **Sí**: "po", "espérate", "déjanos", "suscríbete", "tení", "mira" — marcas chilenas suaves y naturales.
-- **No**: voseo rioplatense ("vos sabés", "che"), mexicanismos ("órale", "güey"), españolismos ("vale", "tío", "guay").
-- Registro conversacional — dos chilenos en un café, no locutores de noticiero.
-- Si el output sale con marcas regionales equivocadas → corregir y reescribir.
+**Reglas concretas:**
+
+- **Español chileno neutro con tuteo.** Usar "tú/tienes/quieres/dime/puedes/sabes". Marcas chilenas suaves OK: "po", "te tinca", "mira", "fíjate", "espérate", "déjanos", "suscríbete", "tení".
+- **Sin voseo argentino/rioplatense.** Prohibido: "vos sabés", "tenés", "querés", "decime", "pegás", "navegás", "armás", "bajás", "fijate" (con voseo), "che".
+- **Sin mexicanismos.** No "órale", "güey", "chido", "ándale".
+- **Sin españolismos.** No "vale", "tío", "guay", "molar".
+- **Sin tildes en tildes débiles** (a/é/í/ó/ú → a/e/i/o/u) en los HTMLs y outputs públicos. En chat con Luis pueden ir tildes (decisión de Luis: si pide aplicar también al chat, sí; si no, el chat puede tener tildes para legibilidad).
+- **Registro conversacional.** Dos chilenos en un café, no locutores de noticiero.
+- **Si el output sale con marcas regionales equivocadas → corregir y reescribir.** No usar "boludo", "che", "vamos a tirarle" en sentido argentino.
+
+Si Luis señala que sonaste argentino → disculparte breve, reescribir el último mensaje en chileno neutro, y seguir aplicando la regla.
 
 ## Formatos
 
