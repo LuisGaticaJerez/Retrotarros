@@ -324,7 +324,11 @@ select#queueSelect:focus { border-color: var(--ye); }
     <button class="btn next" onclick="queueNext()">▶ NEXT</button>
     <button class="btn" onclick="queueReset()">↩ RESET</button>
   </div>
-  <button class="btn full cy" onclick="toggleQueueList()" id="toggleListBtn" style="font-size:9px; padding:8px;">VER LISTA ▾</button>
+  <div class="btn-row">
+    <button class="btn cy" onclick="toggleQueueList()" id="toggleListBtn" style="font-size:9px; padding:8px;">VER LISTA ▾</button>
+    <button class="btn" onclick="exportarSRT('auto')" style="font-size:9px; padding:8px;">SRT GRABACION</button>
+    <button class="btn" onclick="exportarSRT('relative')" style="font-size:9px; padding:8px;">SRT PREVIEW</button>
+  </div>
   <div id="queueList"></div>
 </div>
 
@@ -758,6 +762,32 @@ async function queueReset() { const d = await post('/api/queue/reset', {}); if (
 async function queueJump(idx) {
   const d = await post('/api/queue/jump', { indice: idx });
   if (d && d.ok) { logMsg('→ jump ' + idx + ': ' + (d.dato && d.dato.tema), 'ok'); pollQueueOnce(); }
+}
+
+async function exportarSRT(modo) {
+  try {
+    const r = await fetch('/api/queue/srt?modo=' + encodeURIComponent(modo));
+    if (!r.ok) {
+      const err = await r.json().catch(() => ({}));
+      logMsg('SRT err: ' + (err.error || r.status), 'err');
+      return;
+    }
+    const blob = await r.blob();
+    const cd = r.headers.get('Content-Disposition') || '';
+    const m = cd.match(/filename="([^"]+)"/);
+    const filename = m ? m[1] : 'cola.srt';
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    logMsg('SRT descargado (' + modo + '): ' + filename, 'ok');
+  } catch (e) {
+    logMsg('SRT fail: ' + e.message, 'err');
+  }
 }
 
 function toggleQueueList() {

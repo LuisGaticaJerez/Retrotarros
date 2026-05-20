@@ -559,6 +559,53 @@ async def _preload_pauta_async(pauta: dict, force: bool = False, concurrency: in
     return generados, skipped, errores
 
 
+def _ms_to_srt_timestamp(ms: int) -> str:
+    """Convierte ms a 'HH:MM:SS,mmm' formato SRT."""
+    if ms < 0:
+        ms = 0
+    horas, ms = divmod(ms, 3600_000)
+    minutos, ms = divmod(ms, 60_000)
+    segundos, ms = divmod(ms, 1000)
+    return f"{horas:02d}:{minutos:02d}:{segundos:02d},{ms:03d}"
+
+
+def pauta_to_srt(pauta: dict, session_log: list | None = None, gap_ms: int = 500) -> str:
+    """
+    Genera SRT desde una pauta. Dos modos:
+
+    Modo 'relative' (default, sin session_log): asume que cada dato se
+    reproduce inmediatamente despues del anterior + gap_ms de pausa.
+    Util para preview offline o cuando el video se monta dato-tras-dato.
+
+    Modo 'recording' (con session_log): usa timestamps reales de cuando
+    se apreto NEXT durante la grabacion. Cada entry del session_log es
+    {timestamp_session_ms, dato_id, texto, duracion_ms}. La sincronizacion
+    queda exacta para importar en CapCut/DaVinci sobre la grabacion real.
+    """
+    bloques = []
+
+    if session_log:
+        # Modo recording: timestamps reales
+        for i, entry in enumerate(session_log, 1):
+            start_ms = int(entry.get("timestamp_session_ms", 0))
+            dur_ms = int(entry.get("duracion_ms") or 0)
+            end_ms = start_ms + (dur_ms if dur_ms > 0 else 4000)  # fallback 4s si no hay duracion
+            texto = entry.get("texto", "").strip()
+            bloques.append(f"{i}\n{_ms_to_srt_timestamp(start_ms)} --> {_ms_to_srt_timestamp(end_ms)}\n{texto}\n")
+    else:
+        # Modo relative: secuencial desde T=0
+        cursor_ms = 0
+        for i, dato in enumerate(pauta.get("datos", []), 1):
+            dur_ms = int(dato.get("duracion_ms") or 0) or 4000  # 4s fallback si no hay mp3
+            start_ms = cursor_ms
+            end_ms = cursor_ms + dur_ms
+            texto = dato.get("texto", "").strip()
+            bloques.append(f"{i}\n{_ms_to_srt_timestamp(start_ms)} --> {_ms_to_srt_timestamp(end_ms)}\n{texto}\n")
+            cursor_ms = end_ms + gap_ms
+
+    return "\n".join(bloques)
+
+
 def pauta_agregar_dato(pauta: dict, dato_in: dict) -> dict:
     """Agrega un dato a la pauta con id unico y campos por defecto. Mutates pauta."""
     base = pauta["slug"]
@@ -843,6 +890,30 @@ def cmd_pauta_init(args) -> int:
     return 0
 
 
+def cmd_pauta_srt(args) -> int:
+    slug = slugify(args.pauta_srt)
+    pauta = cargar_pauta(slug)
+    if not pauta:
+        print(f"ERROR: no existe la pauta '{slug}'", file=sys.stderr)
+        return 1
+    if not pauta["datos"]:
+        print(f"ERROR: la pauta '{slug}' esta vacia", file=sys.stderr)
+        return 1
+
+    srt = pauta_to_srt(pauta, session_log=None, gap_ms=args.gap_ms or 500)
+    out_path = PAUTAS_DIR / f"{slug}.srt"
+    out_path.write_text(srt, encoding="utf-8")
+    print(f"[OK] SRT generado: {out_path}")
+    print(f"     modo: relative (asume reproduccion secuencial con {args.gap_ms or 500}ms entre items)")
+    print(f"     items: {len(pauta['datos'])}")
+    # Mostrar primeras 2 entradas como preview
+    preview = "\n".join(srt.split("\n\n")[:2])
+    print()
+    print("Preview:")
+    print(preview)
+    return 0
+
+
 def cmd_pauta_preload(args) -> int:
     slug = slugify(args.pauta_preload)
     pauta = cargar_pauta(slug)
@@ -991,6 +1062,8 @@ def main():
     parser.add_argument("--pauta-auto", metavar="HTML", help="Autogenera la pauta desde un HTML de episodio (usa Claude). Acepta --n-datos, --force.")
     parser.add_argument("--pauta-preload", metavar="SLUG", help="Precarga (genera) todos los MP3 de una pauta en paralelo. Acepta --force, --concurrency.")
     parser.add_argument("--concurrency", type=int, help="Cantidad de TTS concurrentes para --pauta-preload (default 3, max razonable 6).")
+    parser.add_argument("--pauta-srt", metavar="SLUG", help="Exporta SRT desde una pauta (modo relative, util para preview offline).")
+    parser.add_argument("--gap-ms", type=int, help="Milisegundos de pausa entre items en SRT modo relative (default 500).")
     parser.add_argument("--pauta-list", action="store_true", help="Lista todas las pautas creadas en studio/pautas/")
     parser.add_argument("--pauta-show", metavar="SLUG", help="Muestra el contenido de una pauta")
     parser.add_argument("--episodio", help="Titulo del episodio (para --pauta-init y --pauta-auto)")
@@ -1022,6 +1095,8 @@ def main():
         return cmd_pauta_auto(args)
     if args.pauta_preload:
         return cmd_pauta_preload(args)
+    if args.pauta_srt:
+        return cmd_pauta_srt(args)
 
     db = cargar_db()
 

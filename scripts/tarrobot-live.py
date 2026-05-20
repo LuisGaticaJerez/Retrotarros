@@ -42,7 +42,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from tarrobot import (
     cargar_db, buscar, agregar_dato, generar_con_llm,
     generar_tts, resolver_voz,
-    cargar_pauta, pauta_audio_dir,
+    cargar_pauta, pauta_audio_dir, pauta_to_srt,
     LABEL_POR_ESTADO, ESTADOS, VOZ_DEFAULT, PITCH_DEFAULT, RATE_DEFAULT,
     OUT_DIR, PAUTAS_DIR, PAUTAS_AUDIO_DIR,
 )
@@ -174,6 +174,30 @@ class QueueManager:
         self.slug: Optional[str] = None
         self.indice: int = -1   # -1 = sin reproducir aun, 0..N-1 = item actual
         self.lock = asyncio.Lock()
+        # Sprint 7.5: session log para exportar SRT con timestamps reales de
+        # la grabacion. Se rellena cada vez que se reproduce un item.
+        self.session_start_ts: Optional[float] = None
+        self.session_log: list = []
+
+    def reset_session(self):
+        """Reinicia el log de la grabacion (al hacer load o reset)."""
+        self.session_start_ts = time.time()
+        self.session_log = []
+
+    def log_play(self, dato: dict):
+        """Registra que se acaba de empezar a reproducir un dato."""
+        if self.session_start_ts is None:
+            self.session_start_ts = time.time()
+        elapsed_ms = int((time.time() - self.session_start_ts) * 1000)
+        self.session_log.append({
+            "timestamp_session_ms": elapsed_ms,
+            "indice": self.indice,
+            "dato_id": dato["id"],
+            "tema": dato.get("tema", ""),
+            "texto": dato.get("texto", ""),
+            "estado": dato.get("estado", ""),
+            "duracion_ms": dato.get("duracion_ms") or 0,
+        })
 
     def loaded(self) -> bool:
         return self.pauta is not None and bool(self.pauta.get("datos"))
@@ -984,6 +1008,9 @@ async def _reproducir_dato_de_cola(dato: dict, voz_override: Optional[str] = Non
         audio_url = f"/audio/{mp3.name}" if mp3 else None
 
     tracker.mark_speaking(True)
+    # Sprint 7.5: registrar en session log para exportar SRT despues
+    queue.log_play(dato)
+
     meta = " · ".join(
         s for s in [dato.get("consola", ""), str(dato.get("ano", "") or ""), dato.get("editor", "")]
         if s and s != "0"
@@ -997,7 +1024,6 @@ async def _reproducir_dato_de_cola(dato: dict, voz_override: Optional[str] = Non
         "audio_url": audio_url,
         "tema": dato["tema"],
     })
-    # Broadcast tambien el status de la cola al panel control (futuro WS panel)
     return audio_url
 
 
@@ -1020,6 +1046,7 @@ async def queue_load(payload: dict):
         queue.pauta = pauta
         queue.slug = pauta["slug"]
         queue.indice = -1   # arranca en limbo, primer NEXT salta al 0
+        queue.reset_session()
 
     tracker.mark_input()
     return {"ok": True, "status": queue.status()}
@@ -1102,8 +1129,40 @@ async def queue_reset():
         if not queue.loaded():
             return JSONResponse({"error": "no hay cola cargada"}, status_code=400)
         queue.indice = -1
+        queue.reset_session()
     tracker.mark_input()
     return {"ok": True, "status": queue.status()}
+
+
+@app.get("/api/queue/srt")
+async def queue_srt(modo: str = "auto", gap_ms: int = 500):
+    """
+    Exporta SRT de la cola actual.
+    modo='auto'      usa session_log si hay items reproducidos, sino relative
+    modo='relative'  fuerza modo relative (secuencial desde T=0)
+    modo='recording' fuerza modo recording (timestamps reales)
+    gap_ms           solo aplica en modo relative
+    """
+    if not queue.loaded():
+        return JSONResponse({"error": "no hay cola cargada"}, status_code=400)
+
+    use_log = None
+    if modo == "recording":
+        if not queue.session_log:
+            return JSONResponse({"error": "no hay items reproducidos todavia"}, status_code=400)
+        use_log = queue.session_log
+    elif modo == "auto":
+        use_log = queue.session_log if queue.session_log else None
+    # modo='relative' -> use_log queda None
+
+    srt = pauta_to_srt(queue.pauta, session_log=use_log, gap_ms=gap_ms)
+    from fastapi.responses import Response
+    filename = f"{queue.slug}.srt"
+    return Response(
+        content=srt,
+        media_type="application/x-subrip",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
 
 
 @app.get("/api/queue/list")

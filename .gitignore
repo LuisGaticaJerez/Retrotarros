@@ -36,6 +36,9 @@ studio/pautas/*.docx
 # Los JSON .tarrobot.json SI se versionan, son el guion del episodio
 studio/pautas/audio/
 
+# SRT exportados desde pautas (regenerables con --pauta-srt o /api/queue/srt)
+studio/pautas/*.srt
+
 # Capturas PNG generadas por capture-slides.py (la fuente es el HTML)
 # Se regeneran con: python scripts/capture-slides.py <slug>
 studio/captures/
