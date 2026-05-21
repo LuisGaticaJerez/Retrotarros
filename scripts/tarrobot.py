@@ -174,7 +174,8 @@ Genera 3 datos curiosos cortos sobre: "{tema}".
 Requisitos OBLIGATORIOS (este texto se reproduce con TTS, por eso reglas estrictas):
 - Español ESTRICTAMENTE chileno neutro con TUTEO (tú/tienes/sabes/dime/puedes/mira).
 - NO usar voseo argentino: PROHIBIDO "tenés", "querés", "decime", "vení", "vos",
-  "che", "andá", "haceme", "fijate" (con voseo).
+  "sos", "podés", "sabés", "decís", "andás", "vas vos", "che", "andá", "haceme",
+  "fijate" (con voseo). USA: "eres", "tienes", "quieres", "puedes", "dime", "vas".
 - NO usar palabras o entonaciones que suenen argentino-uruguayas, evitar:
   * "acá" -> usa "aquí"
   * "andábamos" -> usa "estábamos"
@@ -232,6 +233,12 @@ Estados validos para "estado_recomendado": talking, excited, fact, winking, conf
         print(f"ERROR: el LLM devolvio JSON invalido: {e}", file=sys.stderr)
         print(raw, file=sys.stderr)
         return None
+
+    # Filtro anti-voseo en los textos generados (defensa ultima)
+    if "datos" in result and isinstance(result["datos"], list):
+        for d in result["datos"]:
+            if "texto" in d:
+                d["texto"] = chilenizar(d["texto"])
 
     return result
 
@@ -584,6 +591,12 @@ Estados validos: talking, excited, fact, winking, confused, happy, sad, angry, t
         print(raw[:800], file=sys.stderr)
         return None
 
+    # Filtro anti-voseo en los textos generados (defensa ultima)
+    if "datos" in result and isinstance(result["datos"], list):
+        for d in result["datos"]:
+            if "texto" in d:
+                d["texto"] = chilenizar(d["texto"])
+
     return result
 
 
@@ -673,6 +686,71 @@ async def _preload_pauta_async(pauta: dict, force: bool = False, concurrency: in
     tareas = [worker(i, d) for i, d in enumerate(pauta["datos"], 1)]
     await asyncio.gather(*tareas)
     return generados, skipped, errores
+
+
+# Sprint 8.x: filtro postproceso anti-voseo. Si Claude se salio del prompt
+# y devolvio voseo argentino, este filtro lo reemplaza por las formas
+# chilenas neutras equivalentes. Es la ultima defensa antes de pasar al TTS.
+
+# Mapeo voseo -> tuteo chileno. Las claves son lowercase; el filtro
+# preserva la capitalizacion del match original.
+VOSEO_MAPA = {
+    # Verbos
+    "sos": "eres",
+    "tenés": "tienes", "tenes": "tienes",
+    "querés": "quieres", "queres": "quieres",
+    "podés": "puedes", "podes": "puedes",
+    "sabés": "sabes", "sabes vos": "sabes",
+    "decís": "dices",
+    "decime": "dime",
+    "vení": "ven",
+    "andás": "andas",
+    "hacé": "haz",
+    "haceme": "hazme",
+    "contame": "cuéntame",
+    "mandame": "mándame",
+    # Pronombre
+    "vos": "tú",
+    # Argentinismos camuflados
+    "acá": "aquí",
+    "andábamos": "estábamos",
+    "me agarraste": "me pillaste",
+}
+
+
+def chilenizar(texto: str) -> str:
+    """Aplica reemplazos anti-voseo preservando capitalizacion del original.
+    Si encuentra matches, imprime warning al stderr."""
+    import re as _re
+
+    def _preservar_caps(orig: str, reemplazo: str) -> str:
+        """Si el original arranca con mayuscula, capitaliza el reemplazo."""
+        if orig and orig[0].isupper():
+            return reemplazo[0].upper() + reemplazo[1:]
+        return reemplazo
+
+    cambios = 0
+    nuevo = texto
+
+    # Aplicar voseo: matchear con \b<palabra>\b case-insensitive,
+    # preservar caps del match original
+    for clave, reemplazo in VOSEO_MAPA.items():
+        # escapar caracteres especiales del regex en la clave
+        patron = r"\b" + _re.escape(clave) + r"\b"
+
+        def _sub(m):
+            return _preservar_caps(m.group(0), reemplazo)
+
+        nuevo, n = _re.subn(patron, _sub, nuevo, flags=_re.IGNORECASE)
+        cambios += n
+
+    # Caso especial "che" -> remover (con comas y espacios)
+    nuevo, n = _re.subn(r"\b[Cc]he\b,?\s*", "", nuevo)
+    cambios += n
+
+    if cambios > 0:
+        print(f"[chilenizar] {cambios} reemplazo(s) aplicado(s) a texto LLM", file=sys.stderr)
+    return nuevo
 
 
 def _ms_to_srt_timestamp(ms: int) -> str:

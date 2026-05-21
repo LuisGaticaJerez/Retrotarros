@@ -41,7 +41,7 @@ import uvicorn
 sys.path.insert(0, str(Path(__file__).parent))
 from tarrobot import (
     cargar_db, buscar, agregar_dato, generar_con_llm,
-    generar_tts, resolver_voz, resolver_preset,
+    generar_tts, resolver_voz, resolver_preset, chilenizar,
     cargar_pauta, pauta_audio_dir, pauta_to_srt,
     LABEL_POR_ESTADO, ESTADOS, VOZ_DEFAULT, PITCH_DEFAULT, RATE_DEFAULT,
     OUT_DIR, PAUTAS_DIR, PAUTAS_AUDIO_DIR, PRESETS_VOZ,
@@ -714,7 +714,9 @@ También decide el estado emocional que mejor calza.
 
 Reglas (este texto se reproduce con TTS, por eso reglas estrictas):
 - Español ESTRICTAMENTE chileno neutro con TUTEO (tú/tienes/sabes/dime/puedes).
-- NO voseo argentino: PROHIBIDO "tenés", "querés", "decime", "vos", "che", "andá".
+- NO voseo argentino: PROHIBIDO "tenés", "querés", "podés", "sabés", "decime",
+  "decís", "vos", "sos", "vení", "andás", "che", "andá". USA: "eres", "tienes",
+  "quieres", "puedes", "dices", "ven", "vas", "dime".
 - NO palabras argentinas: evita "acá" (usa "aquí"), "andábamos" (usa "estábamos"),
   "me agarraste" (usa "me pillaste"), "pibe" (usa "chico").
 - USA TILDES correctas del español ortográfico (también, está, mí, sí, día, año).
@@ -740,7 +742,11 @@ Devuelve SOLO un JSON válido (sin markdown), formato:
         raw = response.content[0].text.strip()
         raw = _re.sub(r"^```(?:json)?\s*", "", raw)
         raw = _re.sub(r"\s*```$", "", raw)
-        return json.loads(raw)
+        result = json.loads(raw)
+        # Filtro anti-voseo (defensa ultima)
+        if "texto" in result:
+            result["texto"] = chilenizar(result["texto"])
+        return result
     except Exception as e:
         print(f"[opinar] error: {e}")
         return None
@@ -805,7 +811,9 @@ Devuelve una opinión PERSONAL, 2-3 oraciones, sobre si vale la pena o no, qué 
 
 Reglas (texto reproducido por TTS):
 - Español ESTRICTAMENTE chileno neutro con TUTEO (tú/tienes/sabes).
-- PROHIBIDO voseo argentino ("tenés", "querés", "decime", "vos", "che", "andá").
+- PROHIBIDO voseo argentino ("tenés", "querés", "podés", "sabés", "sos",
+  "decime", "decís", "vos", "vení", "che", "andá"). USA: "eres", "tienes",
+  "quieres", "puedes", "dices", "vas", "dime".
 - Evita "acá" (usa "aquí"), "andábamos" (usa "estábamos"), "me agarraste"
   (usa "me pillaste"), "pibe" (usa "chico").
 - USA TILDES correctas.
@@ -824,7 +832,10 @@ Devuelve SOLO JSON: {{"texto": "...", "estado": "..."}}
         raw = response.content[0].text.strip()
         raw = _re.sub(r"^```(?:json)?\s*", "", raw)
         raw = _re.sub(r"\s*```$", "", raw)
-        return json.loads(raw)
+        result = json.loads(raw)
+        if "texto" in result:
+            result["texto"] = chilenizar(result["texto"])
+        return result
     except Exception as e:
         print(f"[precio-opinion] error: {e}")
         return None
