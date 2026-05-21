@@ -111,7 +111,7 @@ CATCHPHRASES = [
     "TarroBot al servicio del retrogaming.",
     "Suscríbete que un tarro nunca olvida.",
     "Polvito de cartucho, magia garantizada.",
-    "Acá no se sopla el cartucho, se cuida.",
+    "Aquí no se sopla el cartucho, se cuida.",
     "Cartridge inside, magic incoming.",
     "Ocho bits valen mil palabras.",
     "Retro es eterno, lo nuevo viene y va.",
@@ -137,26 +137,26 @@ CATCHPHRASE_ESTADOS = ["excited", "happy", "winking", "fact"]
 # estando en modo sleep/drowsy/bored. Tono: como si lo hubieran sorprendido
 # pero tranquilo, tipo "perdon estaba en otra".
 DESPERTAR_FRASES = [
-    "Sorry, ¡acá estoy! Estaba revisando mis circuitos.",
+    "Disculpa, ¡aquí estoy! Estaba revisando mis circuitos.",
     "Eh, ¿qué pasó? Estaba en modo bajo consumo.",
     "¡Despierto, despierto! ¿Necesitan algo?",
-    "Pasa, estaba reorganizando la memoria caché.",
+    "Permite, estaba reorganizando la memoria caché.",
     "Procesando despertar... Listo, ¿qué hay?",
-    "Reactivando sistema. ¿Qué se cuenta?",
-    "Sorry, ¡presente! Solo estaba ahorrando batería.",
+    "Reactivando sistema. ¿De qué hablamos?",
+    "Disculpa, ¡presente! Solo estaba ahorrando batería.",
     "¡Estoy aquí! Pensaba en juegos clásicos.",
-    "Bip bop, sistema reactivado. ¿En qué andábamos?",
+    "Bip bop, sistema reactivado. ¿En qué estábamos?",
     "Perdón, estaba soñando con cartuchos de oro.",
-    "¡Acá estoy! Solo descansaban mis píxeles.",
+    "¡Aquí estoy! Solo descansaban mis píxeles.",
     "Volviendo a la sesión. ¿Qué necesitan?",
-    "¡Auch! Me agarraste pensando en Mario 64.",
+    "¡Auch! Me pillaste pensando en Mario 64.",
     "Estaba haciendo un dump de memoria. Ya volví.",
     "¿Yo? Despertando los datos curiosos.",
-    "Reiniciando ojitos. Listo, ¿qué se cuenta?",
+    "Reiniciando ojitos. Listo, ¿qué tienes para mí?",
     "¡Continue! Vuelvo a estar online.",
     "Estaba en modo demo, ya salgo de eso.",
-    "Mis circuitos andaban descansando, pero ya están.",
-    "Recargado al 100. ¿Qué quieren saber?",
+    "Mis circuitos descansaban, pero ya están listos.",
+    "Recargado al cien. ¿Qué quieren saber?",
 ]
 
 
@@ -713,7 +713,10 @@ Devuelve una OPINIÓN corta y con personalidad (1-2 oraciones, max 200 caractere
 También decide el estado emocional que mejor calza.
 
 Reglas (este texto se reproduce con TTS, por eso reglas estrictas):
-- Español neutro latino con TUTEO (tú/tienes/sabes). NO uses voseo argentino.
+- Español ESTRICTAMENTE chileno neutro con TUTEO (tú/tienes/sabes/dime/puedes).
+- NO voseo argentino: PROHIBIDO "tenés", "querés", "decime", "vos", "che", "andá".
+- NO palabras argentinas: evita "acá" (usa "aquí"), "andábamos" (usa "estábamos"),
+  "me agarraste" (usa "me pillaste"), "pibe" (usa "chico").
 - USA TILDES correctas del español ortográfico (también, está, mí, sí, día, año).
   Crítico para que el TTS pronuncie bien.
 - NÚMEROS EN PALABRAS para cifras grandes: "20 mil" en vez de "20,000".
@@ -801,7 +804,10 @@ Tu humano te pregunta explícitamente: "¿Qué opinas del precio de {valor_str} 
 Devuelve una opinión PERSONAL, 2-3 oraciones, sobre si vale la pena o no, qué pensás del mercado de coleccionismo retro a ese precio, contexto historico breve (si es razonable, escandaloso, ganga). Tono curioso y honesto.
 
 Reglas (texto reproducido por TTS):
-- Español neutro latino con TUTEO. NO voseo argentino.
+- Español ESTRICTAMENTE chileno neutro con TUTEO (tú/tienes/sabes).
+- PROHIBIDO voseo argentino ("tenés", "querés", "decime", "vos", "che", "andá").
+- Evita "acá" (usa "aquí"), "andábamos" (usa "estábamos"), "me agarraste"
+  (usa "me pillaste"), "pibe" (usa "chico").
 - USA TILDES correctas.
 - NÚMEROS EN PALABRAS ("20 mil" en vez de "20,000").
 - Estados válidos: confused, excited, fact, winking, thinking, sad, angry, happy.

@@ -172,8 +172,17 @@ def generar_con_llm(tema: str) -> dict | None:
 Genera 3 datos curiosos cortos sobre: "{tema}".
 
 Requisitos OBLIGATORIOS (este texto se reproduce con TTS, por eso reglas estrictas):
-- Español neutro latino con TUTEO (tú/tienes/sabes). NO voseo argentino (nada de
-  "tenés", "querés", "decime", "vos").
+- Español ESTRICTAMENTE chileno neutro con TUTEO (tú/tienes/sabes/dime/puedes/mira).
+- NO usar voseo argentino: PROHIBIDO "tenés", "querés", "decime", "vení", "vos",
+  "che", "andá", "haceme", "fijate" (con voseo).
+- NO usar palabras o entonaciones que suenen argentino-uruguayas, evitar:
+  * "acá" -> usa "aquí"
+  * "andábamos" -> usa "estábamos"
+  * "me agarraste" -> usa "me pillaste"
+  * "pasa" (como saludo) -> usa "permite" o "disculpa"
+  * "bajando el telón" -> usa "cerrando"
+  * "pibe/piba" -> usa "chico/chica" o "amigo"
+  * "guita" -> usa "plata" o "dinero"
 - USA TILDES correctas del español ortográfico estándar (también, está, mí, sí, etc.).
   Esto es importante para que el TTS pronuncie correctamente.
 - NÚMEROS EN PALABRAS, no en cifras. Ejemplos:
@@ -513,8 +522,12 @@ CONTENIDO DEL EPISODIO:
 \"\"\"
 
 Requisitos OBLIGATORIOS para CADA dato (este texto se reproduce con TTS):
-- Español neutro latino con TUTEO (tú/tienes/sabes). NO voseo argentino (nada de
-  "tenés", "querés", "decime", "vos", "che").
+- Español ESTRICTAMENTE chileno neutro con TUTEO (tú/tienes/sabes/dime/puedes/mira).
+- NO voseo argentino: PROHIBIDO "tenés", "querés", "decime", "vení", "vos",
+  "che", "andá", "haceme", "fijate" (con voseo).
+- NO palabras que suenen argentinas/uruguayas: evita "acá" (usa "aquí"),
+  "andábamos" (usa "estábamos"), "me agarraste" (usa "me pillaste"),
+  "pibe/piba" (usa "chico/amigo"), "guita" (usa "plata").
 - USA TILDES correctas del español ortográfico (también, está, día, año, mí, sí).
   Es crítico para que el TTS pronuncie correctamente.
 - NÚMEROS EN PALABRAS para cifras grandes:
