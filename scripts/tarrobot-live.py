@@ -152,6 +152,26 @@ COMO_ESTAS_FRASES = [
     "Como el primer día del cartucho, brillando.",
 ]
 
+# Respuestas a "¿me estás escuchando?" / "¿me oyes?" / "¿nos oyes?"
+ESCUCHANDO_FRASES = [
+    "Te escucho clarito, dispara la pregunta.",
+    "Cinco por cinco. Audio limpio.",
+    "Te oigo perfecto, ¿qué necesitas?",
+    "Sistema de audio funcionando, micrófonos conectados.",
+    "Aquí estoy, atento a cada palabra.",
+    "Escuchando con los dos canales abiertos.",
+    "Audio claro, cero estática. Manda.",
+    "Sí, los oigo perfecto. ¿Qué se cuenta?",
+    "Recibido, recibido. Volumen óptimo.",
+    "Sensores de audio al máximo. Adelante.",
+    "Te escucho como si estuvieras a mi lado.",
+    "Pixeles abiertos, oídos atentos. Habla.",
+    "Conectado y procesando cada sílaba.",
+    "Frecuencia limpia. Estoy con ustedes.",
+    "Sí, los escucho a los dos. Continúen.",
+]
+
+
 # Respuestas a "¿qué hacemos hoy?" / "¿qué te gustaría hacer?"
 QUE_HACEMOS_FRASES = [
     "¿Te tinca un dato sobre SNES o N64 para arrancar?",
@@ -1072,6 +1092,18 @@ async def despedir(payload: dict):
     return {"ok": True, "texto": texto, "audio_url": audio_url}
 
 
+@app.post("/api/escuchando")
+async def escuchando(payload: dict):
+    """Sprint 8.x: respuesta a '¿me estás escuchando?' o variantes."""
+    import random
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    tracker.mark_input()
+    texto = random.choice(ESCUCHANDO_FRASES)
+    estado = random.choice(["happy", "winking", "excited"])
+    audio_url = await _hablar_frase(texto, estado, "TE ESCUCHO", voz, pitch, rate)
+    return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
+
+
 @app.post("/api/como-estas")
 async def como_estas(payload: dict):
     """Sprint 8.x: respuesta a '¿cómo estás?' con frase random."""
@@ -1270,6 +1302,24 @@ def parsear_intent(texto: str) -> dict:
     for kw in ["chao", "adios", "adiós", "bye", "hasta luego", "nos vemos"]:
         if kw in t_clean:
             return {"accion": "despedir", "params": {}}
+
+    # 1c0. "¿Me estás escuchando?" / "¿me oyes?" (Sprint 8.x)
+    escuchando_kws = [
+        "me estas escuchando", "me estás escuchando",
+        "me escuchas", "me escuchás",
+        "me oyes", "me oís", "me ois",
+        "nos escuchas", "nos escuchás",
+        "nos oyes", "nos oís", "nos ois",
+        "estas escuchando", "estás escuchando",
+        "estas oyendo", "estás oyendo",
+        "escuchas bien", "se escucha bien",
+        "audio ok", "audio okey", "audio limpio",
+        "check de audio", "prueba de audio",
+        "hay audio", "se oye", "se escucha",
+    ]
+    for kw in escuchando_kws:
+        if kw in t_clean:
+            return {"accion": "escuchando", "params": {}}
 
     # 1c. "¿Cómo estás?" (Sprint 8.x)
     como_estas_kws = [
@@ -1471,6 +1521,8 @@ async def listen(request: Request, wake: str = ""):
             result = await como_estas({})
         elif accion == "que_hacemos":
             result = await que_hacemos({})
+        elif accion == "escuchando":
+            result = await escuchando({})
         elif accion == "opinar":
             result = await opinar(params)
         elif accion == "precio":

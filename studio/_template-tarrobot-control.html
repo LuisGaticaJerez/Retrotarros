@@ -441,6 +441,7 @@ select#queueSelect:focus { border-color: var(--ye); }
   <div class="btn-row" style="margin-top:6px;">
     <button class="btn cy" onclick="comoEstas()">¿CÓMO ESTÁS?</button>
     <button class="btn cy" onclick="queHacemos()">¿QUÉ HACEMOS HOY?</button>
+    <button class="btn cy" onclick="escuchando()">¿ME ESCUCHAS?</button>
   </div>
   <div style="font-size:10px; color:rgba(255,255,255,.45); margin-top:6px;">
     "Chao" acelera la somnolencia (bored → drowsy → sleep en pocos segundos).
@@ -569,6 +570,7 @@ const PROC_LABELS = {
   '/api/despertar':    'despertando TarroBot...',
   '/api/como-estas':   'pensando cómo está...',
   '/api/que-hacemos':  'pensando qué hacer hoy...',
+  '/api/escuchando':   'confirmando audio...',
   '/api/catchphrase':  'catchphrase Retrotarros...',
   '/api/queue/next':    'siguiente item...',
   '/api/queue/prev':    'item anterior...',
@@ -701,6 +703,12 @@ async function queHacemos() {
   logMsg('preguntando que hacemos hoy...');
   const data = await post('/api/que-hacemos', {});
   if (data && data.ok) logMsg('OK que-hacemos: "' + data.texto + '"', 'ok');
+}
+
+async function escuchando() {
+  logMsg('check de audio...');
+  const data = await post('/api/escuchando', {});
+  if (data && data.ok) logMsg('OK escuchando: "' + data.texto + '"', 'ok');
 }
 
 async function random_(categoria) {
