@@ -2,19 +2,28 @@
 # Arma el paquete TarroBot Studio listo para distribuir al PC del estudio.
 #
 # Uso:
-#   .\installers\tarrobot-studio\build-package.ps1
+#   .\installers\tarrobot-studio\build-package.ps1                # full (todo)
+#   .\installers\tarrobot-studio\build-package.ps1 -Slim          # solo lo basico
+#                                                                  (usa cuando el
+#                                                                   estudio leera todo
+#                                                                   por Drive sync)
 #
 # Resultado:
 #   installers\tarrobot-studio\dist\TarroBot-Studio-v1.0\
 #   installers\tarrobot-studio\dist\TarroBot-Studio-v1.0.zip
 
+param(
+    [switch]$Slim
+)
+
 $ErrorActionPreference = "Stop"
 
-$Version = "1.0"
+$Version = "1.1"
 $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RepoRoot = Resolve-Path (Join-Path $ScriptRoot "..\..")
 $DistDir = Join-Path $ScriptRoot "dist"
-$PackageName = "TarroBot-Studio-v$Version"
+$Suffix = if ($Slim) { "-slim" } else { "" }
+$PackageName = "TarroBot-Studio-v$Version$Suffix"
 $PackageDir = Join-Path $DistDir $PackageName
 $ZipPath = Join-Path $DistDir "$PackageName.zip"
 
@@ -58,6 +67,71 @@ Copy-Item (Join-Path $RepoRoot "studio\_template-tarrobot-control.html") -Destin
 Write-Host "Copiando base de datos TarroBot..." -ForegroundColor Green
 New-Item -ItemType Directory -Path (Join-Path $PackageDir "data") -Force | Out-Null
 Copy-Item (Join-Path $RepoRoot "data\tarrobot-database.json") -Destination (Join-Path $PackageDir "data\")
+
+if (-not $Slim) {
+    # Sprint 8.4: incluir pautas + audio + melodias para paquete autocontenido
+    Write-Host ""
+    Write-Host "Modo FULL: incluyendo pautas + audio + melodias..." -ForegroundColor Yellow
+
+    # Pautas JSON (guiones de episodios)
+    $pautasSrc = Join-Path $RepoRoot "studio\pautas"
+    $pautasDst = Join-Path $PackageDir "studio\pautas"
+    if (Test-Path $pautasSrc) {
+        New-Item -ItemType Directory -Path $pautasDst -Force | Out-Null
+        Get-ChildItem -Path $pautasSrc -Filter "*.tarrobot.json" | ForEach-Object {
+            Copy-Item $_.FullName -Destination $pautasDst
+            Write-Host "  pauta: $($_.Name)" -ForegroundColor Gray
+        }
+
+        # MP3s precargados de las pautas
+        $audioSrc = Join-Path $pautasSrc "audio"
+        if (Test-Path $audioSrc) {
+            $audioDst = Join-Path $pautasDst "audio"
+            New-Item -ItemType Directory -Path $audioDst -Force | Out-Null
+            $mp3Count = 0
+            Get-ChildItem -Path $audioSrc -Recurse -Filter "*.mp3" | ForEach-Object {
+                $rel = $_.FullName.Substring($audioSrc.Length + 1)
+                $dstFile = Join-Path $audioDst $rel
+                $dstParent = Split-Path -Parent $dstFile
+                if (-not (Test-Path $dstParent)) { New-Item -ItemType Directory -Path $dstParent -Force | Out-Null }
+                Copy-Item $_.FullName -Destination $dstFile
+                $mp3Count++
+            }
+            Write-Host "  MP3s precargados: $mp3Count" -ForegroundColor Gray
+        }
+    } else {
+        Write-Host "  (no hay pautas en el repo, saltando)" -ForegroundColor DarkGray
+    }
+
+    # Melodias: MIDIs + soundfont si existen (gitignored, no estan en repo pero
+    # si Luis los tiene localmente los incluimos)
+    $melSrc = Join-Path $RepoRoot "studio\melodias"
+    if (Test-Path $melSrc) {
+        $melDst = Join-Path $PackageDir "studio\melodias"
+        New-Item -ItemType Directory -Path $melDst -Force | Out-Null
+        $midiCount = 0
+        Get-ChildItem -Path $melSrc -Filter "*.mid*" | ForEach-Object {
+            Copy-Item $_.FullName -Destination $melDst
+            $midiCount++
+        }
+        if ($midiCount -gt 0) {
+            Write-Host "  MIDIs: $midiCount" -ForegroundColor Gray
+        }
+        $sf2 = Join-Path $melSrc "soundfont.sf2"
+        if (Test-Path $sf2) {
+            $sf2Size = "{0:N1} MB" -f ((Get-Item $sf2).Length / 1MB)
+            Copy-Item $sf2 -Destination $melDst
+            Write-Host "  soundfont.sf2: $sf2Size" -ForegroundColor Gray
+        }
+        # gitkeep documentacion
+        $keep = Join-Path $melSrc ".gitkeep"
+        if (Test-Path $keep) { Copy-Item $keep -Destination $melDst }
+    }
+} else {
+    Write-Host ""
+    Write-Host "Modo SLIM: SOLO scripts + templates + DB base." -ForegroundColor Yellow
+    Write-Host "El estudio leera pautas/audio/melodias desde el Drive sincronizado." -ForegroundColor Yellow
+}
 
 # Listar contenido
 Write-Host ""
