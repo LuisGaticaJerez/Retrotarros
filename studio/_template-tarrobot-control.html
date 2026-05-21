@@ -824,22 +824,33 @@ micBtn.addEventListener('pointercancel', function() { stopRecord(); });
 micBtn.addEventListener('touchstart', function(e) { e.preventDefault(); startRecord(); }, { passive: false });
 micBtn.addEventListener('touchend', function(e) { e.preventDefault(); stopRecord(); }, { passive: false });
 
-// ─── Sprint 8.2: MODO CONTINUO con wake-word "TarroBot" ──────────
-// VAD basico via Web Audio API: detecta inicio/fin de voz por RMS.
-// Cuando termina la voz, envia el chunk al server con ?wake=tarrobot
-// y este lo procesa solo si la transcripcion contiene la wake-word.
+// ─── Sprint 8.2 (rev2): MODO CONTINUO con rolling buffer + pre-roll ──
+// El problema del VAD anterior: cuando detectaba voz, START nuevo del
+// MediaRecorder pero el inicio de la palabra "TarroBot" ya se habia
+// perdido (los primeros 200-400ms del audio NO entraban al blob).
+//
+// Solucion: MediaRecorder NUNCA para. Graba con timeslice 200ms y
+// mantiene un rolling buffer de los ultimos ~5 segundos. Cuando VAD
+// detecta voz, copia los ultimos chunks del buffer (pre-roll) y sigue
+// agregando hasta que detecta silencio. Asi la wake-word completa
+// SIEMPRE queda dentro del blob enviado.
 
 const modoContinuoToggle = document.getElementById('modoContinuo');
 const vadIndicator = document.getElementById('vadIndicator');
 const vadDot = vadIndicator.querySelector('.vad-dot');
 
-const VAD_THRESHOLD     = 0.025;   // RMS umbral para considerar voz (0-1)
-const VAD_SILENCE_MS    = 1300;    // silencio para cortar grabacion
-const VAD_MIN_VOICE_MS  = 350;     // minimo de voz para empezar a grabar
-const VAD_MAX_RECORD_MS = 10000;   // tope de grabacion por chunk
+const VAD_THRESHOLD     = 0.018;   // RMS umbral (mas sensible que antes)
+const VAD_SILENCE_MS    = 1500;    // silencio para cortar la frase
+const VAD_MIN_VOICE_MS  = 200;     // voz minima para considerar inicio
+const VAD_MAX_RECORD_MS = 12000;   // tope de frase
+const VAD_TIMESLICE_MS  = 200;     // tamaño de cada chunk del MediaRecorder
+const VAD_PRE_ROLL      = 4;       // chunks (200ms c/u) a incluir ANTES de detectar voz = 800ms
+const VAD_ROLLING_MAX   = 30;      // chunks max en el rolling buffer (~6 segundos)
 
 let vadStream = null, vadCtx = null, vadAnalyser = null, vadData = null;
-let vadRecorder = null, vadChunks = [];
+let vadRecorder = null;
+let vadRollingBuffer = [];   // chunks recientes (siempre activo)
+let vadActiveChunks = null;  // chunks acumulados de la frase actual (o null)
 let vadRafId = null;
 let vadHabilitado = false;
 let vadEstado = 'esperando';   // esperando | grabando | enviando
@@ -863,6 +874,25 @@ async function vadStart() {
     vadAnalyser.smoothingTimeConstant = 0.3;
     source.connect(vadAnalyser);
     vadData = new Uint8Array(vadAnalyser.frequencyBinCount);
+
+    // MediaRecorder con timeslice 200ms -> emite dataavailable cada 200ms
+    vadRecorder = new MediaRecorder(vadStream, { mimeType: 'audio/webm' });
+    vadRollingBuffer = [];
+    vadActiveChunks = null;
+    vadRecorder.ondataavailable = (e) => {
+      if (!e.data || e.data.size === 0) return;
+      // Siempre meter en rolling buffer (deja los ultimos VAD_ROLLING_MAX)
+      vadRollingBuffer.push(e.data);
+      if (vadRollingBuffer.length > VAD_ROLLING_MAX) {
+        vadRollingBuffer.shift();
+      }
+      // Si hay frase activa, agregar tambien ahi
+      if (vadActiveChunks) {
+        vadActiveChunks.push(e.data);
+      }
+    };
+    vadRecorder.start(VAD_TIMESLICE_MS);
+
     vadHabilitado = true;
     vadIndicator.classList.add('show');
     vadEstado = 'esperando';
@@ -884,6 +914,8 @@ function vadStop() {
   if (vadStream) vadStream.getTracks().forEach(t => t.stop());
   if (vadCtx) vadCtx.close();
   vadStream = vadCtx = vadAnalyser = vadRecorder = null;
+  vadRollingBuffer = [];
+  vadActiveChunks = null;
   vadIndicator.classList.remove('show');
   vadDot.classList.remove('voz-detectada');
   logMsg('modo continuo: desactivado', 'ok');
@@ -899,32 +931,34 @@ function vadCalcularRMS() {
   return Math.sqrt(sum / vadData.length);
 }
 
-function vadIniciarGrabacion() {
-  vadChunks = [];
-  vadRecorder = new MediaRecorder(vadStream, { mimeType: 'audio/webm' });
-  vadRecorder.ondataavailable = (e) => { if (e.data && e.data.size > 0) vadChunks.push(e.data); };
-  vadRecorder.onstop = vadProcesarChunk;
-  vadRecorder.start();
+function vadIniciarFrase() {
+  // Copiamos los ultimos VAD_PRE_ROLL chunks del rolling buffer como pre-roll.
+  // Asi el blob de la frase incluye ~800ms ANTES de que VAD detectara voz,
+  // que es donde esta el inicio de "TarroBot".
+  const preroll = vadRollingBuffer.slice(-VAD_PRE_ROLL);
+  vadActiveChunks = [...preroll];
   vadRecordStartTs = Date.now();
   vadEstado = 'grabando';
   vadDot.classList.add('voz-detectada');
 }
 
-function vadCortarGrabacion() {
-  if (vadRecorder && vadRecorder.state === 'recording') {
-    try { vadRecorder.stop(); } catch (e) {}
+async function vadCortarFrase() {
+  if (!vadActiveChunks || vadActiveChunks.length === 0) {
+    vadActiveChunks = null;
+    vadEstado = 'esperando';
+    return;
   }
+  const chunks = vadActiveChunks;
+  vadActiveChunks = null;
   vadDot.classList.remove('voz-detectada');
   vadEstado = 'enviando';
-}
 
-async function vadProcesarChunk() {
-  const blob = new Blob(vadChunks, { type: 'audio/webm' });
-  vadChunks = [];
+  const blob = new Blob(chunks, { type: 'audio/webm' });
   if (blob.size < 2000) {
     vadEstado = 'esperando';
     return;
   }
+
   try {
     const r = await fetch('/api/listen?wake=tarrobot', {
       method: 'POST',
@@ -941,8 +975,9 @@ async function vadProcesarChunk() {
         logMsg('VOZ continuo: "' + data.transcript + '" -> ' + data.accion, 'ok');
       }
     } else if (data.ok && data.ignored) {
-      // Silencioso: no contenia wake-word, no se ejecuta nada
-      logMsg('voz sin wake-word, ignorada: "' + (data.transcript || '').slice(0, 40) + '"');
+      logMsg('sin wake-word: "' + (data.transcript || '').slice(0, 50) + '"');
+    } else if (data.error) {
+      logMsg('VAD err: ' + data.error, 'err');
     }
   } catch (e) {
     logMsg('VAD send fail: ' + e.message, 'err');
@@ -960,7 +995,7 @@ function vadLoop() {
     if (rms > VAD_THRESHOLD) {
       if (!vadVozDesde) vadVozDesde = ahora;
       if (ahora - vadVozDesde > VAD_MIN_VOICE_MS) {
-        vadIniciarGrabacion();
+        vadIniciarFrase();
         vadSilencioDesde = null;
       }
     } else {
@@ -970,15 +1005,14 @@ function vadLoop() {
     if (rms < VAD_THRESHOLD) {
       if (!vadSilencioDesde) vadSilencioDesde = ahora;
       if (ahora - vadSilencioDesde > VAD_SILENCE_MS) {
-        vadCortarGrabacion();
+        vadCortarFrase();
         vadVozDesde = null; vadSilencioDesde = null;
       }
     } else {
       vadSilencioDesde = null;
     }
-    // Tope absoluto de grabacion
     if (vadRecordStartTs && ahora - vadRecordStartTs > VAD_MAX_RECORD_MS) {
-      vadCortarGrabacion();
+      vadCortarFrase();
       vadVozDesde = null; vadSilencioDesde = null;
     }
   }
