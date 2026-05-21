@@ -202,41 +202,62 @@ class QueueManager:
     def loaded(self) -> bool:
         return self.pauta is not None and bool(self.pauta.get("datos"))
 
+    def items_datos(self) -> list:
+        """Items normales de la cola (NO melodias). Estos son los que avanzan con NEXT/PREV."""
+        if not self.loaded():
+            return []
+        return [d for d in self.pauta["datos"] if d.get("tipo") != "melodia"]
+
+    def items_melodias(self) -> list:
+        """Items de tipo melodia. Se reproducen on-demand, no por orden secuencial."""
+        if not self.loaded():
+            return []
+        return [d for d in self.pauta["datos"] if d.get("tipo") == "melodia"]
+
     def total(self) -> int:
-        return len(self.pauta["datos"]) if self.loaded() else 0
+        """Total de items de datos normales (no incluye melodias)."""
+        return len(self.items_datos())
 
     def current_dato(self) -> Optional[dict]:
-        if not self.loaded() or self.indice < 0 or self.indice >= self.total():
+        items = self.items_datos()
+        if self.indice < 0 or self.indice >= len(items):
             return None
-        return self.pauta["datos"][self.indice]
+        return items[self.indice]
 
     def status(self) -> dict:
         if not self.loaded():
             return {"loaded": False, "slug": None, "total": 0, "indice": -1,
-                    "actual": None, "mp3_listos": 0}
-        # Contar mp3s realmente presentes en disco
-        audio_dir = pauta_audio_dir(self.slug)
-        mp3_listos = 0
-        for d in self.pauta["datos"]:
-            if d.get("mp3"):
-                p = PAUTAS_DIR / d["mp3"]
-                if p.exists():
-                    mp3_listos += 1
+                    "actual": None, "mp3_listos": 0, "datos": [], "melodias": []}
+
+        def _serialize(d: dict) -> dict:
+            tiene_mp3 = bool(d.get("mp3")) and (PAUTAS_DIR / d["mp3"]).exists() if d.get("mp3") else False
+            return {
+                "id": d["id"],
+                "tema": d["tema"],
+                "estado": d["estado"],
+                "tiene_mp3": tiene_mp3,
+                "duracion_ms": d.get("duracion_ms"),
+                "tipo": d.get("tipo", "dato"),
+            }
+
+        datos_items = self.items_datos()
+        melodias_items = self.items_melodias()
+        mp3_listos = sum(
+            1 for d in self.pauta["datos"]
+            if d.get("mp3") and (PAUTAS_DIR / d["mp3"]).exists()
+        )
+
         actual = self.current_dato()
         return {
             "loaded": True,
             "slug": self.slug,
             "episodio": self.pauta.get("episodio", ""),
-            "total": self.total(),
+            "total": len(datos_items),
             "indice": self.indice,
             "actual": {"id": actual["id"], "tema": actual["tema"], "estado": actual["estado"]} if actual else None,
             "mp3_listos": mp3_listos,
-            "datos": [
-                {"id": d["id"], "tema": d["tema"], "estado": d["estado"],
-                 "tiene_mp3": bool(d.get("mp3")) and (PAUTAS_DIR / d["mp3"]).exists() if d.get("mp3") else False,
-                 "duracion_ms": d.get("duracion_ms")}
-                for d in self.pauta["datos"]
-            ],
+            "datos": [_serialize(d) for d in datos_items],
+            "melodias": [_serialize(d) for d in melodias_items],
         }
 
 
@@ -295,12 +316,13 @@ def _audio_url_de_pauta(slug: str, dato: dict) -> Optional[str]:
 # sin hotkeys. Todo lo demas sigue funcionando via panel mobile.
 
 HOTKEYS = {
-    "f1": ("/api/queue/next",  "F1 -> NEXT cola"),
-    "f2": ("/api/queue/prev",  "F2 -> PREV cola"),
-    "f3": ("/api/saludar",     "F3 -> saludo random"),
-    "f4": ("/api/despedir",    "F4 -> despedida random"),
-    "f5": ("/api/queue/reset", "F5 -> RESET cola"),
-    "f6": ("/api/catchphrase", "F6 -> catchphrase Retrotarros"),
+    "f1": ("/api/queue/next",    "F1 -> NEXT cola datos"),
+    "f2": ("/api/queue/prev",    "F2 -> PREV cola datos"),
+    "f3": ("/api/saludar",       "F3 -> saludo random"),
+    "f4": ("/api/despedir",      "F4 -> despedida random"),
+    "f5": ("/api/queue/reset",   "F5 -> RESET cola"),
+    "f6": ("/api/catchphrase",   "F6 -> catchphrase Retrotarros"),
+    "f7": ("/api/queue/melodia", "F7 -> tocar melodia random"),
 }
 
 
@@ -1186,6 +1208,43 @@ async def queue_reset():
         queue.reset_session()
     tracker.mark_input()
     return {"ok": True, "status": queue.status()}
+
+
+@app.post("/api/queue/melodia")
+async def queue_melodia(payload: dict):
+    """
+    Reproduce una melodia de la cola.
+    Body opcional: { "indice": N, "id": "...", "voz": "..." }
+    Si no se especifica indice ni id, elige una random.
+    """
+    melodias = queue.items_melodias()
+    if not melodias:
+        return JSONResponse({"error": "no hay melodias en la pauta cargada"}, status_code=400)
+
+    dato = None
+    if "id" in payload and payload["id"]:
+        dato_id = payload["id"]
+        for m in melodias:
+            if m["id"] == dato_id:
+                dato = m
+                break
+        if not dato:
+            return JSONResponse({"error": f"melodia con id '{dato_id}' no encontrada"}, status_code=404)
+    elif "indice" in payload and payload["indice"] is not None:
+        try:
+            idx = int(payload["indice"])
+        except (TypeError, ValueError):
+            return JSONResponse({"error": "indice invalido"}, status_code=400)
+        if not (0 <= idx < len(melodias)):
+            return JSONResponse({"error": f"indice fuera de rango (0..{len(melodias)-1})"}, status_code=400)
+        dato = melodias[idx]
+    else:
+        import random
+        dato = random.choice(melodias)
+
+    tracker.mark_input()
+    audio_url = await _reproducir_dato_de_cola(dato, payload.get("voz"))
+    return {"ok": True, "dato": dato, "audio_url": audio_url}
 
 
 @app.get("/api/queue/srt")

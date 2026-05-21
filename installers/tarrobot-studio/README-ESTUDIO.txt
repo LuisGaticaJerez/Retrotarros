@@ -75,12 +75,13 @@ HOTKEYS GLOBALES (funcionan desde cualquier app)
 Mientras TarroBot esta corriendo, puedes apretar estas teclas en
 OBS, navegador, o donde sea sin tocar el celu:
 
-  F1   ->  NEXT en la cola del episodio
-  F2   ->  PREV en la cola
+  F1   ->  NEXT en la cola de datos
+  F2   ->  PREV en la cola de datos
   F3   ->  Saludo random
   F4   ->  Despedida random
   F5   ->  RESET cola (vuelve al primer item)
   F6   ->  Catchphrase Retrotarros (frase de marca random)
+  F7   ->  Tocar una melodia random de la cola de musica
 
 Si en tu PC los hotkeys no responden, cierra TarroBot y vuelve a abrir
 TarroBot.bat haciendo click derecho -> Ejecutar como administrador.

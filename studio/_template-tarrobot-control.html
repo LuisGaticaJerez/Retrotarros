@@ -248,6 +248,48 @@ select#queueSelect:focus { border-color: var(--ye); }
   padding: 8px;
 }
 
+/* ── CARD MUSICA DEL EPISODIO ──────────────────────────────────── */
+.card.music {
+  border-color: rgba(255, 46, 136, .35);
+  box-shadow: 0 0 18px rgba(255,46,136,.10);
+}
+.card.music h2 { color: var(--mg); }
+#musicState {
+  font-size: 11px;
+  color: rgba(255,255,255,.7);
+  padding: 6px 10px;
+  background: rgba(0,0,0,.4);
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+#musicState.empty { color: rgba(255,255,255,.35); font-style: italic; }
+.music-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  margin-bottom: 4px;
+  font-size: 11px;
+  background: rgba(255,46,136,.06);
+  border-left: 3px solid var(--mg);
+  border-radius: 3px;
+  cursor: pointer;
+  color: rgba(255,255,255,.85);
+}
+.music-item:active { background: rgba(255,46,136,.18); }
+.music-item .ico {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--mg);
+  min-width: 16px;
+}
+.music-item .titulo { flex: 1; word-break: break-word; }
+.music-item .dur {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,.5);
+}
+
 /* ── INDICADOR "PROCESANDO" (Sprint 7.1) ──────────────────────── */
 .proc-bar {
   position: fixed;
@@ -346,6 +388,14 @@ select#queueSelect:focus { border-color: var(--ye); }
     <button class="btn" onclick="exportarSRT('relative')" style="font-size:9px; padding:8px;">SRT PREVIEW</button>
   </div>
   <div id="queueList"></div>
+</div>
+
+<!-- MUSICA DEL EPISODIO (melodias) -->
+<div class="card music">
+  <h2>♪ MUSICA DEL EPISODIO</h2>
+  <div id="musicState" class="empty">(cargá una pauta con melodias para tocar)</div>
+  <div id="musicList"></div>
+  <button class="btn full" onclick="tocarMelodiaRandom()" id="randomMelodiaBtn" style="margin-top:8px; display:none;">🎲 TOCAR RANDOM</button>
 </div>
 
 <!-- VOZ · push to talk + modo continuo -->
@@ -491,10 +541,11 @@ const PROC_LABELS = {
   '/api/saludar':      'preparando saludo...',
   '/api/despedir':     'preparando despedida...',
   '/api/catchphrase':  'catchphrase Retrotarros...',
-  '/api/queue/next':   'siguiente item...',
-  '/api/queue/prev':   'item anterior...',
-  '/api/queue/jump':   'saltando...',
-  '/api/queue/load':   'cargando pauta...',
+  '/api/queue/next':    'siguiente item...',
+  '/api/queue/prev':    'item anterior...',
+  '/api/queue/jump':    'saltando...',
+  '/api/queue/load':    'cargando pauta...',
+  '/api/queue/melodia': 'tocando melodia...',
   '/api/state':        '',  // instantaneo, no mostrar barra
   '/api/queue/reset':  '',
   '/api/queue/unload': '',
@@ -1099,11 +1150,80 @@ function renderQueueList(status) {
   });
 }
 
+// ─── Melodias (cola separada) ──────────────────────────────────────
+const musicStateEl  = document.getElementById('musicState');
+const musicListEl   = document.getElementById('musicList');
+const randomMelodiaBtn = document.getElementById('randomMelodiaBtn');
+
+function renderMelodias(status) {
+  while (musicListEl.firstChild) musicListEl.removeChild(musicListEl.firstChild);
+  while (musicStateEl.firstChild) musicStateEl.removeChild(musicStateEl.firstChild);
+
+  if (!status.loaded) {
+    musicStateEl.className = 'empty';
+    musicStateEl.appendChild(document.createTextNode('(cargá una pauta para ver melodias)'));
+    randomMelodiaBtn.style.display = 'none';
+    return;
+  }
+
+  const melodias = status.melodias || [];
+  if (!melodias.length) {
+    musicStateEl.className = 'empty';
+    musicStateEl.appendChild(document.createTextNode('(esta pauta no tiene melodias)'));
+    randomMelodiaBtn.style.display = 'none';
+    return;
+  }
+
+  musicStateEl.className = '';
+  musicStateEl.appendChild(document.createTextNode(
+    melodias.length + ' melodia(s) listas para tocar on-demand'
+  ));
+
+  melodias.forEach(function(m, i) {
+    const row = document.createElement('div');
+    row.className = 'music-item';
+    row.addEventListener('click', function() { tocarMelodia(i); });
+
+    const ico = document.createElement('span');
+    ico.className = 'ico';
+    ico.textContent = '♪';
+    row.appendChild(ico);
+
+    const titulo = document.createElement('span');
+    titulo.className = 'titulo';
+    titulo.textContent = m.tema;
+    row.appendChild(titulo);
+
+    const dur = document.createElement('span');
+    dur.className = 'dur';
+    const segundos = m.duracion_ms ? (m.duracion_ms / 1000).toFixed(1) + 's' : '?';
+    dur.textContent = segundos;
+    row.appendChild(dur);
+
+    musicListEl.appendChild(row);
+  });
+
+  randomMelodiaBtn.style.display = 'block';
+}
+
+async function tocarMelodia(indice) {
+  logMsg('tocando melodia #' + indice + '...');
+  const data = await post('/api/queue/melodia', { indice: indice });
+  if (data && data.ok) logMsg('OK melodia: ' + data.dato.tema, 'ok');
+}
+
+async function tocarMelodiaRandom() {
+  logMsg('tocando melodia random...');
+  const data = await post('/api/queue/melodia', {});
+  if (data && data.ok) logMsg('OK melodia random: ' + data.dato.tema, 'ok');
+}
+
 async function pollQueueOnce() {
   try {
     const r = await fetch('/api/queue/status');
     const data = await r.json();
     renderQueueState(data);
+    renderMelodias(data);
   } catch (e) {
     // silencioso, reintenta en proximo tick
   }
