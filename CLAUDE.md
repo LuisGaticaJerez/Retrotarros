@@ -79,7 +79,8 @@ Canal de YouTube en español sobre **Nostalgia + Juegos + Música** (retrogaming
 - **Sin voseo argentino/rioplatense.** Prohibido: "vos sabés", "tenés", "querés", "decime", "pegás", "navegás", "armás", "bajás", "fijate" (con voseo), "che".
 - **Sin mexicanismos.** No "órale", "güey", "chido", "ándale".
 - **Sin españolismos.** No "vale", "tío", "guay", "molar".
-- **Sin tildes en tildes débiles** (a/é/í/ó/ú → a/e/i/o/u) en los HTMLs y outputs públicos. En chat con Luis pueden ir tildes (decisión de Luis: si pide aplicar también al chat, sí; si no, el chat puede tener tildes para legibilidad).
+- **Sin tildes en tildes débiles** (á/é/í/ó/ú → a/e/i/o/u) en los HTMLs y outputs públicos. En chat con Luis pueden ir tildes (decisión de Luis: si pide aplicar también al chat, sí; si no, el chat puede tener tildes para legibilidad).
+- **EXCEPCIÓN TarroBot (TTS):** los textos que reproduce TarroBot por voz (Edge TTS) SÍ deben llevar tildes correctas + números en palabras ("20 mil" en vez de "20,000"). Sin tildes, Edge TTS no pronuncia bien las palabras. Aplica a: prompts de Claude en `scripts/tarrobot*.py`, listas hardcoded (SALUDOS_GEEK, DESPEDIDAS_CORTAS, CATCHPHRASES), respuestas pregeneradas de `/api/precio`, y cualquier texto que vaya a edge-tts. Los HTMLs y assets visuales del canal siguen sin tildes (regla general).
 - **Registro conversacional.** Dos chilenos en un café, no locutores de noticiero.
 - **Si el output sale con marcas regionales equivocadas → corregir y reescribir.** No usar "boludo", "che", "vamos a tirarle" en sentido argentino.
 

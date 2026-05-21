@@ -170,12 +170,18 @@ def generar_con_llm(tema: str) -> dict | None:
     prompt = f"""Eres TarroBot, mascota del canal de YouTube Retrotarros sobre videojuegos retro.
 Genera 3 datos curiosos cortos sobre: "{tema}".
 
-Requisitos OBLIGATORIOS:
-- Español chileno neutro con tuteo (NO voseo argentino: nada de "tenes", "queres", "decime", "vos").
-- SIN tildes (a/e/i/o/u sin acento).
-- Maximo 3 oraciones por dato, alrededor de 220 caracteres.
-- Verificable y especifico: fechas, numeros, nombres reales.
-- Tono curioso y entusiasta tipo "te voy a contar algo que no sabias".
+Requisitos OBLIGATORIOS (este texto se reproduce con TTS, por eso reglas estrictas):
+- Español neutro latino con TUTEO (tú/tienes/sabes). NO voseo argentino (nada de
+  "tenés", "querés", "decime", "vos").
+- USA TILDES correctas del español ortográfico estándar (también, está, mí, sí, etc.).
+  Esto es importante para que el TTS pronuncie correctamente.
+- NÚMEROS EN PALABRAS, no en cifras. Ejemplos:
+  * "20 mil dólares" en vez de "20,000 dólares" (el TTS lee "veinte mil")
+  * "5 mil" en vez de "5,000"
+  * Años SÍ van en cifras: 1996, 1985
+- Máximo 3 oraciones por dato, alrededor de 220 caracteres.
+- Verificable y específico: fechas, números, nombres reales.
+- Tono curioso y entusiasta tipo "te voy a contar algo que no sabías".
 - Cada dato distinto del otro (no parafrasear el mismo hecho).
 
 Devuelve SOLO un JSON valido con esta estructura exacta, SIN texto extra ni codigo markdown:
@@ -423,12 +429,19 @@ CONTENIDO DEL EPISODIO:
 {contexto}
 \"\"\"
 
-Requisitos OBLIGATORIOS para CADA dato:
-- Español chileno neutro con tuteo (NO voseo argentino: nada de "tenes", "queres", "decime", "vos", "che").
-- SIN tildes (a/e/i/o/u sin acento). ESTO ES CRITICO, revisa antes de devolver.
-- Maximo 3 oraciones por dato, alrededor de 200-260 caracteres.
-- Verificable y especifico: fechas, numeros, nombres reales.
-- Tono curioso y entusiasta tipo "te voy a contar algo que no sabias".
+Requisitos OBLIGATORIOS para CADA dato (este texto se reproduce con TTS):
+- Español neutro latino con TUTEO (tú/tienes/sabes). NO voseo argentino (nada de
+  "tenés", "querés", "decime", "vos", "che").
+- USA TILDES correctas del español ortográfico (también, está, día, año, mí, sí).
+  Es crítico para que el TTS pronuncie correctamente.
+- NÚMEROS EN PALABRAS para cifras grandes:
+  * "20 mil dólares" en vez de "20,000 dólares"
+  * "5 mil copias" en vez de "5,000"
+  * Años SÍ van en cifras: 1996, 1985
+  Los pronuncia bien así.
+- Máximo 3 oraciones por dato, alrededor de 200-260 caracteres.
+- Verificable y específico: fechas, números, nombres reales.
+- Tono curioso y entusiasta tipo "te voy a contar algo que no sabías".
 - Cada dato distinto del otro.
 - Los datos deben seguir el ORDEN del episodio (si el episodio lista Top 10, dato 1 = item 10, dato 2 = item 9, etc.).
 - Distribuye los estados emocionales para que no sean todos iguales.

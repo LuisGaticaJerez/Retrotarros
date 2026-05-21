@@ -55,48 +55,48 @@ STUDIO = REPO / "studio"
 LIVE_HTML = STUDIO / "_template-tarrobot-live.html"
 CONTROL_HTML = STUDIO / "_template-tarrobot-control.html"
 
-# Saludos geek random (chileno neutro, sin tildes)
+# Saludos geek random (español neutro latino, CON tildes para TTS preciso)
 SALUDOS_GEEK = [
-    "Hola hola humanos! Insertando moneda virtual.",
+    "¡Hola, hola humanos! Insertando moneda virtual.",
     "Bip bop. Sistema TarroBot iniciado correctamente.",
     "Saludos, gamers. Cargando datos curiosos...",
-    "Buenos pixels, equipo!",
-    "Press start. Aqui estoy.",
-    "Listo para soltar trivia. ¿Que se cuenta hoy?",
+    "¡Buenos píxeles, equipo!",
+    "Press start. Aquí estoy.",
+    "Listo para soltar trivia. ¿Qué se cuenta hoy?",
     "Hola Luis, hola Koko. TarroBot a la orden.",
-    "Conectado y listo. Que empiece la sesion.",
-    "Wii hoo! TarroBot en linea.",
+    "Conectado y listo. Que empiece la sesión.",
+    "¡Wii hoo! TarroBot en línea.",
     "Buenas, retrotarristas. Datos curiosos en 3, 2, 1...",
-    "Reportandome al estudio. ¿Que vamos a investigar?",
+    "Reportándome al estudio. ¿Qué vamos a investigar?",
     "Frecuencia 42 megahertz. TarroBot transmitiendo.",
-    "Insertando token. Hola, hola!",
+    "Insertando token. ¡Hola, hola!",
     "Memoria llena, sed de datos. Pregunta lo que quieras.",
-    "Sistema operativo: Curiosidad version 8 bits. Listo.",
+    "Sistema operativo: Curiosidad versión 8 bits. Listo.",
 ]
 
 # Catchphrases de marca Retrotarros (Sprint 7.3)
 # Frases random para soltar en medio del programa cuando hace falta ritmo
 # o cuando Luis o Koko quieren un "guiño" del personaje a la audiencia.
 CATCHPHRASES = [
-    "Retrotarros se respeta!",
+    "¡Retrotarros se respeta!",
     "Esto es nostalgia pura, hermano.",
-    "Aprieta Start y pongamosle empeño.",
+    "Aprieta Start y pongámosle empeño.",
     "Game over no existe en Retrotarros.",
-    "Pixel power activado!",
-    "Cartucho clasico, sentimiento eterno.",
+    "¡Pixel power activado!",
+    "Cartucho clásico, sentimiento eterno.",
     "Bip bop, datos retro al canto.",
-    "Insert coin, Retrotarros en linea.",
-    "Tarros para el corazon, tarros para la memoria.",
-    "Konami code de la nostalgia!",
+    "Insert coin, Retrotarros en línea.",
+    "Tarros para el corazón, tarros para la memoria.",
+    "¡Konami code de la nostalgia!",
     "Continue? Siempre.",
-    "16 bits de pura emocion.",
+    "16 bits de pura emoción.",
     "Press Start para que arranque la magia.",
     "Nintendo en el alma, Sega en la sangre.",
-    "Modo arcade activado!",
-    "Tarrobot al servicio del retrogaming.",
-    "Suscribete que un tarro nunca olvida.",
+    "¡Modo arcade activado!",
+    "TarroBot al servicio del retrogaming.",
+    "Suscríbete que un tarro nunca olvida.",
     "Polvito de cartucho, magia garantizada.",
-    "Aca no se sopla el cartucho, se cuida.",
+    "Acá no se sopla el cartucho, se cuida.",
 ]
 
 # Estados emocionales que rotan para las catchphrases (variedad visual)
@@ -106,15 +106,15 @@ CATCHPHRASE_ESTADOS = ["excited", "happy", "winking", "fact"]
 # Despedidas cortas random
 DESPEDIDAS_CORTAS = [
     "Chao chao. Apagando luces de la TV.",
-    "Hasta la proxima, retrotarristas!",
-    "Modo sleep activado. Hasta luego!",
+    "¡Hasta la próxima, retrotarristas!",
+    "Modo sleep activado. ¡Hasta luego!",
     "Bip. Bop. Power off.",
-    "Nos vemos en el proximo episodio.",
-    "Salvo partida. Hasta pronto!",
-    "Game over para hoy. Chao!",
-    "Continue en el proximo capitulo. Chao!",
-    "Apagando consola. Hasta la proxima!",
-    "Eyectando cartucho. Nos vemos!",
+    "Nos vemos en el próximo episodio.",
+    "Salvo partida. ¡Hasta pronto!",
+    "Game over para hoy. ¡Chao!",
+    "Continue en el próximo capítulo. ¡Chao!",
+    "Apagando consola. ¡Hasta la próxima!",
+    "Eyectando cartucho. ¡Nos vemos!",
 ]
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -619,22 +619,25 @@ def generar_opinion_llm(tema: str) -> Optional[dict]:
     client = anthropic.Anthropic(api_key=api_key)
 
     prompt = f"""Eres TarroBot, mascota del canal de YouTube Retrotarros sobre videojuegos retro.
-Tu humano te pregunta: "¿Que opinas de {tema}?"
+Tu humano te pregunta: "¿Qué opinas de {tema}?"
 
-Devuelve una OPINION corta y con personalidad (1-2 oraciones, max 200 caracteres total).
-Tambien decide el estado emocional que mejor calza.
+Devuelve una OPINIÓN corta y con personalidad (1-2 oraciones, max 200 caracteres total).
+También decide el estado emocional que mejor calza.
 
-Reglas:
-- Español chileno neutro con TUTEO (tu/tienes/sabes). NO uses voseo argentino.
-- SIN tildes (a/e/i/o/u sin acento).
-- Tono curioso, opinion clara, vibe retrogaming.
-- Estados validos: happy, excited, fact, winking, confused, sad, angry, thinking, talking.
+Reglas (este texto se reproduce con TTS, por eso reglas estrictas):
+- Español neutro latino con TUTEO (tú/tienes/sabes). NO uses voseo argentino.
+- USA TILDES correctas del español ortográfico (también, está, mí, sí, día, año).
+  Crítico para que el TTS pronuncie bien.
+- NÚMEROS EN PALABRAS para cifras grandes: "20 mil" en vez de "20,000".
+  Años sí en cifras: 1996.
+- Tono curioso, opinión clara, vibe retrogaming.
+- Estados válidos: happy, excited, fact, winking, confused, sad, angry, thinking, talking.
   * Bueno → happy o excited
   * Malo → sad, angry o confused
   * Raro/curioso → confused o thinking
-  * Iconico → fact o excited
+  * Icónico → fact o excited
 
-Devuelve SOLO un JSON valido (sin markdown), formato:
+Devuelve SOLO un JSON válido (sin markdown), formato:
 {{"texto": "...", "estado": "..."}}
 """
     try:
@@ -695,34 +698,50 @@ async def precio(payload: dict):
     voz = resolver_voz(payload.get("voz") or "catalina")
     tracker.mark_input()
 
-    # Reaccion segun rango
+    # Formatear el valor en palabras para que TTS lo pronuncie bien
+    # ("20 mil dólares" en vez de "20,000 dólares" que se lee "veinte coma cero cero cero")
+    def _valor_a_palabras(v: int) -> str:
+        if v >= 1_000_000:
+            mill = v / 1_000_000
+            return f"{mill:.1f} millones de dólares".replace(".0", "")
+        if v >= 1000:
+            miles = v // 1000
+            resto = v % 1000
+            if resto == 0:
+                return f"{miles} mil dólares"
+            return f"{miles} mil {resto} dólares"
+        return f"{v} dólares"
+
+    valor_str = _valor_a_palabras(valor)
+
+    # Reacción según rango (con tildes y números en palabras para que TTS pronuncie bien)
     if valor >= 20000:
         estado = "confused"
-        texto = f"USD {valor:,}? Eso ya no es coleccionismo, es un museo. Imposible de pagar."
+        texto = f"¿{valor_str}? Eso ya no es coleccionismo, es un museo. Imposible de pagar."
     elif valor >= 10000:
         estado = "excited"
-        texto = f"USD {valor:,}! Eso es plata para un auto. Locura total."
+        texto = f"¡{valor_str}! Eso es plata para un auto. Locura total."
     elif valor >= 5000:
         estado = "excited"
-        texto = f"USD {valor:,} es una locura. Mind blown total!"
+        texto = f"{valor_str} es una locura. ¡Mind blown total!"
     elif valor >= 2000:
         estado = "fact"
-        texto = f"USD {valor:,} ya es para coleccionistas serios. Cartucho serio."
+        texto = f"{valor_str} ya es para coleccionistas serios. Cartucho serio."
     elif valor >= 500:
         estado = "thinking"
-        texto = f"USD {valor:,} esta caro pero no es escandaloso. Razonable para piezas raras."
+        texto = f"{valor_str} está caro pero no es escandaloso. Razonable para piezas raras."
     elif valor >= 100:
         estado = "talking"
-        texto = f"USD {valor:,} es precio normal para retrogaming en buen estado."
+        texto = f"{valor_str} es precio normal para retrogaming en buen estado."
     elif valor > 0:
         estado = "happy"
-        texto = f"USD {valor:,}? Eso es chollo, comprate dos!"
+        texto = f"¿{valor_str}? Eso es chollo, ¡cómprate dos!"
     else:
         estado = "confused"
-        texto = "Sin precio no puedo opinar. Decime cuanto sale."
+        texto = "Sin precio no puedo opinar. Dime cuánto sale."
 
     if juego:
-        texto = f"{juego} a USD {valor:,}? " + texto
+        texto = f"¿{juego} a {valor_str}? " + texto
 
     audio_url = await _hablar_frase(texto, estado, "REACCION PRECIO", voz)
     return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
