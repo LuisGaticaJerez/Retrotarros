@@ -489,6 +489,51 @@ select#queueSelect:focus { border-color: var(--ye); }
   </div>
 </div>
 
+<!-- RECETAS / SECUENCIAS (Sprint 10 C6) -->
+<div class="card">
+  <h2>🎬 RECETAS · SECUENCIAS</h2>
+  <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:8px;">
+    Combos guardados en <code>studio/tarrobot-recetas.json</code>. Cada uno
+    ejecuta varios pasos en orden (cambios de escena + frases + esperas).
+  </div>
+  <div class="btn-row" id="recetasRow">
+    <button class="btn cy" onclick="cargarRecetas()">RECARGAR LISTA</button>
+  </div>
+  <div id="recetasLog" style="font-size:11px; color:rgba(255,255,255,.55); margin-top:8px;"></div>
+</div>
+
+<!-- SESION (Sprint 10 B1) -->
+<div class="card">
+  <h2>📊 SESIÓN</h2>
+  <div id="statsBox" style="font-size:12px; color:rgba(255,255,255,.75); line-height:1.7;">
+    cargando...
+  </div>
+  <div class="btn-row" style="margin-top:8px;">
+    <button class="btn" onclick="cargarStats()">REFRESCAR</button>
+    <button class="btn" onclick="resetStats()">RESET CONTADORES</button>
+  </div>
+</div>
+
+<!-- PERSONAL (Sprint 10 B4) -->
+<div class="card">
+  <h2>🤖 SOBRE TARROBOT</h2>
+  <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:8px;">
+    Respuestas a preguntas personales (lore curado). Voz: "TarroBot, ¿cuál es tu juego favorito?", "¿de dónde vienes?", etc.
+  </div>
+  <div class="btn-row">
+    <button class="btn ye" onclick="personal('nombre')">¿QUIÉN ERES?</button>
+    <button class="btn cy" onclick="personal('origen')">¿DE DÓNDE?</button>
+    <button class="btn cy" onclick="personal('favorito')">JUEGO FAV</button>
+    <button class="btn cy" onclick="personal('consola_fav')">CONSOLA FAV</button>
+  </div>
+  <div class="btn-row" style="margin-top:6px;">
+    <button class="btn" onclick="personal('familia')">FAMILIA</button>
+    <button class="btn" onclick="personal('edad')">EDAD</button>
+    <button class="btn" onclick="personal('sueño')">SUEÑO</button>
+    <button class="btn" onclick="personal('como_funciona')">¿CÓMO FUNCIONAS?</button>
+  </div>
+</div>
+
 <!-- CUENTAME -->
 <div class="card">
   <h2>💬 CUÉNTAME DE...</h2>
@@ -627,6 +672,9 @@ const PROC_LABELS = {
   '/api/obs/fuente':      'toggle fuente...',
   '/api/obs/auto-escena': '',
   '/api/obs/desconectar': '',
+  '/api/personal':        'pensando sobre mí...',
+  '/api/receta/run':      'ejecutando receta...',
+  '/api/session/reset':   '',
 };
 
 function showProc(motivo) {
@@ -854,6 +902,85 @@ async function obsGracias() {
 // poll status OBS cada 5s para mantener UI sincronizada
 setInterval(obsRefreshStatus, 5000);
 obsRefreshStatus();
+
+// ─── PERSONAL · SOBRE TARROBOT (Sprint 10 B4) ────────────────────
+async function personal(categoria) {
+  const data = await post('/api/personal', { categoria });
+  if (data && data.ok) {
+    logMsg('personal (' + categoria + '): "' + data.texto.substring(0, 60) + '..."', 'ok');
+  }
+}
+
+// ─── SESION · STATS (Sprint 10 B1) ───────────────────────────────
+async function cargarStats() {
+  try {
+    const r = await fetch('/api/session/stats');
+    const d = await r.json();
+    if (d.ok) renderStats(d.stats);
+  } catch (e) {
+    document.getElementById('statsBox').textContent = 'error: ' + e.message;
+  }
+}
+function renderStats(s) {
+  const box = document.getElementById('statsBox');
+  const formatRow = (lbl, val) =>
+    '<div style="display:flex; justify-content:space-between;"><span>' + lbl +
+    '</span><strong style="color:#FFD23F;">' + val + '</strong></div>';
+  box.innerHTML =
+    formatRow('Minutos activos', s.minutos_activos) +
+    formatRow('Datos hablados', s.datos_hablados) +
+    formatRow('Opiniones dadas', s.opiniones_dadas) +
+    formatRow('Precios reaccionados', s.precios_reaccionados) +
+    formatRow('Melodías tocadas', s.melodias_tocadas) +
+    formatRow('Catchphrases', s.catchphrases) +
+    formatRow('Close-ups', s.close_ups) +
+    formatRow('Cambios de escena', s.cambios_escena) +
+    (s.ultimo_tema ? formatRow('Último tema', s.ultimo_tema) : '');
+}
+async function resetStats() {
+  if (!confirm('¿Resetear contadores de sesión? Esto no borra datos ni pauta.')) return;
+  await post('/api/session/reset', {});
+  cargarStats();
+  logMsg('contadores de sesión reseteados', 'ok');
+}
+setInterval(cargarStats, 15000);
+cargarStats();
+
+// ─── RECETAS · SECUENCIAS (Sprint 10 C6) ─────────────────────────
+async function cargarRecetas() {
+  try {
+    const r = await fetch('/api/recetas');
+    const d = await r.json();
+    const row = document.getElementById('recetasRow');
+    // limpiar todo menos el boton "RECARGAR LISTA"
+    row.innerHTML = '<button class="btn cy" onclick="cargarRecetas()">RECARGAR LISTA</button>';
+    Object.keys(d.recetas || {}).forEach(nombre => {
+      const r = d.recetas[nombre];
+      const b = document.createElement('button');
+      b.className = 'btn ye';
+      b.textContent = '▸ ' + (r.titulo || nombre).toUpperCase();
+      b.title = r.descripcion || '';
+      b.onclick = () => correrReceta(nombre);
+      row.appendChild(b);
+    });
+    document.getElementById('recetasLog').textContent =
+      Object.keys(d.recetas || {}).length + ' recetas cargadas.';
+  } catch (e) {
+    document.getElementById('recetasLog').textContent = 'error: ' + e.message;
+  }
+}
+async function correrReceta(nombre) {
+  document.getElementById('recetasLog').textContent = 'ejecutando ' + nombre + '...';
+  const data = await post('/api/receta/run', { nombre });
+  if (data && data.ok) {
+    const oks = (data.resultados || []).filter(x => x.ok).length;
+    const total = (data.resultados || []).length;
+    document.getElementById('recetasLog').textContent =
+      'receta ' + nombre + ': ' + oks + '/' + total + ' pasos OK';
+    logMsg('receta ' + nombre + ' ejecutada (' + oks + '/' + total + ')', 'ok');
+  }
+}
+cargarRecetas();
 
 async function random_(categoria) {
   logMsg('random ' + categoria + '...');

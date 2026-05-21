@@ -108,6 +108,7 @@ Sync-Item "studio\_template-tarrobot-live.html"
 Sync-Item "studio\_template-tarrobot-control.html"
 Sync-Item "studio\_template-tarrobot-slide.html"
 Sync-Item "studio\obs-aliases.json"
+Sync-Item "studio\tarrobot-recetas.json"
 Write-Host ""
 
 # 3. DB

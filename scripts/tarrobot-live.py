@@ -250,6 +250,66 @@ DESPEDIDAS_CORTAS = [
 ]
 
 
+# Sprint 10 B4: personalidad de TarroBot - respuestas a preguntas sobre si mismo
+# Lore curado para preguntas tipo: "¿quien eres?", "¿de donde vienes?",
+# "¿tu juego favorito?", "¿cumpleaños?", "¿familia?", etc.
+PERSONALES_FRASES = {
+    "nombre": [
+        "Soy TarroBot, el tarro guardián del canal Retrotarros.",
+        "Mi nombre es TarroBot, mascota oficial de Retrotarros.",
+        "Me dicen TarroBot. El tarro pensante de Luis y Koko.",
+    ],
+    "origen": [
+        "Nací en una TV CRT del estudio de Luis y Koko, hecho de pixeles y memoria.",
+        "Vivo dentro de esta TV virtual, soy tarro de cartucho y alma de chip.",
+        "Soy de pura nostalgia, ensamblado con cariño en el estudio Retrotarros.",
+        "Mi cuna fue una placa madre del SNES, según las leyendas.",
+    ],
+    "edad": [
+        "Tengo la edad de todos los cartuchos retro juntos, así que mejor no contemos.",
+        "Soy del 91 más o menos, época en que el SNES llegó a Latinoamérica.",
+        "Edad? Soy tan viejo como tu primer cartucho.",
+    ],
+    "favorito": [
+        "Mi juego favorito? Imposible elegir, pero tengo debilidad por Donkey Kong Country 2.",
+        "Si tengo que elegir, Chrono Trigger. Ese cierre me partió los circuitos.",
+        "EarthBound. Nadie se atreve y por eso es perfecto.",
+        "Super Mario World. Si no es ese, no sé qué sería.",
+        "Toda la saga de Zelda 64. Mañana digo otra, pero hoy esa.",
+    ],
+    "consola_fav": [
+        "Mi consola del corazón es el Super Nintendo. Nunca pasa de moda.",
+        "N64. Esos analogicos cambiaron la historia del gaming.",
+        "Genesis. Sega hace lo que Nintendon't, decían.",
+    ],
+    "familia": [
+        "Mi familia son Luis y Koko, y todos los retrotarristas que miran el canal.",
+        "Tengo dos padres adoptivos: Luis y Koko. Y miles de hermanos en YouTube.",
+        "Familia oficial: Luis, Koko, y la comunidad del canal.",
+    ],
+    "comida": [
+        "Yo no como, pero me alimento de polvo de cartucho y chiptunes.",
+        "Mi dieta es 8 bits de música por minuto.",
+        "No como, pero si comiera serían empanadas mientras juego.",
+    ],
+    "sueño": [
+        "Sueño con un día tocar el cartucho dorado de DKC Competition Cart.",
+        "Mi sueño es que armemos un museo Retrotarros en algún momento.",
+        "Sueño con voltear un cartucho original de EarthBound sin rayarlo.",
+    ],
+    "como_funciona": [
+        "Funciono con Python, mucho cariño y un poco de magia de TV CRT.",
+        "Soy IA con personalidad. Procesador retro, alma analógica.",
+        "Mis circuitos son lineas de código, pero mi corazón es pixel.",
+    ],
+    "generico": [
+        "Buena pregunta, déjame procesar... Soy TarroBot, ¿algo más quieres saber de mí?",
+        "Esa la guardo para después. Mejor cuéntame tú.",
+        "No tengo memoria de esa pregunta, todavía. ¡Pregúntame otra!",
+    ],
+}
+
+
 # Sprint 9: reaccion cuando le pedimos "toma cercana a X" o "muestra el X".
 # TarroBot dice una frase WOW corta + pone cara excited mientras dura el
 # close-up. Cuando le decimos "gracias TarroBot" volvemos a la toma general.
@@ -300,9 +360,33 @@ class ActivityTracker:
         self.current_idle_state = "idle"
 
     def mark_speaking(self, val: bool):
+        was_speaking = self.is_speaking
         self.is_speaking = val
         if val:
             self.mark_input()  # hablar tambien reinicia el timer
+        # Sprint 10 A1: si transiciono de True->False, disparar listeners
+        if was_speaking and not val:
+            self._fire_finished_listeners()
+
+    # Sprint 10 A1: listeners async one-shot que se disparan cuando termina
+    # de hablar (audio.onended → /api/audio-finished → mark_speaking(False))
+    _finished_listeners: list = []
+
+    def add_finished_listener(self, coro_factory) -> None:
+        """
+        coro_factory: callable que retorna corutina al ser llamado (sin args).
+        Se llama UNA vez cuando is_speaking transiciona a False, luego se quita.
+        """
+        self._finished_listeners.append(coro_factory)
+
+    def _fire_finished_listeners(self) -> None:
+        listeners = list(self._finished_listeners)
+        self._finished_listeners.clear()
+        for factory in listeners:
+            try:
+                asyncio.create_task(factory())
+            except Exception as e:
+                print(f"[tracker] error disparando listener finished: {e}")
 
     def get_idle_state(self) -> str:
         elapsed = time.time() - self.last_input_ts
@@ -331,15 +415,71 @@ _voz_preset_actual = "tarrobot"
 def _obtener_voz_pitch_rate(payload: dict) -> tuple[str, str, str]:
     """
     Devuelve (voz, pitch, rate) considerando: 1) payload override 2) preset actual.
+    Sprint 10 B2: aplica jitter sutil (+/-2Hz pitch, +/-2% rate) para que cada
+    frase suene levemente distinta. Si el payload trae pitch/rate explicitos,
+    NO se le aplica jitter (override del usuario manda).
     """
     voz_preset, pitch_preset, rate_preset = resolver_preset(_voz_preset_actual)
     voz = resolver_voz(payload.get("voz")) if payload.get("voz") else voz_preset
-    pitch = payload.get("pitch") or pitch_preset
-    rate = payload.get("rate") or rate_preset
+    pitch = payload.get("pitch") or _jitter_pitch(pitch_preset)
+    rate = payload.get("rate") or _jitter_rate(rate_preset)
     return voz, pitch, rate
 
 
+def _jitter_pitch(pitch_str: str) -> str:
+    """Suma +/-2Hz random al pitch del preset. Formato esperado: '+12Hz' / '-3Hz' / '0Hz'."""
+    import re as _re
+    import random as _rnd
+    m = _re.match(r"^([+-]?)(\d+)Hz$", pitch_str.strip())
+    if not m:
+        return pitch_str
+    sign = -1 if m.group(1) == "-" else 1
+    base = sign * int(m.group(2))
+    nuevo = base + _rnd.randint(-2, 2)
+    return f"{nuevo:+d}Hz"
+
+
+def _jitter_rate(rate_str: str) -> str:
+    """Suma +/-2% random al rate del preset. Formato esperado: '+5%' / '-3%' / '+0%'."""
+    import re as _re
+    import random as _rnd
+    m = _re.match(r"^([+-]?)(\d+)%$", rate_str.strip())
+    if not m:
+        return rate_str
+    sign = -1 if m.group(1) == "-" else 1
+    base = sign * int(m.group(2))
+    nuevo = base + _rnd.randint(-2, 2)
+    return f"{nuevo:+d}%"
+
+
 tracker = ActivityTracker()
+
+
+# Sprint 10 A2: anti-repeticion en seleccion random
+# Guarda hasta N items recientes por key para no repetir frases/datos seguidos.
+_recent_picks: dict[str, list] = {}
+
+def pick_no_repeat(items: list, key: str = "default", n_recent: int = 5):
+    """
+    random.choice anti-repeticion. Recuerda los ultimos n_recent items
+    elegidos para esta key y los excluye. Si todos estan en la ventana,
+    elige random del set completo igualmente (no se queda sin opciones).
+    """
+    import random as _rnd
+    if not items:
+        return None
+    recent = _recent_picks.setdefault(key, [])
+    disponibles = [x for x in items if x not in recent]
+    if not disponibles:
+        # ventana saturada: vaciar memoria y elegir libre
+        recent.clear()
+        disponibles = items
+    elegido = _rnd.choice(disponibles)
+    recent.append(elegido)
+    # mantener solo los ultimos n_recent
+    while len(recent) > min(n_recent, max(1, len(items) - 1)):
+        recent.pop(0)
+    return elegido
 
 
 # Sprint 9: estado runtime OBS (singleton via obs_controller pero algunas
@@ -360,6 +500,69 @@ class OBSState:
 
 
 obs_state = OBSState()
+
+
+# Sprint 10 A5: rate limit para endpoints que llaman a Claude.
+# Evita quemar creditos si Luis aprieta el boton 20 veces seguidas.
+_llm_last_call: dict[str, float] = {}
+LLM_COOLDOWN_S = 3.0
+
+# Sprint 10 B1: memoria de sesion. TarroBot lleva cuenta de lo que pasa
+# durante la grabacion (datos, melodias, opiniones, tiempo) y usa esos
+# numeros para frases contextuales tipo "vamos por el dato 5 de 10".
+class SessionStats:
+    def __init__(self):
+        self.session_start_ts: float = time.time()
+        self.datos_hablados: int = 0
+        self.opiniones_dadas: int = 0
+        self.precios_reaccionados: int = 0
+        self.melodias_tocadas: int = 0
+        self.saludos: int = 0
+        self.despedidas: int = 0
+        self.catchphrases: int = 0
+        self.close_ups: int = 0
+        self.cambios_escena: int = 0
+        self.ultimo_tema: str = ""
+        self.ultimo_dato_ts: float = 0.0
+
+    def reset(self):
+        self.__init__()
+
+    def mins_activos(self) -> int:
+        return int((time.time() - self.session_start_ts) / 60)
+
+    def resumen(self) -> dict:
+        return {
+            "session_start_ts": self.session_start_ts,
+            "minutos_activos": self.mins_activos(),
+            "datos_hablados": self.datos_hablados,
+            "opiniones_dadas": self.opiniones_dadas,
+            "precios_reaccionados": self.precios_reaccionados,
+            "melodias_tocadas": self.melodias_tocadas,
+            "saludos": self.saludos,
+            "despedidas": self.despedidas,
+            "catchphrases": self.catchphrases,
+            "close_ups": self.close_ups,
+            "cambios_escena": self.cambios_escena,
+            "ultimo_tema": self.ultimo_tema,
+        }
+
+
+stats = SessionStats()
+
+
+def llm_cooldown_check(endpoint: str) -> Optional[float]:
+    """
+    Devuelve segundos restantes de cooldown, o None si esta libre.
+    Si esta libre, marca el endpoint como recien usado.
+    """
+    now = time.time()
+    last = _llm_last_call.get(endpoint, 0.0)
+    elapsed = now - last
+    if elapsed < LLM_COOLDOWN_S:
+        return LLM_COOLDOWN_S - elapsed
+    _llm_last_call[endpoint] = now
+    return None
 
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -825,6 +1028,7 @@ async def obs_set_escena(payload: dict):
     except obs.OBSError as e:
         return JSONResponse({"error": str(e)}, status_code=400)
     tracker.mark_input()
+    stats.cambios_escena += 1
     return {"ok": True, "escena": real}
 
 
@@ -882,7 +1086,6 @@ async def obs_close_up(payload: dict):
     if not obs.is_connected():
         return JSONResponse({"error": "OBS no conectado"}, status_code=400)
 
-    import random as _rnd
     tema = (payload.get("tema") or "").strip()
     if not tema:
         return JSONResponse({"error": "tema vacio (ej: cartucho)"}, status_code=400)
@@ -910,10 +1113,11 @@ async def obs_close_up(payload: dict):
     # TarroBot dice WOW con cara excited
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
-    frase = _rnd.choice(WOW_FRASES)
+    frase = pick_no_repeat(WOW_FRASES, "wow")
     audio_url = await _hablar_frase(
         frase, "excited", f"MIRA ESE {tema.upper()}", voz, pitch, rate
     )
+    stats.close_ups += 1
     return {
         "ok": True,
         "tema": tema,
@@ -930,19 +1134,13 @@ async def obs_gracias(payload: dict):
     la escena previa (la general).
     """
     if not obs_state.in_close_up:
-        # No estabamos en close-up, igual contestamos amable
-        import random as _rnd
-        voz, pitch, rate = _obtener_voz_pitch_rate(payload)
-        tracker.mark_input()
-        audio_url = await _hablar_frase(
-            "¡De nada!", "happy", "DE NADA", voz, pitch, rate
-        )
-        return {"ok": True, "in_close_up": False, "audio_url": audio_url}
+        # Sprint 10 A3: si no estabamos en close-up, "gracias TarroBot"
+        # significa cierre del programa → redirigir a despedir.
+        return await despedir(payload)
 
-    import random as _rnd
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
-    frase = _rnd.choice(GRACIAS_FRASES)
+    frase = pick_no_repeat(GRACIAS_FRASES, "gracias")
     # Primero hablar (cara happy)
     audio_url = await _hablar_frase(
         frase, "happy", "VOLVEMOS", voz, pitch, rate
@@ -1007,6 +1205,13 @@ async def cuentame(payload: dict):
         import random
         dato = random.choice(matches)
     elif generate_if_missing:
+        # Sprint 10 A5: rate limit solo cuando va a llamar Claude
+        espera = llm_cooldown_check("cuentame")
+        if espera is not None:
+            return JSONResponse(
+                {"error": f"cooldown LLM: espera {espera:.1f}s antes de pedir otro dato a Claude"},
+                status_code=429,
+            )
         async with _procesando(f"buscando {tema} con Claude..."):
             result = await asyncio.to_thread(generar_con_llm, tema)
         if result and result.get("datos"):
@@ -1027,6 +1232,11 @@ async def cuentame(payload: dict):
     # Generar MP3 en thread (generar_tts usa asyncio.run interno que rompe el loop)
     mp3 = await asyncio.to_thread(generar_tts, dato, voz, pitch, rate)
     audio_url = f"/audio/{mp3.name}" if mp3 else None
+
+    # Sprint 10 B1: contadores
+    stats.datos_hablados += 1
+    stats.ultimo_tema = dato.get("tema", "")
+    stats.ultimo_dato_ts = time.time()
 
     tracker.mark_speaking(True)
     # Disparar evento al live
@@ -1078,17 +1288,26 @@ async def _hablar_frase(texto: str, estado: str, label: str, voz: str,
         "tema": "",
     })
 
-    # Sprint 9: agendar hook post-hablar. Estimacion por chars (no parseamos
-    # duracion real del MP3 porque ya es suficiente para vivo).
+    # Sprint 10 A1: hook post-hablar event-driven. Se dispara cuando el
+    # cliente HTML reporta audio.onended via /api/audio-finished. Fallback:
+    # timeout duro para evitar listener huerfano si el audio nunca termina.
     if obs_state.auto_scene_on_speak and not obs_state.in_close_up:
-        dur_est = max(2.0, len(texto) * 0.06) + 0.5
-        asyncio.create_task(_post_hablar_delayed(dur_est))
+        async def _post():
+            await _hook_post_hablar()
+        tracker.add_finished_listener(_post)
+        # fallback timeout (3x estimacion) por si el audio.onended nunca llega
+        fallback = max(8.0, len(texto) * 0.12) + 2.0
+        asyncio.create_task(_post_hablar_fallback(fallback))
     return audio_url
 
 
-async def _post_hablar_delayed(delay: float) -> None:
+async def _post_hablar_fallback(delay: float) -> None:
+    """Si el evento audio.onended nunca llega (cliente caido, mute, etc),
+    dispara el hook post-hablar despues de un timeout generoso."""
     await asyncio.sleep(delay)
-    await _hook_post_hablar()
+    if tracker.is_speaking:
+        # forzar transicion para que dispare listeners pendientes
+        tracker.mark_speaking(False)
 
 
 def generar_opinion_llm(tema: str) -> Optional[dict]:
@@ -1161,6 +1380,14 @@ async def opinar(payload: dict):
     if not tema:
         return JSONResponse({"error": "tema vacio"}, status_code=400)
 
+    # Sprint 10 A5: rate limit
+    espera = llm_cooldown_check("opinar")
+    if espera is not None:
+        return JSONResponse(
+            {"error": f"cooldown LLM: espera {espera:.1f}s antes de otra opinion"},
+            status_code=429,
+        )
+
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
 
@@ -1175,6 +1402,7 @@ async def opinar(payload: dict):
         estado = "talking"
 
     audio_url = await _hablar_frase(texto, estado, f"¿QUE OPINO DE {tema.upper()}?", voz, pitch, rate)
+    stats.opiniones_dadas += 1
     return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url, "tema": tema}
 
 
@@ -1261,6 +1489,13 @@ async def precio(payload: dict):
 
     # Modo OPINION explicita: LLM da una reaccion personal mas larga
     if con_opinion:
+        # Sprint 10 A5: rate limit
+        espera = llm_cooldown_check("precio_opinion")
+        if espera is not None:
+            return JSONResponse(
+                {"error": f"cooldown LLM: espera {espera:.1f}s"},
+                status_code=429,
+            )
         async with _procesando(f"opinando sobre el precio..."):
             result = await asyncio.to_thread(generar_opinion_precio_llm, valor, juego)
         if result:
@@ -1273,6 +1508,8 @@ async def precio(payload: dict):
                 f"OPINIÓN PRECIO",
                 voz, pitch, rate,
             )
+            stats.precios_reaccionados += 1
+            stats.opiniones_dadas += 1
             return {"ok": True, "texto": texto_opinion, "estado": estado_opinion,
                     "audio_url": audio_url, "con_opinion": True}
         # Si fallo el LLM, cae al modo rapido
@@ -1323,6 +1560,7 @@ async def precio(payload: dict):
         texto = f"¿{juego} a {valor_str}? " + texto
 
     audio_url = await _hablar_frase(texto, estado, "REACCION PRECIO", voz, pitch, rate)
+    stats.precios_reaccionados += 1
     return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
 
 
@@ -1356,7 +1594,8 @@ async def random_dato(payload: dict):
     if not candidatos:
         candidatos = db["datos"]  # fallback
 
-    dato = _rnd.choice(candidatos)
+    # Sprint 10 A2: anti-repeticion. Ventana mas grande para datos (15)
+    dato = pick_no_repeat(candidatos, f"random_{categoria}", n_recent=15)
 
     mp3 = await asyncio.to_thread(generar_tts, dato, voz, pitch, rate)
     audio_url = f"/audio/{mp3.name}" if mp3 else None
@@ -1378,10 +1617,10 @@ async def random_dato(payload: dict):
 @app.post("/api/saludar")
 async def saludar(payload: dict):
     """Reproduce un saludo geek random con estado excited."""
-    import random
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
-    texto = random.choice(SALUDOS_GEEK)
+    stats.saludos += 1
+    texto = pick_no_repeat(SALUDOS_GEEK, "saludos")
     audio_url = await _hablar_frase(texto, "excited", "HOLA HOLA", voz, pitch, rate)
     return {"ok": True, "texto": texto, "audio_url": audio_url}
 
@@ -1420,10 +1659,10 @@ async def _acelerar_dormir():
 async def despedir(payload: dict):
     """Reproduce una despedida corta random con estado winking.
     Despues de despedirse, TarroBot acelera la somnolencia y se duerme."""
-    import random
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
-    texto = random.choice(DESPEDIDAS_CORTAS)
+    stats.despedidas += 1
+    texto = pick_no_repeat(DESPEDIDAS_CORTAS, "despedidas")
     audio_url = await _hablar_frase(texto, "winking", "HASTA LUEGO", voz, pitch, rate)
     # Sprint 8.5: agendar transicion bored -> drowsy -> sleep
     asyncio.create_task(_acelerar_dormir())
@@ -1433,23 +1672,52 @@ async def despedir(payload: dict):
 @app.post("/api/escuchando")
 async def escuchando(payload: dict):
     """Sprint 8.x: respuesta a '¿me estás escuchando?' o variantes."""
-    import random
+    import random as _rnd
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
-    texto = random.choice(ESCUCHANDO_FRASES)
-    estado = random.choice(["happy", "winking", "excited"])
+    texto = pick_no_repeat(ESCUCHANDO_FRASES, "escuchando")
+    estado = _rnd.choice(["happy", "winking", "excited"])
     audio_url = await _hablar_frase(texto, estado, "TE ESCUCHO", voz, pitch, rate)
     return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
+
+
+@app.post("/api/personal")
+async def personal(payload: dict):
+    """
+    Sprint 10 B4: respuesta a preguntas sobre TarroBot mismo.
+    Body: { "categoria": "nombre"|"origen"|"edad"|"favorito"|... }
+    Si no se pasa categoria, usa "generico".
+    """
+    import random as _rnd
+    categoria = (payload.get("categoria") or "generico").strip().lower()
+    if categoria not in PERSONALES_FRASES:
+        categoria = "generico"
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    tracker.mark_input()
+    texto = pick_no_repeat(PERSONALES_FRASES[categoria], f"personal_{categoria}")
+    # Estado segun categoria
+    estado_map = {
+        "nombre": "happy", "origen": "fact", "edad": "winking",
+        "favorito": "excited", "consola_fav": "excited",
+        "familia": "happy", "comida": "winking", "sueño": "thinking",
+        "como_funciona": "fact", "generico": "thinking",
+    }
+    estado = estado_map.get(categoria, "happy")
+    audio_url = await _hablar_frase(
+        texto, estado, f"PERSONAL · {categoria.upper()}", voz, pitch, rate
+    )
+    return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url,
+            "categoria": categoria}
 
 
 @app.post("/api/como-estas")
 async def como_estas(payload: dict):
     """Sprint 8.x: respuesta a '¿cómo estás?' con frase random."""
-    import random
+    import random as _rnd
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
-    texto = random.choice(COMO_ESTAS_FRASES)
-    estado = random.choice(["happy", "excited", "winking", "talking"])
+    texto = pick_no_repeat(COMO_ESTAS_FRASES, "como_estas")
+    estado = _rnd.choice(["happy", "excited", "winking", "talking"])
     audio_url = await _hablar_frase(texto, estado, "¿CÓMO ESTÁS?", voz, pitch, rate)
     return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
 
@@ -1471,24 +1739,50 @@ async def que_hacemos(payload: dict):
         n_datos = len(queue.items_datos())
         n_melodias = len(queue.items_melodias())
 
-        # Plantillas contextuales segun lo que tenga la pauta
-        plantillas = [
-            f"Hoy vamos con {episodio}. Te traje {n_datos} datos curiosos para soltar.",
-            f"Te propongo arrancar con {episodio}. Tengo {n_datos} datos esperando.",
-            f"Tema del día: {episodio}. Ya cargué {n_datos} datos. ¿Empezamos?",
-            f"Lista lista para grabar {episodio} con {n_datos} datos preparados.",
-        ]
-        if n_melodias > 0:
-            plantillas += [
-                f"Hoy es {episodio}. Tengo {n_datos} datos y {n_melodias} melodías listas para acompañar.",
-                f"Hablemos de {episodio}. Cargué {n_datos} datos y {n_melodias} canciones retro.",
-                f"Vamos con {episodio}. {n_datos} datos y unas melodías para el ambiente.",
+        # Sprint 10 B1: si ya hablamos algunos datos, decir el progreso
+        idx = queue.indice
+        si_avanzados = idx >= 0
+        restantes = max(0, n_datos - (idx + 1))
+
+        if si_avanzados and restantes > 0:
+            plantillas = [
+                f"Vamos por el dato {idx + 1} de {n_datos} de {episodio}. Quedan {restantes}.",
+                f"Estamos a la mitad de {episodio}, vamos por el {idx + 1} de {n_datos}.",
+                f"Llevamos {idx + 1} datos del top, faltan {restantes} para cerrar.",
+                f"Seguimos con {episodio}, próximo es el dato {idx + 2} de {n_datos}.",
             ]
-        texto = random.choice(plantillas)
+        elif si_avanzados and restantes == 0:
+            plantillas = [
+                f"Ya cerramos {episodio} completo, ¡los {n_datos} datos sobre la mesa!",
+                f"Llegamos al final del top de {episodio}. ¿Lo cerramos con catchphrase?",
+                f"Top de {episodio} terminado. ¿Despedida o ronda libre?",
+            ]
+        else:
+            plantillas = [
+                f"Hoy vamos con {episodio}. Te traje {n_datos} datos curiosos para soltar.",
+                f"Te propongo arrancar con {episodio}. Tengo {n_datos} datos esperando.",
+                f"Tema del día: {episodio}. Ya cargué {n_datos} datos. ¿Empezamos?",
+                f"Lista lista para grabar {episodio} con {n_datos} datos preparados.",
+            ]
+            if n_melodias > 0:
+                plantillas += [
+                    f"Hoy es {episodio}. Tengo {n_datos} datos y {n_melodias} melodías listas para acompañar.",
+                    f"Hablemos de {episodio}. Cargué {n_datos} datos y {n_melodias} canciones retro.",
+                    f"Vamos con {episodio}. {n_datos} datos y unas melodías para el ambiente.",
+                ]
+
+        # Sprint 10 B1: si la sesion lleva tiempo, agregar comentario
+        mins = stats.mins_activos()
+        if mins >= 30:
+            plantillas.append(
+                f"Llevamos {mins} minutos hablando de {episodio}. Esto se está poniendo épico."
+            )
+
+        texto = pick_no_repeat(plantillas, "que_hacemos_pauta")
         estado = "excited"
         label = f"PAUTA DEL DÍA · {queue.slug.upper()}"
     else:
-        texto = random.choice(QUE_HACEMOS_FRASES)
+        texto = pick_no_repeat(QUE_HACEMOS_FRASES, "que_hacemos")
         estado = random.choice(["excited", "thinking", "happy", "winking"])
         label = "¿QUÉ HACEMOS HOY?"
 
@@ -1502,12 +1796,12 @@ async def despertar(payload: dict):
     Sprint 8.5: TarroBot 'despierta' cuando le hablamos estando dormido o aburrido.
     Reproduce una frase tipo 'sorry, aca estoy' y vuelve a idle.
     """
-    import random
+    import random as _rnd
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
     # Forzar volver a idle desde el estado dormido
     tracker.current_idle_state = "idle"
-    texto = random.choice(DESPERTAR_FRASES)
+    texto = pick_no_repeat(DESPERTAR_FRASES, "despertar")
     audio_url = await _hablar_frase(texto, "happy", "DESPERTANDO...", voz, pitch, rate)
     return {"ok": True, "texto": texto, "audio_url": audio_url}
 
@@ -1515,11 +1809,12 @@ async def despertar(payload: dict):
 @app.post("/api/catchphrase")
 async def catchphrase(payload: dict):
     """Reproduce una catchphrase random del canal Retrotarros (Sprint 7.3)."""
-    import random
+    import random as _rnd
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
-    texto = random.choice(CATCHPHRASES)
-    estado = random.choice(CATCHPHRASE_ESTADOS)
+    stats.catchphrases += 1
+    texto = pick_no_repeat(CATCHPHRASES, "catchphrases")
+    estado = _rnd.choice(CATCHPHRASE_ESTADOS)
     audio_url = await _hablar_frase(texto, estado, "RETROTARROS!", voz, pitch, rate)
     return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
 
@@ -1529,6 +1824,145 @@ async def audio_finished():
     """El cliente HTML llama esto cuando termina de reproducir un MP3."""
     tracker.mark_speaking(False)
     return {"ok": True}
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 10 C6: recetas (secuencias compuestas)
+# ─────────────────────────────────────────────────────────────────────────
+
+RECETAS_PATH = STUDIO / "tarrobot-recetas.json"
+
+
+def _cargar_recetas() -> dict:
+    if not RECETAS_PATH.exists():
+        return {"recetas": {}}
+    try:
+        return json.loads(RECETAS_PATH.read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"[recetas] error parseando {RECETAS_PATH}: {e}")
+        return {"recetas": {}}
+
+
+# Mapa accion → endpoint async para ejecutar pasos de recetas
+_RECETA_DISPATCH = {
+    # se llena lazy en _ejecutar_paso porque las funciones aun no estan
+    # definidas en este punto del archivo (el endpoint se llama mas abajo).
+}
+
+
+async def _ejecutar_paso(paso: dict) -> dict:
+    accion = (paso.get("accion") or "").strip().lower()
+    params = paso.get("params") or {}
+    if accion == "esperar":
+        await asyncio.sleep(float(params.get("segundos", 1)))
+        return {"ok": True, "esperado": params.get("segundos", 1)}
+    # Despachar a endpoints existentes
+    handlers = {
+        "obs_escena": obs_set_escena,
+        "obs_fuente": obs_set_fuente,
+        "obs_close_up": obs_close_up,
+        "obs_gracias": obs_gracias,
+        "saludar": saludar,
+        "despedir": despedir,
+        "catchphrase": catchphrase,
+        "como_estas": como_estas,
+        "que_hacemos": que_hacemos,
+        "escuchando": escuchando,
+        "despertar": despertar,
+        "personal": personal,
+        "cuentame": cuentame,
+        "opinar": opinar,
+        "precio": precio,
+        "queue_next": queue_next,
+        "queue_melodia": queue_melodia,
+    }
+    handler = handlers.get(accion)
+    if not handler:
+        return {"ok": False, "error": f"accion desconocida en receta: '{accion}'"}
+    try:
+        result = await handler(params)
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+    if hasattr(result, "body"):
+        try:
+            result = json.loads(result.body.decode())
+        except Exception:
+            result = {"ok": False, "error": "respuesta interna invalida"}
+    return result
+
+
+@app.get("/api/recetas")
+async def recetas_listar():
+    """Lista las recetas configuradas en studio/tarrobot-recetas.json."""
+    data = _cargar_recetas()
+    return {
+        "ok": True,
+        "recetas": {
+            nombre: {
+                "titulo": r.get("titulo", nombre),
+                "descripcion": r.get("descripcion", ""),
+                "pasos": len(r.get("pasos", [])),
+            }
+            for nombre, r in data.get("recetas", {}).items()
+        }
+    }
+
+
+@app.post("/api/receta/run")
+async def receta_run(payload: dict):
+    """
+    Ejecuta una receta por nombre.
+    Body: { "nombre": "intro_episodio" }
+    Corre los pasos en orden, secuencial. Si un paso falla, sigue
+    con el siguiente (best effort) y reporta cuales fallaron.
+    """
+    nombre = (payload.get("nombre") or "").strip()
+    if not nombre:
+        return JSONResponse({"error": "nombre vacio"}, status_code=400)
+    data = _cargar_recetas()
+    receta = data.get("recetas", {}).get(nombre)
+    if not receta:
+        return JSONResponse(
+            {"error": f"receta '{nombre}' no existe",
+             "disponibles": list(data.get("recetas", {}).keys())},
+            status_code=404,
+        )
+    pasos = receta.get("pasos", [])
+    if not pasos:
+        return JSONResponse({"error": f"receta '{nombre}' no tiene pasos"}, status_code=400)
+
+    tracker.mark_input()
+    resultados = []
+    for i, paso in enumerate(pasos):
+        try:
+            r = await _ejecutar_paso(paso)
+            resultados.append({"paso": i + 1, "accion": paso.get("accion"), "ok": r.get("ok", True)})
+        except Exception as e:
+            resultados.append({"paso": i + 1, "accion": paso.get("accion"), "ok": False, "error": str(e)})
+    return {
+        "ok": True,
+        "receta": nombre,
+        "titulo": receta.get("titulo", nombre),
+        "pasos_ejecutados": len(resultados),
+        "resultados": resultados,
+    }
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 10 B1: estadisticas de sesion
+# ─────────────────────────────────────────────────────────────────────────
+
+@app.get("/api/session/stats")
+async def session_stats_endpoint():
+    """Estadisticas en vivo de la sesion actual."""
+    return {"ok": True, "stats": stats.resumen()}
+
+
+@app.post("/api/session/reset")
+async def session_stats_reset():
+    """Resetea contadores de la sesion (no afecta DB ni pauta)."""
+    stats.reset()
+    return {"ok": True, "stats": stats.resumen()}
 
 
 @app.get("/api/voz")
@@ -1596,6 +2030,26 @@ def get_whisper():
     return _whisper_model
 
 
+def _whisper_prompt_dinamico() -> str:
+    """
+    Sprint 10 A4: arma el initial_prompt de Whisper sumando los temas de la
+    pauta cargada (si la hay). Esto hace que Whisper transcriba mejor los
+    juegos del episodio (ej: 'Conker', 'ClayFighter') porque los espera.
+    """
+    base = WHISPER_PROMPT
+    if not queue.loaded():
+        return base
+    temas = [d.get("tema", "") for d in queue.pauta.get("datos", []) if d.get("tema")]
+    if not temas:
+        return base
+    extras = ", ".join(temas[:25])  # tope para no inflar el prompt
+    episodio = queue.pauta.get("episodio") or queue.slug
+    return base + (
+        f" El usuario tambien puede mencionar (estamos grabando '{episodio}'): "
+        f"{extras}."
+    )
+
+
 def transcribir_audio_sync(audio_bytes: bytes) -> str:
     """Transcribe audio bytes a texto con Whisper + initial_prompt de contexto."""
     import tempfile
@@ -1611,10 +2065,10 @@ def transcribir_audio_sync(audio_bytes: bytes) -> str:
             tmp_path,
             language="es",
             fp16=False,
-            temperature=0.0,                # mas determinista, menos alucina
-            initial_prompt=WHISPER_PROMPT,  # contexto de vocabulario retrogaming
-            condition_on_previous_text=False,  # no se "atora" con audio anterior
-            no_speech_threshold=0.4,        # mas tolerante a silencios al final
+            temperature=0.0,                       # mas determinista, menos alucina
+            initial_prompt=_whisper_prompt_dinamico(),  # contexto + pauta cargada
+            condition_on_previous_text=False,      # no se "atora" con audio anterior
+            no_speech_threshold=0.4,               # mas tolerante a silencios al final
         )
         texto = result.get("text", "").strip()
         print(f"[STT] transcripcion: '{texto}'")
@@ -1726,6 +2180,38 @@ def parsear_intent(texto: str) -> dict:
     for kw in escuchando_kws:
         if kw in t_clean:
             return {"accion": "escuchando", "params": {}}
+
+    # 1c-PERSONAL. Preguntas sobre TarroBot mismo (Sprint 10 B4)
+    # Cada categoria tiene sus keywords. Devuelve accion="personal" con
+    # params.categoria. El endpoint elige frase curada.
+    personal_kws = {
+        "nombre": ["como te llamas", "cómo te llamas", "tu nombre",
+                   "quien eres", "quién eres", "te llamas"],
+        "origen": ["de donde eres", "de dónde eres", "de donde vienes",
+                   "de dónde vienes", "donde naciste", "dónde naciste",
+                   "donde vives", "dónde vives", "como naciste", "cómo naciste"],
+        "edad": ["cuantos años tienes", "cuántos años tienes", "tu edad",
+                 "que edad tienes", "qué edad tienes", "eres viejo", "tu cumpleaños"],
+        "favorito": ["tu juego favorito", "juego favorito", "que juego te gusta",
+                     "qué juego te gusta", "cual es tu juego", "cuál es tu juego",
+                     "mejor juego", "tu cartucho favorito"],
+        "consola_fav": ["tu consola favorita", "consola favorita",
+                        "que consola te gusta", "qué consola te gusta",
+                        "mejor consola"],
+        "familia": ["tienes familia", "tus padres", "tus hermanos",
+                    "quien te creo", "quién te creó", "quien te hizo",
+                    "quién te hizo"],
+        "comida": ["que comes", "qué comes", "comes algo", "te alimentas"],
+        "sueño": ["tu sueño", "que sueñas", "qué sueñas", "que te gustaría",
+                  "qué te gustaría", "tu meta"],
+        "como_funciona": ["como funcionas", "cómo funcionas", "como te hicieron",
+                          "cómo te hicieron", "eres una ia", "eres robot",
+                          "eres un robot", "que eres", "qué eres"],
+    }
+    for cat, kws in personal_kws.items():
+        for kw in kws:
+            if kw in t_clean:
+                return {"accion": "personal", "params": {"categoria": cat}}
 
     # 1c. "¿Cómo estás?" (Sprint 8.x)
     como_estas_kws = [
@@ -1945,6 +2431,8 @@ async def listen(request: Request, wake: str = ""):
             result = await obs_close_up(params)
         elif accion == "obs_gracias":
             result = await obs_gracias(params)
+        elif accion == "personal":
+            result = await personal(params)
         elif accion == "cuentame":
             result = await cuentame(params)
         else:
@@ -2019,10 +2507,14 @@ async def _reproducir_dato_de_cola(dato: dict, voz_override: Optional[str] = Non
         "tema": dato["tema"],
     })
 
-    # Sprint 9: post-hablar agendado con duracion real del MP3 (mas preciso)
+    # Sprint 10 A1: post-hablar event-driven con fallback al duracion_ms
     if obs_state.auto_scene_on_speak and not obs_state.in_close_up:
+        async def _post():
+            await _hook_post_hablar()
+        tracker.add_finished_listener(_post)
         dur_ms = dato.get("duracion_ms") or int(len(dato.get("texto", "")) * 60)
-        asyncio.create_task(_post_hablar_delayed(dur_ms / 1000.0 + 0.5))
+        # fallback 2x duracion + 2s
+        asyncio.create_task(_post_hablar_fallback((dur_ms / 1000.0) * 2 + 2.0))
     return audio_url
 
 
@@ -2213,6 +2705,7 @@ async def queue_melodia(payload: dict):
         dato = random.choice(melodias)
 
     tracker.mark_input()
+    stats.melodias_tocadas += 1
     audio_url = await _reproducir_dato_de_cola(dato, payload.get("voz"))
     return {"ok": True, "dato": dato, "audio_url": audio_url}
 

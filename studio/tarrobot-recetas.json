@@ -1,0 +1,45 @@
+{
+  "_comentario": "Recetas: secuencias compuestas que se ejecutan en orden. Cada paso es {accion, params}. Acciones validas: obs_escena, obs_fuente, obs_close_up, obs_gracias, saludar, despedir, catchphrase, melodia, esperar (params.segundos), cuentame, opinar, personal. Editable en caliente.",
+  "recetas": {
+    "intro_episodio": {
+      "titulo": "Arrancar episodio",
+      "descripcion": "Corta a intro, espera 3s, vuelve a tarrobot, saluda, vuelve a la toma general.",
+      "pasos": [
+        { "accion": "obs_escena", "params": { "escena": "intro" } },
+        { "accion": "esperar", "params": { "segundos": 3 } },
+        { "accion": "obs_escena", "params": { "escena": "tarrobot full" } },
+        { "accion": "saludar", "params": {} },
+        { "accion": "esperar", "params": { "segundos": 1 } },
+        { "accion": "obs_escena", "params": { "escena": "cenital" } }
+      ]
+    },
+    "outro_episodio": {
+      "titulo": "Cerrar episodio",
+      "descripcion": "Catchphrase, corta a tarrobot, despedida, corta a outro.",
+      "pasos": [
+        { "accion": "catchphrase", "params": {} },
+        { "accion": "esperar", "params": { "segundos": 1 } },
+        { "accion": "obs_escena", "params": { "escena": "tarrobot full" } },
+        { "accion": "despedir", "params": {} },
+        { "accion": "esperar", "params": { "segundos": 2 } },
+        { "accion": "obs_escena", "params": { "escena": "outro" } }
+      ]
+    },
+    "transicion_a_koko": {
+      "titulo": "Pasar a Koko",
+      "descripcion": "TarroBot dice una frase de invitacion y corta a la camara de Koko.",
+      "pasos": [
+        { "accion": "personal", "params": { "categoria": "generico" } },
+        { "accion": "esperar", "params": { "segundos": 1 } },
+        { "accion": "obs_escena", "params": { "escena": "koko" } }
+      ]
+    },
+    "tomar_aire": {
+      "titulo": "Pausa de respiro",
+      "descripcion": "Catchphrase ligera para pausa entre datos.",
+      "pasos": [
+        { "accion": "catchphrase", "params": {} }
+      ]
+    }
+  }
+}
