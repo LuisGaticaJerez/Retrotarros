@@ -1086,13 +1086,43 @@ async def como_estas(payload: dict):
 
 @app.post("/api/que-hacemos")
 async def que_hacemos(payload: dict):
-    """Sprint 8.x: respuesta a '¿qué hacemos hoy?' con propuesta random."""
+    """
+    Sprint 8.x: respuesta a '¿qué hacemos hoy?'.
+    Si hay pauta cargada -> respuesta contextual mencionando el episodio
+    y cuantos datos/melodias hay preparados.
+    Si NO hay pauta -> frase random generica de QUE_HACEMOS_FRASES.
+    """
     import random
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
-    texto = random.choice(QUE_HACEMOS_FRASES)
-    estado = random.choice(["excited", "thinking", "happy", "winking"])
-    audio_url = await _hablar_frase(texto, estado, "¿QUÉ HACEMOS HOY?", voz, pitch, rate)
+
+    if queue.loaded():
+        episodio = queue.pauta.get("episodio") or queue.slug.replace("-", " ").title()
+        n_datos = len(queue.items_datos())
+        n_melodias = len(queue.items_melodias())
+
+        # Plantillas contextuales segun lo que tenga la pauta
+        plantillas = [
+            f"Hoy vamos con {episodio}. Te traje {n_datos} datos curiosos para soltar.",
+            f"Te propongo arrancar con {episodio}. Tengo {n_datos} datos esperando.",
+            f"Tema del día: {episodio}. Ya cargué {n_datos} datos. ¿Empezamos?",
+            f"Lista lista para grabar {episodio} con {n_datos} datos preparados.",
+        ]
+        if n_melodias > 0:
+            plantillas += [
+                f"Hoy es {episodio}. Tengo {n_datos} datos y {n_melodias} melodías listas para acompañar.",
+                f"Hablemos de {episodio}. Cargué {n_datos} datos y {n_melodias} canciones retro.",
+                f"Vamos con {episodio}. {n_datos} datos y unas melodías para el ambiente.",
+            ]
+        texto = random.choice(plantillas)
+        estado = "excited"
+        label = f"PAUTA DEL DÍA · {queue.slug.upper()}"
+    else:
+        texto = random.choice(QUE_HACEMOS_FRASES)
+        estado = random.choice(["excited", "thinking", "happy", "winking"])
+        label = "¿QUÉ HACEMOS HOY?"
+
+    audio_url = await _hablar_frase(texto, estado, label, voz, pitch, rate)
     return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
 
 
