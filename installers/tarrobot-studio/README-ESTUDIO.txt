@@ -129,17 +129,35 @@ USAR:
 1. Baja el MIDI de un sitio de partituras fan:
      - Ichigos:        ichigos.com         (Final Fantasy y mas)
      - Ninsheetmusic:  ninsheetmusic.org   (Nintendo)
-   Guardalo en  studio\melodias\<nombre>.mid
 
-2. Agrega la melodia a una pauta del episodio:
+   Guardalo en una SUBCARPETA por consola/contexto (recomendado):
+     studio\melodias\snes\<nombre>.mid    (DKC, Chrono Trigger, etc.)
+     studio\melodias\n64\<nombre>.mid     (DK64, Zelda OoT, Mario 64...)
+     studio\melodias\mario\<nombre>.mid   (Super Mario de cualquier consola)
+     studio\melodias\arcade\<nombre>.mid  (DK arcade, Pac-Man, etc.)
+
+   Asi cuando carga melodias a una pauta, podes filtrar por
+   contexto y solo cargar las que tengan sentido con el episodio.
+
+2. Agrega la melodia a una pauta del episodio. Opciones:
+
+   A) UN MIDI especifico con recorte custom (--desde y --segundos):
      python scripts\tarrobot.py --melodia-add <slug-pauta> ^
-         --midi studio\melodias\dkc-aquatic.mid ^
+         --midi studio\melodias\snes\dkc-aquatic.mid ^
          --desde 0:14 --segundos 8 ^
          --titulo "DKC Aquatic Ambience" ^
          --consola SNES --ano 1994 --editor Rare
 
-   Esto renderiza un MP3 de 8s y lo agrega como item tipo=melodia
-   en la pauta. Aparece automatico en la cola del panel control.
+   B) BULK de una subcarpeta entera (todos los MIDIs ahi):
+     python scripts\tarrobot.py --melodia-bulk <slug-pauta> ^
+         --folder snes --segundos 8
+
+   C) BORRAR las melodias de una pauta (para reorganizar):
+     python scripts\tarrobot.py --melodia-clean <slug-pauta>
+
+   Esto renderiza MP3s con sonido SNES y los agrega como items
+   tipo=melodia a la pauta. Aparecen automatico en la card MUSICA
+   DEL EPISODIO del panel control.
 
 3. Durante grabacion, NEXT en la cola hace que TarroBot toque la
    melodia con estado "whistling" (boca tipo O + notas musicales

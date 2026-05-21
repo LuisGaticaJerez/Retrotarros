@@ -71,26 +71,26 @@
     {
       "id": "snes-top-mundial-melodia-6",
       "tipo": "melodia",
-      "tema": "Test Mary Had a Little Lamb",
-      "texto": "[Tocando: Test Mary Had a Little Lamb (6s)]",
+      "tema": "Donkey Kong Country   Aquatic Ambience",
+      "texto": "[Tocando: Donkey Kong Country   Aquatic Ambience (8s)]",
       "estado": "whistling",
-      "consola": "Test",
+      "consola": "",
       "ano": 0,
       "editor": "",
       "mp3": "audio/snes-top-mundial/snes-top-mundial-melodia-6.mp3",
-      "duracion_ms": 6034,
+      "duracion_ms": 8045,
       "fuente": "midi-render",
       "midi_source": {
-        "midi": "studio/melodias/test-mary.mid",
+        "midi": "studio/melodias/snes/Donkey Kong Country - Aquatic Ambience.mid",
         "desde_s": 0.0,
-        "segundos": 6.0
+        "segundos": 8.0
       }
     },
     {
       "id": "snes-top-mundial-melodia-7",
       "tipo": "melodia",
-      "tema": "Donkey Kong   Game Start",
-      "texto": "[Tocando: Donkey Kong   Game Start (8s)]",
+      "tema": "Donkey Kong Country   Cranky'S Theme",
+      "texto": "[Tocando: Donkey Kong Country   Cranky'S Theme (8s)]",
       "estado": "whistling",
       "consola": "",
       "ano": 0,
@@ -99,7 +99,7 @@
       "duracion_ms": 8045,
       "fuente": "midi-render",
       "midi_source": {
-        "midi": "studio/melodias/Donkey Kong - Game Start.mid",
+        "midi": "studio/melodias/snes/Donkey Kong Country - Cranky's Theme.mid",
         "desde_s": 0.0,
         "segundos": 8.0
       }
@@ -107,8 +107,8 @@
     {
       "id": "snes-top-mundial-melodia-8",
       "tipo": "melodia",
-      "tema": "Donkey Kong 64   Crystal Caves",
-      "texto": "[Tocando: Donkey Kong 64   Crystal Caves (8s)]",
+      "tema": "Donkey Kong Country   Fear Factory",
+      "texto": "[Tocando: Donkey Kong Country   Fear Factory (8s)]",
       "estado": "whistling",
       "consola": "",
       "ano": 0,
@@ -117,7 +117,7 @@
       "duracion_ms": 8045,
       "fuente": "midi-render",
       "midi_source": {
-        "midi": "studio/melodias/Donkey Kong 64 - Crystal Caves.mid",
+        "midi": "studio/melodias/snes/Donkey Kong Country - Fear Factory.mid",
         "desde_s": 0.0,
         "segundos": 8.0
       }
@@ -125,8 +125,8 @@
     {
       "id": "snes-top-mundial-melodia-9",
       "tipo": "melodia",
-      "tema": "Donkey Kong 64   Dk Isle Jungle Japes",
-      "texto": "[Tocando: Donkey Kong 64   Dk Isle Jungle Japes (8s)]",
+      "tema": "Sneskdccourse 8",
+      "texto": "[Tocando: Sneskdccourse 8 (8s)]",
       "estado": "whistling",
       "consola": "",
       "ano": 0,
@@ -135,133 +135,7 @@
       "duracion_ms": 8045,
       "fuente": "midi-render",
       "midi_source": {
-        "midi": "studio/melodias/Donkey Kong 64 - DK Isle Jungle Japes.mid",
-        "desde_s": 0.0,
-        "segundos": 8.0
-      }
-    },
-    {
-      "id": "snes-top-mundial-melodia-10",
-      "tipo": "melodia",
-      "tema": "Donkey Kong Country   Aquatic Ambience",
-      "texto": "[Tocando: Donkey Kong Country   Aquatic Ambience (8s)]",
-      "estado": "whistling",
-      "consola": "",
-      "ano": 0,
-      "editor": "",
-      "mp3": "audio/snes-top-mundial/snes-top-mundial-melodia-10.mp3",
-      "duracion_ms": 8045,
-      "fuente": "midi-render",
-      "midi_source": {
-        "midi": "studio/melodias/Donkey Kong Country - Aquatic Ambience.mid",
-        "desde_s": 0.0,
-        "segundos": 8.0
-      }
-    },
-    {
-      "id": "snes-top-mundial-melodia-11",
-      "tipo": "melodia",
-      "tema": "Donkey Kong Country   Cranky'S Theme",
-      "texto": "[Tocando: Donkey Kong Country   Cranky'S Theme (8s)]",
-      "estado": "whistling",
-      "consola": "",
-      "ano": 0,
-      "editor": "",
-      "mp3": "audio/snes-top-mundial/snes-top-mundial-melodia-11.mp3",
-      "duracion_ms": 8045,
-      "fuente": "midi-render",
-      "midi_source": {
-        "midi": "studio/melodias/Donkey Kong Country - Cranky's Theme.mid",
-        "desde_s": 0.0,
-        "segundos": 8.0
-      }
-    },
-    {
-      "id": "snes-top-mundial-melodia-12",
-      "tipo": "melodia",
-      "tema": "Donkey Kong Country   Fear Factory",
-      "texto": "[Tocando: Donkey Kong Country   Fear Factory (8s)]",
-      "estado": "whistling",
-      "consola": "",
-      "ano": 0,
-      "editor": "",
-      "mp3": "audio/snes-top-mundial/snes-top-mundial-melodia-12.mp3",
-      "duracion_ms": 8045,
-      "fuente": "midi-render",
-      "midi_source": {
-        "midi": "studio/melodias/Donkey Kong Country - Fear Factory.mid",
-        "desde_s": 0.0,
-        "segundos": 8.0
-      }
-    },
-    {
-      "id": "snes-top-mundial-melodia-13",
-      "tipo": "melodia",
-      "tema": "Mario Bros.   Sea Waltz",
-      "texto": "[Tocando: Mario Bros.   Sea Waltz (8s)]",
-      "estado": "whistling",
-      "consola": "",
-      "ano": 0,
-      "editor": "",
-      "mp3": "audio/snes-top-mundial/snes-top-mundial-melodia-13.mp3",
-      "duracion_ms": 8045,
-      "fuente": "midi-render",
-      "midi_source": {
-        "midi": "studio/melodias/Mario Bros. - Sea Waltz.mid",
-        "desde_s": 0.0,
-        "segundos": 8.0
-      }
-    },
-    {
-      "id": "snes-top-mundial-melodia-14",
-      "tipo": "melodia",
-      "tema": "Mario Bros.   Super Mario Bros. Theme",
-      "texto": "[Tocando: Mario Bros.   Super Mario Bros. Theme (8s)]",
-      "estado": "whistling",
-      "consola": "",
-      "ano": 0,
-      "editor": "",
-      "mp3": "audio/snes-top-mundial/snes-top-mundial-melodia-14.mp3",
-      "duracion_ms": 8045,
-      "fuente": "midi-render",
-      "midi_source": {
-        "midi": "studio/melodias/Mario Bros. - Super Mario Bros. Theme.mid",
-        "desde_s": 0.0,
-        "segundos": 8.0
-      }
-    },
-    {
-      "id": "snes-top-mundial-melodia-15",
-      "tipo": "melodia",
-      "tema": "Mario Bros.   Underwater Waltz",
-      "texto": "[Tocando: Mario Bros.   Underwater Waltz (8s)]",
-      "estado": "whistling",
-      "consola": "",
-      "ano": 0,
-      "editor": "",
-      "mp3": "audio/snes-top-mundial/snes-top-mundial-melodia-15.mp3",
-      "duracion_ms": 8045,
-      "fuente": "midi-render",
-      "midi_source": {
-        "midi": "studio/melodias/Mario Bros. - Underwater Waltz.mid",
-        "desde_s": 0.0,
-        "segundos": 8.0
-      }
-    },
-    {
-      "id": "snes-top-mundial-melodia-16",
-      "tipo": "melodia",
-      "tema": "Sneskdccourse 8",
-      "texto": "[Tocando: Sneskdccourse 8 (8s)]",
-      "estado": "whistling",
-      "consola": "",
-      "ano": 0,
-      "editor": "",
-      "mp3": "audio/snes-top-mundial/snes-top-mundial-melodia-16.mp3",
-      "duracion_ms": 8045,
-      "fuente": "midi-render",
-      "midi_source": {
-        "midi": "studio/melodias/snesKDCCourse_8.mid",
+        "midi": "studio/melodias/snes/snesKDCCourse_8.mid",
         "desde_s": 0.0,
         "segundos": 8.0
       }

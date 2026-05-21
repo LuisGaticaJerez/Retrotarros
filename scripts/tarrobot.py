@@ -1222,9 +1222,42 @@ def cmd_melodia_add(args) -> int:
     return 0
 
 
+def cmd_melodia_clean(args) -> int:
+    """Borra todas las melodias (items tipo='melodia') de una pauta."""
+    slug = slugify(args.melodia_clean)
+    pauta = cargar_pauta(slug)
+    if not pauta:
+        print(f"ERROR: no existe la pauta '{slug}'", file=sys.stderr)
+        return 1
+
+    antes = len(pauta["datos"])
+    pauta["datos"] = [d for d in pauta["datos"] if d.get("tipo") != "melodia"]
+    despues = len(pauta["datos"])
+    borradas = antes - despues
+
+    if borradas == 0:
+        print(f"(pauta '{slug}' no tenia melodias)")
+        return 0
+
+    # Tambien borrar los MP3 fisicos de melodias huerfanos
+    audio_dir = pauta_audio_dir(slug)
+    if audio_dir.exists():
+        for mp3 in audio_dir.glob(f"{slug}-melodia-*.mp3"):
+            try:
+                mp3.unlink()
+            except Exception:
+                pass
+
+    guardar_pauta(pauta)
+    print(f"[OK] {borradas} melodia(s) borradas de '{slug}'. Quedan {despues} datos normales.")
+    if not getattr(args, "no_sync", False):
+        _ejecutar_sync_drive()
+    return 0
+
+
 def cmd_melodia_bulk(args) -> int:
     """
-    Agrega TODOS los MIDIs nuevos de studio/melodias/ a una pauta de una.
+    Agrega los MIDIs de studio/melodias/ (o de una subcarpeta) a una pauta.
     Ignora los que ya estan agregados (compara por nombre de archivo).
     """
     slug = slugify(args.melodia_bulk)
@@ -1233,12 +1266,26 @@ def cmd_melodia_bulk(args) -> int:
         print(f"ERROR: no existe la pauta '{slug}'. Crea una con --pauta-init primero.", file=sys.stderr)
         return 1
 
-    if not MELODIAS_DIR.exists():
-        print(f"ERROR: no existe la carpeta {MELODIAS_DIR}", file=sys.stderr)
+    # Folder opcional dentro de MELODIAS_DIR
+    if args.folder:
+        folder = MELODIAS_DIR / args.folder
+        if not folder.exists():
+            print(f"ERROR: no existe la subcarpeta {folder}", file=sys.stderr)
+            print(f"       Carpetas disponibles en {MELODIAS_DIR}:", file=sys.stderr)
+            for sub in MELODIAS_DIR.iterdir():
+                if sub.is_dir():
+                    print(f"         {sub.name}/", file=sys.stderr)
+            return 1
+        scan_dir = folder
+    else:
+        scan_dir = MELODIAS_DIR
+
+    if not scan_dir.exists():
+        print(f"ERROR: no existe la carpeta {scan_dir}", file=sys.stderr)
         return 1
 
     # MIDIs disponibles
-    midis = sorted(list(MELODIAS_DIR.glob("*.mid")) + list(MELODIAS_DIR.glob("*.midi")))
+    midis = sorted(list(scan_dir.glob("*.mid")) + list(scan_dir.glob("*.midi")))
     if not midis:
         print(f"(no hay MIDIs en {MELODIAS_DIR})")
         print(f"Pon archivos .mid o .midi en esa carpeta y volve a correr.")
@@ -1256,6 +1303,7 @@ def cmd_melodia_bulk(args) -> int:
     segundos = float(args.segundos) if args.segundos else 8.0
 
     print(f"=== Bulk melodia add a pauta '{slug}' ===")
+    print(f"Scan dir:         {scan_dir}")
     print(f"MIDIs en carpeta: {len(midis)}")
     print(f"Ya agregados:     {len(ya_agregados)}")
     print()
@@ -1469,7 +1517,9 @@ def main():
     parser.add_argument("--pauta-srt", metavar="SLUG", help="Exporta SRT desde una pauta (modo relative, util para preview offline).")
     parser.add_argument("--gap-ms", type=int, help="Milisegundos de pausa entre items en SRT modo relative (default 500).")
     parser.add_argument("--melodia-add", metavar="SLUG", help="Agrega un item de melodia a la pauta (Sprint 8.1, MIDI->MP3 SNES).")
-    parser.add_argument("--melodia-bulk", metavar="SLUG", help="Agrega TODOS los MIDIs nuevos de studio/melodias/ a la pauta (skip los ya agregados).")
+    parser.add_argument("--melodia-bulk", metavar="SLUG", help="Agrega los MIDIs de studio/melodias/ a la pauta. Usa --folder para limitar a una subcarpeta especifica.")
+    parser.add_argument("--melodia-clean", metavar="SLUG", help="Borra TODAS las melodias de una pauta (los MP3 tambien). Util para reorganizar.")
+    parser.add_argument("--folder", help="Subcarpeta dentro de studio/melodias/ para --melodia-bulk (ej: 'n64', 'snes', 'mario').")
     parser.add_argument("--midi", metavar="PATH", help="Ruta al MIDI para --melodia-add.")
     parser.add_argument("--desde", help="Donde empieza el snippet en el MIDI. Formato: '14', '0:14', '1:23'.")
     parser.add_argument("--segundos", type=float, help="Duracion del snippet en segundos (default 8, max recomendado 15).")
@@ -1512,6 +1562,8 @@ def main():
         return cmd_melodia_add(args)
     if args.melodia_bulk:
         return cmd_melodia_bulk(args)
+    if args.melodia_clean:
+        return cmd_melodia_clean(args)
 
     db = cargar_db()
 
