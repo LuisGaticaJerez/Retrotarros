@@ -99,6 +99,7 @@ Write-Host "Scripts:" -ForegroundColor Cyan
 Sync-Item "scripts\tarrobot.py"
 Sync-Item "scripts\tarrobot-live.py"
 Sync-Item "scripts\tarrobot-tray.py"
+Sync-Item "scripts\obs_controller.py"
 Write-Host ""
 
 # 2. Templates HTML
@@ -106,6 +107,7 @@ Write-Host "Templates:" -ForegroundColor Cyan
 Sync-Item "studio\_template-tarrobot-live.html"
 Sync-Item "studio\_template-tarrobot-control.html"
 Sync-Item "studio\_template-tarrobot-slide.html"
+Sync-Item "studio\obs-aliases.json"
 Write-Host ""
 
 # 3. DB

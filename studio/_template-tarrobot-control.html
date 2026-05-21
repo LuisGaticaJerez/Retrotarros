@@ -449,6 +449,46 @@ select#queueSelect:focus { border-color: var(--ye); }
   </div>
 </div>
 
+<!-- CONTROL OBS (Sprint 9) -->
+<div class="card">
+  <h2>🎥 CONTROL OBS</h2>
+  <div id="obsStatus" style="font-size:11px; margin-bottom:8px; padding:6px 8px; border-radius:6px; background:rgba(255,255,255,.06);">
+    <span id="obsDot" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#c33; margin-right:6px;"></span>
+    <span id="obsStatusText">desconectado</span>
+  </div>
+  <div class="row-inline">
+    <input type="text" id="obsHost" placeholder="host" value="localhost" style="flex:2">
+    <input type="number" id="obsPort" placeholder="puerto" value="4455" style="flex:1">
+  </div>
+  <input type="password" id="obsPass" placeholder="password (la que pusiste en OBS)" style="margin-top:6px;">
+  <div class="btn-row" style="margin-top:8px;">
+    <button class="btn ye" onclick="obsConectar()">CONECTAR</button>
+    <button class="btn" onclick="obsDesconectar()">DESCONECTAR</button>
+  </div>
+
+  <div id="obsControles" style="display:none; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,.1);">
+    <div style="font-size:11px; color:rgba(255,255,255,.65); margin-bottom:4px;">ESCENA ACTUAL</div>
+    <select id="obsEscenaSelect" onchange="obsCambiarEscena()" style="margin-bottom:8px;"></select>
+
+    <div class="toggle-row">
+      <input type="checkbox" id="obsAutoEscena" onchange="obsToggleAuto()">
+      <label for="obsAutoEscena">Auto-escena al hablar (TarroBot habla → corta a su escena, calla → vuelve)</label>
+    </div>
+
+    <div style="font-size:11px; color:rgba(255,255,255,.65); margin-top:10px; margin-bottom:4px;">CLOSE-UP (toma cercana + reacción WOW)</div>
+    <div class="btn-row" id="obsCloseUpRow">
+      <!-- botones se generan dinamicos segun close_ups del alias -->
+    </div>
+    <button class="btn cy full" onclick="obsGracias()" style="margin-top:6px;">🙏 GRACIAS TARROBOT (volver a general)</button>
+  </div>
+
+  <div style="font-size:10px; color:rgba(255,255,255,.45); margin-top:6px;">
+    Comandos por voz: "TarroBot cámara a Koko", "toma cercana al cartucho",
+    "muestra el logo", "saca el título", "gracias TarroBot".
+    Edita las escenas y alias en <code>studio/obs-aliases.json</code>.
+  </div>
+</div>
+
 <!-- CUENTAME -->
 <div class="card">
   <h2>💬 CUÉNTAME DE...</h2>
@@ -580,6 +620,13 @@ const PROC_LABELS = {
   '/api/state':        '',  // instantaneo, no mostrar barra
   '/api/queue/reset':  '',
   '/api/queue/unload': '',
+  '/api/obs/conectar':    'conectando a OBS...',
+  '/api/obs/close-up':    'preparando close-up...',
+  '/api/obs/gracias':     'volviendo a general...',
+  '/api/obs/escena':      'cambiando escena...',
+  '/api/obs/fuente':      'toggle fuente...',
+  '/api/obs/auto-escena': '',
+  '/api/obs/desconectar': '',
 };
 
 function showProc(motivo) {
@@ -710,6 +757,103 @@ async function escuchando() {
   const data = await post('/api/escuchando', {});
   if (data && data.ok) logMsg('OK escuchando: "' + data.texto + '"', 'ok');
 }
+
+// ─── CONTROL OBS (Sprint 9) ──────────────────────────────────────
+async function obsConectar() {
+  const host = document.getElementById('obsHost').value.trim() || 'localhost';
+  const port = parseInt(document.getElementById('obsPort').value, 10) || 4455;
+  const password = document.getElementById('obsPass').value;
+  logMsg('conectando a OBS ' + host + ':' + port + '...');
+  const data = await post('/api/obs/conectar', { host, port, password });
+  if (data && data.ok) {
+    logMsg('OBS conectado', 'ok');
+    obsRefreshStatus();
+  }
+}
+
+async function obsDesconectar() {
+  await post('/api/obs/desconectar', {});
+  logMsg('OBS desconectado', 'ok');
+  obsRefreshStatus();
+}
+
+async function obsRefreshStatus() {
+  try {
+    const r = await fetch('/api/obs/status');
+    const s = await r.json();
+    const dot = document.getElementById('obsDot');
+    const txt = document.getElementById('obsStatusText');
+    const ctrl = document.getElementById('obsControles');
+    if (s.connected) {
+      dot.style.background = '#3c3';
+      txt.textContent = 'conectado · ' + s.host + ':' + s.port + ' · escena: ' + (s.current_scene || '-');
+      ctrl.style.display = 'block';
+      // poblar select de escenas
+      const sel = document.getElementById('obsEscenaSelect');
+      sel.innerHTML = '';
+      (s.scenes || []).forEach(name => {
+        const opt = document.createElement('option');
+        opt.value = name;
+        opt.textContent = name;
+        if (name === s.current_scene) opt.selected = true;
+        sel.appendChild(opt);
+      });
+      // poblar close-ups
+      const row = document.getElementById('obsCloseUpRow');
+      row.innerHTML = '';
+      const closeUps = (s.alias && s.alias.close_ups) || {};
+      Object.keys(closeUps).forEach(tema => {
+        const b = document.createElement('button');
+        b.className = 'btn ye';
+        b.textContent = '📷 ' + tema.toUpperCase();
+        b.onclick = () => obsCloseUp(tema);
+        row.appendChild(b);
+      });
+      // sync auto-escena toggle
+      document.getElementById('obsAutoEscena').checked = !!s.auto_scene_on_speak;
+    } else {
+      dot.style.background = '#c33';
+      txt.textContent = s.error ? ('error: ' + s.error) : 'desconectado';
+      ctrl.style.display = 'none';
+    }
+  } catch (e) {
+    // ignorar, se reintenta en proximo ciclo
+  }
+}
+
+async function obsCambiarEscena() {
+  const sel = document.getElementById('obsEscenaSelect');
+  const escena = sel.value;
+  if (!escena) return;
+  const data = await post('/api/obs/escena', { escena });
+  if (data && data.ok) logMsg('OBS escena: ' + escena, 'ok');
+}
+
+async function obsToggleAuto() {
+  const activo = document.getElementById('obsAutoEscena').checked;
+  const data = await post('/api/obs/auto-escena', { activo });
+  if (data && data.ok) logMsg('OBS auto-escena: ' + (activo ? 'ON' : 'OFF'), 'ok');
+}
+
+async function obsCloseUp(tema) {
+  const data = await post('/api/obs/close-up', { tema });
+  if (data && data.ok) {
+    logMsg('OBS close-up: ' + tema + ' (' + data.frase + ')', 'ok');
+    obsRefreshStatus();
+  }
+}
+
+async function obsGracias() {
+  const data = await post('/api/obs/gracias', {});
+  if (data && data.ok) {
+    logMsg('OBS volviendo a general · ' + (data.frase || ''), 'ok');
+    setTimeout(obsRefreshStatus, 2000);
+  }
+}
+
+// poll status OBS cada 5s para mantener UI sincronizada
+setInterval(obsRefreshStatus, 5000);
+obsRefreshStatus();
 
 async function random_(categoria) {
   logMsg('random ' + categoria + '...');

@@ -54,6 +54,11 @@ REPO = _t.REPO
 STUDIO = REPO / "studio"
 LIVE_HTML = STUDIO / "_template-tarrobot-live.html"
 CONTROL_HTML = STUDIO / "_template-tarrobot-control.html"
+OBS_ALIASES_PATH = STUDIO / "obs-aliases.json"
+
+# Sprint 9: control OBS por WebSocket (obs-websocket v5)
+import obs_controller as obs
+obs.cargar_alias(OBS_ALIASES_PATH)
 
 # Saludos geek random (español neutro latino, CON tildes para TTS preciso)
 SALUDOS_GEEK = [
@@ -244,6 +249,41 @@ DESPEDIDAS_CORTAS = [
     "Save and quit. Nos vemos.",
 ]
 
+
+# Sprint 9: reaccion cuando le pedimos "toma cercana a X" o "muestra el X".
+# TarroBot dice una frase WOW corta + pone cara excited mientras dura el
+# close-up. Cuando le decimos "gracias TarroBot" volvemos a la toma general.
+WOW_FRASES = [
+    "¡Wow! Miren esa belleza.",
+    "¡Uy! Eso me encanta.",
+    "¡Mira esa joyita!",
+    "¡Qué cartucho más lindo!",
+    "¡Wow! Eso es retro de verdad.",
+    "¡Mirad eso, tarristas!",
+    "¡Brilla más que un cartucho dorado!",
+    "¡Esto sí que es coleccionismo!",
+    "¡Tarros, miren ese detalle!",
+    "¡Wow! Memoria pura en pantalla.",
+    "¡Eso es historia viva!",
+    "¡Qué cosa más bonita, en serio!",
+    "¡Tremendo objeto, miralo bien!",
+    "¡Wow, eso me hace ojitos brillantes!",
+    "¡Estoy emocionado, miren!",
+]
+
+# Frases para volver a la toma general cuando dicen "gracias TarroBot"
+GRACIAS_FRASES = [
+    "Gracias por mostrarlo, ¡volvemos!",
+    "Listo, sigamos con el programa.",
+    "Genial verlo de cerca. Continuemos.",
+    "Buenísimo. Volvamos a lo nuestro.",
+    "Quedo registrado. Sigamos.",
+    "Gracias, volvamos a la toma general.",
+    "Perfecto, vamos con lo siguiente.",
+    "Gracias por el primer plano, sigamos.",
+]
+
+
 # ─────────────────────────────────────────────────────────────────────────
 # Idle tracker — TarroBot se aburre y se duerme solo
 # ─────────────────────────────────────────────────────────────────────────
@@ -300,6 +340,26 @@ def _obtener_voz_pitch_rate(payload: dict) -> tuple[str, str, str]:
 
 
 tracker = ActivityTracker()
+
+
+# Sprint 9: estado runtime OBS (singleton via obs_controller pero algunas
+# variables del flujo viven aca para no contaminar el modulo bajo nivel).
+class OBSState:
+    def __init__(self):
+        # auto_scene_on_speak: cuando True, al hablar TarroBot cambia a la
+        # escena tarrobot-full y al terminar vuelve a la previa.
+        self.auto_scene_on_speak: bool = False
+        # En close-up: mientras True, NO disparar auto_scene (TarroBot habla
+        # encima del close-up con cara wow).
+        self.in_close_up: bool = False
+        # Escena anterior, para volver con "gracias TarroBot" o cuando termina
+        # de hablar (si auto_scene esta on).
+        self.escena_previa: Optional[str] = None
+        # Lock para serializar cambios de escena (evita carreras).
+        self.lock = asyncio.Lock()
+
+
+obs_state = OBSState()
 
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -516,6 +576,72 @@ def _hotkey_worker():
         print(f"          (en Windows puede requerir correr el server como admin)")
 
 
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 9: helpers OBS de alto nivel + auto-escena al hablar
+# ─────────────────────────────────────────────────────────────────────────
+
+async def _obs_cambiar_escena_segura(nombre_real: str) -> bool:
+    """
+    Cambia la escena en OBS si esta conectado. Tolerante: si falla solo
+    loguea y devuelve False, NO rompe el flujo de voz.
+    """
+    if not obs.is_connected():
+        return False
+    try:
+        await obs.cliente().set_scene(nombre_real)
+        return True
+    except Exception as e:
+        print(f"[obs] error cambiando a '{nombre_real}': {e}")
+        return False
+
+
+async def _obs_escena_actual_safe() -> Optional[str]:
+    if not obs.is_connected():
+        return None
+    try:
+        return await obs.cliente().get_current_scene()
+    except Exception:
+        return None
+
+
+async def _hook_pre_hablar() -> None:
+    """
+    Antes de que TarroBot empiece a hablar: si auto_scene_on_speak esta
+    activo y NO estamos en close-up, guardar escena previa y cambiar a
+    la escena de TarroBot.
+    """
+    if not obs_state.auto_scene_on_speak:
+        return
+    if obs_state.in_close_up:
+        return  # close-up tiene prioridad: TarroBot habla sobre el cartucho
+    if not obs.is_connected():
+        return
+    target = obs.get_alias().get("tarrobot_scene")
+    if not target:
+        return
+    async with obs_state.lock:
+        actual = await _obs_escena_actual_safe()
+        if actual and actual != target:
+            obs_state.escena_previa = actual
+            await _obs_cambiar_escena_segura(target)
+
+
+async def _hook_post_hablar() -> None:
+    """
+    Despues de que termina de hablar: volver a escena previa si auto_scene
+    esta activo y no estamos en close-up.
+    """
+    if not obs_state.auto_scene_on_speak:
+        return
+    if obs_state.in_close_up:
+        return
+    if not obs_state.escena_previa:
+        return
+    async with obs_state.lock:
+        await _obs_cambiar_escena_segura(obs_state.escena_previa)
+        obs_state.escena_previa = None
+
+
 async def idle_worker():
     """
     Background task: cada 5s revisa el tiempo desde el ultimo input.
@@ -639,6 +765,204 @@ async def ws_live(websocket: WebSocket):
 # API REST
 # ─────────────────────────────────────────────────────────────────────────
 
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 9: endpoints OBS
+# ─────────────────────────────────────────────────────────────────────────
+
+@app.post("/api/obs/conectar")
+async def obs_conectar(payload: dict):
+    """
+    Conecta a obs-websocket v5.
+    Body: { host: "localhost", port: 4455, password: "..." }
+    """
+    host = (payload.get("host") or "localhost").strip()
+    try:
+        port = int(payload.get("port") or 4455)
+    except (TypeError, ValueError):
+        return JSONResponse({"error": "port invalido"}, status_code=400)
+    password = payload.get("password") or ""
+    try:
+        await obs.conectar(host, port, password)
+    except obs.OBSError as e:
+        return JSONResponse({"error": str(e)}, status_code=400)
+    except Exception as e:
+        return JSONResponse({"error": f"fallo conexion: {e}"}, status_code=500)
+    return {"ok": True, "status": await obs.status()}
+
+
+@app.post("/api/obs/desconectar")
+async def obs_desconectar():
+    await obs.desconectar()
+    obs_state.escena_previa = None
+    obs_state.in_close_up = False
+    return {"ok": True}
+
+
+@app.get("/api/obs/status")
+async def obs_status_endpoint():
+    info = await obs.status()
+    info["auto_scene_on_speak"] = obs_state.auto_scene_on_speak
+    info["in_close_up"] = obs_state.in_close_up
+    info["escena_previa"] = obs_state.escena_previa
+    info["alias"] = obs.get_alias()
+    return info
+
+
+@app.post("/api/obs/escena")
+async def obs_set_escena(payload: dict):
+    """
+    Cambia la escena en OBS. Acepta nombre real o alias por voz.
+    Body: { "escena": "camara koko" } o { "escena": "cam-koko" }
+    """
+    if not obs.is_connected():
+        return JSONResponse({"error": "OBS no conectado"}, status_code=400)
+    nombre = (payload.get("escena") or "").strip()
+    if not nombre:
+        return JSONResponse({"error": "escena vacia"}, status_code=400)
+    real = obs.resolver_escena(nombre)
+    try:
+        await obs.cliente().set_scene(real)
+    except obs.OBSError as e:
+        return JSONResponse({"error": str(e)}, status_code=400)
+    tracker.mark_input()
+    return {"ok": True, "escena": real}
+
+
+@app.post("/api/obs/fuente")
+async def obs_set_fuente(payload: dict):
+    """
+    Muestra u oculta una fuente dentro de una escena.
+    Body: { "escena": "cam-cenital", "fuente": "logo-retrotarros", "visible": true }
+    O via alias: { "alias": "logo", "visible": true }  (busca en alias.fuentes)
+    """
+    if not obs.is_connected():
+        return JSONResponse({"error": "OBS no conectado"}, status_code=400)
+
+    alias = (payload.get("alias") or "").strip().lower()
+    if alias:
+        fuentes_map = obs.get_alias().get("fuentes", {})
+        if alias not in fuentes_map:
+            return JSONResponse({"error": f"alias '{alias}' no esta en obs-aliases.json"}, status_code=400)
+        escena, fuente = fuentes_map[alias]
+    else:
+        escena = (payload.get("escena") or "").strip()
+        fuente = (payload.get("fuente") or "").strip()
+        if not escena or not fuente:
+            return JSONResponse({"error": "falta escena o fuente"}, status_code=400)
+        escena = obs.resolver_escena(escena)
+
+    visible = bool(payload.get("visible", True))
+    try:
+        await obs.cliente().set_source_enabled(escena, fuente, visible)
+    except obs.OBSError as e:
+        return JSONResponse({"error": str(e)}, status_code=400)
+    tracker.mark_input()
+    return {"ok": True, "escena": escena, "fuente": fuente, "visible": visible}
+
+
+@app.post("/api/obs/auto-escena")
+async def obs_auto_escena(payload: dict):
+    """
+    Activa o desactiva el hook auto-escena al hablar.
+    Body: { "activo": true|false }
+    """
+    obs_state.auto_scene_on_speak = bool(payload.get("activo", False))
+    return {"ok": True, "auto_scene_on_speak": obs_state.auto_scene_on_speak}
+
+
+@app.post("/api/obs/close-up")
+async def obs_close_up(payload: dict):
+    """
+    Reaccion "toma cercana a X": cambia escena de close-up, TarroBot dice
+    frase WOW + cara excited y queda en close-up hasta que se diga
+    "gracias TarroBot" o se llame /api/obs/gracias.
+
+    Body: { "tema": "cartucho" | "caja" | "consola" | ... }
+    """
+    if not obs.is_connected():
+        return JSONResponse({"error": "OBS no conectado"}, status_code=400)
+
+    import random as _rnd
+    tema = (payload.get("tema") or "").strip()
+    if not tema:
+        return JSONResponse({"error": "tema vacio (ej: cartucho)"}, status_code=400)
+
+    escena_target = obs.resolver_close_up(tema)
+    if not escena_target:
+        return JSONResponse({
+            "error": f"no encontre close-up para '{tema}'. Edita "
+                     f"studio/obs-aliases.json en close_ups."
+        }, status_code=404)
+
+    # Guardar escena previa para volver despues
+    async with obs_state.lock:
+        actual = await _obs_escena_actual_safe()
+        # Solo guardar si NO estamos ya en close-up (evita perder la escena
+        # real cuando se piden dos close-ups seguidos)
+        if not obs_state.in_close_up and actual and actual != escena_target:
+            obs_state.escena_previa = actual
+        obs_state.in_close_up = True
+        ok = await _obs_cambiar_escena_segura(escena_target)
+        if not ok:
+            obs_state.in_close_up = False
+            return JSONResponse({"error": "fallo cambio de escena"}, status_code=500)
+
+    # TarroBot dice WOW con cara excited
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    tracker.mark_input()
+    frase = _rnd.choice(WOW_FRASES)
+    audio_url = await _hablar_frase(
+        frase, "excited", f"MIRA ESE {tema.upper()}", voz, pitch, rate
+    )
+    return {
+        "ok": True,
+        "tema": tema,
+        "escena": escena_target,
+        "frase": frase,
+        "audio_url": audio_url,
+    }
+
+
+@app.post("/api/obs/gracias")
+async def obs_gracias(payload: dict):
+    """
+    Cierra el close-up: TarroBot dice frase de agradecimiento y volvemos a
+    la escena previa (la general).
+    """
+    if not obs_state.in_close_up:
+        # No estabamos en close-up, igual contestamos amable
+        import random as _rnd
+        voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+        tracker.mark_input()
+        audio_url = await _hablar_frase(
+            "¡De nada!", "happy", "DE NADA", voz, pitch, rate
+        )
+        return {"ok": True, "in_close_up": False, "audio_url": audio_url}
+
+    import random as _rnd
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    tracker.mark_input()
+    frase = _rnd.choice(GRACIAS_FRASES)
+    # Primero hablar (cara happy)
+    audio_url = await _hablar_frase(
+        frase, "happy", "VOLVEMOS", voz, pitch, rate
+    )
+
+    # Luego volver a la escena previa (con pequeño delay para que la frase
+    # se escuche antes del corte)
+    async def _volver_diferido():
+        await asyncio.sleep(max(1.5, len(frase) * 0.06))
+        async with obs_state.lock:
+            target = obs_state.escena_previa or obs.get_alias().get("default_scene")
+            if target:
+                await _obs_cambiar_escena_segura(target)
+            obs_state.in_close_up = False
+            obs_state.escena_previa = None
+
+    asyncio.create_task(_volver_diferido())
+    return {"ok": True, "audio_url": audio_url, "frase": frase}
+
+
 @app.post("/api/state")
 async def set_state(payload: dict):
     """
@@ -740,6 +1064,9 @@ async def _hablar_frase(texto: str, estado: str, label: str, voz: str,
     mp3 = await asyncio.to_thread(generar_tts, fake_dato, voz, pitch, rate)
     audio_url = f"/audio/{mp3.name}" if mp3 else None
 
+    # Sprint 9: hook pre-hablar para auto-escena OBS
+    await _hook_pre_hablar()
+
     tracker.mark_speaking(True)
     await manager.broadcast_live({
         "tipo": "hablar",
@@ -750,7 +1077,18 @@ async def _hablar_frase(texto: str, estado: str, label: str, voz: str,
         "audio_url": audio_url,
         "tema": "",
     })
+
+    # Sprint 9: agendar hook post-hablar. Estimacion por chars (no parseamos
+    # duracion real del MP3 porque ya es suficiente para vivo).
+    if obs_state.auto_scene_on_speak and not obs_state.in_close_up:
+        dur_est = max(2.0, len(texto) * 0.06) + 0.5
+        asyncio.create_task(_post_hablar_delayed(dur_est))
     return audio_url
+
+
+async def _post_hablar_delayed(delay: float) -> None:
+    await asyncio.sleep(delay)
+    await _hook_post_hablar()
 
 
 def generar_opinion_llm(tema: str) -> Optional[dict]:
@@ -1303,6 +1641,74 @@ def parsear_intent(texto: str) -> dict:
         if kw in t_clean:
             return {"accion": "despedir", "params": {}}
 
+    # 1-OBS-A. "Gracias TarroBot" → cierre de close-up (Sprint 9)
+    #          Va temprano porque "gracias" puede aparecer en frases largas.
+    gracias_kws = ["gracias tarrobot", "gracias tarro", "gracias robot",
+                   "muchas gracias tarrobot", "ya gracias",
+                   "perfecto gracias", "listo gracias"]
+    for kw in gracias_kws:
+        if kw in t_clean:
+            return {"accion": "obs_gracias", "params": {}}
+
+    # 1-OBS-B. "Toma cercana / primer plano / acercate al X" (Sprint 9)
+    close_up_triggers = [
+        "toma cercana", "toma cercana a", "toma cerca de",
+        "primer plano", "primer plano de", "primer plano al",
+        "acercate al", "acercate a la", "acercate a",
+        "acércate al", "acércate a la", "acércate a",
+        "muestra de cerca", "muestrame de cerca", "muéstrame de cerca",
+        "zoom al", "zoom a la", "zoom a",
+        "close up al", "close up a la", "close up de",
+        "closeup al", "closeup a la", "closeup de",
+        "enfoca al", "enfoca la", "enfoca el",
+    ]
+    for kw in close_up_triggers:
+        idx = t_clean.find(kw)
+        if idx >= 0:
+            tema = t_clean[idx + len(kw):].strip(" ,.;:!?¿¡")
+            # quitar articulo inicial si quedo "al/a la/el"
+            for art in ["al ", "a la ", "a las ", "a los ", "el ", "la ", "los ", "las "]:
+                if tema.startswith(art):
+                    tema = tema[len(art):]
+                    break
+            if tema:
+                return {"accion": "obs_close_up", "params": {"tema": tema}}
+
+    # 1-OBS-C. "Camara a X" / "cambia a X" → cambio simple de escena (Sprint 9)
+    camara_triggers = ["camara a ", "cámara a ", "camara al ", "cámara al ",
+                       "cambia a ", "cambia escena a ", "escena ",
+                       "pasa a camara ", "pasa a cámara ", "vamos a camara ",
+                       "vamos a cámara ", "ponte en camara ", "ponte en cámara "]
+    for kw in camara_triggers:
+        idx = t_clean.find(kw)
+        if idx >= 0:
+            escena = t_clean[idx + len(kw):].strip(" ,.;:!?¿¡")
+            for art in ["el ", "la ", "los ", "las "]:
+                if escena.startswith(art):
+                    escena = escena[len(art):]
+                    break
+            if escena:
+                return {"accion": "obs_escena", "params": {"escena": escena}}
+
+    # 1-OBS-D. "Muestra el X" / "saca el X" → toggle de fuente via alias (Sprint 9)
+    if t_clean.startswith("muestra ") or t_clean.startswith("muéstrame "):
+        rest = t_clean.split(" ", 1)[1].strip(" ,.;:!?¿¡")
+        for art in ["el ", "la ", "los ", "las "]:
+            if rest.startswith(art):
+                rest = rest[len(art):]
+                break
+        if rest:
+            return {"accion": "obs_fuente", "params": {"alias": rest, "visible": True}}
+
+    if t_clean.startswith("saca ") or t_clean.startswith("oculta "):
+        rest = t_clean.split(" ", 1)[1].strip(" ,.;:!?¿¡")
+        for art in ["el ", "la ", "los ", "las "]:
+            if rest.startswith(art):
+                rest = rest[len(art):]
+                break
+        if rest:
+            return {"accion": "obs_fuente", "params": {"alias": rest, "visible": False}}
+
     # 1c0. "¿Me estás escuchando?" / "¿me oyes?" (Sprint 8.x)
     escuchando_kws = [
         "me estas escuchando", "me estás escuchando",
@@ -1531,6 +1937,14 @@ async def listen(request: Request, wake: str = ""):
             result = await random_dato(params)
         elif accion == "melodia":
             result = await queue_melodia(params)
+        elif accion == "obs_escena":
+            result = await obs_set_escena(params)
+        elif accion == "obs_fuente":
+            result = await obs_set_fuente(params)
+        elif accion == "obs_close_up":
+            result = await obs_close_up(params)
+        elif accion == "obs_gracias":
+            result = await obs_gracias(params)
         elif accion == "cuentame":
             result = await cuentame(params)
         else:
@@ -1584,6 +1998,9 @@ async def _reproducir_dato_de_cola(dato: dict, voz_override: Optional[str] = Non
             mp3 = await asyncio.to_thread(generar_tts, dato, voz, pitch, rate)
         audio_url = f"/audio/{mp3.name}" if mp3 else None
 
+    # Sprint 9: hook pre-hablar para auto-escena OBS
+    await _hook_pre_hablar()
+
     tracker.mark_speaking(True)
     # Sprint 7.5: registrar en session log para exportar SRT despues
     queue.log_play(dato)
@@ -1601,6 +2018,11 @@ async def _reproducir_dato_de_cola(dato: dict, voz_override: Optional[str] = Non
         "audio_url": audio_url,
         "tema": dato["tema"],
     })
+
+    # Sprint 9: post-hablar agendado con duracion real del MP3 (mas preciso)
+    if obs_state.auto_scene_on_speak and not obs_state.in_close_up:
+        dur_ms = dato.get("duracion_ms") or int(len(dato.get("texto", "")) * 60)
+        asyncio.create_task(_post_hablar_delayed(dur_ms / 1000.0 + 0.5))
     return audio_url
 
 

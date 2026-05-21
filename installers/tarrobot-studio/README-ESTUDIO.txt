@@ -109,6 +109,70 @@ Si el mic no funciona en el celu (en algunos browsers
 necesita HTTPS), usa el panel desde el PC en localhost.
 
 ============================================================
+CONTROL DE OBS POR VOZ (Sprint 9)
+============================================================
+
+TarroBot puede cambiar escenas y reaccionar a tomas cercanas
+hablando con OBS por su WebSocket interno.
+
+ACTIVAR EN OBS (una vez):
+1. Abre OBS, menu Tools -> WebSocket Server Settings
+2. Marca "Enable WebSocket server"
+3. Puerto: 4455 (default)
+4. Marca "Enable Authentication" y pon una password
+5. Click "Show Connect Info" para verificar
+
+ARMAR ESCENAS EN OBS (recomendado):
+Con nombres claros para que los alias funcionen:
+   cam-cenital       (toma general de la mesa)
+   cam-luis          (camara apuntando a ti)
+   cam-koko          (camara apuntando a Koko)
+   tarrobot-full     (TarroBot pantalla completa)
+   closeup-cartucho  (zoom a un cartucho)
+   closeup-caja      (zoom a una caja)
+   closeup-consola   (zoom a la consola)
+   intro / outro
+
+CONECTAR TARROBOT:
+1. En el panel de control, busca la card "CONTROL OBS"
+2. Pon host (localhost), puerto (4455) y la password
+3. Click CONECTAR
+4. Veras la escena actual y un dropdown con todas las escenas
+
+COMANDOS POR VOZ:
+   "TarroBot, camara a Koko"            -> cambia a cam-koko
+   "TarroBot, camara a Luis"            -> cambia a cam-luis
+   "TarroBot, vamos a camara cenital"   -> cambia a cam-cenital
+   "TarroBot, toma cercana al cartucho" -> close-up + frase WOW
+   "TarroBot, primer plano a la caja"   -> close-up + frase WOW
+   "TarroBot, gracias"                  -> vuelve a la toma anterior
+   "TarroBot, muestra el logo"          -> activa la fuente logo
+   "TarroBot, saca el logo"             -> oculta la fuente logo
+
+REACCION "TOMA CERCANA":
+Cuando dices "toma cercana al cartucho":
+  1. OBS cambia a la escena closeup-cartucho
+  2. TarroBot dice una frase tipo "Wow, miren esa joyita"
+  3. Queda con cara excited mientras dura la toma
+  4. Cuando dices "gracias TarroBot", vuelve a la toma general
+
+AUTO-ESCENA AL HABLAR:
+Toggle "Auto-escena al hablar" en la card:
+  - TarroBot habla  -> OBS corta a tarrobot-full automatico
+  - TarroBot calla  -> vuelve a la escena previa
+Util cuando quieres que aparezca grande cada vez que comenta.
+
+CONFIGURAR ALIAS:
+Si tus escenas tienen otros nombres, edita:
+   studio\obs-aliases.json
+Mapea alias_por_voz -> nombre_real_en_OBS. El archivo se
+sincroniza con el Drive como el resto del repo.
+
+NOTA: si OBS no esta abierto cuando hablas, TarroBot ignora los
+comandos de camara silenciosamente. Todo lo demas funciona igual.
+
+
+============================================================
 MELODIAS MIDI (tocar musica retro en vivo)
 ============================================================
 

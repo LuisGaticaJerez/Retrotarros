@@ -1,0 +1,32 @@
+{
+  "_comentario": "Mapeo de alias por voz a nombres REALES de escenas y fuentes en OBS. Crealos primero en OBS con nombres claros (ej: cam-cenital, cam-luis, cam-koko, tarrobot-full, closeup-cartucho), luego mapealos aca. Match case-insensitive.",
+  "escenas": {
+    "general": "cam-cenital",
+    "cenital": "cam-cenital",
+    "camara cenital": "cam-cenital",
+    "vista de arriba": "cam-cenital",
+    "luis": "cam-luis",
+    "camara luis": "cam-luis",
+    "camara a luis": "cam-luis",
+    "koko": "cam-koko",
+    "camara koko": "cam-koko",
+    "camara a koko": "cam-koko",
+    "tarrobot": "tarrobot-full",
+    "tarrobot full": "tarrobot-full",
+    "intro": "intro",
+    "outro": "outro"
+  },
+  "fuentes": {
+    "logo": ["cam-cenital", "logo-retrotarros"],
+    "titulo": ["cam-cenital", "lower-third"]
+  },
+  "close_ups": {
+    "cartucho": "closeup-cartucho",
+    "caja": "closeup-caja",
+    "consola": "closeup-consola",
+    "control": "closeup-control",
+    "manual": "closeup-manual"
+  },
+  "default_scene": "cam-cenital",
+  "tarrobot_scene": "tarrobot-full"
+}
