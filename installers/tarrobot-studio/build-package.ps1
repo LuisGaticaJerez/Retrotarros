@@ -48,6 +48,7 @@ New-Item -ItemType Directory -Path $PackageDir -Force | Out-Null
 Write-Host "Copiando archivos del instalador..." -ForegroundColor Green
 Copy-Item (Join-Path $ScriptRoot "install.bat") -Destination $PackageDir
 Copy-Item (Join-Path $ScriptRoot "TarroBot.bat") -Destination $PackageDir
+Copy-Item (Join-Path $ScriptRoot "TarroBot-debug.bat") -Destination $PackageDir
 Copy-Item (Join-Path $ScriptRoot "requirements.txt") -Destination $PackageDir
 Copy-Item (Join-Path $ScriptRoot "README-ESTUDIO.txt") -Destination $PackageDir
 
@@ -56,6 +57,7 @@ Write-Host "Copiando scripts del repo..." -ForegroundColor Green
 New-Item -ItemType Directory -Path (Join-Path $PackageDir "scripts") -Force | Out-Null
 Copy-Item (Join-Path $RepoRoot "scripts\tarrobot.py") -Destination (Join-Path $PackageDir "scripts\")
 Copy-Item (Join-Path $RepoRoot "scripts\tarrobot-live.py") -Destination (Join-Path $PackageDir "scripts\")
+Copy-Item (Join-Path $RepoRoot "scripts\tarrobot-tray.py") -Destination (Join-Path $PackageDir "scripts\")
 
 # Copiar templates HTML
 Write-Host "Copiando templates HTML..." -ForegroundColor Green

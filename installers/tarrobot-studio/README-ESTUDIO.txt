@@ -36,17 +36,27 @@ USO DIARIO
 
 Doble click en TarroBot (del escritorio o en TarroBot.bat).
 
-Se abre solo:
-   - Una ventana cmd con el server corriendo
-   - Una ventana de Chrome con TarroBot en pantalla completa
+Modo NORMAL (TarroBot.bat):
+   - Sin ventana cmd visible
+   - Aparece un icono en la bandeja del sistema (al lado del reloj)
+   - Click derecho en el icono:
+       * Abrir TarroBot (TV)        -> Chrome en kiosk con TarroBot
+       * Abrir panel control        -> Chrome con el panel
+       * Abrir overlay (OBS)        -> URL para OBS Browser Source
+       * IP local: 192.168.x.x:8765 -> info
+       * Panel desde el celu        -> abre la URL en tu browser
+       * Salir TarroBot             -> cierra todo
 
-Para controlarlo:
-   - En el celu (mismo wifi): http://IP-DEL-PC:8765/control
-     (el TarroBot.bat te muestra la IP local cuando arranca)
-   - Desde la misma PC: http://localhost:8765/control en otra
-     pestana del browser
+Modo DEBUG (TarroBot-debug.bat):
+   - Ventana cmd visible con todos los logs del server y Whisper
+   - Usalo si algo no anda y queres ver que pasa
+   - Para cerrar: Ctrl+C en la ventana
 
-Para cerrar: cierra la ventana del cmd negro (o Ctrl+C ahi).
+URLs directas para abrir manual:
+   - http://localhost:8765/?mode=fullscreen  (TV)
+   - http://localhost:8765/?mode=overlay     (OBS, fondo transparente)
+   - http://localhost:8765/control           (panel desde la PC)
+   - http://IP-DEL-PC:8765/control           (panel desde el celu)
 
 ============================================================
 USAR EN OBS
