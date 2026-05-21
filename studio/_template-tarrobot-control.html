@@ -851,6 +851,7 @@ let vadStream = null, vadCtx = null, vadAnalyser = null, vadData = null;
 let vadRecorder = null;
 let vadRollingBuffer = [];   // chunks recientes (siempre activo)
 let vadActiveChunks = null;  // chunks acumulados de la frase actual (o null)
+let vadHeaders = null;       // primer chunk del MediaRecorder con headers EBML/webm
 let vadRafId = null;
 let vadHabilitado = false;
 let vadEstado = 'esperando';   // esperando | grabando | enviando
@@ -876,17 +877,25 @@ async function vadStart() {
     vadData = new Uint8Array(vadAnalyser.frequencyBinCount);
 
     // MediaRecorder con timeslice 200ms -> emite dataavailable cada 200ms
+    // El PRIMER chunk tiene los headers EBML del webm; lo guardamos aparte
+    // para prefijarlo a cualquier blob que enviemos (sin esto, ffmpeg
+    // no puede parsear los blobs porque no encuentra los headers).
     vadRecorder = new MediaRecorder(vadStream, { mimeType: 'audio/webm' });
     vadRollingBuffer = [];
     vadActiveChunks = null;
+    vadHeaders = null;
     vadRecorder.ondataavailable = (e) => {
       if (!e.data || e.data.size === 0) return;
-      // Siempre meter en rolling buffer (deja los ultimos VAD_ROLLING_MAX)
+      if (vadHeaders === null) {
+        // Primer chunk = headers EBML. Guardar y NO meter al rolling
+        // (el rolling solo guarda continuaciones del stream)
+        vadHeaders = e.data;
+        return;
+      }
       vadRollingBuffer.push(e.data);
       if (vadRollingBuffer.length > VAD_ROLLING_MAX) {
         vadRollingBuffer.shift();
       }
-      // Si hay frase activa, agregar tambien ahi
       if (vadActiveChunks) {
         vadActiveChunks.push(e.data);
       }
@@ -916,6 +925,7 @@ function vadStop() {
   vadStream = vadCtx = vadAnalyser = vadRecorder = null;
   vadRollingBuffer = [];
   vadActiveChunks = null;
+  vadHeaders = null;
   vadIndicator.classList.remove('show');
   vadDot.classList.remove('voz-detectada');
   logMsg('modo continuo: desactivado', 'ok');
@@ -953,7 +963,10 @@ async function vadCortarFrase() {
   vadDot.classList.remove('voz-detectada');
   vadEstado = 'enviando';
 
-  const blob = new Blob(chunks, { type: 'audio/webm' });
+  // Prefijar SIEMPRE el chunk con los headers EBML al inicio del blob,
+  // sino ffmpeg no puede parsear el webm porque no encuentra los headers.
+  const partes = vadHeaders ? [vadHeaders, ...chunks] : chunks;
+  const blob = new Blob(partes, { type: 'audio/webm' });
   if (blob.size < 2000) {
     vadEstado = 'esperando';
     return;
