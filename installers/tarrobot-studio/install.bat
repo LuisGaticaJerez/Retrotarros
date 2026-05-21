@@ -192,7 +192,7 @@ if exist "bin\fluidsynth.exe" (
     curl -L -o fluidsynth.zip https://github.com/FluidSynth/fluidsynth/releases/download/v2.3.5/fluidsynth-2.3.5-win10-x64.zip
     if !errorlevel! neq 0 (
         echo [WARN] No se pudo descargar FluidSynth. Las melodias MIDI no van a funcionar.
-        echo        Podes bajarlo manual de github.com/FluidSynth/fluidsynth/releases
+        echo        Puedes bajarlo manual de github.com/FluidSynth/fluidsynth/releases
         echo        y copiar bin\fluidsynth.exe + las DLLs en esta carpeta\bin\
         goto :fluidsynth_done
     )

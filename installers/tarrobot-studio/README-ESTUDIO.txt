@@ -49,7 +49,7 @@ Modo NORMAL (TarroBot.bat):
 
 Modo DEBUG (TarroBot-debug.bat):
    - Ventana cmd visible con todos los logs del server y Whisper
-   - Usalo si algo no anda y queres ver que pasa
+   - Usalo si algo no anda y quieres ver que pasa
    - Para cerrar: Ctrl+C en la ventana
 
 URLs directas para abrir manual:
@@ -136,7 +136,7 @@ USAR:
      studio\melodias\mario\<nombre>.mid   (Super Mario de cualquier consola)
      studio\melodias\arcade\<nombre>.mid  (DK arcade, Pac-Man, etc.)
 
-   Asi cuando carga melodias a una pauta, podes filtrar por
+   Asi cuando carga melodias a una pauta, puedes filtrar por
    contexto y solo cargar las que tengan sentido con el episodio.
 
 2. Agrega la melodia a una pauta del episodio. Opciones:
