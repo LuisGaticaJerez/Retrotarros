@@ -28,5 +28,11 @@
     "manual": "closeup-manual"
   },
   "default_scene": "cam-cenital",
-  "tarrobot_scene": "tarrobot-full"
+  "tarrobot_scene": "tarrobot-full",
+  "musica_fondo": {
+    "input_name": "musica-fondo",
+    "volumen_default_db": -20,
+    "volumen_max_db": -6,
+    "volumen_min_db": -45
+  }
 }

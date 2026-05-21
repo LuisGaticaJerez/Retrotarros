@@ -173,6 +173,67 @@ comandos de camara silenciosamente. Todo lo demas funciona igual.
 
 
 ============================================================
+FUNCIONES AVANZADAS (Sprint 12)
+============================================================
+
+PRESENTADOR ASISTENTE (reordenar pauta):
+Card "PRESENTADOR ASISTENTE" en el panel. Pide a Claude que
+analice la pauta cargada y sugiera un nuevo orden con maxima
+retencion (gancho fuerte primero, climax al final). Te muestra
+una preview antes de aplicar. Click APLICAR ORDEN y la cola
+queda reordenada (la pauta JSON tambien se guarda con el nuevo
+orden, asi queda persistente).
+
+EXPORTAR PUBLICACION (titulo + descripcion automatica):
+Card "EXPORTAR PUBLICACION". Cuando termines de grabar, click
+"GENERAR DESCRIPCION" y Claude analiza la pauta + el session_log
+(timestamps reales de cuando apretaste NEXT durante la grabacion)
+y genera:
+   - 3 opciones de titulo optimizadas CTR YouTube
+   - Descripcion completa con timestamps reales
+   - 15-20 hashtags retrogaming
+   - 5 prompts de texto en ingles para generar thumbnails con IA
+   - Texto corto para Instagram/Reels
+
+Se guarda en  studio\exports\<slug>-publicacion.txt  para que
+lo abras y copies/pegues al subir el video.
+
+QUIZ TRIVIA EN VIVO:
+Card "QUIZ TRIVIA". Click TIRAR y TarroBot pregunta una trivia
+retro relacionada con la pauta del dia. Aparece la respuesta
+esperada (visible solo para ti). Click ACERTÓ o ERRÓ segun
+respondan en el programa, y TarroBot reacciona acorde. Lleva
+score acumulado de la sesion.
+
+MUSICA DE FONDO OBS:
+Card "MUSICA DE FONDO". Controla el volumen de un input llamado
+"musica-fondo" en OBS (configurable en obs-aliases.json):
+   - Botones -3dB / +3dB / Mute
+   - Presets -30 / -20 / -10 dB
+Comandos por voz:
+   "TarroBot pon musica"          -> unmute
+   "TarroBot sube la musica"      -> +3 dB
+   "TarroBot baja la musica"      -> -3 dB
+   "TarroBot para la musica"      -> mute
+
+Para usar musica de fondo en OBS:
+   1. Agrega un Media Source o Audio Input Capture en OBS
+   2. Renombralo a "musica-fondo" (o el nombre que configures
+      en obs-aliases.json > musica_fondo > input_name)
+   3. Pon tu playlist retro como source (Media Source con
+      Local File + bucle)
+
+EXPORTAR DATO COMO SHORT:
+Endpoint /api/queue/short-export que copia el MP3 de un dato
+puntual + genera SRT individual a:
+   studio\shorts\<slug>-<NN>-<tema>.mp3
+   studio\shorts\<slug>-<NN>-<tema>.srt
+Pensado para alimentar CapCut/DaVinci con audio + subs sincros
+para hacer Shorts/Reels verticales. No genera video del avatar
+(eso se monta en el editor).
+
+
+============================================================
 GENERAR PAUTA AUTO DESDE UN TEMA (Sprint 11)
 ============================================================
 

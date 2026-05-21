@@ -48,6 +48,8 @@ from tarrobot import (
     # Sprint 11: auto-pauta desde tema libre
     generar_pauta_tema_con_llm, crear_pauta_vacia, pauta_agregar_dato,
     guardar_pauta, slugify, _preload_pauta_async,
+    # Sprint 12: presentador asistente + descripcion auto
+    generar_reorden_pauta_con_llm, generar_descripcion_episodio_con_llm,
 )
 
 # REPO puede venir de env var (modo Drive) o del path del script. Si tarrobot.py
@@ -503,6 +505,21 @@ class OBSState:
 
 
 obs_state = OBSState()
+
+
+# Sprint 12 C5: estado quiz simple (una pregunta a la vez)
+class QuizState:
+    def __init__(self):
+        self.pregunta_activa: Optional[dict] = None  # {pregunta, respuesta, ts}
+        self.aciertos: int = 0
+        self.errores: int = 0
+        self.lock = asyncio.Lock()
+
+    def hay_pregunta(self) -> bool:
+        return self.pregunta_activa is not None
+
+
+quiz_state = QuizState()
 
 
 # Sprint 10 A5: rate limit para endpoints que llaman a Claude.
@@ -1952,6 +1969,465 @@ async def receta_run(payload: dict):
 
 
 # ─────────────────────────────────────────────────────────────────────────
+# Sprint 12 C1: presentador asistente - sugerir y aplicar reorden
+# ─────────────────────────────────────────────────────────────────────────
+
+@app.post("/api/queue/sugerir-orden")
+async def queue_sugerir_orden(payload: Optional[dict] = None):
+    """
+    Sprint 12 C1: con LLM analiza la pauta cargada y propone orden mas
+    dinamico. NO aplica nada, solo devuelve sugerencia para que el
+    operador acepte o rechace.
+    """
+    if not queue.loaded():
+        return JSONResponse({"error": "no hay pauta cargada"}, status_code=400)
+    datos_no_melodia = queue.items_datos()
+    if len(datos_no_melodia) < 3:
+        return JSONResponse({"error": "se necesitan al menos 3 datos para reordenar"}, status_code=400)
+
+    espera = llm_cooldown_check("sugerir_orden")
+    if espera is not None:
+        return JSONResponse({"error": f"cooldown LLM: espera {espera:.1f}s"}, status_code=429)
+
+    async with _procesando("analizando orden con Claude..."):
+        result = await asyncio.to_thread(generar_reorden_pauta_con_llm, queue.pauta)
+    if not result:
+        return JSONResponse({"error": "fallo el LLM de reorden"}, status_code=500)
+
+    # Mapear indices a previews para que el panel muestre nombres
+    nuevo_orden = result.get("nuevo_orden", [])
+    preview = []
+    for nuevo_pos, idx_orig in enumerate(nuevo_orden):
+        if 0 <= idx_orig < len(datos_no_melodia):
+            d = datos_no_melodia[idx_orig]
+            preview.append({
+                "pos_nueva": nuevo_pos,
+                "indice_original": idx_orig,
+                "tema": d.get("tema", ""),
+                "estado": d.get("estado", ""),
+            })
+    return {
+        "ok": True,
+        "nuevo_orden": nuevo_orden,
+        "razon_global": result.get("razon_global", ""),
+        "razones_por_dato": result.get("razones_por_dato", []),
+        "preview": preview,
+    }
+
+
+@app.post("/api/queue/aplicar-orden")
+async def queue_aplicar_orden(payload: dict):
+    """
+    Aplica un nuevo_orden devuelto por sugerir-orden. Reordena los datos
+    NO melodia en la pauta cargada y la guarda en disco.
+    Body: { "nuevo_orden": [3,1,5,0,7,2,6,4] }
+    """
+    if not queue.loaded():
+        return JSONResponse({"error": "no hay pauta cargada"}, status_code=400)
+    nuevo = payload.get("nuevo_orden")
+    if not isinstance(nuevo, list) or not all(isinstance(x, int) for x in nuevo):
+        return JSONResponse({"error": "nuevo_orden debe ser lista de enteros"}, status_code=400)
+
+    datos = queue.pauta.get("datos", [])
+    datos_no_melodia = [d for d in datos if d.get("tipo") != "melodia"]
+    datos_melodia = [d for d in datos if d.get("tipo") == "melodia"]
+
+    if sorted(nuevo) != list(range(len(datos_no_melodia))):
+        return JSONResponse(
+            {"error": f"nuevo_orden invalido (debe contener 0..{len(datos_no_melodia)-1} sin repetir)"},
+            status_code=400,
+        )
+
+    async with queue.lock:
+        reordenados = [datos_no_melodia[i] for i in nuevo]
+        # Mantener melodias al final tal como estaban
+        queue.pauta["datos"] = reordenados + datos_melodia
+        # Reset indice porque las posiciones cambiaron
+        queue.indice = -1
+        # Persistir cambio en disco
+        try:
+            guardar_pauta(queue.pauta)
+        except Exception as e:
+            print(f"[reorden] no se pudo guardar pauta: {e}")
+    tracker.mark_input()
+    return {"ok": True, "indice": -1, "total": len(reordenados)}
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 12 C2: descripcion + titulos + thumbnails del episodio
+# ─────────────────────────────────────────────────────────────────────────
+
+@app.post("/api/episodio/exportar-descripcion")
+async def episodio_exportar_descripcion(payload: Optional[dict] = None):
+    """
+    Sprint 12 C2: genera material de publicacion para el episodio.
+    Usa session_log si hay (timestamps reales) o estimacion si no.
+    Guarda el resultado en studio/exports/<slug>-publicacion.txt.
+
+    Body opcional: { "incluir_session_log": true }   (default true si hay)
+    """
+    payload = payload or {}
+    if not queue.loaded():
+        return JSONResponse({"error": "no hay pauta cargada"}, status_code=400)
+
+    espera = llm_cooldown_check("export_desc")
+    if espera is not None:
+        return JSONResponse({"error": f"cooldown LLM: espera {espera:.1f}s"}, status_code=429)
+
+    usar_session_log = bool(payload.get("incluir_session_log", True))
+    session_log = queue.session_log if usar_session_log and queue.session_log else None
+
+    async with _procesando("generando descripcion + titulos + thumbnails..."):
+        result = await asyncio.to_thread(
+            generar_descripcion_episodio_con_llm, queue.pauta, session_log
+        )
+    if not result:
+        return JSONResponse({"error": "fallo el LLM de descripcion"}, status_code=500)
+
+    # Guardar en disco para que Luis lo pueda copiar/pegar facil
+    exports_dir = STUDIO / "exports"
+    exports_dir.mkdir(parents=True, exist_ok=True)
+    slug = queue.slug or "episodio"
+    out_path = exports_dir / f"{slug}-publicacion.txt"
+
+    lineas = []
+    lineas.append("=" * 60)
+    lineas.append(f"PUBLICACION: {queue.pauta.get('episodio', slug)}")
+    lineas.append(f"Generado: {time.strftime('%Y-%m-%d %H:%M:%S')}")
+    lineas.append(f"Modo timestamps: {'GRABACION REAL' if session_log else 'ESTIMADO'}")
+    lineas.append("=" * 60)
+    lineas.append("")
+    lineas.append("--- TITULOS SUGERIDOS ---")
+    for i, t in enumerate(result.get("titulos", []), 1):
+        lineas.append(f"  {i}. {t}")
+    lineas.append("")
+    lineas.append("--- DESCRIPCION ---")
+    lineas.append(result.get("descripcion", ""))
+    lineas.append("")
+    lineas.append("--- TIMESTAMPS ---")
+    for ts in result.get("timestamps", []):
+        lineas.append(f"  {ts.get('ts', '')} - {ts.get('label', '')}")
+    lineas.append("")
+    lineas.append("--- HASHTAGS ---")
+    lineas.append(" ".join(result.get("hashtags", [])))
+    lineas.append("")
+    lineas.append("--- PROMPTS PARA THUMBNAILS (texto en ingles) ---")
+    for i, p in enumerate(result.get("thumbnail_prompts", []), 1):
+        lineas.append(f"  {i}. {p}")
+    lineas.append("")
+    lineas.append("--- INSTAGRAM POST ---")
+    lineas.append(result.get("ig_post", ""))
+    lineas.append("")
+
+    out_path.write_text("\n".join(lineas), encoding="utf-8")
+
+    return {
+        "ok": True,
+        "path": str(out_path),
+        "data": result,
+    }
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 12 C4-lite: exportar dato suelto para Short (MP3 + SRT individual)
+# ─────────────────────────────────────────────────────────────────────────
+
+@app.post("/api/queue/short-export")
+async def queue_short_export(payload: dict):
+    """
+    Exporta UN dato de la pauta cargada como archivo listo para Short:
+      - studio/shorts/<slug>-<idx>.mp3
+      - studio/shorts/<slug>-<idx>.srt
+
+    Body: { "indice": 0 }  (indice basado en items_datos, no melodias)
+
+    Pensado para alimentar CapCut/DaVinci con la pista de audio + subs
+    sincronizados y agregar visual encima.
+    """
+    if not queue.loaded():
+        return JSONResponse({"error": "no hay pauta cargada"}, status_code=400)
+    try:
+        idx = int(payload.get("indice", -1))
+    except (TypeError, ValueError):
+        return JSONResponse({"error": "indice invalido"}, status_code=400)
+    datos = queue.items_datos()
+    if not (0 <= idx < len(datos)):
+        return JSONResponse({"error": f"indice fuera de rango (0..{len(datos)-1})"}, status_code=400)
+    dato = datos[idx]
+
+    # MP3 source: el precargado de pauta
+    mp3_rel = dato.get("mp3")
+    if not mp3_rel:
+        return JSONResponse({"error": "el dato no tiene MP3 precargado. Corre --pauta-preload primero."}, status_code=400)
+    mp3_src = PAUTAS_DIR / mp3_rel
+    if not mp3_src.exists():
+        return JSONResponse({"error": f"no existe el MP3 fuente: {mp3_src}"}, status_code=404)
+
+    # Output paths
+    shorts_dir = STUDIO / "shorts"
+    shorts_dir.mkdir(parents=True, exist_ok=True)
+    slug = queue.slug or "episodio"
+    base_name = f"{slug}-{idx+1:02d}-{slugify(dato.get('tema', 'item'))[:30]}"
+    mp3_dst = shorts_dir / f"{base_name}.mp3"
+    srt_dst = shorts_dir / f"{base_name}.srt"
+
+    import shutil
+    shutil.copy2(str(mp3_src), str(mp3_dst))
+
+    # SRT del dato suelto (un solo bloque)
+    dur_ms = dato.get("duracion_ms") or max(3000, len(dato.get("texto", "")) * 60)
+    # Reusamos helper de tarrobot.py
+    from tarrobot import _ms_to_srt_timestamp
+    srt = "1\n"
+    srt += f"00:00:00,000 --> {_ms_to_srt_timestamp(dur_ms)}\n"
+    srt += dato.get("texto", "") + "\n"
+    srt_dst.write_text(srt, encoding="utf-8")
+
+    return {
+        "ok": True,
+        "tema": dato.get("tema", ""),
+        "mp3": str(mp3_dst),
+        "srt": str(srt_dst),
+        "duracion_ms": dur_ms,
+    }
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 12 C5: quiz interactivo basico
+# ─────────────────────────────────────────────────────────────────────────
+
+def _generar_quiz_con_llm(tema_hint: Optional[str] = None) -> Optional[dict]:
+    """LLM tira una pregunta retro con respuesta esperada."""
+    try:
+        import anthropic
+    except ImportError:
+        return None
+    import os as _os, re as _re
+    api_key = _os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return None
+    contexto_extra = f"Sesgalo al tema: {tema_hint}." if tema_hint else ""
+    prompt = f"""Eres TarroBot, mascota del canal Retrotarros. Tirale a Luis o Koko UNA pregunta de trivia retrogaming.
+
+{contexto_extra}
+
+Requisitos:
+- Pregunta corta (max 100 chars) y especifica (con respuesta unica clara).
+- USA TILDES correctas, chileno neutro tuteo.
+- Sin voseo argentino.
+- Numeros en palabras si son grandes.
+- Respuesta esperada debe ser una sola palabra/frase corta (max 30 chars).
+
+Devuelve SOLO JSON sin markdown:
+{{"pregunta": "...", "respuesta_esperada": "...", "pista_opcional": "...max 60 chars"}}
+"""
+    client = anthropic.Anthropic(api_key=api_key)
+    try:
+        response = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=400,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw = response.content[0].text.strip()
+        raw = _re.sub(r"^```(?:json)?\s*", "", raw)
+        raw = _re.sub(r"\s*```$", "", raw)
+        result = json.loads(raw)
+        if "pregunta" in result:
+            result["pregunta"] = chilenizar(result["pregunta"])
+        return result
+    except Exception as e:
+        print(f"[quiz] error: {e}")
+        return None
+
+
+@app.post("/api/quiz/pregunta")
+async def quiz_pregunta(payload: Optional[dict] = None):
+    """Tira una pregunta de trivia. Deja modo quiz activo hasta /api/quiz/respuesta."""
+    payload = payload or {}
+    espera = llm_cooldown_check("quiz")
+    if espera is not None:
+        return JSONResponse({"error": f"cooldown LLM: espera {espera:.1f}s"}, status_code=429)
+
+    tema_hint = (payload.get("tema") or "").strip() or None
+    if not tema_hint and queue.loaded():
+        # Si hay pauta, sesgar pregunta al episodio
+        tema_hint = queue.pauta.get("episodio") or queue.slug
+
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    tracker.mark_input()
+
+    async with _procesando("preparando trivia..."):
+        result = await asyncio.to_thread(_generar_quiz_con_llm, tema_hint)
+    if not result:
+        return JSONResponse({"error": "fallo LLM quiz"}, status_code=500)
+
+    pregunta = result.get("pregunta", "")
+    respuesta = result.get("respuesta_esperada", "")
+
+    async with quiz_state.lock:
+        quiz_state.pregunta_activa = {
+            "pregunta": pregunta,
+            "respuesta": respuesta,
+            "pista": result.get("pista_opcional", ""),
+            "ts": time.time(),
+        }
+
+    audio_url = await _hablar_frase(
+        pregunta, "thinking", "TRIVIA TARROBOT", voz, pitch, rate
+    )
+    return {
+        "ok": True,
+        "pregunta": pregunta,
+        "respuesta_esperada": respuesta,
+        "pista": result.get("pista_opcional", ""),
+        "audio_url": audio_url,
+    }
+
+
+REACCION_ACERTO = [
+    "¡Correcto! Tarro de oro para ti.",
+    "¡Eso es! Mi RAM lo confirma.",
+    "Bingo. Esa la sabias bien.",
+    "¡Perfecto! Punto para el equipo.",
+    "¡Acertaste! Eres una enciclopedia retro.",
+]
+
+REACCION_ERROR = [
+    "Casi. La respuesta era: {resp}.",
+    "Ufff, no. Iba por: {resp}.",
+    "Cerca pero no. La correcta era {resp}.",
+    "No esta vez. Te quedaste con la duda: {resp}.",
+]
+
+
+@app.post("/api/quiz/respuesta")
+async def quiz_respuesta(payload: dict):
+    """
+    Confirma si acertaron o no la pregunta activa.
+    Body: { "acerto": true|false }
+    TarroBot reacciona con frase + estado.
+    """
+    if not quiz_state.hay_pregunta():
+        return JSONResponse({"error": "no hay pregunta activa"}, status_code=400)
+    acerto = bool(payload.get("acerto", False))
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    tracker.mark_input()
+
+    import random as _rnd
+    async with quiz_state.lock:
+        respuesta_correcta = quiz_state.pregunta_activa.get("respuesta", "")
+        if acerto:
+            quiz_state.aciertos += 1
+            frase = pick_no_repeat(REACCION_ACERTO, "quiz_acerto")
+            estado = "excited"
+        else:
+            quiz_state.errores += 1
+            template = pick_no_repeat(REACCION_ERROR, "quiz_error")
+            frase = template.format(resp=respuesta_correcta)
+            estado = "winking"
+        quiz_state.pregunta_activa = None
+
+    audio_url = await _hablar_frase(
+        frase, estado, "QUIZ RESULTADO", voz, pitch, rate
+    )
+    return {
+        "ok": True,
+        "acerto": acerto,
+        "frase": frase,
+        "aciertos": quiz_state.aciertos,
+        "errores": quiz_state.errores,
+        "audio_url": audio_url,
+    }
+
+
+@app.get("/api/quiz/status")
+async def quiz_status():
+    return {
+        "ok": True,
+        "pregunta_activa": quiz_state.pregunta_activa,
+        "aciertos": quiz_state.aciertos,
+        "errores": quiz_state.errores,
+    }
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 12 C7: control de musica de fondo en OBS
+# ─────────────────────────────────────────────────────────────────────────
+
+def _input_name_musica() -> str:
+    cfg = obs.get_alias().get("musica_fondo", {})
+    return cfg.get("input_name") or "musica-fondo"
+
+
+def _clamp_volumen_db(db: float) -> float:
+    cfg = obs.get_alias().get("musica_fondo", {})
+    lo = float(cfg.get("volumen_min_db", -45))
+    hi = float(cfg.get("volumen_max_db", -6))
+    return max(lo, min(db, hi))
+
+
+@app.post("/api/obs/musica/volumen")
+async def obs_musica_volumen(payload: dict):
+    """
+    Ajusta volumen del input de musica de fondo en OBS.
+    Body: { "db": -20 }   o   { "delta": -3 }  (delta sumado al actual)
+    """
+    if not obs.is_connected():
+        return JSONResponse({"error": "OBS no conectado"}, status_code=400)
+    input_name = _input_name_musica()
+    try:
+        if "db" in payload:
+            db = _clamp_volumen_db(float(payload["db"]))
+        elif "delta" in payload:
+            actual = await obs.cliente().get_input_volume_db(input_name)
+            db = _clamp_volumen_db(actual + float(payload["delta"]))
+        else:
+            return JSONResponse({"error": "manda 'db' o 'delta'"}, status_code=400)
+        await obs.cliente().set_input_volume_db(input_name, db)
+    except obs.OBSError as e:
+        return JSONResponse({"error": str(e)}, status_code=400)
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, status_code=500)
+    tracker.mark_input()
+    return {"ok": True, "input": input_name, "db": db}
+
+
+@app.post("/api/obs/musica/mute")
+async def obs_musica_mute(payload: dict):
+    """
+    Mute / unmute del input de musica.
+    Body: { "muted": true|false }  o  { "toggle": true }
+    """
+    if not obs.is_connected():
+        return JSONResponse({"error": "OBS no conectado"}, status_code=400)
+    input_name = _input_name_musica()
+    try:
+        if payload.get("toggle"):
+            actual = await obs.cliente().get_input_mute(input_name)
+            target = not actual
+        else:
+            target = bool(payload.get("muted", False))
+        await obs.cliente().set_input_mute(input_name, target)
+    except obs.OBSError as e:
+        return JSONResponse({"error": str(e)}, status_code=400)
+    tracker.mark_input()
+    return {"ok": True, "input": input_name, "muted": target}
+
+
+@app.get("/api/obs/musica/status")
+async def obs_musica_status():
+    if not obs.is_connected():
+        return {"ok": False, "connected": False}
+    input_name = _input_name_musica()
+    try:
+        db = await obs.cliente().get_input_volume_db(input_name)
+        muted = await obs.cliente().get_input_mute(input_name)
+        return {"ok": True, "connected": True, "input": input_name, "db": db, "muted": muted}
+    except obs.OBSError as e:
+        return {"ok": False, "connected": True, "error": str(e), "input": input_name}
+
+
+# ─────────────────────────────────────────────────────────────────────────
 # Sprint 11 C3: auto-pauta desde tema libre (sin HTML, via LLM)
 # ─────────────────────────────────────────────────────────────────────────
 
@@ -2262,6 +2738,21 @@ def parsear_intent(texto: str) -> dict:
             if escena:
                 return {"accion": "obs_escena", "params": {"escena": escena}}
 
+    # 1-OBS-E. Musica de fondo (Sprint 12 C7)
+    if any(kw in t_clean for kw in ["pon musica", "pon música", "musica de fondo", "música de fondo",
+                                     "pone musica", "pone música", "arranca musica", "arranca música"]):
+        return {"accion": "obs_musica_unmute", "params": {}}
+    if any(kw in t_clean for kw in ["sube la musica", "sube la música", "mas volumen musica",
+                                     "más volumen música", "sube el volumen"]):
+        return {"accion": "obs_musica_subir", "params": {"delta": 3}}
+    if any(kw in t_clean for kw in ["baja la musica", "baja la música", "menos volumen musica",
+                                     "menos volumen música", "baja el volumen"]):
+        return {"accion": "obs_musica_bajar", "params": {"delta": -3}}
+    if any(kw in t_clean for kw in ["para la musica", "para la música", "detente musica", "detente música",
+                                     "silencio musica", "silencio música", "mute musica", "mute música",
+                                     "calla la musica", "calla la música"]):
+        return {"accion": "obs_musica_mute", "params": {}}
+
     # 1-OBS-D. "Muestra el X" / "saca el X" → toggle de fuente via alias (Sprint 9)
     if t_clean.startswith("muestra ") or t_clean.startswith("muéstrame "):
         rest = t_clean.split(" ", 1)[1].strip(" ,.;:!?¿¡")
@@ -2551,6 +3042,14 @@ async def listen(request: Request, wake: str = ""):
             result = await obs_gracias(params)
         elif accion == "personal":
             result = await personal(params)
+        elif accion == "obs_musica_subir":
+            result = await obs_musica_volumen({"delta": params.get("delta", 3)})
+        elif accion == "obs_musica_bajar":
+            result = await obs_musica_volumen({"delta": params.get("delta", -3)})
+        elif accion == "obs_musica_mute":
+            result = await obs_musica_mute({"muted": True})
+        elif accion == "obs_musica_unmute":
+            result = await obs_musica_mute({"muted": False})
         elif accion == "cuentame":
             result = await cuentame(params)
         else:

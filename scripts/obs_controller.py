@@ -228,6 +228,30 @@ class OBSClient:
         r = await self._request("GetSceneItemList", {"sceneName": scene_name})
         return r.get("sceneItems", []) or []
 
+    async def set_input_volume_db(self, input_name: str, db: float) -> None:
+        """
+        Sprint 12 C7: ajusta volumen de un Input en OBS (en decibeles).
+        Rango razonable: -60 (casi mute) a 0 (full). Default musica: -20.
+        """
+        await self._request("SetInputVolume", {
+            "inputName": input_name,
+            "inputVolumeDb": float(db),
+        })
+
+    async def get_input_volume_db(self, input_name: str) -> float:
+        r = await self._request("GetInputVolume", {"inputName": input_name})
+        return float(r.get("inputVolumeDb", 0.0))
+
+    async def set_input_mute(self, input_name: str, muted: bool) -> None:
+        await self._request("SetInputMute", {
+            "inputName": input_name,
+            "inputMuted": bool(muted),
+        })
+
+    async def get_input_mute(self, input_name: str) -> bool:
+        r = await self._request("GetInputMute", {"inputName": input_name})
+        return bool(r.get("inputMuted", False))
+
     async def set_source_enabled(self, scene_name: str, source_name: str,
                                  enabled: bool) -> None:
         """

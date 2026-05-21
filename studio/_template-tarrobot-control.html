@@ -502,6 +502,83 @@ select#queueSelect:focus { border-color: var(--ye); }
   <div id="recetasLog" style="font-size:11px; color:rgba(255,255,255,.55); margin-top:8px;"></div>
 </div>
 
+<!-- PRESENTADOR ASISTENTE (Sprint 12 C1) -->
+<div class="card">
+  <h2>🎯 PRESENTADOR ASISTENTE</h2>
+  <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:8px;">
+    Pide a Claude que reordene la pauta cargada para maxima retencion
+    (gancho fuerte + climax al final). Te muestra la sugerencia antes de aplicar.
+  </div>
+  <button class="btn full ye" onclick="sugerirOrden()">🎯 SUGERIR ORDEN ▸</button>
+  <div id="sugerenciaBox" style="margin-top:8px; display:none;">
+    <div id="sugerenciaRazon" style="font-size:12px; color:rgba(255,210,63,.85); margin-bottom:6px;"></div>
+    <div id="sugerenciaPreview" style="font-size:11px; color:rgba(255,255,255,.75); line-height:1.7; max-height:200px; overflow-y:auto; padding:6px; background:rgba(0,0,0,.2); border-radius:6px;"></div>
+    <div class="btn-row" style="margin-top:8px;">
+      <button class="btn cy" onclick="aplicarOrden()">✓ APLICAR ORDEN</button>
+      <button class="btn" onclick="cancelarSugerencia()">✗ DESCARTAR</button>
+    </div>
+  </div>
+</div>
+
+<!-- EXPORTAR DESCRIPCION POST-GRABACION (Sprint 12 C2) -->
+<div class="card">
+  <h2>📝 EXPORTAR PUBLICACION</h2>
+  <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:8px;">
+    Al terminar de grabar, genera titulo + descripcion + timestamps reales
+    + hashtags + prompts thumbnail + post Instagram. Guarda en
+    <code>studio/exports/&lt;slug&gt;-publicacion.txt</code>.
+  </div>
+  <button class="btn full ye" onclick="exportarDescripcion()">📝 GENERAR DESCRIPCION ▸</button>
+  <div id="exportLog" style="font-size:11px; color:rgba(255,255,255,.55); margin-top:8px;"></div>
+  <div id="exportPreview" style="display:none; margin-top:8px; font-size:11px; color:rgba(255,255,255,.85); line-height:1.6;"></div>
+</div>
+
+<!-- QUIZ INTERACTIVO (Sprint 12 C5) -->
+<div class="card">
+  <h2>🎮 QUIZ TRIVIA</h2>
+  <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:8px;">
+    TarroBot tira una trivia retro. Si hay pauta cargada, sesga al tema del episodio.
+    Confirmas manualmente si acertaron o no.
+  </div>
+  <div class="row-inline">
+    <input type="text" id="quizTema" placeholder="tema opcional (vacio = usa pauta)" style="flex:3">
+    <button class="btn ye" onclick="quizPregunta()" style="flex:1">▸ TIRAR</button>
+  </div>
+  <div id="quizActiva" style="display:none; margin-top:8px;">
+    <div id="quizPregunta" style="font-size:12px; color:rgba(255,210,63,.9); margin-bottom:4px;"></div>
+    <div id="quizRespuesta" style="font-size:11px; color:rgba(255,255,255,.6); margin-bottom:6px;"></div>
+    <div class="btn-row">
+      <button class="btn cy" onclick="quizRespuesta(true)">✓ ACERTÓ</button>
+      <button class="btn" onclick="quizRespuesta(false)">✗ ERRÓ</button>
+    </div>
+  </div>
+  <div id="quizScore" style="font-size:11px; color:rgba(255,255,255,.55); margin-top:8px;">
+    Aciertos: 0 · Errores: 0
+  </div>
+</div>
+
+<!-- MUSICA DE FONDO OBS (Sprint 12 C7) -->
+<div class="card">
+  <h2>🎵 MÚSICA DE FONDO</h2>
+  <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:8px;">
+    Controla el input <code>musica-fondo</code> en OBS. Configurable en
+    <code>obs-aliases.json</code>. Por voz: "TarroBot sube/baja/para la música".
+  </div>
+  <div id="musicaStatus" style="font-size:11px; color:rgba(255,255,255,.65); margin-bottom:6px;">
+    OBS desconectado o input no configurado
+  </div>
+  <div class="btn-row">
+    <button class="btn" onclick="musicaDelta(-3)">▼ -3 dB</button>
+    <button class="btn cy" onclick="musicaToggleMute()">🔇 MUTE</button>
+    <button class="btn" onclick="musicaDelta(+3)">▲ +3 dB</button>
+  </div>
+  <div class="btn-row" style="margin-top:6px;">
+    <button class="btn" onclick="musicaSet(-30)">-30 dB</button>
+    <button class="btn" onclick="musicaSet(-20)">-20 dB</button>
+    <button class="btn" onclick="musicaSet(-10)">-10 dB</button>
+  </div>
+</div>
+
 <!-- GENERAR PAUTA AUTO (Sprint 11 C3) -->
 <div class="card">
   <h2>✨ GENERAR PAUTA AUTO</h2>
@@ -701,6 +778,14 @@ const PROC_LABELS = {
   '/api/receta/run':      'ejecutando receta...',
   '/api/session/reset':   '',
   '/api/pauta/auto-tema': 'generando pauta + MP3s (puede tardar 1-3 min)...',
+  '/api/queue/sugerir-orden':           'analizando orden con Claude...',
+  '/api/queue/aplicar-orden':           'aplicando reorden...',
+  '/api/episodio/exportar-descripcion': 'generando publicacion con Claude...',
+  '/api/queue/short-export':            'exportando short...',
+  '/api/quiz/pregunta':                 'preparando trivia...',
+  '/api/quiz/respuesta':                'reaccionando...',
+  '/api/obs/musica/volumen':            '',
+  '/api/obs/musica/mute':               '',
 };
 
 function showProc(motivo) {
@@ -1019,6 +1104,114 @@ async function generarPautaAuto() {
     }
   }
 }
+
+// ─── PRESENTADOR ASISTENTE (Sprint 12 C1) ────────────────────────
+let _ordenSugerido = null;
+async function sugerirOrden() {
+  document.getElementById('sugerenciaBox').style.display = 'none';
+  const data = await post('/api/queue/sugerir-orden', {});
+  if (!data || !data.ok) return;
+  _ordenSugerido = data.nuevo_orden;
+  document.getElementById('sugerenciaRazon').textContent = data.razon_global || '';
+  const box = document.getElementById('sugerenciaPreview');
+  box.innerHTML = '';
+  (data.preview || []).forEach((p, i) => {
+    const row = document.createElement('div');
+    row.innerHTML = '<strong>' + (i + 1) + '.</strong> [' + p.estado + '] ' +
+      p.tema + ' <span style="color:rgba(255,255,255,.4);">(era #' + (p.indice_original + 1) + ')</span>';
+    box.appendChild(row);
+  });
+  document.getElementById('sugerenciaBox').style.display = 'block';
+  logMsg('orden sugerido (' + data.preview.length + ' items)', 'ok');
+}
+async function aplicarOrden() {
+  if (!_ordenSugerido) return;
+  const data = await post('/api/queue/aplicar-orden', { nuevo_orden: _ordenSugerido });
+  if (data && data.ok) {
+    logMsg('orden aplicado, cola en posicion -1 (no avanzada todavia)', 'ok');
+    document.getElementById('sugerenciaBox').style.display = 'none';
+    _ordenSugerido = null;
+    if (typeof refreshQueue === 'function') refreshQueue();
+  }
+}
+function cancelarSugerencia() {
+  document.getElementById('sugerenciaBox').style.display = 'none';
+  _ordenSugerido = null;
+}
+
+// ─── EXPORTAR DESCRIPCION (Sprint 12 C2) ─────────────────────────
+async function exportarDescripcion() {
+  const data = await post('/api/episodio/exportar-descripcion', {});
+  if (!data || !data.ok) return;
+  document.getElementById('exportLog').innerHTML =
+    '<span style="color:rgba(80,255,80,.85);">✓</span> guardado en: <code>' + data.path + '</code>';
+  const r = data.data || {};
+  const titles = (r.titulos || []).map((t, i) => '  ' + (i+1) + '. ' + t).join('<br>');
+  const tsRows = (r.timestamps || []).map(t => '  ' + t.ts + ' - ' + (t.label || '')).join('<br>');
+  document.getElementById('exportPreview').innerHTML =
+    '<strong>TITULOS:</strong><br>' + titles +
+    '<br><br><strong>TIMESTAMPS:</strong><br>' + tsRows +
+    '<br><br><strong>HASHTAGS:</strong><br>' + (r.hashtags || []).join(' ');
+  document.getElementById('exportPreview').style.display = 'block';
+  logMsg('descripcion exportada', 'ok');
+}
+
+// ─── QUIZ INTERACTIVO (Sprint 12 C5) ─────────────────────────────
+async function quizPregunta() {
+  const tema = document.getElementById('quizTema').value.trim();
+  const data = await post('/api/quiz/pregunta', tema ? { tema } : {});
+  if (!data || !data.ok) return;
+  document.getElementById('quizPregunta').textContent = data.pregunta;
+  document.getElementById('quizRespuesta').textContent =
+    'respuesta esperada: ' + data.respuesta_esperada +
+    (data.pista ? ' (pista: ' + data.pista + ')' : '');
+  document.getElementById('quizActiva').style.display = 'block';
+  logMsg('quiz lanzado', 'ok');
+}
+async function quizRespuesta(acerto) {
+  const data = await post('/api/quiz/respuesta', { acerto });
+  if (!data || !data.ok) return;
+  document.getElementById('quizScore').textContent =
+    'Aciertos: ' + data.aciertos + ' · Errores: ' + data.errores;
+  document.getElementById('quizActiva').style.display = 'none';
+  logMsg('quiz: ' + (acerto ? 'ACERTÓ' : 'ERRÓ') + ' (' + data.frase + ')', 'ok');
+}
+
+// ─── MUSICA DE FONDO OBS (Sprint 12 C7) ──────────────────────────
+async function musicaRefresh() {
+  try {
+    const r = await fetch('/api/obs/musica/status');
+    const d = await r.json();
+    const box = document.getElementById('musicaStatus');
+    if (d.ok && d.connected) {
+      box.textContent = 'Input: ' + d.input + ' · ' + d.db.toFixed(1) + ' dB' +
+        (d.muted ? ' · MUTED' : '');
+      box.style.color = d.muted ? 'rgba(255,80,80,.85)' : 'rgba(80,255,80,.85)';
+    } else if (d.error) {
+      box.textContent = 'error: ' + d.error;
+      box.style.color = 'rgba(255,150,80,.85)';
+    } else {
+      box.textContent = 'OBS desconectado o input no configurado';
+      box.style.color = 'rgba(255,255,255,.5)';
+    }
+  } catch (e) {
+    // silencio
+  }
+}
+async function musicaDelta(delta) {
+  const data = await post('/api/obs/musica/volumen', { delta });
+  if (data && data.ok) musicaRefresh();
+}
+async function musicaSet(db) {
+  const data = await post('/api/obs/musica/volumen', { db });
+  if (data && data.ok) musicaRefresh();
+}
+async function musicaToggleMute() {
+  const data = await post('/api/obs/musica/mute', { toggle: true });
+  if (data && data.ok) musicaRefresh();
+}
+setInterval(musicaRefresh, 5000);
+musicaRefresh();
 
 // ─── RECETAS · SECUENCIAS (Sprint 10 C6) ─────────────────────────
 async function cargarRecetas() {

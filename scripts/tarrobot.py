@@ -724,6 +724,223 @@ Estados validos: talking, excited, fact, winking, confused, happy, sad, angry, t
     return result
 
 
+def generar_reorden_pauta_con_llm(pauta: dict) -> dict | None:
+    """
+    Sprint 12 C1: presentador asistente. Toma una pauta cargada y le pide
+    a Claude que sugiera un orden mas dinamico de los datos (gancho al
+    principio, climax al final, transiciones suaves). NO genera datos
+    nuevos: solo reordena los existentes.
+
+    Devuelve {nuevo_orden: [indices], razon_global: str, razones_por_dato: [str]}
+    donde indices son enteros 0-based referenciando datos NO-melodia de la
+    pauta original.
+    """
+    try:
+        import anthropic
+    except ImportError:
+        print("ERROR: libreria 'anthropic' no instalada.", file=sys.stderr)
+        return None
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print("ERROR: ANTHROPIC_API_KEY no definida.", file=sys.stderr)
+        return None
+
+    datos = [d for d in pauta.get("datos", []) if d.get("tipo") != "melodia"]
+    if len(datos) < 3:
+        print("ERROR: pauta con menos de 3 datos no necesita reorden.", file=sys.stderr)
+        return None
+
+    # Lista enumerada para que Claude pueda referenciar por indice
+    lista = "\n".join(
+        f"  [{i}] {d.get('tema', 'sin tema')} ({d.get('estado', 'talking')}) - "
+        f"{d.get('texto', '')[:140]}"
+        for i, d in enumerate(datos)
+    )
+
+    episodio = pauta.get("episodio") or pauta.get("slug", "episodio")
+
+    prompt = f"""Eres director de contenido del canal Retrotarros. Te paso la pauta de un episodio: "{episodio}".
+
+Tu tarea: sugerir un ORDEN DE PRESENTACION mas dinamico de estos {len(datos)} datos. Pensa como un editor de YouTube buscando RETENCION:
+- Item 1: gancho fuerte (que prenda al espectador en los primeros 30s).
+- Items 2 a {len(datos)-1}: ritmo variado, contraste de tonos emocionales, mantener interes.
+- Item ultimo: climax, el dato que mejor cierra el episodio (mas potente, mas memorable).
+
+DATOS DISPONIBLES (con indices 0 a {len(datos)-1}):
+{lista}
+
+Reglas:
+- Usa TODOS los indices, sin repetir ninguno.
+- Maxima variedad emocional entre items consecutivos (no poner dos 'talking' seguidos si se puede evitar).
+- Si hay un dato claramente epico o caro, dejalo cerca del final.
+- Si hay un dato sorprendente o curioso, ponlo al principio.
+
+Devuelve SOLO un JSON valido sin markdown:
+
+{{
+  "nuevo_orden": [3, 1, 5, 0, 7, 2, 6, 4],
+  "razon_global": "1-2 oraciones explicando la logica del orden",
+  "razones_por_dato": [
+    "Item 1 (orden 3): por que abre el episodio",
+    "Item ultimo (orden 4): por que cierra"
+  ]
+}}
+"""
+
+    client = anthropic.Anthropic(api_key=api_key)
+    try:
+        response = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=2048,
+            messages=[{"role": "user", "content": prompt}],
+        )
+    except Exception as e:
+        print(f"ERROR: llamada Claude fallo: {e}", file=sys.stderr)
+        return None
+
+    raw = response.content[0].text.strip()
+    raw = re.sub(r"^```(?:json)?\s*", "", raw)
+    raw = re.sub(r"\s*```$", "", raw)
+    try:
+        result = json.loads(raw)
+    except json.JSONDecodeError as e:
+        print(f"ERROR JSON LLM: {e}\n{raw[:500]}", file=sys.stderr)
+        return None
+
+    # Validar shape: nuevo_orden debe tener TODOS los indices 0..N-1 una vez
+    nuevo = result.get("nuevo_orden", [])
+    if sorted(nuevo) != list(range(len(datos))):
+        print(f"ERROR: nuevo_orden invalido (debe contener 0..{len(datos)-1} sin repetir). Recibido: {nuevo}", file=sys.stderr)
+        return None
+    return result
+
+
+def generar_descripcion_episodio_con_llm(
+    pauta: dict,
+    session_log: list | None = None,
+) -> dict | None:
+    """
+    Sprint 12 C2: genera titulo + descripcion + hashtags + prompts de thumbnail
+    para el episodio, basado en la pauta + session_log (si se grabo).
+
+    session_log es la lista de entries que QueueManager rellena cada vez
+    que se reproduce un dato durante la grabacion. Cada entry tiene
+    timestamp_session_ms, dato_id, tema, duracion_ms. Si esta presente,
+    los timestamps de la descripcion son REALES (no estimados).
+
+    Devuelve {
+      "titulos": [3 opciones de titulo],
+      "descripcion": "...",
+      "timestamps": [{"ts": "HH:MM:SS", "label": "...", "tema": "..."}],
+      "hashtags": ["#...", ...],
+      "thumbnail_prompts": [5 prompts texto para generar thumbnails],
+      "ig_post": "Texto corto para Instagram/Reels",
+    }
+    """
+    try:
+        import anthropic
+    except ImportError:
+        print("ERROR: libreria 'anthropic' no instalada.", file=sys.stderr)
+        return None
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print("ERROR: ANTHROPIC_API_KEY no definida.", file=sys.stderr)
+        return None
+
+    episodio = pauta.get("episodio") or pauta.get("slug", "Episodio Retrotarros")
+    datos = [d for d in pauta.get("datos", []) if d.get("tipo") != "melodia"]
+
+    # Construir timestamps. Si hay session_log usamos timestamps REALES;
+    # sino estimamos por duracion_ms acumulada con gap de 500ms entre items.
+    timestamps_raw = []
+    if session_log:
+        for entry in session_log:
+            ts_ms = int(entry.get("timestamp_session_ms", 0))
+            timestamps_raw.append({
+                "ts_ms": ts_ms,
+                "tema": entry.get("tema", ""),
+                "texto": entry.get("texto", "")[:120],
+            })
+    else:
+        acum = 30_000  # 30s de intro estimada
+        for d in datos:
+            timestamps_raw.append({
+                "ts_ms": acum,
+                "tema": d.get("tema", ""),
+                "texto": d.get("texto", "")[:120],
+            })
+            acum += (d.get("duracion_ms") or 12_000) + 500
+
+    timestamps_list = "\n".join(
+        f"  {_ms_to_srt_timestamp(t['ts_ms'])[:8]} - {t['tema']}: {t['texto']}"
+        for t in timestamps_raw
+    )
+
+    lista_temas = ", ".join(d.get("tema", "") for d in datos if d.get("tema"))
+
+    prompt = f"""Eres community manager del canal de YouTube Retrotarros (retrogaming).
+
+EPISODIO: "{episodio}"
+ITEMS COMENTADOS ({len(datos)}): {lista_temas}
+
+TIMESTAMPS Y CONTEXTO DE CADA ITEM:
+{timestamps_list}
+
+Genera material de publicacion completo. Reglas:
+- TITULOS: 3 opciones distintas, max 70 chars cada uno, optimizados para CTR
+  YouTube. Mezcla tipos: numero+gancho, pregunta intrigante, declaracion potente.
+- DESCRIPCION: 2 parrafos cortos (max 600 chars total) + lista de timestamps.
+- TIMESTAMPS: usar EXACTAMENTE los timestamps que te paso arriba (no inventar).
+  Formato HH:MM:SS - texto corto.
+- HASHTAGS: 15-20 hashtags retrogaming/canal/items mencionados.
+- THUMBNAIL_PROMPTS: 5 prompts de texto en INGLES para generar thumbnails con IA.
+  Cada uno descriptivo, mencionando: cartucho retro relevante, color vibrante,
+  texto grande tipo "TOP 10" o el numero clave del episodio, estilo retro 80s.
+- IG_POST: texto corto (max 280 chars) para Instagram con tono casual chileno.
+
+REGLAS DE ESCRITURA (descripcion, titulos, IG):
+- SIN TILDES en TODOS los textos (regla del canal Retrotarros).
+- SIN EMOJIS en titulos y descripcion (regla del canal).
+- Chileno neutro con tuteo, sin voseo argentino.
+- En IG_POST emojis OK ya que es plataforma mas casual, pero discretos.
+
+Devuelve SOLO un JSON valido sin markdown:
+
+{{
+  "titulos": ["...", "...", "..."],
+  "descripcion": "Texto completo de la descripcion del video (multilinea con \\n).",
+  "timestamps": [
+    {{"ts": "00:00:30", "label": "Intro"}},
+    {{"ts": "00:01:45", "label": "Item 1 - ..."}}
+  ],
+  "hashtags": ["#Retrotarros", "#N64", "..."],
+  "thumbnail_prompts": ["...", "...", "...", "...", "..."],
+  "ig_post": "..."
+}}
+"""
+
+    client = anthropic.Anthropic(api_key=api_key)
+    try:
+        response = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=4096,
+            messages=[{"role": "user", "content": prompt}],
+        )
+    except Exception as e:
+        print(f"ERROR Claude: {e}", file=sys.stderr)
+        return None
+
+    raw = response.content[0].text.strip()
+    raw = re.sub(r"^```(?:json)?\s*", "", raw)
+    raw = re.sub(r"\s*```$", "", raw)
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError as e:
+        print(f"ERROR JSON LLM: {e}\n{raw[:500]}", file=sys.stderr)
+        return None
+
+
 def _mp3_duracion_ms(mp3_path: Path) -> int | None:
     """Lee la duracion de un MP3 en ms. Usa mutagen si esta, sino None."""
     try:
