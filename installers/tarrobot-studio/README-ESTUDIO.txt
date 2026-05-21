@@ -78,10 +78,11 @@ OBS, navegador, o donde sea sin tocar el celu:
   F1   ->  NEXT en la cola de datos
   F2   ->  PREV en la cola de datos
   F3   ->  Saludo random
-  F4   ->  Despedida random
+  F4   ->  Despedida random (+ acelera somnolencia hacia sleep)
   F5   ->  RESET cola (vuelve al primer item)
   F6   ->  Catchphrase Retrotarros (frase de marca random)
   F7   ->  Tocar una melodia random de la cola de musica
+  F8   ->  Despertar TarroBot (si esta dormido o aburrido)
 
 Si en tu PC los hotkeys no responden, cierra TarroBot y vuelve a abrir
 TarroBot.bat haciendo click derecho -> Ejecutar como administrador.
@@ -94,12 +95,15 @@ LISTA DE COMANDOS POR VOZ
 Manten apretado el boton "MIC" en el panel control y di:
 
   "Hola TarroBot"               -> saludo random geek
-  "Chao TarroBot"               -> despedida
+  "Chao TarroBot"               -> despedida + se va a dormir solo
   "Cuentame de Super Mario 64"  -> dato curioso
   "Que opinas de Sonic 06"      -> opinion con Claude
   "Este vale 5000 dolares"      -> reaccion al precio
   "Dame un dato random"         -> dato al azar
   "Dame un dato random de musica" -> filtrado por categoria
+  "TarroBot estas con nosotros?" -> despierta si estaba dormido
+  "TarroBot, despierta"         -> idem
+  "Sigues ahi?"                 -> idem
 
 Si el mic no funciona en el celu (en algunos browsers
 necesita HTTPS), usa el panel desde el PC en localhost.

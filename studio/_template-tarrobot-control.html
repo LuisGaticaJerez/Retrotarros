@@ -436,6 +436,11 @@ select#queueSelect:focus { border-color: var(--ye); }
     <button class="btn ye" onclick="saludar()">👋 HOLA</button>
     <button class="btn cy" onclick="despedir()">😴 CHAO</button>
     <button class="btn" onclick="catchphrase()">⚡ RETRO!</button>
+    <button class="btn ye" onclick="despertar()">⏰ DESPIERTA</button>
+  </div>
+  <div style="font-size:10px; color:rgba(255,255,255,.45); margin-top:6px;">
+    "Chao" acelera la somnolencia (bored → drowsy → sleep en pocos segundos).
+    "Despierta" lo saca de cualquier estado dormido.
   </div>
 </div>
 
@@ -471,7 +476,13 @@ select#queueSelect:focus { border-color: var(--ye); }
     <button class="btn" onclick="precio(5000)">$5K</button>
     <button class="btn" onclick="precio(20000)">$20K</button>
   </div>
-  <button class="btn full ye" onclick="precioCustom()" style="margin-top:8px;">REACCIONAR ▸</button>
+  <div class="btn-row" style="margin-top:8px;">
+    <button class="btn ye" onclick="precioCustom()" style="flex:2">REACCIONAR ▸</button>
+    <button class="btn" onclick="precioCustom(true)" style="flex:2">¿QUÉ OPINAS? ▸</button>
+  </div>
+  <div style="font-size:10px; color:rgba(255,255,255,.45); margin-top:6px;">
+    "Reaccionar" tira frase rápida. "¿Qué opinas?" pide opinión personal con LLM (3-5s).
+  </div>
 </div>
 
 <!-- RANDOM -->
@@ -551,6 +562,7 @@ const PROC_LABELS = {
   '/api/precio':       'reaccionando al precio...',
   '/api/saludar':      'preparando saludo...',
   '/api/despedir':     'preparando despedida...',
+  '/api/despertar':    'despertando TarroBot...',
   '/api/catchphrase':  'catchphrase Retrotarros...',
   '/api/queue/next':    'siguiente item...',
   '/api/queue/prev':    'item anterior...',
@@ -653,17 +665,24 @@ async function opinar() {
   if (data && data.ok) logMsg('OK opinion (' + data.estado + '): "' + data.texto + '"', 'ok');
 }
 
-async function precio(valor) {
+async function precio(valor, conOpinion) {
   const juego = document.getElementById('precioJuego').value.trim();
-  logMsg('reaccion a USD ' + valor + (juego ? ' (' + juego + ')' : '') + '...');
-  const data = await post('/api/precio', { valor_usd: valor, juego: juego });
-  if (data && data.ok) logMsg('OK reaccion (' + data.estado + '): "' + data.texto + '"', 'ok');
+  const modo = conOpinion ? ' opinion LLM' : '';
+  logMsg('reaccion a USD ' + valor + (juego ? ' (' + juego + ')' : '') + modo + '...');
+  const data = await post('/api/precio', { valor_usd: valor, juego: juego, con_opinion: !!conOpinion });
+  if (data && data.ok) logMsg('OK precio (' + data.estado + '): "' + data.texto + '"', 'ok');
 }
 
-async function precioCustom() {
+async function precioCustom(conOpinion) {
   const valor = parseInt(document.getElementById('precioInput').value || '0');
   if (!valor) { logMsg('valor USD invalido', 'err'); return; }
-  await precio(valor);
+  await precio(valor, conOpinion);
+}
+
+async function despertar() {
+  logMsg('despertando TarroBot...');
+  const data = await post('/api/despertar', {});
+  if (data && data.ok) logMsg('OK despertar: "' + data.texto + '"', 'ok');
 }
 
 async function random_(categoria) {

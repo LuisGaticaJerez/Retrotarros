@@ -103,6 +103,25 @@ CATCHPHRASES = [
 CATCHPHRASE_ESTADOS = ["excited", "happy", "winking", "fact"]
 
 
+# Sprint 8.5: frases para cuando TarroBot "despierta" porque le hablamos
+# estando en modo sleep/drowsy/bored. Tono: como si lo hubieran sorprendido
+# pero tranquilo, tipo "perdon estaba en otra".
+DESPERTAR_FRASES = [
+    "Sorry, ¡acá estoy! Estaba revisando mis circuitos.",
+    "Eh, ¿qué pasó? Estaba en modo bajo consumo.",
+    "¡Despierto, despierto! ¿Necesitan algo?",
+    "Pasa, estaba reorganizando la memoria caché.",
+    "Procesando despertar... Listo, ¿qué hay?",
+    "Reactivando sistema. ¿Qué se cuenta?",
+    "Sorry, ¡presente! Solo estaba ahorrando batería.",
+    "¡Estoy aquí! Pensaba en juegos clásicos.",
+    "Bip bop, sistema reactivado. ¿En qué andábamos?",
+    "Perdón, estaba soñando con cartuchos de oro.",
+    "¡Acá estoy! Solo descansaban mis píxeles.",
+    "Volviendo a la sesión. ¿Qué necesitan?",
+]
+
+
 # Despedidas cortas random
 DESPEDIDAS_CORTAS = [
     "Chao chao. Apagando luces de la TV.",
@@ -335,10 +354,11 @@ HOTKEYS = {
     "f1": ("/api/queue/next",    "F1 -> NEXT cola datos"),
     "f2": ("/api/queue/prev",    "F2 -> PREV cola datos"),
     "f3": ("/api/saludar",       "F3 -> saludo random"),
-    "f4": ("/api/despedir",      "F4 -> despedida random"),
+    "f4": ("/api/despedir",      "F4 -> despedida + acelerar sueno"),
     "f5": ("/api/queue/reset",   "F5 -> RESET cola"),
     "f6": ("/api/catchphrase",   "F6 -> catchphrase Retrotarros"),
     "f7": ("/api/queue/melodia", "F7 -> tocar melodia random"),
+    "f8": ("/api/despertar",     "F8 -> despertar TarroBot"),
 }
 
 
@@ -703,11 +723,68 @@ async def opinar(payload: dict):
     return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url, "tema": tema}
 
 
+def generar_opinion_precio_llm(valor: int, juego: str) -> Optional[dict]:
+    """Sprint 8.5: opinion extendida sobre un precio con LLM. Solo se llama
+    si el usuario explicitamente pide opinion (con_opinion=True)."""
+    try:
+        import anthropic
+    except ImportError:
+        return None
+    import os, re as _re
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return None
+
+    def _valor_a_palabras(v: int) -> str:
+        if v >= 1_000_000:
+            return f"{v/1_000_000:.1f} millones de dólares".replace(".0", "")
+        if v >= 1000:
+            miles = v // 1000
+            resto = v % 1000
+            return f"{miles} mil dólares" if resto == 0 else f"{miles} mil {resto} dólares"
+        return f"{v} dólares"
+
+    valor_str = _valor_a_palabras(valor)
+    juego_part = f"para {juego}" if juego else "para este cartucho"
+
+    prompt = f"""Eres TarroBot, mascota del canal Retrotarros sobre videojuegos retro.
+Tu humano te pregunta explícitamente: "¿Qué opinas del precio de {valor_str} {juego_part}?"
+
+Devuelve una opinión PERSONAL, 2-3 oraciones, sobre si vale la pena o no, qué pensás del mercado de coleccionismo retro a ese precio, contexto historico breve (si es razonable, escandaloso, ganga). Tono curioso y honesto.
+
+Reglas (texto reproducido por TTS):
+- Español neutro latino con TUTEO. NO voseo argentino.
+- USA TILDES correctas.
+- NÚMEROS EN PALABRAS ("20 mil" en vez de "20,000").
+- Estados válidos: confused, excited, fact, winking, thinking, sad, angry, happy.
+
+Devuelve SOLO JSON: {{"texto": "...", "estado": "..."}}
+"""
+    try:
+        client = anthropic.Anthropic(api_key=api_key)
+        response = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=400,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw = response.content[0].text.strip()
+        raw = _re.sub(r"^```(?:json)?\s*", "", raw)
+        raw = _re.sub(r"\s*```$", "", raw)
+        return json.loads(raw)
+    except Exception as e:
+        print(f"[precio-opinion] error: {e}")
+        return None
+
+
 @app.post("/api/precio")
 async def precio(payload: dict):
     """
-    Reacciona segun valor USD. No usa LLM, son frases pregeneradas.
-    Body: { "valor_usd": 4500, "juego": "DKC Competition Cart" (opcional), "voz": ... }
+    Reacciona segun valor USD. Modos:
+      con_opinion=False (default): frase pregenerada rapida segun el rango
+      con_opinion=True: usa LLM (Claude) para opinion extendida con contexto
+
+    Body: { "valor_usd": 4500, "juego": "DKC Competition Cart" (opcional),
+            "con_opinion": false, "voz": ... }
     """
     try:
         valor = int(payload.get("valor_usd", 0))
@@ -716,7 +793,26 @@ async def precio(payload: dict):
 
     juego = (payload.get("juego") or "").strip()
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    con_opinion = bool(payload.get("con_opinion", False))
     tracker.mark_input()
+
+    # Modo OPINION explicita: LLM da una reaccion personal mas larga
+    if con_opinion:
+        async with _procesando(f"opinando sobre el precio..."):
+            result = await asyncio.to_thread(generar_opinion_precio_llm, valor, juego)
+        if result:
+            texto_opinion = result.get("texto", "")
+            estado_opinion = result.get("estado", "thinking")
+            if estado_opinion not in ESTADOS:
+                estado_opinion = "thinking"
+            audio_url = await _hablar_frase(
+                texto_opinion, estado_opinion,
+                f"OPINIÓN PRECIO",
+                voz, pitch, rate,
+            )
+            return {"ok": True, "texto": texto_opinion, "estado": estado_opinion,
+                    "audio_url": audio_url, "con_opinion": True}
+        # Si fallo el LLM, cae al modo rapido
 
     # Formatear el valor en palabras para que TTS lo pronuncie bien
     # ("20 mil dólares" en vez de "20,000 dólares" que se lee "veinte coma cero cero cero")
@@ -827,14 +923,63 @@ async def saludar(payload: dict):
     return {"ok": True, "texto": texto, "audio_url": audio_url}
 
 
+async def _acelerar_dormir():
+    """
+    Sprint 8.5: despues de una despedida, TarroBot va a sleep en pocos segundos.
+    Espera que termine la frase del chao (~5s), pasa a drowsy, espera otro
+    poco y luego a sleep. Si el usuario interactua antes, cancela.
+    """
+    # Esperar a que termine la frase del chao (audio.onended marca is_speaking=False)
+    await asyncio.sleep(6)
+    if tracker.is_speaking:
+        return  # algo nuevo paso, cancelar
+    ts_referencia = tracker.last_input_ts
+    # Bored
+    await manager.broadcast_live({"tipo": "estado-idle", "estado": "bored"})
+    tracker.current_idle_state = "bored"
+    await asyncio.sleep(3)
+    if tracker.last_input_ts != ts_referencia or tracker.is_speaking:
+        return
+    # Drowsy
+    await manager.broadcast_live({"tipo": "estado-idle", "estado": "drowsy"})
+    tracker.current_idle_state = "drowsy"
+    await asyncio.sleep(3)
+    if tracker.last_input_ts != ts_referencia or tracker.is_speaking:
+        return
+    # Sleep
+    await manager.broadcast_live({"tipo": "estado-idle", "estado": "sleep"})
+    tracker.current_idle_state = "sleep"
+    # Forzar last_input_ts atras asi se queda dormido (no vuelve a idle solo)
+    tracker.last_input_ts = time.time() - IDLE_SLEEP_AFTER - 10
+
+
 @app.post("/api/despedir")
 async def despedir(payload: dict):
-    """Reproduce una despedida corta random con estado winking."""
+    """Reproduce una despedida corta random con estado winking.
+    Despues de despedirse, TarroBot acelera la somnolencia y se duerme."""
     import random
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
     texto = random.choice(DESPEDIDAS_CORTAS)
     audio_url = await _hablar_frase(texto, "winking", "HASTA LUEGO", voz, pitch, rate)
+    # Sprint 8.5: agendar transicion bored -> drowsy -> sleep
+    asyncio.create_task(_acelerar_dormir())
+    return {"ok": True, "texto": texto, "audio_url": audio_url}
+
+
+@app.post("/api/despertar")
+async def despertar(payload: dict):
+    """
+    Sprint 8.5: TarroBot 'despierta' cuando le hablamos estando dormido o aburrido.
+    Reproduce una frase tipo 'sorry, aca estoy' y vuelve a idle.
+    """
+    import random
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    tracker.mark_input()
+    # Forzar volver a idle desde el estado dormido
+    tracker.current_idle_state = "idle"
+    texto = random.choice(DESPERTAR_FRASES)
+    audio_url = await _hablar_frase(texto, "happy", "DESPERTANDO...", voz, pitch, rate)
     return {"ok": True, "texto": texto, "audio_url": audio_url}
 
 
@@ -966,6 +1111,19 @@ def parsear_intent(texto: str) -> dict:
     for kw in ["chao", "adios", "adiós", "bye", "hasta luego", "nos vemos"]:
         if kw in t_clean:
             return {"accion": "despedir", "params": {}}
+
+    # 1b. Despertar (Sprint 8.5): si dicen "despierta", "estas ahi", "tarrobot?"
+    despertar_kws = [
+        "despierta", "despertate", "despertar",
+        "estas ahi", "estas ahí", "estas con nosotros",
+        "estás ahi", "estás ahí", "estás con nosotros",
+        "tarrobot estas", "tarrobot estás",
+        "sigues ahi", "sigues ahí", "sigues con nosotros",
+        "estas dormido", "estás dormido", "te dormiste",
+    ]
+    for kw in despertar_kws:
+        if kw in t_clean:
+            return {"accion": "despertar", "params": {}}
 
     # 2. Opinar (antes que saludar porque "opinas" puede contener "h" como "hola")
     if any(x in t_clean for x in ["que opinas", "opinas", "que piensas", "te parece", "tu opinion"]):
@@ -1101,6 +1259,8 @@ async def listen(request: Request, wake: str = ""):
             result = await saludar({})
         elif accion == "despedir":
             result = await despedir({})
+        elif accion == "despertar":
+            result = await despertar({})
         elif accion == "opinar":
             result = await opinar(params)
         elif accion == "precio":
