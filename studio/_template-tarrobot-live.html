@@ -73,22 +73,18 @@ body.mode-fullscreen {
 .tb-mouth-waveform { display: none; }
 body.is-speaking:not(.is-whistling) .tb-mouth-waveform { display: block; }
 
-/* Ocultar TODAS las otras bocas cuando is-speaking (excepto whistling) */
-body.is-speaking:not(.is-whistling) .tb-mouth-idle,
-body.is-speaking:not(.is-whistling) .tb-mouth-talking,
-body.is-speaking:not(.is-whistling) .tb-mouth-excited,
-body.is-speaking:not(.is-whistling) .tb-mouth-sleep,
-body.is-speaking:not(.is-whistling) .tb-mouth-thinking,
-body.is-speaking:not(.is-whistling) .tb-mouth-winking,
-body.is-speaking:not(.is-whistling) .tb-mouth-confused,
-body.is-speaking:not(.is-whistling) .tb-mouth-glitched,
-body.is-speaking:not(.is-whistling) .tb-mouth-fact,
-body.is-speaking:not(.is-whistling) .tb-mouth-happy,
-body.is-speaking:not(.is-whistling) .tb-mouth-sad,
-body.is-speaking:not(.is-whistling) .tb-mouth-angry,
-body.is-speaking:not(.is-whistling) .tb-mouth-loading,
-body.is-speaking:not(.is-whistling) .tb-mouth-bored,
-body.is-speaking:not(.is-whistling) .tb-mouth-drowsy { display: none !important; }
+/* Cuando hay audio reproduciendo y NO es whistling: ocultar TODAS las
+   bocas emocionales con !important para ganar la cascada. */
+body.is-speaking:not(.is-whistling) .tarrobot-face g[class^="tb-mouth-"]:not(.tb-mouth-waveform) {
+  display: none !important;
+}
+
+/* Cuando es whistling: ocultar la boca-waveform aunque haya is-speaking,
+   y ocultar todas las otras bocas excepto tb-mouth-whistling */
+body.is-whistling .tarrobot-face .tb-mouth-waveform { display: none !important; }
+body.is-whistling .tarrobot-face g[class^="tb-mouth-"]:not(.tb-mouth-whistling) {
+  display: none !important;
+}
 
 /* La linea del osciloscopio: stroke amarillo grueso con glow */
 .tb-wave-line {
@@ -608,6 +604,13 @@ function setEstado(nuevoEstado) {
   prevEstado = estadoActual;
   estadoActual = nuevoEstado;
   face.className = 'tarrobot-face is-' + nuevoEstado;
+  // Tambien sincronizar al body para que selectores body.is-X funcionen
+  // (los CSS que controlan boca-waveform vs whistling lo necesitan)
+  const body = document.body;
+  // Limpiar clases is-* previas del body
+  const clasesPrev = Array.from(body.classList).filter(c => c.startsWith('is-') && c !== 'is-speaking');
+  for (const c of clasesPrev) body.classList.remove(c);
+  body.classList.add('is-' + nuevoEstado);
 }
 
 async function notifyAudioFinished() {
