@@ -824,7 +824,7 @@ def render_midi_a_mp3(midi_path: Path, out_mp3: Path,
 
 
 def pauta_agregar_melodia(pauta: dict, midi_path: Path, desde_s: float = 0.0,
-                           segundos: float = 8.0, titulo: str = "",
+                           segundos: float = 12.0, titulo: str = "",
                            consola: str = "", ano: int = 0, editor: str = "") -> dict:
     """
     Renderiza un MIDI a MP3 y lo agrega como item tipo=melodia a la pauta.
@@ -1184,9 +1184,9 @@ def cmd_melodia_add(args) -> int:
         return 1
 
     desde_s = _parse_tiempo(args.desde) if args.desde else 0.0
-    segundos = float(args.segundos) if args.segundos else 8.0
+    segundos = float(args.segundos) if args.segundos else 12.0
     if segundos > 30:
-        print(f"[WARN] {segundos}s es bastante para una referencia. Recomendado max 15s.", file=sys.stderr)
+        print(f"[WARN] {segundos}s es bastante para una referencia. Recomendado max 20s.", file=sys.stderr)
 
     titulo = args.titulo or midi_path.stem.replace("-", " ").replace("_", " ").title()
 
@@ -1300,7 +1300,7 @@ def cmd_melodia_bulk(args) -> int:
                 ya_agregados.add(Path(src).name.lower())
 
     desde_s = _parse_tiempo(args.desde) if args.desde else 0.0
-    segundos = float(args.segundos) if args.segundos else 8.0
+    segundos = float(args.segundos) if args.segundos else 12.0
 
     print(f"=== Bulk melodia add a pauta '{slug}' ===")
     print(f"Scan dir:         {scan_dir}")

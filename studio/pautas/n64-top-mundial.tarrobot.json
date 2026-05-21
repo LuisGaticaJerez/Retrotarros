@@ -132,36 +132,36 @@
       "id": "n64-top-mundial-melodia-11",
       "tipo": "melodia",
       "tema": "Donkey Kong 64   Crystal Caves",
-      "texto": "[Tocando: Donkey Kong 64   Crystal Caves (8s)]",
+      "texto": "[Tocando: Donkey Kong 64   Crystal Caves (12s)]",
       "estado": "whistling",
       "consola": "",
       "ano": 0,
       "editor": "",
       "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-11.mp3",
-      "duracion_ms": 8045,
+      "duracion_ms": 12042,
       "fuente": "midi-render",
       "midi_source": {
         "midi": "studio/melodias/n64/Donkey Kong 64 - Crystal Caves.mid",
         "desde_s": 0.0,
-        "segundos": 8.0
+        "segundos": 12.0
       }
     },
     {
       "id": "n64-top-mundial-melodia-12",
       "tipo": "melodia",
       "tema": "Donkey Kong 64   Dk Isle Jungle Japes",
-      "texto": "[Tocando: Donkey Kong 64   Dk Isle Jungle Japes (8s)]",
+      "texto": "[Tocando: Donkey Kong 64   Dk Isle Jungle Japes (12s)]",
       "estado": "whistling",
       "consola": "",
       "ano": 0,
       "editor": "",
       "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-12.mp3",
-      "duracion_ms": 8045,
+      "duracion_ms": 12042,
       "fuente": "midi-render",
       "midi_source": {
         "midi": "studio/melodias/n64/Donkey Kong 64 - DK Isle Jungle Japes.mid",
         "desde_s": 0.0,
-        "segundos": 8.0
+        "segundos": 12.0
       }
     }
   ]

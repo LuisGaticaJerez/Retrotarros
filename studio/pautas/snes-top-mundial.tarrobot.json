@@ -72,72 +72,72 @@
       "id": "snes-top-mundial-melodia-6",
       "tipo": "melodia",
       "tema": "Donkey Kong Country   Aquatic Ambience",
-      "texto": "[Tocando: Donkey Kong Country   Aquatic Ambience (8s)]",
+      "texto": "[Tocando: Donkey Kong Country   Aquatic Ambience (12s)]",
       "estado": "whistling",
       "consola": "",
       "ano": 0,
       "editor": "",
       "mp3": "audio/snes-top-mundial/snes-top-mundial-melodia-6.mp3",
-      "duracion_ms": 8045,
+      "duracion_ms": 12042,
       "fuente": "midi-render",
       "midi_source": {
         "midi": "studio/melodias/snes/Donkey Kong Country - Aquatic Ambience.mid",
         "desde_s": 0.0,
-        "segundos": 8.0
+        "segundos": 12.0
       }
     },
     {
       "id": "snes-top-mundial-melodia-7",
       "tipo": "melodia",
       "tema": "Donkey Kong Country   Cranky'S Theme",
-      "texto": "[Tocando: Donkey Kong Country   Cranky'S Theme (8s)]",
+      "texto": "[Tocando: Donkey Kong Country   Cranky'S Theme (12s)]",
       "estado": "whistling",
       "consola": "",
       "ano": 0,
       "editor": "",
       "mp3": "audio/snes-top-mundial/snes-top-mundial-melodia-7.mp3",
-      "duracion_ms": 8045,
+      "duracion_ms": 12042,
       "fuente": "midi-render",
       "midi_source": {
         "midi": "studio/melodias/snes/Donkey Kong Country - Cranky's Theme.mid",
         "desde_s": 0.0,
-        "segundos": 8.0
+        "segundos": 12.0
       }
     },
     {
       "id": "snes-top-mundial-melodia-8",
       "tipo": "melodia",
       "tema": "Donkey Kong Country   Fear Factory",
-      "texto": "[Tocando: Donkey Kong Country   Fear Factory (8s)]",
+      "texto": "[Tocando: Donkey Kong Country   Fear Factory (12s)]",
       "estado": "whistling",
       "consola": "",
       "ano": 0,
       "editor": "",
       "mp3": "audio/snes-top-mundial/snes-top-mundial-melodia-8.mp3",
-      "duracion_ms": 8045,
+      "duracion_ms": 12042,
       "fuente": "midi-render",
       "midi_source": {
         "midi": "studio/melodias/snes/Donkey Kong Country - Fear Factory.mid",
         "desde_s": 0.0,
-        "segundos": 8.0
+        "segundos": 12.0
       }
     },
     {
       "id": "snes-top-mundial-melodia-9",
       "tipo": "melodia",
       "tema": "Sneskdccourse 8",
-      "texto": "[Tocando: Sneskdccourse 8 (8s)]",
+      "texto": "[Tocando: Sneskdccourse 8 (12s)]",
       "estado": "whistling",
       "consola": "",
       "ano": 0,
       "editor": "",
       "mp3": "audio/snes-top-mundial/snes-top-mundial-melodia-9.mp3",
-      "duracion_ms": 8045,
+      "duracion_ms": 12042,
       "fuente": "midi-render",
       "midi_source": {
         "midi": "studio/melodias/snes/snesKDCCourse_8.mid",
         "desde_s": 0.0,
-        "segundos": 8.0
+        "segundos": 12.0
       }
     }
   ]
