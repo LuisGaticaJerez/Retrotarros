@@ -65,14 +65,66 @@ body.mode-fullscreen {
 @keyframes tb-talk { 0%, 100% { transform: scaleY(0.3); } 20% { transform: scaleY(1); } 40% { transform: scaleY(0.5); } 60% { transform: scaleY(1); } 80% { transform: scaleY(0.7); } }
 .is-talking .tb-mouth-talking { transform-origin: center; animation: tb-talk 0.6s ease-in-out infinite; }
 
-/* Sprint 7.4: lip-sync con amplitude. Cuando hay audio reproduciendose y
-   se activa lipsync, reemplaza la animacion CSS por transform dinamico
-   manejado desde JS (Web Audio API). Fallback a animacion fija si JS
-   no logro inicializar AudioContext. */
-body.lipsync-active.is-talking .tb-mouth-talking {
-  animation: none !important;
-  transform: scaleY(var(--mouth-open, 0.3));
-  transition: transform 60ms ease-out;
+/* Sprint 7.4 (rev): boca tipo waveform/equalizer cuando hay audio
+   reproduciendo. La boca-waveform pisa a la de cualquier estado emocional
+   (excepto whistling que mantiene su boca O + notas). Asi happy/sad/excited/
+   etc. siempre tienen una boca animada al ritmo del audio en vez de una
+   boca fija. */
+
+.tb-mouth-waveform { display: none; }
+
+/* Activar la waveform cuando esta hablando, EXCEPTO si es whistling */
+body.is-speaking:not(.is-whistling) .tb-mouth-waveform { display: block; }
+
+/* Ocultar TODAS las otras bocas cuando is-speaking (excepto whistling) */
+body.is-speaking:not(.is-whistling) .tb-mouth-idle,
+body.is-speaking:not(.is-whistling) .tb-mouth-talking,
+body.is-speaking:not(.is-whistling) .tb-mouth-excited,
+body.is-speaking:not(.is-whistling) .tb-mouth-sleep,
+body.is-speaking:not(.is-whistling) .tb-mouth-thinking,
+body.is-speaking:not(.is-whistling) .tb-mouth-winking,
+body.is-speaking:not(.is-whistling) .tb-mouth-confused,
+body.is-speaking:not(.is-whistling) .tb-mouth-glitched,
+body.is-speaking:not(.is-whistling) .tb-mouth-fact,
+body.is-speaking:not(.is-whistling) .tb-mouth-happy,
+body.is-speaking:not(.is-whistling) .tb-mouth-sad,
+body.is-speaking:not(.is-whistling) .tb-mouth-angry,
+body.is-speaking:not(.is-whistling) .tb-mouth-loading,
+body.is-speaking:not(.is-whistling) .tb-mouth-bored,
+body.is-speaking:not(.is-whistling) .tb-mouth-drowsy { display: none !important; }
+
+/* Las 7 barras del equalizer: cada una con transform-origin en su base
+   (y=78 que es el "piso" del visualizer) y altura modulada por variable
+   CSS --bar-N (0..1). Web Audio API la actualiza desde JS. */
+.tb-mouth-waveform .bar {
+  transform-origin: center 78px;
+  transition: transform 50ms ease-out;
+}
+.tb-mouth-waveform .bar-1 { transform: scaleY(var(--bar-1, 0.25)); }
+.tb-mouth-waveform .bar-2 { transform: scaleY(var(--bar-2, 0.45)); }
+.tb-mouth-waveform .bar-3 { transform: scaleY(var(--bar-3, 0.65)); }
+.tb-mouth-waveform .bar-4 { transform: scaleY(var(--bar-4, 0.85)); }
+.tb-mouth-waveform .bar-5 { transform: scaleY(var(--bar-5, 0.65)); }
+.tb-mouth-waveform .bar-6 { transform: scaleY(var(--bar-6, 0.45)); }
+.tb-mouth-waveform .bar-7 { transform: scaleY(var(--bar-7, 0.25)); }
+
+/* Fallback animacion CSS si Web Audio no inicializo: simula visualizer
+   con 7 keyframes desfasados. Se aplica solo si NO esta la clase
+   lipsync-active (cuando lipsync activo, las variables CSS toman control) */
+body.is-speaking:not(.lipsync-active) .tb-mouth-waveform .bar {
+  animation: tb-bar-bounce 0.5s ease-in-out infinite;
+}
+body.is-speaking:not(.lipsync-active) .bar-1 { animation-delay: 0.00s; }
+body.is-speaking:not(.lipsync-active) .bar-2 { animation-delay: 0.07s; }
+body.is-speaking:not(.lipsync-active) .bar-3 { animation-delay: 0.14s; }
+body.is-speaking:not(.lipsync-active) .bar-4 { animation-delay: 0.21s; }
+body.is-speaking:not(.lipsync-active) .bar-5 { animation-delay: 0.14s; }
+body.is-speaking:not(.lipsync-active) .bar-6 { animation-delay: 0.07s; }
+body.is-speaking:not(.lipsync-active) .bar-7 { animation-delay: 0.00s; }
+
+@keyframes tb-bar-bounce {
+  0%, 100% { transform: scaleY(0.25); }
+  50%      { transform: scaleY(0.9); }
 }
 
 .tb-glasses { opacity: 0; transition: opacity .25s; }
@@ -405,6 +457,22 @@ body.debug .ws-status { display: block; }
           <g class="tb-mouth-bored"><rect x="50" y="62" width="20" height="20" fill="#FFD23F" rx="10"/><rect x="54" y="66" width="12" height="12" fill="#0a0820" rx="6"/></g>
           <!-- BOCA DROWSY: linea descendente, cansado -->
           <g class="tb-mouth-drowsy"><rect x="46" y="72" width="4" height="4" fill="#FFD23F"/><rect x="50" y="74" width="20" height="3" fill="#FFD23F"/><rect x="70" y="76" width="4" height="3" fill="#FFD23F"/></g>
+          <!-- Boca tipo waveform/equalizer: 7 barras pixel-art que se mueven al ritmo del audio.
+               Se muestra cuando body.is-speaking esta activo, pisa a la boca del estado emocional.
+               Las barras estan centradas en x=60, "piso" en y=78. Cada una width=4, altura
+               base 14px, escala 0..1 desde JS (Web Audio) o keyframes fallback. -->
+          <g class="tb-mouth-waveform">
+            <rect class="bar bar-1" x="42" y="64" width="4" height="14" fill="#FFD23F"/>
+            <rect class="bar bar-2" x="48" y="64" width="4" height="14" fill="#FFD23F"/>
+            <rect class="bar bar-3" x="54" y="64" width="4" height="14" fill="#FFD23F"/>
+            <rect class="bar bar-4" x="60" y="64" width="4" height="14" fill="#00E5FF"/>
+            <rect class="bar bar-5" x="66" y="64" width="4" height="14" fill="#FFD23F"/>
+            <rect class="bar bar-6" x="72" y="64" width="4" height="14" fill="#FFD23F"/>
+            <rect class="bar bar-7" x="78" y="64" width="4" height="14" fill="#FFD23F"/>
+            <!-- Linea base sutil debajo del visualizer -->
+            <rect x="40" y="79" width="44" height="1" fill="#FFD23F" opacity="0.3"/>
+          </g>
+
           <!-- Sprint 8.1: boca "OoO" silbando (pixel-art SNES style) -->
           <g class="tb-mouth-whistling">
             <rect x="54" y="66" width="12" height="12" fill="#FFD23F" rx="6"/>
@@ -500,16 +568,25 @@ function startLipSync() {
   if (!setupLipSync()) return;
   if (audioCtx.state === 'suspended') audioCtx.resume();
   document.body.classList.add('lipsync-active');
+
+  // 7 bandas de frecuencia agrupadas para el equalizer pixel-art
+  // (Web Audio devuelve fftSize/2 bins; con fftSize=128 son 64 bins)
+  // Mapeamos las primeras ~28 bins (rango de voz 0-3kHz aprox) a 7 barras
+  const BARS = 7;
+  const BAND_SIZE = 4;   // 4 bins por banda
+  const root = document.documentElement;
+
   const loop = () => {
     analyser.getByteFrequencyData(lipBuffer);
-    // Promedio en el rango de la voz humana (primeras ~24 bins de 64)
-    let sum = 0;
-    const N = Math.min(24, lipBuffer.length);
-    for (let i = 0; i < N; i++) sum += lipBuffer[i];
-    const avg = sum / N / 255;   // 0..1
-    // Mapear: cerrado=0.2, abierto maximo=1.3 (amplificacion 2.5x con clamp)
-    const opening = 0.2 + Math.min(1, avg * 2.5) * 1.1;
-    document.documentElement.style.setProperty('--mouth-open', opening.toFixed(3));
+    for (let b = 0; b < BARS; b++) {
+      let sum = 0;
+      const start = b * BAND_SIZE;
+      for (let i = 0; i < BAND_SIZE; i++) sum += lipBuffer[start + i] || 0;
+      const avg = sum / BAND_SIZE / 255;   // 0..1
+      // Amplificar y mapear a rango visual [0.15..1.2]
+      const escala = 0.15 + Math.min(1, avg * 2.4) * 1.05;
+      root.style.setProperty('--bar-' + (b + 1), escala.toFixed(3));
+    }
     lipRafId = requestAnimationFrame(loop);
   };
   loop();
@@ -521,7 +598,10 @@ function stopLipSync() {
     cancelAnimationFrame(lipRafId);
     lipRafId = null;
   }
-  document.documentElement.style.removeProperty('--mouth-open');
+  // Limpiar variables del equalizer
+  const root = document.documentElement;
+  for (let b = 1; b <= 7; b++) root.style.removeProperty('--bar-' + b);
+  root.style.removeProperty('--mouth-open');
 }
 
 function setEstado(nuevoEstado) {
@@ -609,19 +689,23 @@ function handleMessage(msg) {
     setCaption(msg.label || 'DATO CURIOSO', msg.texto || '', 12000);
     if (msg.audio_url) {
       audio.src = msg.audio_url + '?t=' + Date.now();
+      document.body.classList.add('is-speaking');  // Activa boca-waveform
       audio.play().then(() => {
         startLipSync();
       }).catch(e => console.error('Audio play fail', e));
       audio.onended = () => {
         estaHablando = false;
+        document.body.classList.remove('is-speaking');
         stopLipSync();
         notifyAudioFinished();
         setEstado('idle');
       };
     } else {
       // Sin audio_url, marcar como terminado al cabo de la duracion del caption
+      document.body.classList.add('is-speaking');
       setTimeout(() => {
         estaHablando = false;
+        document.body.classList.remove('is-speaking');
         stopLipSync();
         notifyAudioFinished();
         setEstado('idle');
