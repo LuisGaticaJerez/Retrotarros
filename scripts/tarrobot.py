@@ -358,6 +358,49 @@ def generar_tts(dato: dict, voz: str = VOZ_DEFAULT, pitch: str = PITCH_DEFAULT, 
 # El JSON SI se versiona — es el guion del episodio.
 
 
+def _ejecutar_sync_drive(verbose: bool = True) -> bool:
+    """
+    Corre el script sync-tarrobot-to-drive.ps1 en background.
+    Devuelve True si el sync arranco OK (no espera el resultado completo).
+    """
+    import subprocess
+    sync_script = REPO / "scripts" / "sync-tarrobot-to-drive.ps1"
+    if not sync_script.exists():
+        if verbose:
+            print(f"[SYNC] skip: {sync_script.name} no existe en este repo")
+        return False
+    try:
+        if verbose:
+            print()
+            print("[SYNC] Sincronizando con Drive...")
+        result = subprocess.run(
+            ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass",
+             "-File", str(sync_script)],
+            capture_output=True, text=True, timeout=120,
+        )
+        if result.returncode == 0:
+            if verbose:
+                # Mostrar solo la linea de SYNC COMPLETO + contadores
+                for line in result.stdout.splitlines():
+                    if "sincronizados" in line.lower() or "skipped" in line.lower():
+                        print(f"[SYNC] {line.strip()}")
+                print("[SYNC] Drive Desktop sincronizara al cloud en 1-3 min.")
+            return True
+        else:
+            if verbose:
+                print(f"[SYNC] error (exit {result.returncode}):")
+                print(result.stderr[-500:])
+            return False
+    except subprocess.TimeoutExpired:
+        if verbose:
+            print("[SYNC] timeout (120s). El sync sigue en background, no es critico.")
+        return False
+    except Exception as e:
+        if verbose:
+            print(f"[SYNC] error: {e}")
+        return False
+
+
 def _path_dentro_repo(p: Path) -> bool:
     """Valida que un path resuelto este dentro del repo (defensa path traversal)."""
     try:
@@ -1113,6 +1156,8 @@ def cmd_pauta_init(args) -> int:
     print("Proximo paso:")
     print(f"  python scripts/tarrobot.py --pauta-auto <ruta-html>  (autogenerar datos desde el HTML)")
     print(f"  python scripts/tarrobot.py --pauta-show {slug}        (verla)")
+    if not getattr(args, "no_sync", False):
+        _ejecutar_sync_drive()
     return 0
 
 
@@ -1172,6 +1217,8 @@ def cmd_melodia_add(args) -> int:
     print(f"En la cola va a aparecer como:")
     print(f"  [whistling] {dato['tema']}")
     print(f"  {dato['texto']}")
+    if not getattr(args, "no_sync", False):
+        _ejecutar_sync_drive()
     return 0
 
 
@@ -1238,6 +1285,8 @@ def cmd_melodia_bulk(args) -> int:
     print(f"[OK] {nuevos} melodia(s) agregadas a {slug}")
     if errores:
         print(f"[WARN] {errores} fallaron (ver mensajes arriba)")
+    if nuevos > 0 and not getattr(args, "no_sync", False):
+        _ejecutar_sync_drive()
     return 0 if errores == 0 else 1
 
 
@@ -1322,6 +1371,8 @@ def cmd_pauta_preload(args) -> int:
     print(f"  skipped:   {skipped}")
     print(f"  errores:   {errores}")
     print(f"  duracion total estimada: {total_ms/1000:.1f}s ({total_ms/1000/60:.1f} min)")
+    if generados > 0 and not getattr(args, "no_sync", False):
+        _ejecutar_sync_drive()
     if errores:
         return 1
     return 0
@@ -1385,6 +1436,8 @@ def cmd_pauta_auto(args) -> int:
     print()
     print("Proximo paso (Sprint 6.2):")
     print(f"  python scripts/tarrobot.py --pauta-preload {slug}     (precargar todos los MP3)")
+    if not getattr(args, "no_sync", False):
+        _ejecutar_sync_drive()
     return 0
 
 
@@ -1426,6 +1479,7 @@ def main():
     parser.add_argument("--episodio", help="Titulo del episodio (para --pauta-init y --pauta-auto)")
     parser.add_argument("--n-datos", type=int, help="Cantidad de datos a generar con --pauta-auto (default 10, max 20)")
     parser.add_argument("--force", action="store_true", help="Sobrescribe la pauta si ya existe")
+    parser.add_argument("--no-sync", action="store_true", help="No sincronizar con Drive al terminar (los comandos que modifican pautas hacen sync automatico por default)")
 
     args = parser.parse_args()
 
