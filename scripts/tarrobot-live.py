@@ -72,6 +72,21 @@ SALUDOS_GEEK = [
     "Insertando token. ¡Hola, hola!",
     "Memoria llena, sed de datos. Pregunta lo que quieras.",
     "Sistema operativo: Curiosidad versión 8 bits. Listo.",
+    "¡Acción! Cámara, audio... y datos retro a tope.",
+    "Boot completado. ¿Qué consola le metemos hoy?",
+    "Iniciando rutina de nostalgia. ¡Comenzamos!",
+    "¡Hola tarros! Vengo con la memoria llena.",
+    "Modo Retrotarros activado. ¡A jugar con la historia!",
+    "Pixeles cargados, ojitos despiertos. Vamos.",
+    "Tarro entrando al chat con datos en mano.",
+    "¡Hola desde el cartucho! Voy a comentar lo que sea.",
+    "Carga completa: 100 porciento curiosidad.",
+    "¡Aquí estoy! Listo para soltar las trivias.",
+    "Conectándome al canal. Inserten cartucho favorito.",
+    "Bienvenidos a otra sesión de Retrotarros.",
+    "Bip... bip... ¡adentro! ¿Qué se cuenta?",
+    "Energía verde, ojitos brillando. Ya empezamos.",
+    "Saludos, equipo. Mi RAM trae datazos hoy.",
 ]
 
 # Catchphrases de marca Retrotarros (Sprint 7.3)
@@ -97,6 +112,21 @@ CATCHPHRASES = [
     "Suscríbete que un tarro nunca olvida.",
     "Polvito de cartucho, magia garantizada.",
     "Acá no se sopla el cartucho, se cuida.",
+    "Cartridge inside, magic incoming.",
+    "Ocho bits valen mil palabras.",
+    "Retro es eterno, lo nuevo viene y va.",
+    "¡Botón A para vida, botón B para gloria!",
+    "Cartuchos guardan recuerdos, no datos.",
+    "Subir el volumen, bajar la tristeza.",
+    "Generación dorada en pantalla, siempre.",
+    "Lo retro nunca pasa de moda.",
+    "Cartucho original, alma original.",
+    "¡Combo finalizado! Sigue mirando.",
+    "TarroBot certifica: esto es historia viva.",
+    "Las consolas pasan, las leyendas quedan.",
+    "Píxel a píxel, contamos la historia.",
+    "Si suena chiptune, suena bien.",
+    "Mientras el cartucho aguante, jugamos.",
 ]
 
 # Estados emocionales que rotan para las catchphrases (variedad visual)
@@ -119,6 +149,14 @@ DESPERTAR_FRASES = [
     "Perdón, estaba soñando con cartuchos de oro.",
     "¡Acá estoy! Solo descansaban mis píxeles.",
     "Volviendo a la sesión. ¿Qué necesitan?",
+    "¡Auch! Me agarraste pensando en Mario 64.",
+    "Estaba haciendo un dump de memoria. Ya volví.",
+    "¿Yo? Despertando los datos curiosos.",
+    "Reiniciando ojitos. Listo, ¿qué se cuenta?",
+    "¡Continue! Vuelvo a estar online.",
+    "Estaba en modo demo, ya salgo de eso.",
+    "Mis circuitos andaban descansando, pero ya están.",
+    "Recargado al 100. ¿Qué quieren saber?",
 ]
 
 
@@ -134,6 +172,16 @@ DESPEDIDAS_CORTAS = [
     "Continue en el próximo capítulo. ¡Chao!",
     "Apagando consola. ¡Hasta la próxima!",
     "Eyectando cartucho. ¡Nos vemos!",
+    "Cierro la sesión. Hasta la próxima partida.",
+    "Bajando el telón. Suscríbete si te gustó.",
+    "Me voy a recargar baterías. Chao tarros.",
+    "Disco eyectado. Nos leemos en el próximo.",
+    "Modo standby. Tarrobot fuera.",
+    "Final boss derrotado. ¡Hasta pronto!",
+    "Pausa larga. Hasta el próximo cartucho.",
+    "Cierro el viewport. ¡Vuelvan pronto!",
+    "Power off con cariño. Chao retrotarristas.",
+    "Save and quit. Nos vemos.",
 ]
 
 # ─────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "slug": "snes-top-precios",
+  "episodio": "Top 10 SNES mas caros del mundo (precios)",
+  "creado": "2026-05-20",
+  "actualizado": "2026-05-20",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "datos": [
+    {
+      "id": "snes-top-precios-1",
+      "tema": "Demon's Crest",
+      "texto": "¿Sabías que Demon's Crest es un spinoff oscuro de Gargoyle's Quest que casi nadie conoce? Capcom lo lanzó al final del ciclo SNES con poca promoción, pero la comunidad lo redescubrió después de 2010 y ahora vale cuatrocientos dólares.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Capcom",
+      "mp3": "audio/snes-top-precios/snes-top-precios-1.mp3",
+      "duracion_ms": 14736,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-precios-2",
+      "tema": "Harvest Moon",
+      "texto": "Harvest Moon llegó tardísimo al SNES en 1996 y tuvo un tiraje bajísimo. Lo loco es que Stardew Valley y Story of Seasons dispararon la demanda retroactiva: ahora un cartucho completo alcanza quinientos dólares.",
+      "estado": "excited",
+      "consola": "SNES",
+      "ano": 1996,
+      "editor": "Pack-In-Video",
+      "mp3": "audio/snes-top-precios/snes-top-precios-2.mp3",
+      "duracion_ms": 14616,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-precios-3",
+      "tema": "Super Mario RPG",
+      "texto": "Acá tenemos algo único: Super Mario RPG fue el único Mario RPG en 16 bits y la última colaboración Nintendo con Square antes de que se fueran a PlayStation. Por eso hoy cuesta setecientos dólares en caja.",
+      "estado": "fact",
+      "consola": "SNES",
+      "ano": 1996,
+      "editor": "Square / Nintendo",
+      "mp3": "audio/snes-top-precios/snes-top-precios-3.mp3",
+      "duracion_ms": 14016,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-precios-4",
+      "tema": "Final Fantasy III (FF VI)",
+      "texto": "Final Fantasy VI es el JRPG más prestigioso del SNES, pero la caja con manual original es difícil de encontrar. Adultos que lo jugaron de chicos ahora lo compran completo para coleccionar: ochocientos dólares.",
+      "estado": "thinking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Squaresoft",
+      "mp3": "audio/snes-top-precios/snes-top-precios-4.mp3",
+      "duracion_ms": 13896,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-precios-5",
+      "tema": "Pocky & Rocky 2",
+      "texto": "Pocky & Rocky 2 tiene estética miko anime y tiraje NTSC mínimo que solo conocen fans de shoot 'em up. Los cartuchos sueltos ya cuestan, pero conseguir la caja es otro mundo: mil dólares.",
+      "estado": "winking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Natsume",
+      "mp3": "audio/snes-top-precios/snes-top-precios-5.mp3",
+      "duracion_ms": 13152,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-precios-6",
+      "tema": "Mega Man X3",
+      "texto": "Mega Man X3 fue el último de la trilogía X en SNES, lanzado cuando todos miraban PlayStation. En Japón salió en tres plataformas, pero en EE.UU. solo en SNES: el tiraje fue ridículo y hoy vale mil cien dólares.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1995,
+      "editor": "Capcom",
+      "mp3": "audio/snes-top-precios/snes-top-precios-6.mp3",
+      "duracion_ms": 15000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-precios-7",
+      "tema": "Chrono Trigger",
+      "texto": "Chrono Trigger tiene status de JRPG perfecto, pero aquí está el dato: la caja amarilla de Square era brillosa y se rayaba fácilmente. Un ejemplar en buen estado hoy alcanza mil doscientos dólares.",
+      "estado": "happy",
+      "consola": "SNES",
+      "ano": 1995,
+      "editor": "Square",
+      "mp3": "audio/snes-top-precios/snes-top-precios-7.mp3",
+      "duracion_ms": 13176,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-precios-8",
+      "tema": "Aero Fighters",
+      "texto": "Aero Fighters es un port de Neo-Geo con tiraje ridículamente bajo en NTSC. Los shmups SNES son escasos de por sí, y sin variantes ni reediciones, este ejemplar limpio se vende entre puristas a mil quinientos dólares.",
+      "estado": "excited",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Video System",
+      "mp3": "audio/snes-top-precios/snes-top-precios-8.mp3",
+      "duracion_ms": 14520,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-precios-9",
+      "tema": "Wild Guns",
+      "texto": "Wild Guns mezcla western steampunk con galería de tiros al estilo Cabal: combinación rarísima. El remaster de 2016 disparó los precios y ahora la gente lo quiere en cartucho original: dos mil quinientos dólares.",
+      "estado": "fact",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Natsume",
+      "mp3": "audio/snes-top-precios/snes-top-precios-9.mp3",
+      "duracion_ms": 14352,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-precios-10",
+      "tema": "EarthBound Big Box",
+      "texto": "EarthBound llegó en una caja del tamaño de un VHS con manual de ciento sesenta páginas a color e incluía stickers scratch-and-sniff. Es la pieza más buscada de SNES en EE.UU. y vale tres mil quinientos dólares en perfecto estado.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Ape / HAL",
+      "mp3": "audio/snes-top-precios/snes-top-precios-10.mp3",
+      "duracion_ms": 15096,
+      "fuente": "pauta-auto"
+    }
+  ]
+}

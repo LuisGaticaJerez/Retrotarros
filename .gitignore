@@ -39,6 +39,9 @@ studio/pautas/audio/
 # SRT exportados desde pautas (regenerables con --pauta-srt o /api/queue/srt)
 studio/pautas/*.srt
 
+# Muestras MP3 generadas por tarrobot-probar-voces.py (regenerables)
+studio/voces-muestra/
+
 # MIDI descargados de fan-sites (Ichigos, Ninsheetmusic) — son transcripciones
 # por fans, NO redistribuimos en el repo publico. Cada usuario los baja para si.
 studio/melodias/*.mid

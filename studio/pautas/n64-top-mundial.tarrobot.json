@@ -1,0 +1,330 @@
+{
+  "version": 1,
+  "slug": "n64-top-mundial",
+  "episodio": "Top 10 N64 mas caros del mundo",
+  "creado": "2026-05-20",
+  "actualizado": "2026-05-20",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "datos": [
+    {
+      "id": "n64-top-mundial-1",
+      "tema": "Star Fox 64 - Rumble Pak",
+      "texto": "Nintendo incluyó el Rumble Pak GRATIS con Star Fox 64 porque quería que existiera vibración en su consola. El cartucho fue el caballo de Troya para que todos tuvieran el accesorio en casa.",
+      "estado": "excited",
+      "consola": "Nintendo 64",
+      "ano": 1997,
+      "editor": "Nintendo EAD",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-1.mp3",
+      "duracion_ms": 12120,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-mundial-2",
+      "tema": "Perfect Dark - Expansion Pak obligatorio",
+      "texto": "Perfect Dark fue el primer juego en obligar la compra de un upgrade de hardware. Sin el Expansion Pak no podías ni completar el primer nivel, así de exigente era con la memoria.",
+      "estado": "thinking",
+      "consola": "Nintendo 64",
+      "ano": 2000,
+      "editor": "Rare",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-2.mp3",
+      "duracion_ms": 11304,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-mundial-3",
+      "tema": "Paper Mario - Origen legal",
+      "texto": "Paper Mario iba a ser Super Mario RPG 2, pero cuando Square se fue a Sony, Nintendo cambió todo el estilo a papel para diferenciarlo. La estética nació de un problema legal, no creativo.",
+      "estado": "talking",
+      "consola": "Nintendo 64",
+      "ano": 2000,
+      "editor": "Intelligent Systems",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-3.mp3",
+      "duracion_ms": 12888,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-mundial-4",
+      "tema": "Majora's Mask - Un año de desarrollo",
+      "texto": "Majora's Mask se desarrolló en UN AÑO reutilizando el motor de Ocarina. El sistema de los tres días surgió más por restricción de tiempo que por decisión artística, pero terminó siendo lo que define al juego.",
+      "estado": "fact",
+      "consola": "Nintendo 64",
+      "ano": 2000,
+      "editor": "Nintendo EAD",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-4.mp3",
+      "duracion_ms": 12624,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-mundial-5",
+      "tema": "Super Smash Bros - Proyecto secreto",
+      "texto": "Super Smash Bros empezó como un side project que Iwata y Sakurai hicieron sin permiso de Nintendo. Lo terminaron a escondidas y lo presentaron como hecho consumado. Nintendo aceptó porque ya estaba listo.",
+      "estado": "winking",
+      "consola": "Nintendo 64",
+      "ano": 1999,
+      "editor": "HAL Laboratory",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-5.mp3",
+      "duracion_ms": 13248,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-mundial-6",
+      "tema": "Mario Kart 64 - El Spiny Shell político",
+      "texto": "El Spiny Shell de Mario Kart 64 se diseñó específicamente para que jugadores nuevos ganaran contra expertos. No fue decisión técnica sino política: arruinó amistades en todos los continentes.",
+      "estado": "happy",
+      "consola": "Nintendo 64",
+      "ano": 1996,
+      "editor": "Nintendo EAD",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-6.mp3",
+      "duracion_ms": 13488,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-mundial-7",
+      "tema": "GoldenEye 007 - Equipo sin experiencia",
+      "texto": "El director de GoldenEye, Martin Hollis, tenía treinta años y CERO experiencia en shooters. Rare nunca había hecho un FPS. Vendió ocho millones de copias y reescribió cómo se hacen los FPS de consola.",
+      "estado": "excited",
+      "consola": "Nintendo 64",
+      "ano": 1997,
+      "editor": "Rare",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-7.mp3",
+      "duracion_ms": 14976,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-mundial-8",
+      "tema": "Banjo-Kazooie - Sistema dinámico de música",
+      "texto": "Grant Kirkhope inventó un sistema dinámico donde la música cambiaba según el contexto: bajo el agua, en cueva, en altura. Eso resolvía limitaciones de memoria y nunca se había hecho antes en consola.",
+      "estado": "talking",
+      "consola": "Nintendo 64",
+      "ano": 1998,
+      "editor": "Rare",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-8.mp3",
+      "duracion_ms": 13176,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-mundial-9",
+      "tema": "Super Mario 64 - Control analógico libre",
+      "texto": "Super Mario 64 iba a ser on rails hasta que Miyamoto descubrió que el analógico permitía control libre. Cambió toda la dirección a mitad del desarrollo, atrasó un año el juego, pero definió cómo se haría TODO juego 3D después.",
+      "estado": "fact",
+      "consola": "Nintendo 64",
+      "ano": 1996,
+      "editor": "Nintendo EAD",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-9.mp3",
+      "duracion_ms": 15024,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-mundial-10",
+      "tema": "Ocarina of Time - Z-targeting revolucionario",
+      "texto": "Ocarina of Time definió la aventura 3D moderna con el Z-targeting que después usaron todos. Koji Kondo compuso Hyrule Field con música dinámica que cambió según la dirección, sistema que después tomaron GTA y Red Dead.",
+      "estado": "excited",
+      "consola": "Nintendo 64",
+      "ano": 1998,
+      "editor": "Nintendo EAD",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-10.mp3",
+      "duracion_ms": 14472,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-mundial-melodia-11",
+      "tipo": "melodia",
+      "tema": "Donkey Kong   Game Start",
+      "texto": "[Tocando: Donkey Kong   Game Start (8s)]",
+      "estado": "whistling",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-11.mp3",
+      "duracion_ms": 8045,
+      "fuente": "midi-render",
+      "midi_source": {
+        "midi": "studio/melodias/Donkey Kong - Game Start.mid",
+        "desde_s": 0.0,
+        "segundos": 8.0
+      }
+    },
+    {
+      "id": "n64-top-mundial-melodia-12",
+      "tipo": "melodia",
+      "tema": "Donkey Kong 64   Crystal Caves",
+      "texto": "[Tocando: Donkey Kong 64   Crystal Caves (8s)]",
+      "estado": "whistling",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-12.mp3",
+      "duracion_ms": 8045,
+      "fuente": "midi-render",
+      "midi_source": {
+        "midi": "studio/melodias/Donkey Kong 64 - Crystal Caves.mid",
+        "desde_s": 0.0,
+        "segundos": 8.0
+      }
+    },
+    {
+      "id": "n64-top-mundial-melodia-13",
+      "tipo": "melodia",
+      "tema": "Donkey Kong 64   Dk Isle Jungle Japes",
+      "texto": "[Tocando: Donkey Kong 64   Dk Isle Jungle Japes (8s)]",
+      "estado": "whistling",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-13.mp3",
+      "duracion_ms": 8045,
+      "fuente": "midi-render",
+      "midi_source": {
+        "midi": "studio/melodias/Donkey Kong 64 - DK Isle Jungle Japes.mid",
+        "desde_s": 0.0,
+        "segundos": 8.0
+      }
+    },
+    {
+      "id": "n64-top-mundial-melodia-14",
+      "tipo": "melodia",
+      "tema": "Donkey Kong Country   Aquatic Ambience",
+      "texto": "[Tocando: Donkey Kong Country   Aquatic Ambience (8s)]",
+      "estado": "whistling",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-14.mp3",
+      "duracion_ms": 8045,
+      "fuente": "midi-render",
+      "midi_source": {
+        "midi": "studio/melodias/Donkey Kong Country - Aquatic Ambience.mid",
+        "desde_s": 0.0,
+        "segundos": 8.0
+      }
+    },
+    {
+      "id": "n64-top-mundial-melodia-15",
+      "tipo": "melodia",
+      "tema": "Donkey Kong Country   Cranky'S Theme",
+      "texto": "[Tocando: Donkey Kong Country   Cranky'S Theme (8s)]",
+      "estado": "whistling",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-15.mp3",
+      "duracion_ms": 8045,
+      "fuente": "midi-render",
+      "midi_source": {
+        "midi": "studio/melodias/Donkey Kong Country - Cranky's Theme.mid",
+        "desde_s": 0.0,
+        "segundos": 8.0
+      }
+    },
+    {
+      "id": "n64-top-mundial-melodia-16",
+      "tipo": "melodia",
+      "tema": "Donkey Kong Country   Fear Factory",
+      "texto": "[Tocando: Donkey Kong Country   Fear Factory (8s)]",
+      "estado": "whistling",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-16.mp3",
+      "duracion_ms": 8045,
+      "fuente": "midi-render",
+      "midi_source": {
+        "midi": "studio/melodias/Donkey Kong Country - Fear Factory.mid",
+        "desde_s": 0.0,
+        "segundos": 8.0
+      }
+    },
+    {
+      "id": "n64-top-mundial-melodia-17",
+      "tipo": "melodia",
+      "tema": "Mario Bros.   Sea Waltz",
+      "texto": "[Tocando: Mario Bros.   Sea Waltz (8s)]",
+      "estado": "whistling",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-17.mp3",
+      "duracion_ms": 8045,
+      "fuente": "midi-render",
+      "midi_source": {
+        "midi": "studio/melodias/Mario Bros. - Sea Waltz.mid",
+        "desde_s": 0.0,
+        "segundos": 8.0
+      }
+    },
+    {
+      "id": "n64-top-mundial-melodia-18",
+      "tipo": "melodia",
+      "tema": "Mario Bros.   Super Mario Bros. Theme",
+      "texto": "[Tocando: Mario Bros.   Super Mario Bros. Theme (8s)]",
+      "estado": "whistling",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-18.mp3",
+      "duracion_ms": 8045,
+      "fuente": "midi-render",
+      "midi_source": {
+        "midi": "studio/melodias/Mario Bros. - Super Mario Bros. Theme.mid",
+        "desde_s": 0.0,
+        "segundos": 8.0
+      }
+    },
+    {
+      "id": "n64-top-mundial-melodia-19",
+      "tipo": "melodia",
+      "tema": "Mario Bros.   Underwater Waltz",
+      "texto": "[Tocando: Mario Bros.   Underwater Waltz (8s)]",
+      "estado": "whistling",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-19.mp3",
+      "duracion_ms": 8045,
+      "fuente": "midi-render",
+      "midi_source": {
+        "midi": "studio/melodias/Mario Bros. - Underwater Waltz.mid",
+        "desde_s": 0.0,
+        "segundos": 8.0
+      }
+    },
+    {
+      "id": "n64-top-mundial-melodia-20",
+      "tipo": "melodia",
+      "tema": "Sneskdccourse 8",
+      "texto": "[Tocando: Sneskdccourse 8 (8s)]",
+      "estado": "whistling",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-20.mp3",
+      "duracion_ms": 8045,
+      "fuente": "midi-render",
+      "midi_source": {
+        "midi": "studio/melodias/snesKDCCourse_8.mid",
+        "desde_s": 0.0,
+        "segundos": 8.0
+      }
+    },
+    {
+      "id": "n64-top-mundial-melodia-21",
+      "tipo": "melodia",
+      "tema": "Test Mary",
+      "texto": "[Tocando: Test Mary (8s)]",
+      "estado": "whistling",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "mp3": "audio/n64-top-mundial/n64-top-mundial-melodia-21.mp3",
+      "duracion_ms": 8045,
+      "fuente": "midi-render",
+      "midi_source": {
+        "midi": "studio/melodias/test-mary.mid",
+        "desde_s": 0.0,
+        "segundos": 8.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "slug": "n64-top-precios",
+  "episodio": "Top 10 N64 mas caros (precios)",
+  "creado": "2026-05-20",
+  "actualizado": "2026-05-20",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "datos": [
+    {
+      "id": "n64-top-precios-1",
+      "tema": "Conker's Bad Fur Day",
+      "texto": "Conker's Bad Fur Day cuesta 338 dólares porque fue el único juego M para adultos en una consola de niños. Salió cuando todos ya miraban GameCube, así que quedaron pocas copias y hoy es un coleccionable de culto.",
+      "estado": "talking",
+      "consola": "N64",
+      "ano": 2001,
+      "editor": "Rare",
+      "mp3": "audio/n64-top-precios/n64-top-precios-1.mp3",
+      "duracion_ms": 14568,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-precios-2",
+      "tema": "ISS 2000",
+      "texto": "International Superstar Soccer 2000 alcanza 650 dólares, pero aquí está el dato bomba: la versión PAL cuesta diez veces menos. El mismo juego vale diferente según de qué región salió el cartucho.",
+      "estado": "excited",
+      "consola": "N64",
+      "ano": 2000,
+      "editor": "Konami",
+      "mp3": "audio/n64-top-precios/n64-top-precios-2.mp3",
+      "duracion_ms": 13728,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-precios-3",
+      "tema": "Rat Attack!",
+      "texto": "Rat Attack! de Mindscape es el ejemplo perfecto del coleccionable involuntario: nadie pensó que valdría algo. Simplemente vendió tan mal y tuvo distribución tan mínima que quedaron pocas copias, ¡y hoy cuesta 685 dólares!",
+      "estado": "thinking",
+      "consola": "N64",
+      "ano": 2000,
+      "editor": "Mindscape",
+      "mp3": "audio/n64-top-precios/n64-top-precios-3.mp3",
+      "duracion_ms": 15504,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-precios-4",
+      "tema": "Transformers Beast Wars",
+      "texto": "Transformers Beast Wars Transmetals es un juego de pelea olvidado que explotó en precio por nostalgia: la serie se redescubrió por streaming y la demanda subió al cielo. Hoy vale 693 dólares por un revival cultural.",
+      "estado": "fact",
+      "consola": "N64",
+      "ano": 2000,
+      "editor": "BAM! Entertainment",
+      "mp3": "audio/n64-top-precios/n64-top-precios-4.mp3",
+      "duracion_ms": 14136,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-precios-5",
+      "tema": "Bomberman 64 The Second Attack",
+      "texto": "Bomberman 64 The Second Attack tuvo una de las subidas de precio más rápidas registradas: pasó de 488 a 990 dólares entre enero y febrero de 2022. Lo escaso no es el cartucho, sino la caja en perfecto estado.",
+      "estado": "winking",
+      "consola": "N64",
+      "ano": 2000,
+      "editor": "Hudson Soft",
+      "mp3": "audio/n64-top-precios/n64-top-precios-5.mp3",
+      "duracion_ms": 16464,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-precios-6",
+      "tema": "Worms Armageddon",
+      "texto": "Worms Armageddon NTSC USA cuesta mil 17 dólares, pero la versión PAL apenas 50 dólares. Es el mismo juego: la diferencia regional es brutal porque la distribución USA fue limitadísima y la demanda explotó.",
+      "estado": "excited",
+      "consola": "N64",
+      "ano": 2000,
+      "editor": "Team17",
+      "mp3": "audio/n64-top-precios/n64-top-precios-6.mp3",
+      "duracion_ms": 15480,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-precios-7",
+      "tema": "F1 Racing Championship",
+      "texto": "F1 Racing Championship nunca salió oficialmente en USA porque fue cancelado a último minuto. Los pocos cartuchos NTSC en circulación vienen solo de Brasil, y hoy valen mil 706 dólares. ¡Latam tiene rol histórico acá!",
+      "estado": "happy",
+      "consola": "N64",
+      "ano": 2000,
+      "editor": "Ubisoft",
+      "mp3": "audio/n64-top-precios/n64-top-precios-7.mp3",
+      "duracion_ms": 16872,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-precios-8",
+      "tema": "Super Bowling",
+      "texto": "Super Bowling de THQ tiene tirada microscópica: lanzado en marzo de 1999 sin marketing ni empaques especiales. Vendió tan mal que desapareció, y veinte años después el mercado lo redescubrió como rareza a mil 836 dólares.",
+      "estado": "talking",
+      "consola": "N64",
+      "ano": 1999,
+      "editor": "THQ",
+      "mp3": "audio/n64-top-precios/n64-top-precios-8.mp3",
+      "duracion_ms": 17208,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-precios-9",
+      "tema": "Stunt Racer 64",
+      "texto": "Stunt Racer 64 es exclusivo de Blockbuster y cuesta dos mil 300 dólares. Cuando las tiendas cerraron, se perdieron casi todas las copias: la rareza es real porque literalmente se botaron las cajas con los locales.",
+      "estado": "fact",
+      "consola": "N64",
+      "ano": 2000,
+      "editor": "Boss Game Studios",
+      "mp3": "audio/n64-top-precios/n64-top-precios-9.mp3",
+      "duracion_ms": 14592,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "n64-top-precios-10",
+      "tema": "ClayFighter 63⅓ Sculptor's Cut",
+      "texto": "ClayFighter 63⅓ Sculptor's Cut es el juego retail más caro del N64: solo se arrendaba en Blockbuster y cuesta hasta nueve mil 199 dólares sellado. Es un juego de muñecos de plastilina, ¡y es el más caro jamás vendido del N64!",
+      "estado": "confused",
+      "consola": "N64",
+      "ano": 1998,
+      "editor": "Interplay",
+      "mp3": "audio/n64-top-precios/n64-top-precios-10.mp3",
+      "duracion_ms": 17520,
+      "fuente": "pauta-auto"
+    }
+  ]
+}
