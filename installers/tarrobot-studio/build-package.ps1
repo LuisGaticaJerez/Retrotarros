@@ -18,7 +18,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$Version = "1.1"
+$Version = "1.2"
 $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RepoRoot = Resolve-Path (Join-Path $ScriptRoot "..\..")
 $DistDir = Join-Path $ScriptRoot "dist"
@@ -58,12 +58,39 @@ New-Item -ItemType Directory -Path (Join-Path $PackageDir "scripts") -Force | Ou
 Copy-Item (Join-Path $RepoRoot "scripts\tarrobot.py") -Destination (Join-Path $PackageDir "scripts\")
 Copy-Item (Join-Path $RepoRoot "scripts\tarrobot-live.py") -Destination (Join-Path $PackageDir "scripts\")
 Copy-Item (Join-Path $RepoRoot "scripts\tarrobot-tray.py") -Destination (Join-Path $PackageDir "scripts\")
+# Sprint 9: modulo de control OBS por WebSocket
+Copy-Item (Join-Path $RepoRoot "scripts\obs_controller.py") -Destination (Join-Path $PackageDir "scripts\")
+# Script de sync al Drive (opcional, util si el operador edita pautas localmente)
+Copy-Item (Join-Path $RepoRoot "scripts\sync-tarrobot-to-drive.ps1") -Destination (Join-Path $PackageDir "scripts\")
 
 # Copiar templates HTML
 Write-Host "Copiando templates HTML..." -ForegroundColor Green
 New-Item -ItemType Directory -Path (Join-Path $PackageDir "studio") -Force | Out-Null
 Copy-Item (Join-Path $RepoRoot "studio\_template-tarrobot-live.html") -Destination (Join-Path $PackageDir "studio\")
 Copy-Item (Join-Path $RepoRoot "studio\_template-tarrobot-control.html") -Destination (Join-Path $PackageDir "studio\")
+# Sprint 9-12: configs editables del personaje y recetas
+Copy-Item (Join-Path $RepoRoot "studio\obs-aliases.json") -Destination (Join-Path $PackageDir "studio\")
+Copy-Item (Join-Path $RepoRoot "studio\tarrobot-recetas.json") -Destination (Join-Path $PackageDir "studio\")
+
+# Sprint 12: carpetas vacias para exports/shorts (TarroBot escribe ahi)
+New-Item -ItemType Directory -Path (Join-Path $PackageDir "studio\exports") -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $PackageDir "studio\shorts") -Force | Out-Null
+"# Salida de /api/episodio/exportar-descripcion (titulos, descripciones, hashtags, prompts thumbnail)." |
+    Set-Content -Path (Join-Path $PackageDir "studio\exports\README.txt") -Encoding UTF8
+"# Salida de /api/queue/short-export (MP3 + SRT por dato puntual, listo para CapCut/DaVinci)." |
+    Set-Content -Path (Join-Path $PackageDir "studio\shorts\README.txt") -Encoding UTF8
+
+# Sprint 9: incluir FluidSynth + DLLs si Luis los tiene en installers/tarrobot-studio/bin/
+$binSrc = Join-Path $ScriptRoot "bin"
+if (Test-Path $binSrc) {
+    Write-Host "Copiando FluidSynth bin\..." -ForegroundColor Green
+    $binDst = Join-Path $PackageDir "bin"
+    New-Item -ItemType Directory -Path $binDst -Force | Out-Null
+    Get-ChildItem -Path $binSrc -File | ForEach-Object {
+        Copy-Item $_.FullName -Destination $binDst
+    }
+    Write-Host "  FluidSynth bundle incluido (saltea descarga del install.bat)" -ForegroundColor Gray
+}
 
 # Copiar base de datos
 Write-Host "Copiando base de datos TarroBot..." -ForegroundColor Green
