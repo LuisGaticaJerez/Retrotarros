@@ -923,12 +923,48 @@ def parsear_intent(texto: str) -> dict:
     return {"accion": "cuentame", "params": {"tema": texto.strip(), "generate_if_missing": True}}
 
 
+def _aplicar_wake_word(texto: str, wake: str) -> tuple[bool, str]:
+    """
+    Verifica si la transcripcion contiene la wake-word y devuelve el texto
+    limpio (sin la wake-word ni los caracteres antes de ella). Si no la
+    contiene, devuelve (False, texto). Sprint 8.2.
+    """
+    import re as _re
+    if not wake:
+        return True, texto
+
+    # Match flexible: 'tarrobot', 'tarro', 'taro bot', 'tarrobott', etc.
+    wake_lower = wake.lower().strip()
+    t_lower = texto.lower()
+
+    # Buscar primera ocurrencia
+    m = _re.search(r"\b" + _re.escape(wake_lower) + r"\w*\b", t_lower)
+    if not m:
+        # Fallback: variantes comunes con espacios o pronunciacion
+        variantes = ["tarrobot", "tarro bot", "taro bot", "tarobot", "tarrovot", "taro vot"]
+        for v in variantes:
+            idx = t_lower.find(v)
+            if idx >= 0:
+                m_start, m_end = idx, idx + len(v)
+                resto = texto[m_end:].strip(" ,.;:!?¿¡")
+                return True, resto
+        return False, texto
+
+    resto = texto[m.end():].strip(" ,.;:!?¿¡")
+    return True, resto
+
+
 @app.post("/api/listen")
-async def listen(request: Request):
+async def listen(request: Request, wake: str = ""):
     """
     Recibe audio del browser (mic del celu/PC), transcribe con Whisper local,
     parsea intent y dispara el endpoint correspondiente.
+
     Body: raw bytes (audio webm/opus).
+    Query opcional:
+      ?wake=tarrobot   modo continuo: solo procesa si la transcripcion
+                       contiene la wake-word. El resto del texto despues
+                       de la wake-word se usa como instruccion.
     """
     audio_bytes = await request.body()
     if not audio_bytes or len(audio_bytes) < 1000:
@@ -945,6 +981,22 @@ async def listen(request: Request):
 
     if not texto:
         return JSONResponse({"transcript": "", "error": "no se reconocio voz"}, status_code=400)
+
+    # Sprint 8.2: filtrado por wake-word en modo continuo
+    wake_detected, texto_limpio = _aplicar_wake_word(texto, wake)
+    if wake and not wake_detected:
+        return {"ok": True, "transcript": texto, "wake_detected": False, "ignored": True}
+    if wake and wake_detected and not texto_limpio:
+        # Detecto "tarrobot" solo, sin instruccion -> saludo default
+        return {
+            "ok": True,
+            "transcript": texto,
+            "wake_detected": True,
+            "accion": "saludar",
+            "params": {},
+            "result": await saludar({}),
+        }
+    texto = texto_limpio if wake else texto
 
     # Parsear intent
     intent = parsear_intent(texto)
@@ -980,6 +1032,7 @@ async def listen(request: Request):
     return {
         "ok": True,
         "transcript": texto,
+        "wake_detected": True if wake else None,
         "accion": accion,
         "params": params,
         "result": result,

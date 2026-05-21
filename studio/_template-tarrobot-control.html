@@ -287,6 +287,22 @@ select#queueSelect:focus { border-color: var(--ye); }
   0%, 100% { transform: scale(0.6); opacity: .5; }
   50%      { transform: scale(1.0); opacity: 1; }
 }
+/* ── INDICADOR VAD (modo continuo, Sprint 8.2) ──────────────── */
+.vad-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--mg);
+  display: inline-block;
+  animation: vad-pulse 0.8s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--mg);
+}
+@keyframes vad-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.7); }
+  50%      { opacity: 1;   transform: scale(1.0); }
+}
+#vadIndicator.show { display: inline-flex !important; }
+.vad-dot.voz-detectada { background: var(--cy); box-shadow: 0 0 12px var(--cy); animation-duration: 0.3s; }
+
 .proc-bar .proc-motivo {
   font-family: 'Share Tech Mono', monospace;
   font-size: 11px;
@@ -332,9 +348,18 @@ select#queueSelect:focus { border-color: var(--ye); }
   <div id="queueList"></div>
 </div>
 
-<!-- VOZ · push to talk -->
+<!-- VOZ · push to talk + modo continuo -->
 <div class="card">
   <h2>🎤 HABLAR A TARROBOT</h2>
+  <div class="toggle-row" style="justify-content:space-between; margin-bottom:10px;">
+    <label for="modoContinuo" style="display:flex; align-items:center; gap:8px;">
+      <input type="checkbox" id="modoContinuo">
+      <span>MODO CONTINUO 🎧 (di "TarroBot, ..." sin tocar)</span>
+    </label>
+    <span id="vadIndicator" style="display:none; align-items:center; gap:6px; font-size:10px; color:var(--mg);">
+      <span class="vad-dot"></span>ESCUCHANDO
+    </span>
+  </div>
   <button class="btn full ye" id="micBtn" style="font-size:13px; padding:22px 8px;">
     🎤 MANTÉN PRESIONADO Y HABLA
   </button>
@@ -693,6 +718,166 @@ micBtn.addEventListener('pointercancel', function() { stopRecord(); });
 // Touch events para iOS Safari
 micBtn.addEventListener('touchstart', function(e) { e.preventDefault(); startRecord(); }, { passive: false });
 micBtn.addEventListener('touchend', function(e) { e.preventDefault(); stopRecord(); }, { passive: false });
+
+// ─── Sprint 8.2: MODO CONTINUO con wake-word "TarroBot" ──────────
+// VAD basico via Web Audio API: detecta inicio/fin de voz por RMS.
+// Cuando termina la voz, envia el chunk al server con ?wake=tarrobot
+// y este lo procesa solo si la transcripcion contiene la wake-word.
+
+const modoContinuoToggle = document.getElementById('modoContinuo');
+const vadIndicator = document.getElementById('vadIndicator');
+const vadDot = vadIndicator.querySelector('.vad-dot');
+
+const VAD_THRESHOLD     = 0.025;   // RMS umbral para considerar voz (0-1)
+const VAD_SILENCE_MS    = 1300;    // silencio para cortar grabacion
+const VAD_MIN_VOICE_MS  = 350;     // minimo de voz para empezar a grabar
+const VAD_MAX_RECORD_MS = 10000;   // tope de grabacion por chunk
+
+let vadStream = null, vadCtx = null, vadAnalyser = null, vadData = null;
+let vadRecorder = null, vadChunks = [];
+let vadRafId = null;
+let vadHabilitado = false;
+let vadEstado = 'esperando';   // esperando | grabando | enviando
+let vadVozDesde = null, vadSilencioDesde = null;
+let vadRecordStartTs = null;
+
+async function vadStart() {
+  try {
+    vadStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    vadCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const source = vadCtx.createMediaStreamSource(vadStream);
+    vadAnalyser = vadCtx.createAnalyser();
+    vadAnalyser.fftSize = 512;
+    vadAnalyser.smoothingTimeConstant = 0.3;
+    source.connect(vadAnalyser);
+    vadData = new Uint8Array(vadAnalyser.frequencyBinCount);
+    vadHabilitado = true;
+    vadIndicator.classList.add('show');
+    vadEstado = 'esperando';
+    logMsg('modo continuo: escuchando wake-word "TarroBot"...', 'ok');
+    vadLoop();
+  } catch (e) {
+    logMsg('VAD fail: ' + e.message, 'err');
+    modoContinuoToggle.checked = false;
+  }
+}
+
+function vadStop() {
+  vadHabilitado = false;
+  if (vadRafId) cancelAnimationFrame(vadRafId);
+  vadRafId = null;
+  if (vadRecorder && vadRecorder.state === 'recording') {
+    try { vadRecorder.stop(); } catch (e) {}
+  }
+  if (vadStream) vadStream.getTracks().forEach(t => t.stop());
+  if (vadCtx) vadCtx.close();
+  vadStream = vadCtx = vadAnalyser = vadRecorder = null;
+  vadIndicator.classList.remove('show');
+  vadDot.classList.remove('voz-detectada');
+  logMsg('modo continuo: desactivado', 'ok');
+}
+
+function vadCalcularRMS() {
+  vadAnalyser.getByteTimeDomainData(vadData);
+  let sum = 0;
+  for (let i = 0; i < vadData.length; i++) {
+    const v = (vadData[i] - 128) / 128;
+    sum += v * v;
+  }
+  return Math.sqrt(sum / vadData.length);
+}
+
+function vadIniciarGrabacion() {
+  vadChunks = [];
+  vadRecorder = new MediaRecorder(vadStream, { mimeType: 'audio/webm' });
+  vadRecorder.ondataavailable = (e) => { if (e.data && e.data.size > 0) vadChunks.push(e.data); };
+  vadRecorder.onstop = vadProcesarChunk;
+  vadRecorder.start();
+  vadRecordStartTs = Date.now();
+  vadEstado = 'grabando';
+  vadDot.classList.add('voz-detectada');
+}
+
+function vadCortarGrabacion() {
+  if (vadRecorder && vadRecorder.state === 'recording') {
+    try { vadRecorder.stop(); } catch (e) {}
+  }
+  vadDot.classList.remove('voz-detectada');
+  vadEstado = 'enviando';
+}
+
+async function vadProcesarChunk() {
+  const blob = new Blob(vadChunks, { type: 'audio/webm' });
+  vadChunks = [];
+  if (blob.size < 2000) {
+    vadEstado = 'esperando';
+    return;
+  }
+  try {
+    const r = await fetch('/api/listen?wake=tarrobot', {
+      method: 'POST',
+      headers: { 'Content-Type': 'audio/webm' },
+      body: blob,
+    });
+    const data = await r.json();
+    if (data.ok && data.wake_detected) {
+      micTranscript.textContent = '🎙️ ' + data.transcript;
+      micTranscript.style.display = 'block';
+      if (data.accion) {
+        micAction.textContent = '→ ' + data.accion;
+        micAction.style.display = 'block';
+        logMsg('VOZ continuo: "' + data.transcript + '" -> ' + data.accion, 'ok');
+      }
+    } else if (data.ok && data.ignored) {
+      // Silencioso: no contenia wake-word, no se ejecuta nada
+      logMsg('voz sin wake-word, ignorada: "' + (data.transcript || '').slice(0, 40) + '"');
+    }
+  } catch (e) {
+    logMsg('VAD send fail: ' + e.message, 'err');
+  } finally {
+    vadEstado = 'esperando';
+  }
+}
+
+function vadLoop() {
+  if (!vadHabilitado) return;
+  const rms = vadCalcularRMS();
+  const ahora = Date.now();
+
+  if (vadEstado === 'esperando') {
+    if (rms > VAD_THRESHOLD) {
+      if (!vadVozDesde) vadVozDesde = ahora;
+      if (ahora - vadVozDesde > VAD_MIN_VOICE_MS) {
+        vadIniciarGrabacion();
+        vadSilencioDesde = null;
+      }
+    } else {
+      vadVozDesde = null;
+    }
+  } else if (vadEstado === 'grabando') {
+    if (rms < VAD_THRESHOLD) {
+      if (!vadSilencioDesde) vadSilencioDesde = ahora;
+      if (ahora - vadSilencioDesde > VAD_SILENCE_MS) {
+        vadCortarGrabacion();
+        vadVozDesde = null; vadSilencioDesde = null;
+      }
+    } else {
+      vadSilencioDesde = null;
+    }
+    // Tope absoluto de grabacion
+    if (vadRecordStartTs && ahora - vadRecordStartTs > VAD_MAX_RECORD_MS) {
+      vadCortarGrabacion();
+      vadVozDesde = null; vadSilencioDesde = null;
+    }
+  }
+
+  vadRafId = requestAnimationFrame(vadLoop);
+}
+
+modoContinuoToggle.addEventListener('change', () => {
+  if (modoContinuoToggle.checked) vadStart();
+  else vadStop();
+});
 
 // ─── COLA DEL EPISODIO ─────────────────────────────────────────────
 const queueSelect    = document.getElementById('queueSelect');
