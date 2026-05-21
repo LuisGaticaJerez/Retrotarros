@@ -126,7 +126,7 @@ body.lipsync-active.is-talking .tb-mouth-talking {
 @keyframes tb-heavy-blink { 0%, 100% { transform: scaleY(1); } 30%, 80% { transform: scaleY(0.15); } }
 .is-drowsy .tb-eyes-drowsy { transform-origin: center; animation: tb-heavy-blink 3s ease-in-out infinite; }
 
-.tb-eyes-default, .tb-eyes-excited, .tb-eyes-sleep, .tb-eyes-thinking, .tb-eyes-winking, .tb-eyes-confused, .tb-eyes-glitched, .tb-eyes-happy, .tb-eyes-sad, .tb-eyes-angry, .tb-eyes-loading, .tb-eyes-bored, .tb-eyes-drowsy { display: none; }
+.tb-eyes-default, .tb-eyes-excited, .tb-eyes-sleep, .tb-eyes-thinking, .tb-eyes-winking, .tb-eyes-confused, .tb-eyes-glitched, .tb-eyes-happy, .tb-eyes-sad, .tb-eyes-angry, .tb-eyes-loading, .tb-eyes-bored, .tb-eyes-drowsy, .tb-eyes-whistling { display: none; }
 .is-idle .tb-eyes-default, .is-talking .tb-eyes-default, .is-fact .tb-eyes-default { display: block; }
 .is-excited .tb-eyes-excited { display: block; }
 .is-sleep .tb-eyes-sleep { display: block; }
@@ -140,6 +140,12 @@ body.lipsync-active.is-talking .tb-mouth-talking {
 .is-loading .tb-eyes-loading { display: block; }
 .is-bored .tb-eyes-bored { display: block; }
 .is-drowsy .tb-eyes-drowsy { display: block; }
+.is-whistling .tb-eyes-whistling { display: block; }
+.is-whistling .tb-eye-shape { animation: none; }   /* desactiva el blink del default */
+
+/* Sprint 8.x: ojitos entrecerrados al silbar - concentracion */
+@keyframes tb-eyes-whistle { 0%, 100% { transform: scaleY(1); } 35%, 65% { transform: scaleY(0.6); } }
+.is-whistling .tb-eyes-whistling g { transform-origin: center; animation: tb-eyes-whistle 1.8s ease-in-out infinite; }
 
 .tb-extras { display: none; }
 .is-thinking .tb-extras-thinking,
@@ -352,6 +358,22 @@ body.debug .ws-status { display: block; }
             <rect x="74" y="40" width="18" height="8" fill="#00E5FF"/>
             <rect x="74" y="38" width="18" height="2" fill="#0a0820" opacity=".6"/>
             <rect x="80" y="42" width="6" height="4" fill="#0a0820"/>
+          </g>
+
+          <!-- Sprint 8.x: ojitos entrecerrados al silbar (concentracion) -->
+          <g class="tb-eyes-whistling">
+            <!-- Ojo izq: rectangulo cyan delgado (parpado caido) + pestaña arriba -->
+            <g>
+              <rect x="28" y="38" width="18" height="3" fill="#0a0820"/>
+              <rect x="28" y="41" width="18" height="6" fill="#00E5FF"/>
+              <rect x="34" y="43" width="6" height="3" fill="#0a0820"/>
+            </g>
+            <!-- Ojo der: igual -->
+            <g>
+              <rect x="74" y="38" width="18" height="3" fill="#0a0820"/>
+              <rect x="74" y="41" width="18" height="6" fill="#00E5FF"/>
+              <rect x="80" y="43" width="6" height="3" fill="#0a0820"/>
+            </g>
           </g>
 
           <!-- LENTES -->

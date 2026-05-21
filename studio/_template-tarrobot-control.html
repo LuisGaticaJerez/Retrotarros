@@ -633,8 +633,32 @@ let mediaRecorder = null;
 let audioChunks = [];
 let micReady = false;
 
+function _checkMicSupport() {
+  // Detecta si el browser puede usar getUserMedia en este contexto.
+  // navigator.mediaDevices es undefined si:
+  //   - No es contexto seguro (HTTP en IP no-local, no HTTPS)
+  //   - Browser muy viejo sin la API
+  if (!navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia !== 'function') {
+    const url = location.href;
+    let mensaje;
+    if (url.startsWith('http://') && !url.includes('localhost') && !url.includes('127.0.0.1')) {
+      mensaje = 'Mic bloqueado por seguridad de Chrome. Abre el panel desde http://localhost:8765/control (PC) o configura el sitio como seguro en chrome://flags/#unsafely-treat-insecure-origin-as-secure poniendo tu IP local.';
+    } else {
+      mensaje = 'navigator.mediaDevices no esta disponible. Necesitas Chrome/Edge/Firefox actualizado.';
+    }
+    return mensaje;
+  }
+  return null;
+}
+
 async function setupMic() {
   if (micReady) return true;
+  const err = _checkMicSupport();
+  if (err) {
+    micStatus.textContent = err;
+    logMsg('mic no disponible: ' + err, 'err');
+    return false;
+  }
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
@@ -742,6 +766,13 @@ let vadVozDesde = null, vadSilencioDesde = null;
 let vadRecordStartTs = null;
 
 async function vadStart() {
+  const err = _checkMicSupport();
+  if (err) {
+    logMsg('modo continuo no disponible: ' + err, 'err');
+    modoContinuoToggle.checked = false;
+    alert(err);
+    return;
+  }
   try {
     vadStream = await navigator.mediaDevices.getUserMedia({ audio: true });
     vadCtx = new (window.AudioContext || window.webkitAudioContext)();
