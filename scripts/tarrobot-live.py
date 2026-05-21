@@ -41,10 +41,10 @@ import uvicorn
 sys.path.insert(0, str(Path(__file__).parent))
 from tarrobot import (
     cargar_db, buscar, agregar_dato, generar_con_llm,
-    generar_tts, resolver_voz,
+    generar_tts, resolver_voz, resolver_preset,
     cargar_pauta, pauta_audio_dir, pauta_to_srt,
     LABEL_POR_ESTADO, ESTADOS, VOZ_DEFAULT, PITCH_DEFAULT, RATE_DEFAULT,
-    OUT_DIR, PAUTAS_DIR, PAUTAS_AUDIO_DIR,
+    OUT_DIR, PAUTAS_DIR, PAUTAS_AUDIO_DIR, PRESETS_VOZ,
 )
 
 # REPO puede venir de env var (modo Drive) o del path del script. Si tarrobot.py
@@ -155,6 +155,22 @@ IDLE_SLEEP_AFTER = 120   # 120s sin input → sleep
 
 # Puerto del server (constante de modulo asi el thread de hotkeys lo conoce)
 PORT = 8765
+
+# Voz/preset actual del server. Cambiable en vivo via /api/voz.
+# Si un endpoint recibe voz/pitch/rate en el payload, esos pisan al preset.
+_voz_preset_actual = "tarrobot"
+
+
+def _obtener_voz_pitch_rate(payload: dict) -> tuple[str, str, str]:
+    """
+    Devuelve (voz, pitch, rate) considerando: 1) payload override 2) preset actual.
+    """
+    voz_preset, pitch_preset, rate_preset = resolver_preset(_voz_preset_actual)
+    voz = resolver_voz(payload.get("voz")) if payload.get("voz") else voz_preset
+    pitch = payload.get("pitch") or pitch_preset
+    rate = payload.get("rate") or rate_preset
+    return voz, pitch, rate
+
 
 tracker = ActivityTracker()
 
@@ -527,7 +543,7 @@ async def cuentame(payload: dict):
     if not tema:
         return JSONResponse({"error": "tema vacio"}, status_code=400)
 
-    voz = resolver_voz(payload.get("voz") or "catalina")
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     generate_if_missing = bool(payload.get("generate_if_missing", False))
 
     db = cargar_db()
@@ -557,7 +573,7 @@ async def cuentame(payload: dict):
         return JSONResponse({"error": f"sin dato para '{tema}' (usa generate_if_missing=true para llamar Claude)"}, status_code=404)
 
     # Generar MP3 en thread (generar_tts usa asyncio.run interno que rompe el loop)
-    mp3 = await asyncio.to_thread(generar_tts, dato, voz)
+    mp3 = await asyncio.to_thread(generar_tts, dato, voz, pitch, rate)
     audio_url = f"/audio/{mp3.name}" if mp3 else None
 
     tracker.mark_speaking(True)
@@ -575,13 +591,17 @@ async def cuentame(payload: dict):
     return {"ok": True, "dato": dato, "audio_url": audio_url}
 
 
-async def _hablar_frase(texto: str, estado: str, label: str, voz: str) -> Optional[str]:
+async def _hablar_frase(texto: str, estado: str, label: str, voz: str,
+                        pitch: Optional[str] = None, rate: Optional[str] = None) -> Optional[str]:
     """
     Genera TTS de una frase suelta (sin tema asociado) y dispara WS.
-    Usado por /api/saludar y /api/despedir.
-    Retorna la URL del audio o None si fallo.
+    Usado por /api/saludar, /api/despedir, /api/catchphrase, /api/opinar, /api/precio.
     """
     import time
+    if pitch is None or rate is None:
+        _, p_default, r_default = resolver_preset(_voz_preset_actual)
+        pitch = pitch or p_default
+        rate = rate or r_default
     fake_dato = {
         "id": f"frase-{int(time.time() * 1000)}",
         "tema": "frase",
@@ -589,7 +609,7 @@ async def _hablar_frase(texto: str, estado: str, label: str, voz: str) -> Option
         "estado": estado,
         "consola": "", "ano": 0, "editor": "",
     }
-    mp3 = await asyncio.to_thread(generar_tts, fake_dato, voz)
+    mp3 = await asyncio.to_thread(generar_tts, fake_dato, voz, pitch, rate)
     audio_url = f"/audio/{mp3.name}" if mp3 else None
 
     tracker.mark_speaking(True)
@@ -666,7 +686,7 @@ async def opinar(payload: dict):
     if not tema:
         return JSONResponse({"error": "tema vacio"}, status_code=400)
 
-    voz = resolver_voz(payload.get("voz") or "catalina")
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
 
     async with _procesando(f"opinando de {tema}..."):
@@ -679,7 +699,7 @@ async def opinar(payload: dict):
     if estado not in ESTADOS:
         estado = "talking"
 
-    audio_url = await _hablar_frase(texto, estado, f"¿QUE OPINO DE {tema.upper()}?", voz)
+    audio_url = await _hablar_frase(texto, estado, f"¿QUE OPINO DE {tema.upper()}?", voz, pitch, rate)
     return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url, "tema": tema}
 
 
@@ -695,7 +715,7 @@ async def precio(payload: dict):
         return JSONResponse({"error": "valor_usd invalido"}, status_code=400)
 
     juego = (payload.get("juego") or "").strip()
-    voz = resolver_voz(payload.get("voz") or "catalina")
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
 
     # Formatear el valor en palabras para que TTS lo pronuncie bien
@@ -743,7 +763,7 @@ async def precio(payload: dict):
     if juego:
         texto = f"¿{juego} a {valor_str}? " + texto
 
-    audio_url = await _hablar_frase(texto, estado, "REACCION PRECIO", voz)
+    audio_url = await _hablar_frase(texto, estado, "REACCION PRECIO", voz, pitch, rate)
     return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
 
 
@@ -755,7 +775,7 @@ async def random_dato(payload: dict):
     """
     import random as _rnd
     categoria = (payload.get("categoria") or "all").lower()
-    voz = resolver_voz(payload.get("voz") or "catalina")
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
 
     db = cargar_db()
@@ -779,7 +799,7 @@ async def random_dato(payload: dict):
 
     dato = _rnd.choice(candidatos)
 
-    mp3 = await asyncio.to_thread(generar_tts, dato, voz)
+    mp3 = await asyncio.to_thread(generar_tts, dato, voz, pitch, rate)
     audio_url = f"/audio/{mp3.name}" if mp3 else None
 
     tracker.mark_speaking(True)
@@ -800,10 +820,10 @@ async def random_dato(payload: dict):
 async def saludar(payload: dict):
     """Reproduce un saludo geek random con estado excited."""
     import random
-    voz = resolver_voz(payload.get("voz") or "catalina")
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
     texto = random.choice(SALUDOS_GEEK)
-    audio_url = await _hablar_frase(texto, "excited", "HOLA HOLA", voz)
+    audio_url = await _hablar_frase(texto, "excited", "HOLA HOLA", voz, pitch, rate)
     return {"ok": True, "texto": texto, "audio_url": audio_url}
 
 
@@ -811,10 +831,10 @@ async def saludar(payload: dict):
 async def despedir(payload: dict):
     """Reproduce una despedida corta random con estado winking."""
     import random
-    voz = resolver_voz(payload.get("voz") or "catalina")
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
     texto = random.choice(DESPEDIDAS_CORTAS)
-    audio_url = await _hablar_frase(texto, "winking", "HASTA LUEGO", voz)
+    audio_url = await _hablar_frase(texto, "winking", "HASTA LUEGO", voz, pitch, rate)
     return {"ok": True, "texto": texto, "audio_url": audio_url}
 
 
@@ -822,11 +842,11 @@ async def despedir(payload: dict):
 async def catchphrase(payload: dict):
     """Reproduce una catchphrase random del canal Retrotarros (Sprint 7.3)."""
     import random
-    voz = resolver_voz(payload.get("voz") or "catalina")
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
     texto = random.choice(CATCHPHRASES)
     estado = random.choice(CATCHPHRASE_ESTADOS)
-    audio_url = await _hablar_frase(texto, estado, "RETROTARROS!", voz)
+    audio_url = await _hablar_frase(texto, estado, "RETROTARROS!", voz, pitch, rate)
     return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
 
 
@@ -835,6 +855,37 @@ async def audio_finished():
     """El cliente HTML llama esto cuando termina de reproducir un MP3."""
     tracker.mark_speaking(False)
     return {"ok": True}
+
+
+@app.get("/api/voz")
+async def voz_get():
+    """Devuelve el preset actual y la lista de presets disponibles."""
+    voz, pitch, rate = resolver_preset(_voz_preset_actual)
+    return {
+        "preset": _voz_preset_actual,
+        "voz": voz,
+        "pitch": pitch,
+        "rate": rate,
+        "presets": {nombre: {"voz": v, "pitch": p, "rate": r}
+                    for nombre, (v, p, r) in PRESETS_VOZ.items()},
+    }
+
+
+@app.post("/api/voz")
+async def voz_set(payload: dict):
+    """
+    Cambia el preset de voz activo del server.
+    Body: { "preset": "tarrobot-nino" }
+    Tambien acepta voz/pitch/rate individuales como override del preset.
+    """
+    global _voz_preset_actual
+    nuevo = payload.get("preset")
+    if nuevo and nuevo not in PRESETS_VOZ:
+        return JSONResponse({"error": f"preset '{nuevo}' no existe. Validos: {list(PRESETS_VOZ.keys())}"}, status_code=400)
+    if nuevo:
+        _voz_preset_actual = nuevo
+    voz, pitch, rate = resolver_preset(_voz_preset_actual)
+    return {"ok": True, "preset": _voz_preset_actual, "voz": voz, "pitch": pitch, "rate": rate}
 
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -1090,7 +1141,14 @@ async def _reproducir_dato_de_cola(dato: dict, voz_override: Optional[str] = Non
     genera TTS al vuelo. Dispara el WS 'hablar' a las pantallas live.
     Devuelve la audio_url usada.
     """
-    voz = resolver_voz(voz_override) if voz_override else queue.pauta.get("voz", VOZ_DEFAULT)
+    # Prioridad: voz_override del request > voz del JSON de pauta > preset actual
+    preset_voz, preset_pitch, preset_rate = resolver_preset(_voz_preset_actual)
+    if voz_override:
+        voz = resolver_voz(voz_override)
+    else:
+        voz = queue.pauta.get("voz") or preset_voz
+    pitch = queue.pauta.get("pitch") or preset_pitch
+    rate = queue.pauta.get("rate") or preset_rate
 
     # 1. Intentar MP3 precargado
     audio_url = _audio_url_de_pauta(queue.slug, dato)
@@ -1099,7 +1157,7 @@ async def _reproducir_dato_de_cola(dato: dict, voz_override: Optional[str] = Non
     if not audio_url:
         print(f"[queue] dato {dato['id']} sin MP3 precargado, generando al vuelo...")
         async with _procesando(f"generando audio para {dato['tema'][:30]}..."):
-            mp3 = await asyncio.to_thread(generar_tts, dato, voz)
+            mp3 = await asyncio.to_thread(generar_tts, dato, voz, pitch, rate)
         audio_url = f"/audio/{mp3.name}" if mp3 else None
 
     tracker.mark_speaking(True)

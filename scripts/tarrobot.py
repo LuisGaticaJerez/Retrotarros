@@ -25,6 +25,7 @@ import re
 import sys
 from pathlib import Path
 from datetime import date
+from typing import Optional
 
 # REPO puede venir de env var (modo Drive, estudio compartido) o del path del script.
 # Esto permite que el PC del estudio lea el repo desde el Drive sincronizado y
@@ -244,6 +245,32 @@ VOZ_DEFAULT = "es-CL-CatalinaNeural"
 PITCH_DEFAULT = "+12Hz"   # un poco mas joven/curioso
 RATE_DEFAULT = "+0%"
 
+# Presets de voz: cada uno combina (voz Edge TTS, pitch, rate) para un
+# estilo distinto. Los presets "-nino" suben el pitch para sonar mas
+# infantil. El default es "tarrobot" (catalina +12Hz).
+PRESETS_VOZ = {
+    # Default actual: joven curioso femenino chileno
+    "tarrobot":        ("es-CL-CatalinaNeural", "+12Hz", "+0%"),
+    # Mas infantil: pitch elevado, mas energico
+    "tarrobot-nino":   ("es-CL-CatalinaNeural", "+24Hz", "+5%"),
+    "tarrobot-bebe":   ("es-CL-CatalinaNeural", "+35Hz", "+8%"),
+    # Niño masculino chileno
+    "tarrobot-pibe":   ("es-CL-LorenzoNeural",  "+18Hz", "+5%"),
+    # Otras voces femeninas latinas con pitch infantil
+    "renata-nina":     ("es-NI-YolandaNeural",  "+18Hz", "+3%"),
+    "karina-nina":     ("es-PR-KarinaNeural",   "+18Hz", "+3%"),
+    "camila-nina":     ("es-PE-CamilaNeural",   "+18Hz", "+3%"),
+    "paola-nina":      ("es-VE-PaolaNeural",    "+18Hz", "+3%"),
+    "valentina-nina":  ("es-UY-ValentinaNeural","+18Hz", "+3%"),
+    "sofia-nina":      ("es-BO-SofiaNeural",    "+18Hz", "+3%"),
+    # Mexicanas
+    "dalia":           ("es-MX-DaliaNeural",    "+14Hz", "+0%"),
+    "jorge-pibe":      ("es-MX-JorgeNeural",    "+18Hz", "+5%"),
+    # Tonos especiales
+    "narrador":        ("es-MX-DaliaNeural",    "+0Hz",  "-5%"),  # serio
+    "energico":        ("es-CL-CatalinaNeural", "+15Hz", "+10%"), # rapido entusiasta
+}
+
 
 def resolver_voz(voz_arg: str) -> str:
     """Acepta alias corto ('catalina') o nombre completo Edge ('es-CL-...')."""
@@ -251,7 +278,20 @@ def resolver_voz(voz_arg: str) -> str:
         return VOZ_DEFAULT
     if voz_arg in VOCES_SUGERIDAS:
         return VOCES_SUGERIDAS[voz_arg]
+    # Si es un preset, devolver solo la voz (el pitch/rate los maneja resolver_preset)
+    if voz_arg in PRESETS_VOZ:
+        return PRESETS_VOZ[voz_arg][0]
     return voz_arg
+
+
+def resolver_preset(nombre: Optional[str]) -> tuple[str, str, str]:
+    """
+    Devuelve (voz, pitch, rate) para un preset nombrado.
+    Si no existe, devuelve los defaults.
+    """
+    if nombre and nombre in PRESETS_VOZ:
+        return PRESETS_VOZ[nombre]
+    return (VOZ_DEFAULT, PITCH_DEFAULT, RATE_DEFAULT)
 
 
 def generar_tts(dato: dict, voz: str = VOZ_DEFAULT, pitch: str = PITCH_DEFAULT, rate: str = RATE_DEFAULT) -> Path | None:

@@ -418,6 +418,17 @@ select#queueSelect:focus { border-color: var(--ye); }
   <div id="micAction" style="margin-top:4px; font-size:10px; color:var(--mg); letter-spacing:2px; text-align:right; display:none;"></div>
 </div>
 
+<!-- VOZ DE TARROBOT (preset selector) -->
+<div class="card">
+  <h2>🗣️ VOZ DE TARROBOT</h2>
+  <select id="vozPreset" style="width:100%; background:rgba(0,0,0,.5); border:1px solid rgba(0,229,255,.3); color:#fff; font-family:'Share Tech Mono',monospace; font-size:13px; padding:10px 12px; border-radius:4px; margin-bottom:8px;"></select>
+  <div id="vozInfo" style="font-size:10px; color:rgba(255,255,255,.55); margin-bottom:8px; min-height:14px;"></div>
+  <div class="btn-row">
+    <button class="btn cy" onclick="aplicarVoz()" style="flex:2">APLICAR ▸</button>
+    <button class="btn ye" onclick="probarVoz()" style="flex:1">PROBAR</button>
+  </div>
+</div>
+
 <!-- SALUDOS Y DESPEDIDAS -->
 <div class="card">
   <h2>👋 SALUDOS · DESPEDIDAS · MARCA</h2>
@@ -1241,9 +1252,70 @@ function stopQueuePoll() {
   }
 }
 
-// Inicializar cola al cargar
+// ─── VOZ DE TARROBOT (selector de preset) ─────────────────────────
+const vozPresetEl = document.getElementById('vozPreset');
+const vozInfoEl   = document.getElementById('vozInfo');
+
+async function cargarPresetsVoz() {
+  try {
+    const r = await fetch('/api/voz');
+    const data = await r.json();
+    while (vozPresetEl.firstChild) vozPresetEl.removeChild(vozPresetEl.firstChild);
+    for (const [nombre, conf] of Object.entries(data.presets || {})) {
+      const o = document.createElement('option');
+      o.value = nombre;
+      o.textContent = nombre + '  (' + conf.voz.replace('es-', '').replace('Neural', '') + ' · ' + conf.pitch + ')';
+      if (nombre === data.preset) o.selected = true;
+      vozPresetEl.appendChild(o);
+    }
+    actualizarVozInfo(data.preset, data.presets);
+  } catch (e) {
+    logMsg('cargarPresetsVoz fail: ' + e.message, 'err');
+  }
+}
+
+function actualizarVozInfo(presetActual, presets) {
+  while (vozInfoEl.firstChild) vozInfoEl.removeChild(vozInfoEl.firstChild);
+  if (!presets || !presets[presetActual]) return;
+  const c = presets[presetActual];
+  vozInfoEl.textContent = 'Activo: ' + c.voz + '  pitch=' + c.pitch + '  rate=' + c.rate;
+}
+
+vozPresetEl.addEventListener('change', async () => {
+  // Mostrar info del seleccionado (no aplicar hasta presionar boton)
+  try {
+    const r = await fetch('/api/voz');
+    const data = await r.json();
+    const seleccionado = vozPresetEl.value;
+    if (data.presets[seleccionado]) {
+      const c = data.presets[seleccionado];
+      vozInfoEl.textContent = 'Seleccionado: ' + c.voz + '  pitch=' + c.pitch + '  rate=' + c.rate + '  (presiona APLICAR)';
+    }
+  } catch (e) {}
+});
+
+async function aplicarVoz() {
+  const preset = vozPresetEl.value;
+  const data = await post('/api/voz', { preset: preset });
+  if (data && data.ok) {
+    logMsg('voz cambiada a: ' + preset, 'ok');
+    cargarPresetsVoz();
+  }
+}
+
+async function probarVoz() {
+  const preset = vozPresetEl.value;
+  // Primero aplicar el preset, despues saludar
+  await post('/api/voz', { preset: preset });
+  await post('/api/saludar', {});
+  logMsg('probando voz: ' + preset, 'ok');
+  cargarPresetsVoz();
+}
+
+// Inicializar cola y voz al cargar
 refreshQueueList();
 pollQueueOnce();
+cargarPresetsVoz();
 
 logMsg('Listo. Pulsa un boton.', 'ok');
 ping();
