@@ -173,6 +173,46 @@ comandos de camara silenciosamente. Todo lo demas funciona igual.
 
 
 ============================================================
+GENERAR PAUTA AUTO DESDE UN TEMA (Sprint 11)
+============================================================
+
+TarroBot puede armar una pauta completa para un episodio nuevo
+solo pidiendoselo. Le das un tema, le dice cuantos datos
+quieres y Claude genera todo + MP3s listos para grabar.
+
+DESDE EL PANEL:
+1. Abre el panel control en el browser.
+2. Busca la card "GENERAR PAUTA AUTO".
+3. Escribe el tema (ej: "Top SNES exclusivos japoneses").
+4. Opcional: consola (ej: "SNES"), cantidad de datos (default 10),
+   slug del archivo (default: derivado del tema).
+5. Click "GENERAR PAUTA". Tarda 1-3 min (LLM + TTS).
+6. Cuando termina, te pregunta si quieres cargarla en la cola.
+
+DESDE LA TERMINAL (CMD/PowerShell):
+   python scripts\tarrobot.py --pauta-tema "Mega Drive raros"
+   python scripts\tarrobot.py --pauta-tema "Joyas N64 PAL" ^
+       --n-datos 8 --consola N64 --slug n64-joyas-pal
+   python scripts\tarrobot.py --pauta-tema "Arcade japones 80s" ^
+       --no-preload         (solo genera JSON, sin MP3s)
+
+OPCIONES:
+   --n-datos N    : 3 a 20, default 10
+   --slug S       : nombre del archivo, default se deriva del tema
+   --consola C    : hint al LLM (SNES, N64, Genesis, etc.)
+   --episodio E   : titulo del episodio (default lo elige Claude)
+   --voice V      : preset de voz (catalina, dalia, etc.)
+   --no-preload   : NO generar los MP3s (mas rapido pero hay
+                    que correr --pauta-preload despues)
+   --force        : sobreescribe si ya existe el slug
+   --no-sync      : no sincronizar con Drive al terminar
+
+Despues de generar, la pauta queda en:
+   studio\pautas\<slug>.tarrobot.json
+   studio\pautas\audio\<slug>\<id>.mp3   (si hubo preload)
+
+
+============================================================
 MELODIAS MIDI (tocar musica retro en vivo)
 ============================================================
 

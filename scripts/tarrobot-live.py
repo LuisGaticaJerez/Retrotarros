@@ -45,6 +45,9 @@ from tarrobot import (
     cargar_pauta, pauta_audio_dir, pauta_to_srt,
     LABEL_POR_ESTADO, ESTADOS, VOZ_DEFAULT, PITCH_DEFAULT, RATE_DEFAULT,
     OUT_DIR, PAUTAS_DIR, PAUTAS_AUDIO_DIR, PRESETS_VOZ,
+    # Sprint 11: auto-pauta desde tema libre
+    generar_pauta_tema_con_llm, crear_pauta_vacia, pauta_agregar_dato,
+    guardar_pauta, slugify, _preload_pauta_async,
 )
 
 # REPO puede venir de env var (modo Drive) o del path del script. Si tarrobot.py
@@ -1945,6 +1948,121 @@ async def receta_run(payload: dict):
         "titulo": receta.get("titulo", nombre),
         "pasos_ejecutados": len(resultados),
         "resultados": resultados,
+    }
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 11 C3: auto-pauta desde tema libre (sin HTML, via LLM)
+# ─────────────────────────────────────────────────────────────────────────
+
+@app.post("/api/pauta/auto-tema")
+async def pauta_auto_tema(payload: dict):
+    """
+    Genera una pauta completa desde un tema libre. Pasos:
+      1. LLM genera N datos curados (Claude)
+      2. Crea pauta JSON en studio/pautas/<slug>.tarrobot.json
+      3. Precarga MP3s en paralelo (Edge TTS)
+      4. Sincroniza al Drive si aplica
+
+    Body:
+      {
+        "tema": "Mega Drive raros",           # obligatorio
+        "n_datos": 10,                        # opcional, 3-20, default 10
+        "slug": "mega-drive-raros",           # opcional, derivado del tema si falta
+        "episodio": "Top 10 Mega Drive raros",# opcional
+        "consola": "Genesis",                 # opcional, hint para el LLM
+        "voz": "catalina",                    # opcional, default preset actual
+        "preload": true,                      # default true: precarga MP3s
+        "force": false                        # default false: no sobreescribe pauta existente
+      }
+    """
+    tema = (payload.get("tema") or "").strip()
+    if not tema:
+        return JSONResponse({"error": "tema vacio"}, status_code=400)
+
+    # Rate limit (es un LLM call caro)
+    espera = llm_cooldown_check("pauta_auto_tema")
+    if espera is not None:
+        return JSONResponse(
+            {"error": f"cooldown LLM: espera {espera:.1f}s antes de generar otra pauta"},
+            status_code=429,
+        )
+
+    try:
+        n_datos = int(payload.get("n_datos", 10))
+    except (TypeError, ValueError):
+        return JSONResponse({"error": "n_datos invalido"}, status_code=400)
+    n_datos = max(3, min(n_datos, 20))
+
+    slug_raw = (payload.get("slug") or "").strip()
+    slug = slugify(slug_raw) if slug_raw else slugify(tema)
+
+    consola = (payload.get("consola") or "").strip() or None
+    voz_in = (payload.get("voz") or "").strip()
+    voz = resolver_voz(voz_in) if voz_in else VOZ_DEFAULT
+    force = bool(payload.get("force", False))
+    preload = bool(payload.get("preload", True))
+
+    # Validar que no se piserve una pauta existente sin force
+    pauta_existente = cargar_pauta(slug)
+    if pauta_existente and not force:
+        return JSONResponse({
+            "error": f"ya existe la pauta '{slug}' con {len(pauta_existente['datos'])} datos",
+            "hint": "manda 'force': true para reemplazarla, o pasa un 'slug' distinto",
+            "slug": slug,
+        }, status_code=409)
+
+    # 1) Generar via LLM en thread (el SDK es bloqueante)
+    async with _procesando(f"generando pauta '{tema}' con Claude..."):
+        result = await asyncio.to_thread(
+            generar_pauta_tema_con_llm, tema, n_datos, consola, None
+        )
+
+    if result is None:
+        return JSONResponse(
+            {"error": "fallo generacion LLM. Verifica ANTHROPIC_API_KEY y creditos."},
+            status_code=500,
+        )
+
+    datos_llm = result.get("datos", [])
+    if not datos_llm:
+        return JSONResponse({"error": "el LLM no devolvio datos"}, status_code=500)
+
+    # 2) Crear pauta en disco
+    episodio = (payload.get("episodio") or "").strip() or result.get("episodio_titulo") or tema
+    pauta = crear_pauta_vacia(slug, episodio, voz=voz, pitch=PITCH_DEFAULT, rate=RATE_DEFAULT)
+    for d in datos_llm:
+        d["fuente"] = "pauta-tema"
+        pauta_agregar_dato(pauta, d)
+    p = guardar_pauta(pauta)
+
+    # 3) Preload MP3s (opcional, lento)
+    preload_result = None
+    if preload:
+        async with _procesando(f"generando MP3s para {len(pauta['datos'])} datos..."):
+            try:
+                generados, skipped, errores = await _preload_pauta_async(
+                    pauta, force=False, concurrency=3
+                )
+                guardar_pauta(pauta)  # persistir con mp3 y duracion_ms
+                preload_result = {
+                    "generados": generados, "skipped": skipped, "errores": errores
+                }
+            except Exception as e:
+                preload_result = {"error": str(e)}
+
+    return {
+        "ok": True,
+        "slug": slug,
+        "episodio": episodio,
+        "n_datos": len(pauta["datos"]),
+        "path": str(p),
+        "preload": preload_result,
+        "datos_preview": [
+            {"tema": d["tema"], "estado": d["estado"],
+             "texto": d["texto"][:120]}
+            for d in pauta["datos"]
+        ],
     }
 
 

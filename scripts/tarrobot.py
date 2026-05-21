@@ -600,6 +600,130 @@ Estados validos: talking, excited, fact, winking, confused, happy, sad, angry, t
     return result
 
 
+def generar_pauta_tema_con_llm(
+    tema: str,
+    n_datos: int = 10,
+    consola_hint: str | None = None,
+    enfoque: str | None = None,
+) -> dict | None:
+    """
+    Sprint 11: genera una pauta completa a partir de un tema libre, sin HTML
+    de referencia. Pide N datos curados sobre el tema en formato lista
+    coherente (por ejemplo: 'Top juegos raros de Mega Drive').
+
+    Devuelve dict {episodio_titulo, datos[]}. Cada dato trae tema, texto,
+    estado, consola, ano, editor.
+    """
+    try:
+        import anthropic
+    except ImportError:
+        print("ERROR: libreria 'anthropic' no instalada.", file=sys.stderr)
+        print("Instalala con: pip install anthropic", file=sys.stderr)
+        return None
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print("ERROR: variable de entorno ANTHROPIC_API_KEY no definida.", file=sys.stderr)
+        return None
+
+    client = anthropic.Anthropic(api_key=api_key)
+
+    consola_linea = (
+        f"- CONSOLA O AMBITO: limita los datos a {consola_hint}." if consola_hint else
+        "- CONSOLA O AMBITO: elige la que mejor calce con el tema; si el tema cubre varias, mezcla."
+    )
+    enfoque_linea = (
+        f"- ENFOQUE ESPECIFICO: {enfoque}." if enfoque else
+        "- ENFOQUE: datos curiosos, anecdotas, rarezas, hechos verificables que enganchen a un retrogamer."
+    )
+
+    prompt = f"""Eres TarroBot, mascota del canal de YouTube Retrotarros sobre videojuegos retro.
+
+Necesito que prepares UNA PAUTA COMPLETA de un episodio nuevo para el canal. El tema del episodio es:
+
+  "{tema}"
+
+{consola_linea}
+{enfoque_linea}
+
+Genera EXACTAMENTE {n_datos} datos curiosos. Pueden formar un top countdown (de menor a mayor impacto), un recorrido cronologico, o variantes alrededor del tema. Lo que mejor narrativamente funcione para grabar un episodio del canal.
+
+Requisitos OBLIGATORIOS para CADA dato (este texto se reproduce con TTS, por eso reglas estrictas):
+- Español ESTRICTAMENTE chileno neutro con TUTEO (tú/tienes/sabes/dime/puedes/mira).
+- NO voseo argentino: PROHIBIDO "tenés", "querés", "decime", "vení", "vos", "sos",
+  "podés", "sabés", "decís", "andás", "che", "andá", "haceme", "fijate" (con voseo).
+  USA: "eres", "tienes", "quieres", "puedes", "dices", "ven", "vas", "dime".
+- NO palabras que suenen argentinas/uruguayas: evita "acá" (usa "aquí"),
+  "andábamos" (usa "estábamos"), "me agarraste" (usa "me pillaste"),
+  "pibe/piba" (usa "chico/amigo"), "guita" (usa "plata").
+- USA TILDES correctas del español ortográfico (también, está, día, año, mí, sí).
+  Crítico para que el TTS pronuncie bien.
+- NÚMEROS EN PALABRAS para cifras grandes:
+  * "20 mil dólares" en vez de "20,000 dólares"
+  * "5 mil copias" en vez de "5,000"
+  * Años SÍ van en cifras: 1996, 1985
+- Máximo 3 oraciones por dato, alrededor de 200-260 caracteres.
+- Verificable y específico: fechas, números, nombres reales. Nada inventado.
+- Tono curioso y entusiasta tipo "te voy a contar algo que no sabías".
+- Cada dato distinto del otro. NO repetir hechos parafraseados.
+- Distribuye los estados emocionales: que NO sean todos talking. Mezcla excited,
+  fact, winking, confused, happy, sad, angry, thinking según el tono de cada dato.
+
+Devuelve SOLO un JSON valido con esta estructura exacta, SIN texto extra ni markdown:
+
+{{
+  "episodio_titulo": "Titulo corto del episodio (max 60 chars)",
+  "datos": [
+    {{
+      "tema": "Nombre del juego o item puntual (max 40 chars)",
+      "texto": "El dato curioso completo, max 260 chars.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Nintendo"
+    }}
+    // {n_datos} items en total
+  ]
+}}
+
+Estados validos: talking, excited, fact, winking, confused, happy, sad, angry, thinking.
+"""
+
+    try:
+        response = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=4096,
+            messages=[{"role": "user", "content": prompt}],
+        )
+    except Exception as e:
+        print(f"ERROR: llamada a Claude API fallo: {e}", file=sys.stderr)
+        return None
+
+    raw = response.content[0].text.strip()
+    raw = re.sub(r"^```(?:json)?\s*", "", raw)
+    raw = re.sub(r"\s*```$", "", raw)
+    raw = raw.strip()
+
+    try:
+        result = json.loads(raw)
+    except json.JSONDecodeError as e:
+        print(f"ERROR: el LLM devolvio JSON invalido: {e}", file=sys.stderr)
+        print(raw[:800], file=sys.stderr)
+        return None
+
+    # Validar shape
+    if "datos" not in result or not isinstance(result["datos"], list):
+        print("ERROR: respuesta sin 'datos'.", file=sys.stderr)
+        return None
+
+    # Filtro anti-voseo en los textos generados (defensa ultima)
+    for d in result["datos"]:
+        if "texto" in d:
+            d["texto"] = chilenizar(d["texto"])
+
+    return result
+
+
 def _mp3_duracion_ms(mp3_path: Path) -> int | None:
     """Lee la duracion de un MP3 en ms. Usa mutagen si esta, sino None."""
     try:
@@ -1580,6 +1704,94 @@ def cmd_pauta_auto(args) -> int:
     return 0
 
 
+def cmd_pauta_tema(args) -> int:
+    """
+    Sprint 11: genera una pauta completa desde un tema libre.
+    No requiere HTML previo. Llama LLM, crea pauta, opcionalmente precarga MP3s.
+    """
+    tema = (args.pauta_tema or "").strip()
+    if not tema:
+        print("ERROR: tema vacio. Ejemplo: --pauta-tema 'Mega Drive raros'", file=sys.stderr)
+        return 1
+
+    n_datos = max(3, min(args.n_datos or 10, 20))
+
+    # Derivar slug: si lo pasaron, usar; sino slugify del tema
+    if args.slug:
+        slug = slugify(args.slug)
+    else:
+        slug = slugify(tema)
+
+    pauta_existente = cargar_pauta(slug)
+    if pauta_existente and not args.force:
+        print(f"ERROR: ya existe la pauta '{slug}' con {len(pauta_existente['datos'])} datos.", file=sys.stderr)
+        print(f"       Usa --force para reemplazar, o --slug otro-nombre.", file=sys.stderr)
+        return 1
+
+    print(f"[INFO] Tema: '{tema}'")
+    print(f"[INFO] Slug: {slug}")
+    if args.consola:
+        print(f"[INFO] Consola: {args.consola}")
+    print(f"[INFO] Pidiendo {n_datos} datos a Claude (haiku-4-5)...")
+
+    result = generar_pauta_tema_con_llm(
+        tema=tema,
+        n_datos=n_datos,
+        consola_hint=args.consola,
+    )
+    if result is None:
+        return 1
+
+    datos_llm = result.get("datos", [])
+    if not datos_llm:
+        print("ERROR: el LLM no devolvio datos.", file=sys.stderr)
+        return 1
+
+    episodio = args.episodio or result.get("episodio_titulo") or tema
+    voz = resolver_voz(args.voice) if args.voice else VOZ_DEFAULT
+    pauta = crear_pauta_vacia(slug, episodio, voz=voz, pitch=args.pitch, rate=args.rate)
+
+    for d in datos_llm:
+        d["fuente"] = "pauta-tema"
+        pauta_agregar_dato(pauta, d)
+
+    p = guardar_pauta(pauta)
+    print()
+    print(f"[OK] pauta '{slug}' generada con {len(pauta['datos'])} datos:")
+    print(f"     {p}")
+    print()
+    for i, d in enumerate(pauta["datos"], 1):
+        print(f"  {i:2}. [{d['estado']:8}] {d['tema'][:50]}")
+        print(f"            {d['texto'][:100]}{'...' if len(d['texto']) > 100 else ''}")
+    print()
+
+    # Precargar MP3s salvo --no-preload
+    if not getattr(args, "no_preload", False):
+        print("[INFO] Precargando MP3s en paralelo (esto puede tardar 1-3 min)...")
+        import asyncio as _asyncio
+        concurrency = max(1, args.concurrency or 3)
+        try:
+            generados, skipped, errores = _asyncio.run(
+                _preload_pauta_async(pauta, force=False, concurrency=concurrency)
+            )
+            guardar_pauta(pauta)  # guardar con mp3 + duracion_ms ya seteados
+            print(f"[OK] MP3s: {generados} generados, {skipped} skipped, {errores} errores")
+        except Exception as e:
+            print(f"[WARN] fallo el preload: {e}", file=sys.stderr)
+            print("        Puedes correrlo manualmente con:", file=sys.stderr)
+            print(f"        python scripts/tarrobot.py --pauta-preload {slug}", file=sys.stderr)
+    else:
+        print(f"[INFO] Saltando preload (--no-preload). Para hacerlo manual:")
+        print(f"       python scripts/tarrobot.py --pauta-preload {slug}")
+
+    print()
+    print(f"Listo. Para usar la pauta desde el panel TarroBot, carga el slug: {slug}")
+
+    if not getattr(args, "no_sync", False):
+        _ejecutar_sync_drive()
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="TarroBot - asistente de datos curiosos retro Retrotarros",
@@ -1603,6 +1815,9 @@ def main():
     # Pauta / cola del episodio (Sprint 6)
     parser.add_argument("--pauta-init", metavar="SLUG", help="Crea una pauta vacia con ese slug. Acepta --episodio, --voice, --pitch, --rate.")
     parser.add_argument("--pauta-auto", metavar="HTML", help="Autogenera la pauta desde un HTML de episodio (usa Claude). Acepta --n-datos, --force.")
+    parser.add_argument("--pauta-tema", metavar="TEMA", help="Sprint 11: genera pauta desde un tema libre sin HTML (Claude). Ej: --pauta-tema 'Mega Drive raros'. Acepta --n-datos, --slug, --consola, --episodio, --voice, --no-preload, --force.")
+    parser.add_argument("--slug", help="Slug explicito para --pauta-tema (por default se deriva del tema).")
+    parser.add_argument("--no-preload", action="store_true", help="No precargar MP3s al generar pauta (--pauta-tema).")
     parser.add_argument("--pauta-preload", metavar="SLUG", help="Precarga (genera) todos los MP3 de una pauta en paralelo. Acepta --force, --concurrency.")
     parser.add_argument("--concurrency", type=int, help="Cantidad de TTS concurrentes para --pauta-preload (default 3, max razonable 6).")
     parser.add_argument("--pauta-srt", metavar="SLUG", help="Exporta SRT desde una pauta (modo relative, util para preview offline).")
@@ -1645,6 +1860,8 @@ def main():
         return cmd_pauta_init(args)
     if args.pauta_auto:
         return cmd_pauta_auto(args)
+    if args.pauta_tema:
+        return cmd_pauta_tema(args)
     if args.pauta_preload:
         return cmd_pauta_preload(args)
     if args.pauta_srt:
