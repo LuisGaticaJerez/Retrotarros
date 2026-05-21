@@ -1197,6 +1197,20 @@ def parsear_intent(texto: str) -> dict:
             except ValueError:
                 pass
 
+    # 3b. Tocar/poner melodia (Sprint 8.x): detectar "tocá X", "ponme X",
+    #     "ponete X", "suena X" -> accion melodia con tema fuzzy
+    melodia_kws = ["toca ", "tocate ", "tocá ", "tócame ", "tocame ",
+                   "pon ", "pone ", "ponete ", "ponme ", "ponéme ",
+                   "ponete a tocar ", "tocate la ", "tocate el ",
+                   "suena ", "sonar ", "reproduce ", "reproducí ", "reproducime ",
+                   "te acordas de ", "te acuerdas de ", "te acordás de "]
+    for kw in melodia_kws:
+        idx = t_clean.find(kw)
+        if idx >= 0:
+            tema = t_clean[idx + len(kw):].strip(" ,.;:!?¿¡")
+            if tema:
+                return {"accion": "melodia", "params": {"tema": tema}}
+
     # 4. Random
     if any(x in t_clean for x in ["random", "azar", "cualquier", "sorprendeme", "sorpréndeme"]):
         # Sub-categoria
@@ -1226,30 +1240,39 @@ def _aplicar_wake_word(texto: str, wake: str) -> tuple[bool, str]:
     Verifica si la transcripcion contiene la wake-word y devuelve el texto
     limpio (sin la wake-word ni los caracteres antes de ella). Si no la
     contiene, devuelve (False, texto). Sprint 8.2.
+
+    Variantes que Whisper suele transcribir mal (todas valen como wake):
+      tarrobot, tarro bot, taro bot, taro vot, taro pot, tarrovot, tarobot,
+      tarrobott, tarrobod, tarro pot, terrabot, tarrobo, tarro, ¡tarrobot!
     """
     import re as _re
     if not wake:
         return True, texto
 
-    # Match flexible: 'tarrobot', 'tarro', 'taro bot', 'tarrobott', etc.
-    wake_lower = wake.lower().strip()
     t_lower = texto.lower()
 
-    # Buscar primera ocurrencia
-    m = _re.search(r"\b" + _re.escape(wake_lower) + r"\w*\b", t_lower)
-    if not m:
-        # Fallback: variantes comunes con espacios o pronunciacion
-        variantes = ["tarrobot", "tarro bot", "taro bot", "tarobot", "tarrovot", "taro vot"]
-        for v in variantes:
-            idx = t_lower.find(v)
-            if idx >= 0:
-                m_start, m_end = idx, idx + len(v)
-                resto = texto[m_end:].strip(" ,.;:!?¿¡")
-                return True, resto
-        return False, texto
+    # Lista exhaustiva de variantes (mejor coincidencia primero por longitud)
+    variantes = [
+        "tarrobot", "tarrobott", "tarrobod", "tarro bot", "tarro bott", "tarro bod",
+        "tarobot", "taro bot", "taro pot", "taro vot",
+        "tarrovot", "tarrov", "terrabot", "tarrabot",
+        "tarro pot", "tarro vot",
+        "tarro!", "tarro?",
+    ]
 
-    resto = texto[m.end():].strip(" ,.;:!?¿¡")
-    return True, resto
+    for v in variantes:
+        idx = t_lower.find(v)
+        if idx >= 0:
+            resto = texto[idx + len(v):].strip(" ,.;:!?¿¡")
+            return True, resto
+
+    # Fallback regex mas amplio: 'tarro' seguido opcionalmente de 'bot/pot/vot/bott'
+    m = _re.search(r"\btarr?o\s*(?:bot|pot|vot|bott|bod)?\w*\b", t_lower)
+    if m:
+        resto = texto[m.end():].strip(" ,.;:!?¿¡")
+        return True, resto
+
+    return False, texto
 
 
 @app.post("/api/listen")
@@ -1315,6 +1338,8 @@ async def listen(request: Request, wake: str = ""):
             result = await precio(params)
         elif accion == "random":
             result = await random_dato(params)
+        elif accion == "melodia":
+            result = await queue_melodia(params)
         elif accion == "cuentame":
             result = await cuentame(params)
         else:
@@ -1495,19 +1520,58 @@ async def queue_reset():
     return {"ok": True, "status": queue.status()}
 
 
+def _buscar_melodia_por_tema(tema: str, melodias: list) -> Optional[dict]:
+    """
+    Busqueda fuzzy de melodia por tema. Devuelve la mejor coincidencia o None.
+    Estrategia: match por palabras clave del tema en cualquier orden.
+    Ejemplo: "aquatic ambience" -> match con "Donkey Kong Country Aquatic Ambience"
+    """
+    if not tema or not melodias:
+        return None
+    import re as _re
+
+    # Normalizar tema buscado: lowercase, sin caracteres especiales
+    def _norm(s: str) -> str:
+        s = s.lower()
+        s = _re.sub(r"[^\w\s]", " ", s)
+        s = _re.sub(r"\s+", " ", s).strip()
+        return s
+
+    palabras_buscadas = set(_norm(tema).split())
+    if not palabras_buscadas:
+        return None
+
+    mejor = None
+    mejor_score = 0
+    for m in melodias:
+        tema_m = _norm(m.get("tema", ""))
+        palabras_m = set(tema_m.split())
+        # Contar palabras de la busqueda que aparecen en el tema
+        coincidencias = sum(1 for p in palabras_buscadas if p in palabras_m)
+        # Bonus si la busqueda completa esta como substring
+        if _norm(tema) in tema_m:
+            coincidencias += 2
+        if coincidencias > mejor_score:
+            mejor_score = coincidencias
+            mejor = m
+
+    return mejor if mejor_score >= 1 else None
+
+
 @app.post("/api/queue/melodia")
 async def queue_melodia(payload: dict):
     """
     Reproduce una melodia de la cola.
-    Body opcional: { "indice": N, "id": "...", "voz": "..." }
-    Si no se especifica indice ni id, elige una random.
+    Body opcional: { "indice": N, "id": "...", "tema": "...", "voz": "..." }
+    Si no se especifica nada, elige una random.
+    Si tema='aquatic' busca fuzzy entre las melodias cargadas.
     """
     melodias = queue.items_melodias()
     if not melodias:
         return JSONResponse({"error": "no hay melodias en la pauta cargada"}, status_code=400)
 
     dato = None
-    if "id" in payload and payload["id"]:
+    if payload.get("id"):
         dato_id = payload["id"]
         for m in melodias:
             if m["id"] == dato_id:
@@ -1523,6 +1587,14 @@ async def queue_melodia(payload: dict):
         if not (0 <= idx < len(melodias)):
             return JSONResponse({"error": f"indice fuera de rango (0..{len(melodias)-1})"}, status_code=400)
         dato = melodias[idx]
+    elif payload.get("tema"):
+        dato = _buscar_melodia_por_tema(payload["tema"], melodias)
+        if not dato:
+            return JSONResponse(
+                {"error": f"no encontre una melodia que matchee '{payload['tema']}'",
+                 "disponibles": [m["tema"] for m in melodias]},
+                status_code=404
+            )
     else:
         import random
         dato = random.choice(melodias)
