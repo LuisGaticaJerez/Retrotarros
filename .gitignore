@@ -77,3 +77,14 @@ __pycache__/
 # Binarios portables descargados por el instalador
 bin/ffmpeg.exe
 bin/ffprobe.exe
+
+# FluidSynth bundle local (DLLs + exe) que descarga install.bat. Si Luis lo
+# tiene en installers/tarrobot-studio/bin/, build-package.ps1 lo incluye en
+# el ZIP, pero no lo versionamos en git (8 MB de binarios redistribuibles).
+installers/tarrobot-studio/bin/
+
+# Cache de session log y exports generados por TarroBot
+studio/exports/*.txt
+studio/shorts/*.mp3
+studio/shorts/*.srt
+studio/sessions/
