@@ -133,6 +133,46 @@ CATCHPHRASES = [
 CATCHPHRASE_ESTADOS = ["excited", "happy", "winking", "fact"]
 
 
+# Sprint 8.x: respuestas a "¿cómo estás?" o variantes conversacionales
+COMO_ESTAS_FRASES = [
+    "Funcionando al cien, ¡gracias por preguntar!",
+    "Mis circuitos están perfectos, listos para datos.",
+    "Modo curioso activado. ¿Y tú, qué cuentas?",
+    "Cargado de nostalgia y datos listos para soltar.",
+    "Bien, descansaba pero ya tengo energía a tope.",
+    "Excelente, recién leí algo de SNES que te va a volar la cabeza.",
+    "Genial. Hoy tengo la memoria llena de tarros retro.",
+    "Listo para grabar. ¿En qué andamos hoy?",
+    "Funcionando con un poco de polvo de cartucho, pero bien.",
+    "Sistema OK, ojitos brillando. ¿Vamos a jugar?",
+    "Acabo de hacer un reinicio mental, todo limpio.",
+    "Mejor que el primer Game Boy, te lo aseguro.",
+    "Ocho bits de pura felicidad, así estoy.",
+    "Recargado, actualizado y con ganas de comentar.",
+    "Como el primer día del cartucho, brillando.",
+]
+
+# Respuestas a "¿qué hacemos hoy?" / "¿qué te gustaría hacer?"
+QUE_HACEMOS_FRASES = [
+    "¿Te tinca un dato sobre SNES o N64 para arrancar?",
+    "Yo me anoto para revisar la colección de Koko.",
+    "Podemos rankear cartuchos. Eso siempre prende.",
+    "Tirar trivia hasta que se nos sequen las pilas.",
+    "Música retro de fondo y hablar de cartuchos raros.",
+    "Soltar curiosidades hasta que el público pida más.",
+    "Comentar precios locos del mercado retro. Eso vende.",
+    "Estoy con ganas de hablar de joyas ocultas de N64.",
+    "Buscamos cartuchos raros y comentamos cada uno.",
+    "Lo que tú mandes. Yo apoyo cualquier idea retro.",
+    "Un top de bandas sonoras de SNES suena bien.",
+    "Te propongo: jugar un poco y comentar fallas técnicas.",
+    "Hablemos de mascotas perdidas de Nintendo. Hay varias.",
+    "Comparativa SNES versus Genesis. Polémica garantizada.",
+    "Si me preguntas, mejor un top diez de cartuchos imposibles.",
+]
+
+
+
 # Sprint 8.5: frases para cuando TarroBot "despierta" porque le hablamos
 # estando en modo sleep/drowsy/bored. Tono: como si lo hubieran sorprendido
 # pero tranquilo, tipo "perdon estaba en otra".
@@ -1032,6 +1072,30 @@ async def despedir(payload: dict):
     return {"ok": True, "texto": texto, "audio_url": audio_url}
 
 
+@app.post("/api/como-estas")
+async def como_estas(payload: dict):
+    """Sprint 8.x: respuesta a '¿cómo estás?' con frase random."""
+    import random
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    tracker.mark_input()
+    texto = random.choice(COMO_ESTAS_FRASES)
+    estado = random.choice(["happy", "excited", "winking", "talking"])
+    audio_url = await _hablar_frase(texto, estado, "¿CÓMO ESTÁS?", voz, pitch, rate)
+    return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
+
+
+@app.post("/api/que-hacemos")
+async def que_hacemos(payload: dict):
+    """Sprint 8.x: respuesta a '¿qué hacemos hoy?' con propuesta random."""
+    import random
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    tracker.mark_input()
+    texto = random.choice(QUE_HACEMOS_FRASES)
+    estado = random.choice(["excited", "thinking", "happy", "winking"])
+    audio_url = await _hablar_frase(texto, estado, "¿QUÉ HACEMOS HOY?", voz, pitch, rate)
+    return {"ok": True, "texto": texto, "estado": estado, "audio_url": audio_url}
+
+
 @app.post("/api/despertar")
 async def despertar(payload: dict):
     """
@@ -1176,6 +1240,30 @@ def parsear_intent(texto: str) -> dict:
     for kw in ["chao", "adios", "adiós", "bye", "hasta luego", "nos vemos"]:
         if kw in t_clean:
             return {"accion": "despedir", "params": {}}
+
+    # 1c. "¿Cómo estás?" (Sprint 8.x)
+    como_estas_kws = [
+        "como estas", "cómo estás", "como te sientes", "cómo te sientes",
+        "que tal estas", "qué tal estás", "como andas", "cómo andas",
+        "como te va", "cómo te va",
+    ]
+    for kw in como_estas_kws:
+        if kw in t_clean:
+            return {"accion": "como_estas", "params": {}}
+
+    # 1d. "¿Qué hacemos hoy?" / "¿Qué te gustaría hacer?"
+    que_hacemos_kws = [
+        "que hacemos hoy", "qué hacemos hoy", "que hacemos", "qué hacemos",
+        "que te gustaria hacer", "qué te gustaría hacer",
+        "que haremos hoy", "qué haremos hoy",
+        "que quieres hacer", "qué quieres hacer",
+        "tienes ganas de", "tenés ganas de",
+        "que proponemos", "qué proponemos",
+        "que tienes pensado", "qué tienes pensado",
+    ]
+    for kw in que_hacemos_kws:
+        if kw in t_clean:
+            return {"accion": "que_hacemos", "params": {}}
 
     # 1b. Despertar (Sprint 8.5): si dicen "despierta", "estas ahi", "tarrobot?"
     despertar_kws = [
@@ -1349,6 +1437,10 @@ async def listen(request: Request, wake: str = ""):
             result = await despedir({})
         elif accion == "despertar":
             result = await despertar({})
+        elif accion == "como_estas":
+            result = await como_estas({})
+        elif accion == "que_hacemos":
+            result = await que_hacemos({})
         elif accion == "opinar":
             result = await opinar(params)
         elif accion == "precio":

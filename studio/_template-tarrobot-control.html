@@ -438,6 +438,10 @@ select#queueSelect:focus { border-color: var(--ye); }
     <button class="btn" onclick="catchphrase()">⚡ RETRO!</button>
     <button class="btn ye" onclick="despertar()">⏰ DESPIERTA</button>
   </div>
+  <div class="btn-row" style="margin-top:6px;">
+    <button class="btn cy" onclick="comoEstas()">¿CÓMO ESTÁS?</button>
+    <button class="btn cy" onclick="queHacemos()">¿QUÉ HACEMOS HOY?</button>
+  </div>
   <div style="font-size:10px; color:rgba(255,255,255,.45); margin-top:6px;">
     "Chao" acelera la somnolencia (bored → drowsy → sleep en pocos segundos).
     "Despierta" lo saca de cualquier estado dormido.
@@ -563,6 +567,8 @@ const PROC_LABELS = {
   '/api/saludar':      'preparando saludo...',
   '/api/despedir':     'preparando despedida...',
   '/api/despertar':    'despertando TarroBot...',
+  '/api/como-estas':   'pensando cómo está...',
+  '/api/que-hacemos':  'pensando qué hacer hoy...',
   '/api/catchphrase':  'catchphrase Retrotarros...',
   '/api/queue/next':    'siguiente item...',
   '/api/queue/prev':    'item anterior...',
@@ -683,6 +689,18 @@ async function despertar() {
   logMsg('despertando TarroBot...');
   const data = await post('/api/despertar', {});
   if (data && data.ok) logMsg('OK despertar: "' + data.texto + '"', 'ok');
+}
+
+async function comoEstas() {
+  logMsg('preguntando como esta...');
+  const data = await post('/api/como-estas', {});
+  if (data && data.ok) logMsg('OK como-estas: "' + data.texto + '"', 'ok');
+}
+
+async function queHacemos() {
+  logMsg('preguntando que hacemos hoy...');
+  const data = await post('/api/que-hacemos', {});
+  if (data && data.ok) logMsg('OK que-hacemos: "' + data.texto + '"', 'ok');
 }
 
 async function random_(categoria) {
