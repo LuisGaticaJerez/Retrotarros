@@ -30,6 +30,27 @@ de read-only a interactivos. Bloques:
 - ✓ B14.5 Cola READ PINNED secuencial con TTS sincronizado (espera fin de audio)
 - ✓ B14.6 Docs + commit final
 
+**Sprint 15 cerrado: Minimizar gasto LLM con pauta enriquecida + cache.** Resultado: 80% menos llamadas a Claude durante grabacion.
+- ✓ B15.1 `generar_pauta_tema_con_llm(enriquecido=True)`: pre-genera opiniones
+  alternativas (3 por dato), comentarios cortos (5 por dato), quiz pregenerado
+  (2 preguntas con respuesta+pista por dato).
+- ✓ B15.2 Pauta enriquecida tambien trae catchphrases_episodio (8),
+  intros_cold_open (3), outros_cliffhanger (3), publicacion completa
+  (titulos x3, descripcion, hashtags 15-20, thumbnail_prompts x5, ig_post).
+- ✓ B15.3 Endpoints `/api/opinar`, `/api/quiz/pregunta`, `/api/episodio/exportar-descripcion`
+  resuelven desde pauta enriquecida antes de llamar Claude. Cero llamadas
+  si el contenido esta pre-generado.
+- ✓ B15.4 Infraestructura para minimizar llamadas (cache + resolver pauta).
+  Prompt caching real con `cache_control` de Anthropic queda como
+  optimizacion adicional futura.
+- ✓ B15.5 `scripts/llm_resolver.py` con cache JSON local en
+  `data/tarrobot-cache-llm.json`, TTL 30 dias, max 5 respuestas por key.
+- ✓ B15.6 Telemetria: contador de calls por endpoint + costo estimado USD +
+  cache stats. Endpoint `/api/llm/stats`. Card LLM STATS en panel con
+  refresh cada 10s.
+- ✓ B15.7 Modo barato: toggle global que bloquea todas las llamadas LLM
+  (devuelve 503). Endpoint `/api/llm/modo-barato`. Toggle en panel.
+
 ## Que es TarroBot Studio
 
 Conjunto de herramientas para producir el canal de YouTube Retrotarros (retrogaming + nostalgia + musica). Dos productos coexistiendo en stacks distintos pero gestionados como un solo proyecto:

@@ -104,6 +104,8 @@ Sync-Item "scripts\obs_controller.py"
 Sync-Item "scripts\message_store.py"
 Sync-Item "scripts\social_manager.py"
 Sync-Item "scripts\connectors" -Recursive
+# Sprint 15: resolver LLM (pauta enriquecida + cache local + telemetria + modo barato)
+Sync-Item "scripts\llm_resolver.py"
 Write-Host ""
 
 # 2. Templates HTML

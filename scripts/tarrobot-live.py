@@ -68,6 +68,7 @@ obs.cargar_alias(OBS_ALIASES_PATH)
 # Sprint 13: modulo social (chat multi-plataforma Twitch/Discord/YouTube)
 import message_store
 import social_manager
+import llm_resolver  # Sprint 15: minimizar gasto LLM
 from connectors.twitch import TwitchConnector
 from connectors import discord_conn as discord_connector_mod
 from connectors import youtube as youtube_connector_mod
@@ -1251,6 +1252,8 @@ async def cuentame(payload: dict):
             )
         async with _procesando(f"buscando {tema} con Claude..."):
             result = await asyncio.to_thread(generar_con_llm, tema)
+        if result:
+            llm_resolver.track_llm_call("cuentame")
         if result and result.get("datos"):
             primera = result["datos"][0]
             dato = agregar_dato(
@@ -1485,19 +1488,41 @@ async def opinar(payload: dict):
     if not tema:
         return JSONResponse({"error": "tema vacio"}, status_code=400)
 
-    # Sprint 10 A5: rate limit
-    espera = llm_cooldown_check("opinar")
-    if espera is not None:
-        return JSONResponse(
-            {"error": f"cooldown LLM: espera {espera:.1f}s antes de otra opinion"},
-            status_code=429,
-        )
-
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
 
-    async with _procesando(f"opinando de {tema}..."):
-        result = await asyncio.to_thread(generar_opinion_llm, tema)
+    # Sprint 15: capa 1 - pauta enriquecida (opinion pre-generada)
+    pauta_actual = queue.pauta if queue.loaded() else None
+    result = llm_resolver.resolver_opinion(pauta_actual, tema)
+    if result:
+        print(f"[opinar] cache pauta HIT para '{tema}'")
+    else:
+        # Sprint 15: capa 2 - cache JSON local
+        result = llm_resolver.cache_get("opinar", tema)
+        if result:
+            print(f"[opinar] cache local HIT para '{tema}'")
+
+    if not result:
+        # Sprint 15: modo barato bloquea LLM real
+        if llm_resolver.is_modo_barato():
+            return JSONResponse({
+                "error": "modo barato activo: sin opinion LLM. Cargar pauta con material "
+                         "pre-generado o desactivar modo barato."
+            }, status_code=503)
+
+        # Sprint 10 A5: rate limit
+        espera = llm_cooldown_check("opinar")
+        if espera is not None:
+            return JSONResponse(
+                {"error": f"cooldown LLM: espera {espera:.1f}s antes de otra opinion"},
+                status_code=429,
+            )
+
+        async with _procesando(f"opinando de {tema}..."):
+            result = await asyncio.to_thread(generar_opinion_llm, tema)
+        if result:
+            llm_resolver.track_llm_call("opinar")
+            llm_resolver.cache_save("opinar", tema, result)
     if not result:
         return JSONResponse({"error": "fallo Claude API. Verifica ANTHROPIC_API_KEY y creditos."}, status_code=500)
 
@@ -1604,6 +1629,7 @@ async def precio(payload: dict):
         async with _procesando(f"opinando sobre el precio..."):
             result = await asyncio.to_thread(generar_opinion_precio_llm, valor, juego)
         if result:
+            llm_resolver.track_llm_call("precio_opinion")
             texto_opinion = result.get("texto", "")
             estado_opinion = result.get("estado", "thinking")
             if estado_opinion not in ESTADOS:
@@ -2078,6 +2104,7 @@ async def queue_sugerir_orden(payload: Optional[dict] = None):
         result = await asyncio.to_thread(generar_reorden_pauta_con_llm, queue.pauta)
     if not result:
         return JSONResponse({"error": "fallo el LLM de reorden"}, status_code=500)
+    llm_resolver.track_llm_call("sugerir_orden")
 
     # Mapear indices a previews para que el panel muestre nombres
     nuevo_orden = result.get("nuevo_orden", [])
@@ -2155,17 +2182,40 @@ async def episodio_exportar_descripcion(payload: Optional[dict] = None):
     if not queue.loaded():
         return JSONResponse({"error": "no hay pauta cargada"}, status_code=400)
 
-    espera = llm_cooldown_check("export_desc")
-    if espera is not None:
-        return JSONResponse({"error": f"cooldown LLM: espera {espera:.1f}s"}, status_code=429)
-
     usar_session_log = bool(payload.get("incluir_session_log", True))
     session_log = queue.session_log if usar_session_log and queue.session_log else None
 
-    async with _procesando("generando descripcion + titulos + thumbnails..."):
-        result = await asyncio.to_thread(
-            generar_descripcion_episodio_con_llm, queue.pauta, session_log
-        )
+    # Sprint 15: usar publicacion pre-generada en la pauta si existe
+    result = llm_resolver.resolver_publicacion(queue.pauta)
+    if result:
+        print("[export_desc] pauta HIT - usando publicacion pre-generada")
+        # Si tenemos session_log con timestamps reales, sobreescribir los
+        # timestamps tentativos de la pauta
+        if session_log:
+            # Generar lista de timestamps reales en el formato esperado
+            from tarrobot import _ms_to_srt_timestamp
+            result = dict(result)  # copy
+            result["timestamps"] = [
+                {
+                    "ts": _ms_to_srt_timestamp(int(e.get("timestamp_session_ms", 0)))[:8],
+                    "label": e.get("tema", ""),
+                }
+                for e in session_log
+            ]
+    else:
+        if llm_resolver.is_modo_barato():
+            return JSONResponse({
+                "error": "modo barato: no hay publicacion pre-generada en esta pauta."
+            }, status_code=503)
+        espera = llm_cooldown_check("export_desc")
+        if espera is not None:
+            return JSONResponse({"error": f"cooldown LLM: espera {espera:.1f}s"}, status_code=429)
+        async with _procesando("generando descripcion + titulos + thumbnails..."):
+            result = await asyncio.to_thread(
+                generar_descripcion_episodio_con_llm, queue.pauta, session_log
+            )
+        if result:
+            llm_resolver.track_llm_call("exportar_descripcion")
     if not result:
         return JSONResponse({"error": "fallo el LLM de descripcion"}, status_code=500)
 
@@ -2329,20 +2379,42 @@ Devuelve SOLO JSON sin markdown:
 async def quiz_pregunta(payload: Optional[dict] = None):
     """Tira una pregunta de trivia. Deja modo quiz activo hasta /api/quiz/respuesta."""
     payload = payload or {}
-    espera = llm_cooldown_check("quiz")
-    if espera is not None:
-        return JSONResponse({"error": f"cooldown LLM: espera {espera:.1f}s"}, status_code=429)
-
     tema_hint = (payload.get("tema") or "").strip() or None
     if not tema_hint and queue.loaded():
-        # Si hay pauta, sesgar pregunta al episodio
         tema_hint = queue.pauta.get("episodio") or queue.slug
 
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
 
-    async with _procesando("preparando trivia..."):
-        result = await asyncio.to_thread(_generar_quiz_con_llm, tema_hint)
+    # Sprint 15: capa 1 - quiz pre-generado en la pauta
+    pauta_actual = queue.pauta if queue.loaded() else None
+    result = llm_resolver.resolver_quiz(pauta_actual, tema_hint)
+    if result:
+        print(f"[quiz] pauta HIT para '{tema_hint}'")
+
+    if not result and llm_resolver.is_modo_barato():
+        return JSONResponse({
+            "error": "modo barato: sin quiz disponible (no hay pauta con quiz pregenerado)."
+        }, status_code=503)
+
+    if not result:
+        # Capa 2: cache local
+        result = llm_resolver.cache_get("quiz", tema_hint or "_no_hint_")
+        if result:
+            print(f"[quiz] cache local HIT para '{tema_hint}'")
+
+    if not result:
+        # Capa 3: llamar LLM
+        espera = llm_cooldown_check("quiz")
+        if espera is not None:
+            return JSONResponse({"error": f"cooldown LLM: espera {espera:.1f}s"}, status_code=429)
+
+        async with _procesando("preparando trivia..."):
+            result = await asyncio.to_thread(_generar_quiz_con_llm, tema_hint)
+        if result:
+            llm_resolver.track_llm_call("quiz")
+            llm_resolver.cache_save("quiz", tema_hint or "_no_hint_", result)
+
     if not result:
         return JSONResponse({"error": "fallo LLM quiz"}, status_code=500)
 
@@ -2574,9 +2646,10 @@ async def pauta_auto_tema(payload: dict):
         }, status_code=409)
 
     # 1) Generar via LLM en thread (el SDK es bloqueante)
-    async with _procesando(f"generando pauta '{tema}' con Claude..."):
+    # Sprint 15: enriquecido=True por default para minimizar llamadas en vivo
+    async with _procesando(f"generando pauta enriquecida '{tema}' con Claude..."):
         result = await asyncio.to_thread(
-            generar_pauta_tema_con_llm, tema, n_datos, consola, None
+            generar_pauta_tema_con_llm, tema, n_datos, consola, None, True
         )
 
     if result is None:
@@ -2584,6 +2657,7 @@ async def pauta_auto_tema(payload: dict):
             {"error": "fallo generacion LLM. Verifica ANTHROPIC_API_KEY y creditos."},
             status_code=500,
         )
+    llm_resolver.track_llm_call("pauta_auto_tema_enriquecido")
 
     datos_llm = result.get("datos", [])
     if not datos_llm:
@@ -2595,6 +2669,11 @@ async def pauta_auto_tema(payload: dict):
     for d in datos_llm:
         d["fuente"] = "pauta-tema"
         pauta_agregar_dato(pauta, d)
+    # Sprint 15: preservar contenido colateral a nivel episodio
+    for key in ("catchphrases_episodio", "intros_cold_open",
+                "outros_cliffhanger", "publicacion"):
+        if key in result:
+            pauta[key] = result[key]
     p = guardar_pauta(pauta)
 
     # 3) Preload MP3s (opcional, lento)
@@ -3790,6 +3869,12 @@ async def social_respond(payload: dict):
     voz, pitch, rate = _obtener_voz_pitch_rate(payload)
     tracker.mark_input()
 
+    if llm_resolver.is_modo_barato():
+        return JSONResponse({
+            "error": "modo barato activo: TarroBot no responde a chat con LLM. "
+                     "Usa /api/social/dictate o /api/social/say."
+        }, status_code=503)
+
     async with _procesando(f"respondiendo a {msg.get('user_name', '?')}..."):
         result = await asyncio.to_thread(
             generar_respuesta_chat_llm,
@@ -3798,6 +3883,8 @@ async def social_respond(payload: dict):
             msg.get("platform", "chat"),
             context,
         )
+    if result:
+        llm_resolver.track_llm_call("social_respond")
     if not result:
         return JSONResponse(
             {"error": "fallo LLM. Verifica ANTHROPIC_API_KEY y creditos."},
@@ -3985,6 +4072,36 @@ async def social_read_pinned_queue(payload: Optional[dict] = None):
 
 
 # ─── Discord post genérico (para casos no asociados a un message_id) ──
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 15: telemetria + modo barato
+# ─────────────────────────────────────────────────────────────────────────
+
+@app.get("/api/llm/stats")
+async def llm_stats():
+    """Estadisticas de uso de LLM: calls, costo estimado, cache."""
+    return {"ok": True, **llm_resolver.telemetry_snapshot()}
+
+
+@app.post("/api/llm/stats/reset")
+async def llm_stats_reset():
+    """Resetea contadores de la sesion (no toca el cache JSON)."""
+    llm_resolver.reset_telemetry()
+    return {"ok": True}
+
+
+@app.post("/api/llm/modo-barato")
+async def llm_modo_barato(payload: dict):
+    """
+    Toggle del modo barato. Cuando esta on, las llamadas LLM se rechazan
+    con 503 y los endpoints intentan responder con material pre-generado
+    (pauta enriquecida o cache local).
+    Body: { "activo": true|false }
+    """
+    activo = bool(payload.get("activo", False))
+    llm_resolver.set_modo_barato(activo)
+    return {"ok": True, "modo_barato": llm_resolver.is_modo_barato()}
+
 
 @app.post("/api/social/post-message")
 async def social_post_message(payload: dict):

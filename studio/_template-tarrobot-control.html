@@ -502,6 +502,30 @@ select#queueSelect:focus { border-color: var(--ye); }
   <div id="recetasLog" style="font-size:11px; color:rgba(255,255,255,.55); margin-top:8px;"></div>
 </div>
 
+<!-- LLM STATS · GASTO Y MODO BARATO (Sprint 15) -->
+<div class="card">
+  <h2>💰 LLM · GASTO Y AHORRO</h2>
+  <div id="llmStatsBox" style="font-size:12px; color:rgba(255,255,255,.75); line-height:1.7;">
+    cargando...
+  </div>
+  <div class="toggle-row" style="margin-top:8px;">
+    <input type="checkbox" id="llmModoBarato" onchange="llmToggleModoBarato()">
+    <label for="llmModoBarato">
+      <strong>MODO BARATO</strong> · bloquea llamadas LLM en vivo
+      (solo usa pauta pre-generada + cache local)
+    </label>
+  </div>
+  <div class="btn-row" style="margin-top:8px;">
+    <button class="btn" onclick="llmRefreshStats()">REFRESCAR</button>
+    <button class="btn" onclick="llmResetStats()">RESET CONTADORES</button>
+  </div>
+  <div style="font-size:10px; color:rgba(255,255,255,.45); margin-top:6px;">
+    Si la pauta cargada se genero con <code>enriquecido=true</code>, la mayoria
+    de opiniones/quiz salen sin llamar a Claude. Solo se cobra cuando hay un
+    miss del cache + miss de la pauta.
+  </div>
+</div>
+
 <!-- SOCIAL · SESION DE STREAM (Sprint 13) -->
 <div class="card">
   <h2>📡 SESIÓN DE STREAM</h2>
@@ -904,6 +928,8 @@ const PROC_LABELS = {
   '/api/social/dictate':            'TarroBot diciendo tu dictado...',
   '/api/social/read-pinned-queue':  '',
   '/api/social/post-message':       'publicando en Discord...',
+  '/api/llm/stats/reset':           '',
+  '/api/llm/modo-barato':           '',
   '/api/queue/sugerir-orden':           'analizando orden con Claude...',
   '/api/queue/aplicar-orden':           'aplicando reorden...',
   '/api/episodio/exportar-descripcion': 'generando publicacion con Claude...',
@@ -1374,6 +1400,48 @@ async function correrReceta(nombre) {
   }
 }
 cargarRecetas();
+
+// ─── LLM STATS · GASTO (Sprint 15) ────────────────────────────────
+async function llmRefreshStats() {
+  try {
+    const r = await fetch('/api/llm/stats');
+    const d = await r.json();
+    if (!d.ok) return;
+    const box = document.getElementById('llmStatsBox');
+    const row = (lbl, val) =>
+      '<div style="display:flex; justify-content:space-between;"><span>' + lbl +
+      '</span><strong style="color:#FFD23F;">' + val + '</strong></div>';
+    const calls = d.calls_by_endpoint || {};
+    const callsLines = Object.entries(calls)
+      .sort((a, b) => b[1] - a[1])
+      .map(([k, v]) => row('&nbsp;&nbsp;' + k, v))
+      .join('');
+    box.innerHTML =
+      row('Llamadas LLM (esta sesion)', d.calls_total) +
+      callsLines +
+      row('Costo estimado', '$' + d.estimated_cost_usd.toFixed(4) + ' USD') +
+      row('Minutos de sesion', d.session_minutes) +
+      row('Cache local (keys)', d.cache.total_keys + ' / ' + d.cache.total_responses + ' respuestas');
+    // Sync toggle modo barato
+    document.getElementById('llmModoBarato').checked = !!d.modo_barato;
+  } catch (e) {
+    document.getElementById('llmStatsBox').textContent = 'error: ' + e.message;
+  }
+}
+async function llmResetStats() {
+  if (!confirm('Resetear contadores LLM? No toca el cache JSON.')) return;
+  await post('/api/llm/stats/reset', {});
+  llmRefreshStats();
+  logMsg('contadores LLM reseteados', 'ok');
+}
+async function llmToggleModoBarato() {
+  const activo = document.getElementById('llmModoBarato').checked;
+  await post('/api/llm/modo-barato', {activo});
+  logMsg('MODO BARATO ' + (activo ? 'ACTIVADO (no se llama Claude)' : 'desactivado'), 'ok');
+  llmRefreshStats();
+}
+setInterval(llmRefreshStats, 10000);
+llmRefreshStats();
 
 // ─── SOCIAL (Sprint 13) ───────────────────────────────────────────
 // Modulo del concentrador de chat multi-plataforma. Maneja sesion de

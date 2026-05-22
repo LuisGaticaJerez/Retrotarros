@@ -231,6 +231,74 @@ LIMITACIONES:
 
 
 ============================================================
+MINIMIZAR GASTO LLM (Sprint 15)
+============================================================
+
+Cada llamada a Claude cuesta ~$0.001 USD. Para minimizar el
+gasto durante grabaciones, TarroBot pre-genera TODO el contenido
+LLM al crear la pauta:
+
+CUANDO HACES "GENERAR PAUTA AUTO" CON UN TEMA:
+TarroBot ahora genera EN LA MISMA LLAMADA (1 call de Claude):
+  - 10 datos curiosos del top
+  - 3 opiniones alternativas por dato (para boton "opinar")
+  - 5 comentarios cortos por dato (color entre items)
+  - 2 preguntas quiz por dato (para "/api/quiz/pregunta")
+  - 8 catchphrases especificas del episodio
+  - 3 intros de cold open
+  - 3 outros con cliffhanger
+  - Publicacion completa: 3 titulos + descripcion + 15-20
+    hashtags + 5 prompts thumbnail + ig_post
+
+Esto significa: durante grabacion, NO se llama a Claude para
+opinar/quiz/exportar-descripcion porque YA ESTA todo en la pauta.
+
+CAPA DE CACHE LOCAL:
+Para temas fuera de la pauta, las respuestas que TarroBot
+genera con Claude se cachean en data/tarrobot-cache-llm.json
+con TTL de 30 dias. Si Luis pide "opinar Mario Galaxy" 5 veces
+en una semana, solo se llama a Claude una vez (las otras 4
+salen del cache).
+
+CARD "LLM GASTO Y AHORRO" EN EL PANEL:
+Muestra en vivo:
+  - Llamadas a Claude esta sesion (por endpoint)
+  - Costo estimado USD acumulado
+  - Cache local: keys + respuestas
+  - Toggle MODO BARATO
+
+MODO BARATO:
+Cuando esta ON, TarroBot bloquea TODAS las llamadas a Claude.
+Solo responde con pauta pre-generada + cache local. Util para:
+  - Grabar sin presupuesto LLM
+  - Probar el flujo sin gastar
+  - Si te quedaste sin creditos Anthropic
+
+En modo barato, opinar/quiz/respond a chat con LLM devuelven
+error 503. Lo que sigue funcionando:
+  - Cuentame con datos curados de la DB
+  - SAY (lectura literal) de mensajes
+  - DICTATE (vos escribes la respuesta)
+  - Pauta cargada con material pre-generado
+
+WORKFLOW RECOMENDADO PARA AHORRO MAXIMO:
+1. Cuando preparas un episodio, usa "GENERAR PAUTA AUTO" con
+   modo enriquecido (default). Costo: ~$0.05 una vez.
+2. Durante grabacion, casi todas las opiniones/quiz/comentarios
+   salen de la pauta. Costo: $0.
+3. Para chat de streams: usa SAY o DICTATE (gratis) en lugar de
+   RESPOND. Si necesitas respond, va al cache despues de la
+   primera vez.
+4. Al exportar la descripcion del episodio: ya esta lista en
+   la pauta, costo $0.
+
+Costo mensual estimado:
+  - 4 episodios/mes × $0.05 = $0.20 USD en pautas
+  - ~20 respuestas LLM ad-hoc/mes × $0.001 = $0.02
+  - Total: ~$0.22 USD/mes para uso normal del canal
+
+
+============================================================
 TARROBOT RESPONDE AL CHAT (Sprint 14)
 ============================================================
 

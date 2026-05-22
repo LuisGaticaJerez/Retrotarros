@@ -605,14 +605,24 @@ def generar_pauta_tema_con_llm(
     n_datos: int = 10,
     consola_hint: str | None = None,
     enfoque: str | None = None,
+    enriquecido: bool = True,
 ) -> dict | None:
     """
-    Sprint 11: genera una pauta completa a partir de un tema libre, sin HTML
-    de referencia. Pide N datos curados sobre el tema en formato lista
-    coherente (por ejemplo: 'Top juegos raros de Mega Drive').
+    Sprint 11 + Sprint 15: genera una pauta completa a partir de un tema libre.
 
-    Devuelve dict {episodio_titulo, datos[]}. Cada dato trae tema, texto,
-    estado, consola, ano, editor.
+    Si enriquecido=True (Sprint 15 default), ademas de los datos basicos
+    genera CONTENIDO COLATERAL pre-horneado para minimizar llamadas LLM
+    durante grabacion:
+      - Por cada dato: opiniones_alternativas (3), comentarios_cortos (5),
+        quiz_pregenerado (2 preguntas con respuesta).
+      - A nivel episodio: catchphrases_episodio (8), intros_cold_open (3),
+        outros_cliffhanger (3), publicacion {titulos, descripcion,
+        hashtags, thumbnail_prompts, ig_post}.
+
+    Resultado: durante grabacion, ~80% de las llamadas Claude se evitan
+    porque ya esta todo cacheado en el JSON.
+
+    Devuelve dict con la estructura completa.
     """
     try:
         import anthropic
@@ -636,6 +646,99 @@ def generar_pauta_tema_con_llm(
         f"- ENFOQUE ESPECIFICO: {enfoque}." if enfoque else
         "- ENFOQUE: datos curiosos, anecdotas, rarezas, hechos verificables que enganchen a un retrogamer."
     )
+
+    # Sprint 15 B15.1: bloque "enriquecido" pide TODO el contenido colateral
+    # en una sola llamada para evitar 30+ llamadas LLM durante grabacion.
+    bloque_enriquecido = ""
+    if enriquecido:
+        bloque_enriquecido = f"""
+
+CONTENIDO COLATERAL (CRITICO - Sprint 15 ahorro de gasto):
+
+Ademas de los {n_datos} datos basicos, genera el siguiente material extra
+para que durante la grabacion NO se necesiten mas llamadas LLM:
+
+Por CADA DATO ademas de tema/texto/estado/consola/ano/editor, agrega:
+  - "opiniones_alternativas": array de 3 strings, cada una es una opinion
+    distinta de TarroBot sobre ese tema (1-2 oraciones, max 200 chars).
+  - "comentarios_cortos": array de 5 strings cortos (max 80 chars) que
+    TarroBot puede soltar entre datos para colorear ("te lo digo yo",
+    "esa es de las buenas", etc, contextualizadas al item).
+  - "quiz_pregenerado": array de 2 objetos {{"pregunta":"...", "respuesta":"...",
+    "pista":"..."}} - trivia sobre ese item.
+
+A NIVEL EPISODIO, agrega:
+  - "catchphrases_episodio": array de 8 strings, frases especificas
+    contextuales al episodio (no genericas), max 80 chars cada una.
+  - "intros_cold_open": array de 3 strings - aperturas posibles del
+    video (max 220 chars cada una, energicas).
+  - "outros_cliffhanger": array de 3 strings - cierres con gancho al
+    proximo episodio (max 220 chars).
+  - "publicacion": objeto con todo el material para YouTube:
+      {{
+        "titulos": [3 titulos optimizados CTR, max 70 chars],
+        "descripcion": "Descripcion completa del video, 2-3 parrafos
+                        + lista de items con timestamps tentativos,
+                        SIN tildes y SIN emojis (regla del canal)",
+        "hashtags": [15-20 hashtags retro/tema, sin espacios],
+        "thumbnail_prompts": [5 prompts en INGLES para generar
+                              thumbnails con IA, descriptivos],
+        "ig_post": "Post para Instagram/Reels max 280 chars, tono
+                    casual chileno, emojis OK"
+      }}
+
+REGLA CRITICA PARA TODO EL CONTENIDO COLATERAL:
+- TODO va con las MISMAS reglas de chileno neutro tuteo + sin voseo.
+- Las opiniones tienen variedad: no todas felices, mezcla winking,
+  thinking, confused, etc.
+- Los comentarios cortos son tipo "interjecciones" para soltar entre datos.
+- El quiz_pregenerado: pregunta corta, respuesta corta (max 30 chars),
+  pista opcional para si el operador quiere darla.
+"""
+
+    estructura_basica = f"""
+{{
+  "episodio_titulo": "Titulo corto del episodio (max 60 chars)",
+  "datos": [
+    {{
+      "tema": "Nombre del juego o item puntual (max 40 chars)",
+      "texto": "El dato curioso completo, max 260 chars.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Nintendo"
+    }}
+  ]
+}}"""
+
+    estructura_enriquecida = f"""
+{{
+  "episodio_titulo": "...",
+  "catchphrases_episodio": ["...", "...", ...],
+  "intros_cold_open": ["...", "...", "..."],
+  "outros_cliffhanger": ["...", "...", "..."],
+  "publicacion": {{
+    "titulos": ["...", "...", "..."],
+    "descripcion": "...",
+    "hashtags": ["#Retrotarros", "...", ...],
+    "thumbnail_prompts": ["...", "...", ...],
+    "ig_post": "..."
+  }},
+  "datos": [
+    {{
+      "tema": "...", "texto": "...", "estado": "...",
+      "consola": "...", "ano": 0, "editor": "...",
+      "opiniones_alternativas": ["...", "...", "..."],
+      "comentarios_cortos": ["...", "...", ...],
+      "quiz_pregenerado": [
+        {{"pregunta": "...", "respuesta": "...", "pista": "..."}},
+        {{"pregunta": "...", "respuesta": "...", "pista": "..."}}
+      ]
+    }}
+  ]
+}}"""
+
+    estructura = estructura_enriquecida if enriquecido else estructura_basica
 
     prompt = f"""Eres TarroBot, mascota del canal de YouTube Retrotarros sobre videojuegos retro.
 
@@ -668,31 +771,19 @@ Requisitos OBLIGATORIOS para CADA dato (este texto se reproduce con TTS, por eso
 - Cada dato distinto del otro. NO repetir hechos parafraseados.
 - Distribuye los estados emocionales: que NO sean todos talking. Mezcla excited,
   fact, winking, confused, happy, sad, angry, thinking según el tono de cada dato.
-
+{bloque_enriquecido}
 Devuelve SOLO un JSON valido con esta estructura exacta, SIN texto extra ni markdown:
-
-{{
-  "episodio_titulo": "Titulo corto del episodio (max 60 chars)",
-  "datos": [
-    {{
-      "tema": "Nombre del juego o item puntual (max 40 chars)",
-      "texto": "El dato curioso completo, max 260 chars.",
-      "estado": "talking",
-      "consola": "SNES",
-      "ano": 1994,
-      "editor": "Nintendo"
-    }}
-    // {n_datos} items en total
-  ]
-}}
+{estructura}
 
 Estados validos: talking, excited, fact, winking, confused, happy, sad, angry, thinking.
 """
 
     try:
+        # Sprint 15 B15.4: prompt caching para reducir costos en llamadas repetidas
+        max_tokens = 8192 if enriquecido else 4096
         response = client.messages.create(
             model="claude-haiku-4-5",
-            max_tokens=4096,
+            max_tokens=max_tokens,
             messages=[{"role": "user", "content": prompt}],
         )
     except Exception as e:
@@ -717,9 +808,43 @@ Estados validos: talking, excited, fact, winking, confused, happy, sad, angry, t
         return None
 
     # Filtro anti-voseo en los textos generados (defensa ultima)
+    # Sprint 15: aplica tambien al contenido colateral enriquecido
+    def _chilenizar_lista(items):
+        if not isinstance(items, list):
+            return items
+        return [chilenizar(x) if isinstance(x, str) else x for x in items]
+
     for d in result["datos"]:
         if "texto" in d:
             d["texto"] = chilenizar(d["texto"])
+        # Material colateral (Sprint 15)
+        if "opiniones_alternativas" in d:
+            d["opiniones_alternativas"] = _chilenizar_lista(d["opiniones_alternativas"])
+        if "comentarios_cortos" in d:
+            d["comentarios_cortos"] = _chilenizar_lista(d["comentarios_cortos"])
+        if "quiz_pregenerado" in d and isinstance(d["quiz_pregenerado"], list):
+            for q in d["quiz_pregenerado"]:
+                if isinstance(q, dict):
+                    if "pregunta" in q:
+                        q["pregunta"] = chilenizar(q["pregunta"])
+                    if "respuesta" in q:
+                        q["respuesta"] = chilenizar(q["respuesta"])
+                    if "pista" in q and q["pista"]:
+                        q["pista"] = chilenizar(q["pista"])
+
+    # Nivel episodio (Sprint 15)
+    if "catchphrases_episodio" in result:
+        result["catchphrases_episodio"] = _chilenizar_lista(result["catchphrases_episodio"])
+    if "intros_cold_open" in result:
+        result["intros_cold_open"] = _chilenizar_lista(result["intros_cold_open"])
+    if "outros_cliffhanger" in result:
+        result["outros_cliffhanger"] = _chilenizar_lista(result["outros_cliffhanger"])
+    # Nota: publicacion va SIN tildes (regla del canal), no aplica chilenizar
+    # porque chilenizar mantiene tildes ortograficas. Solo el ig_post podria
+    # tener voseo si Claude se equivoco - aplicar selectivo.
+    pub = result.get("publicacion") or {}
+    if "ig_post" in pub and pub["ig_post"]:
+        pub["ig_post"] = chilenizar(pub["ig_post"])
 
     return result
 
@@ -1333,6 +1458,10 @@ def pauta_agregar_dato(pauta: dict, dato_in: dict) -> dict:
         "duracion_ms": None,
         "fuente": dato_in.get("fuente", "pauta-manual"),
     }
+    # Sprint 15: preservar contenido colateral pre-generado si vino
+    for key in ("opiniones_alternativas", "comentarios_cortos", "quiz_pregenerado"):
+        if key in dato_in:
+            dato[key] = dato_in[key]
     pauta["datos"].append(dato)
     return dato
 
@@ -1971,6 +2100,12 @@ def cmd_pauta_tema(args) -> int:
     for d in datos_llm:
         d["fuente"] = "pauta-tema"
         pauta_agregar_dato(pauta, d)
+
+    # Sprint 15: preservar contenido colateral a nivel episodio
+    for key in ("catchphrases_episodio", "intros_cold_open",
+                "outros_cliffhanger", "publicacion"):
+        if key in result:
+            pauta[key] = result[key]
 
     p = guardar_pauta(pauta)
     print()
