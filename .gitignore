@@ -91,3 +91,31 @@ studio/sessions/
 
 # Bundle exportable del Claude del estudio (build, se regenera con Compress-Archive)
 docs/handoff-claude-studio.zip
+
+# ─── Studio Panel (Node/TypeScript monorepo absorbido como subcarpeta) ──
+# Solo .env raiz y .env.local del studio-panel; los .env.example y similares
+# se versionan normalmente.
+studio-panel/.env
+studio-panel/.env.local
+studio-panel/.env.*.local
+studio-panel/apps/*/.env
+studio-panel/apps/*/.env.local
+
+# node_modules del monorepo studio-panel
+studio-panel/node_modules/
+studio-panel/apps/*/node_modules/
+studio-panel/packages/*/node_modules/
+
+# Build output del studio-panel
+studio-panel/apps/*/dist/
+studio-panel/apps/*/.next/
+studio-panel/apps/*/build/
+studio-panel/apps/*/out/
+
+# Backup del .env hecho al migrar (no se versiona)
+studio-panel/.env.bak.*
+studio-panel/.env.bak
+
+# Memorias locales del studio-panel (cache de sesion claude code, no canonico)
+studio-panel/.remember/tmp/
+studio-panel/.remember/logs/

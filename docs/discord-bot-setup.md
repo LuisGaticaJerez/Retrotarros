@@ -166,21 +166,55 @@ Verificar en los logs que el bot se conecta:
 
 ---
 
-## Estado de cada paso
+## Estado de cada paso (actualizado 2026-05-22)
 
-- [x] App Discord "Tarrobot" creada
-- [x] Privileged Gateway Intents activados
-- [x] OAuth2 Scopes configurados
-- [x] Permisos del bot configurados
+- [x] App Discord "Tarrobot" creada (ID `1507235440527413368`)
+- [x] Privileged Gateway Intents activados (Presence + Members + Message Content)
+- [x] OAuth2 Scopes configurados (`bot` + `applications.commands`)
+- [x] Permisos del bot configurados (bitfield `277025770560`)
 - [x] URL de invitacion generada
-- [ ] Servidor Discord "Retrotarros" creado
-- [ ] Bot invitado al servidor
-- [ ] Canales basicos creados
-- [ ] Modo desarrollador activado
-- [ ] Token rotado y copiado al `.env` del studio-panel
-- [ ] DISCORD_GUILD_ID + DISCORD_CHANNEL_IDS copiados al `.env`
-- [ ] Backend reiniciado y bot conectado
-- [ ] Test end-to-end OK
+- [x] Servidor Discord "RetroTarros" creado (ID `1507239039747756094`)
+- [x] Bot invitado al servidor (con captcha resuelto por Luis)
+- [x] 4 Canales creados (`#general`, `#videojuegos`, `#colecciones`, `#musica`)
+- [ ] Modo desarrollador activado (no urgente, los IDs se capturaron desde URLs)
+- [x] Token rotado y copiado al `.env` del studio-panel
+- [x] DISCORD_GUILD_ID + DISCORD_CHANNEL_IDS copiados al `.env` (4 channel IDs)
+- [ ] Backend reiniciado y bot conectado (BLOQUEADO: conector Discord vive en rama feature `claude/hungry-proskuriakova-681c75`, falta mergear)
+- [ ] Test end-to-end OK (depende del paso anterior)
+
+## IDs del servidor RetroTarros
+
+```
+DISCORD_GUILD_ID=1507239039747756094
+DISCORD_CHANNEL_IDS=1507239040913768470,1507239192915345418,1507242416296689665,1507242447565230100
+```
+
+| Canal | ID |
+|-------|-----|
+| `#general` | `1507239040913768470` |
+| `#videojuegos` | `1507239192915345418` |
+| `#colecciones` | `1507242416296689665` |
+| `#musica` | `1507242447565230100` |
+
+## Migracion monorepo (2026-05-22)
+
+El studio-panel fue movido como subcarpeta del repo Retrotarros. Paths nuevos:
+
+- `.env` ahora en: `D:\Recursos Retrotarros\repo\studio-panel\.env`
+- Comando dev: `cd D:\Recursos Retrotarros\repo\studio-panel && pnpm dev`
+
+Ver `HANDOFF-tarrobot-studio.md` para detalle de la migracion.
+
+## Pendiente para que el bot se conecte realmente
+
+El conector Discord vive en la rama feature `claude/hungry-proskuriakova-681c75` del repo legacy `retrotarros-studio-panel`. Para activarlo:
+
+1. Cherry-pick el commit `e1ac23c "feat: persistencia Supabase + conectores YouTube y Discord"` al monorepo nuevo
+2. O aplicar manualmente el codigo del conector
+3. Reinstalar deps: `cd studio-panel && pnpm install`
+4. Reiniciar `pnpm dev`
+5. Verificar logs: `[discord] Bot conectado como Tarrobot#3006`
+6. Test E2E: mensaje en `#general` → aparece en dashboard
 
 ---
 
