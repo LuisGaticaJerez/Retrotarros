@@ -11,3 +11,8 @@ pillow>=10.0
 # Sprint 9: cliente WebSocket para obs-websocket v5 (control OBS por voz/panel)
 # uvicorn[standard] ya lo trae transitivo pero lo pineamos explicito por claridad
 websockets>=12.0
+
+# Sprint 13: conectores sociales para concentrador de chat multi-plataforma
+# (Twitch usa IRC nativo con asyncio, no requiere lib; YouTube usa google-api-python-client)
+discord.py>=2.4
+google-api-python-client>=2.140
