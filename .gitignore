@@ -88,3 +88,6 @@ studio/exports/*.txt
 studio/shorts/*.mp3
 studio/shorts/*.srt
 studio/sessions/
+
+# Bundle exportable del Claude del estudio (build, se regenera con Compress-Archive)
+docs/handoff-claude-studio.zip
