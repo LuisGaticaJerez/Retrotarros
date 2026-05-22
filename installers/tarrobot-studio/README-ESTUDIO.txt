@@ -173,6 +173,75 @@ comandos de camara silenciosamente. Todo lo demas funciona igual.
 
 
 ============================================================
+CONCENTRADOR DE CHAT MULTI-PLATAFORMA (Sprint 13)
+============================================================
+
+TarroBot escucha el chat de Twitch, Discord y YouTube Live en
+tiempo real y muestra todo en un solo feed unificado en el panel
+control. Util para streams/podcasts donde el publico escribe en
+varias plataformas y no queres tener 4 pestañas abiertas.
+
+CONECTORES DISPONIBLES:
+
+1. TWITCH (sin setup, auth anonima)
+   - Solo pone el nombre del canal y conecta.
+   - No requiere registrar bot ni OAuth.
+
+2. DISCORD (requiere setup previo del bot)
+   - Ver docs/discord-bot-setup.md para crear la app Discord.
+   - Variables de entorno necesarias:
+       DISCORD_BOT_TOKEN
+       DISCORD_GUILD_ID
+       DISCORD_CHANNEL_IDS (comma-separated)
+   - El bot tiene que estar invitado al servidor.
+
+3. YOUTUBE LIVE (read-only, sin OAuth)
+   - Variables de entorno:
+       YOUTUBE_API_KEY (de Google Cloud Console)
+   - Pegar el video_id del stream activo en el panel
+     (o setear YOUTUBE_VIDEO_ID en .env como default).
+
+USAR EN VIVO:
+1. Abre el panel: http://localhost:8765/control
+2. Card "SESION DE STREAM": pone slug + titulo y click INICIAR.
+3. Card "CONECTORES SOCIALES":
+   - Twitch: pone canal y CONECTAR (por defecto: retrotarros)
+   - Discord: CONECTAR (lee env vars)
+   - YouTube: opcional, video_id + CONECTAR
+4. Card "FEED DE CHAT" se llena con mensajes en tiempo real.
+   - Filtros: TODO / TWITCH / DISCORD / YT
+   - Click PIN en un mensaje para responderlo en camara.
+   - Panel lateral PINNED muestra los pinneados destacados.
+
+PERSISTENCIA:
+Todo se guarda en data/tarrobot-messages.db (SQLite local).
+Cada sesion queda etiquetada con el slug. Post-grabacion podes
+exportar los pinned como pinned comment de YouTube o highlights
+de la transmision (futuro).
+
+PRIVACIDAD:
+- Todo corre LOCAL en tu PC. No hay servicios cloud.
+- Discord bot solo lee canales del servidor RetroTarros.
+- Twitch usa auth anonima (no se ve quien escucha).
+- YouTube usa API key publica (solo lee chat publico).
+
+LIMITACIONES:
+- Instagram Live, Facebook Live, WhatsApp: NO implementados.
+  Estos requieren Social Stream Ninja como puente. Futuro sprint.
+- Solo READ por ahora. Para que TarroBot RESPONDA en el chat,
+  hace falta otro sprint (cuando estes listo para streams reales).
+
+TROUBLESHOOTING:
+- "Twitch no conecta": revisa que no haya firewall bloqueando
+  el puerto 6697 (IRC SSL). Tipico en redes corporativas.
+- "Discord no conecta": verifica que el bot este invitado al
+  servidor y que el token sea valido. Ver discord-bot-setup.md.
+- "YouTube no encuentra video": el video_id debe ser de un
+  stream EN VIVO (no de un video grabado). Tambien verifica
+  que la API key tenga YouTube Data API v3 habilitada.
+
+
+============================================================
 FUNCIONES AVANZADAS (Sprint 12)
 ============================================================
 

@@ -70,6 +70,7 @@ import message_store
 import social_manager
 from connectors.twitch import TwitchConnector
 from connectors import discord_conn as discord_connector_mod
+from connectors import youtube as youtube_connector_mod
 
 # Saludos geek random (español neutro latino, CON tildes para TTS preciso)
 SALUDOS_GEEK = [
@@ -3569,6 +3570,53 @@ async def social_discord_stop():
     conn = social_manager.manager.find_connector("discord")
     if not conn:
         return JSONResponse({"error": "Discord no esta activo"}, status_code=400)
+    await conn.stop()
+    try:
+        social_manager.manager._connectors.remove(conn)
+    except ValueError:
+        pass
+    return {"ok": True}
+
+
+@app.post("/api/social/connectors/youtube/start")
+async def social_youtube_start(payload: Optional[dict] = None):
+    """
+    Arranca el conector YouTube Live Chat. Lee YOUTUBE_API_KEY del env.
+    Body opcional: { 'video_id': 'XXXXXXXXXXX' } para override del env var.
+    """
+    payload = payload or {}
+    existing = social_manager.manager.find_connector("youtube")
+    if existing:
+        try:
+            await existing.stop()
+            social_manager.manager._connectors.remove(existing)
+        except Exception:
+            pass
+    conn = youtube_connector_mod.from_env()
+    if conn is None:
+        return JSONResponse({
+            "error": "No se pudo crear conector YouTube. "
+                     "Verifica YOUTUBE_API_KEY en el .env."
+        }, status_code=400)
+    # Si el payload trae video_id, override
+    override_vid = (payload.get("video_id") or "").strip()
+    if override_vid:
+        conn.set_video_id(override_vid)
+    if not conn.video_id:
+        return JSONResponse({
+            "error": "YouTube necesita un video_id (del stream activo). "
+                     "Mandalo en el body o seteatlo en YOUTUBE_VIDEO_ID env var."
+        }, status_code=400)
+    await social_manager.manager.register(conn)
+    return {"ok": True, "platform": "youtube", "status": conn.get_status(),
+            "video_id": conn.video_id}
+
+
+@app.post("/api/social/connectors/youtube/stop")
+async def social_youtube_stop():
+    conn = social_manager.manager.find_connector("youtube")
+    if not conn:
+        return JSONResponse({"error": "YouTube no esta activo"}, status_code=400)
     await conn.stop()
     try:
         social_manager.manager._connectors.remove(conn)

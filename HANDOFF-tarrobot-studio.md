@@ -2,14 +2,24 @@
 
 > Documento unico que cubre **TarroBot + Studio Panel** como un solo proyecto unificado **"TarroBot Studio"**. Reemplaza la separacion entre los dos proyectos que vivian en repos distintos hasta el 2026-05-22.
 
-## Estado al 2026-05-22
+## Estado al 2026-05-22 (Sprint 13 cerrado)
 
-**Decision tomada hoy:** unificar los dos productos en un monorepo bajo el repo Retrotarros principal. Pasos completados:
+**Sprint 13 completo: Studio Panel migrado a Python.** Ya NO existe la carpeta
+`studio-panel/` Node — todo el conector multi-plataforma vive en
+`scripts/connectors/` + `scripts/social_manager.py` + endpoints en
+`scripts/tarrobot-live.py`. Una sola codebase Python, un solo proceso,
+una sola sesion Claude.
 
-- ✓ Studio Panel migrado de repo independiente a subcarpeta `studio-panel/` del repo Retrotarros
-- ✓ TarroBot v1.2 sigue intacto en sus paths tradicionales (`scripts/`, `studio/`, `data/`, `installers/`)
-- ✓ `.gitignore` actualizado para soportar el monorepo
-- ✓ Discord bot Tarrobot operativo en servidor RetroTarros, .env del studio-panel listo
+Pasos completados:
+
+- ✓ Studio Panel Node eliminado del repo (era proyecto separado, ya no aporta)
+- ✓ Conectores Twitch (IRC nativo) + Discord (discord.py) + YouTube (Data API v3) en Python
+- ✓ Persistencia SQLite local `data/tarrobot-messages.db` (reemplaza Supabase)
+- ✓ SocialManager orquesta conectores + persiste mensajes + broadcast WS
+- ✓ 14 endpoints REST `/api/social/*` en `tarrobot-live.py`
+- ✓ 3 cards nuevas en panel control: SESION + CONECTORES + FEED DE CHAT
+- ✓ WebSocket cliente en panel filtra eventos `social-*` con reconnect automatico
+- ✓ Discord bot Tarrobot operativo en servidor RetroTarros (de sesion previa)
 
 ## Que es TarroBot Studio
 
@@ -28,62 +38,67 @@ Asistente de produccion local. Corre en el PC del estudio durante grabacion.
 - **Puerto**: :8765 local
 - **Instalador**: `installers/tarrobot-studio/` con build script Inno Setup
 
-### Studio Panel (Node/TypeScript · `studio-panel/`)
+### TarroBot Social (Python · `scripts/connectors/` + `scripts/social_manager.py`)
 
-Concentrador de mensajeria multi-plataforma. Corre durante streams/podcasts para leer chat en vivo de varias plataformas en un solo dashboard.
+Concentrador de mensajeria multi-plataforma INTEGRADO en TarroBot.
+Sprint 13: migrado del stack Node original a Python como modulo del
+servidor FastAPI de TarroBot.
 
-- **Conectores**: Twitch (activo), Discord/YouTube/SSN (en rama `claude/hungry-proskuriakova-681c75`)
-- **Backend**: Fastify + WebSocket en :3001
-- **Frontend**: React 19 + Vite + Tailwind + paleta synthwave en :5173
-- **Persistencia**: Supabase (multi-tenant: orgs/memberships/streams/messages con RLS)
-- **Estado**: Sprint 1 cerrado, Sprint 2 + merge de conectores pendientes
-- **Repo legacy**: `github.com/LuisGaticaJerez/retrotarros-studio-panel` (queda como archivo historico; el codigo vivo esta aca)
+- **Conectores activos**:
+  - Twitch (IRC nativo asyncio, auth anonima justinfan, reconnect automatico)
+  - Discord (discord.py, intents Message Content + Members + Presence)
+  - YouTube Live Chat (Data API v3 polling, respeta pollingIntervalMillis)
+- **Backend**: extendido en `scripts/tarrobot-live.py` (mismo proceso :8765)
+- **Frontend**: 3 cards en `studio/_template-tarrobot-control.html`
+- **Persistencia**: SQLite local en `data/tarrobot-messages.db` (WAL mode)
+- **WebSocket**: reutiliza el `/ws/live` con eventos `social-*` filtrados
+- **Repo legacy**: `github.com/LuisGaticaJerez/retrotarros-studio-panel`
+  queda como archivo historico (codigo vivo migrado a Python).
 
-## Estructura del monorepo
+## Estructura del repo (Sprint 13 cerrado)
 
 ```
 D:\Recursos Retrotarros\repo\
 ├── .git/                          # repo unico
-├── .gitignore                     # cubre TarroBot + Studio Panel
+├── .gitignore
 ├── HANDOFF.md                     # estado canal (general)
-├── HANDOFF-tarrobot-studio.md     # ESTE archivo (unificado)
+├── HANDOFF-tarrobot-studio.md     # ESTE archivo
 ├── docs/
-│   ├── HANDOFF-tarrobot.md        # legacy: solo TarroBot
-│   ├── discord-bot-setup.md       # setup Discord bot
-│   ├── app-estudio-mensajeria.md  # legacy: brainstorm Studio Panel
+│   ├── HANDOFF-tarrobot.md        # legacy
+│   ├── discord-bot-setup.md       # setup Discord bot (sesion previa)
+│   ├── app-estudio-mensajeria.md  # legacy brainstorm
 │   ├── pauta-*.md                 # pautas de episodios del canal
 │   ├── handoff-claude-studio/     # bundle para Claude del PC del estudio
 │   └── ...
-├── scripts/                       # TarroBot Python
+├── scripts/                       # codigo Python TarroBot Studio
 │   ├── tarrobot.py                # CLI principal
-│   ├── tarrobot-live.py           # servidor FastAPI
-│   ├── tarrobot-tray.py
-│   ├── obs_controller.py
-│   └── sync-tarrobot-to-drive.ps1
+│   ├── tarrobot-live.py           # servidor FastAPI principal :8765
+│   ├── tarrobot-tray.py           # tray icon wrapper
+│   ├── obs_controller.py          # OBS WebSocket client
+│   ├── sync-tarrobot-to-drive.ps1 # sync al Drive del estudio
+│   ├── message_store.py           # Sprint 13: SQLite persistencia
+│   ├── social_manager.py          # Sprint 13: orquestador conectores
+│   └── connectors/                # Sprint 13: conectores plataformas
+│       ├── __init__.py            # Connector ABC + Message dataclass
+│       ├── twitch.py              # IRC nativo asyncio
+│       ├── discord_conn.py        # discord.py bot reader
+│       └── youtube.py             # Data API v3 polling
 ├── studio/                        # HTMLs canal Retrotarros
-│   ├── _template-tarrobot-live.html
-│   ├── _template-tarrobot-control.html
+│   ├── _template-tarrobot-live.html      # TV virtual TarroBot
+│   ├── _template-tarrobot-control.html   # panel control completo
 │   ├── obs-aliases.json
 │   ├── tarrobot-recetas.json
 │   ├── pautas/<slug>.tarrobot.json
 │   └── ...
 ├── data/
-│   └── tarrobot-database.json
-├── installers/
-│   └── tarrobot-studio/           # instalador .exe + ZIPs
-└── studio-panel/                  # Studio Panel Node/TS (NUEVA UBICACION)
-    ├── apps/
-    │   ├── backend/               # Fastify + WebSocket
-    │   └── frontend/              # React 19 + Vite + Tailwind
-    ├── packages/
-    │   └── shared/
-    ├── package.json
-    ├── pnpm-workspace.yaml
-    ├── .env                       # gitignored (creds Discord, Supabase, etc)
-    ├── CLAUDE.md                  # instrucciones especificas studio-panel
-    ├── HANDOFF.md                 # legacy: estado Sprint 1
-    └── ...
+│   ├── tarrobot-database.json     # datos curados
+│   └── tarrobot-messages.db       # Sprint 13: SQLite messages + streams
+└── installers/
+    └── tarrobot-studio/           # instalador .exe + ZIPs
 ```
+
+**El directorio `studio-panel/` Node fue eliminado en Sprint 13** — todo su
+codigo equivalente vive ahora en Python como modulo de TarroBot.
 
 ## Roadmap
 

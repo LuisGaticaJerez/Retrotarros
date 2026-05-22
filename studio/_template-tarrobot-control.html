@@ -545,7 +545,7 @@ select#queueSelect:focus { border-color: var(--ye); }
     </div>
   </div>
 
-  <div style="margin-bottom:6px;">
+  <div style="margin-bottom:10px;">
     <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
       <span id="socDiscordDot" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#c33;"></span>
       <strong style="font-size:12px;">DISCORD</strong>
@@ -554,6 +554,21 @@ select#queueSelect:focus { border-color: var(--ye); }
     <button class="btn cy full" id="socDiscordToggle" onclick="socToggleDiscord()">CONECTAR</button>
     <div style="font-size:10px; color:rgba(255,255,255,.45); margin-top:4px;">
       Usa DISCORD_BOT_TOKEN + DISCORD_GUILD_ID + DISCORD_CHANNEL_IDS del .env
+    </div>
+  </div>
+
+  <div style="margin-bottom:6px;">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+      <span id="socYoutubeDot" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#c33;"></span>
+      <strong style="font-size:12px;">YOUTUBE LIVE</strong>
+      <span id="socYoutubeStatus" style="font-size:11px; color:rgba(255,255,255,.6);">desconectado</span>
+    </div>
+    <div class="row-inline">
+      <input type="text" id="socYoutubeVideoId" placeholder="video ID del stream activo (opcional, usa env)" style="flex:3">
+      <button class="btn cy" id="socYoutubeToggle" onclick="socToggleYouTube()" style="flex:1">CONECTAR</button>
+    </div>
+    <div style="font-size:10px; color:rgba(255,255,255,.45); margin-top:4px;">
+      Usa YOUTUBE_API_KEY del .env (read-only, no necesita OAuth)
     </div>
   </div>
 </div>
@@ -1384,7 +1399,7 @@ function socRenderStatus(s) {
     document.getElementById('socSessionActive').style.display = 'none';
   }
   // Conectores
-  const platforms = ['twitch', 'discord'];
+  const platforms = ['twitch', 'discord', 'youtube'];
   platforms.forEach(p => {
     const conn = (s.connectors || []).find(c => c.platform === p);
     const dot = document.getElementById('soc' + p.charAt(0).toUpperCase()+p.slice(1) + 'Dot');
@@ -1452,6 +1467,22 @@ async function socToggleDiscord() {
   } else {
     const data = await post('/api/social/connectors/discord/start', {});
     if (data && data.ok) { logMsg('Discord conectado', 'ok'); socRefreshStatus(); }
+  }
+}
+
+async function socToggleYouTube() {
+  const btn = document.getElementById('socYoutubeToggle');
+  if (btn.dataset.connected === 'true') {
+    const data = await post('/api/social/connectors/youtube/stop', {});
+    if (data && data.ok) { logMsg('YouTube desconectado', 'ok'); socRefreshStatus(); }
+  } else {
+    const videoId = document.getElementById('socYoutubeVideoId').value.trim();
+    const body = videoId ? {video_id: videoId} : {};
+    const data = await post('/api/social/connectors/youtube/start', body);
+    if (data && data.ok) {
+      logMsg('YouTube conectado · video=' + data.video_id, 'ok');
+      socRefreshStatus();
+    }
   }
 }
 

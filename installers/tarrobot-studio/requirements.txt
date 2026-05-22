@@ -13,6 +13,7 @@ pillow>=10.0
 websockets>=12.0
 
 # Sprint 13: conectores sociales para concentrador de chat multi-plataforma
-# (Twitch usa IRC nativo con asyncio, no requiere lib; YouTube usa google-api-python-client)
+# Twitch: IRC nativo con asyncio.open_connection + SSL (cero deps extra)
+# YouTube: Data API v3 con urllib (cero deps extra)
+# Discord: discord.py (unico que requiere lib, por la complejidad del protocolo)
 discord.py>=2.4
-google-api-python-client>=2.140
