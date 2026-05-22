@@ -12,7 +12,7 @@
 ; ─────────────────────────────────────────────────────────────────────
 
 #define MyAppName "TarroBot Studio"
-#define MyAppVersion "1.2.2"
+#define MyAppVersion "1.3.0"
 #define MyAppPublisher "Retrotarros - Luis Gatica Jerez"
 #define MyAppURL "https://github.com/LuisGaticaJerez/Retrotarros"
 #define MyAppExeName "TarroBot.bat"
@@ -63,6 +63,13 @@ Source: "..\..\scripts\tarrobot-live.py";         DestDir: "{app}\scripts"; Flag
 Source: "..\..\scripts\tarrobot-tray.py";         DestDir: "{app}\scripts"; Flags: ignoreversion
 Source: "..\..\scripts\obs_controller.py";        DestDir: "{app}\scripts"; Flags: ignoreversion
 Source: "..\..\scripts\sync-tarrobot-to-drive.ps1"; DestDir: "{app}\scripts"; Flags: ignoreversion
+; Sprint 13-16: modulo social + LLM resolver + auto-respond
+Source: "..\..\scripts\message_store.py";   DestDir: "{app}\scripts"; Flags: ignoreversion
+Source: "..\..\scripts\social_manager.py";  DestDir: "{app}\scripts"; Flags: ignoreversion
+Source: "..\..\scripts\llm_resolver.py";    DestDir: "{app}\scripts"; Flags: ignoreversion
+Source: "..\..\scripts\auto_respond.py";    DestDir: "{app}\scripts"; Flags: ignoreversion
+; Connectors (Twitch + Discord + YouTube)
+Source: "..\..\scripts\connectors\*.py";    DestDir: "{app}\scripts\connectors"; Flags: ignoreversion recursesubdirs
 
 ; ───────── Templates HTML ─────────
 Source: "..\..\studio\_template-tarrobot-live.html";    DestDir: "{app}\studio"; Flags: ignoreversion

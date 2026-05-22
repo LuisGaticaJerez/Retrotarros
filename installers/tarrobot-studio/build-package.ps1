@@ -18,7 +18,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$Version = "1.2.2"
+$Version = "1.3.0"
 $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RepoRoot = Resolve-Path (Join-Path $ScriptRoot "..\..")
 $DistDir = Join-Path $ScriptRoot "dist"
@@ -62,6 +62,14 @@ Copy-Item (Join-Path $RepoRoot "scripts\tarrobot-tray.py") -Destination (Join-Pa
 Copy-Item (Join-Path $RepoRoot "scripts\obs_controller.py") -Destination (Join-Path $PackageDir "scripts\")
 # Script de sync al Drive (opcional, util si el operador edita pautas localmente)
 Copy-Item (Join-Path $RepoRoot "scripts\sync-tarrobot-to-drive.ps1") -Destination (Join-Path $PackageDir "scripts\")
+# Sprint 13-16: modulo social (chat multi-plataforma + LLM resolver + auto-respond)
+Copy-Item (Join-Path $RepoRoot "scripts\message_store.py") -Destination (Join-Path $PackageDir "scripts\")
+Copy-Item (Join-Path $RepoRoot "scripts\social_manager.py") -Destination (Join-Path $PackageDir "scripts\")
+Copy-Item (Join-Path $RepoRoot "scripts\llm_resolver.py") -Destination (Join-Path $PackageDir "scripts\")
+Copy-Item (Join-Path $RepoRoot "scripts\auto_respond.py") -Destination (Join-Path $PackageDir "scripts\")
+# Subcarpeta connectors (Twitch + Discord + YouTube)
+New-Item -ItemType Directory -Path (Join-Path $PackageDir "scripts\connectors") -Force | Out-Null
+Copy-Item (Join-Path $RepoRoot "scripts\connectors\*.py") -Destination (Join-Path $PackageDir "scripts\connectors\")
 
 # Copiar templates HTML
 Write-Host "Copiando templates HTML..." -ForegroundColor Green
