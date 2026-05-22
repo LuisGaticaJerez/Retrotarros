@@ -502,6 +502,64 @@ select#queueSelect:focus { border-color: var(--ye); }
   <div id="recetasLog" style="font-size:11px; color:rgba(255,255,255,.55); margin-top:8px;"></div>
 </div>
 
+<!-- AUTO-RESPOND TOGGLE (Sprint 16 B16.1) -->
+<div class="card">
+  <h2>🤖 AUTO-RESPOND</h2>
+  <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:8px;">
+    Cuando esta ON, TarroBot responde automaticamente a mensajes del chat
+    que matchen los filtros. Por defecto responde solo si lo mencionan
+    (@tarrobot, "tarrobot ...", etc). Cooldowns evitan spam.
+  </div>
+  <div class="toggle-row">
+    <input type="checkbox" id="arActivo" onchange="arUpdateConfig()">
+    <label for="arActivo"><strong>AUTO-RESPOND ACTIVO</strong></label>
+  </div>
+  <div class="toggle-row">
+    <input type="checkbox" id="arMentionOnly" checked onchange="arUpdateConfig()">
+    <label for="arMentionOnly">Solo si mencionan a TarroBot (@tarrobot, tarrobot, etc)</label>
+  </div>
+  <div class="toggle-row">
+    <input type="checkbox" id="arSkipSpeaking" checked onchange="arUpdateConfig()">
+    <label for="arSkipSpeaking">No auto-responder si TarroBot esta hablando</label>
+  </div>
+  <div style="margin-top:8px;">
+    <label style="font-size:11px; color:rgba(255,255,255,.7);">
+      Cooldown por user (segundos): <span id="arCooldownUserVal">60</span>
+    </label>
+    <input type="range" id="arCooldownUser" min="10" max="300" value="60" step="5"
+           oninput="document.getElementById('arCooldownUserVal').textContent = this.value"
+           onchange="arUpdateConfig()" style="width:100%;">
+  </div>
+  <div style="margin-top:6px;">
+    <label style="font-size:11px; color:rgba(255,255,255,.7);">
+      Cooldown global (segundos): <span id="arCooldownGlobalVal">15</span>
+    </label>
+    <input type="range" id="arCooldownGlobal" min="5" max="60" value="15" step="1"
+           oninput="document.getElementById('arCooldownGlobalVal').textContent = this.value"
+           onchange="arUpdateConfig()" style="width:100%;">
+  </div>
+  <div style="margin-top:8px;">
+    <label style="font-size:11px; color:rgba(255,255,255,.7);">Plataformas habilitadas:</label>
+    <div class="btn-row" style="margin-top:3px;">
+      <label style="font-size:11px; cursor:pointer;">
+        <input type="checkbox" id="arPlatTwitch" checked onchange="arUpdateConfig()"> Twitch
+      </label>
+      <label style="font-size:11px; cursor:pointer;">
+        <input type="checkbox" id="arPlatDiscord" checked onchange="arUpdateConfig()"> Discord
+      </label>
+      <label style="font-size:11px; cursor:pointer;">
+        <input type="checkbox" id="arPlatYoutube" checked onchange="arUpdateConfig()"> YouTube
+      </label>
+    </div>
+  </div>
+  <div id="arStats" style="font-size:11px; color:rgba(255,210,63,.85); margin-top:8px;">
+    Respuestas automaticas: 0
+  </div>
+  <div class="btn-row" style="margin-top:6px;">
+    <button class="btn" onclick="arResetCounters()">RESET CONTADORES</button>
+  </div>
+</div>
+
 <!-- LLM STATS · GASTO Y MODO BARATO (Sprint 15) -->
 <div class="card">
   <h2>💰 LLM · GASTO Y AHORRO</h2>
@@ -930,6 +988,7 @@ const PROC_LABELS = {
   '/api/social/post-message':       'publicando en Discord...',
   '/api/llm/stats/reset':           '',
   '/api/llm/modo-barato':           '',
+  '/api/social/auto-respond':       '',
   '/api/queue/sugerir-orden':           'analizando orden con Claude...',
   '/api/queue/aplicar-orden':           'aplicando reorden...',
   '/api/episodio/exportar-descripcion': 'generando publicacion con Claude...',
@@ -1400,6 +1459,69 @@ async function correrReceta(nombre) {
   }
 }
 cargarRecetas();
+
+// ─── AUTO-RESPOND TOGGLE (Sprint 16 B16.1) ────────────────────────
+let _arSilentUpdate = false;  // evitar loop al cargar config inicial
+
+async function arRefreshStatus() {
+  try {
+    const r = await fetch('/api/social/auto-respond');
+    const d = await r.json();
+    if (!d.ok) return;
+    _arSilentUpdate = true;
+    const c = d.config || {};
+    document.getElementById('arActivo').checked = !!c.activo;
+    document.getElementById('arMentionOnly').checked = !!c.mention_only;
+    document.getElementById('arSkipSpeaking').checked = !!c.skip_if_speaking;
+    const cuVal = c.cooldown_user_s || 60;
+    document.getElementById('arCooldownUser').value = cuVal;
+    document.getElementById('arCooldownUserVal').textContent = cuVal;
+    const cgVal = c.cooldown_global_s || 15;
+    document.getElementById('arCooldownGlobal').value = cgVal;
+    document.getElementById('arCooldownGlobalVal').textContent = cgVal;
+    const plats = c.platforms || [];
+    const noFilter = plats.length === 0;
+    document.getElementById('arPlatTwitch').checked = noFilter || plats.includes('twitch');
+    document.getElementById('arPlatDiscord').checked = noFilter || plats.includes('discord');
+    document.getElementById('arPlatYoutube').checked = noFilter || plats.includes('youtube');
+    _arSilentUpdate = false;
+    document.getElementById('arStats').textContent =
+      'Respuestas automaticas esta sesion: ' + (d.auto_responses_count || 0) +
+      ' · Tracked users: ' + (d.tracked_users || 0);
+  } catch (e) { /* silencio */ }
+}
+
+async function arUpdateConfig() {
+  if (_arSilentUpdate) return;
+  const platforms = [];
+  if (document.getElementById('arPlatTwitch').checked) platforms.push('twitch');
+  if (document.getElementById('arPlatDiscord').checked) platforms.push('discord');
+  if (document.getElementById('arPlatYoutube').checked) platforms.push('youtube');
+  // Si los 3 estan, mandar [] (= todas, no filtrar)
+  const body = {
+    activo: document.getElementById('arActivo').checked,
+    mention_only: document.getElementById('arMentionOnly').checked,
+    skip_if_speaking: document.getElementById('arSkipSpeaking').checked,
+    cooldown_user_s: parseInt(document.getElementById('arCooldownUser').value, 10),
+    cooldown_global_s: parseInt(document.getElementById('arCooldownGlobal').value, 10),
+    platforms: platforms.length === 3 ? [] : platforms,
+  };
+  const data = await post('/api/social/auto-respond', body);
+  if (data && data.ok) {
+    arRefreshStatus();
+    logMsg('auto-respond ' + (body.activo ? 'ON' : 'OFF') +
+           ' (' + (body.mention_only ? 'solo mention' : 'todos los mensajes') + ')', 'ok');
+  }
+}
+
+async function arResetCounters() {
+  await post('/api/social/auto-respond', {reset_counters: true});
+  arRefreshStatus();
+  logMsg('contadores auto-respond reseteados', 'ok');
+}
+
+setInterval(arRefreshStatus, 8000);
+arRefreshStatus();
 
 // ─── LLM STATS · GASTO (Sprint 15) ────────────────────────────────
 async function llmRefreshStats() {

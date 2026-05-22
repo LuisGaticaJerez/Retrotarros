@@ -34,6 +34,10 @@ class SocialManager:
         self._connectors: list[Connector] = []
         self._ws_broadcast = None  # async callable(message_dict) -> None
         self._current_session_id: Optional[str] = None
+        # Sprint 16 B16.1: hook async para auto-respond
+        # Tipicamente seteado por tarrobot-live.py al callable que dispara
+        # /api/social/respond con el message_id.
+        self._auto_respond_handler = None  # async callable(message_dict) -> None
 
     # ─── lifecycle ───
 
@@ -63,6 +67,14 @@ class SocialManager:
         Cada mensaje recibido se broadcastea a todos los clientes WS.
         """
         self._ws_broadcast = callback
+
+    def set_auto_respond_handler(self, callback) -> None:
+        """
+        Sprint 16 B16.1: hook que se dispara cuando llega un mensaje y
+        auto_respond.should_auto_respond() devuelve True.
+        callback: async callable(message_dict) -> None
+        """
+        self._auto_respond_handler = callback
 
     # ─── pipeline de mensaje entrante ───
 
@@ -94,6 +106,13 @@ class SocialManager:
                 })
             except Exception as e:
                 print(f"[social_manager] error ws_broadcast: {e}")
+
+        # Sprint 16 B16.1: auto-respond hook
+        if self._auto_respond_handler:
+            try:
+                await self._auto_respond_handler(msg.to_dict())
+            except Exception as e:
+                print(f"[social_manager] error auto_respond_handler: {e}")
 
     # ─── consulta ───
 

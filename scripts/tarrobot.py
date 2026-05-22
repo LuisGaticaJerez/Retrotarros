@@ -142,6 +142,78 @@ def agregar_dato(
 # LLM (Claude API)
 # ─────────────────────────────────────────────────────────────────────────
 
+def call_claude(
+    prompt: str,
+    max_tokens: int = 300,
+    model: str = "claude-haiku-4-5",
+    parse_json: bool = True,
+    system: str | None = None,
+) -> dict | str | None:
+    """
+    Sprint 16 B16.2: helper unificado para llamar Claude.
+
+    Centraliza:
+      - Init del cliente Anthropic con check de API key
+      - Llamada messages.create con manejo de errores
+      - Strip de markdown fences (```)
+      - Parseo JSON opcional
+      - System prompt opcional (preparado para prompt caching futuro)
+
+    Devuelve dict (si parse_json=True) o str (si parse_json=False) o None
+    si fallo. Las funciones LLM existentes siguen funcionando como estan;
+    este helper se usa para llamadas NUEVAS que no quieran duplicar codigo.
+
+    NOTA: no se refactorizaron las 8 funciones LLM existentes a este helper
+    para evitar riesgo de romper lo que ya anda. Si en sprint futuro se
+    quiere unificar, este es el target.
+    """
+    try:
+        import anthropic
+    except ImportError:
+        print("ERROR: libreria 'anthropic' no instalada.", file=sys.stderr)
+        return None
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print("ERROR: ANTHROPIC_API_KEY no definida.", file=sys.stderr)
+        return None
+
+    client = anthropic.Anthropic(api_key=api_key)
+    kwargs = {
+        "model": model,
+        "max_tokens": max_tokens,
+        "messages": [{"role": "user", "content": prompt}],
+    }
+    if system:
+        kwargs["system"] = system
+
+    try:
+        response = client.messages.create(**kwargs)
+    except Exception as e:
+        print(f"ERROR call_claude: {e}", file=sys.stderr)
+        return None
+
+    raw = response.content[0].text.strip()
+    raw = re.sub(r"^```(?:json)?\s*", "", raw)
+    raw = re.sub(r"\s*```$", "", raw)
+    raw = raw.strip()
+
+    if not parse_json:
+        return raw
+
+    try:
+        result = json.loads(raw)
+    except json.JSONDecodeError as e:
+        print(f"ERROR call_claude: JSON invalido: {e}\n{raw[:300]}", file=sys.stderr)
+        return None
+
+    # Aplicar chilenizar a textos comunes si el dict tiene esos keys
+    if isinstance(result, dict) and "texto" in result and isinstance(result["texto"], str):
+        result["texto"] = chilenizar(result["texto"])
+
+    return result
+
+
 def generar_con_llm(tema: str) -> dict | None:
     """
     Llama a Claude API para generar 3 propuestas de datos curiosos.

@@ -129,6 +129,18 @@ def save_message(msg: "Message") -> None:  # noqa: F821
     )
 
 
+def get_message_by_id(message_id: str) -> Optional[dict]:
+    """Sprint 16 B16.3: lookup eficiente por id con query SQL directa."""
+    if not message_id:
+        return None
+    conn = get_conn()
+    row = conn.execute(
+        "SELECT * FROM messages WHERE id=?",
+        (message_id,),
+    ).fetchone()
+    return _row_to_dict(row) if row else None
+
+
 def get_recent(limit: int = 100, platform: Optional[str] = None,
                session_id: Optional[str] = None) -> list[dict]:
     """Devuelve los mensajes mas recientes. Opcionalmente filtrado."""
@@ -277,7 +289,7 @@ def _row_to_dict(row: sqlite3.Row) -> dict:
 
 __all__ = [
     "DB_PATH", "get_conn", "close_conn",
-    "save_message", "get_recent", "get_pinned",
+    "save_message", "get_recent", "get_pinned", "get_message_by_id",
     "set_pinned", "set_replied", "message_count",
     "start_stream_session", "end_stream_session",
     "current_session", "recent_sessions",

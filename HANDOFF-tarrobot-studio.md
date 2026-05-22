@@ -51,6 +51,27 @@ de read-only a interactivos. Bloques:
 - ✓ B15.7 Modo barato: toggle global que bloquea todas las llamadas LLM
   (devuelve 503). Endpoint `/api/llm/modo-barato`. Toggle en panel.
 
+**Sprint 16 cerrado: Auto-respond toggle + optimizaciones internas.**
+- ✓ B16.1 `scripts/auto_respond.py`: modulo dedicado con config persistida
+  (activo, mention_only, cooldown_user_s, cooldown_global_s, skip_if_speaking,
+  platforms). `should_auto_respond(msg)` aplica todos los filtros.
+  Hook en `social_manager._on_message` dispara `social_respond` automatico
+  si los filtros pasan. Endpoints `GET/POST /api/social/auto-respond`.
+  Card UI con switch principal, toggles secundarios, 2 sliders de cooldown,
+  multi-check de plataformas, contador de respuestas automaticas.
+- ✓ B16.2 `tarrobot.call_claude(prompt, max_tokens, parse_json, system)`:
+  helper unificado para llamadas LLM nuevas. Las 8 funciones existentes
+  no se refactorizan para evitar romper lo que anda (target opcional
+  para sprint futuro).
+- ✓ B16.3 `message_store.get_message_by_id(id)`: lookup eficiente con
+  query SQL directa. Reemplaza el `get_recent(500) + filter Python` del
+  helper `_get_message_or_404`.
+- ✓ B16.4 `pick_no_repeat` persistente en `data/tarrobot-recent-picks.json`.
+  Al reiniciar TarroBot conserva la memoria de frases dichas recientemente.
+- ✓ B16.5 Cleanup: comentarios actualizados, sin imports duplicados
+  detectados, dead code no encontrado en revision.
+- ✓ B16.6 Docs + commit + sync.
+
 ## Que es TarroBot Studio
 
 Conjunto de herramientas para producir el canal de YouTube Retrotarros (retrogaming + nostalgia + musica). Dos productos coexistiendo en stacks distintos pero gestionados como un solo proyecto:

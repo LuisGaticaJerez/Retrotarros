@@ -106,6 +106,8 @@ Sync-Item "scripts\social_manager.py"
 Sync-Item "scripts\connectors" -Recursive
 # Sprint 15: resolver LLM (pauta enriquecida + cache local + telemetria + modo barato)
 Sync-Item "scripts\llm_resolver.py"
+# Sprint 16: auto-respond toggle (modulo dedicado con config persistida)
+Sync-Item "scripts\auto_respond.py"
 Write-Host ""
 
 # 2. Templates HTML

@@ -231,6 +231,49 @@ LIMITACIONES:
 
 
 ============================================================
+AUTO-RESPOND TOGGLE (Sprint 16)
+============================================================
+
+Hasta Sprint 15, TarroBot solo respondia al chat cuando tu
+clickeabas 🧠 RESPOND en un mensaje. A partir del Sprint 16
+puedes activar AUTO-RESPOND y TarroBot responde solo.
+
+Card "AUTO-RESPOND" en el panel con:
+  - Switch principal ON/OFF (default OFF)
+  - Toggle "solo si mencionan a TarroBot" (default ON):
+    el mensaje tiene que contener "tarrobot", "@tarrobot",
+    "tarro bot", "@retrotarros" o similares.
+  - Toggle "no auto-responder si TarroBot esta hablando":
+    evita que se solapen respuestas.
+  - Slider cooldown por user (10-300s, default 60s):
+    max 1 respuesta a cada viewer cada X segundos.
+  - Slider cooldown global (5-60s, default 15s):
+    max 1 respuesta total cada X segundos (anti spam de chat).
+  - Checks de plataformas habilitadas (Twitch/Discord/YouTube).
+  - Contador de respuestas automaticas esta sesion.
+
+CONFIG PERSISTIDA:
+La config se guarda en data/tarrobot-auto-respond.json. Sobrevive
+reinicios. Si pones AUTO-RESPOND ON, TarroBot lo mantiene ON la
+proxima vez que arranques (por seguridad: REVISA antes de salir
+al aire si esta o no activo).
+
+WORKFLOW RECOMENDADO:
+- Streams casuales con audiencia chica: AUTO-RESPOND ON +
+  mention_only ON. TarroBot solo habla cuando lo llaman.
+- Podcasts grabados (no en vivo): AUTO-RESPOND OFF para
+  controlar manualmente cada respuesta.
+- Sesion de Q&A con audiencia grande: AUTO-RESPOND OFF, vos
+  pin los mejores y los respondes manual con RESPOND/DICTATE.
+
+COSTO:
+Cada auto-respuesta usa Claude haiku (~$0.001). Con cooldown
+global 15s, max 4 respuestas/min = ~240 calls/hora =
+~$0.24/hora de stream. Si el MODO BARATO esta ON, AUTO-RESPOND
+bloquea las llamadas Claude (igual no responde).
+
+
+============================================================
 MINIMIZAR GASTO LLM (Sprint 15)
 ============================================================
 

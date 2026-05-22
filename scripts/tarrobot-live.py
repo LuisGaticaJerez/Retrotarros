@@ -69,6 +69,7 @@ obs.cargar_alias(OBS_ALIASES_PATH)
 import message_store
 import social_manager
 import llm_resolver  # Sprint 15: minimizar gasto LLM
+import auto_respond  # Sprint 16 B16.1: auto-respond toggle
 from connectors.twitch import TwitchConnector
 from connectors import discord_conn as discord_connector_mod
 from connectors import youtube as youtube_connector_mod
@@ -468,9 +469,38 @@ def _jitter_rate(rate_str: str) -> str:
 tracker = ActivityTracker()
 
 
-# Sprint 10 A2: anti-repeticion en seleccion random
-# Guarda hasta N items recientes por key para no repetir frases/datos seguidos.
+# Sprint 10 A2 + Sprint 16 B16.4: anti-repeticion con persistencia local
+# Guarda hasta N items recientes por key. Persiste a JSON para que sobreviva
+# reinicios (asi TarroBot no repite frases despues de cerrar/abrir).
+_RECENT_PICKS_PATH = REPO / "data" / "tarrobot-recent-picks.json"
 _recent_picks: dict[str, list] = {}
+
+
+def _load_recent_picks() -> None:
+    """Cargar el dict de _recent_picks de JSON si existe."""
+    global _recent_picks
+    if _RECENT_PICKS_PATH.exists():
+        try:
+            _recent_picks = json.loads(_RECENT_PICKS_PATH.read_text(encoding="utf-8"))
+        except Exception as e:
+            print(f"[recent_picks] error cargando, usando vacio: {e}")
+            _recent_picks = {}
+
+
+def _save_recent_picks() -> None:
+    """Persistir _recent_picks a JSON. Llamado tras cada pick."""
+    try:
+        _RECENT_PICKS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        _RECENT_PICKS_PATH.write_text(
+            json.dumps(_recent_picks, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+    except Exception as e:
+        print(f"[recent_picks] error guardando: {e}")
+
+
+_load_recent_picks()
+
 
 def pick_no_repeat(items: list, key: str = "default", n_recent: int = 5):
     """
@@ -492,6 +522,8 @@ def pick_no_repeat(items: list, key: str = "default", n_recent: int = 5):
     # mantener solo los ultimos n_recent
     while len(recent) > min(n_recent, max(1, len(items) - 1)):
         recent.pop(0)
+    # Sprint 16 B16.4: persistir async-friendly (no bloqueante por archivo chico)
+    _save_recent_picks()
     return elegido
 
 
@@ -513,6 +545,33 @@ class OBSState:
 
 
 obs_state = OBSState()
+
+
+# Sprint 16 B16.1: handler async que dispara auto-respond si aplica
+# La definicion concreta vive aca porque necesita acceso a social_respond
+# y _hablar_frase que se definen mas abajo. Por eso usa un proxy lazy.
+async def _auto_respond_handler(msg_dict: dict) -> None:
+    """Hook que social_manager llama por cada mensaje. Decide si auto-respondear."""
+    try:
+        should, reason = auto_respond.should_auto_respond(
+            msg_dict, is_speaking=tracker.is_speaking
+        )
+    except Exception as e:
+        print(f"[auto_respond] error decidiendo: {e}")
+        return
+    if not should:
+        return
+    msg_id = msg_dict.get("id")
+    if not msg_id:
+        return
+    # Marcar AHORA antes de la llamada para evitar race conditions
+    auto_respond.mark_responded(msg_dict)
+    print(f"[auto_respond] disparando respuesta auto a {msg_dict.get('user_name', '?')}: {reason}")
+    try:
+        # Llamada directa a social_respond con post_to_channel = False (por seguridad)
+        await social_respond({"message_id": msg_id, "post_to_channel": False})
+    except Exception as e:
+        print(f"[auto_respond] error al disparar respuesta: {e}")
 
 
 # Sprint 12 C5: estado quiz simple (una pregunta a la vez)
@@ -900,6 +959,8 @@ async def lifespan(app):
     # Sprint 13: hook social_manager → broadcast_live (WS) para que los
     # mensajes de chat de Twitch/Discord/YT lleguen al panel control.
     social_manager.manager.set_ws_broadcast(manager.broadcast_live)
+    # Sprint 16 B16.1: hook auto-respond
+    social_manager.manager.set_auto_respond_handler(_auto_respond_handler)
     # Inicializar SQLite (crea DB y schema si no existe)
     message_store.get_conn()
     yield
@@ -3777,12 +3838,8 @@ async def social_youtube_stop():
 # ─────────────────────────────────────────────────────────────────────────
 
 def _get_message_or_404(message_id: str) -> Optional[dict]:
-    """Helper: busca un mensaje por id en SQLite, devuelve dict o None."""
-    msgs = message_store.get_recent(limit=500)
-    for m in msgs:
-        if m["id"] == message_id:
-            return m
-    return None
+    """Helper: busca un mensaje por id en SQLite (Sprint 16 B16.3: lookup directo)."""
+    return message_store.get_message_by_id(message_id)
 
 
 @app.post("/api/social/say")
@@ -4088,6 +4145,47 @@ async def llm_stats_reset():
     """Resetea contadores de la sesion (no toca el cache JSON)."""
     llm_resolver.reset_telemetry()
     return {"ok": True}
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 16 B16.1: Auto-respond toggle
+# ─────────────────────────────────────────────────────────────────────────
+
+@app.get("/api/social/auto-respond")
+async def social_auto_respond_get():
+    """Estado actual del auto-respond: config + counters."""
+    return {"ok": True, **auto_respond.status()}
+
+
+@app.post("/api/social/auto-respond")
+async def social_auto_respond_set(payload: dict):
+    """
+    Configura el auto-respond. Acepta cualquiera de los siguientes campos:
+      activo (bool), mention_only (bool), cooldown_user_s (int),
+      cooldown_global_s (int), skip_if_speaking (bool), platforms (list)
+    Solo se actualizan los campos que vengan en el body.
+    Body especial: { 'reset_counters': true } resetea contadores sin tocar config.
+    """
+    if payload.get("reset_counters"):
+        auto_respond.reset_counters()
+        return {"ok": True, "reset": True, **auto_respond.status()}
+
+    # Sanitizar tipos
+    kwargs = {}
+    for key in ("activo", "mention_only", "skip_if_speaking"):
+        if key in payload:
+            kwargs[key] = bool(payload[key])
+    for key in ("cooldown_user_s", "cooldown_global_s"):
+        if key in payload:
+            try:
+                kwargs[key] = max(0, int(payload[key]))
+            except (TypeError, ValueError):
+                pass
+    if "platforms" in payload and isinstance(payload["platforms"], list):
+        kwargs["platforms"] = [str(p) for p in payload["platforms"]]
+
+    auto_respond.update_config(**kwargs)
+    return {"ok": True, **auto_respond.status()}
 
 
 @app.post("/api/llm/modo-barato")
