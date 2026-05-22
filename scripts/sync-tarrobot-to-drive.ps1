@@ -100,6 +100,10 @@ Sync-Item "scripts\tarrobot.py"
 Sync-Item "scripts\tarrobot-live.py"
 Sync-Item "scripts\tarrobot-tray.py"
 Sync-Item "scripts\obs_controller.py"
+# Sprint 13: modulo social (chat multi-plataforma Twitch/Discord/YouTube)
+Sync-Item "scripts\message_store.py"
+Sync-Item "scripts\social_manager.py"
+Sync-Item "scripts\connectors" -Recursive
 Write-Host ""
 
 # 2. Templates HTML
