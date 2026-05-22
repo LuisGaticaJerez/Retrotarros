@@ -502,6 +502,106 @@ select#queueSelect:focus { border-color: var(--ye); }
   <div id="recetasLog" style="font-size:11px; color:rgba(255,255,255,.55); margin-top:8px;"></div>
 </div>
 
+<!-- SOCIAL · SESION DE STREAM (Sprint 13) -->
+<div class="card">
+  <h2>📡 SESIÓN DE STREAM</h2>
+  <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:8px;">
+    Marca el inicio/fin de la grabación para etiquetar los mensajes
+    del chat con la sesión. Se persiste en SQLite local.
+  </div>
+  <div id="socSessionBox">
+    <div id="socSessionInactive">
+      <div class="row-inline">
+        <input type="text" id="socSessionSlug" placeholder="slug (ej: snes-coleccion)" style="flex:2">
+        <input type="text" id="socSessionTitle" placeholder="titulo (opcional)" style="flex:2">
+      </div>
+      <button class="btn ye full" onclick="socStartSession()" style="margin-top:6px;">▸ INICIAR SESIÓN</button>
+    </div>
+    <div id="socSessionActive" style="display:none;">
+      <div id="socSessionInfo" style="font-size:12px; color:rgba(255,210,63,.9); margin-bottom:6px;"></div>
+      <div id="socSessionStats" style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:6px;"></div>
+      <button class="btn cy full" onclick="socEndSession()">■ CERRAR SESIÓN</button>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL · CONECTORES (Sprint 13) -->
+<div class="card">
+  <h2>🔌 CONECTORES SOCIALES</h2>
+  <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:8px;">
+    Activa los conectores de plataformas. Los mensajes que reciban
+    aparecen en la card FEED DE CHAT en tiempo real.
+  </div>
+
+  <div style="margin-bottom:10px;">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+      <span id="socTwitchDot" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#c33;"></span>
+      <strong style="font-size:12px;">TWITCH</strong>
+      <span id="socTwitchStatus" style="font-size:11px; color:rgba(255,255,255,.6);">desconectado</span>
+    </div>
+    <div class="row-inline">
+      <input type="text" id="socTwitchChannels" placeholder="canales (ej: retrotarros, otrocanal)" value="retrotarros" style="flex:3">
+      <button class="btn cy" id="socTwitchToggle" onclick="socToggleTwitch()" style="flex:1">CONECTAR</button>
+    </div>
+  </div>
+
+  <div style="margin-bottom:6px;">
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+      <span id="socDiscordDot" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#c33;"></span>
+      <strong style="font-size:12px;">DISCORD</strong>
+      <span id="socDiscordStatus" style="font-size:11px; color:rgba(255,255,255,.6);">desconectado</span>
+    </div>
+    <button class="btn cy full" id="socDiscordToggle" onclick="socToggleDiscord()">CONECTAR</button>
+    <div style="font-size:10px; color:rgba(255,255,255,.45); margin-top:4px;">
+      Usa DISCORD_BOT_TOKEN + DISCORD_GUILD_ID + DISCORD_CHANNEL_IDS del .env
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL · FEED DE CHAT (Sprint 13) -->
+<div class="card">
+  <h2>💬 FEED DE CHAT</h2>
+  <div class="btn-row" style="margin-bottom:6px;">
+    <button class="btn cy soc-filter-btn soc-filter-active" onclick="socFilterFeed('all')" data-filter="all">TODO</button>
+    <button class="btn soc-filter-btn" onclick="socFilterFeed('twitch')" data-filter="twitch">TWITCH</button>
+    <button class="btn soc-filter-btn" onclick="socFilterFeed('discord')" data-filter="discord">DISCORD</button>
+    <button class="btn soc-filter-btn" onclick="socFilterFeed('youtube')" data-filter="youtube">YT</button>
+  </div>
+  <div style="display:flex; gap:8px;">
+    <div id="socFeedList" style="flex:2; max-height:340px; overflow-y:auto; padding:6px; background:rgba(0,0,0,.25); border-radius:6px; font-size:11px;">
+      <div style="text-align:center; color:rgba(255,255,255,.4); padding:30px;">Esperando mensajes...</div>
+    </div>
+    <div id="socPinnedList" style="flex:1; max-height:340px; overflow-y:auto; padding:6px; background:rgba(255,210,63,.05); border:1px solid rgba(255,210,63,.3); border-radius:6px; font-size:11px;">
+      <div style="font-family:'Press Start 2P', monospace; font-size:9px; color:#FFD23F; letter-spacing:2px; margin-bottom:6px;">PINNED</div>
+      <div id="socPinnedItems"></div>
+    </div>
+  </div>
+  <div style="font-size:10px; color:rgba(255,255,255,.45); margin-top:6px;">
+    Click 📌 en un mensaje para fijarlo en la lista derecha (visible para Luis/Koko al responder en cámara).
+  </div>
+</div>
+
+<style>
+.soc-msg { padding:6px; margin-bottom:4px; border-left:3px solid rgba(255,255,255,.1); background:rgba(255,255,255,.02); border-radius:0 3px 3px 0; }
+.soc-msg.plat-twitch { border-left-color:#9146FF; }
+.soc-msg.plat-discord { border-left-color:#5865F2; }
+.soc-msg.plat-youtube { border-left-color:#FF0000; }
+.soc-msg.pinned { background:rgba(255,210,63,.08); }
+.soc-msg-head { display:flex; align-items:center; gap:6px; margin-bottom:2px; }
+.soc-msg-name { font-weight:bold; }
+.soc-msg-badge { font-size:9px; padding:1px 4px; border-radius:3px; background:rgba(255,255,255,.1); }
+.soc-msg-badge.broadcaster { background:#FF2E88; color:#fff; }
+.soc-msg-badge.moderator { background:#00E5FF; color:#000; }
+.soc-msg-badge.subscriber { background:rgba(0,229,255,.3); }
+.soc-msg-time { font-size:9px; color:rgba(255,255,255,.4); margin-left:auto; }
+.soc-msg-text { color:rgba(255,255,255,.85); word-wrap:break-word; }
+.soc-msg-actions { display:flex; gap:4px; margin-top:3px; opacity:.6; }
+.soc-msg-actions button { background:none; border:1px solid rgba(255,255,255,.2); color:rgba(255,255,255,.7); font-size:10px; padding:1px 6px; cursor:pointer; border-radius:3px; }
+.soc-msg-actions button:hover { background:rgba(255,255,255,.1); }
+.soc-filter-active { background:rgba(0,229,255,.2)!important; border:1px solid #00E5FF; }
+.soc-pinned-item { padding:4px; margin-bottom:4px; border-radius:3px; background:rgba(0,0,0,.2); border-left:2px solid #FFD23F; }
+</style>
+
 <!-- PRESENTADOR ASISTENTE (Sprint 12 C1) -->
 <div class="card">
   <h2>🎯 PRESENTADOR ASISTENTE</h2>
@@ -1248,6 +1348,268 @@ async function correrReceta(nombre) {
   }
 }
 cargarRecetas();
+
+// ─── SOCIAL (Sprint 13) ───────────────────────────────────────────
+// Modulo del concentrador de chat multi-plataforma. Maneja sesion de
+// stream, conectores Twitch/Discord/YT, feed en tiempo real (WS) y
+// pinned panel.
+
+let socFeed = [];               // mensajes en buffer (max 200)
+let socFeedFilter = 'all';      // all / twitch / discord / youtube
+const SOC_FEED_MAX = 200;
+
+async function socRefreshStatus() {
+  try {
+    const r = await fetch('/api/social/status');
+    const d = await r.json();
+    if (d.ok) {
+      socRenderStatus(d.status);
+    }
+  } catch (e) { /* silencio */ }
+}
+
+function socRenderStatus(s) {
+  // Sesion
+  if (s.current_session) {
+    document.getElementById('socSessionInactive').style.display = 'none';
+    document.getElementById('socSessionActive').style.display = 'block';
+    document.getElementById('socSessionInfo').textContent =
+      '✓ ' + s.current_session.slug + (s.current_session.title ? ' · ' + s.current_session.title : '');
+    const counts = s.message_counts || {};
+    const total = Object.values(counts).reduce((a,b)=>a+b, 0);
+    document.getElementById('socSessionStats').textContent =
+      'Mensajes: ' + total + ' (' + Object.entries(counts).map(([p,c]) => p+':'+c).join(' · ') + ')';
+  } else {
+    document.getElementById('socSessionInactive').style.display = 'block';
+    document.getElementById('socSessionActive').style.display = 'none';
+  }
+  // Conectores
+  const platforms = ['twitch', 'discord'];
+  platforms.forEach(p => {
+    const conn = (s.connectors || []).find(c => c.platform === p);
+    const dot = document.getElementById('soc' + p.charAt(0).toUpperCase()+p.slice(1) + 'Dot');
+    const status = document.getElementById('soc' + p.charAt(0).toUpperCase()+p.slice(1) + 'Status');
+    const toggleBtn = document.getElementById('soc' + p.charAt(0).toUpperCase()+p.slice(1) + 'Toggle');
+    if (conn) {
+      const connected = conn.connected;
+      dot.style.background = connected ? '#3c3' : '#fa3';
+      let txt = connected ? 'conectado' : 'reconectando';
+      if (conn.messages_received) txt += ' · ' + conn.messages_received + ' msgs';
+      if (conn.last_error) txt += ' · ' + conn.last_error.substring(0, 40);
+      status.textContent = txt;
+      toggleBtn.textContent = 'DESCONECTAR';
+      toggleBtn.dataset.connected = 'true';
+    } else {
+      dot.style.background = '#c33';
+      status.textContent = 'desconectado';
+      toggleBtn.textContent = 'CONECTAR';
+      toggleBtn.dataset.connected = 'false';
+    }
+  });
+}
+
+async function socStartSession() {
+  const slug = document.getElementById('socSessionSlug').value.trim();
+  if (!slug) { logMsg('falta slug de sesion', 'err'); return; }
+  const title = document.getElementById('socSessionTitle').value.trim();
+  const body = {slug};
+  if (title) body.title = title;
+  const data = await post('/api/social/session/start', body);
+  if (data && data.ok) {
+    logMsg('sesion iniciada: ' + slug, 'ok');
+    socRefreshStatus();
+  }
+}
+
+async function socEndSession() {
+  if (!confirm('Cerrar la sesion actual? Los mensajes ya quedan asociados.')) return;
+  const data = await post('/api/social/session/end', {});
+  if (data && data.ok) {
+    logMsg('sesion cerrada', 'ok');
+    socRefreshStatus();
+  }
+}
+
+async function socToggleTwitch() {
+  const btn = document.getElementById('socTwitchToggle');
+  if (btn.dataset.connected === 'true') {
+    const data = await post('/api/social/connectors/twitch/stop', {});
+    if (data && data.ok) { logMsg('Twitch desconectado', 'ok'); socRefreshStatus(); }
+  } else {
+    const channelsRaw = document.getElementById('socTwitchChannels').value.trim();
+    if (!channelsRaw) { logMsg('faltan canales Twitch', 'err'); return; }
+    const channels = channelsRaw.split(',').map(s => s.trim()).filter(Boolean);
+    const data = await post('/api/social/connectors/twitch/start', {channels});
+    if (data && data.ok) { logMsg('Twitch conectado a: ' + channels.join(', '), 'ok'); socRefreshStatus(); }
+  }
+}
+
+async function socToggleDiscord() {
+  const btn = document.getElementById('socDiscordToggle');
+  if (btn.dataset.connected === 'true') {
+    const data = await post('/api/social/connectors/discord/stop', {});
+    if (data && data.ok) { logMsg('Discord desconectado', 'ok'); socRefreshStatus(); }
+  } else {
+    const data = await post('/api/social/connectors/discord/start', {});
+    if (data && data.ok) { logMsg('Discord conectado', 'ok'); socRefreshStatus(); }
+  }
+}
+
+function socFilterFeed(filter) {
+  socFeedFilter = filter;
+  document.querySelectorAll('.soc-filter-btn').forEach(b => {
+    b.classList.toggle('soc-filter-active', b.dataset.filter === filter);
+  });
+  socRenderFeed();
+}
+
+function socAddMessage(msg) {
+  // Agregar al buffer (mas reciente arriba)
+  socFeed.unshift(msg);
+  if (socFeed.length > SOC_FEED_MAX) socFeed = socFeed.slice(0, SOC_FEED_MAX);
+  socRenderFeed();
+  if (msg.pinned) socRefreshPinned();
+}
+
+function socRenderFeed() {
+  const box = document.getElementById('socFeedList');
+  let items = socFeed;
+  if (socFeedFilter !== 'all') {
+    items = items.filter(m => m.platform === socFeedFilter);
+  }
+  if (!items.length) {
+    box.innerHTML = '<div style="text-align:center; color:rgba(255,255,255,.4); padding:30px;">Sin mensajes en este filtro.</div>';
+    return;
+  }
+  box.innerHTML = items.slice(0, 50).map(m => socMsgHtml(m)).join('');
+}
+
+function socMsgHtml(m) {
+  const time = new Date(m.timestamp_ms).toLocaleTimeString('es-CL', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+  const safeText = (m.text || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const safeName = (m.user_name || '?').replace(/</g,'&lt;');
+  const badge = m.user_badge ? `<span class="soc-msg-badge ${m.user_badge}">${m.user_badge}</span>` : '';
+  const platLabel = (m.platform || '').toUpperCase().substring(0, 3);
+  return `<div class="soc-msg plat-${m.platform} ${m.pinned ? 'pinned' : ''}" data-msg-id="${m.id}">
+    <div class="soc-msg-head">
+      <span class="soc-msg-name">${safeName}</span> ${badge}
+      <span style="font-size:9px; color:rgba(255,255,255,.4);">[${platLabel}] #${m.channel}</span>
+      <span class="soc-msg-time">${time}</span>
+    </div>
+    <div class="soc-msg-text">${safeText}</div>
+    <div class="soc-msg-actions">
+      <button onclick="socTogglePin('${m.id}', ${!m.pinned})">${m.pinned ? '📌 unpin' : '📌 pin'}</button>
+      <button onclick="socMarkReplied('${m.id}')">${m.replied ? '✓ replied' : '↪ reply'}</button>
+    </div>
+  </div>`;
+}
+
+async function socTogglePin(msgId, pin) {
+  const data = await post('/api/social/messages/' + encodeURIComponent(msgId) + '/pin', {pinned: pin});
+  if (data && data.ok) {
+    const m = socFeed.find(x => x.id === msgId);
+    if (m) m.pinned = pin;
+    socRenderFeed();
+    socRefreshPinned();
+  }
+}
+
+async function socMarkReplied(msgId) {
+  const data = await post('/api/social/messages/' + encodeURIComponent(msgId) + '/replied', {replied: true});
+  if (data && data.ok) {
+    const m = socFeed.find(x => x.id === msgId);
+    if (m) m.replied = true;
+    socRenderFeed();
+  }
+}
+
+async function socRefreshPinned() {
+  try {
+    const r = await fetch('/api/social/messages/pinned');
+    const d = await r.json();
+    const box = document.getElementById('socPinnedItems');
+    if (!d.messages || !d.messages.length) {
+      box.innerHTML = '<div style="color:rgba(255,255,255,.4); font-size:10px; text-align:center; padding:10px;">(sin mensajes pinned)</div>';
+      return;
+    }
+    box.innerHTML = d.messages.slice(0, 20).map(m => {
+      const safeText = (m.text || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      const safeName = (m.user_name || '?').replace(/</g,'&lt;');
+      return `<div class="soc-pinned-item">
+        <div style="font-weight:bold;">${safeName}</div>
+        <div style="color:rgba(255,255,255,.8);">${safeText}</div>
+        <button onclick="socTogglePin('${m.id}', false)" style="background:none; border:1px solid rgba(255,255,255,.2); color:rgba(255,255,255,.6); font-size:9px; padding:1px 4px; cursor:pointer; border-radius:3px; margin-top:3px;">unpin</button>
+      </div>`;
+    }).join('');
+  } catch (e) { /* silencio */ }
+}
+
+// Handler para eventos social que vienen por WebSocket
+function socHandleWSMessage(data) {
+  if (data.tipo === 'social-message') {
+    socAddMessage(data.message);
+  } else if (data.tipo === 'social-message-pinned') {
+    const m = socFeed.find(x => x.id === data.message_id);
+    if (m) m.pinned = data.pinned;
+    socRenderFeed();
+    socRefreshPinned();
+  } else if (data.tipo === 'social-session-started' || data.tipo === 'social-session-ended') {
+    socRefreshStatus();
+  }
+}
+
+// WebSocket: el panel se conecta a /ws/live (mismo endpoint que la TV)
+// y filtra solo eventos social-* para no procesar los eventos visuales
+// (hablar, estado, procesando, etc) que son para la TV/OBS.
+let socWS = null;
+let socWSReconnectTimer = null;
+
+function socConnectWS() {
+  const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const url = proto + '//' + location.host + '/ws/live';
+  try {
+    socWS = new WebSocket(url);
+  } catch (e) {
+    setTimeout(socConnectWS, 5000);
+    return;
+  }
+  socWS.onopen = () => {
+    if (socWSReconnectTimer) { clearTimeout(socWSReconnectTimer); socWSReconnectTimer = null; }
+  };
+  socWS.onmessage = (ev) => {
+    try {
+      const data = JSON.parse(ev.data);
+      if (data.tipo && data.tipo.indexOf('social-') === 0) {
+        socHandleWSMessage(data);
+      }
+    } catch (e) { /* ignorar mensajes no-JSON */ }
+  };
+  socWS.onclose = () => {
+    if (!socWSReconnectTimer) {
+      socWSReconnectTimer = setTimeout(socConnectWS, 3000);
+    }
+  };
+  socWS.onerror = () => { /* manejado por onclose */ };
+}
+
+// Cargar mensajes existentes al abrir el panel (si hubo sesion previa)
+async function socLoadHistory() {
+  try {
+    const r = await fetch('/api/social/messages?limit=50');
+    const d = await r.json();
+    if (d.ok && d.messages) {
+      socFeed = d.messages;
+      socRenderFeed();
+    }
+  } catch (e) { /* silencio */ }
+}
+
+// Poll status cada 5s + load inicial
+setInterval(socRefreshStatus, 5000);
+socRefreshStatus();
+socRefreshPinned();
+socLoadHistory();
+socConnectWS();
 
 async function random_(categoria) {
   logMsg('random ' + categoria + '...');

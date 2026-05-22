@@ -65,6 +65,12 @@ OBS_ALIASES_PATH = STUDIO / "obs-aliases.json"
 import obs_controller as obs
 obs.cargar_alias(OBS_ALIASES_PATH)
 
+# Sprint 13: modulo social (chat multi-plataforma Twitch/Discord/YouTube)
+import message_store
+import social_manager
+from connectors.twitch import TwitchConnector
+from connectors import discord_conn as discord_connector_mod
+
 # Saludos geek random (español neutro latino, CON tildes para TTS preciso)
 SALUDOS_GEEK = [
     "¡Hola, hola humanos! Insertando moneda virtual.",
@@ -889,9 +895,19 @@ async def lifespan(app):
     task = asyncio.create_task(idle_worker())
     hk_thread = threading.Thread(target=_hotkey_worker, name="hotkey-worker", daemon=True)
     hk_thread.start()
+    # Sprint 13: hook social_manager → broadcast_live (WS) para que los
+    # mensajes de chat de Twitch/Discord/YT lleguen al panel control.
+    social_manager.manager.set_ws_broadcast(manager.broadcast_live)
+    # Inicializar SQLite (crea DB y schema si no existe)
+    message_store.get_conn()
     yield
     # Shutdown: cancelar el async task. El thread es daemon -> muere al cerrar.
     task.cancel()
+    # Sprint 13: detener conectores activos limpiamente
+    try:
+        await social_manager.manager.shutdown()
+    except Exception as e:
+        print(f"[lifespan] error social_manager.shutdown: {e}")
 
 
 app = FastAPI(title="TarroBot Live", lifespan=lifespan)
@@ -3379,6 +3395,186 @@ async def queue_list():
         except Exception:
             continue
     return {"ok": True, "pautas": items}
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 13: Endpoints social (chat multi-plataforma)
+# ─────────────────────────────────────────────────────────────────────────
+
+@app.get("/api/social/status")
+async def social_status():
+    """Estado global del modulo social: conectores + sesion activa + counts."""
+    return {"ok": True, "status": social_manager.manager.status()}
+
+
+@app.post("/api/social/session/start")
+async def social_session_start(payload: dict):
+    """
+    Inicia una sesion de stream. Cierra automaticamente la anterior si habia.
+    Body: { "slug": "stream-2026-05-22", "title": "opcional" }
+    """
+    slug = (payload.get("slug") or "").strip()
+    if not slug:
+        return JSONResponse({"error": "slug obligatorio"}, status_code=400)
+    title = (payload.get("title") or "").strip() or None
+    sess = await asyncio.to_thread(message_store.start_stream_session, slug, title)
+    # Notificar al panel
+    try:
+        await manager.broadcast_live({
+            "tipo": "social-session-started",
+            "session": sess,
+        })
+    except Exception:
+        pass
+    return {"ok": True, "session": sess}
+
+
+@app.post("/api/social/session/end")
+async def social_session_end(payload: Optional[dict] = None):
+    """Cierra la sesion actual. Body opcional: { 'notes': '...' }"""
+    payload = payload or {}
+    sess = message_store.current_session()
+    if not sess:
+        return JSONResponse({"error": "no hay sesion activa"}, status_code=400)
+    notes = (payload.get("notes") or "").strip() or None
+    ok = await asyncio.to_thread(
+        message_store.end_stream_session, sess["id"], notes
+    )
+    try:
+        await manager.broadcast_live({
+            "tipo": "social-session-ended",
+            "session_id": sess["id"],
+        })
+    except Exception:
+        pass
+    return {"ok": ok, "session_id": sess["id"]}
+
+
+@app.get("/api/social/session/current")
+async def social_session_current():
+    return {"ok": True, "session": message_store.current_session()}
+
+
+@app.get("/api/social/messages")
+async def social_messages(platform: Optional[str] = None,
+                          session_id: Optional[str] = None,
+                          limit: int = 100):
+    """Lista de mensajes recientes con filtros opcionales."""
+    try:
+        limit = max(1, min(int(limit), 500))
+    except (TypeError, ValueError):
+        limit = 100
+    msgs = await asyncio.to_thread(
+        message_store.get_recent, limit, platform, session_id
+    )
+    return {"ok": True, "messages": msgs, "count": len(msgs)}
+
+
+@app.get("/api/social/messages/pinned")
+async def social_messages_pinned(session_id: Optional[str] = None):
+    """Mensajes pinned, opcionalmente filtrados por sesion."""
+    msgs = await asyncio.to_thread(message_store.get_pinned, session_id)
+    return {"ok": True, "messages": msgs, "count": len(msgs)}
+
+
+@app.post("/api/social/messages/{msg_id}/pin")
+async def social_message_pin(msg_id: str, payload: Optional[dict] = None):
+    """Toggle pin. Body: { 'pinned': true|false }. Default true."""
+    payload = payload or {}
+    pinned = bool(payload.get("pinned", True))
+    ok = await asyncio.to_thread(message_store.set_pinned, msg_id, pinned)
+    if not ok:
+        return JSONResponse({"error": f"mensaje {msg_id} no encontrado"}, status_code=404)
+    # Broadcast al panel para que actualice la UI
+    try:
+        await manager.broadcast_live({
+            "tipo": "social-message-pinned",
+            "message_id": msg_id, "pinned": pinned,
+        })
+    except Exception:
+        pass
+    return {"ok": True, "pinned": pinned}
+
+
+@app.post("/api/social/messages/{msg_id}/replied")
+async def social_message_replied(msg_id: str, payload: Optional[dict] = None):
+    """Toggle replied. Body: { 'replied': true|false }. Default true."""
+    payload = payload or {}
+    replied = bool(payload.get("replied", True))
+    ok = await asyncio.to_thread(message_store.set_replied, msg_id, replied)
+    if not ok:
+        return JSONResponse({"error": f"mensaje {msg_id} no encontrado"}, status_code=404)
+    return {"ok": True, "replied": replied}
+
+
+# ─── Conectores: control ON/OFF desde el panel ─────────────────────────
+
+@app.post("/api/social/connectors/twitch/start")
+async def social_twitch_start(payload: dict):
+    """Arranca el conector Twitch con los canales especificados.
+    Body: { 'channels': ['retrotarros', 'otro'] }"""
+    channels = payload.get("channels") or []
+    if not isinstance(channels, list) or not channels:
+        return JSONResponse({"error": "channels obligatorio (lista no vacia)"}, status_code=400)
+    # Si ya hay uno corriendo, detenerlo primero
+    existing = social_manager.manager.find_connector("twitch")
+    if existing:
+        try:
+            await existing.stop()
+            social_manager.manager._connectors.remove(existing)
+        except Exception:
+            pass
+    conn = TwitchConnector(channels=channels)
+    await social_manager.manager.register(conn)
+    return {"ok": True, "platform": "twitch", "status": conn.get_status(),
+            "channels": conn.channels}
+
+
+@app.post("/api/social/connectors/twitch/stop")
+async def social_twitch_stop():
+    conn = social_manager.manager.find_connector("twitch")
+    if not conn:
+        return JSONResponse({"error": "Twitch no esta activo"}, status_code=400)
+    await conn.stop()
+    try:
+        social_manager.manager._connectors.remove(conn)
+    except ValueError:
+        pass
+    return {"ok": True}
+
+
+@app.post("/api/social/connectors/discord/start")
+async def social_discord_start():
+    """Arranca el conector Discord usando variables de entorno
+    (DISCORD_BOT_TOKEN + DISCORD_GUILD_ID + DISCORD_CHANNEL_IDS)."""
+    existing = social_manager.manager.find_connector("discord")
+    if existing:
+        try:
+            await existing.stop()
+            social_manager.manager._connectors.remove(existing)
+        except Exception:
+            pass
+    conn = discord_connector_mod.from_env()
+    if conn is None:
+        return JSONResponse({
+            "error": "No se pudo crear conector Discord. Verifica que esten "
+                     "DISCORD_BOT_TOKEN, DISCORD_GUILD_ID y discord.py instalada."
+        }, status_code=400)
+    await social_manager.manager.register(conn)
+    return {"ok": True, "platform": "discord", "status": conn.get_status()}
+
+
+@app.post("/api/social/connectors/discord/stop")
+async def social_discord_stop():
+    conn = social_manager.manager.find_connector("discord")
+    if not conn:
+        return JSONResponse({"error": "Discord no esta activo"}, status_code=400)
+    await conn.stop()
+    try:
+        social_manager.manager._connectors.remove(conn)
+    except ValueError:
+        pass
+    return {"ok": True}
 
 
 @app.get("/api/ping")
