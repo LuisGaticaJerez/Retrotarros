@@ -4,40 +4,279 @@ setlocal enabledelayedexpansion
 
 REM ============================================================
 REM  TarroBot Studio - Instalador automatico para Windows 10/11
-REM  Retrotarros . doble click y listo
+REM  Retrotarros - doble click y listo
+REM  Version 1.2.2 (flujo: pre-flight + instalacion sin preguntas)
 REM ============================================================
 
-title TarroBot Studio - Instalando...
+title TarroBot Studio - Configuracion
 color 0B
 
+REM ============================================================
+REM  CONSTANTES
+REM ============================================================
+set "ROOT=%~dp0"
+set "ROOT=%ROOT:~0,-1%"
+cd /d "%ROOT%"
+
+REM Variables que llenamos en FASE 1 y aplicamos en FASE 2
+set "CFG_REPO_PATH="
+set "CFG_API_KEY="
+set "CFG_INTERNET_OK=no"
+set "CFG_DISK_OK=no"
+
+REM ============================================================
+REM  BIENVENIDA
+REM ============================================================
+cls
 echo.
 echo ============================================================
 echo   TARROBOT STUDIO - INSTALADOR
 echo ============================================================
 echo.
-echo Esto va a hacer:
-echo   1. Instalar Python si no esta (silencioso)
-echo   2. Crear entorno virtual aislado en esta carpeta
-echo   3. Instalar dependencias (FastAPI, Whisper, edge-tts, anthropic)
-echo   4. Descargar ffmpeg portable
-echo   5. Pedirte tu API key de Anthropic
-echo   6. Configurar el repo Retrotarros (Drive sincronizado o local)
-echo   7. Descargar FluidSynth portable (para tocar melodias MIDI)
-echo   8. Crear acceso directo en escritorio
+echo Este instalador funciona en DOS fases:
+echo.
+echo   FASE 1 (configuracion): preguntas + validaciones
+echo     - Ubicacion del repo Retrotarros (Drive o local)
+echo     - API key de Anthropic (opcional)
+echo     - Internet + espacio en disco
+echo     - Confirmacion antes de tocar nada
+echo.
+echo   FASE 2 (instalacion automatica, ~5-10 minutos)
+echo     - Python + dependencias
+echo     - ffmpeg + FluidSynth portable
+echo     - Acceso directo en escritorio
 echo.
 echo Espacio en disco necesario: ~800 MB
-echo Tiempo estimado: 5-10 minutos (depende de tu conexion)
+echo Conexion a internet requerida (primera vez)
 echo.
 pause
 
-REM --- Carpeta de instalacion = la carpeta del .bat -------------
-set "ROOT=%~dp0"
-set "ROOT=%ROOT:~0,-1%"
-cd /d "%ROOT%"
-
-REM --- Paso 1: Python -------------------------------------------
+REM ============================================================
+REM  FASE 1.1 - DETECTAR / PEDIR RUTA DEL REPO RETROTARROS
+REM ============================================================
+cls
 echo.
-echo [1/8] Verificando Python...
+echo ============================================================
+echo   FASE 1/2  -  CONFIGURACION
+echo ============================================================
+echo.
+echo [Paso 1 de 4] Ubicacion del repo Retrotarros
+echo ------------------------------------------------------------
+echo.
+echo TarroBot necesita saber donde estan las pautas, datos y
+echo melodias del canal. Dos opciones:
+echo.
+echo   A) Drive sincronizado: TarroBot lee las pautas nuevas que
+echo      Luis genera en su PC automaticamente.
+echo   B) Paquete local: TarroBot usa lo que vino en este ZIP,
+echo      autocontenido pero sin actualizaciones automaticas.
+echo.
+
+REM Auto-deteccion del Drive en paths comunes
+echo Buscando Drive sincronizado en ubicaciones tipicas...
+set "DETECTED="
+for %%P in (
+    "G:\Mi unidad\Studio\tarrobot"
+    "H:\Mi unidad\Studio\tarrobot"
+    "F:\Mi unidad\Studio\tarrobot"
+    "D:\Mi unidad\Studio\tarrobot"
+    "C:\Users\%USERNAME%\Google Drive\Studio\tarrobot"
+    "%USERPROFILE%\Google Drive\Studio\tarrobot"
+    "G:\Mi unidad\Recursos Retrotarros\repo"
+    "%USERPROFILE%\Google Drive\Recursos Retrotarros\repo"
+) do (
+    if not defined DETECTED (
+        if exist "%%~P\scripts\tarrobot-live.py" (
+            if exist "%%~P\data\tarrobot-database.json" (
+                set "DETECTED=%%~P"
+            )
+        )
+    )
+)
+
+if defined DETECTED (
+    echo.
+    echo [OK] Encontre repo Drive en:
+    echo      !DETECTED!
+    echo.
+    set /p USE_DETECTED="Usar esa ruta? (S/n): "
+    if /i "!USE_DETECTED!"=="n" (
+        set "DETECTED="
+        echo.
+        echo Manual entonces.
+    ) else (
+        set "CFG_REPO_PATH=!DETECTED!"
+        echo [OK] Repo Retrotarros configurado.
+    )
+) else (
+    echo.
+    echo [INFO] No encontre Drive sincronizado en ubicaciones tipicas.
+)
+
+REM Si no quedo seteado (no se detecto o usuario dijo no), preguntar
+if not defined CFG_REPO_PATH (
+    echo.
+    echo Opciones:
+    echo   - Pega la ruta del repo en Drive (acepta drag and drop)
+    echo   - O dejalo vacio para usar el paquete local
+    echo.
+    echo Ejemplos validos:
+    echo   G:\Mi unidad\Studio\tarrobot
+    echo   C:\Users\Estudio\Google Drive\Studio\tarrobot
+    echo.
+    set /p REPOMANUAL="Ruta al repo Retrotarros (Enter = paquete local): "
+    if defined REPOMANUAL (
+        REM Limpiar comillas si las pego con drag-drop
+        set "REPOMANUAL=!REPOMANUAL:"=!"
+        if exist "!REPOMANUAL!\scripts\tarrobot-live.py" (
+            if exist "!REPOMANUAL!\data\tarrobot-database.json" (
+                set "CFG_REPO_PATH=!REPOMANUAL!"
+                echo [OK] Repo Retrotarros configurado: !REPOMANUAL!
+            ) else (
+                echo [WARN] La ruta no tiene data\tarrobot-database.json
+                echo        Voy a usar el paquete local.
+            )
+        ) else (
+            echo [WARN] La ruta no tiene scripts\tarrobot-live.py
+            echo        Voy a usar el paquete local.
+        )
+    ) else (
+        echo [OK] Usando paquete local.
+    )
+)
+
+REM ============================================================
+REM  FASE 1.2 - API KEY ANTHROPIC
+REM ============================================================
+echo.
+echo ------------------------------------------------------------
+echo [Paso 2 de 4] API key de Anthropic
+echo ------------------------------------------------------------
+echo.
+echo TarroBot usa Claude (Anthropic) para:
+echo   - Opinar sobre juegos (modo opinion)
+echo   - Generar pautas de episodios desde un tema
+echo   - Reordenar pautas para retencion
+echo   - Trivia interactiva
+echo   - Generar descripciones de YouTube post-grabacion
+echo.
+echo SIN api key, TarroBot funciona pero limitado (solo datos
+echo curados de la DB, sin LLM en vivo).
+echo.
+echo Para conseguir una key:
+echo   1. Ve a https://console.anthropic.com/settings/keys
+echo   2. Crea una llamada "tarrobot-studio"
+echo   3. Empieza con sk-ant-api03-...
+echo.
+set /p CFG_API_KEY="Pega tu API key (Enter = configurar despues): "
+
+if defined CFG_API_KEY (
+    REM Limpiar espacios y comillas
+    set "CFG_API_KEY=!CFG_API_KEY:"=!"
+    echo [OK] API key recibida.
+) else (
+    echo [INFO] OK, podes configurarla despues con:
+    echo        setx ANTHROPIC_API_KEY "sk-ant-..."
+)
+
+REM ============================================================
+REM  FASE 1.3 - VERIFICAR INTERNET
+REM ============================================================
+echo.
+echo ------------------------------------------------------------
+echo [Paso 3 de 4] Verificar conexion a internet
+echo ------------------------------------------------------------
+echo.
+echo Probando conexion a python.org...
+curl -s -o nul -w "" --max-time 5 https://www.python.org/ 2>nul
+if !errorlevel! equ 0 (
+    echo [OK] Internet OK.
+    set "CFG_INTERNET_OK=yes"
+) else (
+    echo [WARN] No se puede acceder a internet.
+    echo        La instalacion necesita bajar Python, ffmpeg y FluidSynth.
+    echo        Verifica tu conexion antes de continuar.
+)
+
+REM ============================================================
+REM  FASE 1.4 - VERIFICAR ESPACIO EN DISCO
+REM ============================================================
+echo.
+echo ------------------------------------------------------------
+echo [Paso 4 de 4] Verificar espacio en disco
+echo ------------------------------------------------------------
+echo.
+for /f "tokens=3" %%a in ('dir /-c "%ROOT%" ^| findstr /R /C:"libres" /C:"bytes free"') do set FREE=%%a
+if defined FREE (
+    echo Espacio libre en este disco: %FREE% bytes
+    set "CFG_DISK_OK=yes"
+) else (
+    echo [INFO] No pude leer el espacio libre, pero seguramente esta OK.
+    set "CFG_DISK_OK=yes"
+)
+echo TarroBot necesita ~800 MB libres.
+
+REM ============================================================
+REM  CONFIRMACION FINAL
+REM ============================================================
+echo.
+echo ============================================================
+echo   RESUMEN DE CONFIGURACION
+echo ============================================================
+echo.
+echo Carpeta de instalacion:
+echo   %ROOT%
+echo.
+if defined CFG_REPO_PATH (
+    echo Repo Retrotarros: Drive sincronizado
+    echo   !CFG_REPO_PATH!
+) else (
+    echo Repo Retrotarros: Paquete local autocontenido
+)
+echo.
+if defined CFG_API_KEY (
+    echo API key Anthropic: Configurada
+) else (
+    echo API key Anthropic: NO configurada (podes hacerlo despues)
+)
+echo.
+echo Internet: %CFG_INTERNET_OK%
+echo Disco:    %CFG_DISK_OK%
+echo.
+echo Voy a:
+echo   - Instalar Python 3.12 si no esta (silencioso)
+echo   - Crear entorno virtual (.venv) en esta carpeta
+echo   - Instalar dependencias Python (FastAPI, Whisper, edge-tts, etc)
+echo   - Descargar ffmpeg portable (~70 MB)
+echo   - Descargar FluidSynth portable (~25 MB)
+echo   - Guardar configuracion (variables de entorno)
+echo   - Crear acceso directo en escritorio
+echo.
+echo Tiempo estimado: 5-10 minutos (depende de tu conexion).
+echo.
+set /p CONFIRM="Continuar con la instalacion? (S/n): "
+if /i "!CONFIRM!"=="n" (
+    echo.
+    echo Cancelado. Nada se modifico.
+    pause
+    exit /b 0
+)
+
+REM ============================================================
+REM  FASE 2 - INSTALACION AUTOMATICA (sin preguntas)
+REM ============================================================
+cls
+echo.
+echo ============================================================
+echo   FASE 2/2  -  INSTALACION AUTOMATICA
+echo ============================================================
+echo.
+
+REM ============================================================
+REM  Paso 1 - Python
+REM ============================================================
+echo.
+echo [1/7] Verificando Python...
 where python >nul 2>nul
 if !errorlevel! equ 0 (
     for /f "tokens=2" %%v in ('python --version 2^>^&1') do set "PY_VER=%%v"
@@ -46,11 +285,11 @@ if !errorlevel! equ 0 (
     echo [INFO] Python no encontrado. Descargando Python 3.12.7...
     curl -L -o python-installer.exe https://www.python.org/ftp/python/3.12.7/python-3.12.7-amd64.exe
     if !errorlevel! neq 0 (
-        echo [ERROR] No se pudo descargar Python. Verifica tu conexion a internet.
+        echo [ERROR] No se pudo descargar Python. Verifica tu conexion.
         pause
         exit /b 1
     )
-    echo [INFO] Instalando Python (modo silencioso, solo para tu usuario)...
+    echo [INFO] Instalando Python (silencioso, solo para tu usuario)...
     python-installer.exe /quiet InstallAllUsers=0 PrependPath=1 Include_test=0 Include_pip=1
     if !errorlevel! neq 0 (
         echo [ERROR] La instalacion de Python fallo.
@@ -58,14 +297,15 @@ if !errorlevel! equ 0 (
         exit /b 1
     )
     del python-installer.exe
-    REM Agregar Python al PATH de esta sesion
     set "PATH=%LOCALAPPDATA%\Programs\Python\Python312;%LOCALAPPDATA%\Programs\Python\Python312\Scripts;!PATH!"
     echo [OK] Python instalado.
 )
 
-REM --- Paso 2: Crear entorno virtual ----------------------------
+REM ============================================================
+REM  Paso 2 - venv
+REM ============================================================
 echo.
-echo [2/8] Creando entorno virtual (.venv)...
+echo [2/7] Creando entorno virtual (.venv)...
 if exist ".venv" (
     echo [OK] .venv ya existe, saltando.
 ) else (
@@ -78,9 +318,11 @@ if exist ".venv" (
     echo [OK] .venv creado.
 )
 
-REM --- Paso 3: Instalar dependencias Python ---------------------
+REM ============================================================
+REM  Paso 3 - Dependencias Python
+REM ============================================================
 echo.
-echo [3/8] Instalando dependencias Python (puede tardar 2-5 min)...
+echo [3/7] Instalando dependencias Python (puede tardar 2-5 min)...
 call .venv\Scripts\activate.bat
 python -m pip install --upgrade pip >nul
 pip install -r requirements.txt
@@ -91,9 +333,11 @@ if !errorlevel! neq 0 (
 )
 echo [OK] Dependencias instaladas.
 
-REM --- Paso 4: ffmpeg portable ----------------------------------
+REM ============================================================
+REM  Paso 4 - ffmpeg
+REM ============================================================
 echo.
-echo [4/8] Verificando ffmpeg...
+echo [4/7] Verificando ffmpeg...
 if exist "bin\ffmpeg.exe" (
     echo [OK] ffmpeg ya esta.
 ) else (
@@ -107,7 +351,6 @@ if exist "bin\ffmpeg.exe" (
     )
     echo [INFO] Extrayendo...
     powershell -NoProfile -Command "Expand-Archive -Path ffmpeg.zip -DestinationPath ffmpeg-temp -Force"
-    REM Buscar ffmpeg.exe en cualquier subcarpeta
     for /r "ffmpeg-temp" %%f in (ffmpeg.exe) do (
         copy "%%f" "bin\ffmpeg.exe" >nul
         goto :ffmpeg_done
@@ -118,72 +361,17 @@ if exist "bin\ffmpeg.exe" (
     if exist "bin\ffmpeg.exe" (
         echo [OK] ffmpeg listo en bin\ffmpeg.exe
     ) else (
-        echo [ERROR] No se pudo extraer ffmpeg. Bajalo manual de github.com/BtbN/FFmpeg-Builds
+        echo [ERROR] No se pudo extraer ffmpeg.
         pause
         exit /b 1
     )
 )
 
-REM --- Paso 5: API Key de Anthropic -----------------------------
+REM ============================================================
+REM  Paso 5 - FluidSynth + DLLs
+REM ============================================================
 echo.
-echo [5/8] Configurando API key de Anthropic...
-echo.
-echo Necesitas una API key de https://console.anthropic.com/settings/keys
-echo Te recomiendo crear una llamada "tarrobot-studio" especifica para este PC.
-echo La key empieza con sk-ant-api03-...
-echo.
-set /p ANTKEY="Pega tu API key (o presiona Enter para configurarla despues): "
-if defined ANTKEY (
-    setx ANTHROPIC_API_KEY "!ANTKEY!" >nul
-    echo [OK] API key guardada como variable de entorno User.
-    echo      Tendras que reabrir CMD/PowerShell para que tome efecto.
-) else (
-    echo [WARN] API key no configurada. Solo podras usar datos curados de la DB,
-    echo        sin opinar ni cuentame con LLM. Configurala manual con:
-    echo        setx ANTHROPIC_API_KEY "sk-ant-..."
-)
-
-REM --- Paso 6: Configurar repo Retrotarros ----------------------
-echo.
-echo [6/8] Configurando ubicacion del repo Retrotarros...
-echo.
-echo TarroBot puede leer pautas, datos y templates desde:
-echo   A) El paquete local (esta carpeta) - autocontenido, sin internet
-echo   B) Tu repo en Google Drive sincronizado - se actualiza solo
-echo.
-echo Si pegas la ruta del repo en Drive, vas a ver automaticamente
-echo las pautas y datos nuevos que Luis genere en su PC.
-echo.
-echo Ejemplos de ruta valida:
-echo   G:\Mi unidad\Recursos Retrotarros\repo
-echo   C:\Users\Estudio\Google Drive\Retrotarros\repo
-echo   D:\Drive\Retrotarros\repo
-echo.
-set /p REPOPATH="Ruta al repo Retrotarros (o presiona Enter para usar local): "
-if defined REPOPATH (
-    REM Limpiar comillas si las pego con drag-drop
-    set "REPOPATH=!REPOPATH:"=!"
-    if exist "!REPOPATH!\scripts\tarrobot-live.py" (
-        if exist "!REPOPATH!\data\tarrobot-database.json" (
-            setx RETROTARROS_REPO "!REPOPATH!" >nul
-            echo [OK] Repo Retrotarros configurado: !REPOPATH!
-            echo      TarroBot va a leer scripts, pautas y datos desde ahi.
-        ) else (
-            echo [WARN] La ruta no parece un repo valido (falta data\tarrobot-database.json^).
-            echo        Usando paquete local.
-        )
-    ) else (
-        echo [WARN] La ruta no parece un repo valido (falta scripts\tarrobot-live.py^).
-        echo        Usando paquete local.
-    )
-) else (
-    echo [OK] Usando paquete local. Puedes configurarlo despues con:
-    echo      setx RETROTARROS_REPO "ruta al repo"
-)
-
-REM --- Paso 7: FluidSynth portable + soundfont (melodias MIDI) --
-echo.
-echo [7/8] Configurando FluidSynth para tocar melodias MIDI...
+echo [5/7] Configurando FluidSynth para tocar melodias MIDI...
 if exist "bin\fluidsynth.exe" (
     echo [OK] FluidSynth ya esta en bin\fluidsynth.exe
 ) else (
@@ -192,13 +380,10 @@ if exist "bin\fluidsynth.exe" (
     curl -L -o fluidsynth.zip https://github.com/FluidSynth/fluidsynth/releases/download/v2.3.5/fluidsynth-2.3.5-win10-x64.zip
     if !errorlevel! neq 0 (
         echo [WARN] No se pudo descargar FluidSynth. Las melodias MIDI no van a funcionar.
-        echo        Puedes bajarlo manual de github.com/FluidSynth/fluidsynth/releases
-        echo        y copiar bin\fluidsynth.exe + las DLLs en esta carpeta\bin\
         goto :fluidsynth_done
     )
     echo [INFO] Extrayendo FluidSynth...
     powershell -NoProfile -Command "Expand-Archive -Path fluidsynth.zip -DestinationPath fluidsynth-temp -Force"
-    REM Copiar fluidsynth.exe + todas las DLLs necesarias a bin\
     for /r "fluidsynth-temp" %%f in (fluidsynth.exe) do (
         copy "%%~dpf*.exe" "bin\" >nul 2>&1
         copy "%%~dpf*.dll" "bin\" >nul 2>&1
@@ -215,26 +400,27 @@ if exist "bin\fluidsynth.exe" (
 )
 :fluidsynth_done
 
-REM --- Soundfont SNES (no se baja automatico por temas de derechos) -
+REM ============================================================
+REM  Paso 6 - Guardar configuracion (variables de entorno)
+REM ============================================================
 echo.
-echo Para tocar melodias necesitas un soundfont .sf2 ^(formato estandar^).
-echo Opciones recomendadas ^(libres / fair use^):
-echo   - GeneralUser GS:  schristiancollins.com/generaluser.php  ^(~30 MB, CC0^)
-echo   - SNES soundfont:  buscar "Super Nintendo Soundfont" sf2
-echo.
-echo Una vez que tengas el .sf2:
-echo   1. Renombralo a "soundfont.sf2"
-echo   2. Copialo a:  %ROOT%\studio\melodias\soundfont.sf2
-echo      ^(o al repo en Drive si usas modo Drive^)
-echo.
-echo Sin el soundfont, las melodias MIDI no van a funcionar pero el
-echo resto de TarroBot anda perfecto.
-echo.
-pause
+echo [6/7] Guardando configuracion...
 
-REM --- Paso 8: Crear shortcut en escritorio ---------------------
+if defined CFG_API_KEY (
+    setx ANTHROPIC_API_KEY "!CFG_API_KEY!" >nul
+    echo [OK] ANTHROPIC_API_KEY guardada como variable de usuario.
+)
+
+if defined CFG_REPO_PATH (
+    setx RETROTARROS_REPO "!CFG_REPO_PATH!" >nul
+    echo [OK] RETROTARROS_REPO guardada: !CFG_REPO_PATH!
+)
+
+REM ============================================================
+REM  Paso 7 - Shortcut en escritorio
+REM ============================================================
 echo.
-echo [8/8] Creando acceso directo en escritorio...
+echo [7/7] Creando acceso directo en escritorio...
 powershell -NoProfile -Command ^
     "$ws = New-Object -ComObject WScript.Shell;" ^
     "$sc = $ws.CreateShortcut([Environment]::GetFolderPath('Desktop') + '\TarroBot.lnk');" ^
@@ -247,26 +433,56 @@ powershell -NoProfile -Command ^
 if exist "%USERPROFILE%\Desktop\TarroBot.lnk" (
     echo [OK] Acceso directo creado: %USERPROFILE%\Desktop\TarroBot.lnk
 ) else (
-    echo [WARN] No se pudo crear shortcut. Podes arrancar manualmente desde TarroBot.bat
+    echo [WARN] No se pudo crear shortcut. Podes arrancar manual desde TarroBot.bat
 )
 
-REM --- Fin ------------------------------------------------------
+REM ============================================================
+REM  Soundfont para melodias MIDI (instruccion solamente)
+REM ============================================================
+echo.
+echo ------------------------------------------------------------
+echo NOTA: Soundfont para melodias MIDI
+echo ------------------------------------------------------------
+echo Para que TarroBot toque melodias MIDI necesitas un soundfont
+echo .sf2. NO se incluye por temas de derechos (las melodias son
+echo transcripciones fan de juegos comerciales).
+echo.
+echo Opciones recomendadas:
+echo   - GeneralUser GS (CC0, libre):
+echo     https://www.schristiancollins.com/generaluser.php
+echo   - SNES soundfont: buscar en archive.org
+echo.
+echo Una vez bajado:
+echo   1. Renombralo a "soundfont.sf2"
+echo   2. Copialo a: %ROOT%\studio\melodias\soundfont.sf2
+echo      (o al repo en Drive si usas modo Drive)
+echo.
+echo Sin soundfont, TarroBot anda perfecto para todo lo demas.
+echo (Esto es opcional, podes hacerlo despues sin reinstalar.)
+echo.
+
+REM ============================================================
+REM  FIN
+REM ============================================================
 echo.
 echo ============================================================
 echo   INSTALACION COMPLETA
 echo ============================================================
 echo.
 echo Para arrancar TarroBot:
-echo   - Doble click en el acceso directo del escritorio
+echo   - Doble click en el acceso directo TarroBot del escritorio
 echo   - O doble click en TarroBot.bat
 echo.
 echo Al arrancar:
-echo   - Se abre el navegador con TarroBot en pantalla completa
-echo   - Para controlarlo, abre http://localhost:8765/control en otra pestana
-echo     (o desde el celu: http://[IP-DE-ESTA-PC]:8765/control)
+echo   - Aparece un icono en la bandeja del sistema (al lado del reloj)
+echo   - Click derecho en el icono para abrir TV / panel / overlay OBS
+echo   - O abre manual http://localhost:8765 en el browser
 echo.
-echo Nota: la primera vez que uses voz, Whisper descarga el modelo
-echo       (244 MB) y tarda un poco. Despues queda en cache.
+echo Nota importante:
+echo   - Las variables de entorno (API key, repo path) se aplican en
+echo     NUEVAS terminales. Si abriste algo antes, cerralo y vuelve a abrir.
+echo.
+echo Documentacion completa: README-ESTUDIO.txt en esta carpeta.
 echo.
 pause
 endlocal
