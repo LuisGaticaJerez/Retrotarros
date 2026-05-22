@@ -21,6 +21,15 @@ Pasos completados:
 - ✓ WebSocket cliente en panel filtra eventos `social-*` con reconnect automatico
 - ✓ Discord bot Tarrobot operativo en servidor RetroTarros (de sesion previa)
 
+**Sprint 14 cerrado: TarroBot RESPONDE al chat.** Bots multi-plataforma pasaron
+de read-only a interactivos. Bloques:
+- ✓ B14.1 `/api/social/say` - TarroBot lee mensaje literal con TTS
+- ✓ B14.2 `/api/social/respond` - Claude genera respuesta + TTS (con rate limit)
+- ✓ B14.3 UI: 3 botones por mensaje (SAY / RESPOND / DICTATE) + modal dictate
+- ✓ B14.4 `/api/social/post-message` + `DiscordConnector.send_to_channel` (write-back Discord)
+- ✓ B14.5 Cola READ PINNED secuencial con TTS sincronizado (espera fin de audio)
+- ✓ B14.6 Docs + commit final
+
 ## Que es TarroBot Studio
 
 Conjunto de herramientas para producir el canal de YouTube Retrotarros (retrogaming + nostalgia + musica). Dos productos coexistiendo en stacks distintos pero gestionados como un solo proyecto:

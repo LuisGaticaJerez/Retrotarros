@@ -1347,6 +1347,74 @@ async def _post_hablar_fallback(delay: float) -> None:
         tracker.mark_speaking(False)
 
 
+def generar_respuesta_chat_llm(viewer_name: str, viewer_text: str,
+                                platform: str = "chat",
+                                context: Optional[str] = None) -> Optional[dict]:
+    """
+    Sprint 14: TarroBot responde a un mensaje del chat usando Claude.
+    Devuelve {texto, estado} con la respuesta lista para TTS.
+    """
+    try:
+        import anthropic
+    except ImportError:
+        return None
+    import os, re as _re
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return None
+    client = anthropic.Anthropic(api_key=api_key)
+
+    contexto_extra = (
+        f"Contexto adicional (pauta del episodio actual): {context}\n"
+        if context else ""
+    )
+
+    prompt = f"""Eres TarroBot, mascota del canal Retrotarros sobre videojuegos retro.
+Un viewer te escribio en el chat de {platform}.
+
+Viewer: "{viewer_name}"
+Mensaje: "{viewer_text}"
+
+{contexto_extra}
+Devuelve una RESPUESTA corta y con personalidad (1-2 oraciones, max 220 caracteres).
+Tambien decide el estado emocional que mejor calza.
+
+Reglas (este texto se reproduce con TTS, por eso reglas estrictas):
+- Saludale al viewer por su nombre si tiene sentido natural.
+- Espanol ESTRICTAMENTE chileno neutro con TUTEO (tu/tienes/sabes/dime/puedes).
+- NO voseo argentino: PROHIBIDO "tenes", "queres", "podes", "sabes (con tilde)",
+  "decime", "decis", "vos", "sos", "vení", "andas (con tilde)", "che", "anda".
+  USA: "eres", "tienes", "quieres", "puedes", "dices", "ven", "vas", "dime".
+- NO palabras argentinas: evita "aca" (usa "aqui"), "andabamos" (usa "estabamos"),
+  "me agarraste" (usa "me pillaste"), "pibe" (usa "chico").
+- USA TILDES correctas del espanol ortografico (tambien, esta, mi, si, dia, ano).
+  Critico para que el TTS pronuncie bien.
+- NUMEROS EN PALABRAS para cifras grandes: "20 mil" en vez de "20,000".
+- Tono curioso, cercano, vibe retrogaming.
+- Si el viewer hace una pregunta tonta o trolea, responde con humor pero sin agresion.
+- Estados validos: happy, excited, fact, winking, confused, sad, angry, thinking, talking.
+
+Devuelve SOLO un JSON valido (sin markdown), formato:
+{{"texto": "...", "estado": "..."}}
+"""
+    try:
+        response = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=300,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw = response.content[0].text.strip()
+        raw = _re.sub(r"^```(?:json)?\s*", "", raw)
+        raw = _re.sub(r"\s*```$", "", raw)
+        result = json.loads(raw)
+        if "texto" in result:
+            result["texto"] = chilenizar(result["texto"])
+        return result
+    except Exception as e:
+        print(f"[respond_chat] error: {e}")
+        return None
+
+
 def generar_opinion_llm(tema: str) -> Optional[dict]:
     """Llama Claude para que TarroBot opine de un tema. Retorna {texto, estado}."""
     try:
@@ -3623,6 +3691,333 @@ async def social_youtube_stop():
     except ValueError:
         pass
     return {"ok": True}
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 14: TarroBot RESPONDE al chat (SAY / RESPOND / DICTATE)
+# ─────────────────────────────────────────────────────────────────────────
+
+def _get_message_or_404(message_id: str) -> Optional[dict]:
+    """Helper: busca un mensaje por id en SQLite, devuelve dict o None."""
+    msgs = message_store.get_recent(limit=500)
+    for m in msgs:
+        if m["id"] == message_id:
+            return m
+    return None
+
+
+@app.post("/api/social/say")
+async def social_say(payload: dict):
+    """
+    TarroBot lee un mensaje del chat en voz alta (TTS literal).
+    Body:
+      { "message_id": "twitch-xxx" }  o
+      { "text": "...", "user_name": "...", "platform": "..." }
+      Opcional: { "with_intro": true|false } (default true)
+                "voz", "pitch", "rate"
+    """
+    msg_id = (payload.get("message_id") or "").strip()
+    if msg_id:
+        msg = _get_message_or_404(msg_id)
+        if not msg:
+            return JSONResponse({"error": f"mensaje {msg_id} no encontrado"}, status_code=404)
+        viewer = msg.get("user_name", "alguien")
+        text = msg.get("text", "")
+        platform = msg.get("platform", "chat")
+    else:
+        text = (payload.get("text") or "").strip()
+        if not text:
+            return JSONResponse({"error": "manda message_id o text"}, status_code=400)
+        viewer = (payload.get("user_name") or "").strip()
+        platform = (payload.get("platform") or "chat").strip()
+
+    with_intro = payload.get("with_intro", True)
+    if with_intro and viewer:
+        frase = f"{viewer} dice: {text}"
+    else:
+        frase = text
+
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    tracker.mark_input()
+    audio_url = await _hablar_frase(
+        frase, "talking", f"VIEWER · {platform.upper()}", voz, pitch, rate
+    )
+
+    # Marcar replied
+    if msg_id:
+        try:
+            await asyncio.to_thread(message_store.set_replied, msg_id, True)
+            await manager.broadcast_live({
+                "tipo": "social-message-replied",
+                "message_id": msg_id, "replied": True,
+            })
+        except Exception:
+            pass
+
+    return {"ok": True, "texto": frase, "audio_url": audio_url}
+
+
+@app.post("/api/social/respond")
+async def social_respond(payload: dict):
+    """
+    TarroBot responde a un mensaje del chat con LLM (Claude) + TTS.
+    Body:
+      { "message_id": "twitch-xxx" }
+      Opcional: { "post_to_channel": true|false } - publicar respuesta en
+                 el canal de origen (solo Discord soportado por ahora)
+                "voz", "pitch", "rate"
+    """
+    msg_id = (payload.get("message_id") or "").strip()
+    if not msg_id:
+        return JSONResponse({"error": "message_id obligatorio"}, status_code=400)
+    msg = _get_message_or_404(msg_id)
+    if not msg:
+        return JSONResponse({"error": f"mensaje {msg_id} no encontrado"}, status_code=404)
+
+    # Rate limit (LLM call)
+    espera = llm_cooldown_check("social_respond")
+    if espera is not None:
+        return JSONResponse(
+            {"error": f"cooldown LLM: espera {espera:.1f}s antes de responder otro mensaje"},
+            status_code=429,
+        )
+
+    # Contexto opcional: si hay pauta cargada, pasarlo al LLM
+    context = None
+    if queue.loaded():
+        context = queue.pauta.get("episodio") or queue.slug
+
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    tracker.mark_input()
+
+    async with _procesando(f"respondiendo a {msg.get('user_name', '?')}..."):
+        result = await asyncio.to_thread(
+            generar_respuesta_chat_llm,
+            msg.get("user_name", "alguien"),
+            msg.get("text", ""),
+            msg.get("platform", "chat"),
+            context,
+        )
+    if not result:
+        return JSONResponse(
+            {"error": "fallo LLM. Verifica ANTHROPIC_API_KEY y creditos."},
+            status_code=500,
+        )
+
+    texto = result.get("texto", "")
+    estado = result.get("estado", "talking")
+    if estado not in ESTADOS:
+        estado = "talking"
+
+    audio_url = await _hablar_frase(
+        texto, estado, f"RESPUESTA A {msg.get('user_name', '').upper()}",
+        voz, pitch, rate,
+    )
+
+    # Marcar replied
+    try:
+        await asyncio.to_thread(message_store.set_replied, msg_id, True)
+        await manager.broadcast_live({
+            "tipo": "social-message-replied",
+            "message_id": msg_id, "replied": True,
+        })
+    except Exception:
+        pass
+
+    # Opcional: publicar en el canal de origen (solo Discord)
+    posted_to_channel = False
+    post_error = None
+    if payload.get("post_to_channel"):
+        if msg.get("platform") == "discord":
+            channel_id = (msg.get("meta") or {}).get("channel_id")
+            if channel_id:
+                discord_conn = social_manager.manager.find_connector("discord")
+                if discord_conn and hasattr(discord_conn, "send_to_channel"):
+                    try:
+                        await discord_conn.send_to_channel(int(channel_id), texto)
+                        posted_to_channel = True
+                    except Exception as e:
+                        post_error = str(e)
+                else:
+                    post_error = "Discord no conectado o sin metodo send_to_channel"
+            else:
+                post_error = "mensaje sin channel_id"
+        else:
+            post_error = f"plataforma '{msg.get('platform')}' no soporta write-back (solo Discord)"
+
+    return {
+        "ok": True, "texto": texto, "estado": estado, "audio_url": audio_url,
+        "posted_to_channel": posted_to_channel,
+        "post_error": post_error,
+    }
+
+
+@app.post("/api/social/dictate")
+async def social_dictate(payload: dict):
+    """
+    El operador escribe una respuesta y TarroBot la lee literal con voz.
+    Body:
+      { "text": "...", "message_id": "opcional para marcar replied",
+        "estado": "happy", "post_to_channel": true|false }
+    """
+    text = (payload.get("text") or "").strip()
+    if not text:
+        return JSONResponse({"error": "text obligatorio"}, status_code=400)
+    estado = (payload.get("estado") or "talking").strip()
+    if estado not in ESTADOS:
+        estado = "talking"
+    msg_id = (payload.get("message_id") or "").strip() or None
+
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+    tracker.mark_input()
+
+    # chilenizar por si el operador escribio en argentino sin querer
+    text = chilenizar(text)
+
+    label = f"DICTADO · {estado.upper()}"
+    if msg_id:
+        msg = _get_message_or_404(msg_id)
+        if msg:
+            label = f"RESP A {msg.get('user_name', '').upper()}"
+
+    audio_url = await _hablar_frase(text, estado, label, voz, pitch, rate)
+
+    if msg_id:
+        try:
+            await asyncio.to_thread(message_store.set_replied, msg_id, True)
+            await manager.broadcast_live({
+                "tipo": "social-message-replied",
+                "message_id": msg_id, "replied": True,
+            })
+        except Exception:
+            pass
+
+    # Post to channel (Discord) si pide
+    posted_to_channel = False
+    post_error = None
+    if payload.get("post_to_channel") and msg_id:
+        msg = _get_message_or_404(msg_id)
+        if msg and msg.get("platform") == "discord":
+            channel_id = (msg.get("meta") or {}).get("channel_id")
+            if channel_id:
+                discord_conn = social_manager.manager.find_connector("discord")
+                if discord_conn and hasattr(discord_conn, "send_to_channel"):
+                    try:
+                        await discord_conn.send_to_channel(int(channel_id), text)
+                        posted_to_channel = True
+                    except Exception as e:
+                        post_error = str(e)
+
+    return {"ok": True, "texto": text, "audio_url": audio_url,
+            "posted_to_channel": posted_to_channel, "post_error": post_error}
+
+
+# ─── Cola: leer pinned secuencial ────────────────────────────────────
+
+_pinned_queue_task: Optional[asyncio.Task] = None
+_pinned_queue_stop = asyncio.Event()
+
+
+@app.post("/api/social/read-pinned-queue")
+async def social_read_pinned_queue(payload: Optional[dict] = None):
+    """
+    Lanza un task que lee TODOS los mensajes pinned en orden (oldest first).
+    Espera entre cada uno a que el TTS termine (via tracker.is_speaking).
+    Si ya hay una cola corriendo, la cancela y arranca de cero.
+
+    Body opcional: { "stop": true } para solo detener la cola actual.
+    """
+    global _pinned_queue_task
+    payload = payload or {}
+    if payload.get("stop"):
+        if _pinned_queue_task and not _pinned_queue_task.done():
+            _pinned_queue_stop.set()
+            _pinned_queue_task.cancel()
+            try:
+                await _pinned_queue_task
+            except (asyncio.CancelledError, Exception):
+                pass
+        return {"ok": True, "stopped": True}
+
+    # Cancelar cola previa si hay
+    if _pinned_queue_task and not _pinned_queue_task.done():
+        _pinned_queue_stop.set()
+        _pinned_queue_task.cancel()
+        try:
+            await _pinned_queue_task
+        except (asyncio.CancelledError, Exception):
+            pass
+
+    _pinned_queue_stop.clear()
+    voz, pitch, rate = _obtener_voz_pitch_rate(payload)
+
+    async def _read_loop():
+        pinned = await asyncio.to_thread(message_store.get_pinned, None)
+        if not pinned:
+            return
+        # Orden por timestamp ascendente (oldest primero, mas natural)
+        pinned.sort(key=lambda m: m["timestamp_ms"])
+        for i, m in enumerate(pinned):
+            if _pinned_queue_stop.is_set():
+                break
+            viewer = m.get("user_name", "alguien")
+            text = m.get("text", "")
+            platform = m.get("platform", "chat")
+            frase = f"{viewer} pregunta: {text}"
+            await _hablar_frase(
+                frase, "thinking",
+                f"PINNED {i+1}/{len(pinned)} · {platform.upper()}",
+                voz, pitch, rate,
+            )
+            # Esperar a que termine de hablar este mensaje antes de pasar al siguiente
+            wait_start = time.time()
+            while tracker.is_speaking and (time.time() - wait_start) < 30:
+                if _pinned_queue_stop.is_set():
+                    break
+                await asyncio.sleep(0.3)
+            if _pinned_queue_stop.is_set():
+                break
+            # Pequeno gap entre mensajes para que no sean rafaga
+            await asyncio.sleep(0.8)
+
+    _pinned_queue_task = asyncio.create_task(_read_loop(), name="pinned-queue")
+    return {"ok": True, "started": True}
+
+
+# ─── Discord post genérico (para casos no asociados a un message_id) ──
+
+@app.post("/api/social/post-message")
+async def social_post_message(payload: dict):
+    """
+    Publica un mensaje en un canal Discord arbitrario.
+    Body: { "platform": "discord", "channel_id": "123", "text": "..." }
+    Solo Discord soportado por ahora.
+    """
+    platform = (payload.get("platform") or "").strip()
+    if platform != "discord":
+        return JSONResponse(
+            {"error": f"platform '{platform}' no soportada para post (solo Discord)"},
+            status_code=400,
+        )
+    channel_id_raw = payload.get("channel_id")
+    text = (payload.get("text") or "").strip()
+    if not channel_id_raw or not text:
+        return JSONResponse({"error": "channel_id y text obligatorios"}, status_code=400)
+    try:
+        channel_id = int(channel_id_raw)
+    except (TypeError, ValueError):
+        return JSONResponse({"error": "channel_id invalido"}, status_code=400)
+
+    discord_conn = social_manager.manager.find_connector("discord")
+    if not discord_conn:
+        return JSONResponse({"error": "Discord no esta activo"}, status_code=400)
+    if not hasattr(discord_conn, "send_to_channel"):
+        return JSONResponse({"error": "conector Discord sin send_to_channel"}, status_code=500)
+    try:
+        await discord_conn.send_to_channel(channel_id, text)
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, status_code=500)
+    return {"ok": True, "channel_id": channel_id}
 
 
 @app.get("/api/ping")

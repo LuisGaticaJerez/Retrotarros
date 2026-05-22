@@ -228,8 +228,54 @@ PRIVACIDAD:
 LIMITACIONES:
 - Instagram Live, Facebook Live, WhatsApp: NO implementados.
   Estos requieren Social Stream Ninja como puente. Futuro sprint.
-- Solo READ por ahora. Para que TarroBot RESPONDA en el chat,
-  hace falta otro sprint (cuando estes listo para streams reales).
+
+
+============================================================
+TARROBOT RESPONDE AL CHAT (Sprint 14)
+============================================================
+
+A partir del Sprint 14, TarroBot no solo lee el chat: tambien
+responde con voz (TTS) y opcionalmente escribe en el canal de
+Discord. Cada mensaje del feed tiene 3 botones:
+
+1. 🔊 SAY - TarroBot lee el mensaje literal en voz alta
+   ("Marcos dice: ¿que opinas de Mario Galaxy?"). Util para
+   pasar la pregunta al aire sin tu intervencion.
+
+2. 🧠 RESPOND - TarroBot pide a Claude que arme una respuesta
+   personalizada al viewer (chileno neutro, max 220 chars, tono
+   acorde al canal). Tarda 2-4 seg. Rate limit 3s entre respuestas.
+
+3. ✍ DICTATE - Abre un modal donde TU escribis la respuesta y
+   TarroBot la lee con su voz. Util cuando queres respuesta
+   espontanea o personalizada.
+
+Si el mensaje es de Discord, podes ademas tildar "publicar en
+Discord" y la respuesta se publica en el canal de origen (TarroBot
+escribe ahi). Twitch/YouTube todavia no soportan write-back por
+limitaciones de auth.
+
+COLA "LEER PINNED EN ORDEN":
+En la card FEED hay un boton "▶ LEER PINNED EN COLA". TarroBot
+lee todos los pinneados uno por uno, esperando que termine el
+TTS de cada uno antes del siguiente. Boton de nuevo para detener.
+
+WORKFLOW TIPICO EN STREAM:
+1. Empieza el stream, conectas Twitch + Discord + YouTube.
+2. Mientras grabas, las preguntas interesantes las haces PIN.
+3. En el segmento "preguntas del publico", click LEER PINNED EN
+   COLA. TarroBot va leyendo las preguntas.
+4. Para cada una: o decis tu respuesta a camara, o le das RESPOND
+   (Claude responde) o DICTATE (vos lo escribis).
+5. Si era de Discord, podes hacer que TarroBot conteste tambien
+   en el canal Discord directamente.
+
+ANTI-SPAM Y SEGURIDAD:
+- Rate limit 3s en RESPOND para no quemar creditos Claude.
+- Filtro chilenizar() postproceso en TODA respuesta LLM.
+- Discord write-back solo a canales donde el bot ya tiene
+  permiso send_messages (configurado en el setup del bot).
+- Maximo 2000 chars en cada post Discord (limite plataforma).
 
 TROUBLESHOOTING:
 - "Twitch no conecta": revisa que no haya firewall bloqueando

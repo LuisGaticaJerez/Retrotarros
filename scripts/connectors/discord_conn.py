@@ -153,6 +153,29 @@ class DiscordConnector(Connector):
             normalized = self._to_message(msg)
             await self._emit(normalized)
 
+    async def send_to_channel(self, channel_id: int, text: str) -> None:
+        """
+        Sprint 14: TarroBot escribe en un canal Discord (write-back).
+        Lanza ValueError si el canal no se encuentra o si el bot no tiene
+        permisos para escribir.
+        """
+        if not self._client or not self.is_connected():
+            raise RuntimeError("Discord no esta conectado")
+        channel = self._client.get_channel(int(channel_id))
+        if channel is None:
+            # Intentar fetch (puede ser canal de un guild que no esta cacheado)
+            try:
+                channel = await self._client.fetch_channel(int(channel_id))
+            except Exception as e:
+                raise ValueError(f"canal {channel_id} no encontrado: {e}")
+        # Trimear a 2000 chars (limite Discord)
+        if len(text) > 2000:
+            text = text[:1997] + "..."
+        try:
+            await channel.send(text)
+        except Exception as e:
+            raise RuntimeError(f"fallo send a canal {channel_id}: {e}")
+
     def _to_message(self, msg) -> Message:
         """Convierte un discord.Message a nuestro Message normalizado."""
         author = msg.author

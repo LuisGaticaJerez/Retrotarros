@@ -591,8 +591,14 @@ select#queueSelect:focus { border-color: var(--ye); }
       <div id="socPinnedItems"></div>
     </div>
   </div>
+  <div class="btn-row" style="margin-top:8px;">
+    <button class="btn ye" id="socReadPinnedBtn" onclick="socReadPinnedAll()">▶ LEER PINNED EN COLA</button>
+  </div>
   <div style="font-size:10px; color:rgba(255,255,255,.45); margin-top:6px;">
-    Click 📌 en un mensaje para fijarlo en la lista derecha (visible para Luis/Koko al responder en cámara).
+    Click 📌 en un mensaje para fijarlo. Acciones por mensaje:
+    🔊 say (lectura literal) · 🧠 respond (TarroBot opina con LLM) ·
+    ✍ dictate (vos escribis la respuesta). El boton de arriba lee
+    todos los pinned en orden secuencial.
   </div>
 </div>
 
@@ -893,6 +899,11 @@ const PROC_LABELS = {
   '/api/receta/run':      'ejecutando receta...',
   '/api/session/reset':   '',
   '/api/pauta/auto-tema': 'generando pauta + MP3s (puede tardar 1-3 min)...',
+  '/api/social/say':                'leyendo mensaje...',
+  '/api/social/respond':            'pensando respuesta con Claude...',
+  '/api/social/dictate':            'TarroBot diciendo tu dictado...',
+  '/api/social/read-pinned-queue':  '',
+  '/api/social/post-message':       'publicando en Discord...',
   '/api/queue/sugerir-orden':           'analizando orden con Claude...',
   '/api/queue/aplicar-orden':           'aplicando reorden...',
   '/api/episodio/exportar-descripcion': 'generando publicacion con Claude...',
@@ -1529,10 +1540,123 @@ function socMsgHtml(m) {
     </div>
     <div class="soc-msg-text">${safeText}</div>
     <div class="soc-msg-actions">
-      <button onclick="socTogglePin('${m.id}', ${!m.pinned})">${m.pinned ? '📌 unpin' : '📌 pin'}</button>
-      <button onclick="socMarkReplied('${m.id}')">${m.replied ? '✓ replied' : '↪ reply'}</button>
+      <button onclick="socTogglePin('${m.id}', ${!m.pinned})" title="Fijar/desfijar">${m.pinned ? '📌 unpin' : '📌 pin'}</button>
+      <button onclick="socSayMessage('${m.id}')" title="TarroBot lo lee en voz alta">🔊 say</button>
+      <button onclick="socRespondMessage('${m.id}')" title="TarroBot responde con LLM">🧠 respond</button>
+      <button onclick="socOpenDictate('${m.id}')" title="Escribe tu propia respuesta para que TarroBot la lea">✍ dictate</button>
+      ${m.replied ? '<span style="font-size:9px; color:rgba(0,255,0,.7); align-self:center;">✓ replied</span>' : ''}
     </div>
   </div>`;
+}
+
+async function socSayMessage(msgId) {
+  const data = await post('/api/social/say', {message_id: msgId});
+  if (data && data.ok) {
+    logMsg('TarroBot dice: ' + data.texto.substring(0, 60), 'ok');
+    // Marcar localmente
+    const m = socFeed.find(x => x.id === msgId);
+    if (m) { m.replied = true; socRenderFeed(); }
+  }
+}
+
+async function socRespondMessage(msgId) {
+  const m = socFeed.find(x => x.id === msgId);
+  const postBack = m && m.platform === 'discord'
+    ? confirm('Despues que TarroBot responda con voz, ¿publicar tambien la respuesta en el canal Discord?')
+    : false;
+  const data = await post('/api/social/respond', {message_id: msgId, post_to_channel: postBack});
+  if (data && data.ok) {
+    logMsg('TarroBot responde a ' + (m ? m.user_name : '?') + ': ' + data.texto.substring(0, 60), 'ok');
+    if (data.post_error) logMsg('post discord fallo: ' + data.post_error, 'err');
+    if (m) { m.replied = true; socRenderFeed(); }
+  }
+}
+
+function socOpenDictate(msgId) {
+  const m = socFeed.find(x => x.id === msgId);
+  if (!m) return;
+  // Modal inline simple
+  const existing = document.getElementById('socDictateModal');
+  if (existing) existing.remove();
+  const modal = document.createElement('div');
+  modal.id = 'socDictateModal';
+  modal.style.cssText = 'position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,.7); z-index:9999; display:flex; align-items:center; justify-content:center;';
+  modal.innerHTML = `
+    <div style="background:#1a0d2e; border:2px solid #FF2E88; border-radius:8px; padding:20px; max-width:500px; width:90%;">
+      <h3 style="font-family:'Orbitron'; font-weight:900; color:#FFD23F; margin-bottom:10px;">✍ DICTAR RESPUESTA</h3>
+      <div style="font-size:12px; color:rgba(255,255,255,.7); margin-bottom:10px;">
+        Mensaje original (${(m.user_name || '?').replace(/</g,'&lt;')} · ${m.platform}):
+      </div>
+      <div style="background:rgba(0,0,0,.3); padding:8px; border-radius:4px; margin-bottom:10px; font-size:12px; color:rgba(255,255,255,.8);">
+        ${(m.text || '').replace(/</g,'&lt;')}
+      </div>
+      <label style="font-size:11px; color:rgba(255,255,255,.7);">Tu respuesta (TarroBot la va a leer):</label>
+      <textarea id="socDictateText" rows="3" style="width:100%; margin-top:4px; padding:6px; background:#0a0617; color:#fff; border:1px solid rgba(255,255,255,.2); border-radius:4px; font-family:inherit; font-size:12px;"></textarea>
+      <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
+        <label style="font-size:11px; color:rgba(255,255,255,.7);">Estado:</label>
+        <select id="socDictateEstado" style="background:#0a0617; color:#fff; border:1px solid rgba(255,255,255,.2); border-radius:4px; padding:3px;">
+          <option value="talking">talking</option>
+          <option value="happy">happy</option>
+          <option value="excited">excited</option>
+          <option value="winking">winking</option>
+          <option value="fact">fact</option>
+          <option value="thinking">thinking</option>
+          <option value="confused">confused</option>
+        </select>
+        ${m.platform === 'discord' ? `
+          <label style="font-size:11px; color:rgba(255,255,255,.7); margin-left:auto;">
+            <input type="checkbox" id="socDictatePost"> publicar en Discord
+          </label>` : ''}
+      </div>
+      <div class="btn-row" style="margin-top:12px;">
+        <button class="btn cy" onclick="socSubmitDictate('${msgId}')">▸ ENVIAR</button>
+        <button class="btn" onclick="document.getElementById('socDictateModal').remove()">CANCELAR</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  setTimeout(() => document.getElementById('socDictateText').focus(), 50);
+}
+
+async function socSubmitDictate(msgId) {
+  const text = document.getElementById('socDictateText').value.trim();
+  if (!text) { logMsg('falta el texto', 'err'); return; }
+  const estado = document.getElementById('socDictateEstado').value;
+  const postEl = document.getElementById('socDictatePost');
+  const post_to_channel = postEl ? postEl.checked : false;
+  const data = await post('/api/social/dictate', {
+    message_id: msgId, text, estado, post_to_channel,
+  });
+  if (data && data.ok) {
+    logMsg('TarroBot dicta: ' + data.texto.substring(0, 60), 'ok');
+    if (data.post_error) logMsg('post discord fallo: ' + data.post_error, 'err');
+    const m = socFeed.find(x => x.id === msgId);
+    if (m) { m.replied = true; socRenderFeed(); }
+    document.getElementById('socDictateModal').remove();
+  }
+}
+
+let socPinnedQueueRunning = false;
+async function socReadPinnedAll() {
+  if (socPinnedQueueRunning) {
+    // Detener
+    await post('/api/social/read-pinned-queue', {stop: true});
+    socPinnedQueueRunning = false;
+    document.getElementById('socReadPinnedBtn').textContent = '▶ LEER PINNED EN COLA';
+    logMsg('cola pinned detenida', 'ok');
+    return;
+  }
+  const data = await post('/api/social/read-pinned-queue', {});
+  if (data && data.ok) {
+    socPinnedQueueRunning = true;
+    document.getElementById('socReadPinnedBtn').textContent = '■ DETENER COLA';
+    logMsg('TarroBot leyendo pinned en cola', 'ok');
+    // Auto-reset del boton despues de 5 min (heuristica)
+    setTimeout(() => {
+      socPinnedQueueRunning = false;
+      document.getElementById('socReadPinnedBtn').textContent = '▶ LEER PINNED EN COLA';
+    }, 5 * 60 * 1000);
+  }
 }
 
 async function socTogglePin(msgId, pin) {
