@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 
 REM ============================================================
 REM  TarroBot Studio - Instalador automatico para Windows 10/11
-REM  Retrotarros · doble click y listo
+REM  Retrotarros . doble click y listo
 REM ============================================================
 
 title TarroBot Studio - Instalando...
@@ -30,12 +30,12 @@ echo Tiempo estimado: 5-10 minutos (depende de tu conexion)
 echo.
 pause
 
-REM ─── Carpeta de instalacion = la carpeta del .bat ─────────────
+REM --- Carpeta de instalacion = la carpeta del .bat -------------
 set "ROOT=%~dp0"
 set "ROOT=%ROOT:~0,-1%"
 cd /d "%ROOT%"
 
-REM ─── Paso 1: Python ───────────────────────────────────────────
+REM --- Paso 1: Python -------------------------------------------
 echo.
 echo [1/8] Verificando Python...
 where python >nul 2>nul
@@ -63,7 +63,7 @@ if !errorlevel! equ 0 (
     echo [OK] Python instalado.
 )
 
-REM ─── Paso 2: Crear entorno virtual ────────────────────────────
+REM --- Paso 2: Crear entorno virtual ----------------------------
 echo.
 echo [2/8] Creando entorno virtual (.venv)...
 if exist ".venv" (
@@ -78,7 +78,7 @@ if exist ".venv" (
     echo [OK] .venv creado.
 )
 
-REM ─── Paso 3: Instalar dependencias Python ─────────────────────
+REM --- Paso 3: Instalar dependencias Python ---------------------
 echo.
 echo [3/8] Instalando dependencias Python (puede tardar 2-5 min)...
 call .venv\Scripts\activate.bat
@@ -91,7 +91,7 @@ if !errorlevel! neq 0 (
 )
 echo [OK] Dependencias instaladas.
 
-REM ─── Paso 4: ffmpeg portable ──────────────────────────────────
+REM --- Paso 4: ffmpeg portable ----------------------------------
 echo.
 echo [4/8] Verificando ffmpeg...
 if exist "bin\ffmpeg.exe" (
@@ -124,7 +124,7 @@ if exist "bin\ffmpeg.exe" (
     )
 )
 
-REM ─── Paso 5: API Key de Anthropic ─────────────────────────────
+REM --- Paso 5: API Key de Anthropic -----------------------------
 echo.
 echo [5/8] Configurando API key de Anthropic...
 echo.
@@ -143,7 +143,7 @@ if defined ANTKEY (
     echo        setx ANTHROPIC_API_KEY "sk-ant-..."
 )
 
-REM ─── Paso 6: Configurar repo Retrotarros ──────────────────────
+REM --- Paso 6: Configurar repo Retrotarros ----------------------
 echo.
 echo [6/8] Configurando ubicacion del repo Retrotarros...
 echo.
@@ -181,7 +181,7 @@ if defined REPOPATH (
     echo      setx RETROTARROS_REPO "ruta al repo"
 )
 
-REM ─── Paso 7: FluidSynth portable + soundfont (melodias MIDI) ──
+REM --- Paso 7: FluidSynth portable + soundfont (melodias MIDI) --
 echo.
 echo [7/8] Configurando FluidSynth para tocar melodias MIDI...
 if exist "bin\fluidsynth.exe" (
@@ -215,7 +215,7 @@ if exist "bin\fluidsynth.exe" (
 )
 :fluidsynth_done
 
-REM ─── Soundfont SNES (no se baja automatico por temas de derechos) ─
+REM --- Soundfont SNES (no se baja automatico por temas de derechos) -
 echo.
 echo Para tocar melodias necesitas un soundfont .sf2 ^(formato estandar^).
 echo Opciones recomendadas ^(libres / fair use^):
@@ -232,7 +232,7 @@ echo resto de TarroBot anda perfecto.
 echo.
 pause
 
-REM ─── Paso 8: Crear shortcut en escritorio ─────────────────────
+REM --- Paso 8: Crear shortcut en escritorio ---------------------
 echo.
 echo [8/8] Creando acceso directo en escritorio...
 powershell -NoProfile -Command ^
@@ -250,7 +250,7 @@ if exist "%USERPROFILE%\Desktop\TarroBot.lnk" (
     echo [WARN] No se pudo crear shortcut. Podes arrancar manualmente desde TarroBot.bat
 )
 
-REM ─── Fin ──────────────────────────────────────────────────────
+REM --- Fin ------------------------------------------------------
 echo.
 echo ============================================================
 echo   INSTALACION COMPLETA

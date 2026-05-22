@@ -12,7 +12,7 @@
 ; ─────────────────────────────────────────────────────────────────────
 
 #define MyAppName "TarroBot Studio"
-#define MyAppVersion "1.2"
+#define MyAppVersion "1.2.1"
 #define MyAppPublisher "Retrotarros - Luis Gatica Jerez"
 #define MyAppURL "https://github.com/LuisGaticaJerez/Retrotarros"
 #define MyAppExeName "TarroBot.bat"
