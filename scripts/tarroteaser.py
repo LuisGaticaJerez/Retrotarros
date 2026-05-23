@@ -22,6 +22,16 @@ Tipos soportados (auto-detectados del slug):
 Output: MP4 vertical 1080x1920 con audio ORIGINAL del master.
 SIN overlays, SIN intro/outro, SIN música agregada. Listo para edición manual.
 
+Duración de clip: SE AJUSTA a la frase Whisper detectada (no es fija).
+  - Lead-in 0.3s antes del segmento (no come la primera sílaba).
+  - Tail-pad 0.7s después del segmento (cierra el número/palabra).
+  - Si la frase Whisper queda mid-thought (sin '.', '!', '?'), encadena la
+    siguiente frase contigua (hasta 2.5s extra · 3.5s en climax con precios).
+  - Min 3s (--clip-duration), max 6s (--max-clip-duration).
+  - Si excede max:
+      · Centros/inicio: conserva el INICIO (donde está la keyword).
+      · Climax: conserva el FINAL (donde está el reveal del #1).
+
 Workflow esperado:
     1. python scripts/tarroteaser.py <master.mp4> --slug <slug>
     2. Importar el MP4 resultante en CapCut (o DaVinci)
@@ -256,8 +266,38 @@ def _score(text: str, keywords: list[str]) -> int:
     return sum(1 for kw in keywords if kw in text_low)
 
 
-def find_funny_start(segments: list[dict], video_duration: float) -> tuple[float, str]:
-    """Mejor segmento del primer tercio del video. Mezcla keywords funny + highlight."""
+def _extend_to_next_segment(seg: dict, all_segments: list[dict],
+                             max_extra: float = 2.5) -> float:
+    """Devuelve el end del segmento, extendido si la siguiente frase parece
+    continuar el mismo pensamiento (p. ej. el numero esta partido entre 2 frases).
+
+    Heuristica: si hay un segmento siguiente que arranca <= 0.5s despues del
+    fin de este, y el texto actual termina mid-thought (sin punto/signo final),
+    extender el clip hasta el end del siguiente. Cap a max_extra extra.
+    """
+    base_end = float(seg["end"])
+    text = seg["text"].strip()
+    # Si la frase ya cierra con punto/signo, no extender.
+    if text and text[-1] in ".!?":
+        return base_end
+    # Buscar el siguiente segmento contiguo.
+    seg_start = float(seg["start"])
+    for s2 in all_segments:
+        s2_start = float(s2["start"])
+        if s2_start <= seg_start:
+            continue
+        if s2_start - base_end > 0.5:
+            return base_end
+        extra = min(max_extra, float(s2["end"]) - base_end)
+        return base_end + max(0.0, extra)
+    return base_end
+
+
+def find_funny_start(segments: list[dict], video_duration: float) -> tuple[float, float, str]:
+    """Mejor segmento del primer tercio del video. Mezcla keywords funny + highlight.
+
+    Devuelve (start, end, text) — end ya viene extendido si la frase no cierra.
+    """
     cutoff = video_duration / 3.0
     combined = KEYWORDS_FUNNY + KEYWORDS_HIGHLIGHT
     candidates = []
@@ -267,17 +307,21 @@ def find_funny_start(segments: list[dict], video_duration: float) -> tuple[float
             continue
         s = _score(seg["text"], combined)
         if s > 0:
-            candidates.append((seg["start"], s, seg["text"][:70]))
+            end_ext = _extend_to_next_segment(seg, segments)
+            candidates.append((seg["start"], end_ext, s, seg["text"][:70]))
     if candidates:
-        best = max(candidates, key=lambda x: (x[1], -x[0]))  # mejor score, después más temprano
-        return best[0], best[2]
-    # Fallback: segundo 60 (1 min)
-    return 60.0, "(fallback, sin keywords detectadas)"
+        best = max(candidates, key=lambda x: (x[2], -x[0]))  # mejor score, después más temprano
+        return best[0], best[1], best[3]
+    # Fallback: segundo 60 (1 min) — sin segmento, devuelve start=end+3s para que cut use min duration
+    return 60.0, 63.0, "(fallback, sin keywords detectadas)"
 
 
 def find_center_highlights(segments: list[dict], video_duration: float,
-                            n: int) -> list[tuple[float, str]]:
-    """Top N segmentos por score entre 1/3 y 2/3 del video."""
+                            n: int) -> list[tuple[float, float, str]]:
+    """Top N segmentos por score entre 1/3 y 2/3 del video.
+
+    Devuelve lista de (start, end, text). end viene extendido si la frase no cierra.
+    """
     start_t = video_duration / 3.0
     end_t = video_duration * 2.0 / 3.0
     scored = []
@@ -286,23 +330,24 @@ def find_center_highlights(segments: list[dict], video_duration: float,
             continue
         s = _score(seg["text"], KEYWORDS_HIGHLIGHT)
         if s > 0:
-            scored.append((seg["start"], s, seg["text"][:70]))
-    scored.sort(key=lambda x: -x[1])
+            end_ext = _extend_to_next_segment(seg, segments)
+            scored.append((seg["start"], end_ext, s, seg["text"][:70]))
+    scored.sort(key=lambda x: -x[2])
 
     # Tomar top N y ordenar cronológicamente
     top = sorted(scored[:n], key=lambda x: x[0])
 
-    # Si no encontramos N, rellenar con puntos uniformes
+    # Si no encontramos N, rellenar con puntos uniformes (start=fallback_t, end=fallback_t+3)
     while len(top) < n:
         step = (end_t - start_t) / (n + 1)
         fallback_t = start_t + step * (len(top) + 1)
-        top.append((fallback_t, 0, "(fallback)"))
+        top.append((fallback_t, fallback_t + 3.0, 0, "(fallback)"))
         top.sort(key=lambda x: x[0])
 
-    return [(t[0], t[2]) for t in top]
+    return [(t[0], t[1], t[3]) for t in top]
 
 
-def find_farewell(segments: list[dict], video_duration: float) -> tuple[float, str]:
+def find_farewell(segments: list[dict], video_duration: float) -> tuple[float, float, str]:
     """Detecta despedida ('vemos', 'apóyenos', 'chiquillos', etc) en últimos 90s."""
     cutoff = max(0.0, video_duration - 90.0)
     candidates = []
@@ -312,20 +357,24 @@ def find_farewell(segments: list[dict], video_duration: float) -> tuple[float, s
         text_low = seg["text"].lower()
         for kw in FAREWELL_KEYWORDS:
             if kw in text_low:
-                candidates.append((seg["start"], seg["text"][:70], kw))
+                end_ext = _extend_to_next_segment(seg, segments)
+                candidates.append((seg["start"], end_ext, seg["text"][:70], kw))
                 break
     if candidates:
         best = max(candidates, key=lambda x: x[0])
-        return best[0], best[1]
-    return max(0.0, video_duration - 5.0), "(fallback, sin keywords detectadas)"
+        return best[0], best[1], best[2]
+    fallback_start = max(0.0, video_duration - 5.0)
+    return fallback_start, min(video_duration, fallback_start + 3.0), "(fallback, sin keywords detectadas)"
 
 
 def find_climax(segments: list[dict], video_duration: float,
-                episode_type: str) -> tuple[float, str]:
+                episode_type: str) -> tuple[float, float, str]:
     """Detecta el clímax del episodio según su tipo.
 
     Busca en el último tercio del video usando las keywords del tipo.
     Si no encuentra, fallback al tipo 'generic' (despedida).
+
+    Devuelve (start, end, text). end viene extendido para no cortar reveals con numeros.
     """
     keywords = CLIMAX_KEYWORDS.get(episode_type, CLIMAX_KEYWORDS["generic"])
 
@@ -338,6 +387,10 @@ def find_climax(segments: list[dict], video_duration: float,
         cutoff_start = video_duration * 2.0 / 3.0
         cutoff_end = max(cutoff_start + 1, video_duration - 30.0)
 
+    # Tipos con reveals numericos: dar mas margen de extension (precio o valor)
+    PRICE_REVEAL_TYPES = {"top-precios", "archivo", "joyas", "ranking", "vs-mundo"}
+    max_extra = 3.5 if episode_type in PRICE_REVEAL_TYPES else 2.5
+
     candidates = []
     for seg in segments:
         if not (cutoff_start <= seg["start"] < cutoff_end):
@@ -345,7 +398,8 @@ def find_climax(segments: list[dict], video_duration: float,
         text_low = seg["text"].lower()
         for kw in keywords:
             if kw in text_low:
-                candidates.append((seg["start"], seg["text"][:80], kw))
+                end_ext = _extend_to_next_segment(seg, segments, max_extra=max_extra)
+                candidates.append((seg["start"], end_ext, seg["text"][:80], kw))
                 break
 
     if candidates:
@@ -355,7 +409,7 @@ def find_climax(segments: list[dict], video_duration: float,
         else:
             # Reveal narrativo: el primer match en el último tercio
             best = min(candidates, key=lambda x: x[0])
-        return best[0], best[1]
+        return best[0], best[1], best[2]
 
     # Sin match: intentar fallback al tipo 'generic' si no era genérico
     if episode_type != "generic":
@@ -363,18 +417,52 @@ def find_climax(segments: list[dict], video_duration: float,
         return find_climax(segments, video_duration, "generic")
 
     # Último fallback: últimos 5 seg del video
-    return max(0.0, video_duration - 5.0), "(fallback final, sin keywords)"
+    fallback_start = max(0.0, video_duration - 5.0)
+    return fallback_start, min(video_duration, fallback_start + 3.0), "(fallback final, sin keywords)"
 
 
 # ============================================================================
 # CUT + VERTICAL + CONCAT
 # ============================================================================
 
-def cut_and_verticalize(video: Path, start: float, duration: float,
+def plan_clip_window(seg_start: float, seg_end: float, video_duration: float,
+                      min_dur: float = 3.0, max_dur: float = 6.0,
+                      lead_in: float = 0.3, tail_pad: float = 0.7,
+                      prefer_end: bool = False) -> tuple[float, float]:
+    """Calcula la ventana de corte para que NO se corte la frase.
+
+    - Empieza un poco antes del segmento (lead_in) para no comer la primera silaba.
+    - Termina despues del segmento (tail_pad) para que cierre el numero/palabra.
+    - Si la duracion resultante es menor a min_dur, extiende por el final.
+    - Si es mayor a max_dur:
+        - prefer_end=True (climax): conserva el final (donde Koko revela el #1).
+        - prefer_end=False (inicio/centros): conserva el inicio (donde Whisper detecto la keyword).
+    """
+    clip_start = max(0.0, seg_start - lead_in)
+    clip_end = min(video_duration, seg_end + tail_pad)
+    duration = clip_end - clip_start
+
+    if duration < min_dur:
+        clip_end = min(video_duration, clip_start + min_dur)
+    elif duration > max_dur:
+        if prefer_end:
+            # Climax: preservar el final (reveal final)
+            clip_start = max(0.0, clip_end - max_dur)
+        else:
+            # Inicio/centros: preservar el inicio (donde estaba la keyword)
+            clip_end = min(video_duration, clip_start + max_dur)
+
+    return clip_start, clip_end
+
+
+def cut_and_verticalize(video: Path, start: float, end: float,
                          out: Path, ffmpeg: str) -> None:
     """Recorta y convierte directo a vertical 1080x1920 con blur background.
     Mantiene el audio original del master tal cual.
+
+    start, end: tiempos absolutos en el video master (en segundos).
     """
+    duration = end - start
     vertical_filter = (
         "[0:v]split=2[bg][fg];"
         f"[bg]scale={OUT_W}:{OUT_H}:force_original_aspect_ratio=increase,"
@@ -384,7 +472,7 @@ def cut_and_verticalize(video: Path, start: float, duration: float,
     )
     run([
         ffmpeg, "-y", "-ss", f"{start:.2f}", "-i", str(video),
-        "-t", f"{duration}",
+        "-t", f"{duration:.2f}",
         "-filter_complex", vertical_filter,
         "-map", "[vout]", "-map", "0:a?",
         "-c:v", "libx264", "-preset", "medium", "-crf", "18",
@@ -422,7 +510,11 @@ def main():
     parser.add_argument("--num-highlights", type=int, default=3,
                         help="Cantidad de clips del centro (default 3)")
     parser.add_argument("--clip-duration", type=float, default=3.0,
-                        help="Duración de cada clip en segundos (default 3.0)")
+                        help="Duración MINIMA de cada clip en segundos (default 3.0). El "
+                             "clip se extiende si la frase Whisper dura más, hasta el max.")
+    parser.add_argument("--max-clip-duration", type=float, default=6.0,
+                        help="Duración MAXIMA de cada clip en segundos (default 6.0). Evita "
+                             "clips eternos si Whisper detecta segmentos largos.")
     parser.add_argument("--model", default="small",
                         choices=["tiny", "base", "small", "medium", "large"],
                         help="Modelo Whisper (default small - mejor accuracy chileno que base)")
@@ -452,7 +544,6 @@ def main():
     output = out_dir / f"{args.slug}-tarroteaser-{date_tag}.mp4"
 
     total_clips = 1 + args.num_highlights + 1
-    total_duration = args.clip_duration * total_clips
 
     print(f"=== TARROTEASER ===")
     print(f"   video    : {video}")
@@ -460,7 +551,7 @@ def main():
     print(f"   tipo     : {ep_type}{' (auto-detectado)' if not args.ep_type else ' (forzado)'}")
     print(f"   duración : {duration:.1f}s ({duration/60:.1f} min)")
     print(f"   clips    : 1 inicio + {args.num_highlights} centro + 1 clímax = {total_clips} clips")
-    print(f"   por clip : {args.clip_duration}s · total: {total_duration:.0f}s")
+    print(f"   por clip : min {args.clip_duration:.1f}s · max {args.max_clip_duration:.1f}s (se ajusta a frase Whisper)")
     print(f"   modelo   : whisper-{args.model}")
     print(f"   output   : {output}")
 
@@ -476,26 +567,39 @@ def main():
 
         # 3. Detectar momentos
         print(f"\n[3/5] Detectando momentos...")
-        funny_t, funny_txt = find_funny_start(segments, duration)
-        print(f"   INICIO @ {funny_t:.1f}s: \"{funny_txt}\"")
+        funny_start, funny_end, funny_txt = find_funny_start(segments, duration)
+        print(f"   INICIO @ {funny_start:.1f}-{funny_end:.1f}s ({funny_end-funny_start:.1f}s): \"{funny_txt}\"")
 
         centers = find_center_highlights(segments, duration, args.num_highlights)
-        for i, (t, txt) in enumerate(centers):
-            print(f"   CENTRO {i+1} @ {t:.1f}s: \"{txt}\"")
+        for i, (s_t, e_t, txt) in enumerate(centers):
+            print(f"   CENTRO {i+1} @ {s_t:.1f}-{e_t:.1f}s ({e_t-s_t:.1f}s): \"{txt}\"")
 
-        climax_t, climax_txt = find_climax(segments, duration, ep_type)
-        print(f"   CLIMAX ({ep_type}) @ {climax_t:.1f}s: \"{climax_txt}\"")
+        climax_start, climax_end, climax_txt = find_climax(segments, duration, ep_type)
+        print(f"   CLIMAX ({ep_type}) @ {climax_start:.1f}-{climax_end:.1f}s ({climax_end-climax_start:.1f}s): \"{climax_txt}\"")
 
         # 4. Recortar + verticalizar
-        all_times = [funny_t] + [c[0] for c in centers] + [climax_t]
-        print(f"\n[4/5] Recortando y verticalizando {len(all_times)} clips...")
+        # ranges con flag prefer_end: solo el climax preserva final (resto preserva inicio)
+        all_ranges = (
+            [(funny_start, funny_end, False)]
+            + [(s, e, False) for s, e, _ in centers]
+            + [(climax_start, climax_end, True)]
+        )
+        print(f"\n[4/5] Recortando y verticalizando {len(all_ranges)} clips...")
         clip_paths = []
-        for i, start in enumerate(all_times):
-            # Centrar el clip ±duracion/2 alrededor del segmento detectado
-            start_adj = max(0.0, start - args.clip_duration / 2)
+        total_out_dur = 0.0
+        for i, (seg_s, seg_e, prefer_end) in enumerate(all_ranges):
+            # Planificar ventana: lead-in 0.3s + tail-pad 0.7s, ajustada a min/max
+            clip_s, clip_e = plan_clip_window(
+                seg_s, seg_e, duration,
+                min_dur=args.clip_duration,
+                max_dur=args.max_clip_duration,
+                prefer_end=prefer_end,
+            )
+            print(f"   clip {i:02d}: {clip_s:.2f} -> {clip_e:.2f}s ({clip_e-clip_s:.2f}s)")
             out = tmp_dir / f"clip_{i:02d}.mp4"
-            cut_and_verticalize(video, start_adj, args.clip_duration, out, ffmpeg)
+            cut_and_verticalize(video, clip_s, clip_e, out, ffmpeg)
             clip_paths.append(out)
+            total_out_dur += (clip_e - clip_s)
 
         # 5. Concat
         print(f"\n[5/5] Concatenando...")
@@ -504,7 +608,7 @@ def main():
     size_mb = output.stat().st_size / (1024 * 1024)
     print(f"\n=== LISTO ===")
     print(f"   Highlights crudos: {output}")
-    print(f"   Tamaño: {size_mb:.1f} MB · {total_duration:.0f}s")
+    print(f"   Tamaño: {size_mb:.1f} MB · {total_out_dur:.1f}s")
     print(f"   Audio: original del master · sin overlays · sin música agregada")
     print(f"   Importalo en DaVinci y agregale intro + outro + lower-thirds a tu gusto.")
 
