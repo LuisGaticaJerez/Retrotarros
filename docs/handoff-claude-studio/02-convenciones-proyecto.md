@@ -97,6 +97,17 @@ Si Luis señala que sono argentino:
 
 **Excepcion:** los textos para TTS de TarroBot SI llevan tildes (para que el sintetizador pronuncie bien). Pero TarroBot es proyecto aparte, lo aclaro por completitud.
 
+## TarroVisiones · Reglas inmutables
+
+**Las TarroVisiones siempre van VACIAS en los HTMLs del canal.**
+
+- El `tv-noscreen` debe ser un div vacio: `<div class="tv-noscreen"></div>`.
+- NO usar placeholders tipo `JOYA 1`, `PANEO PLATAFORMAS`, `gameplay aqui`, `Insertar video paneo camara`, etc.
+- El texto guia para edicion en DaVinci es el `tv-namebox` que va DEBAJO de la TarroVision (titulo del juego + año + editor).
+- Esto aplica a slides paneo (TV grande) y slides triple (3 TarroVisiones lado a lado).
+
+Razon: en la edicion se superpone gameplay real sobre la TV. Si el HTML trae texto adentro, queda asomando por los bordes del clip y obliga a reencuadrar. Vacia + namebox abajo = workflow limpio.
+
 ## Git workflow
 
 ### Quien hace que

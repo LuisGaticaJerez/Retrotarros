@@ -195,12 +195,10 @@ Detalles importantes:
   </div>
   <div class="tv-screen">
     <div class="tv-screen-inner">
-      <!-- Modo placeholder -->
-      <div class="tv-noscreen">
-        <div class="tv-noscreen-big">JOYA 1</div>
-        <div class="tv-noscreen-sub">gameplay aqui</div>
-      </div>
-      <!-- O reemplazar por video real:
+      <!-- REGLA: las TarroVisiones siempre quedan VACIAS en el HTML del canal.
+           El namebox de abajo (tv-namebox) es el unico texto guia para edicion. -->
+      <div class="tv-noscreen"></div>
+      <!-- O reemplazar por video real (solo si se renderiza con video embebido):
       <video src="../assets/{slug}/super-mario-world.mp4" autoplay loop muted></video>
       -->
     </div>
