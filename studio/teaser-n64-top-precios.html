@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · TEASER · EP04 N64 mas caros</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 80% 40% at 50% -5%, rgba(255,46,136,.18) 0%, transparent 65%),
+    radial-gradient(ellipse 80% 40% at 50% 105%, rgba(0,229,255,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+/* ── HEADER barra superior ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 90px;
+  z-index: 200;
+  background: rgba(6, 3, 15, 0.97);
+  border-bottom: 3px solid var(--mg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+}
+.hdr-logo {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 30px;
+  color: var(--mg);
+  text-shadow: 0 0 18px rgba(255,46,136,.7);
+  letter-spacing: 4px;
+}
+.hdr-tag {
+  font-family: 'Share Tech Mono';
+  font-size: 16px;
+  color: var(--ye);
+  letter-spacing: 4px;
+}
+.hdr-rec {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Press Start 2P';
+  font-size: 12px;
+  color: var(--mg);
+}
+.dot {
+  width: 14px; height: 14px;
+  background: var(--mg);
+  border-radius: 50%;
+  animation: blink 1.2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+/* ── FOOTER barra inferior ── */
+footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 90px;
+  background: rgba(6, 3, 15, 0.97);
+  border-top: 3px solid var(--cy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+.ftr-tag {
+  font-family: 'Press Start 2P';
+  font-size: 14px;
+  color: var(--cy);
+  letter-spacing: 5px;
+  text-shadow: 0 0 12px rgba(0,229,255,.5);
+}
+
+/* ── DECK ── */
+.deck {
+  position: fixed;
+  top: 90px; left: 0; right: 0; bottom: 90px;
+  overflow: hidden;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: 60px 60px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.slide-num {
+  position: absolute;
+  top: 28px;
+  right: 36px;
+  font-family: 'Press Start 2P';
+  font-size: 14px;
+  color: rgba(255,255,255,.28);
+  letter-spacing: 3px;
+}
+
+/* ───────── 01 HOOK ───────── */
+.hook {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0 30px;
+}
+.hook .ep-badge {
+  font-family: 'Press Start 2P';
+  font-size: 18px;
+  color: var(--ye);
+  letter-spacing: 6px;
+  padding: 14px 26px;
+  border: 2px solid var(--ye);
+  background: rgba(255,210,63,.06);
+  margin-bottom: 60px;
+}
+.hook .pre {
+  font-family: 'Press Start 2P';
+  font-size: 22px;
+  color: var(--cy);
+  letter-spacing: 5px;
+  margin-bottom: 36px;
+}
+.hook .big {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 118px;
+  line-height: .98;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 36px;
+}
+.hook .big .mg { color: var(--mg); text-shadow: 0 0 28px rgba(255,46,136,.7); }
+.hook .big .cy { color: var(--cy); text-shadow: 0 0 28px rgba(0,229,255,.55); }
+.hook .sub {
+  font-family: 'Share Tech Mono';
+  font-size: 30px;
+  color: var(--bo);
+  letter-spacing: 4px;
+  margin-bottom: 50px;
+}
+.hook .strike-row {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 30px;
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 72px;
+  letter-spacing: 2px;
+}
+.hook .strike-row .item {
+  position: relative;
+  display: inline-block;
+  color: rgba(255,255,255,.45);
+}
+.hook .strike-row .item::after {
+  content: "";
+  position: absolute;
+  left: -10px; right: -10px;
+  top: 50%;
+  height: 6px;
+  background: var(--mg);
+  transform: translateY(-50%) rotate(-3deg);
+  box-shadow: 0 0 16px rgba(255,46,136,.6);
+}
+
+/* ───────── 02 PRICE BOMB ───────── */
+.bomb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0 30px;
+}
+.bomb .pre {
+  font-family: 'Press Start 2P';
+  font-size: 22px;
+  color: var(--mg);
+  letter-spacing: 5px;
+  margin-bottom: 30px;
+}
+.bomb .juego {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 78px;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 14px;
+  letter-spacing: 1.5px;
+}
+.bomb .juego .sub-num {
+  font-family: 'Share Tech Mono';
+  font-size: 34px;
+  color: rgba(255,255,255,.55);
+  letter-spacing: 4px;
+  display: block;
+  margin-top: 12px;
+}
+.bomb .price-card {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 30px;
+  border: 3px solid var(--ye);
+  background: rgba(255,210,63,.06);
+  position: relative;
+  width: 90%;
+  max-width: 880px;
+}
+.bomb .price-card::before,
+.bomb .price-card::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--dk);
+  border: 3px solid var(--ye);
+}
+.bomb .price-card::before { top: -10px; left: -10px; }
+.bomb .price-card::after { bottom: -10px; right: -10px; }
+.bomb .price-card .lbl {
+  font-family: 'Press Start 2P';
+  font-size: 16px;
+  color: var(--ye);
+  letter-spacing: 5px;
+  margin-bottom: 18px;
+}
+.bomb .price-card .price {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 168px;
+  line-height: 1;
+  color: var(--ye);
+  text-shadow: 0 0 30px rgba(255,210,63,.55);
+  letter-spacing: 2px;
+}
+.bomb .price-card .meta {
+  margin-top: 16px;
+  font-family: 'Share Tech Mono';
+  font-size: 24px;
+  color: var(--bo);
+  letter-spacing: 4px;
+}
+.bomb .reason {
+  margin-top: 50px;
+  font-family: 'Share Tech Mono';
+  font-size: 28px;
+  color: rgba(255,255,255,.78);
+  letter-spacing: 2px;
+  max-width: 880px;
+  line-height: 1.5;
+}
+.bomb .reason .hl { color: var(--cy); }
+
+/* ───────── 03 SEALED RECORD ───────── */
+.sealed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0 30px;
+}
+.sealed .pre {
+  font-family: 'Press Start 2P';
+  font-size: 20px;
+  color: var(--cy);
+  letter-spacing: 6px;
+  margin-bottom: 30px;
+}
+.sealed .title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 92px;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+}
+.sealed .title .mg { color: var(--mg); text-shadow: 0 0 26px rgba(255,46,136,.65); }
+.sealed .megaprice {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 240px;
+  line-height: 1;
+  color: var(--mg);
+  text-shadow: 0 0 40px rgba(255,46,136,.7);
+  letter-spacing: 3px;
+  margin: 36px 0;
+}
+.sealed .megaprice .small {
+  font-size: 64px;
+  vertical-align: top;
+  margin-right: 8px;
+  color: rgba(255,46,136,.7);
+}
+.sealed .stamp {
+  margin-top: 30px;
+  display: inline-block;
+  font-family: 'Press Start 2P';
+  font-size: 20px;
+  color: var(--dk);
+  background: var(--ye);
+  padding: 18px 32px;
+  letter-spacing: 4px;
+  transform: rotate(-3deg);
+  box-shadow: 0 0 20px rgba(255,210,63,.5);
+}
+.sealed .reason {
+  margin-top: 50px;
+  font-family: 'Share Tech Mono';
+  font-size: 28px;
+  color: rgba(255,255,255,.78);
+  letter-spacing: 2px;
+  max-width: 880px;
+  line-height: 1.55;
+}
+
+/* ───────── 04 TOP 5 LIST ───────── */
+.top-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 30px 30px 0;
+}
+.top-list .pre {
+  font-family: 'Press Start 2P';
+  font-size: 20px;
+  color: var(--mg);
+  letter-spacing: 5px;
+  margin-bottom: 16px;
+}
+.top-list h2 {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 74px;
+  color: #fff;
+  letter-spacing: 1.5px;
+  margin-bottom: 40px;
+  text-align: center;
+  line-height: 1;
+}
+.top-list h2 .cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.55); }
+.top-list .grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.top-list .row {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  align-items: center;
+  gap: 24px;
+  padding: 22px 28px;
+  background: rgba(255,255,255,.04);
+  border-left: 6px solid var(--mg);
+}
+.top-list .row .pos {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 62px;
+  color: var(--mg);
+  text-shadow: 0 0 16px rgba(255,46,136,.5);
+  line-height: 1;
+}
+.top-list .row .juego {
+  font-family: 'Share Tech Mono';
+  font-size: 30px;
+  color: #fff;
+  letter-spacing: 1px;
+  line-height: 1.15;
+}
+.top-list .row .juego .meta {
+  display: block;
+  font-size: 18px;
+  color: rgba(255,255,255,.45);
+  letter-spacing: 3px;
+  margin-top: 6px;
+}
+.top-list .row .price {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 44px;
+  color: var(--ye);
+  letter-spacing: 1px;
+}
+.top-list .row.top1 { border-left-color: var(--ye); }
+.top-list .row.top1 .pos { color: var(--ye); text-shadow: 0 0 16px rgba(255,210,63,.55); }
+.top-list .footer-note {
+  margin-top: 30px;
+  font-family: 'Press Start 2P';
+  font-size: 16px;
+  color: var(--cy);
+  letter-spacing: 4px;
+  text-align: center;
+}
+
+/* ───────── 05 KICKER NFR ───────── */
+.kicker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0 30px;
+}
+.kicker .warn {
+  font-family: 'Press Start 2P';
+  font-size: 22px;
+  color: var(--mg);
+  letter-spacing: 6px;
+  padding: 14px 24px;
+  border: 2px solid var(--mg);
+  background: rgba(255,46,136,.06);
+  margin-bottom: 50px;
+  animation: blink 1.5s ease-in-out infinite;
+}
+.kicker h2 {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: 1.5px;
+  margin-bottom: 30px;
+}
+.kicker h2 .gray { color: rgba(255,255,255,.55); }
+.kicker .price-mega {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 220px;
+  line-height: 1;
+  color: var(--mg);
+  text-shadow: 0 0 38px rgba(255,46,136,.7);
+  margin: 30px 0;
+}
+.kicker .price-mega .small {
+  font-size: 56px;
+  vertical-align: top;
+  margin-right: 8px;
+  color: rgba(255,46,136,.7);
+}
+.kicker .meta {
+  font-family: 'Share Tech Mono';
+  font-size: 28px;
+  color: var(--cy);
+  letter-spacing: 4px;
+  margin-top: 24px;
+}
+.kicker .punch {
+  margin-top: 50px;
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 56px;
+  line-height: 1.1;
+  color: var(--ye);
+  letter-spacing: 1.5px;
+}
+
+/* ───────── 06 CTA ───────── */
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0 30px;
+}
+.cta .ep {
+  font-family: 'Press Start 2P';
+  font-size: 26px;
+  color: var(--ye);
+  letter-spacing: 8px;
+  padding: 18px 32px;
+  border: 3px solid var(--ye);
+  background: rgba(255,210,63,.08);
+  margin-bottom: 60px;
+}
+.cta .title {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 104px;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+.cta .title .mg { color: var(--mg); text-shadow: 0 0 30px rgba(255,46,136,.7); }
+.cta .title .cy { color: var(--cy); text-shadow: 0 0 30px rgba(0,229,255,.55); }
+.cta .sub {
+  font-family: 'Share Tech Mono';
+  font-size: 32px;
+  color: rgba(255,255,255,.75);
+  letter-spacing: 4px;
+  margin-bottom: 60px;
+  max-width: 880px;
+  line-height: 1.4;
+}
+.cta .now {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 86px;
+  color: var(--mg);
+  letter-spacing: 4px;
+  text-shadow: 0 0 28px rgba(255,46,136,.65);
+  margin-bottom: 50px;
+  animation: blink 1.5s ease-in-out infinite;
+}
+.cta .btn-row {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  margin-top: 20px;
+}
+.cta .btn {
+  font-family: 'Press Start 2P';
+  font-size: 26px;
+  letter-spacing: 5px;
+  padding: 26px 50px;
+  border: 3px solid var(--cy);
+  color: var(--cy);
+  background: rgba(0,229,255,.06);
+}
+.cta .btn.mg { border-color: var(--mg); color: var(--mg); background: rgba(255,46,136,.06); }
+.cta .hint {
+  margin-top: 40px;
+  font-family: 'Share Tech Mono';
+  font-size: 22px;
+  color: rgba(255,255,255,.45);
+  letter-spacing: 3px;
+}
+
+/* ── NAV (no se captura, solo para preview) ── */
+nav.nav-bar {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 300;
+  background: rgba(6, 3, 15, 0.85);
+  border: 1px solid rgba(255,255,255,.15);
+  padding: 8px 14px;
+  border-radius: 4px;
+}
+nav.nav-bar button {
+  background: transparent;
+  border: 1px solid var(--cy);
+  color: var(--cy);
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  padding: 8px 14px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+nav.nav-bar .counter {
+  color: var(--mg);
+  font-family: 'Press Start 2P';
+  font-size: 10px;
+  align-self: center;
+  margin: 0 8px;
+  letter-spacing: 2px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">TEASER · EP 04</div>
+  <div class="hdr-rec"><div class="dot"></div>ON AIR</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 HOOK -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="hook">
+      <div class="ep-badge">EP 04 · N64</div>
+      <div class="pre">EL N64 MAS CARO</div>
+      <div class="big">NO ES <span class="mg">MARIO</span></div>
+      <div class="big" style="font-size:104px;">NO ES <span class="cy">ZELDA</span></div>
+      <div class="sub">ES UN CARTUCHO QUE NADIE JUGO</div>
+    </div>
+  </section>
+
+  <!-- 02 PRICE BOMB · ClayFighter -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="bomb">
+      <div class="pre">TOP 1 · MERCADO</div>
+      <div class="juego">CLAYFIGHTER<br>63 1/3<span class="sub-num">SCULPTORS CUT · 1998</span></div>
+      <div class="price-card">
+        <div class="lbl">CIB · MAYO 2026</div>
+        <div class="price">$4,800</div>
+        <div class="meta">DOLARES · CARTUCHO COMPLETO</div>
+      </div>
+      <div class="reason">Solo se vendio en <span class="hl">Blockbuster</span>. Cuando cerraron las tiendas, casi todos se perdieron.</div>
+    </div>
+  </section>
+
+  <!-- 03 SEALED RECORD -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="sealed">
+      <div class="pre">PERO ESPERA</div>
+      <div class="title">EL <span class="mg">SEALED</span> CERRO EN</div>
+      <div class="megaprice"><span class="small">USD</span>9,199</div>
+      <div class="stamp">RECORD MUNDIAL N64</div>
+      <div class="reason">La subasta mas alta jamas registrada por un cartucho retail de Nintendo 64.</div>
+    </div>
+  </section>
+
+  <!-- 04 TOP 5 RESUMIDO -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="top-list">
+      <div class="pre">TOP 5 · CIB MAYO 2026</div>
+      <h2>NADIE LOS <span class="cy">CONOCE</span></h2>
+      <div class="grid">
+        <div class="row top1">
+          <div class="pos">#1</div>
+          <div class="juego">CLAYFIGHTER 63 1/3<span class="meta">SCULPTORS CUT · BLOCKBUSTER</span></div>
+          <div class="price">$4,800</div>
+        </div>
+        <div class="row">
+          <div class="pos">#2</div>
+          <div class="juego">STUNT RACER 64<span class="meta">BLOCKBUSTER EXCLUSIVE</span></div>
+          <div class="price">$2,300</div>
+        </div>
+        <div class="row">
+          <div class="pos">#3</div>
+          <div class="juego">SUPER BOWLING<span class="meta">THQ · TIRADA MINIMA</span></div>
+          <div class="price">$1,836</div>
+        </div>
+        <div class="row">
+          <div class="pos">#4</div>
+          <div class="juego">F1 RACING CHAMPIONSHIP<span class="meta">NTSC SOLO BRASIL</span></div>
+          <div class="price">$1,706</div>
+        </div>
+        <div class="row">
+          <div class="pos">#5</div>
+          <div class="juego">WORMS ARMAGEDDON<span class="meta">NTSC USA · LA PAL VALE $50</span></div>
+          <div class="price">$1,017</div>
+        </div>
+      </div>
+      <div class="footer-note">CERO MARIO · CERO ZELDA · CERO DK</div>
+    </div>
+  </section>
+
+  <!-- 05 KICKER NFR Majora -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="kicker">
+      <div class="warn">DATO BOMBA</div>
+      <h2>EL <span class="gray">CARTUCHO GRIS</span></h2>
+      <h2>DE MAJORA</h2>
+      <div class="price-mega"><span class="small">USD</span>8,500</div>
+      <div class="meta">NOT FOR RESALE · BETA · SOLO EMPLEADOS</div>
+      <div class="punch">UN CARTUCHO QUE JAMAS<br>SE VENDIO EN UNA TIENDA</div>
+    </div>
+  </section>
+
+  <!-- 06 CTA -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="cta">
+      <div class="ep">EP 04 · N64</div>
+      <div class="title">LOS <span class="mg">MAS CAROS</span></div>
+      <div class="title"><span class="cy">DEL N64</span></div>
+      <div class="sub">RANKING COMPLETO · NFR KICKER · LA COLECCION DE KOKO SOBRE LA MESA</div>
+      <div class="now">YA DISPONIBLE</div>
+      <div class="btn-row">
+        <div class="btn">▶ YOUTUBE / RETROTARROS</div>
+        <div class="btn mg">SUSCRIBETE PARA NO PERDER NINGUNO</div>
+      </div>
+      <div class="hint">PARTE 2 DE 2 · DESPUES DEL RANKING MUNDIAL</div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="ftr-tag">RETROTARROS · NOSTALGIA · JUEGOS · MUSICA</div>
+</footer>
+
+<nav class="nav-bar">
+  <button id="prevBtn">◀</button>
+  <div class="counter" id="counter">01 / 06</div>
+  <button id="nextBtn">▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+let current = 0;
+const total = slides.length;
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+}
+
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+
+go(0);
+</script>
+
+</body>
+</html>
