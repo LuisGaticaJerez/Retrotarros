@@ -108,6 +108,16 @@ Si Luis señala que sono argentino:
 
 Razon: en la edicion se superpone gameplay real sobre la TV. Si el HTML trae texto adentro, queda asomando por los bordes del clip y obliga a reencuadrar. Vacia + namebox abajo = workflow limpio.
 
+## Builds del paquete TarroBot Studio · Reglas
+
+**NO buildear el .exe / .zip durante la sesion, solo al cierre.**
+
+- Acumular TODOS los cambios del sprint (commits intermedios OK, push intermedio OK).
+- El build (`installers/tarrobot-studio/build-package.ps1`) corre **solo cuando Luis confirma cierre de sesion**.
+- Razon: el build pesa ~34 MB y demora 1-3 min entre comprimir + Inno Setup. Buildar entre iteraciones es desperdicio puro: si el sprint sigue, ese .exe ya quedo obsoleto.
+- Cuando cerremos: rebuild + release GitHub + sync Drive en una sola tanda.
+- Excepcion: si el cambio es CRITICO y necesita ir al estudio HOY (bug fix de produccion), buildear suelto previa confirmacion explicita.
+
 ## Git workflow
 
 ### Quien hace que
