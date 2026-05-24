@@ -12,11 +12,11 @@
 ; ─────────────────────────────────────────────────────────────────────
 
 #define MyAppName "TarroBot Studio"
-#define MyAppVersion "1.4.0"
+#define MyAppVersion "1.5.0"
 #define MyAppPublisher "Retrotarros - Luis Gatica Jerez"
 #define MyAppURL "https://github.com/LuisGaticaJerez/Retrotarros"
 #define MyAppExeName "TarroBot.bat"
-#define MyAppMutex "TarroBotStudioMutex_1.4"
+#define MyAppMutex "TarroBotStudioMutex_1.5"
 
 [Setup]
 AppId={{A91F3D6B-7E2C-4E8F-9D2A-7C8F1B3D4E5F}

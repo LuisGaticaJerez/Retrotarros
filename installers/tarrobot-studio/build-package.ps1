@@ -18,7 +18,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$Version = "1.4.0"
+$Version = "1.5.0"
 $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RepoRoot = Resolve-Path (Join-Path $ScriptRoot "..\..")
 $DistDir = Join-Path $ScriptRoot "dist"

@@ -5,6 +5,91 @@ en GitHub Releases con ZIP + .exe firmados.
 
 ---
 
+## v1.5.0 · Sprint 18 · "OBS Assistant + CapCut Ready"
+
+**Fecha:** 2026-05-24
+**Nombre clave:** cierre del loop estudio
+
+TarroBot ahora optimiza tambien el setup y operacion de OBS, y entrega
+todo el episodio empaquetado para abrir en CapCut. Cinco capacidades nuevas:
+
+### A · OBS Healthcheck
+
+Card en panel que diagnostica OBS: version, canvas 1080p/60fps, escenas
+mapeadas, mic detectado, browser source TarroBot, directorio de grabacion.
+Cada item te dice exactamente que hacer si esta mal. Toggle AUTO refresca
+cada 30s.
+
+- **`scripts/obs_healthcheck.py`** (nuevo): 12+ checks con status
+  (ok/warn/error/skip) + instruccion de fix por item.
+- **`GET /api/obs/healthcheck`** endpoint.
+- Card UI 'OBS HEALTHCHECK' con items coloreados.
+
+### B · OBS Auto-setup escenas Retrotarros Standard
+
+Boton PREVIEW dry-run muestra que va a crear, APLICAR ejecuta. 9 escenas
+(intro, cam-cenital, cam-luis, cam-koko, tarrobot-full, closeup-cartucho,
+closeup-caja, transition, outro) + browser source TarroVision + text
+source lower-third. **Idempotente** — nunca sobreescribe lo existente.
+
+- **`scripts/obs_setup.py`** (nuevo): template + diff + apply.
+- **`POST /api/obs/setup-auto`** con flag `dry_run`.
+
+### C · Auto-record sincronizado con sesion
+
+Toggle "auto-record al cargar pauta" → cuando cargas pauta, OBS arranca
+grabacion automatica contra `recordings/<slug>/master-*.mp4`. La card
+TarroTeaser ahora **autollena el video_path** con ese master.
+
+Cierra el loop: pauta → grabacion → teaser sin tocar paths a mano.
+
+- **`scripts/obs_recorder.py`** (nuevo): start/stop/status + auto-record
+  in-memory toggle + busqueda del ultimo master por slug.
+- **5 endpoints** `/api/obs/recording/{status,start,stop,auto-toggle,last}`.
+- Hook en `queue_load` dispara StartRecord si auto-record on.
+
+### D · Lower-thirds dinamicos
+
+Toggle "auto-mostrar titulo al avanzar item" → cada NEXT en la pauta
+actualiza el text source `lower-third` en OBS con el tema del item actual
+(formato `TITULO - meta`). Tambien manual desde la card.
+
+- **`_set_lower_third()`** + **`_format_lower_third()`** en tarrobot-live.py.
+- **`POST /api/obs/lower-third`** (manual) + **`/auto-toggle`**.
+- Hook en `queue_next` dispara si toggle on.
+
+### E · CapCut Ready
+
+Boton PREPARAR empaqueta `recordings/<slug>/capcut-ready/` con todo:
+master OBS + teaser TarroTeaser + cartelas PNG + `descripcion.txt` +
+`README.txt` con orden exacto de import a CapCut.
+
+- **`scripts/capcut_ready.py`** (nuevo): empaquetado idempotente con
+  inventario de assets disponibles vs faltantes.
+- **`POST /api/capcut/preparar`** con flag `copy_videos` (default false,
+  apunta sin copiar para ahorrar disco).
+- Card UI 'CAPCUT READY' con boton abrir-carpeta nativo.
+
+### Distribuible
+
+- `installer.iss`: copia los 4 modulos nuevos + crea dir `{app}\recordings\`.
+- `build-package.ps1`: incluye los 4 modulos al armar paquete.
+- `sync-tarrobot-to-drive.ps1`: sincroniza los 4 modulos.
+- `.gitignore`: ignora `recordings/`, `studio/teasers/`, `studio/captures/`
+  (outputs locales del estudio).
+
+### Reglas nuevas
+
+- `docs/handoff-claude-studio/02-convenciones-proyecto.md`: regla nueva
+  documentada — NO buildear paquete .exe durante la sesion, solo al cierre.
+
+### Migracion desde v1.4.0
+
+Limpia. Si auto-setup detecta escenas existentes con los mismos nombres
+del template Standard, las respeta sin tocar.
+
+---
+
 ## v1.4.0 · Sprint 17 · "Retrotarros Studio Suite"
 
 **Fecha:** 2026-05-23
