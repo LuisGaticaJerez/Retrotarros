@@ -543,6 +543,13 @@ class OBSState:
         self.escena_previa: Optional[str] = None
         # Lock para serializar cambios de escena (evita carreras).
         self.lock = asyncio.Lock()
+        # Sprint 18 D1: lower-thirds dinamicos automaticos al avanzar item
+        # de la pauta. Default off para no romper sesiones existentes.
+        self.auto_lower_third: bool = False
+        # Nombre del Text Source en OBS que se usa como lower-third.
+        # Debe existir en alguna escena (creado por auto-setup B1 con nombre
+        # "lower-third"). Si no existe, los hooks fallan silenciosamente.
+        self.lower_third_source: str = "lower-third"
 
 
 obs_state = OBSState()
@@ -1123,6 +1130,210 @@ async def obs_status_endpoint():
     info["escena_previa"] = obs_state.escena_previa
     info["alias"] = obs.get_alias()
     return info
+
+
+@app.get("/api/obs/healthcheck")
+async def obs_healthcheck_endpoint():
+    """
+    Sprint 18 A1: Diagnostico de la configuracion OBS.
+
+    Corre una serie de checks via obs-websocket: version, canvas 1080p/60fps,
+    escenas mapeadas existen, mic detectado, browser source de TarroBot,
+    directorio de grabacion. Devuelve estado + instruccion de fix por check.
+
+    No modifica nada en OBS, solo lee.
+    """
+    from obs_healthcheck import run_healthcheck
+    client = obs.cliente() if obs.is_connected() else None
+    alias = obs.get_alias() or {}
+    result = await run_healthcheck(client, alias)
+    return result.to_dict()
+
+
+# ─── Sprint 18 E1-E2: CapCut Ready folder ──────────────────────────
+
+@app.post("/api/capcut/preparar")
+async def capcut_preparar_endpoint(payload: dict | None = None):
+    """Sprint 18 E2: empaqueta master + teaser + cartelas + descripcion para
+    abrir en CapCut. Body: {slug?: str, copy_videos?: bool}.
+
+    Si no se pasa slug, usa el de la pauta cargada.
+    copy_videos=true copia los MP4 (consume disco). Default false (apunta solo).
+    """
+    from capcut_ready import empaquetar
+    payload = payload or {}
+    slug = (payload.get("slug") or "").strip()
+    if not slug and queue.loaded():
+        slug = queue.slug
+    if not slug:
+        return JSONResponse({"error": "slug requerido"}, status_code=400)
+    copy_videos = bool(payload.get("copy_videos", False))
+    try:
+        r = await asyncio.to_thread(empaquetar, slug, copy_videos)
+    except Exception as e:
+        return JSONResponse({"error": f"empaquetado fallo: {e}"}, status_code=500)
+    return r
+
+
+# ─── Sprint 18 D1: lower-thirds dinamicos ──────────────────────────
+
+async def _set_lower_third(text: str) -> dict:
+    """Setea el texto del source 'lower-third' en OBS. Best-effort: si el
+    source no existe o OBS no responde, se ignora silencioso.
+    """
+    if not obs.is_connected():
+        return {"ok": False, "error": "OBS desconectado"}
+    source_name = obs_state.lower_third_source or "lower-third"
+    client = obs.cliente()
+    try:
+        # OBS text_ft2_source_v2 acepta el campo "text" en inputSettings
+        await client._request("SetInputSettings", {
+            "inputName": source_name,
+            "inputSettings": {"text": text or ""},
+            "overlay": True,
+        })
+        return {"ok": True, "source": source_name, "text": text}
+    except Exception as e:
+        return {"ok": False, "error": str(e), "source": source_name}
+
+
+@app.post("/api/obs/lower-third")
+async def obs_lower_third_endpoint(payload: dict):
+    """Sprint 18 D1: setea el texto del lower-third manualmente.
+
+    Body: {text: str} - usa string vacio para limpiar.
+    """
+    text = (payload or {}).get("text", "")
+    res = await _set_lower_third(str(text))
+    if not res.get("ok"):
+        return JSONResponse(res, status_code=400)
+    return res
+
+
+@app.post("/api/obs/lower-third/auto-toggle")
+async def obs_lower_third_auto_toggle(payload: dict | None = None):
+    """Sprint 18 D2: activa/desactiva el hook automatico al avanzar item."""
+    payload = payload or {}
+    on = bool(payload.get("on", not obs_state.auto_lower_third))
+    obs_state.auto_lower_third = on
+    return {"ok": True, "auto_lower_third": on, "source": obs_state.lower_third_source}
+
+
+def _format_lower_third(dato: dict) -> str:
+    """Formato canonico para el lower-third desde un dato de la pauta.
+
+    Ejemplo: 'CLAYFIGHTER 63 1/3 - SCULPTORS CUT · 1998'
+    Cae al campo 'tema' si no hay metadata estructurada.
+    """
+    if not dato:
+        return ""
+    tema = (dato.get("tema") or "").strip()
+    meta_bits = []
+    for k in ("anio", "ano", "year", "consola", "estudio"):
+        v = dato.get(k)
+        if v:
+            meta_bits.append(str(v))
+    if meta_bits:
+        return f"{tema} - {' · '.join(meta_bits)}"
+    return tema
+
+
+@app.get("/api/obs/recording/status")
+async def obs_recording_status_endpoint():
+    """Sprint 18 C1: estado de grabacion actual de OBS + flag auto-record."""
+    from obs_recorder import status as recorder_status
+    client = obs.cliente() if obs.is_connected() else None
+    return await recorder_status(client)
+
+
+@app.post("/api/obs/recording/start")
+async def obs_recording_start_endpoint(payload: dict | None = None):
+    """Sprint 18 C1: arranca grabacion OBS contra <repo>/recordings/<slug>/.
+
+    Body: {slug?: str} - si no se pasa, usa el slug de la pauta cargada.
+    """
+    from obs_recorder import start_recording
+    payload = payload or {}
+    slug = (payload.get("slug") or "").strip()
+    if not slug and queue.loaded():
+        slug = queue.slug
+    if not slug:
+        return JSONResponse({"error": "slug requerido (carga una pauta o pasalo en el body)"}, status_code=400)
+    if not obs.is_connected():
+        return JSONResponse({"error": "OBS desconectado"}, status_code=400)
+    res = await start_recording(obs.cliente(), slug)
+    if not res.get("ok"):
+        return JSONResponse(res, status_code=400)
+    return res
+
+
+@app.post("/api/obs/recording/stop")
+async def obs_recording_stop_endpoint():
+    """Sprint 18 C1: para la grabacion actual y captura el path generado."""
+    from obs_recorder import stop_recording
+    if not obs.is_connected():
+        return JSONResponse({"error": "OBS desconectado"}, status_code=400)
+    res = await stop_recording(obs.cliente())
+    if not res.get("ok"):
+        return JSONResponse(res, status_code=400)
+    return res
+
+
+@app.post("/api/obs/recording/auto-toggle")
+async def obs_recording_auto_toggle(payload: dict | None = None):
+    """Sprint 18 C1: activa/desactiva auto-record al cargar pauta.
+
+    Body: {on: bool}
+    """
+    from obs_recorder import set_auto_record, is_auto_record
+    payload = payload or {}
+    on = bool(payload.get("on", not is_auto_record()))
+    set_auto_record(on)
+    return {"ok": True, "auto_record": is_auto_record()}
+
+
+@app.get("/api/obs/recording/last")
+async def obs_recording_last(slug: str | None = None):
+    """Sprint 18 C2: devuelve el path del ultimo master grabado para un slug.
+
+    Si slug no se pasa, usa el de la pauta cargada. Para integracion con
+    TarroTeaser card (autorelleno del video_path).
+    """
+    from obs_recorder import last_recording_path
+    if not slug and queue.loaded():
+        slug = queue.slug
+    if not slug:
+        return {"ok": False, "error": "slug requerido"}
+    path = last_recording_path(slug)
+    return {"ok": True, "slug": slug, "path": path}
+
+
+@app.post("/api/obs/setup-auto")
+async def obs_setup_auto_endpoint(payload: dict | None = None):
+    """
+    Sprint 18 B2: Auto-setup escenas + sources del template Retrotarros Standard.
+
+    Body opcional:
+        dry_run (bool, default True): si True solo devuelve el plan sin
+            tocar OBS. Si False ejecuta los CreateScene + CreateInput.
+
+    Idempotente: nunca sobreescribe escenas o inputs ya existentes.
+
+    Respuesta:
+        - dry_run True: {dry_run: true, plan: {...}, would_create_scenes, would_create_inputs}
+        - dry_run False: {dry_run: false, created, skipped, errors, plan}
+    """
+    from obs_setup import apply_template
+    payload = payload or {}
+    dry_run = bool(payload.get("dry_run", True))
+    if not obs.is_connected():
+        return JSONResponse({"error": "OBS desconectado"}, status_code=400)
+    client = obs.cliente()
+    try:
+        result = await apply_template(client, dry_run=dry_run)
+    except Exception as e:
+        return JSONResponse({"error": f"fallo apply_template: {e}"}, status_code=500)
+    return result
 
 
 @app.post("/api/obs/escena")
@@ -3477,7 +3688,26 @@ async def queue_load(payload: dict):
         queue.reset_session()
 
     tracker.mark_input()
-    return {"ok": True, "status": queue.status()}
+
+    # Sprint 18 C1: si auto-record esta on y OBS conectado, arrancar grabacion
+    auto_rec_started = None
+    try:
+        from obs_recorder import is_auto_record, start_recording
+        if is_auto_record() and obs.is_connected():
+            auto_rec_started = await start_recording(obs.cliente(), queue.slug)
+            if auto_rec_started.get("ok"):
+                print(f"[auto-record] grabacion iniciada en {auto_rec_started.get('dir')}")
+                await manager.broadcast_live({
+                    "tipo": "obs-recording-started",
+                    "slug": queue.slug,
+                    "dir": auto_rec_started.get("dir"),
+                })
+            else:
+                print(f"[auto-record] no se pudo iniciar: {auto_rec_started.get('error')}")
+    except Exception as e:
+        print(f"[auto-record] hook fallo: {e}")
+
+    return {"ok": True, "status": queue.status(), "auto_record_started": auto_rec_started}
 
 
 @app.post("/api/queue/unload")
@@ -3511,6 +3741,12 @@ async def queue_next(payload: Optional[dict] = None):
         dato = queue.current_dato()
     tracker.mark_input()
     audio_url = await _reproducir_dato_de_cola(dato, payload.get("voz"))
+    # Sprint 18 D1: hook lower-third automatico (silent si falla)
+    if obs_state.auto_lower_third and obs.is_connected():
+        try:
+            await _set_lower_third(_format_lower_third(dato))
+        except Exception as e:
+            print(f"[lower-third] hook fallo: {e}")
     return {"ok": True, "indice": queue.indice, "dato": dato, "audio_url": audio_url}
 
 

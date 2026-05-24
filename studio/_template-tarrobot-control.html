@@ -489,6 +489,67 @@ select#queueSelect:focus { border-color: var(--ye); }
   </div>
 </div>
 
+<!-- OBS HEALTHCHECK (Sprint 18 A1-A2) -->
+<div class="card">
+  <h2>🩺 OBS HEALTHCHECK</h2>
+  <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:8px;">
+    Diagnostico de tu config OBS: escenas, audio, browser sources, grabacion.
+    Solo lee, no modifica nada. Te dice exacto que arreglar si algo no esta listo.
+  </div>
+  <div class="btn-row">
+    <button class="btn cy" onclick="obsHealthcheck()">▸ CHEQUEAR AHORA</button>
+    <button class="btn" id="obsHcAutoBtn" onclick="obsHealthcheckToggleAuto()">AUTO: OFF</button>
+  </div>
+  <div id="obsHcSummary" style="display:none; margin-top:8px; padding:6px 8px; border-radius:4px; font-size:11px;"></div>
+  <div id="obsHcList" style="margin-top:6px; font-size:11px;"></div>
+
+  <div style="margin-top:12px; padding-top:10px; border-top:1px solid rgba(255,255,255,.1);">
+    <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:6px;">
+      ⚙ AUTO-SETUP RETROTARROS STANDARD<br>
+      <span style="font-size:10px;">9 escenas + browser source TarroVision + lower-third. NO sobreescribe existentes.</span>
+    </div>
+    <div class="btn-row">
+      <button class="btn ye" onclick="obsSetupDryRun()">▸ PREVIEW (no toca nada)</button>
+      <button class="btn mg" onclick="obsSetupAplicar()">▸▸ APLICAR (crea lo que falta)</button>
+    </div>
+    <div id="obsSetupResult" style="margin-top:8px; font-size:11px;"></div>
+  </div>
+
+  <div style="margin-top:12px; padding-top:10px; border-top:1px solid rgba(255,255,255,.1);">
+    <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:6px;">
+      🔴 AUTO-RECORD<br>
+      <span style="font-size:10px;">Auto-arranca grabacion OBS al cargar pauta. Path: <code>recordings/&lt;slug&gt;/</code></span>
+    </div>
+    <div class="toggle-row">
+      <input type="checkbox" id="obsAutoRec" onchange="obsToggleAutoRec()">
+      <label for="obsAutoRec">Auto-record al cargar pauta</label>
+    </div>
+    <div class="btn-row" style="margin-top:6px;">
+      <button class="btn cy" onclick="obsRecStart()">● START REC</button>
+      <button class="btn mg" onclick="obsRecStop()">■ STOP REC</button>
+    </div>
+    <div id="obsRecStatus" style="margin-top:6px; font-size:11px; color:rgba(255,255,255,.65);"></div>
+  </div>
+
+  <div style="margin-top:12px; padding-top:10px; border-top:1px solid rgba(255,255,255,.1);">
+    <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:6px;">
+      📝 LOWER-THIRDS<br>
+      <span style="font-size:10px;">Muestra titulo del item actual en OBS (source <code>lower-third</code>).</span>
+    </div>
+    <div class="toggle-row">
+      <input type="checkbox" id="obsAutoLT" onchange="obsToggleAutoLT()">
+      <label for="obsAutoLT">Auto-mostrar titulo al avanzar item</label>
+    </div>
+    <div class="row-inline" style="margin-top:6px;">
+      <input type="text" id="obsLTText" placeholder="texto manual (ej: TITULO DEL JUEGO)" style="flex:3">
+      <button class="btn cy" onclick="obsLTSet()" style="flex:1">▸ MOSTRAR</button>
+    </div>
+    <div class="btn-row" style="margin-top:6px;">
+      <button class="btn" onclick="obsLTClear()">LIMPIAR</button>
+    </div>
+  </div>
+</div>
+
 <!-- RECETAS / SECUENCIAS (Sprint 10 C6) -->
 <div class="card">
   <h2>🎬 RECETAS · SECUENCIAS</h2>
@@ -801,6 +862,25 @@ select#queueSelect:focus { border-color: var(--ye); }
     <div style="font-size:10px; color:rgba(255,255,255,.45); margin-bottom:4px;">HISTORIAL · ULTIMOS TEASERS</div>
     <div id="teaserHistorial" style="font-size:11px; color:rgba(255,255,255,.65);"></div>
   </div>
+</div>
+
+<!-- CAPCUT READY (Sprint 18 E2) -->
+<div class="card">
+  <h2>🎞 CAPCUT READY</h2>
+  <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:8px;">
+    Empaqueta todo lo del episodio en una sola carpeta lista para arrastrar
+    a CapCut: master OBS + teaser + cartelas + descripcion + README con
+    orden de import. Termina en <code>recordings/&lt;slug&gt;/capcut-ready/</code>.
+  </div>
+  <input type="text" id="capcutSlug" placeholder="slug (vacio = pauta cargada)" autocomplete="off">
+  <div class="toggle-row" style="margin-top:6px;">
+    <input type="checkbox" id="capcutCopyVideos">
+    <label for="capcutCopyVideos">Copiar videos (consume MB, default solo apunta)</label>
+  </div>
+  <div class="btn-row" style="margin-top:6px;">
+    <button class="btn ye full" onclick="capcutPreparar()">▸ PREPARAR CARPETA CAPCUT</button>
+  </div>
+  <div id="capcutResult" style="margin-top:8px; font-size:11px;"></div>
 </div>
 
 <!-- QUIZ INTERACTIVO (Sprint 12 C5) -->
@@ -1195,6 +1275,216 @@ async function escuchando() {
   if (data && data.ok) logMsg('OK escuchando: "' + data.texto + '"', 'ok');
 }
 
+// ─── OBS HEALTHCHECK (Sprint 18 A1-A2) ───────────────────────────
+let obsHcAutoTimer = null;
+let obsHcAutoOn = false;
+
+async function obsHealthcheck() {
+  const summary = document.getElementById('obsHcSummary');
+  const list = document.getElementById('obsHcList');
+  list.innerHTML = '<em style="color:rgba(255,255,255,.4);">chequeando...</em>';
+  try {
+    const r = await fetch('/api/obs/healthcheck');
+    const d = await r.json();
+    if (!d || typeof d !== 'object') {
+      list.innerHTML = '<span style="color:rgba(255,80,80,.85);">error de respuesta</span>';
+      return;
+    }
+    const s = d.summary || {};
+    const overall = d.ok ? 'TODO OK' : (s.error > 0 ? `${s.error} ERROR` : 'CON WARNINGS');
+    const bg = d.ok ? 'rgba(80,255,80,.08)' : (s.error > 0 ? 'rgba(255,80,80,.08)' : 'rgba(255,210,63,.08)');
+    const col = d.ok ? 'rgba(80,255,80,.9)' : (s.error > 0 ? 'rgba(255,80,80,.9)' : 'rgba(255,210,63,.9)');
+    summary.style.display = 'block';
+    summary.style.background = bg;
+    summary.style.color = col;
+    summary.style.fontWeight = 'bold';
+    summary.textContent = overall + ` (ok:${s.ok || 0} warn:${s.warn || 0} error:${s.error || 0} skip:${s.skip || 0})`;
+
+    const ICONS = { ok: '✓', warn: '⚠', error: '✗', skip: '…' };
+    const COLORS = {
+      ok:    'rgba(80,255,80,.85)',
+      warn:  'rgba(255,210,63,.85)',
+      error: 'rgba(255,80,80,.85)',
+      skip:  'rgba(255,255,255,.35)',
+    };
+    list.innerHTML = (d.checks || []).map(c => {
+      const icon = ICONS[c.status] || '?';
+      const color = COLORS[c.status] || 'white';
+      const fix = c.fix && c.status !== 'ok' && c.status !== 'skip'
+        ? `<div style="margin-left:18px; color:rgba(255,255,255,.55); font-size:10px;">💡 ${escapeHtml(c.fix)}</div>`
+        : '';
+      return `<div style="padding:3px 0; color:${color};">
+        ${icon} <strong>${escapeHtml(c.label)}:</strong> ${escapeHtml(c.msg || '')}
+      </div>${fix}`;
+    }).join('');
+  } catch (e) {
+    list.innerHTML = '<span style="color:rgba(255,80,80,.85);">error: ' + (e.message || e) + '</span>';
+  }
+}
+
+function obsHealthcheckToggleAuto() {
+  obsHcAutoOn = !obsHcAutoOn;
+  document.getElementById('obsHcAutoBtn').textContent = 'AUTO: ' + (obsHcAutoOn ? 'ON' : 'OFF');
+  if (obsHcAutoTimer) { clearInterval(obsHcAutoTimer); obsHcAutoTimer = null; }
+  if (obsHcAutoOn) {
+    obsHealthcheck();
+    obsHcAutoTimer = setInterval(obsHealthcheck, 30000);
+  }
+}
+
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"]/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'
+  }[c]));
+}
+
+// ─── OBS AUTO-SETUP (Sprint 18 B2-B3) ────────────────────────────
+async function obsSetupDryRun() {
+  const out = document.getElementById('obsSetupResult');
+  out.innerHTML = '<em style="color:rgba(255,255,255,.4);">calculando plan...</em>';
+  try {
+    const r = await fetch('/api/obs/setup-auto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ dry_run: true }),
+    });
+    const d = await r.json();
+    if (!d || d.error) {
+      out.innerHTML = '<span style="color:rgba(255,80,80,.9);">' + escapeHtml(d?.error || 'error') + '</span>';
+      return;
+    }
+    const plan = d.plan || {};
+    const sc = plan.scenes_to_create || [];
+    const inp = plan.inputs_to_create || [];
+    const scExist = plan.scenes_existing || [];
+    const inpExist = plan.inputs_existing || [];
+    if (sc.length === 0 && inp.length === 0) {
+      out.innerHTML = '<span style="color:rgba(80,255,80,.9);">✓ Ya esta todo creado, nada que hacer</span>';
+      return;
+    }
+    let html = '<div style="color:rgba(255,210,63,.9); font-weight:bold;">Plan (dry-run):</div>';
+    if (sc.length) {
+      html += '<div style="color:rgba(255,255,255,.85); margin-top:4px;">Escenas a CREAR (' + sc.length + '):</div>';
+      html += '<ul style="margin:2px 0 0 18px; color:rgba(0,229,255,.85);">' +
+        sc.map(s => '<li>' + escapeHtml(s.name) + (s.description ? ' <span style="color:rgba(255,255,255,.4);">— ' + escapeHtml(s.description) + '</span>' : '') + '</li>').join('') +
+        '</ul>';
+    }
+    if (inp.length) {
+      html += '<div style="color:rgba(255,255,255,.85); margin-top:4px;">Inputs a CREAR (' + inp.length + '):</div>';
+      html += '<ul style="margin:2px 0 0 18px; color:rgba(0,229,255,.85);">' +
+        inp.map(i => '<li>' + escapeHtml(i.name) + ' <span style="color:rgba(255,255,255,.4);">(' + escapeHtml(i.kind) + ' → ' + escapeHtml(i.parent_scene || '?') + ')</span></li>').join('') +
+        '</ul>';
+    }
+    if (scExist.length || inpExist.length) {
+      html += '<div style="color:rgba(255,255,255,.4); margin-top:6px; font-size:10px;">Ya existentes (NO se tocan): ' +
+        (scExist.length + inpExist.length) + ' items</div>';
+    }
+    html += '<div style="margin-top:6px; color:rgba(255,255,255,.55);">Si te parece bien, dale al boton <strong>APLICAR</strong>.</div>';
+    out.innerHTML = html;
+  } catch (e) {
+    out.innerHTML = '<span style="color:rgba(255,80,80,.9);">error: ' + (e.message || e) + '</span>';
+  }
+}
+
+async function obsSetupAplicar() {
+  if (!confirm('Esto va a CREAR las escenas e inputs faltantes en OBS. Lo existente NO se toca. Continuar?')) return;
+  const out = document.getElementById('obsSetupResult');
+  out.innerHTML = '<em style="color:rgba(255,255,255,.4);">aplicando...</em>';
+  try {
+    const r = await fetch('/api/obs/setup-auto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ dry_run: false }),
+    });
+    const d = await r.json();
+    if (!d || d.error) {
+      out.innerHTML = '<span style="color:rgba(255,80,80,.9);">' + escapeHtml(d?.error || 'error') + '</span>';
+      return;
+    }
+    const c = d.created || {};
+    const e = d.errors || [];
+    let html = '<div style="color:rgba(80,255,80,.9); font-weight:bold;">✓ Setup aplicado</div>';
+    if (c.scenes?.length) html += '<div style="color:rgba(0,229,255,.85);">Escenas creadas: ' + c.scenes.map(escapeHtml).join(', ') + '</div>';
+    if (c.inputs?.length) html += '<div style="color:rgba(0,229,255,.85);">Inputs creados: ' + c.inputs.map(i => escapeHtml(i.name)).join(', ') + '</div>';
+    if (!c.scenes?.length && !c.inputs?.length) html += '<div style="color:rgba(255,255,255,.55);">Todo ya estaba creado, nada nuevo.</div>';
+    if (e.length) {
+      html += '<div style="color:rgba(255,80,80,.85); margin-top:4px;">Errores:</div>';
+      html += '<ul style="margin:2px 0 0 18px; color:rgba(255,80,80,.85);">' +
+        e.map(x => '<li>' + escapeHtml(x.target) + ': ' + escapeHtml(x.error) + '</li>').join('') +
+        '</ul>';
+    }
+    out.innerHTML = html;
+    logMsg('OBS auto-setup aplicado', 'ok');
+    // Re-correr healthcheck para reflejar el cambio
+    obsHealthcheck();
+  } catch (e) {
+    out.innerHTML = '<span style="color:rgba(255,80,80,.9);">error: ' + (e.message || e) + '</span>';
+  }
+}
+
+// ─── OBS AUTO-RECORD (Sprint 18 C1) ──────────────────────────────
+async function obsRecRefresh() {
+  try {
+    const r = await fetch('/api/obs/recording/status');
+    const d = await r.json();
+    document.getElementById('obsAutoRec').checked = !!d.auto_record;
+    const box = document.getElementById('obsRecStatus');
+    let html = '';
+    if (d.obs_recording) {
+      html = '<span style="color:rgba(255,80,80,.95);">● GRABANDO</span>';
+      if (d.timecode) html += ' · ' + escapeHtml(d.timecode);
+      if (d.obs_record_dir) html += '<br><span style="color:rgba(255,255,255,.45); font-size:10px;">' + escapeHtml(d.obs_record_dir) + '</span>';
+    } else {
+      html = '<span style="color:rgba(255,255,255,.4);">no grabando</span>';
+      if (d.last && d.last.output_path) {
+        html += '<br><span style="color:rgba(80,255,80,.7); font-size:10px;">ultimo: ' + escapeHtml(d.last.output_path) + '</span>';
+      }
+    }
+    box.innerHTML = html;
+  } catch (e) { /* silencio */ }
+}
+
+async function obsToggleAutoRec() {
+  const on = document.getElementById('obsAutoRec').checked;
+  await post('/api/obs/recording/auto-toggle', { on });
+  logMsg('auto-record ' + (on ? 'ON' : 'OFF'), 'ok');
+}
+
+async function obsRecStart() {
+  const r = await post('/api/obs/recording/start', {});
+  if (r && r.ok) logMsg('grabacion iniciada en ' + (r.dir || '?'), 'ok');
+  setTimeout(obsRecRefresh, 500);
+}
+
+async function obsRecStop() {
+  const r = await post('/api/obs/recording/stop', {});
+  if (r && r.ok) logMsg('grabacion detenida: ' + (r.output_path || '?'), 'ok');
+  setTimeout(obsRecRefresh, 500);
+}
+
+// Polling status cada 5s cuando OBS esta conectado
+setInterval(obsRecRefresh, 5000);
+setTimeout(obsRecRefresh, 1500);
+
+// ─── LOWER-THIRDS (Sprint 18 D1-D2) ──────────────────────────────
+async function obsToggleAutoLT() {
+  const on = document.getElementById('obsAutoLT').checked;
+  const r = await post('/api/obs/lower-third/auto-toggle', { on });
+  if (r && r.ok) logMsg('lower-third auto ' + (on ? 'ON' : 'OFF'), 'ok');
+}
+
+async function obsLTSet() {
+  const text = (document.getElementById('obsLTText').value || '').trim();
+  const r = await post('/api/obs/lower-third', { text });
+  if (r && r.ok) logMsg('lower-third: ' + text, 'ok');
+}
+
+async function obsLTClear() {
+  const r = await post('/api/obs/lower-third', { text: '' });
+  document.getElementById('obsLTText').value = '';
+  if (r && r.ok) logMsg('lower-third limpiado', 'ok');
+}
+
 // ─── CONTROL OBS (Sprint 9) ──────────────────────────────────────
 async function obsConectar() {
   const host = document.getElementById('obsHost').value.trim() || 'localhost';
@@ -1559,19 +1849,83 @@ async function teaserRegenerar() {
   await post('/api/teaser/generar', teaserLastParams);
 }
 
-// Auto-rellenar slug desde la pauta cargada cuando esta disponible
-function teaserAutofillSlug() {
+// Auto-rellenar slug desde la pauta cargada cuando esta disponible.
+// Sprint 18 C2: ademas autorellenar el video_path con el master grabado
+// por OBS para el slug actual (si existe en disco).
+async function teaserAutofillSlug() {
   try {
-    fetch('/api/queue/status').then(r => r.json()).then(d => {
-      const slugInput = document.getElementById('teaserSlug');
-      if (d && d.slug && !slugInput.value) slugInput.value = d.slug;
-    });
+    const qr = await fetch('/api/queue/status');
+    const q = await qr.json();
+    const slugInput = document.getElementById('teaserSlug');
+    const videoInput = document.getElementById('teaserVideo');
+    if (q && q.slug) {
+      if (!slugInput.value) slugInput.value = q.slug;
+      // Pedir el path del ultimo master grabado para ese slug
+      if (!videoInput.value) {
+        try {
+          const lr = await fetch('/api/obs/recording/last?slug=' + encodeURIComponent(q.slug));
+          const ld = await lr.json();
+          if (ld && ld.ok && ld.path) {
+            videoInput.value = ld.path;
+            videoInput.title = 'Auto-rellenado desde grabacion OBS reciente';
+          }
+        } catch (e) { /* silencio */ }
+      }
+    }
   } catch (e) { /* silencio */ }
 }
 
 // Boot: carga historial inicial + autofill slug
 setTimeout(() => { teaserCargarHistorial(); teaserAutofillSlug(); }, 1500);
 setInterval(teaserCargarHistorial, 30000);
+
+// ─── CAPCUT READY (Sprint 18 E2) ──────────────────────────────────
+async function capcutPreparar() {
+  const slug = (document.getElementById('capcutSlug').value || '').trim();
+  const copy_videos = document.getElementById('capcutCopyVideos').checked;
+  const out = document.getElementById('capcutResult');
+  out.innerHTML = '<em style="color:rgba(255,255,255,.4);">empaquetando...</em>';
+  const body = { copy_videos };
+  if (slug) body.slug = slug;
+  try {
+    const r = await fetch('/api/capcut/preparar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const d = await r.json();
+    if (!d || d.error) {
+      out.innerHTML = '<span style="color:rgba(255,80,80,.9);">' + escapeHtml(d?.error || 'error') + '</span>';
+      return;
+    }
+    const inv = d.inventory || {};
+    const files = inv.files || [];
+    const missing = inv.missing || [];
+    let html = '<div style="color:rgba(80,255,80,.9); font-weight:bold;">✓ Empaquetado</div>';
+    html += '<div style="color:rgba(255,255,255,.85); margin-top:4px;">' +
+      '<strong>Carpeta:</strong> <code>' + escapeHtml(d.out_dir) + '</code></div>';
+    html += '<div style="color:rgba(255,255,255,.65); margin-top:4px;">' +
+      files.length + ' archivos en la carpeta</div>';
+    if (missing.length) {
+      html += '<div style="color:rgba(255,210,63,.85); margin-top:6px;">Faltan:</div>';
+      html += '<ul style="margin:2px 0 0 18px; color:rgba(255,210,63,.85);">' +
+        missing.map(m => '<li>' + escapeHtml(m) + '</li>').join('') + '</ul>';
+    }
+    html += '<div class="btn-row" style="margin-top:6px;">';
+    html += '<button class="btn cy" onclick="capcutAbrirCarpeta(\'' + escapeHtml(d.out_dir) + '\')">📁 ABRIR CARPETA</button>';
+    html += '</div>';
+    out.innerHTML = html;
+    logMsg('capcut-ready listo: ' + d.out_dir, 'ok');
+  } catch (e) {
+    out.innerHTML = '<span style="color:rgba(255,80,80,.9);">error: ' + (e.message || e) + '</span>';
+  }
+}
+
+function capcutAbrirCarpeta(path) {
+  if (!path) return;
+  const url = 'file:///' + path.replace(/\\/g, '/');
+  window.open(url, '_blank');
+}
 
 // ─── QUIZ INTERACTIVO (Sprint 12 C5) ─────────────────────────────
 async function quizPregunta() {

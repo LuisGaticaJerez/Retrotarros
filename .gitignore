@@ -119,3 +119,9 @@ studio-panel/.env.bak
 # Memorias locales del studio-panel (cache de sesion claude code, no canonico)
 studio-panel/.remember/tmp/
 studio-panel/.remember/logs/
+
+# Sprint 17-18: grabaciones OBS auto-record + teasers generados + capcut-ready.
+# Son outputs locales del estudio, no versionables.
+recordings/
+studio/teasers/
+studio/captures/

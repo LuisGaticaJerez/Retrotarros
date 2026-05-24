@@ -75,6 +75,11 @@ Source: "..\..\scripts\tarroteaser.py";     DestDir: "{app}\scripts"; Flags: ign
 Source: "..\..\scripts\teaser_jobs.py";     DestDir: "{app}\scripts"; Flags: ignoreversion
 Source: "..\..\scripts\generate-teaser.py"; DestDir: "{app}\scripts"; Flags: ignoreversion skipifsourcedoesntexist
 Source: "..\..\scripts\capture-slides.py";  DestDir: "{app}\scripts"; Flags: ignoreversion skipifsourcedoesntexist
+; Sprint 18: OBS healthcheck + auto-setup + auto-record + lower-thirds + CapCut Ready
+Source: "..\..\scripts\obs_healthcheck.py"; DestDir: "{app}\scripts"; Flags: ignoreversion
+Source: "..\..\scripts\obs_setup.py";       DestDir: "{app}\scripts"; Flags: ignoreversion
+Source: "..\..\scripts\obs_recorder.py";    DestDir: "{app}\scripts"; Flags: ignoreversion
+Source: "..\..\scripts\capcut_ready.py";    DestDir: "{app}\scripts"; Flags: ignoreversion
 
 ; ───────── Templates HTML ─────────
 Source: "..\..\studio\_template-tarrobot-live.html";    DestDir: "{app}\studio"; Flags: ignoreversion
@@ -112,6 +117,8 @@ Name: "{app}\studio\shorts";  Flags: uninsneveruninstall
 Name: "{app}\studio\out";     Flags: uninsneveruninstall
 ; Sprint 17: directorio de salida default para TarroTeaser
 Name: "{app}\studio\teasers"; Flags: uninsneveruninstall
+; Sprint 18: directorio para grabaciones OBS auto-record + capcut-ready
+Name: "{app}\recordings"; Flags: uninsneveruninstall
 
 [Components]
 Name: "core"; Description: "TarroBot Studio (scripts, templates, DB) - REQUERIDO"; Types: full slim custom; Flags: fixed

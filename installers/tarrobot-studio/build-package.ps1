@@ -78,6 +78,11 @@ if (Test-Path (Join-Path $RepoRoot "scripts\generate-teaser.py")) {
 if (Test-Path (Join-Path $RepoRoot "scripts\capture-slides.py")) {
     Copy-Item (Join-Path $RepoRoot "scripts\capture-slides.py") -Destination (Join-Path $PackageDir "scripts\")
 }
+# Sprint 18: OBS Assistant + CapCut Ready
+Copy-Item (Join-Path $RepoRoot "scripts\obs_healthcheck.py") -Destination (Join-Path $PackageDir "scripts\")
+Copy-Item (Join-Path $RepoRoot "scripts\obs_setup.py") -Destination (Join-Path $PackageDir "scripts\")
+Copy-Item (Join-Path $RepoRoot "scripts\obs_recorder.py") -Destination (Join-Path $PackageDir "scripts\")
+Copy-Item (Join-Path $RepoRoot "scripts\capcut_ready.py") -Destination (Join-Path $PackageDir "scripts\")
 # Subcarpeta connectors (Twitch + Discord + YouTube)
 New-Item -ItemType Directory -Path (Join-Path $PackageDir "scripts\connectors") -Force | Out-Null
 Copy-Item (Join-Path $RepoRoot "scripts\connectors\*.py") -Destination (Join-Path $PackageDir "scripts\connectors\")

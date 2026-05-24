@@ -113,6 +113,11 @@ Sync-Item "scripts\tarroteaser.py"
 Sync-Item "scripts\teaser_jobs.py"
 Sync-Item "scripts\generate-teaser.py"
 Sync-Item "scripts\capture-slides.py"
+# Sprint 18: OBS healthcheck + auto-setup + auto-record + lower-thirds + CapCut Ready
+Sync-Item "scripts\obs_healthcheck.py"
+Sync-Item "scripts\obs_setup.py"
+Sync-Item "scripts\obs_recorder.py"
+Sync-Item "scripts\capcut_ready.py"
 Write-Host ""
 
 # 2. Templates HTML
