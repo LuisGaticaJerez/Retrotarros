@@ -70,6 +70,7 @@ import message_store
 import social_manager
 import llm_resolver  # Sprint 15: minimizar gasto LLM
 import auto_respond  # Sprint 16 B16.1: auto-respond toggle
+from teaser_jobs import TeaserJobManager  # Sprint 17: TarroTeaser via panel
 from connectors.twitch import TwitchConnector
 from connectors import discord_conn as discord_connector_mod
 from connectors import youtube as youtube_connector_mod
@@ -950,6 +951,12 @@ async def idle_worker():
                 print(f"[idle_worker] error broadcast: {e}")
 
 
+# Sprint 17: job manager de TarroTeaser. Se instancia aca (no en lifespan)
+# para que los endpoints definidos al modulo-level lo puedan referenciar.
+# El worker arranca en lifespan startup.
+teaser_jobs = TeaserJobManager()
+
+
 @asynccontextmanager
 async def lifespan(app):
     # Startup: lanzar el idle worker (async) y el hotkey worker (thread)
@@ -961,11 +968,19 @@ async def lifespan(app):
     social_manager.manager.set_ws_broadcast(manager.broadcast_live)
     # Sprint 16 B16.1: hook auto-respond
     social_manager.manager.set_auto_respond_handler(_auto_respond_handler)
+    # Sprint 17: arrancar el job worker de TarroTeaser
+    teaser_jobs.set_broadcast(manager.broadcast_live)
+    await teaser_jobs.start()
     # Inicializar SQLite (crea DB y schema si no existe)
     message_store.get_conn()
     yield
     # Shutdown: cancelar el async task. El thread es daemon -> muere al cerrar.
     task.cancel()
+    # Sprint 17: detener el worker de teasers
+    try:
+        await teaser_jobs.stop()
+    except Exception as e:
+        print(f"[lifespan] error teaser_jobs.stop: {e}")
     # Sprint 13: detener conectores activos limpiamente
     try:
         await social_manager.manager.shutdown()
@@ -2322,6 +2337,86 @@ async def episodio_exportar_descripcion(payload: Optional[dict] = None):
         "path": str(out_path),
         "data": result,
     }
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 17: TarroTeaser - genera Short vertical 1080x1920 desde master
+# ─────────────────────────────────────────────────────────────────────────
+
+@app.post("/api/teaser/generar")
+async def teaser_generar(payload: dict):
+    """
+    Encola un job de TarroTeaser.
+
+    Body:
+        video_path (str, requerido): ruta absoluta al MP4 master
+        slug (str, requerido): kebab-case del episodio (ej. n64-top-precios)
+        ep_type (str, opcional): forzar tipo (auto-detecta del slug si no)
+        num_highlights (int, default 3): clips del centro
+        clip_duration (float, default 3.0): duracion MIN del clip
+        max_clip_duration (float, default 6.0): duracion MAX del clip
+        model (str, default 'small'): modelo Whisper
+        out_dir (str, opcional): override directorio salida
+
+    Respuesta: {ok, job_id, queue_size}
+    El progreso se publica via WS con tipos:
+        teaser.queued / teaser.started / teaser.progress / teaser.done / teaser.error
+    """
+    payload = payload or {}
+    video_path = (payload.get("video_path") or "").strip()
+    slug = (payload.get("slug") or "").strip()
+    if not video_path or not slug:
+        return JSONResponse({"error": "video_path y slug son requeridos"}, status_code=400)
+
+    video = Path(video_path)
+    if not video.exists():
+        return JSONResponse({"error": f"video no existe: {video_path}"}, status_code=404)
+
+    # Validar slug kebab-case (defensa extra; tarroteaser tambien valida)
+    import re as _re
+    if not _re.match(r"^[a-z0-9-]+$", slug):
+        return JSONResponse({"error": "slug invalido (kebab-case requerido)"}, status_code=400)
+
+    params = {
+        k: payload.get(k)
+        for k in ("ep_type", "num_highlights", "clip_duration",
+                  "max_clip_duration", "model", "out_dir")
+        if payload.get(k) is not None
+    }
+    job_id = await teaser_jobs.submit(str(video.resolve()), slug, **params)
+    return {
+        "ok": True,
+        "job_id": job_id,
+        "queue_size": teaser_jobs._queue.qsize(),
+    }
+
+
+@app.get("/api/teaser/job/{job_id}")
+async def teaser_get_job(job_id: str):
+    """Devuelve el estado completo de un job de teaser."""
+    job = teaser_jobs.get(job_id)
+    if not job:
+        return JSONResponse({"error": "job no existe"}, status_code=404)
+    return {"ok": True, "job": job.to_dict()}
+
+
+@app.get("/api/teaser/list")
+async def teaser_list(limit: int = 20):
+    """Devuelve los ultimos N jobs (default 20) ordenados por created_at desc."""
+    return {
+        "ok": True,
+        "jobs": teaser_jobs.list_recent(limit=limit),
+        "current_job_id": teaser_jobs.current_job_id(),
+    }
+
+
+@app.post("/api/teaser/cancel/{job_id}")
+async def teaser_cancel(job_id: str):
+    """Cancela un job. Si esta corriendo, solo marca el flag (no detiene ffmpeg)."""
+    ok = await teaser_jobs.cancel(job_id)
+    if not ok:
+        return JSONResponse({"error": "no se pudo cancelar (no existe o ya termino)"}, status_code=400)
+    return {"ok": True, "job_id": job_id}
 
 
 # ─────────────────────────────────────────────────────────────────────────

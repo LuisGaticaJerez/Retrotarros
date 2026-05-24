@@ -12,11 +12,11 @@
 ; ─────────────────────────────────────────────────────────────────────
 
 #define MyAppName "TarroBot Studio"
-#define MyAppVersion "1.3.0"
+#define MyAppVersion "1.4.0"
 #define MyAppPublisher "Retrotarros - Luis Gatica Jerez"
 #define MyAppURL "https://github.com/LuisGaticaJerez/Retrotarros"
 #define MyAppExeName "TarroBot.bat"
-#define MyAppMutex "TarroBotStudioMutex_1.2"
+#define MyAppMutex "TarroBotStudioMutex_1.4"
 
 [Setup]
 AppId={{A91F3D6B-7E2C-4E8F-9D2A-7C8F1B3D4E5F}
@@ -70,6 +70,11 @@ Source: "..\..\scripts\llm_resolver.py";    DestDir: "{app}\scripts"; Flags: ign
 Source: "..\..\scripts\auto_respond.py";    DestDir: "{app}\scripts"; Flags: ignoreversion
 ; Connectors (Twitch + Discord + YouTube)
 Source: "..\..\scripts\connectors\*.py";    DestDir: "{app}\scripts\connectors"; Flags: ignoreversion recursesubdirs
+; Sprint 17: TarroTeaser + job manager + utilidades de captura (Retrotarros Studio Suite)
+Source: "..\..\scripts\tarroteaser.py";     DestDir: "{app}\scripts"; Flags: ignoreversion
+Source: "..\..\scripts\teaser_jobs.py";     DestDir: "{app}\scripts"; Flags: ignoreversion
+Source: "..\..\scripts\generate-teaser.py"; DestDir: "{app}\scripts"; Flags: ignoreversion skipifsourcedoesntexist
+Source: "..\..\scripts\capture-slides.py";  DestDir: "{app}\scripts"; Flags: ignoreversion skipifsourcedoesntexist
 
 ; ───────── Templates HTML ─────────
 Source: "..\..\studio\_template-tarrobot-live.html";    DestDir: "{app}\studio"; Flags: ignoreversion
@@ -96,6 +101,7 @@ Source: "bin\*"; DestDir: "{app}\bin"; Flags: ignoreversion skipifsourcedoesntex
 Source: "install.bat";          DestDir: "{app}"; Flags: ignoreversion
 Source: "TarroBot.bat";         DestDir: "{app}"; Flags: ignoreversion
 Source: "TarroBot-debug.bat";   DestDir: "{app}"; Flags: ignoreversion
+Source: "TarroBot-Teaser.bat";  DestDir: "{app}"; Flags: ignoreversion
 Source: "requirements.txt";     DestDir: "{app}"; Flags: ignoreversion
 Source: "README-ESTUDIO.txt";   DestDir: "{app}"; Flags: ignoreversion isreadme
 
@@ -104,6 +110,8 @@ Source: "README-ESTUDIO.txt";   DestDir: "{app}"; Flags: ignoreversion isreadme
 Name: "{app}\studio\exports"; Flags: uninsneveruninstall
 Name: "{app}\studio\shorts";  Flags: uninsneveruninstall
 Name: "{app}\studio\out";     Flags: uninsneveruninstall
+; Sprint 17: directorio de salida default para TarroTeaser
+Name: "{app}\studio\teasers"; Flags: uninsneveruninstall
 
 [Components]
 Name: "core"; Description: "TarroBot Studio (scripts, templates, DB) - REQUERIDO"; Types: full slim custom; Flags: fixed
@@ -117,6 +125,7 @@ Name: "custom"; Description: "Personalizada"; Flags: iscustom
 [Icons]
 Name: "{group}\TarroBot Studio"; Filename: "{app}\TarroBot.bat"; WorkingDir: "{app}"; IconFilename: "{sys}\shell32.dll"; IconIndex: 13
 Name: "{group}\TarroBot Debug (con logs)"; Filename: "{app}\TarroBot-debug.bat"; WorkingDir: "{app}"; IconFilename: "{sys}\shell32.dll"; IconIndex: 23
+Name: "{group}\TarroTeaser (genera Short vertical)"; Filename: "{app}\TarroBot-Teaser.bat"; WorkingDir: "{app}"; IconFilename: "{sys}\shell32.dll"; IconIndex: 137
 Name: "{group}\Carpeta del programa"; Filename: "{app}"
 Name: "{group}\Manual TarroBot (README)"; Filename: "{app}\README-ESTUDIO.txt"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"

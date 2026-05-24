@@ -736,6 +736,73 @@ select#queueSelect:focus { border-color: var(--ye); }
   <div id="exportPreview" style="display:none; margin-top:8px; font-size:11px; color:rgba(255,255,255,.85); line-height:1.6;"></div>
 </div>
 
+<!-- TARROTEASER (Sprint 17) -->
+<div class="card">
+  <h2>🎬 TARROTEASER · SHORT VERTICAL</h2>
+  <div style="font-size:11px; color:rgba(255,255,255,.55); margin-bottom:8px;">
+    Desde el master del episodio, genera un teaser 1080x1920 (~15-30s) con
+    los mejores momentos detectados por Whisper. Audio original sin overlays.
+    Guarda en <code>studio/teasers/&lt;slug&gt;/</code>. Importalo en CapCut
+    y agregale intro/outro.
+  </div>
+  <input type="text" id="teaserVideo" placeholder="Ruta absoluta al MP4 master (arrastrar y soltar OK)" autocomplete="off">
+  <div class="row-inline" style="margin-top:6px;">
+    <input type="text" id="teaserSlug" placeholder="slug del episodio (ej. n64-top-precios)" style="flex:2" autocomplete="off">
+    <button class="btn ye" onclick="teaserGenerar()" style="flex:1">▸ GENERAR</button>
+  </div>
+
+  <details style="margin-top:8px;">
+    <summary style="font-size:11px; color:rgba(255,255,255,.55); cursor:pointer;">⚙ Avanzado (clips, modelo Whisper)</summary>
+    <div style="margin-top:6px; padding:8px; background:rgba(255,255,255,.03); border-radius:4px;">
+      <div class="row-inline">
+        <div style="flex:1;">
+          <div style="font-size:10px; color:rgba(255,255,255,.55);">N highlights</div>
+          <input type="number" id="teaserNumHi" value="3" min="1" max="6">
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:10px; color:rgba(255,255,255,.55);">Clip MIN (s)</div>
+          <input type="number" id="teaserClipMin" value="3" min="1" max="10" step="0.5">
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:10px; color:rgba(255,255,255,.55);">Clip MAX (s)</div>
+          <input type="number" id="teaserClipMax" value="6" min="2" max="15" step="0.5">
+        </div>
+      </div>
+      <div style="margin-top:6px;">
+        <div style="font-size:10px; color:rgba(255,255,255,.55);">Modelo Whisper</div>
+        <select id="teaserModel">
+          <option value="tiny">tiny (75 MB, rapido, menos accuracy)</option>
+          <option value="base">base (140 MB)</option>
+          <option value="small" selected>small (244 MB, balance recomendado)</option>
+          <option value="medium">medium (770 MB, mejor pero lento)</option>
+        </select>
+      </div>
+    </div>
+  </details>
+
+  <div id="teaserStatus" style="display:none; margin-top:10px; padding:8px; background:rgba(0,229,255,.06); border-left:3px solid var(--cy); font-size:11px;">
+    <div id="teaserStatusMsg" style="color:var(--cy); font-weight:bold;">Encolado...</div>
+    <div style="margin-top:6px; height:8px; background:rgba(255,255,255,.08); border-radius:2px; overflow:hidden;">
+      <div id="teaserBar" style="height:100%; width:0%; background:linear-gradient(90deg, var(--mg), var(--cy)); transition:width .3s;"></div>
+    </div>
+    <div id="teaserStep" style="margin-top:4px; font-size:10px; color:rgba(255,255,255,.55);"></div>
+  </div>
+
+  <div id="teaserResult" style="display:none; margin-top:8px; padding:8px; background:rgba(255,210,63,.06); border-left:3px solid var(--ye); font-size:11px;">
+    <div style="color:var(--ye); font-weight:bold;">✓ LISTO</div>
+    <div id="teaserResultInfo" style="margin-top:4px; color:rgba(255,255,255,.85);"></div>
+    <div class="btn-row" style="margin-top:6px;">
+      <button class="btn cy" onclick="teaserAbrirCarpeta()">📁 ABRIR CARPETA</button>
+      <button class="btn" onclick="teaserRegenerar()">🔄 RE-GENERAR</button>
+    </div>
+  </div>
+
+  <div style="margin-top:10px;">
+    <div style="font-size:10px; color:rgba(255,255,255,.45); margin-bottom:4px;">HISTORIAL · ULTIMOS TEASERS</div>
+    <div id="teaserHistorial" style="font-size:11px; color:rgba(255,255,255,.65);"></div>
+  </div>
+</div>
+
 <!-- QUIZ INTERACTIVO (Sprint 12 C5) -->
 <div class="card">
   <h2>🎮 QUIZ TRIVIA</h2>
@@ -1367,6 +1434,145 @@ async function exportarDescripcion() {
   logMsg('descripcion exportada', 'ok');
 }
 
+// ─── TARROTEASER (Sprint 17) ──────────────────────────────────────
+// Maneja generacion de teaser desde la card. Escucha WS teaser.* para
+// progreso en vivo. Mantiene historial de los ultimos 5 teasers.
+
+let teaserCurrentJobId = null;
+let teaserLastParams = null;
+let teaserLastOutputDir = null;
+
+async function teaserGenerar() {
+  const video = document.getElementById('teaserVideo').value.trim();
+  const slug = document.getElementById('teaserSlug').value.trim();
+  if (!video) { alert('Falta ruta del video'); return; }
+  if (!slug) { alert('Falta slug del episodio'); return; }
+  if (!/^[a-z0-9-]+$/.test(slug)) {
+    alert('Slug invalido. Usa kebab-case (ej. n64-top-precios)');
+    return;
+  }
+
+  const body = {
+    video_path: video,
+    slug: slug,
+    num_highlights: parseInt(document.getElementById('teaserNumHi').value) || 3,
+    clip_duration: parseFloat(document.getElementById('teaserClipMin').value) || 3.0,
+    max_clip_duration: parseFloat(document.getElementById('teaserClipMax').value) || 6.0,
+    model: document.getElementById('teaserModel').value || 'small',
+  };
+  teaserLastParams = body;
+
+  const data = await post('/api/teaser/generar', body);
+  if (!data || !data.ok) return;
+
+  teaserCurrentJobId = data.job_id;
+  document.getElementById('teaserResult').style.display = 'none';
+  document.getElementById('teaserStatus').style.display = 'block';
+  document.getElementById('teaserStatusMsg').textContent = 'Encolado · job ' + data.job_id;
+  document.getElementById('teaserBar').style.width = '0%';
+  document.getElementById('teaserStep').textContent = 'esperando turno (queue=' + data.queue_size + ')';
+  logMsg('teaser encolado: ' + slug, 'ok');
+}
+
+function teaserHandleWSMessage(data) {
+  if (!data.tipo || data.tipo.indexOf('teaser.') !== 0) return;
+
+  // teaser.queued: solo loggear, ya lo manejamos en teaserGenerar
+  if (data.tipo === 'teaser.queued') return;
+
+  // Filtrar por job_id si tenemos uno activo (para no mezclar UI con jobs ajenos)
+  const jobId = data.job_id || (data.job && data.job.id);
+  if (teaserCurrentJobId && jobId && jobId !== teaserCurrentJobId) return;
+
+  const statusBox = document.getElementById('teaserStatus');
+  const statusMsg = document.getElementById('teaserStatusMsg');
+  const bar = document.getElementById('teaserBar');
+  const step = document.getElementById('teaserStep');
+
+  if (data.tipo === 'teaser.started') {
+    statusBox.style.display = 'block';
+    statusMsg.textContent = '▶ Procesando...';
+    bar.style.width = '5%';
+    step.textContent = 'arrancando';
+  } else if (data.tipo === 'teaser.progress') {
+    statusBox.style.display = 'block';
+    statusMsg.textContent = '▶ Procesando (' + data.progress + '%)';
+    bar.style.width = data.progress + '%';
+    step.textContent = '[' + data.step + '/' + data.total + '] ' + (data.msg || '');
+  } else if (data.tipo === 'teaser.done') {
+    statusBox.style.display = 'none';
+    const job = data.job || {};
+    teaserLastOutputDir = (job.output_path || '').replace(/[\\/][^\\/]+$/, '');
+    document.getElementById('teaserResult').style.display = 'block';
+    document.getElementById('teaserResultInfo').innerHTML =
+      '<code>' + (job.output_path || '?') + '</code><br>' +
+      job.size_mb + ' MB · ' + job.duration_s + 's · ' +
+      (job.num_clips || (job.clips || []).length) + ' clips · tipo ' + (job.ep_type || '?');
+    logMsg('teaser listo: ' + (job.output_path || ''), 'ok');
+    teaserCargarHistorial();
+  } else if (data.tipo === 'teaser.error') {
+    statusBox.style.display = 'none';
+    alert('TarroTeaser fallo: ' + (data.error || 'error desconocido'));
+    logMsg('teaser fallo: ' + (data.error || ''), 'err');
+  } else if (data.tipo === 'teaser.cancelled') {
+    statusBox.style.display = 'none';
+    logMsg('teaser cancelado', 'warn');
+  }
+}
+
+async function teaserCargarHistorial() {
+  try {
+    const r = await fetch('/api/teaser/list?limit=5');
+    const d = await r.json();
+    if (!d.ok) return;
+    const box = document.getElementById('teaserHistorial');
+    if (!d.jobs.length) {
+      box.innerHTML = '<em style="color:rgba(255,255,255,.4);">aun no hay teasers generados</em>';
+      return;
+    }
+    box.innerHTML = d.jobs.map(j => {
+      const time = new Date(j.created_at * 1000).toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'});
+      let icon = '⏳';
+      let color = 'rgba(255,255,255,.55)';
+      if (j.status === 'done') { icon = '✓'; color = 'rgba(80,255,80,.85)'; }
+      else if (j.status === 'error') { icon = '✗'; color = 'rgba(255,80,80,.85)'; }
+      else if (j.status === 'running') { icon = '▶'; color = 'rgba(0,229,255,.85)'; }
+      else if (j.status === 'cancelled') { icon = '⊘'; color = 'rgba(255,150,80,.65)'; }
+      return '<div style="padding:3px 0; color:' + color + ';">' +
+        icon + ' ' + time + ' · <strong>' + j.slug + '</strong>' +
+        (j.size_mb ? ' (' + j.size_mb + ' MB · ' + j.duration_s + 's)' : '') +
+        '</div>';
+    }).join('');
+  } catch (e) { /* silencio */ }
+}
+
+function teaserAbrirCarpeta() {
+  if (!teaserLastOutputDir) return;
+  // En Windows file:// con backslashes funciona en algunos browsers; mejor mostrar la ruta
+  // para que Luis la copie/pegue. Tambien intentamos abrirla.
+  const url = 'file:///' + teaserLastOutputDir.replace(/\\/g, '/');
+  window.open(url, '_blank');
+}
+
+async function teaserRegenerar() {
+  if (!teaserLastParams) return;
+  await post('/api/teaser/generar', teaserLastParams);
+}
+
+// Auto-rellenar slug desde la pauta cargada cuando esta disponible
+function teaserAutofillSlug() {
+  try {
+    fetch('/api/queue/status').then(r => r.json()).then(d => {
+      const slugInput = document.getElementById('teaserSlug');
+      if (d && d.slug && !slugInput.value) slugInput.value = d.slug;
+    });
+  } catch (e) { /* silencio */ }
+}
+
+// Boot: carga historial inicial + autofill slug
+setTimeout(() => { teaserCargarHistorial(); teaserAutofillSlug(); }, 1500);
+setInterval(teaserCargarHistorial, 30000);
+
 // ─── QUIZ INTERACTIVO (Sprint 12 C5) ─────────────────────────────
 async function quizPregunta() {
   const tema = document.getElementById('quizTema').value.trim();
@@ -1926,6 +2132,10 @@ function socConnectWS() {
       const data = JSON.parse(ev.data);
       if (data.tipo && data.tipo.indexOf('social-') === 0) {
         socHandleWSMessage(data);
+      }
+      // Sprint 17: eventos del job manager de TarroTeaser
+      if (data.tipo && data.tipo.indexOf('teaser.') === 0 && typeof teaserHandleWSMessage === 'function') {
+        teaserHandleWSMessage(data);
       }
     } catch (e) { /* ignorar mensajes no-JSON */ }
   };

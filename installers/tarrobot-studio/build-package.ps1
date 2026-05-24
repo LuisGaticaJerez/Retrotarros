@@ -18,7 +18,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$Version = "1.3.0"
+$Version = "1.4.0"
 $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RepoRoot = Resolve-Path (Join-Path $ScriptRoot "..\..")
 $DistDir = Join-Path $ScriptRoot "dist"
@@ -49,6 +49,8 @@ Write-Host "Copiando archivos del instalador..." -ForegroundColor Green
 Copy-Item (Join-Path $ScriptRoot "install.bat") -Destination $PackageDir
 Copy-Item (Join-Path $ScriptRoot "TarroBot.bat") -Destination $PackageDir
 Copy-Item (Join-Path $ScriptRoot "TarroBot-debug.bat") -Destination $PackageDir
+# Sprint 17: launcher CLI de TarroTeaser
+Copy-Item (Join-Path $ScriptRoot "TarroBot-Teaser.bat") -Destination $PackageDir
 Copy-Item (Join-Path $ScriptRoot "requirements.txt") -Destination $PackageDir
 Copy-Item (Join-Path $ScriptRoot "README-ESTUDIO.txt") -Destination $PackageDir
 
@@ -67,6 +69,15 @@ Copy-Item (Join-Path $RepoRoot "scripts\message_store.py") -Destination (Join-Pa
 Copy-Item (Join-Path $RepoRoot "scripts\social_manager.py") -Destination (Join-Path $PackageDir "scripts\")
 Copy-Item (Join-Path $RepoRoot "scripts\llm_resolver.py") -Destination (Join-Path $PackageDir "scripts\")
 Copy-Item (Join-Path $RepoRoot "scripts\auto_respond.py") -Destination (Join-Path $PackageDir "scripts\")
+# Sprint 17: TarroTeaser + utilidades de captura (Retrotarros Studio Suite)
+Copy-Item (Join-Path $RepoRoot "scripts\tarroteaser.py") -Destination (Join-Path $PackageDir "scripts\")
+Copy-Item (Join-Path $RepoRoot "scripts\teaser_jobs.py") -Destination (Join-Path $PackageDir "scripts\")
+if (Test-Path (Join-Path $RepoRoot "scripts\generate-teaser.py")) {
+    Copy-Item (Join-Path $RepoRoot "scripts\generate-teaser.py") -Destination (Join-Path $PackageDir "scripts\")
+}
+if (Test-Path (Join-Path $RepoRoot "scripts\capture-slides.py")) {
+    Copy-Item (Join-Path $RepoRoot "scripts\capture-slides.py") -Destination (Join-Path $PackageDir "scripts\")
+}
 # Subcarpeta connectors (Twitch + Discord + YouTube)
 New-Item -ItemType Directory -Path (Join-Path $PackageDir "scripts\connectors") -Force | Out-Null
 Copy-Item (Join-Path $RepoRoot "scripts\connectors\*.py") -Destination (Join-Path $PackageDir "scripts\connectors\")

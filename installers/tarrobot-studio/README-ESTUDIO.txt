@@ -599,6 +599,46 @@ PROBLEMAS COMUNES
      "Super Nintendo Soundfont" especifico.
 
 ============================================================
+TARROTEASER · GENERAR SHORTS DESDE EL MASTER (v1.4+)
+============================================================
+
+A partir de v1.4 podes generar teasers verticales (1080x1920) listos
+para YouTube Shorts / Reels / TikTok directamente desde el master del
+episodio. TarroTeaser usa Whisper para detectar los mejores momentos
+del video y los corta automaticamente.
+
+Tres formas de usarlo:
+
+1) DESDE EL MENU INICIO (lo mas comodo)
+   - Abri el Menu Inicio > TarroBot Studio > "TarroTeaser (genera Short vertical)"
+   - Te pide la ruta del MP4 (podes arrastrar el archivo sobre el bat)
+   - Te pide el slug del episodio (ej. n64-top-precios)
+   - Espera 5-10 min (Whisper transcribe + ffmpeg corta y verticaliza)
+   - Te abre la carpeta de salida al terminar
+
+2) DESDE EL PANEL CONTROL (web)
+   - Abri el panel control (mismo navegador donde manejas TarroBot)
+   - Busca la card "TARROTEASER · SHORT VERTICAL"
+   - Pega la ruta del MP4 + slug. Si tenes una pauta cargada, el slug
+     viene autollenado.
+   - Click GENERAR. La barra de progreso muestra Whisper transcribiendo,
+     deteccion de momentos, cortes, concatenacion.
+   - Al terminar te muestra link a la carpeta y boton re-generar.
+
+3) DESDE LA TERMINAL (control fino)
+   python scripts\tarroteaser.py <video.mp4> --slug <slug> [opciones]
+
+   Opciones:
+     --num-highlights N      cantidad de clips del centro (default 3)
+     --clip-duration N       duracion MIN del clip en seg (default 3)
+     --max-clip-duration N   duracion MAX del clip en seg (default 6)
+     --model small|medium    modelo Whisper (default small)
+     --type ranking|archivo|...   forzar tipo de episodio
+     --out-dir <ruta>        override directorio salida
+
+Output: studio\teasers\<slug>\<slug>-tarroteaser-YYYYMMDD.mp4
+
+============================================================
 ESPACIO EN DISCO
 ============================================================
 

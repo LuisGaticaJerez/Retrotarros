@@ -68,11 +68,47 @@ from pathlib import Path
 # ============================================================================
 # CONFIGURACIÓN
 # ============================================================================
+#
+# Sprint 17: paths resueltos en runtime, no hardcoded.
+#
+# Resolucion de REPO:
+#   1. env RETROTARROS_REPO (que setea install.bat del estudio)
+#   2. parent del directorio de este script (caso dev en repo)
+#
+# Resolucion del directorio de salida por defecto:
+#   1. env RETROTARROS_TEASER_OUT (override explicito)
+#   2. REPO/studio/teasers/<slug>/ (default, sincroniza con Drive si REPO esta
+#      en la carpeta sincronizada)
+#
+# WHISPER_CACHE_DIR vive bajo REPO/.cache/whisper/ para que el cache de
+# transcripciones se comparta entre runs en el mismo equipo.
 
-RECURSOS = Path("D:/Recursos Retrotarros")
-REPO = RECURSOS / "repo"
-DRIVE_STUDIO = RECURSOS / "Drive" / "Studio"
+def _resolve_repo() -> Path:
+    """Resuelve el root del repo Retrotarros (env RETROTARROS_REPO o parent del script)."""
+    env_repo = os.environ.get("RETROTARROS_REPO")
+    if env_repo:
+        p = Path(env_repo).resolve()
+        if p.exists():
+            return p
+    # Fallback: parent del directorio scripts/
+    return Path(__file__).resolve().parent.parent
+
+
+def _resolve_teaser_out(slug: str) -> Path:
+    """Resuelve el directorio donde guardar el teaser. Override por env."""
+    env_out = os.environ.get("RETROTARROS_TEASER_OUT")
+    if env_out:
+        return Path(env_out).resolve() / slug
+    return _resolve_repo() / "studio" / "teasers" / slug
+
+
+REPO = _resolve_repo()
 WHISPER_CACHE_DIR = REPO / ".cache" / "whisper"
+
+# Compat: codigo viejo referenciaba DRIVE_STUDIO. Lo mantenemos como alias del
+# nuevo default output (mismo path). Si Luis seteo RETROTARROS_TEASER_OUT, esto
+# queda obsoleto pero no se usa.
+DRIVE_STUDIO = REPO / "studio" / "teasers"
 
 # Output dimensions (TikTok / Reels / Shorts)
 OUT_W = 1080
@@ -500,8 +536,167 @@ def concat_clips(clip_paths: list[Path], output: Path, tmp_dir: Path, ffmpeg: st
 # MAIN
 # ============================================================================
 
+def generar_teaser(
+    video_path: str | Path,
+    slug: str,
+    ep_type: str | None = None,
+    num_highlights: int = 3,
+    clip_duration: float = 3.0,
+    max_clip_duration: float = 6.0,
+    model: str = "small",
+    out_dir: str | Path | None = None,
+    progress_callback=None,
+) -> dict:
+    """Genera un teaser vertical 1080x1920 desde un video master.
+
+    Sprint 17: extraido de main() para que tarrobot-live.py pueda invocarlo
+    como funcion sync (corre en thread pool via asyncio.to_thread).
+
+    Args:
+        video_path: ruta absoluta al MP4 master.
+        slug: kebab-case identificador del episodio (ej. n64-top-precios).
+        ep_type: tipo de episodio. None = auto-detectar del slug.
+        num_highlights: cantidad de clips del centro (default 3).
+        clip_duration: duracion MIN del clip en segundos.
+        max_clip_duration: duracion MAX del clip en segundos.
+        model: modelo Whisper (tiny/base/small/medium/large).
+        out_dir: directorio destino. None = resolver via _resolve_teaser_out(slug).
+        progress_callback: callable(step:int, total:int, msg:str, **extra) que
+            se llama en cada hito (1/5 audio, 2/5 whisper, 3/5 detect, 4/5 cut,
+            5/5 concat). Permite al panel mostrar barra de progreso.
+
+    Returns:
+        dict con: output_path (str), size_mb (float), duration_s (float),
+        clips (list de dicts con start/end/text), ep_type (str), num_clips (int).
+
+    Raises:
+        FileNotFoundError si el video no existe.
+        ValueError si el slug no es kebab-case.
+    """
+
+    def _emit(step: int, total: int, msg: str, **extra):
+        """Helper: invoca callback si esta seteado y siempre imprime a stdout."""
+        print(f"\n[{step}/{total}] {msg}")
+        if progress_callback:
+            try:
+                progress_callback(step, total, msg, **extra)
+            except Exception as e:
+                # callback errors no deben romper el teaser
+                print(f"   (warning: progress_callback fallo: {e})")
+
+    video = Path(video_path).resolve()
+    if not video.exists():
+        raise FileNotFoundError(f"video no existe: {video}")
+    if not re.match(r"^[a-z0-9-]+$", slug):
+        raise ValueError(f"slug invalido (kebab-case requerido): {slug!r}")
+
+    ffmpeg = ensure_ffmpeg()
+    duration = get_duration(video)
+
+    # Detectar tipo de episodio (o usar el forzado)
+    resolved_ep_type = ep_type if ep_type else detect_episode_type(slug)
+
+    if out_dir is None:
+        out_dir_path = _resolve_teaser_out(slug)
+    else:
+        out_dir_path = Path(out_dir)
+    out_dir_path.mkdir(parents=True, exist_ok=True)
+    date_tag = date.today().strftime("%Y%m%d")
+    output = out_dir_path / f"{slug}-tarroteaser-{date_tag}.mp4"
+
+    total_clips = 1 + num_highlights + 1
+
+    print(f"=== TARROTEASER ===")
+    print(f"   video    : {video}")
+    print(f"   slug     : {slug}")
+    print(f"   tipo     : {resolved_ep_type}{' (auto-detectado)' if not ep_type else ' (forzado)'}")
+    print(f"   duracion : {duration:.1f}s ({duration/60:.1f} min)")
+    print(f"   clips    : 1 inicio + {num_highlights} centro + 1 climax = {total_clips} clips")
+    print(f"   por clip : min {clip_duration:.1f}s · max {max_clip_duration:.1f}s (se ajusta a frase Whisper)")
+    print(f"   modelo   : whisper-{model}")
+    print(f"   output   : {output}")
+
+    with tempfile.TemporaryDirectory(prefix="highlights_") as tmp:
+        tmp_dir = Path(tmp)
+
+        # 1/5 Audio
+        _emit(1, 5, "Extrayendo audio para Whisper...")
+        wav = tmp_dir / "audio.wav"
+        step_extract_audio(video, wav, ffmpeg)
+
+        # 2/5 Whisper (con cache)
+        _emit(2, 5, f"Whisper transcribiendo (modelo={model})...")
+        segments = step_whisper(wav, model)
+
+        # 3/5 Detectar momentos
+        _emit(3, 5, "Detectando momentos...")
+        funny_start, funny_end, funny_txt = find_funny_start(segments, duration)
+        print(f"   INICIO @ {funny_start:.1f}-{funny_end:.1f}s ({funny_end-funny_start:.1f}s): \"{funny_txt}\"")
+
+        centers = find_center_highlights(segments, duration, num_highlights)
+        for i, (s_t, e_t, txt) in enumerate(centers):
+            print(f"   CENTRO {i+1} @ {s_t:.1f}-{e_t:.1f}s ({e_t-s_t:.1f}s): \"{txt}\"")
+
+        climax_start, climax_end, climax_txt = find_climax(segments, duration, resolved_ep_type)
+        print(f"   CLIMAX ({resolved_ep_type}) @ {climax_start:.1f}-{climax_end:.1f}s ({climax_end-climax_start:.1f}s): \"{climax_txt}\"")
+
+        # 4/5 Recortar + verticalizar
+        # ranges con flag prefer_end: solo el climax preserva final (resto preserva inicio)
+        all_ranges = (
+            [(funny_start, funny_end, False, funny_txt)]
+            + [(s, e, False, t) for s, e, t in centers]
+            + [(climax_start, climax_end, True, climax_txt)]
+        )
+        _emit(4, 5, f"Recortando y verticalizando {len(all_ranges)} clips...")
+        clip_paths = []
+        total_out_dur = 0.0
+        clips_meta = []
+        for i, (seg_s, seg_e, prefer_end, txt) in enumerate(all_ranges):
+            clip_s, clip_e = plan_clip_window(
+                seg_s, seg_e, duration,
+                min_dur=clip_duration,
+                max_dur=max_clip_duration,
+                prefer_end=prefer_end,
+            )
+            print(f"   clip {i:02d}: {clip_s:.2f} -> {clip_e:.2f}s ({clip_e-clip_s:.2f}s)")
+            out_clip = tmp_dir / f"clip_{i:02d}.mp4"
+            cut_and_verticalize(video, clip_s, clip_e, out_clip, ffmpeg)
+            clip_paths.append(out_clip)
+            total_out_dur += (clip_e - clip_s)
+            clips_meta.append({
+                "index": i,
+                "start": round(clip_s, 2),
+                "end": round(clip_e, 2),
+                "duration": round(clip_e - clip_s, 2),
+                "text": txt,
+                "slot": "inicio" if i == 0 else ("climax" if i == len(all_ranges) - 1 else f"centro-{i}"),
+            })
+
+        # 5/5 Concat
+        _emit(5, 5, "Concatenando clips...")
+        concat_clips(clip_paths, output, tmp_dir, ffmpeg)
+
+    size_mb = output.stat().st_size / (1024 * 1024)
+    print(f"\n=== LISTO ===")
+    print(f"   Highlights crudos: {output}")
+    print(f"   Tamano: {size_mb:.1f} MB · {total_out_dur:.1f}s")
+    print(f"   Audio: original del master · sin overlays · sin musica agregada")
+    print(f"   Importalo en DaVinci y agregale intro + outro + lower-thirds a tu gusto.")
+
+    return {
+        "output_path": str(output),
+        "size_mb": round(size_mb, 2),
+        "duration_s": round(total_out_dur, 2),
+        "clips": clips_meta,
+        "ep_type": resolved_ep_type,
+        "num_clips": len(clips_meta),
+        "video_master": str(video),
+        "slug": slug,
+    }
+
+
 def main():
-    parser = argparse.ArgumentParser(description="TarroTeaser - genera teaser crudo para edición manual.")
+    parser = argparse.ArgumentParser(description="TarroTeaser - genera teaser crudo para edicion manual.")
     parser.add_argument("video", help="Ruta al video master (MP4)")
     parser.add_argument("--slug", required=True, help="Slug del episodio (ej. n64-top-mundial)")
     parser.add_argument("--type", dest="ep_type", default=None,
@@ -510,107 +705,32 @@ def main():
     parser.add_argument("--num-highlights", type=int, default=3,
                         help="Cantidad de clips del centro (default 3)")
     parser.add_argument("--clip-duration", type=float, default=3.0,
-                        help="Duración MINIMA de cada clip en segundos (default 3.0). El "
-                             "clip se extiende si la frase Whisper dura más, hasta el max.")
+                        help="Duracion MINIMA de cada clip en segundos (default 3.0).")
     parser.add_argument("--max-clip-duration", type=float, default=6.0,
-                        help="Duración MAXIMA de cada clip en segundos (default 6.0). Evita "
-                             "clips eternos si Whisper detecta segmentos largos.")
+                        help="Duracion MAXIMA de cada clip en segundos (default 6.0).")
     parser.add_argument("--model", default="small",
                         choices=["tiny", "base", "small", "medium", "large"],
-                        help="Modelo Whisper (default small - mejor accuracy chileno que base)")
+                        help="Modelo Whisper (default small)")
     parser.add_argument("--out-dir", default=None)
     args = parser.parse_args()
-    # Para limpiar la música del master: usar CapCut "Voice Enhance" /
-    # "Noise Reduction" o DaVinci "Voice Isolation" sobre el MP4 importado.
-    # Lo hacemos fuera del script (mejor calidad + menos infra).
 
-    video = Path(args.video).resolve()
-    if not video.exists():
-        print(f"ERROR: no existe {video}")
-        sys.exit(1)
-    if not re.match(r"^[a-z0-9-]+$", args.slug):
-        print("ERROR: --slug inválido (kebab-case)")
-        sys.exit(1)
-
-    ffmpeg = ensure_ffmpeg()
-    duration = get_duration(video)
-
-    # Detectar tipo de episodio (o usar el forzado por CLI)
-    ep_type = args.ep_type if args.ep_type else detect_episode_type(args.slug)
-
-    out_dir = Path(args.out_dir) if args.out_dir else (DRIVE_STUDIO / args.slug / "teasers")
-    out_dir.mkdir(parents=True, exist_ok=True)
-    date_tag = date.today().strftime("%Y%m%d")
-    output = out_dir / f"{args.slug}-tarroteaser-{date_tag}.mp4"
-
-    total_clips = 1 + args.num_highlights + 1
-
-    print(f"=== TARROTEASER ===")
-    print(f"   video    : {video}")
-    print(f"   slug     : {args.slug}")
-    print(f"   tipo     : {ep_type}{' (auto-detectado)' if not args.ep_type else ' (forzado)'}")
-    print(f"   duración : {duration:.1f}s ({duration/60:.1f} min)")
-    print(f"   clips    : 1 inicio + {args.num_highlights} centro + 1 clímax = {total_clips} clips")
-    print(f"   por clip : min {args.clip_duration:.1f}s · max {args.max_clip_duration:.1f}s (se ajusta a frase Whisper)")
-    print(f"   modelo   : whisper-{args.model}")
-    print(f"   output   : {output}")
-
-    with tempfile.TemporaryDirectory(prefix="highlights_") as tmp:
-        tmp_dir = Path(tmp)
-
-        # 1. Audio
-        wav = tmp_dir / "audio.wav"
-        step_extract_audio(video, wav, ffmpeg)
-
-        # 2. Whisper (con cache)
-        segments = step_whisper(wav, args.model)
-
-        # 3. Detectar momentos
-        print(f"\n[3/5] Detectando momentos...")
-        funny_start, funny_end, funny_txt = find_funny_start(segments, duration)
-        print(f"   INICIO @ {funny_start:.1f}-{funny_end:.1f}s ({funny_end-funny_start:.1f}s): \"{funny_txt}\"")
-
-        centers = find_center_highlights(segments, duration, args.num_highlights)
-        for i, (s_t, e_t, txt) in enumerate(centers):
-            print(f"   CENTRO {i+1} @ {s_t:.1f}-{e_t:.1f}s ({e_t-s_t:.1f}s): \"{txt}\"")
-
-        climax_start, climax_end, climax_txt = find_climax(segments, duration, ep_type)
-        print(f"   CLIMAX ({ep_type}) @ {climax_start:.1f}-{climax_end:.1f}s ({climax_end-climax_start:.1f}s): \"{climax_txt}\"")
-
-        # 4. Recortar + verticalizar
-        # ranges con flag prefer_end: solo el climax preserva final (resto preserva inicio)
-        all_ranges = (
-            [(funny_start, funny_end, False)]
-            + [(s, e, False) for s, e, _ in centers]
-            + [(climax_start, climax_end, True)]
+    try:
+        result = generar_teaser(
+            video_path=args.video,
+            slug=args.slug,
+            ep_type=args.ep_type,
+            num_highlights=args.num_highlights,
+            clip_duration=args.clip_duration,
+            max_clip_duration=args.max_clip_duration,
+            model=args.model,
+            out_dir=args.out_dir,
         )
-        print(f"\n[4/5] Recortando y verticalizando {len(all_ranges)} clips...")
-        clip_paths = []
-        total_out_dur = 0.0
-        for i, (seg_s, seg_e, prefer_end) in enumerate(all_ranges):
-            # Planificar ventana: lead-in 0.3s + tail-pad 0.7s, ajustada a min/max
-            clip_s, clip_e = plan_clip_window(
-                seg_s, seg_e, duration,
-                min_dur=args.clip_duration,
-                max_dur=args.max_clip_duration,
-                prefer_end=prefer_end,
-            )
-            print(f"   clip {i:02d}: {clip_s:.2f} -> {clip_e:.2f}s ({clip_e-clip_s:.2f}s)")
-            out = tmp_dir / f"clip_{i:02d}.mp4"
-            cut_and_verticalize(video, clip_s, clip_e, out, ffmpeg)
-            clip_paths.append(out)
-            total_out_dur += (clip_e - clip_s)
-
-        # 5. Concat
-        print(f"\n[5/5] Concatenando...")
-        concat_clips(clip_paths, output, tmp_dir, ffmpeg)
-
-    size_mb = output.stat().st_size / (1024 * 1024)
-    print(f"\n=== LISTO ===")
-    print(f"   Highlights crudos: {output}")
-    print(f"   Tamaño: {size_mb:.1f} MB · {total_out_dur:.1f}s")
-    print(f"   Audio: original del master · sin overlays · sin música agregada")
-    print(f"   Importalo en DaVinci y agregale intro + outro + lower-thirds a tu gusto.")
+        # Para script-friendliness, imprimir tambien el path final claro
+        print(f"\nOK: {result['output_path']}")
+        sys.exit(0)
+    except (FileNotFoundError, ValueError) as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

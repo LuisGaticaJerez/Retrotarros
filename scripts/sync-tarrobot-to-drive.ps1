@@ -108,6 +108,11 @@ Sync-Item "scripts\connectors" -Recursive
 Sync-Item "scripts\llm_resolver.py"
 # Sprint 16: auto-respond toggle (modulo dedicado con config persistida)
 Sync-Item "scripts\auto_respond.py"
+# Sprint 17: TarroTeaser + job manager + utilidades de captura (Retrotarros Studio Suite)
+Sync-Item "scripts\tarroteaser.py"
+Sync-Item "scripts\teaser_jobs.py"
+Sync-Item "scripts\generate-teaser.py"
+Sync-Item "scripts\capture-slides.py"
 Write-Host ""
 
 # 2. Templates HTML
