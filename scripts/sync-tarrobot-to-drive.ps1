@@ -12,15 +12,18 @@
 #   - scripts/tarrobot.py
 #   - scripts/tarrobot-live.py
 #   - scripts/tarrobot-tray.py
+#   - scripts Sprint 17-18 (TarroTeaser + OBS Assistant + CapCut Ready)
 #   - studio/_template-tarrobot-live.html
 #   - studio/_template-tarrobot-control.html
 #   - studio/_template-tarrobot-slide.html  (si existe)
+#   - studio/*.html (TODOS los HTMLs de episodios del canal · fix 2026-05-27)
+#   - studio/img/* recursive (imagenes de episodios, box arts, sprites)
 #   - studio/pautas/*.tarrobot.json + audio/*
 #   - studio/melodias/* (.mid, .midi, soundfont.sf2 si existe)
 #   - data/tarrobot-database.json
 #
 # Que NO sincroniza:
-#   - .venv, .git, videos, capturas, otros HTMLs del canal
+#   - .venv, .git, videos master, capturas
 #   - El instalador del estudio (ese se distribuye solo la primera vez)
 
 param(
@@ -127,6 +130,27 @@ Sync-Item "studio\_template-tarrobot-control.html"
 Sync-Item "studio\_template-tarrobot-slide.html"
 Sync-Item "studio\obs-aliases.json"
 Sync-Item "studio\tarrobot-recetas.json"
+Write-Host ""
+
+# 2b. HTMLs de EPISODIOS del canal (lo que se proyecta en grabacion)
+# FIX 2026-05-27: estos faltaban en el sync. Sin esto, Luis va al estudio,
+# abre n64-coleccion.html y no la encuentra. Sync masivo de todos los HTMLs
+# que NO empiezan con underscore (esos son templates internos).
+Write-Host "HTMLs de episodios:" -ForegroundColor Cyan
+$episodios = Get-ChildItem -Path (Join-Path $RepoRoot "studio") -Filter "*.html" -File |
+    Where-Object { $_.Name -notlike "_*" }
+foreach ($ep in $episodios) {
+    $relPath = "studio\$($ep.Name)"
+    Sync-Item $relPath
+}
+Write-Host ""
+
+# 2c. Carpeta de imagenes de episodios (box arts, sprites, paneos)
+# Necesarias para que los HTMLs con <img src="img/..."> renderizen bien.
+Write-Host "Imagenes de episodios:" -ForegroundColor Cyan
+if (Test-Path (Join-Path $RepoRoot "studio\img")) {
+    Sync-Item "studio\img" -Recursive
+}
 Write-Host ""
 
 # 3. DB
