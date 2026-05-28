@@ -108,6 +108,35 @@ Si Luis señala que sono argentino:
 
 Razon: en la edicion se superpone gameplay real sobre la TV. Si el HTML trae texto adentro, queda asomando por los bordes del clip y obliga a reencuadrar. Vacia + namebox abajo = workflow limpio.
 
+## Set canonico por episodio · Regla inmutable
+
+**Cuando se crea una pauta nueva para el canal, se genera SIEMPRE el set completo de assets. Nunca dejar el conjunto a medias.**
+
+Set canonico (checklist por episodio con slug `<slug>`):
+
+| # | Archivo | Cuando se genera |
+|---|---------|------------------|
+| 1 | `studio/<slug>.html` | Diseño visual del episodio (proyectado en grabacion) |
+| 2 | `docs/pauta-<slug>.md` | Pauta editorial: estructura, bloques, tiempos, lo que SI/NO se dice |
+| 3 | `docs/discusion-<slug>.md` | Decisiones argumentadas: criterios, descartes, casos disputables |
+| 4 | `studio/pautas/<slug>.tarrobot.json` | **Solo si lleva TarroBot.** Datos TTS pre-cargados (con MP3s al cargar pauta) |
+| 5 | `studio/captures/<slug>/*.png` | Capturas 1920x1080 @ 2x DPI con `scripts/capture-slides.py <slug>` |
+| 6 | Sync Drive | `robocopy /MIR` a `G:\Mi unidad\Studio\<slug>\captures\` para que llegue al estudio |
+| 7 | `studio/exports/<slug>-publicacion.txt` | Descripcion YouTube (titulos + descripcion + timestamps + hashtags + thumbnail prompts + IG post). Pre-grabacion con timestamps ESTIMADOS, regenerable post-grabacion con session_log de tarrobot-live. |
+| 8 | Teaser 9:16 (opcional, post-grabacion) | `studio/teaser-<slug>.html` + capturas 1080x1920 + ejecutar `tarroteaser.py` sobre el MP4 master cuando exista |
+
+### Reglas operativas
+
+- **Antes de crear cualquier archivo nuevo**, verificar con `find` o `Glob` que no existe ya (evitar duplicacion).
+- **Si un episodio ya tiene HTML pero le faltan docs**, aplicar la regla retroactivamente.
+- **El item #4 (JSON TarroBot) es opcional**: solo episodios donde TarroBot aporta datos en vivo. Episodios humanos puros (musicales, especiales) no lo necesitan.
+- **El item #8 (teaser) es opcional pre-publicacion** y se genera cuando se decide hacer la promo del episodio. NO obligatorio en la creacion de la pauta.
+- **Commit con mensaje que liste exactamente los 5-7 archivos creados** para que sea facil auditar despues.
+
+### Por que esta regla existe
+
+Antes pasaba esto: se creaba el HTML del estudio + capturas, pero faltaban los docs MD (pauta + discusion). Cuando Luis necesitaba la descripcion YouTube o queria revisar decisiones del episodio, no estaba la informacion documentada. La regla cierra ese gap: si arrancamos un episodio, lo cerramos completo.
+
 ## Builds del paquete TarroBot Studio · Reglas
 
 **NO buildear el .exe / .zip durante la sesion, solo al cierre.**

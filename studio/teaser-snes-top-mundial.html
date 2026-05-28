@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · TEASER · EP06 SNES top mundial</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 80% 40% at 50% -5%, rgba(255,46,136,.18) 0%, transparent 65%),
+    radial-gradient(ellipse 80% 40% at 50% 105%, rgba(0,229,255,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+header {
+  position: fixed; top: 0; left: 0; right: 0; height: 90px; z-index: 200;
+  background: rgba(6, 3, 15, 0.97); border-bottom: 3px solid var(--mg);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 36px;
+}
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 30px; color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.7); letter-spacing: 4px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size: 16px; color: var(--ye); letter-spacing: 4px; }
+.hdr-rec { display: flex; align-items: center; gap: 10px; font-family: 'Press Start 2P'; font-size: 12px; color: var(--mg); }
+.dot { width: 14px; height: 14px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+footer {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 90px;
+  background: rgba(6, 3, 15, 0.97); border-top: 3px solid var(--cy);
+  display: flex; align-items: center; justify-content: center; z-index: 200;
+}
+.ftr-tag { font-family: 'Press Start 2P'; font-size: 14px; color: var(--cy); letter-spacing: 5px; text-shadow: 0 0 12px rgba(0,229,255,.5); }
+
+.deck { position: fixed; top: 90px; left: 0; right: 0; bottom: 90px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 60px 60px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 28px; right: 36px; font-family: 'Press Start 2P'; font-size: 14px; color: rgba(255,255,255,.28); letter-spacing: 3px; }
+
+/* ───── 01 HOOK ───── */
+.hook { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 0 30px; }
+.hook .ep-badge { font-family: 'Press Start 2P'; font-size: 18px; color: var(--ye); letter-spacing: 6px; padding: 14px 26px; border: 2px solid var(--ye); background: rgba(255,210,63,.06); margin-bottom: 60px; }
+.hook .pre { font-family: 'Press Start 2P'; font-size: 22px; color: var(--cy); letter-spacing: 5px; margin-bottom: 36px; }
+.hook .big { font-family: 'Orbitron'; font-weight: 900; font-size: 112px; line-height: .98; letter-spacing: 1px; color: #fff; margin-bottom: 30px; }
+.hook .big .mg { color: var(--mg); text-shadow: 0 0 28px rgba(255,46,136,.7); }
+.hook .big .cy { color: var(--cy); text-shadow: 0 0 28px rgba(0,229,255,.55); }
+.hook .sub { font-family: 'Share Tech Mono'; font-size: 30px; color: var(--bo); letter-spacing: 4px; margin-bottom: 50px; }
+.hook .question { font-family: 'Orbitron'; font-weight: 900; font-size: 92px; color: var(--ye); text-shadow: 0 0 28px rgba(255,210,63,.65); letter-spacing: 1.5px; margin-top: 20px; }
+
+/* ───── LISTAS ranking ───── */
+.list { display: flex; flex-direction: column; align-items: center; height: 100%; padding: 30px 30px 0; }
+.list .pre { font-family: 'Press Start 2P'; font-size: 20px; color: var(--mg); letter-spacing: 5px; margin-bottom: 18px; }
+.list h2 { font-family: 'Orbitron'; font-weight: 900; font-size: 76px; color: #fff; letter-spacing: 1.5px; margin-bottom: 40px; text-align: center; line-height: 1; }
+.list h2 .cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.55); }
+.list h2 .mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.65); }
+.list h2 .ye { color: var(--ye); text-shadow: 0 0 22px rgba(255,210,63,.6); }
+.list .grid { width: 100%; display: flex; flex-direction: column; gap: 22px; }
+.list .row { display: grid; grid-template-columns: 110px 1fr; align-items: center; gap: 26px; padding: 26px 32px; background: rgba(255,255,255,.04); border-left: 6px solid var(--mg); }
+.list .row .pos { font-family: 'Orbitron'; font-weight: 900; font-size: 70px; color: var(--mg); text-shadow: 0 0 16px rgba(255,46,136,.5); line-height: 1; }
+.list .row .juego { font-family: 'Share Tech Mono'; font-size: 34px; color: #fff; letter-spacing: 1px; line-height: 1.15; }
+.list .row .juego .meta { display: block; font-size: 20px; color: rgba(255,255,255,.45); letter-spacing: 3px; margin-top: 6px; }
+.list .row.podio { border-left-color: var(--ye); }
+.list .row.podio .pos { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.55); }
+.list .row.cy { border-left-color: var(--cy); }
+.list .row.cy .pos { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.55); }
+
+/* ───── REVEAL #1 ───── */
+.reveal { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 0 30px; }
+.reveal .warn { font-family: 'Press Start 2P'; font-size: 22px; color: var(--mg); letter-spacing: 6px; padding: 14px 24px; border: 2px solid var(--mg); background: rgba(255,46,136,.06); margin-bottom: 40px; animation: blink 1.5s ease-in-out infinite; }
+.reveal .nro { font-family: 'Orbitron'; font-weight: 900; font-size: 280px; line-height: 1; color: var(--ye); text-shadow: 0 0 50px rgba(255,210,63,.8); margin-bottom: 20px; }
+.reveal .juego-name { font-family: 'Orbitron'; font-weight: 900; font-size: 92px; line-height: 1.1; color: #fff; letter-spacing: 1.5px; margin-bottom: 24px; }
+.reveal .juego-name .mg { color: var(--mg); text-shadow: 0 0 26px rgba(255,46,136,.65); }
+.reveal .meta { font-family: 'Share Tech Mono'; font-size: 28px; color: var(--cy); letter-spacing: 4px; margin-top: 20px; }
+.reveal .stamp { margin-top: 36px; display: inline-block; font-family: 'Press Start 2P'; font-size: 20px; color: var(--dk); background: var(--ye); padding: 18px 32px; letter-spacing: 4px; transform: rotate(-3deg); box-shadow: 0 0 20px rgba(255,210,63,.5); }
+
+/* ───── CTA ───── */
+.cta { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 0 30px; }
+.cta .ep { font-family: 'Press Start 2P'; font-size: 26px; color: var(--ye); letter-spacing: 8px; padding: 18px 32px; border: 3px solid var(--ye); background: rgba(255,210,63,.08); margin-bottom: 60px; }
+.cta .title { font-family: 'Orbitron'; font-weight: 900; font-size: 104px; line-height: 1; color: #fff; letter-spacing: 2px; margin-bottom: 24px; }
+.cta .title .mg { color: var(--mg); text-shadow: 0 0 30px rgba(255,46,136,.7); }
+.cta .title .cy { color: var(--cy); text-shadow: 0 0 30px rgba(0,229,255,.55); }
+.cta .sub { font-family: 'Share Tech Mono'; font-size: 32px; color: rgba(255,255,255,.75); letter-spacing: 4px; margin-bottom: 60px; max-width: 880px; line-height: 1.4; }
+.cta .now { font-family: 'Orbitron'; font-weight: 900; font-size: 86px; color: var(--mg); letter-spacing: 4px; text-shadow: 0 0 28px rgba(255,46,136,.65); margin-bottom: 50px; animation: blink 1.5s ease-in-out infinite; }
+.cta .btn-row { display: flex; flex-direction: column; gap: 24px; align-items: center; margin-top: 20px; }
+.cta .btn { font-family: 'Press Start 2P'; font-size: 26px; letter-spacing: 5px; padding: 26px 50px; border: 3px solid var(--cy); color: var(--cy); background: rgba(0,229,255,.06); }
+.cta .btn.mg { border-color: var(--mg); color: var(--mg); background: rgba(255,46,136,.06); }
+
+/* ───── NAV ───── */
+nav.nav-bar { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 300; background: rgba(6, 3, 15, 0.85); border: 1px solid rgba(255,255,255,.15); padding: 8px 14px; border-radius: 4px; }
+nav.nav-bar button { background: transparent; border: 1px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 10px; padding: 8px 14px; letter-spacing: 1.5px; cursor: pointer; }
+nav.nav-bar .counter { color: var(--mg); font-family: 'Press Start 2P'; font-size: 10px; align-self: center; margin: 0 8px; letter-spacing: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">TEASER · EP 06</div>
+  <div class="hdr-rec"><div class="dot"></div>ON AIR</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 HOOK -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="hook">
+      <div class="ep-badge">EP 06 · SNES</div>
+      <div class="pre">TOP 10 MUNDIAL</div>
+      <div class="big">EL <span class="mg">#1</span> SNES</div>
+      <div class="big" style="font-size:92px;">SEGUN LA <span class="cy">CRITICA</span></div>
+      <div class="sub">DIEZ JUEGOS · UN GANADOR</div>
+      <div class="question">¿CUAL ES?</div>
+    </div>
+  </section>
+
+  <!-- 02 #10 a #7 -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="list">
+      <div class="pre">TOP 10 · SEGUN LA CRITICA</div>
+      <h2>DEL <span class="cy">#10</span> AL <span class="cy">#7</span></h2>
+      <div class="grid">
+        <div class="row cy">
+          <div class="pos">#10</div>
+          <div class="juego">STAR FOX<span class="meta">1993 · POLIGONOS 3D EN 16 BITS</span></div>
+        </div>
+        <div class="row cy">
+          <div class="pos">#9</div>
+          <div class="juego">SUPER MARIO KART<span class="meta">1992 · INVENTO EL GENERO</span></div>
+        </div>
+        <div class="row cy">
+          <div class="pos">#8</div>
+          <div class="juego">EARTHBOUND<span class="meta">1994 · CULTO ABSOLUTO</span></div>
+        </div>
+        <div class="row cy">
+          <div class="pos">#7</div>
+          <div class="juego">DONKEY KONG COUNTRY 2<span class="meta">1995 · DAVID WISE</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 #6 a #4 -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="list">
+      <div class="pre">TOP 10 · SEGUN LA CRITICA</div>
+      <h2>DEL <span class="mg">#6</span> AL <span class="mg">#4</span></h2>
+      <div class="grid">
+        <div class="row">
+          <div class="pos">#6</div>
+          <div class="juego">YOSHI'S ISLAND<span class="meta">1995 · DIBUJADO A MANO</span></div>
+        </div>
+        <div class="row">
+          <div class="pos">#5</div>
+          <div class="juego">FINAL FANTASY VI<span class="meta">1994 · EL PICO SQUARE</span></div>
+        </div>
+        <div class="row">
+          <div class="pos">#4</div>
+          <div class="juego">SUPER METROID<span class="meta">1994 · METROIDVANIA BLUEPRINT</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 PODIO #3 + #2 -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="list">
+      <div class="pre">PODIO · CASI EL #1</div>
+      <h2>EL <span class="ye">PODIO</span></h2>
+      <div class="grid">
+        <div class="row podio">
+          <div class="pos">#3</div>
+          <div class="juego">CHRONO TRIGGER<span class="meta">1995 · SAKAGUCHI · HORII · TORIYAMA</span></div>
+        </div>
+        <div class="row podio">
+          <div class="pos">#2</div>
+          <div class="juego">ZELDA: A LINK TO THE PAST<span class="meta">1991 · LA PLANTILLA DE LA SAGA</span></div>
+        </div>
+      </div>
+      <div style="margin-top:60px; font-family:'Press Start 2P'; font-size:24px; color:var(--mg); letter-spacing:6px; animation:blink 1.5s ease-in-out infinite;">PERO EL #1...</div>
+    </div>
+  </section>
+
+  <!-- 05 REVEAL #1 -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="reveal">
+      <div class="warn">EL #1 MUNDIAL</div>
+      <div class="nro">#1</div>
+      <div class="juego-name"><span class="mg">SUPER MARIO</span></div>
+      <div class="juego-name" style="font-size:108px;">WORLD</div>
+      <div class="meta">1990 · NINTENDO EAD · GAME DESIGN PERFECTO</div>
+      <div class="stamp">EL MEJOR SNES DE LA HISTORIA</div>
+    </div>
+  </section>
+
+  <!-- 06 CTA -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="cta">
+      <div class="ep">EP 06 · SNES</div>
+      <div class="title">TOP <span class="mg">10</span></div>
+      <div class="title"><span class="cy">SNES</span> MUNDIAL</div>
+      <div class="sub">EL RANKING COMPLETO · POR QUE CADA UNO</div>
+      <div class="now">YA DISPONIBLE</div>
+      <div class="btn-row">
+        <div class="btn">▶ YOUTUBE / RETROTARROS</div>
+        <div class="btn mg">SUSCRIBETE PARA NO PERDER NINGUNO</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="ftr-tag">RETROTARROS · NOSTALGIA · JUEGOS · MUSICA</div>
+</footer>
+
+<nav class="nav-bar">
+  <button id="prevBtn">◀</button>
+  <div class="counter" id="counter">01 / 06</div>
+  <button id="nextBtn">▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+});
+go(0);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "slug": "retro-glorias-navales",
+  "episodio": "Top 10 Glorias Navales Retro - Especial 21 de Mayo",
+  "creado": "2026-05-24",
+  "actualizado": "2026-05-24",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+0Hz",
+  "rate": "+0%",
+  "_nota": "Pauta opcional. El episodio puede grabarse 100% humano si Luis prefiere leer las hojas. Pero el tono burocratico funciona mejor con TTS Catalina (chilena, formal). Ver discusion punto 7.",
+  "datos": [
+    {
+      "id": "retro-glorias-navales-1",
+      "tema": "Numero 10 · Jaws Chief Brody",
+      "texto": "Numero diez. Chief Brody, del juego Jaws para NES de 1987. Foja de servicios: pescador deportivo reconvertido a cazador de megafauna escualo. Patrulla las aguas de Amity Island con sonar de ocho bits, harpon y un bote que se le inunda solo. Sin GPS, sin sindicato, sin descanso dominical. Bonus: la pelicula original tampoco le pago bien.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1987,
+      "editor": "LJN / Westone",
+      "mp3": "audio/retro-glorias-navales/retro-glorias-navales-1.mp3",
+      "duracion_ms": 22000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-glorias-navales-2",
+      "tema": "Numero 9 · Big the Cat pescador zen",
+      "texto": "Numero nueve. Big the Cat, de Sonic Adventure para Dreamcast de mil novecientos noventa y ocho. Foja de servicios: unico empleado del Sonic Adventure que no corre a ochocientos kilometros por hora. Su unica funcion es pescar a Froggy, su mejor amigo anfibio que escapa cada cierto tiempo. Jornada de nueve a cinco sentado en el muelle con caña y carnada. Cuando lo recupera, Froggy escapa otra vez. Ciclo eterno de paciencia.",
+      "estado": "thinking",
+      "consola": "Dreamcast",
+      "ano": 1998,
+      "editor": "Sonic Team",
+      "mp3": "audio/retro-glorias-navales/retro-glorias-navales-2.mp3",
+      "duracion_ms": 26000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-glorias-navales-3",
+      "tema": "Numero 8 · Silent Service comandante de submarino",
+      "texto": "Numero ocho. El comandante anonimo de Silent Service para NES de mil novecientos ochenta y nueve. Foja de servicios: capitan de submarino clase Gato. Mision permanente, hundir destructores japoneses, cargueros y transportes en el Pacifico. Dieciocho meses sumergido sin ver tierra firme. Vista exclusiva por periscopio y sonar. El unico marinero retro que conoce de verdad la oscuridad oceanica.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1989,
+      "editor": "MicroProse",
+      "mp3": "audio/retro-glorias-navales/retro-glorias-navales-3.mp3",
+      "duracion_ms": 24000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-glorias-navales-4",
+      "tema": "Numero 7 · Captain Skyhawk piloto naval",
+      "texto": "Numero siete. Captain Skyhawk, del juego homonimo para NES de mil novecientos ochenta y nueve. Foja de servicios: piloto de un jet hibrido helicoptero aeroplano. Mision permanente, defender la base naval del Atlantico Norte de una invasion alienigena. Trabaja en aire, mar y tierra de manera simultanea. Probablemente el unico personaje retro con tres contratos paralelos.",
+      "estado": "excited",
+      "consola": "NES",
+      "ano": 1989,
+      "editor": "Rare / Milton Bradley",
+      "mp3": "audio/retro-glorias-navales/retro-glorias-navales-4.mp3",
+      "duracion_ms": 24500,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-glorias-navales-5",
+      "tema": "Numero 6 · The Goonies tropa caza-tesoros",
+      "texto": "Numero seis. La tropa de The Goonies, NES de mil novecientos ochenta y siete. Foja de servicios: equipo juvenil que baja a las cavernas costeras de Astoria para recuperar a Annie y el tesoro del pirata One Eyed Willy. Riesgos: piratas momificados, fantasmas, alacranes y fontanerias rotas. Salario final: la mitad del cofre, descontados los gastos operativos.",
+      "estado": "happy",
+      "consola": "NES",
+      "ano": 1987,
+      "editor": "Konami",
+      "mp3": "audio/retro-glorias-navales/retro-glorias-navales-5.mp3",
+      "duracion_ms": 23500,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-glorias-navales-6",
+      "tema": "Numero 5 · Wave Race 64 corredores de jet ski",
+      "texto": "Numero cinco. Los corredores profesionales de Wave Race 64, para Nintendo 64 de mil novecientos noventa y seis. Foja de servicios: atletas profesionales del jet ski. Jornadas de ocho horas, lluvia o sol, agua salada en los ojos. Boyas a esquivar en orden estricto, olas que voltean al menor error. La unica oficina del catalogo retro con mareas reales.",
+      "estado": "excited",
+      "consola": "N64",
+      "ano": 1996,
+      "editor": "Nintendo EAD",
+      "mp3": "audio/retro-glorias-navales/retro-glorias-navales-6.mp3",
+      "duracion_ms": 23000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-glorias-navales-7",
+      "tema": "Numero 4 · Ecco the Dolphin rescatista oceanico",
+      "texto": "Numero cuatro. Ecco the Dolphin, Sega Genesis de mil novecientos noventa y dos. Foja de servicios: mision, salvar a su pod de delfines, viajar en el tiempo, pelear contra los Vortex y conversar con una maquina alienigena. Sin pulgares, sin barco, sin reloj. Solo eco locacion y voluntad. Probablemente el empleado mas subestimado del catalogo Genesis.",
+      "estado": "thinking",
+      "consola": "Genesis",
+      "ano": 1992,
+      "editor": "Novotrade",
+      "mp3": "audio/retro-glorias-navales/retro-glorias-navales-7.mp3",
+      "duracion_ms": 24000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-glorias-navales-8",
+      "tema": "Numero 3 · Pirates capitan freelance del Caribe",
+      "texto": "Numero tres. El capitan de Pirates, juego multi plataforma de Sid Meier para MicroProse, mil novecientos ochenta y siete. Foja de servicios: multioficio nivel S del oceano. Navega, comercia, asalta galeones españoles, romance con hijas de gobernadores, exhuma tesoros enterrados y escapa de la armada. Todo el sandbox de la vida pirata en una mision sin descanso. Sin sueldo fijo, todo a comision.",
+      "estado": "excited",
+      "consola": "Multi",
+      "ano": 1987,
+      "editor": "MicroProse",
+      "mp3": "audio/retro-glorias-navales/retro-glorias-navales-8.mp3",
+      "duracion_ms": 26500,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-glorias-navales-9",
+      "tema": "Numero 2 · Guybrush Threepwood aprendiz de pirata",
+      "texto": "Numero dos. Guybrush Threepwood, de The Secret of Monkey Island, PC, mil novecientos noventa, Lucasfilm Games. Foja de servicios: postulante a pirata mas torpe del Caribe. Aguanta tres pruebas, esgrima de insultos, ladroneria de idolo dorado, busqueda de tesoros, sin sueldo, sin contrato, solo con su nombre raro. Persistencia digna de manual de recursos humanos. Bonus: aguanta la respiracion exactamente diez minutos.",
+      "estado": "happy",
+      "consola": "PC",
+      "ano": 1990,
+      "editor": "Lucasfilm Games",
+      "mp3": "audio/retro-glorias-navales/retro-glorias-navales-9.mp3",
+      "duracion_ms": 27000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-glorias-navales-10",
+      "tema": "Numero 1 · Kaptain K. Rool CEO y capitan de flota",
+      "texto": "Numero uno. Kaptain K. Rool, de Donkey Kong Country 2, SNES, mil novecientos noventa y cinco, Rare. Foja de servicios: maneja Kremlings S.A. con turnos de veinticuatro siete. Cuatro juegos consecutivos perdiendo contra los Kong y vuelve mas fuerte cada vez. Comercializa cartuchos pirata, Krazy Kremland, explota minas, Krocodile Kore, y captura simios. Liderazgo toxico modelo, pero curiosamente efectivo. El unico capitan del top que llego al cargo a punta de palos.",
+      "estado": "winking",
+      "consola": "SNES",
+      "ano": 1995,
+      "editor": "Rare",
+      "mp3": "audio/retro-glorias-navales/retro-glorias-navales-10.mp3",
+      "duracion_ms": 31000,
+      "fuente": "pauta-auto"
+    }
+  ]
+}
