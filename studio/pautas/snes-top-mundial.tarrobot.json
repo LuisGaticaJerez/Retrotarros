@@ -1,9 +1,9 @@
 {
   "version": 1,
   "slug": "snes-top-mundial",
-  "episodio": "Top 10 SNES mas caros del mundo",
+  "episodio": "Top 10 SNES mundial - los mejores juegos",
   "creado": "2026-05-20",
-  "actualizado": "2026-05-20",
+  "actualizado": "2026-05-24",
   "voz": "es-CL-CatalinaNeural",
   "pitch": "+12Hz",
   "rate": "+0%",
@@ -57,6 +57,66 @@
       "fuente": "pauta-auto"
     },
     {
+      "id": "snes-top-mundial-6",
+      "tema": "Yoshi's Island y la estetica pintada a mano",
+      "texto": "Yoshi's Island de 1995 rompio con todo lo que era SNES visualmente. Nintendo EAD se atrevio a hacer un juego que parecia dibujado a mano con crayones de un nino. Tecnicamente uso el chip Super FX 2 y se peleo con BLOCKBUSTER por su look infantil.",
+      "estado": "happy",
+      "consola": "SNES",
+      "ano": 1995,
+      "editor": "Nintendo EAD",
+      "mp3": "audio/snes-top-mundial/snes-top-mundial-6.mp3",
+      "duracion_ms": 18500,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-mundial-7",
+      "tema": "Final Fantasy VI y el pico Square",
+      "texto": "Final Fantasy VI de 1994 es considerado por muchos el pico narrativo de Square. Tenia 14 personajes jugables, una opera completa en medio del juego y a Kefka, el primer villano de RPG que de verdad gana. Cambio la forma de contar historias en videojuegos.",
+      "estado": "thinking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Square",
+      "mp3": "audio/snes-top-mundial/snes-top-mundial-7.mp3",
+      "duracion_ms": 18800,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-mundial-8",
+      "tema": "Super Metroid y el blueprint de los metroidvania",
+      "texto": "Super Metroid de 1994 definio el genero metroidvania entero. Nintendo R&D1 con Intelligent Systems crearon un mapa interconectado que se abre con cada habilidad nueva. Sin Super Metroid no existen Hollow Knight, Ori, Castlevania Symphony of the Night.",
+      "estado": "excited",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Nintendo R&D1",
+      "mp3": "audio/snes-top-mundial/snes-top-mundial-8.mp3",
+      "duracion_ms": 18900,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-mundial-9",
+      "tema": "Chrono Trigger y el dream team RPG",
+      "texto": "Chrono Trigger de 1995 reunio al dream team del RPG japones: Hironobu Sakaguchi de Final Fantasy, Yuji Horii de Dragon Quest y Akira Toriyama de Dragon Ball. Square hizo 13 finales distintos, sistema de combate sin pantallas separadas y nunca envejecio.",
+      "estado": "happy",
+      "consola": "SNES",
+      "ano": 1995,
+      "editor": "Square",
+      "mp3": "audio/snes-top-mundial/snes-top-mundial-9.mp3",
+      "duracion_ms": 19200,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "snes-top-mundial-10",
+      "tema": "Zelda A Link to the Past y la plantilla de la saga",
+      "texto": "Zelda A Link to the Past de 1991 establecio la plantilla de toda la saga moderna. Nintendo EAD invento el truco del mundo paralelo entre luz y oscuridad, los dungeons en orden, los items que abren nuevas zonas. Ocarina of Time es esto en 3D.",
+      "estado": "winking",
+      "consola": "SNES",
+      "ano": 1991,
+      "editor": "Nintendo EAD",
+      "mp3": "audio/snes-top-mundial/snes-top-mundial-10.mp3",
+      "duracion_ms": 18400,
+      "fuente": "pauta-auto"
+    },
+    {
       "id": "snes-top-mundial-5",
       "tema": "Super Mario World y el game design educativo",
       "texto": "Super Mario World de 1990 tiene un diseno de niveles tan perfecto que escuelas enteras lo usan para ensenar game design profesional. El pack-in de SNES introduce a Yoshi, tiene 96 salidas y su arquitectura sigue siendo estudiada como referencia.",
@@ -69,7 +129,7 @@
       "fuente": "pauta-auto"
     },
     {
-      "id": "snes-top-mundial-melodia-6",
+      "id": "snes-top-mundial-melodia-11",
       "tipo": "melodia",
       "tema": "Donkey Kong Country   Aquatic Ambience",
       "texto": "[Tocando: Donkey Kong Country   Aquatic Ambience (12s)]",
@@ -87,7 +147,7 @@
       }
     },
     {
-      "id": "snes-top-mundial-melodia-7",
+      "id": "snes-top-mundial-melodia-12",
       "tipo": "melodia",
       "tema": "Donkey Kong Country   Cranky'S Theme",
       "texto": "[Tocando: Donkey Kong Country   Cranky'S Theme (12s)]",
@@ -105,7 +165,7 @@
       }
     },
     {
-      "id": "snes-top-mundial-melodia-8",
+      "id": "snes-top-mundial-melodia-13",
       "tipo": "melodia",
       "tema": "Donkey Kong Country   Fear Factory",
       "texto": "[Tocando: Donkey Kong Country   Fear Factory (12s)]",
@@ -123,7 +183,7 @@
       }
     },
     {
-      "id": "snes-top-mundial-melodia-9",
+      "id": "snes-top-mundial-melodia-14",
       "tipo": "melodia",
       "tema": "Sneskdccourse 8",
       "texto": "[Tocando: Sneskdccourse 8 (12s)]",
