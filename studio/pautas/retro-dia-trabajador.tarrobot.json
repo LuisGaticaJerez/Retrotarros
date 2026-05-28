@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "slug": "retro-dia-trabajador",
+  "episodio": "Top 10 Trabajadores Retro - Especial 1 de Mayo",
+  "creado": "2026-05-28",
+  "actualizado": "2026-05-28",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+0Hz",
+  "rate": "+0%",
+  "_nota": "Pauta opcional. El episodio puede grabarse 100% humano si Luis prefiere. El tono burocratico funciona mejor con TTS Catalina. Replica de glorias-navales.",
+  "datos": [
+    {
+      "id": "retro-dia-trabajador-1",
+      "tema": "Numero 10 · Frogger QA tester vial",
+      "texto": "Numero diez. Frogger, juego arcade de mil novecientos ochenta y uno por Konami. Hoja de servicios: tester profesional de pasos peatonales con cero work life balance. Cruza autopistas, rios y troncos flotantes durante toda su jornada. Sin chaleco reflectivo, sin paso cebra, sin semaforo. Una falla en el reporte y vuelve al checkpoint anterior. El primer hero del trafico.",
+      "estado": "talking",
+      "consola": "Arcade",
+      "ano": 1981,
+      "editor": "Konami",
+      "mp3": "audio/retro-dia-trabajador/retro-dia-trabajador-1.mp3",
+      "duracion_ms": 24000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-dia-trabajador-2",
+      "tema": "Numero 9 · Q-bert pintor industrial",
+      "texto": "Numero nueve. Q bert, arcade de mil novecientos ochenta y dos por Gottlieb. Hoja de servicios: pintor industrial de piramides isometricas. Sube y baja cubos cambiandoles el color a saltos. Riesgos laborales: serpiente Coily, gloops, slick y sam. Lenguaje interno tipo arroba almohadilla. Sin arnes, sin EPP, sin curso de altura. Cuando se cae del andamio rebota.",
+      "estado": "thinking",
+      "consola": "Arcade",
+      "ano": 1982,
+      "editor": "Gottlieb",
+      "mp3": "audio/retro-dia-trabajador/retro-dia-trabajador-2.mp3",
+      "duracion_ms": 23000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-dia-trabajador-3",
+      "tema": "Numero 8 · Dig Dug exterminador subterraneo",
+      "texto": "Numero ocho. Dig Dug, arcade de mil novecientos ochenta y dos por Namco. Hoja de servicios: tecnico especializado en control de plagas subterraneas. Equipo de trabajo, una manguera neumatica para inflar enemigos hasta reventarlos. Tambien sabe tirar rocas desde arriba, poco etico. Sin descanso entre niveles, sin certificacion ambiental, sin abogado.",
+      "estado": "talking",
+      "consola": "Arcade",
+      "ano": 1982,
+      "editor": "Namco",
+      "mp3": "audio/retro-dia-trabajador/retro-dia-trabajador-3.mp3",
+      "duracion_ms": 22000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-dia-trabajador-4",
+      "tema": "Numero 7 · Karnov strongman de circo",
+      "texto": "Numero siete. Karnov, arcade de mil novecientos ochenta y siete por Data East. Hoja de servicios: hombre fuerte de circo ruso reconvertido a cazador de dragones. Escupe bolas de fuego como acto principal, salta, derrota dinosaurios, fantasmas y minotauros. Trabaja sin descanso del nivel uno al nueve. Sin sindicato del espectaculo, sin AFP, sin contrato fijo.",
+      "estado": "excited",
+      "consola": "Arcade",
+      "ano": 1987,
+      "editor": "Data East",
+      "mp3": "audio/retro-dia-trabajador/retro-dia-trabajador-4.mp3",
+      "duracion_ms": 23500,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-dia-trabajador-5",
+      "tema": "Numero 6 · Peter Pepper chef maestro",
+      "texto": "Numero seis. Peter Pepper, de BurgerTime, arcade de mil novecientos ochenta y dos por Data East. Hoja de servicios: chef que arma hamburguesas gigantes saltando sobre los ingredientes. Persecucion permanente de senor Hot Dog, senor Egg y senor Pickle, sus rivales gastronomicos. Equipo defensivo: pimienta. Cocina sin ayudante, sin descanso entre platos, sin propina pactada.",
+      "estado": "happy",
+      "consola": "Arcade",
+      "ano": 1982,
+      "editor": "Data East",
+      "mp3": "audio/retro-dia-trabajador/retro-dia-trabajador-5.mp3",
+      "duracion_ms": 23000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-dia-trabajador-6",
+      "tema": "Numero 5 · Paperboy repartidor en bici",
+      "texto": "Numero cinco. Paperboy, arcade de mil novecientos ochenta y cinco por Atari Games. Hoja de servicios: repartidor juvenil de diarios en bicicleta. Ruta llena de obstaculos: perros sueltos, autos descontrolados, robots, vecinos furiosos. Salario por suscripcion entregada. Si rompe una ventana lo descuentan. Antecedente directo de toda app de delivery moderna.",
+      "estado": "talking",
+      "consola": "Arcade",
+      "ano": 1985,
+      "editor": "Atari Games",
+      "mp3": "audio/retro-dia-trabajador/retro-dia-trabajador-6.mp3",
+      "duracion_ms": 22500,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-dia-trabajador-7",
+      "tema": "Numero 4 · Mario carpintero de obra",
+      "texto": "Numero cuatro. Mario, en Donkey Kong, arcade de mil novecientos ochenta y uno por Nintendo. Hoja de servicios: antes de ser fontanero fue carpintero de obra. Trabaja en una construccion vertical donde su jefe gorila le tira barriles desde arriba. Sin casco, sin arnes, sin pago de horas extra. Termina rescatando a su jefa Pauline mientras esquiva accidentes laborales en cada piso. El primer obrero de Nintendo.",
+      "estado": "winking",
+      "consola": "Arcade",
+      "ano": 1981,
+      "editor": "Nintendo",
+      "mp3": "audio/retro-dia-trabajador/retro-dia-trabajador-7.mp3",
+      "duracion_ms": 27000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-dia-trabajador-8",
+      "tema": "Numero 3 · Mr. Game and Watch multioficio extremo",
+      "texto": "Numero tres. Senor Game and Watch, handheld LCD de mil novecientos ochenta por Nintendo. Hoja de servicios: el empleado mas versatil de la industria retro. Chef, bombero, salvavidas, malabarista, helicopterista, pulpero, conductor de tren, alpinista, pescador, y mil mas. Un cuerpo monocromatico, un sindicato de uno.",
+      "estado": "excited",
+      "consola": "LCD Handheld",
+      "ano": 1980,
+      "editor": "Nintendo",
+      "mp3": "audio/retro-dia-trabajador/retro-dia-trabajador-8.mp3",
+      "duracion_ms": 22000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-dia-trabajador-9",
+      "tema": "Numero 2 · Lakitu freelancer nube",
+      "texto": "Numero dos. Lakitu, de la saga Mario, mil novecientos ochenta y cinco en adelante por Nintendo. Hoja de servicios: tortuga sobre nube con jornada laboral imposible. Lunes, tira spinies a Mario en Super Mario Bros. Martes, fotografo oficial en Super Mario 64. Miercoles, rescatista en Mario Kart cuando alguien cae. Jueves, juez de carreras. Viernes, marcador de tiempos. Nunca toma vacaciones. Trabaja para Bowser y para Mario al mismo tiempo, probable conflicto de intereses.",
+      "estado": "happy",
+      "consola": "Mario series",
+      "ano": 1985,
+      "editor": "Nintendo",
+      "mp3": "audio/retro-dia-trabajador/retro-dia-trabajador-9.mp3",
+      "duracion_ms": 33000,
+      "fuente": "pauta-auto"
+    },
+    {
+      "id": "retro-dia-trabajador-10",
+      "tema": "Numero 1 · Tapper barman absoluto",
+      "texto": "Numero uno. Tapper, arcade de mil novecientos ochenta y tres por Bally Midway. Hoja de servicios: barman de cuatro barras simultaneas atendiendo clientes ansiosos. Sirve schop tras schop, recoge los vasos vacios que vuelven volando, atrapa propinas, esquiva borrachos. El unico personaje del top que ademas limpia la barra y aguanta clientes molestos. Sin sindicato gastronomico, sin pago de domingo, sin descanso entre clientes. Empleado del año retro. Honor.",
+      "estado": "winking",
+      "consola": "Arcade",
+      "ano": 1983,
+      "editor": "Bally Midway",
+      "mp3": "audio/retro-dia-trabajador/retro-dia-trabajador-10.mp3",
+      "duracion_ms": 31000,
+      "fuente": "pauta-auto"
+    }
+  ]
+}

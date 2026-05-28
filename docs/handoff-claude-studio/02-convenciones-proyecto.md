@@ -137,6 +137,42 @@ Set canonico (checklist por episodio con slug `<slug>`):
 
 Antes pasaba esto: se creaba el HTML del estudio + capturas, pero faltaban los docs MD (pauta + discusion). Cuando Luis necesitaba la descripcion YouTube o queria revisar decisiones del episodio, no estaba la informacion documentada. La regla cierra ese gap: si arrancamos un episodio, lo cerramos completo.
 
+## Sync Drive al estudio · Regla inmutable
+
+**Antes de cualquier sesion de grabacion, correr `scripts/sync-tarrobot-to-drive.ps1` y esperar 1-3 min a que Drive Desktop sincronice al cloud.**
+
+Esta regla NO es opcional. Existe porque historicamente paso esto:
+- 2026-05-27: Luis fue a grabar `n64-coleccion` al estudio. El HTML no aparecia en `G:\Mi unidad\Studio\tarrobot\studio\`. Tuvo que cancelar y grabar otro episodio. **Causa raiz:** el script de sync solo copiaba `_template-*.html`, NUNCA los HTMLs de episodios. Fix aplicado en commit `b8898ae`.
+
+### Que sincroniza el script (post-fix 2026-05-27)
+
+- `scripts/*.py` (TarroBot core + Sprint 17-18 modulos)
+- `studio/_template-*.html` (templates de TarroBot)
+- **`studio/*.html` (TODOS los HTMLs de episodios del canal)** ← FIX
+- **`studio/img/` recursive (imagenes de episodios)** ← FIX
+- `studio/pautas/` recursive (JSONs + MP3s pre-cargados)
+- `studio/melodias/` recursive
+- `studio/obs-aliases.json`, `studio/tarrobot-recetas.json`
+- `data/tarrobot-database.json`
+
+### Que NO sincroniza
+
+- `.venv`, `.git`, videos master grabados, capturas (`studio/captures/`)
+- Estos viajan por otros canales o se generan localmente en el estudio
+
+### Verificacion antes de grabar (5 segundos)
+
+```powershell
+# Desde el PC del estudio, antes de cargar TarroBot:
+ls "G:\Mi unidad\Studio\tarrobot\studio\<slug>.html"
+```
+
+Si el archivo no aparece: el sync no llego todavia. Esperar 1-3 min mas o forzar refresh de Drive Desktop.
+
+### Future-proofing
+
+Cuando se mueva el `obs_healthcheck` al estudio remoto, agregar check `slug_html_exists` que valide que el HTML de la pauta cargada efectivamente esta en disco antes de empezar grabacion. Eso cierra el loop preventivamente.
+
 ## Builds del paquete TarroBot Studio · Reglas
 
 **NO buildear el .exe / .zip durante la sesion, solo al cierre.**
