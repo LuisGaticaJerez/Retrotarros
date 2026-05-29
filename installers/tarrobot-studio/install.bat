@@ -5,7 +5,8 @@ setlocal enabledelayedexpansion
 REM ============================================================
 REM  TarroBot Studio - Instalador automatico para Windows 10/11
 REM  Retrotarros - doble click y listo
-REM  Version 1.2.2 (flujo: pre-flight + instalacion sin preguntas)
+REM  Version 1.2.3 (fix: deteccion Python anti-stub Store + venv ruta completa
+REM                 + gate version 3.10-3.12 + torch CPU primero en deps)
 REM ============================================================
 
 title TarroBot Studio - Configuracion
@@ -277,12 +278,42 @@ REM  Paso 1 - Python
 REM ============================================================
 echo.
 echo [1/7] Verificando Python...
-where python >nul 2>nul
-if !errorlevel! equ 0 (
-    for /f "tokens=2" %%v in ('python --version 2^>^&1') do set "PY_VER=%%v"
-    echo [OK] Python ya instalado: !PY_VER!
+set "PYEXE="
+
+REM Detectar Python REAL ignorando el alias de la Microsoft Store.
+REM El stub en WindowsApps responde a 'where python' pero NO es Python:
+REM al invocarlo abre la tienda y cuelga el instalador en el paso del venv.
+for /f "delims=" %%i in ('where python 2^>nul') do (
+    echo %%i | findstr /I "WindowsApps" >nul
+    if errorlevel 1 if not defined PYEXE set "PYEXE=%%i"
+)
+
+REM Respaldo: el py launcher suele apuntar al Python real (no al stub).
+if not defined PYEXE (
+    for /f "delims=" %%i in ('py -3.12 -c "import sys;print(sys.executable)" 2^>nul') do set "PYEXE=%%i"
+)
+if not defined PYEXE (
+    for /f "delims=" %%i in ('py -3 -c "import sys;print(sys.executable)" 2^>nul') do set "PYEXE=%%i"
+)
+
+REM Rechazar Python demasiado nuevo: whisper/torch/numba no tienen wheels para
+REM 3.13+, y pip se cuelga resolviendo/compilando. Solo aceptamos 3.10/3.11/3.12.
+if defined PYEXE (
+    for /f "tokens=2" %%v in ('"!PYEXE!" --version 2^>^&1') do set "PY_VER=%%v"
+    echo !PY_VER! | findstr /R "^3\.1[012]\." >nul
+    if errorlevel 1 (
+        echo [INFO] Python !PY_VER! es muy nuevo para Whisper/torch.
+        echo [INFO] Voy a instalar un Python 3.12.7 dedicado.
+        set "PYEXE="
+    )
+)
+
+if defined PYEXE (
+    echo [OK] Python real compatible encontrado: !PY_VER!
+    echo      !PYEXE!
 ) else (
-    echo [INFO] Python no encontrado. Descargando Python 3.12.7...
+    echo [INFO] No hay Python real (solo el alias de la tienda, o nada).
+    echo [INFO] Descargando Python 3.12.7...
     curl -L -o python-installer.exe https://www.python.org/ftp/python/3.12.7/python-3.12.7-amd64.exe
     if !errorlevel! neq 0 (
         echo [ERROR] No se pudo descargar Python. Verifica tu conexion.
@@ -297,8 +328,17 @@ if !errorlevel! equ 0 (
         exit /b 1
     )
     del python-installer.exe
-    set "PATH=%LOCALAPPDATA%\Programs\Python\Python312;%LOCALAPPDATA%\Programs\Python\Python312\Scripts;!PATH!"
-    echo [OK] Python instalado.
+    REM Usar la ruta COMPLETA del python recien instalado, NO 'python' a secas
+    REM (asi no volvemos a caer en el stub de la tienda).
+    set "PYEXE=%LOCALAPPDATA%\Programs\Python\Python312\python.exe"
+    if not exist "!PYEXE!" (
+        echo [ERROR] Python se instalo pero no aparece en:
+        echo         !PYEXE!
+        echo         Reinicia el PC y vuelve a correr install.bat.
+        pause
+        exit /b 1
+    )
+    echo [OK] Python instalado: !PYEXE!
 )
 
 REM ============================================================
@@ -306,12 +346,23 @@ REM  Paso 2 - venv
 REM ============================================================
 echo.
 echo [2/7] Creando entorno virtual (.venv)...
-if exist ".venv" (
-    echo [OK] .venv ya existe, saltando.
+if exist ".venv\Scripts\python.exe" (
+    echo [OK] .venv ya existe y es valido, saltando.
 ) else (
-    python -m venv .venv
+    REM Si quedo un .venv a medias de un intento anterior, lo borramos.
+    if exist ".venv" (
+        echo [INFO] Habia un .venv incompleto, lo recreo...
+        rmdir /s /q ".venv"
+    )
+    "!PYEXE!" -m venv .venv
     if !errorlevel! neq 0 (
         echo [ERROR] No se pudo crear el entorno virtual.
+        pause
+        exit /b 1
+    )
+    if not exist ".venv\Scripts\python.exe" (
+        echo [ERROR] El venv se creo pero falta .venv\Scripts\python.exe
+        echo         Probablemente Python quedo a medias. Reinstala Python.
         pause
         exit /b 1
     )
@@ -322,12 +373,28 @@ REM ============================================================
 REM  Paso 3 - Dependencias Python
 REM ============================================================
 echo.
-echo [3/7] Instalando dependencias Python (puede tardar 2-5 min)...
-call .venv\Scripts\activate.bat
-python -m pip install --upgrade pip >nul
-pip install -r requirements.txt
+echo [3/7] Instalando dependencias Python (puede tardar 3-8 min)...
+REM Usamos el python del venv por ruta directa (mas confiable que activate.bat
+REM y evita cualquier interferencia del alias de la tienda).
+set "VPY=.venv\Scripts\python.exe"
+
+echo [INFO] Actualizando pip...
+"!VPY!" -m pip install --upgrade pip
+
+REM PyTorch (dependencia de openai-whisper) PRIMERO y desde el indice CPU.
+REM Sin esto, pip intenta resolver wheels gigantes (variante CUDA ~2.5 GB) o
+REM compilar desde fuente, y el instalador parece colgado sin dar error.
+echo [INFO] Instalando PyTorch (CPU) - el paso mas pesado, paciencia...
+"!VPY!" -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+if !errorlevel! neq 0 (
+    echo [WARN] Fallo el torch CPU dedicado. Intento via requirements normal...
+)
+
+echo [INFO] Instalando el resto de dependencias (FastAPI, Whisper, edge-tts...)...
+"!VPY!" -m pip install -r requirements.txt
 if !errorlevel! neq 0 (
     echo [ERROR] Fallo la instalacion de dependencias.
+    echo         Revisa el mensaje de pip de arriba para ver cual.
     pause
     exit /b 1
 )
