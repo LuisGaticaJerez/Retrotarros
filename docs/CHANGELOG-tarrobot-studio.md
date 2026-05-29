@@ -5,6 +5,58 @@ en GitHub Releases con ZIP + .exe firmados.
 
 ---
 
+## v1.5.1 · Hotfix · "Instalacion a prueba de balas"
+
+**Fecha:** 2026-05-28
+**Nombre clave:** que no se cuelgue mas en silencio
+
+Fix de un cuelgue silencioso del instalador en PC limpio (sin Python) y
+blindaje del arranque para que ningun fallo sea invisible.
+
+### Sintoma
+
+`install.bat` corria, no daba error, pero nunca terminaba (se quedaba en
+un paso `[x/7]`). En produccion, a veces TarroBot "no abria" sin dejar rastro.
+
+### Causa raiz
+
+Windows 10/11 trae un alias falso `python.exe` en `WindowsApps` (abre la
+Microsoft Store). `where python` lo detectaba como Python real -> el script
+saltaba la descarga -> `python -m venv` ejecutaba el stub -> abria la Store
+y se colgaba sin error.
+
+### Fixes en `install.bat`
+
+- **Deteccion de Python anti-stub**: ignora el `python.exe` de WindowsApps
+  (filtra por ruta), usa el `py` launcher como respaldo y guarda la ruta
+  COMPLETA del exe.
+- **Gate de version**: rechaza Python 3.13+ (whisper/torch/numba sin wheels,
+  causa cuelgue de pip) y fuerza la descarga del 3.12.7 dedicado.
+- **venv robusto**: se crea con la ruta completa de Python, valida
+  `.venv\Scripts\python.exe` y recrea un `.venv` incompleto de intentos previos.
+- **deps sin cuelgue**: instala PyTorch desde el indice CPU PRIMERO (evita
+  resolver wheels CUDA ~2.5 GB o compilar desde fuente), con progreso visible.
+- **smoke-test**: tras instalar, verifica que las dependencias clave IMPORTEN.
+  Si algo falla, lo dice en la instalacion en vez de fallar mudo al arrancar.
+
+### Fixes en `scripts/tarrobot-tray.py`
+
+- **Anti-fallo-silencioso bajo pythonw**: redirige stdout/stderr a
+  `logs/tarrobot-tray.log`, captura cualquier crash de arranque y muestra un
+  MessageBox de Windows con el detalle + ruta del log.
+- **Chequeo de puerto previo**: si 8765 ya esta ocupado, avisa con un cartel
+  claro (TarroBot ya corriendo) en vez de mostrar un icono "vivo" pero muerto.
+- **Server thread con guarda**: si uvicorn no puede arrancar, loguea, avisa y
+  mata el proceso (antes el icono aparecia pero la TV/panel no cargaban nunca).
+
+### Docs
+
+- `README-ESTUDIO.txt`: nuevas entradas en PROBLEMAS COMUNES para
+  "no pasa nada al abrir TarroBot" (con ruta del log) y "la instalacion se
+  queda pegada".
+
+---
+
 ## v1.5.0 · Sprint 18 · "OBS Assistant + CapCut Ready"
 
 **Fecha:** 2026-05-24

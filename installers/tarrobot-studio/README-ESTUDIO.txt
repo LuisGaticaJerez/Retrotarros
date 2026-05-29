@@ -567,6 +567,23 @@ comentario sobre el material). Recomendacion:
 PROBLEMAS COMUNES
 ============================================================
 
+"Le doy a TarroBot y no pasa nada / no aparece el icono"
+  -> TarroBot corre sin ventana (modo bandeja). Si algo falla al
+     arrancar, ahora deja un log y muestra un cartel de error.
+     Revisa el archivo de log:
+        logs\tarrobot-tray.log
+     (en la carpeta de instalacion, o en el repo si usas modo Drive).
+     Ahi dice exactamente que fallo. Tambien podes correr
+     TarroBot-debug.bat para verlo todo en una ventana.
+
+"La instalacion (install.bat) se queda pegada y nunca termina"
+  -> Casi siempre es el paso [3/7] bajando PyTorch (es pesado, paciencia)
+     o un Python demasiado nuevo. El instalador v1.2.3+ ya:
+       - ignora el Python falso de la Microsoft Store
+       - rechaza Python 3.13+ (incompatible) y baja un 3.12.7 dedicado
+       - instala PyTorch CPU primero para no descargar wheels gigantes
+     Si igual se cuelga, cierra, abre install.bat de nuevo (retoma).
+
 "Falta la API key"
   -> Reinstala o ejecuta en CMD:
      setx ANTHROPIC_API_KEY "sk-ant-tu-key-aqui"

@@ -5,8 +5,9 @@ setlocal enabledelayedexpansion
 REM ============================================================
 REM  TarroBot Studio - Instalador automatico para Windows 10/11
 REM  Retrotarros - doble click y listo
-REM  Version 1.2.3 (fix: deteccion Python anti-stub Store + venv ruta completa
-REM                 + gate version 3.10-3.12 + torch CPU primero en deps)
+REM  Version 1.5.1 hotfix (fix: deteccion Python anti-stub Store + venv ruta
+REM                 completa + gate version 3.10-3.12 + torch CPU primero en
+REM                 deps + smoke-test imports). Ver CHANGELOG-tarrobot-studio.md
 REM ============================================================
 
 title TarroBot Studio - Configuracion
@@ -398,7 +399,19 @@ if !errorlevel! neq 0 (
     pause
     exit /b 1
 )
-echo [OK] Dependencias instaladas.
+
+REM Smoke-test: que las dependencias clave IMPORTEN de verdad. Asi el fallo
+REM aparece aca (ruidoso) y no despues al arrancar TarroBot con pythonw (mudo).
+echo [INFO] Verificando que las dependencias clave importen...
+"!VPY!" -c "import fastapi, uvicorn, jinja2, edge_tts, anthropic, whisper, pystray, PIL, discord; print('imports OK')"
+if !errorlevel! neq 0 (
+    echo [ERROR] Las dependencias se instalaron pero alguna NO importa.
+    echo         Mira el mensaje de arriba para ver cual falta.
+    echo         Suele arreglarse corriendo install.bat de nuevo.
+    pause
+    exit /b 1
+)
+echo [OK] Dependencias instaladas y verificadas.
 
 REM ============================================================
 REM  Paso 4 - ffmpeg
