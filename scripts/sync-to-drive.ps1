@@ -105,8 +105,37 @@ foreach ($html in $htmlFiles) {
     }
 }
 
-# === 2. CONVERTIR PAUTAS Y DISCUSIONES MD → DOCX ===
-Write-Host "`n[2/2] Convirtiendo pautas/discusiones a DOCX..." -ForegroundColor Yellow
+# === 2. VERIFICACION: todo HTML del repo aterrizo en su carpeta por-episodio ===
+# Salvaguarda anti-bug 2026-05-28: Luis fue a grabar n64-coleccion y el HTML no
+# estaba en G:\Mi unidad\Studio\n64-coleccion\ (solo las capturas). Causa: el sync
+# se corrio antes de que existiera el HTML. Este bloque corre ANTES de la conversion
+# DOCX (que puede fallar por warnings de pandoc) para garantizar que la verificacion
+# critica de grabacion siempre se ejecute. Falla ruidoso si falta algun episodio.
+Write-Host "`n[2/3] Verificando que cada HTML aterrizo en su carpeta..." -ForegroundColor Yellow
+$faltantes = @()
+foreach ($html in $htmlFiles) {
+    $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
+    if ($slug.StartsWith("_")) { continue }
+    $destHtml = Join-Path (Join-Path $DriveRoot $slug) "$slug.html"
+    if (-not (Test-Path $destHtml)) { $faltantes += $slug }
+}
+if ($faltantes.Count -gt 0) {
+    Write-Host "  [ERROR] Estos episodios NO quedaron en el Drive:" -ForegroundColor Red
+    $faltantes | ForEach-Object { Write-Host "          - $_" -ForegroundColor Red }
+    Write-Host "  Revisa antes de ir a grabar." -ForegroundColor Red
+    exit 1
+} else {
+    $totalEp = ($htmlFiles | Where-Object { -not $_.Name.StartsWith("_") }).Count
+    Write-Host "  OK - los $totalEp HTMLs estan en su carpeta por-episodio." -ForegroundColor Green
+}
+
+# === 3. CONVERTIR PAUTAS Y DISCUSIONES MD → DOCX ===
+# DOCX es conveniencia (Word en el estudio), NO critico para grabar. pandoc tira
+# warnings de TeX que bajo ErrorActionPreference=Stop matarian el script, asi que
+# lo bajamos a Continue solo para este bloque.
+$prevEAP = $ErrorActionPreference
+$ErrorActionPreference = "Continue"
+Write-Host "`n[3/3] Convirtiendo pautas/discusiones a DOCX..." -ForegroundColor Yellow
 
 if (-not $PandocExe) {
     Write-Host "  WARN: pandoc no encontrado. Saltando conversión a DOCX." -ForegroundColor Yellow
@@ -136,6 +165,8 @@ if (-not $PandocExe) {
         }
     }
 }
+
+$ErrorActionPreference = $prevEAP
 
 Write-Host "`nSincronización completa. Drive Desktop subirá los cambios a la nube." -ForegroundColor Green
 Write-Host "Ver en: https://drive.google.com → Mi unidad → Studio" -ForegroundColor Green

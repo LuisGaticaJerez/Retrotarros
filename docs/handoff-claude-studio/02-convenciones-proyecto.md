@@ -139,32 +139,34 @@ Antes pasaba esto: se creaba el HTML del estudio + capturas, pero faltaban los d
 
 ## Sync Drive al estudio · Regla inmutable
 
-**Antes de cualquier sesion de grabacion, correr `scripts/sync-tarrobot-to-drive.ps1` y esperar 1-3 min a que Drive Desktop sincronice al cloud.**
+**Hay DOS scripts de sync y NO hacen lo mismo. No los confundas.**
 
-Esta regla NO es opcional. Existe porque historicamente paso esto:
-- 2026-05-27: Luis fue a grabar `n64-coleccion` al estudio. El HTML no aparecia en `G:\Mi unidad\Studio\tarrobot\studio\`. Tuvo que cancelar y grabar otro episodio. **Causa raiz:** el script de sync solo copiaba `_template-*.html`, NUNCA los HTMLs de episodios. Fix aplicado en commit `b8898ae`.
+| Script | Destino | Para que |
+|---|---|---|
+| `scripts/sync-to-drive.ps1` | `G:\Mi unidad\Studio\<slug>\<slug>.html` (+ img, captures, DOCX) | **El que importa para grabar.** Layout por-episodio: cada episodio en su carpeta. Es lo que abres en el estudio. |
+| `scripts/sync-tarrobot-to-drive.ps1` | `G:\Mi unidad\Studio\tarrobot\studio\` | Solo para la app TarroBot (templates + scripts py + DB). NO es el layout de grabacion. |
 
-### Que sincroniza el script (post-fix 2026-05-27)
+**Antes de cualquier sesion de grabacion, correr `scripts/sync-to-drive.ps1` y esperar 1-3 min a que Drive Desktop sincronice al cloud.**
 
-- `scripts/*.py` (TarroBot core + Sprint 17-18 modulos)
-- `studio/_template-*.html` (templates de TarroBot)
-- **`studio/*.html` (TODOS los HTMLs de episodios del canal)** ← FIX
-- **`studio/img/` recursive (imagenes de episodios)** ← FIX
-- `studio/pautas/` recursive (JSONs + MP3s pre-cargados)
-- `studio/melodias/` recursive
-- `studio/obs-aliases.json`, `studio/tarrobot-recetas.json`
-- `data/tarrobot-database.json`
+Esta regla NO es opcional. Existe por dos incidentes:
+- 2026-05-27/28: Luis fue a grabar `n64-coleccion`. En su carpeta `G:\Mi unidad\Studio\n64-coleccion\` estaban las capturas pero NO el `n64-coleccion.html`. **Causa raiz real:** `sync-to-drive.ps1` (el publisher por-episodio) se habia corrido ANTES de que existiera ese HTML, asi que nunca aterrizo. Un fix previo edito por error el script equivocado (`sync-tarrobot-to-drive.ps1`), que escribe a otra carpeta (`tarrobot\studio\`) que el estudio no usa para grabar. Fix definitivo: correr `sync-to-drive.ps1` + bloque de verificacion final que falla ruidoso si falta algun HTML.
 
-### Que NO sincroniza
+### Que sincroniza `sync-to-drive.ps1` (el de grabacion)
 
-- `.venv`, `.git`, videos master grabados, capturas (`studio/captures/`)
-- Estos viajan por otros canales o se generan localmente en el estudio
+Itera TODOS los `studio/*.html` (salvo `_template-*`). Por cada slug copia a `G:\Mi unidad\Studio\<slug>\`:
+- `<slug>.html`
+- `img/<slug>/*` (box arts, sprites, paneos)
+- `captures/*.png` (overlays para DaVinci/CapCut)
+- Pautas + discusiones MD convertidas a `.docx` (via pandoc) en `Studio/pautas/`
+
+Al final corre un **bloque de verificacion** (paso 3/3) que recorre cada HTML del repo y confirma que aterrizo en su carpeta. Si falta alguno, sale con error y lo lista. Esto es la salvaguarda anti-bug 2026-05-28.
 
 ### Verificacion antes de grabar (5 segundos)
 
 ```powershell
-# Desde el PC del estudio, antes de cargar TarroBot:
-ls "G:\Mi unidad\Studio\tarrobot\studio\<slug>.html"
+# Desde el PC del estudio, antes de cargar el HTML:
+ls "G:\Mi unidad\Studio\<slug>\<slug>.html"
+# Si no esta: en el PC de Luis correr scripts/sync-to-drive.ps1 y esperar 1-3 min.
 ```
 
 Si el archivo no aparece: el sync no llego todavia. Esperar 1-3 min mas o forzar refresh de Drive Desktop.
