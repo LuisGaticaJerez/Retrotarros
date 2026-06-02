@@ -153,8 +153,15 @@ class TarroShortJobManager:
 
         def _work():
             nonlocal render_slug
-            if job.from_pauta:
-                html = construir_desde_pauta(job.slug, params.get("out_slug"), progress=progress_cb)
+            if params.get("from_episodio"):
+                from tarroshort_render import construir_short_highlights
+                html = construir_short_highlights(
+                    job.slug, params.get("formato", "coleccion"), progress=progress_cb)
+                render_slug = html.stem
+                job.html_path = str(html)
+            elif job.from_pauta:
+                html = construir_desde_pauta(
+                    job.slug, params.get("out_slug"), formato=params.get("formato"), progress=progress_cb)
                 render_slug = html.stem
                 job.html_path = str(html)
             return generar_tarroshort(

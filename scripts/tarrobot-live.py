@@ -2664,6 +2664,21 @@ async def tarroshort_generar(payload: dict):
     import re as _re
     pauta_slug = (payload.get("pauta_slug") or "").strip()
     slug = (payload.get("slug") or "").strip()
+    episodio_slug = (payload.get("episodio_slug") or "").strip()
+    formato = (payload.get("formato") or "").strip()
+
+    if episodio_slug:
+        # highlights desde el HTML de un episodio (coleccion / entrevista)
+        if not _re.match(r"^[a-z0-9-]+$", episodio_slug):
+            return JSONResponse({"error": "episodio_slug invalido (kebab-case)"}, status_code=400)
+        html = STUDIO / f"{episodio_slug}.html"
+        if not html.exists():
+            return JSONResponse({"error": f"episodio no existe: {episodio_slug}"}, status_code=404)
+        if formato not in ("coleccion", "entrevista"):
+            formato = "entrevista" if "abriendo-el-tarro" in episodio_slug else "coleccion"
+        job_id = await tarroshort_jobs.submit(
+            episodio_slug, from_pauta=False, from_episodio=True, formato=formato)
+        return {"ok": True, "job_id": job_id, "queue_size": tarroshort_jobs._queue.qsize()}
 
     if pauta_slug:
         if not _re.match(r"^[a-z0-9-]+$", pauta_slug):
@@ -2722,7 +2737,18 @@ async def tarroshort_fuentes():
         shorts = sorted(h.stem for h in STUDIO.glob("tarroshort-*.html"))
     except Exception:
         shorts = []
-    return {"ok": True, "pautas": pautas, "shorts": shorts}
+    # Episodios para highlights: colecciones + entrevistas (Abriendo el Tarro)
+    episodios = []
+    try:
+        for h in sorted(STUDIO.glob("*coleccion*.html")):
+            if not h.name.startswith("_"):
+                episodios.append({"slug": h.stem, "formato": "coleccion"})
+        for h in sorted(STUDIO.glob("abriendo-el-tarro-*.html")):
+            if not h.name.startswith("_"):
+                episodios.append({"slug": h.stem, "formato": "entrevista"})
+    except Exception:
+        episodios = []
+    return {"ok": True, "pautas": pautas, "shorts": shorts, "episodios": episodios}
 
 
 # ─────────────────────────────────────────────────────────────────────────

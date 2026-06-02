@@ -1934,6 +1934,11 @@ async function tarroshortCargarFuentes() {
       html += d.pautas.map(s => '<option value="' + s + '" data-from-pauta="1">' + s + '</option>').join('');
       html += '</optgroup>';
     }
+    if (d.episodios && d.episodios.length) {
+      html += '<optgroup label="Coleccion / Entrevista (highlights)">';
+      html += d.episodios.map(e => '<option value="' + e.slug + '" data-from-episodio="1" data-formato="' + e.formato + '">' + e.slug + ' (' + e.formato + ')</option>').join('');
+      html += '</optgroup>';
+    }
     if (d.shorts && d.shorts.length) {
       html += '<optgroup label="Shorts ya armados (listos para video)">';
       html += d.shorts.map(s => '<option value="' + s + '" data-from-pauta="0">' + s + '</option>').join('');
@@ -1947,9 +1952,13 @@ async function tarroshortGenerar() {
   const sel = document.getElementById('tshortSlug');
   const opt = sel.options[sel.selectedIndex];
   const slug = (sel.value || '').trim();
-  if (!slug) { alert('Elige una pauta o short de la lista'); return; }
+  if (!slug) { alert('Elige una pauta, episodio o short de la lista'); return; }
+  const fromEpisodio = !!(opt && opt.dataset.fromEpisodio === '1');
   const fromPauta = !!(opt && opt.dataset.fromPauta === '1');
-  const body = fromPauta ? { pauta_slug: slug } : { slug: slug };
+  let body;
+  if (fromEpisodio) body = { episodio_slug: slug, formato: opt.dataset.formato || 'coleccion' };
+  else if (fromPauta) body = { pauta_slug: slug };
+  else body = { slug: slug };
 
   const data = await post('/api/tarroshort/generar', body);
   if (!data || !data.ok) return;
