@@ -25,7 +25,9 @@ reemplaza el MP3 y vuelve a correr para usar tu propia narracion).
 
 import argparse
 import asyncio
+import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -249,15 +251,145 @@ def generar_tarroshort(slug: str, voice: str = VOZ_DEFAULT, pitch: str = PITCH_D
         shutil.rmtree(work, ignore_errors=True)
 
 
+# ───────────────────────── builder desde pauta JSON ──────────────────────────
+def _slugify(s: str) -> str:
+    s = s.lower()
+    repl = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u", "ñ": "n", "ü": "u"}
+    for a, b in repl.items():
+        s = s.replace(a, b)
+    s = re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+    return s
+
+
+def _esc(s: str) -> str:
+    return (s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
+
+
+def _primera_frase(texto: str, max_len: int = 170) -> str:
+    """Primera frase del texto (hook), para la linea breve del short."""
+    t = (texto or "").strip()
+    m = re.search(r"(.+?[.!?])(\s|$)", t)
+    frase = m.group(1).strip() if m else t
+    if len(frase) > max_len:
+        frase = frase[:max_len].rsplit(" ", 1)[0].rstrip(",;:") + "..."
+    return frase
+
+
+def construir_desde_pauta(pauta_slug: str, out_slug=None, progress=None) -> Path:
+    """Lee studio/pautas/<pauta_slug>.tarrobot.json y arma studio/tarroshort-<slug>.html
+    clonando la estructura del template. Llena rank, nombre, meta y la linea breve.
+    El precio (highlight) y las fotos los completa Luis."""
+    repo = _resolve_repo()
+    pauta_path = repo / "studio" / "pautas" / f"{pauta_slug}.tarrobot.json"
+    if not pauta_path.exists():
+        raise FileNotFoundError(f"No existe la pauta: {pauta_path}")
+    template_path = repo / "studio" / "_template-tarroshort.html"
+    if not template_path.exists():
+        raise FileNotFoundError(f"No existe el template: {template_path}")
+
+    data = json.loads(pauta_path.read_text(encoding="utf-8"))
+    datos = data.get("datos", [])
+    if not datos:
+        raise ValueError("La pauta no tiene 'datos'.")
+    out_slug = out_slug or pauta_slug
+    episodio = data.get("episodio") or pauta_slug.replace("-", " ").title()
+    img_dir = f"img/{out_slug}"
+
+    template = template_path.read_text(encoding="utf-8")
+    head, _, rest = template.partition('<div class="deck" id="deck">')
+    nav_idx = rest.find('<nav class="footer">')
+    foot = rest[nav_idx:]
+
+    n = len(datos)
+    slides = []
+
+    # INTRO
+    titulo = _esc(episodio.upper())
+    saludo = ("Soy TarroBot. Trabajo con Koko y Luis en Retrotarros. "
+              f"Hoy vamos a ver {_esc(episodio)}. Quedate hasta el final que el numero uno es una locura.")
+    slides.append(
+        '  <section class="slide active intro">\n'
+        '    <span class="slide-num">01</span>\n'
+        '    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>\n'
+        '    <div class="pre">RETROTARROS</div>\n'
+        f'    <div class="titulo">{titulo}</div>\n'
+        f'    <div class="saludo">{saludo}</div>\n'
+        '  </section>'
+    )
+
+    # ITEMS (la pauta va del 10 al 1: datos[0] = puesto mas alto del numero)
+    for i, d in enumerate(datos):
+        rank = n - i
+        num = i + 2
+        name = _esc((d.get("tema") or "").upper())
+        partes = [str(d.get("consola") or ""), str(d.get("ano") or ""), str(d.get("editor") or "")]
+        meta = _esc(" · ".join([p for p in partes if p]))
+        line = _esc(_primera_frase(d.get("texto", "")))
+        photo = f"{img_dir}/{_slugify(d.get('tema', f'item-{rank}'))}.jpg"
+        slides.append(
+            '  <section class="slide item">\n'
+            f'    <span class="slide-num">{num:02d}</span>\n'
+            '    <div class="brand">RETROTARROS</div>\n'
+            f'    <div class="rank-badge"><span class="hash">#</span>{rank}</div>\n'
+            '    <div class="item-photo">\n'
+            f'      <img src="{photo}" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">\n'
+            f'      <div class="ph-fallback" style="display:none">{name}</div>\n'
+            '    </div>\n'
+            f'    <div class="item-name">{name}</div>\n'
+            f'    <div class="item-meta">{meta}</div>\n'
+            '    <div class="item-highlight">[precio / dato]</div>\n'
+            f'    <div class="item-line">{line}</div>\n'
+            '    <svg class="tb-corner"><use href="#tarrobot-mascot"/></svg>\n'
+            '  </section>'
+        )
+
+    # CIERRE
+    cierre_num = n + 2
+    slides.append(
+        '  <section class="slide cierre">\n'
+        f'    <span class="slide-num">{cierre_num:02d}</span>\n'
+        '    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>\n'
+        '    <div class="cta">SIGUE A <span class="mg">RETROTARROS</span></div>\n'
+        '    <div class="sub">El ranking completo esta en el canal. Comenta cual te sorprendio y sigue para mas retro.</div>\n'
+        '  </section>'
+    )
+
+    deck = '<div class="deck" id="deck">\n\n' + "\n\n".join(slides) + "\n\n</div>\n\n"
+    html = head + deck + foot
+
+    out_path = repo / "studio" / f"tarroshort-{out_slug}.html"
+    out_path.write_text(html, encoding="utf-8")
+    if progress:
+        progress(f"HTML armado: {out_path} ({n} items)")
+    print(f"[tarroshort] HTML armado desde pauta: {out_path}  ({n} items)")
+    print(f"[tarroshort] Faltan: fotos en studio/{img_dir}/ y los precios ([precio / dato]).")
+    return out_path
+
+
 def main():
     ap = argparse.ArgumentParser(description="Genera un MP4 vertical de TarroShort (TarroBot leyendo).")
-    ap.add_argument("slug", help="Slug del HTML en studio/ (ej. tarroshort-snes-top-precios)")
+    ap.add_argument("slug", nargs="?", help="Slug del HTML en studio/ a renderizar (ej. tarroshort-snes-top-precios)")
+    ap.add_argument("--from-pauta", metavar="PAUTA_SLUG", help="Arma el HTML del short desde studio/pautas/<PAUTA_SLUG>.tarrobot.json")
+    ap.add_argument("--render", action="store_true", help="Tras --from-pauta, renderiza tambien el MP4")
     ap.add_argument("--voice", default=VOZ_DEFAULT)
     ap.add_argument("--pitch", default=PITCH_DEFAULT)
     ap.add_argument("--rate", default=RATE_DEFAULT)
     ap.add_argument("--out", default=None, help="Ruta de salida MP4 (default studio/shorts/<slug>.mp4)")
     args = ap.parse_args()
     try:
+        if args.from_pauta:
+            out_html = construir_desde_pauta(args.from_pauta)
+            render_slug = out_html.stem  # tarroshort-<slug>
+            if args.render:
+                out = generar_tarroshort(render_slug, args.voice, args.pitch, args.rate, args.out)
+                print(f"OK: {out}")
+            else:
+                print(f"OK: {out_html}")
+                print("Agrega fotos + precios y luego corre:  "
+                      f"python scripts/tarroshort_render.py {render_slug}")
+            return
+        if not args.slug:
+            ap.error("falta el slug a renderizar, o usa --from-pauta")
         out = generar_tarroshort(args.slug, args.voice, args.pitch, args.rate, args.out)
         print(f"OK: {out}")
     except Exception as e:
