@@ -44,7 +44,7 @@ W, H, FPS = 1080, 1920, 30
 REC_SECONDS = 4.5      # cuanto grabamos del loop crudo (suficiente para 2-3 ciclos)
 LOOP_TRIM_START = 1.0  # descartamos el arranque (navegacion + fuentes + settle)
 LOOP_LEN = 3.0         # largo del loop limpio que se repite
-TAIL_PAD = 0.6         # colita despues de la voz para que no quede seca
+TAIL_PAD = 0.3         # colita despues de la voz para que no quede seca
 
 
 def _resolve_repo() -> Path:
@@ -205,14 +205,21 @@ def generar_tarroshort(slug: str, voice: str = VOZ_DEFAULT, pitch: str = PITCH_D
         n = len(raw_clips)
         _say(f"{n} escenas detectadas")
 
-        # FASE B · voces (solo las que faltan; respeta MP3 propios)
+        # FASE B · voces. El nombre incluye un HASH del texto+voz, asi que si el
+        # texto de la escena cambia se regenera la voz (no reusa audio viejo de
+        # otra version del short). Si el texto es identico, reusa (rapido).
+        import hashlib
         voice_paths = []
         pending = []
         for i, txt in enumerate(texts):
-            mp3 = audio_dir / f"scene-{i+1:02d}.mp3"
-            if txt.strip() and not mp3.exists():
+            if not txt.strip():
+                voice_paths.append(None)
+                continue
+            h = hashlib.md5(f"{txt}|{voice}|{pitch}|{rate}".encode("utf-8")).hexdigest()[:10]
+            mp3 = audio_dir / f"scene-{i+1:02d}-{h}.mp3"
+            if not mp3.exists():
                 pending.append((txt, voice, pitch, rate, mp3))
-            voice_paths.append(mp3 if txt.strip() else None)
+            voice_paths.append(mp3)
         if pending:
             _say(f"generando voz de {len(pending)} escenas (edge-tts)...")
             asyncio.run(_gen_all_voices(pending))
@@ -312,7 +319,7 @@ Escribe UNA reaccion hablada para que TarroBot la lea en voz alta.
 Reglas ESTRICTAS:
 - Espanol NEUTRO. Nada de jergas, chilenismos, voseo ni acento de ningun pais.
 - USA tildes correctas y comas, para marcar las pausas naturales al hablar.
-- Entre 8 y 16 palabras. Una sola frase (a lo mas dos muy cortas).
+- Entre 6 y 11 palabras. UNA sola frase corta (para un short agil).
 - Reacciona o interpreta el dato (sorpresa, gancho, dato curioso), NO lo leas literal.
 - Sin emojis, sin hashtags, sin comillas dentro del texto.
 
@@ -415,8 +422,8 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
 
     # INTRO (saludo neutro, con tildes/comas para que TarroBot pause bien)
     titulo = _esc(episodio.upper())
-    saludo = (f"Soy TarroBot, del canal Retrotarros. Hoy, junto a Koko y Luis, "
-              f"vemos {_esc(episodio)}. Partimos desde el número {n}.")
+    saludo = (f"Soy TarroBot, de Retrotarros. Hoy vemos {_esc(episodio)}, "
+              f"desde el número {n}.")
     slides.append(
         '  <section class="slide active intro">\n'
         '    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>\n'
@@ -458,9 +465,8 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
 
     # CIERRE / CLIFFHANGER: si quedaron puestos sin mostrar, los teaseamos al canal
     if teaser_n > 0:
-        cta_sub = (f"¿Quieres los primeros {teaser_n}? El ranking completo está en el canal. "
-                   f"Busca Retrotarros en YouTube, y descúbrelos.")
-        cta_titulo = f'LOS {teaser_n} PRIMEROS,<br><span class="mg">EN EL CANAL</span>'
+        cta_sub = (f"¿Quieres el top {teaser_n}? Está completo en el canal.")
+        cta_titulo = f'EL TOP {teaser_n},<br><span class="mg">EN EL CANAL</span>'
     else:
         cta_sub = "El ranking completo esta en el canal. Comenta cual te sorprendio y sigue para mas retro."
         cta_titulo = 'SIGUE A <span class="mg">RETROTARROS</span>'
