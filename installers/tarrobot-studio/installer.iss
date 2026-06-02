@@ -82,6 +82,7 @@ Source: "..\..\scripts\obs_recorder.py";    DestDir: "{app}\scripts"; Flags: ign
 Source: "..\..\scripts\capcut_ready.py";    DestDir: "{app}\scripts"; Flags: ignoreversion
 ; Sprint 19: TarroShort (MP4 vertical para redes)
 Source: "..\..\scripts\tarroshort_render.py"; DestDir: "{app}\scripts"; Flags: ignoreversion
+Source: "..\..\scripts\tarroshort_jobs.py";   DestDir: "{app}\scripts"; Flags: ignoreversion
 Source: "..\..\studio\_template-tarroshort.html"; DestDir: "{app}\studio"; Flags: ignoreversion
 
 ; ───────── Templates HTML ─────────

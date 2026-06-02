@@ -87,6 +87,7 @@ Copy-Item (Join-Path $RepoRoot "scripts\obs_recorder.py") -Destination (Join-Pat
 Copy-Item (Join-Path $RepoRoot "scripts\capcut_ready.py") -Destination (Join-Path $PackageDir "scripts\")
 # Sprint 19: TarroShort (MP4 vertical para redes)
 Copy-Item (Join-Path $RepoRoot "scripts\tarroshort_render.py") -Destination (Join-Path $PackageDir "scripts\")
+Copy-Item (Join-Path $RepoRoot "scripts\tarroshort_jobs.py") -Destination (Join-Path $PackageDir "scripts\")
 # Subcarpeta connectors (Twitch + Discord + YouTube)
 New-Item -ItemType Directory -Path (Join-Path $PackageDir "scripts\connectors") -Force | Out-Null
 Copy-Item (Join-Path $RepoRoot "scripts\connectors\*.py") -Destination (Join-Path $PackageDir "scripts\connectors\")
