@@ -45,6 +45,7 @@ REC_SECONDS = 4.5      # cuanto grabamos del loop crudo (suficiente para 2-3 cic
 LOOP_TRIM_START = 1.0  # descartamos el arranque (navegacion + fuentes + settle)
 LOOP_LEN = 3.0         # largo del loop limpio que se repite
 TAIL_PAD = 0.3         # colita despues de la voz para que no quede seca
+MIN_SCENE = 3.8        # piso por escena: ritmo parejo, ningun item pasa volando
 
 
 def _resolve_repo() -> Path:
@@ -153,7 +154,7 @@ def _build_scene(ffmpeg: str, raw_webm: Path, voice_mp3, dur: float, out_mp4: Pa
         "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "veryfast",
         str(loop_mp4),
     ])
-    total = round(dur + TAIL_PAD, 2)
+    total = round(max(dur + TAIL_PAD, MIN_SCENE), 2)
     if voice_mp3 is not None:
         # 2) repetir loop hasta total + pegar voz
         _run([
@@ -494,19 +495,171 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
     return out_path
 
 
+# ───────────── formato HIGHLIGHTS (coleccion / entrevista) ───────────────────
+def _extraer_highlights(html_path: Path, formato: str, max_items: int):
+    """Saca los destacados/joyas del HTML del episodio via Playwright.
+    coleccion -> .tv-namebox .tv-title ; entrevista -> .joya-name.
+    Devuelve (portada, [nombres], tag)."""
+    from playwright.sync_api import sync_playwright
+    sel = ".joya-name" if formato == "entrevista" else ".tv-namebox .tv-title"
+    tag = "JOYA" if formato == "entrevista" else "DESTACADO"
+    with sync_playwright() as pw:
+        b = pw.chromium.launch()
+        pg = b.new_page()
+        pg.goto(html_path.as_uri(), wait_until="domcontentloaded")
+        names = pg.evaluate(f"Array.from(document.querySelectorAll('{sel}')).map(e=>e.textContent.trim())")
+        portada = pg.evaluate("((document.querySelector('.ep-title')||{}).textContent||'').trim() "
+                              "|| ((document.querySelector('.nombre')||{}).textContent||'').trim()")
+        b.close()
+    seen, out = set(), []
+    for nm in names:
+        if not nm or nm.startswith("[") or nm in seen:
+            continue
+        seen.add(nm)
+        out.append(nm)
+    return (portada or "").strip(), out[:max_items], tag
+
+
+def _asegurar_reacciones_highlights(out_slug: str, names: list, formato: str, portada: str, progress=None) -> dict:
+    """Reacciones LLM por pieza, cacheadas en studio/shorts/highlights/<slug>.json
+    (editables; no se regeneran). Devuelve dict {nombre: reaccion}."""
+    repo = _resolve_repo()
+    side_dir = repo / "studio" / "shorts" / "highlights"
+    side_dir.mkdir(parents=True, exist_ok=True)
+    sidecar = side_dir / f"{out_slug}.json"
+    cache = {}
+    if sidecar.exists():
+        try:
+            cache = json.loads(sidecar.read_text(encoding="utf-8"))
+        except Exception:
+            cache = {}
+    changed = False
+    for nm in names:
+        if (cache.get(nm) or "").strip():
+            continue
+        if formato == "entrevista":
+            ctx = f"{nm}, una joya de la coleccion del invitado, con valor sentimental y nostalgia."
+        else:
+            ctx = f"{nm}, una pieza destacada de la coleccion {portada}."
+        if progress:
+            progress(f"reaccion LLM: {nm}")
+        res = _reaccion_llm({"tema": nm, "texto": ctx}, "calidad")
+        cache[nm] = ((res or {}).get("reaccion") or "").strip() or nm.title()
+        changed = True
+    if changed:
+        sidecar.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
+        if progress:
+            progress("reacciones guardadas")
+    return cache
+
+
+def construir_short_highlights(source_slug: str, formato: str, out_slug=None,
+                               max_items: int = 6, progress=None) -> Path:
+    """Arma un short de highlights (coleccion/entrevista) leyendo los destacados/joyas
+    del HTML del episodio studio/<source_slug>.html. Reusa las imagenes del episodio."""
+    repo = _resolve_repo()
+    html_src = repo / "studio" / f"{source_slug}.html"
+    if not html_src.exists():
+        raise FileNotFoundError(f"No existe el episodio: {html_src}")
+    template_path = repo / "studio" / "_template-tarroshort.html"
+    if not template_path.exists():
+        raise FileNotFoundError(f"No existe el template: {template_path}")
+    out_slug = out_slug or source_slug
+
+    portada, names, tag = _extraer_highlights(html_src, formato, max_items)
+    if not names:
+        raise ValueError(f"No encontre destacados/joyas en {source_slug} (formato {formato}).")
+    cache = _asegurar_reacciones_highlights(out_slug, names, formato, portada, progress=progress)
+    img_dir = f"img/{source_slug}"  # reusa el arte del episodio
+
+    template = template_path.read_text(encoding="utf-8")
+    head, _, rest = template.partition('<div class="deck" id="deck">')
+    foot = rest[rest.find('<nav class="footer">'):]
+
+    titulo = _esc((portada or source_slug.replace("-", " ")).upper())
+    if formato == "entrevista":
+        saludo = f"Soy TarroBot, de Retrotarros. Estas son las joyas de {_esc(portada)}."
+        cta_sub = "La entrevista completa esta en el canal. Busca Retrotarros en YouTube."
+        cta_titulo = 'LA ENTREVISTA COMPLETA,<br><span class="mg">EN EL CANAL</span>'
+    else:
+        saludo = f"Soy TarroBot, de Retrotarros. Estos son los destacados de {_esc(portada)}."
+        cta_sub = "La coleccion completa esta en el canal. Busca Retrotarros en YouTube."
+        cta_titulo = 'LA COLECCION COMPLETA,<br><span class="mg">EN EL CANAL</span>'
+
+    slides = [
+        '  <section class="slide active intro">\n'
+        '    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>\n'
+        '    <div class="pre">RETROTARROS</div>\n'
+        f'    <div class="titulo">{titulo}</div>\n'
+        f'    <div class="saludo">{saludo}</div>\n'
+        '  </section>'
+    ]
+    for nm in names:
+        reaccion = _esc((cache.get(nm) or nm))
+        name_up = _esc(nm.upper())
+        photo = f"{img_dir}/{_slugify(nm)}.jpg"
+        slides.append(
+            '  <section class="slide item">\n'
+            '    <div class="item-top">\n'
+            '      <div class="tb-mini"><svg class="tb-mascot"><use href="#tarrobot-mascot"/></svg></div>\n'
+            f'      <div class="item-tag">{tag}</div>\n'
+            '    </div>\n'
+            '    <div class="item-photo">\n'
+            f'      <img src="{photo}" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">\n'
+            f'      <div class="ph-fallback" style="display:none">{name_up}</div>\n'
+            '    </div>\n'
+            f'    <div class="item-name">{name_up}</div>\n'
+            f'    <div class="item-line">{reaccion}</div>\n'
+            '  </section>'
+        )
+    slides.append(
+        '  <section class="slide cierre">\n'
+        '    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>\n'
+        f'    <div class="cta">{cta_titulo}</div>\n'
+        f'    <div class="sub">{cta_sub}</div>\n'
+        '  </section>'
+    )
+
+    deck = '<div class="deck" id="deck">\n\n' + "\n\n".join(slides) + "\n\n</div>\n\n"
+    out_path = repo / "studio" / f"tarroshort-{out_slug}.html"
+    out_path.write_text(head + deck + foot, encoding="utf-8")
+    msg = f"HTML highlights ({formato}): {len(names)} piezas de {source_slug}"
+    if progress:
+        progress(msg)
+    print(f"[tarroshort] {msg} -> {out_path}")
+    print(f"[tarroshort] Reacciones editables en studio/shorts/highlights/{out_slug}.json · fotos en studio/{img_dir}/")
+    return out_path
+
+
 def main():
     ap = argparse.ArgumentParser(description="Genera un MP4 vertical de TarroShort (TarroBot leyendo).")
     ap.add_argument("slug", nargs="?", help="Slug del HTML en studio/ a renderizar (ej. tarroshort-snes-top-precios)")
-    ap.add_argument("--from-pauta", metavar="PAUTA_SLUG", help="Arma el HTML del short desde studio/pautas/<PAUTA_SLUG>.tarrobot.json")
-    ap.add_argument("--render", action="store_true", help="Tras --from-pauta, renderiza tambien el MP4")
+    ap.add_argument("--from-pauta", metavar="PAUTA_SLUG", help="Arma el HTML del short desde studio/pautas/<PAUTA_SLUG>.tarrobot.json (rankings)")
+    ap.add_argument("--from-episodio", metavar="SLUG", help="Arma un short de highlights desde studio/<SLUG>.html (coleccion/entrevista)")
+    ap.add_argument("--formato", choices=["calidad", "precios", "coleccion", "entrevista"], help="Forzar formato (auto-detecta del slug si no)")
+    ap.add_argument("--render", action="store_true", help="Tras armar, renderiza tambien el MP4")
     ap.add_argument("--voice", default=VOZ_DEFAULT)
     ap.add_argument("--pitch", default=PITCH_DEFAULT)
     ap.add_argument("--rate", default=RATE_DEFAULT)
     ap.add_argument("--out", default=None, help="Ruta de salida MP4 (default studio/shorts/<slug>.mp4)")
     args = ap.parse_args()
     try:
+        if args.from_episodio:
+            formato = args.formato or _detectar_formato(args.from_episodio)
+            if formato not in ("coleccion", "entrevista"):
+                # heuristica: si el slug arranca con 'abriendo-el-tarro' es entrevista
+                formato = "entrevista" if "abriendo-el-tarro" in args.from_episodio else "coleccion"
+            out_html = construir_short_highlights(args.from_episodio, formato)
+            render_slug = out_html.stem
+            if args.render:
+                out = generar_tarroshort(render_slug, args.voice, args.pitch, args.rate, args.out)
+                print(f"OK: {out}")
+            else:
+                print(f"OK: {out_html}")
+                print(f"Revisa reacciones/fotos y luego: python scripts/tarroshort_render.py {render_slug}")
+            return
         if args.from_pauta:
-            out_html = construir_desde_pauta(args.from_pauta)
+            out_html = construir_desde_pauta(args.from_pauta, formato=args.formato)
             render_slug = out_html.stem  # tarroshort-<slug>
             if args.render:
                 out = generar_tarroshort(render_slug, args.voice, args.pitch, args.rate, args.out)
