@@ -2705,6 +2705,26 @@ async def tarroshort_list(limit: int = 20):
     }
 
 
+@app.get("/api/tarroshort/fuentes")
+async def tarroshort_fuentes():
+    """Lista las fuentes disponibles para armar un short:
+       - pautas: rankings con pauta JSON (arman el HTML solos)
+       - shorts: HTMLs tarroshort-* ya armados (listos para renderizar)."""
+    pautas = []
+    try:
+        if PAUTAS_DIR.exists():
+            pautas = sorted(p.name.replace(".tarrobot.json", "")
+                            for p in PAUTAS_DIR.glob("*.tarrobot.json"))
+    except Exception:
+        pautas = []
+    shorts = []
+    try:
+        shorts = sorted(h.stem for h in STUDIO.glob("tarroshort-*.html"))
+    except Exception:
+        shorts = []
+    return {"ok": True, "pautas": pautas, "shorts": shorts}
+
+
 # ─────────────────────────────────────────────────────────────────────────
 # Sprint 12 C4-lite: exportar dato suelto para Short (MP3 + SRT individual)
 # ─────────────────────────────────────────────────────────────────────────

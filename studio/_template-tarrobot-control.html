@@ -873,15 +873,15 @@ select#queueSelect:focus { border-color: var(--ye); }
     <code>studio/shorts/&lt;slug&gt;.mp4</code>. Llevalo a CapCut y ponele la musica.
   </div>
   <div class="row-inline">
-    <input type="text" id="tshortSlug" placeholder="slug de pauta (ej. snes-top-precios)" style="flex:2" autocomplete="off">
+    <select id="tshortSlug" style="flex:2"><option value="">cargando lista...</option></select>
     <button class="btn ye" onclick="tarroshortGenerar()" style="flex:1">▸ GENERAR</button>
   </div>
-  <label style="display:flex; align-items:center; gap:6px; margin-top:6px; font-size:11px; color:rgba(255,255,255,.6); cursor:pointer;">
-    <input type="checkbox" id="tshortFromPauta" checked>
-    Armar el HTML desde la pauta JSON (destilda si ya tienes un <code>tarroshort-&lt;slug&gt;.html</code> listo)
-  </label>
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-top:4px;">
+    <span style="font-size:10px; color:rgba(255,255,255,.4);">Elige una pauta (arma el HTML) o un short ya armado.</span>
+    <button class="btn" onclick="tarroshortCargarFuentes()" style="font-size:10px; padding:4px 8px;">🔄 refrescar</button>
+  </div>
   <div style="font-size:10px; color:rgba(255,255,255,.4); margin-top:4px;">
-    Tip: tras armar, agrega las fotos en <code>studio/img/&lt;slug&gt;/</code> y los precios antes de generar el video final.
+    Tip: si armas desde pauta, agrega las fotos en <code>studio/img/&lt;slug&gt;/</code> y los precios antes de generar el video final.
   </div>
 
   <div id="tshortStatus" style="display:none; margin-top:10px; padding:8px; background:rgba(0,229,255,.06); border-left:3px solid var(--cy); font-size:11px;">
@@ -1922,14 +1922,33 @@ async function teaserAutofillSlug() {
 let tshortCurrentJobId = null;
 let tshortLastOutputDir = null;
 
+async function tarroshortCargarFuentes() {
+  try {
+    const r = await fetch('/api/tarroshort/fuentes');
+    const d = await r.json();
+    if (!d.ok) return;
+    const sel = document.getElementById('tshortSlug');
+    let html = '';
+    if (d.pautas && d.pautas.length) {
+      html += '<optgroup label="Desde pauta (arma el HTML)">';
+      html += d.pautas.map(s => '<option value="' + s + '" data-from-pauta="1">' + s + '</option>').join('');
+      html += '</optgroup>';
+    }
+    if (d.shorts && d.shorts.length) {
+      html += '<optgroup label="Shorts ya armados (listos para video)">';
+      html += d.shorts.map(s => '<option value="' + s + '" data-from-pauta="0">' + s + '</option>').join('');
+      html += '</optgroup>';
+    }
+    sel.innerHTML = html || '<option value="">(no hay pautas ni shorts)</option>';
+  } catch (e) { /* silencio */ }
+}
+
 async function tarroshortGenerar() {
-  const slug = document.getElementById('tshortSlug').value.trim();
-  if (!slug) { alert('Falta el slug (de pauta o de short)'); return; }
-  if (!/^[a-z0-9-]+$/.test(slug)) {
-    alert('Slug invalido. Usa kebab-case (ej. snes-top-precios)');
-    return;
-  }
-  const fromPauta = document.getElementById('tshortFromPauta').checked;
+  const sel = document.getElementById('tshortSlug');
+  const opt = sel.options[sel.selectedIndex];
+  const slug = (sel.value || '').trim();
+  if (!slug) { alert('Elige una pauta o short de la lista'); return; }
+  const fromPauta = !!(opt && opt.dataset.fromPauta === '1');
   const body = fromPauta ? { pauta_slug: slug } : { slug: slug };
 
   const data = await post('/api/tarroshort/generar', body);
@@ -2011,7 +2030,7 @@ function tarroshortAbrirCarpeta() {
   window.open('file:///' + tshortLastOutputDir.replace(/\\/g, '/'), '_blank');
 }
 
-setTimeout(() => { teaserCargarHistorial(); teaserAutofillSlug(); tarroshortCargarHistorial(); }, 1500);
+setTimeout(() => { teaserCargarHistorial(); teaserAutofillSlug(); tarroshortCargarHistorial(); tarroshortCargarFuentes(); }, 1500);
 setInterval(teaserCargarHistorial, 30000);
 
 // ─── CAPCUT READY (Sprint 18 E2) ──────────────────────────────────
