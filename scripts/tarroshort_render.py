@@ -319,7 +319,7 @@ Escribe UNA reaccion hablada para que TarroBot la lea en voz alta.
 Reglas ESTRICTAS:
 - Espanol NEUTRO. Nada de jergas, chilenismos, voseo ni acento de ningun pais.
 - USA tildes correctas y comas, para marcar las pausas naturales al hablar.
-- Entre 6 y 11 palabras. UNA sola frase corta (para un short agil).
+- Entre 8 y 14 palabras. Una o dos frases cortas, con ritmo agil.
 - Reacciona o interpreta el dato (sorpresa, gancho, dato curioso), NO lo leas literal.
 - Sin emojis, sin hashtags, sin comillas dentro del texto.
 
