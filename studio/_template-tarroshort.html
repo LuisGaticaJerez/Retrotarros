@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · TARROSHORT · [TEMA]</title>
+<!--
+  ============================================================================
+  TEMPLATE: TARROSHORT  (shorts / reels verticales 1080x1920)
+  ============================================================================
+  Tarjetas verticales pre-generadas para redes. TarroBot presenta y comenta
+  cada item. Tu grabas la voz/cara de TarroBot encima y pones la musica en CapCut.
+
+  FORMATO: vertical 9:16. Generar capturas con:
+    python scripts/capture-slides.py _template-tarroshort --width 1080 --height 1920
+
+  ESTRUCTURA:
+    01  INTRO   - TarroBot se presenta + tema del short
+    02..11 ITEMS - del 10 al 1, foto del item + TarroBot esquina + linea breve
+    12  CIERRE  - CTA seguir / ver el ranking completo
+
+  COMO USAR:
+    1. Copia a studio/tarroshort-<tema>.html  (ej. tarroshort-snes-top-precios.html)
+    2. Reemplaza los [PLACEHOLDER]. Pon las fotos en img/<slug>/ y apunta los src.
+    3. Ajusta cantidad de items (duplica/borra slides). Renumera los rank-badge.
+    4. Genera capturas verticales (comando de arriba).
+    5. En CapCut: cada PNG es una escena. Encima va la voz de TarroBot (su MP3 de
+       short-export o grabado en vivo) y la cara animada en la esquina si quieres.
+       La musica la pones tu al final.
+
+  SAFE AREA: el contenido importante va centrado. Las esquinas inferior-derecha
+  y la franja inferior las tapa la UI de TikTok/Reels: ahi NO va nada critico.
+  ============================================================================
+-->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 120% 40% at 50% -2%, rgba(255,46,136,.16) 0%, transparent 60%),
+    radial-gradient(ellipse 120% 40% at 50% 102%, rgba(0,229,255,.12) 0%, transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 47px, rgba(255,255,255,.015) 47px, rgba(255,255,255,.015) 48px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 47px, rgba(255,255,255,.015) 47px, rgba(255,255,255,.015) 48px);
+}
+
+/* ── DECK vertical 9:16 ── */
+.deck { position: fixed; inset: 0; overflow: hidden; }
+.slide { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center; padding: 90px 70px 150px; }
+.slide.active { display: flex; }
+
+/* marca arriba */
+.brand { position: absolute; top: 44px; left: 0; right: 0; text-align: center; font-family: 'Orbitron'; font-weight: 900; font-size: 30px; letter-spacing: 6px; color: var(--mg); text-shadow: 0 0 16px rgba(255,46,136,.6); }
+/* handle abajo (sobre la safe area) */
+.handle { position: absolute; bottom: 150px; left: 0; right: 0; text-align: center; font-family: 'Share Tech Mono'; font-size: 24px; letter-spacing: 4px; color: rgba(255,255,255,.5); }
+.slide-num { position: absolute; top: 44px; right: 40px; font-family: 'Press Start 2P'; font-size: 16px; color: rgba(255,255,255,.25); }
+
+/* ── TARROBOT mascota (esquina o intro) ── */
+.tb-mascot { width: 100%; height: 100%; display: block; }
+.tb-corner { position: absolute; bottom: 168px; left: 56px; width: 190px; height: 190px; filter: drop-shadow(0 0 16px rgba(0,229,255,.5)); z-index: 6; }
+.tb-corner .tb-bubble { position: absolute; bottom: 100%; left: 50%; transform: translateX(-30%); margin-bottom: 8px; white-space: nowrap; font-family: 'Press Start 2P'; font-size: 14px; color: var(--ye); background: rgba(6,3,15,.85); border: 1px solid var(--ye); padding: 8px 12px; border-radius: 4px; }
+
+/* ── INTRO ── */
+.intro { justify-content: center; gap: 0; text-align: center; }
+.intro .tb-big { width: 340px; height: 340px; filter: drop-shadow(0 0 24px rgba(0,229,255,.55)); margin-bottom: 40px; }
+.intro .pre { font-family: 'Press Start 2P'; font-size: 22px; color: var(--cy); letter-spacing: 4px; margin-bottom: 30px; }
+.intro .titulo { font-family: 'Orbitron'; font-weight: 900; font-size: 88px; line-height: 1.02; color: #fff; text-shadow: 0 0 28px rgba(255,46,136,.5); margin-bottom: 34px; }
+.intro .titulo .mg { color: var(--mg); }
+.intro .saludo { font-family: 'Share Tech Mono'; font-size: 30px; line-height: 1.5; color: rgba(255,255,255,.82); max-width: 820px; }
+
+/* ── ITEM ── */
+.item { justify-content: flex-start; gap: 0; text-align: center; }
+.rank-badge { font-family: 'Orbitron'; font-weight: 900; font-size: 150px; line-height: 1; color: var(--mg); text-shadow: 0 0 30px rgba(255,46,136,.6); margin-bottom: 6px; }
+.rank-badge .hash { font-size: 60px; color: rgba(255,255,255,.4); vertical-align: super; }
+.item-photo { width: 620px; height: 620px; position: relative; border-radius: 10px; overflow: hidden; background: var(--pu); box-shadow: 0 0 0 4px rgba(0,229,255,.2), 0 24px 70px rgba(0,0,0,.7); margin-bottom: 28px; }
+.item-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.item-photo .ph-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 30px; font-family: 'Press Start 2P'; font-size: 26px; line-height: 1.6; color: rgba(255,255,255,.6); }
+.item-name { font-family: 'Orbitron'; font-weight: 900; font-size: 60px; line-height: 1.05; color: #fff; margin-bottom: 12px; }
+.item-meta { font-family: 'Share Tech Mono'; font-size: 26px; letter-spacing: 2px; color: var(--cy); margin-bottom: 22px; }
+.item-highlight { display: inline-block; font-family: 'Press Start 2P'; font-size: 30px; color: var(--ye); border: 2px solid var(--ye); padding: 14px 26px; letter-spacing: 2px; background: rgba(255,210,63,.06); box-shadow: 0 0 18px rgba(255,210,63,.25); }
+/* linea que dice TarroBot (texto en pantalla, opcional) - en flujo, bajo el precio */
+.item-line { margin-top: 30px; max-width: 840px; font-family: 'Share Tech Mono'; font-size: 30px; line-height: 1.45; color: rgba(255,255,255,.82); text-align: center; }
+
+/* ── CIERRE ── */
+.cierre { justify-content: center; text-align: center; gap: 0; }
+.cierre .tb-big { width: 300px; height: 300px; filter: drop-shadow(0 0 24px rgba(0,229,255,.55)); margin-bottom: 40px; }
+.cierre .cta { font-family: 'Orbitron'; font-weight: 900; font-size: 76px; line-height: 1.05; color: var(--cy); text-shadow: 0 0 24px rgba(0,229,255,.5); margin-bottom: 28px; }
+.cierre .cta .mg { color: var(--mg); }
+.cierre .sub { font-family: 'Share Tech Mono'; font-size: 30px; line-height: 1.5; color: rgba(255,255,255,.8); max-width: 820px; }
+
+/* ── NAV (solo para revisar; se oculta en captura) ── */
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: rgba(6,3,15,.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 10px; padding: 10px 16px; cursor: pointer; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 12px; color: var(--mg); }
+</style>
+</head>
+<body>
+
+<!-- Mascota TarroBot reutilizable (pixel TV). Se referencia con <use>. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="tarrobot-mascot" viewBox="0 0 64 64">
+    <rect x="2"  y="6"  width="60" height="50" rx="3" fill="#00E5FF"/>
+    <rect x="6"  y="10" width="51" height="40" rx="2" fill="#0a0820"/>
+    <rect x="8"  y="12" width="47" height="36" fill="none" stroke="#FF2E88" stroke-width="1"/>
+    <rect x="16" y="22" width="8"  height="8" fill="#FFD23F"/>
+    <rect x="38" y="22" width="8"  height="8" fill="#FFD23F"/>
+    <rect x="19" y="24" width="3"  height="4" fill="#0a0820"/>
+    <rect x="41" y="24" width="3"  height="4" fill="#0a0820"/>
+    <rect x="22" y="38" width="20" height="4" fill="#FFD23F"/>
+    <circle cx="6" cy="5" r="2.2" fill="#FF2E88"/>
+    <rect x="14" y="56" width="8"  height="5" fill="#00E5FF"/>
+    <rect x="42" y="56" width="8"  height="5" fill="#00E5FF"/>
+  </symbol>
+</svg>
+
+<div class="deck" id="deck">
+
+  <!-- 01 INTRO -->
+  <section class="slide active intro">
+    <span class="slide-num">01</span>
+    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>
+    <div class="pre">RETROTARROS</div>
+    <div class="titulo">[TOP 10 ·<br><span class="mg">LOS MAS CAROS DE SNES</span>]</div>
+    <div class="saludo">Soy TarroBot. Trabajo con Koko y Luis en Retrotarros. Hoy vamos a ver [tema del ranking]. Quedate hasta el final que el numero uno es una locura.</div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════ -->
+  <!-- ITEMS · del 10 al 1 · duplica/borra segun cuantos sean             -->
+  <!-- ════════════════════════════════════════════════════════════════ -->
+
+  <!-- 02 ITEM #10 -->
+  <section class="slide item">
+    <span class="slide-num">02</span>
+    <div class="brand">RETROTARROS</div>
+    <div class="rank-badge"><span class="hash">#</span>10</div>
+    <div class="item-photo">
+      <img src="img/[SLUG]/[foto-10].jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-fallback" style="display:none">[ITEM 10]</div>
+    </div>
+    <div class="item-name">[NOMBRE DEL ITEM]</div>
+    <div class="item-meta">[ano · estudio / detalle]</div>
+    <div class="item-highlight">[USD 400]</div>
+    <div class="item-line">[Linea breve que dice TarroBot sobre este item.]</div>
+    <svg class="tb-corner"><use href="#tarrobot-mascot"/></svg>
+  </section>
+
+  <!-- 03 ITEM #9 -->
+  <section class="slide item">
+    <span class="slide-num">03</span>
+    <div class="brand">RETROTARROS</div>
+    <div class="rank-badge"><span class="hash">#</span>9</div>
+    <div class="item-photo">
+      <img src="img/[SLUG]/[foto-9].jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-fallback" style="display:none">[ITEM 9]</div>
+    </div>
+    <div class="item-name">[NOMBRE DEL ITEM]</div>
+    <div class="item-meta">[ano · estudio / detalle]</div>
+    <div class="item-highlight">[USD 500]</div>
+    <div class="item-line">[Linea breve que dice TarroBot sobre este item.]</div>
+    <svg class="tb-corner"><use href="#tarrobot-mascot"/></svg>
+  </section>
+
+  <!-- 04 ITEM #8 -->
+  <section class="slide item">
+    <span class="slide-num">04</span>
+    <div class="brand">RETROTARROS</div>
+    <div class="rank-badge"><span class="hash">#</span>8</div>
+    <div class="item-photo">
+      <img src="img/[SLUG]/[foto-8].jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-fallback" style="display:none">[ITEM 8]</div>
+    </div>
+    <div class="item-name">[NOMBRE DEL ITEM]</div>
+    <div class="item-meta">[ano · estudio / detalle]</div>
+    <div class="item-highlight">[USD 700]</div>
+    <div class="item-line">[Linea breve que dice TarroBot sobre este item.]</div>
+    <svg class="tb-corner"><use href="#tarrobot-mascot"/></svg>
+  </section>
+
+  <!-- (… duplica para #7 #6 #5 #4 #3 #2 …) -->
+
+  <!-- 11 ITEM #1 -->
+  <section class="slide item">
+    <span class="slide-num">11</span>
+    <div class="brand">RETROTARROS</div>
+    <div class="rank-badge"><span class="hash">#</span>1</div>
+    <div class="item-photo">
+      <img src="img/[SLUG]/[foto-1].jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="ph-fallback" style="display:none">[ITEM 1]</div>
+    </div>
+    <div class="item-name">[EL NUMERO UNO]</div>
+    <div class="item-meta">[ano · estudio / detalle]</div>
+    <div class="item-highlight">[USD 3.500]</div>
+    <div class="item-line">[El remate. La linea mas fuerte, el numero uno.]</div>
+    <svg class="tb-corner"><use href="#tarrobot-mascot"/></svg>
+  </section>
+
+  <!-- 12 CIERRE -->
+  <section class="slide cierre">
+    <span class="slide-num">12</span>
+    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>
+    <div class="cta">SIGUE A <span class="mg">RETROTARROS</span></div>
+    <div class="sub">El ranking completo esta en el canal. Comenta cual te sorprendio y sigue para mas retro. Nos vemos en el proximo tarro.</div>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">&#9664;</button>
+  <div class="nav-counter" id="counter">01 / 12</div>
+  <button class="nav-btn" id="nextBtn">&#9654;</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const counter = document.getElementById('counter');
+let current = 0;
+const total = slides.length;
+function pad(n){return String(n).padStart(2,'0');}
+function go(i){
+  if(i<0||i>=total) return;
+  slides[current].classList.remove('active');
+  current=i;
+  slides[current].classList.add('active');
+  counter.textContent = pad(current+1)+' / '+pad(total);
+}
+document.getElementById('prevBtn').addEventListener('click',()=>go(current-1));
+document.getElementById('nextBtn').addEventListener('click',()=>go(current+1));
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(current+1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();go(current-1);}
+});
+go(0);
+</script>
+
+</body>
+</html>
