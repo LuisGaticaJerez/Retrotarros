@@ -18,7 +18,9 @@
       "editor": "Capcom",
       "mp3": "audio/snes-top-precios/snes-top-precios-1.mp3",
       "duracion_ms": 14736,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Un juego oscuro de Capcom que pasó desapercibido, ahora vale una fortuna.",
+      "precio_short": "USD 400"
     },
     {
       "id": "snes-top-precios-2",
@@ -30,7 +32,9 @@
       "editor": "Pack-In-Video",
       "mp3": "audio/snes-top-precios/snes-top-precios-2.mp3",
       "duracion_ms": 14616,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Increíble cómo un juego olvidado se convirtió en oro puro gracias a sus herederos espirituales.",
+      "precio_short": "USD 500"
     },
     {
       "id": "snes-top-precios-3",
@@ -42,7 +46,9 @@
       "editor": "Square / Nintendo",
       "mp3": "audio/snes-top-precios/snes-top-precios-3.mp3",
       "duracion_ms": 14016,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Un juego legendario que marcó historia: la última vez que Nintendo y Square trabajaron juntas.",
+      "precio_short": "USD 700"
     },
     {
       "id": "snes-top-precios-4",
@@ -54,7 +60,9 @@
       "editor": "Squaresoft",
       "mp3": "audio/snes-top-precios/snes-top-precios-4.mp3",
       "duracion_ms": 13896,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Ochocientos dólares por nostalgia, ¡así de valiosa es la infancia en cartucho!",
+      "precio_short": "USD 800"
     },
     {
       "id": "snes-top-precios-5",
@@ -66,7 +74,9 @@
       "editor": "Natsume",
       "mp3": "audio/snes-top-precios/snes-top-precios-5.mp3",
       "duracion_ms": 13152,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Mil dólares por la caja de un shoot 'em up de los noventa, eso es coleccionismo de élite.",
+      "precio_short": "USD 1000"
     },
     {
       "id": "snes-top-precios-6",

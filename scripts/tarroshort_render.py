@@ -275,10 +275,108 @@ def _primera_frase(texto: str, max_len: int = 170) -> str:
     return frase
 
 
-def construir_desde_pauta(pauta_slug: str, out_slug=None, progress=None) -> Path:
-    """Lee studio/pautas/<pauta_slug>.tarrobot.json y arma studio/tarroshort-<slug>.html
-    clonando la estructura del template. Llena rank, nombre, meta y la linea breve.
-    El precio (highlight) y las fotos los completa Luis."""
+def _detectar_formato(slug: str) -> str:
+    """Infiere el formato del short desde el slug de la pauta."""
+    s = slug.lower()
+    if "precio" in s:
+        return "precios"
+    if "coleccion" in s:
+        return "coleccion"
+    return "calidad"  # top mundial / rankings de calidad
+
+
+def _reaccion_llm(dato: dict, formato: str):
+    """Genera una reaccion hablada (neutra, con tildes y comas) via Claude haiku.
+    Para precios devuelve tambien el precio en formato 'USD N'. Devuelve dict o None."""
+    import os as _os
+    key = _os.environ.get("ANTHROPIC_API_KEY")
+    if not key:
+        return None
+    try:
+        import anthropic
+    except ImportError:
+        return None
+    tema = dato.get("tema", "")
+    texto = dato.get("texto", "")
+    campo_precio = ""
+    if formato == "precios":
+        campo_precio = ' "precio": "el precio en formato USD N (ej. USD 400), tomado del dato",'
+    prompt = f"""Eres TarroBot, la mascota del canal de retrogaming Retrotarros.
+Vas a comentar este item de un ranking para un short vertical de redes sociales.
+
+ITEM: {tema}
+DATO: {texto}
+
+Escribe UNA reaccion hablada para que TarroBot la lea en voz alta.
+
+Reglas ESTRICTAS:
+- Espanol NEUTRO. Nada de jergas, chilenismos, voseo ni acento de ningun pais.
+- USA tildes correctas y comas, para marcar las pausas naturales al hablar.
+- Entre 8 y 16 palabras. Una sola frase (a lo mas dos muy cortas).
+- Reacciona o interpreta el dato (sorpresa, gancho, dato curioso), NO lo leas literal.
+- Sin emojis, sin hashtags, sin comillas dentro del texto.
+
+Devuelve SOLO un JSON sin markdown:
+{{"reaccion": "...",{campo_precio} }}"""
+    try:
+        client = anthropic.Anthropic(api_key=key)
+        msg = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=220,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw = "".join(b.text for b in msg.content if getattr(b, "type", "") == "text").strip()
+        m = re.search(r"\{.*\}", raw, re.DOTALL)
+        if not m:
+            return None
+        return json.loads(m.group(0))
+    except Exception as e:
+        print(f"[tarroshort] LLM reaccion fallo para '{tema}': {e}")
+        return None
+
+
+def _asegurar_reacciones(pauta_path: Path, data: dict, indices: list, formato: str, progress=None) -> bool:
+    """Para cada indice, asegura dato['reaccion_short'] (y 'precio_short' si precios).
+    Genera lo que falte via LLM y GUARDA la pauta (respeta lo ya editado a mano).
+    Devuelve True si guardo cambios."""
+    datos = data["datos"]
+    cambios = False
+    for idx in indices:
+        d = datos[idx]
+        falta_reaccion = not (d.get("reaccion_short") or "").strip()
+        falta_precio = formato == "precios" and not (d.get("precio_short") or "").strip()
+        if not (falta_reaccion or falta_precio):
+            continue
+        if progress:
+            progress(f"reaccion LLM: {d.get('tema','item')}")
+        res = _reaccion_llm(d, formato)
+        if not res:
+            # fallback: primera frase recortada (sin LLM)
+            if falta_reaccion:
+                d["reaccion_short"] = _primera_frase(d.get("texto", ""), max_len=120)
+                cambios = True
+            continue
+        if falta_reaccion and res.get("reaccion"):
+            d["reaccion_short"] = str(res["reaccion"]).strip()
+            cambios = True
+        if falta_precio and res.get("precio"):
+            d["precio_short"] = str(res["precio"]).strip()
+            cambios = True
+    if cambios:
+        data["actualizado"] = data.get("actualizado", "")
+        pauta_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        if progress:
+            progress("reacciones guardadas en la pauta")
+    return cambios
+
+
+def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
+                          mostrar: int = 5, progress=None) -> Path:
+    """Arma studio/tarroshort-<slug>.html desde la pauta JSON.
+    - formato: 'calidad' / 'precios' / 'coleccion' (auto-detecta del slug si None).
+    - mostrar: cuantos items muestra (default 5: del #10 al #6). El resto se teasea
+      al final ('los primeros estan en el canal') para empujar trafico a YouTube.
+    Genera/usa reacciones LLM (neutras, con tildes) guardadas en la pauta."""
     repo = _resolve_repo()
     pauta_path = repo / "studio" / "pautas" / f"{pauta_slug}.tarrobot.json"
     if not pauta_path.exists():
@@ -292,24 +390,35 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, progress=None) -> Path
     if not datos:
         raise ValueError("La pauta no tiene 'datos'.")
     out_slug = out_slug or pauta_slug
+    formato = formato or _detectar_formato(pauta_slug)
     episodio = data.get("episodio") or pauta_slug.replace("-", " ").title()
     img_dir = f"img/{out_slug}"
+
+    n = len(datos)
+    # La pauta va del #10 (datos[0]) al #1 (datos[-1]). Mostramos los primeros
+    # 'mostrar' (los puestos mas altos en numero: #10, #9, ...) y dejamos el resto
+    # como gancho para el canal.
+    mostrar = max(1, min(mostrar, n))
+    indices = list(range(mostrar))
+    teaser_n = n - mostrar  # cuantos quedan para el canal
+
+    # Reacciones LLM (neutras, con tildes) + precio si aplica, guardadas en la pauta
+    _asegurar_reacciones(pauta_path, data, indices, formato, progress=progress)
+    datos = data["datos"]  # refrescar por si se enriquecio
 
     template = template_path.read_text(encoding="utf-8")
     head, _, rest = template.partition('<div class="deck" id="deck">')
     nav_idx = rest.find('<nav class="footer">')
     foot = rest[nav_idx:]
 
-    n = len(datos)
     slides = []
 
-    # INTRO
+    # INTRO (saludo neutro, con tildes/comas para que TarroBot pause bien)
     titulo = _esc(episodio.upper())
-    saludo = ("Soy TarroBot. Trabajo con Koko y Luis en Retrotarros. "
-              f"Hoy vamos a ver {_esc(episodio)}. Quedate hasta el final que el numero uno es una locura.")
+    saludo = (f"Soy TarroBot, del canal Retrotarros. Hoy, junto a Koko y Luis, "
+              f"vemos {_esc(episodio)}. Partimos desde el número {n}.")
     slides.append(
         '  <section class="slide active intro">\n'
-        '    <span class="slide-num">01</span>\n'
         '    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>\n'
         '    <div class="pre">RETROTARROS</div>\n'
         f'    <div class="titulo">{titulo}</div>\n'
@@ -317,40 +426,49 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, progress=None) -> Path
         '  </section>'
     )
 
-    # ITEMS (la pauta va del 10 al 1: datos[0] = puesto mas alto del numero)
-    for i, d in enumerate(datos):
+    # ITEMS mostrados (del #10 hacia abajo en numero, segun 'mostrar')
+    for i in indices:
+        d = datos[i]
         rank = n - i
-        num = i + 2
         name = _esc((d.get("tema") or "").upper())
         partes = [str(d.get("consola") or ""), str(d.get("ano") or ""), str(d.get("editor") or "")]
         meta = _esc(" · ".join([p for p in partes if p]))
-        line = _esc(_primera_frase(d.get("texto", "")))
+        reaccion = _esc((d.get("reaccion_short") or _primera_frase(d.get("texto", ""), 120)))
         photo = f"{img_dir}/{_slugify(d.get('tema', f'item-{rank}'))}.jpg"
+        price_html = ""
+        if formato == "precios":
+            precio = _esc((d.get("precio_short") or "").strip()) or "[precio]"
+            price_html = f'    <div class="item-price">{precio}</div>\n'
         slides.append(
             '  <section class="slide item">\n'
-            f'    <span class="slide-num">{num:02d}</span>\n'
-            '    <div class="brand">RETROTARROS</div>\n'
-            f'    <div class="rank-badge"><span class="hash">#</span>{rank}</div>\n'
+            '    <div class="item-top">\n'
+            '      <div class="tb-mini"><svg class="tb-mascot"><use href="#tarrobot-mascot"/></svg></div>\n'
+            f'      <div class="rank-badge"><span class="hash">#</span>{rank}</div>\n'
+            '    </div>\n'
             '    <div class="item-photo">\n'
             f'      <img src="{photo}" alt="" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">\n'
             f'      <div class="ph-fallback" style="display:none">{name}</div>\n'
             '    </div>\n'
             f'    <div class="item-name">{name}</div>\n'
             f'    <div class="item-meta">{meta}</div>\n'
-            '    <div class="item-highlight">[precio / dato]</div>\n'
-            f'    <div class="item-line">{line}</div>\n'
-            '    <svg class="tb-corner"><use href="#tarrobot-mascot"/></svg>\n'
+            f'{price_html}'
+            f'    <div class="item-line">{reaccion}</div>\n'
             '  </section>'
         )
 
-    # CIERRE
-    cierre_num = n + 2
+    # CIERRE / CLIFFHANGER: si quedaron puestos sin mostrar, los teaseamos al canal
+    if teaser_n > 0:
+        cta_sub = (f"¿Quieres los primeros {teaser_n}? El ranking completo está en el canal. "
+                   f"Busca Retrotarros en YouTube, y descúbrelos.")
+        cta_titulo = f'LOS {teaser_n} PRIMEROS,<br><span class="mg">EN EL CANAL</span>'
+    else:
+        cta_sub = "El ranking completo esta en el canal. Comenta cual te sorprendio y sigue para mas retro."
+        cta_titulo = 'SIGUE A <span class="mg">RETROTARROS</span>'
     slides.append(
         '  <section class="slide cierre">\n'
-        f'    <span class="slide-num">{cierre_num:02d}</span>\n'
         '    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>\n'
-        '    <div class="cta">SIGUE A <span class="mg">RETROTARROS</span></div>\n'
-        '    <div class="sub">El ranking completo esta en el canal. Comenta cual te sorprendio y sigue para mas retro.</div>\n'
+        f'    <div class="cta">{cta_titulo}</div>\n'
+        f'    <div class="sub">{cta_sub}</div>\n'
         '  </section>'
     )
 
@@ -359,10 +477,14 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, progress=None) -> Path
 
     out_path = repo / "studio" / f"tarroshort-{out_slug}.html"
     out_path.write_text(html, encoding="utf-8")
+    msg = f"HTML armado ({formato}): {mostrar} items mostrados, {teaser_n} al canal"
     if progress:
-        progress(f"HTML armado: {out_path} ({n} items)")
-    print(f"[tarroshort] HTML armado desde pauta: {out_path}  ({n} items)")
-    print(f"[tarroshort] Faltan: fotos en studio/{img_dir}/ y los precios ([precio / dato]).")
+        progress(msg)
+    print(f"[tarroshort] {msg} -> {out_path}")
+    if formato == "precios":
+        print(f"[tarroshort] Revisa precios/fotos: precio_short en la pauta + fotos en studio/{img_dir}/")
+    else:
+        print(f"[tarroshort] Agrega fotos en studio/{img_dir}/ si quieres (sino, fallback al nombre).")
     return out_path
 
 
