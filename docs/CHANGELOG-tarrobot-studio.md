@@ -30,11 +30,23 @@ invitados (Abriendo el Tarro).
 Corre en el PC de autoria (igual que TarroTeaser / capture-slides): necesita
 playwright + chromium + ffmpeg. Voz: es-CL-CatalinaNeural (+12Hz), igual al canal.
 
+### Integracion en el panel (completado)
+
+- **Auto-rellenar desde pauta**: `tarroshort_render.py --from-pauta <slug>` arma el
+  HTML del short desde la pauta JSON (rank + nombre + meta + linea breve por item).
+- **`scripts/tarroshort_jobs.py`** (nuevo): job manager async (1 a la vez) con
+  progreso por WS, mismo patron que teaser_jobs.
+- **Endpoints** en tarrobot-live.py: `POST /api/tarroshort/generar`
+  (body `{pauta_slug}` o `{slug}`), `GET /api/tarroshort/job/{id}`, `/api/tarroshort/list`.
+- **Card "TARROSHORT"** en el panel de control: input slug + checkbox "desde pauta"
+  + barra de progreso en vivo + historial. WS `tarroshort.*`.
+
 ### Verificado
 
-Render end-to-end OK: 6 escenas del template -> MP4 1080x1920 h264+aac de ~40s,
-TarroBot animado al hablar. Falta (siguiente iteracion): boton "Generar TarroShort"
-en el panel + auto-rellenar el template desde una pauta JSON.
+- Render end-to-end OK: MP4 1080x1920 h264+aac ~40s, TarroBot animado al hablar.
+- Auto-rellenar desde pauta snes-top-precios: 10 items con datos reales.
+- py_compile de tarroshort_render/jobs + tarrobot-live OK. JS del panel sin errores
+  (validado en Playwright). Falta: smoke test del boton con el server vivo en el estudio.
 
 ---
 

@@ -71,6 +71,7 @@ import social_manager
 import llm_resolver  # Sprint 15: minimizar gasto LLM
 import auto_respond  # Sprint 16 B16.1: auto-respond toggle
 from teaser_jobs import TeaserJobManager  # Sprint 17: TarroTeaser via panel
+from tarroshort_jobs import TarroShortJobManager  # Sprint 19: TarroShort via panel
 from connectors.twitch import TwitchConnector
 from connectors import discord_conn as discord_connector_mod
 from connectors import youtube as youtube_connector_mod
@@ -962,6 +963,8 @@ async def idle_worker():
 # para que los endpoints definidos al modulo-level lo puedan referenciar.
 # El worker arranca en lifespan startup.
 teaser_jobs = TeaserJobManager()
+# Sprint 19: job manager de TarroShort (MP4 vertical con TarroBot leyendo)
+tarroshort_jobs = TarroShortJobManager()
 
 
 @asynccontextmanager
@@ -978,6 +981,9 @@ async def lifespan(app):
     # Sprint 17: arrancar el job worker de TarroTeaser
     teaser_jobs.set_broadcast(manager.broadcast_live)
     await teaser_jobs.start()
+    # Sprint 19: arrancar el job worker de TarroShort
+    tarroshort_jobs.set_broadcast(manager.broadcast_live)
+    await tarroshort_jobs.start()
     # Inicializar SQLite (crea DB y schema si no existe)
     message_store.get_conn()
     yield
@@ -988,6 +994,11 @@ async def lifespan(app):
         await teaser_jobs.stop()
     except Exception as e:
         print(f"[lifespan] error teaser_jobs.stop: {e}")
+    # Sprint 19: detener el worker de TarroShort
+    try:
+        await tarroshort_jobs.stop()
+    except Exception as e:
+        print(f"[lifespan] error tarroshort_jobs.stop: {e}")
     # Sprint 13: detener conectores activos limpiamente
     try:
         await social_manager.manager.shutdown()
@@ -2628,6 +2639,70 @@ async def teaser_cancel(job_id: str):
     if not ok:
         return JSONResponse({"error": "no se pudo cancelar (no existe o ya termino)"}, status_code=400)
     return {"ok": True, "job_id": job_id}
+
+
+# ─────────────────────────────────────────────────────────────────────────
+# Sprint 19: TarroShort (MP4 vertical para redes con TarroBot leyendo)
+# ─────────────────────────────────────────────────────────────────────────
+
+@app.post("/api/tarroshort/generar")
+async def tarroshort_generar(payload: dict):
+    """
+    Encola un job de TarroShort.
+
+    Body (una de dos formas):
+      A) Desde pauta:  { "pauta_slug": "snes-top-precios" }
+         -> arma el HTML del short desde la pauta JSON y luego renderiza.
+      B) Desde HTML ya armado:  { "slug": "tarroshort-snes-top-precios" }
+         -> renderiza un studio/<slug>.html existente.
+
+    Opcionales: voice, pitch, rate, out_slug.
+    Respuesta: {ok, job_id, queue_size}. Progreso por WS:
+      tarroshort.queued / started / progress / done / error
+    """
+    payload = payload or {}
+    import re as _re
+    pauta_slug = (payload.get("pauta_slug") or "").strip()
+    slug = (payload.get("slug") or "").strip()
+
+    if pauta_slug:
+        if not _re.match(r"^[a-z0-9-]+$", pauta_slug):
+            return JSONResponse({"error": "pauta_slug invalido (kebab-case)"}, status_code=400)
+        pauta = PAUTAS_DIR / f"{pauta_slug}.tarrobot.json"
+        if not pauta.exists():
+            return JSONResponse({"error": f"pauta no existe: {pauta_slug}"}, status_code=404)
+        target, from_pauta = pauta_slug, True
+    elif slug:
+        if not _re.match(r"^[a-z0-9-]+$", slug):
+            return JSONResponse({"error": "slug invalido (kebab-case)"}, status_code=400)
+        html = STUDIO / f"{slug}.html"
+        if not html.exists():
+            return JSONResponse({"error": f"HTML no existe: {slug}"}, status_code=404)
+        target, from_pauta = slug, False
+    else:
+        return JSONResponse({"error": "pauta_slug o slug requerido"}, status_code=400)
+
+    params = {k: payload.get(k) for k in ("voice", "pitch", "rate", "out_slug")
+              if payload.get(k) is not None}
+    job_id = await tarroshort_jobs.submit(target, from_pauta=from_pauta, **params)
+    return {"ok": True, "job_id": job_id, "queue_size": tarroshort_jobs._queue.qsize()}
+
+
+@app.get("/api/tarroshort/job/{job_id}")
+async def tarroshort_get_job(job_id: str):
+    job = tarroshort_jobs.get(job_id)
+    if not job:
+        return JSONResponse({"error": "job no existe"}, status_code=404)
+    return {"ok": True, "job": job.to_dict()}
+
+
+@app.get("/api/tarroshort/list")
+async def tarroshort_list(limit: int = 20):
+    return {
+        "ok": True,
+        "jobs": tarroshort_jobs.list_recent(limit=limit),
+        "current_job_id": tarroshort_jobs.current_job_id(),
+    }
 
 
 # ─────────────────────────────────────────────────────────────────────────
