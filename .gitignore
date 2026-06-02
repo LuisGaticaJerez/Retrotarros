@@ -87,6 +87,8 @@ installers/tarrobot-studio/bin/
 studio/exports/*.txt
 studio/shorts/*.mp3
 studio/shorts/*.srt
+studio/shorts/*.mp4
+studio/shorts/audio/
 studio/sessions/
 
 # Bundle exportable del Claude del estudio (build, se regenera con Compress-Archive)

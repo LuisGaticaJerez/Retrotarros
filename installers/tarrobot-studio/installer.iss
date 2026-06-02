@@ -80,6 +80,9 @@ Source: "..\..\scripts\obs_healthcheck.py"; DestDir: "{app}\scripts"; Flags: ign
 Source: "..\..\scripts\obs_setup.py";       DestDir: "{app}\scripts"; Flags: ignoreversion
 Source: "..\..\scripts\obs_recorder.py";    DestDir: "{app}\scripts"; Flags: ignoreversion
 Source: "..\..\scripts\capcut_ready.py";    DestDir: "{app}\scripts"; Flags: ignoreversion
+; Sprint 19: TarroShort (MP4 vertical para redes)
+Source: "..\..\scripts\tarroshort_render.py"; DestDir: "{app}\scripts"; Flags: ignoreversion
+Source: "..\..\studio\_template-tarroshort.html"; DestDir: "{app}\studio"; Flags: ignoreversion
 
 ; ───────── Templates HTML ─────────
 Source: "..\..\studio\_template-tarrobot-live.html";    DestDir: "{app}\studio"; Flags: ignoreversion
@@ -107,6 +110,7 @@ Source: "install.bat";          DestDir: "{app}"; Flags: ignoreversion
 Source: "TarroBot.bat";         DestDir: "{app}"; Flags: ignoreversion
 Source: "TarroBot-debug.bat";   DestDir: "{app}"; Flags: ignoreversion
 Source: "TarroBot-Teaser.bat";  DestDir: "{app}"; Flags: ignoreversion
+Source: "TarroBot-Short.bat";   DestDir: "{app}"; Flags: ignoreversion
 Source: "requirements.txt";     DestDir: "{app}"; Flags: ignoreversion
 Source: "README-ESTUDIO.txt";   DestDir: "{app}"; Flags: ignoreversion isreadme
 
@@ -133,6 +137,7 @@ Name: "custom"; Description: "Personalizada"; Flags: iscustom
 Name: "{group}\TarroBot Studio"; Filename: "{app}\TarroBot.bat"; WorkingDir: "{app}"; IconFilename: "{sys}\shell32.dll"; IconIndex: 13
 Name: "{group}\TarroBot Debug (con logs)"; Filename: "{app}\TarroBot-debug.bat"; WorkingDir: "{app}"; IconFilename: "{sys}\shell32.dll"; IconIndex: 23
 Name: "{group}\TarroTeaser (genera Short vertical)"; Filename: "{app}\TarroBot-Teaser.bat"; WorkingDir: "{app}"; IconFilename: "{sys}\shell32.dll"; IconIndex: 137
+Name: "{group}\TarroShort (video vertical con TarroBot)"; Filename: "{app}\TarroBot-Short.bat"; WorkingDir: "{app}"; IconFilename: "{sys}\shell32.dll"; IconIndex: 137
 Name: "{group}\Carpeta del programa"; Filename: "{app}"
 Name: "{group}\Manual TarroBot (README)"; Filename: "{app}\README-ESTUDIO.txt"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"

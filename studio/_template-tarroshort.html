@@ -76,6 +76,15 @@ body {
 
 /* ── TARROBOT mascota (esquina o intro) ── */
 .tb-mascot { width: 100%; height: 100%; display: block; }
+
+/* TarroBot HABLANDO · solo se activa al renderizar el video (clase tb-talking
+   en el body, la pone el script tarroshort_render.py). En las capturas PNG
+   normales NO se activa, asi que el personaje queda estatico. */
+@keyframes tb-mouth-talk { 0%,100% { transform: scaleY(0.35); } 30% { transform: scaleY(1.4); } 55% { transform: scaleY(0.6); } 80% { transform: scaleY(1.2); } }
+body.tb-talking .tb-mouth { transform-box: fill-box; transform-origin: center; animation: tb-mouth-talk 0.4s ease-in-out infinite; }
+@keyframes tb-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+body.tb-talking .tb-corner { animation: tb-bob 0.75s ease-in-out infinite; }
+body.tb-talking .tb-big { animation: tb-bob 0.9s ease-in-out infinite; }
 .tb-corner { position: absolute; bottom: 168px; left: 56px; width: 190px; height: 190px; filter: drop-shadow(0 0 16px rgba(0,229,255,.5)); z-index: 6; }
 .tb-corner .tb-bubble { position: absolute; bottom: 100%; left: 50%; transform: translateX(-30%); margin-bottom: 8px; white-space: nowrap; font-family: 'Press Start 2P'; font-size: 14px; color: var(--ye); background: rgba(6,3,15,.85); border: 1px solid var(--ye); padding: 8px 12px; border-radius: 4px; }
 
@@ -125,7 +134,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; backgr
     <rect x="38" y="22" width="8"  height="8" fill="#FFD23F"/>
     <rect x="19" y="24" width="3"  height="4" fill="#0a0820"/>
     <rect x="41" y="24" width="3"  height="4" fill="#0a0820"/>
-    <rect x="22" y="38" width="20" height="4" fill="#FFD23F"/>
+    <rect class="tb-mouth" x="22" y="38" width="20" height="4" fill="#FFD23F"/>
     <circle cx="6" cy="5" r="2.2" fill="#FF2E88"/>
     <rect x="14" y="56" width="8"  height="5" fill="#00E5FF"/>
     <rect x="42" y="56" width="8"  height="5" fill="#00E5FF"/>

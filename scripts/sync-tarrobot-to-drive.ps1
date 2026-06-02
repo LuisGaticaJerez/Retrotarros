@@ -121,6 +121,8 @@ Sync-Item "scripts\obs_healthcheck.py"
 Sync-Item "scripts\obs_setup.py"
 Sync-Item "scripts\obs_recorder.py"
 Sync-Item "scripts\capcut_ready.py"
+# Sprint 19: TarroShort (MP4 vertical para redes con TarroBot leyendo)
+Sync-Item "scripts\tarroshort_render.py"
 Write-Host ""
 
 # 2. Templates HTML

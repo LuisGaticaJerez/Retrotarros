@@ -5,6 +5,39 @@ en GitHub Releases con ZIP + .exe firmados.
 
 ---
 
+## v1.6.0 · Sprint 19 · "TarroShort" (en desarrollo)
+
+Generador de shorts/reels verticales (1080x1920) donde TarroBot presenta y
+comenta cada item con su voz y su cara MOVIENDOSE, listo para llevar a CapCut
+(tu pones la musica). Pensado para rankings, piezas de coleccion y joyas de
+invitados (Abriendo el Tarro).
+
+### Componentes
+
+- **`studio/_template-tarroshort.html`** (nuevo): template vertical 9:16.
+  Intro (TarroBot se presenta) + items del 10 al 1 (foto + TarroBot esquina +
+  linea breve) + cierre. Mascota TarroBot con boca + bob animados (clase
+  `tb-talking`, solo activa al renderizar video; las capturas PNG quedan estaticas).
+- **`scripts/tarroshort_render.py`** (nuevo): motor de render. Por escena:
+  Playwright graba a TarroBot "hablando" -> edge-tts genera la voz Catalina
+  desde el texto de la escena -> ffmpeg arma el clip (loop + voz) -> concatena
+  todo en `studio/shorts/<slug>.mp4`. Respeta MP3 propios si los reemplazas en
+  `studio/shorts/audio/<slug>/`.
+- **`TarroBot-Short.bat`** (nuevo): launcher CLI (elige el slug y genera el MP4).
+
+### Requisitos
+
+Corre en el PC de autoria (igual que TarroTeaser / capture-slides): necesita
+playwright + chromium + ffmpeg. Voz: es-CL-CatalinaNeural (+12Hz), igual al canal.
+
+### Verificado
+
+Render end-to-end OK: 6 escenas del template -> MP4 1080x1920 h264+aac de ~40s,
+TarroBot animado al hablar. Falta (siguiente iteracion): boton "Generar TarroShort"
+en el panel + auto-rellenar el template desde una pauta JSON.
+
+---
+
 ## v1.5.1 · Hotfix · "Instalacion a prueba de balas"
 
 **Fecha:** 2026-05-28
