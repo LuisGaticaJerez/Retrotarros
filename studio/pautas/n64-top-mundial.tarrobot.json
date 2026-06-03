@@ -1,7 +1,7 @@
 {
   "version": 1,
   "slug": "n64-top-mundial",
-  "episodio": "Top 10 N64 mas caros del mundo",
+  "episodio": "Top 10 N64 mundial - los mejores juegos",
   "creado": "2026-05-20",
   "actualizado": "2026-05-20",
   "voz": "es-CL-CatalinaNeural",
@@ -18,7 +18,8 @@
       "editor": "Nintendo EAD",
       "mp3": "audio/n64-top-mundial/n64-top-mundial-1.mp3",
       "duracion_ms": 12120,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "¡Genial estrategia! Nintendo regalaba vibración, pero los jugadores terminaban comprando más accesorios."
     },
     {
       "id": "n64-top-mundial-2",
@@ -30,7 +31,8 @@
       "editor": "Rare",
       "mp3": "audio/n64-top-mundial/n64-top-mundial-2.mp3",
       "duracion_ms": 11304,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Espera, espera, espera. ¿Un juego que literalmente te obligaba a comprar hardware? Eso es brutal."
     },
     {
       "id": "n64-top-mundial-3",
@@ -42,7 +44,8 @@
       "editor": "Intelligent Systems",
       "mp3": "audio/n64-top-mundial/n64-top-mundial-3.mp3",
       "duracion_ms": 12888,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "¡Un accidente legal que creó una de las mejores sagas! Increíble cómo Nintendo convirtió un problema en genialidad."
     },
     {
       "id": "n64-top-mundial-4",
@@ -54,7 +57,8 @@
       "editor": "Nintendo EAD",
       "mp3": "audio/n64-top-mundial/n64-top-mundial-4.mp3",
       "duracion_ms": 12624,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Un año de desarrollo y creó una de las secuelas más innovadoras de Nintendo. La necesidad fue la madre de la invención."
     },
     {
       "id": "n64-top-mundial-5",
@@ -66,7 +70,8 @@
       "editor": "HAL Laboratory",
       "mp3": "audio/n64-top-mundial/n64-top-mundial-5.mp3",
       "duracion_ms": 13248,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "¡Espera, hicieron Smash Bros en secreto y Nintendo simplemente lo aceptó! Increíble."
     },
     {
       "id": "n64-top-mundial-6",

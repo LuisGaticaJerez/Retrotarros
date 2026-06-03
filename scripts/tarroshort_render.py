@@ -283,14 +283,31 @@ def _primera_frase(texto: str, max_len: int = 170) -> str:
     return frase
 
 
-def _detectar_formato(slug: str) -> str:
-    """Infiere el formato del short desde el slug de la pauta."""
+def _detectar_formato(slug: str, titulo: str = "") -> str:
+    """Infiere el formato del short. La convencion de nombres del canal manda:
+    el SLUG es la senal autoritativa (no el titulo, que a veces queda mal copiado).
+      - '...-precios'   -> precios
+      - '...-coleccion' -> coleccion
+      - '...-mundial'   -> calidad (los mejores juegos; convencion del canal)
+    El titulo solo se usa de respaldo cuando el slug no trae ninguna senal
+    explicita, para atrapar pautas con slugs poco convencionales."""
     s = slug.lower()
+    # 1) Senales EXPLICITAS del slug (convencion del canal, no se sobrescriben)
     if "precio" in s:
         return "precios"
     if "coleccion" in s:
         return "coleccion"
-    return "calidad"  # top mundial / rankings de calidad
+    if "mundial" in s:
+        return "calidad"  # 'mundial' = los mejores, NUNCA precios aunque el titulo confunda
+    # 2) Slug sin senal -> usar el titulo como respaldo
+    t = (titulo or "").lower()
+    precio_signals = ("precio", "caro", "caros", "valioso", "valiosos",
+                      "cotiza", "usd", "dolar", "subasta")
+    if any(sig in t for sig in precio_signals):
+        return "precios"
+    if "coleccion" in t:
+        return "coleccion"
+    return "calidad"  # default: rankings de calidad (los mejores)
 
 
 def _reaccion_llm(dato: dict, formato: str):
@@ -398,8 +415,8 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
     if not datos:
         raise ValueError("La pauta no tiene 'datos'.")
     out_slug = out_slug or pauta_slug
-    formato = formato or _detectar_formato(pauta_slug)
     episodio = data.get("episodio") or pauta_slug.replace("-", " ").title()
+    formato = formato or _detectar_formato(pauta_slug, episodio)
     img_dir = f"img/{out_slug}"
 
     n = len(datos)
