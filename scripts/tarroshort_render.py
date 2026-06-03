@@ -433,13 +433,16 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
     formato = formato or _detectar_formato(pauta_slug, episodio)
     img_dir = f"img/{out_slug}"
 
-    n = len(datos)
-    # La pauta va del #10 (datos[0]) al #1 (datos[-1]). Mostramos los primeros
+    # Los rankings del canal SIEMPRE empiezan en el #10 (regla fija), sin importar
+    # cuantos 'datos' tenga la pauta (a veces trae melodias extra al final). El tope
+    # se puede sobrescribir por pauta con el campo 'top'.
+    rank_top = int(data.get("top") or 10)
+    # datos[0] = #rank_top, datos[1] = #(rank_top-1), ... Mostramos los primeros
     # 'mostrar' (los puestos mas altos en numero: #10, #9, ...) y dejamos el resto
     # como gancho para el canal.
-    mostrar = max(1, min(mostrar, n))
+    mostrar = max(1, min(mostrar, rank_top, len(datos)))
     indices = list(range(mostrar))
-    teaser_n = n - mostrar  # cuantos quedan para el canal
+    teaser_n = rank_top - mostrar  # cuantos puestos quedan para el canal (#5..#1)
 
     # Reacciones LLM (neutras, con tildes) + precio si aplica, guardadas en la pauta
     _asegurar_reacciones(pauta_path, data, indices, formato, progress=progress)
@@ -455,7 +458,7 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
     # INTRO (saludo neutro, con tildes/comas para que TarroBot pause bien)
     titulo = _esc(episodio.upper())
     saludo = (f"Soy TarroBot, de Retrotarros. Hoy vemos {_esc(episodio)}, "
-              f"desde el número {n}.")
+              f"desde el número {rank_top}.")
     slides.append(
         '  <section class="slide active intro">\n'
         '    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>\n'
@@ -468,7 +471,7 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
     # ITEMS mostrados (del #10 hacia abajo en numero, segun 'mostrar')
     for i in indices:
         d = datos[i]
-        rank = n - i
+        rank = rank_top - i
         name = _esc((d.get("tema") or "").upper())
         partes = [str(d.get("consola") or ""), str(d.get("ano") or ""), str(d.get("editor") or "")]
         meta = _esc(" · ".join([p for p in partes if p]))
@@ -496,7 +499,7 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
 
     # CIERRE / CLIFFHANGER: si quedaron puestos sin mostrar, los teaseamos al canal
     if teaser_n > 0:
-        cta_sub = (f"¿Quieres el top {teaser_n}? Está completo en el canal.")
+        cta_sub = (f"¿Quieres conocer el top {teaser_n}? Descúbrelo completo en el canal.")
         cta_titulo = f'EL TOP {teaser_n},<br><span class="mg">EN EL CANAL</span>'
     else:
         cta_sub = "El ranking completo esta en el canal. Comenta cual te sorprendio y sigue para mas retro."
