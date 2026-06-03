@@ -180,9 +180,23 @@ def _build_scene(ffmpeg: str, raw_webm: Path, voice_mp3, dur: float, out_mp4: Pa
 def generar_tarroshort(slug: str, voice: str = VOZ_DEFAULT, pitch: str = PITCH_DEFAULT,
                        rate: str = RATE_DEFAULT, out_path=None, progress=None) -> Path:
     repo = _resolve_repo()
-    html_path = repo / "studio" / f"{slug}.html"
+    studio = repo / "studio"
+    # Blindaje anti-footgun: el slug de un short SIEMPRE es 'tarroshort-<nombre>'.
+    # Si llega el slug pelado (ej. 'n64-top-mundial') y existe el short
+    # correspondiente, auto-corregimos para no renderizar el deck del episodio
+    # (16:9 horizontal) por error.
+    if not slug.startswith("tarroshort-") and (studio / f"tarroshort-{slug}.html").exists():
+        slug = f"tarroshort-{slug}"
+    html_path = studio / f"{slug}.html"
     if not html_path.exists():
         raise FileNotFoundError(f"No existe el HTML del short: {html_path}")
+    # Verificar que el HTML sea efectivamente un short vertical (template TarroShort),
+    # no el deck horizontal del episodio. 'item-photo' es exclusivo del short.
+    if "item-photo" not in html_path.read_text(encoding="utf-8", errors="ignore"):
+        raise ValueError(
+            f"'{html_path.name}' no parece un short vertical TarroShort. "
+            f"Usa el slug con prefijo (tarroshort-<nombre>) o arma el short primero "
+            f"con construir_desde_pauta / construir_short_highlights.")
     ffmpeg = _resolve_ffmpeg()
 
     shorts_dir = repo / "studio" / "shorts"
