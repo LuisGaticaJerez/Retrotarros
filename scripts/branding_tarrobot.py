@@ -237,6 +237,52 @@ def assets() -> list[dict]:
         + f'<div class="tag" style="font-size:30px;margin-top:28px">LA MASCOTA DE RETROTARROS</div>'
         + '</div>')))
 
+    # 9) ENDCARDS YouTube 1920x1080 (pantalla final, ultimos ~20s).
+    # Las zonas de video y suscripcion van VACIAS (marco/contorno) porque
+    # YouTube monta los elementos clicables encima. TarroBot invita a la accion.
+    def _slot(x, y, w, h):  # marco de elemento de video (16:9), interior vacio
+        return (f'<div style="position:absolute;left:{x}px;top:{y}px;width:{w}px;height:{h}px;'
+                f'border:4px solid {CY};border-radius:12px;box-shadow:0 0 30px rgba(0,229,255,.35);'
+                f'background:rgba(6,3,15,.25)"></div>')
+
+    def _slot_label(x, y, w, txt):
+        return (f'<div class="tag" style="position:absolute;left:{x}px;top:{y}px;width:{w}px;'
+                f'text-align:center;font-size:20px;color:{YE}">{txt}</div>')
+
+    def _subzone(x, y):  # dropzone circular para el boton de suscripcion
+        return (f'<div style="position:absolute;left:{x}px;top:{y}px;width:200px;height:200px;'
+                f'border:4px dashed rgba(0,229,255,.6);border-radius:50%;'
+                f'box-shadow:0 0 26px rgba(255,46,136,.3)"></div>'
+                f'<div class="wm pill" style="position:absolute;left:{x-40}px;top:{y+214}px;'
+                f'width:280px;text-align:center;font-size:34px;letter-spacing:3px">SUSCRIBETE</div>')
+
+    # 9a) Endcard clasica: 2 videos a la derecha + suscripcion + mascota
+    endcard_2v = (
+        '<div class="stage bg-wide" style="width:1920px;height:1080px;display:block">'
+        '<div class="grid"></div>'
+        '<div class="wm" style="position:absolute;top:64px;left:0;width:1920px;text-align:center;'
+        'font-size:104px;letter-spacing:6px">GRACIAS POR <b>VER</b></div>'
+        + mascota_svg("feliz", 340).replace('class="mascot" ',
+            'class="mascot" style="position:absolute;left:150px;top:560px" ')
+        + _subzone(560, 600)
+        + _slot(1180, 175, 620, 349) + _slot_label(1180, 138, 620, "PROXIMO VIDEO")
+        + _slot(1180, 610, 620, 349) + _slot_label(1180, 573, 620, "MAS RETRO")
+        + '</div>')
+    a.append(dict(file="endcards/endcard-2videos.png", w=1920, h=1080, transp=False, html=endcard_2v))
+
+    # 9b) Endcard 1 video grande + suscripcion
+    endcard_1v = (
+        '<div class="stage bg-wide" style="width:1920px;height:1080px;display:block">'
+        '<div class="grid"></div>'
+        '<div class="wm" style="position:absolute;top:64px;left:0;width:1920px;text-align:center;'
+        'font-size:104px;letter-spacing:6px">SIGUE A <b>TARROBOT</b></div>'
+        + mascota_svg("wow", 320).replace('class="mascot" ',
+            'class="mascot" style="position:absolute;left:170px;top:600px" ')
+        + _subzone(560, 640)
+        + _slot(980, 230, 820, 461) + _slot_label(980, 193, 820, "MIRA ESTE VIDEO")
+        + '</div>')
+    a.append(dict(file="endcards/endcard-1video.png", w=1920, h=1080, transp=False, html=endcard_1v))
+
     return a
 
 
@@ -279,6 +325,8 @@ def contact_sheet(progress=print) -> Path:
         ("Banner X", "banner-x-1500x500.png"),
         ("Post 1080", "post-1080.png"),
         ("Story 1080x1920", "story-1080x1920.png"),
+        ("Endcard 2 videos", "endcards/endcard-2videos.png"),
+        ("Endcard 1 video", "endcards/endcard-1video.png"),
     ]
     expr = [(f, f"expresiones/{f}.png") for f in FACES]
 

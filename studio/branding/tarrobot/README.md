@@ -16,6 +16,8 @@ Todo generado desde el SVG vectorial canonico, en la paleta del canal
 | `post-1080.png` | 1080x1080 | Plantilla post cuadrado (IG/FB). |
 | `story-1080x1920.png` | 1080x1920 | Cover de story / portada de short. |
 | `expresiones/*.png` | 512x512 | Sticker pack transparente: neutral, feliz, wow, pensando, guino, sospecha. |
+| `endcards/endcard-2videos.png` | 1920x1080 | Pantalla final YouTube: 2 slots de video + suscripcion. Zonas vacias para montar los elementos clicables encima. |
+| `endcards/endcard-1video.png` | 1920x1080 | Pantalla final con 1 video grande + suscripcion. |
 | `mascota.svg` | vectorial | Fuente escalable de la mascota (para editar o exportar a cualquier tamano). |
 | `contact-sheet.png` | — | Hoja de contacto con todo el kit de un vistazo. |
 
