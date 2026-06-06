@@ -75,6 +75,26 @@ foreach ($src in $map.Keys) {
     $n++
 }
 
+# Tarjetas imprimibles (categoria nueva). Copia desde studio/branding/tarjetas.
+$Tarjetas = Join-Path $RepoRoot "studio\branding\tarjetas"
+if (Test-Path $Tarjetas) {
+    $tdst = Join-Path $ImgBase "Branding\Tarjetas_imprimibles"
+    if (-not (Test-Path $tdst)) { New-Item -ItemType Directory -Path $tdst -Force | Out-Null }
+    $tmap = [ordered]@{
+        "tarjeta-retrotarros-70x55.png" = "Retrotarros_Tarjeta_TarroBot_70x55.png"
+        "tarjeta-retrotarros-70x55.pdf" = "Retrotarros_Tarjeta_TarroBot_70x55.pdf"
+        "qr-retrotarros.png"            = "Retrotarros_QR_canal.png"
+    }
+    foreach ($f in $tmap.Keys) {
+        $from = Join-Path $Tarjetas $f
+        if (Test-Path $from) {
+            Copy-Item -Path $from -Destination (Join-Path $tdst $tmap[$f]) -Force
+            Write-Host ("  [OK] Branding\Tarjetas_imprimibles\{0}" -f $tmap[$f]) -ForegroundColor Green
+            $n++
+        }
+    }
+}
+
 # Eliminar el volcado plano viejo
 $viejo = Join-Path $ImgBase "Branding\TarroBot"
 if (Test-Path $viejo) {
