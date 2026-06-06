@@ -191,9 +191,9 @@ def endcard_vertical_html() -> str:
         f'<div style="position:absolute;top:80px;right:64px;color:{YE};font-size:26px">CH 04</div>'
         '<div style="position:absolute;top:300px;left:0;width:1080px;display:flex;flex-direction:column;align-items:center">'
         + mascota_svg("feliz", 520)
-        + f'<div style="color:#fff;font-size:64px;letter-spacing:4px;margin-top:30px;'
-        f'text-shadow:0 0 16px rgba(0,229,255,.6)">TARRO<span style="color:{CY}">BOT</span></div>'
-        + f'<div style="color:{YE};font-size:22px;margin-top:22px">MODEL TB-20XX</div></div>'
+        + f'<div style="color:#fff;font-size:52px;letter-spacing:3px;margin-top:30px;'
+        f'text-shadow:0 0 16px rgba(0,229,255,.6)">RETRO<span style="color:{CY}">TARROS</span></div>'
+        + f'<div style="color:{YE};font-size:24px;letter-spacing:6px;margin-top:20px">TARROBOT</div></div>'
         + f'<div style="position:absolute;top:1180px;left:0;width:1080px;text-align:center;color:{MG};'
         f'font-size:72px;letter-spacing:6px;text-shadow:0 0 16px rgba(255,46,136,.6)">SIGUENOS</div>'
         + f'<div style="position:absolute;top:1300px;left:180px;width:720px;height:3px;background:{MG}"></div>'
@@ -204,7 +204,13 @@ def endcard_vertical_html() -> str:
 
 
 def _wm(size_px: int, ls: int = 5) -> str:
-    return f'<div class="wm" style="font-size:{size_px}px;letter-spacing:{ls}px">TARRO<b>BOT</b></div>'
+    """Wordmark principal: RETROTARROS (la marca)."""
+    return f'<div class="wm" style="font-size:{size_px}px;letter-spacing:{ls}px">RETRO<b>TARROS</b></div>'
+
+
+def _subtb(size_px: int, ls: int = 6, mt: int = 12) -> str:
+    """Subtitulo de la mascota: TARROBOT (chico, debajo de la marca)."""
+    return f'<div class="tag" style="font-size:{size_px}px;letter-spacing:{ls}px;margin-top:{mt}px">TARROBOT</div>'
 
 
 # ── Definicion de cada asset: (archivo, w, h, transparente, html) ────────
@@ -215,15 +221,19 @@ def assets() -> list[dict]:
     a.append(dict(file="avatar-800.png", w=800, h=800, transp=False, html=(
         '<div class="stage bg-dark" style="width:800px;height:800px">'
         '<div class="ring" style="width:760px;height:760px"></div>'
-        + mascota_svg("neutral", 360)
-        + '<div class="wm pill" style="font-size:60px;letter-spacing:5px;margin-top:20px">TARRO<b>BOT</b></div>'
+        + mascota_svg("neutral", 330)
+        + '<div class="wm pill" style="font-size:46px;letter-spacing:3px;margin-top:18px">RETRO<b>TARROS</b></div>'
+        + '<div class="tag" style="font-size:26px;letter-spacing:8px;margin-top:14px">TARROBOT</div>'
         + '</div>')))
 
     # 2) LOGO horizontal (mascota + wordmark) - dark y transparente
     def logo_h():
         return ('<div class="stage %BG%" style="width:1200px;height:520px;flex-direction:row;gap:40px">'
-                + mascota_svg("neutral", 360)
-                + '<div class="wm" style="font-size:150px;letter-spacing:6px">TARRO<b>BOT</b></div>'
+                + mascota_svg("neutral", 340)
+                + '<div style="display:flex;flex-direction:column;align-items:flex-start">'
+                + '<div class="wm" style="font-size:108px;letter-spacing:5px">RETRO<b>TARROS</b></div>'
+                + '<div class="tag" style="font-size:34px;letter-spacing:10px;margin-top:10px">TARROBOT</div>'
+                + '</div>'
                 + '</div>')
     a.append(dict(file="logo-horizontal-dark.png", w=1200, h=520, transp=False,
                   html=logo_h().replace("%BG%", "bg-dark")))
@@ -233,8 +243,9 @@ def assets() -> list[dict]:
     # 3) LOGO apilado - dark y transparente
     def logo_s():
         return ('<div class="stage %BG%" style="width:760px;height:840px">'
-                + mascota_svg("neutral", 440)
-                + '<div class="wm" style="font-size:120px;letter-spacing:6px;margin-top:18px">TARRO<b>BOT</b></div>'
+                + mascota_svg("neutral", 420)
+                + '<div class="wm" style="font-size:92px;letter-spacing:3px;margin-top:18px">RETRO<b>TARROS</b></div>'
+                + '<div class="tag" style="font-size:30px;letter-spacing:10px;margin-top:10px">TARROBOT</div>'
                 + '</div>')
     a.append(dict(file="logo-stacked-dark.png", w=760, h=840, transp=False,
                   html=logo_s().replace("%BG%", "bg-dark")))
@@ -254,8 +265,8 @@ def assets() -> list[dict]:
         '<div style="display:flex;flex-direction:row;align-items:center;gap:60px;z-index:2">'
         + mascota_svg("feliz", 420)
         + '<div style="display:flex;flex-direction:column;align-items:flex-start">'
-        + '<div class="wm" style="font-size:200px;letter-spacing:8px">TARRO<b>BOT</b></div>'
-        + f'<div class="tag" style="font-size:34px;margin-top:22px;color:{YE}">LA MASCOTA DE RETROTARROS</div>'
+        + '<div class="wm" style="font-size:168px;letter-spacing:6px">RETRO<b>TARROS</b></div>'
+        + f'<div class="tag" style="font-size:40px;margin-top:22px;letter-spacing:8px;color:{YE}">TARROBOT · MASCOTA OFICIAL</div>'
         + '</div></div></div>')))
 
     # 6) BANNER X / Twitter 1500x500
@@ -265,17 +276,17 @@ def assets() -> list[dict]:
         '<div style="display:flex;flex-direction:row;align-items:center;gap:44px;z-index:2">'
         + mascota_svg("neutral", 300)
         + '<div style="display:flex;flex-direction:column;align-items:flex-start">'
-        + '<div class="wm" style="font-size:130px;letter-spacing:6px">TARRO<b>BOT</b></div>'
-        + f'<div class="tag" style="font-size:22px;margin-top:16px;color:{YE}">RETRO AL 100 POR CIENTO</div>'
+        + '<div class="wm" style="font-size:104px;letter-spacing:4px">RETRO<b>TARROS</b></div>'
+        + f'<div class="tag" style="font-size:26px;margin-top:14px;letter-spacing:6px;color:{YE}">TARROBOT · MASCOTA</div>'
         + '</div></div></div>')))
 
     # 7) POST cuadrado 1080
     a.append(dict(file="post-1080.png", w=1080, h=1080, transp=False, html=(
         '<div class="stage bg-dark" style="width:1080px;height:1080px">'
         '<div class="grid"></div>'
-        + mascota_svg("wow", 540)
-        + '<div class="wm" style="font-size:128px;letter-spacing:6px;margin-top:24px">TARRO<b>BOT</b></div>'
-        + f'<div class="tag" style="font-size:26px;margin-top:22px">RETROTARROS</div>'
+        + mascota_svg("wow", 520)
+        + '<div class="wm" style="font-size:112px;letter-spacing:5px;margin-top:24px">RETRO<b>TARROS</b></div>'
+        + f'<div class="tag" style="font-size:30px;margin-top:18px;letter-spacing:10px">TARROBOT</div>'
         + '</div>')))
 
     # 8) STORY / cover short 1080x1920
@@ -283,9 +294,9 @@ def assets() -> list[dict]:
         '<div class="stage bg-dark" style="width:1080px;height:1920px;justify-content:center;gap:10px">'
         '<div class="grid"></div>'
         '<div class="ring" style="width:880px;height:880px;top:360px"></div>'
-        + mascota_svg("feliz", 520)
-        + '<div class="wm" style="font-size:150px;letter-spacing:8px;margin-top:40px">TARRO<b>BOT</b></div>'
-        + f'<div class="tag" style="font-size:30px;margin-top:28px">LA MASCOTA DE RETROTARROS</div>'
+        + mascota_svg("feliz", 500)
+        + '<div class="wm" style="font-size:120px;letter-spacing:5px;margin-top:40px">RETRO<b>TARROS</b></div>'
+        + f'<div class="tag" style="font-size:32px;margin-top:24px;letter-spacing:8px">TARROBOT · LA MASCOTA</div>'
         + '</div>')))
 
     # 9) ENDCARDS YouTube 1920x1080 (pantalla final, ultimos ~20s).
@@ -326,7 +337,7 @@ def assets() -> list[dict]:
         '<div class="stage bg-wide" style="width:1920px;height:1080px;display:block">'
         '<div class="grid"></div>'
         '<div class="wm" style="position:absolute;top:64px;left:0;width:1920px;text-align:center;'
-        'font-size:104px;letter-spacing:6px">SIGUE A <b>TARROBOT</b></div>'
+        'font-size:104px;letter-spacing:6px">SIGUE A <b>RETROTARROS</b></div>'
         + mascota_svg("wow", 320).replace('class="mascot" ',
             'class="mascot" style="position:absolute;left:170px;top:600px" ')
         + _subzone(560, 640)
