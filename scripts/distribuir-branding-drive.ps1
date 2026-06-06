@@ -81,12 +81,19 @@ if (Test-Path $Tarjetas) {
     $tdst = Join-Path $ImgBase "Branding\Tarjetas_imprimibles"
     if (-not (Test-Path $tdst)) { New-Item -ItemType Directory -Path $tdst -Force | Out-Null }
     $tmap = [ordered]@{
-        "tarjeta-retrotarros-70x55.png"          = "Retrotarros_Tarjeta_TarroBot_70x55.png"
-        "tarjeta-retrotarros-70x55.pdf"          = "Retrotarros_Tarjeta_TarroBot_70x55.pdf"
-        "tarjeta-vertical-55x85.png"             = "Retrotarros_Tarjeta_TarroBot_Vertical_55x85.png"
-        "plancha-carta-tarjeta-vertical.pdf"     = "Retrotarros_Tarjeta_TarroBot_Plancha_Carta.pdf"
-        "plancha-carta-tarjeta-vertical.png"     = "Retrotarros_Tarjeta_TarroBot_Plancha_Carta_preview.png"
-        "qr-retrotarros.png"                     = "Retrotarros_QR_canal.png"
+        "tarjeta-retrotarros-70x55.png"      = "Retrotarros_Tarjeta_TarroBot_70x55.png"
+        "plancha-carta-tarjeta-70x55.pdf"    = "Retrotarros_Tarjeta_TarroBot_Plancha_Carta.pdf"
+        "plancha-carta-tarjeta-70x55.png"    = "Retrotarros_Tarjeta_TarroBot_Plancha_Carta_preview.png"
+        "qr-retrotarros.png"                 = "Retrotarros_QR_canal.png"
+    }
+    # Limpiar versiones obsoletas (navy / vertical / pdf single viejo)
+    $obsoletos = @(
+        "Retrotarros_Tarjeta_TarroBot_70x55.pdf",
+        "Retrotarros_Tarjeta_TarroBot_Vertical_55x85.png"
+    )
+    foreach ($o in $obsoletos) {
+        $op = Join-Path $tdst $o
+        if (Test-Path $op) { Remove-Item $op -Force; Write-Host "  [CLEAN] Tarjetas_imprimibles\$o" -ForegroundColor Magenta }
     }
     foreach ($f in $tmap.Keys) {
         $from = Join-Path $Tarjetas $f
