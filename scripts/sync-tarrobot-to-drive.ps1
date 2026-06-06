@@ -21,6 +21,7 @@
 #   - studio/pautas/*.tarrobot.json + audio/*
 #   - studio/melodias/* (.mid, .midi, soundfont.sf2 si existe)
 #   - studio/shorts/tarroshort-*.mp4 (shorts finales · fix 2026-06-03; NO la carpeta audio/)
+#   - studio/branding/* (kit visual de TarroBot para redes · fix 2026-06-03)
 #   - data/tarrobot-database.json
 #
 # Que NO sincroniza:
@@ -179,6 +180,13 @@ $shortsDir = Join-Path $RepoRoot "studio\shorts"
 if (Test-Path $shortsDir) {
     Get-ChildItem -Path $shortsDir -Filter "tarroshort-*.mp4" -File |
         ForEach-Object { Sync-Item "studio\shorts\$($_.Name)" }
+}
+Write-Host ""
+
+# 5c. Branding TarroBot (kit visual para redes). Fix 2026-06-03.
+Write-Host "Branding TarroBot (kit redes):" -ForegroundColor Cyan
+if (Test-Path (Join-Path $RepoRoot "studio\branding")) {
+    Sync-Item "studio\branding" -Recursive
 }
 Write-Host ""
 
