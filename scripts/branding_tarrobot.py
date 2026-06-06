@@ -152,6 +152,57 @@ def _doc(body: str) -> str:
     return f'<!doctype html><html><head><meta charset="utf-8"><style>{CSS}</style></head><body>{body}</body></html>'
 
 
+def _social_icons() -> str:
+    """Fila de iconos sociales (estilo del canal): YouTube, TikTok, Instagram."""
+    yt = ('<div style="width:150px;height:106px;background:#FF0000;border-radius:22px;'
+          'display:flex;align-items:center;justify-content:center">'
+          '<div style="width:0;height:0;border-left:38px solid #fff;'
+          'border-top:24px solid transparent;border-bottom:24px solid transparent;margin-left:8px"></div></div>')
+    tk = ('<div style="width:150px;height:106px;background:#000;border-radius:22px;'
+          'display:flex;align-items:center;justify-content:center;position:relative">'
+          '<div style="font-size:64px;color:#fff">&#9835;</div>'
+          f'<div style="position:absolute;left:42px;top:24px;font-size:64px;color:{CY};opacity:.8">&#9835;</div></div>')
+    ig = ('<div style="width:150px;height:106px;border-radius:22px;'
+          'background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF,#515BD4);'
+          'display:flex;align-items:center;justify-content:center">'
+          '<div style="width:54px;height:54px;border:6px solid #fff;border-radius:16px;position:relative">'
+          '<div style="width:24px;height:24px;border:5px solid #fff;border-radius:50%;'
+          'position:absolute;top:9px;left:9px"></div></div></div>')
+    col = '<div style="display:flex;flex-direction:column;align-items:center;gap:18px">{0}<div style="color:#fff;font-size:22px">{1}</div></div>'
+    return ('<div style="display:flex;justify-content:center;gap:60px">'
+            + col.format(yt, "YOUTUBE") + col.format(tk, "TIKTOK") + col.format(ig, "INSTAGRAM")
+            + '</div>')
+
+
+def endcard_vertical_html() -> str:
+    """Endcard 1080x1920 en la plantilla del canal (pixel, REC/CH, fila social),
+    con TarroBot de protagonista. Conversa con Retrotarros_EndCard_*.png."""
+    NAVY = "#0e0a20"
+    px = "font-family:'Press Start 2P'"
+    return (
+        f'<div class="stage" style="width:1080px;height:1920px;background:{NAVY};display:block;'
+        f'{px}">'
+        '<div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,'
+        'rgba(0,0,0,.18) 0 2px,transparent 2px 4px);opacity:.4"></div>'
+        f'<div style="position:absolute;top:70px;left:64px;border:3px solid {MG};padding:18px 26px;'
+        f'color:{MG};font-size:26px;letter-spacing:2px;text-shadow:0 0 10px rgba(255,46,136,.6)">@RETROTARROS</div>'
+        f'<div style="position:absolute;top:80px;right:230px;color:{MG};font-size:26px;display:flex;'
+        f'align-items:center;gap:12px"><div style="width:18px;height:18px;border-radius:50%;background:{MG}"></div>REC</div>'
+        f'<div style="position:absolute;top:80px;right:64px;color:{YE};font-size:26px">CH 04</div>'
+        '<div style="position:absolute;top:300px;left:0;width:1080px;display:flex;flex-direction:column;align-items:center">'
+        + mascota_svg("feliz", 520)
+        + f'<div style="color:#fff;font-size:64px;letter-spacing:4px;margin-top:30px;'
+        f'text-shadow:0 0 16px rgba(0,229,255,.6)">TARRO<span style="color:{CY}">BOT</span></div>'
+        + f'<div style="color:{YE};font-size:22px;margin-top:22px">MODEL TB-20XX</div></div>'
+        + f'<div style="position:absolute;top:1180px;left:0;width:1080px;text-align:center;color:{MG};'
+        f'font-size:72px;letter-spacing:6px;text-shadow:0 0 16px rgba(255,46,136,.6)">SIGUENOS</div>'
+        + f'<div style="position:absolute;top:1300px;left:180px;width:720px;height:3px;background:{MG}"></div>'
+        + '<div style="position:absolute;top:1420px;left:0;width:1080px">' + _social_icons() + '</div>'
+        + f'<div style="position:absolute;top:1720px;left:0;width:1080px;text-align:center;color:{MG};'
+        f'font-size:52px;letter-spacing:4px;text-shadow:0 0 16px rgba(255,46,136,.6)">@RETROTARROS</div>'
+        + '</div>')
+
+
 def _wm(size_px: int, ls: int = 5) -> str:
     return f'<div class="wm" style="font-size:{size_px}px;letter-spacing:{ls}px">TARRO<b>BOT</b></div>'
 
@@ -283,6 +334,10 @@ def assets() -> list[dict]:
         + '</div>')
     a.append(dict(file="endcards/endcard-1video.png", w=1920, h=1080, transp=False, html=endcard_1v))
 
+    # 9c) Endcard VERTICAL estilo canal (1080x1920) - conversa con redes sociales
+    a.append(dict(file="endcards/endcard-vertical.png", w=1080, h=1920, transp=False,
+                  html=endcard_vertical_html()))
+
     return a
 
 
@@ -325,8 +380,9 @@ def contact_sheet(progress=print) -> Path:
         ("Banner X", "banner-x-1500x500.png"),
         ("Post 1080", "post-1080.png"),
         ("Story 1080x1920", "story-1080x1920.png"),
-        ("Endcard 2 videos", "endcards/endcard-2videos.png"),
-        ("Endcard 1 video", "endcards/endcard-1video.png"),
+        ("Endcard vertical (canal)", "endcards/endcard-vertical.png"),
+        ("Endcard 2 videos (YT)", "endcards/endcard-2videos.png"),
+        ("Endcard 1 video (YT)", "endcards/endcard-1video.png"),
     ]
     expr = [(f, f"expresiones/{f}.png") for f in FACES]
 
