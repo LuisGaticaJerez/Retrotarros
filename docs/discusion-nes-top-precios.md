@@ -39,18 +39,22 @@ Cifras tratadas como **valor de mercado aproximado**: fluctuan con cada subasta.
 
 ---
 
-## Decisiones de orden y que quedo afuera
+## La estructura de tres bloques (convencion del canal)
 
-El top mezcla dos familias:
-1. **Rarezas retail / fin de ciclo** (Bonk, Panic Restaurant, Little Samson, Flintstones).
-2. **Cartuchos de competencia / no-retail** (Campus Challenge, NWC gris y dorado) — los mas caros, van al podio.
+Igual que `snes-top-precios`, el episodio separa por como llego el juego al mundo:
 
-**Decision clave**: incluir los NWC y Campus Challenge aunque NO sean retail. Son LOS grales del NES y el publico los espera. Se aclara en vivo que eran cartuchos de evento, no de tienda.
+1. **Top 10 RETAIL**: solo juegos que se vendieron en tiendas. Es el ranking "de verdad", ordenado por valor CIB. Aca el #1 es **Stadium Events** (retail retirado, USD 25.000), que se escapa de los demas (que rondan los miles).
+2. **Apartado RAREZAS / NO-RETAIL**: variantes, sin licencia (Panesian), exclusivos de alquiler (Blockbuster), hallazgos de bodega y cartuchos de competencia. NO se vendieron en retail normal, por eso van aparte con etiqueta en vez de numero.
+3. **SANTO GRIAL**: el que se escapa de todo precio. Aca: **NWC dorado** (26 copias, USD 100.000+).
+
+**Por que esta separacion**: meter los NWC (USD 30k-100k) en el mismo ranking que Bonk (USD 900) aplastaria todo. Separando, el top retail es comparable entre si y las rarezas brillan en su propia liga. Es la misma logica del SNES (retail → variantes/exclusivos → grial Powerfest 94).
+
+**Decision Stadium Events**: es retail (Bandai lo vendio en tiendas en 1987 antes de retirarlo), asi que va como #1 retail, NO como rareza. Es "el mas caro que de verdad estuvo a la venta".
 
 **Afuera quedaron:**
-- **Hot Slots / Peek-A-Boo Poker** (Panesian): para no repetir la rareza Panesian (ya esta Bubble Bath Babes).
-- **Myriad 6-in-1**: rarisimo pero demasiado obscuro, requiere mucha explicacion.
-- **Powerfest 94**: es N64-era / prototipo unico, no encaja limpio.
+- **Hot Slots / Peek-A-Boo Poker** (Panesian): para no repetir rareza Panesian (ya esta Bubble Bath Babes).
+- **Mr. Gimmick / Recca**: carisimos pero solo PAL/Famicom, no retail NTSC (audiencia Latam juega NTSC).
+- **Myriad 6-in-1**: rarisimo pero demasiado obscuro.
 
 ---
 
@@ -72,10 +76,10 @@ OJO: este top es de mercado MUNDIAL, no de la coleccion de Luis (`data/coleccion
 ## Decisiones de armado (2026-06-07)
 
 1. Triptico NES cerrado: coleccion + mundial + precios.
-2. Precios = **valor de mercado aproximado** (se insiste, no es precio fijo, no es consejo de inversion).
-3. Podio = los 3 cartuchos de competencia (NWC dorado/gris + Campus Challenge).
-4. Deck con `scripts/top_deck.py`: el precio va como etiqueta de bloque; la etiqueta de cartucho usa color (oro para el NWC dorado, buen detalle).
-5. JSON TarroBot con `precio_short` por item + reaccion_short (con tildes para TTS).
+2. Precios = **valor de mercado aproximado 2026** (se insiste: no es precio fijo, no es consejo de inversion).
+3. Tres bloques: **10 retail** (#10→#1) + **5 rarezas** (etiqueta) + **grial** (NWC dorado). Igual que SNES.
+4. Deck con `scripts/top_deck.py` (extendido para soportar rarezas con `badge_text` + slide `grial`). Etiqueta de cartucho con color (oro para el NWC dorado).
+5. JSON TarroBot: `datos` = solo los 10 retail (#10→#1) con `precio_short`, para que sea compatible con el generador de TarroShorts. Rarezas/grial viven en el deck HTML.
 
 ---
 

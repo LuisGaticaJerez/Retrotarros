@@ -80,15 +80,27 @@ def _badge(it: dict) -> str:
             f'<div class="game-block-label {color}">{label}</div>')
 
 
-def _slide_item(num: int, it: dict, consola: str) -> str:
-    ch = it["pos"]
+def _badge_text(it: dict) -> str:
+    """Badge de texto (rarezas/grial): game-pos con label en vez de #numero."""
+    color = it.get("color", "mg")
+    if it.get("grial"):
+        return ('<div class="game-pos mg" style="font-size:34px;letter-spacing:3px;">'
+                '<span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div>')
+    txt = it["badge_text"]
+    return (f'<div class="game-pos {color}" style="font-size:24px;letter-spacing:2px;line-height:1.15;">'
+            f'{txt}</div>')
+
+
+def _slide_item(num: int, it: dict, consola: str, ch: int | None = None) -> str:
+    ch = ch if ch is not None else it.get("pos", 1)
     meta = it.get("meta") or " · ".join(
         str(x) for x in [consola, it.get("ano"), (it.get("editor") or "").upper()] if x)
+    head = _badge_text(it) if (it.get("badge_text") or it.get("grial")) else _badge(it)
     return (
         '  <section class="slide">\n'
         f'    <span class="slide-num">{num:02d}</span>\n'
         '    <div class="slide-hybrid">\n'
-        f'      <div class="hybrid-head">{_badge(it)}</div>\n'
+        f'      <div class="hybrid-head">{head}</div>\n'
         '      <div class="hybrid-body">\n'
         f'        <div class="cart-wrap">{_cart(it, consola)}</div>\n'
         f'        <div class="tv-wrap">{_tv(ch)}</div>\n'
@@ -141,6 +153,17 @@ def generar_top(data: dict, out_slug: str) -> Path:
     slides.append(_slide_divider(n, data["intro"])); n += 1
     for it in data["items"]:           # ya ordenados #10 -> #1
         slides.append(_slide_item(n, it, consola)); n += 1
+    # Apartado RAREZAS (variantes / no-retail) - opcional
+    ch = 1
+    if data.get("rarezas"):
+        if data.get("rarezas_divider"):
+            slides.append(_slide_divider(n, data["rarezas_divider"])); n += 1
+        for it in data["rarezas"]:
+            slides.append(_slide_item(n, it, consola, ch=ch)); n += 1; ch += 1
+    # SANTO GRIAL - opcional (slide unico)
+    if data.get("grial"):
+        g = dict(data["grial"]); g["grial"] = True
+        slides.append(_slide_item(n, g, consola, ch=ch)); n += 1
     slides.append(_slide_divider(n, data["analisis"])); n += 1
     slides.append(_slide_divider(n, data["cliffhanger"])); n += 1
 
