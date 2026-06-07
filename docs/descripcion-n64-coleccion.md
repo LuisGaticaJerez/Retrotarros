@@ -41,14 +41,15 @@ Cuentanos en los comentarios cual fue TU juego de N64 y que te falta para comple
 Suscribete para la coleccion de las otras consolas (ya viene NES y SNES).
 Retrotarros — Nostalgia + Juegos + Musica.
 
-#Nintendo64 #N64 #Retrogaming #Coleccion #RetroTarros
+#Nintendo64 #Nintendo #Retrogaming #Gaming #Videojuegos
 ```
 
 ---
 
-## Hashtags adicionales (pool, elegir 3-5 para el titulo/primer comentario)
+## Hashtags adicionales (pool — preferir los MAS MASIVOS, elegir 3-5)
 
-`#Nintendo64 #N64 #Retrogaming #RetroGaming #Coleccion #GameCollection #GoldenEye #SuperMario64 #OcarinaOfTime #MarioKart64 #Funtastic #Nintendo #RetroTarros #VideojuegosRetro #Chile`
+Masivos (alto volumen, primero): `#Nintendo64 #Nintendo #Retrogaming #Gaming #Videojuegos #Retro #Gamer #N64`
+Nicho/relleno (opcional): `#SuperMario64 #GoldenEye #OcarinaOfTime #Funtastic #RetroTarros #Chile`
 
 ## Tags YouTube (keywords, separadas por coma)
 

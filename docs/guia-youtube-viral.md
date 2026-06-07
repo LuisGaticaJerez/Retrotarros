@@ -67,10 +67,12 @@ deben seguir esta guia.
 ## 4. HASHTAGS
 
 - **3 a 5 hashtags** relevantes. Los **primeros 3** del cuadro de descripcion aparecen ENCIMA del titulo (los que mas pesan).
+- **Preferencia de Luis (2026-06-07): usar hashtags MASIVOS** (alto volumen de busqueda) por sobre los de nicho/marca. El alcance pesa mas que la especificidad.
+  - Por defecto: `#Nintendo64 #Nintendo #Retrogaming #Gaming #Videojuegos` (1 especifico-pero-buscado + 4 masivos).
+  - Pool masivo: `#Nintendo #Gaming #Retrogaming #Videojuegos #Retro #Gamer #VideoGames`.
+  - Nicho/marca (`#RetroTarros`, `#Funtastic`, `#Chile`): solo como relleno opcional, NO en los primeros 3.
 - **Maximo 15 hashtags**: si pones mas de 15, YouTube los IGNORA TODOS. No abusar.
 - Cada hashtag < 60 caracteres, sin espacios.
-- Mezclar: 1 amplio (#Retrogaming), 1-2 de nicho (#Nintendo64 #N64), 1 de marca (#RetroTarros), 1 regional opcional (#Chile).
-- Un **pool** mas grande puede vivir en el doc de descripcion; se eligen 3-5 por video.
 
 ---
 
