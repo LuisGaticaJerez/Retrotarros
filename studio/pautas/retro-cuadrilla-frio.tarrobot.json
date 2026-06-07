@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "retro-cuadrilla-frio",
+  "episodio": "Especial de Invierno - La Cuadrilla del Frio",
+  "creado": "2026-06-07",
+  "actualizado": "2026-06-07",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "retro-cuadrilla-frio-1",
+      "tema": "Sub-Zero",
+      "texto": "Sub-Zero, jefe de congelacion desde el 92. Llega tarde y te saca la columna, literal.",
+      "estado": "sospecha",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Sub-Zero, jefe de congelacion desde el 92. Llega tarde y te saca la columna, literal."
+    },
+    {
+      "id": "retro-cuadrilla-frio-2",
+      "tema": "Mr. Freeze",
+      "texto": "Mr. Freeze, el unico que hace horas extra por amor. Romantico y heladisimo.",
+      "estado": "pensando",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Mr. Freeze, el unico que hace horas extra por amor. Romantico y heladisimo."
+    },
+    {
+      "id": "retro-cuadrilla-frio-3",
+      "tema": "Ice Man",
+      "texto": "Ice Man, robot friolento de fabrica. Reclama que le pagan el aguinaldo en tornillos.",
+      "estado": "neutral",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Ice Man, robot friolento de fabrica. Reclama que le pagan el aguinaldo en tornillos."
+    },
+    {
+      "id": "retro-cuadrilla-frio-4",
+      "tema": "Glacius",
+      "texto": "Glacius se derrite y se rearma para fichar dos veces. El gremio investiga el fraude.",
+      "estado": "wow",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Glacius se derrite y se rearma para fichar dos veces. El gremio investiga el fraude."
+    },
+    {
+      "id": "retro-cuadrilla-frio-5",
+      "tema": "Articuno",
+      "texto": "Articuno, turno noche. Aparece una vez cada mil partidas y igual se queja del frio.",
+      "estado": "guino",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Articuno, turno noche. Aparece una vez cada mil partidas y igual se queja del frio."
+    },
+    {
+      "id": "retro-cuadrilla-frio-6",
+      "tema": "Snow Bros",
+      "texto": "Los Snow Bros, Nick y Tom. Hacen bolas gigantes y a empujones limpian el cerro.",
+      "estado": "feliz",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Los Snow Bros, Nick y Tom. Hacen bolas gigantes y a empujones limpian el cerro."
+    },
+    {
+      "id": "retro-cuadrilla-frio-7",
+      "tema": "Ice Climbers",
+      "texto": "Los Ice Climbers llevan 40 años en Smash sin contrato fijo. El sindicato exige justicia.",
+      "estado": "pensando",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Los Ice Climbers llevan 40 años en Smash sin contrato fijo. El sindicato exige justicia."
+    },
+    {
+      "id": "retro-cuadrilla-frio-8",
+      "tema": "Mr. Frosty",
+      "texto": "Mr. Frosty, la morsa. Kirby le copia el poder sin pagar regalias, esta en tribunales.",
+      "estado": "sospecha",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Mr. Frosty, la morsa. Kirby le copia el poder sin pagar regalias, esta en tribunales."
+    },
+    {
+      "id": "retro-cuadrilla-frio-9",
+      "tema": "Lord Fredrik",
+      "texto": "Lord Fredrik, el gerente vikingo. Congelo una isla entera por capricho. Asi es la gerencia.",
+      "estado": "wow",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Lord Fredrik, el gerente vikingo. Congelo una isla entera por capricho. Asi es la gerencia."
+    },
+    {
+      "id": "retro-cuadrilla-frio-10",
+      "tema": "El Yeti De Skifree",
+      "texto": "El Yeti de SkiFree, seguridad del cerro. Nunca falta al trabajo, y te come si bajas esquiando.",
+      "estado": "wow",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "El Yeti de SkiFree, seguridad del cerro. Nunca falta al trabajo, y te come si bajas esquiando."
+    }
+  ]
+}
