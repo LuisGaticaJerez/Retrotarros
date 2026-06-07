@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "nes-top-mundial",
+  "episodio": "Top 10 NES mundial - los mejores juegos",
+  "creado": "2026-06-07",
+  "actualizado": "2026-06-07",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "nes-top-mundial-10",
+      "tema": "Castlevania Iii: Dracula'S Curse",
+      "texto": "Castlevania III es el techo tecnico del NES en sonido. Konami metio el chip VRC6 en el cartucho japones para tener canales de audio extra, personajes jugables como Alucard y rutas ramificadas. Un cierre de saga monumental para los 8 bits.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1990,
+      "editor": "Konami",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Castlevania III metia un chip de sonido extra en el cartucho! Konami exprimio la NES como nadie."
+    },
+    {
+      "id": "nes-top-mundial-9",
+      "tema": "Ninja Gaiden",
+      "texto": "Ninja Gaiden fue de los primeros juegos en contar una historia con cinematicas tipo comic entre niveles. Tecmo creo un action-platformer veloz y brutalmente dificil que definio el genero ninja en consola.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1989,
+      "editor": "Tecmo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Ninja Gaiden nos hizo sufrir, pero esas cinematicas tipo comic eran de otro planeta."
+    },
+    {
+      "id": "nes-top-mundial-8",
+      "tema": "Contra",
+      "texto": "Contra trajo el arcade run-and-gun a la casa con cooperativo de dos jugadores, el spread gun y el codigo Konami mas famoso del mundo: arriba arriba abajo abajo. Konami en su mejor momento.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1988,
+      "editor": "Konami",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Arriba, arriba, abajo, abajo... ¡Contra hizo inmortal al codigo Konami!"
+    },
+    {
+      "id": "nes-top-mundial-7",
+      "tema": "Kirby'S Adventure",
+      "texto": "Kirby's Adventure llego tarde, en 1993, y aun asi sorprendio: HAL introdujo la mecanica de copiar poderes de los enemigos y logro efectos graficos que parecian imposibles para la NES. El canto del cisne de la consola.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1993,
+      "editor": "HAL Laboratory",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Kirby's Adventure salio en el 93 y exprimio la NES como si fuera de 16 bits!"
+    },
+    {
+      "id": "nes-top-mundial-6",
+      "tema": "Punch-Out!!",
+      "texto": "Punch-Out!! convirtio el boxeo en un puzzle de reflejos: cada rival tiene un patron que debes leer y castigar. Little Mac enfrentando a gigantes como King Hippo y Mike Tyson lo hizo legendario.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1987,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Punch-Out!! era puro leer al rival. King Hippo y su pancita abierta, un clasico!"
+    },
+    {
+      "id": "nes-top-mundial-5",
+      "tema": "Mega Man 2",
+      "texto": "Mega Man 2 perfecciono todo lo que el primero propuso: ocho Robot Masters, el sistema de robar armas al vencerlos y una banda sonora eterna. El tema de Dr. Wily sigue sonando 35 años despues.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1989,
+      "editor": "Capcom",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Mega Man 2 y el tema de Dr. Wily... ¡la mejor musica que dio la NES, sin discusion!"
+    },
+    {
+      "id": "nes-top-mundial-4",
+      "tema": "Metroid",
+      "texto": "Metroid invento la exploracion no-lineal: un mundo interconectado en el planeta Zebes que se abre con cada habilidad nueva. Y el giro final, revelar que Samus era mujer, fue historico para 1987.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1987,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Metroid escondia que Samus era mujer hasta el final! Un giro adelantado a su epoca."
+    },
+    {
+      "id": "nes-top-mundial-3",
+      "tema": "The Legend Of Zelda",
+      "texto": "The Legend of Zelda llego en cartucho dorado y cambio todo: un mundo abierto para explorar a tu ritmo, secretos en cada pantalla y guardado en bateria, algo rarisimo en 1987. Nacio una leyenda.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1987,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡El cartucho dorado de Zelda! Mundo abierto y guardado en bateria en 1987, una locura."
+    },
+    {
+      "id": "nes-top-mundial-2",
+      "tema": "Super Mario Bros.",
+      "texto": "Super Mario Bros. salvo a la industria del videojuego tras el crash de 1983. Definio el genero plataformas, y su primer nivel, el 1-1, sigue siendo el mejor ejemplo de diseño que enseña sin texto.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1985,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Super Mario Bros. salvo a toda la industria! Y el nivel 1-1 es game design perfecto."
+    },
+    {
+      "id": "nes-top-mundial-1",
+      "tema": "Super Mario Bros. 3",
+      "texto": "Super Mario Bros. 3 es, para gran parte de la critica, el mejor juego de la NES. Mapas de mundo, los trajes mapache y tanooki, decenas de niveles sin relleno. La cuspide del plataformero 2D.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1990,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Super Mario Bros. 3 es la cumbre del NES. El traje mapache cambio mi infancia entera."
+    }
+  ]
+}

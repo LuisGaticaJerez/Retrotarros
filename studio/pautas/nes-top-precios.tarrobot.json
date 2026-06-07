@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "slug": "nes-top-precios",
+  "episodio": "Top 10 NES mas caros del mundo (precios)",
+  "creado": "2026-06-07",
+  "actualizado": "2026-06-07",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "nes-top-precios-10",
+      "tema": "Bonk'S Adventure",
+      "texto": "Bonk's Adventure para NES salio en 1994, cuando la consola ya estaba muerta comercialmente. Esa tirada minima de fin de ciclo lo volvio raro: hoy un cartucho completo en caja ronda los ochocientos cincuenta dolares.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1994,
+      "editor": "Hudson",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Bonk en NES salio en el 94, con la consola ya muerta! Por eso vale lo que vale.",
+      "precio_short": "USD 700"
+    },
+    {
+      "id": "nes-top-precios-9",
+      "tema": "Panic Restaurant",
+      "texto": "Panic Restaurant es un plataformero de Taito de 1992, encantador pero ignorado en su epoca. Justo por eso casi nadie lo tiene: hoy un suelto supera los ochocientos dolares y completo pasa los mil.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1992,
+      "editor": "Taito",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Panic Restaurant: nadie lo pesco en su momento, y ahora todos lo quieren.",
+      "precio_short": "USD 850"
+    },
+    {
+      "id": "nes-top-precios-8",
+      "tema": "Cheetahmen Ii",
+      "texto": "Cheetahmen II nunca se lanzo oficialmente. Años despues aparecieron cajas de cartuchos en una bodega y se vendieron a coleccionistas. Es famoso por estar inacabado y por lo raro, no por bueno.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1992,
+      "editor": "Active Enterprises",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Cheetahmen II ni siquiera se lanzo! Lo encontraron en una bodega años despues.",
+      "precio_short": "USD 900"
+    },
+    {
+      "id": "nes-top-precios-7",
+      "tema": "Bubble Bath Babes",
+      "texto": "Bubble Bath Babes es uno de los tres juegos para adultos sin licencia que hizo Panesian. Nintendo nunca los aprobo, asi que se produjeron poquisimos. Hoy son de los cartuchos NES mas buscados por rareza.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1991,
+      "editor": "Panesian",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Los juegos prohibidos de Panesian... Nintendo los odiaba, los coleccionistas los aman.",
+      "precio_short": "USD 1.500"
+    },
+    {
+      "id": "nes-top-precios-6",
+      "tema": "The Flintstones: Surprise At Dinosaur Peak",
+      "texto": "Surprise at Dinosaur Peak casi no se vendio al publico: Taito lo distribuyo solo como alquiler en tiendas Blockbuster de Estados Unidos. Pocas copias sobrevivieron, y hoy es uno de los santos griales del NES.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1994,
+      "editor": "Taito",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Solo se arrendaba en Blockbuster! Por eso este Flintstones vale una fortuna.",
+      "precio_short": "USD 2.000"
+    },
+    {
+      "id": "nes-top-precios-5",
+      "tema": "Little Samson",
+      "texto": "Little Samson es un action-platformer buenisimo que vendio pesimo por llegar tarde al NES. Esa combinacion de calidad y rareza lo convirtio en leyenda: hoy un suelto supera los dos mil cuatrocientos dolares.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1992,
+      "editor": "Taito",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Little Samson: un juegazo que nadie compro. Hoy cuesta como un sueldo entero.",
+      "precio_short": "USD 3.000"
+    },
+    {
+      "id": "nes-top-precios-4",
+      "tema": "Stadium Events",
+      "texto": "Stadium Events de Bandai es el gral mas famoso del NES. Nintendo compro los derechos, lo retiro y lo rebautizo World Class Track Meet, dejando poquisimas copias originales. Una sellada se remato en casi cuarenta y dos mil dolares.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1987,
+      "editor": "Bandai",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Stadium Events! El mas famoso de todos. Una copia sellada se vendio en 42 mil dolares.",
+      "precio_short": "USD 25.000"
+    },
+    {
+      "id": "nes-top-precios-3",
+      "tema": "Nintendo Campus Challenge 1991",
+      "texto": "El Nintendo Campus Challenge de 1991 era un cartucho de competencia para la gira universitaria. Se suponia que todos se destruyeron al terminar el tour, pero sobrevivio practicamente uno solo. Una pieza de museo que supero los veinte mil dolares.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1991,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Campus Challenge 91: se suponia que los destruyeron todos. Sobrevivio uno.",
+      "precio_short": "USD 20.000+"
+    },
+    {
+      "id": "nes-top-precios-2",
+      "tema": "Nintendo World Championships (Gris)",
+      "texto": "El Nintendo World Championships gris de 1990 era el cartucho oficial del torneo. Se hicieron cerca de noventa unidades grises para los competidores. Cada vez que aparece uno en subasta, supera los treinta mil dolares.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1990,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "El World Championships gris: noventa copias en el mundo. Treinta mil dolares cada una.",
+      "precio_short": "USD 30.000+"
+    },
+    {
+      "id": "nes-top-precios-1",
+      "tema": "Nintendo World Championships (Dorado)",
+      "texto": "El Nintendo World Championships dorado es el santo gral absoluto del coleccionismo. Solo existen veintiseis cartuchos dorados, entregados como premio en un concurso de la revista Nintendo Power. Es el cartucho NES mas caro del planeta: supera los cien mil dolares.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1990,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡El dorado! Solo veintiseis en el mundo entero. El cartucho NES mas caro del planeta.",
+      "precio_short": "USD 100.000+"
+    }
+  ]
+}
