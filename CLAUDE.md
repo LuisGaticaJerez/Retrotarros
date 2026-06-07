@@ -133,10 +133,13 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 **Por qué:** la caja física es lo que Koko colecciona y lo que el espectador reconoce visualmente. El logo solo dice el nombre que ya está como texto al lado.
 
 **Cómo encontrar la caja correcta:**
-1. Wikipedia API: `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=<juego>+cover&srnamespace=6&format=json` → buscar `File:<Juego> Cover.png` o `.jpg`.
-2. Si Wikipedia no la tiene → MobyGames, LaunchBox, TheGamesDB, o página específica del juego en Wikipedia (no del compositor/serie).
-3. Verificar con `Read` tool antes de commitear — si sale logo/wordmark/screenshot, descartar y buscar otra.
-4. Si NO existe box art accesible → usar fallback CSS estilizado (ya implementado con clase `cart-fallback`), nunca dejar un logo en su lugar.
+1. **gamesdatabase.org** (fuente preferida que pasó Luis) — tiene box art por plataforma, incluye caras frontales de cajas NTSC/PAL/JP. Buscar el juego → descargar la box front. Bueno para retro 8/16 bits.
+2. Wikipedia API: `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=<juego>+cover&srnamespace=6&format=json` → buscar `File:<Juego> Cover.png` o `.jpg`.
+3. Si no → MobyGames, LaunchBox, TheGamesDB, o página específica del juego en Wikipedia (no del compositor/serie).
+4. Verificar con `Read` tool antes de commitear — si sale logo/wordmark/screenshot, descartar y buscar otra.
+5. Si NO existe box art accesible → usar fallback CSS estilizado (clase `cart-fallback`, ya soportada por `scripts/top_deck.py` y los decks de ranking), nunca dejar un logo en su lugar.
+
+> Las box van en `studio/img/<slug>/<slug-juego>.jpg`. Los decks generados con `top_deck.py` usan `cart-fallback` (etiqueta de color con el nombre) cuando no hay imagen — al agregar las box reales, pasar `img` en el item del driver y regenerar.
 
 **Aplica a rankings ya hechos:** N64 (top-mundial, top-precios, retrotarros-vs-mundo, archivo-koko, joyas-ocultas) + PS Vita (top-mundial, top-precios, retrotarros-vs-mundo, archivo-koko) + futuros SNES, PS1, etc.
 
@@ -270,6 +273,58 @@ G:\Mi unidad\Studio\
 - **No** emojis en el cuerpo del guión hablado (sí en captions y títulos YouTube).
 - **No** repetir el chiste del nombre "Retrotarros" — ya lo cubre el short fijado del canal.
 - **No** inventar precios ni datos históricos. Si no se puede respaldar, se omite.
+
+## Generadores de decks (reutilizables) — desde 2026-06
+
+Para no escribir HTML a mano, hay dos generadores que clonan el CSS/JS canónico y reconstruyen el deck desde un dict de datos. Reutilizables para cualquier consola.
+
+| Script | Genera | Estructura |
+|---|---|---|
+| `scripts/coleccion_deck.py` (`generar_deck(data, slug)`) | Episodio **colección** | portada → índice → por categoría: paneo + triple de 3 joyas → hardware → balance → cierre |
+| `scripts/top_deck.py` (`generar_top(data, slug)`) | Episodio **top mundial / precios** | portada → divider intro → N slides #10→#1 → (rarezas: divider + items con `badge_text`) → (`grial`) → análisis → cliffhanger |
+
+- Base de estilo: `coleccion_deck.py` clona de `n64-coleccion.html`; `top_deck.py` clona de `snes-top-mundial.html`.
+- `top_deck.py` soporta `cart-fallback` (sin box art → etiqueta de color), `badge_text` (rarezas con etiqueta en vez de número) y slide `grial` (HOLY GRAIL).
+- Driver one-off por episodio en `.cache/gen_<slug>.py` (gitignored). El generador (`scripts/*.py`) sí se commitea.
+
+## Convención del TOP PRECIOS (obligatoria) — articulada por Luis 2026-06-07
+
+El episodio de precios SIEMPRE se arma en tres bloques, igual que `snes-top-precios`:
+
+1. **Top 10 RETAIL** — solo juegos que de verdad se vendieron en tiendas. Ordenados por valor CIB (#10→#1). Es el ranking "de verdad".
+2. **Apartado RAREZAS / NO-RETAIL** — variantes de color, sin licencia, exclusivos de alquiler (Blockbuster), prototipos, hallazgos de bodega y cartuchos de competencia. Van APARTE con etiqueta en vez de número (no se vendieron en retail normal).
+3. **SANTO GRIAL** — el que se escapa de todo precio. Slide HOLY GRAIL único.
+
+**Reglas de datos:**
+- **Precios actualizados al año en curso (2026)**, cruce PriceCharting / GameValueNow / Den of Geek. Siempre "valor aproximado", nunca precio fijo, nunca consejo de inversión.
+- Distinguir **dos ejes** de "el más caro": por **rareza/escasez** (ej. NWC dorado, 26 copias) vs por **venta récord de copia sellada graduada** (ej. Super Mario Bros. sellado WATA 9.8 = USD 2M, récord NES 2026). El grial suele ser el récord de venta.
+- **Aclarar SIEMPRE en vivo** cuando el grial es una copia SELLADA Y GRADUADA (fenómeno boom WATA 2020-2021): NO es el cartucho suelto común. Da credibilidad y evita el "yo tengo ese, ¿valgo millones?".
+
+## TarroShorts — generación (vertical 1080×1920)
+
+`scripts/tarroshort_render.py` arma el MP4 vertical donde TarroBot presenta y comenta (voz edge-tts es-CL-CatalinaNeural +12Hz). Reacciones CON tildes (TTS). Bajo 60s.
+
+- **Tops** (mundial/precios): `construir_desde_pauta(<slug>)` desde el JSON `studio/pautas/<slug>.tarrobot.json` (#10→#1, muestra los primeros y teasea el resto al canal).
+- **Colección**: short curado con **uno de cada categoría** (decisión Luis para n64-coleccion). Driver curado en `.cache/` que arma el HTML del short con `_template-tarroshort.html` + reacciones manuales en `studio/shorts/highlights/<slug>.json`.
+- Render: `python scripts/tarroshort_render.py tarroshort-<slug>`. Output `studio/shorts/tarroshort-<slug>.mp4` (gitignored, va al Drive por sync).
+- El short deja un cuadro vacío (placeholder) para montar gameplay encima en CapCut — no trae box ni gameplay embebido.
+
+## Fuente de verdad de la colección (GameEye)
+
+- **Canónico (más nuevo):** `data/coleccion/coleccion-retrotarros.csv` — export de la app **GameEye**, 898 juegos, con `README.md`. Copia estable + snapshot fechado. **Consultar SIEMPRE antes de inventar listas** (colección, tops).
+- `data/coleccion_koko.csv` es un export ANTERIOR (15-may) del mismo origen — quedó como snapshot viejo. Usar el de `data/coleccion/`.
+- Columnas: `Platform, Title, Publisher, Developer, Genre, Ownership (Loose/Boxed/CIB), PriceLoose/PriceCIB/PriceNew` (coma decimal, EUR), `metacritic` (puede venir `Missing Field`). Nombres exactos de plataforma: `NES/Famicom`, `SNES/Super Famicom`, `Nintendo 64`.
+- Actualizar: re-exportar de GameEye → pisar `coleccion-retrotarros.csv` + dejar snapshot fechado.
+
+## Commit en el sandbox (workaround obligatorio)
+
+El Bash sandbox bloquea here-strings con rutas del sistema (`G:\Mi`, `D:\Recursos`). Para commits multilínea:
+```bash
+printf '%s\n' "titulo" "" "linea cuerpo" > .git/COMMIT_EDITMSG_TMP.txt && git commit -F .git/COMMIT_EDITMSG_TMP.txt && rm -f .git/COMMIT_EDITMSG_TMP.txt
+```
+- **Sin** `Co-Authored-By` ni firmas automatizadas en commits del canal.
+- Sync del estudio TarroBot: `scripts/sync-tarrobot-to-drive.ps1` (sube scripts + HTMLs + pautas + shorts MP4 + branding a `G:\Mi unidad\Studio\tarrobot`). Distinto de `sync-to-drive.ps1` (pautas DOCX).
+- `Remove-Item` inline con rutas del sistema también se bloquea → borrar con `python -c "import glob,os; ..."` o desde un `.ps1`.
 
 ## Cómo arrancar una sesión
 
