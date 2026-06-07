@@ -132,14 +132,15 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 
 **Por qué:** la caja física es lo que Koko colecciona y lo que el espectador reconoce visualmente. El logo solo dice el nombre que ya está como texto al lado.
 
-**Cómo encontrar la caja correcta:**
-1. **gamesdatabase.org** (fuente preferida que pasó Luis) — tiene box art por plataforma, incluye caras frontales de cajas NTSC/PAL/JP. Buscar el juego → descargar la box front. Bueno para retro 8/16 bits.
-2. Wikipedia API: `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=<juego>+cover&srnamespace=6&format=json` → buscar `File:<Juego> Cover.png` o `.jpg`.
-3. Si no → MobyGames, LaunchBox, TheGamesDB, o página específica del juego en Wikipedia (no del compositor/serie).
-4. Verificar con `Read` tool antes de commitear — si sale logo/wordmark/screenshot, descartar y buscar otra.
-5. Si NO existe box art accesible → usar fallback CSS estilizado (clase `cart-fallback`, ya soportada por `scripts/top_deck.py` y los decks de ranking), nunca dejar un logo en su lugar.
+**Cómo encontrar la caja correcta (método probado 2026-06):**
 
-> Las box van en `studio/img/<slug>/<slug-juego>.jpg`. Los decks generados con `top_deck.py` usan `cart-fallback` (etiqueta de color con el nombre) cuando no hay imagen — al agregar las box reales, pasar `img` en el item del driver y regenerar.
+1. **Wikipedia REST summary = fuente CONFIABLE y por defecto.** Limpia (sin marca de agua), NTSC, articulo del juego. Script: `scripts/fetch_boxart_wiki.py` → `descargar(out_dir, [(key, "query")])`. Internamente: search API resuelve el titulo → `GET https://en.wikipedia.org/api/rest_v1/page/summary/<Titulo>` → `originalimage.source` (la caratula del infobox). Query con desambiguacion cuando haga falta: `"Metroid (video game)"`, `"Contra (video game)"`, `"Ninja Gaiden (NES video game)"`, `"Mike Tyson's Punch-Out!!"`.
+2. **gamesdatabase.org — NO recomendada** (Luis la sugirio, pero la probamos): tiene **marca de agua** "www.gamesdatabase.org" sobre cada imagen y a veces trae la edicion equivocada (Famicom JP, o compilaciones como "All-Stars 25th Anniversary"). Script existe (`scripts/fetch_boxart.py`) pero solo usar si Wikipedia no tiene el juego, y limpiar la marca de agua.
+3. Si no → MobyGames, LaunchBox, TheGamesDB.
+4. **Verificar SIEMPRE** con `Read`/mosaico antes de commitear — si sale logo/wordmark/screenshot/edicion-equivocada/imagen <6kb, descartar.
+5. Si NO existe box accesible → fallback CSS `cart-fallback` (soportado por `top_deck.py`), nunca un logo.
+
+**Wiring automatico:** las box van en `studio/img/<slug>/<key>.jpg` donde `key = slug del titulo` (mismo `_slugify`). `scripts/top_deck.py` las detecta solas (`_auto_img`): si existe el archivo, la usa; si no, `cart-fallback`. Los TarroShorts tambien las toman solas (item-photo con `onerror` que oculta si falta). Asi: bajar la box con la key correcta + regenerar deck / re-render short = aparece sin tocar drivers.
 
 **Aplica a rankings ya hechos:** N64 (top-mundial, top-precios, retrotarros-vs-mundo, archivo-koko, joyas-ocultas) + PS Vita (top-mundial, top-precios, retrotarros-vs-mundo, archivo-koko) + futuros SNES, PS1, etc.
 

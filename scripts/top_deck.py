@@ -45,6 +45,23 @@ def _tv(ch: int) -> str:
     )
 
 
+def _slug(s: str) -> str:
+    import re as _re
+    s = s.lower()
+    for a, b in {"á":"a","é":"e","í":"i","ó":"o","ú":"u","ñ":"n","ü":"u"}.items():
+        s = s.replace(a, b)
+    return _re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+
+
+def _auto_img(it: dict, out_slug: str) -> None:
+    """Si no hay 'img' pero existe studio/img/<out_slug>/<slug(title)>.jpg, la usa."""
+    if it.get("img"):
+        return
+    cand = REPO / "studio" / "img" / out_slug / f"{_slug(it['title'])}.jpg"
+    if cand.exists():
+        it["img"] = f"img/{out_slug}/{_slug(it['title'])}.jpg"
+
+
 def _cart(it: dict, consola: str) -> str:
     """Cartucho con etiqueta de color (cart-fallback) o imagen si hay 'img'."""
     lb = it.get("lb", "lb-default")
@@ -152,6 +169,7 @@ def generar_top(data: dict, out_slug: str) -> Path:
     slides.append(_slide_portada(n, data)); n += 1
     slides.append(_slide_divider(n, data["intro"])); n += 1
     for it in data["items"]:           # ya ordenados #10 -> #1
+        _auto_img(it, out_slug)
         slides.append(_slide_item(n, it, consola)); n += 1
     # Apartado RAREZAS (variantes / no-retail) - opcional
     ch = 1
@@ -159,10 +177,12 @@ def generar_top(data: dict, out_slug: str) -> Path:
         if data.get("rarezas_divider"):
             slides.append(_slide_divider(n, data["rarezas_divider"])); n += 1
         for it in data["rarezas"]:
+            _auto_img(it, out_slug)
             slides.append(_slide_item(n, it, consola, ch=ch)); n += 1; ch += 1
     # SANTO GRIAL - opcional (slide unico)
     if data.get("grial"):
         g = dict(data["grial"]); g["grial"] = True
+        _auto_img(g, out_slug)
         slides.append(_slide_item(n, g, consola, ch=ch)); n += 1
     slides.append(_slide_divider(n, data["analisis"])); n += 1
     slides.append(_slide_divider(n, data["cliffhanger"])); n += 1
