@@ -300,6 +300,8 @@ El episodio de precios SIEMPRE se arma en tres bloques, igual que `snes-top-prec
 2. **Apartado RAREZAS / NO-RETAIL** — variantes de color, sin licencia, exclusivos de alquiler (Blockbuster), prototipos, hallazgos de bodega y cartuchos de competencia. Van APARTE con etiqueta en vez de número (no se vendieron en retail normal).
 3. **SANTO GRIAL** — el que se escapa de todo precio. Slide HOLY GRAIL único.
 
+**Regla visual (obligatoria, Luis 2026-06-07):** en TODO top de precios el **precio va SIEMPRE grande en la esquina superior derecha** de cada slide (pastilla amarilla, `top_deck.py` lo hace solo: detecta `USD ...` en `price`/`precio_short`/`meta` y lo pone con la clase `.game-price`). La posicion (#N) queda arriba a la izquierda.
+
 **Reglas de datos:**
 - **Precios actualizados al año en curso (2026)**, cruce PriceCharting / GameValueNow / Den of Geek. Siempre "valor aproximado", nunca precio fijo, nunca consejo de inversión.
 - Distinguir **dos ejes** de "el más caro": por **rareza/escasez** (ej. NWC dorado, 26 copias) vs por **venta récord de copia sellada graduada** (ej. Super Mario Bros. sellado WATA 9.8 = USD 2M, récord NES 2026). El grial suele ser el récord de venta.

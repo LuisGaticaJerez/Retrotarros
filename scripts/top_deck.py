@@ -79,40 +79,51 @@ def _cart(it: dict, consola: str) -> str:
             '        </div>')
 
 
-def _badge(it: dict) -> str:
-    """Posicion + etiqueta de bloque. Podio (#1-3) en mg, resto cy.
-    Para precios, label puede ser el precio."""
-    pos = it["pos"]
-    podio = pos <= 3
-    color = "mg" if podio else "cy"
-    label = it.get("block_label")
-    if not label:
-        if pos == 1:
-            label = "EL TRONO"
-        elif podio:
-            label = "PODIO"
-        else:
-            label = "TOP"
-    return (f'<div class="game-pos {color}"><span class="hash">#</span>{pos}</div>'
-            f'<div class="game-block-label {color}">{label}</div>')
-
-
-def _badge_text(it: dict) -> str:
-    """Badge de texto (rarezas/grial): game-pos con label en vez de #numero."""
-    color = it.get("color", "mg")
+def _left(it: dict) -> str:
+    """Lado izquierdo del head: posicion (#N), etiqueta (rarezas) o HOLY GRAIL."""
     if it.get("grial"):
         return ('<div class="game-pos mg" style="font-size:34px;letter-spacing:3px;">'
                 '<span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div>')
-    txt = it["badge_text"]
-    return (f'<div class="game-pos {color}" style="font-size:24px;letter-spacing:2px;line-height:1.15;">'
-            f'{txt}</div>')
+    if it.get("badge_text"):
+        color = it.get("color", "mg")
+        return (f'<div class="game-pos {color}" style="font-size:24px;letter-spacing:2px;line-height:1.15;">'
+                f'{it["badge_text"]}</div>')
+    pos = it["pos"]
+    color = "mg" if pos <= 3 else "cy"
+    return f'<div class="game-pos {color}"><span class="hash">#</span>{pos}</div>'
+
+
+def _price_of(it: dict):
+    """Extrae el precio (USD ...) de price / precio_short / meta. None si no hay."""
+    src = it.get("price") or it.get("precio_short") or it.get("meta") or ""
+    m = re.search(r"USD[\s ]*[\d.,]+\s*\+?", src)
+    if not m:
+        return None
+    return re.sub(r"\s+", " ", m.group(0)).strip()
+
+
+def _right(it: dict) -> str:
+    """Lado derecho del head. En precios: PRECIO grande. Si no, etiqueta de bloque."""
+    price = _price_of(it)
+    if price:
+        return f'<div class="game-price">{price}</div>'
+    if it.get("block_label"):
+        color = "mg" if (not it.get("badge_text") and it.get("pos", 99) <= 3) else "cy"
+        return f'<div class="game-block-label {color}">{it["block_label"]}</div>'
+    if it.get("badge_text") or it.get("grial"):
+        return ""  # rarezas/grial sin precio (ej. especiales): sin etiqueta derecha
+    pos = it["pos"]
+    podio = pos <= 3
+    color = "mg" if podio else "cy"
+    label = "EL TRONO" if pos == 1 else ("PODIO" if podio else "TOP")
+    return f'<div class="game-block-label {color}">{label}</div>'
 
 
 def _slide_item(num: int, it: dict, consola: str, ch: int | None = None) -> str:
     ch = ch if ch is not None else it.get("pos", 1)
     meta = it.get("meta") or " · ".join(
         str(x) for x in [consola, it.get("ano"), (it.get("editor") or "").upper()] if x)
-    head = _badge_text(it) if (it.get("badge_text") or it.get("grial")) else _badge(it)
+    head = _left(it) + _right(it)
     return (
         '  <section class="slide">\n'
         f'    <span class="slide-num">{num:02d}</span>\n'
@@ -162,6 +173,17 @@ def generar_top(data: dict, out_slug: str) -> Path:
     base = BASE.read_text(encoding="utf-8")
     head = base[: base.index("<body>") + len("<body>")]
     foot = base[base.index('<nav class="footer">'):]
+
+    # CSS del PRECIO grande en la esquina superior derecha (top de precios)
+    price_css = (
+        "<style>\n"
+        ".game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;"
+        "color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);"
+        "letter-spacing:1px;white-space:nowrap;border:3px solid var(--ye);"
+        "padding:8px 18px;border-radius:6px;background:rgba(255,210,63,.07);align-self:flex-start}\n"
+        "</style>\n</head>"
+    )
+    head = head.replace("</head>", price_css, 1)
 
     consola = data.get("consola", "NES")
     slides = []
