@@ -95,7 +95,9 @@ def _left(it: dict) -> str:
 
 def _price_of(it: dict):
     """Extrae el precio (USD ...) de price / precio_short / meta. None si no hay."""
-    src = it.get("price") or it.get("precio_short") or it.get("meta") or ""
+    if it.get("price"):
+        return str(it["price"]).strip()
+    src = it.get("precio_short") or it.get("meta") or ""
     m = re.search(r"USD[\s ]*[\d.,]+\s*\+?", src)
     if not m:
         return None

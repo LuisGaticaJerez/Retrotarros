@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "retro-padres-gamer",
+  "episodio": "Especial Dia del Padre - El Club de Padres Gamer",
+  "creado": "2026-06-07",
+  "actualizado": "2026-06-07",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "retro-padres-gamer-1",
+      "tema": "Heihachi Mishima",
+      "texto": "Heihachi tiro a su hijo por un acantilado. Y al nieto tambien. Nota uno, cerrado.",
+      "estado": "sospecha",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Heihachi tiro a su hijo por un acantilado. Y al nieto tambien. Nota uno, cerrado."
+    },
+    {
+      "id": "retro-padres-gamer-2",
+      "tema": "Dr. Wily",
+      "texto": "El Dr. Wily fabrica hijos solo para conquistar el mundo. Talento desperdiciado, nota dos.",
+      "estado": "pensando",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "El Dr. Wily fabrica hijos solo para conquistar el mundo. Talento desperdiciado, nota dos."
+    },
+    {
+      "id": "retro-padres-gamer-3",
+      "tema": "Big Boss",
+      "texto": "Big Boss clono a sus propios hijos. La saga entera es pura terapia familiar pendiente.",
+      "estado": "wow",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Big Boss clono a sus propios hijos. La saga entera es pura terapia familiar pendiente."
+    },
+    {
+      "id": "retro-padres-gamer-4",
+      "tema": "El Papa De Ness",
+      "texto": "El papa de Ness nunca aparece, pero te deposita plata y guarda la partida. Proveedor.",
+      "estado": "neutral",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "El papa de Ness nunca aparece, pero te deposita plata y guarda la partida. Proveedor."
+    },
+    {
+      "id": "retro-padres-gamer-5",
+      "tema": "Cranky Kong",
+      "texto": "Cranky Kong: en sus tiempos los juegos eran dificiles de verdad. El abuelo del gaming.",
+      "estado": "guino",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Cranky Kong: en sus tiempos los juegos eran dificiles de verdad. El abuelo del gaming."
+    },
+    {
+      "id": "retro-padres-gamer-6",
+      "tema": "Norman",
+      "texto": "Norman es tu papa y ademas tu rival de gimnasio. Mezclar trabajo y familia, clasico.",
+      "estado": "pensando",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Norman es tu papa y ademas tu rival de gimnasio. Mezclar trabajo y familia, clasico."
+    },
+    {
+      "id": "retro-padres-gamer-7",
+      "tema": "Bowser",
+      "texto": "Bowser es un papa soltero dedicadisimo de Bowser Jr. Quien lo diria, el villano padraso.",
+      "estado": "feliz",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Bowser es un papa soltero dedicadisimo de Bowser Jr. Quien lo diria, el villano padraso."
+    },
+    {
+      "id": "retro-padres-gamer-8",
+      "tema": "James Mccloud",
+      "texto": "James McCloud guia a su hijo Fox desde el mas alla, en pleno combate. Papa eterno.",
+      "estado": "wow",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "James McCloud guia a su hijo Fox desde el mas alla, en pleno combate. Papa eterno."
+    },
+    {
+      "id": "retro-padres-gamer-9",
+      "tema": "Dr. Light",
+      "texto": "El Dr. Light creo a Mega Man con puro amor. El papa nerd que todos quisieramos tener.",
+      "estado": "feliz",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "El Dr. Light creo a Mega Man con puro amor. El papa nerd que todos quisieramos tener."
+    },
+    {
+      "id": "retro-padres-gamer-10",
+      "tema": "Harry Mason",
+      "texto": "Harry Mason cruza el infierno entero por su hija. Padre del año, nota siete sin discusion.",
+      "estado": "wow",
+      "consola": "",
+      "ano": 0,
+      "editor": "",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Harry Mason cruza el infierno entero por su hija. Padre del año, nota siete sin discusion."
+    }
+  ]
+}
