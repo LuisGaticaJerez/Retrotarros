@@ -6,11 +6,13 @@ Doc para copiar/pegar al subir el video. Texto publico = sin tildes (regla del c
 
 ## Titulos sugeridos (elegir uno)
 
-1. **Mi COLECCION COMPLETA de Nintendo 64 | 58 juegos + las consolas Funtastic**
-2. **Toda mi COLECCION de N64 categoria por categoria (y la esquina mas rara del estudio)**
-3. **58 juegos de Nintendo 64: la coleccion completa | Retrotarros**
+Reglas aplicadas (ver `docs/guia-youtube-viral.md`): keyword adelante, numero, =<65 chars, gancho honesto.
 
-> Recomendado el #1: numero concreto (58) + el gancho del hardware (Funtastic) que es lo distintivo.
+1. **Mi COLECCION COMPLETA de Nintendo 64 (58 juegos)** — 49 chars. Keyword adelante + numero. (Recomendado)
+2. **Nintendo 64: mi coleccion COMPLETA y la consola mas rara** — 56 chars. Suma el gancho del hardware.
+3. **58 juegos de Nintendo 64: toda mi coleccion** — 44 chars. Numero al frente.
+
+> Evitar el largo viejo "Mi COLECCION COMPLETA de Nintendo 64 | 58 juegos + las consolas Funtastic" (70+ chars, se corta en movil).
 
 ---
 

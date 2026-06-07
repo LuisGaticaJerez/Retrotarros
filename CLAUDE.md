@@ -115,6 +115,8 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 | `docs/estrategia.md` | Documento maestro: nombre, enfoques, formatos, plan 3 meses, Indie Lat, identidad visual. |
 | `docs/briefings-compositores.md` | Fichas de compositores (Kondo, Uematsu, Mitsuda, Yamaoka, Wise, Kirkhope, etc.). Documento vivo. |
 | `docs/guiones-shorts.md` | Guiones lane Luis: timings, B-roll, título YouTube, caption, hashtags, datos de respaldo. Documento vivo. |
+| `docs/guia-youtube-viral.md` | **Playbook de virality YouTube** (título, miniatura, descripción, hashtags, capítulos). Toda `descripcion-{slug}.md` lo sigue. |
+| `docs/descripcion-{slug}.md` | Descripción YouTube lista para pegar: títulos, resumen, capítulos con timestamps, hashtags, tags. Sigue `guia-youtube-viral.md`. |
 | `docs/pauta-{slug}.md` | Pauta operativa de episodio largo (para Claude — denso, tablas, anclas, anexos). |
 | `docs/discusion-{slug}.md` | Versión conversacional de la pauta (para Luis + Koko — bullets, preguntas guía, decisiones pendientes). |
 | `studio/{slug}.html` | Monitor visual del estudio durante la grabación (paleta synthwave, navegable). |
