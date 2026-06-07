@@ -117,6 +117,8 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 | `docs/guiones-shorts.md` | Guiones lane Luis: timings, B-roll, título YouTube, caption, hashtags, datos de respaldo. Documento vivo. |
 | `docs/guia-youtube-viral.md` | **Playbook de virality YouTube** (título, miniatura, descripción, hashtags, capítulos). Toda `descripcion-{slug}.md` lo sigue. |
 | `docs/descripcion-{slug}.md` | Descripción YouTube lista para pegar: títulos, resumen, capítulos con timestamps, hashtags, tags. Sigue `guia-youtube-viral.md`. |
+
+> **Regla de entrega (Luis, 2026-06-07):** cada vez que cierre un kit de publicación, **pegar en el chat** el texto listo para YouTube (título + descripción + comentario fijado + tags + hashtags), no solo dejarlo en el `.md`. Luis lo copia directo desde el chat.
 | `docs/pauta-{slug}.md` | Pauta operativa de episodio largo (para Claude — denso, tablas, anclas, anexos). |
 | `docs/discusion-{slug}.md` | Versión conversacional de la pauta (para Luis + Koko — bullets, preguntas guía, decisiones pendientes). |
 | `studio/{slug}.html` | Monitor visual del estudio durante la grabación (paleta synthwave, navegable). |
