@@ -3,107 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RETROTARROS · Estudio · Top precios PS Vita</title>
+<title>RETROTARROS · PS Vita · Top Precios</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
-:root { --mg:#FF2E88; --cy:#00E5FF; --ye:#FFD23F; --pu:#2D1B69; --bo:#F5F0E8; --dk:#06030f; --card-bg:rgba(12,6,32,.92); }
+:root {
+  --mg: #FF2E88; --cy: #00E5FF; --ye: #FFD23F; --pu: #2D1B69;
+  --bo: #F5F0E8; --dk: #06030f; --card-bg: rgba(12, 6, 32, 0.92);
+}
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
-body { background-image: radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%), repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px), repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px); }
-header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6,3,15,.97); border-bottom: 2px solid var(--mg); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6, 3, 15, 0.97); border-bottom: 2px solid var(--mg); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
 .hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
 .hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
 .hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--mg); }
 .dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
 .deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
-.slide { position: absolute; inset: 0; padding: 32px 48px; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide { position: absolute; inset: 0; padding: 28px 44px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .22s; }
 .slide.active { opacity: 1; pointer-events: auto; }
 .slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
-
 .portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
-.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--ye); letter-spacing: 5px; margin-bottom: 22px; }
-.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 58px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
-.portada .ep-title .accent { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 62px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .vs { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
 .portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; }
+.divider { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.divider .pre { font-family: 'Press Start 2P'; font-size: 11px; letter-spacing: 6px; margin-bottom: 24px; }
+.divider .pre.cy { color: var(--cy); } .divider .pre.mg { color: var(--mg); }
+.divider .title { font-family: 'Orbitron'; font-weight: 900; font-size: 78px; letter-spacing: 2px; line-height: 1; color: #fff; margin-bottom: 22px; }
+.divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
+.divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.divider .sub { font-family: 'Share Tech Mono'; font-size: 18px; color: rgba(255,255,255,.7); letter-spacing: 2px; max-width: 800px; line-height: 1.6; }
 
-.slide h1 { font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye); letter-spacing: 4px; margin-bottom: 6px; border-left: 4px solid var(--ye); padding-left: 16px; }
-.slide h2 { font-family: 'Orbitron'; font-weight: 900; font-size: 38px; color: #fff; letter-spacing: 1px; margin: 8px 0 20px 20px; line-height: 1.05; }
-.slide h2.mg { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
-.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
-.slide h2.ye { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.45); }
+/* HIBRIDO */
+.slide-hybrid { display: grid; grid-template-rows: auto 1fr auto auto; height: 100%; gap: 14px; max-width: 1400px; margin: 0 auto; }
+.hybrid-head { display: flex; align-items: center; justify-content: space-between; }
+.game-pos { font-family: 'Orbitron'; font-weight: 900; font-size: 64px; line-height: 1; letter-spacing: 1px; }
+.game-pos.cy { color: var(--cy); text-shadow: 0 0 20px rgba(0,229,255,.55); }
+.game-pos.mg { color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.6); }
+.game-pos .hash { font-size: 28px; color: rgba(255,255,255,.35); margin-right: 4px; }
+.game-block-label { font-family: 'Press Start 2P'; font-size: 9px; letter-spacing: 3px; padding: 6px 12px; border: 1px solid; }
+.game-block-label.cy { color: var(--cy); border-color: var(--cy); }
+.game-block-label.mg { color: var(--mg); border-color: var(--mg); }
+.hybrid-body { display: grid; grid-template-columns: 38% 1fr; gap: 32px; align-items: center; justify-items: center; min-height: 0; }
+.cart-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; }
+.cart { position: relative; width: min(100%, 380px); aspect-ratio: 5/4; max-height: 100%; background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%); border-radius: 12px 12px 6px 6px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08); }
+.cart::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 78%; height: 14%; background: linear-gradient(180deg, #2a2a2f 0%, #1a1a1f 100%); border-radius: 0 0 6px 6px; box-shadow: inset 0 -1px 0 rgba(0,0,0,.6); z-index: 3; }
+.cart-img-wrap { position: absolute; inset: 14% 10% 10%; border-radius: 4px; overflow: hidden; background: var(--label-1, #2D1B69); box-shadow: inset 0 0 0 3px rgba(255,255,255,.07), inset 0 0 0 6px rgba(0,0,0,.25), 0 4px 14px rgba(0,0,0,.4); }
+.cart-img-wrap img { display: block; width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 2; }
+.cart-img-wrap img.cart-img-bg { object-fit: cover; filter: blur(22px) brightness(0.55) saturate(1.2); transform: scale(1.1); z-index: 1; position: absolute; inset: 0; }
+.cart-fallback { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; background: linear-gradient(135deg, var(--label-1, #2D1B69) 0%, var(--label-2, #4a2a99) 100%); text-align: center; }
+.cart-fallback::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 22%; background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 100%); pointer-events: none; }
+.cart-fallback .title { font-family: 'Orbitron'; font-weight: 900; font-size: clamp(14px, 1.8vw, 22px); line-height: 1.05; color: #fff; letter-spacing: .5px; text-shadow: 0 2px 4px rgba(0,0,0,.5); z-index: 2; }
+.cart-fallback .sub { font-family: 'Press Start 2P'; font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,.7); margin-top: 8px; z-index: 2; }
+.cart-console { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-family: 'Press Start 2P'; font-size: 7px; letter-spacing: 3px; color: rgba(255,255,255,.22); z-index: 4; }
+.lb-default { --label-1:#2D1B69; --label-2:#4a2a99; }
+.lb-mario   { --label-1:#a01818; --label-2:#d62828; }
+.lb-zelda   { --label-1:#1a4a1a; --label-2:#2f7a2f; }
+.lb-rpg     { --label-1:#5a1a8a; --label-2:#8a2fc4; }
+.lb-action  { --label-1:#a01818; --label-2:#d62828; }
+.lb-metroid { --label-1:#3a1a6b; --label-2:#5a2a9b; }
+.lb-yoshi   { --label-1:#1a6b3a; --label-2:#2f9b5a; }
+.lb-dkc     { --label-1:#7a3a1a; --label-2:#b85820; }
+.lb-eb      { --label-1:#c2872f; --label-2:#e8b04a; }
+.lb-kart    { --label-1:#c25c00; --label-2:#ff8a1f; }
+.lb-fox     { --label-1:#1a2a4a; --label-2:#3a5fa0; }
 
-.intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 18px; }
-.intro-card { background: var(--card-bg); border: 2px solid var(--mg); border-radius: 4px; padding: 22px; text-align: center; }
-.intro-card .big { font-family: 'Orbitron'; font-weight: 900; font-size: 48px; color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.4); line-height: 1; margin: 8px 0; }
-.intro-card h3 { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 2px; margin-bottom: 10px; }
-.intro-card p { font-family: 'Share Tech Mono'; font-size: 13px; color: rgba(255,255,255,.78); line-height: 1.5; }
+.tv-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; container-type: size; }
+.tarrovision { width: min(100cqh, 100cqw); height: min(100cqh, 100cqw); max-width: 100%; max-height: 100%; background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%); border-radius: 22px; padding: 18px 22px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(0,0,0,.4); display: grid; grid-template-rows: auto 1fr auto; gap: 10px; }
+.tv-controls-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px; }
+.tv-led { width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, var(--mg) 60%, #7a0030 100%); box-shadow: 0 0 10px rgba(255,46,136,.8), inset 0 0 2px rgba(0,0,0,.5); }
+.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 3px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
+.tv-channel { font-family: 'Share Tech Mono'; font-size: 11px; color: var(--cy); letter-spacing: 2px; padding: 3px 9px; border: 1px solid rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
+.tv-screen { position: relative; background: #2a2a2f; border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 2px #3a3a3f, inset 0 0 14px rgba(0,0,0,.6); min-height: 0; }
+.tv-screen-inner { position: relative; width: 100%; height: 100%; background: #000; border-radius: 16px / 8px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 40px rgba(0,0,0,.95); }
+.tv-screen-inner img, .tv-screen-inner video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tv-screen-inner::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 3px); z-index: 3; mix-blend-mode: multiply; }
+.tv-screen-inner::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255,255,255,.08) 0%, transparent 55%), radial-gradient(ellipse 90% 50% at 50% 100%, rgba(0,229,255,.06) 0%, transparent 60%); z-index: 4; }
+.tv-noscreen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, rgba(45,27,105,.6) 0%, #000 80%), repeating-linear-gradient(0deg, #0a0a14 0px, #0a0a14 1px, #14142a 1px, #14142a 2px); color: rgba(255,255,255,.35); text-align: center; padding: 24px; z-index: 2; }
+.tv-noscreen .tv-noscreen-big { font-family: 'Press Start 2P'; font-size: 14px; color: var(--mg); letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 12px rgba(255,46,136,.5); }
+.tv-noscreen .tv-noscreen-sub { font-family: 'Share Tech Mono'; font-size: 11px; letter-spacing: 2px; color: rgba(0,229,255,.55); }
+.tv-controls-bottom { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; padding: 2px 4px 0; }
+.tv-knob { width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #5a5a60 0%, #2a2a30 60%, #0a0a0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.6); position: relative; }
+.tv-knob::after { content: ""; position: absolute; top: 5px; left: 50%; width: 2px; height: 9px; background: var(--ye); transform-origin: bottom center; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 4px rgba(255,210,63,.6); }
+.tv-knob.cy::after { background: var(--cy); box-shadow: 0 0 4px rgba(0,229,255,.6); transform: translateX(-50%) rotate(-30deg); }
+.tv-speaker { height: 22px; background: repeating-linear-gradient(90deg, #0a0a0e 0px, #0a0a0e 3px, #1a1a1f 3px, #1a1a1f 6px); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6); }
 
-.slide-game { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; align-items: stretch; height: 100%; padding: 20px 56px 24px; gap: 14px; max-width: 1200px; margin: 0 auto; }
-.game-head { display: flex; align-items: center; justify-content: space-between; }
-.game-pos { font-family: 'Orbitron'; font-weight: 900; font-size: 64px; line-height: 1; color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.6); }
-.game-pos .hash { font-size: 28px; color: rgba(255,255,255,.35); text-shadow: none; margin-right: 4px; }
-.game-block-label { font-family: 'Press Start 2P'; font-size: 9px; letter-spacing: 3px; padding: 6px 12px; border: 1px solid var(--mg); color: var(--mg); }
-.cart-wrap { display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden; }
-.cart { position: relative; height: 100%; max-height: 340px; aspect-ratio: 3/4; background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%); border-radius: 8px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6); overflow: hidden; }
-.cart-inner { position: absolute; inset: 6%; border-radius: 4px; overflow: hidden; background: #2D1B69; }
-.cart-inner img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; background: linear-gradient(135deg, var(--ph-1, #2D1B69) 0%, var(--ph-2, #4a2a99) 100%); text-align: center; gap: 12px; }
-.ph .ico { font-size: 72px; }
-.ph .lbl { font-family: 'Orbitron'; font-weight: 900; font-size: 22px; color: #fff; line-height: 1.1; text-shadow: 0 2px 4px rgba(0,0,0,.5); }
-.lb-action { --ph-1:#7a1a1a; --ph-2:#c41e1e; } .lb-rpg { --ph-1:#3a1a6b; --ph-2:#6a2f9b; } .lb-fight { --ph-1:#4a1a3a; --ph-2:#8a2f6a; } .lb-puzzle { --ph-1:#1a4a4a; --ph-2:#2f7a7a; } .lb-music { --ph-1:#4a2a1a; --ph-2:#8a5a2a; } .lb-horror { --ph-1:#2a1a3a; --ph-2:#5a3a6a; }
-.game-info { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
-.game-title-row { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
-.game-title { font-family: 'Orbitron'; font-weight: 900; font-size: 26px; color: #fff; line-height: 1.1; }
-.price-tag { display: inline-flex; align-items: baseline; gap: 8px; font-family: 'Orbitron'; font-weight: 900; font-size: 38px; color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); letter-spacing: 1px; line-height: 1; padding: 4px 14px; border: 2px solid var(--mg); border-radius: 4px; background: rgba(255,46,136,.06); }
-.price-tag .usd-lbl { font-size: 13px; color: rgba(255,46,136,.6); letter-spacing: 3px; text-shadow: none; font-weight: 700; }
-.koko-has { padding: 6px 14px; background: var(--ye); color: #000; font-family: 'Press Start 2P'; font-size: 9px; letter-spacing: 2px; border-radius: 4px; }
+.hybrid-title { text-align: center; display: flex; flex-direction: column; gap: 4px; }
+.game-title { font-family: 'Orbitron'; font-weight: 900; font-size: 26px; color: #fff; letter-spacing: 1px; line-height: 1.1; }
 .game-meta { font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.5); letter-spacing: 2px; }
-.game-why { max-width: 940px; padding: 12px 22px; background: rgba(255,255,255,.04); border-left: 4px solid var(--ye); font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,.86); text-align: left; }
+.game-why { max-width: 1200px; margin: 0 auto; padding: 12px 22px; background: rgba(255,255,255,.04); border-left: 4px solid var(--ye); font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,.86); text-align: left; }
 .game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 6px; }
-.game-why strong { color: var(--ye); }
 
-.lrg-grid { display: grid; grid-template-columns: 1fr 100px; gap: 0; font-family: 'Share Tech Mono'; margin-top: 14px; }
-.lrg-grid .hdr { font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; padding: 10px 12px; border-bottom: 2px solid var(--ye); }
-.lrg-grid .row { display: contents; }
-.lrg-grid .row > div { padding: 11px 12px; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 14px; }
-.lrg-grid .name { color: #fff; font-family: 'Orbitron'; font-weight: 700; }
-.lrg-grid .price { font-family: 'Orbitron'; font-weight: 900; color: var(--mg); text-align: right; font-size: 16px; }
-
-.tengo-cuatro-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 16px; }
-.tengo-cuatro-card { background: var(--card-bg); border: 2px solid var(--ye); border-radius: 4px; padding: 14px; text-align: center; }
-.tengo-cuatro-card h3 { font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 6px; }
-.tengo-cuatro-card .name { font-family: 'Orbitron'; font-weight: 700; font-size: 14px; color: #fff; line-height: 1.2; margin-bottom: 8px; }
-.tengo-cuatro-card .pago { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.55); }
-.tengo-cuatro-card .vale { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); margin-top: 6px; }
-
-.cam-quote { background: rgba(255,210,63,.07); border-left: 4px solid var(--ye); padding: 22px 26px; margin-top: 22px; font-family: 'Share Tech Mono'; font-size: 16px; font-style: italic; color: rgba(255,255,255,.88); line-height: 1.6; }
-.cam-quote .lbl { display: block; font-style: normal; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 10px; }
-
-ul.checklist { list-style: none; margin-top: 10px; }
-ul.checklist li { padding: 14px 20px; border-left: 4px solid; margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5; }
-ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
-ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
-ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
-ul.checklist li strong.ye { color: var(--ye); } ul.checklist li strong.cy { color: var(--cy); } ul.checklist li strong.mg { color: var(--mg); }
-
-nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6,3,15,.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
 .nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
-.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; } .nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
 .nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
 .nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
 .nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
-.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(255,46,136,.5); }
 .nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
 .nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
-::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--dk); } ::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
 </style>
 </head>
 <body>
 
 <header>
   <div class="hdr-logo">RETROTARROS</div>
-  <div class="hdr-tag">ESTUDIO · TOP PRECIOS PSV · GEN 8</div>
+  <div class="hdr-tag">ESTUDIO · PS VITA TOP PRECIOS · GEN 8</div>
   <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
 </header>
 
@@ -112,224 +129,376 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
   <section class="slide active">
     <span class="slide-num">01</span>
     <div class="portada">
-      <div class="ep-tag">GENERACIÓN 8 PORTÁTIL · COLECCIONISMO 2026</div>
-      <div class="ep-title">LOS PS VITA <span class="accent">MÁS CAROS</span> DEL MUNDO</div>
-      <div class="ep-sub">CINCO AÑOS DESPUÉS QUE SONY LA MATÓ</div>
+      <div class="ep-tag">GENERACION 8 · PORTATIL · SONY</div>
+      <div class="ep-title">TOP 10 <span class="vs">PRECIOS</span> PS VITA</div>
+      <div class="ep-sub">LOS CARTUCHOS QUE ROMPEN BILLETERAS</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">02</span>
-    <h1>BLOQUE 2 · POR QUÉ SON CAROS</h1>
-    <h2 class="mg">El catálogo finito</h2>
-    <div class="intro-grid">
-      <div class="intro-card"><h3>FIN DE PRODUCCIÓN</h3><div class="big">2019</div><p>Sony cerró manufactura PS Vita en <strong>marzo de 2019</strong>. Desde ese día, lo físico es finito.</p></div>
-      <div class="intro-card"><h3>CATÁLOGO FÍSICO</h3><div class="big">~700</div><p>Total de cartuchos retail físicos. Comparado con PS1 (~7,900) o Switch (~3,500), es chico.</p></div>
-      <div class="intro-card"><h3>LIMITED RUN</h3><div class="big">120+</div><p>Títulos físicos exclusivos vía Limited Run Games. Tiradas de <strong>3,000-5,000 copias</strong> cada uno.</p></div>
-    </div>
-    <div class="cam-quote">
-      <span class="lbl">CONTEXTO PARA CÁMARA</span>
-      "Cinco años después que Sony mató la PlayStation Vita, <strong>los cartuchos físicos valen lo que valen porque ya no se va a fabricar uno más</strong>. Esta consola fue de las primeras víctimas del modelo digital — Sony dejó de producir físico, cerró el PSN store en 2021, lo reabrió bajo presión pública, pero la cosa quedó rota. Lo único estable es lo que ya está en cajas en la casa de la gente."
+    <div class="divider">
+      <div class="pre mg">PRICEGUIDE 2026</div>
+      <div class="title mg" style="font-size:78px;">DEL #10 AL #1</div>
+      <div class="sub">Solo juegos RETAIL: los que se vendieron en tiendas. Valores CIB aproximados (PriceCharting, 2026). Las Limited Run y rarezas van aparte. El numero uno se escapa de la liga.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">03</span>
-    <div class="slide-game">
-      <div class="game-head"><div class="game-pos"><span class="hash">#</span>10</div><div class="game-block-label">TOP PRECIOS</div></div>
-      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-precios/silent-hill.jpg" alt="Silent Hill BoM" onerror="this.style.display='none'"><div class="ph lb-horror"><div class="ico">🕯️</div><div class="lbl">Silent Hill</div></div></div></div></div>
-      <div class="game-info">
-        <div class="game-title-row"><div class="game-title">Silent Hill: Book of Memories</div><div class="price-tag"><span class="usd-lbl">USD</span>$160</div><div class="koko-has">★ KOKO TIENE</div></div>
-        <div class="game-meta">2012 · KONAMI · HORROR · NTSC USA · KOKO PAGÓ €93</div>
-        <div class="game-why"><span class="lbl">POR QUÉ ES CARO</span>Konami enterró Silent Hill como saga. Este es el último Silent Hill físico que salió. <strong>Horror nicho + saga muerta = rareza</strong>. Koko lo tiene de hace años — pagó €93 cuando estaba más barato.</div>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/psvita-top-precios/hatsune-miku-project-diva-f-2nd.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/hatsune-miku-project-diva-f-2nd.jpg" alt="HATSUNE MIKU: PROJECT DIVA F 2ND box art"></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 10</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
       </div>
+      <div class="hybrid-title"><div class="game-title">HATSUNE MIKU: PROJECT DIVA F 2ND</div><div class="game-meta">VITA · 2014 · SEGA · CIB ~USD 55</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Rhythm de culto. Tirada moderada y demanda alta de fans: hoy un completo ronda los 55 dolares.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">04</span>
-    <div class="slide-game">
-      <div class="game-head"><div class="game-pos"><span class="hash">#</span>9</div><div class="game-block-label">TOP PRECIOS</div></div>
-      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-precios/persona4-gold.jpg" alt="Persona 4 Golden" onerror="this.style.display='none'"><div class="ph lb-rpg"><div class="ico">🎴</div><div class="lbl">P4G Solid Gold</div></div></div></div></div>
-      <div class="game-info">
-        <div class="game-title-row"><div class="game-title">Persona 4 Golden · Solid Gold Premium Edition</div><div class="price-tag"><span class="usd-lbl">USD</span>$170</div></div>
-        <div class="game-meta">2012 · ATLUS · EDICIÓN LIMITADA · STEELBOOK + OST</div>
-        <div class="game-why"><span class="lbl">POR QUÉ ES CARO</span>Edición premium con steelbook, OST en CD y artbook. Atlus la lanzó como bundle especial. <strong>La versión normal de P4G también es cara ($60+)</strong>, pero esta Solid Gold es la que coleccionistas Persona buscan.</div>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-eb"><img class="cart-img-bg" src="img/psvita-top-precios/dragon-s-crown.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/dragon-s-crown.jpg" alt="DRAGON'S CROWN box art"></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 09</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
       </div>
+      <div class="hybrid-title"><div class="game-title">DRAGON'S CROWN</div><div class="game-meta">VITA · 2013 · ATLUS · CIB ~USD 65</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Beat-em-up de Vanillaware, arte pintado a mano. Clasico de la consola que sube de a poco.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">05</span>
-    <div class="slide-game">
-      <div class="game-head"><div class="game-pos"><span class="hash">#</span>8</div><div class="game-block-label">TOP PRECIOS</div></div>
-      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-precios/trails.jpg" alt="Trails of Cold Steel II" onerror="this.style.display='none'"><div class="ph lb-rpg"><div class="ico">⚔️</div><div class="lbl">Trails of CS II</div></div></div></div></div>
-      <div class="game-info">
-        <div class="game-title-row"><div class="game-title">Trails of Cold Steel II</div><div class="price-tag"><span class="usd-lbl">USD</span>$175</div></div>
-        <div class="game-meta">2016 · FALCOM · JRPG · LOCALIZACIÓN XSEED · NTSC USA</div>
-        <div class="game-why"><span class="lbl">POR QUÉ ES CARO</span>Falcom hizo este JRPG masivo (80h+) y Xseed lo localizó con tirada chica. <strong>Saga cult Trails</strong> con fans devotos que pagan lo que pidas. Hoy solo digital — el físico se acabó.</div>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-zelda"><img class="cart-img-bg" src="img/psvita-top-precios/ys-memories-of-celceta.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/ys-memories-of-celceta.jpg" alt="YS: MEMORIES OF CELCETA box art"></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 08</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
       </div>
+      <div class="hybrid-title"><div class="game-title">YS: MEMORIES OF CELCETA</div><div class="game-meta">VITA · 2013 · XSEED · CIB ~USD 70</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Action-RPG de Falcom localizado por XSEED. Localizaciones chicas = precios que suben.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">06</span>
-    <div class="slide-game">
-      <div class="game-head"><div class="game-pos"><span class="hash">#</span>7</div><div class="game-block-label">TOP PRECIOS</div></div>
-      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-precios/toukiden.jpg" alt="Toukiden 2" onerror="this.style.display='none'"><div class="ph lb-action"><div class="ico">🗡️</div><div class="lbl">Toukiden 2</div></div></div></div></div>
-      <div class="game-info">
-        <div class="game-title-row"><div class="game-title">Toukiden 2</div><div class="price-tag"><span class="usd-lbl">USD</span>$185</div></div>
-        <div class="game-meta">2017 · KOEI TECMO · MONSTER HUNTER-LIKE · NTSC USA</div>
-        <div class="game-why"><span class="lbl">POR QUÉ ES CARO</span>Hunter game al estilo Monster Hunter, exclusivo Vita+PS4 al inicio. <strong>Port a PS4 dejó al PSV como "el viejo formato físico"</strong>. Tirada NTSC fue chica · port digital después · coleccionistas quieren el físico original.</div>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-action"><img class="cart-img-bg" src="img/psvita-top-precios/toukiden-2.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/toukiden-2.jpg" alt="TOUKIDEN 2 box art"></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 07</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
       </div>
+      <div class="hybrid-title"><div class="game-title">TOUKIDEN 2</div><div class="game-meta">VITA · 2017 · KOEI TECMO · CIB ~USD 75</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Cazador de demonios estilo Monster Hunter, lanzado tarde en la vida de la Vita. Pocas copias.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">07</span>
-    <div class="slide-game">
-      <div class="game-head"><div class="game-pos"><span class="hash">#</span>6</div><div class="game-block-label">TOP PRECIOS</div></div>
-      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-precios/atelier-rorona.jpg" alt="Atelier Rorona Plus" onerror="this.style.display='none'"><div class="ph lb-rpg"><div class="ico">⚗️</div><div class="lbl">Atelier Rorona+</div></div></div></div></div>
-      <div class="game-info">
-        <div class="game-title-row"><div class="game-title">Atelier Rorona Plus</div><div class="price-tag"><span class="usd-lbl">USD</span>$200</div></div>
-        <div class="game-meta">2014 · GUST · JRPG ALQUIMISTA · NTSC USA</div>
-        <div class="game-why"><span class="lbl">POR QUÉ ES CARO</span>Gust hace Atelier desde 1997. Esta versión Plus es la edición definitiva de Rorona en PS Vita. <strong>Localización NTSC con tirada microscópica</strong>. Saga Atelier tiene fanbase chico pero apasionado · pagan lo que sea.</div>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-yoshi"><img class="cart-img-bg" src="img/psvita-top-precios/atelier-rorona-plus.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/atelier-rorona-plus.jpg" alt="ATELIER RORONA PLUS box art"></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 06</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
       </div>
+      <div class="hybrid-title"><div class="game-title">ATELIER RORONA PLUS</div><div class="game-meta">VITA · 2014 · NIS AMERICA · CIB ~USD 85</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>JRPG de alquimia de Gust, tirada NISA limitada. Saga de coleccionistas: completo pasa los 85.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">08</span>
-    <div class="slide-game">
-      <div class="game-head"><div class="game-pos"><span class="hash">#</span>5</div><div class="game-block-label">TOP PRECIOS</div></div>
-      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-precios/miku.jpg" alt="Hatsune Miku F 2nd" onerror="this.style.display='none'"><div class="ph lb-music"><div class="ico">🎤</div><div class="lbl">Miku Diva F 2nd</div></div></div></div></div>
-      <div class="game-info">
-        <div class="game-title-row"><div class="game-title">Hatsune Miku: Project Diva F 2nd</div><div class="price-tag"><span class="usd-lbl">USD</span>$220</div></div>
-        <div class="game-meta">2014 · SEGA · RHYTHM · NTSC USA</div>
-        <div class="game-why"><span class="lbl">POR QUÉ ES CARO</span>Sega lo lanzó con OST de 40+ canciones licenciadas. <strong>Sin reedición posible — los derechos musicales no se pueden renegociar</strong>. Si querés jugar Miku F 2nd legalmente, tenés que comprar el cartucho físico. Cult fanbase + sin reedición = $220 hoy.</div>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-metroid"><img class="cart-img-bg" src="img/psvita-top-precios/silent-hill-book-of-memories.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/silent-hill-book-of-memories.jpg" alt="SILENT HILL: BOOK OF MEMORIES box art"></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
       </div>
+      <div class="hybrid-title"><div class="game-title">SILENT HILL: BOOK OF MEMORIES</div><div class="game-meta">VITA · 2012 · KONAMI · CIB ~USD 90</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>El unico Silent Hill de Vita (spin-off dungeon crawler). Rareza por marca: ronda los 90.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">09</span>
-    <div class="slide-game">
-      <div class="game-head"><div class="game-pos"><span class="hash">#</span>4</div><div class="game-block-label">TOP PRECIOS</div></div>
-      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-precios/soul-sacrifice.jpg" alt="Soul Sacrifice Delta" onerror="this.style.display='none'"><div class="ph lb-action"><div class="ico">🩸</div><div class="lbl">Soul Sacrifice Δ</div></div></div></div></div>
-      <div class="game-info">
-        <div class="game-title-row"><div class="game-title">Soul Sacrifice Delta</div><div class="price-tag"><span class="usd-lbl">USD</span>$230</div></div>
-        <div class="game-meta">2014 · SONY JAPAN STUDIO / COMCEPT · DARK ACTION</div>
-        <div class="game-why"><span class="lbl">POR QUÉ ES CARO</span>Keiji Inafune (Mega Man) en Comcept · co-desarrollado con Sony Japan Studio. <strong>Localización NA en tiraje pequeño</strong>. Premise oscura — sacrificar a tus amigos por poder mágico. Cult absoluto + sin reedición = $230.</div>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/psvita-top-precios/disgaea-4-a-promise-revisited.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/disgaea-4-a-promise-revisited.jpg" alt="DISGAEA 4: A PROMISE REVISITED box art"></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
       </div>
+      <div class="hybrid-title"><div class="game-title">DISGAEA 4: A PROMISE REVISITED</div><div class="game-meta">VITA · 2014 · NIS AMERICA · CIB ~USD 100</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Tactical JRPG enorme, tirada NISA limitada. Pasa los 100 dolares completo y subiendo.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">10</span>
-    <div class="slide-game">
-      <div class="game-head"><div class="game-pos"><span class="hash">#</span>3</div><div class="game-block-label">TOP PRECIOS</div></div>
-      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-precios/disgaea4.jpg" alt="Disgaea 4: A Promise Revisited" onerror="this.style.display='none'"><div class="ph lb-rpg"><div class="ico">😈</div><div class="lbl">Disgaea 4</div></div></div></div></div>
-      <div class="game-info">
-        <div class="game-title-row"><div class="game-title">Disgaea 4: A Promise Revisited</div><div class="price-tag"><span class="usd-lbl">USD</span>$250</div></div>
-        <div class="game-meta">2014 · NIPPON ICHI · TACTICAL JRPG · NTSC USA</div>
-        <div class="game-why"><span class="lbl">POR QUÉ ES CARO</span>Tactical JRPG de Nippon Ichi · 200+ horas de gameplay. <strong>Sin reedición · sin versión digital occidental</strong>. Saga Disgaea es cult pero la versión Vita es la considerada "definitiva". Tirada NTSC chica · precio escaló desde 2018.</div>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-zelda"><img class="cart-img-bg" src="img/psvita-top-precios/the-legend-of-heroes-trails-of-cold-steel-ii.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/the-legend-of-heroes-trails-of-cold-steel-ii.jpg" alt="THE LEGEND OF HEROES: TRAILS OF COLD STEEL II box art"></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
       </div>
+      <div class="hybrid-title"><div class="game-title">THE LEGEND OF HEROES: TRAILS OF COLD STEEL II</div><div class="game-meta">VITA · 2016 · XSEED · CIB ~USD 130</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>JRPG querido de Falcom, salio tarde y en poca cantidad. De los retail mas buscados: 130+.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">11</span>
-    <div class="slide-game">
-      <div class="game-head"><div class="game-pos"><span class="hash">#</span>2</div><div class="game-block-label">TOP PRECIOS</div></div>
-      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-precios/dragons-crown.jpg" alt="Dragon's Crown" onerror="this.style.display='none'"><div class="ph lb-action"><div class="ico">🐉</div><div class="lbl">Dragon's Crown</div></div></div></div></div>
-      <div class="game-info">
-        <div class="game-title-row"><div class="game-title">Dragon's Crown</div><div class="price-tag"><span class="usd-lbl">USD</span>$280</div></div>
-        <div class="game-meta">2013 · VANILLAWARE · BEAT-EM-UP FANTASY · NTSC USA</div>
-        <div class="game-why"><span class="lbl">POR QUÉ ES CARO</span>VanillaWare hace arte hecho a mano · cada frame ilustrado. Dragon's Crown PS Vita salió antes del port a PS4. <strong>La versión Vita es la canónica original</strong>. Port a PS4 hizo que coleccionistas quisieran el formato original → escalada de precios. $280 hoy es razonable.</div>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-mario"><img class="cart-img-bg" src="img/psvita-top-precios/muramasa-rebirth.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/muramasa-rebirth.jpg" alt="MURAMASA REBIRTH box art"></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
       </div>
+      <div class="hybrid-title"><div class="game-title">MURAMASA REBIRTH</div><div class="game-meta">VITA · 2013 · AKSYS · CIB ~USD 150</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Action de Vanillaware con espadas, arte 2D brutal. Tirada chica de Aksys: ronda los 150.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">12</span>
-    <div class="slide-game">
-      <div class="game-head"><div class="game-pos"><span class="hash">#</span>1</div><div class="game-block-label">TOP PRECIOS · EL SANTO GRIAL</div></div>
-      <div class="cart-wrap"><div class="cart"><div class="cart-inner"><img src="img/psvita-top-precios/invizimals.jpg" alt="Invizimals The Alliance" onerror="this.style.display='none'"><div class="ph lb-action"><div class="ico">👾</div><div class="lbl">Invizimals</div></div></div></div></div>
-      <div class="game-info">
-        <div class="game-title-row"><div class="game-title">Invizimals: The Alliance</div><div class="price-tag"><span class="usd-lbl">USD</span>$320</div><div class="koko-has">★ KOKO TIENE</div></div>
-        <div class="game-meta">2014 · SCEE · AUGMENTED REALITY · SOLO EUROPA</div>
-        <div class="game-why"><span class="lbl">POR QUÉ ES EL #1</span><strong>Exclusivo Sony Computer Entertainment Europe.</strong> Nunca tuvo distribución NA ni JP. Sony lo distribuyó casi solo en supermercados europeos. Magenta Software (el estudio) cerró después de Invizimals — saga muerta. <strong>Coleccionistas europeos lo redescubrieron en 2020+ y los precios escalaron de €20 a €240 en cinco años.</strong> Koko tiene una copia — pagó €240 CIB (que es más o menos lo mismo en USD).</div>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL REY RETAIL</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-eb"><img class="cart-img-bg" src="img/psvita-top-precios/persona-4-golden-solid-gold-premium-edition.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/persona-4-golden-solid-gold-premium-edition.jpg" alt="PERSONA 4 GOLDEN: SOLID GOLD PREMIUM EDITION box art"></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
       </div>
+      <div class="hybrid-title"><div class="game-title">PERSONA 4 GOLDEN: SOLID GOLD PREMIUM EDITION</div><div class="game-meta">VITA · 2012 · ATLUS · CIB ~USD 200</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>La edicion de lanzamiento con steelbook dorado y OST. El P4G mas buscado: el rey retail, ~200 y subiendo.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">13</span>
-    <h1>BLOQUE 4 · EL KICKER LIMITED RUN GAMES</h1>
-    <h2 class="ye">120 títulos · tiradas de 3-5 mil copias cada uno</h2>
-    <p style="font-family:'Share Tech Mono'; font-size:15px; color: rgba(255,255,255,.85); line-height: 1.6; margin: 0 0 16px 20px;">
-      Limited Run Games hizo <strong style="color:var(--ye);">120+ títulos</strong> PS Vita entre 2015-2020. Cada SKU con tirada de <strong style="color:var(--ye);">3,000-5,000 copias máximo</strong>. Hoy son los releases más cotizados del catálogo. Quien compró doble en 2018 ($35 cada copia) se hizo rico por accidente.
-    </p>
-    <div class="lrg-grid">
-      <div class="hdr">EDICIÓN LIMITED RUN</div><div class="hdr">CIB USD</div>
-      <div class="row"><div class="name">Steins;Gate Limited Edition</div><div class="price">$140</div></div>
-      <div class="row"><div class="name">Tokyo Mirage Sessions LRG</div><div class="price">$120</div></div>
-      <div class="row"><div class="name">Mighty No. 9 LRG</div><div class="price">$95</div></div>
-      <div class="row"><div class="name">OlliOlli 2: Welcome to OlliWood</div><div class="price">$90</div></div>
-      <div class="row"><div class="name">Shantae: Half-Genie Hero (Risky Beats) <span style="color:var(--ye); font-size:11px;">★ KOKO TIENE</span></div><div class="price">$80</div></div>
-      <div class="row"><div class="name">Velocity 2X: Critical Mass Edition <span style="color:var(--ye); font-size:11px;">★ KOKO TIENE</span></div><div class="price">$75</div></div>
+    <div class="divider">
+      <div class="pre mg">FUERA DEL TOP · IMPOSIBLES DE IGNORAR</div>
+      <div class="title mg" style="font-size:58px;">RAREZAS &amp; LIMITED RUN</div>
+      <div class="sub">No se vendieron en tiendas normales: tiradas minimas de Limited Run Games y ediciones de coleccionista. Otra liga de precios, miles de dolares.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">14</span>
-    <h1>BLOQUE 5 · LO QUE TENGO YO</h1>
-    <h2 class="ye">4 de los 16 más caros del mundo · en mi colección</h2>
-    <div class="tengo-cuatro-grid">
-      <div class="tengo-cuatro-card"><h3>#1 MUNDIAL</h3><div class="name">Invizimals: The Alliance</div><div class="pago">Pagué €240</div><div class="vale">€240</div></div>
-      <div class="tengo-cuatro-card"><h3>#10 MUNDIAL</h3><div class="name">Silent Hill: Book of Memories</div><div class="pago">Pagué €93</div><div class="vale">$160</div></div>
-      <div class="tengo-cuatro-card"><h3>TOP LRG</h3><div class="name">Velocity 2X (LRG)</div><div class="pago">Pagué €52</div><div class="vale">$75</div></div>
-      <div class="tengo-cuatro-card"><h3>TOP LRG</h3><div class="name">Shantae HGH (Risky Beats)</div><div class="pago">Pagué €45</div><div class="vale">$80</div></div>
-    </div>
-    <div class="cam-quote">
-      <span class="lbl">FRASE DE CIERRE PARA CÁMARA</span>
-      "Cinco años después que Sony mató la PlayStation Vita en marzo de dos mil diecinueve, <strong>los cartuchos físicos valen lo que valen porque ya no se va a fabricar uno más</strong>. Esta consola fue una de las primeras víctimas del modelo digital. Y yo, sin haber comprado con intención de invertir, tengo cuatro de los dieciséis más caros del mundo. <strong>Total: setecientos treinta y cinco dólares si los vendiera mañana</strong>. Eso es el coleccionismo de consolas abandonadas: tu hobby se convierte en inversión sin avisarte."
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">LIMITED RUN</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-rpg"><div class="cart-fallback"><div class="title">A.W.: PHOENIX FESTA</div><div class="sub">VITA</div></div></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">A.W.: PHOENIX FESTA</div><div class="game-meta">VITA · 2016 · BANDAI NAMCO · LRG · ~USD 600</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Tirada minima de Limited Run Games. Suelto ronda 450, completo pasa los 600 dolares.</div>
     </div>
   </section>
 
   <section class="slide">
     <span class="slide-num">15</span>
-    <h1>CHECKLIST · PRE-GRABACIÓN</h1>
-    <h2 class="cy">Antes de prender cámaras</h2>
-    <ul class="checklist">
-      <li class="ye"><strong class="ye">☐ Luis</strong> — verificar precios PriceCharting + VGPC mayo 2026. Memorizar 10 anclas + frase fija.</li>
-      <li class="ye"><strong class="ye">☐ Koko</strong> — los 4 cartuchos del top mundial a la vista: Invizimals · Silent Hill BoM · Velocity 2X · Shantae HGH.</li>
-      <li class="cy"><strong class="cy">☐ Audio</strong> — reacciones genuinas son el oro. <strong>NO dar los precios a Koko antes de cámara.</strong></li>
-      <li class="cy"><strong class="cy">☐ Tono</strong> — celebratorio del coleccionismo (no quejoso). Crítico solo en el cierre.</li>
-      <li class="mg"><strong class="mg">☐ Ritmo</strong> — ~70 seg por slide. Invizimals (#1) e Dragon's Crown (#2) pueden tomar 1:30.</li>
-      <li class="mg"><strong class="mg">☐ B-roll</strong> — closeups de los 4 cartuchos físicos juntos para el cierre.</li>
-    </ul>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">LIMITED RUN</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-fox"><div class="cart-fallback"><div class="title">VVVVVV</div><div class="sub">VITA</div></div></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">VVVVVV</div><div class="game-meta">VITA · 2017 · LIMITED RUN · LRG · ~USD 1.000</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformero indie en fisico via LRG. Suelto sobre 800, completo supera los mil dolares.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">16</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">LIMITED RUN · LA ULTIMA</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-action"><div class="cart-fallback"><div class="title">REVENGE OF THE BIRD KING</div><div class="sub">VITA</div></div></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">REVENGE OF THE BIRD KING</div><div class="game-meta">VITA · 2019 · LIMITED RUN · LRG FINAL · ~USD 1.200</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Pensado como el ultimo lanzamiento fisico de Vita de LRG. Rareza historica de la consola.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">17</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">LIMITED RUN</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-metroid"><div class="cart-fallback"><div class="title">1001 SPIKES</div><div class="sub">VITA</div></div></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">1001 SPIKES</div><div class="game-meta">VITA · 2014 · LIMITED RUN · LRG · ~USD 1.500</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Una de las primeras LRG y de las mas escasas. Hoy ronda los mil quinientos dolares.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">18</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-dkc"><img class="cart-img-bg" src="img/psvita-top-precios/the-binding-of-isaac-rebirth.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/the-binding-of-isaac-rebirth.jpg" alt="THE BINDING OF ISAAC: REBIRTH box art"></div>
+          <div class="cart-console">VITA</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">THE BINDING OF ISAAC: REBIRTH</div><div class="game-meta">VITA · 2015 · LIMITED RUN · TIRADA MINIMA · CIB ~USD 4.000</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>El santo grial de la Vita. Tirada tan minima que los coleccionistas dudaban que existiera en fisico. Un completo en caja supera los cuatro mil dolares: el juego de Vita mas caro del planeta.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">19</span>
+    <div class="divider">
+      <div class="pre mg">ANALISIS DEL TOP</div>
+      <div class="title mg" style="font-size:54px;">DOS LIGAS DISTINTAS</div>
+      <div class="sub">El retail Vita techa en un par de cientos de dolares (JRPG NISA/XSEED/Falcom). Pero las Limited Run juegan en los miles, y el grial Binding of Isaac, en otro planeta.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">20</span>
+    <div class="divider">
+      <div class="pre cy">CIERRA EL ARCO VITA</div>
+      <div class="title cy" style="font-size:54px;">LA VITA COMPLETA</div>
+      <div class="sub">Cerramos Vita: coleccion, los mejores y los mas caros. Cuentanos cual de estos grales tienes o quisieras. Suscribete para la proxima consola.</div>
+    </div>
   </section>
 
 </div>
 
 <nav class="footer">
   <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
-  <div class="nav-center"><div class="nav-counter" id="counter">01 / 15</div><div class="nav-progress"><div class="bar" id="bar"></div></div></div>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 14</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
   <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
   <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
 </nav>
 
 <script>
 const slides = document.querySelectorAll('.slide');
-const prevBtn = document.getElementById('prevBtn'); const nextBtn = document.getElementById('nextBtn');
-const counter = document.getElementById('counter'); const bar = document.getElementById('bar');
-let current = 0; const total = slides.length;
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
 function pad(n) { return String(n).padStart(2, '0'); }
 function go(i) {
   if (i < 0 || i >= total) return;
-  slides[current].classList.remove('active'); current = i; slides[current].classList.add('active');
-  prevBtn.disabled = current === 0; nextBtn.disabled = current === total - 1;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
   counter.textContent = pad(current + 1) + ' / ' + pad(total);
   bar.style.width = ((current + 1) / total * 100) + '%';
 }
@@ -338,9 +507,11 @@ nextBtn.addEventListener('click', () => go(current + 1));
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
   if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
-  if (e.key === 'Home') { go(0); } if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
 });
 go(0);
 </script>
+
 </body>
 </html>

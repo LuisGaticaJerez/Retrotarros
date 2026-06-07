@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "slug": "psvita-top-precios",
+  "episodio": "Top 10 PS Vita mas caros (retail)",
+  "creado": "2026-06-07",
+  "actualizado": "2026-06-07",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "psvita-top-precios-10",
+      "tema": "Hatsune Miku: Project Diva F 2Nd",
+      "texto": "Hatsune Miku Project Diva F 2nd es un juego de ritmo de culto en la Vita. Tirada moderada y fans fieles lo mantienen sobre los cincuenta dolares completo.",
+      "estado": "wow",
+      "consola": "PS Vita",
+      "ano": 2014,
+      "editor": "Sega",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Project Diva F 2nd, ritmo de culto. Los fans de Miku lo mantienen carito.",
+      "precio_short": "CIB ~USD 55"
+    },
+    {
+      "id": "psvita-top-precios-9",
+      "tema": "Dragon'S Crown",
+      "texto": "Dragon's Crown de Vanillaware es un beat-em-up con arte pintado a mano, de los mas bonitos de la Vita. Un completo ronda los sesenta y cinco dolares.",
+      "estado": "wow",
+      "consola": "PS Vita",
+      "ano": 2013,
+      "editor": "Atlus",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Dragon's Crown, el beat-em-up mas hermoso de la Vita. Puro arte de Vanillaware.",
+      "precio_short": "CIB ~USD 65"
+    },
+    {
+      "id": "psvita-top-precios-8",
+      "tema": "Ys: Memories Of Celceta",
+      "texto": "Ys Memories of Celceta es un action-RPG de Falcom traido por XSEED. Las localizaciones de tirada chica hacen que hoy ronde los setenta dolares completo.",
+      "estado": "wow",
+      "consola": "PS Vita",
+      "ano": 2013,
+      "editor": "XSEED",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Ys Memories of Celceta. Cuando XSEED localiza poco, el precio sube solo.",
+      "precio_short": "CIB ~USD 70"
+    },
+    {
+      "id": "psvita-top-precios-7",
+      "tema": "Toukiden 2",
+      "texto": "Toukiden 2 es un cazador de demonios estilo Monster Hunter que salio tarde, en 2017, con la Vita ya de salida. Esa tirada minima lo dejo en unos setenta y cinco dolares.",
+      "estado": "wow",
+      "consola": "PS Vita",
+      "ano": 2017,
+      "editor": "Koei Tecmo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Toukiden 2 salio en el 2017, con la Vita casi muerta. Por eso es caro hoy.",
+      "precio_short": "CIB ~USD 75"
+    },
+    {
+      "id": "psvita-top-precios-6",
+      "tema": "Atelier Rorona Plus",
+      "texto": "Atelier Rorona Plus es un JRPG de alquimia de Gust con tirada NISA limitada. La saga Atelier es de coleccionistas, asi que un completo pasa los ochenta y cinco dolares.",
+      "estado": "wow",
+      "consola": "PS Vita",
+      "ano": 2014,
+      "editor": "NIS America",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Atelier Rorona Plus. NISA imprime poquito y los coleccionistas pagan lo que sea.",
+      "precio_short": "CIB ~USD 85"
+    },
+    {
+      "id": "psvita-top-precios-5",
+      "tema": "Silent Hill: Book Of Memories",
+      "texto": "Silent Hill Book of Memories es el unico Silent Hill de la Vita, un spin-off dungeon crawler. Ser el unico de la marca lo dejo cerca de los noventa dolares completo.",
+      "estado": "wow",
+      "consola": "PS Vita",
+      "ano": 2012,
+      "editor": "Konami",
+      "fuente": "pauta-manual",
+      "reaccion_short": "El unico Silent Hill de Vita. Por ser el unico, ya vale noventa dolares.",
+      "precio_short": "CIB ~USD 90"
+    },
+    {
+      "id": "psvita-top-precios-4",
+      "tema": "Disgaea 4: A Promise Revisited",
+      "texto": "Disgaea 4 A Promise Revisited es un tactical JRPG gigante con tirada NISA limitada. Hoy un completo pasa los cien dolares y sigue subiendo.",
+      "estado": "wow",
+      "consola": "PS Vita",
+      "ano": 2014,
+      "editor": "NIS America",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Disgaea 4 en Vita. Cien dolares de pura estrategia con millones de daño.",
+      "precio_short": "CIB ~USD 100"
+    },
+    {
+      "id": "psvita-top-precios-3",
+      "tema": "The Legend Of Heroes: Trails Of Cold Steel Ii",
+      "texto": "Trails of Cold Steel 2 es uno de los JRPG mas queridos de la Vita, de Falcom. Salio tarde y en poca cantidad, asi que es de los retail mas buscados: pasa los ciento treinta dolares.",
+      "estado": "wow",
+      "consola": "PS Vita",
+      "ano": 2016,
+      "editor": "XSEED",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Trails of Cold Steel 2. Los fans de Falcom haran lo que sea por este cartucho.",
+      "precio_short": "CIB ~USD 130"
+    },
+    {
+      "id": "psvita-top-precios-2",
+      "tema": "Muramasa Rebirth",
+      "texto": "Muramasa Rebirth es un action de Vanillaware con katanas y un arte 2D brutal. La tirada chica de Aksys lo dejo cerca de los ciento cincuenta dolares completo.",
+      "estado": "wow",
+      "consola": "PS Vita",
+      "ano": 2013,
+      "editor": "Aksys",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Muramasa Rebirth. Vanillaware otra vez, y otra vez carisimo. Vale cada peso.",
+      "precio_short": "CIB ~USD 150"
+    },
+    {
+      "id": "psvita-top-precios-1",
+      "tema": "Persona 4 Golden: Solid Gold Premium Edition",
+      "texto": "La Persona 4 Golden Solid Gold Premium Edition trae steelbook dorado y banda sonora. Es la version mas buscada del mejor juego de la consola: el rey del retail, doscientos dolares y subiendo.",
+      "estado": "wow",
+      "consola": "PS Vita",
+      "ano": 2012,
+      "editor": "Atlus",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Persona 4 Golden edicion dorada. El mejor juego de Vita en su version mas premium.",
+      "precio_short": "CIB ~USD 200"
+    }
+  ]
+}
