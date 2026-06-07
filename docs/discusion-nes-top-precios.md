@@ -34,8 +34,9 @@ Cifras tratadas como **valor de mercado aproximado**: fluctuan con cada subasta.
 
 ### Casos con cifra firme
 
+- **Super Mario Bros. sellado (grial)**: USD 2.000.000 documentado (Rally, 2021; Engadget/GameSpot). Copia WATA 9.8 A+ edicion "hangtab". Sigue siendo el record de un juego de NES en 2026.
 - **Stadium Events sellado**: remate documentado de USD 41.977 (Kotaku). En el deck lo dejamos en "USD 25.000" como valor CIB representativo, y la cifra sellada va como dato hablado.
-- **NWC dorado**: ventas historicas sobre USD 100.000 (han llegado a 300k+ segun copia/condicion). Lo dejamos en "USD 100.000+".
+- **NWC dorado**: ventas historicas sobre USD 100.000 (han llegado a 300k+ segun copia/condicion). Lo dejamos en "USD 100.000+" como climax de rarezas.
 
 ---
 
@@ -44,10 +45,15 @@ Cifras tratadas como **valor de mercado aproximado**: fluctuan con cada subasta.
 Igual que `snes-top-precios`, el episodio separa por como llego el juego al mundo:
 
 1. **Top 10 RETAIL**: solo juegos que se vendieron en tiendas. Es el ranking "de verdad", ordenado por valor CIB. Aca el #1 es **Stadium Events** (retail retirado, USD 25.000), que se escapa de los demas (que rondan los miles).
-2. **Apartado RAREZAS / NO-RETAIL**: variantes, sin licencia (Panesian), exclusivos de alquiler (Blockbuster), hallazgos de bodega y cartuchos de competencia. NO se vendieron en retail normal, por eso van aparte con etiqueta en vez de numero.
-3. **SANTO GRIAL**: el que se escapa de todo precio. Aca: **NWC dorado** (26 copias, USD 100.000+).
+2. **Apartado RAREZAS / NO-RETAIL**: variantes, sin licencia (Panesian), exclusivos de alquiler (Blockbuster), hallazgos de bodega y cartuchos de competencia (Campus Challenge, NWC gris y dorado). NO se vendieron en retail normal, por eso van aparte con etiqueta en vez de numero. El climax del apartado es el **NWC dorado** (26 copias, USD 100.000+): el mas raro del mundo.
+3. **SANTO GRIAL**: el que se escapa de todo precio = la **venta record**. Aca: **Super Mario Bros. sellado** WATA 9.8 A+, vendido en **USD 2.000.000** (2021, sigue siendo record en 2026).
 
-**Por que esta separacion**: meter los NWC (USD 30k-100k) en el mismo ranking que Bonk (USD 900) aplastaria todo. Separando, el top retail es comparable entre si y las rarezas brillan en su propia liga. Es la misma logica del SNES (retail → variantes/exclusivos → grial Powerfest 94).
+**Dos ejes de "el mas caro" (decision editorial, validada con Luis):**
+- Por **rareza/escasez** manda el NWC dorado (26 copias). Va como climax de las rarezas.
+- Por **venta record** manda Super Mario Bros. sellado (USD 2M). Va como santo grial.
+- El grial es la venta record porque es el numero mas alto y mas impactante. CLAVE aclarar en vivo: es una copia SELLADA Y GRADUADA (WATA 9.8) en estado casi perfecto — NO el cartucho suelto comun (que vale ~USD 10). Es el fenomeno "boom WATA" 2020-2021.
+
+**Por que esta separacion**: meter los NWC (USD 30k-100k) o el SMB sellado (USD 2M) en el mismo ranking que Bonk (USD 900) aplastaria todo. Separando, el top retail es comparable entre si, las rarezas brillan en su liga, y el grial cierra con el numero imposible. Misma logica del SNES (retail → variantes/exclusivos → grial Powerfest 94).
 
 **Decision Stadium Events**: es retail (Bandai lo vendio en tiendas en 1987 antes de retirarlo), asi que va como #1 retail, NO como rareza. Es "el mas caro que de verdad estuvo a la venta".
 
@@ -77,7 +83,7 @@ OJO: este top es de mercado MUNDIAL, no de la coleccion de Luis (`data/coleccion
 
 1. Triptico NES cerrado: coleccion + mundial + precios.
 2. Precios = **valor de mercado aproximado 2026** (se insiste: no es precio fijo, no es consejo de inversion).
-3. Tres bloques: **10 retail** (#10→#1) + **5 rarezas** (etiqueta) + **grial** (NWC dorado). Igual que SNES.
+3. Tres bloques: **10 retail** (#10→#1) + **6 rarezas** (etiqueta, climax NWC dorado) + **grial** (Super Mario Bros. sellado, venta record USD 2M). Igual que SNES.
 4. Deck con `scripts/top_deck.py` (extendido para soportar rarezas con `badge_text` + slide `grial`). Etiqueta de cartucho con color (oro para el NWC dorado).
 5. JSON TarroBot: `datos` = solo los 10 retail (#10→#1) con `precio_short`, para que sea compatible con el generador de TarroShorts. Rarezas/grial viven en el deck HTML.
 

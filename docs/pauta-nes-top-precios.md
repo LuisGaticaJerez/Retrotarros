@@ -36,11 +36,11 @@ Precios **actualizados a 2026** (PriceCharting / GameValueNow / Den of Geek). Si
 
 Formato presentacion visual con HTML del estudio (`studio/nes-top-precios.html`):
 
-- 21 slides navegables del 01 al 21.
+- 22 slides navegables del 01 al 22.
 - Portada con tag "TOP 10 · PRECIOS · CARTUCHOS QUE ROMPEN BILLETERAS".
 - 10 slides hibridas RETAIL (#10 → #1, cartucho + TarroVision + precio CIB + "POR QUE").
-- Divider "RAREZAS & NO-RETAIL" + 5 slides de rarezas (etiqueta en vez de numero).
-- Slide HOLY GRAIL (NWC dorado).
+- Divider "RAREZAS & NO-RETAIL" + 6 slides de rarezas (etiqueta en vez de numero, incluye NWC dorado como el mas raro).
+- Slide HOLY GRAIL (Super Mario Bros. sellado, USD 2M, venta record).
 - Cierre con analisis (dos ligas) + cierre de arco NES.
 
 **Duracion objetivo:** 22-28 minutos.
@@ -75,12 +75,15 @@ No se vendieron en tiendas normales. Etiqueta en vez de numero.
 | Blockbuster exclusive | Flintstones: Surprise at Dinosaur Peak (1994, Taito) | 2.000 |
 | Competencia · 1 copia | Nintendo Campus Challenge 1991 | 20.000+ |
 | Competencia · ~90 copias | Nintendo World Championships gris (1990) | 30.000+ |
+| El mas raro · 26 copias | Nintendo World Championships dorado (1990) | 100.000+ |
 
-## Bloque 3 · SANTO GRIAL
+## Bloque 3 · SANTO GRIAL — la venta record
 
-**Nintendo World Championships (dorado), 1990** — solo 26 copias, premio de Nintendo Power. El cartucho NES mas caro del planeta: **USD 100.000+**, sin precio fijo.
+**Super Mario Bros. SELLADO (1985), WATA 9.8 A+** — el juego de NES mas caro jamas vendido: **USD 2.000.000** (2021, sigue siendo record en 2026). Suelto vale ~USD 10; lo que se disparo es una copia sellada y graduada en estado casi perfecto (edicion "hangtab" de 1985).
 
-> Valores de mercado APROXIMADOS (USD), cruce de PriceCharting, GameValueNow y Den of Geek (2026). Las cifras fluctuan; presentarlas como "valor aproximado", no precio fijo.
+> **Dos ejes de "el mas caro":** por rareza/escasez manda el NWC dorado (26 copias, va en rarezas); por venta record manda el Super Mario Bros. sellado (USD 2M). El grial del episodio es el record absoluto. Aclarar en vivo que es una copia SELLADA Y GRADUADA, no el cartucho suelto comun.
+
+> Valores de mercado APROXIMADOS (USD), cruce de PriceCharting, GameValueNow y Den of Geek (2026). Las cifras fluctuan; presentarlas como "valor aproximado".
 
 ---
 
@@ -90,7 +93,7 @@ No se vendieron en tiendas normales. Etiqueta en vez de numero.
 
 Plano de un cartucho NES comun. Luis:
 
-> *"Este cartucho cuesta como diez lucas. Pero hay uno de NES que cuesta mas de cien mil dolares. Hoy vemos los diez juegos de NES mas caros del planeta, y el numero uno es una locura. Del diez al uno."*
+> *"Este cartucho cuesta como diez lucas. Pero una copia sellada de NES se vendio en dos millones de dolares. Hoy vemos los juegos de NES mas caros del planeta: primero los retail, despues las rarezas, y cerramos con el santo grial. Del diez al uno."*
 
 ### Bloque 2 · Setup (0:40 – 1:30)
 
@@ -110,15 +113,15 @@ Plano de un cartucho NES comun. Luis:
 
 **El #1 retail (Stadium Events) se escapa de todos**: salto de USD 3.000 a USD 25.000. Buen momento de impacto.
 
-### Bloque 4 · Rarezas & no-retail (18:00 – 23:00)
+### Bloque 4 · Rarezas & no-retail (18:00 – 23:30)
 
 - Divider "RAREZAS & NO-RETAIL".
-- 5 slides: Cheetahmen II, Bubble Bath Babes, Flintstones (Blockbuster), Campus Challenge 91, NWC gris.
+- 6 slides: Cheetahmen II, Bubble Bath Babes, Flintstones (Blockbuster), Campus Challenge 91, NWC gris, NWC dorado (el mas raro, 26 copias, USD 100.000+).
 - Aclarar en vivo: estos NO se vendieron en tiendas, por eso van aparte.
 
-### Bloque 5 · Santo grial + cierre (23:00 – 28:00)
+### Bloque 5 · Santo grial + cierre (23:30 – 28:00)
 
-- Slide HOLY GRAIL: NWC dorado (26 copias, USD 100.000+).
+- Slide HOLY GRAIL: **Super Mario Bros. sellado** WATA 9.8 (USD 2.000.000, record 2026). Aclarar: es copia sellada y graduada, no el cartucho suelto.
 - Slide analisis: "dos ligas distintas".
 - Slide cierre: fin del arco NES + proxima consola.
 
@@ -154,7 +157,7 @@ El HTML funciona con placeholders `tv-noscreen` + etiqueta de color por juego.
 
 | Item | Estado |
 |------|--------|
-| HTML estudio (`studio/nes-top-precios.html`) | ✓ Cerrado (21 slides: 10 retail + 5 rarezas + grial) |
+| HTML estudio (`studio/nes-top-precios.html`) | ✓ Cerrado (22 slides: 10 retail + 6 rarezas + grial SMB sellado) |
 | JSON TarroBot (`studio/pautas/nes-top-precios.tarrobot.json`) | ✓ 10 datos #10→#1 + precio_short |
 | Box art / fotos | ☐ Pendiente |
 | Pauta MD (este archivo) | ✓ |
