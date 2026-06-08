@@ -22,9 +22,16 @@ Zelda es el piloto ideal: tenemos **10 de los 16** juegos de la linea principal,
 
 ---
 
-## Concepto del episodio
+## Concepto del episodio — LINEA DE TIEMPO + ZOOM
 
-HTML (`studio/saga-zelda.html`): 20 slides. Portada → intro (de 1986 a hoy) → 16 juegos cronologicos (año + box + por que importa + sello coleccion) → balance (10 de 16 en fisico) → cierre.
+HTML (`studio/saga-zelda.html`): 21 slides, generado con `scripts/saga_deck.py`. Mecanica visual (idea de Luis):
+
+1. **Slide LINEA DE TIEMPO COMPLETA** (slide 02): se muestra la saga entera de 1986 a 2023 como una cinta horizontal con todos los juegos (box mini + año + consola + sello EN COLECCION/FALTA). "Casi 40 años de Hyrule" de un vistazo.
+2. **Un slide por juego con ZOOM**: la misma cinta pero CENTRADA y ampliada en el juego que toca (el nodo crece, brilla, y un marcador apunta "estamos aqui"). Abajo, la ficha: box grande, "LLEGAMOS A <año> · <consola>", titulo, por que importa, y el sello EN COLECCION. Asi en vivo Luis dice "llegamos a 1986, a la NES... aparece The Legend of Zelda" y la imagen hace el zoom al punto exacto.
+3. **Slide BONUS** (EN LA VITRINA): remakes/remasters + Game & Watch Zelda (la edicion especial / hardware al final).
+4. **Balance + cierre**.
+
+> En edicion (CapCut/DaVinci) se anima el zoom real entre la cinta completa y cada juego; el HTML entrega los keyframes (slide overview + cada slide ampliado).
 
 **Duracion objetivo:** 22-28 minutos.
 
