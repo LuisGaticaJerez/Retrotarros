@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "slug": "saga-zelda",
+  "episodio": "Especial Saga - The Legend of Zelda",
+  "creado": "2026-06-07",
+  "actualizado": "2026-06-07",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 16,
+  "datos": [
+    {
+      "id": "saga-zelda-1",
+      "tema": "The Legend Of Zelda",
+      "texto": "El cartucho dorado que empezo todo. Mundo abierto en 1986, y lo tenemos en la coleccion.",
+      "estado": "winking",
+      "consola": "NES",
+      "ano": 1986,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "El cartucho dorado que empezo todo. Mundo abierto en 1986, y lo tenemos en la coleccion."
+    },
+    {
+      "id": "saga-zelda-2",
+      "tema": "Zelda Ii: The Adventure Of Link",
+      "texto": "Zelda II, la oveja negra. Vista lateral y dificilisimo. El experimento que no se repitio.",
+      "estado": "thinking",
+      "consola": "NES",
+      "ano": 1987,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Zelda II, la oveja negra. Vista lateral y dificilisimo. El experimento que no se repitio."
+    },
+    {
+      "id": "saga-zelda-3",
+      "tema": "A Link To The Past",
+      "texto": "A Link to the Past definio el Zelda 2D. El mundo oscuro y el Hookshot. Joya de la coleccion.",
+      "estado": "happy",
+      "consola": "SNES",
+      "ano": 1991,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "A Link to the Past definio el Zelda 2D. El mundo oscuro y el Hookshot. Joya de la coleccion."
+    },
+    {
+      "id": "saga-zelda-4",
+      "tema": "Link'S Awakening",
+      "texto": "Link's Awakening, el primer Zelda portatil. La isla que era un sueño. Lo tenemos en Switch.",
+      "estado": "thinking",
+      "consola": "GAME BOY",
+      "ano": 1993,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Link's Awakening, el primer Zelda portatil. La isla que era un sueño. Lo tenemos en Switch."
+    },
+    {
+      "id": "saga-zelda-5",
+      "tema": "Ocarina Of Time",
+      "texto": "Ocarina of Time, para muchos el mejor juego de la historia. Y lo tenemos en N64 fisico.",
+      "estado": "excited",
+      "consola": "N64",
+      "ano": 1998,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Ocarina of Time, para muchos el mejor juego de la historia. Y lo tenemos en N64 fisico."
+    },
+    {
+      "id": "saga-zelda-6",
+      "tema": "Majora'S Mask",
+      "texto": "Majora's Mask y la luna que cae. El Zelda mas oscuro y raro. Otro N64 de la coleccion.",
+      "estado": "thinking",
+      "consola": "N64",
+      "ano": 2000,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Majora's Mask y la luna que cae. El Zelda mas oscuro y raro. Otro N64 de la coleccion."
+    },
+    {
+      "id": "saga-zelda-7",
+      "tema": "Oracle Of Seasons / Ages",
+      "texto": "Los Oracle, dos juegos de Capcom que se conectan. Estaciones y tiempo, joyas portatiles.",
+      "estado": "neutral",
+      "consola": "GAME BOY COLOR",
+      "ano": 2001,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Los Oracle, dos juegos de Capcom que se conectan. Estaciones y tiempo, joyas portatiles."
+    },
+    {
+      "id": "saga-zelda-8",
+      "tema": "The Wind Waker",
+      "texto": "Wind Waker y su estilo caricaturesco que envejecio perfecto. Lo tenemos en HD, navegando.",
+      "estado": "happy",
+      "consola": "GAMECUBE",
+      "ano": 2002,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Wind Waker y su estilo caricaturesco que envejecio perfecto. Lo tenemos en HD, navegando."
+    },
+    {
+      "id": "saga-zelda-9",
+      "tema": "The Minish Cap",
+      "texto": "The Minish Cap, donde Link se achica para ver el mundo gigante. Capcom haciendo magia.",
+      "estado": "winking",
+      "consola": "GAME BOY ADVANCE",
+      "ano": 2004,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "The Minish Cap, donde Link se achica para ver el mundo gigante. Capcom haciendo magia."
+    },
+    {
+      "id": "saga-zelda-10",
+      "tema": "Twilight Princess",
+      "texto": "Twilight Princess, el Zelda oscuro y maduro. Link lobo y Midna. Lo tenemos en la coleccion.",
+      "estado": "excited",
+      "consola": "GAMECUBE / WII",
+      "ano": 2006,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Twilight Princess, el Zelda oscuro y maduro. Link lobo y Midna. Lo tenemos en la coleccion."
+    },
+    {
+      "id": "saga-zelda-11",
+      "tema": "Phantom Hourglass",
+      "texto": "Phantom Hourglass, todo con el stylus del DS. Un experimento valiente. En la coleccion.",
+      "estado": "thinking",
+      "consola": "NINTENDO DS",
+      "ano": 2007,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Phantom Hourglass, todo con el stylus del DS. Un experimento valiente. En la coleccion."
+    },
+    {
+      "id": "saga-zelda-12",
+      "tema": "Spirit Tracks",
+      "texto": "Spirit Tracks, Link manejando un tren. De lo mas raro de la saga, pero con encanto.",
+      "estado": "neutral",
+      "consola": "NINTENDO DS",
+      "ano": 2009,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Spirit Tracks, Link manejando un tren. De lo mas raro de la saga, pero con encanto."
+    },
+    {
+      "id": "saga-zelda-13",
+      "tema": "Skyward Sword",
+      "texto": "Skyward Sword, el origen de la Master Sword. Controles por movimiento, divisivo pero clave.",
+      "estado": "thinking",
+      "consola": "WII",
+      "ano": 2011,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Skyward Sword, el origen de la Master Sword. Controles por movimiento, divisivo pero clave."
+    },
+    {
+      "id": "saga-zelda-14",
+      "tema": "A Link Between Worlds",
+      "texto": "A Link Between Worlds, secuela de A Link to the Past. Link pegado a las paredes. Brillante.",
+      "estado": "happy",
+      "consola": "NINTENDO 3DS",
+      "ano": 2013,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "A Link Between Worlds, secuela de A Link to the Past. Link pegado a las paredes. Brillante."
+    },
+    {
+      "id": "saga-zelda-15",
+      "tema": "Breath Of The Wild",
+      "texto": "Breath of the Wild reinvento todo. Libertad total. Lo tenemos en Wii U y en Switch, doble.",
+      "estado": "excited",
+      "consola": "WII U / SWITCH",
+      "ano": 2017,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Breath of the Wild reinvento todo. Libertad total. Lo tenemos en Wii U y en Switch, doble."
+    },
+    {
+      "id": "saga-zelda-16",
+      "tema": "Tears Of The Kingdom",
+      "texto": "Tears of the Kingdom, construir lo que se te ocurra. Lo tenemos hasta en edicion coleccionista.",
+      "estado": "wow",
+      "consola": "NINTENDO SWITCH",
+      "ano": 2023,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Tears of the Kingdom, construir lo que se te ocurra. Lo tenemos hasta en edicion coleccionista."
+    }
+  ]
+}
