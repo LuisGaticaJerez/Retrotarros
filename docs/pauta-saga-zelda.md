@@ -27,13 +27,15 @@ Zelda es el piloto ideal: tenemos **10 de los 16** juegos de la linea principal,
 HTML (`studio/saga-zelda.html`): 21 slides, generado con `scripts/saga_deck.py`. Mecanica visual (idea de Luis):
 
 1. **Slide LINEA DE TIEMPO COMPLETA** (slide 02): se muestra la saga entera de 1986 a 2023 como una cinta horizontal con todos los juegos (box mini + año + consola + sello EN COLECCION/FALTA). "Casi 40 años de Hyrule" de un vistazo.
-2. **Un slide por juego con ZOOM**: la misma cinta pero CENTRADA y ampliada en el juego que toca (el nodo crece, brilla, y un marcador apunta "estamos aqui"). Abajo, la ficha: box grande, "LLEGAMOS A <año> · <consola>", titulo, por que importa, y el sello EN COLECCION. Asi en vivo Luis dice "llegamos a 1986, a la NES... aparece The Legend of Zelda" y la imagen hace el zoom al punto exacto.
+2. **DOS slides por juego:**
+   - **(a) ZOOM a la linea de tiempo + ficha:** la cinta centrada y ampliada en el juego que toca (el nodo crece, brilla, marcador "estamos aqui"). Abajo: box grande, "LLEGAMOS A <año> · <consola>", titulo, por que importa, sello EN COLECCION. Luis dice "llegamos a 1986, a la NES... aparece The Legend of Zelda" y la imagen hace el zoom.
+   - **(b) GAMEPLAY en TarroVision grande:** una TarroVision (CRT) ocupando la pantalla para correr gameplay del juego mientras se comenta brevemente. Al lado, "EL DATO" (una curiosidad corta) + sello mini EN COLECCION. Es el respiro de "ver el juego en accion".
 3. **Slide BONUS** (EN LA VITRINA): remakes/remasters + Game & Watch Zelda (la edicion especial / hardware al final).
 4. **Balance + cierre**.
 
-> En edicion (CapCut/DaVinci) se anima el zoom real entre la cinta completa y cada juego; el HTML entrega los keyframes (slide overview + cada slide ampliado).
+> Flujo por juego: zoom-ficha → gameplay. En edicion se anima el zoom real entre la cinta y cada juego, y se monta el gameplay en la TarroVision (placeholder NO SIGNAL en el HTML).
 
-**Duracion objetivo:** 22-28 minutos.
+**Duracion objetivo:** 24-30 minutos (37 slides: 16 juegos x 2).
 
 ---
 

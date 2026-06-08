@@ -95,6 +95,33 @@ def _slide_game(num, g, idx, games, slug):
         '</div></section>')
 
 
+def _tv(ch: int) -> str:
+    return (
+        '<div class="tarrovision">'
+        f'<div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH {ch:02d}</span></div>'
+        '<div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen">'
+        '<div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>'
+        '<div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>'
+        '</div>'
+    )
+
+
+def _slide_gameplay(num, g, idx):
+    owned = ('<div class="gp-owned-mini">★ EN LA COLECCION</div>' if g.get("owned") else '')
+    dato = g.get("dato", "")
+    return (
+        f'<section class="slide"><span class="slide-num">{num:02d}</span>'
+        f'<div class="gp-head"><div class="gp-title">{g["title"]}</div>'
+        f'<div class="gp-meta">{g["console"]} · {g["year"]} · GAMEPLAY</div></div>'
+        '<div class="gp-body">'
+        f'  <div class="gp-tv">{_tv((idx % 12) + 1)}</div>'
+        '  <div class="gp-side">'
+        f'    <div class="gp-dato"><span class="lbl">EL DATO</span>{dato}</div>'
+        f'    {owned}'
+        '  </div>'
+        '</div></section>')
+
+
 def _slide_bonus(num, data):
     cards = "".join(
         f'<div class="bonus-card {c.get("color","cy")}"><h3>{c["name"]}</h3>'
@@ -171,6 +198,34 @@ header{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;background:rg
 .saga-why .lbl{display:block;font-family:'Press Start 2P';font-size:8px;color:var(--ye);letter-spacing:2px;margin-bottom:8px}
 .saga-owned{align-self:flex-start;font-family:'Orbitron';font-weight:900;font-size:30px;color:var(--dk);background:var(--ye);padding:8px 22px;border-radius:5px;letter-spacing:1px;box-shadow:0 0 22px rgba(255,210,63,.6)}
 .saga-owned.faltan{color:var(--bo);background:transparent;border:2px solid rgba(255,255,255,.3);box-shadow:none;font-size:22px}
+/* GAMEPLAY (TarroVision grande) */
+.gp-head{text-align:center;flex:none;padding-top:6px;margin-bottom:8px}
+.gp-title{font-family:'Orbitron';font-weight:900;font-size:40px;color:#fff;line-height:1}
+.gp-meta{font-family:'Share Tech Mono';font-size:13px;color:var(--ye);letter-spacing:3px;margin-top:4px}
+.gp-body{flex:1;display:grid;grid-template-columns:1fr 440px;gap:40px;align-items:center;min-height:0;padding:0 16px 8px}
+.gp-tv{height:100%;display:flex;align-items:center;justify-content:center;min-height:0}
+.gp-tv .tarrovision{height:min(100%,640px);aspect-ratio:4/3;max-width:100%}
+.gp-side{display:flex;flex-direction:column;gap:18px}
+.gp-dato{background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:18px 22px;font-family:'Share Tech Mono';font-size:18px;line-height:1.6;color:rgba(255,255,255,.9)}
+.gp-dato .lbl{display:block;font-family:'Press Start 2P';font-size:8px;color:var(--cy);letter-spacing:2px;margin-bottom:10px}
+.gp-owned-mini{font-family:'Press Start 2P';font-size:11px;color:var(--ye);letter-spacing:2px}
+.tarrovision{position:relative;background:linear-gradient(180deg,#1a1a1f,#0d0d12);border-radius:22px;padding:20px 24px;box-shadow:0 0 0 2px rgba(255,255,255,.04),0 22px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08),inset 0 -2px 0 rgba(0,0,0,.4);display:grid;grid-template-rows:auto 1fr auto;gap:12px}
+.tv-controls-top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 6px}
+.tv-led{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ff8fb8,var(--mg) 60%,#7a0030);box-shadow:0 0 10px rgba(255,46,136,.8)}
+.tv-brand{flex:1;text-align:center;font-family:'Press Start 2P';font-size:12px;color:var(--ye);letter-spacing:4px}
+.tv-channel{font-family:'Share Tech Mono';font-size:12px;color:var(--cy);padding:4px 10px;border:1px solid rgba(0,229,255,.4);background:rgba(0,229,255,.06)}
+.tv-screen{position:relative;background:#2a2a2f;border-radius:14px;padding:16px;box-shadow:inset 0 0 0 2px #3a3a3f,inset 0 0 14px rgba(0,0,0,.6);min-height:0}
+.tv-screen-inner{position:relative;width:100%;height:100%;background:#000;border-radius:18px/8px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),inset 0 0 40px rgba(0,0,0,.95)}
+.tv-screen-inner img,.tv-screen-inner video{display:block;width:100%;height:100%;object-fit:cover}
+.tv-screen-inner::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0 2px,rgba(0,0,0,.18) 2px 3px);z-index:3;mix-blend-mode:multiply}
+.tv-noscreen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 50%,rgba(45,27,105,.6),#000 80%);color:rgba(255,255,255,.35);text-align:center;padding:30px;z-index:2}
+.tv-noscreen-big{font-family:'Press Start 2P';font-size:18px;color:var(--mg);letter-spacing:4px;margin-bottom:12px;text-shadow:0 0 12px rgba(255,46,136,.5)}
+.tv-noscreen-sub{font-family:'Share Tech Mono';font-size:12px;color:rgba(0,229,255,.55)}
+.tv-controls-bottom{display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:14px;padding:4px 6px 0}
+.tv-knob{width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#5a5a60,#2a2a30 60%,#0a0a0e);box-shadow:inset 0 1px 0 rgba(255,255,255,.15),inset 0 -2px 0 rgba(0,0,0,.4),0 2px 4px rgba(0,0,0,.6);position:relative}
+.tv-knob::after{content:"";position:absolute;top:6px;left:50%;width:2px;height:10px;background:var(--ye);transform:translateX(-50%) rotate(45deg)}
+.tv-knob.cy::after{background:var(--cy);transform:translateX(-50%) rotate(-30deg)}
+.tv-speaker{height:26px;background:repeating-linear-gradient(90deg,#0a0a0e 0 3px,#1a1a1f 3px 6px);border-radius:4px}
 /* BONUS + DIVIDER + NUMBERS */
 .slide h1{font-family:'Orbitron';font-weight:900;font-size:60px;color:#fff;text-align:center;margin-bottom:6px}
 .slide h2{font-family:'Share Tech Mono';font-size:18px;letter-spacing:4px;text-align:center;margin-bottom:24px;color:rgba(255,255,255,.7)}
@@ -216,6 +271,7 @@ def generar_saga(data: dict, out_slug: str) -> Path:
     slides.append(_slide_timeline(n, data, games, out_slug)); n += 1
     for i, g in enumerate(games):
         slides.append(_slide_game(n, g, i, games, out_slug)); n += 1
+        slides.append(_slide_gameplay(n, g, i)); n += 1   # TarroVision para gameplay
     if data.get("bonus"):
         slides.append(_slide_bonus(n, data)); n += 1
     if data.get("balance"):
