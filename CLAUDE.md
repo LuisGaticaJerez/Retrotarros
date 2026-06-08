@@ -212,11 +212,14 @@ python scripts/capture-slides.py <slug>
 Cualquier sesión que modifique HTMLs / imágenes / box arts / pautas / discusiones debe terminar con estos pasos en orden:
 
 1. **Commit + push a GitHub** — Claude ejecuta `git add`, `git commit`, `git push origin master`. Sin esto el equipo no ve los cambios.
-2. **Regenerar capturas** (si tocaste HTMLs) — `python scripts/capture-slides.py <slug>` para cada HTML modificado.
-3. **Sync a Drive** — copiar imágenes, HTMLs, DOCX y **capturas** a `G:\Mi unidad\Studio\<slug>\`. Sin esto el PC del estudio queda desactualizado.
+2. **Regenerar capturas** (si tocaste HTMLs) — `python scripts/capture-slides.py <slug>` para CADA HTML nuevo/modificado. Episodio nuevo SIEMPRE genera capturas antes de sincronizar.
+3. **Sync a Drive — LOS DOS scripts, SIEMPRE (regla de Luis 2026-06-07):**
+   - **`scripts/sync-to-drive.ps1`** → `G:\Mi unidad\Studio\<slug>\` (HTML + img + **capturas** por episodio) + `Studio\pautas\*.docx` (pauta y discusión convertidas con pandoc). **Este es el que usa el PC de grabación.** Es el que mas se me olvida — NUNCA saltarlo al cerrar un episodio.
+   - **`scripts/sync-tarrobot-to-drive.ps1`** → `G:\Mi unidad\Studio\tarrobot\` (la app TarroBot: scripts + HTMLs + JSON + shorts MP4 + branding).
+   - Correr AMBOS. El primero es el critico para que Luis pueda grabar; el segundo para la app/estudio TarroBot.
 4. **Avisar a Luis** del SHA del último commit + qué cambió.
 
-**Anti-patrón:** dejar cambios solo en el repo o solo en Drive. Las tres ubicaciones (repo local, GitHub, Drive del estudio) deben quedar sincronizadas al cerrar la sesión.
+**Anti-patrón:** dejar cambios solo en el repo, o sincronizar solo `tarrobot` y olvidar `sync-to-drive.ps1` (= el estudio queda sin la pauta/HTML/capturas para grabar). Las tres ubicaciones (repo local, GitHub, Drive del estudio) deben quedar sincronizadas, y en el Drive deben quedar AMBAS carpetas (`Studio\<slug>\` y `Studio\tarrobot\`).
 
 ## Sincronización con Drive del estudio
 
