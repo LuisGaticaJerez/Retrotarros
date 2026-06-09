@@ -326,8 +326,11 @@ Lane nueva de shorts conducidos por **TarroBot** (mascota) sobre un **tema curio
 - **Generador:** `scripts/tarroshort_datos.py` (`generar_short_datos(data, slug)`), clona `_template-tarroshort.html`.
 - **Flag `modo`:** `"countdown"` (ranking #5→#1, rank-badge) o `"lista"` (5 datos con etiqueta `DATO N`).
 - **Salidas:** `studio/tarroshort-<slug>.html` + `studio/shorts/guion-<slug>.txt` (líneas habladas de TarroBot para el TTS).
-- **Investigación curada acá** (no LLM en estudio): el driver `.cache/gen_tarroshorts_batch.py` lleva los datos a mano. Tono **dato + reacción meme**. **Sin tildes** (regla del canal).
+- **Investigación curada acá** (no LLM en estudio): el driver `.cache/gen_tarroshorts_batch.py` lleva los datos a mano. Tono **dato + reacción meme**.
 - Slug siempre con prefijo `datos-` (ej. `datos-zelda-feos`). El gameplay va en la TarroVisión vacía en CapCut.
+- **Intro (regla):** toda intro arranca diciendo **"Soy TarroBot de Retrotarros"** y es **corta**.
+- **Display vs hablado (`data-say`):** el texto en **pantalla va SIN tildes** (regla del canal). El texto **hablado va aparte** en los campos `saludo_say` / `say` / `sub_say` **CON tildes y pausas** (comas y `...`), para que el TTS pronuncie bien el español y deje un beat antes/después de los **nombres en inglés**. El render (`tarroshort_render.py`) lee `data-say` si existe, si no, el `textContent`. Las tildes solo viven dentro de `data-say` (no son visibles).
+- **Re-render = limpiar audio:** el render reutiliza los MP3 por escena. Si cambian los textos hablados, borrar `studio/shorts/audio/tarroshort-<slug>/` antes de re-rendir, o quedará la voz vieja.
 
 ## TarroShorts — generación (vertical 1080×1920)
 

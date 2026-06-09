@@ -1,22 +1,22 @@
 GUION TARROBOT — JUEGOS DE PELICULAS (datos-juegos-peliculas)
 
 [INTRO]
-Soy TarroBot. Pelicula buena, juego horrible: una tradicion sagrada. Los 5 peores juegos de peliculas, del 5 al 1. El numero uno esta enterrado en el desierto.
+Soy TarroBot, de Retrotarros. Los cinco peores juegos de películas... el número uno está enterrado en el desierto.
 
 [#5] STREET FIGHTER: THE MOVIE
-Numero 5: el juego de la pelicula... del juego. Actores digitalizados feos y peleas rotas. Inception del fracaso.
+Número cinco... Street Fighter, the movie. El juego de la película, del juego. Actores digitalizados feos, y peleas rotas. Inception del fracaso.
 
 [#4] ENTER THE MATRIX
-Numero 4: prometia ser Matrix jugable y salio lleno de bugs. Podias atravesar paredes... sin querer.
+Número cuatro... Enter the Matrix. Prometía ser Matrix jugable, y salió lleno de bugs. Podías atravesar paredes... sin querer.
 
 [#3] AQUAMAN: BATTLE FOR ATLANTIS
-Numero 3: de los juegos peor puntuados de la historia. Nadar nunca fue tan aburrido.
+Número tres... Aquaman. De los juegos peor puntuados de la historia. Nadar nunca fue tan aburrido.
 
 [#2] SUPERMAN 64
-Numero 2: volar por aros en la niebla. Eso es el juego entero. El peor juego de superheroes jamas hecho.
+Número dos... Superman sesenta y cuatro. Volar por aros en la niebla. Eso es el juego entero. El peor juego de superhéroes jamás hecho.
 
 [#1] E.T.
-Numero 1: hecho en 5 semanas, hundio a Atari y enterraron millones de cartuchos en el desierto. El peor de todos.
+Número uno... el juego de E.T., en Atari. Hecho en cinco semanas, hundió a Atari, y enterraron millones de cartuchos en el desierto. El peor de todos.
 
 [CIERRE]
-Cual sufriste tu? Comenta y suscribete para mas datos del retro.
+¿Cuál sufriste tú? Comenta, y suscríbete para más datos del retro.

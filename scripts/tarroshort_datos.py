@@ -33,6 +33,20 @@ def _esc(s: str) -> str:
     return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+def _attr(s: str) -> str:
+    """Escapa para usar dentro de un atributo HTML con comillas dobles."""
+    return _esc(s).replace('"', "&quot;")
+
+
+def _say_attr(say: str) -> str:
+    """Devuelve ' data-say="..."' si hay texto hablado distinto, si no, cadena vacia.
+
+    data-say lleva el texto que LEE el TTS: con tildes correctas (el display va sin
+    tildes por regla del canal) y con pausas para los nombres en ingles.
+    """
+    return f' data-say="{_attr(say)}"' if say else ""
+
+
 def _slide_intro(d: dict) -> str:
     intro = d["intro"]
     pre = _esc(intro.get("pre", "RETROTARROS"))
@@ -44,12 +58,13 @@ def _slide_intro(d: dict) -> str:
     else:
         titulo = f'<span class="mg">{t_mg}</span>'
     saludo = _esc(intro.get("saludo", ""))
+    say = _say_attr(intro.get("saludo_say", ""))
     return (
         '  <section class="slide active intro">\n'
         '    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>\n'
         f'    <div class="pre">{pre}</div>\n'
         f'    <div class="titulo">{titulo}</div>\n'
-        f'    <div class="saludo">{saludo}</div>\n'
+        f'    <div class="saludo"{say}>{saludo}</div>\n'
         '  </section>'
     )
 
@@ -70,6 +85,7 @@ def _slide_item(d: dict, it: dict, idx: int) -> str:
     name = _esc(it.get("name", ""))
     meta = _esc(it.get("meta", ""))
     linea = _esc(it.get("linea", ""))
+    say = _say_attr(it.get("say", ""))
     meta_html = f'    <div class="item-meta">{meta}</div>\n' if meta else ""
     return (
         '  <section class="slide item">\n'
@@ -81,7 +97,7 @@ def _slide_item(d: dict, it: dict, idx: int) -> str:
         f'    <div class="item-photo">{img}</div>\n'
         f'    <div class="item-name">{name}</div>\n'
         f'{meta_html}'
-        f'    <div class="item-line">{linea}</div>\n'
+        f'    <div class="item-line"{say}>{linea}</div>\n'
         '  </section>'
     )
 
@@ -91,11 +107,12 @@ def _slide_cierre(d: dict) -> str:
     cta_pre = _esc(c.get("cta_pre", "SIGUE A"))
     cta_mg = _esc(c.get("cta_mg", "RETROTARROS"))
     sub = _esc(c.get("sub", ""))
+    say = _say_attr(c.get("sub_say", ""))
     return (
         '  <section class="slide cierre">\n'
         '    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>\n'
         f'    <div class="cta">{cta_pre} <span class="mg">{cta_mg}</span></div>\n'
-        f'    <div class="sub">{sub}</div>\n'
+        f'    <div class="sub"{say}>{sub}</div>\n'
         '  </section>'
     )
 
@@ -104,16 +121,16 @@ def _guion(d: dict, slug: str) -> str:
     """Texto plano con las lineas habladas de TarroBot, en orden, para el TTS."""
     L = [f"GUION TARROBOT — {d['intro'].get('titulo_mg','')} ({slug})", ""]
     L.append("[INTRO]")
-    L.append(d["intro"].get("saludo", ""))
+    L.append(d["intro"].get("saludo_say") or d["intro"].get("saludo", ""))
     L.append("")
     for i, it in enumerate(d["items"], start=1):
         etq = (f"#{it.get('rank','')}" if d.get("modo") == "countdown"
                else it.get("tag", f"DATO {i}"))
         L.append(f"[{etq}] {it.get('name','')}")
-        L.append(it.get("linea", ""))
+        L.append(it.get("say") or it.get("linea", ""))
         L.append("")
     L.append("[CIERRE]")
-    L.append(d["cierre"].get("sub", ""))
+    L.append(d["cierre"].get("sub_say") or d["cierre"].get("sub", ""))
     L.append("")
     return "\n".join(L)
 

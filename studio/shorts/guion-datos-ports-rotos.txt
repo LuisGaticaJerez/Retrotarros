@@ -1,22 +1,22 @@
 GUION TARROBOT — MAS ROTOS (datos-ports-rotos)
 
 [INTRO]
-Soy TarroBot. A veces un juego buenisimo llega a otra consola... destrozado. Estos son los 5 ports mas rotos del retro, del 5 al 1.
+Soy TarroBot, de Retrotarros. Los cinco ports más rotos del retro... del cinco al uno.
 
 [#5] SONIC GENESIS
-Numero 5: portar Sonic 1 a GBA y que ande PEOR que el original de 1991. Lag y fisicas rotas. Increible.
+Número cinco... portar Sonic uno a Game Boy Advance, y que ande peor que el original de mil novecientos noventa y uno. Lag, y físicas rotas. Increíble.
 
 [#4] MORTAL KOMBAT
-Numero 4: Mortal Kombat en blanco y negro, con la mitad del roster y SIN sangre. O sea... sin la gracia.
+Número cuatro... Mortal Kombat en blanco y negro, con la mitad del roster, y sin sangre. O sea... sin la gracia.
 
 [#3] FINAL FIGHT
-Numero 3: le cortaron un personaje jugable, el modo cooperativo y un nivel entero. Medio Final Fight nomas.
+Número tres... le cortaron un personaje jugable, el modo cooperativo, y un nivel entero. Medio Final Fight, nomás.
 
 [#2] DOUBLE DRAGON
-Numero 2: el arcade era para jugar de a dos... y al NES le quitaron el cooperativo de la historia. El colmo.
+Número dos... el arcade era para jugar de a dos, y al NES le quitaron el cooperativo de la historia. El colmo.
 
 [#1] PAC-MAN
-Numero 1: fantasmas parpadeando, nada que ver al arcade, hecho en 6 semanas. Ayudo a hundir a Atari. El rey de los ports rotos.
+Número uno... Pac-Man en Atari. Fantasmas parpadeando, nada que ver al arcade, hecho en seis semanas. Ayudó a hundir a Atari. El rey de los ports rotos.
 
 [CIERRE]
-Cual jugaste y te decepciono? Comenta y suscribete para mas datos del retro.
+¿Cuál jugaste y te decepcionó? Comenta, y suscríbete para más datos del retro.

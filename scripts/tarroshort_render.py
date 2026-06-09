@@ -119,7 +119,8 @@ def _render_raw_clips(html_path: Path, work_dir: Path, progress=None):
             txt = page.evaluate(
                 "(i) => { const s=document.querySelectorAll('.slide')[i];"
                 " if(!s) return ''; const el=s.querySelector('.saludo, .item-line, .sub');"
-                " return el ? el.textContent.trim() : ''; }",
+                " if(!el) return '';"
+                " return (el.getAttribute('data-say') || el.textContent).trim(); }",
                 i,
             )
             texts.append(txt or "")
