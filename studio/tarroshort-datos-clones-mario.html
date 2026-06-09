@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · TARROSHORT · COPIARON A MARIO</title>
+<!--
+  ============================================================================
+  TEMPLATE: TARROSHORT  (shorts / reels verticales 1080x1920)
+  ============================================================================
+  TarroBot presenta y comenta cada item. Tu grabas el video con
+  scripts/tarroshort_render.py y le pones la musica en CapCut.
+
+  SAFE ZONES (1080x1920): TODO el contenido vive en la banda central segura.
+  Reservado para la UI de TikTok/Reels/Shorts:
+    - arriba  ~235px (hora, volver)
+    - abajo   ~345px (caption, usuario, barra de progreso)
+    - derecha ~160px (like / comentar / compartir / audio)
+  Por eso TarroBot va en la FILA SUPERIOR (izquierda) y el contenido centrado:
+  nada queda tapado por iconos ni texto de la app.
+
+  Normalmente se arma solo desde una pauta:
+    python scripts/tarroshort_render.py --from-pauta <slug> --render
+  ============================================================================
+-->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  /* SAFE ZONES */
+  --safe-top: 235px;
+  --safe-bottom: 345px;
+  --safe-right: 160px;
+  --safe-left: 60px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 120% 40% at 50% -2%, rgba(255,46,136,.16) 0%, transparent 60%),
+    radial-gradient(ellipse 120% 40% at 50% 102%, rgba(0,229,255,.12) 0%, transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 47px, rgba(255,255,255,.015) 47px, rgba(255,255,255,.015) 48px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 47px, rgba(255,255,255,.015) 47px, rgba(255,255,255,.015) 48px);
+}
+
+.deck { position: fixed; inset: 0; overflow: hidden; }
+/* cada slide vive dentro de la banda segura via padding */
+.slide { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center;
+  padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left); }
+.slide.active { display: flex; }
+.slide-num { display: none; } /* sin numero de dev en el short */
+
+/* guia opcional de safe zone (solo para revisar; nunca sale en render) */
+.safe-guide { display: none; }
+
+/* ── TARROBOT mascota ── */
+.tb-mascot { width: 100%; height: 100%; display: block; }
+@keyframes tb-mouth-talk { 0%,100% { transform: scaleY(0.35); } 30% { transform: scaleY(1.4); } 55% { transform: scaleY(0.6); } 80% { transform: scaleY(1.2); } }
+body.tb-talking .tb-mouth { transform-box: fill-box; transform-origin: center; animation: tb-mouth-talk 0.4s ease-in-out infinite; }
+@keyframes tb-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+body.tb-talking .tb-mini svg { animation: tb-bob 0.75s ease-in-out infinite; }
+body.tb-talking .tb-big { animation: tb-bob 0.9s ease-in-out infinite; }
+
+/* ── INTRO / CIERRE (centrados en la banda segura) ── */
+.intro, .cierre { justify-content: center; text-align: center; gap: 0; }
+.intro .tb-big, .cierre .tb-big { width: 300px; height: 300px; filter: drop-shadow(0 0 24px rgba(0,229,255,.55)); margin-bottom: 36px; }
+.intro .pre, .cierre .pre { font-family: 'Press Start 2P'; font-size: 22px; color: var(--cy); letter-spacing: 4px; margin-bottom: 28px; }
+.intro .titulo { font-family: 'Orbitron'; font-weight: 900; font-size: 82px; line-height: 1.04; color: #fff; text-shadow: 0 0 28px rgba(255,46,136,.5); margin-bottom: 32px; }
+.intro .titulo .mg { color: var(--mg); }
+.intro .saludo { font-family: 'Share Tech Mono'; font-size: 30px; line-height: 1.5; color: rgba(255,255,255,.85); }
+.cierre .cta { font-family: 'Orbitron'; font-weight: 900; font-size: 74px; line-height: 1.05; color: var(--cy); text-shadow: 0 0 24px rgba(0,229,255,.5); margin-bottom: 26px; }
+.cierre .cta .mg { color: var(--mg); }
+.cierre .sub { font-family: 'Share Tech Mono'; font-size: 30px; line-height: 1.5; color: rgba(255,255,255,.82); }
+
+/* ── ITEM ── */
+.item { justify-content: center; gap: 0; }
+/* fila superior: TarroBot (izq) + puesto (der), ambos en zona segura arriba */
+.item-top { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 22px; }
+.tb-mini { width: 150px; height: 150px; flex: 0 0 auto; filter: drop-shadow(0 0 14px rgba(0,229,255,.5)); }
+.rank-badge { font-family: 'Orbitron'; font-weight: 900; font-size: 130px; line-height: .9; color: var(--mg); text-shadow: 0 0 30px rgba(255,46,136,.6); }
+.rank-badge .hash { font-size: 54px; color: rgba(255,255,255,.4); vertical-align: super; }
+/* etiqueta para highlights (coleccion/entrevista): reemplaza al puesto */
+.item-tag { font-family: 'Press Start 2P'; font-size: 22px; color: var(--mg); border: 2px solid var(--mg); padding: 12px 18px; letter-spacing: 2px; text-shadow: 0 0 14px rgba(255,46,136,.5); background: rgba(255,46,136,.06); }
+/* foto del item (cuadrada, centrada) */
+.item-photo { width: 100%; max-width: 720px; aspect-ratio: 1 / 1; position: relative; border-radius: 10px; overflow: hidden; background: var(--pu); box-shadow: 0 0 0 4px rgba(0,229,255,.2), 0 24px 70px rgba(0,0,0,.7); margin: 0 auto 24px; }
+.item-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.item-name { font-family: 'Orbitron'; font-weight: 900; font-size: 56px; line-height: 1.05; color: #fff; text-align: center; margin-bottom: 12px; }
+.item-meta { font-family: 'Share Tech Mono'; font-size: 24px; letter-spacing: 2px; color: var(--cy); text-align: center; margin-bottom: 16px; }
+.item-price { display: inline-block; font-family: 'Press Start 2P'; font-size: 34px; color: var(--ye); border: 2px solid var(--ye); padding: 14px 28px; letter-spacing: 2px; background: rgba(255,210,63,.06); box-shadow: 0 0 18px rgba(255,210,63,.25); margin-bottom: 18px; }
+/* reaccion de TarroBot (texto en pantalla) */
+.item-line { font-family: 'Share Tech Mono'; font-size: 32px; line-height: 1.4; color: rgba(255,255,255,.9); text-align: center; max-width: 820px; }
+
+/* ── NAV (solo para revisar en el browser; se oculta en captura/render) ── */
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: rgba(6,3,15,.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 10px; padding: 10px 16px; cursor: pointer; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 12px; color: var(--mg); }
+</style>
+</head>
+<body>
+
+<!-- Mascota TarroBot reutilizable (pixel TV). Se referencia con <use>. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="tarrobot-mascot" viewBox="0 0 64 64">
+    <rect x="2"  y="6"  width="60" height="50" rx="3" fill="#00E5FF"/>
+    <rect x="6"  y="10" width="51" height="40" rx="2" fill="#0a0820"/>
+    <rect x="8"  y="12" width="47" height="36" fill="none" stroke="#FF2E88" stroke-width="1"/>
+    <rect x="16" y="22" width="8"  height="8" fill="#FFD23F"/>
+    <rect x="38" y="22" width="8"  height="8" fill="#FFD23F"/>
+    <rect x="19" y="24" width="3"  height="4" fill="#0a0820"/>
+    <rect x="41" y="24" width="3"  height="4" fill="#0a0820"/>
+    <rect class="tb-mouth" x="22" y="38" width="20" height="4" fill="#FFD23F"/>
+    <circle cx="6" cy="5" r="2.2" fill="#FF2E88"/>
+    <rect x="14" y="56" width="8"  height="5" fill="#00E5FF"/>
+    <rect x="42" y="56" width="8"  height="5" fill="#00E5FF"/>
+  </symbol>
+</svg>
+
+<div class="deck" id="deck">
+
+  <section class="slide active intro">
+    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>
+    <div class="pre">RETROTARROS · DATOS</div>
+    <div class="titulo">LOS 5 QUE<br><span class="mg">COPIARON A MARIO</span></div>
+    <div class="saludo">Soy TarroBot. Mario fue tan grande que todos lo quisieron copiar. Estos son los 5 clones mas descarados, del 5 al 1. El numero uno termino en demanda.</div>
+  </section>
+
+  <section class="slide item">
+    <div class="item-top">
+      <div class="tb-mini"><svg class="tb-mascot"><use href="#tarrobot-mascot"/></svg></div>
+      <div class="rank-badge"><span class="hash">#</span>5</div>
+    </div>
+    <!-- TV: marco vacio. Aca va el gameplay en CapCut. -->
+    <div class="item-photo"></div>
+    <div class="item-name">BUBSY</div>
+    <div class="item-meta">1993 · SNES / GENESIS</div>
+    <div class="item-line">Numero 5: el gato con actitud que quiso ser Mario Y Sonic a la vez. Termino siendo puro meme.</div>
+  </section>
+
+  <section class="slide item">
+    <div class="item-top">
+      <div class="tb-mini"><svg class="tb-mascot"><use href="#tarrobot-mascot"/></svg></div>
+      <div class="rank-badge"><span class="hash">#</span>4</div>
+    </div>
+    <!-- TV: marco vacio. Aca va el gameplay en CapCut. -->
+    <div class="item-photo"></div>
+    <div class="item-name">ZOOL</div>
+    <div class="item-meta">1992 · AMIGA</div>
+    <div class="item-line">Numero 4: un ninja alienigena para competirle a Mario y Sonic... auspiciado por Chupa Chups. En serio.</div>
+  </section>
+
+  <section class="slide item">
+    <div class="item-top">
+      <div class="tb-mini"><svg class="tb-mascot"><use href="#tarrobot-mascot"/></svg></div>
+      <div class="rank-badge"><span class="hash">#</span>3</div>
+    </div>
+    <!-- TV: marco vacio. Aca va el gameplay en CapCut. -->
+    <div class="item-photo"></div>
+    <div class="item-name">7 GRAND DAD</div>
+    <div class="item-meta">BOOTLEG · FAMICOM</div>
+    <div class="item-line">Numero 3: un cartucho pirata que metio a un viejo de los Picapiedra en un Mario calcado. FLINTSTONES?! MARIO?!</div>
+  </section>
+
+  <section class="slide item">
+    <div class="item-top">
+      <div class="tb-mini"><svg class="tb-mascot"><use href="#tarrobot-mascot"/></svg></div>
+      <div class="rank-badge"><span class="hash">#</span>2</div>
+    </div>
+    <!-- TV: marco vacio. Aca va el gameplay en CapCut. -->
+    <div class="item-photo"></div>
+    <div class="item-name">SOMARI</div>
+    <div class="item-meta">1994 · BOOTLEG FAMICOM</div>
+    <div class="item-line">Numero 2: un pirata que puso a Sonic dentro de un juego identico a Mario. Existe de verdad. El crossover prohibido.</div>
+  </section>
+
+  <section class="slide item">
+    <div class="item-top">
+      <div class="tb-mini"><svg class="tb-mascot"><use href="#tarrobot-mascot"/></svg></div>
+      <div class="rank-badge"><span class="hash">#</span>1</div>
+    </div>
+    <!-- TV: marco vacio. Aca va el gameplay en CapCut. -->
+    <div class="item-photo"></div>
+    <div class="item-name">THE GREAT GIANA SISTERS</div>
+    <div class="item-meta">1987 · COMMODORE 64</div>
+    <div class="item-line">Numero 1: tan calcado a Super Mario Bros que Nintendo demando y lo sacaron del mercado. El clon mas famoso de la historia.</div>
+  </section>
+
+  <section class="slide cierre">
+    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>
+    <div class="cta">SIGUE A <span class="mg">RETROTARROS</span></div>
+    <div class="sub">Conocias alguno? Comenta y suscribete para mas datos del retro.</div>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">&#9664;</button>
+  <div class="nav-counter" id="counter">01 / 03</div>
+  <button class="nav-btn" id="nextBtn">&#9654;</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const counter = document.getElementById('counter');
+let current = 0;
+const total = slides.length;
+function pad(n){return String(n).padStart(2,'0');}
+function go(i){
+  if(i<0||i>=total) return;
+  slides[current].classList.remove('active');
+  current=i;
+  slides[current].classList.add('active');
+  counter.textContent = pad(current+1)+' / '+pad(total);
+}
+document.getElementById('prevBtn').addEventListener('click',()=>go(current-1));
+document.getElementById('nextBtn').addEventListener('click',()=>go(current+1));
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(current+1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();go(current-1);}
+});
+go(0);
+</script>
+
+</body>
+</html>
