@@ -331,6 +331,7 @@ Lane nueva de shorts conducidos por **TarroBot** (mascota) sobre un **tema curio
 - **Intro (regla):** toda intro arranca diciendo **"Soy TarroBot de Retrotarros"** y es **corta**.
 - **Display vs hablado (`data-say`):** el texto en **pantalla va SIN tildes** (regla del canal). El texto **hablado va aparte** en los campos `saludo_say` / `say` / `sub_say` **CON tildes y pausas** (comas y `...`), para que el TTS pronuncie bien el español y deje un beat antes/después de los **nombres en inglés**. El render (`tarroshort_render.py`) lee `data-say` si existe, si no, el `textContent`. Las tildes solo viven dentro de `data-say` (no son visibles).
 - **Re-render = limpiar audio:** el render reutiliza los MP3 por escena. Si cambian los textos hablados, borrar `studio/shorts/audio/tarroshort-<slug>/` antes de re-rendir, o quedará la voz vieja.
+- **Gotcha pronunciación (es-CL-CatalinaNeural):** una palabra **española pegada a una inglesa** puede salir anglicada (ej. "Matrix jugable" → "jugable" en inglés). Fix en el `say`: separar con coma/pausa o **reescribir** evitando el roce (ej. "meterte dentro de Matrix"). El display no se toca. Misma idea para cualquier palabra ES que suene rara junto a EN.
 
 ## TarroShorts — generación (vertical 1080×1920)
 

@@ -1,0 +1,22 @@
+GUION TARROBOT — PAC-MAN (datos-pacman)
+
+[INTRO]
+Soy TarroBot, de Retrotarros. Cinco datos de Pac-Man, el arcade más famoso de la historia.
+
+[DATO 1] DISEÑADO PARA MUJERES
+Pac-Man fue diseñado para atraer mujeres a los arcades, que en los setenta eran oscuros y llenos de juegos de disparos.
+
+[DATO 2] NACIO DE UNA PIZZA
+Su forma salió de una pizza a la que le sacaron un trozo. El nombre viene de... paku paku... comer, en japonés.
+
+[DATO 3] ERA PUCK MAN
+En Japón se llamaba Puck Man. Lo cambiaron en Occidente por miedo a que rayaran la pe, y quedara otra palabra.
+
+[DATO 4] FANTASMAS CON PERSONALIDAD
+Los cuatro fantasmas no son iguales... cada uno tiene su patrón. Blinky te persigue, Pinky te embosca. Tienen inteligencia propia.
+
+[DATO 5] EL KILL SCREEN
+El nivel doscientos cincuenta y seis es injugable... un bug parte la pantalla a la mitad. Es el famoso kill screen, el final accidental.
+
+[CIERRE]
+¿Llegaste lejos en Pac-Man? Comenta, y suscríbete para más datos del retro.

@@ -1,0 +1,22 @@
+GUION TARROBOT — TETRIS (datos-tetris)
+
+[INTRO]
+Soy TarroBot, de Retrotarros. Cinco datos de Tetris, el juego más jugado de la historia.
+
+[DATO 1] 10 AÑOS SIN GANAR NADA
+Lo creó Alexey Pajitnov, en la Unión Soviética, en mil novecientos ochenta y cuatro. No ganó un peso por diez años... los derechos eran del Estado soviético.
+
+[DATO 2] EL NOMBRE
+El nombre mezcla... tetra, los cuatro lados de cada pieza... con tenis, su deporte favorito. Dato curioso.
+
+[DATO 3] ESTA EN TODOS LADOS
+Es el juego más vendido y portado de la historia. Está hasta en calculadoras, osciloscopios, y edificios enteros.
+
+[DATO 4] EL EFECTO TETRIS
+Jugar tanto que ves piezas cayendo al cerrar los ojos tiene nombre científico... el efecto Tetris. Le pasa a todos.
+
+[DATO 5] VENDIO EL GAME BOY
+Nintendo lo regaló con el Game Boy, en mil novecientos ochenta y nueve, y eso solo vendió millones de consolas. La aplicación estrella perfecta.
+
+[CIERRE]
+¿Cuál no sabías? Comenta, y suscríbete para más datos del retro.
