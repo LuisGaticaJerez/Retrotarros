@@ -295,6 +295,15 @@ Para no escribir HTML a mano, hay dos generadores que clonan el CSS/JS canónico
 - `top_deck.py` soporta `cart-fallback` (sin box art → etiqueta de color), `badge_text` (rarezas con etiqueta en vez de número) y slide `grial` (HOLY GRAIL).
 - Driver one-off por episodio en `.cache/gen_<slug>.py` (gitignored). El generador (`scripts/*.py`) sí se commitea.
 
+### REGLA — Lista de paneo por colección (obligatoria, automática) — Luis 2026-06-08
+
+Cada vez que se genera una **colección** con `coleccion_deck.generar_deck()`, el generador escribe **además** `docs/lista-paneo-<slug>.md`: el catálogo COMPLETO por categoría, con las 3 joyas marcadas con ⭐. Sirve para consultar/compartir al grabar los paneos de cámara.
+
+- Para que la lista traiga el detalle completo de títulos (no solo conteo + joyas), cada categoría del `data` debe incluir `"juegos": [<títulos>]`. Los drivers de colección **deben** pasar esa lista (sale del CSV `data/coleccion/coleccion-retrotarros.csv`).
+- El emparejamiento joya↔juego es por mejor coincidencia de prefijo (las joyas vienen en mayúsculas/abreviadas), así que basta con que la joya empiece igual que el título real.
+- El `.md` se commitea y se sincroniza al Drive como DOCX con el sync normal.
+- Pendiente backfill: `snes-coleccion` y `n64-coleccion` (sus drivers ya no están en `.cache`; regenerar con `"juegos"` cuando se retomen).
+
 ## Convención del TOP PRECIOS (obligatoria) — articulada por Luis 2026-06-07
 
 El episodio de precios SIEMPRE se arma en tres bloques, igual que `snes-top-precios`:

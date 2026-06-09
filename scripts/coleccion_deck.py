@@ -191,6 +191,93 @@ def _slide_cierre(num: int, data: dict) -> str:
     )
 
 
+def _escribir_lista_md(data: dict, out_slug: str) -> Path:
+    """Escribe docs/lista-paneo-<slug>.md con el catalogo por categoria.
+
+    Cada categoria puede traer 'juegos' (lista completa de titulos) para el
+    detalle por paneo; si no la trae, se listan solo las 3 joyas + el conteo.
+    Las joyas se marcan con una estrella. Pensado para consultar/compartir al
+    grabar los paneos de camara.
+    """
+    cats = data["categorias"]
+    portada = data.get("portada", {})
+    titulo = data.get("doc_title", out_slug)
+    total_juegos = sum(c.get("count", len(c.get("juegos", []))) for c in cats)
+
+    L = []
+    L.append(f"# Lista de paneo · {titulo}")
+    L.append("")
+    L.append(f"> Catalogo completo por categoria de la coleccion **{out_slug}**.")
+    L.append("> Generado automaticamente por `scripts/coleccion_deck.py` al armar el deck.")
+    L.append("> La estrella marca las 3 joyas destacadas (van en TarroVision triple).")
+    L.append("")
+    L.append(f"**Total:** {total_juegos} juegos · {len(cats)} categorias · {len(cats)*3} joyas")
+    L.append("")
+    L.append("---")
+    L.append("")
+    def _norm(s: str) -> str:
+        n = "".join(ch for ch in s.lower() if ch.isalnum())
+        if n.startswith("the"):  # ignora articulo inicial (THE LEGEND OF ZELDA ~ Legend of Zelda)
+            n = n[3:]
+        return n
+
+    def _common_prefix(a: str, b: str) -> int:
+        n = 0
+        for x, y in zip(a, b):
+            if x != y:
+                break
+            n += 1
+        return n
+
+    for ci, c in enumerate(cats, start=1):
+        juegos = c.get("juegos")
+        L.append(f"## [{ci:02}] {c['name']}  ({c.get('count', len(juegos or []))})")
+        L.append("")
+        if juegos:
+            # Emparejar cada joya curada con su juego real por mejor coincidencia
+            # (las joyas vienen en mayusculas y a veces abreviadas).
+            norm_juegos = [_norm(g) for g in juegos]
+            joya_idx = set()
+            for j in c.get("joyas", []):
+                nj = _norm(j["title"])
+                best, best_score = None, 0
+                for i, ng in enumerate(norm_juegos):
+                    if i in joya_idx:
+                        continue
+                    score = _common_prefix(nj, ng)
+                    if score > best_score:
+                        best, best_score = i, score
+                if best is not None and best_score >= 5:
+                    joya_idx.add(best)
+            joyas_en_lista = [g for i, g in enumerate(juegos) if i in joya_idx]
+            resto = [g for i, g in enumerate(juegos) if i not in joya_idx]
+            for g in joyas_en_lista:
+                L.append(f"- ⭐ {g}")
+            for g in resto:
+                L.append(f"- {g}")
+        else:
+            for j in c.get("joyas", []):
+                L.append(f"- ⭐ {j['title']}")
+            otros = c.get("count", 0) - len(c.get("joyas", []))
+            if otros > 0:
+                L.append(f"- _(+{otros} mas en el paneo — sin detalle de titulos en este deck)_")
+        L.append("")
+
+    hw = data.get("hardware")
+    if hw:
+        L.append("---")
+        L.append("")
+        L.append(f"## Hardware — {data.get('hardware_sub', 'Fierro')}")
+        L.append("")
+        for h in hw:
+            L.append(f"- {h['name']}")
+        L.append("")
+
+    out_md = REPO / "docs" / f"lista-paneo-{out_slug}.md"
+    out_md.write_text("\n".join(L), encoding="utf-8")
+    return out_md
+
+
 def generar_deck(data: dict, out_slug: str) -> Path:
     base = BASE.read_text(encoding="utf-8")
     # CSS + head: todo hasta <body>
@@ -228,4 +315,9 @@ def generar_deck(data: dict, out_slug: str) -> Path:
 
     out = REPO / "studio" / f"{out_slug}.html"
     out.write_text(head + hdr + foot, encoding="utf-8")
+
+    # REGLA: cada coleccion genera ademas su lista MD por categoria (consultar/compartir)
+    lista = _escribir_lista_md(data, out_slug)
+    print("LISTA ->", lista)
+
     return out
