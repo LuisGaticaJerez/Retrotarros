@@ -5,9 +5,10 @@ setlocal enabledelayedexpansion
 REM ============================================================
 REM  TarroBot Studio - Instalador automatico para Windows 10/11
 REM  Retrotarros - doble click y listo
-REM  Version 1.5.1 hotfix (fix: deteccion Python anti-stub Store + venv ruta
-REM                 completa + gate version 3.10-3.12 + torch CPU primero en
-REM                 deps + smoke-test imports). Ver CHANGELOG-tarrobot-studio.md
+REM  Version 1.5.2 hotfix (fix: parentesis en echo dentro de bloques rompian
+REM                 el parser y cerraban el instalador sin log -- sobre todo en
+REM                 PCs con Python 3.13+ -- ; + log persistente install-log.txt
+REM                 / install-pip.txt). Ver CHANGELOG-tarrobot-studio.md
 REM ============================================================
 
 title TarroBot Studio - Configuracion
@@ -25,6 +26,19 @@ set "CFG_REPO_PATH="
 set "CFG_API_KEY="
 set "CFG_INTERNET_OK=no"
 set "CFG_DISK_OK=no"
+
+REM ============================================================
+REM  LOG PERSISTENTE  (para diagnosticar si algo falla)
+REM  - install-log.txt : bitacora de fases + diagnosticos
+REM  - install-pip.txt : log detallado de pip (deps), donde mas falla
+REM ============================================================
+set "LOGFILE=%ROOT%\install-log.txt"
+set "PIPLOG=%ROOT%\install-pip.txt"
+> "%LOGFILE%" echo === TarroBot install log ===
+>>"%LOGFILE%" echo Fecha: %DATE% %TIME%
+>>"%LOGFILE%" echo ROOT:  %ROOT%
+>>"%LOGFILE%" echo Usuario: %USERNAME%
+>>"%LOGFILE%" echo.
 
 REM ============================================================
 REM  BIENVENIDA
@@ -119,7 +133,7 @@ REM Si no quedo seteado (no se detecto o usuario dijo no), preguntar
 if not defined CFG_REPO_PATH (
     echo.
     echo Opciones:
-    echo   - Pega la ruta del repo en Drive (acepta drag and drop)
+    echo   - Pega la ruta del repo en Drive ^(acepta drag and drop^)
     echo   - O dejalo vacio para usar el paquete local
     echo.
     echo Ejemplos validos:
@@ -239,7 +253,7 @@ echo.
 if defined CFG_API_KEY (
     echo API key Anthropic: Configurada
 ) else (
-    echo API key Anthropic: NO configurada (podes hacerlo despues)
+    echo API key Anthropic: NO configurada ^(podes hacerlo despues^)
 )
 echo.
 echo Internet: %CFG_INTERNET_OK%
@@ -312,8 +326,9 @@ if defined PYEXE (
 if defined PYEXE (
     echo [OK] Python real compatible encontrado: !PY_VER!
     echo      !PYEXE!
+    >>"!LOGFILE!" echo [python] usando !PYEXE! ver !PY_VER!
 ) else (
-    echo [INFO] No hay Python real (solo el alias de la tienda, o nada).
+    echo [INFO] No hay Python real ^(solo el alias de la tienda, o nada^).
     echo [INFO] Descargando Python 3.12.7...
     curl -L -o python-installer.exe https://www.python.org/ftp/python/3.12.7/python-3.12.7-amd64.exe
     if !errorlevel! neq 0 (
@@ -321,7 +336,7 @@ if defined PYEXE (
         pause
         exit /b 1
     )
-    echo [INFO] Instalando Python (silencioso, solo para tu usuario)...
+    echo [INFO] Instalando Python ^(silencioso, solo para tu usuario^)...
     python-installer.exe /quiet InstallAllUsers=0 PrependPath=1 Include_test=0 Include_pip=1
     if !errorlevel! neq 0 (
         echo [ERROR] La instalacion de Python fallo.
@@ -386,16 +401,21 @@ REM PyTorch (dependencia de openai-whisper) PRIMERO y desde el indice CPU.
 REM Sin esto, pip intenta resolver wheels gigantes (variante CUDA ~2.5 GB) o
 REM compilar desde fuente, y el instalador parece colgado sin dar error.
 echo [INFO] Instalando PyTorch (CPU) - el paso mas pesado, paciencia...
-"!VPY!" -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+echo [INFO] (detalle completo se guarda en install-pip.txt)
+"!VPY!" -m pip install torch --index-url https://download.pytorch.org/whl/cpu --log "!PIPLOG!"
 if !errorlevel! neq 0 (
     echo [WARN] Fallo el torch CPU dedicado. Intento via requirements normal...
+    >>"!LOGFILE!" echo [pip] torch CPU fallo - ver install-pip.txt
 )
 
 echo [INFO] Instalando el resto de dependencias (FastAPI, Whisper, edge-tts...)...
-"!VPY!" -m pip install -r requirements.txt
+"!VPY!" -m pip install -r requirements.txt --log "!PIPLOG!"
 if !errorlevel! neq 0 (
     echo [ERROR] Fallo la instalacion de dependencias.
-    echo         Revisa el mensaje de pip de arriba para ver cual.
+    echo         Detalle del error en:
+    echo           !PIPLOG!
+    echo           !LOGFILE!
+    >>"!LOGFILE!" echo [pip] requirements fallo - ver install-pip.txt
     pause
     exit /b 1
 )
@@ -403,15 +423,18 @@ if !errorlevel! neq 0 (
 REM Smoke-test: que las dependencias clave IMPORTEN de verdad. Asi el fallo
 REM aparece aca (ruidoso) y no despues al arrancar TarroBot con pythonw (mudo).
 echo [INFO] Verificando que las dependencias clave importen...
-"!VPY!" -c "import fastapi, uvicorn, jinja2, edge_tts, anthropic, whisper, pystray, PIL, discord; print('imports OK')"
+"!VPY!" -c "import fastapi, uvicorn, jinja2, edge_tts, anthropic, whisper, pystray, PIL, discord; print('imports OK')" 2>>"!LOGFILE!"
 if !errorlevel! neq 0 (
     echo [ERROR] Las dependencias se instalaron pero alguna NO importa.
-    echo         Mira el mensaje de arriba para ver cual falta.
+    echo         El detalle del import que fallo quedo en:
+    echo           !LOGFILE!
     echo         Suele arreglarse corriendo install.bat de nuevo.
+    >>"!LOGFILE!" echo [smoke] fallo import de dependencias
     pause
     exit /b 1
 )
 echo [OK] Dependencias instaladas y verificadas.
+>>"!LOGFILE!" echo [smoke] imports OK
 
 REM ============================================================
 REM  Paso 4 - ffmpeg
@@ -421,7 +444,7 @@ echo [4/7] Verificando ffmpeg...
 if exist "bin\ffmpeg.exe" (
     echo [OK] ffmpeg ya esta.
 ) else (
-    echo [INFO] Descargando ffmpeg portable (~70 MB)...
+    echo [INFO] Descargando ffmpeg portable ^(~70 MB^)...
     if not exist "bin" mkdir bin
     curl -L -o ffmpeg.zip https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip
     if !errorlevel! neq 0 (
@@ -455,7 +478,7 @@ echo [5/7] Configurando FluidSynth para tocar melodias MIDI...
 if exist "bin\fluidsynth.exe" (
     echo [OK] FluidSynth ya esta en bin\fluidsynth.exe
 ) else (
-    echo [INFO] Descargando FluidSynth 2.3.5 portable (~25 MB)...
+    echo [INFO] Descargando FluidSynth 2.3.5 portable ^(~25 MB^)...
     if not exist "bin" mkdir bin
     curl -L -o fluidsynth.zip https://github.com/FluidSynth/fluidsynth/releases/download/v2.3.5/fluidsynth-2.3.5-win10-x64.zip
     if !errorlevel! neq 0 (
@@ -545,9 +568,14 @@ REM ============================================================
 REM  FIN
 REM ============================================================
 echo.
+>>"!LOGFILE!" echo [fin] instalacion completa OK
 echo ============================================================
 echo   INSTALACION COMPLETA
 echo ============================================================
+echo.
+echo Bitacora de esta instalacion guardada en:
+echo   %LOGFILE%
+echo   %PIPLOG%  (detalle de dependencias)
 echo.
 echo Para arrancar TarroBot:
 echo   - Doble click en el acceso directo TarroBot del escritorio

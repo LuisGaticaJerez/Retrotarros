@@ -5,6 +5,41 @@ en GitHub Releases con ZIP + .exe firmados.
 
 ---
 
+## v1.5.2 · Hotfix instalador · "no se cierra mas"
+
+Arregla el bug por el que el instalador **se cerraba de golpe sin dejar log**
+al correr `install.bat`, especialmente en PCs con Python 3.13+ (como el del
+estudio, que tiene 3.14).
+
+### Causa raiz
+
+Varios `echo` con **parentesis dentro de bloques `if/else`** rompian el parser
+de cmd: el `)` del texto cerraba el bloque antes de tiempo y abortaba con
+"No se esperaba . en este momento" (cierre instantaneo de la ventana, sin
+rastro). Solo se disparaba al entrar a esas ramas: **no hay Python compatible**
+(la que mata en PCs con Python muy nuevo), instalar Python, descargar
+ffmpeg/FluidSynth, pedir repo manual, o "sin API key".
+
+### Cambios
+
+- `install.bat`: escapados los parentesis (`^(` `^)`) en las 6 lineas de `echo`
+  dentro de bloques. Validado corriendo el flujo completo (todas las ramas) sin
+  errores de sintaxis.
+- `install.bat`: **log persistente** `install-log.txt` + `install-pip.txt`
+  (detalle de pip via `--log`, donde mas falla) en la carpeta de instalacion.
+  Los errores de pip/import/Python ahora quedan SIEMPRE en archivo.
+- `installer.iss`: el postinstall ahora lanza `install.bat` via `cmd /k`
+  (antes `shellexec`), asi la ventana **no se cierra sola** ni al terminar ni al
+  fallar -- el usuario alcanza a leer el error.
+
+### Para aplicar
+
+- **Rebuild del .exe** (`build-package.ps1` / ISCC) para distribuir el fix.
+- **Atajo rapido en el PC del estudio:** reemplazar el `install.bat` de la
+  carpeta instalada por el corregido y volver a correrlo (ya no se cierra).
+
+---
+
 ## v1.6.0 · Sprint 19 · "TarroShort" (en desarrollo)
 
 Generador de shorts/reels verticales (1080x1920) donde TarroBot presenta y

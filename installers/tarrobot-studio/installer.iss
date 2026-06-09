@@ -12,7 +12,7 @@
 ; ─────────────────────────────────────────────────────────────────────
 
 #define MyAppName "TarroBot Studio"
-#define MyAppVersion "1.5.1"
+#define MyAppVersion "1.5.2"
 #define MyAppPublisher "Retrotarros - Luis Gatica Jerez"
 #define MyAppURL "https://github.com/LuisGaticaJerez/Retrotarros"
 #define MyAppExeName "TarroBot.bat"
@@ -145,8 +145,12 @@ Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\TarroBot Studio"; Filename: "{app}\TarroBot.bat"; WorkingDir: "{app}"; IconFilename: "{sys}\shell32.dll"; IconIndex: 13; Tasks: desktopicon
 
 [Run]
-; Ejecutar install.bat al terminar (descarga deps, configura API key, etc)
-Filename: "{app}\install.bat"; Description: "Ejecutar configuracion inicial (Python, deps, ffmpeg, FluidSynth, API key)"; Flags: postinstall shellexec waituntilterminated; Tasks: runinstall
+; Ejecutar install.bat al terminar (descarga deps, configura API key, etc).
+; Lanzamos via cmd /k (NO shellexec): con /k la ventana NO se cierra sola al
+; terminar ni al fallar, asi el usuario alcanza a leer el error. shellexec hacia
+; que la consola se cerrara al instante si el bat salia, sin dejar rastro.
+; El detalle igual queda en install-log.txt / install-pip.txt dentro de {app}.
+Filename: "{cmd}"; Parameters: "/k ""{app}\install.bat"""; WorkingDir: "{app}"; Description: "Ejecutar configuracion inicial (Python, deps, ffmpeg, FluidSynth, API key)"; Flags: postinstall skipifsilent; Tasks: runinstall
 
 [UninstallRun]
 ; No corremos nada especial al desinstalar (Python y deps son del usuario, los dejamos)
