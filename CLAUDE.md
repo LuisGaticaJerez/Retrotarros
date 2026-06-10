@@ -290,10 +290,27 @@ Para no escribir HTML a mano, hay dos generadores que clonan el CSS/JS canónico
 |---|---|---|
 | `scripts/coleccion_deck.py` (`generar_deck(data, slug)`) | Episodio **colección** | portada → índice → por categoría: paneo + triple de 3 joyas → hardware → balance → cierre |
 | `scripts/top_deck.py` (`generar_top(data, slug)`) | Episodio **top mundial / precios** | portada → divider intro → N slides #10→#1 → (rarezas: divider + items con `badge_text`) → (`grial`) → análisis → cliffhanger |
+| `scripts/saga_deck.py` (`generar_saga(data, slug)`) | Episodio **SAGA** (línea de tiempo de franquicia) | portada → timeline completa → por juego: zoom-ficha + gameplay TarroVisión con dato → bonus "EN LA VITRINA" → balance → cierre |
 
 - Base de estilo: `coleccion_deck.py` clona de `n64-coleccion.html`; `top_deck.py` clona de `snes-top-mundial.html`.
 - `top_deck.py` soporta `cart-fallback` (sin box art → etiqueta de color), `badge_text` (rarezas con etiqueta en vez de número) y slide `grial` (HOLY GRAIL).
 - Driver one-off por episodio en `.cache/gen_<slug>.py` (gitignored). El generador (`scripts/*.py`) sí se commitea.
+- Box art para sagas: `scripts/fetch_boxart_wiki.py` (Wikipedia REST summary → `studio/img/<slug>/`).
+
+### REGLA — Criterio de la línea de tiempo SAGA (obligatorio) — Luis 2026-06-10
+
+Qué juegos entran al hilo de un episodio SAGA (las 12 hechas siguen esto; toda saga nueva igual):
+
+1. **Solo la línea principal (mainline), en orden de LANZAMIENTO** — nunca cronología interna de la historia (Metal Gear va por año de salida, no por la línea de Snake).
+2. **Spin-offs, crossovers y experimentos NO entran al hilo** → van al slide bonus "EN LA VITRINA" (sobre todo si los tenemos en físico).
+3. **Versiones revisadas y remakes no tienen nodo propio** — se mencionan dentro de la entrada original (SFII Turbo/Super dentro de SFII; UMK3/Trilogy en el bonus de MK3).
+4. **Un juego entra aunque NO lo tengamos** — la línea es el recorrido histórico completo; la colección se marca EN COLECCIÓN / FALTA. El wishlist honesto es parte del relato.
+5. **Recopilaciones/remasters cuentan como "owned" pero no como entrada**: Prime vía Remastered, Sunshine/Galaxy vía 3D All-Stars, MM1-10 vía Legacy Collections, MGS2/3/PW vía HD Collection, SF1/SFIII vía 30th Anniversary. Explicarlo al aire para que no parezca trampa.
+6. **Sub-series canónicas SÍ son mainline**: trilogía Prime (Metroid), Alpha (SF), Peace Walker (MGS). Ramas paralelas NO: Mega Man X, Revelations (RE), Boom (Sonic).
+7. **Corte pragmático de tamaño**: el hilo no debiera pasar de ~16 juegos. Si la saga es muy grande, dejar fuera mainline menores (caso Sonic: Colors/Secret Rings fuera) y decir el criterio al aire.
+8. **Entrega doble multi-plataforma = una entrada** (Smash 4 3DS+Wii U).
+
+Cada decisión particular queda escrita en el `docs/discusion-saga-<slug>.md` del episodio (sección "El criterio del mainline").
 
 ### REGLA — Lista de paneo por colección (obligatoria, automática) — Luis 2026-06-08
 
