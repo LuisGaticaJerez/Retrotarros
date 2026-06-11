@@ -31,8 +31,9 @@ from branding_tarrobot import CY, MG, YE, DK, SCREEN, FONTS, mascota_svg  # noqa
 OUT = REPO / "studio" / "branding" / "poleras"
 PRINT = OUT / "print"
 
-# tinta "blanca" segun polera
-INK = {"dark": "#FFFFFF", "light": DK}
+# tinta "blanca" segun polera. "flat" = mismo look que dark (blanco + cyan) pero
+# SIN glow ni sombra ni halo (color plano). Pensado para polera oscura.
+INK = {"dark": "#FFFFFF", "light": DK, "flat": "#FFFFFF"}
 
 # Morado: color de ambiente/decoracion del canal (halos, grids, marcos de
 # dispositivos). El CYAN queda RESERVADO para acompañar a TarroBot (su cuerpo)
@@ -43,8 +44,12 @@ PU_DK = "#3A1A6E"   # morado profundo (cuerpos de dispositivo)
 
 def _css(variant: str) -> str:
     glow = variant == "dark"
+    flat = variant == "flat"     # color plano: sin glow, sin halo, sin sombra
     ink = INK[variant]
     light = variant == "light"
+    # halo morado de fondo: fuerte en dark, sutil en light, NULO en flat
+    halo1 = ".5" if glow else ("0" if flat else ".16")
+    halo2 = ".18" if glow else ("0" if flat else ".06")
     # Letras de los disenos SIN TarroBot, segun tela (que no se camuflen):
     #   polera BLANCA -> negro + morado    |    polera NEGRA -> naranja
     nc_retro = DK if light else "#FFA64D"      # RETRO
@@ -69,7 +74,7 @@ def _css(variant: str) -> str:
   justify-content:center;overflow:hidden;background:transparent}}
 .mascot{{{'filter:drop-shadow(0 0 22px rgba(0,229,255,.5)) drop-shadow(0 0 40px rgba(124,47,240,.45));' if glow else ''}z-index:2}}
 .halo{{position:absolute;left:50%;transform:translateX(-50%);border-radius:50%;z-index:0;
-  background:radial-gradient(circle, rgba(124,47,240,{'.5' if glow else '.16'}) 0%, rgba(124,47,240,{'.18' if glow else '.06'}) 40%, transparent 70%)}}
+  background:radial-gradient(circle, rgba(124,47,240,{halo1}) 0%, rgba(124,47,240,{halo2}) 40%, transparent 70%)}}
 /* cápsula del wordmark (del avatar) y anillos concéntricos (del avatar/halo) */
 .pill{{display:inline-block;background:rgba(6,3,15,{'.55' if glow else '.9'});border:4px solid {MG};
   border-radius:60px;padding:14px 44px;{'box-shadow:0 0 28px rgba(255,46,136,.45);' if glow else ''}}}
@@ -197,8 +202,9 @@ def espalda_crt(v: str) -> str:
 
 def espalda_arcade(v: str) -> str:
     ink = INK[v]
-    # en tela clara el amarillo se pierde -> textos amarillos pasan a magenta
-    acc = YE if v == "dark" else MG
+    # en tela clara el amarillo se pierde -> textos amarillos pasan a magenta.
+    # flat (polera oscura) mantiene amarillo como dark.
+    acc = MG if v == "light" else YE
     # mascota "sprite": el SVG canonico ya es pixel-art friendly; lo enmarcamos en HUD arcade
     return (f'''<div class="stage" style="width:1100px;height:1400px">
 <div style="display:flex;justify-content:space-between;width:920px;z-index:2">
@@ -406,14 +412,17 @@ def pecho_ciudad(v: str, sub: str = _SUB_DEFAULT) -> str:
     """Marquesina (cartel de la ciudad): RETROTARROS magenta + subtitulo amarillo
     dentro de un marco neon. El 'bullet'/marco cambia segun la polera. El subtitulo
     es parametrizable (nombre del equipo)."""
-    marco = YE if v == "dark" else PU
+    flat = v == "flat"
+    marco = PU if v == "light" else YE
+    box_glow = "" if flat else f"box-shadow:0 0 30px {marco}66, inset 0 0 22px rgba(0,0,0,.6);"
+    txt_glow = "" if flat else f"text-shadow:0 0 14px {MG}99"
     fs = 21 if len(sub) <= 26 else 17
     return ('<div class="stage" style="width:820px;height:320px">'
             f'<div style="border:7px solid {marco};border-radius:12px;background:#0d0820;'
-            f'padding:40px 56px;box-shadow:0 0 30px {marco}66, inset 0 0 22px rgba(0,0,0,.6);'
+            f'padding:40px 56px;{box_glow}'
             'display:flex;flex-direction:column;align-items:center;gap:22px">'
             f'<div style="font-family:\'Press Start 2P\';font-size:52px;color:{MG};letter-spacing:2px;'
-            f'white-space:nowrap;text-shadow:0 0 14px {MG}99">RETROTARROS</div>'
+            f'white-space:nowrap;{txt_glow}">RETROTARROS</div>'
             f'<div style="font-family:\'Press Start 2P\';font-size:{fs}px;color:{YE};letter-spacing:3px;'
             f'white-space:nowrap">{sub}</div>'
             '</div></div>')
@@ -439,9 +448,10 @@ def pecho_sol(v: str, sub: str = _SUB_DEFAULT) -> str:
     """Titulo magenta + subtitulo amarillo (tal cual los colores del sol).
     Contorno chrome para que no se pierda en ninguna tela."""
     fs = 21 if len(sub) <= 26 else 17
+    sol_glow = "" if v == "flat" else f", 0 0 16px {MG}88"
     return ('<div class="stage" style="width:820px;height:240px">'
             f'<div style="font-family:\'Press Start 2P\';font-size:52px;color:{MG};letter-spacing:2px;'
-            f'white-space:nowrap;text-shadow:{_OLINE}, 0 0 16px {MG}88">RETROTARROS</div>'
+            f'white-space:nowrap;text-shadow:{_OLINE}{sol_glow}">RETROTARROS</div>'
             f'<div style="font-family:\'Press Start 2P\';font-size:{fs}px;color:{YE};letter-spacing:3px;'
             f'white-space:nowrap;margin-top:26px;text-shadow:{_OLINE}">{sub}</div>'
             '</div>')
@@ -489,14 +499,15 @@ for _who, _nom in _EQUIPO:
     DISENOS.append((f"pecho-banner-{_who}", lambda v, n=_nom: pecho_banner(v, n)))
 
 
-def generar(progress=print) -> list[Path]:
+def generar(progress=print, variants=("dark", "light"), solo=None) -> list[Path]:
     from playwright.sync_api import sync_playwright
     PRINT.mkdir(parents=True, exist_ok=True)
     hechos = []
+    disenos = [d for d in DISENOS if not solo or solo.lower() in d[0].lower()]
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
-        for nombre, fn in DISENOS:
-            for v in ("dark", "light"):
+        for nombre, fn in disenos:
+            for v in variants:
                 html = fn(v)
                 page = browser.new_page(viewport={"width": 1400, "height": 1600},
                                         device_scale_factor=3)  # 300 dpi aprox
@@ -547,6 +558,14 @@ def contact_sheet(progress=print) -> Path:
 
 
 if __name__ == "__main__":
-    generar()
-    contact_sheet()
+    # python merch_poleras.py                -> dark + light (todo) + contact sheet
+    # python merch_poleras.py --flat          -> flat (todo el kit)
+    # python merch_poleras.py --flat banner   -> flat solo de los que matcheen "banner"
+    if "--flat" in sys.argv:
+        i = sys.argv.index("--flat")
+        solo = sys.argv[i + 1] if len(sys.argv) > i + 1 else None
+        generar(variants=("flat",), solo=solo)
+    else:
+        generar()
+        contact_sheet()
     print("LISTO ->", PRINT)
