@@ -59,6 +59,9 @@ def _css(variant: str) -> str:
     wm_glow = ", 0 0 18px rgba(255,46,136,.6)" if glow else ""
     tag_glow = ", 0 0 10px rgba(0,229,255,.55)" if glow else ""
     nctag_glow = ", 0 0 12px rgba(255,106,0,.55)" if glow else ""
+    # Cyan de TEXTO sobre la tela: brillante en negra, teal mas oscuro en blanca
+    # (el cyan brillante se lava con el blanco). El cuerpo de TarroBot sigue cyan.
+    cy_txt = CY if not light else "#0782A0"
     return f"""
 {FONTS}
 *{{margin:0;padding:0;box-sizing:border-box}}
@@ -75,8 +78,12 @@ def _css(variant: str) -> str:
   {'box-shadow:0 0 60px rgba(0,229,255,.22) inset, 0 0 50px rgba(124,47,240,.3);' if glow else ''}}}
 .wm{{font-family:Orbitron;font-weight:900;color:{ink};z-index:2;line-height:1;
   text-shadow:{ol}{wm_glow};}}
-.wm b{{color:{CY}}}
-.tag{{font-family:'Press Start 2P';color:{CY};z-index:2;text-shadow:{ol}{tag_glow};}}
+.wm b{{color:{cy_txt}}}
+.tag{{font-family:'Press Start 2P';color:{cy_txt};z-index:2;text-shadow:{ol}{tag_glow};}}
+/* .od = wordmark sobre fondo SIEMPRE oscuro (cápsula/pill): blanco + cyan
+   brillante aunque la polera sea blanca (el pill no cambia de color). */
+.wm.od{{color:#fff}}
+.wm.od b{{color:{CY}}}
 /* REGLA: sin TarroBot (mascota/cara/palabra) NO hay cyan.
    Letras segun tela para no camuflarse: blanca->negro+morado | negra->naranja.
    Todo el texto lleva contorno oscuro (chrome synthwave) para no perderse. */
@@ -354,7 +361,7 @@ def espalda_badge(v: str) -> str:
             + '<div class="halo" style="width:760px;height:760px;top:80px"></div>'
             + '<div style="display:flex;flex-direction:column;align-items:center;z-index:2">'
             + mascota_svg("feliz", 470)
-            + '<div class="pill" style="margin-top:40px"><span class="wm" style="font-size:88px;letter-spacing:2px;white-space:nowrap">RETRO<b>TARROS</b></span></div>'
+            + '<div class="pill" style="margin-top:40px"><span class="wm od" style="font-size:88px;letter-spacing:2px;white-space:nowrap">RETRO<b>TARROS</b></span></div>'
             + '<div class="tag" style="font-size:38px;letter-spacing:12px;margin-top:28px">TARROBOT</div>'
             + '</div></div>')
 
@@ -363,7 +370,7 @@ def pecho_pill(v: str) -> str:
     """Pecho: wordmark en capsula magenta + TARROBOT debajo (del avatar).
     Lleva la palabra TARROBOT -> cyan permitido."""
     return ('<div class="stage" style="width:560px;height:200px">'
-            + '<div class="pill"><span class="wm" style="font-size:46px;letter-spacing:2px;white-space:nowrap">RETRO<b>TARROS</b></span></div>'
+            + '<div class="pill"><span class="wm od" style="font-size:46px;letter-spacing:2px;white-space:nowrap">RETRO<b>TARROS</b></span></div>'
             + '<div class="tag" style="font-size:20px;letter-spacing:8px;margin-top:16px">TARROBOT</div>'
             + '</div>')
 

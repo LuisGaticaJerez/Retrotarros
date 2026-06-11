@@ -49,6 +49,16 @@ imagen saturada (sol), va en zona limpia o sobre placa/cápsula.
 En el generador esto es el flag de clase `.nc` (no-cyan) sobre el wordmark/tag;
 los colores se resuelven solos según `-dark`/`-light`.
 
+### Cyan de texto según el fondo (que no se lave)
+
+El cyan brillante (`#00E5FF`) se lava sobre blanco. Por eso:
+- **Texto cyan sobre la TELA** (TARROS, taglines): brillante en negra, **teal más
+  oscuro** (`#0782A0`) en blanca. El **cuerpo de TarroBot** sigue cyan brillante
+  (es una forma con detalles magenta/amarillo, se reconoce).
+- **Texto sobre una CÁPSULA/pill** (badge, pecho-pill): clase `.od` → siempre
+  blanco + cyan brillante, porque el pill es oscuro aunque la polera sea blanca
+  (si no, el RETRO negro desaparecía sobre el pill).
+
 ## Diseños
 
 | Diseño | Inspiración | Lleva TarroBot | Cyan |
