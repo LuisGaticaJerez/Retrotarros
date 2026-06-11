@@ -183,10 +183,28 @@ if (Test-Path $shortsDir) {
 }
 Write-Host ""
 
-# 5c. Branding TarroBot (kit visual para redes). Fix 2026-06-03.
-Write-Host "Branding TarroBot (kit redes):" -ForegroundColor Cyan
-if (Test-Path (Join-Path $RepoRoot "studio\branding")) {
-    Sync-Item "studio\branding" -Recursive
+# 5c. Branding -> carpeta CANONICA de imagenes (no duplicar en Studio). Fix 2026-06-10.
+#     Va a "G:\Mi unidad\Imagenes retrotarros\Branding\<subcarpeta>" en vez de
+#     Studio\tarrobot\studio\branding (que era el duplicado). Subcarpetas nuevas,
+#     no pisa las manuales de Luis (Avatars, Banners, Logo, Stickers, etc.).
+Write-Host "Branding -> Imagenes retrotarros\Branding:" -ForegroundColor Cyan
+$DriveRoot = Split-Path -Parent (Split-Path -Parent $Destino)   # ej. G:\Mi unidad
+$BrandingDest = Join-Path $DriveRoot "Imagenes retrotarros\Branding"
+# Solo POLERAS (lo nuevo). El kit TarroBot y las tarjetas ya viven en las
+# carpetas oficiales de Luis (Avatars/Banners/Logo/Stickers/Tarjetas_imprimibles);
+# no se duplican. La fuente de todo sigue versionada en el repo git.
+$brandingMap = [ordered]@{
+    "studio\branding\poleras"  = "Poleras"
+}
+foreach ($rel in $brandingMap.Keys) {
+    $src = Join-Path $RepoRoot $rel
+    if (Test-Path $src) {
+        $dst = Join-Path $BrandingDest $brandingMap[$rel]
+        if (-not $DryRun) {
+            & robocopy $src $dst /MIR /NJH /NJS /NDL /NP /NC /NS | Out-Null
+        }
+        Write-Host "  [BRAND]  $rel -> Branding\$($brandingMap[$rel])\" -ForegroundColor Green
+    }
 }
 Write-Host ""
 
