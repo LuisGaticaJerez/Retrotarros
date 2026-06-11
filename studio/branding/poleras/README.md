@@ -42,18 +42,24 @@ los colores se resuelven solos según `-dark`/`-light`.
 
 ## Diseños
 
-| Diseño | Lleva TarroBot | Cyan |
-|---|:---:|:---:|
-| pecho-mascota | mascota | sí |
-| pecho-wordmark | — | no |
-| pecho-gameboy | cara en pantalla | sí |
-| espalda-stacked | mascota + palabra TARROBOT | sí |
-| espalda-synthwave | mascota | sí |
-| espalda-crt | — | no |
-| espalda-arcade | mascota (guiño) | sí |
-| espalda-gameboy | cara en pantalla | sí |
-| espalda-wordmark-synthwave | — | no |
-| espalda-tarrovision | — | no |
+| Diseño | Inspiración | Lleva TarroBot | Cyan |
+|---|---|:---:|:---:|
+| pecho-mascota | logo | mascota | sí |
+| pecho-wordmark | wordmark | — | no |
+| pecho-gameboy | Game Boy | cara en pantalla | sí |
+| pecho-pill | avatar (cápsula) | palabra TARROBOT | sí |
+| espalda-badge | **avatar** (emblema + anillos) | mascota + palabra | sí |
+| espalda-banner | **banner YouTube/X** (horizontal) | mascota | sí |
+| espalda-stacked | logo apilado | mascota + palabra | sí |
+| espalda-synthwave | synthwave + mascota | mascota | sí |
+| espalda-crt | TV retro | — | no |
+| espalda-arcade | HUD arcade (guiño) | mascota | sí |
+| espalda-gameboy | Game Boy synthwave | cara en pantalla | sí |
+| espalda-wordmark-synthwave | sol + grid | — | no |
+| espalda-tarrovision | TarroVisión de los decks | — | no |
+
+**13 diseños × 2 telas = 26 artes.** Las inspiraciones salen del kit de
+`studio/branding/tarrobot/` (avatar, banners, logos, expresiones).
 
 ## Para cotizar (imprenta)
 

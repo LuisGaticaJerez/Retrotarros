@@ -59,6 +59,12 @@ def _css(variant: str) -> str:
 .mascot{{{'filter:drop-shadow(0 0 22px rgba(0,229,255,.5)) drop-shadow(0 0 40px rgba(124,47,240,.45));' if glow else ''}z-index:2}}
 .halo{{position:absolute;left:50%;transform:translateX(-50%);border-radius:50%;z-index:0;
   background:radial-gradient(circle, rgba(124,47,240,{'.5' if glow else '.16'}) 0%, rgba(124,47,240,{'.18' if glow else '.06'}) 40%, transparent 70%)}}
+/* cápsula del wordmark (del avatar) y anillos concéntricos (del avatar/halo) */
+.pill{{display:inline-block;background:rgba(6,3,15,{'.55' if glow else '.9'});border:4px solid {MG};
+  border-radius:60px;padding:14px 44px;{'box-shadow:0 0 28px rgba(255,46,136,.45);' if glow else ''}}}
+.ring{{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;z-index:0;
+  border:5px solid rgba(0,229,255,{'.30' if glow else '.5'});
+  {'box-shadow:0 0 60px rgba(0,229,255,.22) inset, 0 0 50px rgba(124,47,240,.3);' if glow else ''}}}
 .wm{{font-family:Orbitron;font-weight:900;color:{ink};z-index:2;line-height:1;
   {'text-shadow:0 0 16px rgba(255,46,136,.55);' if glow else ''}}}
 .wm b{{color:{CY}}}
@@ -328,12 +334,53 @@ def espalda_tarrovision(v: str) -> str:
 </div>''')
 
 
+# ───────────────────────── motivos inspirados en avatar / banners ─────────────────────────
+
+def espalda_badge(v: str) -> str:
+    """Emblema circular tipo parche (inspirado en el avatar): anillos concentricos
+    + TarroBot + wordmark en capsula magenta + TARROBOT. Lleva TarroBot + palabra
+    TARROBOT -> cyan permitido."""
+    return ('<div class="stage" style="width:1160px;height:1320px">'
+            + '<div class="ring" style="width:1040px;height:1040px;top:430px"></div>'
+            + '<div class="ring" style="width:880px;height:880px;top:430px"></div>'
+            + '<div class="halo" style="width:760px;height:760px;top:80px"></div>'
+            + '<div style="display:flex;flex-direction:column;align-items:center;z-index:2">'
+            + mascota_svg("feliz", 470)
+            + '<div class="pill" style="margin-top:40px"><span class="wm" style="font-size:88px;letter-spacing:2px;white-space:nowrap">RETRO<b>TARROS</b></span></div>'
+            + '<div class="tag" style="font-size:38px;letter-spacing:12px;margin-top:28px">TARROBOT</div>'
+            + '</div></div>')
+
+
+def pecho_pill(v: str) -> str:
+    """Pecho: wordmark en capsula magenta + TARROBOT debajo (del avatar).
+    Lleva la palabra TARROBOT -> cyan permitido."""
+    return ('<div class="stage" style="width:560px;height:200px">'
+            + '<div class="pill"><span class="wm" style="font-size:46px;letter-spacing:2px;white-space:nowrap">RETRO<b>TARROS</b></span></div>'
+            + '<div class="tag" style="font-size:20px;letter-spacing:8px;margin-top:16px">TARROBOT</div>'
+            + '</div>')
+
+
+def espalda_banner(v: str) -> str:
+    """Layout horizontal del banner del canal: TarroBot a la izquierda +
+    RETROTARROS + 'TARROBOT · MASCOTA OFICIAL'. Lleva TarroBot -> cyan permitido."""
+    return ('<div class="stage" style="width:1560px;height:720px;flex-direction:row;gap:54px">'
+            + '<div class="halo" style="width:560px;height:560px;left:340px;top:80px"></div>'
+            + mascota_svg("neutral", 380)
+            + '<div style="display:flex;flex-direction:column;align-items:flex-start;z-index:2">'
+            + '<div class="wm" style="font-size:128px;letter-spacing:3px;white-space:nowrap">RETRO<b>TARROS</b></div>'
+            + '<div class="tag" style="font-size:31px;letter-spacing:8px;margin-top:18px;white-space:nowrap">TARROBOT · MASCOTA OFICIAL</div>'
+            + '</div></div>')
+
+
 # ───────────────────────── build ─────────────────────────
 
 DISENOS = [
     ("pecho-mascota", pecho_mascota),
     ("pecho-wordmark", pecho_wordmark),
     ("pecho-gameboy", pecho_gameboy),
+    ("pecho-pill", pecho_pill),
+    ("espalda-badge", espalda_badge),
+    ("espalda-banner", espalda_banner),
     ("espalda-stacked", espalda_stacked),
     ("espalda-synthwave", espalda_synthwave),
     ("espalda-crt", espalda_crt),
