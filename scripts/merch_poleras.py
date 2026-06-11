@@ -44,6 +44,13 @@ PU_DK = "#3A1A6E"   # morado profundo (cuerpos de dispositivo)
 def _css(variant: str) -> str:
     glow = variant == "dark"
     ink = INK[variant]
+    light = variant == "light"
+    # Letras de los disenos SIN TarroBot, segun tela (que no se camuflen):
+    #   polera BLANCA -> negro + morado    |    polera NEGRA -> naranja
+    nc_retro = DK if light else "#FFA64D"      # RETRO
+    nc_tarros = PU if light else "#FF6A00"     # TARROS
+    nc_tag = PU if light else "#FF7A1A"        # tagline
+    nc_glow = "" if light else "text-shadow:0 0 12px rgba(255,106,0,.5);"
     return f"""
 {FONTS}
 *{{margin:0;padding:0;box-sizing:border-box}}
@@ -57,9 +64,11 @@ def _css(variant: str) -> str:
 .wm b{{color:{CY}}}
 .tag{{font-family:'Press Start 2P';color:{CY};z-index:2;
   {'text-shadow:0 0 10px rgba(0,229,255,.5);' if glow else ''}}}
-/* REGLA: sin TarroBot (mascota/cara/palabra) NO hay cyan. .nc -> magenta. */
-.wm.nc b{{color:{MG}}}
-.tag.nc{{color:{MG};{'text-shadow:0 0 10px rgba(255,46,136,.5);' if glow else ''}}}
+/* REGLA: sin TarroBot (mascota/cara/palabra) NO hay cyan.
+   Letras segun tela para no camuflarse: blanca->negro+morado | negra->naranja. */
+.wm.nc{{color:{nc_retro}}}
+.wm.nc b{{color:{nc_tarros}}}
+.tag.nc{{color:{nc_tag};{nc_glow}}}
 .px{{font-family:'Press Start 2P';z-index:2;line-height:1}}
 """
 

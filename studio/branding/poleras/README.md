@@ -25,7 +25,20 @@ Base general: fondo negro/morado dominante, morado (`#7C2FF0`) para grids,
 líneas de perspectiva y cuerpos de dispositivo. Magenta y amarillo de acento.
 Halo morado radial detrás de TarroBot (igual a los assets de redes).
 
-En el generador esto es el flag de clase `.nc` (no-cyan) sobre el wordmark/tag.
+### Letras de los diseños SIN TarroBot, según la tela (que no se camuflen)
+
+- **Polera BLANCA (`-light`):** letras **negras + moradas**. (Nada de amarillo
+  ni blanco: se camuflan con el fondo claro.) → RETRO negro + TARROS morado.
+- **Polera NEGRA (`-dark`):** letras **naranjas**. (Nada de negro plano: se
+  camufla con el fondo.) → RETRO naranja claro + TARROS naranja fuerte.
+
+Principio general de no-camuflaje: en tela clara evitar amarillo/blanco para
+texto y líneas finas; en tela oscura evitar negro/morado muy oscuro. Los textos
+DENTRO de un dispositivo (EN VIVO, TARROVISION) tienen fondo oscuro propio, así
+que van en amarillo y se ven bien en ambas telas.
+
+En el generador esto es el flag de clase `.nc` (no-cyan) sobre el wordmark/tag;
+los colores se resuelven solos según `-dark`/`-light`.
 
 ## Diseños
 
