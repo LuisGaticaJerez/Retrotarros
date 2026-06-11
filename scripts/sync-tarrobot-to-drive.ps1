@@ -201,7 +201,10 @@ foreach ($rel in $brandingMap.Keys) {
     if (Test-Path $src) {
         $dst = Join-Path $BrandingDest $brandingMap[$rel]
         if (-not $DryRun) {
-            & robocopy $src $dst /MIR /NJH /NJS /NDL /NP /NC /NS | Out-Null
+            # /XD fondos: NO tocar las carpetas que Luis sube directo al Drive
+            # (recortes de espalda). El /MIR borraria todo lo que no este en el
+            # repo, y esos recortes viven solo en el Drive. NUNCA quitar este /XD.
+            & robocopy $src $dst /MIR /XD fondos mockups-fuente /NJH /NJS /NDL /NP /NC /NS | Out-Null
         }
         Write-Host "  [BRAND]  $rel -> Branding\$($brandingMap[$rel])\" -ForegroundColor Green
     }
