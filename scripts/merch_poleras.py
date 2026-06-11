@@ -50,6 +50,10 @@ def _css(variant: str) -> str:
     # halo morado de fondo: fuerte en dark, sutil en light, NULO en flat
     halo1 = ".5" if glow else ("0" if flat else ".16")
     halo2 = ".18" if glow else ("0" if flat else ".06")
+    # En flat, el RETRO del wordmark no va blanco (se come con polera blanca):
+    # usa amarillo de la paleta. TARROS sigue cyan. El .od (cápsula) se mantiene
+    # blanco aparte porque va sobre fondo oscuro.
+    wm_ink = YE if flat else ink
     # Letras de los disenos SIN TarroBot, segun tela (que no se camuflen):
     #   polera BLANCA -> negro + morado    |    polera NEGRA -> naranja
     nc_retro = DK if light else "#FFA64D"      # RETRO
@@ -81,7 +85,7 @@ def _css(variant: str) -> str:
 .ring{{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;z-index:0;
   border:5px solid rgba(0,229,255,{'.30' if glow else '.5'});
   {'box-shadow:0 0 60px rgba(0,229,255,.22) inset, 0 0 50px rgba(124,47,240,.3);' if glow else ''}}}
-.wm{{font-family:Orbitron;font-weight:900;color:{ink};z-index:2;line-height:1;
+.wm{{font-family:Orbitron;font-weight:900;color:{wm_ink};z-index:2;line-height:1;
   text-shadow:{ol}{wm_glow};}}
 .wm b{{color:{cy_txt}}}
 .tag{{font-family:'Press Start 2P';color:{cy_txt};z-index:2;text-shadow:{ol}{tag_glow};}}
