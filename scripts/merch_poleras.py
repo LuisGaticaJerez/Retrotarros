@@ -399,45 +399,64 @@ _OLINE = ",".join(f"{x}px {y}px 0 #150026" for x, y in
                   [(-3, -3), (3, -3), (-3, 3), (3, 3), (-3, 0), (3, 0), (0, -3), (0, 3)])
 
 
-def pecho_ciudad(v: str) -> str:
+_SUB_DEFAULT = "NOSTALGIA + JUEGOS + MUSICA"
+
+
+def pecho_ciudad(v: str, sub: str = _SUB_DEFAULT) -> str:
     """Marquesina (cartel de la ciudad): RETROTARROS magenta + subtitulo amarillo
-    dentro de un marco neon. El 'bullet'/marco cambia segun la polera."""
+    dentro de un marco neon. El 'bullet'/marco cambia segun la polera. El subtitulo
+    es parametrizable (nombre del equipo)."""
     marco = YE if v == "dark" else PU
-    return ('<div class="stage" style="width:760px;height:320px">'
+    fs = 21 if len(sub) <= 26 else 17
+    return ('<div class="stage" style="width:820px;height:320px">'
             f'<div style="border:7px solid {marco};border-radius:12px;background:#0d0820;'
             f'padding:40px 56px;box-shadow:0 0 30px {marco}66, inset 0 0 22px rgba(0,0,0,.6);'
             'display:flex;flex-direction:column;align-items:center;gap:22px">'
             f'<div style="font-family:\'Press Start 2P\';font-size:52px;color:{MG};letter-spacing:2px;'
             f'white-space:nowrap;text-shadow:0 0 14px {MG}99">RETROTARROS</div>'
-            f'<div style="font-family:\'Press Start 2P\';font-size:21px;color:{YE};letter-spacing:3px;'
-            'white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>'
+            f'<div style="font-family:\'Press Start 2P\';font-size:{fs}px;color:{YE};letter-spacing:3px;'
+            f'white-space:nowrap">{sub}</div>'
             '</div></div>')
 
 
-def pecho_dotmatrix(v: str) -> str:
+def pecho_dotmatrix(v: str, sub: str = _SUB_DEFAULT) -> str:
     """Pantalla dot-matrix del Game Boy: placa verde con RETROTARROS + subtitulo
     en pixel negro. Placa opaca -> se ve igual en cualquier polera."""
     GB_SCREEN, GB_INK, GB_FRAME = "#9bbc0f", "#0f2b0a", "#2b2b30"
-    return ('<div class="stage" style="width:700px;height:360px">'
+    fs = 15 if len(sub) <= 26 else 13
+    return ('<div class="stage" style="width:760px;height:360px">'
             f'<div style="background:{GB_FRAME};border-radius:20px 20px 46px 20px;padding:28px 32px 50px">'
-            f'<div style="background:{GB_SCREEN};border-radius:6px;padding:40px 44px;'
+            f'<div style="background:{GB_SCREEN};border-radius:6px;padding:40px 48px;'
             'display:flex;flex-direction:column;align-items:center;gap:22px">'
             f'<div style="font-family:\'Press Start 2P\';font-size:40px;color:{GB_INK};letter-spacing:1px;'
             'white-space:nowrap">RETROTARROS</div>'
-            f'<div style="font-family:\'Press Start 2P\';font-size:15px;color:{GB_INK};letter-spacing:2px;'
-            'white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>'
+            f'<div style="font-family:\'Press Start 2P\';font-size:{fs}px;color:{GB_INK};letter-spacing:2px;'
+            f'white-space:nowrap">{sub}</div>'
             '</div></div></div>')
 
 
-def pecho_sol(v: str) -> str:
+def pecho_sol(v: str, sub: str = _SUB_DEFAULT) -> str:
     """Titulo magenta + subtitulo amarillo (tal cual los colores del sol).
     Contorno chrome para que no se pierda en ninguna tela."""
-    return ('<div class="stage" style="width:760px;height:240px">'
+    fs = 21 if len(sub) <= 26 else 17
+    return ('<div class="stage" style="width:820px;height:240px">'
             f'<div style="font-family:\'Press Start 2P\';font-size:52px;color:{MG};letter-spacing:2px;'
             f'white-space:nowrap;text-shadow:{_OLINE}, 0 0 16px {MG}88">RETROTARROS</div>'
-            f'<div style="font-family:\'Press Start 2P\';font-size:21px;color:{YE};letter-spacing:3px;'
-            f'white-space:nowrap;margin-top:26px;text-shadow:{_OLINE}">NOSTALGIA + JUEGOS + MUSICA</div>'
+            f'<div style="font-family:\'Press Start 2P\';font-size:{fs}px;color:{YE};letter-spacing:3px;'
+            f'white-space:nowrap;margin-top:26px;text-shadow:{_OLINE}">{sub}</div>'
             '</div>')
+
+
+def pecho_banner(v: str, sub: str = "TARROBOT · MASCOTA OFICIAL") -> str:
+    """Banner horizontal del canal en version PECHO: TarroBot + RETROTARROS +
+    subtitulo. Lleva TarroBot -> cyan permitido. Subtitulo parametrizable."""
+    return ('<div class="stage" style="width:1000px;height:300px;flex-direction:row;gap:34px">'
+            + '<div class="halo" style="width:330px;height:330px;left:200px;top:0"></div>'
+            + mascota_svg("neutral", 220)
+            + '<div style="display:flex;flex-direction:column;align-items:flex-start;z-index:2">'
+            + '<div class="wm" style="font-size:86px;letter-spacing:3px;white-space:nowrap">RETRO<b>TARROS</b></div>'
+            + f'<div class="tag" style="font-size:21px;letter-spacing:6px;margin-top:14px;white-space:nowrap">{sub}</div>'
+            + '</div></div>')
 
 
 # ───────────────────────── build ─────────────────────────
@@ -460,6 +479,14 @@ DISENOS = [
     ("espalda-wordmark-synthwave", espalda_wordmark_synthwave),
     ("espalda-tarrovision", espalda_tarrovision),
 ]
+
+# Pechos NOMINADOS del equipo: el subtitulo es el nombre de cada uno.
+_EQUIPO = [("luis", 'LUIS "BALBRIGAME" JEREZ'), ("coco", 'JORGE "COCO" YARUR')]
+for _who, _nom in _EQUIPO:
+    DISENOS.append((f"pecho-ciudad-{_who}", lambda v, n=_nom: pecho_ciudad(v, n)))
+    DISENOS.append((f"pecho-dotmatrix-{_who}", lambda v, n=_nom: pecho_dotmatrix(v, n)))
+    DISENOS.append((f"pecho-sol-{_who}", lambda v, n=_nom: pecho_sol(v, n)))
+    DISENOS.append((f"pecho-banner-{_who}", lambda v, n=_nom: pecho_banner(v, n)))
 
 
 def generar(progress=print) -> list[Path]:
