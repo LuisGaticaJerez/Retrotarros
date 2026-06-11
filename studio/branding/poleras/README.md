@@ -11,10 +11,13 @@ Generados con `python scripts/merch_poleras.py`.
 `-dark` = arte para **polera oscura** (blancos + neón + glow).
 `-light` = arte para **polera clara** (tinta oscura, sin glow).
 `-flat` = mismo look que `-dark` (blanco + cyan + amarillo) pero **plano**: sin
-glow neón, sin halo de fondo y sin sombras. Solo conserva el contorno oscuro de
-las letras (para que no se pierdan). Pensado para polera oscura con estampado
-liso. Se generan con `python scripts/merch_poleras.py --flat` (o
-`--flat <filtro>` para uno solo, ej. `--flat banner`).
+glow neón, sin halo de fondo y sin sombras. Pensado para servir en **cualquier
+tela** (oscura o blanca). Dos reglas para que no se camufle en polera blanca:
+(1) todo texto lleva el **contorno oscuro** (incluido el HUD pixel); (2) **nada
+de blanco "pelado"** sin contorno — un texto que iba blanco (ej. `HI-SCORE`) usa
+un color que ya está en la imagen (amarillo, como los ojos/sonrisa/1986). Se
+generan con `python scripts/merch_poleras.py --flat` (o `--flat <filtro>` para
+uno solo, ej. `--flat arcade`).
 
 ## REGLA DE COLOR (obligatoria) — Luis
 

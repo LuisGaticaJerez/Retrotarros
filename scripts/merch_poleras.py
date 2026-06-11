@@ -99,7 +99,9 @@ def _css(variant: str) -> str:
 .wm.ny{{color:#FF7A1A;text-shadow:{ol}{', 0 0 16px rgba(124,47,240,.5)' if glow else ''};}}
 .wm.ny b{{color:{PU}}}
 .tag.ny{{color:#FF7A1A;text-shadow:{ol}{', 0 0 12px rgba(255,122,26,.5)' if glow else ''};}}
-.px{{font-family:'Press Start 2P';z-index:2;line-height:1}}
+/* En flat (sirve para cualquier tela) el HUD pixel lleva contorno oscuro para
+   que ningun color claro se camufle con una polera blanca. */
+.px{{font-family:'Press Start 2P';z-index:2;line-height:1;{'text-shadow:' + ol + ';' if flat else ''}}}
 """
 
 
@@ -203,13 +205,16 @@ def espalda_crt(v: str) -> str:
 def espalda_arcade(v: str) -> str:
     ink = INK[v]
     # en tela clara el amarillo se pierde -> textos amarillos pasan a magenta.
-    # flat (polera oscura) mantiene amarillo como dark.
+    # flat mantiene amarillo como dark.
     acc = MG if v == "light" else YE
+    # HI-SCORE no debe ir blanco: en flat (sirve para polera blanca) reusa un
+    # color que ya esta en la imagen (amarillo, como ojos/sonrisa/1986).
+    hi = acc if v == "flat" else ink
     # mascota "sprite": el SVG canonico ya es pixel-art friendly; lo enmarcamos en HUD arcade
     return (f'''<div class="stage" style="width:1100px;height:1400px">
 <div style="display:flex;justify-content:space-between;width:920px;z-index:2">
   <div class="px" style="font-size:34px;color:{MG}">1UP</div>
-  <div class="px" style="font-size:34px;color:{ink}">HI-SCORE</div>
+  <div class="px" style="font-size:34px;color:{hi}">HI-SCORE</div>
   <div class="px" style="font-size:34px;color:{acc}">1986</div>
 </div>
 <div class="halo" style="width:560px;height:560px;top:130px"></div>
