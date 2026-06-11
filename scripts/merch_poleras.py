@@ -50,10 +50,9 @@ def _css(variant: str) -> str:
     # halo morado de fondo: fuerte en dark, sutil en light, NULO en flat
     halo1 = ".5" if glow else ("0" if flat else ".16")
     halo2 = ".18" if glow else ("0" if flat else ".06")
-    # En flat, el RETRO del wordmark no va blanco (se come con polera blanca):
-    # usa amarillo de la paleta. TARROS sigue cyan. El .od (cápsula) se mantiene
-    # blanco aparte porque va sobre fondo oscuro.
-    wm_ink = YE if flat else ink
+    # El RETRO del wordmark va BLANCO (eleccion de Luis): se lee en polera blanca
+    # gracias al contorno oscuro. TARROS sigue cyan.
+    wm_ink = ink
     # Letras de los disenos SIN TarroBot, segun tela (que no se camuflen):
     #   polera BLANCA -> negro + morado    |    polera NEGRA -> naranja
     nc_retro = DK if light else "#FFA64D"      # RETRO
