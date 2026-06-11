@@ -90,6 +90,9 @@ def _css(variant: str) -> str:
 .wm.nc{{color:{nc_retro}}}
 .wm.nc b{{color:{nc_tarros}}}
 .tag.nc{{color:{nc_tag};text-shadow:{ol}{nctag_glow};}}
+/* .ny = RETRO naranja + TARROS morado, FIJO en ambas telas (eleccion de Luis) */
+.wm.ny{{color:#FF7A1A;text-shadow:{ol}{', 0 0 16px rgba(124,47,240,.5)' if glow else ''};}}
+.wm.ny b{{color:{PU}}}
 .px{{font-family:'Press Start 2P';z-index:2;line-height:1}}
 """
 
@@ -111,7 +114,7 @@ def pecho_mascota(v: str) -> str:
 
 def pecho_wordmark(v: str) -> str:
     return ('<div class="stage" style="width:600px;height:140px">'
-            '<div class="wm nc" style="font-size:52px;letter-spacing:2px;white-space:nowrap">RETRO<b>TARROS</b></div>'
+            '<div class="wm ny" style="font-size:52px;letter-spacing:2px;white-space:nowrap">RETRO<b>TARROS</b></div>'
             '</div>')
 
 
