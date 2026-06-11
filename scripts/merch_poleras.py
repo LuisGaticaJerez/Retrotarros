@@ -57,6 +57,9 @@ def _css(variant: str) -> str:
 .wm b{{color:{CY}}}
 .tag{{font-family:'Press Start 2P';color:{CY};z-index:2;
   {'text-shadow:0 0 10px rgba(0,229,255,.5);' if glow else ''}}}
+/* REGLA: sin TarroBot (mascota/cara/palabra) NO hay cyan. .nc -> magenta. */
+.wm.nc b{{color:{MG}}}
+.tag.nc{{color:{MG};{'text-shadow:0 0 10px rgba(255,46,136,.5);' if glow else ''}}}
 .px{{font-family:'Press Start 2P';z-index:2;line-height:1}}
 """
 
@@ -78,7 +81,7 @@ def pecho_mascota(v: str) -> str:
 
 def pecho_wordmark(v: str) -> str:
     return ('<div class="stage" style="width:600px;height:140px">'
-            '<div class="wm" style="font-size:52px;letter-spacing:2px;white-space:nowrap">RETRO<b>TARROS</b></div>'
+            '<div class="wm nc" style="font-size:52px;letter-spacing:2px;white-space:nowrap">RETRO<b>TARROS</b></div>'
             '</div>')
 
 
@@ -152,8 +155,8 @@ def espalda_crt(v: str) -> str:
   </g>
 </svg>
 <div style="position:absolute;bottom:170px;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%">
-  <div class="wm" style="font-size:118px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
-  <div class="tag" style="font-size:23px;letter-spacing:6px;margin-top:24px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
+  <div class="wm nc" style="font-size:118px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
+  <div class="tag nc" style="font-size:23px;letter-spacing:6px;margin-top:24px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
 </div>
 </div>''')
 
@@ -257,8 +260,8 @@ def espalda_wordmark_synthwave(v: str) -> str:
   </g>
 </svg>
 <div style="position:absolute;top:760px;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%">
-  <div class="wm" style="font-size:138px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
-  <div class="tag" style="font-size:25px;letter-spacing:7px;margin-top:30px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
+  <div class="wm nc" style="font-size:138px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
+  <div class="tag nc" style="font-size:25px;letter-spacing:7px;margin-top:30px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
 </div>
 </div>''')
 
@@ -310,8 +313,8 @@ def espalda_tarrovision(v: str) -> str:
   <rect x="650" y="800" width="130" height="62" fill="#160d2e" stroke="{PU}" stroke-width="5"/>
 </svg>
 <div style="position:absolute;bottom:130px;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%">
-  <div class="wm" style="font-size:114px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
-  <div class="tag" style="font-size:23px;letter-spacing:6px;margin-top:24px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
+  <div class="wm nc" style="font-size:114px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
+  <div class="tag nc" style="font-size:23px;letter-spacing:6px;margin-top:24px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
 </div>
 </div>''')
 
