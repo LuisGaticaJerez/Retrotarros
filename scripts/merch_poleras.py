@@ -248,34 +248,34 @@ def espalda_gameboy(v: str) -> str:
 
 def espalda_wordmark_synthwave(v: str) -> str:
     glow = 'filter="url(#g2)"' if v == "dark" else ''
-    # sol de franjas gigante + wordmark cruzandolo + grid abajo. Sin mascota.
-    return (f'''<div class="stage" style="width:1200px;height:1400px">
-<svg width="1200" height="1400" viewBox="0 0 1200 1400" style="position:absolute;inset:0;z-index:1" xmlns="http://www.w3.org/2000/svg">
+    # Sol arriba + grid, y el WORDMARK abajo en zona limpia (no cruza el sol,
+    # para que no se camufle). Synthwave tipografico, sin mascota.
+    return (f'''<div class="stage" style="width:1100px;height:1440px">
+<svg width="1100" height="980" viewBox="0 0 1100 980" style="position:absolute;top:0;z-index:1" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="sun2" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="{YE}"/><stop offset="0.5" stop-color="{MG}"/><stop offset="1" stop-color="{MG}"/>
     </linearGradient>
     <mask id="slits2">
-      <rect width="1200" height="1400" fill="white"/>
-      <rect x="0" y="600" width="1200" height="20" fill="black"/>
-      <rect x="0" y="664" width="1200" height="28" fill="black"/>
-      <rect x="0" y="744" width="1200" height="36" fill="black"/>
-      <rect x="0" y="840" width="1200" height="44" fill="black"/>
+      <rect width="1100" height="980" fill="white"/>
+      <rect x="0" y="430" width="1100" height="14" fill="black"/>
+      <rect x="0" y="480" width="1100" height="20" fill="black"/>
+      <rect x="0" y="544" width="1100" height="26" fill="black"/>
     </mask>
     <filter id="g2"><feDropShadow dx="0" dy="0" stdDeviation="16" flood-color="{MG}" flood-opacity="0.5"/></filter>
   </defs>
-  <circle cx="600" cy="560" r="430" fill="url(#sun2)" mask="url(#slits2)" {glow}/>
+  <circle cx="550" cy="370" r="300" fill="url(#sun2)" mask="url(#slits2)" {glow}/>
   <g stroke="{PU}" stroke-width="3" opacity="0.95">
-    <line x1="600" y1="1020" x2="600" y2="1400"/>
-    <line x1="600" y1="1020" x2="260" y2="1400"/><line x1="600" y1="1020" x2="940" y2="1400"/>
-    <line x1="600" y1="1020" x2="-120" y2="1400"/><line x1="600" y1="1020" x2="1320" y2="1400"/>
-    <line x1="140" y1="1090" x2="1060" y2="1090"/>
-    <line x1="20" y1="1190" x2="1180" y2="1190"/>
-    <line x1="-140" y1="1330" x2="1340" y2="1330"/>
+    <line x1="550" y1="700" x2="550" y2="980"/>
+    <line x1="550" y1="700" x2="250" y2="980"/><line x1="550" y1="700" x2="850" y2="980"/>
+    <line x1="550" y1="700" x2="-40" y2="980"/><line x1="550" y1="700" x2="1140" y2="980"/>
+    <line x1="115" y1="760" x2="985" y2="760"/>
+    <line x1="10" y1="828" x2="1090" y2="828"/>
+    <line x1="-90" y1="912" x2="1190" y2="912"/>
   </g>
 </svg>
-<div style="position:absolute;top:760px;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%">
-  <div class="wm nc" style="font-size:138px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
+<div style="position:absolute;bottom:170px;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%">
+  <div class="wm nc" style="font-size:126px;letter-spacing:3px;white-space:nowrap">RETRO<b>TARROS</b></div>
   <div class="tag nc" style="font-size:25px;letter-spacing:7px;margin-top:30px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
 </div>
 </div>''')
