@@ -34,6 +34,12 @@ PRINT = OUT / "print"
 # tinta "blanca" segun polera
 INK = {"dark": "#FFFFFF", "light": DK}
 
+# Morado: color de ambiente/decoracion del canal (halos, grids, marcos de
+# dispositivos). El CYAN queda RESERVADO para acompañar a TarroBot (su cuerpo)
+# y el wordmark TARROS — no para decorar. (Luis 2026-06-xx)
+PU = "#7C2FF0"      # morado neon (lineas, bordes, grids)
+PU_DK = "#3A1A6E"   # morado profundo (cuerpos de dispositivo)
+
 
 def _css(variant: str) -> str:
     glow = variant == "dark"
@@ -43,7 +49,9 @@ def _css(variant: str) -> str:
 *{{margin:0;padding:0;box-sizing:border-box}}
 .stage{{position:relative;display:flex;flex-direction:column;align-items:center;
   justify-content:center;overflow:hidden;background:transparent}}
-.mascot{{{'filter:drop-shadow(0 0 26px rgba(0,229,255,.55));' if glow else ''}z-index:2}}
+.mascot{{{'filter:drop-shadow(0 0 22px rgba(0,229,255,.5)) drop-shadow(0 0 40px rgba(124,47,240,.45));' if glow else ''}z-index:2}}
+.halo{{position:absolute;left:50%;transform:translateX(-50%);border-radius:50%;z-index:0;
+  background:radial-gradient(circle, rgba(124,47,240,{'.5' if glow else '.16'}) 0%, rgba(124,47,240,{'.18' if glow else '.06'}) 40%, transparent 70%)}}
 .wm{{font-family:Orbitron;font-weight:900;color:{ink};z-index:2;line-height:1;
   {'text-shadow:0 0 16px rgba(255,46,136,.55);' if glow else ''}}}
 .wm b{{color:{CY}}}
@@ -62,6 +70,7 @@ def _doc(body: str, variant: str) -> str:
 
 def pecho_mascota(v: str) -> str:
     return ('<div class="stage" style="width:360px;height:430px">'
+            + '<div class="halo" style="width:340px;height:340px;top:10px"></div>'
             + mascota_svg("neutral", 250)
             + '<div class="wm" style="font-size:40px;letter-spacing:2px;margin-top:16px">RETRO<b>TARROS</b></div>'
             + '</div>')
@@ -77,6 +86,7 @@ def pecho_wordmark(v: str) -> str:
 
 def espalda_stacked(v: str) -> str:
     return ('<div class="stage" style="width:1100px;height:1320px">'
+            + '<div class="halo" style="width:880px;height:880px;top:60px"></div>'
             + mascota_svg("feliz", 640)
             + '<div class="wm" style="font-size:118px;letter-spacing:4px;margin-top:40px;white-space:nowrap">RETRO<b>TARROS</b></div>'
             + '<div class="tag" style="font-size:42px;letter-spacing:14px;margin-top:26px">TARROBOT</div>'
@@ -102,7 +112,7 @@ def espalda_synthwave(v: str) -> str:
     <filter id="g"><feDropShadow dx="0" dy="0" stdDeviation="14" flood-color="{MG}" flood-opacity="0.55"/></filter>
   </defs>
   <circle cx="550" cy="430" r="330" fill="url(#sun)" mask="url(#slits)" {glow}/>
-  <g stroke="{CY}" stroke-width="3" {'opacity="0.9"' if v == 'dark' else 'opacity="0.95"'}>
+  <g stroke="{PU}" stroke-width="3" {'opacity="0.95"' if v == 'dark' else 'opacity="0.9"'}>
     <line x1="550" y1="790" x2="550" y2="980"/>
     <line x1="550" y1="790" x2="250" y2="980"/><line x1="550" y1="790" x2="850" y2="980"/>
     <line x1="550" y1="790" x2="-40" y2="980"/><line x1="550" y1="790" x2="1140" y2="980"/>
@@ -111,6 +121,7 @@ def espalda_synthwave(v: str) -> str:
     <line x1="-90" y1="940" x2="1190" y2="940"/>
   </g>
 </svg>
+<div class="halo" style="width:640px;height:640px;top:200px"></div>
 <div style="position:absolute;top:280px;z-index:2;display:flex;justify-content:center;width:100%">'''
             + mascota_svg("neutral", 380) + '''</div>
 <div style="position:absolute;bottom:120px;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%">
@@ -122,20 +133,20 @@ def espalda_synthwave(v: str) -> str:
 
 def espalda_crt(v: str) -> str:
     ink = INK[v]
-    scan = ''.join(f'<rect x="120" y="{210 + i * 56}" width="860" height="6" fill="{CY}" opacity="0.28"/>'
+    scan = ''.join(f'<rect x="120" y="{210 + i * 56}" width="860" height="6" fill="{PU}" opacity="0.30"/>'
                    for i in range(11))
     glitch = (f'<rect x="120" y="392" width="860" height="26" fill="{MG}" opacity="0.55"/>'
-              f'<rect x="120" y="430" width="430" height="14" fill="{CY}" opacity="0.5"/>'
+              f'<rect x="120" y="430" width="430" height="14" fill="{PU}" opacity="0.6"/>'
               f'<rect x="640" y="540" width="340" height="18" fill="{YE}" opacity="0.45"/>')
     return (f'''<div class="stage" style="width:1100px;height:1380px">
 <svg width="1100" height="960" viewBox="0 0 1100 960" style="z-index:1" xmlns="http://www.w3.org/2000/svg">
-  <rect x="70" y="120" width="960" height="700" rx="36" fill="{CY}"/>
+  <rect x="70" y="120" width="960" height="700" rx="36" fill="{PU_DK}" stroke="{PU}" stroke-width="6"/>
   <rect x="110" y="160" width="880" height="620" rx="20" fill="{SCREEN}"/>
   <rect x="135" y="185" width="830" height="570" fill="none" stroke="{MG}" stroke-width="7"/>
   {scan}{glitch}
   <circle cx="100" cy="100" r="20" fill="{MG}"/>
-  <rect x="240" y="820" width="120" height="56" fill="{CY}"/>
-  <rect x="740" y="820" width="120" height="56" fill="{CY}"/>
+  <rect x="240" y="820" width="120" height="56" fill="{PU}"/>
+  <rect x="740" y="820" width="120" height="56" fill="{PU}"/>
   <g font-family="'Press Start 2P'" font-size="40" fill="{YE}">
     <text x="550" y="500" text-anchor="middle">EN VIVO</text>
   </g>
@@ -158,9 +169,10 @@ def espalda_arcade(v: str) -> str:
   <div class="px" style="font-size:34px;color:{ink}">HI-SCORE</div>
   <div class="px" style="font-size:34px;color:{acc}">1986</div>
 </div>
-<div style="margin-top:60px;z-index:2">''' + mascota_svg("wow", 560) + f'''</div>
+<div class="halo" style="width:560px;height:560px;top:130px"></div>
+<div style="margin-top:60px;z-index:2">''' + mascota_svg("guino", 560) + f'''</div>
 <div class="px" style="font-size:64px;color:{acc};margin-top:80px;letter-spacing:4px">PRESS START</div>
-<div class="px" style="font-size:30px;color:{CY};margin-top:40px;letter-spacing:6px">INSERT COIN(S)</div>
+<div class="px" style="font-size:30px;color:{PU};margin-top:40px;letter-spacing:6px">INSERT COIN(S)</div>
 <div style="margin-top:90px;z-index:2;display:flex;flex-direction:column;align-items:center">
   <div class="wm" style="font-size:108px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
 </div>
@@ -174,8 +186,8 @@ def _gameboy_svg(w: int) -> str:
     cruceta, botones A/B magenta, START/SELECT, parlante. viewBox 0 0 300 480."""
     h = int(w * 480 / 300)
     return f'''<svg width="{w}" height="{h}" viewBox="0 0 300 480" xmlns="http://www.w3.org/2000/svg" style="z-index:2">
-  <rect x="10" y="10" width="280" height="460" rx="26" fill="#15151c" stroke="{CY}" stroke-width="7"/>
-  <rect x="34" y="44" width="232" height="180" rx="12" fill="#23232b"/>
+  <rect x="10" y="10" width="280" height="460" rx="26" fill="{PU_DK}" stroke="{PU}" stroke-width="7"/>
+  <rect x="34" y="44" width="232" height="180" rx="12" fill="#1a1330"/>
   <rect x="60" y="64" width="180" height="140" rx="4" fill="{SCREEN}"/>
   <rect x="68" y="72" width="164" height="124" fill="none" stroke="{MG}" stroke-width="3"/>
   <rect x="100" y="104" width="26" height="26" fill="{YE}"/>
@@ -184,8 +196,8 @@ def _gameboy_svg(w: int) -> str:
   <rect x="183" y="111" width="9" height="12" fill="{SCREEN}"/>
   <rect x="118" y="158" width="64" height="12" fill="{YE}"/>
   <circle cx="48" cy="54" r="5" fill="{MG}"/>
-  <text x="150" y="242" text-anchor="middle" font-family="'Press Start 2P'" font-size="13" fill="{CY}" letter-spacing="3">RETROTARROS</text>
-  <g fill="{CY}">
+  <text x="150" y="242" text-anchor="middle" font-family="'Press Start 2P'" font-size="13" fill="{YE}" letter-spacing="3">RETROTARROS</text>
+  <g fill="{PU}">
     <rect x="46" y="288" width="22" height="62" rx="4"/>
     <rect x="26" y="308" width="62" height="22" rx="4"/>
   </g>
@@ -193,8 +205,8 @@ def _gameboy_svg(w: int) -> str:
   <circle cx="262" cy="304" r="20" fill="{MG}"/>
   <text x="216" y="366" text-anchor="middle" font-family="'Press Start 2P'" font-size="11" fill="{YE}">B</text>
   <text x="262" y="340" text-anchor="middle" font-family="'Press Start 2P'" font-size="11" fill="{YE}">A</text>
-  <rect x="96" y="394" width="44" height="11" rx="5" fill="{CY}" transform="rotate(-22 118 399)"/>
-  <rect x="160" y="394" width="44" height="11" rx="5" fill="{CY}" transform="rotate(-22 182 399)"/>
+  <rect x="96" y="394" width="44" height="11" rx="5" fill="{PU}" transform="rotate(-22 118 399)"/>
+  <rect x="160" y="394" width="44" height="11" rx="5" fill="{PU}" transform="rotate(-22 182 399)"/>
   <g stroke="{MG}" stroke-width="7" stroke-linecap="round">
     <line x1="216" y1="416" x2="252" y2="452"/>
     <line x1="234" y1="408" x2="270" y2="444"/>
@@ -235,7 +247,7 @@ def espalda_wordmark_synthwave(v: str) -> str:
     <filter id="g2"><feDropShadow dx="0" dy="0" stdDeviation="16" flood-color="{MG}" flood-opacity="0.5"/></filter>
   </defs>
   <circle cx="600" cy="560" r="430" fill="url(#sun2)" mask="url(#slits2)" {glow}/>
-  <g stroke="{CY}" stroke-width="3" opacity="0.95">
+  <g stroke="{PU}" stroke-width="3" opacity="0.95">
     <line x1="600" y1="1020" x2="600" y2="1400"/>
     <line x1="600" y1="1020" x2="260" y2="1400"/><line x1="600" y1="1020" x2="940" y2="1400"/>
     <line x1="600" y1="1020" x2="-120" y2="1400"/><line x1="600" y1="1020" x2="1320" y2="1400"/>
@@ -258,7 +270,7 @@ def espalda_tarrovision(v: str) -> str:
 <svg width="1020" height="900" viewBox="0 0 1020 900" style="z-index:2" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#22222a"/><stop offset="1" stop-color="#101016"/>
+      <stop offset="0" stop-color="#2a1a52"/><stop offset="1" stop-color="#160d2e"/>
     </linearGradient>
     <linearGradient id="sun3" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="{YE}"/><stop offset="1" stop-color="{MG}"/>
@@ -270,16 +282,16 @@ def espalda_tarrovision(v: str) -> str:
       <rect x="120" y="528" width="780" height="20" fill="black"/>
     </mask>
   </defs>
-  <rect x="20" y="20" width="980" height="760" rx="34" fill="url(#body)" stroke="{CY}" stroke-width="5"/>
+  <rect x="20" y="20" width="980" height="760" rx="34" fill="url(#body)" stroke="{PU}" stroke-width="5"/>
   <circle cx="84" cy="78" r="11" fill="{MG}"/>
   <text x="510" y="92" text-anchor="middle" font-family="'Press Start 2P'" font-size="26" fill="{YE}" letter-spacing="8">TARROVISION</text>
-  <text x="924" y="90" text-anchor="end" font-family="'Press Start 2P'" font-size="15" fill="{CY}">CH-86</text>
-  <rect x="80" y="130" width="860" height="540" rx="18" fill="#2a2a2f"/>
+  <text x="924" y="90" text-anchor="end" font-family="'Press Start 2P'" font-size="15" fill="{PU}">CH-86</text>
+  <rect x="80" y="130" width="860" height="540" rx="18" fill="#241a3d"/>
   <rect x="104" y="152" width="812" height="496" rx="14" fill="{SCREEN}"/>
   <g mask="url(#slits3)">
     <circle cx="510" cy="430" r="200" fill="url(#sun3)"/>
   </g>
-  <g stroke="{CY}" stroke-width="2.4" opacity="0.9">
+  <g stroke="{PU}" stroke-width="2.4" opacity="0.95">
     <line x1="510" y1="560" x2="510" y2="648"/>
     <line x1="510" y1="560" x2="330" y2="648"/><line x1="510" y1="560" x2="690" y2="648"/>
     <line x1="510" y1="560" x2="140" y2="648"/><line x1="510" y1="560" x2="880" y2="648"/>
@@ -287,15 +299,15 @@ def espalda_tarrovision(v: str) -> str:
     <line x1="160" y1="620" x2="860" y2="620"/>
   </g>
   <rect x="104" y="152" width="812" height="496" rx="14" fill="none" stroke="{MG}" stroke-width="4"/>
-  <circle cx="160" cy="724" r="20" fill="#101016" stroke="{CY}" stroke-width="4"/>
+  <circle cx="160" cy="724" r="20" fill="#160d2e" stroke="{PU}" stroke-width="4"/>
   <circle cx="230" cy="724" r="20" fill="#101016" stroke="{MG}" stroke-width="4"/>
   <g stroke="#3a3a42" stroke-width="6" stroke-linecap="round">
     <line x1="800" y1="710" x2="930" y2="710"/>
     <line x1="800" y1="728" x2="930" y2="728"/>
     <line x1="800" y1="746" x2="930" y2="746"/>
   </g>
-  <rect x="240" y="800" width="130" height="62" fill="#15151c" stroke="{CY}" stroke-width="5"/>
-  <rect x="650" y="800" width="130" height="62" fill="#15151c" stroke="{CY}" stroke-width="5"/>
+  <rect x="240" y="800" width="130" height="62" fill="#160d2e" stroke="{PU}" stroke-width="5"/>
+  <rect x="650" y="800" width="130" height="62" fill="#160d2e" stroke="{PU}" stroke-width="5"/>
 </svg>
 <div style="position:absolute;bottom:130px;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%">
   <div class="wm" style="font-size:114px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
