@@ -167,15 +167,156 @@ def espalda_arcade(v: str) -> str:
 </div>''')
 
 
+# ───────────────────────── motivos del universo del canal ─────────────────────────
+
+def _gameboy_svg(w: int) -> str:
+    """Game Boy synthwave: cuerpo oscuro borde cyan, pantalla con cara TarroBot,
+    cruceta, botones A/B magenta, START/SELECT, parlante. viewBox 0 0 300 480."""
+    h = int(w * 480 / 300)
+    return f'''<svg width="{w}" height="{h}" viewBox="0 0 300 480" xmlns="http://www.w3.org/2000/svg" style="z-index:2">
+  <rect x="10" y="10" width="280" height="460" rx="26" fill="#15151c" stroke="{CY}" stroke-width="7"/>
+  <rect x="34" y="44" width="232" height="180" rx="12" fill="#23232b"/>
+  <rect x="60" y="64" width="180" height="140" rx="4" fill="{SCREEN}"/>
+  <rect x="68" y="72" width="164" height="124" fill="none" stroke="{MG}" stroke-width="3"/>
+  <rect x="100" y="104" width="26" height="26" fill="{YE}"/>
+  <rect x="174" y="104" width="26" height="26" fill="{YE}"/>
+  <rect x="109" y="111" width="9" height="12" fill="{SCREEN}"/>
+  <rect x="183" y="111" width="9" height="12" fill="{SCREEN}"/>
+  <rect x="118" y="158" width="64" height="12" fill="{YE}"/>
+  <circle cx="48" cy="54" r="5" fill="{MG}"/>
+  <text x="150" y="242" text-anchor="middle" font-family="'Press Start 2P'" font-size="13" fill="{CY}" letter-spacing="3">RETROTARROS</text>
+  <g fill="{CY}">
+    <rect x="46" y="288" width="22" height="62" rx="4"/>
+    <rect x="26" y="308" width="62" height="22" rx="4"/>
+  </g>
+  <circle cx="216" cy="330" r="20" fill="{MG}"/>
+  <circle cx="262" cy="304" r="20" fill="{MG}"/>
+  <text x="216" y="366" text-anchor="middle" font-family="'Press Start 2P'" font-size="11" fill="{YE}">B</text>
+  <text x="262" y="340" text-anchor="middle" font-family="'Press Start 2P'" font-size="11" fill="{YE}">A</text>
+  <rect x="96" y="394" width="44" height="11" rx="5" fill="{CY}" transform="rotate(-22 118 399)"/>
+  <rect x="160" y="394" width="44" height="11" rx="5" fill="{CY}" transform="rotate(-22 182 399)"/>
+  <g stroke="{MG}" stroke-width="7" stroke-linecap="round">
+    <line x1="216" y1="416" x2="252" y2="452"/>
+    <line x1="234" y1="408" x2="270" y2="444"/>
+    <line x1="252" y1="400" x2="288" y2="436"/>
+  </g>
+</svg>'''
+
+
+def pecho_gameboy(v: str) -> str:
+    return ('<div class="stage" style="width:340px;height:560px">'
+            + _gameboy_svg(280) + '</div>')
+
+
+def espalda_gameboy(v: str) -> str:
+    return ('<div class="stage" style="width:1100px;height:1500px;gap:0">'
+            + _gameboy_svg(620)
+            + '<div class="wm" style="font-size:104px;letter-spacing:4px;margin-top:64px;white-space:nowrap">RETRO<b>TARROS</b></div>'
+            + f'<div class="tag" style="font-size:24px;letter-spacing:7px;margin-top:24px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>'
+            + '</div>')
+
+
+def espalda_wordmark_synthwave(v: str) -> str:
+    glow = 'filter="url(#g2)"' if v == "dark" else ''
+    # sol de franjas gigante + wordmark cruzandolo + grid abajo. Sin mascota.
+    return (f'''<div class="stage" style="width:1200px;height:1400px">
+<svg width="1200" height="1400" viewBox="0 0 1200 1400" style="position:absolute;inset:0;z-index:1" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sun2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="{YE}"/><stop offset="0.5" stop-color="{MG}"/><stop offset="1" stop-color="{MG}"/>
+    </linearGradient>
+    <mask id="slits2">
+      <rect width="1200" height="1400" fill="white"/>
+      <rect x="0" y="600" width="1200" height="20" fill="black"/>
+      <rect x="0" y="664" width="1200" height="28" fill="black"/>
+      <rect x="0" y="744" width="1200" height="36" fill="black"/>
+      <rect x="0" y="840" width="1200" height="44" fill="black"/>
+    </mask>
+    <filter id="g2"><feDropShadow dx="0" dy="0" stdDeviation="16" flood-color="{MG}" flood-opacity="0.5"/></filter>
+  </defs>
+  <circle cx="600" cy="560" r="430" fill="url(#sun2)" mask="url(#slits2)" {glow}/>
+  <g stroke="{CY}" stroke-width="3" opacity="0.95">
+    <line x1="600" y1="1020" x2="600" y2="1400"/>
+    <line x1="600" y1="1020" x2="260" y2="1400"/><line x1="600" y1="1020" x2="940" y2="1400"/>
+    <line x1="600" y1="1020" x2="-120" y2="1400"/><line x1="600" y1="1020" x2="1320" y2="1400"/>
+    <line x1="140" y1="1090" x2="1060" y2="1090"/>
+    <line x1="20" y1="1190" x2="1180" y2="1190"/>
+    <line x1="-140" y1="1330" x2="1340" y2="1330"/>
+  </g>
+</svg>
+<div style="position:absolute;top:760px;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%">
+  <div class="wm" style="font-size:138px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
+  <div class="tag" style="font-size:25px;letter-spacing:7px;margin-top:30px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
+</div>
+</div>''')
+
+
+def espalda_tarrovision(v: str) -> str:
+    # TarroVision fiel a los decks: cuerpo oscuro, LED magenta, marca amarilla,
+    # perillas y parlante; en pantalla, atardecer synthwave.
+    return (f'''<div class="stage" style="width:1100px;height:1400px">
+<svg width="1020" height="900" viewBox="0 0 1020 900" style="z-index:2" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22222a"/><stop offset="1" stop-color="#101016"/>
+    </linearGradient>
+    <linearGradient id="sun3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="{YE}"/><stop offset="1" stop-color="{MG}"/>
+    </linearGradient>
+    <mask id="slits3">
+      <rect width="1020" height="900" fill="white"/>
+      <rect x="120" y="430" width="780" height="12" fill="black"/>
+      <rect x="120" y="474" width="780" height="16" fill="black"/>
+      <rect x="120" y="528" width="780" height="20" fill="black"/>
+    </mask>
+  </defs>
+  <rect x="20" y="20" width="980" height="760" rx="34" fill="url(#body)" stroke="{CY}" stroke-width="5"/>
+  <circle cx="84" cy="78" r="11" fill="{MG}"/>
+  <text x="510" y="92" text-anchor="middle" font-family="'Press Start 2P'" font-size="26" fill="{YE}" letter-spacing="8">TARROVISION</text>
+  <text x="924" y="90" text-anchor="end" font-family="'Press Start 2P'" font-size="15" fill="{CY}">CH-86</text>
+  <rect x="80" y="130" width="860" height="540" rx="18" fill="#2a2a2f"/>
+  <rect x="104" y="152" width="812" height="496" rx="14" fill="{SCREEN}"/>
+  <g mask="url(#slits3)">
+    <circle cx="510" cy="430" r="200" fill="url(#sun3)"/>
+  </g>
+  <g stroke="{CY}" stroke-width="2.4" opacity="0.9">
+    <line x1="510" y1="560" x2="510" y2="648"/>
+    <line x1="510" y1="560" x2="330" y2="648"/><line x1="510" y1="560" x2="690" y2="648"/>
+    <line x1="510" y1="560" x2="140" y2="648"/><line x1="510" y1="560" x2="880" y2="648"/>
+    <line x1="240" y1="588" x2="780" y2="588"/>
+    <line x1="160" y1="620" x2="860" y2="620"/>
+  </g>
+  <rect x="104" y="152" width="812" height="496" rx="14" fill="none" stroke="{MG}" stroke-width="4"/>
+  <circle cx="160" cy="724" r="20" fill="#101016" stroke="{CY}" stroke-width="4"/>
+  <circle cx="230" cy="724" r="20" fill="#101016" stroke="{MG}" stroke-width="4"/>
+  <g stroke="#3a3a42" stroke-width="6" stroke-linecap="round">
+    <line x1="800" y1="710" x2="930" y2="710"/>
+    <line x1="800" y1="728" x2="930" y2="728"/>
+    <line x1="800" y1="746" x2="930" y2="746"/>
+  </g>
+  <rect x="240" y="800" width="130" height="62" fill="#15151c" stroke="{CY}" stroke-width="5"/>
+  <rect x="650" y="800" width="130" height="62" fill="#15151c" stroke="{CY}" stroke-width="5"/>
+</svg>
+<div style="position:absolute;bottom:130px;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%">
+  <div class="wm" style="font-size:114px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
+  <div class="tag" style="font-size:23px;letter-spacing:6px;margin-top:24px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
+</div>
+</div>''')
+
+
 # ───────────────────────── build ─────────────────────────
 
 DISENOS = [
     ("pecho-mascota", pecho_mascota),
     ("pecho-wordmark", pecho_wordmark),
+    ("pecho-gameboy", pecho_gameboy),
     ("espalda-stacked", espalda_stacked),
     ("espalda-synthwave", espalda_synthwave),
     ("espalda-crt", espalda_crt),
     ("espalda-arcade", espalda_arcade),
+    ("espalda-gameboy", espalda_gameboy),
+    ("espalda-wordmark-synthwave", espalda_wordmark_synthwave),
+    ("espalda-tarrovision", espalda_tarrovision),
 ]
 
 
