@@ -387,6 +387,55 @@ def espalda_banner(v: str) -> str:
             + '</div></div>')
 
 
+# ───────── pechos coordinados con las escenas de espalda (pixel) ─────────
+# Para combinar con los banners del canal (ciudad / Game Boy / sol), que son
+# pixel-art. El pecho lleva SOLO el titulo + subtitulo, en el estilo de su escena.
+
+_OLINE = ",".join(f"{x}px {y}px 0 #150026" for x, y in
+                  [(-3, -3), (3, -3), (-3, 3), (3, 3), (-3, 0), (3, 0), (0, -3), (0, 3)])
+
+
+def pecho_ciudad(v: str) -> str:
+    """Marquesina (cartel de la ciudad): RETROTARROS magenta + subtitulo amarillo
+    dentro de un marco neon. El 'bullet'/marco cambia segun la polera."""
+    marco = YE if v == "dark" else PU
+    return ('<div class="stage" style="width:760px;height:320px">'
+            f'<div style="border:7px solid {marco};border-radius:12px;background:#0d0820;'
+            f'padding:40px 56px;box-shadow:0 0 30px {marco}66, inset 0 0 22px rgba(0,0,0,.6);'
+            'display:flex;flex-direction:column;align-items:center;gap:22px">'
+            f'<div style="font-family:\'Press Start 2P\';font-size:52px;color:{MG};letter-spacing:2px;'
+            f'white-space:nowrap;text-shadow:0 0 14px {MG}99">RETROTARROS</div>'
+            f'<div style="font-family:\'Press Start 2P\';font-size:21px;color:{YE};letter-spacing:3px;'
+            'white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>'
+            '</div></div>')
+
+
+def pecho_dotmatrix(v: str) -> str:
+    """Pantalla dot-matrix del Game Boy: placa verde con RETROTARROS + subtitulo
+    en pixel negro. Placa opaca -> se ve igual en cualquier polera."""
+    GB_SCREEN, GB_INK, GB_FRAME = "#9bbc0f", "#0f2b0a", "#2b2b30"
+    return ('<div class="stage" style="width:700px;height:360px">'
+            f'<div style="background:{GB_FRAME};border-radius:20px 20px 46px 20px;padding:28px 32px 50px">'
+            f'<div style="background:{GB_SCREEN};border-radius:6px;padding:40px 44px;'
+            'display:flex;flex-direction:column;align-items:center;gap:22px">'
+            f'<div style="font-family:\'Press Start 2P\';font-size:40px;color:{GB_INK};letter-spacing:1px;'
+            'white-space:nowrap">RETROTARROS</div>'
+            f'<div style="font-family:\'Press Start 2P\';font-size:15px;color:{GB_INK};letter-spacing:2px;'
+            'white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>'
+            '</div></div></div>')
+
+
+def pecho_sol(v: str) -> str:
+    """Titulo magenta + subtitulo amarillo (tal cual los colores del sol).
+    Contorno chrome para que no se pierda en ninguna tela."""
+    return ('<div class="stage" style="width:760px;height:240px">'
+            f'<div style="font-family:\'Press Start 2P\';font-size:52px;color:{MG};letter-spacing:2px;'
+            f'white-space:nowrap;text-shadow:{_OLINE}, 0 0 16px {MG}88">RETROTARROS</div>'
+            f'<div style="font-family:\'Press Start 2P\';font-size:21px;color:{YE};letter-spacing:3px;'
+            f'white-space:nowrap;margin-top:26px;text-shadow:{_OLINE}">NOSTALGIA + JUEGOS + MUSICA</div>'
+            '</div>')
+
+
 # ───────────────────────── build ─────────────────────────
 
 DISENOS = [
@@ -394,6 +443,9 @@ DISENOS = [
     ("pecho-wordmark", pecho_wordmark),
     ("pecho-gameboy", pecho_gameboy),
     ("pecho-pill", pecho_pill),
+    ("pecho-ciudad", pecho_ciudad),
+    ("pecho-dotmatrix", pecho_dotmatrix),
+    ("pecho-sol", pecho_sol),
     ("espalda-badge", espalda_badge),
     ("espalda-banner", espalda_banner),
     ("espalda-stacked", espalda_stacked),
