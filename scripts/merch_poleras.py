@@ -93,6 +93,7 @@ def _css(variant: str) -> str:
 /* .ny = RETRO naranja + TARROS morado, FIJO en ambas telas (eleccion de Luis) */
 .wm.ny{{color:#FF7A1A;text-shadow:{ol}{', 0 0 16px rgba(124,47,240,.5)' if glow else ''};}}
 .wm.ny b{{color:{PU}}}
+.tag.ny{{color:#FF7A1A;text-shadow:{ol}{', 0 0 12px rgba(255,122,26,.5)' if glow else ''};}}
 .px{{font-family:'Press Start 2P';z-index:2;line-height:1}}
 """
 
@@ -188,8 +189,8 @@ def espalda_crt(v: str) -> str:
   </g>
 </svg>
 <div style="position:absolute;bottom:170px;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%">
-  <div class="wm nc" style="font-size:118px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
-  <div class="tag nc" style="font-size:23px;letter-spacing:6px;margin-top:24px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
+  <div class="wm ny" style="font-size:118px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
+  <div class="tag ny" style="font-size:23px;letter-spacing:6px;margin-top:24px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
 </div>
 </div>''')
 
@@ -293,8 +294,8 @@ def espalda_wordmark_synthwave(v: str) -> str:
   </g>
 </svg>
 <div style="position:absolute;bottom:170px;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%">
-  <div class="wm nc" style="font-size:126px;letter-spacing:3px;white-space:nowrap">RETRO<b>TARROS</b></div>
-  <div class="tag nc" style="font-size:25px;letter-spacing:7px;margin-top:30px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
+  <div class="wm ny" style="font-size:126px;letter-spacing:3px;white-space:nowrap">RETRO<b>TARROS</b></div>
+  <div class="tag ny" style="font-size:25px;letter-spacing:7px;margin-top:30px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
 </div>
 </div>''')
 
@@ -346,8 +347,8 @@ def espalda_tarrovision(v: str) -> str:
   <rect x="650" y="800" width="130" height="62" fill="#160d2e" stroke="{PU}" stroke-width="5"/>
 </svg>
 <div style="position:absolute;bottom:130px;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%">
-  <div class="wm nc" style="font-size:114px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
-  <div class="tag nc" style="font-size:23px;letter-spacing:6px;margin-top:24px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
+  <div class="wm ny" style="font-size:114px;letter-spacing:4px;white-space:nowrap">RETRO<b>TARROS</b></div>
+  <div class="tag ny" style="font-size:23px;letter-spacing:6px;margin-top:24px;white-space:nowrap">NOSTALGIA + JUEGOS + MUSICA</div>
 </div>
 </div>''')
 
