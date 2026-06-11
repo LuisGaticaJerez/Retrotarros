@@ -37,6 +37,15 @@ texto y líneas finas; en tela oscura evitar negro/morado muy oscuro. Los textos
 DENTRO de un dispositivo (EN VIVO, TARROVISION) tienen fondo oscuro propio, así
 que van en amarillo y se ven bien en ambas telas.
 
+### Contorno "chrome" synthwave (obligatorio en todo wordmark/tagline)
+
+Todo wordmark y tagline lleva un **contorno oscuro** (text-shadow multidir,
+`#150026`) — el clásico texto delineado synthwave. Despega la palabra de
+CUALQUIER fondo (el sol, la tela clara, los dispositivos) para que **nunca se
+pierda con el fondo**. En tela negra se suma el glow neón. Regla de diseño:
+ningún título debe camuflarse con lo que tiene detrás; si igual cae sobre una
+imagen saturada (sol), va en zona limpia o sobre placa/cápsula.
+
 En el generador esto es el flag de clase `.nc` (no-cyan) sobre el wordmark/tag;
 los colores se resuelven solos según `-dark`/`-light`.
 

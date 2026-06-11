@@ -50,7 +50,15 @@ def _css(variant: str) -> str:
     nc_retro = DK if light else "#FFA64D"      # RETRO
     nc_tarros = PU if light else "#FF6A00"     # TARROS
     nc_tag = PU if light else "#FF7A1A"        # tagline
-    nc_glow = "" if light else "text-shadow:0 0 12px rgba(255,106,0,.5);"
+    # Contorno oscuro synthwave ("chrome text"): despega el texto de CUALQUIER
+    # fondo (el sol, la tela clara, los dispositivos). En negra, ademas, el glow
+    # neon. Esto evita que las palabras se pierdan con el fondo.
+    OL = "#150026"
+    ol = ",".join(f"{x}px {y}px 0 {OL}" for x, y in
+                  [(-3, -3), (3, -3), (-3, 3), (3, 3), (-3, 0), (3, 0), (0, -3), (0, 3)])
+    wm_glow = ", 0 0 18px rgba(255,46,136,.6)" if glow else ""
+    tag_glow = ", 0 0 10px rgba(0,229,255,.55)" if glow else ""
+    nctag_glow = ", 0 0 12px rgba(255,106,0,.55)" if glow else ""
     return f"""
 {FONTS}
 *{{margin:0;padding:0;box-sizing:border-box}}
@@ -66,15 +74,15 @@ def _css(variant: str) -> str:
   border:5px solid rgba(0,229,255,{'.30' if glow else '.5'});
   {'box-shadow:0 0 60px rgba(0,229,255,.22) inset, 0 0 50px rgba(124,47,240,.3);' if glow else ''}}}
 .wm{{font-family:Orbitron;font-weight:900;color:{ink};z-index:2;line-height:1;
-  {'text-shadow:0 0 16px rgba(255,46,136,.55);' if glow else ''}}}
+  text-shadow:{ol}{wm_glow};}}
 .wm b{{color:{CY}}}
-.tag{{font-family:'Press Start 2P';color:{CY};z-index:2;
-  {'text-shadow:0 0 10px rgba(0,229,255,.5);' if glow else ''}}}
+.tag{{font-family:'Press Start 2P';color:{CY};z-index:2;text-shadow:{ol}{tag_glow};}}
 /* REGLA: sin TarroBot (mascota/cara/palabra) NO hay cyan.
-   Letras segun tela para no camuflarse: blanca->negro+morado | negra->naranja. */
+   Letras segun tela para no camuflarse: blanca->negro+morado | negra->naranja.
+   Todo el texto lleva contorno oscuro (chrome synthwave) para no perderse. */
 .wm.nc{{color:{nc_retro}}}
 .wm.nc b{{color:{nc_tarros}}}
-.tag.nc{{color:{nc_tag};{nc_glow}}}
+.tag.nc{{color:{nc_tag};text-shadow:{ol}{nctag_glow};}}
 .px{{font-family:'Press Start 2P';z-index:2;line-height:1}}
 """
 
