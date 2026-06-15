@@ -215,6 +215,18 @@ python scripts/capture-slides.py <slug>
 
 **Requisitos (una sola vez):** `pip install playwright && python -m playwright install chromium`.
 
+## Capa de notas (teleprompter) en los HTML de estudio — desde 2026-06-15
+
+Los HTML de ranking del formato nuevo llevan una **capa de notas de lectura** para los presentadores, separada de lo que ve el público:
+
+- **Modo captura (por defecto):** limpio, solo la info pública. Es lo que toma `capture-slides.py` (que además fuerza `read-mode` off por seguridad). Las notas NUNCA salen en los PNG.
+- **Modo lectura:** tecla **`N`**, click en la `N` de la barra inferior, o `?notas=1`. Muestra un panel a la **derecha** con las notas por slide. Badge "MODO LECTURA" cuando está activo.
+- Implementación: `<aside class="notas">` dentro de cada `.slide`, oculto por `display:none`; se revela con `body.read-mode .slide.active .notas`.
+
+**REGLA de contenido de las notas (Luis 2026-06-15):** las notas deben dar **MÁS información de la que aparece en pantalla**, para que en cámara podamos **elegir qué decir** — NO repetir casi textual el "por qué" visible. Meter data extra: anécdotas, cifras de respaldo, ángulos alternativos, contexto histórico, cue de reacción, transición. Si la nota dice casi lo mismo que el slide, está mal y hay que enriquecerla.
+
+Los slides de prep del formato viejo (SETUP, CHECKLIST) ya **no** van como páginas de captura: su contenido se mueve a las notas. Patrón de referencia: `studio/psvita-top-mundial.html`.
+
 ## Workflow obligatorio al cerrar cambios
 
 Cualquier sesión que modifique HTMLs / imágenes / box arts / pautas / discusiones debe terminar con estos pasos en orden:
