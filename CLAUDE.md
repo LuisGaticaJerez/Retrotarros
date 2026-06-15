@@ -67,7 +67,15 @@ Canal de YouTube en español sobre **Nostalgia + Juegos + Música** (retrogaming
 ## Protagonistas
 
 - **Luis Balbrigame** — rigor histórico, investigación, estructura narrativa. Cámara en lane Luis.
-- **Koko** — colección física grande de juegos/consolas, toca batería. Cámara en lane Koko y episodios largos.
+- **Coco** (Jorge "Coco" Yarur) — toca batería; cámara en lane Coco y episodios largos. El nombre correcto es **Coco** (docs/archivos viejos lo llaman "Koko" — quedó como nombre heredado).
+
+### REGLA — La colección es de RETROTARROS, no de una persona (Luis, 2026-06-15)
+
+El **dueño de la colección es Retrotarros** (el canal/estudio). Luis y Coco son los **presentadores**, no los dueños. Por eso, en pantalla, guion, notas y copies:
+
+- Se habla de **la colección de Retrotarros**: tags **"EN LA COLECCIÓN" / "NO ESTÁ EN LA COLECCIÓN"**, y frases tipo "esto lo tenemos / esto nos falta".
+- **NUNCA** "Coco lo tiene", "a Coco le falta", "la colección de Coco". La posesión es del canal, no de una persona.
+- El presentador es **Coco** (no "Koko"). Los slugs/archivos heredados (`coleccion_koko.csv`, `archivo-koko`, clase CSS `koko-tag`) son paths internos y **no** se renombran por ahora; la regla aplica al texto visible/hablado.
 
 ## REGLA INMUTABLE — Tono y lengua
 
