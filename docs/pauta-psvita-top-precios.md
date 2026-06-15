@@ -8,15 +8,24 @@
 
 Documento de trabajo · Luis Balbrigame & Koko
 
+> **Sincronizado con `studio/psvita-top-precios.html` (formato TarroVisión).** Los
+> precios y el ranking de esta pauta reflejan EXACTAMENTE lo que muestra el HTML.
+> Si tocas uno, toca el otro. Valores CIB aproximados, PriceCharting 2026.
+
 ---
 
 ## Propósito de esta pauta
 
-Episodio sobre el ranking de precios PS Vita 2026 (PriceCharting CIB USD + EU). La PS Vita es **EL caso paradigmático del coleccionismo de consola abandonada por el fabricante**: catálogo chico, mucho indie con Limited Run, JP exclusives valiosos, ediciones europeas escasas. Resultado: precios que en 2018 eran $30 hoy son $500+.
+Episodio sobre el ranking de precios PS Vita 2026. La PS Vita es **EL caso paradigmático del coleccionismo de consola abandonada por el fabricante**: catálogo chico, mucho JRPG nicho, ediciones Limited Run de tirada mínima. Resultado: cartuchos que en 2018 costaban $30 hoy valen cientos o miles.
 
-El ángulo: *"Cinco años después que Sony mató la PS Vita en 2019, los cartuchos físicos valen más que los Switch que salieron el mismo año. La economía del coleccionismo en consolas que el dueño abandonó."*
+El ángulo: *"Cinco años después que Sony mató la PS Vita en 2019, los cartuchos físicos valen más que nunca. La economía del coleccionismo en consolas que el dueño abandonó."*
 
-> **Estado:** pendiente grabar. Pauta y HTML listos.
+**Estructura en TRES ligas** (así está armado el HTML, no mezclar):
+1. **RETAIL** — los que se vendieron en tiendas. Techan en un par de cientos de dólares.
+2. **LIMITED RUN / coleccionista** — tiradas mínimas de LRG. Juegan en los miles.
+3. **EL GRIAL** — Binding of Isaac: Rebirth, en otro planeta.
+
+> **Estado:** pendiente grabar. Pauta y HTML sincronizados.
 
 ---
 
@@ -24,67 +33,56 @@ El ángulo: *"Cinco años después que Sony mató la PS Vita en 2019, los cartuc
 
 - **Catálogo total publicado:** ~1,500 juegos (físico + digital)
 - **Físicos solamente:** ~700
-- **Limited Run Games releases para PS Vita:** ~120 títulos
+- **Limited Run Games releases para PS Vita:** ~120 títulos (tiradas de 3,000-5,000 por SKU)
 - **Última manufactura mundial:** **marzo 2019** (Sony cerró producción)
-- **PSN PS Vita store cerró:** julio 2021 (luego revertido bajo presión pública, pero compra digital sigue rota)
+- **PSN PS Vita store:** cerró julio 2021 (revertido bajo presión, pero la compra digital sigue rota)
 
 **Resultado:** **lo que es físico hoy es todo lo que va a haber para siempre.** Eso disparó los precios.
 
 ---
 
-## El Top 10 mundial de precios PS Vita (mayo 2026)
+## LIGA 1 · El Top 10 RETAIL (vendidos en tiendas)
 
-Datos cruzados de PriceCharting USA + VGPC EU + auction history. Solo cartuchos retail NTSC USA + algunas excepciones regionales marcadas.
+Solo juegos retail. Valores CIB aproximados (PriceCharting, 2026). El #1 se escapa de la liga.
 
-| # | Juego | CIB USD | Por qué cuesta tanto |
-|---|-------|---------|----------------------|
-| 1 | **Invizimals: The Alliance** (PAL EU) | **$320** | Exclusivo SCEE, distribuido en supermercados europeos, Magenta Software cerrado |
-| 2 | Dragon's Crown | $280 | VanillaWare, tirada baja NTSC, port a PS4 hizo que la versión PSV se volviera rareza |
-| 3 | Disgaea 4: A Promise Revisited | $250 | Nippon Ichi · localización limitada · sin reedición |
-| 4 | Soul Sacrifice Delta | $230 | Sony Japan Studio · localizado NA en tiraje pequeño |
-| 5 | Hatsune Miku: Project Diva F 2nd | $220 | Sega · cult fanbase · OST con copyright = sin reediciones |
-| 6 | Atelier Rorona Plus | $200 | Gust · JRPG nicho · NTSC USA tirada chica |
-| 7 | Toukiden 2 | $185 | Koei Tecmo · port a PS4 lo dejó como "el viejo formato físico" |
-| 8 | Trails of Cold Steel (Trails II) | $175 | Falcom · JRPG cult · localización Xseed tirada baja |
-| 9 | Persona 4 Golden Solid Gold Premium Edition | $170 | Atlus · edición limitada con steelbook + soundtrack |
-| 10 | Silent Hill: Book of Memories | $160 | Konami · saga muerta + horror nicho = rareza |
+| # | Juego | Año | Editor | CIB aprox. (USD) | Por qué cuesta tanto |
+|---|-------|-----|--------|------------------|----------------------|
+| 1 | **Persona 4 Golden: Solid Gold Premium Edition** | 2012 | Atlus | **200** | Edición de lanzamiento con steelbook dorado y OST. El P4G más buscado: el rey retail, ~200 y subiendo. |
+| 2 | Muramasa Rebirth | 2013 | Aksys | 150 | Action de Vanillaware con espadas, arte 2D brutal. Tirada chica de Aksys: ronda los 150. |
+| 3 | The Legend of Heroes: Trails of Cold Steel II | 2016 | XSEED | 130 | JRPG querido de Falcom, salió tarde y en poca cantidad. De los retail más buscados: 130+. |
+| 4 | Disgaea 4: A Promise Revisited | 2014 | NIS America | 100 | Tactical JRPG enorme, tirada NISA limitada. Pasa los 100 completo y subiendo. |
+| 5 | Silent Hill: Book of Memories | 2012 | Konami | 90 | El único Silent Hill de Vita (spin-off dungeon crawler). Rareza por marca: ronda los 90. |
+| 6 | Atelier Rorona Plus | 2014 | NIS America | 85 | JRPG de alquimia de Gust, tirada NISA limitada. Saga de coleccionistas: completo pasa los 85. |
+| 7 | Toukiden 2 | 2017 | Koei Tecmo | 75 | Cazador de demonios estilo Monster Hunter, lanzado tarde en la vida de la Vita. Pocas copias. |
+| 8 | Ys: Memories of Celceta | 2013 | XSEED | 70 | Action-RPG de Falcom localizado por XSEED. Localizaciones chicas = precios que suben. |
+| 9 | Dragon's Crown | 2013 | Atlus | 65 | Beat-em-up de Vanillaware, arte pintado a mano. Clásico de la consola que sube de a poco. |
+| 10 | Hatsune Miku: Project Diva F 2nd | 2014 | Sega | 55 | Rhythm de culto. Tirada moderada y demanda alta de fans: hoy un completo ronda los 55. |
 
-**Lectura del ranking:**
-- **6 de los 10 son JRPG / Action JP** — el público adulto japonés mantuvo la PS Vita viva en Japón hasta 2019.
-- **3 son ediciones limitadas o premium** — Limited Run Games + Solid Gold Persona.
-- **Ningún Mario, Zelda, Pokémon** — esa es la trampa: en consolas Nintendo los franquicia first-party dominan; en Sony los caros son nicho third-party.
-
----
-
-## El Kicker · las ediciones Limited Run Games
-
-Limited Run Games hizo **120+ títulos para PS Vita** entre 2015-2020. Tiradas típicas de 3,000-5,000 copias por SKU. Hoy son los releases más cotizados del catálogo.
-
-| Ed. Limited Run cara | CIB USD aprox. |
-|----------------------|----------------|
-| Velocity 2X: Critical Mass Edition | $75 |
-| Shantae: Half-Genie Hero (Risky Beats) | $80 |
-| OlliOlli 2: Welcome to OlliWood | $90 |
-| Steins;Gate Limited Edition | $140 |
-| Tokyo Mirage Sessions (no LRG pero limited) | $120 |
-| Mighty No. 9 LRG | $95 |
-
-**Dato bomba:** muchos coleccionistas compraron 2 copias en 2018 ($35 cada una) — una para abrir y otra para vender. **Hoy las copias selladas LRG triplicaron de precio.**
+**Lectura del ranking retail:**
+- **Dominan JRPG / Action JP** (Falcom, NIS, Gust, Atlus, Vanillaware) — el público adulto japonés mantuvo viva la Vita hasta 2019.
+- **El retail techa en ~$200** (Persona 4 Golden Solid Gold). De ahí para arriba ya no es retail: es Limited Run.
+- **Ningún Mario, Zelda, Pokémon** — esa es la trampa: en Nintendo mandan los first-party; en Sony los caros son nicho third-party.
 
 ---
 
-## El dato Koko · "tengo una"
+## LIGA 2 · Limited Run Games (no se vendieron en tiendas)
 
-**Callback al episodio `psvita-archivo-koko`.** En el top 10 mundial de precios, Koko tiene **3 cartuchos** en su colección:
+Tiradas mínimas de Limited Run Games y ediciones de coleccionista. Otra liga de precios, miles de dólares.
 
-- **Silent Hill: Book of Memories** (#10 · $160 USD ≈ €93 que pagó CIB)
-- **Velocity 2X Critical Mass Edition** (top Limited Run · $75 USD ≈ €52)
-- **Shantae: Half-Genie Hero Risky Beats** (top Limited Run · $80 USD ≈ €45)
+| Juego | Año | Sello | CIB aprox. (USD) | Por qué |
+|-------|-----|-------|------------------|---------|
+| A.W.: Phoenix Festa | 2016 | Bandai Namco · LRG | ~600 | Tirada mínima de LRG. Suelto ronda 450, completo pasa los 600. |
+| VVVVVV | 2017 | Limited Run | ~1.000 | Plataformero indie en físico vía LRG. Suelto sobre 800, completo supera los mil. |
+| Revenge of the Bird King | 2019 | Limited Run · LRG FINAL | ~1.200 | Pensado como el último lanzamiento físico de Vita de LRG. Rareza histórica de la consola. |
+| 1001 Spikes | 2014 | Limited Run | ~1.500 | Una de las primeras LRG y de las más escasas. Hoy ronda los mil quinientos. |
 
-Y además tiene la joya europea que ENCABEZA el ranking:
-- **Invizimals: The Alliance** (#1 mundial · $320 USD ≈ €240 que pagó CIB)
+---
 
-**Conclusión:** la colección de Koko tiene **4 de los 16 cartuchos más caros del mercado mundial PS Vita**. Eso es 25% de captura del top, sin haber comprado con intención de inversión.
+## LIGA 3 · EL SANTO GRIAL
+
+**The Binding of Isaac: Rebirth** — 2015 · Limited Run · tirada mínima · **CIB ~USD 4.000**
+
+> El santo grial de la Vita. Tirada tan mínima que los coleccionistas dudaban que existiera en físico. Un completo en caja supera los cuatro mil dólares: **el juego de Vita más caro del planeta.**
 
 ---
 
@@ -92,80 +90,84 @@ Y además tiene la joya europea que ENCABEZA el ranking:
 
 ### Bloque 1 · Cold open (0:00 – 1:00)
 
-Plano cerrado del cartucho Invizimals + billete de 100 dólares al lado. Luis: *"Este cartucho de PlayStation Vita vale más de trescientos dólares hoy. Sony lo lanzó en 2014. Lo distribuyó solo en supermercados europeos. Y en cinco años pasó de costar veinte euros a costar trescientos."*
+Plano cerrado de un cartucho Vita caro (Persona 4 Golden Solid Gold o Muramasa). Luis: *"Esta consola la mató Sony en marzo de dos mil diecinueve. Y desde ese día, los cartuchos físicos no paran de subir. Hoy te muestro los diez más caros que se vendieron en tiendas... y después los que nunca llegaron a una tienda y valen miles."*
 
 ### Bloque 2 · Setup (1:00 – 2:30)
 
 - Por qué los precios PS Vita son altos: Sony cerró producción en marzo 2019.
 - Catálogo finito → demanda creciente → precios al alza.
-- El factor Limited Run Games (tiradas de 3-5k).
+- Las TRES ligas: retail, Limited Run, el grial.
 
-### Bloque 3 · Cuenta regresiva top 10 (2:30 – 14:00)
+### Bloque 3 · Cuenta regresiva RETAIL #10 → #1 (2:30 – 13:00)
 
-11-12 min para 10 juegos = ~70 seg promedio (la reacción al valor toma tiempo).
+~10 min para 10 juegos = ~60 seg promedio.
 
 **Estructura por slide:**
-- Imagen del juego + posición + precio en USD.
-- Luis explica por qué cuesta tanto.
-- Koko reacciona.
-- Si Koko tiene una copia (slides #1, #5/Velocity, #8/Shantae, #10), reacción especial: "tengo una".
+- Imagen del juego + posición + precio CIB en USD.
+- Luis explica el "por qué" (está en la tabla).
+- Koko reacciona al valor.
 
-### Bloque 4 · Limited Run Kicker (14:00 – 16:00)
+### Bloque 4 · Liga Limited Run (13:00 – 16:00)
 
-- Mostrar el patrón LRG: tirada 3-5k, precio inicial $30, hoy $75-140.
-- Dato: muchos coleccionistas compraron doble en 2018 para revender.
+- El patrón LRG: tirada 3-5k, precio inicial ~$30, hoy cientos a miles.
+- Phoenix Festa $600 → VVVVVV $1.000 → Revenge of the Bird King $1.200 → 1001 Spikes $1.500.
 
-### Bloque 5 · "Tengo cuatro" + cierre (16:00 – 19:00)
+### Bloque 5 · El grial + cierre (16:00 – 19:00)
 
-- Slide especial: 4 de los 16 más caros del mundo están en la colección de Koko.
-- Frase fija de cierre:
+- Slide grial: **Binding of Isaac: Rebirth ~$4.000**, el Vita físico más caro del mundo.
+- Cierre (igual al HTML):
 
-> *"Cinco años después que Sony mató la PlayStation Vita en marzo de dos mil diecinueve, los cartuchos físicos valen lo que valen porque ya no se va a fabricar uno más. Esta consola fue una de las primeras víctimas del modelo digital — Sony dejó de producir físico pero el PSN store cerró y abrió tres veces. Lo único estable es lo que ya está en cajas en la casa de la gente. Y Koko tiene cuatro de los dieciséis más caros del mundo. Sin haber comprado con intención de invertir. Eso es el coleccionismo de consolas abandonadas: tu hobby se convierte en inversión sin avisarte."*
+> *"El retail Vita techa en un par de cientos de dólares: JRPG de NISA, XSEED, Falcom. Pero las Limited Run juegan en los miles, y el grial Binding of Isaac está en otro planeta. Cinco años después que Sony mató la consola, lo único estable es lo que ya está en cajas en la casa de la gente. Cuéntanos cuál de estos griales tienes o quisieras. Suscríbete para la próxima consola."*
 
 ---
 
 ## Anclas para cámara
 
-1. **Invizimals: The Alliance = $320 USD CIB · #1 mundial.** Exclusivo SCEE.
-2. **Sony cerró producción PS Vita en marzo de 2019** — todo lo físico es finito desde entonces.
-3. **Limited Run Games hizo 120+ títulos PS Vita.** Tiradas de 3,000-5,000.
-4. **Velocity 2X subió de $35 a $75 en 6 años.**
-5. **6 de los 10 más caros son JRPG / Action JP** — público adulto japonés mantuvo viva la consola.
-6. **Dragon's Crown $280** — VanillaWare. Port a PS4 hizo que el físico PSV se volviera rareza.
-7. **PSN store cerró en 2021** (luego revertido) — el caos digital empujó coleccionismo físico.
-8. **Koko tiene 4 de los 16 más caros del mundo.** Total ~$735 USD si los vendiera.
-9. **Persona 4 Golden Solid Gold Premium Edition = $170** — el coleccionable Atlus.
-10. **Steins;Gate Limited Edition $140** — fanbase visual novel sostiene precios.
+1. **Persona 4 Golden Solid Gold = $200 CIB · #1 retail.** Steelbook dorado + OST.
+2. **El retail Vita techa en ~$200** — de ahí para arriba ya es Limited Run.
+3. **Sony cerró producción PS Vita en marzo de 2019** — todo lo físico es finito desde entonces.
+4. **Limited Run Games hizo 120+ títulos PS Vita.** Tiradas de 3,000-5,000.
+5. **VVVVVV LRG ronda los $1.000** completo — un plataformero indie en físico.
+6. **1001 Spikes ~$1.500** — una de las primeras y más escasas LRG.
+7. **Binding of Isaac: Rebirth ~$4.000** — el santo grial, el Vita físico más caro del mundo.
+8. **Dominan los JRPG / Action JP** (Falcom, NIS, Gust, Atlus) — público adulto japonés.
+9. **Muramasa Rebirth $150 + Dragon's Crown $65** — dos Vanillaware, distinta tirada, distinto precio.
+10. **PSN store cerró en 2021** (luego revertido) — el caos digital empujó el coleccionismo físico.
 
 ---
 
 ## Shorts derivados (mínimo 6)
 
-1. "El cartucho PS Vita más caro vale 320 dólares · y no es lo que pensás" — Invizimals.
+1. "El juego de PS Vita más caro del mundo vale 4.000 dólares" — Binding of Isaac Rebirth.
 2. "Sony mató la PS Vita en 2019 · y los precios explotaron desde ese día".
 3. "Limited Run Games · cómo una distribuidora hizo que los indies fueran coleccionables".
-4. "Dragon's Crown costaba $40 en 2013 · hoy vale $280" — caso de revalorización.
-5. "Yo tengo 4 de los 16 cartuchos PS Vita más caros del mundo" — Koko muestra los suyos.
-6. "Por qué los JRPG japoneses dominan el ranking de precios PS Vita" — el factor public adulto JP.
+4. "El Persona 4 Golden dorado es el cartucho retail más caro de la Vita" — Solid Gold Edition.
+5. "Dos juegos de Vanillaware en Vita: uno vale 65 y otro 150 dólares · por qué".
+6. "Por qué los JRPG japoneses dominan el ranking de precios PS Vita".
 
 ---
 
 ## Conexión con el resto del arco
 
-- **Archivo:** los 4 cartuchos top de Koko ya aparecieron en archivo-koko.
-- **No-Latam:** muchos de los caros son juegos que NO llegaron a Latam (porque la consola no llegó).
-- **vs 3DS:** el contraste con 3DS — el 3DS tiene MUCHO MÁS catálogo pero precios más bajos porque Nintendo siguió produciendo hasta 2020.
+- **Archivo:** si Koko tiene alguno de estos en su colección, callback a `psvita-archivo-koko` (verificar en cámara cuáles tiene, sin guion).
+- **No-Latam:** muchos de los caros NO llegaron a Latam (la consola casi no llegó).
+- **vs 3DS:** el 3DS tiene MUCHO más catálogo pero precios más bajos, porque Nintendo siguió produciendo hasta 2020.
 
 ---
 
 ## Checklist antes de grabar
 
-- [ ] Verificar precios PriceCharting + VGPC mayo 2026 antes de grabar.
-- [ ] Memorizar 10 anclas + frase fija de cierre.
-- [ ] Cartuchos físicos a la vista: Invizimals + Silent Hill BoM + Velocity 2X + Shantae HGH.
+- [ ] Verificar precios PriceCharting + VGPC antes de grabar (las cifras fluctúan; presentarlas como "valor aproximado").
+- [ ] Memorizar las 3 ligas + el grial + frase de cierre.
+- [ ] Respetar el orden del HTML: retail #10→#1, luego Limited Run, luego grial.
 - [ ] Koko reacciona genuino a los precios — **NO darle los valores antes de cámara**.
-- [ ] Cronómetro visible · ~70 seg por slide del top 10.
+- [ ] Cronómetro visible · ~60 seg por slide del top retail.
 
 ---
 
 *RETROTARROS · Gen 8 portátil · Top precios PS Vita*
+
+**Última actualización:** 2026-06-14 (sincronizada con el HTML)
+**Slug:** `psvita-top-precios`
+**HTML asociado:** `studio/psvita-top-precios.html`
+**Discusión:** `docs/discusion-psvita-top-precios.md`
