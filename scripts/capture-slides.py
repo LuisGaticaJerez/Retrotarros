@@ -63,6 +63,10 @@ def capture(slug: str, width: int = 1920, height: int = 1080, scale: int = 2, wa
         # Esperar fuentes web (Orbitron, Share Tech Mono, etc.)
         page.wait_for_function("document.fonts.ready")
 
+        # Seguridad: forzar modo limpio (sin la capa de notas de lectura/teleprompter)
+        # para que las capturas nunca incluyan las notas de los hosts.
+        page.evaluate("document.body.classList.remove('read-mode')")
+
         total = page.evaluate("document.querySelectorAll('.slide').length")
         print(f"Slides detectados: {total}")
         print()

@@ -27,42 +27,12 @@ header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200;
 .deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
 .slide { position: absolute; inset: 0; padding: 28px 44px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .22s; }
 .slide.active { opacity: 1; pointer-events: auto; }
-.slide.doc { overflow-y: auto; padding: 32px 48px; }
 .slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
 .portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
 .portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
 .portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 62px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
 .portada .ep-title .accent { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.55); }
 .portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; }
-
-/* slides de documento (setup / cierre / checklist) */
-.slide h1 { font-family: 'Press Start 2P'; font-size: 13px; color: var(--ye); letter-spacing: 4px; margin-bottom: 6px; border-left: 4px solid var(--ye); padding-left: 16px; }
-.slide h2 { font-family: 'Orbitron'; font-weight: 900; font-size: 38px; color: #fff; letter-spacing: 1px; margin: 8px 0 20px 20px; line-height: 1.05; }
-.slide h2.cy { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.4); }
-.intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 16px; }
-.intro-card { background: var(--card-bg); border: 2px solid var(--cy); border-radius: 4px; padding: 24px; }
-.intro-card h3 { font-family: 'Press Start 2P'; font-size: 10px; color: var(--cy); letter-spacing: 2px; margin-bottom: 10px; }
-.intro-card p { font-family: 'Share Tech Mono'; font-size: 14px; color: rgba(255,255,255,.85); line-height: 1.55; }
-.intro-card.mg { border-color: var(--mg); }
-.intro-card.mg h3 { color: var(--mg); }
-.intro-card strong { color: var(--ye); }
-.cierre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 18px; }
-.cierre-card { background: var(--card-bg); border: 2px solid; border-radius: 4px; padding: 26px; }
-.cierre-card.cy { border-color: var(--cy); box-shadow: 0 0 22px rgba(0,229,255,.18); }
-.cierre-card.mg { border-color: var(--mg); box-shadow: 0 0 22px rgba(255,46,136,.18); }
-.cierre-card h3 { font-family: 'Press Start 2P'; font-size: 11px; letter-spacing: 2px; margin-bottom: 14px; }
-.cierre-card.cy h3 { color: var(--cy); } .cierre-card.mg h3 { color: var(--mg); }
-.cierre-card p { font-family: 'Share Tech Mono'; font-size: 15px; color: rgba(255,255,255,.85); line-height: 1.6; }
-.cierre-card p strong { color: var(--ye); }
-.cam-quote { background: rgba(255,210,63,.07); border-left: 4px solid var(--ye); padding: 22px 26px; margin-top: 22px; font-family: 'Share Tech Mono'; font-size: 16px; font-style: italic; color: rgba(255,255,255,.88); line-height: 1.6; }
-.cam-quote .lbl { display: block; font-style: normal; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 10px; }
-.cam-quote strong { color: var(--ye); font-style: normal; }
-ul.checklist { list-style: none; margin-top: 10px; }
-ul.checklist li { padding: 14px 20px; border-left: 4px solid; margin-bottom: 10px; font-family: 'Share Tech Mono'; font-size: 16px; line-height: 1.5; }
-ul.checklist li.ye { border-color: var(--ye); background: rgba(255,210,63,.05); }
-ul.checklist li.cy { border-color: var(--cy); background: rgba(0,229,255,.05); }
-ul.checklist li.mg { border-color: var(--mg); background: rgba(255,46,136,.05); }
-ul.checklist li strong.ye { color: var(--ye); } ul.checklist li strong.cy { color: var(--cy); } ul.checklist li strong.mg { color: var(--mg); }
 
 /* HIBRIDO (formato TarroVision) */
 .slide-hybrid { display: grid; grid-template-rows: auto 1fr auto auto; height: 100%; gap: 14px; max-width: 1400px; margin: 0 auto; }
@@ -87,16 +57,11 @@ ul.checklist li strong.ye { color: var(--ye); } ul.checklist li strong.cy { colo
 .cart-fallback .title { font-family: 'Orbitron'; font-weight: 900; font-size: clamp(14px, 1.8vw, 22px); line-height: 1.05; color: #fff; letter-spacing: .5px; text-shadow: 0 2px 4px rgba(0,0,0,.5); z-index: 2; }
 .cart-fallback .sub { font-family: 'Press Start 2P'; font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,.7); margin-top: 8px; z-index: 2; }
 .cart-console { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-family: 'Press Start 2P'; font-size: 7px; letter-spacing: 3px; color: rgba(255,255,255,.22); z-index: 4; }
-.lb-default { --label-1:#2D1B69; --label-2:#4a2a99; }
-.lb-mario   { --label-1:#a01818; --label-2:#d62828; }
-.lb-zelda   { --label-1:#1a4a1a; --label-2:#2f7a2f; }
 .lb-rpg     { --label-1:#5a1a8a; --label-2:#8a2fc4; }
 .lb-action  { --label-1:#a01818; --label-2:#d62828; }
 .lb-metroid { --label-1:#3a1a6b; --label-2:#5a2a9b; }
 .lb-yoshi   { --label-1:#1a6b3a; --label-2:#2f9b5a; }
-.lb-dkc     { --label-1:#7a3a1a; --label-2:#b85820; }
 .lb-eb      { --label-1:#c2872f; --label-2:#e8b04a; }
-.lb-kart    { --label-1:#c25c00; --label-2:#ff8a1f; }
 .lb-fox     { --label-1:#1a2a4a; --label-2:#3a5fa0; }
 .lb-gris    { --label-1:#3a3a3f; --label-2:#6a6a70; }
 
@@ -127,6 +92,19 @@ ul.checklist li strong.ye { color: var(--ye); } ul.checklist li strong.cy { colo
 .game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 6px; }
 .game-why strong { color: var(--ye); }
 
+/* ============ CAPA DE NOTAS DE LECTURA (teleprompter) ============
+   Oculta por defecto -> las capturas salen limpias. Se activa con la tecla N
+   o abriendo el HTML con ?notas=1. NUNCA aparece en capture-slides.py. */
+.notas { position: absolute; top: 0; right: 0; width: 460px; height: 100%; z-index: 150; display: none; flex-direction: column; gap: 10px; padding: 26px 22px 30px; overflow-y: auto; background: linear-gradient(90deg, rgba(6,3,15,.55) 0%, rgba(6,3,15,.96) 26%); border-left: 2px solid var(--ye); backdrop-filter: blur(2px); }
+body.read-mode .slide.active .notas { display: flex; }
+.notas h4 { font-family: 'Press Start 2P'; font-size: 9px; color: var(--ye); letter-spacing: 2px; margin-top: 4px; }
+.notas h4:first-child { margin-top: 0; }
+.notas .n-line { font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.5; color: rgba(255,255,255,.92); border-left: 3px solid var(--cy); padding: 3px 0 3px 11px; }
+.notas .n-cue { border-left-color: var(--mg); color: var(--ye); }
+.notas .n-cue b { color: #fff; }
+.read-indicator { position: fixed; top: 64px; right: 16px; z-index: 300; font-family: 'Press Start 2P'; font-size: 8px; color: #000; background: var(--ye); padding: 6px 10px; border-radius: 3px; display: none; box-shadow: 0 0 14px rgba(255,210,63,.5); }
+body.read-mode .read-indicator { display: block; }
+
 nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
 .nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
 .nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
@@ -144,6 +122,8 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
 </head>
 <body>
 
+<div class="read-indicator">● MODO LECTURA (N)</div>
+
 <header>
   <div class="hdr-logo">RETROTARROS</div>
   <div class="hdr-tag">ESTUDIO · TOP MUNDIAL PSV · GEN 8</div>
@@ -159,30 +139,20 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="ep-title">TOP 10 <span class="accent">PS VITA</span> MUNDIAL</div>
       <div class="ep-sub">LO QUE LA CRITICA AMA · DEL #10 AL #1</div>
     </div>
-  </section>
-
-  <section class="slide doc">
-    <span class="slide-num">02</span>
-    <h1>BLOQUE 2 · SETUP</h1>
-    <h2 class="cy">El consenso de 5 fuentes · y el dato Coco</h2>
-    <div class="intro-grid">
-      <div class="intro-card">
-        <h3>FUENTES CONSULTADAS</h3>
-        <p>IGN, GameSpot, Push Square, Eurogamer, Metacritic. <strong>Los primeros 5 son consenso absoluto</strong>. Del 6 al 10 hay rotacion, pero estos son los mas mencionados.</p>
-      </div>
-      <div class="intro-card mg">
-        <h3>EL DATO COCO</h3>
-        <p><strong>Coco tiene 8 de los 10</strong> en su coleccion, sin haber leido critica antes. <strong>La critica acerto con el coleccionista.</strong></p>
-      </div>
-    </div>
-    <div class="cam-quote">
-      <span class="lbl">PARA CAMARA</span>
-      "Diez juegos. La critica del mundo entero coincide en que estos son los mejores de la PS Vita. Y Coco tiene ocho de los diez en su coleccion sin haber leido ninguna lista. Eso ya es <strong>un dato</strong>."
-    </div>
+    <aside class="notas">
+      <h4>INTRO (LEER)</h4>
+      <div class="n-line">Diez juegos. La critica del mundo entero coincide en que son los mejores de la PS Vita. Del #10 al #1.</div>
+      <div class="n-line">Fuentes: IGN, GameSpot, Push Square, Eurogamer, Metacritic. Los primeros 5 = consenso absoluto.</div>
+      <div class="n-cue">EL DATO COCO: <b>tiene 8 de los 10</b> en su coleccion, sin haber leido critica antes. La critica acerto con el coleccionista.</div>
+      <h4>ANTES DE GRABAR</h4>
+      <div class="n-line">Cartuchos fisicos del top a la vista. Anecdota de 15-20 seg por cada uno que Coco tenga.</div>
+      <div class="n-line">Ritmo ~90 seg por slide. Persona 4 Golden (#1) puede tomar 2 min: es el climax.</div>
+      <div class="n-line">Memorizar la frase fija de cierre (esta en el ultimo slide).</div>
+    </aside>
   </section>
 
   <section class="slide">
-    <span class="slide-num">03</span>
+    <span class="slide-num">02</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">90</span></div><div class="koko-tag no">NO ESTA EN LA COLECCION</div></div></div>
       <div class="hybrid-body">
@@ -199,10 +169,16 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">SPELUNKY</div><div class="game-meta">VITA · 2013 · MOSSMOUTH · ROGUELIKE</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE LO AMA LA CRITICA</span>Roguelike perfecto: cada partida es nueva, fisica precisa, diseno que ensena sin tutoriales. <strong>Metacritic 90</strong>. La Vita era ideal para el formato: partida corta, controles fisicos. Coco no lo tiene: recomendacion abierta para los comentarios.</div>
     </div>
+    <aside class="notas">
+      <h4>PARA LEER · #10</h4>
+      <div class="n-line">Roguelike de Mossmouth. Cada muerte ensena. La Vita era ideal: partida corta + controles fisicos.</div>
+      <div class="n-line">Metacritic 90, el indie mas puro del top.</div>
+      <div class="n-cue">NO esta en la coleccion -> "este me falta". Recomendacion abierta a los comentarios.</div>
+    </aside>
   </section>
 
   <section class="slide">
-    <span class="slide-num">04</span>
+    <span class="slide-num">03</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">84</span></div><div class="koko-tag has">★ EN LA COLECCION</div></div></div>
       <div class="hybrid-body">
@@ -219,10 +195,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">SOUL SACRIFICE (BASE + DELTA)</div><div class="game-meta">VITA · 2013-14 · SONY JAPAN STUDIO + COMCEPT · DARK ACTION</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE LO AMA LA CRITICA</span>Keiji Inafune (Mega Man) en Comcept, co-desarrollado con Sony Japan Studio. <strong>Premisa oscura: sacrificas a tus aliados por poder magico</strong>. Cult absoluto. Coco tiene la base; la version Delta expandida es la rara y cotizada del par.</div>
     </div>
+    <aside class="notas">
+      <h4>PARA LEER · #9</h4>
+      <div class="n-line">Keiji Inafune (Mega Man) + Sony Japan Studio. Sacrificas aliados por poder magico. MC 84.</div>
+      <div class="n-cue">Coco tiene la BASE. La version DELTA expandida es la rara y cotizada -> callback al top precios.</div>
+    </aside>
   </section>
 
   <section class="slide">
-    <span class="slide-num">05</span>
+    <span class="slide-num">04</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">86</span></div><div class="koko-tag has">★ EN LA COLECCION</div></div></div>
       <div class="hybrid-body">
@@ -239,10 +220,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">DANGANRONPA 2: GOODBYE DESPAIR</div><div class="game-meta">VITA · 2014 · SPIKE CHUNSOFT · VISUAL NOVEL</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE LO AMA LA CRITICA</span>Visual novel + investigacion + juicios en una isla tropical. <strong>El doble del primer Danganronpa</strong>. Spike Chunsoft con Kazutaka Kodaka: narrativa de muerte y misterio constante. Cult masivo. Coco la tiene.</div>
     </div>
+    <aside class="notas">
+      <h4>PARA LEER · #8</h4>
+      <div class="n-line">Visual novel + investigacion + juicios en una isla. Spike Chunsoft / Kazutaka Kodaka. MC 86.</div>
+      <div class="n-cue">Coco la tiene -> anecdota: como llego a su coleccion.</div>
+    </aside>
   </section>
 
   <section class="slide">
-    <span class="slide-num">06</span>
+    <span class="slide-num">05</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">89</span></div><div class="koko-tag no">NO ESTA EN LA COLECCION</div></div></div>
       <div class="hybrid-body">
@@ -259,10 +245,16 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">HOTLINE MIAMI</div><div class="game-meta">VITA · 2013 · DENNATON · TOP-DOWN + SYNTHWAVE</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE LO AMA LA CRITICA</span><strong>Top-down ultra-violento con OST synthwave</strong> que se volvio referencia cultural. Dennaton hizo el indie definitivo de la generacion. Metacritic 89 universal. El port a Vita es la version preferida por muchos criticos. Coco no lo tiene: recomendacion abierta.</div>
     </div>
+    <aside class="notas">
+      <h4>PARA LEER · #7</h4>
+      <div class="n-line">Top-down ultraviolento + OST synthwave, referencia cultural. Dennaton. MC 89.</div>
+      <div class="n-line">El port a Vita es el favorito de muchos criticos (portatil = se juega distinto).</div>
+      <div class="n-cue">NO esta en la coleccion -> recomendacion abierta.</div>
+    </aside>
   </section>
 
   <section class="slide">
-    <span class="slide-num">07</span>
+    <span class="slide-num">06</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">86</span></div><div class="koko-tag has">★ EN LA COLECCION</div></div></div>
       <div class="hybrid-body">
@@ -279,10 +271,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">FINAL FANTASY X / X-2 HD REMASTER</div><div class="game-meta">VITA · 2014 · SQUARE ENIX · DOS JRPG EN UN CARTUCHO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE LO AMA LA CRITICA</span>Dos JRPG masivos en un cartucho. <strong>Final Fantasy X (2001) sigue siendo top 5 de la saga para muchos criticos</strong>. La version Vita es la portatil definitiva. El primer FF en cartucho desde Pokemon.</div>
     </div>
+    <aside class="notas">
+      <h4>PARA LEER · #6</h4>
+      <div class="n-line">Dos JRPG en un cartucho. FFX (2001) sigue top 5 de la saga. MC 86.</div>
+      <div class="n-cue">Coco lo tiene -> su primer FF en cartucho desde Pokemon (gancho personal).</div>
+    </aside>
   </section>
 
   <section class="slide">
-    <span class="slide-num">08</span>
+    <span class="slide-num">07</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">78</span></div><div class="koko-tag has">★ EN LA COLECCION</div></div></div>
       <div class="hybrid-body">
@@ -299,10 +296,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">KILLZONE: MERCENARY</div><div class="game-meta">VITA · 2013 · SONY CAMBRIDGE · FPS</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE LO AMA LA CRITICA</span><strong>El unico FPS portatil de su epoca con tecnologia de consola</strong>. Sony Cambridge uso el motor de Killzone 3 modificado. Multiplayer cross-region. La critica lo amo porque probo que la Vita podia hacer AAA. Lastima que Sony abandono la consola justo despues.</div>
     </div>
+    <aside class="notas">
+      <h4>PARA LEER · #5</h4>
+      <div class="n-line">Unico FPS portatil con tech de consola (motor Killzone 3). Sony Cambridge. MC 78.</div>
+      <div class="n-cue">Coco lo tiene. Probo que la Vita podia AAA... justo antes que Sony la abandonara (ironia).</div>
+    </aside>
   </section>
 
   <section class="slide">
-    <span class="slide-num">09</span>
+    <span class="slide-num">08</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">83</span></div><div class="koko-tag has">★ EN LA COLECCION</div></div></div>
       <div class="hybrid-body">
@@ -319,10 +321,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">GRAVITY RUSH</div><div class="game-meta">VITA · 2012 · SONY JAPAN STUDIO · ACTION</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE LO AMA LA CRITICA</span><strong>El angulo mas universal de la Vita.</strong> Sony Japan Studio creo un mundo flotante donde controlas la gravedad para caer en cualquier direccion. Premio a juego portatil del ano en varios sitios. Inauguro la era de Sony Japan Studio experimentando con la Vita.</div>
     </div>
+    <aside class="notas">
+      <h4>PARA LEER · #4</h4>
+      <div class="n-line">Mundo flotante, controlas la gravedad. Sony Japan Studio. Premio juego portatil del ano. MC 83.</div>
+      <div class="n-cue">Coco lo tiene. Aqui arranca la era experimental de Japan Studio en Vita (luego Tearaway, Soul Sacrifice).</div>
+    </aside>
   </section>
 
   <section class="slide">
-    <span class="slide-num">10</span>
+    <span class="slide-num">09</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">80</span></div><div class="koko-tag has">★ EN LA COLECCION</div></div></div>
       <div class="hybrid-body">
@@ -339,10 +346,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">UNCHARTED: GOLDEN ABYSS</div><div class="game-meta">VITA · 2011 · BEND STUDIO · LAUNCH TITLE</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE LO AMA LA CRITICA</span><strong>Launch title canonico de la Vita</strong>. Bend Studio (Syphon Filter) hizo un Uncharted para portatil: controles tactiles, giroscopio. Fue el juego que probo a la prensa que la Vita era una consola de verdad. Metacritic 80 al dia uno, alto para un lanzamiento.</div>
     </div>
+    <aside class="notas">
+      <h4>PARA LEER · #3</h4>
+      <div class="n-line">Launch title canonico. Bend Studio (Syphon Filter). Controles tactiles + giroscopio. MC 80 = alto para lanzamiento.</div>
+      <div class="n-cue">Coco lo tiene. El que probo a la prensa que la Vita era consola de verdad.</div>
+    </aside>
   </section>
 
   <section class="slide">
-    <span class="slide-num">11</span>
+    <span class="slide-num">10</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">87</span></div><div class="koko-tag has">★ EN LA COLECCION</div></div></div>
       <div class="hybrid-body">
@@ -359,10 +371,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">TEARAWAY</div><div class="game-meta">VITA · 2013 · MEDIA MOLECULE · PAPELERIA INTERACTIVA</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE LO AMA LA CRITICA</span><strong>Los creadores de LittleBigPlanet: aqui sos un mensajero de papel</strong>. Usa pantalla tactil frontal + touchpad trasero + giroscopio + camara + microfono. Mas caracteristicas unicas de la Vita en un solo juego que cualquier otro. Metacritic 87: el juego que justifica la consola.</div>
     </div>
+    <aside class="notas">
+      <h4>PARA LEER · #2</h4>
+      <div class="n-line">Media Molecule (LittleBigPlanet). Usa TODO: tactil, touchpad trasero, giroscopio, camara, micro. MC 87.</div>
+      <div class="n-cue">Coco lo tiene. "El juego que justifica la consola" -> mostrar el cartucho.</div>
+    </aside>
   </section>
 
   <section class="slide">
-    <span class="slide-num">12</span>
+    <span class="slide-num">11</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-meta-row"><div class="metacritic-tag">MC <span class="num">93</span></div><div class="koko-tag has">★ EN LA COLECCION</div></div></div>
       <div class="hybrid-body">
@@ -379,40 +396,28 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">PERSONA 4 GOLDEN</div><div class="game-meta">VITA · 2012 · ATLUS · JRPG + SIM SOCIAL · MC 93</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE ES EL #1</span><strong>El consenso numero uno universal de la Vita.</strong> Atlus tomo Persona 4 (PS2, 2008), agrego contenido nuevo, social link nuevo y finales nuevos. <strong>Metacritic 93: el mas alto de la consola</strong>. JRPG + simulador social + dungeon crawler, 80+ horas. Paso al canon de todos los rankings de mejores JRPG de la historia. Hoy esta en PS4/PS5/Switch/PC, pero la version Vita es la original: peso historico.</div>
     </div>
+    <aside class="notas">
+      <h4>PARA LEER · #1 (CLIMAX)</h4>
+      <div class="n-line">Consenso #1. Atlus expandio P4 (PS2): contenido nuevo, social link nuevo, finales nuevos. MC 93 = el mas alto de la Vita. 80+ horas.</div>
+      <div class="n-line">Paso al canon de todos los rankings de mejores JRPG de la historia.</div>
+      <div class="n-cue">Coco lo tiene. Tomarse 2 min. Hoy esta en todas las plataformas, pero la version Vita es la ORIGINAL: peso historico.</div>
+    </aside>
   </section>
 
-  <section class="slide doc">
-    <span class="slide-num">13</span>
-    <h1>CIERRE · LA PARADOJA DEL CATALOGO</h1>
-    <h2 class="cy">Critica vs. mercado · misma consola, distinto valor</h2>
-    <div class="cierre-grid">
-      <div class="cierre-card cy">
-        <h3>EL VEREDICTO DE LA CRITICA</h3>
-        <p>Diez juegos universales. <strong>Tres de Sony Japan Studio</strong> (Gravity Rush, Tearaway con Media Molecule, Soul Sacrifice). <strong>Cuatro JRPG japoneses</strong>. Dos indies de culto. Y Persona 4 Golden como numero uno absoluto.</p>
-      </div>
-      <div class="cierre-card mg">
-        <h3>LO QUE TENGO YO</h3>
-        <p><strong>8 de los 10</strong> en mi coleccion, sin haber leido critica antes. Me faltan Hotline Miami y Spelunky. <strong>Deberia buscarlos?</strong> Comenten abajo.</p>
-      </div>
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="portada">
+      <div class="ep-tag">CIERRE · LA PARADOJA DEL CATALOGO</div>
+      <div class="ep-title">CRITICA <span class="accent">VS.</span> MERCADO</div>
+      <div class="ep-sub">MISMA CONSOLA, DISTINTO VALOR</div>
     </div>
-    <div class="cam-quote">
-      <span class="lbl">FRASE DE CIERRE PARA CAMARA</span>
-      "Diez juegos. <strong>Ocho los tengo en mi coleccion sin haber leido critica antes</strong>. La critica acerto. Pero Coco tambien tiene su top personal, y eso lo vemos en el proximo episodio del arco PS Vita: <strong>el game show donde el trae sus diez favoritos y descubrimos cuantos coinciden con la opinion del mundo</strong>."
-    </div>
-  </section>
-
-  <section class="slide doc">
-    <span class="slide-num">14</span>
-    <h1>CHECKLIST · PRE-GRABACION</h1>
-    <h2 class="cy">Antes de prender camaras</h2>
-    <ul class="checklist">
-      <li class="ye"><strong class="ye">[ ] Luis</strong> — verificar Metacritic. Memorizar 10 anclas + frase fija de cierre con transicion.</li>
-      <li class="ye"><strong class="ye">[ ] Coco</strong> — los 8 cartuchos fisicos del top 10 a la vista. Anecdota personal por cada uno (15-20 seg).</li>
-      <li class="cy"><strong class="cy">[ ] Manejar los 2 que NO tiene</strong> (Hotline Miami #7, Spelunky #10): reconocer en camara "estos me faltan".</li>
-      <li class="cy"><strong class="cy">[ ] Slide #9 Soul Sacrifice</strong> — explicar diferencia base vs Delta.</li>
-      <li class="mg"><strong class="mg">[ ] Ritmo</strong> — ~90 seg por slide. Persona 4 Golden (#1) puede tomar 2 min: es el climax.</li>
-      <li class="mg"><strong class="mg">[ ] Frase de cierre</strong> — memorizar palabra por palabra. Es lo que la gente clipea.</li>
-    </ul>
+    <aside class="notas">
+      <h4>CIERRE (LEER)</h4>
+      <div class="n-line">Veredicto: 3 de Sony Japan Studio (Gravity Rush, Tearaway, Soul Sacrifice), 4 JRPG japoneses, 2 indies de culto, y Persona 4 Golden #1.</div>
+      <div class="n-line">Coco: 8 de los 10 en su coleccion, sin haber leido critica antes. Faltan Hotline Miami y Spelunky.</div>
+      <div class="n-cue">FRASE FIJA: <b>"Diez juegos. Ocho los tengo en mi coleccion sin haber leido critica antes. La critica acerto. Pero Coco tambien tiene su top personal, y eso lo vemos en el proximo episodio: el game show donde el trae sus diez favoritos y descubrimos cuantos coinciden con la opinion del mundo."</b></div>
+      <div class="n-line">Cerrar invitando a comentar el favorito + suscribirse.</div>
+    </aside>
   </section>
 
 </div>
@@ -420,10 +425,10 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
 <nav class="footer">
   <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
   <div class="nav-center">
-    <div class="nav-counter" id="counter">01 / 14</div>
+    <div class="nav-counter" id="counter">01 / 12</div>
     <div class="nav-progress"><div class="bar" id="bar"></div></div>
   </div>
-  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR · <kbd>N</kbd> NOTAS</div>
   <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
 </nav>
 
@@ -436,6 +441,8 @@ const bar = document.getElementById('bar');
 let current = 0;
 const total = slides.length;
 function pad(n) { return String(n).padStart(2, '0'); }
+// Auto-numera los slide-num segun su posicion (asi quitar paginas no rompe nada)
+slides.forEach((s, i) => { const sn = s.querySelector('.slide-num'); if (sn) sn.textContent = pad(i + 1); });
 function go(i) {
   if (i < 0 || i >= total) return;
   slides[current].classList.remove('active');
@@ -448,11 +455,15 @@ function go(i) {
 }
 prevBtn.addEventListener('click', () => go(current - 1));
 nextBtn.addEventListener('click', () => go(current + 1));
+// Modo lectura (notas de teleprompter): tecla N o ?notas=1. NO afecta las capturas.
+function setRead(on) { document.body.classList.toggle('read-mode', on); }
+if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
   if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
   if (e.key === 'Home') { go(0); }
   if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }
 });
 go(0);
 </script>
