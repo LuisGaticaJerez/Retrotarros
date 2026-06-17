@@ -114,9 +114,22 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--dk); }
 ::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+
+/* ============ CAPA DE NOTAS DE LECTURA (teleprompter) ============ */
+.notas { position: absolute; top: 0; right: 0; width: 460px; height: 100%; z-index: 150; display: none; flex-direction: column; gap: 10px; padding: 26px 22px 30px; overflow-y: auto; background: linear-gradient(90deg, rgba(6,3,15,.55) 0%, rgba(6,3,15,.96) 26%); border-left: 2px solid var(--ye); backdrop-filter: blur(2px); }
+body.read-mode .slide.active .notas { display: flex; }
+.notas h4 { font-family: 'Press Start 2P'; font-size: 9px; color: var(--ye); letter-spacing: 2px; margin-top: 4px; }
+.notas h4:first-child { margin-top: 0; }
+.notas .n-line { font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.5; color: rgba(255,255,255,.92); border-left: 3px solid var(--cy); padding: 3px 0 3px 11px; }
+.notas .n-cue { border-left-color: var(--mg); color: var(--ye); }
+.notas .n-cue b { color: #fff; }
+.read-indicator { position: fixed; top: 64px; right: 16px; z-index: 300; font-family: 'Press Start 2P'; font-size: 8px; color: #000; background: var(--ye); padding: 6px 10px; border-radius: 3px; display: none; box-shadow: 0 0 14px rgba(255,210,63,.5); }
+body.read-mode .read-indicator { display: block; }
 </style>
 </head>
 <body>
+
+<div class="read-indicator">● MODO LECTURA (N)</div>
 
 <header>
   <div class="hdr-logo">RETROTARROS</div>
@@ -133,6 +146,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="ep-title">TOP 10 <span class="vs">NES</span> MUNDIAL</div>
       <div class="ep-sub">LO QUE LA CRITICA AMA · CONSENSO 2026</div>
     </div>
+    <aside class="notas">
+      <h4>INTRO · DATOS BOMBA</h4>
+      <div class="n-line">Fuentes cruzadas: IGN, Nintendo Life, GamesRadar, Edge, Metacritic retrospectivo 2026. Los primeros 3 del top = consenso absoluto — casi ninguna lista los mueve del podio.</div>
+      <div class="n-line">La NES definio 5 generos enteros desde cero: plataformero (Mario), action-RPG (Zelda), metroidvania (Metroid), run-and-gun (Contra), puzzle-plataformero (Kirby). Una sola consola de 8 bits.</div>
+      <div class="n-line">La NES vendio 62 millones de unidades mundialmente. Rescato la industria del gaming tras el crash de 1983 — sin la NES, posiblemente no existiria la industria moderna.</div>
+      <div class="n-cue">DATO GANCHO: 6 de los 10 son first-party Nintendo puro. Konami puso 2, Capcom 1, Tecmo 1. La NES se construyo sobre exclusivos perfectos.</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -142,6 +162,11 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title cy" style="font-size:78px;">DEL #10 AL #1</div>
       <div class="sub">Cruce de IGN, Nintendo Life, Edge y GamesRadar. La NES es la raiz de todo: definio generos enteros. Los primeros 3 son casi sagrados. Empezamos desde abajo.</div>
     </div>
+    <aside class="notas">
+      <h4>ANTES DE ARRANCAR</h4>
+      <div class="n-line">Ritmo: ~75 seg por slide de juego. Los del podio (#3, #2, #1) pueden tomar 90 seg — son los climax. No apurar el #1 (SMB3).</div>
+      <div class="n-cue">Angulo de entrada: "la NES tiene 40 anos y sus juegos siguen siendo referencia. ¿Por que? Porque el diseno sin relleno envejece bien."</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -162,6 +187,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">CASTLEVANIA III: DRACULA'S CURSE</div><div class="game-meta">NES · 1990 · KONAMI</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El pico de la saga en 8 bits: ramas de nivel, personajes jugables como Alucard y el chip de sonido VRC6 que sonaba imposible en NES. Dificultad brutal y diseño impecable.</div>
     </div>
+    <aside class="notas">
+      <h4>CASTLEVANIA III · DATOS EXTRA</h4>
+      <div class="n-line">El chip VRC6 era hardware extra DENTRO del cartucho — Konami lo meto adentro. Generaba 3 canales extra de sonido. La version Famicom (Japon) suena completamente distinto y superior a la NES americana. Los que jugamos la NES de USA/Chile tuvimos version con peor audio sin saberlo.</div>
+      <div class="n-line">Las rutas de nivel son reales: puedes ir por el camino norte o sur del mapa, lo que cambia que personajes desbloqueas. Alucard (hijo de Dracula) por una ruta, Grant DaNasty (acrobata) y Sypha Belnades (maga) por otras.</div>
+      <div class="n-line">Alucard aqui es un personaje secundario — el mismo Alucard que protagonizo Castlevania: Symphony of the Night (PS1, 1997), el metroidvania definitivo. Esta NES es el primer capitulo de su historia.</div>
+      <div class="n-cue">Angulo: "la version que jugamos era inferior a la japonesa — Konami tenia un chip secreto que Nintendo USA no dejo usar". Dato bomba para la discusion.</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -182,6 +214,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">NINJA GAIDEN</div><div class="game-meta">NES · 1989 · TECMO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Trajo las cinematicas estilo comic a la consola y un action-platformer rapidisimo. Dificil hasta la leyenda, pero su ritmo y narrativa marcaron una era.</div>
     </div>
+    <aside class="notas">
+      <h4>NINJA GAIDEN · DATOS EXTRA</h4>
+      <div class="n-line">Las cinematicas eran paneles fijos tipo comic entre niveles — primera vez que una consola contaba una historia con ese nivel narrativo. Antes era solo texto en pantalla (si es que habia historia). NES, 1989.</div>
+      <div class="n-line">La dificultad del ultimo jefe es legendaria: si mueres en el jefe final, el juego te regresa al inicio del ACTO 6-1 (tres escenas atras), no al jefe. Genera furia real — hay videos de gente rompiendose los nervios en speedruns.</div>
+      <div class="n-line">Ryu Hayabusa (protagonista) aparecio despues en Dead or Alive (Team Ninja) como personaje secreto. La saga cambio completamente de genero (action-platformer → hack-and-slash en Xbox 2004) pero el personaje sobrevivio.</div>
+      <div class="n-cue">Angulo: "el primer juego de consola que te hace sentir que estas en una pelicula de accion — y te castiga si no sos bueno". Preguntar si Coco/Luis llegaron al final alguna vez.</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -202,6 +241,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">CONTRA</div><div class="game-meta">NES · 1988 · KONAMI</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El run-and-gun definitivo. Cooperativo a dos jugadores, armas iconicas y el codigo Konami mas famoso de la historia. Puro adrenalina arcade en casa.</div>
     </div>
+    <aside class="notas">
+      <h4>CONTRA · DATOS EXTRA</h4>
+      <div class="n-line">El Konami Code (↑↑↓↓←→←→BA) se popularizo en Contra — daba 30 vidas. Se convirtio en el cheat code mas famoso de la historia del gaming. Aparece como easter egg en cientos de juegos y sitios web hasta hoy.</div>
+      <div class="n-line">Los disenadores se inspiraron directamente en Alien (1979) y Predator (1987) — los enemigos finales y los disenios de nivel son referencias directas. Habia temor de problemas legales, pero Konami los diseno lo suficientemente distintos.</div>
+      <div class="n-line">La version arcade (1987) llego antes que la NES. En arcade los personajes se llamaban Bill y Lance — referencias a Bill Rizer y Lance Bean, inspirados en Arnold Schwarzenegger y Sylvester Stallone visualmente.</div>
+      <div class="n-cue">Angulo cooperativo: "el primer juego en el que dos amigos podian fracasar juntos y pasarlo bien". ¿Lo jugaron en cooperativo? Preguntar anecdota de quien se quedaba sin vidas primero.</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -222,6 +268,14 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">KIRBY'S ADVENTURE</div><div class="game-meta">NES · 1993 · HAL LABORATORY</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Uno de los ultimos grandes NES. Estreno la mecanica de copiar poderes de Kirby y exprimio el hardware al limite con efectos que parecian de 16 bits.</div>
     </div>
+    <aside class="notas">
+      <h4>KIRBY'S ADVENTURE · DATOS EXTRA</h4>
+      <div class="n-line">Salio en 1993 — cuando el SNES ya llevaba 3 anos en el mercado. Fue uno de los ultimos grandes exclusivos de NES. HAL Laboratory uso 6 megabytes de ROM — enorme para la consola. De ahi los efectos pseudo-3D imposibles para el hardware.</div>
+      <div class="n-line">Lo diseno Masahiro Sakurai — el mismo que creo Super Smash Bros. (1999). Tenia 21 anos cuando desarrollo Kirby's Adventure. Hoy tiene 53 anos y todavia dirige la saga Smash.</div>
+      <div class="n-line">El Kirby original de Game Boy (1992) NO tenia copiar poderes — era solo aspirar y escupir. La mecanica de copiar (24 poderes en Kirby's Adventure) nacio en este juego y se convirtio en el sello de la saga para siempre.</div>
+      <div class="n-line">Kirby en Game Boy era blanco/gris por la pantalla monocroma. Aqui, en NES a color, por primera vez se confirmo que era rosado — su look definitivo.</div>
+      <div class="n-cue">Angulo: "el ultimo gran juego de NES salio cuando la gente ya estaba con el SNES — y era MEJOR que la mayoria de los juegos del SNES de ese ano". Dato de cierre sorpresivo.</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -242,6 +296,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">PUNCH-OUT!!</div><div class="game-meta">NES · 1987 · NINTENDO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Boxeo de patrones puro: memorizar el tell de cada rival y contraatacar. Little Mac contra gigantes carismaticos. Adictivo, justo y eterno.</div>
     </div>
+    <aside class="notas">
+      <h4>PUNCH-OUT!! · DATOS EXTRA</h4>
+      <div class="n-line">Little Mac pesa 107 libras y mide 5'7 — el mas chico de todos sus rivales. La narrativa visual completa es David vs Goliat. El referee del ring de fondo es Mario — su primera aparicion como personaje secundario en otro juego.</div>
+      <div class="n-line">Los rivales son estereotipos culturales exagerados: Bald Bull (turco), King Hippo (islas ficticias), Soda Popinski (ruso — en Arcade se llamaba "Vodka Drunkenski" pero Nintendo censuro el nombre para NES), Don Flamenco (espanol).</div>
+      <div class="n-line">La version original se llamo "Mike Tyson's Punch-Out!!" (1987) porque Nintendo pago la licencia. En 1990 la licencia expiro y fue reemplazado por "Mr. Dream" — personaje inventado. La version con Tyson es la coleccionable y vale mas en el mercado.</div>
+      <div class="n-cue">Angulo: "el primer juego de boxeo que era un puzzle disfrazado — no pegas, LEES al rival". Preguntar si llegaron a Mike Tyson / Mr. Dream. Casi nadie lo termino sin guia.</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -262,6 +323,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">MEGA MAN 2</div><div class="game-meta">NES · 1989 · CAPCOM</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El que perfecciono la formula: ocho jefes, robar sus armas, banda sonora legendaria (Dr. Wily Stage 1). El Mega Man que todos recuerdan.</div>
     </div>
+    <aside class="notas">
+      <h4>MEGA MAN 2 · DATOS EXTRA</h4>
+      <div class="n-line">Mega Man 1 fue mediocre en ventas y Capcom queria discontinuarlo. El equipo original lo desarrollo en horas extra, sin presupuesto oficial — lo hicieron por pasion. Si Mega Man 2 fallaba, la saga terminaba ahi. Vendio 1.5 millones: 10 veces mas que el primero.</div>
+      <div class="n-line">Los 8 robot masters se eligieron por concurso de fans en Japon: Air Man, Bubble Man, Crash Man, Flash Man, Heat Man, Metal Man, Quick Man, Wood Man. Los fans disenan los villanos del juego — inedito para la epoca.</div>
+      <div class="n-line">La banda sonora es de Takashi Tateishi "Okinawa". El tema de Dr. Wily Stage 1 se convirtio en uno de los memes musicales mas reconocidos de internet — versiones metal, covers, remixes. Identificable para cualquiera aunque no haya jugado NES.</div>
+      <div class="n-cue">Angulo: "este juego existe porque el equipo desobedecio a Capcom y lo hizo de noche". Historia de amor por el proyecto contra las ordenes corporativas — funciona bien en camara.</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -282,6 +350,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">METROID</div><div class="game-meta">NES · 1987 · NINTENDO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El nacimiento de la exploracion no-lineal. Planeta Zebes, Samus, el giro final que nadie vio venir. Raiz del genero metroidvania entero.</div>
     </div>
+    <aside class="notas">
+      <h4>METROID · DATOS EXTRA</h4>
+      <div class="n-line">El plot twist final: Samus Aran es mujer. Al terminar el juego rapido (menos de 5 horas) se revela su identidad quitandose el casco. En 1987 fue el giro mas famoso del gaming — nadie lo esperaba, no habia internet para spoilear.</div>
+      <div class="n-line">Samus fue disenada originalmente como hombre. La decision de hacerla mujer fue de ultimo momento por uno de los desarrolladores para sorprender a los jugadores. Se convirtio en uno de los primeros protagonistas femeninos iconicos del gaming.</div>
+      <div class="n-line">El genero "Metroidvania" lleva la mitad del nombre de este juego. Junto a Castlevania (mismo ano, misma consola), definieron la exploracion no-lineal con backtracking. Castlevania: Symphony of the Night (1997) combino ambas formulas y le dio el nombre al genero.</div>
+      <div class="n-cue">Angulo: "el personaje que todos pensaban que era hombre en 1987 — y resulto ser la accionista mas importante de Nintendo hasta hoy". Samus sigue siendo un icono cultural.</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -302,6 +377,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">THE LEGEND OF ZELDA</div><div class="game-meta">NES · 1987 · NINTENDO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El cartucho dorado. Mundo abierto, exploracion libre, guardado en bateria. Fundo una de las sagas mas importantes de la historia del videojuego.</div>
     </div>
+    <aside class="notas">
+      <h4>ZELDA · DATOS EXTRA</h4>
+      <div class="n-line">El cartucho dorado no era solo estetico: fue el PRIMER juego NES con bateria de guardado interna (SRAM). Antes de Zelda, los juegos no guardaban — terminabas en una sesion o usabas passwords interminables. Zelda cambio eso para siempre.</div>
+      <div class="n-line">Shigeru Miyamoto diseno la exploracion inspirado en sus caminatas de infancia por los bosques de Kyoto. La narrativa de "mundo misterioso por explorar" es autobiografica — el mismo encontraba cuevas reales de nino.</div>
+      <div class="n-line">En 1987 no habia internet, no habia FAQs. La gente completaba Zelda por prueba y error pura, o comprando revistas con mapas dibujados a mano. Era un juego social: en el colegio se intercambiaba informacion de donde estaban los dungeons. Experiencia comunitaria analogica.</div>
+      <div class="n-cue">Angulo: "el primer juego en el que perderse ERA el juego — y la gente no se quejaba, lo disfrutaba". Preguntar como lo jugaron sin internet. Anecdota de la primera vez que encontraron un dungeon oculto.</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -322,6 +404,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">SUPER MARIO BROS.</div><div class="game-meta">NES · 1985 · NINTENDO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El juego que salvo a la industria tras el crash del 83. Definio el plataformero, vendio la NES en el mundo entero y enseño game design en su primer nivel.</div>
     </div>
+    <aside class="notas">
+      <h4>SUPER MARIO BROS. · DATOS EXTRA</h4>
+      <div class="n-line">Salio con la NES como pack-in (venia con la consola) en 1985. Fue el argumento que convencio a los retailers de que la industria del gaming habia revivido tras el crash de 1983 — sin SMB, la NES podia haber muerto en los primeros meses.</div>
+      <div class="n-line">El Mundo 1-1 es el nivel de tutorial mas famoso de la historia: sin texto, sin instrucciones, te ensena a jugar en 30 segundos. Primero el hongo seguro (espacio amplio), luego el Goomba (enemigo obvio), luego el bloque de monedas. Tres objetos, todo explicado. Miyamoto lo diseno sin palabras.</div>
+      <div class="n-line">Vendio mas de 40 millones en NES. El record de speedrun actual esta en ~4:55 minutos. La musica de Koji Kondo (overworld theme) es reconocible para personas que nunca jugaron un videojuego — nivel pop culture absoluto.</div>
+      <div class="n-cue">Angulo: "la critica lo pone en #2 y no en #1 porque SMB3 lo supero tecnicamente — pero culturalmente el original es tan grande que cualquiera lo reconoce". Tension interesante entre impacto cultural vs calidad critica.</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -342,6 +431,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">SUPER MARIO BROS. 3</div><div class="game-meta">NES · 1990 · NINTENDO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Para la critica, el mejor juego de la NES. Mapas de mundo, trajes (mapache, rana, tanooki), niveles inagotables. El plataformero 2D que perfecciono el genero.</div>
     </div>
+    <aside class="notas">
+      <h4>SUPER MARIO BROS. 3 · DATOS EXTRA (TOMARSE 90 SEG)</h4>
+      <div class="n-line">Antes de lanzarse, fue "presentado" en la pelicula The Wizard (1989) — Hollywood entero hizo una pelicula para promocionar un videojuego. Los ultimos 20 minutos son gameplay de SMB3 ante una audiencia que lo veia por primera vez. El hype fue tan masivo que la gente esperaba en filas para verla.</div>
+      <div class="n-line">En Japon salio en 1988. En USA salio en 1990 — dos anos de espera despues de la pelicula. En Chile llego aun despues. Esa espera entre paises era normal y brutal para los fans de esa generacion.</div>
+      <div class="n-line">Los trajes son la revolucion de diseno: cada uno cambia fisica Y mecanica completa. Raccoon = vuelo. Frog = nadar eficiente. Tanooki = invulnerabilidad temporal como estatua. Hammer = lanzar martillos. No son solo cosmeticos — cambian como se juega. Vendio 17 millones en NES.</div>
+      <div class="n-cue">TOMARSE 90 SEG — es el climax. Angulo: "la pregunta de oro es si SMB o SMB3 es el mejor juego de la historia. La critica dice SMB3. El corazon dice SMB. En camara: ¿cual elegirian ustedes y por que?"</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -351,6 +447,12 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title mg" style="font-size:58px;">DOMINIO NINTENDO</div>
       <div class="sub">6 de 10 son first-party Nintendo. La NES se construyo sobre exclusivos perfectos, pero Konami (Castlevania, Contra), Capcom (Mega Man) y Tecmo (Ninja Gaiden) pusieron joyas que envejecieron como el vino.</div>
     </div>
+    <aside class="notas">
+      <h4>ANALISIS · DATOS EXTRA</h4>
+      <div class="n-line">Desglose: Nintendo (6): SMB, SMB3, Zelda, Metroid, Kirby, Punch-Out. Konami (2): Castlevania III, Contra. Capcom (1): Mega Man 2. Tecmo (1): Ninja Gaiden. Sin terceros japoneses, el top seria mas pobre.</div>
+      <div class="n-line">Ninguno de los 10 salio despues de 1993. La NES tuvo su catalogo de culto en 5-6 anos (1987-1993). Velocidad de innovacion que no se ha vuelto a ver en una sola plataforma.</div>
+      <div class="n-cue">Angulo de cierre: "hoy estos juegos siguen siendo referencia en escuelas de diseno de videojuegos. Se estudian como se estudian peliculas clasicas de Hitchcock — para aprender como hacerlo bien".</div>
+    </aside>
   </section>
 
   <section class="slide">
@@ -360,6 +462,12 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title cy" style="font-size:54px;">¿CUANTO VALEN HOY?</div>
       <div class="sub">Estos son los mejores en lo critico, pero ¿cuanto cuesta hoy un cartucho NES sellado? Spoiler: hay uno que vale como un auto. La proxima: Top Precios NES.</div>
     </div>
+    <aside class="notas">
+      <h4>GANCHO PROXIMO EPISODIO</h4>
+      <div class="n-line">El cartucho mas caro de NES en subasta: Super Mario Bros. sealed (gold seal Heritage Auctions 2021) = $660,000 USD. No es broma — hay uno que vale mas que un departamento.</div>
+      <div class="n-line">No todos los del top critico son los mas caros — esa tension es el tema del proximo episodio. La critica y el mercado no siempre coinciden.</div>
+      <div class="n-cue">Cerrar: invitar a comentar cual es el favorito personal de los 10 + suscribirse para el episodio de precios. Ritmo rapido en este cierre.</div>
+    </aside>
   </section>
 
 </div>
@@ -370,7 +478,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
     <div class="nav-counter" id="counter">01 / 14</div>
     <div class="nav-progress"><div class="bar" id="bar"></div></div>
   </div>
-  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR · <kbd id="notasBtn" style="cursor:pointer" title="Mostrar/ocultar notas">N</kbd> NOTAS</div>
   <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
 </nav>
 
@@ -383,6 +491,11 @@ const bar = document.getElementById('bar');
 let current = 0;
 const total = slides.length;
 function pad(n) { return String(n).padStart(2, '0'); }
+slides.forEach((s, i) => { const sn = s.querySelector('.slide-num'); if (sn) sn.textContent = pad(i + 1); });
+function setRead(on) { document.body.classList.toggle('read-mode', on); }
+if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
+const notasBtn = document.getElementById('notasBtn');
+if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
 function go(i) {
   if (i < 0 || i >= total) return;
   slides[current].classList.remove('active');
@@ -400,6 +513,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
   if (e.key === 'Home') { go(0); }
   if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }
 });
 go(0);
 </script>
