@@ -19,7 +19,8 @@
       "editor": "LJN / Westone",
       "mp3": "audio/retro-glorias-navales/retro-glorias-navales-1.mp3",
       "duracion_ms": 22000,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Chief Brody, cazando tiburones en ocho bits sin ni un descanso. Pobre hombre, ni en los videojuegos descansa."
     },
     {
       "id": "retro-glorias-navales-2",
@@ -31,7 +32,8 @@
       "editor": "Sonic Team",
       "mp3": "audio/retro-glorias-navales/retro-glorias-navales-2.mp3",
       "duracion_ms": 26000,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Big es el empleado más paciente de Dreamcast. Pesca, pierde, repite. ¿Quién necesita velocidad?"
     },
     {
       "id": "retro-glorias-navales-3",
@@ -43,7 +45,8 @@
       "editor": "MicroProse",
       "mp3": "audio/retro-glorias-navales/retro-glorias-navales-3.mp3",
       "duracion_ms": 24000,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Dieciocho meses en la oscuridad total. El marinero más solitario de toda la historia retro."
     },
     {
       "id": "retro-glorias-navales-4",
@@ -55,7 +58,8 @@
       "editor": "Rare / Milton Bradley",
       "mp3": "audio/retro-glorias-navales/retro-glorias-navales-4.mp3",
       "duracion_ms": 24500,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Capitán Skyhawk, el único piloto retro con tres trabajos simultáneos. Multitarea extrema."
     },
     {
       "id": "retro-glorias-navales-5",
@@ -67,7 +71,8 @@
       "editor": "Konami",
       "mp3": "audio/retro-glorias-navales/retro-glorias-navales-5.mp3",
       "duracion_ms": 23500,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "¡Qué equipo! Niños contra piratas momificados en las cavernas. ¡Eso sí es una misión imposible!"
     },
     {
       "id": "retro-glorias-navales-6",

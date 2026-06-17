@@ -122,6 +122,83 @@
       "editor": "Nintendo",
       "creado": "2026-05-20",
       "fuente": "LLM-live"
+    },
+    {
+      "id": "tarrobot-y-un-cartucho-de-1",
+      "tema": "TarroBot y un cartucho de...",
+      "texto": "¿Sabías que TarroBot encontró un cartucho original de Super Mario Bros. que nunca fue lanzado al público? Este prototipo contenía niveles completamente diferentes y enemigos que fueron eliminados en la versión final. Solo existen tres copias en el mundo.",
+      "estado": "talking",
+      "consola": "Nintendo Entertainment System",
+      "ano": 1985,
+      "editor": "Nintendo",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "puedes-tocar-una-canción-de-donkey-kong-1",
+      "tema": "Puedes tocar una canción de Donkey Kong.",
+      "texto": "¿Sabías que la canción principal de Donkey Kong fue compuesta por Gunpei Yokoi y su equipo en 1981? Es una de las melodías más reconocibles de la historia de los videojuegos, y tiene menos de treinta segundos de duración, pero se repite constantemente durante el juego.",
+      "estado": "fact",
+      "consola": "Arcade",
+      "ano": 1981,
+      "editor": "Nintendo",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "toca-una-música-del-1",
+      "tema": "Toca una música del...",
+      "texto": "¿Sabías que Toca una música del... fue lanzado exclusivamente en Japón en 2005? Este juego nunca llegó a occidente, lo que lo convierte en una joya oculta que muchos coleccionistas buscan desesperadamente.",
+      "estado": "talking",
+      "consola": "Nintendo DS",
+      "ano": 2005,
+      "editor": "Nintendo",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "tarrobot-cuánto-vale-el-cartucho-de-doom-1",
+      "tema": "TarroBot, cuánto vale el cartucho de Doom?",
+      "texto": "El cartucho de Doom para SNES en buen estado puede costar entre trescientos y mil dólares, dependiendo de si incluye la caja original y el manual. Las copias sin documentación rondan los cien a doscientos dólares.",
+      "estado": "fact",
+      "consola": "SNES",
+      "ano": 1995,
+      "editor": "Id Software / Doom Confederation",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "dame-un-dato-freak-de-super-mario-world-1",
+      "tema": "Dame un dato freak de Super Mario World",
+      "texto": "¿Sabías que Yoshi originalmente iba a tener alas en Super Mario World? Los desarrolladores las eliminaron porque el sprite ocupaba demasiada memoria en el cartucho. Imagina a un Yoshi volador desde el inicio del juego.",
+      "estado": "thinking",
+      "consola": "Super Nintendo Entertainment System (SNES)",
+      "ano": 1990,
+      "editor": "Nintendo",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "cuánto-vale-el-cartucho-de-donkey-kong-en-competición-1",
+      "tema": "cuánto vale el cartucho de Donkey Kong en competición",
+      "texto": "¿Sabías que un cartucho original de Donkey Kong en perfecto estado puede alcanzar los treinta mil dólares en subastas especializadas? Los coleccionistas competitivos pagan fortunas por versiones sin jugar y con certificación de autenticidad.",
+      "estado": "excited",
+      "consola": "Arcade",
+      "ano": 1981,
+      "editor": "Nintendo",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
+    },
+    {
+      "id": "cuál-es-el-cartucho-de-donkey-kong-más-caro-1",
+      "tema": "Cuál es el cartucho de Donkey Kong más caro",
+      "texto": "¿Sabes que un cartucho original de Donkey Kong para arcade se vendió en dieciséis mil dólares en 2018? Era una versión tan rara que los coleccionistas pujaron sin parar. ¡Imagínate pagar eso por un juego de hace cuarenta años!",
+      "estado": "excited",
+      "consola": "Arcade",
+      "ano": 1981,
+      "editor": "Nintendo",
+      "creado": "2026-05-20",
+      "fuente": "LLM-live"
     }
   ]
 }

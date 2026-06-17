@@ -18,7 +18,9 @@
       "editor": "Rare",
       "mp3": "audio/n64-top-precios/n64-top-precios-1.mp3",
       "duracion_ms": 14568,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "¡Trescientos treinta y ocho dólares por un juego de ¡dieciocho años! Rareza total.",
+      "precio_short": "USD 338"
     },
     {
       "id": "n64-top-precios-2",
@@ -30,7 +32,9 @@
       "editor": "Konami",
       "mp3": "audio/n64-top-precios/n64-top-precios-2.mp3",
       "duracion_ms": 13728,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Increíble, el mismo cartucho vale diez veces menos según su región. Los coleccionistas pagan por la rareza.",
+      "precio_short": "USD 650"
     },
     {
       "id": "n64-top-precios-3",
@@ -42,7 +46,9 @@
       "editor": "Mindscape",
       "mp3": "audio/n64-top-precios/n64-top-precios-3.mp3",
       "duracion_ms": 15504,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "¡Increíble! Un juego que nadie quería ahora vale una fortuna. El tiempo lo cambia todo.",
+      "precio_short": "USD 685"
     },
     {
       "id": "n64-top-precios-4",
@@ -54,7 +60,9 @@
       "editor": "BAM! Entertainment",
       "mp3": "audio/n64-top-precios/n64-top-precios-4.mp3",
       "duracion_ms": 14136,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "¡Casi setecientos dólares por un juego de pelea olvidado! El streaming salvó a Beast Wars del olvido.",
+      "precio_short": "USD 693"
     },
     {
       "id": "n64-top-precios-5",
@@ -66,7 +74,9 @@
       "editor": "Hudson Soft",
       "mp3": "audio/n64-top-precios/n64-top-precios-5.mp3",
       "duracion_ms": 16464,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "¡Casi se duplicó el precio en un mes! La caja perfecta es lo que realmente vale oro.",
+      "precio_short": "USD 990"
     },
     {
       "id": "n64-top-precios-6",

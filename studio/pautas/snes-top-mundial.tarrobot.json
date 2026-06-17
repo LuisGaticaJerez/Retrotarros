@@ -18,7 +18,8 @@
       "editor": "Nintendo EAD",
       "mp3": "audio/snes-top-mundial/snes-top-mundial-1.mp3",
       "duracion_ms": 18096,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Star Fox nos mostró que lo imposible era posible en la SNES. Un chip que cambió todo."
     },
     {
       "id": "snes-top-mundial-2",
@@ -30,7 +31,8 @@
       "editor": "Nintendo EAD",
       "mp3": "audio/snes-top-mundial/snes-top-mundial-2.mp3",
       "duracion_ms": 17496,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Treinta y cuatro años y Nintendo aún no necesita cambiar nada. Eso es perfección."
     },
     {
       "id": "snes-top-mundial-3",
@@ -42,7 +44,8 @@
       "editor": "APE",
       "mp3": "audio/snes-top-mundial/snes-top-mundial-3.mp3",
       "duracion_ms": 17712,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "Un fracaso que se convirtió en leyenda. Earthbound cambió todo para los juegos indie."
     },
     {
       "id": "snes-top-mundial-4",
@@ -54,7 +57,8 @@
       "editor": "Rare",
       "mp3": "audio/snes-top-mundial/snes-top-mundial-4.mp3",
       "duracion_ms": 16175,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "David Wise compuso una obra maestra mientras Rare reinventaba todo. Diddy y Dixie conquistaron el mundo."
     },
     {
       "id": "snes-top-mundial-6",
@@ -66,7 +70,8 @@
       "editor": "Nintendo EAD",
       "mp3": "audio/snes-top-mundial/snes-top-mundial-6.mp3",
       "duracion_ms": 18500,
-      "fuente": "pauta-auto"
+      "fuente": "pauta-auto",
+      "reaccion_short": "¡Blockbuster rechazó a Yoshi por verse demasiado infantil! Nintendo ganó esa batalla visual."
     },
     {
       "id": "snes-top-mundial-7",
