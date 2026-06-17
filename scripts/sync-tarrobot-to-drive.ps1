@@ -211,7 +211,33 @@ foreach ($rel in $brandingMap.Keys) {
 }
 Write-Host ""
 
-# 6. .env file con la ruta para que install.bat la sugiera (opcional)
+# 6. Instalador vigente -> carpeta unica en Drive (borra versiones viejas con /MIR)
+# La carpeta TarroBot-Instalador/ en Drive siempre tiene UN SOLO ZIP: el actual.
+# Asi Luis va a Drive, entra ahi, y solo ve el correcto. No hay confusion de versiones.
+Write-Host "Instalador vigente -> Drive:" -ForegroundColor Cyan
+$DistDir = Resolve-Path (Join-Path $ScriptRoot "..\installers\tarrobot-studio\dist")
+$InstallerZip = Get-ChildItem -Path $DistDir -Filter "TarroBot-Studio-v*-slim.zip" |
+    Sort-Object Name -Descending | Select-Object -First 1
+if ($InstallerZip) {
+    $InstallerDest = Join-Path (Split-Path -Parent $Destino) "TarroBot-Instalador"
+    if (-not $DryRun) {
+        if (-not (Test-Path $InstallerDest)) { New-Item -ItemType Directory -Path $InstallerDest -Force | Out-Null }
+        # /MIR: borra todo lo que no sea el ZIP actual (elimina versiones viejas)
+        $tempDir = Join-Path $env:TEMP "tarrobot-installer-sync"
+        if (-not (Test-Path $tempDir)) { New-Item -ItemType Directory -Path $tempDir -Force | Out-Null }
+        Copy-Item $InstallerZip.FullName -Destination $tempDir -Force
+        & robocopy $tempDir $InstallerDest /MIR /NJH /NJS /NDL /NP /NC /NS | Out-Null
+        Remove-Item -Recurse -Force $tempDir
+        Write-Host "  [INSTALL] $($InstallerZip.Name) -> TarroBot-Instalador\" -ForegroundColor Green
+    } else {
+        Write-Host "  [DRY ]   $($InstallerZip.Name) -> TarroBot-Instalador\" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "  [SKIP]   No se encontro ZIP de instalador en dist\" -ForegroundColor DarkGray
+}
+Write-Host ""
+
+# 7. .env file con la ruta para que install.bat la sugiera (opcional)
 if (-not $DryRun) {
     $infoPath = Join-Path $Destino "INSTALL-INFO.txt"
     @"
