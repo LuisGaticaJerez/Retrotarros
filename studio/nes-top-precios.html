@@ -114,12 +114,24 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--dk); }
 ::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+
+/* ============ CAPA DE NOTAS DE LECTURA (teleprompter) ============ */
+.notas { position: absolute; top: 0; right: 0; width: 460px; height: 100%; z-index: 150; display: none; flex-direction: column; gap: 10px; padding: 26px 22px 30px; overflow-y: auto; background: linear-gradient(90deg, rgba(6,3,15,.55) 0%, rgba(6,3,15,.96) 26%); border-left: 2px solid var(--ye); backdrop-filter: blur(2px); }
+body.read-mode .slide.active .notas { display: flex; }
+.notas h4 { font-family: 'Press Start 2P'; font-size: 9px; color: var(--ye); letter-spacing: 2px; margin-top: 4px; }
+.notas h4:first-child { margin-top: 0; }
+.notas .n-line { font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.5; color: rgba(255,255,255,.92); border-left: 3px solid var(--cy); padding: 3px 0 3px 11px; }
+.notas .n-cue { border-left-color: var(--mg); color: var(--ye); }
+.notas .n-cue b { color: #fff; }
+.read-indicator { position: fixed; top: 64px; right: 16px; z-index: 300; font-family: 'Press Start 2P'; font-size: 8px; color: #000; background: var(--ye); padding: 6px 10px; border-radius: 3px; display: none; box-shadow: 0 0 14px rgba(255,210,63,.5); }
+body.read-mode .read-indicator { display: block; }
 </style>
 <style>
 .game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);letter-spacing:1px;white-space:nowrap;border:3px solid var(--ye);padding:8px 18px;border-radius:6px;background:rgba(255,210,63,.07);align-self:flex-start}
 </style>
 </head>
 <body>
+<div class="read-indicator">● MODO LECTURA (N)</div>
 
 <header>
   <div class="hdr-logo">RETROTARROS</div>
@@ -136,6 +148,14 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="ep-title">TOP 10 <span class="vs">PRECIOS</span> NES</div>
       <div class="ep-sub">LOS CARTUCHOS QUE ROMPEN BILLETERAS</div>
     </div>
+    <aside class="notas">
+      <h4>CONTEXTO DEL EPISODIO</h4>
+      <p class="n-line">Este episodio cierra el arco NES en Retrotarros: ya cubrimos la coleccion y el top mundial. Ahora el dinero.</p>
+      <p class="n-line">La logica del precio retro tiene tres ejes: rareza (tirada corta), calidad (gente lo quiere) y condicion (CIB vs suelto).</p>
+      <p class="n-line">El top 10 es solo RETAIL. Lo que se vendio en tiendas normales. Las rarezas van en seccion aparte.</p>
+      <h4>TONO SUGERIDO</h4>
+      <p class="n-cue">► <b>Apertura:</b> "Hoy no hablamos del mejor NES para jugar. Hablamos del que te vacía la billetera si lo ves en una feria."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -145,6 +165,14 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title mg" style="font-size:78px;">DEL #10 AL #1</div>
       <div class="sub">Solo juegos RETAIL: los que de verdad se vendieron en tiendas. Valores CIB aproximados (PriceCharting, GameValueNow, 2026). Las variantes y rarezas van aparte. El numero uno se escapa de la liga.</div>
     </div>
+    <aside class="notas">
+      <h4>METODOLOGIA</h4>
+      <p class="n-line">CIB = Complete In Box: caja + cartucho + manual. Un suelto puede valer 5-10x menos.</p>
+      <p class="n-line">PriceCharting promedia ventas reales en eBay de los ultimos 90 dias. GameValueNow es mas conservador.</p>
+      <p class="n-line">Los precios de esta lista son aproximados a 2026. Algunos suben, otros se estabilizan con mas oferta.</p>
+      <h4>PARA DECIR AL PUBLICO</h4>
+      <p class="n-cue">► <b>Aclarar desde ya:</b> los valores en pantalla son CIB. Sueltos pueden costar 5-10 veces menos.</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -165,6 +193,16 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">BUCKY O'HARE</div><div class="game-meta">NES · 1992 · KONAMI · CIB ~USD 500</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformero de Konami basado en el comic, dificil y querido. Tirada chica: hoy un completo en caja ronda los 500 dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>ORIGEN</h4>
+      <p class="n-line">El comic original de Larry Hama y Michael Golden (1984) fue publicado por Continuity Comics. En 1991 DiC y Hasbro sacaron la serie de TV + linea de juguetes.</p>
+      <p class="n-line">Konami hizo el juego directamente inspirado en su arcade de 1992 del mismo nombre. El port a NES es excelente.</p>
+      <h4>MECANICA</h4>
+      <p class="n-line">5 personajes jugables: Bucky, Dead-Eye, AFC Jenny, Willy y otro. Se desbloquean rescatando aliados en los niveles — incentivo para explorar.</p>
+      <h4>POR QUE CUESTA</h4>
+      <p class="n-line">Tirada limitada en USA. Konami por esa epoca tambien publico juegos de mucha mas popularidad — a Bucky no le fue comercialmente bien.</p>
+      <p class="n-cue">► <b>Dato para enganchar:</b> "Konami en los 90 hacia el juego de Bucky O'Hare Y el de Contra. No es lo mismo en distribucion."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -185,6 +223,16 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">GUN-NAC</div><div class="game-meta">NES · 1991 · ASCII · CIB ~USD 700</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Shmup vertical de Compile, de los mejores del NES. Llego en pocas cantidades a USA y hoy es codiciado por los fans del genero.</div>
     </div>
+    <aside class="notas">
+      <h4>QUIEN ES COMPILE</h4>
+      <p class="n-line">Compile = maestros del shmup vertical japones. Tambien hicieron Aleste y Blazing Lazers en TurboGrafx-16. Empresa de culto absoluto.</p>
+      <p class="n-line">Publicado en USA por ASCII Corporation — distribuidora menor. En Japon estaba mas disponible (Famicom).</p>
+      <h4>ESTETICA CURIOSA</h4>
+      <p class="n-line">Gun-Nac tiene estetica absurdista: personajes kawaii y enemigos bizarros (verduras alienígenas, etc.). Shmup de culto con sentido del humor.</p>
+      <h4>COLECCIONISMO</h4>
+      <p class="n-line">Los fans del genero shmup son fieles y estan dispuestos a pagar. La interseccion rareza + calidad + nicho especifico infla el precio.</p>
+      <p class="n-cue">► <b>Si tienen gameplay:</b> mostrar los enemigos absurdos en pantalla antes de dar el precio.</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -205,6 +253,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">SNOW BROTHERS</div><div class="game-meta">NES · 1991 · CAPCOM · CIB ~USD 800</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Port del arcade de Toaplan, clasico de culto. Lanzamiento limitado: completo supera los 800 dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>TOAPLAN</h4>
+      <p class="n-line">Toaplan hizo Truxton, Tatsujin y Fire Shark — todo shmup de culto. La empresa quebro en 1994. Eso elevó el valor nostalgico de todo lo suyo.</p>
+      <p class="n-line">El port a NES fue publicado por Capcom en USA con distribucion reducida.</p>
+      <h4>CLON DIRECTO DE BUBBLE BOBBLE</h4>
+      <p class="n-line">Mismo gameplay que Bubble Bobble (Taito, 1986): atrapar enemigos en nieve y hacerlos rodar. Mecanica identica, vestuario diferente.</p>
+      <p class="n-line">No es un secreto — Toaplan lo copio abiertamente. Pero lo ejecuto muy bien.</p>
+      <p class="n-cue">► <b>Pregunta al chat:</b> "¿Alguien recuerda Bubble Bobble? Este es practicamente lo mismo pero con muñecos de nieve."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -225,6 +282,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">BONK'S ADVENTURE</div><div class="game-meta">NES · 1994 · HUDSON · CIB ~USD 900</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>La version NES llego en 1994, con la consola muerta. Esa tirada minima de fin de ciclo la disparo: completo ronda los 900 dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>MASCOTA DE OTRA CONSOLA</h4>
+      <p class="n-line">Bonk fue la mascota de PC Engine / TurboGrafx-16 (NEC/Hudson), la consola japonesa que compitio con SNES y Genesis en 1989-1994.</p>
+      <p class="n-line">La version NES llego en 1994 — tres anos despues del lanzamiento en PC Engine. Para entonces la NES estaba practicamente muerta.</p>
+      <h4>PORQUE EL PRECIO ES IRRACIONAL</h4>
+      <p class="n-line">No es el mejor Bonk: el de PC Engine es notablemente superior. Pero la tirada minima de fin de ciclo hizo poquisimas copias.</p>
+      <p class="n-line">Red Company vendio la licencia a Hudson para sacar dinero facil de una mascota establecida. El mercado lo inflo despues.</p>
+      <p class="n-cue">► <b>Dato curioso:</b> "Si queriai jugar Bonk en los 90, lo correcto era tener TurboGrafx. Esta version NES fue casi un error comercial."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -245,6 +311,16 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">DUCKTALES 2</div><div class="game-meta">NES · 1993 · CAPCOM · CIB ~USD 1.000</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Secuela tardia del clasico de Capcom. Salio poco porque ya nadie compraba NES: hoy completo pasa los mil dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>EL PRIMER DUCKTALES</h4>
+      <p class="n-line">DuckTales 1 (1989) fue bestseller y elogiado hasta hoy — tiene uno de los OST mas quieridísimos del NES. La secuela deberia haber sido enorme.</p>
+      <p class="n-line">Llego en 1993 cuando el SNES ya dominaba. Los padres ya no buscaban cartuchos NES en las tiendas.</p>
+      <h4>EL OST</h4>
+      <p class="n-line">OST compuesto por Hiroshige Tojo. El tema de Niagara Falls de DuckTales 2 tiene covers modernos y sigue siendo reconocido por fans del chiptune.</p>
+      <h4>PATRON CAPCOM FIN DE CICLO</h4>
+      <p class="n-line">DuckTales 2, Chip n Dale 2 y Rescue Rangers 2 todos salieron tardisimo, todos son excelentes, todos son caros hoy. Capcom sabia lo que hacia — el mercado no respondio.</p>
+      <p class="n-cue">► <b>Reaccion sugerida:</b> "Capcom sacaba juegos excelentes cuando nadie los iba a comprar. Eso es lo que los hace caros hoy."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -265,6 +341,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">CHIP 'N DALE RESCUE RANGERS 2</div><div class="game-meta">NES · 1994 · CAPCOM · CIB ~USD 1.200</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Otra secuela Disney de Capcom de fin de ciclo. Tirada minima en 1994: completo ronda los 1.200 dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>EL ORIGINAL</h4>
+      <p class="n-line">Chip n Dale Rescue Rangers 1 (1990) fue exito de ventas — cooperativo a 2 jugadores con mecanica de lanzar objetos. Uno de los mejores co-op del NES.</p>
+      <p class="n-line">La secuela llego en 1994: mismo destino que DuckTales 2. Calidad igual de alta, ventas cercanas a cero.</p>
+      <h4>EL PATRON SE REPITE</h4>
+      <p class="n-line">DuckTales 2, Chip n Dale 2, Rescue Rangers 2 — Capcom repitio la formula tres veces. Calidad alta, tirada minima, todos rarísimos hoy.</p>
+      <p class="n-line">Desde el punto de vista del coleccionismo, estos tres forman un "set" natural que muchos intentan completar.</p>
+      <p class="n-cue">► <b>Para conectar con slide anterior:</b> "Si DuckTales 2 cuesta $1,000... este, que vino el mismo año con la misma historia, cuesta $1,200."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -285,6 +370,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">POWER BLADE 2</div><div class="game-meta">NES · 1992 · TAITO · CIB ~USD 1.300</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Action-platformer estilo Mega Man de Taito. Poca distribucion: completo se mueve entre 1.000 y 1.300 dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>EL PROTAGONISTA</h4>
+      <p class="n-line">El protagonista se llama Arnold y tiene clarisima inspiracion en Schwarzenegger. Taito / Natsume no se molestaron en disimularlo.</p>
+      <p class="n-line">Power Blade 1 (1991) tuvo distribucion normal y es un buen juego. La secuela (1992) tuvo mucho menos, de ahi el precio inflado.</p>
+      <h4>REPUTACION RETRO</h4>
+      <p class="n-line">La comunidad retro lo considera uno de los mejores action-platformers de NES que nadie conocio en su epoca. Criticas modernas son muy positivas.</p>
+      <p class="n-line">El precio de $1,300 es principalmente rareza, no calidad extraordinaria. Hay juegos mejores en NES que se consiguen en $20.</p>
+      <p class="n-cue">► <b>Comentario de color:</b> "Este le deberia haber dado royalties a Schwarzenegger. Pero en los 90 nadie demandaba a nadie por eso."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -305,6 +399,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">PANIC RESTAURANT</div><div class="game-meta">NES · 1992 · TAITO · CIB ~USD 1.700</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformero obscuro de Taito, encantador pero ignorado. Casi nadie lo compro: completo supera los 1.700 dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>LA PREMISA</h4>
+      <p class="n-line">Eres un cocinero que pelea con comida y utensilios de cocina. El escenario ES un restaurante. Absurdo, encantador, bien hecho.</p>
+      <p class="n-line">Taito lo desarrollo, Acclaim lo publico en USA (1992). Distribucion menor — no fue prioridad para nadie en ese momento.</p>
+      <h4>MERCADO EN SU EPOCA</h4>
+      <p class="n-line">Los pocos que lo jugaron lo consiguieron usado, de regalo, o en tiendas de segunda mano. Practicamente nadie lo compro nuevo en caja.</p>
+      <p class="n-line">Eso explica por que es tan raro encontrarlo CIB: pocas cajas sobrevivieron intactas.</p>
+      <p class="n-cue">► <b>Imagen mental:</b> "Imagina encontrar esto en una feria por $5 hace 10 años sin saber lo que era. Alguien lo hizo y hoy tiene $1,700."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -325,6 +428,17 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">LITTLE SAMSON</div><div class="game-meta">NES · 1992 · TAITO · CIB ~USD 3.000</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Action-platformer excelente que vendio pesimo por salir tarde. Calidad + rareza lo hicieron leyenda: completo pasa los 3.000 dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>EL JUEGO</h4>
+      <p class="n-line">Desarrollado por Taito (1992). Calidad de produccion excelente para una NES tardia — sprites, animaciones, musica de Hiroyuki Iwatsuki.</p>
+      <p class="n-line">El protagonista usa una campana como arma principal. Mecanica unica para un action-platformer — nada igual en el catalogo.</p>
+      <h4>EL FRACASO COMERCIAL</h4>
+      <p class="n-line">Anunciado en Nintendo Power pero llego tan tarde (1992) que las tiendas ya no pedian stock NES. Mayoria de la tirada quedo en bodegas.</p>
+      <p class="n-line">Eso es el dato clave: no es que se vendiera mal — es que casi no llego a las tiendas fisicamente.</p>
+      <h4>CIB VS SUELTO</h4>
+      <p class="n-line">CIB vale ~$3,000. Suelto (solo cartucho) vale ~$300-500. La caja y el manual multiplican el precio x6 a x10.</p>
+      <p class="n-cue">► <b>Dato para el chat:</b> "Si alguien tiene la caja de Little Samson guardada, que la cuide. Esa caja sola vale $2,500."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -345,6 +459,17 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">STADIUM EVENTS</div><div class="game-meta">NES · 1987 · BANDAI · CIB ~USD 25.000</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El juego retail mas caro del NES. Bandai lo retiro y rebautizo World Class Track Meet, dejando poquisimas copias. Una sellada se vendio en casi 42 mil dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>LA HISTORIA DEL RETIRO</h4>
+      <p class="n-line">Bandai lanzo Stadium Events en 1987 para el Family Fun Fitness Mat (alfombra de baile y fitness).</p>
+      <p class="n-line">Nintendo compro los derechos del Power Pad y obligo a Bandai a retirar Stadium Events. Lo rebautizaron "World Class Track Meet" con branding Nintendo.</p>
+      <p class="n-line">Las copias que ya estaban en tiendas debieron retirarse. La mayoria regreso al almacen o fue destruida.</p>
+      <h4>CUANTAS QUEDAN</h4>
+      <p class="n-line">Estimacion: menos de 200 copias CIB en todo el mundo. Es una rareza real de retail — no de competencia ni de bodega.</p>
+      <h4>VENTAS REALES</h4>
+      <p class="n-line">Copia sellada vendida en Heritage Auctions (2010) = $41,300. CIB promedio hoy ronda $25,000-40,000 segun estado.</p>
+      <p class="n-cue">► <b>Pausa dramatica:</b> "El mismo juego como World Class Track Meet vale $15 dolares. Esta version vale $25,000. La diferencia es solo el nombre en la caja."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -354,6 +479,14 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title mg" style="font-size:60px;">RAREZAS &amp; NO-RETAIL</div>
       <div class="sub">Estos NO se vendieron en tiendas normales: prototipos, exclusivos de alquiler, sin licencia y cartuchos de competencia. Otra liga, otra historia.</div>
     </div>
+    <aside class="notas">
+      <h4>LAS 4 CATEGORIAS</h4>
+      <p class="n-line">1) NUNCA LANZADO: Cheetahmen II (bodega de cartucho inacabado). 2) SIN LICENCIA: Bubble Bath Babes (Panesian burlando el chip). 3) EXCLUSIVO RENTAL: Flintstones Blockbuster (nunca en tiendas). 4) COMPETENCIA: Campus Challenge (1 copia) + NWC gris (~90) + NWC dorado (26).</p>
+      <p class="n-line">Cada categoria tiene su propia logica de precio. No se pueden comparar entre si ni con el retail.</p>
+      <h4>MENCION ESPECIAL</h4>
+      <p class="n-line">El Santo Grial cierra la seccion: Super Mario Bros. sellado WATA 9.8 A+ — que tecnicamente SÍ fue retail pero en estado perfecto escala a otra dimension.</p>
+      <p class="n-cue">► <b>Para preparar al publico:</b> "Lo que vienen a continuacion no son juegos caros — son artefactos de coleccion. Son una categoria distinta."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -374,6 +507,17 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">CHEETAHMEN II</div><div class="game-meta">NES · 1992 · ACTIVE ENTERPRISES · NO LANZADO · ~USD 900</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Nunca se lanzo: aparecieron cartuchos en una bodega años despues. Inacabado y famoso por malo, pero rarisimo.</div>
     </div>
+    <aside class="notas">
+      <h4>ACTION 52</h4>
+      <p class="n-line">Cheetahmen era parte del cartucho "Action 52" (1991): 52 juegos, todos terribles, vendido por $200 USD. Uno de los scams mas famosos de la historia del gaming.</p>
+      <p class="n-line">Active Enterprises quebro antes de lanzar la secuela Cheetahmen II. El juego quedo inacabado en una bodega.</p>
+      <h4>EL DESCUBRIMIENTO</h4>
+      <p class="n-line">En los anos 90 alguien encontro esa bodega con ~1,500 cartuchos sin etiqueta. Se vendieron en eBay como curiosidad — fans de lo "tan malo que es bueno".</p>
+      <p class="n-line">Tiene bugs graves: algunos niveles son injugables, el juego se colapsa a los 5 minutos. Es buggier que el Action 52 original.</p>
+      <h4>POR QUE VALE</h4>
+      <p class="n-line">Ironicamente vale ~$900 no por calidad sino por ser un artefacto de historia del gaming — el simbolo del fracaso publisher.</p>
+      <p class="n-cue">► <b>Tono:</b> "El peor juego de esta lista... es tambien el mas interesante de contar."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -394,6 +538,17 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">BUBBLE BATH BABES</div><div class="game-meta">NES · 1991 · PANESIAN · UNLICENSED · ~USD 1.500</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Uno de los tres juegos para adultos sin licencia de Panesian. Nintendo nunca los aprobo: se hicieron poquisimos.</div>
     </div>
+    <aside class="notas">
+      <h4>PANESIAN</h4>
+      <p class="n-line">Panesian era una empresa taiwanesa que burlo el chip de seguridad 10NES de Nintendo para publicar sin licencia.</p>
+      <p class="n-line">Solo sacaron 3 juegos: Bubble Bath Babes, Hot Slots y Peek-a-Boo Poker. Todos para adultos, todos sin licencia, todos carísimos hoy.</p>
+      <h4>EL JUEGO EN SI</h4>
+      <p class="n-line">El gameplay base es un clon de Puzzle Bobble (Taito). No tiene contenido adulto en la mecanica de juego — el contenido adulto esta en las pantallas entre niveles.</p>
+      <p class="n-line">Nintendo no podia tomar accion legal directa por el contenido — la violacion del chip era el problema legal real.</p>
+      <h4>RAREZA HOY</h4>
+      <p class="n-line">Se hicieron muy pocos. No habia canales normales de distribucion. La mayoria se vendio bajo la mesa o en tiendas especializadas.</p>
+      <p class="n-cue">► <b>Advertencia de tono:</b> Mencionar el tema con humor ligero — es historia del gaming, no material explicito.</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -414,6 +569,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">FLINTSTONES: SURPRISE AT DINOSAUR PEAK</div><div class="game-meta">NES · 1994 · TAITO · BLOCKBUSTER · ~USD 2.000</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Casi no se vendio: se distribuyo solo como alquiler en tiendas Blockbuster de USA. Pocas copias sobrevivieron.</div>
     </div>
+    <aside class="notas">
+      <h4>BLOCKBUSTER EN LOS 90</h4>
+      <p class="n-line">Blockbuster Video era el equivalente de Netflix en los 90: miles de tiendas en USA donde alquilabas VHS y videojuegos por el fin de semana.</p>
+      <p class="n-line">Nintendo y publishers a veces hacian acuerdos exclusivos de distribucion con ellos. Flintstones Surprise fue solo alquiler — nunca llego a tiendas de retail.</p>
+      <h4>COMO LLEGO AL MERCADO</h4>
+      <p class="n-line">Cuando Blockbuster cerro tiendas (la empresa quebro definitivamente en 2010), liquido su inventario. Ahi aparecieron estos cartuchos.</p>
+      <p class="n-line">Dato de autenticidad: muchas copias tienen el adhesivo "BLOCKBUSTER VIDEO" o stickers sobre el arte original — eso confirma la procedencia.</p>
+      <p class="n-cue">► <b>Imagen nostalgica:</b> "Para muchos de ustedes, Flintstones Dinosaur Peak es ese juego que siempre estuvo en la vitrina del Blockbuster del barrio. Nunca lo compraron porque no se vendía."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -434,6 +598,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">NINTENDO CAMPUS CHALLENGE 1991</div><div class="game-meta">NES · 1991 · NINTENDO · NFR · ~USD 20.000+</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Cartucho de competencia de la gira universitaria del 91. Se suponia que todos se destruyeron: sobrevivio practicamente uno.</div>
     </div>
+    <aside class="notas">
+      <h4>LA GIRA</h4>
+      <p class="n-line">Nintendo recorrio universidades de USA en 1991 instalando consolas para competencias: SMB3, Pin-Bot y Dr. Mario con timers de torneo.</p>
+      <p class="n-line">Todos los cartuchos debían destruirse al terminar la gira. Era politica oficial de Nintendo para evitar que circularan.</p>
+      <h4>EL UNICO SOBREVIVIENTE</h4>
+      <p class="n-line">Un empleado de Nintendo se llevo un cartucho en lugar de destruirlo. Ese unico cartucho aparecio en un garage sale en 2006.</p>
+      <p class="n-line">Vendido en eBay por $14,000 (2006). Heritage Auctions lo remato en 2009 por $20,100. Precio sigue subiendo.</p>
+      <p class="n-cue">► <b>Reflexion:</b> "Un empleado de Nintendo decidio no destruirlo y con eso creo el objeto de coleccion mas raro de esa gira. La historia del gaming la hacen esas decisiones pequeñas."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -454,6 +627,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">NINTENDO WORLD CHAMPIONSHIPS (GRIS)</div><div class="game-meta">NES · 1990 · NINTENDO · NFR · ~USD 30.000+</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El cartucho gris del torneo de 1990. Se hicieron cerca de 90 unidades para los competidores. Cada subasta supera los 30 mil dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>EL TORNEO</h4>
+      <p class="n-line">Nintendo World Championships 1990: 29 ciudades de USA. Inspirado directamente en la pelicula "The Wizard" (1989) que mostro SMB3 al mundo.</p>
+      <p class="n-line">Los cartuchos tienen SMB1, Rad Racer y Tetris con timers integrados. 6 minutos y medio para acumular el puntaje total.</p>
+      <h4>LAS ~90 COPIAS</h4>
+      <p class="n-line">Se repartieron a los ganadores regionales del torneo. No todos se conservaron — muchos se perdieron, se vendieron por poco, se tiraron.</p>
+      <p class="n-line">Los que llegaron al mercado de coleccion han subido de precio consistentemente. Cada subasta supera la anterior.</p>
+      <p class="n-cue">► <b>Conexion con slide siguiente:</b> "90 copias son pocas... pero esperen la version dorada. Ahí la historia cambia completamente."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -474,6 +656,17 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">NINTENDO WORLD CHAMPIONSHIPS (DORADO)</div><div class="game-meta">NES · 1990 · NINTENDO · NFR · ~USD 100.000+</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El cartucho mas raro del NES: solo 26 dorados, premios de un concurso de Nintendo Power. Cada aparicion supera los 100 mil dolares. Rarisimo, pero no es el record de venta.</div>
     </div>
+    <aside class="notas">
+      <h4>EL CONCURSO DE NINTENDO POWER</h4>
+      <p class="n-line">Los 26 cartuchos dorados fueron premios de un concurso para lectores de la revista Nintendo Power — no del torneo en vivo.</p>
+      <p class="n-line">Funcionalmente identico al gris: mismos juegos, mismos timers. Solo el color los diferencia. Pero ese color vale todo.</p>
+      <h4>EL PRECIO</h4>
+      <p class="n-line">Ultima subasta registrada: $100,880 (Heritage Auctions, 2014). En 2026 cualquier aparicion superaria ese numero facilmente.</p>
+      <p class="n-line">26 copias vs ~90 del gris = mas raro, pero menos conocido entre el publico general. Los coleccionistas lo saben.</p>
+      <h4>POR QUE NO ES EL RECORD</h4>
+      <p class="n-line">El NWC dorado es el MAS RARO de NES. Pero el record de venta lo tiene un juego que se puede conseguir suelto por $10. El proximo slide explica por que.</p>
+      <p class="n-cue">► <b>Setup para el Holy Grail:</b> "26 copias. $100,000. Y sin embargo... no es el mas caro que se ha vendido. ¿Como es eso posible?"</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -494,6 +687,18 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">SUPER MARIO BROS. (SELLADO)</div><div class="game-meta">NES · 1985 · NINTENDO · SELLADO WATA 9.8 A+ · VENTA RECORD USD 2.000.000</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El juego de NES mas caro jamas vendido. Suelto vale 10 dolares, pero una copia sellada y graduada WATA 9.8 A+ (edicion hangtab de 1985) se vendio en DOS MILLONES de dolares en 2021. Sigue siendo el record en 2026. No es rareza: es estado perfecto + el juego mas iconico de la historia.</div>
     </div>
+    <aside class="notas">
+      <h4>LA COPIA ESPECIFICA</h4>
+      <p class="n-line">No es cualquier SMB sellado. Es la variante "hangtab + sticker seal" (no cello wrap) de la primera produccion de 1985 — uno de los primeros SMB que existieron.</p>
+      <p class="n-line">WATA Games (fundada 2018) certifica el estado del sellado y la caja. 9.8 A+ es la calificacion maxima posible. Esta copia estaba perfecta despues de 36 anos.</p>
+      <h4>LA VENTA RECORD</h4>
+      <p class="n-line">Rally Road Auctions, julio 2021: $2,000,000 USD. Sigue siendo el record de videojuego mas caro vendido en subasta en 2026.</p>
+      <p class="n-line">El comprador fue anonimo. Pero la transaccion fue cuestionada publicamente.</p>
+      <h4>LA CONTROVERSIA</h4>
+      <p class="n-line">Jim Halperin (co-fundador de Heritage Auctions) participo en el mercado de cartuchos gradeados como comprador. Se investigo si las subastas previas inflaron artificialmente el mercado para crear FOMO.</p>
+      <p class="n-line">La FTC de USA investigo el mercado de coleccionables videojuego en 2021-2022 por esta razon. No hubo sancion formal.</p>
+      <p class="n-cue">► <b>Frase de cierre:</b> "Dos millones de dolares por un juego que cualquiera puede jugar gratis en un emulador. Eso es el coleccionismo llevado al extremo absoluto."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -503,6 +708,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title mg" style="font-size:54px;">DOS LIGAS DISTINTAS</div>
       <div class="sub">El retail tiene un techo de unos pocos miles de dolares (con Stadium Events como anomalia). Pero las rarezas de competencia juegan en las decenas de miles, y el grial dorado, en otro planeta.</div>
     </div>
+    <aside class="notas">
+      <h4>EL ANALISIS DE LAS DOS LIGAS</h4>
+      <p class="n-line">Retail puro: techo real en ~$1,700 (Panic Restaurant). Stadium Events ($25K) es la anomalia — retiro de mercado forzado lo convirtio en algo distinto.</p>
+      <p class="n-line">Rarezas de competencia: $20K–$100K+. La rareza fisica (copias contables) es el motor principal.</p>
+      <p class="n-line">El Holy Grail ($2M): categoria de una sola pieza. No es rareza — es iconicidad + estado perfecto. La formula es distinta.</p>
+      <h4>LA LECCION</h4>
+      <p class="n-line">Rareza sola no basta. El NWC dorado (26 copias) vale $100K. Un SMB comun sellado en mal estado vale $500. La ecuacion es: rareza x iconicidad x estado.</p>
+      <p class="n-cue">► <b>Para el publico:</b> "Si tienen un juego raro guardado, cuiden la caja y el manual. Sin ellos, el valor cae entre 5 y 10 veces."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -512,6 +726,16 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title cy" style="font-size:54px;">LA NES COMPLETA</div>
       <div class="sub">Cerramos NES: coleccion, los mejores del mundo y los mas caros. Cuentanos cual de estos grales te gustaria tener. Suscribete para la proxima consola.</div>
     </div>
+    <aside class="notas">
+      <h4>CIERRE DEL ARCO NES</h4>
+      <p class="n-line">Con este episodio cerramos el arco NES en Retrotarros: coleccion (que tenemos) + top mundial (los mejores) + top precios (los mas caros).</p>
+      <p class="n-line">Tres angulos distintos de la misma consola — el espectador que siguio los tres tiene el panorama completo de la NES como fenomeno cultural y de mercado.</p>
+      <h4>PREGUNTA AL CHAT</h4>
+      <p class="n-cue">► <b>Interaccion:</b> "¿Con cuantos de estos tendrian conformarse si pudieran elegir uno solo? Escriban en el chat."</p>
+      <h4>SETUP PROXIMA CONSOLA</h4>
+      <p class="n-line">No anunciar todavia que consola es. Dejar el misterio si la proxima no es obvia. El teaser de "la proxima consola" es suficiente.</p>
+      <p class="n-cue">► <b>Call to action:</b> Suscripcion + notificacion + comunidad Retrotarros. Mencionar que esto se puede ver tambien en Discord.</p>
+    </aside>
   </section>
 
 </div>
@@ -522,7 +746,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
     <div class="nav-counter" id="counter">01 / 14</div>
     <div class="nav-progress"><div class="bar" id="bar"></div></div>
   </div>
-  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR &nbsp; <kbd id="notasBtn" style="cursor:pointer" title="Mostrar/ocultar notas">N</kbd> NOTAS</div>
   <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
 </nav>
 
@@ -535,6 +759,11 @@ const bar = document.getElementById('bar');
 let current = 0;
 const total = slides.length;
 function pad(n) { return String(n).padStart(2, '0'); }
+slides.forEach((s, i) => { const sn = s.querySelector('.slide-num'); if (sn) sn.textContent = pad(i + 1); });
+function setRead(on) { document.body.classList.toggle('read-mode', on); }
+if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
+const notasBtn = document.getElementById('notasBtn');
+if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
 function go(i) {
   if (i < 0 || i >= total) return;
   slides[current].classList.remove('active');
@@ -552,6 +781,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
   if (e.key === 'Home') { go(0); }
   if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }
 });
 go(0);
 </script>
