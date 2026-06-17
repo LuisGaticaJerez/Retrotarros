@@ -5,10 +5,11 @@ setlocal enabledelayedexpansion
 REM ============================================================
 REM  TarroBot Studio - Instalador automatico para Windows 10/11
 REM  Retrotarros - doble click y listo
-REM  Version 1.5.2 hotfix (fix: parentesis en echo dentro de bloques rompian
-REM                 el parser y cerraban el instalador sin log -- sobre todo en
-REM                 PCs con Python 3.13+ -- ; + log persistente install-log.txt
-REM                 / install-pip.txt). Ver CHANGELOG-tarrobot-studio.md
+REM  Version 1.5.3 hotfix (fix ffmpeg: URL BtbN "latest" no resolvia con curl
+REM                 --> reemplazado por gyan.dev con fallback a version pinneada;
+REM                 deteccion previa de ffmpeg en sistema (OBS/winget/scoop);
+REM                 eliminado goto-dentro-de-for-dentro-de-else (fragil en CMD)).
+REM                 Ver CHANGELOG-tarrobot-studio.md
 REM ============================================================
 
 title TarroBot Studio - Configuracion
@@ -441,30 +442,68 @@ REM  Paso 4 - ffmpeg
 REM ============================================================
 echo.
 echo [4/7] Verificando ffmpeg...
+set "FFMPEG_OK=no"
+
+REM Primero: portable local
 if exist "bin\ffmpeg.exe" (
-    echo [OK] ffmpeg ya esta.
-) else (
-    echo [INFO] Descargando ffmpeg portable ^(~70 MB^)...
+    echo [OK] ffmpeg portable en bin\ffmpeg.exe
+    set "FFMPEG_OK=yes"
+)
+
+REM Segundo: ffmpeg instalado en el sistema (OBS, winget, scoop, etc)
+if "!FFMPEG_OK!"=="no" (
+    set "FFMPEG_SYS="
+    for /f "delims=" %%i in ('where ffmpeg 2^>nul') do (
+        if not defined FFMPEG_SYS set "FFMPEG_SYS=%%i"
+    )
+    if defined FFMPEG_SYS (
+        echo [OK] ffmpeg encontrado en el sistema: !FFMPEG_SYS!
+        if not exist "bin" mkdir bin
+        copy "!FFMPEG_SYS!" "bin\ffmpeg.exe" >nul
+        echo [OK] copiado a bin\ffmpeg.exe
+        set "FFMPEG_OK=yes"
+        >>"!LOGFILE!" echo [ffmpeg] copiado del sistema: !FFMPEG_SYS!
+    )
+)
+
+REM Tercero: descargar si no hay ninguno
+if "!FFMPEG_OK!"=="no" (
+    echo [INFO] ffmpeg no encontrado. Descargando portable desde gyan.dev ~25 MB...
     if not exist "bin" mkdir bin
-    curl -L -o ffmpeg.zip https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip
+    curl -L --max-time 120 -o ffmpeg-essentials.zip "https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip" 2>>"!LOGFILE!"
     if !errorlevel! neq 0 (
-        echo [ERROR] No se pudo descargar ffmpeg.
-        pause
-        exit /b 1
+        echo [WARN] Fallo descarga de gyan.dev. Intentando con version fija de GitHub...
+        curl -L --max-time 120 -o ffmpeg-essentials.zip "https://github.com/GyanD/codexffmpeg/releases/download/7.1.1/ffmpeg-7.1.1-essentials_build.zip" 2>>"!LOGFILE!"
+        if !errorlevel! neq 0 (
+            echo [ERROR] No se pudo descargar ffmpeg.
+            echo         Opciones manuales:
+            echo           winget install Gyan.FFmpeg
+            echo           o baja de https://www.gyan.dev/ffmpeg/builds/
+            echo           y pon ffmpeg.exe en la carpeta bin\ de TarroBot
+            >>"!LOGFILE!" echo [ffmpeg] descarga fallida - instalar manual
+            pause
+            exit /b 1
+        )
     )
-    echo [INFO] Extrayendo...
-    powershell -NoProfile -Command "Expand-Archive -Path ffmpeg.zip -DestinationPath ffmpeg-temp -Force"
+    echo [INFO] Extrayendo ffmpeg...
+    powershell -NoProfile -Command "Expand-Archive -Path ffmpeg-essentials.zip -DestinationPath ffmpeg-temp -Force"
+    set "FFEXE="
     for /r "ffmpeg-temp" %%f in (ffmpeg.exe) do (
-        copy "%%f" "bin\ffmpeg.exe" >nul
-        goto :ffmpeg_done
+        if not defined FFEXE set "FFEXE=%%f"
     )
-    :ffmpeg_done
-    rmdir /s /q ffmpeg-temp
-    del ffmpeg.zip
-    if exist "bin\ffmpeg.exe" (
+    if defined FFEXE (
+        copy "!FFEXE!" "bin\ffmpeg.exe" >nul
+        set "FFMPEG_OK=yes"
+    )
+    rmdir /s /q ffmpeg-temp 2>nul
+    del ffmpeg-essentials.zip 2>nul
+    if "!FFMPEG_OK!"=="yes" (
         echo [OK] ffmpeg listo en bin\ffmpeg.exe
+        >>"!LOGFILE!" echo [ffmpeg] instalado OK
     ) else (
         echo [ERROR] No se pudo extraer ffmpeg.
+        echo         Instala manual: winget install Gyan.FFmpeg
+        >>"!LOGFILE!" echo [ffmpeg] extraccion fallida
         pause
         exit /b 1
     )
