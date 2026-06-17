@@ -114,12 +114,24 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--dk); }
 ::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+
+/* ============ CAPA DE NOTAS DE LECTURA (teleprompter) ============ */
+.notas { position: absolute; top: 0; right: 0; width: 460px; height: 100%; z-index: 150; display: none; flex-direction: column; gap: 10px; padding: 26px 22px 30px; overflow-y: auto; background: linear-gradient(90deg, rgba(6,3,15,.55) 0%, rgba(6,3,15,.96) 26%); border-left: 2px solid var(--ye); backdrop-filter: blur(2px); }
+body.read-mode .slide.active .notas { display: flex; }
+.notas h4 { font-family: 'Press Start 2P'; font-size: 9px; color: var(--ye); letter-spacing: 2px; margin-top: 4px; }
+.notas h4:first-child { margin-top: 0; }
+.notas .n-line { font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.5; color: rgba(255,255,255,.92); border-left: 3px solid var(--cy); padding: 3px 0 3px 11px; }
+.notas .n-cue { border-left-color: var(--mg); color: var(--ye); }
+.notas .n-cue b { color: #fff; }
+.read-indicator { position: fixed; top: 64px; right: 16px; z-index: 300; font-family: 'Press Start 2P'; font-size: 8px; color: #000; background: var(--ye); padding: 6px 10px; border-radius: 3px; display: none; box-shadow: 0 0 14px rgba(255,210,63,.5); }
+body.read-mode .read-indicator { display: block; }
 </style>
 <style>
 .game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);letter-spacing:1px;white-space:nowrap;border:3px solid var(--ye);padding:8px 18px;border-radius:6px;background:rgba(255,210,63,.07);align-self:flex-start}
 </style>
 </head>
 <body>
+<div class="read-indicator">● MODO LECTURA (N)</div>
 
 <header>
   <div class="hdr-logo">RETROTARROS</div>
@@ -136,6 +148,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="ep-title">TOP 10 <span class="vs">PRECIOS</span> PS VITA</div>
       <div class="ep-sub">LOS CARTUCHOS QUE ROMPEN BILLETERAS</div>
     </div>
+    <aside class="notas">
+      <h4>CONTEXTO VITA</h4>
+      <p class="n-line">La PS Vita murio comercialmente pronto en Occidente pero tuvo una vida larga en Japon y entre fans de JRPG. Eso crea el patron de precios: juegos excelentes con tiradas occidentales pequenas.</p>
+      <p class="n-line">El top retail techa en ~$200 (Persona 4 Golden Solid Gold). Pero las Limited Run Games rompen eso completamente: $600, $1,000, $4,000.</p>
+      <h4>TONO APERTURA</h4>
+      <p class="n-cue">► <b>Apertura:</b> "Si creias que los juegos de Vita eran baratos porque la consola fracaso... los coleccionistas tienen noticias para ti."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -145,6 +164,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title mg" style="font-size:78px;">DEL #10 AL #1</div>
       <div class="sub">Solo juegos RETAIL: los que se vendieron en tiendas. Valores CIB aproximados (PriceCharting, 2026). Las Limited Run y rarezas van aparte. El numero uno se escapa de la liga.</div>
     </div>
+    <aside class="notas">
+      <h4>METODOLOGIA</h4>
+      <p class="n-line">CIB Vita es especialmente importante: muchos venian con insertos DLC y contenido digital. Sin el codigo (aunque este usado) el valor baja.</p>
+      <p class="n-line">NISA (NIS America) y XSEED son los publishers que dominan este top — ambos especializados en JRPG con distribuciones occidentales reducidas.</p>
+      <p class="n-line">Los precios de la Vita en general han subido consistentemente desde 2018. La consola gano una segunda vida como consola de culto.</p>
+      <p class="n-cue">► <b>Dato para decir:</b> "Los precios del top retail de Vita son relativamente 'modestos'. La segunda seccion de rarezas es donde el coleccionismo se vuelve ridiculo."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -165,6 +191,14 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">HATSUNE MIKU: PROJECT DIVA F 2ND</div><div class="game-meta">VITA · 2014 · SEGA · CIB ~USD 55</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Rhythm de culto. Tirada moderada y demanda alta de fans: hoy un completo ronda los 55 dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>HATSUNE MIKU</h4>
+      <p class="n-line">Hatsune Miku es un Vocaloid — software de sintesis de voz de Crypton Future Media (2007). No es una persona, es un personaje de mascota de software. Tiene millones de fans globales.</p>
+      <p class="n-line">Project Diva F 2nd es el segundo de los juegos de ritmo de Sega con el personaje. Vita fue la plataforma ideal: portatil, pantalla OLED, perfecto para sesiones cortas de ritmo.</p>
+      <h4>POR QUE CUESTA</h4>
+      <p class="n-line">SEGA hizo tiradas moderadas en Occidente — el mercado de Miku es grande en Japon pero menor en USA/EU. Los fans occidentales de ritmo buscan la version fisica y eso sube el precio.</p>
+      <p class="n-cue">► <b>Para el chat:</b> "¿Alguien del chat es fan de Miku? Este juego en fisico ya cuesta mas que cuando salio."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -185,6 +219,14 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">DRAGON'S CROWN</div><div class="game-meta">VITA · 2013 · ATLUS · CIB ~USD 65</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Beat-em-up de Vanillaware, arte pintado a mano. Clasico de la consola que sube de a poco.</div>
     </div>
+    <aside class="notas">
+      <h4>VANILLAWARE</h4>
+      <p class="n-line">Vanillaware es conocido por arte 2D pintado a mano de calidad cinematografica: Odin Sphere, GrimGrimoire, 13 Sentinels. Cada juego suyo es visualmente espectacular.</p>
+      <p class="n-line">Dragon's Crown es un beat-em-up co-op para 4 jugadores con 6 clases distintas. Combina roll-playing con accion de scroll lateral.</p>
+      <h4>LA POLEMICA</h4>
+      <p class="n-line">Al lanzarse en 2013, el diseno exagerado de los personajes (especialmente la Sorceress y el Amazon) genero criticas por parte de algunos medios. Eso le dio mas visibilidad y el juego se convirtio en favorito de fans.</p>
+      <p class="n-cue">► <b>Tono:</b> "Arte discutido, juego excelente. Vanillaware nunca hace nada a medias."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -205,6 +247,14 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">YS: MEMORIES OF CELCETA</div><div class="game-meta">VITA · 2013 · XSEED · CIB ~USD 70</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Action-RPG de Falcom localizado por XSEED. Localizaciones chicas = precios que suben.</div>
     </div>
+    <aside class="notas">
+      <h4>FALCOM Y XSEED</h4>
+      <p class="n-line">Nihon Falcom es el estudio japones de Ys — saga de ARPG activo que existe desde 1987. XSEED es su publisher en Occidente, conocido por localizaciones de calidad pero tiradas pequenas.</p>
+      <p class="n-line">Memories of Celceta es la version "definitiva" de Ys IV — un juego que habia tenido dos versiones anteriores en Japon, nunca localizadas. Esta fue la primera version oficial en ingles.</p>
+      <h4>POR QUE CUESTA</h4>
+      <p class="n-line">XSEED imprime lo que calcula que va a vender. Con una base de fans pequena pero leal, las tiradas son conservadoras. La demanda supera la oferta rapidamente.</p>
+      <p class="n-cue">► <b>Para contextualizar:</b> "XSEED es el publisher que mas fans de JRPG quieren... y el que menos copias imprime. Esa combinacion crea exactamente esta lista de precios."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -225,6 +275,14 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">TOUKIDEN 2</div><div class="game-meta">VITA · 2017 · KOEI TECMO · CIB ~USD 75</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Cazador de demonios estilo Monster Hunter, lanzado tarde en la vida de la Vita. Pocas copias.</div>
     </div>
+    <aside class="notas">
+      <h4>TOUKIDEN COMO SAGA</h4>
+      <p class="n-line">Toukiden es la respuesta de Koei Tecmo a Monster Hunter (Capcom). Caza cooperativa, pero con mitologia japonesa: los Oni son los monstruos, los guerreros son Tamamayu.</p>
+      <p class="n-line">Toukiden 2 es de mundo abierto — el primero en la saga con esa estructura. Salio en 2017 cuando la Vita ya estaba en fase final de su ciclo occidental.</p>
+      <h4>EL CONTEXTO DEL PRECIO</h4>
+      <p class="n-line">2017 en Vita = casi nadie compraba fisico. Koei Tecmo hizo una tirada conservadora. Los fans del genero caza cooperativo en Vita buscan este titulo hoy.</p>
+      <p class="n-cue">► <b>Comparacion:</b> "Si te gusto Monster Hunter en PSP o PS Vita, Toukiden 2 es lo que debiste jugar. Y ahora cuesta $75 encontrarlo completo."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -245,6 +303,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">ATELIER RORONA PLUS</div><div class="game-meta">VITA · 2014 · NIS AMERICA · CIB ~USD 85</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>JRPG de alquimia de Gust, tirada NISA limitada. Saga de coleccionistas: completo pasa los 85.</div>
     </div>
+    <aside class="notas">
+      <h4>LA SAGA ATELIER</h4>
+      <p class="n-line">Atelier es una saga de Gust (ahora parte de Koei Tecmo) que lleva desde 1997. La mecanica central es la alquimia: recoger ingredientes y crear objetos, no solo pelear.</p>
+      <p class="n-line">Atelier Rorona Plus es la version mejorada del primer juego de la trilogia Arland. "Plus" incluye todo el DLC original mas contenido nuevo.</p>
+      <h4>POR QUE CUESTA</h4>
+      <p class="n-line">NIS America tiene distribuciones sistematicamente pequenas en Occidente. Los fans de Atelier buscan fisico obsesivamente — es una saga que se colecciona, no solo se juega.</p>
+      <p class="n-line">El efecto "set completo": si alguien colecciona Atelier en Vita, quiere todos los titulos. Eso mantiene la demanda alta aunque el catalogo sea de nicho.</p>
+      <p class="n-cue">► <b>Para el chat:</b> "La saga Atelier es la que mas lleva a la gente a coleccionar fisico de Vita. Es un fenomeno aparte."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -265,6 +332,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">SILENT HILL: BOOK OF MEMORIES</div><div class="game-meta">VITA · 2012 · KONAMI · CIB ~USD 90</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El unico Silent Hill de Vita (spin-off dungeon crawler). Rareza por marca: ronda los 90.</div>
     </div>
+    <aside class="notas">
+      <h4>EL CONTEXTO SILENT HILL</h4>
+      <p class="n-line">Silent Hill: Book of Memories fue desarrollado por WayForward (Shovel Knight, DuckTales Remastered) — no por el equipo original de Konami Jappon.</p>
+      <p class="n-line">En lugar de survival horror, es un dungeon crawler cooperativo para hasta 4 jugadores. Recibio criticas mixtas — los fans de Silent Hill lo rechazaron por cambiar el genero.</p>
+      <h4>POR QUE CUESTA</h4>
+      <p class="n-line">Es el UNICO juego de Silent Hill en Vita. Los coleccionistas de la franquicia quieren tenerlo aunque no sea el mejor — rareza de marca + unico titulo en plataforma.</p>
+      <p class="n-line">Silent Hill como franquicia esta inactiva hace anos (excepto por Silent Hill 2 Remake en 2024). Eso aumenta el interes en tener el catalogo fisico completo.</p>
+      <p class="n-cue">► <b>Curiosidad:</b> "El peor Silent Hill de la historia... y el mas caro de conseguir en Vita. La logica del coleccionismo."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -285,6 +361,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">DISGAEA 4: A PROMISE REVISITED</div><div class="game-meta">VITA · 2014 · NIS AMERICA · CIB ~USD 100</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Tactical JRPG enorme, tirada NISA limitada. Pasa los 100 dolares completo y subiendo.</div>
     </div>
+    <aside class="notas">
+      <h4>DISGAEA</h4>
+      <p class="n-line">Disgaea 4 A Promise Revisited es la version "completa" de Disgaea 4 — incluye todo el DLC del original de PS3. Nippon Ichi Software (NIS), desarrollador japones.</p>
+      <p class="n-line">Disgaea es el JRPG de los numeros absurdos: niveles hasta 9999, estadisticas en millones, horas de post-game para optimizar builds. Es una saga que atrae al jugador hardcore de sistema.</p>
+      <h4>EL PRECIO</h4>
+      <p class="n-line">NIS America tiene distribuciones pequenas pero fieles. El jugador de Disgaea es un coleccionista por naturaleza — tiene todos los Disgaea de todas las consolas.</p>
+      <p class="n-line">El hecho de que Vita sea la "plataforma definitiva" para los Disgaea clasicos (portatil, play anywhere) hace que este titulo sea codiciado.</p>
+      <p class="n-cue">► <b>Dato:</b> "100 dolares por el juego que te permite llegar a nivel 9,999 y seguir jugando. Valor por dolar, sigue siendo una ganga."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -305,6 +390,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">THE LEGEND OF HEROES: TRAILS OF COLD STEEL II</div><div class="game-meta">VITA · 2016 · XSEED · CIB ~USD 130</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>JRPG querido de Falcom, salio tarde y en poca cantidad. De los retail mas buscados: 130+.</div>
     </div>
+    <aside class="notas">
+      <h4>TRAILS OF COLD STEEL</h4>
+      <p class="n-line">Trails of Cold Steel es parte de la mega-saga Trails (Kiseki) de Falcom. La historia comienza en CS1 y continua directamente en CS2 — son practicamente dos mitades del mismo juego.</p>
+      <p class="n-line">Localizado por XSEED (primero) y luego por Nihon Falcom directamente (versiones PC/PS4 posteriores). La version Vita tiene tirada especialmente pequena.</p>
+      <h4>EL PRECIO EXPLICADO</h4>
+      <p class="n-line">Salio en 2016 para Vita en USA — un ano antes de que XSEED dejara de priorizar localizaciones fisicas de Vita. Las copias que existian se vendieron rapido.</p>
+      <p class="n-line">Los fans de Trails coleccionan TODOS los titulos fisicos. CS2 Vita es el "eslabon" mas dificil de esa cadena.</p>
+      <p class="n-cue">► <b>Para enganchados en la saga:</b> "Si ya tienen Cold Steel 1 en Vita, necesitan este. Y 'necesitan' literalmente — la historia no funciona sin el."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -325,6 +419,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">MURAMASA REBIRTH</div><div class="game-meta">VITA · 2013 · AKSYS · CIB ~USD 150</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Action de Vanillaware con espadas, arte 2D brutal. Tirada chica de Aksys: ronda los 150.</div>
     </div>
+    <aside class="notas">
+      <h4>MURAMASA REBIRTH</h4>
+      <p class="n-line">Muramasa: The Demon Blade fue originalmente de Wii (2009). La version Vita es "Rebirth" — port mejorado con contenido adicional y 4 DLC de escenarios adicionales con personajes nuevos.</p>
+      <p class="n-line">El arte 2D de Vanillaware es pintado cuadro a cuadro — escenarios y animaciones de una calidad visual que rivaliza con producciones de anime de estudio.</p>
+      <h4>AKSYS Y LA TIRADA</h4>
+      <p class="n-line">Aksys Games es publisher especializado en titulos japoneses de nicho para Occidente. Sus tiradas son pequenas pero precisas — van directo al fan que lo quiere en fisico.</p>
+      <p class="n-line">Los 4 DLC de Rebirth (Genroku Legends) son considerados contenido imprescindible. Esto hace que el CIB completo con DLC sea especialmente buscado.</p>
+      <p class="n-cue">► <b>Visual:</b> "Si tienen gameplay de esto, muStrenlo. Es el juego mas bonito de la lista — visualmente sin discusion."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -345,6 +448,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">PERSONA 4 GOLDEN: SOLID GOLD PREMIUM EDITION</div><div class="game-meta">VITA · 2012 · ATLUS · CIB ~USD 200</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>La edicion de lanzamiento con steelbook dorado y OST. El P4G mas buscado: el rey retail, ~200 y subiendo.</div>
     </div>
+    <aside class="notas">
+      <h4>QUE INCLUYE</h4>
+      <p class="n-line">Solid Gold Premium Edition incluye: steelbook dorado, OST en CD de 2 discos, artbook, caja exterior premium. Es una de las ediciones de coleccionista mas logradas de la Vita.</p>
+      <p class="n-line">Persona 4 Golden fue considerado por anos el mejor JRPG de la Vita y uno de los mejores RPG de la decada. Fue exclusivo de Vita de 2012 a 2020 — 8 anos de exclusividad.</p>
+      <h4>LA EXCLUSIVIDAD</h4>
+      <p class="n-line">En 2020 llego a PC (Steam) y luego a PS4/Xbox/Switch. Eso bajo el precio de la version estandar de Vita. Pero la Solid Gold Premium Edition sigue siendo buscada como pieza de coleccion.</p>
+      <p class="n-line">Los actores de voz re-grabaron algunas lineas para la version Vita. La exclusividad de esas grabaciones fue un factor que mantuvo la Vita viva en Occidente durante anos.</p>
+      <p class="n-cue">► <b>Tono:</b> "Persona 4 Golden fue LA razon para comprar una Vita en Occidente. Esta edicion es la forma 'correcta' de tenerlo."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -354,6 +466,14 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title mg" style="font-size:58px;">RAREZAS &amp; LIMITED RUN</div>
       <div class="sub">No se vendieron en tiendas normales: tiradas minimas de Limited Run Games y ediciones de coleccionista. Otra liga de precios, miles de dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>QUE ES LIMITED RUN GAMES</h4>
+      <p class="n-line">Limited Run Games es una empresa fundada en 2015 que produce ediciones fisicas de juegos que solo existian en digital. Tiradas de 1,500 a 5,000 copias tipicamente. Vita fue su consola estrella desde el inicio.</p>
+      <p class="n-line">El modelo: los fans tienen una ventana de 2 semanas para ordenar. No hay restock. Lo que no se ordena, no se fabrica. Lo que si se fabrica, es lo unico que existira fisicamente.</p>
+      <h4>POR QUE EXPLOTAN LOS PRECIOS</h4>
+      <p class="n-line">Algunas tiradas fueron tan pequenas (menos de 2,000 copias) que agotaron inmediatamente. Hoy en el mercado secundario esas copias valen 5-10x el precio original.</p>
+      <p class="n-cue">► <b>Para el chat:</b> "Alguien en el chat que haya comprado un Limited Run en $25 y hoy vale $1,000? Cuenten."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -374,6 +494,14 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">A.W.: PHOENIX FESTA</div><div class="game-meta">VITA · 2016 · BANDAI NAMCO · LRG · ~USD 600</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Tirada minima de Limited Run Games. Suelto ronda 450, completo pasa los 600 dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>A.W.: PHOENIX FESTA</h4>
+      <p class="n-line">A.W.: Phoenix Festa es un fighting/action game basado en el anime "The Asterisk War" (Gakusen Toshi Asterisk). Bandai Namco lo publico en digital. Limited Run hizo la unica edicion fisica occidental.</p>
+      <p class="n-line">El juego en si es moderado — no es un clasico ni tiene una reputacion destacada. El precio lo maneja enteramente la rareza LRG.</p>
+      <h4>EL PATRON</h4>
+      <p class="n-line">Este es el patron tipico de los LRG caros: juego de anime de nicho + tirada ultra-pequena + fans coleccionistas de Vita que quieren el set completo = precio inflado por el contenedor fisico, no por el juego.</p>
+      <p class="n-cue">► <b>Honestidad:</b> "Este no esta aqui por calidad. Esta por ser fisico, escaso, y de Vita. Eso es suficiente."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -394,6 +522,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">VVVVVV</div><div class="game-meta">VITA · 2017 · LIMITED RUN · LRG · ~USD 1.000</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformero indie en fisico via LRG. Suelto sobre 800, completo supera los mil dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>VVVVVV</h4>
+      <p class="n-line">Creado por Terry Cavanagh (desarrollador independiente irlandes) en 2010. Mecanica central: el personaje no salta — invierte la gravedad. Plataformero de precision extrema.</p>
+      <p class="n-line">La version Vita incluye niveles adicionales hechos por desarrolladores invitados. Es la "edicion de lujo" del juego, aunque Cavanagh hizo el port el mismo.</p>
+      <h4>POR QUE MIL DOLARES</h4>
+      <p class="n-line">Limited Run hizo una tirada muy pequena — algunos estiman menos de 2,000 copias. El juego tiene un nombre reconocido entre fans de indie y retro. Esa combinacion explota el precio.</p>
+      <p class="n-line">El titulo en si cuesta $5 en Steam. La caja de Vita vale $1,000. Eso resume el coleccionismo de Limited Run perfectamente.</p>
+      <p class="n-cue">► <b>Punto de humor:</b> "Cinco dolares en Steam. Mil dolares en Vita. La misma experiencia de juego. Bienvenidos al coleccionismo."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -414,6 +551,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">REVENGE OF THE BIRD KING</div><div class="game-meta">VITA · 2019 · LIMITED RUN · LRG FINAL · ~USD 1.200</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Pensado como el ultimo lanzamiento fisico de Vita de LRG. Rareza historica de la consola.</div>
     </div>
+    <aside class="notas">
+      <h4>EL CONTEXTO</h4>
+      <p class="n-line">Revenge of the Bird King es un plataformero indie menor que de otro modo nadie recordaria. Pero Limited Run lo anuncio como "el ultimo lanzamiento fisico de Vita" — eso lo hizo historico instantaneamente.</p>
+      <p class="n-line">Lanzado en 2019. En ese momento la PS Vita ya habia sido oficialmente discontinuada por Sony. Fue un acto de amor de LRG hacia la plataforma.</p>
+      <h4>EL VALOR SIMBOLICO</h4>
+      <p class="n-line">Los coleccionistas de Vita quieren "el ultimo". Tener el cierre oficial del catalogo fisico de LRG en Vita es un argumento poderoso para pagar el precio elevado.</p>
+      <p class="n-line">Es similar a los sellos de "edicion de cierre" de consolas: el ultimo juego oficial de una plataforma tiene valor simbolico independiente de su calidad.</p>
+      <p class="n-cue">► <b>Tono emotivo:</b> "El ultimo juego fisico de Vita de Limited Run. Para muchos coleccionistas, eso es suficiente para quererlo a cualquier precio."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -434,6 +580,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">1001 SPIKES</div><div class="game-meta">VITA · 2014 · LIMITED RUN · LRG · ~USD 1.500</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Una de las primeras LRG y de las mas escasas. Hoy ronda los mil quinientos dolares.</div>
     </div>
+    <aside class="notas">
+      <h4>1001 SPIKES</h4>
+      <p class="n-line">1001 Spikes de Nicalis es un plataformero de precision inspirado en los clasicos de 8 bits — penalizacion extrema, requiere memorizar niveles. Saludo al retro hardcore.</p>
+      <p class="n-line">Es uno de los primeros titulos de Limited Run Games para Vita, cuando LRG era pequena y sus tiradas eran especialmente reducidas. Menos de 1,500 copias estimadas.</p>
+      <h4>POR QUE VALE MAS QUE VVVVVV</h4>
+      <p class="n-line">Combina dos factores: tirada mas pequena que VVVVVV (LRG era mas nueva, ordenes menores) + reconocimiento de marca entre fans de juegos duros estilo NES.</p>
+      <p class="n-line">Nicalis (el publisher) tiene una reputacion fuerte en el indie retro. La interseccion Nicalis + LRG Vita + tirada minima = precio record para un indie fisico.</p>
+      <p class="n-cue">► <b>Setup Holy Grail:</b> "$1,500 parecia el techo de esta lista... hasta que llegamos al siguiente."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -454,6 +609,17 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">THE BINDING OF ISAAC: REBIRTH</div><div class="game-meta">VITA · 2015 · LIMITED RUN · TIRADA MINIMA · CIB ~USD 4.000</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El santo grial de la Vita. Tirada tan minima que los coleccionistas dudaban que existiera en fisico. Un completo en caja supera los cuatro mil dolares: el juego de Vita mas caro del planeta.</div>
     </div>
+    <aside class="notas">
+      <h4>THE BINDING OF ISAAC</h4>
+      <p class="n-line">Binding of Isaac: Rebirth es uno de los roguelikes mas influyentes de la decada 2010. Edmund McMillen y Nicalis. Tiene millones de copias vendidas en todas las plataformas digitales.</p>
+      <p class="n-line">La version Vita de Limited Run fue anunciada pero nadie sabia cuantas copias existian realmente. La tirada fue tan pequena que los propios compradores dudaban de haber recibido algo real.</p>
+      <h4>LA TIRADA LEGENDARIA</h4>
+      <p class="n-line">Se estima que existen entre 500 y 1,000 copias fisicas en todo el mundo. La mayoria en colecciones que no salen al mercado. Cuando una aparece, el precio es $4,000 o mas.</p>
+      <p class="n-line">El juego es gratuito en PS Plus/PlayStation Plus o cuesta unos pocos dolares en digital. La diferencia de precio entre digital y fisico es de $3,990+.</p>
+      <h4>POR QUE ES EL GRIAL</h4>
+      <p class="n-line">No es el juego mas oscuro ni el mas desconocido. Es el que tiene el mejor combo de: fama global del titulo + tirada absurdamente pequena + comunidad de coleccionistas activa.</p>
+      <p class="n-cue">► <b>Cierre de seccion:</b> "Si alguien del chat tiene esto en caja, que lo muestre. Seriamente — es una reliquia."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -463,6 +629,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title mg" style="font-size:54px;">DOS LIGAS DISTINTAS</div>
       <div class="sub">El retail Vita techa en un par de cientos de dolares (JRPG NISA/XSEED/Falcom). Pero las Limited Run juegan en los miles, y el grial Binding of Isaac, en otro planeta.</div>
     </div>
+    <aside class="notas">
+      <h4>LA ESTRUCTURA DE PRECIOS VITA</h4>
+      <p class="n-line">Retail: techo en $200 (P4G Solid Gold). Los JRPG de NISA/XSEED/Falcom viven entre $55-200. La razon es simple: buena demanda de fans, tiradas conservadoras.</p>
+      <p class="n-line">LRG basico: $600-1,500. La logica es matematica: tiradas de 1,500-2,000 copias para miles de fans. El tiempo hace el resto.</p>
+      <p class="n-line">Holy Grail: $4,000+. Tirada de menos de 1,000 copias + juego famoso globalmente. Categoria de una sola pieza.</p>
+      <h4>DIFERENCIA CON NES</h4>
+      <p class="n-line">Los precios del top NES son mucho mayores ($25K-$2M). El NES tiene 40 anos de historia. La Vita tiene 15. Los precios Vita seguiran subiendo con el tiempo.</p>
+      <p class="n-cue">► <b>Proyeccion:</b> "En 20 anos, Binding of Isaac Vita probablemente valga 10x lo que vale hoy. Los que lo tienen ahora lo saben."</p>
+    </aside>
   </section>
 
   <section class="slide">
@@ -472,6 +647,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title cy" style="font-size:54px;">LA VITA COMPLETA</div>
       <div class="sub">Cerramos Vita: coleccion, los mejores y los mas caros. Cuentanos cual de estos grales tienes o quisieras. Suscribete para la proxima consola.</div>
     </div>
+    <aside class="notas">
+      <h4>CIERRE DEL ARCO VITA</h4>
+      <p class="n-line">Con este episodio cerramos el arco PS Vita en Retrotarros: coleccion + top mundial + top precios. El panorama queda completo.</p>
+      <p class="n-line">Vita es una consola que vale la pena conocer — fracaso comercial que esconde un catalogo de calidad que sigue siendo relevante para fans de JRPG y portatiles.</p>
+      <h4>INTERACCION FINAL</h4>
+      <p class="n-cue">► <b>Pregunta al chat:</b> "¿Cual de los dos grales prefieren? ¿El NES con dos millones? ¿O el Binding of Isaac a cuatro mil que casi nadie ha visto en persona?"</p>
+      <h4>CALL TO ACTION</h4>
+      <p class="n-cue">► <b>CTA:</b> Suscripcion + notificacion. La proxima consola: dejar el misterio o dar una pista sutil si ya esta decidido.</p>
+    </aside>
   </section>
 
 </div>
@@ -482,7 +666,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
     <div class="nav-counter" id="counter">01 / 14</div>
     <div class="nav-progress"><div class="bar" id="bar"></div></div>
   </div>
-  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR &nbsp; <kbd id="notasBtn" style="cursor:pointer" title="Mostrar/ocultar notas">N</kbd> NOTAS</div>
   <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
 </nav>
 
@@ -495,6 +679,11 @@ const bar = document.getElementById('bar');
 let current = 0;
 const total = slides.length;
 function pad(n) { return String(n).padStart(2, '0'); }
+slides.forEach((s, i) => { const sn = s.querySelector('.slide-num'); if (sn) sn.textContent = pad(i + 1); });
+function setRead(on) { document.body.classList.toggle('read-mode', on); }
+if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
+const notasBtn = document.getElementById('notasBtn');
+if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
 function go(i) {
   if (i < 0 || i >= total) return;
   slides[current].classList.remove('active');
@@ -512,6 +701,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
   if (e.key === 'Home') { go(0); }
   if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }
 });
 go(0);
 </script>
