@@ -44,8 +44,11 @@ studio/voces-muestra/
 
 # MIDI descargados de fan-sites (Ichigos, Ninsheetmusic) — son transcripciones
 # por fans, NO redistribuimos en el repo publico. Cada usuario los baja para si.
+# Cubrir tambien subcarpetas (arcade/ mario/ n64/ snes/ test/) — fix 2026-06-19.
 studio/melodias/*.mid
 studio/melodias/*.midi
+studio/melodias/**/*.mid
+studio/melodias/**/*.midi
 
 # Soundfont SNES (~30 MB binario, lo descarga install.bat)
 studio/melodias/*.sf2
@@ -126,4 +129,17 @@ studio-panel/.remember/logs/
 # Son outputs locales del estudio, no versionables.
 recordings/
 studio/teasers/
+
+# Runtime de TarroBot: estado/cache generado en ejecucion, NO versionable.
+# OJO: NO ignorar data/tarrobot-database.json (esa SI es canonica). Fix 2026-06-19.
+data/*.db
+data/tarrobot-cache-llm.json
+data/tarrobot-auto-respond.json
+data/tarrobot-messages.db
+
+# Audio de reaccion/SFX embebido en episodios (se distribuye por Drive, no git).
+studio/img/**/*.mp3
+
+# Memoria local del harness (Claude Code), no es del proyecto.
+/.remember/
 studio/captures/
