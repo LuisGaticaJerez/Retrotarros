@@ -215,6 +215,27 @@ Write-Host ""
 # La carpeta TarroBot-Instalador/ en Drive siempre tiene UN SOLO ZIP: el actual.
 # Asi Luis va a Drive, entra ahi, y solo ve el correcto. No hay confusion de versiones.
 Write-Host "Instalador vigente -> Drive:" -ForegroundColor Cyan
+
+# 6a. LIMPIEZA: el instalador oficial vive en TarroBot-Instalador\ (carpeta hermana).
+# Cualquier TarroBot-Studio-v*.zip o *Setup*.exe suelto DENTRO de $Destino (raiz o
+# installer\) es legacy de versiones viejas (1.5.1/1.5.2) y confunde. Se borran.
+# Solo toca esos patrones: NO toca install.bat, .venv, desktop.ini ni logs (instalacion real).
+# Fix 2026-06-19: aparecieron zombies 1.5.1/1.5.2 que hicieron creer que la version era vieja.
+if (-not $DryRun) {
+    $zombiePatterns = @("TarroBot-Studio-v*.zip", "TarroBot-Studio-Setup-v*.exe")
+    $zombieDirs = @($Destino, (Join-Path $Destino "installer"))
+    foreach ($zd in $zombieDirs) {
+        if (Test-Path $zd) {
+            foreach ($pat in $zombiePatterns) {
+                Get-ChildItem -Path $zd -Filter $pat -File -ErrorAction SilentlyContinue | ForEach-Object {
+                    Remove-Item -LiteralPath $_.FullName -Force
+                    Write-Host "  [LIMPIEZA] instalador viejo borrado: $($_.Name)" -ForegroundColor Yellow
+                }
+            }
+        }
+    }
+}
+
 $DistDir = Resolve-Path (Join-Path $ScriptRoot "..\installers\tarrobot-studio\dist")
 $InstallerZip = Get-ChildItem -Path $DistDir -Filter "TarroBot-Studio-v*-slim.zip" |
     Sort-Object Name -Descending | Select-Object -First 1
