@@ -158,6 +158,45 @@ if (Test-Path (Join-Path $RepoRoot "studio\img")) {
 }
 Write-Host ""
 
+# 2d. CARPETAS DE PRODUCCION por episodio: "G:\Mi unidad\Studio\<slug>\"
+# FIX 2026-06-19 (desfase): estas carpetas (la fuente de produccion de Luis) tenian
+# COPIAS del HTML y gameboxes que NADIE actualizaba -> se desfasaban del repo y del
+# sync. Ahora, para cada carpeta de produccion que exista, refrescamos el <slug>.html
+# y los gameboxes (img\<slug>\) desde el repo. NO se tocan: guiones .docx, captures\,
+# teasers\ ni nada que solo viva en el Drive. Asi los 3 lugares quedan SIEMPRE al dia.
+Write-Host "Carpetas de produccion (Studio\<slug>):" -ForegroundColor Cyan
+$ProdRoot  = Split-Path -Parent $Destino          # G:\Mi unidad\Studio
+$StudioSrc = Join-Path $RepoRoot "studio"
+$prodOk = 0; $prodSkip = 0
+if (Test-Path $ProdRoot) {
+    Get-ChildItem $ProdRoot -Directory -ErrorAction SilentlyContinue |
+        Where-Object { $_.Name -notmatch "^(tarrobot|TarroBot-Instalador|pautas|_template)" } |
+        ForEach-Object {
+            $slug    = $_.Name
+            $prodDir = $_.FullName
+            $htmlSrc = Join-Path $StudioSrc "$slug.html"
+            if (Test-Path $htmlSrc) {
+                if (-not $DryRun) {
+                    # HTML: el repo es canonico -> sobrescribir siempre
+                    Copy-Item $htmlSrc -Destination (Join-Path $prodDir "$slug.html") -Force
+                    # Gameboxes: repo\studio\img\<slug>\ -> Studio\<slug>\img\<slug>\
+                    # /E agrega+actualiza, SIN /MIR para no borrar assets que solo viven en prod.
+                    $imgSrc = Join-Path $StudioSrc "img\$slug"
+                    if (Test-Path $imgSrc) {
+                        & robocopy $imgSrc (Join-Path $prodDir "img\$slug") /E /NJH /NJS /NDL /NP /NC /NS | Out-Null
+                    }
+                    Write-Host "  [PROD]   $slug\ (html + gameboxes al dia)" -ForegroundColor Green
+                }
+                $prodOk++
+            } else {
+                # Carpeta en la raiz sin HTML fuente en el repo (ej. solo capturas/teasers)
+                $prodSkip++
+            }
+        }
+}
+Write-Host "  Produccion actualizada: $prodOk  |  sin HTML fuente: $prodSkip" -ForegroundColor Gray
+Write-Host ""
+
 # 3. DB
 Write-Host "Database:" -ForegroundColor Cyan
 Sync-Item "data\tarrobot-database.json"
