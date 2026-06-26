@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · MEGA DRIVE TOP PRECIOS</title>
+<!--
+  EPISODIO: Mega Drive Top Precios. Retail CIB #9->#1 + Joyas + Santo Grial (Tetris JP).
+  Precios reales TheGamer/GameRant/Old School Gamer 2026. Valores fluctuan.
+-->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root { --mg: #FF2E88; --cy: #00E5FF; --ye: #FFD23F; --pu: #2D1B69; --bo: #F5F0E8; --dk: #06030f; --gr: #3CE88A; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body { background-image: radial-gradient(ellipse 100% 50% at 50% -5%, rgba(0,229,255,.12) 0%, transparent 65%), repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px), repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px); }
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6, 3, 15, 0.97); border-bottom: 2px solid var(--ye); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--mg); }
+.dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 28px 44px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 62px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .vs { color: var(--ye); text-shadow: 0 0 22px rgba(255,210,63,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; }
+.divider { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.divider .pre { font-family: 'Press Start 2P'; font-size: 11px; letter-spacing: 6px; margin-bottom: 24px; }
+.divider .pre.cy { color: var(--cy); } .divider .pre.mg { color: var(--mg); } .divider .pre.ye { color: var(--ye); }
+.divider .title { font-family: 'Orbitron'; font-weight: 900; font-size: 72px; letter-spacing: 2px; line-height: 1; color: #fff; margin-bottom: 22px; }
+.divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
+.divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.divider .title.ye { color: var(--ye); text-shadow: 0 0 22px rgba(255,210,63,.55); }
+.divider .sub { font-family: 'Share Tech Mono'; font-size: 18px; color: rgba(255,255,255,.7); letter-spacing: 2px; max-width: 820px; line-height: 1.6; }
+.slide-hybrid { display: grid; grid-template-rows: auto 1fr auto auto; height: 100%; gap: 14px; max-width: 1400px; margin: 0 auto; }
+.hybrid-head { display: flex; align-items: center; justify-content: space-between; }
+.game-pos { font-family: 'Orbitron'; font-weight: 900; font-size: 64px; line-height: 1; letter-spacing: 1px; }
+.game-pos.cy { color: var(--cy); text-shadow: 0 0 20px rgba(0,229,255,.55); }
+.game-pos.mg { color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.6); }
+.game-pos .hash { font-size: 28px; color: rgba(255,255,255,.35); margin-right: 4px; }
+.game-pos.label { font-size: 26px; letter-spacing: 2px; line-height: 1.15; }
+.game-price { font-family: 'Orbitron'; font-weight: 900; font-size: 46px; color: var(--gr); text-shadow: 0 0 18px rgba(60,232,138,.45); letter-spacing: 1px; }
+.game-price .cur { font-size: 22px; color: rgba(255,255,255,.5); margin-right: 4px; vertical-align: 6px; }
+.game-price.joya { color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.55); }
+.game-price.grial { color: var(--ye); text-shadow: 0 0 24px rgba(255,210,63,.7); font-size: 54px; }
+.hybrid-body { display: grid; grid-template-columns: 38% 1fr; gap: 32px; align-items: center; justify-items: center; min-height: 0; }
+.cart-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; }
+.cart { position: relative; width: min(100%, 380px); aspect-ratio: 5/4; max-height: 100%; background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%); border-radius: 12px 12px 6px 6px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08); }
+.cart::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 78%; height: 14%; background: linear-gradient(180deg, #2a2a2f 0%, #1a1a1f 100%); border-radius: 0 0 6px 6px; box-shadow: inset 0 -1px 0 rgba(0,0,0,.6); z-index: 3; }
+.cart-img-wrap { position: absolute; inset: 14% 10% 10%; border-radius: 4px; overflow: hidden; background: var(--label-1, #2D1B69); box-shadow: inset 0 0 0 3px rgba(255,255,255,.07), inset 0 0 0 6px rgba(0,0,0,.25), 0 4px 14px rgba(0,0,0,.4); }
+.cart-img-wrap img { display: block; width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 2; }
+.cart-img-wrap img.cart-img-bg { object-fit: cover; filter: blur(22px) brightness(0.55) saturate(1.2); transform: scale(1.1); z-index: 1; position: absolute; inset: 0; }
+.cart-fallback { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; background: linear-gradient(135deg, var(--label-1, #2D1B69) 0%, var(--label-2, #4a2a99) 100%); text-align: center; }
+.cart-fallback .title { font-family: 'Orbitron'; font-weight: 900; font-size: clamp(14px, 1.8vw, 22px); line-height: 1.05; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,.5); }
+.cart-fallback .sub { font-family: 'Press Start 2P'; font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,.7); margin-top: 8px; }
+.cart-console { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-family: 'Press Start 2P'; font-size: 7px; letter-spacing: 3px; color: rgba(255,255,255,.22); z-index: 4; }
+.lb-default { --label-1:#2D1B69; --label-2:#4a2a99; }
+.lb-rpg { --label-1:#5a1a8a; --label-2:#8a2fc4; }
+.lb-action { --label-1:#a01818; --label-2:#d62828; }
+.lb-platform{ --label-1:#1a4a8a; --label-2:#2f7acd; }
+.lb-fight { --label-1:#7a1a1a; --label-2:#b03030; }
+.lb-puzzle { --label-1:#1a4a4a; --label-2:#2f7a7a; }
+.lb-gold { --label-1:#6b4e0a; --label-2:#b8901a; }
+.tv-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; container-type: size; }
+.tarrovision { width: min(100cqh, 100cqw); height: min(100cqh, 100cqw); max-width: 100%; max-height: 100%; background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%); border-radius: 22px; padding: 18px 22px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(0,0,0,.4); display: grid; grid-template-rows: auto 1fr auto; gap: 10px; }
+.tv-controls-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px; }
+.tv-led { width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, var(--mg) 60%, #7a0030 100%); box-shadow: 0 0 10px rgba(255,46,136,.8), inset 0 0 2px rgba(0,0,0,.5); }
+.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 3px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
+.tv-channel { font-family: 'Share Tech Mono'; font-size: 11px; color: var(--cy); letter-spacing: 2px; padding: 3px 9px; border: 1px solid rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
+.tv-screen { position: relative; background: #2a2a2f; border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 2px #3a3a3f, inset 0 0 14px rgba(0,0,0,.6); min-height: 0; }
+.tv-screen-inner { position: relative; width: 100%; height: 100%; background: #000; border-radius: 16px / 8px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 40px rgba(0,0,0,.95); }
+.tv-screen-inner img, .tv-screen-inner video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tv-screen-inner::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 3px); z-index: 3; mix-blend-mode: multiply; }
+.tv-screen-inner::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255,255,255,.08) 0%, transparent 55%), radial-gradient(ellipse 90% 50% at 50% 100%, rgba(0,229,255,.06) 0%, transparent 60%); z-index: 4; }
+.tv-noscreen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, rgba(45,27,105,.6) 0%, #000 80%), repeating-linear-gradient(0deg, #0a0a14 0px, #0a0a14 1px, #14142a 1px, #14142a 2px); color: rgba(255,255,255,.35); text-align: center; padding: 24px; z-index: 2; }
+.tv-noscreen .tv-noscreen-big { font-family: 'Press Start 2P'; font-size: 14px; color: var(--mg); letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 12px rgba(255,46,136,.5); }
+.tv-noscreen .tv-noscreen-sub { font-family: 'Share Tech Mono'; font-size: 11px; letter-spacing: 2px; color: rgba(0,229,255,.55); }
+.tv-controls-bottom { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; padding: 2px 4px 0; }
+.tv-knob { width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #5a5a60 0%, #2a2a30 60%, #0a0a0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.6); position: relative; }
+.tv-knob::after { content: ""; position: absolute; top: 5px; left: 50%; width: 2px; height: 9px; background: var(--ye); transform-origin: bottom center; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 4px rgba(255,210,63,.6); }
+.tv-knob.cy::after { background: var(--cy); box-shadow: 0 0 4px rgba(0,229,255,.6); transform: translateX(-50%) rotate(-30deg); }
+.tv-speaker { height: 22px; background: repeating-linear-gradient(90deg, #0a0a0e 0px, #0a0a0e 3px, #1a1a1f 3px, #1a1a1f 6px); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6); }
+.hybrid-title { text-align: center; display: flex; flex-direction: column; gap: 6px; }
+.game-title { font-family: 'Orbitron'; font-weight: 900; font-size: 34px; color: #fff; letter-spacing: 1px; line-height: 1.1; text-shadow: 0 2px 10px rgba(0,0,0,.7); }
+.game-meta { font-family: 'Share Tech Mono'; font-size: 16px; color: rgba(255,255,255,.62); letter-spacing: 2px; }
+.game-why { max-width: 1280px; margin: 0 auto; padding: 14px 26px; background: rgba(6,3,15,.72); border-left: 5px solid var(--gr); font-family: 'Share Tech Mono'; font-size: 19px; line-height: 1.5; color: #fff; text-align: left; box-shadow: 0 6px 22px rgba(0,0,0,.5); }
+.game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size: 10px; color: var(--gr); letter-spacing: 2px; margin-bottom: 8px; }
+.game-why.joya { border-left-color: var(--mg); } .game-why.joya .lbl { color: var(--mg); }
+.game-why.grial { border-left-color: var(--ye); } .game-why.grial .lbl { color: var(--ye); }
+.notas { position: absolute; top: 0; right: 0; width: 460px; height: 100%; z-index: 150; display: none; flex-direction: column; gap: 10px; padding: 26px 22px 30px; overflow-y: auto; background: linear-gradient(90deg, rgba(6,3,15,.55) 0%, rgba(6,3,15,.96) 26%); border-left: 2px solid var(--ye); backdrop-filter: blur(2px); }
+body.read-mode .slide.active .notas { display: flex; }
+.notas h4 { font-family: 'Press Start 2P'; font-size: 9px; color: var(--ye); letter-spacing: 2px; margin-top: 4px; }
+.notas h4:first-child { margin-top: 0; }
+.notas .n-line { font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.5; color: rgba(255,255,255,.92); border-left: 3px solid var(--cy); padding: 3px 0 3px 11px; }
+.notas .n-cue { border-left-color: var(--mg); color: var(--ye); }
+.read-indicator { position: fixed; top: 64px; right: 16px; z-index: 300; font-family: 'Press Start 2P'; font-size: 8px; color: #000; background: var(--ye); padding: 6px 10px; border-radius: 3px; display: none; box-shadow: 0 0 14px rgba(255,210,63,.5); }
+body.read-mode .read-indicator { display: block; }
+.notas-hotzone { position: fixed; bottom: 0; right: 0; width: 230px; height: 150px; z-index: 299; }
+.notas-toggle { position: fixed; bottom: 74px; right: 16px; z-index: 300; font-family: 'Press Start 2P'; font-size: 9px; letter-spacing: 1px; color: var(--ye); background: rgba(6,3,15,.92); border: 2px solid var(--ye); padding: 10px 14px; border-radius: 4px; cursor: pointer; transition: opacity .2s, background .15s, color .15s; opacity: 0; }
+.notas-hotzone:hover ~ .notas-toggle, .notas-toggle:hover { opacity: 1; }
+.notas-toggle:hover { background: var(--ye); color: #000; }
+body.read-mode .notas-toggle { opacity: 1; background: var(--ye); color: #000; box-shadow: 0 0 18px rgba(255,210,63,.6); }
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--gr), var(--ye)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(60,232,138,.5); }
+.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
+</style>
+</head>
+<body>
+
+<div class="read-indicator no-capture">● MODO LECTURA (N)</div>
+<div class="notas-hotzone no-capture"></div>
+<button class="notas-toggle no-capture" id="notasToggle">📖 NOTAS (N)</button>
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">SEGA MEGA DRIVE · TOP PRECIOS · CIB</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <!-- 01 PORTADA -->
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">SEGA MEGA DRIVE · LO QUE HOY CUESTA UNA FORTUNA</div>
+      <div class="ep-title">MEGA DRIVE <span class="vs">TOP PRECIOS</span></div>
+      <div class="ep-sub">RETAIL CIB + JOYAS + EL SANTO GRIAL</div>
+    </div>
+    <aside class="notas">
+      <h4>INTRO · DATOS BOMBA</h4>
+      <div class="n-line">Ranking por precio CIB (cartucho + caja + manual). Las cajas del Genesis eran de plastico rigido (no carton como SNES), pero igual son dificiles de hallar completas.</div>
+      <div class="n-line">Fuentes: TheGamer, GameRant, Old School Gamer (2026). Ventas reales. Valores fluctuan harto.</div>
+      <div class="n-cue">ESTRUCTURA: primero el retail CIB (#9 al #1), despues 2 joyas fuera de catalogo, y cerramos con el Santo Grial: el juego mas raro de toda la Mega Drive.</div>
+    </aside>
+  </section>
+
+  <!-- 02 DIVIDER RETAIL -->
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="divider">
+      <div class="pre ye">MERCADO DE COLECCION 2026</div>
+      <div class="title ye">RETAIL CIB · #9 AL #1</div>
+      <div class="sub">Juegos que se vendieron en tiendas y hoy cuestan una fortuna. Late releases, exclusivos japoneses y variantes raras. Empezamos desde abajo.</div>
+    </div>
+  </section>
+
+  <!-- 03 #9 SKELETON KREW -->
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price"><span class="cur">CIB</span>$316</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart"><div class="cart-img-wrap lb-action"><img class="cart-img-bg" src="img/mega-drive-top-precios/skeleton-krew.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/skeleton-krew.png" alt="Skeleton Krew box art"></div><div class="cart-console">MEGA DRIVE</div></div></div>
+        <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 09</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">SKELETON KREW</div><div class="game-meta">MEGA DRIVE · 1995 · CORE DESIGN</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE ES CARO</span>Shooter isometrico de Core Design (los creadores de Tomb Raider). Salio tarde, en 1995, con tirada chica. Poco conocido pero muy buscado por coleccionistas.</div>
+      <aside class="notas">
+        <h4>#9 SKELETON KREW</h4>
+        <div class="n-line">Core Design lo hizo justo antes de volverse mundialmente famosos con Tomb Raider (1996).</div>
+        <div class="n-cue">GANCHO: late release del 95, cuando ya todos miraban al Saturn y PlayStation. Por eso casi no se fabrico.</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 04 #8 SPARKSTER -->
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price"><span class="cur">CIB</span>$325</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart"><div class="cart-img-wrap lb-platform"><img class="cart-img-bg" src="img/mega-drive-top-precios/sparkster.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/sparkster.png" alt="Sparkster box art"></div><div class="cart-console">MEGA DRIVE</div></div></div>
+        <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 08</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">SPARKSTER</div><div class="game-meta">MEGA DRIVE · 1994 · KONAMI</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE ES CARO</span>Secuela de Rocket Knight Adventures: un zarigueya con jetpack. Plataformas excelente de Konami, pero vendio poco. Hoy es de los Konami mas codiciados del Genesis.</div>
+      <aside class="notas">
+        <h4>#8 SPARKSTER</h4>
+        <div class="n-line">Sparkster es el zarigueya samurai. La version de SNES es un juego DISTINTO con el mismo nombre, no un port.</div>
+        <div class="n-cue">GANCHO: Konami en su mejor epoca de plataformas, pero la gente ya no compraba tanto en el 94. Calidad alta, ventas bajas, precio alto.</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 05 #7 THE PUNISHER -->
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price"><span class="cur">CIB</span>$341</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart"><div class="cart-img-wrap lb-fight"><img class="cart-img-bg" src="img/mega-drive-top-precios/punisher.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/punisher.png" alt="The Punisher box art"></div><div class="cart-console">MEGA DRIVE</div></div></div>
+        <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 07</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">THE PUNISHER</div><div class="game-meta">MEGA DRIVE · 1994 · CAPCOM</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE ES CARO</span>Port del beat'em up arcade de Capcom con licencia Marvel. Salio tarde y con tirada limitada. Las licencias Marvel + Capcom + rareza disparan el precio.</div>
+      <aside class="notas">
+        <h4>#7 THE PUNISHER</h4>
+        <div class="n-line">El arcade de Capcom era buenisimo; este port lo trajo a casa con co-op. Frank Castle y Nick Fury jugables.</div>
+        <div class="n-cue">GANCHO: los juegos con licencia de comics y tirada corta son imanes de coleccionistas. Hoy reventado de precio.</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 06 #6 EL VIENTO -->
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price"><span class="cur">CIB</span>$367</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart"><div class="cart-img-wrap lb-action"><img class="cart-img-bg" src="img/mega-drive-top-precios/el-viento.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/el-viento.png" alt="El Viento box art"></div><div class="cart-console">MEGA DRIVE</div></div></div>
+        <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 06</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">EL VIENTO</div><div class="game-meta">MEGA DRIVE · 1991 · WOLF TEAM</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE ES CARO</span>Action-platformer de Wolf Team ambientado en el Chicago de los años 20, con horror estilo Lovecraft. No vendio en USA, lo que hoy lo vuelve rareza buscada.</div>
+      <aside class="notas">
+        <h4>#6 EL VIENTO</h4>
+        <div class="n-line">Protagonista: Annet Myer, una hechicera. Parte de una trilogia de Wolf Team (Earnest Evans, Anett Futatabi).</div>
+        <div class="n-cue">GANCHO: mezcla años 20, gangsters y dioses Lovecraftianos. Raro tematicamente y raro de conseguir. Wolf Team despues se volvio tri-Ace (Star Ocean).</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 07 #5 SPIDER-MAN MAXIMUM CARNAGE (ROJO) -->
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price"><span class="cur">CIB</span>$442</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart"><div class="cart-img-wrap lb-fight"><img class="cart-img-bg" src="img/mega-drive-top-precios/spiderman-carnage.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/spiderman-carnage.png" alt="Spider-Man Maximum Carnage box art"></div><div class="cart-console">MEGA DRIVE</div></div></div>
+        <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">SPIDER-MAN: MAXIMUM CARNAGE (CARTUCHO ROJO)</div><div class="game-meta">MEGA DRIVE · 1994 · ACCLAIM</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE ES CARO</span>El juego es comun... pero la PRIMERA edicion venia en un cartucho ROJO en vez del negro estandar. Esa variante limitada es la que vale oro entre coleccionistas.</div>
+      <aside class="notas">
+        <h4>#5 SPIDER-MAN: MAXIMUM CARNAGE ROJO</h4>
+        <div class="n-line">El cartucho rojo era homenaje al villano Carnage. Las copias normales (negras) valen poco; la roja se dispara.</div>
+        <div class="n-cue">GANCHO: ejemplo perfecto de que en coleccionismo a veces no importa el juego, importa la VARIANTE. Mismo juego, 10x el precio por el color del plastico.</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 08 #4 ZERO THE KAMIKAZE SQUIRREL -->
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price"><span class="cur">CIB</span>$550</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart"><div class="cart-img-wrap lb-platform"><img class="cart-img-bg" src="img/mega-drive-top-precios/zero-squirrel.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/zero-squirrel.png" alt="Zero the Kamikaze Squirrel box art"></div><div class="cart-console">MEGA DRIVE</div></div></div>
+        <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">ZERO THE KAMIKAZE SQUIRREL</div><div class="game-meta">MEGA DRIVE · 1994 · SUNSOFT / ICEGUANA</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE ES CARO</span>Spin-off de la saga Aero the Acro-Bat. Es el mas dificil de hallar de la trilogia. Tirada chica + ser el "raro de la familia" lo convirtieron en pieza buscada.</div>
+      <aside class="notas">
+        <h4>#4 ZERO THE KAMIKAZE SQUIRREL</h4>
+        <div class="n-line">Zero es la ardilla rival de Aero the Acro-Bat. Le dieron su propio juego. La version Genesis es la cara; la de SNES es mas comun.</div>
+        <div class="n-cue">GANCHO: nadie esperaria que una ardilla noventera olvidada cueste mas de 500 dolares. Pero la rareza no perdona.</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 09 #3 MUSHA (PODIO) -->
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price"><span class="cur">CIB</span>$808</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart"><div class="cart-img-wrap lb-action"><img class="cart-img-bg" src="img/mega-drive-top-precios/musha.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/musha.png" alt="MUSHA box art"></div><div class="cart-console">MEGA DRIVE</div></div></div>
+        <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">MUSHA</div><div class="game-meta">MEGA DRIVE · 1990 · COMPILE</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE ES CARO</span>Para muchos, el MEJOR shmup del Genesis. Lo hizo Compile (los mismos de Aleste y Power Strike de nuestros tops de Master System). Tirada baja + fama de obra maestra = precio altisimo.</div>
+      <aside class="notas">
+        <h4>#3 MUSHA</h4>
+        <div class="n-line">Nombre completo: Metallic Uniframe Super Hybrid Armor. Parte de la saga Aleste de Compile. Estetica de mechas japoneses.</div>
+        <div class="n-cue">GANCHO: en 2017 valia 270-400. Hoy CIB cerca de los 800-1000. La reedicion en Virtual Console subio su fama y disparo la demanda del fisico.</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 10 #2 ELIMINATE DOWN (PODIO) -->
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price"><span class="cur">CIB</span>$1.000</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart"><div class="cart-img-wrap lb-action"><img class="cart-img-bg" src="img/mega-drive-top-precios/eliminate-down.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/eliminate-down.png" alt="Eliminate Down box art"></div><div class="cart-console">MEGA DRIVE</div></div></div>
+        <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">ELIMINATE DOWN</div><div class="game-meta">MEGA DRIVE · 1993 · APRINET (SOFT VISION)</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE ES CARO</span>Shmup exclusivo de Japon con tirada minima. Tecnicamente brutal para el Genesis, pero casi nadie lo conocio. Hoy CIB supera los mil dolares. Joya de culto de los shmuperos.</div>
+      <aside class="notas">
+        <h4>#2 ELIMINATE DOWN</h4>
+        <div class="n-line">Solo salio en Japon, 1993. Scroll multidireccional y efectos que exprimian el hardware al maximo.</div>
+        <div class="n-cue">GANCHO: es de esos juegos que los fans de shmups persiguen toda la vida. Exclusividad japonesa + calidad tecnica + rareza extrema.</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 11 #1 CRUSADER OF CENTY (REY RETAIL) -->
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price"><span class="cur">CIB</span>$1.620</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart"><div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/mega-drive-top-precios/crusader-centy.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/crusader-centy.png" alt="Crusader of Centy box art"></div><div class="cart-console">MEGA DRIVE</div></div></div>
+        <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">CRUSADER OF CENTY</div><div class="game-meta">MEGA DRIVE · 1994 · NEXTECH / SEGA · REY DEL RETAIL</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE ES CARO</span>La respuesta de Sega a Zelda: un action-RPG precioso. Pero los RPG no pegaban en Genesis, Sega lo enterro rapido, y los coleccionistas lo redescubrieron años despues. El retail mas caro de la consola.</div>
+      <aside class="notas">
+        <h4>#1 CRUSADER OF CENTY · REY DEL RETAIL</h4>
+        <div class="n-line">Hablas con animales que se unen a ti y dan habilidades. Muy querido hoy, ignorado en su lanzamiento.</div>
+        <div class="n-cue">GANCHO: en Europa salio como "Soleil". El de USA es el caro. CIB ronda los 1.300-1.620. Y eso que es SOLO el retail... ahora viene lo serio.</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 12 DIVIDER JOYAS -->
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="divider">
+      <div class="pre mg">FUERA DE CATALOGO</div>
+      <div class="title mg">JOYAS RARAS</div>
+      <div class="sub">Esto ya no se compraba en tiendas. Cartuchos de competencia y promocionales que casi nadie tuvo en sus manos. Aca los precios pegan un salto.</div>
+    </div>
+  </section>
+
+  <!-- 13 JOYA: BLOCKBUSTER CHAMPIONSHIP II -->
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos label mg">JOYA · COMPETENCIA</div><div class="game-price joya"><span class="cur">~</span>$5.232</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart"><div class="cart-img-wrap lb-fight"><img class="cart-img-bg" src="img/mega-drive-top-precios/blockbuster-championship.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/blockbuster-championship.png" alt="Blockbuster Championship II box art"></div><div class="cart-console">MEGA DRIVE</div></div></div>
+        <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">RARE</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">BLOCKBUSTER WORLD VIDEO GAME CHAMPIONSHIP II</div><div class="game-meta">MEGA DRIVE · 1995 · BLOCKBUSTER · NFR</div></div>
+      <div class="game-why joya"><span class="lbl">▶ JOYA DE COMPETENCIA</span>El cartucho del torneo nacional de la cadena Blockbuster Video. Contenia demos cronometradas para competir por puntaje. Nunca se vendio: era solo para las tiendas. El equivalente Sega del Nintendo World Championships.</div>
+      <aside class="notas">
+        <h4>JOYA · BLOCKBUSTER CHAMPIONSHIP II</h4>
+        <div class="n-line">Blockbuster (la cadena de arriendo de videos) organizo torneos en sus tiendas. Este cartucho tenia retos de NBA Jam y Judge Dredd contrarreloj.</div>
+        <div class="n-cue">GANCHO: como las copias eran de las tiendas, casi todas se botaron o perdieron cuando termino el torneo. Por eso hoy CIB ronda los 5 mil dolares.</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 14 JOYA: OUTBACK JOEY -->
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos label mg">JOYA · PROMOCIONAL</div><div class="game-price joya"><span class="cur">~</span>$5.297</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart"><div class="cart-img-wrap lb-platform"><img class="cart-img-bg" src="img/mega-drive-top-precios/outback-joey.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/outback-joey.png" alt="Outback Joey box art"></div><div class="cart-console">MEGA DRIVE</div></div></div>
+        <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">RARE</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">OUTBACK JOEY</div><div class="game-meta">MEGA DRIVE · 1991 · HEARTBEAT · NFR</div></div>
+      <div class="game-why joya"><span class="lbl">▶ JOYA PROMOCIONAL</span>NUNCA se vendio en tiendas. Venia GRATIS con el "HeartBeat Catalyst", un accesorio para hacer ejercicio: pedaleabas y tu pulso controlaba el juego. Un fitness game de los 90 que casi nadie vio.</div>
+      <aside class="notas">
+        <h4>JOYA · OUTBACK JOEY</h4>
+        <div class="n-line">El HeartBeat Catalyst era una bici/maquina de ejercicio que se conectaba al Genesis. Tu ritmo cardiaco movia al canguro Joey.</div>
+        <div class="n-cue">GANCHO: producto de nicho fallido = poquisimas unidades. Hoy es de los cartuchos mas caros y raros del Genesis, +5 mil dolares.</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 15 SANTO GRIAL: TETRIS -->
+  <section class="slide">
+    <span class="slide-num">15</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos label mg" style="color:var(--ye);text-shadow:0 0 16px rgba(255,210,63,.6)">EL SANTO GRIAL</div><div class="game-price grial"><span class="cur">~</span>$16.000+</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart"><div class="cart-img-wrap lb-gold"><img class="cart-img-bg" src="img/mega-drive-top-precios/tetris.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/tetris.png" alt="Tetris Mega Drive Japan box art"></div><div class="cart-console">MEGA DRIVE</div></div></div>
+        <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">GRIAL</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">TETRIS (MEGA DRIVE · JAPON)</div><div class="game-meta">MEGA DRIVE · 1989 · SEGA · ~12 COPIAS EN EL MUNDO</div></div>
+      <div class="game-why grial"><span class="lbl">▶ EL SANTO GRIAL DE SEGA</span>El juego mas raro de toda la Mega Drive. Sega lo iba a lanzar en 1989, pero la guerra legal entre Nintendo y Tengen por los derechos de Tetris lo mato. Sega cancelo todo y DESTRUYO las copias fabricadas. Solo sobreviven unas 12. Una se ofrecio en UN MILLON de dolares.</div>
+      <aside class="notas">
+        <h4>SANTO GRIAL · TETRIS MEGA DRIVE</h4>
+        <div class="n-line">Cuando Nintendo demando a Tengen por los derechos de Tetris en consola, Sega se asusto y cancelo su version japonesa que ya estaba en produccion.</div>
+        <div class="n-line">Las pocas copias que existian fueron destruidas. Quedan ~12: una en el Museo del Juego de Rochester, otras en manos de coleccionistas y youtubers.</div>
+        <div class="n-cue">GANCHO FINAL: una copia firmada por Alexey Pajitnov (creador de Tetris) se listo en eBay por UN MILLON de dolares. Ventas reales superan los 16 mil. ESTE es el grial absoluto de Sega. Cerrar fuerte.</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 16 VEREDICTO -->
+  <section class="slide">
+    <span class="slide-num">16</span>
+    <div class="divider">
+      <div class="pre mg">ANALISIS DEL TOP</div>
+      <div class="title mg" style="font-size:60px;">EL VEREDICTO</div>
+      <div class="sub">En la Mega Drive lo caro tampoco es lo famoso: son shmups japoneses, late releases y variantes de cartucho. Y por encima de todo, las rarezas que nunca se vendieron: cartuchos de torneo, promocionales y un Tetris que fue borrado de la historia. Rareza pura por sobre nostalgia.</div>
+    </div>
+  </section>
+
+  <!-- 17 CIERRE -->
+  <section class="slide">
+    <span class="slide-num">17</span>
+    <div class="divider">
+      <div class="pre cy">TU TURNO</div>
+      <div class="title cy" style="font-size:54px;">¿LO SABIAS?</div>
+      <div class="sub">¿Sabias que existia un Tetris prohibido de Mega Drive? ¿Tienes alguno de estos? Dejalo en los comentarios. Suscribete a Retrotarros: ya vienen Dreamcast y Saturn, mundial y precios.</div>
+    </div>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 17</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR · <kbd>N</kbd> NOTAS</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'n' || e.key === 'N') { toggleRead(); }
+});
+function toggleRead() { document.body.classList.toggle('read-mode'); }
+document.getElementById('notasToggle').addEventListener('click', toggleRead);
+go(0);
+</script>
+
+</body>
+</html>
