@@ -77,10 +77,13 @@ def capture(slug: str, width: int = 1920, height: int = 1080, scale: int = 2, wa
             # Pequeña espera para imágenes lazy / transiciones / re-layout
             page.wait_for_timeout(wait_ms)
 
-            # Ocultar la barra de navegación inferior para que la captura sea solo el contenido del slide
+            # Ocultar la barra de navegación inferior + cualquier control del presentador
+            # marcado con .no-capture (boton de notas, indicador de modo lectura, hotzone)
+            # para que la captura sea SOLO el contenido del slide.
             page.evaluate("""
                 const nav = document.querySelector('nav');
                 if (nav) nav.style.display = 'none';
+                document.querySelectorAll('.no-capture').forEach(el => el.style.display = 'none');
             """)
             page.wait_for_timeout(50)
 
@@ -90,10 +93,11 @@ def capture(slug: str, width: int = 1920, height: int = 1080, scale: int = 2, wa
             print(f"  [{num}/{str(total).zfill(2)}]  {out_file.name}")
             captured += 1
 
-            # Restaurar nav por si el script lee algo del DOM en próxima iteración
+            # Restaurar nav + controles por si el script lee algo del DOM en próxima iteración
             page.evaluate("""
                 const nav = document.querySelector('nav');
                 if (nav) nav.style.display = '';
+                document.querySelectorAll('.no-capture').forEach(el => el.style.display = '');
             """)
 
         browser.close()

@@ -142,10 +142,14 @@ body.read-mode .slide.active .notas { display: flex; }
 .notas .n-cue b { color: #fff; }
 .read-indicator { position: fixed; top: 64px; right: 16px; z-index: 300; font-family: 'Press Start 2P'; font-size: 8px; color: #000; background: var(--ye); padding: 6px 10px; border-radius: 3px; display: none; box-shadow: 0 0 14px rgba(255,210,63,.5); }
 body.read-mode .read-indicator { display: block; }
-/* Boton clickeable para activar/desactivar notas con el mouse (ademas de la tecla N) */
-.notas-toggle { position: fixed; bottom: 74px; right: 16px; z-index: 300; font-family: 'Press Start 2P'; font-size: 9px; letter-spacing: 1px; color: var(--ye); background: rgba(6,3,15,.92); border: 2px solid var(--ye); padding: 10px 14px; border-radius: 4px; cursor: pointer; box-shadow: 0 0 14px rgba(255,210,63,.3); transition: all .15s; }
+/* Boton clickeable para notas (ademas de la tecla N). INVISIBLE por defecto: solo
+   aparece al pasar el mouse por la esquina (hotzone) o si las notas estan activas.
+   Asi NUNCA sale en grabacion/captura con el mouse quieto. */
+.notas-hotzone { position: fixed; bottom: 0; right: 0; width: 230px; height: 150px; z-index: 299; }
+.notas-toggle { position: fixed; bottom: 74px; right: 16px; z-index: 300; font-family: 'Press Start 2P'; font-size: 9px; letter-spacing: 1px; color: var(--ye); background: rgba(6,3,15,.92); border: 2px solid var(--ye); padding: 10px 14px; border-radius: 4px; cursor: pointer; box-shadow: 0 0 14px rgba(255,210,63,.3); transition: opacity .2s, background .15s, color .15s; opacity: 0; }
+.notas-hotzone:hover ~ .notas-toggle, .notas-toggle:hover { opacity: 1; }
 .notas-toggle:hover { background: var(--ye); color: #000; }
-body.read-mode .notas-toggle { background: var(--ye); color: #000; box-shadow: 0 0 18px rgba(255,210,63,.6); }
+body.read-mode .notas-toggle { opacity: 1; background: var(--ye); color: #000; box-shadow: 0 0 18px rgba(255,210,63,.6); }
 
 nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
 .nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
@@ -161,8 +165,9 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
 </head>
 <body>
 
-<div class="read-indicator">● MODO LECTURA (N)</div>
-<button class="notas-toggle" id="notasToggle">📖 NOTAS (N)</button>
+<div class="read-indicator no-capture">● MODO LECTURA (N)</div>
+<div class="notas-hotzone no-capture"></div>
+<button class="notas-toggle no-capture" id="notasToggle">📖 NOTAS (N)</button>
 
 <header>
   <div class="hdr-logo">RETROTARROS</div>
