@@ -158,6 +158,14 @@ if (Test-Path (Join-Path $RepoRoot "studio\img")) {
 }
 Write-Host ""
 
+# 2c-bis. Capturas PNG de slides (generadas por capture-slides.py). Las usa Luis
+# para edicion/CapCut y como respaldo de cada slide. Fix 2026-06-25: faltaban en el sync.
+Write-Host "Capturas de slides (PNG):" -ForegroundColor Cyan
+if (Test-Path (Join-Path $RepoRoot "studio\captures")) {
+    Sync-Item "studio\captures" -Recursive
+}
+Write-Host ""
+
 # 2d. CARPETAS DE PRODUCCION por episodio: "G:\Mi unidad\Studio\<slug>\"
 # FIX 2026-06-19 (desfase): estas carpetas (la fuente de produccion de Luis) tenian
 # COPIAS del HTML y gameboxes que NADIE actualizaba -> se desfasaban del repo y del
