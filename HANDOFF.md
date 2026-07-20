@@ -5,11 +5,11 @@
 
 ## Estado actual (2026-07-20)
 
-Canal en pre-lanzamiento con una base grande de contenido armado. Arco **SEGA cerrado** (8 episodios listos para grabar) y **TarroShorts de embudo** en curso. Infraestructura del repo, Drive sync y app TarroBot operativas.
+Canal en pre-lanzamiento con una base grande de contenido armado. Arco **SEGA cerrado** (8 episodios listos para grabar) y **TarroShorts de embudo de precios SEGA — ronda completa** (los 4). Infraestructura del repo, Drive sync y app TarroBot operativas.
 
 **En qué estamos ahora mismo:**
 - **Arco SEGA — 8 episodios cerrados** (HTML + pauta MD + box arts reales): Master System, Mega Drive, Dreamcast, Saturn, cada uno en top-mundial + top-precios. Falta grabarlos/renderizarlos en el estudio.
-- **TarroShorts de embudo (fase en curso):** el short `mega-drive-top-precios` se rehizo al estilo VIGENTE (`item-tag`, box arts reales, teaser del grial) y se verificó a 1080×1920. **Pendiente:** crear los shorts de precios de Master System, Dreamcast y Saturn con el mismo molde; después, eventualmente, los de top-mundial. Luego render MP4 + commit + sync.
+- **TarroShorts de precios SEGA — LOS 4 CERRADOS:** `mega-drive-top-precios`, `master-system-top-precios`, `dreamcast-top-precios` y `saturn-top-precios`, todos al estilo VIGENTE (`item-tag`, box arts reales con padding-hack, enfoque teaser que guarda el grial para el canal). Verificados a 1080×1920 real, renderizados a MP4, commiteados (`0092a96`) y sincronizados a Drive (ambos scripts). **Pendiente siguiente:** los shorts de top-mundial de la saga Sega (mismo molde, otro enfoque de contenido a definir con Luis).
 - **Nace `docs/modus-operandi/`** — carpeta canónica de convenciones de estilo + bitácora de decisiones, para que las mejoras no se pierdan entre sesiones.
 
 ## Decidido y cerrado (vigente)
@@ -34,7 +34,7 @@ Canal en pre-lanzamiento con una base grande de contenido armado. Arco **SEGA ce
 
 ## En proceso / por resolver
 
-- **Shorts de precios SEGA restantes** (Master System, Dreamcast, Saturn) con el molde `item-tag` + teaser. Luego render MP4.
+- **Shorts de top-mundial SEGA** (Master System, Mega Drive, Dreamcast, Saturn) — mismo molde `item-tag`, falta definir enfoque de contenido con Luis.
 - **Grabar los episodios cerrados en el estudio con Coco** — falta feedback de cámara.
 - **Más episodios largos** con el mismo molde de ranking (ideas: Game Boy, PS1, arcade).
 - Reserva de handles, logo final, calendario editorial, primer dev Indie Lat.
@@ -63,4 +63,4 @@ Canal en pre-lanzamiento con una base grande de contenido armado. Arco **SEGA ce
 
 ---
 
-*Última actualización: 2026-07-20 · Consolidación memoria + modus operandi + estilo shorts SEGA*
+*Última actualización: 2026-07-20 · Ronda completa de TarroShorts de precios SEGA (4/4) renderizados y sincronizados*
