@@ -305,6 +305,25 @@ if ($InstallerZip) {
 }
 Write-Host ""
 
+# 6b. Modus operandi + memoria -> carpeta hermana en el Drive (respaldo).
+# La fuente canonica es el repo (docs\modus-operandi\). Esto es el respaldo que Luis
+# pidio para tenerlo aparte, junto al resto del estudio. /MIR: el repo manda, se espeja.
+# NO editar la copia del Drive a mano; se pisa en cada sync.
+Write-Host "Modus operandi + memoria -> Studio\_modus-operandi:" -ForegroundColor Cyan
+$MoSrc = Join-Path $RepoRoot "docs\modus-operandi"
+if (Test-Path $MoSrc) {
+    $MoDest = Join-Path $ProdRoot "_modus-operandi"
+    if (-not $DryRun) {
+        & robocopy $MoSrc $MoDest /MIR /NJH /NJS /NDL /NP /NC /NS | Out-Null
+        Write-Host "  [DOCS]   docs\modus-operandi -> Studio\_modus-operandi\" -ForegroundColor Green
+    } else {
+        Write-Host "  [DRY ]   docs\modus-operandi -> Studio\_modus-operandi\" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "  [SKIP]   docs\modus-operandi no existe en el repo" -ForegroundColor DarkGray
+}
+Write-Host ""
+
 # 7. .env file con la ruta para que install.bat la sugiera (opcional)
 if (-not $DryRun) {
     $infoPath = Join-Path $Destino "INSTALL-INFO.txt"

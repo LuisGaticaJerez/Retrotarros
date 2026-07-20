@@ -1,6 +1,8 @@
 # Retrotarros — Claude Code Project Instructions
 
-> Lee este archivo completo antes de cualquier acción. Después lee `HANDOFF.md` y los docs relevantes al escenario.
+> Lee este archivo completo antes de cualquier acción. Después lee `HANDOFF.md`, `docs/modus-operandi/` y los docs relevantes al escenario.
+
+> **`docs/modus-operandi/`** = memoria + convenciones de estilo que no caben acá en detalle: el estilo VIGENTE de los TarroShorts (`convenciones-tarroshorts.md`) y la bitácora cronológica de decisiones (`bitacora-decisiones.md`). Fuente canónica en el repo, respaldo al Drive.
 
 ## Ubicaciones canónicas (importante)
 
@@ -371,6 +373,8 @@ Lane nueva de shorts conducidos por **TarroBot** (mascota) sobre un **tema curio
 - **Gotcha pronunciación (es-CL-CatalinaNeural):** una palabra **española pegada a una inglesa** puede salir anglicada (ej. "Matrix jugable" → "jugable" en inglés). Fix en el `say`: separar con coma/pausa o **reescribir** evitando el roce (ej. "meterte dentro de Matrix"). El display no se toca. Misma idea para cualquier palabra ES que suene rara junto a EN.
 
 ## TarroShorts — generación (vertical 1080×1920)
+
+> **Estilo VIGENTE de los shorts:** ver `docs/modus-operandi/convenciones-tarroshorts.md` ANTES de crear/editar uno. Ahí está el molde actual (`item-tag` en vez del viejo `rank-badge`, box arts con padding-hack, letras grandes, teaser vs top directo). No copiar un short antiguo sin revisar ese doc — el molde mejoró en el tiempo.
 
 `scripts/tarroshort_render.py` arma el MP4 vertical donde TarroBot presenta y comenta (voz edge-tts es-CL-CatalinaNeural +12Hz). Reacciones CON tildes (TTS). Bajo 60s.
 

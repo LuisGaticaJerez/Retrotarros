@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · TARROSHORT · MEGA DRIVE TOP PRECIOS</title>
+<!--
+  ============================================================================
+  TEMPLATE: TARROSHORT  (shorts / reels verticales 1080x1920)
+  ============================================================================
+  Episodio: Los Mega Drive mas caros (teaser del episodio mega-drive-top-precios)
+  Ranking teaser: #9 -> #5 (accesibles), cierra tentando con el grial (Tetris prohibido)
+  Estilo: item-tag (PUESTO + precio) segun estandar mejorado (mas-caros-historia)
+  Box arts reales reutilizadas de img/mega-drive-top-precios/
+  Render:
+    python scripts/tarroshort_render.py mega-drive-top-precios --render
+  ============================================================================
+-->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  /* SAFE ZONES */
+  --safe-top: 235px;
+  --safe-bottom: 345px;
+  --safe-right: 160px;
+  --safe-left: 60px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 120% 40% at 50% -2%, rgba(255,210,63,.16) 0%, transparent 60%),
+    radial-gradient(ellipse 120% 40% at 50% 102%, rgba(255,46,136,.12) 0%, transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 47px, rgba(255,255,255,.015) 47px, rgba(255,255,255,.015) 48px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 47px, rgba(255,255,255,.015) 47px, rgba(255,255,255,.015) 48px);
+}
+
+.deck { position: fixed; inset: 0; overflow: hidden; }
+.slide { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center;
+  padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left); }
+.slide.active { display: flex; }
+.slide-num { display: none; }
+.safe-guide { display: none; }
+
+/* TARROBOT mascota */
+.tb-mascot { width: 100%; height: 100%; display: block; }
+@keyframes tb-mouth-talk { 0%,100% { transform: scaleY(0.35); } 30% { transform: scaleY(1.4); } 55% { transform: scaleY(0.6); } 80% { transform: scaleY(1.2); } }
+body.tb-talking .tb-mouth { transform-box: fill-box; transform-origin: center; animation: tb-mouth-talk 0.4s ease-in-out infinite; }
+@keyframes tb-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+body.tb-talking .tb-mini svg { animation: tb-bob 0.75s ease-in-out infinite; }
+body.tb-talking .tb-big { animation: tb-bob 0.9s ease-in-out infinite; }
+
+/* INTRO / CIERRE */
+.intro, .cierre { justify-content: center; text-align: center; gap: 0; }
+.intro .tb-big, .cierre .tb-big { width: 300px; height: 300px; filter: drop-shadow(0 0 24px rgba(255,210,63,.55)); margin-bottom: 36px; }
+.intro .pre, .cierre .pre { font-family: 'Press Start 2P'; font-size: 22px; color: var(--cy); letter-spacing: 4px; margin-bottom: 28px; }
+.intro .titulo { font-family: 'Orbitron'; font-weight: 900; font-size: 78px; line-height: 1.04; color: #fff; text-shadow: 0 0 28px rgba(255,210,63,.5); margin-bottom: 32px; }
+.intro .titulo .mg { color: var(--ye); }
+.intro .saludo { font-family: 'Share Tech Mono'; font-size: 30px; line-height: 1.5; color: rgba(255,255,255,.85); }
+.cierre .cta { font-family: 'Orbitron'; font-weight: 900; font-size: 70px; line-height: 1.05; color: var(--ye); text-shadow: 0 0 24px rgba(255,210,63,.55); margin-bottom: 26px; }
+.cierre .cta .mg { color: var(--mg); }
+.cierre .sub { font-family: 'Share Tech Mono'; font-size: 30px; line-height: 1.5; color: rgba(255,255,255,.82); }
+
+/* ITEM */
+.item { justify-content: center; gap: 0; }
+.item-top { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 22px; }
+.tb-mini { width: 150px; height: 150px; flex: 0 0 auto; filter: drop-shadow(0 0 14px rgba(0,229,255,.5)); }
+/* etiqueta posicion + precio (el hook) */
+.item-tag { font-family: 'Press Start 2P'; font-size: 22px; color: var(--cy); border: 2px solid var(--cy); padding: 12px 18px; letter-spacing: 1px; text-shadow: 0 0 14px rgba(0,229,255,.5); background: rgba(0,229,255,.06); text-align: right; line-height: 1.5; }
+.item-tag .pos { display: block; font-size: 13px; color: rgba(255,255,255,.7); letter-spacing: 2px; margin-bottom: 6px; }
+.item-tag.ye { color: var(--ye); border-color: var(--ye); text-shadow: 0 0 14px rgba(255,210,63,.5); background: rgba(255,210,63,.06); }
+.item-tag.gold { color: #FFE57A; border-color: #FFD23F; text-shadow: 0 0 18px rgba(255,210,63,.8); background: rgba(255,210,63,.1); box-shadow: 0 0 26px rgba(255,210,63,.25); }
+/* foto: box art real (bg blur + fg contain, se ve COMPLETA).
+   Cuadrado via padding-hack: aspect-ratio no genera altura en flex-item columna. */
+.item-photo { width: 100%; max-width: 720px; position: relative; display: block; border-radius: 10px; overflow: hidden; background: var(--pu); box-shadow: 0 0 0 4px rgba(0,229,255,.2), 0 24px 70px rgba(0,0,0,.7); margin: 0 auto 24px; }
+.item-photo::before { content: ""; display: block; padding-top: 100%; }
+.item-photo img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.item-photo img.bg { object-fit: cover; filter: blur(26px) brightness(.5) saturate(1.2); transform: scale(1.15); z-index: 0; }
+.item-photo img.fg { object-fit: contain; z-index: 1; }
+.item-name { font-family: 'Orbitron'; font-weight: 900; font-size: 48px; line-height: 1.05; color: #fff; text-align: center; margin-bottom: 12px; }
+.item-meta { font-family: 'Share Tech Mono'; font-size: 24px; letter-spacing: 2px; color: var(--cy); text-align: center; margin-bottom: 16px; }
+.item-line { font-family: 'Share Tech Mono'; font-size: 32px; line-height: 1.4; color: rgba(255,255,255,.9); text-align: center; max-width: 820px; }
+
+/* NAV (solo para revisar en browser) */
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: rgba(6,3,15,.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 10px; padding: 10px 16px; cursor: pointer; }
+.nav-counter { font-family: 'Press Start 2P'; font-size: 12px; color: var(--mg); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="tarrobot-mascot" viewBox="0 0 64 64">
+    <rect x="2"  y="6"  width="60" height="50" rx="3" fill="#00E5FF"/>
+    <rect x="6"  y="10" width="51" height="40" rx="2" fill="#0a0820"/>
+    <rect x="8"  y="12" width="47" height="36" fill="none" stroke="#FF2E88" stroke-width="1"/>
+    <rect x="16" y="22" width="8"  height="8" fill="#FFD23F"/>
+    <rect x="38" y="22" width="8"  height="8" fill="#FFD23F"/>
+    <rect x="19" y="24" width="3"  height="4" fill="#0a0820"/>
+    <rect x="41" y="24" width="3"  height="4" fill="#0a0820"/>
+    <rect class="tb-mouth" x="22" y="38" width="20" height="4" fill="#FFD23F"/>
+    <circle cx="6" cy="5" r="2.2" fill="#FF2E88"/>
+    <rect x="14" y="56" width="8"  height="5" fill="#00E5FF"/>
+    <rect x="42" y="56" width="8"  height="5" fill="#00E5FF"/>
+  </symbol>
+</svg>
+
+<div class="deck" id="deck">
+
+  <!-- INTRO -->
+  <section class="slide active intro">
+    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>
+    <div class="pre">RETROTARROS</div>
+    <div class="titulo">MEGA DRIVE <span class="mg">MAS CAROS</span></div>
+    <div class="saludo">Soy TarroBot. Estos juegos de Mega Drive hoy cuestan una fortuna. Del mas accesible al que te va a volar la cabeza.</div>
+  </section>
+
+  <!-- #9 SKELETON KREW -->
+  <section class="slide item">
+    <div class="item-top">
+      <div class="tb-mini"><svg class="tb-mascot"><use href="#tarrobot-mascot"/></svg></div>
+      <div class="item-tag"><span class="pos">PUESTO 9 · CIB</span>US$316</div>
+    </div>
+    <div class="item-photo">
+      <img class="bg" src="img/mega-drive-top-precios/skeleton-krew.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+      <img class="fg" src="img/mega-drive-top-precios/skeleton-krew.png" alt="" onerror="this.style.display='none'">
+    </div>
+    <div class="item-name">SKELETON KREW</div>
+    <div class="item-meta">MEGA DRIVE · 1995 · CORE DESIGN</div>
+    <div class="item-line">De los que despues crearon Tomb Raider. Salio tarde y casi nadie lo compro.</div>
+  </section>
+
+  <!-- #8 SPARKSTER -->
+  <section class="slide item">
+    <div class="item-top">
+      <div class="tb-mini"><svg class="tb-mascot"><use href="#tarrobot-mascot"/></svg></div>
+      <div class="item-tag"><span class="pos">PUESTO 8 · CIB</span>US$325</div>
+    </div>
+    <div class="item-photo">
+      <img class="bg" src="img/mega-drive-top-precios/sparkster.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+      <img class="fg" src="img/mega-drive-top-precios/sparkster.png" alt="" onerror="this.style.display='none'">
+    </div>
+    <div class="item-name">SPARKSTER</div>
+    <div class="item-meta">MEGA DRIVE · 1994 · KONAMI</div>
+    <div class="item-line">La secuela de Rocket Knight. Un Konami buenisimo que vendio poquisimo.</div>
+  </section>
+
+  <!-- #7 THE PUNISHER -->
+  <section class="slide item">
+    <div class="item-top">
+      <div class="tb-mini"><svg class="tb-mascot"><use href="#tarrobot-mascot"/></svg></div>
+      <div class="item-tag"><span class="pos">PUESTO 7 · CIB</span>US$341</div>
+    </div>
+    <div class="item-photo">
+      <img class="bg" src="img/mega-drive-top-precios/punisher.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+      <img class="fg" src="img/mega-drive-top-precios/punisher.png" alt="" onerror="this.style.display='none'">
+    </div>
+    <div class="item-name">THE PUNISHER</div>
+    <div class="item-meta">MEGA DRIVE · 1994 · CAPCOM</div>
+    <div class="item-line">Beat em up de Capcom con licencia Marvel. Poca tirada, mucha demanda.</div>
+  </section>
+
+  <!-- #6 EL VIENTO -->
+  <section class="slide item">
+    <div class="item-top">
+      <div class="tb-mini"><svg class="tb-mascot"><use href="#tarrobot-mascot"/></svg></div>
+      <div class="item-tag ye"><span class="pos">PUESTO 6 · CIB</span>US$367</div>
+    </div>
+    <div class="item-photo">
+      <img class="bg" src="img/mega-drive-top-precios/el-viento.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+      <img class="fg" src="img/mega-drive-top-precios/el-viento.png" alt="" onerror="this.style.display='none'">
+    </div>
+    <div class="item-name">EL VIENTO</div>
+    <div class="item-meta">MEGA DRIVE · 1991 · WOLF TEAM</div>
+    <div class="item-line">Accion en el Chicago de los años 20 con horror Lovecraft. No vendio en Estados Unidos.</div>
+  </section>
+
+  <!-- #5 SPIDER-MAN: MAXIMUM CARNAGE (cartucho rojo) -->
+  <section class="slide item">
+    <div class="item-top">
+      <div class="tb-mini"><svg class="tb-mascot"><use href="#tarrobot-mascot"/></svg></div>
+      <div class="item-tag ye"><span class="pos">PUESTO 5 · CIB</span>US$442</div>
+    </div>
+    <div class="item-photo">
+      <img class="bg" src="img/mega-drive-top-precios/spiderman-carnage.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+      <img class="fg" src="img/mega-drive-top-precios/spiderman-carnage.png" alt="" onerror="this.style.display='none'">
+    </div>
+    <div class="item-name">SPIDER-MAN: MAXIMUM CARNAGE</div>
+    <div class="item-meta">MEGA DRIVE · 1994 · CARTUCHO ROJO</div>
+    <div class="item-line">El cartucho ROJO de Spider-Man. Mismo juego que el negro, pero diez veces mas caro por el color.</div>
+  </section>
+
+  <!-- CIERRE -->
+  <section class="slide cierre">
+    <svg class="tb-big"><use href="#tarrobot-mascot"/></svg>
+    <div class="cta">¿Y EL <span class="mg">#1</span>?</div>
+    <div class="sub">Un Tetris PROHIBIDO que Sega mando a destruir: 16 mil dolares. El top completo, con el santo grial, esta en el canal.</div>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">&#9664;</button>
+  <div class="nav-counter" id="counter">01 / 07</div>
+  <button class="nav-btn" id="nextBtn">&#9654;</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const counter = document.getElementById('counter');
+let current = 0;
+const total = slides.length;
+function pad(n){return String(n).padStart(2,'0');}
+function go(i){
+  if(i<0||i>=total) return;
+  slides[current].classList.remove('active');
+  current=i;
+  slides[current].classList.add('active');
+  counter.textContent = pad(current+1)+' / '+pad(total);
+}
+document.getElementById('prevBtn').addEventListener('click',()=>go(current-1));
+document.getElementById('nextBtn').addEventListener('click',()=>go(current+1));
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(current+1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();go(current-1);}
+});
+go(0);
+</script>
+
+</body>
+</html>
