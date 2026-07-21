@@ -12,6 +12,11 @@
 #   pautas/pauta-<slug>.docx
 #   pautas/discusion-<slug>.docx
 #
+# Excepcion RESENAS (studio\resenas\*.html): el HTML aterriza igual en su propia
+# carpeta <slug>/, pero la box art es compartida POR JUEGO (no por episodio) y
+# vive en img/resenas/ al lado de las carpetas <slug>/, no adentro de cada una
+# (el HTML referencia "../img/resenas/<key>.jpg").
+#
 # Requiere: pandoc instalado (winget install JohnMacFarlane.Pandoc)
 
 $ErrorActionPreference = "Stop"
@@ -105,6 +110,40 @@ foreach ($html in $htmlFiles) {
     }
 }
 
+# === 1b. RESENAS (carpeta APARTE studio\resenas\, no la raiz plana de studio\) ===
+# FIX 2026-07-21: el Get-ChildItem de arriba no es recursivo, asi que las resenas
+# nunca llegaban al Drive -> Luis no las encontraba para grabar. Ademas, las
+# imagenes de resenas se comparten por JUEGO (studio\img\resenas\<key>.jpg), no
+# por episodio como el resto de formatos, y el HTML las referencia con
+# "../img/resenas/<key>.jpg" -> hay que copiarlas a Studio\img\resenas\ (al lado
+# de las carpetas <slug>\, no adentro) para que esa ruta relativa siga resolviendo.
+$resenasDir = Join-Path $RepoStudio "resenas"
+$resenaHtmlFiles = @()
+if (Test-Path $resenasDir) {
+    $resenaHtmlFiles = Get-ChildItem -Path $resenasDir -Filter "*.html" -File
+    foreach ($html in $resenaHtmlFiles) {
+        $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
+        $destDir = Join-Path $DriveRoot $slug
+        if (-not (Test-Path $destDir)) {
+            New-Item -ItemType Directory -Path $destDir -Force | Out-Null
+        }
+        Copy-Item -Path $html.FullName -Destination $destDir -Force
+        Write-Host "  HTML → $destDir\$($html.Name)" -ForegroundColor Cyan
+    }
+    $srcResenaImg = Join-Path $RepoStudio "img\resenas"
+    if (Test-Path $srcResenaImg) {
+        $destResenaImg = Join-Path $DriveRoot "img\resenas"
+        if (-not (Test-Path $destResenaImg)) {
+            New-Item -ItemType Directory -Path $destResenaImg -Force | Out-Null
+        }
+        $imgs = Get-ChildItem -Path $srcResenaImg -File -ErrorAction SilentlyContinue
+        if ($imgs.Count -gt 0) {
+            Copy-Item -Path "$srcResenaImg\*" -Destination $destResenaImg -Force
+            Write-Host "  IMG  → $destResenaImg ($($imgs.Count) archivos, compartida entre resenas)" -ForegroundColor Cyan
+        }
+    }
+}
+
 # === 2. VERIFICACION: todo HTML del repo aterrizo en su carpeta por-episodio ===
 # Salvaguarda anti-bug 2026-05-28: Luis fue a grabar n64-coleccion y el HTML no
 # estaba en G:\Mi unidad\Studio\n64-coleccion\ (solo las capturas). Causa: el sync
@@ -112,8 +151,9 @@ foreach ($html in $htmlFiles) {
 # DOCX (que puede fallar por warnings de pandoc) para garantizar que la verificacion
 # critica de grabacion siempre se ejecute. Falla ruidoso si falta algun episodio.
 Write-Host "`n[2/3] Verificando que cada HTML aterrizo en su carpeta..." -ForegroundColor Yellow
+$allHtmlFiles = @($htmlFiles) + @($resenaHtmlFiles)
 $faltantes = @()
-foreach ($html in $htmlFiles) {
+foreach ($html in $allHtmlFiles) {
     $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
     if ($slug.StartsWith("_")) { continue }
     $destHtml = Join-Path (Join-Path $DriveRoot $slug) "$slug.html"
@@ -125,7 +165,7 @@ if ($faltantes.Count -gt 0) {
     Write-Host "  Revisa antes de ir a grabar." -ForegroundColor Red
     exit 1
 } else {
-    $totalEp = ($htmlFiles | Where-Object { -not $_.Name.StartsWith("_") }).Count
+    $totalEp = ($allHtmlFiles | Where-Object { -not $_.Name.StartsWith("_") }).Count
     Write-Host "  OK - los $totalEp HTMLs estan en su carpeta por-episodio." -ForegroundColor Green
 }
 
