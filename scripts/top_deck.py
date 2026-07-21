@@ -32,7 +32,11 @@ def _repo() -> Path:
 
 
 REPO = _repo()
-BASE = REPO / "studio" / "snes-top-mundial.html"
+import sys
+sys.path.insert(0, str(REPO / "scripts"))
+from _studio_layout import episode_category
+
+BASE = REPO / "studio" / "rankings" / "top-mundial" / "snes-top-mundial.html"
 
 
 def _tv(ch: int) -> str:
@@ -223,6 +227,8 @@ def generar_top(data: dict, out_slug: str) -> Path:
     )
     head = re.sub(r"<title>.*?</title>",
                   f'<title>RETROTARROS · {data["doc_title"]}</title>', head, flags=re.DOTALL)
-    out = REPO / "studio" / f"{out_slug}.html"
+    out_dir = REPO / "studio" / episode_category(out_slug)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out = out_dir / f"{out_slug}.html"
     out.write_text(head + hdr + foot, encoding="utf-8")
     return out

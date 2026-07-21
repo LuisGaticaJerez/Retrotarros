@@ -60,6 +60,11 @@ def _resolve_repo() -> Path:
     return Path(__file__).resolve().parent.parent
 
 
+import sys as _sys
+_sys.path.insert(0, str(_resolve_repo() / "scripts"))
+from _studio_layout import find_html, episode_category, short_category
+
+
 def _resolve_ffmpeg() -> str:
     env = os.environ.get("RETROTARROS_FFMPEG")
     if env and Path(env).exists():
@@ -193,9 +198,10 @@ def generar_tarroshort(slug: str, voice: str = VOZ_DEFAULT, pitch: str = PITCH_D
     # (16:9 horizontal) por error.
     if not slug.startswith("tarroshort-") and (studio / f"tarroshort-{slug}.html").exists():
         slug = f"tarroshort-{slug}"
-    html_path = studio / f"{slug}.html"
-    if not html_path.exists():
-        raise FileNotFoundError(f"No existe el HTML del short: {html_path}")
+    try:
+        html_path = find_html(slug)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"No existe el HTML del short: studio/**/{slug}.html")
     # Verificar que el HTML sea efectivamente un short vertical (template TarroShort),
     # no el deck horizontal del episodio. 'item-photo' es exclusivo del short.
     if "item-photo" not in html_path.read_text(encoding="utf-8", errors="ignore"):
@@ -520,7 +526,9 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
     deck = '<div class="deck" id="deck">\n\n' + "\n\n".join(slides) + "\n\n</div>\n\n"
     html = head + deck + foot
 
-    out_path = repo / "studio" / f"tarroshort-{out_slug}.html"
+    out_dir = repo / "studio" / "shorts-html" / short_category(f"tarroshort-{out_slug}")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"tarroshort-{out_slug}.html"
     out_path.write_text(html, encoding="utf-8")
     msg = f"HTML armado ({formato}): {mostrar} items mostrados, {teaser_n} al canal"
     if progress:
@@ -596,9 +604,10 @@ def construir_short_highlights(source_slug: str, formato: str, out_slug=None,
     """Arma un short de highlights (coleccion/entrevista) leyendo los destacados/joyas
     del HTML del episodio studio/<source_slug>.html. Reusa las imagenes del episodio."""
     repo = _resolve_repo()
-    html_src = repo / "studio" / f"{source_slug}.html"
-    if not html_src.exists():
-        raise FileNotFoundError(f"No existe el episodio: {html_src}")
+    try:
+        html_src = find_html(source_slug)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"No existe el episodio: studio/**/{source_slug}.html")
     template_path = repo / "studio" / "_template-tarroshort.html"
     if not template_path.exists():
         raise FileNotFoundError(f"No existe el template: {template_path}")
@@ -658,7 +667,10 @@ def construir_short_highlights(source_slug: str, formato: str, out_slug=None,
     )
 
     deck = '<div class="deck" id="deck">\n\n' + "\n\n".join(slides) + "\n\n</div>\n\n"
-    out_path = repo / "studio" / f"tarroshort-{out_slug}.html"
+    cat = "colecciones" if formato == "coleccion" else "abriendo-el-tarro"
+    out_dir = repo / "studio" / "shorts-html" / cat
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"tarroshort-{out_slug}.html"
     out_path.write_text(head + deck + foot, encoding="utf-8")
     msg = f"HTML highlights ({formato}): {len(names)} piezas de {source_slug}"
     if progress:

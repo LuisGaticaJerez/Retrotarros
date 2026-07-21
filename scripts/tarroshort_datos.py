@@ -158,7 +158,9 @@ def generar_short_datos(data: dict, slug: str) -> Path:
     deck = ('\n\n' + mascota + '\n\n<div class="deck" id="deck">\n\n'
             + "\n\n".join(slides) + '\n\n</div>\n\n')
 
-    out = REPO / "studio" / f"tarroshort-{slug}.html"
+    out_dir = REPO / "studio" / "shorts-html" / "datos"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out = out_dir / f"tarroshort-{slug}.html"
     out.write_text(head + deck + foot, encoding="utf-8")
 
     # guion para TTS

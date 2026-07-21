@@ -293,6 +293,8 @@ def generar_saga(data: dict, out_slug: str) -> Path:
         '<button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button></nav>'
         f'<script>{SCRIPT}</script></body></html>'
     )
-    out = REPO / "studio" / f"{out_slug}.html"
+    out_dir = REPO / "studio" / "sagas"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out = out_dir / f"{out_slug}.html"
     out.write_text(html, encoding="utf-8")
     return out
