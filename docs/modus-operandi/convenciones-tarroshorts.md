@@ -133,17 +133,31 @@ Acordado con Luis (2026-06-17):
 - **Re-render = limpiar audio:** si cambian los textos hablados, borrar `studio/shorts/audio/<slug>/` antes de re-rendir o queda la voz vieja.
 - **Sync al Drive:** `scripts/sync-tarrobot-to-drive.ps1` (sube el short MP4 + HTML a `G:\Mi unidad\Studio\tarrobot`). Ver `CLAUDE.md` sección "Workflow obligatorio al cerrar cambios".
 
-### Bug corregido — se filtraba la intro entre escenas (Luis, 2026-07-20)
+### Bugs corregidos en el pipeline de render (Luis, 2026-07-20)
 
-En `tarroshort-master-system-top-precios.mp4` apareció la intro completa (TarroBot + título) tapando el arranque de la escena del item 1. Causa: cada escena se graba en un browser context nuevo que carga la página desde cero (arranca siempre en el slide intro por default) y recién después el script cambia al slide correcto vía JS; ese cambio depende de que carguen las Google Fonts por red, con timing variable. El recorte fijo de 1s (`LOOP_TRIM_START`) a veces no alcanzaba a saltarse ese arranque, y el loop final quedaba "contaminado" con el frame de la intro. Fix en `scripts/tarroshort_render.py`: subido `LOOP_TRIM_START` a 2.5s y `REC_SECONDS` a 6.0s (más margen antes de empezar a usar el loop). Si vuelve a pasar, revisar frame por frame con `ffmpeg -vf fps=1` + contact sheet antes de asumir que es un problema del HTML.
+Dos bugs reales encontrados por Luis mirando el MP4 final de `tarroshort-master-system-top-precios` — **no** eran visibles en las capturas de pantalla del navegador, solo en el video renderizado:
+
+1. **Se filtraba la intro entre escenas.** Apareció la intro completa (TarroBot + título) tapando el arranque de la escena del item 1. Causa: cada escena se graba en un browser context nuevo que carga la página desde cero (arranca siempre en el slide intro por default) y recién después el script cambia al slide correcto vía JS; ese cambio depende de que carguen las Google Fonts por red, con timing variable. El recorte fijo de 1s (`LOOP_TRIM_START`) a veces no alcanzaba a saltarse ese arranque, y el loop final quedaba "contaminado" con el frame de la intro.
+2. **Glitch/estática en el frame exacto del corte hacia la siguiente escena** (se vio en la transición hacia el cierre). Causa: el concat final usaba `-c copy` para pegar streams h264 codificados por separado en procesos distintos; si los límites de GOP/keyframe no calzan exactamente, ffmpeg no tira error pero deja un frame corrupto justo en el corte.
+
+**Fix en `scripts/tarroshort_render.py`:** `LOOP_TRIM_START` subido de 1.0s a 2.5s y `REC_SECONDS` de 4.5s a 6.0s (más margen antes de usar el loop); el concat final ahora **siempre re-encodea** (se sacó el intento de `-c copy`). Afecta a cualquier TarroShort, no solo a los de precios SEGA.
+
+**REGLA de verificación (obligatoria desde ahora):** un short nuevo o re-renderizado NO se da por bueno solo con capturas de pantalla del navegador (`mcp__Claude_Browser` verifica el HTML/CSS, no el pipeline de grabación). Antes de avisar a Luis que un MP4 está listo, revisar el **video real** frame por frame:
+```bash
+ffmpeg -i studio/shorts/<slug>.mp4 -vf "fps=2" /tmp/f-%03d.png
+ffmpeg -i /tmp/f-%03d.png -vf "scale=110:-1,tile=10x12" contact_sheet.png
+```
+y mirar el contact sheet completo (Read tool), prestando especial atención a las transiciones entre escenas (ahí es donde aparecen estos bugs).
 
 ---
 
 ## Checklist al crear/editar un TarroShort
 
-1. Usar `item-tag` (no `rank-badge`) con escalada cyan → `ye` → `gold`.
+1. Usar `item-tag` (no `rank-badge`) con escalada cyan → `ye` → `gold`, siempre PUESTO 10 → PUESTO 6 (aunque la pauta arranque en #9).
 2. Box art real con el padding-hack (no `aspect-ratio`).
 3. Letras grandes (item-name 48 / meta 24 / line 32).
 4. Verificar visualmente **a 1080×1920** (no a media resolución).
 5. Definir enfoque teaser vs top directo con Luis.
-6. Render MP4, commit, y sync a Drive (ambos scripts si tocaste episodios).
+6. Si es teaser: el cierre describe el santo grial **sin nombrarlo** + invita a suscribirse y activar la campana.
+7. Render MP4, commit, y sync a Drive (ambos scripts si tocaste episodios).
+8. Verificar el **MP4 real** frame por frame (contact sheet, ver sección "Bugs corregidos" arriba) antes de avisar que está listo — las capturas de pantalla del navegador no alcanzan.

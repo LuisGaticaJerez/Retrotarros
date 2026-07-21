@@ -9,7 +9,9 @@ Canal en pre-lanzamiento con una base grande de contenido armado. Arco **SEGA ce
 
 **En qué estamos ahora mismo:**
 - **Arco SEGA — 8 episodios cerrados** (HTML + pauta MD + box arts reales): Master System, Mega Drive, Dreamcast, Saturn, cada uno en top-mundial + top-precios. Falta grabarlos/renderizarlos en el estudio.
-- **TarroShorts de precios SEGA — LOS 4 CERRADOS:** `mega-drive-top-precios`, `master-system-top-precios`, `dreamcast-top-precios` y `saturn-top-precios`, todos al estilo VIGENTE (`item-tag`, box arts reales con padding-hack, enfoque teaser que guarda el grial para el canal). Verificados a 1080×1920 real, renderizados a MP4, commiteados (`0092a96`) y sincronizados a Drive (ambos scripts). **Pendiente siguiente:** los shorts de top-mundial de la saga Sega (mismo molde, otro enfoque de contenido a definir con Luis).
+- **TarroShorts de precios SEGA — LOS 4 CERRADOS Y PUSHEADOS:** `mega-drive-top-precios`, `master-system-top-precios`, `dreamcast-top-precios` y `saturn-top-precios`, todos al estilo VIGENTE (`item-tag` PUESTO 10→6, box arts reales con padding-hack, enfoque teaser que guarda el grial SIN nombrarlo + invita a suscribirse/campana). Verificados a 1080×1920 real Y frame-por-frame en el MP4 renderizado (contact sheets), renderizados, commiteados (`0092a96`..`6df1ff3`) y pusheados a GitHub. Sincronizados a Drive (ambos scripts).
+  - En el camino se corrigieron **2 bugs reales del pipeline** `scripts/tarroshort_render.py` (afectan a cualquier TarroShort, no solo estos 4): intro filtrándose entre escenas (timing de fuentes por red) y glitch en el corte de escena (concat `-c copy` → ahora siempre re-encode). Detalle y regla de verificación en `docs/modus-operandi/convenciones-tarroshorts.md` § "Bugs corregidos en el pipeline de render".
+  - **Pendiente siguiente:** los shorts de top-mundial de la saga Sega (mismo molde, otro enfoque de contenido a definir con Luis).
 - **Nace `docs/modus-operandi/`** — carpeta canónica de convenciones de estilo + bitácora de decisiones, para que las mejoras no se pierdan entre sesiones.
 
 ## Decidido y cerrado (vigente)
@@ -63,4 +65,4 @@ Canal en pre-lanzamiento con una base grande de contenido armado. Arco **SEGA ce
 
 ---
 
-*Última actualización: 2026-07-20 · Ronda completa de TarroShorts de precios SEGA (4/4) renderizados y sincronizados*
+*Última actualización: 2026-07-20 · Ronda completa de TarroShorts de precios SEGA (4/4), 2 bugs de render corregidos, pusheado a GitHub*
