@@ -106,26 +106,43 @@ Koko interpreta el tema icónico de una generación en batería. Sembrado como i
 
 ## 2. Shorts (9:16)
 
+> Corrección 2026-07-21: el primer barrido de la pestaña Shorts del canal quedó cortado
+> por límites de scroll del navegador automatizado (solo cargó 5 de 22). Los números de
+> abajo salen de leer `ytInitialData` (`shortsLockupViewModel`) directo del JSON interno
+> de la página, que sí trae el listado completo. Si se vuelve a auditar esto, no confiar
+> en un scroll simple — extraer del JSON embebido.
+
 ### TarroShorts (pipeline HTML + render automático)
 
 Narrados por TarroBot (voz edge-tts), armados con `scripts/tarroshort_render.py` +
 generadores (`tarroshort_datos.py`, o a mano siguiendo el molde `item-tag` — ver
 `docs/modus-operandi/convenciones-tarroshorts.md`).
 
-| Sub-tipo | Armados | Publicados |
-|---|---|---|
-| Derivados de episodio (top-mundial/precios/colección + cross-console) | 17 | 2 (`mas-caros-historia`, `mejor-consola-retro`) |
-| De DATOS (tema curioso libre, lane TarroBot) | 15 | 0 |
+| Sub-tipo | Armados | Publicados | Backlog |
+|---|---:|---:|---:|
+| Derivados de episodio (top-mundial/precios/colección + cross-console) | 17 | 11 | 6 |
+| De DATOS (tema curioso libre, lane TarroBot) | 15 | 6 | 9 |
+| **TOTAL TarroShort** | **32** | **17** | **15** |
 
-**Backlog: 30 TarroShorts armados y renderizables, solo 2 publicados.** Es la brecha más
-grande del canal — la producción va muy por delante de la publicación.
+**Publicados (17):** `mas-caros-historia`, `mejor-consola-retro`, `retro-glorias-navales`,
+`retro-padres-gamer`, `n64-coleccion`, `n64-top-mundial`, `n64-top-precios`,
+`snes-coleccion`, `snes-top-mundial`, `snes-top-precios`, `nes-top-mundial`,
+`datos-sonic`, `datos-tetris`, `datos-juegos-peliculas`, `datos-ports-rotos`,
+`datos-clones-mario`, `datos-zelda-feos`.
 
-### Shorts simples de B-roll (sin pipeline TarroBot)
+**Backlog (15):** `dreamcast-top-precios`, `master-system-top-precios`,
+`mega-drive-top-precios`, `saturn-top-precios`, `nes-coleccion`, `nes-top-precios`,
+`datos-cartuchos-caros`, `datos-easter-egg`, `datos-finales-raros`, `datos-game-boy`,
+`datos-jefes-dificiles`, `datos-mario-secretos`, `datos-mortal-kombat`, `datos-pacman`,
+`datos-secretos-escondidos`.
 
-3 publicados: "Generaciones Nintendo en sus controles", "controles N64", "Pequeña
-colección de consolas de Nintendo 64". Edición directa en CapCut sobre clips de
-`scripts/extract-broll.ps1`, sin HTML ni narración generada — no tienen contraparte en
-el repo más allá del B-roll crudo.
+### Shorts simples de B-roll / trivia (sin pipeline TarroBot)
+
+5 publicados: "Generaciones Nintendo en sus controles", "controles N64", "Pequeña
+colección de consolas de Nintendo 64", "La mujer que inventó los videojuegos", "El primer
+juego de plantas". Edición directa en CapCut (los de controles/colección sobre clips de
+`scripts/extract-broll.ps1`; los dos de trivia histórica parecen lane Luis grabado
+directo). Sin HTML ni narración generada — no tienen contraparte en `studio/`.
 
 ### Lane Luis / Lane Koko (guionados, sin HTML)
 
@@ -144,11 +161,10 @@ cual — alimenta el proceso de armar el short/trailer final.
 
 ## 3. La brecha principal: se produce más rápido de lo que se publica
 
-Patrón repetido en las tres categorías con más volumen:
-
-- **Sagas:** 12 armadas, 1 publicada (11 de backlog).
-- **TarroShorts:** 32 armados, 2 publicados (30 de backlog).
-- **Rankings:** 9 publicados, 7 armados sin subir.
+- **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **la brecha más grande del canal**.
+- **Rankings:** 16 armados, 9 publicados (7 de backlog).
+- **TarroShorts:** 32 armados, 17 publicados (15 de backlog) — más sano de lo que parecía a primera vista.
+- **Episodios sin playlist asignada** (curaduría N64, Archivo Koko, Retrotarros vs Mundo): 9 armados, 0 publicados.
 
 **Colecciones es la única categoría al día** (4 armadas = 4 publicadas).
 
