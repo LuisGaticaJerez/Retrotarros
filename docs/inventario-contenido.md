@@ -102,6 +102,19 @@ Entrevistas a devs indie latinoamericanos. Descrito en `docs/formatos.md` y
 Koko interpreta el tema icónico de una generación en batería. Sembrado como idea
 (`n64-ost-bateria` en `docs/arcos/n64.md`), sin pauta ni HTML armados.
 
+### Reseñas — playlist NUEVA (pendiente crear en YouTube), 5 armadas
+
+Un juego por video, ángulo retrospectivo ("¿envejeció bien?"), máximo 10 min, talento
+alterna Luis/Koko 1 y 1, nunca cierra con batería. Diseño completo en
+`docs/superpowers/specs/2026-07-21-resena-format-design.md`. Generador:
+`scripts/resena_deck.py`. Salida en `studio/resenas/<slug>.html` (carpeta aparte, no la
+raíz plana de `studio/` como el resto de formatos).
+
+**Primera tanda armada (0 publicadas):** Super Mario Bros. 3 (NES), Sonic the Hedgehog 2
+(Mega Drive), Killer Instinct Gold (N64), Mortal Kombat (SNES), Donkey Kong Country
+(SNES). **Pendiente:** crear la playlist "Reseñas" en YouTube Studio (no se puede crear
+por API/Claude).
+
 ---
 
 ## 2. Shorts (9:16)
@@ -165,6 +178,7 @@ cual — alimenta el proceso de armar el short/trailer final.
 - **Rankings:** 16 armados, 9 publicados (7 de backlog).
 - **TarroShorts:** 32 armados, 17 publicados (15 de backlog) — más sano de lo que parecía a primera vista.
 - **Episodios sin playlist asignada** (curaduría N64, Archivo Koko, Retrotarros vs Mundo): 9 armados, 0 publicados.
+- **Reseñas** (playlist nueva, aún no creada en YouTube): 5 armadas, 0 publicadas.
 
 **Colecciones es la única categoría al día** (4 armadas = 4 publicadas).
 

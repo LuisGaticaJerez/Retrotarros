@@ -2,7 +2,7 @@
 
 > Memoria cronológica de acuerdos y decisiones con Luis. Cada entrada apunta a dónde vive el detalle
 > (para no duplicar). Sirve para reconstruir el "por qué" cuando pasa tiempo entre sesiones.
-> Se agrega al final; no se reescribe la historia. Última entrada: 2026-07-20.
+> Se agrega al final; no se reescribe la historia. Última entrada: 2026-07-21.
 
 ## Cómo leer esto
 
@@ -66,3 +66,10 @@
 - **REGLA — el teaser siempre PUESTO 10 → PUESTO 6**, aunque la pauta del episodio solo liste 9 items (Mega Drive y Saturn arrancaban en #9; se corrió la etiqueta, no se inventaron items). Es una convención de display, no una renumeración del ranking oficial. → `convenciones-tarroshorts.md`.
 - **REGLA — el cierre nunca nombra el santo grial + siempre invita a suscribirse y activar la campana.** Se detectó porque los cierres de Mega Drive ("un Tetris prohibido") y Saturn ("un Daytona online") revelaban el nombre sin querer. → `convenciones-tarroshorts.md`.
 - **Dos bugs reales del pipeline de render encontrados por Luis mirando el MP4 final** (no visibles en capturas de pantalla del navegador): (1) la intro se filtraba al arranque de la escena del item 1 por timing de carga de fuentes vía red; (2) glitch/estática en el frame del corte hacia el cierre por usar `-c copy` al concatenar streams codificados por separado. Ambos corregidos en `scripts/tarroshort_render.py` (`LOOP_TRIM_START`/`REC_SECONDS` más generosos + concat siempre re-encodea). **Lección de proceso:** las capturas de pantalla del navegador (`mcp__Claude_Browser`) verifican el HTML/CSS pero NO el pipeline de grabación — un short nuevo solo se da por bueno tras revisar el MP4 real frame por frame (contact sheet con `ffmpeg -vf fps=N` + `tile=`), sobre todo en las transiciones entre escenas. → `convenciones-tarroshorts.md` § Render y sync.
+
+## 2026-07-21 — Playlist Reseñas (nuevo formato)
+
+- **Nace la playlist "Reseñas":** un juego por video, ángulo retrospectivo, máximo 10 min, talento alterna Luis/Koko 1 y 1, nunca cierra con batería, portada nunca muestra el nombre del presentador. Diseñado con Luis via brainstorming + mockup real revisado en navegador antes de escribir el generador. → `docs/superpowers/specs/2026-07-21-resena-format-design.md`.
+- **Primera tanda: 5 reseñas armadas** (SMB3, Sonic 2, Killer Instinct Gold, Mortal Kombat, Donkey Kong Country) via `scripts/resena_deck.py`, salida en `studio/resenas/<slug>.html` (carpeta aparte — pedido de Luis, distinto al resto de formatos que van en la raíz de `studio/`). Cero publicadas — falta crear la playlist en YouTube Studio.
+- **Bug real encontrado en la implementación (no en el diseño):** al mover la salida a una subcarpeta, las rutas relativas de box art quedaron rotas (`img/resenas/...` en vez de `../img/resenas/...`). Se detectó verificando con Playwright (el navegador interactivo se puso inestable esa sesión) — capturas confirmaron el bug y el fix. **Lección:** cuando un generador cambia de carpeta de salida, revisar TODAS las rutas relativas del HTML, no asumir que siguen siendo válidas.
+- **Regla del canal (nunca logo) aplicada de nuevo:** Mortal Kombat no tiene box art real disponible en Wikipedia (solo el logo del dragón) → se usó un fallback de tarjeta de color en vez de forzar el logo. → `CLAUDE.md` § Imágenes en HTMLs de ranking (misma regla, aplicada acá).

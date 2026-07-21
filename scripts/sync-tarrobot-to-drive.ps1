@@ -150,6 +150,15 @@ foreach ($ep in $episodios) {
 }
 Write-Host ""
 
+# 2b-bis. Resenas (carpeta APARTE studio\resenas\, no la raiz plana de studio\).
+# FIX 2026-07-21: el Get-ChildItem de arriba no es recursivo, asi que las resenas
+# quedaban fuera del sync sin este bloque.
+if (Test-Path (Join-Path $RepoRoot "studio\resenas")) {
+    Write-Host "Resenas:" -ForegroundColor Cyan
+    Sync-Item "studio\resenas" -Recursive
+    Write-Host ""
+}
+
 # 2c. Carpeta de imagenes de episodios (box arts, sprites, paneos)
 # Necesarias para que los HTMLs con <img src="img/..."> renderizen bien.
 Write-Host "Imagenes de episodios:" -ForegroundColor Cyan
