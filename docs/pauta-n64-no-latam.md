@@ -154,7 +154,7 @@ Los shorts de batería del catálogo N64 siguen reservados para el episodio espe
 - Dos cámaras: una fija plano amplio + una móvil para reacciones de Koko (especialmente importantes en este episodio — la nostalgia se transmite en la cara).
 - Iluminación con dominante cálida (amarillo arcade) — más nostálgica que synthwave puro.
 - Audio: lavalier para ambos.
-- Monitor secundario: `studio/n64-no-latam.html` en Chrome pantalla completa.
+- Monitor secundario: `studio/curaduria-n64/n64-no-latam.html` en Chrome pantalla completa.
 
 **Imágenes en los slides**
 
@@ -189,7 +189,7 @@ mother3.jpg
 
 ## Checklist antes de grabar
 
-- [ ] Luis abre `studio/n64-no-latam.html` en Chrome pantalla completa. Probar flechas ← →.
+- [ ] Luis abre `studio/curaduria-n64/n64-no-latam.html` en Chrome pantalla completa. Probar flechas ← →.
 - [ ] Subir fotos reales de box art a `studio/img/n64-no-latam/` si conseguimos.
 - [ ] Memorizar las 5 anclas de cámara (Densha de Go, Bomberman, F-Zero X EK, Sin & Punishment, Mother 3).
 - [ ] Memorizar al pie de la letra la frase de cierre fija del episodio.

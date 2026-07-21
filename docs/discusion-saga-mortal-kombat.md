@@ -73,4 +73,4 @@ La cobertura de consolas es notable: cada generacion representada.
 
 **Ultima actualizacion:** 2026-06-08
 **Pauta asociada:** `docs/pauta-saga-mortal-kombat.md`
-**HTML:** `studio/saga-mortal-kombat.html`
+**HTML:** `studio/sagas/saga-mortal-kombat.html`

@@ -33,10 +33,10 @@
 
 | # | Slug | Tipo | Estado | Pauta | Discusion | HTML |
 |---|------|------|--------|-------|-----------|------|
-| 1a | `psvita-top-mundial` | Ranking · crítica | ✓ Cerrado para grabar | [pauta](../pauta-psvita-top-mundial.md) | [discusion](../discusion-psvita-top-mundial.md) | [html](../../studio/psvita-top-mundial.html) |
-| 1b | `psvita-top-precios` | Ranking · mercado | ✓ Cerrado para grabar | [pauta](../pauta-psvita-top-precios.md) | [discusion](../discusion-psvita-top-precios.md) | [html](../../studio/psvita-top-precios.html) |
-| 1c | `psvita-retrotarros-vs-mundo` | Ranking · Koko personal (game show) | ✓ Cerrado para grabar | [pauta](../pauta-psvita-retrotarros-vs-mundo.md) | [discusion](../discusion-psvita-retrotarros-vs-mundo.md) | [html](../../studio/psvita-retrotarros-vs-mundo.html) |
-| 2 | `psvita-archivo-koko` | Íntimo · los 91 juegos | ✓ Cerrado para grabar | [pauta](../pauta-psvita-archivo-koko.md) | [discusion](../discusion-psvita-archivo-koko.md) | [html](../../studio/psvita-archivo-koko.html) |
+| 1a | `psvita-top-mundial` | Ranking · crítica | ✓ Cerrado para grabar | [pauta](../pauta-psvita-top-mundial.md) | [discusion](../discusion-psvita-top-mundial.md) | [html](../../studio/rankings/top-mundial/psvita-top-mundial.html) |
+| 1b | `psvita-top-precios` | Ranking · mercado | ✓ Cerrado para grabar | [pauta](../pauta-psvita-top-precios.md) | [discusion](../discusion-psvita-top-precios.md) | [html](../../studio/rankings/top-precios/psvita-top-precios.html) |
+| 1c | `psvita-retrotarros-vs-mundo` | Ranking · Koko personal (game show) | ✓ Cerrado para grabar | [pauta](../pauta-psvita-retrotarros-vs-mundo.md) | [discusion](../discusion-psvita-retrotarros-vs-mundo.md) | [html](../../studio/rankings/retrotarros-vs-mundo/psvita-retrotarros-vs-mundo.html) |
+| 2 | `psvita-archivo-koko` | Íntimo · los 91 juegos | ✓ Cerrado para grabar | [pauta](../pauta-psvita-archivo-koko.md) | [discusion](../discusion-psvita-archivo-koko.md) | [html](../../studio/archivo-koko/psvita-archivo-koko.html) |
 | 3 | `psvita-joyas-ocultas` | Curaduría · joyas Metacritic 80+ de la colección | ☐ Idea | — | — | — |
 | 4 | `psvita-no-latam` | La consola que Sony abandonó en Latam | ☐ Idea | — | — | — |
 | 5 | `psvita-vs-3ds` | Cómo Sony perdió la guerra portátil | ☐ Idea | — | — | — |

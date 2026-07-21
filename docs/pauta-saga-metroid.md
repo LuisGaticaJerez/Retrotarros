@@ -22,7 +22,7 @@ Coleccion honesta: **3 de 11** en fisico (Metroid NES, Prime via Remastered, Oth
 
 ## Concepto del episodio — LINEA DE TIEMPO + ZOOM + GAMEPLAY
 
-HTML (`studio/saga-metroid.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (Remastered + legado + wishlist) → balance → cierre.
+HTML (`studio/sagas/saga-metroid.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (Remastered + legado + wishlist) → balance → cierre.
 
 **Duracion objetivo:** 22-28 minutos. Mecanica identica a saga-zelda.
 
@@ -81,7 +81,7 @@ HTML (`studio/saga-metroid.html`): portada → linea de tiempo completa → por 
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/saga-metroid.html`) | ✓ + box art |
+| HTML (`studio/sagas/saga-metroid.html`) | ✓ + box art |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
 | Gameplay + fisicos | ☐ Pendiente |
@@ -90,5 +90,5 @@ HTML (`studio/saga-metroid.html`): portada → linea de tiempo completa → por 
 
 **Ultima actualizacion:** 2026-06-08
 **Slug:** `saga-metroid`
-**HTML:** `studio/saga-metroid.html`
+**HTML:** `studio/sagas/saga-metroid.html`
 **Discusion:** `docs/discusion-saga-metroid.md`

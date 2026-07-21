@@ -73,4 +73,4 @@ El especial cierra con Koko tocando una **melodia de nivel de nieve** en bateria
 
 **Ultima actualizacion:** 2026-06-07
 **Pauta asociada:** `docs/pauta-retro-cuadrilla-frio.md`
-**HTML:** `studio/retro-cuadrilla-frio.html`
+**HTML:** `studio/specials/retro-cuadrilla-frio.html`

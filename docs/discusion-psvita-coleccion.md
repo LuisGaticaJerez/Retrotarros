@@ -65,4 +65,4 @@ El bloque hardware cierra con el **talon de Aquiles de la Vita: las tarjetas de 
 
 **Ultima actualizacion:** 2026-06-07
 **Pauta asociada:** `docs/pauta-psvita-coleccion.md`
-**HTML:** `studio/psvita-coleccion.html`
+**HTML:** `studio/colecciones/psvita-coleccion.html`

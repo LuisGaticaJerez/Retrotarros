@@ -65,4 +65,4 @@ Todo lo demas es wishlist real. Los grandes que duelen: Super Metroid y Dread.
 
 **Ultima actualizacion:** 2026-06-08
 **Pauta asociada:** `docs/pauta-saga-metroid.md`
-**HTML:** `studio/saga-metroid.html`
+**HTML:** `studio/sagas/saga-metroid.html`

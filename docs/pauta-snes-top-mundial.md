@@ -26,7 +26,7 @@ Sirve como:
 
 ## Concepto del episodio
 
-Formato presentacion visual con HTML del estudio (`studio/snes-top-mundial.html`):
+Formato presentacion visual con HTML del estudio (`studio/rankings/top-mundial/snes-top-mundial.html`):
 
 - 13 slides navegables del 01 al 13.
 - Portada con tag "TOP 10 · MUNDIAL · SEGUN LA CRITICA".
@@ -155,13 +155,13 @@ La pauta JSON (`studio/pautas/snes-top-mundial.tarrobot.json`) tiene **10 datos*
 
 | Item | Estado |
 |------|--------|
-| HTML estudio (`studio/snes-top-mundial.html`) | ✓ Cerrado para grabar (13 slides) |
+| HTML estudio (`studio/rankings/top-mundial/snes-top-mundial.html`) | ✓ Cerrado para grabar (13 slides) |
 | Pauta JSON TarroBot (`studio/pautas/snes-top-mundial.tarrobot.json`) | ✓ 10 datos + 4 melodias |
 | Capturas (`studio/captures/snes-top-mundial/`) | ✓ Generadas |
 | Pauta MD (este archivo) | ✓ |
 | Discusion MD (`docs/discusion-snes-top-mundial.md`) | ✓ |
 | Descripcion YouTube (`studio/exports/snes-top-mundial-publicacion.txt`) | ✓ |
-| Teaser 9:16 (`studio/teaser-snes-top-mundial.html`) | ✓ Generado |
+| Teaser 9:16 (`studio/teasers/teaser-snes-top-mundial.html`) | ✓ Generado |
 | TarroTeaser MP4 (`studio/teasers/snes-top-mundial/`) | ✓ 30s con audio Koko |
 
 ---
@@ -176,6 +176,6 @@ La pauta JSON (`studio/pautas/snes-top-mundial.tarrobot.json`) tiene **10 datos*
 
 **Ultima actualizacion:** 2026-05-28
 **Slug:** `snes-top-mundial`
-**HTML asociado:** `studio/snes-top-mundial.html`
+**HTML asociado:** `studio/rankings/top-mundial/snes-top-mundial.html`
 **Discusion:** `docs/discusion-snes-top-mundial.md`
 **Estado:** EP 06 publicado en YouTube

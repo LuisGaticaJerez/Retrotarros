@@ -27,7 +27,7 @@ Es el primer episodio "panorama" del canal. Sirve como:
 
 ## Concepto del episodio
 
-Formato de presentacion visual con HTML del estudio (`studio/snes-coleccion.html`):
+Formato de presentacion visual con HTML del estudio (`studio/colecciones/snes-coleccion.html`):
 
 - 23 slides navegables del 01 al 23.
 - Portada → menu consola tipo "PRESS START" con 9 categorias → recorrido secuencial.
@@ -187,7 +187,7 @@ Mismo patron para los paneos (slide paneo) y los gameplay (slide triple).
 
 | Item | Estado |
 |------|--------|
-| HTML estudio (`studio/snes-coleccion.html`) | ✓ Cerrado para grabar (23 slides) |
+| HTML estudio (`studio/colecciones/snes-coleccion.html`) | ✓ Cerrado para grabar (23 slides) |
 | Paneos de camara grabados | ☐ Pendiente |
 | Clips de gameplay (27) | ☐ Pendiente |
 | Material perifericos (Super Scope, Super GB) | ☐ Pendiente |
@@ -208,5 +208,5 @@ Mismo patron para los paneos (slide paneo) y los gameplay (slide triple).
 
 **Ultima actualizacion:** 2026-05-21
 **Slug:** `snes-coleccion`
-**HTML asociado:** `studio/snes-coleccion.html`
+**HTML asociado:** `studio/colecciones/snes-coleccion.html`
 **Discusion:** `docs/discusion-snes-coleccion.md`

@@ -3,7 +3,7 @@
 > Documento conversacional. **Tiempo estimado: 30 min** (importante: Koko arma su top 10 acá).
 >
 > Doc operativo: [`docs/pauta-psvita-retrotarros-vs-mundo.md`](pauta-psvita-retrotarros-vs-mundo.md).
-> Monitor: [`studio/psvita-retrotarros-vs-mundo.html`](../studio/psvita-retrotarros-vs-mundo.html).
+> Monitor: [`studio/rankings/retrotarros-vs-mundo/psvita-retrotarros-vs-mundo.html`](../studio/rankings/retrotarros-vs-mundo/psvita-retrotarros-vs-mundo.html).
 
 ---
 

@@ -22,7 +22,7 @@ Tono **humoristico** con **cierre sincero**: arranca como chiste (papas terrible
 
 ## Concepto del episodio
 
-HTML (`studio/retro-padres-gamer.html`): 14 slides. Portada → intro (reunion de apoderados) → 10 fichas (papa + evaluacion + nota grande) → promedio del curso → cierre sincero con Koko.
+HTML (`studio/specials/retro-padres-gamer.html`): 14 slides. Portada → intro (reunion de apoderados) → 10 fichas (papa + evaluacion + nota grande) → promedio del curso → cierre sincero con Koko.
 
 **Duracion objetivo:** 12-16 minutos. **Orden: de peor a mejor papa** (cierra en el padrazo).
 
@@ -84,7 +84,7 @@ El HTML usa placeholders `tv-noscreen` + `cart-fallback`. La nota va en la clase
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/retro-padres-gamer.html`) | ✓ 14 slides |
+| HTML (`studio/specials/retro-padres-gamer.html`) | ✓ 14 slides |
 | JSON TarroBot | ✓ 10 fichas |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
@@ -94,5 +94,5 @@ El HTML usa placeholders `tv-noscreen` + `cart-fallback`. La nota va en la clase
 
 **Ultima actualizacion:** 2026-06-07
 **Slug:** `retro-padres-gamer`
-**HTML:** `studio/retro-padres-gamer.html`
+**HTML:** `studio/specials/retro-padres-gamer.html`
 **Discusion:** `docs/discusion-retro-padres-gamer.md`

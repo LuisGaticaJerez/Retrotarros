@@ -66,4 +66,4 @@ Resultado: la saga clasica 1-11 esta 100% cubierta en fisico. Es honesto contarl
 
 **Ultima actualizacion:** 2026-06-08
 **Pauta asociada:** `docs/pauta-saga-mega-man.md`
-**HTML:** `studio/saga-mega-man.html`
+**HTML:** `studio/sagas/saga-mega-man.html`

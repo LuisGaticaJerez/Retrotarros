@@ -22,7 +22,7 @@ Cobertura brutal: **10 de los 11** en la coleccion (solo falta MK1 reboot de 202
 
 ## Concepto del episodio — LINEA DE TIEMPO + ZOOM + GAMEPLAY
 
-HTML (`studio/saga-mortal-kombat.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (definitivas + spinoffs + rivalidad SF) → balance → cierre.
+HTML (`studio/sagas/saga-mortal-kombat.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (definitivas + spinoffs + rivalidad SF) → balance → cierre.
 
 **Duracion objetivo:** 22-28 minutos. Mecanica identica a saga-zelda.
 
@@ -82,7 +82,7 @@ HTML (`studio/saga-mortal-kombat.html`): portada → linea de tiempo completa �
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/saga-mortal-kombat.html`) | ✓ + box art |
+| HTML (`studio/sagas/saga-mortal-kombat.html`) | ✓ + box art |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
 | Gameplay + fisicos | ☐ Pendiente |
@@ -91,5 +91,5 @@ HTML (`studio/saga-mortal-kombat.html`): portada → linea de tiempo completa �
 
 **Ultima actualizacion:** 2026-06-08
 **Slug:** `saga-mortal-kombat`
-**HTML:** `studio/saga-mortal-kombat.html`
+**HTML:** `studio/sagas/saga-mortal-kombat.html`
 **Discusion:** `docs/discusion-saga-mortal-kombat.md`

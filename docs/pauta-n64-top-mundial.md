@@ -22,7 +22,7 @@ Esta pauta cubre la **primera parte** del duelo ranking N64. Es un episodio sobr
 
 ## Concepto del episodio
 
-Formato de presentación visual con HTML del estudio (`studio/n64-top-mundial.html`):
+Formato de presentación visual con HTML del estudio (`studio/rankings/top-mundial/n64-top-mundial.html`):
 
 - 14 slides navegables del 01 al 14.
 - Portada con tag "PARTE 1 DE 2" para anclar la audiencia en la serie.
@@ -124,7 +124,7 @@ Plano cerrado de un cartucho N64 sobre la mesa. Luis a cámara: *"Estos son los 
 
 ## Checklist antes de grabar
 
-- [ ] Luis abre `studio/n64-top-mundial.html` en Chrome pantalla completa. Probar navegación con flechas.
+- [ ] Luis abre `studio/rankings/top-mundial/n64-top-mundial.html` en Chrome pantalla completa. Probar navegación con flechas.
 - [ ] Memorizar la frase de cierre con transición al episodio de precios.
 - [ ] Koko prepara opinión personal sobre los 10 juegos. Si no jugó alguno, decir por qué.
 - [ ] Cartuchos físicos a la vista en mesa.

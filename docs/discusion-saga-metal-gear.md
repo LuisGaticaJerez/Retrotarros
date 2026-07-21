@@ -67,4 +67,4 @@ La HD Collection (PS Vita) es la llave que nos da 3 entradas de golpe. Bonus own
 
 **Ultima actualizacion:** 2026-06-08
 **Pauta asociada:** `docs/pauta-saga-metal-gear.md`
-**HTML:** `studio/saga-metal-gear.html`
+**HTML:** `studio/sagas/saga-metal-gear.html`

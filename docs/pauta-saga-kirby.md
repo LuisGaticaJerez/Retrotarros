@@ -22,7 +22,7 @@ Cobertura: **5 de 11** en la coleccion, incluido el clasico **Kirby's Adventure 
 
 ## Concepto del episodio — LINEA DE TIEMPO + ZOOM + GAMEPLAY
 
-HTML (`studio/saga-kirby.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (spinoffs + Sakurai) → balance → cierre.
+HTML (`studio/sagas/saga-kirby.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (spinoffs + Sakurai) → balance → cierre.
 
 **Duracion objetivo:** 22-28 minutos. Mecanica identica a saga-zelda.
 
@@ -81,7 +81,7 @@ HTML (`studio/saga-kirby.html`): portada → linea de tiempo completa → por ca
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/saga-kirby.html`) | ✓ + box art |
+| HTML (`studio/sagas/saga-kirby.html`) | ✓ + box art |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
 | Gameplay + fisicos | ☐ Pendiente |
@@ -90,5 +90,5 @@ HTML (`studio/saga-kirby.html`): portada → linea de tiempo completa → por ca
 
 **Ultima actualizacion:** 2026-06-08
 **Slug:** `saga-kirby`
-**HTML:** `studio/saga-kirby.html`
+**HTML:** `studio/sagas/saga-kirby.html`
 **Discusion:** `docs/discusion-saga-kirby.md`

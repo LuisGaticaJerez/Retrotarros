@@ -3,7 +3,7 @@
 > Documento conversacional para revisar antes de grabar. **Tiempo estimado: 30-40 min.**
 >
 > Doc operativo: [`docs/pauta-n64-nintendo-vs-playstation.md`](pauta-n64-nintendo-vs-playstation.md).
-> Monitor de estudio: [`studio/n64-nintendo-vs-playstation.html`](../studio/n64-nintendo-vs-playstation.html).
+> Monitor de estudio: [`studio/curaduria-n64/n64-nintendo-vs-playstation.html`](../studio/curaduria-n64/n64-nintendo-vs-playstation.html).
 
 ---
 
@@ -47,7 +47,7 @@ Este episodio polariza. Tres opciones:
 ## 3. Lo que tiene que llegar listo
 
 ### Luis (antes de grabar)
-- [ ] HTML `studio/n64-nintendo-vs-playstation.html` abierto en Chrome.
+- [ ] HTML `studio/curaduria-n64/n64-nintendo-vs-playstation.html` abierto en Chrome.
 - [ ] Memorizar las 10 anclas (datos duros — son el corazón del episodio).
 - [ ] Verificar números actualizados de VGChartz para PS1 y N64 lifetime sales (mayo 2026).
 - [ ] Frase fija de cierre memorizada palabra por palabra.

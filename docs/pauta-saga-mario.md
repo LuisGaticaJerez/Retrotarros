@@ -22,7 +22,7 @@ Cobertura brutal: **15 de los 16** en la coleccion (solo falta Galaxy 2), de NES
 
 ## Concepto del episodio — LINEA DE TIEMPO + ZOOM + GAMEPLAY
 
-HTML (`studio/saga-mario.html`): 37 slides. Portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (compilaciones) → balance → cierre.
+HTML (`studio/sagas/saga-mario.html`): 37 slides. Portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (compilaciones) → balance → cierre.
 
 **Duracion objetivo:** 24-30 minutos. Mecanica identica a saga-zelda.
 
@@ -86,7 +86,7 @@ HTML (`studio/saga-mario.html`): 37 slides. Portada → linea de tiempo completa
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/saga-mario.html`) | ✓ 37 slides + box art |
+| HTML (`studio/sagas/saga-mario.html`) | ✓ 37 slides + box art |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
 | Gameplay + fisicos | ☐ Pendiente |
@@ -95,5 +95,5 @@ HTML (`studio/saga-mario.html`): 37 slides. Portada → linea de tiempo completa
 
 **Ultima actualizacion:** 2026-06-07
 **Slug:** `saga-mario`
-**HTML:** `studio/saga-mario.html`
+**HTML:** `studio/sagas/saga-mario.html`
 **Discusion:** `docs/discusion-saga-mario.md`

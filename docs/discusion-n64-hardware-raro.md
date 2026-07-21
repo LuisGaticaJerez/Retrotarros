@@ -3,7 +3,7 @@
 > Documento conversacional para revisar con Koko antes de grabar. **Tiempo estimado de reunión: 20–30 min.**
 >
 > Doc operativo: [`docs/pauta-n64-hardware-raro.md`](pauta-n64-hardware-raro.md).
-> Monitor de estudio: [`studio/n64-hardware-raro.html`](../studio/n64-hardware-raro.html).
+> Monitor de estudio: [`studio/curaduria-n64/n64-hardware-raro.html`](../studio/curaduria-n64/n64-hardware-raro.html).
 
 ---
 
@@ -26,7 +26,7 @@
 ## 2. Lo que tiene que llegar listo
 
 ### Luis (antes de prender cámaras)
-- [ ] HTML del estudio (`studio/n64-hardware-raro.html`) abierto en Chrome pantalla completa.
+- [ ] HTML del estudio (`studio/curaduria-n64/n64-hardware-raro.html`) abierto en Chrome pantalla completa.
 - [ ] Memorizar las 4 anclas de cámara (4 frases gancho — ver más abajo).
 - [ ] Cronómetro visible.
 - [ ] Si conseguimos fotos reales de algún ítem, subirlas a `studio/img/n64-hardware-raro/` antes de empezar.

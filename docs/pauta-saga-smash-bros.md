@@ -22,7 +22,7 @@ Cobertura PERFECTA: **5 de 5, la saga COMPLETA** en la coleccion, de la N64 a la
 
 ## Concepto del episodio — LINEA DE TIEMPO + ZOOM + GAMEPLAY
 
-HTML (`studio/saga-smash-bros.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (Sakurai + Pro Controller + legado esport) → balance → cierre.
+HTML (`studio/sagas/saga-smash-bros.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (Sakurai + Pro Controller + legado esport) → balance → cierre.
 
 **Duracion objetivo:** 18-24 minutos. Mecanica identica a saga-zelda.
 
@@ -75,7 +75,7 @@ HTML (`studio/saga-smash-bros.html`): portada → linea de tiempo completa → p
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/saga-smash-bros.html`) | ✓ + box art |
+| HTML (`studio/sagas/saga-smash-bros.html`) | ✓ + box art |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
 | Gameplay + fisicos | ☐ Pendiente |
@@ -84,5 +84,5 @@ HTML (`studio/saga-smash-bros.html`): portada → linea de tiempo completa → p
 
 **Ultima actualizacion:** 2026-06-08
 **Slug:** `saga-smash-bros`
-**HTML:** `studio/saga-smash-bros.html`
+**HTML:** `studio/sagas/saga-smash-bros.html`
 **Discusion:** `docs/discusion-saga-smash-bros.md`

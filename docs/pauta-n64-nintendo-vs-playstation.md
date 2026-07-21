@@ -250,7 +250,7 @@ Plano lateral: una N64 al lado de una PS1 sobre la mesa. Luis a cámara: *"El de
 
 ## Checklist antes de grabar
 
-- [ ] Luis abre `studio/n64-nintendo-vs-playstation.html` en Chrome.
+- [ ] Luis abre `studio/curaduria-n64/n64-nintendo-vs-playstation.html` en Chrome.
 - [ ] Memorizar las 10 anclas (un dato por slide).
 - [ ] Verificar números actualizados: VGChartz lifetime PS1 y N64 (mayo 2026).
 - [ ] Una PS1 prestada en la mesa si es posible (para B-roll del contraste). Si no, foto de PS1 al lado de N64 de Koko.

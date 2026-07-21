@@ -78,4 +78,4 @@ A diferencia del top precios (que tiene cifras objetivas), aca hay subjetividad.
 
 **Ultima actualizacion:** 2026-06-07
 **Pauta asociada:** `docs/pauta-nes-top-mundial.md`
-**HTML:** `studio/nes-top-mundial.html`
+**HTML:** `studio/rankings/top-mundial/nes-top-mundial.html`

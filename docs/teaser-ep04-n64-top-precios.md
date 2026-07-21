@@ -2,7 +2,7 @@
 
 > Short vertical 9:16 · 30s · YouTube Shorts / Reels / TikTok
 >
-> Asset HTML: `studio/teaser-n64-top-precios.html`
+> Asset HTML: `studio/teasers/teaser-n64-top-precios.html`
 > Capturas: `studio/captures/teaser-n64-top-precios/` (6 PNGs 1080x1920) + mirror en Drive.
 
 ## Concepto

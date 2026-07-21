@@ -1,7 +1,7 @@
 # Pauta — Mega Drive Top Precios
 
 > Episodio: Los Mega Drive mas caros (retail CIB + joyas + santo grial)
-> HTML: `studio/mega-drive-top-precios.html`
+> HTML: `studio/rankings/top-precios/mega-drive-top-precios.html`
 > Formato: ranking hibrido por precio CIB · 17 slides
 
 ## Gancho / Cold open

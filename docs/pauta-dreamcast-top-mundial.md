@@ -1,7 +1,7 @@
 # Pauta — Dreamcast Top Mundial
 
 > Episodio: Los 10 mejores juegos de Sega Dreamcast
-> HTML: `studio/dreamcast-top-mundial.html`
+> HTML: `studio/rankings/top-mundial/dreamcast-top-mundial.html`
 > Formato: ranking hibrido · 14 slides
 
 ## Gancho / Cold open

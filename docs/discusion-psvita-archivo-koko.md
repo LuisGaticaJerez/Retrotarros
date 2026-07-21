@@ -3,7 +3,7 @@
 > Documento conversacional. **Tiempo estimado: 25 min.**
 >
 > Doc operativo: [`docs/pauta-psvita-archivo-koko.md`](pauta-psvita-archivo-koko.md).
-> Monitor estudio: [`studio/psvita-archivo-koko.html`](../studio/psvita-archivo-koko.html).
+> Monitor estudio: [`studio/archivo-koko/psvita-archivo-koko.html`](../studio/archivo-koko/psvita-archivo-koko.html).
 
 ---
 
@@ -26,7 +26,7 @@
 ## 2. Preparación
 
 ### Luis
-- [ ] HTML `studio/psvita-archivo-koko.html` abierto en Chrome.
+- [ ] HTML `studio/archivo-koko/psvita-archivo-koko.html` abierto en Chrome.
 - [ ] Memorizar las 8 anclas + frase fija de cierre.
 - [ ] Confirmar precios actualizados del top 8 (CSV mayo 2026).
 

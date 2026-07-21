@@ -3,7 +3,7 @@
 > Documento conversacional para revisar con Koko antes de grabar. **Tiempo estimado de reunión: 30-40 min.**
 >
 > Doc operativo: [`docs/pauta-n64-joyas-ocultas.md`](pauta-n64-joyas-ocultas.md).
-> Monitor de estudio: [`studio/n64-joyas-ocultas.html`](../studio/n64-joyas-ocultas.html).
+> Monitor de estudio: [`studio/curaduria-n64/n64-joyas-ocultas.html`](../studio/curaduria-n64/n64-joyas-ocultas.html).
 
 ---
 

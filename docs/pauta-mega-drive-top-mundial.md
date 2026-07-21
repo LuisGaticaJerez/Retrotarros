@@ -1,7 +1,7 @@
 # Pauta — Mega Drive Top Mundial
 
 > Episodio: Los 10 mejores juegos de Sega Mega Drive / Genesis
-> HTML: `studio/mega-drive-top-mundial.html`
+> HTML: `studio/rankings/top-mundial/mega-drive-top-mundial.html`
 > Formato: ranking hibrido (cartucho + TarroVision) · 14 slides
 
 ## Gancho / Cold open

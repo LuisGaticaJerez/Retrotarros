@@ -1,7 +1,7 @@
 # Pauta — Saturn Top Precios
 
 > Episodio: Los Saturn mas caros (retail CIB + santo grial). CIERRA la saga Sega.
-> HTML: `studio/saturn-top-precios.html`
+> HTML: `studio/rankings/top-precios/saturn-top-precios.html`
 > Formato: ranking hibrido por precio CIB · 15 slides
 
 ## Gancho / Cold open

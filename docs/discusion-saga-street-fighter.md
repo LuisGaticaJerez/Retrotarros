@@ -71,4 +71,4 @@ Sin la 30th, faltarian SF1 y SFIII; con ella, la coleccion queda en 6 de 7. Hay 
 
 **Ultima actualizacion:** 2026-06-08
 **Pauta asociada:** `docs/pauta-saga-street-fighter.md`
-**HTML:** `studio/saga-street-fighter.html`
+**HTML:** `studio/sagas/saga-street-fighter.html`

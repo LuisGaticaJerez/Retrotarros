@@ -1,7 +1,7 @@
 # Pauta — Master System Top Mundial
 
 > Episodio: Los 10 mejores juegos de Sega Master System
-> HTML: `studio/master-system-top-mundial.html`
+> HTML: `studio/rankings/top-mundial/master-system-top-mundial.html`
 > Formato: ranking hibrido (cartucho + TarroVision) · 14 slides
 
 ## Gancho / Cold open

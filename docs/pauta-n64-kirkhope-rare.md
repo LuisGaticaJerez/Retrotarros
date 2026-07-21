@@ -200,7 +200,7 @@ Plano cerrado del DK Rap sonando + cartuchos de Rare cayendo a la mesa. Luis a c
 
 ## Checklist antes de grabar
 
-- [ ] Luis abre `studio/n64-kirkhope-rare.html` en Chrome pantalla completa.
+- [ ] Luis abre `studio/curaduria-n64/n64-kirkhope-rare.html` en Chrome pantalla completa.
 - [ ] Memorizar las 10 anclas (un dato por slide).
 - [ ] Memorizar la frase fija de cierre.
 - [ ] Tener el DK Rap listo para reproducir en cold open + en slide 06.

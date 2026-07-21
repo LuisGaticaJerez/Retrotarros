@@ -66,4 +66,4 @@ Bonus owned (rico): Revelations (3DS CIB + Wii U CIB + Revelations Collection Sw
 
 **Ultima actualizacion:** 2026-06-08
 **Pauta asociada:** `docs/pauta-saga-resident-evil.md`
-**HTML:** `studio/saga-resident-evil.html`
+**HTML:** `studio/sagas/saga-resident-evil.html`

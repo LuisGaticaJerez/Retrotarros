@@ -102,4 +102,4 @@ OJO: este top es de mercado MUNDIAL, no de la coleccion de Luis (`data/coleccion
 
 **Ultima actualizacion:** 2026-06-07
 **Pauta asociada:** `docs/pauta-nes-top-precios.md`
-**HTML:** `studio/nes-top-precios.html`
+**HTML:** `studio/rankings/top-precios/nes-top-precios.html`

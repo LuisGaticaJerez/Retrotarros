@@ -3,7 +3,7 @@
 > Documento conversacional para revisar con Koko antes de grabar/editar. **Tiempo estimado: 20-25 min.**
 >
 > Doc operativo completo: [`docs/pauta-n64-top-precios.md`](pauta-n64-top-precios.md).
-> Monitor de estudio: [`studio/n64-top-precios.html`](../studio/n64-top-precios.html).
+> Monitor de estudio: [`studio/rankings/top-precios/n64-top-precios.html`](../studio/rankings/top-precios/n64-top-precios.html).
 
 ---
 
@@ -51,7 +51,7 @@ La pauta tiene una frase escrita palabra por palabra. **Recomendación: re-graba
 ## 3. Lo que tiene que llegar listo
 
 ### Luis
-- [ ] HTML `studio/n64-top-precios.html` abierto en Chrome.
+- [ ] HTML `studio/rankings/top-precios/n64-top-precios.html` abierto en Chrome.
 - [ ] Material grabado del episodio doble — identificado el bloque de precios.
 - [ ] Memorizar palabra por palabra la frase de cierre + frase de transición a NFR.
 - [ ] Miniatura YouTube específica para Parte 2 (ClayFighter al frente con "$4.800" gigante + "PARTE 2" arriba).

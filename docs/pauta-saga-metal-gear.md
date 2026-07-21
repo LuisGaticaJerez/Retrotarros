@@ -22,7 +22,7 @@ Cobertura: **4 de 8**, la columna vertebral de Solid Snake — MGS1 (PS1) + MGS2
 
 ## Concepto del episodio — LINEA DE TIEMPO + ZOOM + GAMEPLAY
 
-HTML (`studio/saga-metal-gear.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (HD Collection + spinoffs + Kojima) → balance → cierre.
+HTML (`studio/sagas/saga-metal-gear.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (HD Collection + spinoffs + Kojima) → balance → cierre.
 
 **Duracion objetivo:** 22-28 minutos. Mecanica identica a saga-zelda.
 
@@ -78,7 +78,7 @@ HTML (`studio/saga-metal-gear.html`): portada → linea de tiempo completa → p
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/saga-metal-gear.html`) | ✓ + box art |
+| HTML (`studio/sagas/saga-metal-gear.html`) | ✓ + box art |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
 | Gameplay + fisicos | ☐ Pendiente |
@@ -87,5 +87,5 @@ HTML (`studio/saga-metal-gear.html`): portada → linea de tiempo completa → p
 
 **Ultima actualizacion:** 2026-06-08
 **Slug:** `saga-metal-gear`
-**HTML:** `studio/saga-metal-gear.html`
+**HTML:** `studio/sagas/saga-metal-gear.html`
 **Discusion:** `docs/discusion-saga-metal-gear.md`

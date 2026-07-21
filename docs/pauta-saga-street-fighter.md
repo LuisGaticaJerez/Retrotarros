@@ -22,7 +22,7 @@ Cobertura casi total: **6 de los 7** en la coleccion (solo falta SF6). Detalle c
 
 ## Concepto del episodio — LINEA DE TIEMPO + ZOOM + GAMEPLAY
 
-HTML (`studio/saga-street-fighter.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (30th Collection + crossover + rivalidad MK) → balance → cierre.
+HTML (`studio/sagas/saga-street-fighter.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (30th Collection + crossover + rivalidad MK) → balance → cierre.
 
 **Duracion objetivo:** 18-24 minutos. Mecanica identica a saga-zelda.
 
@@ -78,7 +78,7 @@ HTML (`studio/saga-street-fighter.html`): portada → linea de tiempo completa �
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/saga-street-fighter.html`) | ✓ + box art |
+| HTML (`studio/sagas/saga-street-fighter.html`) | ✓ + box art |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
 | Gameplay + fisicos | ☐ Pendiente |
@@ -87,5 +87,5 @@ HTML (`studio/saga-street-fighter.html`): portada → linea de tiempo completa �
 
 **Ultima actualizacion:** 2026-06-08
 **Slug:** `saga-street-fighter`
-**HTML:** `studio/saga-street-fighter.html`
+**HTML:** `studio/sagas/saga-street-fighter.html`
 **Discusion:** `docs/discusion-saga-street-fighter.md`

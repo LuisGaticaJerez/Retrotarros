@@ -68,4 +68,4 @@ Los 6 que faltan (Zelda II, Oracle, Minish Cap, Spirit Tracks, Skyward Sword, A 
 
 **Ultima actualizacion:** 2026-06-07
 **Pauta asociada:** `docs/pauta-saga-zelda.md`
-**HTML:** `studio/saga-zelda.html`
+**HTML:** `studio/sagas/saga-zelda.html`

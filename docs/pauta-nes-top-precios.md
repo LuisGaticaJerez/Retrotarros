@@ -34,7 +34,7 @@ Precios **actualizados a 2026** (PriceCharting / GameValueNow / Den of Geek). Si
 
 ## Concepto del episodio
 
-Formato presentacion visual con HTML del estudio (`studio/nes-top-precios.html`):
+Formato presentacion visual con HTML del estudio (`studio/rankings/top-precios/nes-top-precios.html`):
 
 - 22 slides navegables del 01 al 22.
 - Portada con tag "TOP 10 · PRECIOS · CARTUCHOS QUE ROMPEN BILLETERAS".
@@ -157,7 +157,7 @@ El HTML funciona con placeholders `tv-noscreen` + etiqueta de color por juego.
 
 | Item | Estado |
 |------|--------|
-| HTML estudio (`studio/nes-top-precios.html`) | ✓ Cerrado (22 slides: 10 retail + 6 rarezas + grial SMB sellado) |
+| HTML estudio (`studio/rankings/top-precios/nes-top-precios.html`) | ✓ Cerrado (22 slides: 10 retail + 6 rarezas + grial SMB sellado) |
 | JSON TarroBot (`studio/pautas/nes-top-precios.tarrobot.json`) | ✓ 10 datos #10→#1 + precio_short |
 | Box art / fotos | ☐ Pendiente |
 | Pauta MD (este archivo) | ✓ |
@@ -167,5 +167,5 @@ El HTML funciona con placeholders `tv-noscreen` + etiqueta de color por juego.
 
 **Ultima actualizacion:** 2026-06-07
 **Slug:** `nes-top-precios`
-**HTML asociado:** `studio/nes-top-precios.html`
+**HTML asociado:** `studio/rankings/top-precios/nes-top-precios.html`
 **Discusion:** `docs/discusion-nes-top-precios.md`

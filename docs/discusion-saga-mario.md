@@ -64,4 +64,4 @@ Cruzamos el CSV (27 Marios). Marcamos owned los mainline en cualquier forma:
 
 **Ultima actualizacion:** 2026-06-07
 **Pauta asociada:** `docs/pauta-saga-mario.md`
-**HTML:** `studio/saga-mario.html`
+**HTML:** `studio/sagas/saga-mario.html`

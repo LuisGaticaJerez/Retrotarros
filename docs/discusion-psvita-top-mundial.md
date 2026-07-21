@@ -3,7 +3,7 @@
 > Documento conversacional. **Tiempo estimado: 20 min.**
 >
 > Doc operativo: [`docs/pauta-psvita-top-mundial.md`](pauta-psvita-top-mundial.md).
-> Monitor: [`studio/psvita-top-mundial.html`](../studio/psvita-top-mundial.html).
+> Monitor: [`studio/rankings/top-mundial/psvita-top-mundial.html`](../studio/rankings/top-mundial/psvita-top-mundial.html).
 
 ---
 

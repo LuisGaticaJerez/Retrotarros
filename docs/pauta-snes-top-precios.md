@@ -20,7 +20,7 @@ Es la **contraparte de `snes-top-mundial`**: alli vimos el ranking de calidad/cr
 
 ## Concepto del episodio
 
-Formato presentacion visual con HTML del estudio (`studio/snes-top-precios.html`):
+Formato presentacion visual con HTML del estudio (`studio/rankings/top-precios/snes-top-precios.html`):
 
 - 16 slides navegables del 01 al 16.
 - Portada con tag "TOP 10 · MAS CAROS · CIB MUNDIAL"
@@ -166,7 +166,7 @@ Ya generados en `studio/pautas/audio/snes-top-precios/`:
 
 | Item | Estado |
 |------|--------|
-| HTML estudio (`studio/snes-top-precios.html`) | ✓ Cerrado para grabar (16 slides) |
+| HTML estudio (`studio/rankings/top-precios/snes-top-precios.html`) | ✓ Cerrado para grabar (16 slides) |
 | Pauta JSON TarroBot (`studio/pautas/snes-top-precios.tarrobot.json`) | ✓ Con 10 MP3s pre-generados |
 | Capturas (`studio/captures/snes-top-precios/`) | ✓ 16 PNGs |
 | Pauta MD (este archivo) | ✓ |
@@ -187,5 +187,5 @@ Ya generados en `studio/pautas/audio/snes-top-precios/`:
 
 **Ultima actualizacion:** 2026-05-24
 **Slug:** `snes-top-precios`
-**HTML asociado:** `studio/snes-top-precios.html`
+**HTML asociado:** `studio/rankings/top-precios/snes-top-precios.html`
 **Discusion:** `docs/discusion-snes-top-precios.md`

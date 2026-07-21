@@ -24,7 +24,7 @@ Zelda es el piloto ideal: tenemos **10 de los 16** juegos de la linea principal,
 
 ## Concepto del episodio — LINEA DE TIEMPO + ZOOM
 
-HTML (`studio/saga-zelda.html`): 21 slides, generado con `scripts/saga_deck.py`. Mecanica visual (idea de Luis):
+HTML (`studio/sagas/saga-zelda.html`): 21 slides, generado con `scripts/saga_deck.py`. Mecanica visual (idea de Luis):
 
 1. **Slide LINEA DE TIEMPO COMPLETA** (slide 02): se muestra la saga entera de 1986 a 2023 como una cinta horizontal con todos los juegos (box mini + año + consola + sello EN COLECCION/FALTA). "Casi 40 años de Hyrule" de un vistazo.
 2. **DOS slides por juego:**
@@ -98,7 +98,7 @@ HTML (`studio/saga-zelda.html`): 21 slides, generado con `scripts/saga_deck.py`.
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/saga-zelda.html`) | ✓ 20 slides + box art |
+| HTML (`studio/sagas/saga-zelda.html`) | ✓ 20 slides + box art |
 | JSON TarroBot | ✓ 16 juegos |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
@@ -108,5 +108,5 @@ HTML (`studio/saga-zelda.html`): 21 slides, generado con `scripts/saga_deck.py`.
 
 **Ultima actualizacion:** 2026-06-07
 **Slug:** `saga-zelda`
-**HTML:** `studio/saga-zelda.html`
+**HTML:** `studio/sagas/saga-zelda.html`
 **Discusion:** `docs/discusion-saga-zelda.md`

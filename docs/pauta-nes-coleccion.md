@@ -27,7 +27,7 @@ Es el tercer episodio "panorama" del canal (despues de SNES y N64). Sirve como:
 
 ## Concepto del episodio
 
-Formato de presentacion visual con HTML del estudio (`studio/nes-coleccion.html`):
+Formato de presentacion visual con HTML del estudio (`studio/colecciones/nes-coleccion.html`):
 
 - 17 slides navegables del 01 al 17.
 - Portada → menu consola tipo "PRESS START" con 6 categorias → recorrido secuencial.
@@ -166,7 +166,7 @@ Las TarroVisiones tienen placeholders `tv-noscreen` que se reemplazan por los vi
 
 | Item | Estado |
 |------|--------|
-| HTML estudio (`studio/nes-coleccion.html`) | ✓ Cerrado para grabar (17 slides) |
+| HTML estudio (`studio/colecciones/nes-coleccion.html`) | ✓ Cerrado para grabar (17 slides) |
 | Paneos de camara grabados | ☐ Pendiente |
 | Clips de gameplay (18) | ☐ Pendiente |
 | Material hardware (Zapper, Action Set, Classic) | ☐ Pendiente |
@@ -186,5 +186,5 @@ Las TarroVisiones tienen placeholders `tv-noscreen` que se reemplazan por los vi
 
 **Ultima actualizacion:** 2026-06-07
 **Slug:** `nes-coleccion`
-**HTML asociado:** `studio/nes-coleccion.html`
+**HTML asociado:** `studio/colecciones/nes-coleccion.html`
 **Discusion:** `docs/discusion-nes-coleccion.md`

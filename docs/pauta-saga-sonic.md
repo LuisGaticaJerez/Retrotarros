@@ -22,7 +22,7 @@ Coleccion fuerte en la era moderna: **7 de 14** en fisico (casi todos de 2003 en
 
 ## Concepto del episodio — LINEA DE TIEMPO + ZOOM + GAMEPLAY
 
-HTML (`studio/saga-sonic.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (racing + Boom + legado) → balance → cierre.
+HTML (`studio/sagas/saga-sonic.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (racing + Boom + legado) → balance → cierre.
 
 **Duracion objetivo:** 24-30 minutos. Mecanica identica a saga-zelda.
 
@@ -84,7 +84,7 @@ HTML (`studio/saga-sonic.html`): portada → linea de tiempo completa → por ca
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/saga-sonic.html`) | ✓ + box art |
+| HTML (`studio/sagas/saga-sonic.html`) | ✓ + box art |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
 | Gameplay + fisicos | ☐ Pendiente |
@@ -93,5 +93,5 @@ HTML (`studio/saga-sonic.html`): portada → linea de tiempo completa → por ca
 
 **Ultima actualizacion:** 2026-06-08
 **Slug:** `saga-sonic`
-**HTML:** `studio/saga-sonic.html`
+**HTML:** `studio/sagas/saga-sonic.html`
 **Discusion:** `docs/discusion-saga-sonic.md`

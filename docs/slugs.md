@@ -11,7 +11,7 @@ Para el episodio con slug `n64-top-mundial`, los archivos asociados son:
 ```
 docs/pauta-n64-top-mundial.md          ← pauta operativa (Claude)
 docs/discusion-n64-top-mundial.md      ← reunión previa (Luis + Koko)
-studio/n64-top-mundial.html            ← monitor visual del estudio
+studio/rankings/top-mundial/n64-top-mundial.html            ← monitor visual del estudio
 studio/img/n64-top-mundial/            ← box arts del episodio
 G:\Mi unidad\Studio\n64-top-mundial\   ← versión en Drive (HTML + img)
 G:\Mi unidad\Studio\pautas\pauta-n64-top-mundial.docx  ← DOCX para imprimir/leer

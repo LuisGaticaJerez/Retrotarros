@@ -1,7 +1,7 @@
 # Pauta — Dreamcast Top Precios
 
 > Episodio: Los Dreamcast mas caros (retail CIB + santo grial)
-> HTML: `studio/dreamcast-top-precios.html`
+> HTML: `studio/rankings/top-precios/dreamcast-top-precios.html`
 > Formato: ranking hibrido por precio CIB · 16 slides
 
 ## Gancho / Cold open

@@ -1,7 +1,7 @@
 # Pauta — Master System Top Precios
 
 > Episodio: Los 10 cartuchos mas caros de Sega Master System (retail CIB)
-> HTML: `studio/master-system-top-precios.html`
+> HTML: `studio/rankings/top-precios/master-system-top-precios.html`
 > Formato: ranking hibrido por precio CIB · 14 slides · #1 = Santo Grial
 
 ## Gancho / Cold open

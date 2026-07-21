@@ -24,7 +24,7 @@ Es un especial de **temporada** (invierno chileno, junio-agosto), no de fecha ex
 
 ## Concepto del episodio
 
-HTML del estudio (`studio/retro-cuadrilla-frio.html`): 14 slides. Portada → intro (el gremio) → 10 fichas (personaje + puesto + foja + TarroVision para gameplay) → balance del gremio → cierre con Koko.
+HTML del estudio (`studio/specials/retro-cuadrilla-frio.html`): 14 slides. Portada → intro (el gremio) → 10 fichas (personaje + puesto + foja + TarroVision para gameplay) → balance del gremio → cierre con Koko.
 
 **Duracion objetivo:** 12-16 minutos (mas agil que un episodio largo).
 
@@ -91,7 +91,7 @@ El HTML usa placeholders `tv-noscreen` + `cart-fallback`.
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/retro-cuadrilla-frio.html`) | ✓ 14 slides |
+| HTML (`studio/specials/retro-cuadrilla-frio.html`) | ✓ 14 slides |
 | JSON TarroBot | ✓ 10 fichas |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
@@ -101,5 +101,5 @@ El HTML usa placeholders `tv-noscreen` + `cart-fallback`.
 
 **Ultima actualizacion:** 2026-06-07
 **Slug:** `retro-cuadrilla-frio`
-**HTML:** `studio/retro-cuadrilla-frio.html`
+**HTML:** `studio/specials/retro-cuadrilla-frio.html`
 **Discusion:** `docs/discusion-retro-cuadrilla-frio.md`

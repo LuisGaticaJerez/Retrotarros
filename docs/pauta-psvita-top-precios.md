@@ -8,7 +8,7 @@
 
 Documento de trabajo · Luis Balbrigame & Koko
 
-> **Sincronizado con `studio/psvita-top-precios.html` (formato TarroVisión).** Los
+> **Sincronizado con `studio/rankings/top-precios/psvita-top-precios.html` (formato TarroVisión).** Los
 > precios y el ranking de esta pauta reflejan EXACTAMENTE lo que muestra el HTML.
 > Si tocas uno, toca el otro. Valores CIB aproximados, PriceCharting 2026.
 
@@ -169,5 +169,5 @@ Plano cerrado de un cartucho Vita caro (Persona 4 Golden Solid Gold o Muramasa).
 
 **Última actualización:** 2026-06-14 (sincronizada con el HTML)
 **Slug:** `psvita-top-precios`
-**HTML asociado:** `studio/psvita-top-precios.html`
+**HTML asociado:** `studio/rankings/top-precios/psvita-top-precios.html`
 **Discusión:** `docs/discusion-psvita-top-precios.md`

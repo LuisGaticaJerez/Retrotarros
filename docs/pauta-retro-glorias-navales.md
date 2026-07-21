@@ -22,7 +22,7 @@ Es el primer especial de fecha conmemorativa del canal. Si funciona, se replica 
 
 ## Concepto del episodio
 
-Formato presentacion visual con HTML del estudio (`studio/retro-glorias-navales.html`):
+Formato presentacion visual con HTML del estudio (`studio/specials/retro-glorias-navales.html`):
 
 - 14 slides navegables del 01 al 14.
 - Portada "Top 10 Glorias Navales Retro" con paleta canal.
@@ -156,7 +156,7 @@ Pendientes de generar al cargar la pauta JSON.
 
 | Item | Estado |
 |------|--------|
-| HTML estudio (`studio/retro-glorias-navales.html`) | ✓ Cerrado para grabar (14 slides) |
+| HTML estudio (`studio/specials/retro-glorias-navales.html`) | ✓ Cerrado para grabar (14 slides) |
 | Pauta JSON TarroBot (`studio/pautas/retro-glorias-navales.tarrobot.json`) | ✓ Opcional (textos pre-cargados) |
 | Capturas (`studio/captures/retro-glorias-navales/`) | ✓ 14 PNGs |
 | Imagenes (`studio/img/retro-glorias-navales/`) | ✓ |
@@ -179,5 +179,5 @@ Pendientes de generar al cargar la pauta JSON.
 
 **Ultima actualizacion:** 2026-05-24
 **Slug:** `retro-glorias-navales`
-**HTML asociado:** `studio/retro-glorias-navales.html`
+**HTML asociado:** `studio/specials/retro-glorias-navales.html`
 **Discusion:** `docs/discusion-retro-glorias-navales.md`

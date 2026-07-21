@@ -153,7 +153,7 @@ Las 10 box arts están en `studio/img/n64-joyas-ocultas/` (descargadas de Wikipe
 
 ## Checklist antes de grabar
 
-- [ ] Luis abre `studio/n64-joyas-ocultas.html` en Chrome pantalla completa.
+- [ ] Luis abre `studio/curaduria-n64/n64-joyas-ocultas.html` en Chrome pantalla completa.
 - [ ] Memorizar las 10 anclas (un dato por juego, máximo).
 - [ ] Memorizar la frase fija de cierre.
 - [ ] Koko prepara anécdota personal por cada joya: ¿la jugó? ¿la recuerda con cariño? ¿le rompe la cabeza ahora?

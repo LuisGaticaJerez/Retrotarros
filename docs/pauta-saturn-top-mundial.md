@@ -1,7 +1,7 @@
 # Pauta — Saturn Top Mundial
 
 > Episodio: Los 10 mejores juegos de Sega Saturn
-> HTML: `studio/saturn-top-mundial.html`
+> HTML: `studio/rankings/top-mundial/saturn-top-mundial.html`
 > Formato: ranking hibrido · 14 slides · CIERRA la saga Sega (mundial)
 
 ## Gancho / Cold open

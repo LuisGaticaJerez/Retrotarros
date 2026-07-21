@@ -22,7 +22,7 @@ Cierra con el kicker de los Not For Resale ($9.199 ClayFighter sealed, $8.500 Ma
 
 ## Concepto del episodio
 
-Formato de presentación visual con HTML del estudio (`studio/n64-top-precios.html`):
+Formato de presentación visual con HTML del estudio (`studio/rankings/top-precios/n64-top-precios.html`):
 
 - 17 slides navegables del 01 al 17.
 - Portada con tag "PARTE 2 DE 2" para anclar la continuidad.
@@ -163,7 +163,7 @@ Slide 16 con dos cards comparando #1 crítica (Ocarina $147) vs #1 mercado (Clay
 
 ## Checklist antes de grabar
 
-- [ ] Luis abre `studio/n64-top-precios.html` en Chrome pantalla completa.
+- [ ] Luis abre `studio/rankings/top-precios/n64-top-precios.html` en Chrome pantalla completa.
 - [ ] Memorizar las 3 anclas clave: ClayFighter $9,199 / Majora gris $8,500 / valor colección Koko US$1,470.
 - [ ] Koko **NO** debe saber los precios antes de cámara. Las reacciones genuinas son el oro.
 - [ ] Cartuchos físicos a la vista durante todo el episodio. El contraste "yo tengo esto que vale $100 vs aquel que vale $4,800" es visualmente fuerte.

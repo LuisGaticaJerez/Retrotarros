@@ -24,7 +24,7 @@ Es complemento natural del episodio de ranking de juegos: si el primero contó q
 
 Formato de presentación visual del coleccionismo retro de hardware:
 
-- Luis presenta los 18 ítems con el HTML del estudio (`studio/n64-hardware-raro.html`) como soporte visual en pantalla.
+- Luis presenta los 18 ítems con el HTML del estudio (`studio/curaduria-n64/n64-hardware-raro.html`) como soporte visual en pantalla.
 - Tres bloques con estética distinta: consolas (cyan), periféricos japoneses (magenta), accesorios estándar (amarillo). El cambio de paleta es deliberado — marca el cambio de tono.
 - Orden **del menos caro al más caro** dentro de cada bloque. Suspenso ascendente.
 - Koko reacciona a cada ítem desde su experiencia: qué conocía, qué no, qué le rompe la cabeza por primera vez.
@@ -166,7 +166,7 @@ Los shorts de batería del catálogo N64 se siguen guardando para el episodio es
 - Dos cámaras: una fija plano amplio (Luis y Koko) + una cámara móvil para closeups de cualquier accesorio físico que Koko muestre en Bloque 3.
 - Iluminación de tono frío (paleta synthwave).
 - Audio: lavalier para ambos.
-- Monitor secundario: HTML del estudio (`studio/n64-hardware-raro.html`) abierto en Chrome a pantalla completa.
+- Monitor secundario: HTML del estudio (`studio/curaduria-n64/n64-hardware-raro.html`) abierto en Chrome a pantalla completa.
 
 **Imágenes en los slides**
 
@@ -197,7 +197,7 @@ rumble-pak.jpg               transfer-pak.jpg    expansion-pak.jpg
 
 ## Checklist antes de grabar
 
-- [ ] Luis abre `studio/n64-hardware-raro.html` en Chrome pantalla completa. Probar flechas ← →.
+- [ ] Luis abre `studio/curaduria-n64/n64-hardware-raro.html` en Chrome pantalla completa. Probar flechas ← →.
 - [ ] Si tenemos fotos reales del hardware, subirlas a `studio/img/n64-hardware-raro/` con los nombres exactos (ver lista arriba).
 - [ ] Koko prepara su opinión sobre los 18 ítems — qué conocía, qué no, qué le rompe la cabeza por primera vez.
 - [ ] Si Koko tiene Rumble Pak / Controller Pak / Expansion Pak físicos → traerlos a la mesa.

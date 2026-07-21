@@ -67,4 +67,4 @@ No falta ninguna. Run perfecto.
 
 **Ultima actualizacion:** 2026-06-08
 **Pauta asociada:** `docs/pauta-saga-smash-bros.md`
-**HTML:** `studio/saga-smash-bros.html`
+**HTML:** `studio/sagas/saga-smash-bros.html`

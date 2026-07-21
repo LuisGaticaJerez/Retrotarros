@@ -3,7 +3,7 @@
 > Documento conversacional para revisar antes de **editar** el material grabado.
 >
 > Doc operativo: [`docs/pauta-n64-retrotarros-vs-mundo.md`](pauta-n64-retrotarros-vs-mundo.md).
-> Monitor de estudio: [`studio/n64-retrotarros-vs-mundo.html`](../studio/n64-retrotarros-vs-mundo.html).
+> Monitor de estudio: [`studio/rankings/retrotarros-vs-mundo/n64-retrotarros-vs-mundo.html`](../studio/rankings/retrotarros-vs-mundo/n64-retrotarros-vs-mundo.html).
 
 ---
 

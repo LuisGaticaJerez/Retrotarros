@@ -30,7 +30,7 @@ Sirve como:
 
 ## Concepto del episodio
 
-Formato de presentacion visual con HTML del estudio (`studio/n64-coleccion.html`):
+Formato de presentacion visual con HTML del estudio (`studio/colecciones/n64-coleccion.html`):
 
 - 21 slides navegables del 01 al 21.
 - Portada → menu consola tipo "PRESS START" con 8 categorias → recorrido secuencial.
@@ -188,7 +188,7 @@ Las TarroVisiones quedan VACIAS por convencion del canal (regla en `docs/handoff
 
 | Item | Estado |
 |------|--------|
-| HTML estudio (`studio/n64-coleccion.html`) | ✓ Cerrado para grabar (21 slides) |
+| HTML estudio (`studio/colecciones/n64-coleccion.html`) | ✓ Cerrado para grabar (21 slides) |
 | Paneos de camara grabados | ☐ Pendiente |
 | Clips de gameplay (24) | ☐ Pendiente |
 | Material consolas Funtastic | ☐ Pendiente |
@@ -210,5 +210,5 @@ Las TarroVisiones quedan VACIAS por convencion del canal (regla en `docs/handoff
 
 **Ultima actualizacion:** 2026-05-24
 **Slug:** `n64-coleccion`
-**HTML asociado:** `studio/n64-coleccion.html`
+**HTML asociado:** `studio/colecciones/n64-coleccion.html`
 **Discusion:** `docs/discusion-n64-coleccion.md`

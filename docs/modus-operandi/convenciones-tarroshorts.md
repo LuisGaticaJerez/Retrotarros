@@ -8,7 +8,7 @@
 
 Los TarroShorts fueron mejorando ronda a ronda, pero las mejoras vivían solo en el último HTML hecho y en la memoria de Claude. Resultado: al volver después de semanas, es fácil copiar un molde **viejo** sin darse cuenta (pasó el 2026-07-20 con el short de Mega Drive precios, que salió con el estilo viejo `rank-badge` y hubo que rehacerlo). Este doc fija el molde vigente para que no se pierda entre sesiones.
 
-**Referencias vivas del estilo correcto:** `studio/tarroshort-mas-caros-historia.html` y `studio/tarroshort-mejor-consola-retro.html` (junio 2026). Cuando dudes, mira esos dos, no un short más antiguo.
+**Referencias vivas del estilo correcto:** `studio/shorts-html/cross-console/tarroshort-mas-caros-historia.html` y `studio/shorts-html/cross-console/tarroshort-mejor-consola-retro.html` (junio 2026). Cuando dudes, mira esos dos, no un short más antiguo.
 
 ---
 

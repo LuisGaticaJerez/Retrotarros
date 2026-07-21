@@ -22,7 +22,7 @@ Cobertura brutal: **7 de los 8** en la coleccion (solo falta el arcade original 
 
 ## Concepto del episodio — LINEA DE TIEMPO + ZOOM + GAMEPLAY
 
-HTML (`studio/saga-donkey-kong.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (Returns 3D + Rare + spinoffs) → balance → cierre.
+HTML (`studio/sagas/saga-donkey-kong.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (Returns 3D + Rare + spinoffs) → balance → cierre.
 
 **Duracion objetivo:** 20-26 minutos. Mecanica identica a saga-zelda.
 
@@ -79,7 +79,7 @@ HTML (`studio/saga-donkey-kong.html`): portada → linea de tiempo completa → 
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/saga-donkey-kong.html`) | ✓ + box art |
+| HTML (`studio/sagas/saga-donkey-kong.html`) | ✓ + box art |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
 | Gameplay + fisicos | ☐ Pendiente |
@@ -88,5 +88,5 @@ HTML (`studio/saga-donkey-kong.html`): portada → linea de tiempo completa → 
 
 **Ultima actualizacion:** 2026-06-08
 **Slug:** `saga-donkey-kong`
-**HTML:** `studio/saga-donkey-kong.html`
+**HTML:** `studio/sagas/saga-donkey-kong.html`
 **Discusion:** `docs/discusion-saga-donkey-kong.md`

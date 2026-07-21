@@ -26,7 +26,7 @@ Sirve como:
 
 ## Concepto del episodio
 
-Formato presentacion visual con HTML del estudio (`studio/nes-top-mundial.html`):
+Formato presentacion visual con HTML del estudio (`studio/rankings/top-mundial/nes-top-mundial.html`):
 
 - 14 slides navegables del 01 al 14.
 - Portada con tag "TOP 10 · MUNDIAL · CONSENSO 2026".
@@ -122,7 +122,7 @@ El HTML funciona con placeholders `tv-noscreen` (NO SIGNAL) + etiqueta de color 
 
 | Item | Estado |
 |------|--------|
-| HTML estudio (`studio/nes-top-mundial.html`) | ✓ Cerrado (14 slides) |
+| HTML estudio (`studio/rankings/top-mundial/nes-top-mundial.html`) | ✓ Cerrado (14 slides) |
 | JSON TarroBot (`studio/pautas/nes-top-mundial.tarrobot.json`) | ✓ 10 datos #10→#1 |
 | Clips de gameplay (10) | ☐ Pendiente |
 | Pauta MD (este archivo) | ✓ |
@@ -132,5 +132,5 @@ El HTML funciona con placeholders `tv-noscreen` (NO SIGNAL) + etiqueta de color 
 
 **Ultima actualizacion:** 2026-06-07
 **Slug:** `nes-top-mundial`
-**HTML asociado:** `studio/nes-top-mundial.html`
+**HTML asociado:** `studio/rankings/top-mundial/nes-top-mundial.html`
 **Discusion:** `docs/discusion-nes-top-mundial.md`

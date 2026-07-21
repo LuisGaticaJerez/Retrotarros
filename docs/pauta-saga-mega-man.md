@@ -22,7 +22,7 @@ Cobertura ESPECTACULAR: **11 de 11, la saga clasica COMPLETA** en la coleccion. 
 
 ## Concepto del episodio — LINEA DE TIEMPO + ZOOM + GAMEPLAY
 
-HTML (`studio/saga-mega-man.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (Mega Man X + Legacy Collections + ramas) → balance → cierre.
+HTML (`studio/sagas/saga-mega-man.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (Mega Man X + Legacy Collections + ramas) → balance → cierre.
 
 **Duracion objetivo:** 24-30 minutos. Mecanica identica a saga-zelda.
 
@@ -81,7 +81,7 @@ HTML (`studio/saga-mega-man.html`): portada → linea de tiempo completa → por
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/saga-mega-man.html`) | ✓ + box art |
+| HTML (`studio/sagas/saga-mega-man.html`) | ✓ + box art |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
 | Gameplay + fisicos | ☐ Pendiente |
@@ -90,5 +90,5 @@ HTML (`studio/saga-mega-man.html`): portada → linea de tiempo completa → por
 
 **Ultima actualizacion:** 2026-06-08
 **Slug:** `saga-mega-man`
-**HTML:** `studio/saga-mega-man.html`
+**HTML:** `studio/sagas/saga-mega-man.html`
 **Discusion:** `docs/discusion-saga-mega-man.md`

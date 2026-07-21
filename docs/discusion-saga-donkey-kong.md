@@ -68,4 +68,4 @@ Cruzamos el CSV. Marcamos owned:
 
 **Ultima actualizacion:** 2026-06-08
 **Pauta asociada:** `docs/pauta-saga-donkey-kong.md`
-**HTML:** `studio/saga-donkey-kong.html`
+**HTML:** `studio/sagas/saga-donkey-kong.html`

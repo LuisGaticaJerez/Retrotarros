@@ -68,4 +68,4 @@ El humor abre, pero el especial CIERRA sincero: mensaje real de Dia del Padre ("
 
 **Ultima actualizacion:** 2026-06-07
 **Pauta asociada:** `docs/pauta-retro-padres-gamer.md`
-**HTML:** `studio/retro-padres-gamer.html`
+**HTML:** `studio/specials/retro-padres-gamer.html`

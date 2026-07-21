@@ -3,7 +3,7 @@
 > Documento conversacional para revisar con Koko antes de grabar. **Tiempo estimado: 20-25 min.**
 >
 > Doc operativo completo: [`docs/pauta-n64-top-mundial.md`](pauta-n64-top-mundial.md).
-> Monitor de estudio: [`studio/n64-top-mundial.html`](../studio/n64-top-mundial.html).
+> Monitor de estudio: [`studio/rankings/top-mundial/n64-top-mundial.html`](../studio/rankings/top-mundial/n64-top-mundial.html).
 
 ---
 
@@ -47,7 +47,7 @@ La Parte 2 abre con un slide recap del top mundial. **No hay que grabar nada nue
 ## 3. Lo que tiene que llegar listo
 
 ### Luis
-- [ ] HTML `studio/n64-top-mundial.html` abierto en Chrome.
+- [ ] HTML `studio/rankings/top-mundial/n64-top-mundial.html` abierto en Chrome.
 - [ ] Material grabado del episodio doble — identificado el bloque de top mundial.
 - [ ] Frase de cierre memorizada para re-grabar (si elegimos opción b).
 - [ ] Miniatura YouTube específica para Parte 1 (Ocarina al frente con "TOP MUNDIAL N64 · PARTE 1" en grande).

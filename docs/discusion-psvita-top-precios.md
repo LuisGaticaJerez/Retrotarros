@@ -3,7 +3,7 @@
 > Documento conversacional. **Tiempo estimado: 25 min.**
 >
 > Doc operativo: [`docs/pauta-psvita-top-precios.md`](pauta-psvita-top-precios.md).
-> Monitor: [`studio/psvita-top-precios.html`](../studio/psvita-top-precios.html).
+> Monitor: [`studio/rankings/top-precios/psvita-top-precios.html`](../studio/rankings/top-precios/psvita-top-precios.html).
 >
 > **Sincronizado con el HTML (formato TarroVisión, 3 ligas).** Ranking y precios
 > reflejan el HTML real. Versión anterior (Invizimals #1 / "Koko tiene 4") quedó

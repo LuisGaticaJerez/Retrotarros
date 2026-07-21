@@ -22,7 +22,7 @@ Cobertura honesta: **2 de 8** numerados, pero son **dos de los mas queridos** �
 
 ## Concepto del episodio — LINEA DE TIEMPO + ZOOM + GAMEPLAY
 
-HTML (`studio/saga-resident-evil.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (Revelations + experimentos + remakes) → balance → cierre.
+HTML (`studio/sagas/saga-resident-evil.html`): portada → linea de tiempo completa → por cada juego DOS slides (zoom-ficha + gameplay en TarroVision con dato) → bonus (Revelations + experimentos + remakes) → balance → cierre.
 
 **Duracion objetivo:** 20-26 minutos. Mecanica identica a saga-zelda.
 
@@ -78,7 +78,7 @@ HTML (`studio/saga-resident-evil.html`): portada → linea de tiempo completa �
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/saga-resident-evil.html`) | ✓ + box art |
+| HTML (`studio/sagas/saga-resident-evil.html`) | ✓ + box art |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
 | Gameplay + fisicos | ☐ Pendiente |
@@ -87,5 +87,5 @@ HTML (`studio/saga-resident-evil.html`): portada → linea de tiempo completa �
 
 **Ultima actualizacion:** 2026-06-08
 **Slug:** `saga-resident-evil`
-**HTML:** `studio/saga-resident-evil.html`
+**HTML:** `studio/sagas/saga-resident-evil.html`
 **Discusion:** `docs/discusion-saga-resident-evil.md`

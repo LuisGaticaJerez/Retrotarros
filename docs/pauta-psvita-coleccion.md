@@ -27,7 +27,7 @@ Sirve como:
 
 ## Concepto del episodio
 
-HTML del estudio (`studio/psvita-coleccion.html`): 23 slides. Portada → indice "PRESS START" con 9 categorias → por categoria 2 slides (paneo + 3 joyas en TarroVisiones) → hardware → balance → cierre.
+HTML del estudio (`studio/colecciones/psvita-coleccion.html`): 23 slides. Portada → indice "PRESS START" con 9 categorias → por categoria 2 slides (paneo + 3 joyas en TarroVisiones) → hardware → balance → cierre.
 
 **Duracion objetivo:** 24-30 minutos (catalogo grande, 91 juegos).
 
@@ -93,7 +93,7 @@ El HTML usa placeholders `tv-noscreen`.
 
 | Item | Estado |
 |------|--------|
-| HTML (`studio/psvita-coleccion.html`) | ✓ 23 slides |
+| HTML (`studio/colecciones/psvita-coleccion.html`) | ✓ 23 slides |
 | Pauta MD (este) | ✓ |
 | Discusion MD | ✓ |
 | Paneos + gameplay | ☐ Pendiente |
@@ -102,5 +102,5 @@ El HTML usa placeholders `tv-noscreen`.
 
 **Ultima actualizacion:** 2026-06-07
 **Slug:** `psvita-coleccion`
-**HTML:** `studio/psvita-coleccion.html`
+**HTML:** `studio/colecciones/psvita-coleccion.html`
 **Discusion:** `docs/discusion-psvita-coleccion.md`

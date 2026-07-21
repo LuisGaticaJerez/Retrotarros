@@ -3,7 +3,7 @@
 > Documento conversacional para revisar antes de grabar. **Tiempo estimado: 30 min.**
 >
 > Doc operativo: [`docs/pauta-n64-kirkhope-rare.md`](pauta-n64-kirkhope-rare.md).
-> Monitor de estudio: [`studio/n64-kirkhope-rare.html`](../studio/n64-kirkhope-rare.html).
+> Monitor de estudio: [`studio/curaduria-n64/n64-kirkhope-rare.html`](../studio/curaduria-n64/n64-kirkhope-rare.html).
 
 ---
 
@@ -27,7 +27,7 @@
 ## 2. Lo que tiene que llegar listo
 
 ### Luis (antes de grabar)
-- [ ] HTML `studio/n64-kirkhope-rare.html` abierto en Chrome pantalla completa.
+- [ ] HTML `studio/curaduria-n64/n64-kirkhope-rare.html` abierto en Chrome pantalla completa.
 - [ ] Memorizar las 10 anclas (un dato por slide).
 - [ ] DK Rap listo para reproducir (sin copyright issues — usar clip corto de 2-3 seg).
 - [ ] Datos de ventas verificados (las 9 cifras del bloque 2 — vienen de VGChartz y reportes Nintendo).

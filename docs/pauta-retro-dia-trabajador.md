@@ -22,7 +22,7 @@ Es el **segundo especial de fecha del canal** (despues de `glorias-navales` del 
 
 ## Concepto del episodio
 
-Formato presentacion visual con HTML del estudio (`studio/retro-dia-trabajador.html`):
+Formato presentacion visual con HTML del estudio (`studio/specials/retro-dia-trabajador.html`):
 
 - Slides hibridos cartucho + sprite + HOJA DE SERVICIOS.
 - Posicion grande (#10 → #1) + tag "CONTRATO LABORAL" (#10-#4) o "PODIO LABORAL" (#3-#2) o "EMPLEADO DEL AÑO" (#1).
@@ -161,7 +161,7 @@ Las HOJAS DE SERVICIOS estan diseñadas para ser leidas con tono burocratico-fin
 
 | Item | Estado |
 |------|--------|
-| HTML estudio (`studio/retro-dia-trabajador.html`) | ✓ Cerrado para grabar |
+| HTML estudio (`studio/specials/retro-dia-trabajador.html`) | ✓ Cerrado para grabar |
 | Pauta JSON TarroBot (`studio/pautas/retro-dia-trabajador.tarrobot.json`) | ✓ Opcional |
 | Capturas (`studio/captures/retro-dia-trabajador/`) | ✓ |
 | Pauta MD (este archivo) | ✓ |
@@ -180,5 +180,5 @@ Las HOJAS DE SERVICIOS estan diseñadas para ser leidas con tono burocratico-fin
 
 **Ultima actualizacion:** 2026-05-28
 **Slug:** `retro-dia-trabajador`
-**HTML asociado:** `studio/retro-dia-trabajador.html`
+**HTML asociado:** `studio/specials/retro-dia-trabajador.html`
 **Discusion:** `docs/discusion-retro-dia-trabajador.md`

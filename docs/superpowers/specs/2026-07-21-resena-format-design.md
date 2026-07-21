@@ -34,7 +34,7 @@ Rankings (que comparan N juegos) — acá se profundiza en uno solo.
   nos ven desde la tv"). Subido de ~18px a ~22-26px según el bloque, sin llegar a
   "grotesco" (palabra textual de Luis).
 - **Capa de notas (tecla N) copiada 1:1 del patrón ya usado en los episodios SEGA**
-  (`studio/master-system-top-mundial.html`) — mismo CSS/JS, no se reinventó. Las notas
+  (`studio/rankings/top-mundial/master-system-top-mundial.html`) — mismo CSS/JS, no se reinventó. Las notas
   dan MÁS información de la que se ve en pantalla (anécdotas, datos duros, cues de
   reacción), nunca repiten el texto visible.
 - **Navegación triple:** botones ◀▶, flechas de teclado, y click en el deck (mitad

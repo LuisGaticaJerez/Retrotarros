@@ -147,4 +147,4 @@ Las dos primeras estan literalmente en el CSV (categoria `Missing Field`, una ma
 
 **Ultima actualizacion:** 2026-06-07
 **Pauta asociada:** `docs/pauta-nes-coleccion.md`
-**HTML:** `studio/nes-coleccion.html`
+**HTML:** `studio/colecciones/nes-coleccion.html`

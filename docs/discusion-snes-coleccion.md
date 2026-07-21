@@ -186,4 +186,4 @@ Cambios respecto a la version inicial de la pauta:
 
 **Ultima actualizacion:** 2026-05-21
 **Pauta asociada:** `docs/pauta-snes-coleccion.md`
-**HTML:** `studio/snes-coleccion.html`
+**HTML:** `studio/colecciones/snes-coleccion.html`

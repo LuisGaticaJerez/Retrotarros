@@ -70,4 +70,4 @@ Duele Forgotten Land (el mejor moderno) y Super Star (el mejor clasico), pero la
 
 **Ultima actualizacion:** 2026-06-08
 **Pauta asociada:** `docs/pauta-saga-kirby.md`
-**HTML:** `studio/saga-kirby.html`
+**HTML:** `studio/sagas/saga-kirby.html`

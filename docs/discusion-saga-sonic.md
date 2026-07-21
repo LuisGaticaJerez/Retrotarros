@@ -67,4 +67,4 @@ Cruzamos el CSV. Marcamos owned los de la era moderna que tenemos en fisico:
 
 **Ultima actualizacion:** 2026-06-08
 **Pauta asociada:** `docs/pauta-saga-sonic.md`
-**HTML:** `studio/saga-sonic.html`
+**HTML:** `studio/sagas/saga-sonic.html`
