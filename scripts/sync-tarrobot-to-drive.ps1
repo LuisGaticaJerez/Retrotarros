@@ -36,7 +36,13 @@ param(
 $ErrorActionPreference = "Stop"
 
 $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$RepoRoot = Resolve-Path (Join-Path $ScriptRoot "..")
+# .Path explicito: Resolve-Path devuelve un PathInfo, no un string. PathInfo NO
+# tiene una propiedad .Length de verdad (PowerShell la resuelve via
+# enumeracion implicita y da "1"), asi que $RepoRoot.Length + 1 en el bloque de
+# episodios de abajo calculaba mal el offset del Substring y armaba relPaths
+# rotos (con la ruta absoluta pegada). Con .Path, $RepoRoot es un string plano
+# y .Length funciona como se espera.
+$RepoRoot = (Resolve-Path (Join-Path $ScriptRoot "..")).Path
 
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host "  TarroBot -> Drive sync" -ForegroundColor Cyan
@@ -142,10 +148,10 @@ Write-Host ""
 # abre n64-coleccion.html y no la encuentra. Sync masivo de todos los HTMLs
 # que NO empiezan con underscore (esos son templates internos).
 Write-Host "HTMLs de episodios:" -ForegroundColor Cyan
-$episodios = Get-ChildItem -Path (Join-Path $RepoRoot "studio") -Filter "*.html" -File |
-    Where-Object { $_.Name -notlike "_*" }
+$episodios = Get-ChildItem -Path (Join-Path $RepoRoot "studio") -Filter "*.html" -Recurse -File |
+    Where-Object { $_.Name -notlike "_*" -and $_.DirectoryName -notmatch '\\resenas($|\\)' }
 foreach ($ep in $episodios) {
-    $relPath = "studio\$($ep.Name)"
+    $relPath = $ep.FullName.Substring($RepoRoot.Length + 1)
     Sync-Item $relPath
 }
 Write-Host ""

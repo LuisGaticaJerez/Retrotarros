@@ -6,11 +6,13 @@
 # Uso:
 #   .\scripts\sync-to-drive.ps1
 #
-# Estructura resultante en Drive (G:\Mi unidad\Studio\):
-#   <slug>/<slug>.html
-#   <slug>/img/<slug>/*.{jpg,png}
+# Estructura resultante en Drive (G:\Mi unidad\Studio\), espejo del repo desde
+# la reorganizacion de 2026-07-21:
+#   <categoria>/[<subcategoria>/]<slug>/<slug>.html
+#   <categoria>/[<subcategoria>/]<slug>/img/<slug>/*.{jpg,png}
 #   pautas/pauta-<slug>.docx
 #   pautas/discusion-<slug>.docx
+# Ejemplo: rankings/top-precios/n64-top-precios/n64-top-precios.html
 #
 # Excepcion RESENAS (studio\resenas\*.html): el HTML aterriza igual en su propia
 # carpeta <slug>/, pero la box art es compartida POR JUEGO (no por episodio) y
@@ -52,6 +54,15 @@ if (-not (Test-Path $RepoStudio)) {
     exit 1
 }
 
+# Normalizar a ruta absoluta resuelta (sin "..\"): $RepoStudio se construyo con
+# Join-Path $PSScriptRoot ".." y todavia contiene "..\scripts\..", asi que su
+# longitud NO calza con $html.DirectoryName (que Get-ChildItem devuelve ya
+# resuelto). Sin este Resolve-Path, el Substring($RepoStudio.Length) de mas
+# abajo revienta con ArgumentOutOfRangeException. Se hace .Path explicito (no
+# dejar el PathInfo crudo) para evitar el mismo problema con .Length que tiene
+# sync-tarrobot-to-drive.ps1.
+$RepoStudio = (Resolve-Path $RepoStudio).Path
+
 if (-not (Test-Path $DriveRoot)) {
     New-Item -ItemType Directory -Path $DriveRoot -Force | Out-Null
     Write-Host "Creada carpeta raíz en Drive: $DriveRoot" -ForegroundColor Green
@@ -63,7 +74,10 @@ if (-not (Test-Path $DrivePautas)) {
 
 # === 1. COPIAR HTML + IMAGENES POR SLUG ===
 Write-Host "`n[1/2] Copiando HTML + imágenes..." -ForegroundColor Yellow
-$htmlFiles = Get-ChildItem -Path $RepoStudio -Filter "*.html" -File
+# Recursivo: los episodios y shorts viven en subcarpetas por categoria desde
+# 2026-07-21 (rankings/top-precios/, colecciones/, shorts-html/datos/, etc.)
+$htmlFiles = Get-ChildItem -Path $RepoStudio -Filter "*.html" -File -Recurse |
+    Where-Object { $_.DirectoryName -notmatch '\\resenas($|\\)' }
 
 foreach ($html in $htmlFiles) {
     $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
@@ -72,7 +86,8 @@ foreach ($html in $htmlFiles) {
         Write-Host "  SKIP $slug (template)" -ForegroundColor DarkGray
         continue
     }
-    $destDir = Join-Path $DriveRoot $slug
+    $relCategoria = $html.DirectoryName.Substring($RepoStudio.Length).TrimStart('\')
+    $destDir = if ($relCategoria) { Join-Path $DriveRoot (Join-Path $relCategoria $slug) } else { Join-Path $DriveRoot $slug }
     $destImgDir = Join-Path $destDir "img\$slug"
     $destCapturesDir = Join-Path $destDir "captures"
     $srcImgDir = Join-Path $RepoStudio "img\$slug"
@@ -156,7 +171,18 @@ $faltantes = @()
 foreach ($html in $allHtmlFiles) {
     $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
     if ($slug.StartsWith("_")) { continue }
-    $destHtml = Join-Path (Join-Path $DriveRoot $slug) "$slug.html"
+    # Las resenas (bloque 1b) se copian PLANAS ($DriveRoot\$slug\, sin carpeta
+    # de categoria) porque comparten box art por juego via ../img/resenas/. No
+    # calcular $relCategoria para ellas o la verificacion las daria por
+    # "faltantes" aunque el HTML si esta en el Drive (mismatch con el destino
+    # real que arma el bloque 1b mas arriba, que no se toca en este cambio).
+    if ($html.DirectoryName -match '\\resenas($|\\)') {
+        $destSlugDir = Join-Path $DriveRoot $slug
+    } else {
+        $relCategoria = $html.DirectoryName.Substring($RepoStudio.Length).TrimStart('\')
+        $destSlugDir = if ($relCategoria) { Join-Path $DriveRoot (Join-Path $relCategoria $slug) } else { Join-Path $DriveRoot $slug }
+    }
+    $destHtml = Join-Path $destSlugDir "$slug.html"
     if (-not (Test-Path $destHtml)) { $faltantes += $slug }
 }
 if ($faltantes.Count -gt 0) {
