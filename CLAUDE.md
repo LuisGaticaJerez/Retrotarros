@@ -98,11 +98,20 @@ Si Luis señala que sonaste argentino → disculparte breve, reescribir el últi
 
 ## Formatos
 
-Ver `docs/formatos.md` para estructura completa. Resumen:
+Ver `docs/formatos.md` para estructura de producción (bloques, tiempos). Ver
+**`docs/inventario-contenido.md`** para el inventario real de qué tipos de video existen,
+grounded en las playlists del canal de YouTube (`@Retrotarros`) — cuál está publicado,
+armado sin subir, o solo definido como formato. Revisar ese doc antes de asumir qué
+formatos tiene el canal; se desactualiza rápido y no hay que reconstruirlo solo desde
+`studio/` (eso da una lista incompleta — confirmado 2026-07-21).
 
-- **Episodios largos** (15–25 min): 5 bloques, cierra con Koko tocando en batería. Cadencia: 1 cada 10–12 días.
-- **Shorts**: divididos por lane Luis (curiosidades históricas, solo) y lane Koko (batería, performance). Cadencia: 2–3/semana.
-- **Indie Lat**: entrevistas a devs indie latinoamericanos. Cierra con Koko tocando el tema del juego.
+Resumen de formatos:
+
+- **Episodios largos** (15–25 min): 5 bloques, cierra con Koko tocando en batería. Cadencia: 1 cada 10–12 días. Sub-tipos con playlist propia en YouTube: **Rankings** (top mundial/precios por consola), **Colecciones**, **Sagas de videojuegos**, **Specials** (multi-consola, atados a fecha chilena).
+- **Abriendo el tarro**: entrevista a un coleccionista invitado (no Luis/Koko) mostrando su propia colección — de lo que sea, no solo videojuegos. Kit para el invitado en `docs/kit-coleccionista-abriendo-el-tarro.md`, formulario en `docs/abriendo-el-tarro-google-form.gs`, template `studio/_template-abriendo-el-tarro.html`.
+- **Shorts**: TarroShorts (pipeline con TarroBot narrando, ver `docs/modus-operandi/convenciones-tarroshorts.md`) + shorts de B-roll simple + lane Luis (curiosidades históricas, solo) y lane Koko (batería, performance). Cadencia objetivo: 2–3/semana.
+- **Indie Lat**: entrevistas a devs indie latinoamericanos. Cierra con Koko tocando el tema del juego. Formato definido, sin episodios armados todavía.
+- **Musical / OST en batería**: Koko interpreta el tema icónico de una generación. Formato sembrado como idea, sin asset armado todavía.
 
 ## Identidad visual
 
