@@ -32,9 +32,12 @@ from playwright.sync_api import sync_playwright
 
 
 def capture(slug: str, width: int = 1920, height: int = 1080, scale: int = 2, wait_ms: int = 400) -> int:
+    import sys
     repo_root = Path(__file__).parent.parent
-    html_path = repo_root / "studio" / f"{slug}.html"
-    out_dir = repo_root / "studio" / "captures" / slug
+    sys.path.insert(0, str(repo_root / "scripts"))
+    from _studio_layout import find_html
+    html_path = find_html(slug)
+    out_dir = html_path.parent / "captures" / slug
 
     if not html_path.exists():
         print(f"ERROR: no existe {html_path}", file=sys.stderr)
