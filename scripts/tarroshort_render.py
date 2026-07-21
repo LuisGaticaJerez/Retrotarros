@@ -41,8 +41,13 @@ RATE_DEFAULT = "+0%"
 
 # Parametros de video
 W, H, FPS = 1080, 1920, 30
-REC_SECONDS = 4.5      # cuanto grabamos del loop crudo (suficiente para 2-3 ciclos)
-LOOP_TRIM_START = 1.0  # descartamos el arranque (navegacion + fuentes + settle)
+REC_SECONDS = 6.0      # cuanto grabamos del loop crudo (suficiente para 2-3 ciclos)
+LOOP_TRIM_START = 2.5  # descartamos el arranque: navegacion + fuentes (Google Fonts via
+                        # red, timing variable por escena) + cambio de slide + primer
+                        # paint del box art. Si es muy corto, el loop final arranca
+                        # mostrando la INTRO de fondo (bug 2026-07-20: se filtraba el
+                        # slide por defecto en escenas intermedias). 2.5s da margen
+                        # incluso si el fetch de fuentes tarda mas de 1s.
 LOOP_LEN = 3.0         # largo del loop limpio que se repite
 TAIL_PAD = 0.3         # colita despues de la voz para que no quede seca
 MIN_SCENE = 3.8        # piso por escena: ritmo parejo, ningun item pasa volando
@@ -252,21 +257,20 @@ def generar_tarroshort(slug: str, voice: str = VOZ_DEFAULT, pitch: str = PITCH_D
             scene_mp4s.append(scene_out)
 
         # FASE D · concat
+        # SIEMPRE re-encode (no "-c copy"): concatenar streams h264 codificados por
+        # separado con -c copy puede dejar un frame con glitch/estatica justo en el
+        # corte (limites de GOP/keyframe que no calzan entre escenas). El re-encode
+        # es mas lento pero garantiza un corte limpio (bug real 2026-07-20, visto en
+        # la transicion hacia el cierre de master-system-top-precios).
         _say("concatenando escenas...")
         listfile = work / "concat.txt"
         listfile.write_text(
             "\n".join(f"file '{p.as_posix()}'" for p in scene_mp4s) + "\n",
             encoding="utf-8",
         )
-        try:
-            _run([ffmpeg, "-y", "-f", "concat", "-safe", "0", "-i", str(listfile),
-                  "-c", "copy", str(out_path)])
-        except RuntimeError:
-            # fallback: re-encode si el copy no cuadra
-            _say("concat copy fallo, re-encodeando...")
-            _run([ffmpeg, "-y", "-f", "concat", "-safe", "0", "-i", str(listfile),
-                  "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
-                  "-c:a", "aac", "-b:a", "192k", str(out_path)])
+        _run([ffmpeg, "-y", "-f", "concat", "-safe", "0", "-i", str(listfile),
+              "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+              "-c:a", "aac", "-b:a", "192k", str(out_path)])
 
         _say(f"LISTO -> {out_path}")
         return out_path

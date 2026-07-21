@@ -108,6 +108,12 @@ Decidir con Luis cuál va según el short. Ambos cierran apuntando al canal.
 
 Los 5 items mostrados en un short teaser se etiquetan **PUESTO 10 → PUESTO 6**, sin excepción, aunque la pauta del episodio solo liste 9 items en su tabla retail CIB (caso Mega Drive y Saturn, que arrancan en #9 en la pauta). El rótulo del short es una convención de display para que toda la serie se vea uniforme — **no** es una re-numeración real del ranking oficial de la pauta (esa sigue siendo la fuente de verdad para el episodio largo). No se inventan items ni precios nuevos para "completar" el 10: se toman los mismos 5 juegos accesibles ya documentados y se corren las etiquetas de posición hacia arriba en 1 si la pauta arrancaba en #9.
 
+### REGLA — El cierre NUNCA nombra el santo grial + siempre invita a suscribirse (Luis, 2026-07-20)
+
+El slide de cierre del teaser puede describir el santo grial (por qué es especial, cuánto vale, cómo se conseguía) pero **jamás dice su nombre** — esa es la incógnita que empuja al espectador al episodio largo. Ejemplo de error ya corregido: el cierre de Mega Drive decía "un Tetris prohibido" (revela el nombre) y el de Saturn decía "un Daytona online" (revela el nombre); ambos se reescribieron a descripciones genéricas ("un cartucho que Sega mandó a destruir", "un juego de carreras que solo se pedía por correo").
+
+Además, el cierre de **todo** short de precios SEGA termina invitando a **suscribirse y activar la campana** (no alcanza con "está en el canal" solo). Frase estándar: *"Suscríbete y activa la campana para no perdértelo."*
+
 ---
 
 ## Estrategia (por qué hacemos shorts) — embudo, no contenido suelto
@@ -126,6 +132,10 @@ Acordado con Luis (2026-06-17):
 - **Texto hablado con tildes (`data-say`):** el display va SIN tildes (regla del canal), el hablado va aparte CON tildes y pausas para que el TTS pronuncie bien. Ver `CLAUDE.md` sección "TarroShorts de DATOS".
 - **Re-render = limpiar audio:** si cambian los textos hablados, borrar `studio/shorts/audio/<slug>/` antes de re-rendir o queda la voz vieja.
 - **Sync al Drive:** `scripts/sync-tarrobot-to-drive.ps1` (sube el short MP4 + HTML a `G:\Mi unidad\Studio\tarrobot`). Ver `CLAUDE.md` sección "Workflow obligatorio al cerrar cambios".
+
+### Bug corregido — se filtraba la intro entre escenas (Luis, 2026-07-20)
+
+En `tarroshort-master-system-top-precios.mp4` apareció la intro completa (TarroBot + título) tapando el arranque de la escena del item 1. Causa: cada escena se graba en un browser context nuevo que carga la página desde cero (arranca siempre en el slide intro por default) y recién después el script cambia al slide correcto vía JS; ese cambio depende de que carguen las Google Fonts por red, con timing variable. El recorte fijo de 1s (`LOOP_TRIM_START`) a veces no alcanzaba a saltarse ese arranque, y el loop final quedaba "contaminado" con el frame de la intro. Fix en `scripts/tarroshort_render.py`: subido `LOOP_TRIM_START` a 2.5s y `REC_SECONDS` a 6.0s (más margen antes de empezar a usar el loop). Si vuelve a pasar, revisar frame por frame con `ffmpeg -vf fps=1` + contact sheet antes de asumir que es un problema del HTML.
 
 ---
 
