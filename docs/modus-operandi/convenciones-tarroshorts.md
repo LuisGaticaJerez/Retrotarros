@@ -99,10 +99,14 @@ Los HTML de estudio llevan capa de notas de teleprompter (tecla `N` + botón cli
 
 Dos moldes válidos, se elige según el objetivo:
 
-- **Teaser (guardar el grial):** muestra los accesibles (ej. #9→#5) y **NO revela el #1**; el cierre tienta con "el grial está en el canal". Genera clic al episodio largo. Es el enfoque elegido para los shorts de precios SEGA (2026-07-20).
+- **Teaser (guardar el grial):** muestra los accesibles y **NO revela el #1**; el cierre tienta con "el grial está en el canal". Genera clic al episodio largo. Es el enfoque elegido para los shorts de precios SEGA (2026-07-20).
 - **Top directo (con grial destacado):** muestra el top completo (#4→#1) con el grial en dorado. Auto-contenido y potente. Es el de `mas-caros-historia`.
 
 Decidir con Luis cuál va según el short. Ambos cierran apuntando al canal.
+
+### REGLA — El teaser SIEMPRE empieza en PUESTO 10 y termina en PUESTO 6 (Luis, 2026-07-20)
+
+Los 5 items mostrados en un short teaser se etiquetan **PUESTO 10 → PUESTO 6**, sin excepción, aunque la pauta del episodio solo liste 9 items en su tabla retail CIB (caso Mega Drive y Saturn, que arrancan en #9 en la pauta). El rótulo del short es una convención de display para que toda la serie se vea uniforme — **no** es una re-numeración real del ranking oficial de la pauta (esa sigue siendo la fuente de verdad para el episodio largo). No se inventan items ni precios nuevos para "completar" el 10: se toman los mismos 5 juegos accesibles ya documentados y se corren las etiquetas de posición hacia arriba en 1 si la pauta arrancaba en #9.
 
 ---
 
