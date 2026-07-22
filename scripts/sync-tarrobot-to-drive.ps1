@@ -165,19 +165,31 @@ if (Test-Path (Join-Path $RepoRoot "studio\resenas")) {
     Write-Host ""
 }
 
-# 2c. Carpeta de imagenes de episodios (box arts, sprites, paneos)
+# 2c. Carpetas de imagenes de episodios (box arts, sprites, paneos)
 # Necesarias para que los HTMLs con <img src="img/..."> renderizen bien.
+# FIX 2026-07-21 (reorg): "studio\img" plano solo tiene resenas/ y thumbnails/
+# desde la reorganizacion; las imagenes por-episodio ahora viven en
+# "studio\<categoria>\img\<slug>\" (hermanas del HTML). Sync-Item plano de
+# "studio\img" dejaba de copiar el 90% de las box arts sin ningun error visible.
+# Recorremos TODAS las carpetas llamadas "img" bajo studio\ (incluye la raiz
+# resenas/thumbnails y cada carpeta anidada por categoria).
 Write-Host "Imagenes de episodios:" -ForegroundColor Cyan
-if (Test-Path (Join-Path $RepoRoot "studio\img")) {
-    Sync-Item "studio\img" -Recursive
+$imgDirs = Get-ChildItem -Path (Join-Path $RepoRoot "studio") -Directory -Recurse -Filter "img" -ErrorAction SilentlyContinue
+foreach ($imgDir in $imgDirs) {
+    $relPath = $imgDir.FullName.Substring($RepoRoot.Length + 1)
+    Sync-Item $relPath -Recursive
 }
 Write-Host ""
 
 # 2c-bis. Capturas PNG de slides (generadas por capture-slides.py). Las usa Luis
 # para edicion/CapCut y como respaldo de cada slide. Fix 2026-06-25: faltaban en el sync.
+# FIX 2026-07-21 (reorg): mismo problema que 2c -- las carpetas "captures\<slug>"
+# ahora viven anidadas por categoria, no en la raiz plana "studio\captures".
 Write-Host "Capturas de slides (PNG):" -ForegroundColor Cyan
-if (Test-Path (Join-Path $RepoRoot "studio\captures")) {
-    Sync-Item "studio\captures" -Recursive
+$capDirs = Get-ChildItem -Path (Join-Path $RepoRoot "studio") -Directory -Recurse -Filter "captures" -ErrorAction SilentlyContinue
+foreach ($capDir in $capDirs) {
+    $relPath = $capDir.FullName.Substring($RepoRoot.Length + 1)
+    Sync-Item $relPath -Recursive
 }
 Write-Host ""
 

@@ -90,8 +90,8 @@ foreach ($html in $htmlFiles) {
     $destDir = if ($relCategoria) { Join-Path $DriveRoot (Join-Path $relCategoria $slug) } else { Join-Path $DriveRoot $slug }
     $destImgDir = Join-Path $destDir "img\$slug"
     $destCapturesDir = Join-Path $destDir "captures"
-    $srcImgDir = Join-Path $RepoStudio "img\$slug"
-    $srcCapturesDir = Join-Path $RepoStudio "captures\$slug"
+    $srcImgDir = Join-Path $html.DirectoryName "img\$slug"
+    $srcCapturesDir = Join-Path $html.DirectoryName "captures\$slug"
 
     if (-not (Test-Path $destDir)) {
         New-Item -ItemType Directory -Path $destDir -Force | Out-Null
