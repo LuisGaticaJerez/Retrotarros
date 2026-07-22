@@ -204,15 +204,15 @@ Ejemplos reales ejecutados (2026-05-15):
 
 ## Capturas de slides para edición (regla obligatoria)
 
-Cada HTML del estudio (`studio/<slug>.html`) genera frames PNG 1920×1080 listos para meter directo en DaVinci como B-roll / cortina entre tomas. Sin rebordes, texto crisp a 2x DPI.
+Cada HTML del estudio (episodios en `studio/<categoria>/[<subcategoria>/]<slug>.html`, shorts en `studio/shorts-html/<categoria>/tarroshort-<slug>.html`) genera frames PNG 1920×1080 listos para meter directo en DaVinci/CapCut como B-roll / cortina entre tomas. Sin rebordes, texto crisp a 2x DPI.
 
-**Comando:**
+**Comando (acepta el slug pelado, sin importar en qué carpeta de categoría viva el HTML):**
 ```powershell
 python scripts/capture-slides.py <slug>
 ```
 
-- **Salida repo:** `studio/captures/<slug>/<slug>-slide-NN.png` (gitignored).
-- **Salida Drive:** `G:\Mi unidad\Studio\<slug>\captures\<slug>-slide-NN.png` (sincronizada manualmente con `cp` o `scripts/sync-to-drive.ps1`).
+- **Salida repo:** al lado del HTML, en `<carpeta-del-html>/captures/<slug>/<slug>-slide-NN.png` (gitignored — `capture-slides.py` usa `find_html()` de `scripts/_studio_layout.py` para ubicar el HTML sin importar la categoría, y guarda ahí mismo).
+- **Salida Drive:** `G:\Mi unidad\Studio\<categoria>\[<subcategoria>\]<slug>\captures\<slug>-slide-NN.png` (sincronizada con `scripts/sync-to-drive.ps1`, que también refleja la categoría).
 
 **Cuándo correrlo (obligatorio):**
 1. Al **crear** un HTML de ranking nuevo (top mundial, top precios, retrotarros-vs-mundo, archivo, joyas, etc.).
