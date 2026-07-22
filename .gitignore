@@ -53,9 +53,12 @@ studio/melodias/**/*.midi
 # Soundfont SNES (~30 MB binario, lo descarga install.bat)
 studio/melodias/*.sf2
 
-# Capturas PNG generadas por capture-slides.py (la fuente es el HTML)
+# Capturas PNG generadas por capture-slides.py (la fuente es el HTML).
 # Se regeneran con: python scripts/capture-slides.py <slug>
-studio/captures/
+# studio/**/ (no solo studio/) porque desde la reorganizacion de 2026-07-21
+# las carpetas captures/<slug>/ viven anidadas por categoria
+# (studio/rankings/top-precios/captures/<slug>/, etc.), no solo en la raiz plana.
+studio/**/captures/
 
 # Backups generados por update-tagline-images.py
 # El versionado del git es la historia, no necesitamos .bak.png al lado
@@ -142,4 +145,3 @@ studio/img/**/*.mp3
 
 # Memoria local del harness (Claude Code), no es del proyecto.
 /.remember/
-studio/captures/
