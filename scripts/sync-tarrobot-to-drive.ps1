@@ -257,11 +257,15 @@ foreach ($rel in $brandingMap.Keys) {
 Write-Host ""
 
 # 6. Instalador vigente -> carpeta unica en Drive (borra versiones viejas con /MIR)
-# La carpeta TarroBot-Instalador/ en Drive siempre tiene UN SOLO ZIP: el actual.
-# Asi Luis va a Drive, entra ahi, y solo ve el correcto. No hay confusion de versiones.
+# La carpeta Tarrobot\TarroBot-Instalador\ en Drive siempre tiene UN SOLO ZIP: el
+# actual. Asi Luis entra a Tarrobot/ y solo ve el correcto. No hay confusion de
+# versiones.
+# FIX 2026-07-23: vivia como carpeta HERMANA de Tarrobot/ (fuera de ella) para que
+# Luis la encontrara sin navegar adentro. Con la regla de que todo lo propio de
+# TarroBot vive DENTRO de Tarrobot/, se movio adentro (decision de Luis).
 Write-Host "Instalador vigente -> Drive:" -ForegroundColor Cyan
 
-# 6a. LIMPIEZA: el instalador oficial vive en TarroBot-Instalador\ (carpeta hermana).
+# 6a. LIMPIEZA: el instalador oficial vive en Tarrobot\TarroBot-Instalador\.
 # Cualquier TarroBot-Studio-v*.zip o *Setup*.exe suelto DENTRO de $Destino (raiz o
 # installer\) es legacy de versiones viejas (1.5.1/1.5.2) y confunde. Se borran.
 # Solo toca esos patrones: NO toca install.bat, .venv, desktop.ini ni logs (instalacion real).
@@ -285,7 +289,7 @@ $DistDir = Resolve-Path (Join-Path $ScriptRoot "..\installers\tarrobot-studio\di
 $InstallerZip = Get-ChildItem -Path $DistDir -Filter "TarroBot-Studio-v*-slim.zip" |
     Sort-Object Name -Descending | Select-Object -First 1
 if ($InstallerZip) {
-    $InstallerDest = Join-Path (Split-Path -Parent $Destino) "TarroBot-Instalador"
+    $InstallerDest = Join-Path $Destino "TarroBot-Instalador"
     if (-not $DryRun) {
         if (-not (Test-Path $InstallerDest)) { New-Item -ItemType Directory -Path $InstallerDest -Force | Out-Null }
         # /MIR: borra todo lo que no sea el ZIP actual (elimina versiones viejas)
