@@ -41,7 +41,7 @@ EPISODE_CATEGORY_RULES: list[tuple[str, str]] = [
     (r"^saga-", "sagas"),
     (r"^retro-", "specials"),
     (r"^n64-(hardware-raro|joyas-ocultas|kirkhope-rare|nintendo-vs-playstation|no-latam)$", "curaduria-n64"),
-    (r"-archivo-koko$", "archivo-koko"),
+    (r"-archivo-koko$", "colecciones/archivo-koko"),
 ]
 
 SHORT_CATEGORY_RULES: list[tuple[str, str]] = [

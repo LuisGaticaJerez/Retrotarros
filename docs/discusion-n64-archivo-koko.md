@@ -3,7 +3,7 @@
 > Documento conversacional para revisar antes de **editar** el material grabado.
 >
 > Doc operativo: [`docs/pauta-n64-archivo-koko.md`](pauta-n64-archivo-koko.md).
-> Monitor de estudio: [`studio/archivo-koko/n64-archivo-koko.html`](../studio/archivo-koko/n64-archivo-koko.html).
+> Monitor de estudio: [`studio/colecciones/archivo-koko/n64-archivo-koko.html`](../studio/colecciones/archivo-koko/n64-archivo-koko.html).
 
 ---
 
