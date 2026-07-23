@@ -94,12 +94,17 @@ def _resolve_repo() -> Path:
     return Path(__file__).resolve().parent.parent
 
 
+import sys as _sys
+_sys.path.insert(0, str(_resolve_repo() / "scripts"))
+from _studio_layout import STUDIO
+
+
 def _resolve_teaser_out(slug: str) -> Path:
     """Resuelve el directorio donde guardar el teaser. Override por env."""
     env_out = os.environ.get("RETROTARROS_TEASER_OUT")
     if env_out:
         return Path(env_out).resolve() / slug
-    return _resolve_repo() / "studio" / "teasers" / slug
+    return STUDIO / "teasers" / slug
 
 
 REPO = _resolve_repo()
@@ -108,7 +113,7 @@ WHISPER_CACHE_DIR = REPO / ".cache" / "whisper"
 # Compat: codigo viejo referenciaba DRIVE_STUDIO. Lo mantenemos como alias del
 # nuevo default output (mismo path). Si Luis seteo RETROTARROS_TEASER_OUT, esto
 # queda obsoleto pero no se usa.
-DRIVE_STUDIO = REPO / "studio" / "teasers"
+DRIVE_STUDIO = STUDIO / "teasers"
 
 # Output dimensions (TikTok / Reels / Shorts)
 OUT_W = 1080
