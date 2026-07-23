@@ -37,7 +37,7 @@ else:
     REPO = Path(__file__).parent.parent
 
 DB_PATH = REPO / "data" / "tarrobot-database.json"
-TEMPLATE = REPO / "studio" / "_template-tarrobot-slide.html"
+TEMPLATE = REPO / "studio" / "templates" / "_template-tarrobot-slide.html"
 OUT_DIR = REPO / "studio" / "tarrobot-out"
 PAUTAS_DIR = REPO / "studio" / "pautas"
 PAUTAS_AUDIO_DIR = PAUTAS_DIR / "audio"

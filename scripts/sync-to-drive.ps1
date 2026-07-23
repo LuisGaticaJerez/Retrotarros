@@ -15,9 +15,10 @@
 # Ejemplo: rankings/top-precios/n64-top-precios/n64-top-precios.html
 #
 # Excepcion RESENAS (studio\resenas\*.html): el HTML aterriza igual en su propia
-# carpeta <slug>/, pero la box art es compartida POR JUEGO (no por episodio) y
-# vive en img/resenas/ al lado de las carpetas <slug>/, no adentro de cada una
-# (el HTML referencia "../img/resenas/<key>.jpg").
+# carpeta <slug>/, y la box art (compartida POR JUEGO, no por episodio) se copia
+# DENTRO de cada carpeta <slug>/img/resenas/ (el HTML referencia "img/resenas/<key>.jpg",
+# sin "../", desde que Luis reorganizo studio\img\resenas\ -> studio\resenas\img\resenas\
+# el 2026-07-23).
 #
 # Requiere: pandoc instalado (winget install JohnMacFarlane.Pandoc)
 
@@ -128,14 +129,18 @@ foreach ($html in $htmlFiles) {
 # === 1b. RESENAS (carpeta APARTE studio\resenas\, no la raiz plana de studio\) ===
 # FIX 2026-07-21: el Get-ChildItem de arriba no es recursivo, asi que las resenas
 # nunca llegaban al Drive -> Luis no las encontraba para grabar. Ademas, las
-# imagenes de resenas se comparten por JUEGO (studio\img\resenas\<key>.jpg), no
-# por episodio como el resto de formatos, y el HTML las referencia con
-# "../img/resenas/<key>.jpg" -> hay que copiarlas a Studio\img\resenas\ (al lado
-# de las carpetas <slug>\, no adentro) para que esa ruta relativa siga resolviendo.
+# imagenes de resenas se comparten por JUEGO (studio\resenas\img\resenas\<key>.jpg),
+# no por episodio como el resto de formatos.
+# FIX 2026-07-23: Luis reorganizo studio\img\resenas\ -> studio\resenas\img\resenas\
+# (img/ paso a ser HIJA de resenas/, no hermana), y el HTML se actualizo a
+# src="img/resenas/<key>.jpg" (sin "../"). Por eso ahora copiamos img\resenas\
+# COMPLETA DENTRO de cada carpeta de produccion <slug>\ (una copia por resena,
+# no compartida al lado) para que esa ruta relativa directa siga resolviendo.
 $resenasDir = Join-Path $RepoStudio "resenas"
 $resenaHtmlFiles = @()
 if (Test-Path $resenasDir) {
     $resenaHtmlFiles = Get-ChildItem -Path $resenasDir -Filter "*.html" -File
+    $srcResenaImg = Join-Path $resenasDir "img\resenas"
     foreach ($html in $resenaHtmlFiles) {
         $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
         $destDir = Join-Path $DriveRoot $slug
@@ -144,17 +149,16 @@ if (Test-Path $resenasDir) {
         }
         Copy-Item -Path $html.FullName -Destination $destDir -Force
         Write-Host "  HTML → $destDir\$($html.Name)" -ForegroundColor Cyan
-    }
-    $srcResenaImg = Join-Path $RepoStudio "img\resenas"
-    if (Test-Path $srcResenaImg) {
-        $destResenaImg = Join-Path $DriveRoot "img\resenas"
-        if (-not (Test-Path $destResenaImg)) {
-            New-Item -ItemType Directory -Path $destResenaImg -Force | Out-Null
-        }
-        $imgs = Get-ChildItem -Path $srcResenaImg -File -ErrorAction SilentlyContinue
-        if ($imgs.Count -gt 0) {
-            Copy-Item -Path "$srcResenaImg\*" -Destination $destResenaImg -Force
-            Write-Host "  IMG  → $destResenaImg ($($imgs.Count) archivos, compartida entre resenas)" -ForegroundColor Cyan
+        if (Test-Path $srcResenaImg) {
+            $destResenaImg = Join-Path $destDir "img\resenas"
+            if (-not (Test-Path $destResenaImg)) {
+                New-Item -ItemType Directory -Path $destResenaImg -Force | Out-Null
+            }
+            $imgs = Get-ChildItem -Path $srcResenaImg -File -ErrorAction SilentlyContinue
+            if ($imgs.Count -gt 0) {
+                Copy-Item -Path "$srcResenaImg\*" -Destination $destResenaImg -Force
+                Write-Host "  IMG  → $destResenaImg ($($imgs.Count) archivos)" -ForegroundColor Cyan
+            }
         }
     }
 }

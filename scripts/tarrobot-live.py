@@ -57,9 +57,12 @@ from tarrobot import (
 import tarrobot as _t
 REPO = _t.REPO
 STUDIO = REPO / "studio"
-LIVE_HTML = STUDIO / "_template-tarrobot-live.html"
-CONTROL_HTML = STUDIO / "_template-tarrobot-control.html"
+LIVE_HTML = STUDIO / "templates" / "_template-tarrobot-live.html"
+CONTROL_HTML = STUDIO / "templates" / "_template-tarrobot-control.html"
 OBS_ALIASES_PATH = STUDIO / "obs-aliases.json"
+
+# sys.path ya tiene scripts/ (linea 41, para el import de tarrobot)
+from _studio_layout import find_html
 
 # Sprint 9: control OBS por WebSocket (obs-websocket v5)
 import obs_controller as obs
@@ -2671,8 +2674,9 @@ async def tarroshort_generar(payload: dict):
         # highlights desde el HTML de un episodio (coleccion / entrevista)
         if not _re.match(r"^[a-z0-9-]+$", episodio_slug):
             return JSONResponse({"error": "episodio_slug invalido (kebab-case)"}, status_code=400)
-        html = STUDIO / f"{episodio_slug}.html"
-        if not html.exists():
+        try:
+            find_html(episodio_slug)
+        except (FileNotFoundError, FileExistsError):
             return JSONResponse({"error": f"episodio no existe: {episodio_slug}"}, status_code=404)
         if formato not in ("coleccion", "entrevista"):
             formato = "entrevista" if "abriendo-el-tarro" in episodio_slug else "coleccion"
@@ -2690,8 +2694,9 @@ async def tarroshort_generar(payload: dict):
     elif slug:
         if not _re.match(r"^[a-z0-9-]+$", slug):
             return JSONResponse({"error": "slug invalido (kebab-case)"}, status_code=400)
-        html = STUDIO / f"{slug}.html"
-        if not html.exists():
+        try:
+            find_html(slug)
+        except (FileNotFoundError, FileExistsError):
             return JSONResponse({"error": f"HTML no existe: {slug}"}, status_code=404)
         target, from_pauta = slug, False
     else:
@@ -2734,16 +2739,16 @@ async def tarroshort_fuentes():
         pautas = []
     shorts = []
     try:
-        shorts = sorted(h.stem for h in STUDIO.glob("tarroshort-*.html"))
+        shorts = sorted(h.stem for h in STUDIO.glob("**/tarroshort-*.html"))
     except Exception:
         shorts = []
     # Episodios para highlights: colecciones + entrevistas (Abriendo el Tarro)
     episodios = []
     try:
-        for h in sorted(STUDIO.glob("*coleccion*.html")):
+        for h in sorted(STUDIO.glob("**/*coleccion*.html")):
             if not h.name.startswith("_"):
                 episodios.append({"slug": h.stem, "formato": "coleccion"})
-        for h in sorted(STUDIO.glob("abriendo-el-tarro-*.html")):
+        for h in sorted(STUDIO.glob("**/abriendo-el-tarro-*.html")):
             if not h.name.startswith("_"):
                 episodios.append({"slug": h.stem, "formato": "entrevista"})
     except Exception:

@@ -431,7 +431,7 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
     pauta_path = repo / "studio" / "pautas" / f"{pauta_slug}.tarrobot.json"
     if not pauta_path.exists():
         raise FileNotFoundError(f"No existe la pauta: {pauta_path}")
-    template_path = repo / "studio" / "_template-tarroshort.html"
+    template_path = repo / "studio" / "templates" / "_template-tarroshort.html"
     if not template_path.exists():
         raise FileNotFoundError(f"No existe el template: {template_path}")
 
@@ -526,7 +526,7 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
     deck = '<div class="deck" id="deck">\n\n' + "\n\n".join(slides) + "\n\n</div>\n\n"
     html = head + deck + foot
 
-    out_dir = STUDIO / "shorts-html" / short_category(f"tarroshort-{out_slug}")
+    out_dir = STUDIO / "shorts" / "shorts-html" / short_category(f"tarroshort-{out_slug}")
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / f"tarroshort-{out_slug}.html"
     out_path.write_text(html, encoding="utf-8")
@@ -608,7 +608,7 @@ def construir_short_highlights(source_slug: str, formato: str, out_slug=None,
         html_src = find_html(source_slug)
     except FileNotFoundError:
         raise FileNotFoundError(f"No existe el episodio: studio/**/{source_slug}.html")
-    template_path = repo / "studio" / "_template-tarroshort.html"
+    template_path = repo / "studio" / "templates" / "_template-tarroshort.html"
     if not template_path.exists():
         raise FileNotFoundError(f"No existe el template: {template_path}")
     out_slug = out_slug or source_slug
@@ -668,7 +668,7 @@ def construir_short_highlights(source_slug: str, formato: str, out_slug=None,
 
     deck = '<div class="deck" id="deck">\n\n' + "\n\n".join(slides) + "\n\n</div>\n\n"
     cat = "colecciones" if formato == "coleccion" else "abriendo-el-tarro"
-    out_dir = STUDIO / "shorts-html" / cat
+    out_dir = STUDIO / "shorts" / "shorts-html" / cat
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / f"tarroshort-{out_slug}.html"
     out_path.write_text(head + deck + foot, encoding="utf-8")

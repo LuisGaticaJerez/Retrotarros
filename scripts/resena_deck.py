@@ -23,9 +23,12 @@ Texto publico mas grande que el resto de los decks de episodio (feedback Luis:
 Navegacion: boton, flechas de teclado, Y click en el deck (mitad derecha
 avanza, mitad izquierda retrocede; click dentro de .notas no cambia de slide).
 
-Box art en studio/img/resenas/<key>.jpg (key = slug del titulo, o el que se
-pase explicito en data['img_key']). Salida en studio/resenas/<slug>.html
+Box art en studio/resenas/img/resenas/<key>.jpg (key = slug del titulo, o el
+que se pase explicito en data['img_key']). Salida en studio/resenas/<slug>.html
 (carpeta APARTE del resto de episodios, pedido explicito de Luis 2026-07-21).
+Nota 2026-07-23: img/ vive DENTRO de resenas/ (Luis reorganizo
+studio/img/resenas/ -> studio/resenas/img/resenas/), no al lado como los
+demas episodios -- por eso el src del HTML es relativo directo, sin '../'.
 """
 from __future__ import annotations
 import re
@@ -56,13 +59,14 @@ def _notas(bloque: dict | None) -> str:
 
 
 def _ficha_cart(data: dict) -> str:
-    """Box art real si existe studio/img/resenas/<key>.jpg; si no, fallback con
+    """Box art real si existe studio/resenas/img/resenas/<key>.jpg; si no, fallback con
     tarjeta de color (regla del canal: nunca logo/artwork promocional)."""
     key = data.get("img_key") or _slug(data["juego"])
-    img_path = REPO / "studio" / "img" / "resenas" / f"{key}.jpg"
+    img_path = REPO / "studio" / "resenas" / "img" / "resenas" / f"{key}.jpg"
     if img_path.exists():
-        # el HTML vive en studio/resenas/, la imagen en studio/img/resenas/ -> subir un nivel
-        return f'<div class="ficha-cart"><img src="../img/resenas/{key}.jpg" alt="" onerror="this.style.display=\'none\'"></div>'
+        # el HTML vive en studio/resenas/, la imagen en studio/resenas/img/resenas/
+        # -> ruta relativa directa, img/ es hija de resenas/, no hermana.
+        return f'<div class="ficha-cart"><img src="img/resenas/{key}.jpg" alt="" onerror="this.style.display=\'none\'"></div>'
     return (
         '<div class="ficha-cart"><div class="ficha-fallback">'
         f'<div class="ff-title">{_esc(data["juego"])}</div>'

@@ -26,7 +26,7 @@ import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-BASE = REPO / "studio" / "_template-tarroshort.html"
+BASE = REPO / "studio" / "templates" / "_template-tarroshort.html"
 
 
 def _esc(s: str) -> str:
@@ -158,7 +158,7 @@ def generar_short_datos(data: dict, slug: str) -> Path:
     deck = ('\n\n' + mascota + '\n\n<div class="deck" id="deck">\n\n'
             + "\n\n".join(slides) + '\n\n</div>\n\n')
 
-    out_dir = REPO / "studio" / "shorts-html" / "datos"
+    out_dir = REPO / "studio" / "shorts" / "shorts-html" / "datos"
     out_dir.mkdir(parents=True, exist_ok=True)
     out = out_dir / f"tarroshort-{slug}.html"
     out.write_text(head + deck + foot, encoding="utf-8")

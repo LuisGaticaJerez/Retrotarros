@@ -13,9 +13,9 @@
 #   - scripts/tarrobot-live.py
 #   - scripts/tarrobot-tray.py
 #   - scripts Sprint 17-18 (TarroTeaser + OBS Assistant + CapCut Ready)
-#   - studio/_template-tarrobot-live.html
-#   - studio/_template-tarrobot-control.html
-#   - studio/_template-tarrobot-slide.html  (si existe)
+#   - studio/templates/_template-tarrobot-live.html
+#   - studio/templates/_template-tarrobot-control.html
+#   - studio/templates/_template-tarrobot-slide.html  (si existe)
 #   - (2026-07-23: studio/*.html, img/ y captures/ de episodios DEJARON de
 #     sincronizarse aca -- TarroBot ya no mantiene su propia copia del
 #     contenido de estudio. Ese contenido vive en G:\Mi unidad\Studio\ y se
@@ -139,9 +139,9 @@ Write-Host ""
 
 # 2. Templates HTML
 Write-Host "Templates:" -ForegroundColor Cyan
-Sync-Item "studio\_template-tarrobot-live.html"
-Sync-Item "studio\_template-tarrobot-control.html"
-Sync-Item "studio\_template-tarrobot-slide.html"
+Sync-Item "studio\templates\_template-tarrobot-live.html"
+Sync-Item "studio\templates\_template-tarrobot-control.html"
+Sync-Item "studio\templates\_template-tarrobot-slide.html"
 Sync-Item "studio\obs-aliases.json"
 Sync-Item "studio\tarrobot-recetas.json"
 Write-Host ""
