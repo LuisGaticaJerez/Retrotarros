@@ -199,6 +199,11 @@ Write-Host ""
 # sync. Ahora, para cada carpeta de produccion que exista, refrescamos el <slug>.html
 # y los gameboxes (img\<slug>\) desde el repo. NO se tocan: guiones .docx, captures\,
 # teasers\ ni nada que solo viva en el Drive. Asi los 3 lugares quedan SIEMPRE al dia.
+# FIX 2026-07-21 (reorg, diferido de la Tarea 6 a esta Tarea 9 a proposito): el
+# $htmlSrc plano (studio\$slug.html) ya no existe para el 90% de los episodios --
+# ahora viven anidados por categoria. Buscamos el HTML por nombre de forma
+# recursiva bajo studio\ en vez de asumir la ruta plana, y calculamos $imgSrc
+# como hermano de donde se encontro (no de $StudioSrc).
 Write-Host "Carpetas de produccion (Studio\<slug>):" -ForegroundColor Cyan
 $ProdRoot  = Split-Path -Parent $Destino          # G:\Mi unidad\Studio
 $StudioSrc = Join-Path $RepoRoot "studio"
@@ -209,14 +214,15 @@ if (Test-Path $ProdRoot) {
         ForEach-Object {
             $slug    = $_.Name
             $prodDir = $_.FullName
-            $htmlSrc = Join-Path $StudioSrc "$slug.html"
-            if (Test-Path $htmlSrc) {
+            $htmlMatches = @(Get-ChildItem -Path $StudioSrc -Filter "$slug.html" -File -Recurse -ErrorAction SilentlyContinue)
+            if ($htmlMatches.Count -eq 1) {
+                $htmlSrc = $htmlMatches[0].FullName
                 if (-not $DryRun) {
                     # HTML: el repo es canonico -> sobrescribir siempre
                     Copy-Item $htmlSrc -Destination (Join-Path $prodDir "$slug.html") -Force
-                    # Gameboxes: repo\studio\img\<slug>\ -> Studio\<slug>\img\<slug>\
+                    # Gameboxes: hermano del HTML encontrado -> Studio\<slug>\img\<slug>\
                     # /E agrega+actualiza, SIN /MIR para no borrar assets que solo viven en prod.
-                    $imgSrc = Join-Path $StudioSrc "img\$slug"
+                    $imgSrc = Join-Path $htmlMatches[0].DirectoryName "img\$slug"
                     if (Test-Path $imgSrc) {
                         & robocopy $imgSrc (Join-Path $prodDir "img\$slug") /E /NJH /NJS /NDL /NP /NC /NS | Out-Null
                     }
@@ -224,7 +230,8 @@ if (Test-Path $ProdRoot) {
                 }
                 $prodOk++
             } else {
-                # Carpeta en la raiz sin HTML fuente en el repo (ej. solo capturas/teasers)
+                # Carpeta en la raiz sin HTML fuente en el repo (ej. solo capturas/teasers),
+                # o mas de un match (no deberia pasar, find_html tambien lo trataria como error)
                 $prodSkip++
             }
         }
