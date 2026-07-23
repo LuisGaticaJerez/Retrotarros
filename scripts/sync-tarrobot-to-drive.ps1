@@ -16,8 +16,10 @@
 #   - studio/_template-tarrobot-live.html
 #   - studio/_template-tarrobot-control.html
 #   - studio/_template-tarrobot-slide.html  (si existe)
-#   - studio/*.html (TODOS los HTMLs de episodios del canal · fix 2026-05-27)
-#   - studio/img/* recursive (imagenes de episodios, box arts, sprites)
+#   - (2026-07-23: studio/*.html, img/ y captures/ de episodios DEJARON de
+#     sincronizarse aca -- TarroBot ya no mantiene su propia copia del
+#     contenido de estudio. Ese contenido vive en G:\Mi unidad\Studio\ y se
+#     lee via RETROTARROS_STUDIO_ROOT, poblado por scripts/sync-to-drive.ps1)
 #   - studio/pautas/*.tarrobot.json + audio/*
 #   - studio/melodias/* (.mid, .midi, soundfont.sf2 si existe)
 #   - studio/shorts/tarroshort-*.mp4 (shorts finales · fix 2026-06-03; NO la carpeta audio/)
@@ -124,6 +126,7 @@ Sync-Item "scripts\tarroteaser.py"
 Sync-Item "scripts\teaser_jobs.py"
 Sync-Item "scripts\generate-teaser.py"
 Sync-Item "scripts\capture-slides.py"
+Sync-Item "scripts\_studio_layout.py"
 # Sprint 18: OBS healthcheck + auto-setup + auto-record + lower-thirds + CapCut Ready
 Sync-Item "scripts\obs_healthcheck.py"
 Sync-Item "scripts\obs_setup.py"
@@ -143,57 +146,9 @@ Sync-Item "studio\obs-aliases.json"
 Sync-Item "studio\tarrobot-recetas.json"
 Write-Host ""
 
-# 2b. HTMLs de EPISODIOS del canal (lo que se proyecta en grabacion)
-# FIX 2026-05-27: estos faltaban en el sync. Sin esto, Luis va al estudio,
-# abre n64-coleccion.html y no la encuentra. Sync masivo de todos los HTMLs
-# que NO empiezan con underscore (esos son templates internos).
-Write-Host "HTMLs de episodios:" -ForegroundColor Cyan
-$episodios = Get-ChildItem -Path (Join-Path $RepoRoot "studio") -Filter "*.html" -Recurse -File |
-    Where-Object { $_.Name -notlike "_*" -and $_.DirectoryName -notmatch '\\resenas($|\\)' }
-foreach ($ep in $episodios) {
-    $relPath = $ep.FullName.Substring($RepoRoot.Length + 1)
-    Sync-Item $relPath
-}
-Write-Host ""
-
-# 2b-bis. Resenas (carpeta APARTE studio\resenas\, no la raiz plana de studio\).
-# FIX 2026-07-21: el Get-ChildItem de arriba no es recursivo, asi que las resenas
-# quedaban fuera del sync sin este bloque.
-if (Test-Path (Join-Path $RepoRoot "studio\resenas")) {
-    Write-Host "Resenas:" -ForegroundColor Cyan
-    Sync-Item "studio\resenas" -Recursive
-    Write-Host ""
-}
-
-# 2c. Carpetas de imagenes de episodios (box arts, sprites, paneos)
-# Necesarias para que los HTMLs con <img src="img/..."> renderizen bien.
-# FIX 2026-07-21 (reorg): "studio\img" plano solo tiene resenas/ y thumbnails/
-# desde la reorganizacion; las imagenes por-episodio ahora viven en
-# "studio\<categoria>\img\<slug>\" (hermanas del HTML). Sync-Item plano de
-# "studio\img" dejaba de copiar el 90% de las box arts sin ningun error visible.
-# Recorremos TODAS las carpetas llamadas "img" bajo studio\ (incluye la raiz
-# resenas/thumbnails y cada carpeta anidada por categoria).
-Write-Host "Imagenes de episodios:" -ForegroundColor Cyan
-$imgDirs = Get-ChildItem -Path (Join-Path $RepoRoot "studio") -Directory -Recurse -Filter "img" -ErrorAction SilentlyContinue
-foreach ($imgDir in $imgDirs) {
-    $relPath = $imgDir.FullName.Substring($RepoRoot.Length + 1)
-    Sync-Item $relPath -Recursive
-}
-Write-Host ""
-
-# 2c-bis. Capturas PNG de slides (generadas por capture-slides.py). Las usa Luis
-# para edicion/CapCut y como respaldo de cada slide. Fix 2026-06-25: faltaban en el sync.
-# FIX 2026-07-21 (reorg): mismo problema que 2c -- las carpetas "captures\<slug>"
-# ahora viven anidadas por categoria, no en la raiz plana "studio\captures".
-Write-Host "Capturas de slides (PNG):" -ForegroundColor Cyan
-$capDirs = Get-ChildItem -Path (Join-Path $RepoRoot "studio") -Directory -Recurse -Filter "captures" -ErrorAction SilentlyContinue
-foreach ($capDir in $capDirs) {
-    $relPath = $capDir.FullName.Substring($RepoRoot.Length + 1)
-    Sync-Item $relPath -Recursive
-}
-Write-Host ""
-
-# 2d. CARPETAS DE PRODUCCION por episodio: "G:\Mi unidad\Studio\<slug>\"
+# 2b. CARPETAS DE PRODUCCION por episodio: "G:\Mi unidad\Studio\<slug>\"
+# (renombrado de "2d" a "2b" el 2026-07-23 al eliminar los bloques 2b/2b-bis/2c/2c-bis
+# que mirroreaban studio/ completo -- ver spec 2026-07-23-tarrobot-studio-root-split)
 # FIX 2026-06-19 (desfase): estas carpetas (la fuente de produccion de Luis) tenian
 # COPIAS del HTML y gameboxes que NADIE actualizaba -> se desfasaban del repo y del
 # sync. Ahora, para cada carpeta de produccion que exista, refrescamos el <slug>.html
@@ -381,6 +336,15 @@ Para usar desde el PC del estudio:
    data/tarrobot-database.json. Si la estructura quedo bien, queda
    guardado como RETROTARROS_REPO.
 
+2b. ADEMAS, configura la variable RETROTARROS_STUDIO_ROOT apuntando a
+    la raiz de Studio (el contenido real de episodios/shorts, NO esta
+    carpeta tarrobot). Corre una vez en el PC del estudio:
+
+      setx RETROTARROS_STUDIO_ROOT "$(Split-Path -Parent $Destino)"
+
+    Sin esto, TarroBot no encuentra las capturas/box arts de los
+    episodios (viven en Studio\, no en Studio\tarrobot\).
+
 3. De ahi en adelante, cualquier cambio que Luis haga en su PC y
    sincronice con este script va a aparecer automatico en el estudio.
 
@@ -402,4 +366,5 @@ Write-Host "configurada esta ruta en RETROTARROS_REPO)." -ForegroundColor White
 Write-Host ""
 Write-Host "En el estudio: para apuntar a esta carpeta, corre una vez:" -ForegroundColor Cyan
 Write-Host "  setx RETROTARROS_REPO `"$Destino`"" -ForegroundColor Yellow
+Write-Host "  setx RETROTARROS_STUDIO_ROOT `"$(Split-Path -Parent $Destino)`"" -ForegroundColor Yellow
 Write-Host ""
