@@ -108,7 +108,7 @@ formatos tiene el canal; se desactualiza rápido y no hay que reconstruirlo solo
 Resumen de formatos:
 
 - **Episodios largos** (15–25 min): 5 bloques, cierra con Koko tocando en batería. Cadencia: 1 cada 10–12 días. Sub-tipos con playlist propia en YouTube: **Rankings** (top mundial/precios por consola), **Colecciones**, **Sagas de videojuegos**, **Specials** (multi-consola, atados a fecha chilena).
-- **Abriendo el tarro**: entrevista a un coleccionista invitado (no Luis/Koko) mostrando su propia colección — de lo que sea, no solo videojuegos. Kit para el invitado en `docs/kit-coleccionista-abriendo-el-tarro.md`, formulario en `docs/abriendo-el-tarro-google-form.gs`, template `studio/_template-abriendo-el-tarro.html`.
+- **Abriendo el tarro**: entrevista a un coleccionista invitado (no Luis/Koko) mostrando su propia colección — de lo que sea, no solo videojuegos. Kit para el invitado en `docs/kit-coleccionista-abriendo-el-tarro.md`, formulario en `docs/abriendo-el-tarro-google-form.gs`, template `studio/templates/_template-abriendo-el-tarro.html`.
 - **Reseñas** (playlist nueva, desde 2026-07-21): un juego por video, ángulo retrospectivo ("¿envejeció bien?"), máximo 10 min, talento alterna Luis/Koko 1 y 1 (nunca juntos, nunca cierra con batería). Diseño completo en `docs/superpowers/specs/2026-07-21-resena-format-design.md`. Generador `scripts/resena_deck.py`, salida en `studio/resenas/<slug>.html` (carpeta aparte).
 - **Shorts**: TarroShorts (pipeline con TarroBot narrando, ver `docs/modus-operandi/convenciones-tarroshorts.md`) + shorts de B-roll simple + lane Luis (curiosidades históricas, solo) y lane Koko (batería, performance). Cadencia objetivo: 2–3/semana.
 - **Indie Lat**: entrevistas a devs indie latinoamericanos. Cierra con Koko tocando el tema del juego. Formato definido, sin episodios armados todavía.
@@ -204,7 +204,7 @@ Ejemplos reales ejecutados (2026-05-15):
 
 ## Capturas de slides para edición (regla obligatoria)
 
-Cada HTML del estudio (episodios en `studio/<categoria>/[<subcategoria>/]<slug>.html`, shorts en `studio/shorts-html/<categoria>/tarroshort-<slug>.html`) genera frames PNG 1920×1080 listos para meter directo en DaVinci/CapCut como B-roll / cortina entre tomas. Sin rebordes, texto crisp a 2x DPI.
+Cada HTML del estudio (episodios en `studio/<categoria>/[<subcategoria>/]<slug>.html`, shorts en `studio/shorts/shorts-html/<categoria>/tarroshort-<slug>.html`) genera frames PNG 1920×1080 listos para meter directo en DaVinci/CapCut como B-roll / cortina entre tomas. Sin rebordes, texto crisp a 2x DPI.
 
 **Comando (acepta el slug pelado, sin importar en qué carpeta de categoría viva el HTML):**
 ```powershell
