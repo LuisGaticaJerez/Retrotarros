@@ -71,6 +71,32 @@ if (-not (Test-Path $RepoStudio)) {
 # sync-tarrobot-to-drive.ps1.
 $RepoStudio = (Resolve-Path $RepoStudio).Path
 
+# FIX 2026-07-23: el repo va en kebab-case (nadie del equipo del estudio ve git),
+# pero en Drive Luis quiere que las carpetas de categoria empiecen con mayuscula
+# (navegacion visual para el PC de grabacion). Escribir el $relCategoria del repo
+# tal cual en Drive generaba duplicados reales cuando la palabra no calzaba SOLO
+# en mayus/minus -- ej. "top-mundial" (repo) vs "Top Mundial" (carpeta que Luis ya
+# tenia armada a mano, con espacio en vez de guion): a Windows le parecen carpetas
+# distintas y nunca se fusionan, asi que quedaban DOS copias completas de cada
+# episodio. Con esta funcion, todo lo que escribe este script a Drive pasa por la
+# misma transformacion, consistente siempre, para que jamas se generen esas
+# variantes divergentes.
+function Get-DriveCategoryPath {
+    param([string]$RelCategoria)
+    if (-not $RelCategoria) { return $RelCategoria }
+    $segmentos = $RelCategoria -split '\\' | ForEach-Object {
+        switch ($_) {
+            "top-mundial" { "Top Mundial" }
+            "top-precios" { "Top Precios" }
+            default {
+                if ($_.Length -gt 0) { $_.Substring(0,1).ToUpperInvariant() + $_.Substring(1) }
+                else { $_ }
+            }
+        }
+    }
+    return ($segmentos -join '\')
+}
+
 if (-not (Test-Path $DriveRoot)) {
     New-Item -ItemType Directory -Path $DriveRoot -Force | Out-Null
     Write-Host "Creada carpeta raíz en Drive: $DriveRoot" -ForegroundColor Green
@@ -95,7 +121,8 @@ foreach ($html in $htmlFiles) {
         continue
     }
     $relCategoria = $html.DirectoryName.Substring($RepoStudio.Length).TrimStart('\')
-    $destDir = if ($relCategoria) { Join-Path $DriveRoot (Join-Path $relCategoria $slug) } else { Join-Path $DriveRoot $slug }
+    $driveCategoria = Get-DriveCategoryPath $relCategoria
+    $destDir = if ($driveCategoria) { Join-Path $DriveRoot (Join-Path $driveCategoria $slug) } else { Join-Path $DriveRoot $slug }
     $destImgDir = Join-Path $destDir "img\$slug"
     $destCapturesDir = Join-Path $destDir "captures"
     $srcImgDir = Join-Path $html.DirectoryName "img\$slug"
@@ -150,7 +177,7 @@ if (Test-Path $resenasDir) {
     $srcResenaImg = Join-Path $resenasDir "img\resenas"
     foreach ($html in $resenaHtmlFiles) {
         $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
-        $destDir = Join-Path $DriveRoot (Join-Path "resenas" $slug)
+        $destDir = Join-Path $DriveRoot (Join-Path (Get-DriveCategoryPath "resenas") $slug)
         if (-not (Test-Path $destDir)) {
             New-Item -ItemType Directory -Path $destDir -Force | Out-Null
         }
@@ -186,10 +213,11 @@ foreach ($html in $allHtmlFiles) {
     # destino a mano en vez de via $relCategoria para no depender de que
     # $resenasDir siga siendo hijo directo de $RepoStudio.
     if ($html.DirectoryName -match '\\resenas($|\\)') {
-        $destSlugDir = Join-Path $DriveRoot (Join-Path "resenas" $slug)
+        $destSlugDir = Join-Path $DriveRoot (Join-Path (Get-DriveCategoryPath "resenas") $slug)
     } else {
         $relCategoria = $html.DirectoryName.Substring($RepoStudio.Length).TrimStart('\')
-        $destSlugDir = if ($relCategoria) { Join-Path $DriveRoot (Join-Path $relCategoria $slug) } else { Join-Path $DriveRoot $slug }
+        $driveCategoria = Get-DriveCategoryPath $relCategoria
+        $destSlugDir = if ($driveCategoria) { Join-Path $DriveRoot (Join-Path $driveCategoria $slug) } else { Join-Path $DriveRoot $slug }
     }
     $destHtml = Join-Path $destSlugDir "$slug.html"
     if (-not (Test-Path $destHtml)) { $faltantes += $slug }
