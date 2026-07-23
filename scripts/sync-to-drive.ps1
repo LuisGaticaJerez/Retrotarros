@@ -14,11 +14,18 @@
 #   pautas/discusion-<slug>.docx
 # Ejemplo: rankings/top-precios/n64-top-precios/n64-top-precios.html
 #
-# Excepcion RESENAS (studio\resenas\*.html): el HTML aterriza igual en su propia
-# carpeta <slug>/, y la box art (compartida POR JUEGO, no por episodio) se copia
-# DENTRO de cada carpeta <slug>/img/resenas/ (el HTML referencia "img/resenas/<key>.jpg",
-# sin "../", desde que Luis reorganizo studio\img\resenas\ -> studio\resenas\img\resenas\
-# el 2026-07-23).
+# Excepcion RESENAS (studio\resenas\*.html): igual que el resto, el HTML aterriza
+# en resenas\<slug>\, pero la box art (compartida POR JUEGO, no por episodio) se
+# copia DENTRO de cada carpeta resenas\<slug>\img\resenas\ (el HTML referencia
+# "img/resenas/<key>.jpg", sin "../", desde que Luis reorganizo
+# studio\img\resenas\ -> studio\resenas\img\resenas\ el 2026-07-23).
+# FIX 2026-07-23 (2): antes aterrizaba PLANO en la raiz del Drive ($DriveRoot\$slug\),
+# lo que dejaba las resenas afuera de la carpeta Resenas\ que Luis arma a mano en
+# Drive. Ahora nido bajo resenas\ como cualquier otra categoria.
+#
+# Excepcion TARROBOT-OUT (studio\tarrobot-out\*.html): decks de prueba/debug que
+# genera TarroBot al vuelo (gitignored, no son episodios reales). Se excluyen del
+# barrido generico para que no aparezcan como categoria falsa en la raiz del Drive.
 #
 # Requiere: pandoc instalado (winget install JohnMacFarlane.Pandoc)
 
@@ -78,7 +85,7 @@ Write-Host "`n[1/2] Copiando HTML + imágenes..." -ForegroundColor Yellow
 # Recursivo: los episodios y shorts viven en subcarpetas por categoria desde
 # 2026-07-21 (rankings/top-precios/, colecciones/, shorts-html/datos/, etc.)
 $htmlFiles = Get-ChildItem -Path $RepoStudio -Filter "*.html" -File -Recurse |
-    Where-Object { $_.DirectoryName -notmatch '\\resenas($|\\)' }
+    Where-Object { $_.DirectoryName -notmatch '\\resenas($|\\)' -and $_.DirectoryName -notmatch '\\tarrobot-out($|\\)' }
 
 foreach ($html in $htmlFiles) {
     $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
@@ -143,7 +150,7 @@ if (Test-Path $resenasDir) {
     $srcResenaImg = Join-Path $resenasDir "img\resenas"
     foreach ($html in $resenaHtmlFiles) {
         $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
-        $destDir = Join-Path $DriveRoot $slug
+        $destDir = Join-Path $DriveRoot (Join-Path "resenas" $slug)
         if (-not (Test-Path $destDir)) {
             New-Item -ItemType Directory -Path $destDir -Force | Out-Null
         }
@@ -175,13 +182,11 @@ $faltantes = @()
 foreach ($html in $allHtmlFiles) {
     $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
     if ($slug.StartsWith("_")) { continue }
-    # Las resenas (bloque 1b) se copian PLANAS ($DriveRoot\$slug\, sin carpeta
-    # de categoria) porque comparten box art por juego via ../img/resenas/. No
-    # calcular $relCategoria para ellas o la verificacion las daria por
-    # "faltantes" aunque el HTML si esta en el Drive (mismatch con el destino
-    # real que arma el bloque 1b mas arriba, que no se toca en este cambio).
+    # Las resenas (bloque 1b) se copian bajo resenas\$slug\ -- calcular el mismo
+    # destino a mano en vez de via $relCategoria para no depender de que
+    # $resenasDir siga siendo hijo directo de $RepoStudio.
     if ($html.DirectoryName -match '\\resenas($|\\)') {
-        $destSlugDir = Join-Path $DriveRoot $slug
+        $destSlugDir = Join-Path $DriveRoot (Join-Path "resenas" $slug)
     } else {
         $relCategoria = $html.DirectoryName.Substring($RepoStudio.Length).TrimStart('\')
         $destSlugDir = if ($relCategoria) { Join-Path $DriveRoot (Join-Path $relCategoria $slug) } else { Join-Path $DriveRoot $slug }

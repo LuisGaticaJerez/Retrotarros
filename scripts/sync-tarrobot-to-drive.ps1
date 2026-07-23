@@ -209,6 +209,15 @@ Write-Host "Melodias (MIDIs + soundfont):" -ForegroundColor Cyan
 Sync-Item "studio\melodias" -Recursive
 Write-Host ""
 
+# 5a. Cache de salida de TarroBot (decks de prueba + TTS cacheado). Es dato propio
+# de la app, no contenido de estudio -- se quedo sin sync desde que Task 6 saco los
+# bloques que mirroreaban studio/ completo (2026-07-23). Sin esto, el sync generico
+# (sync-to-drive.ps1) lo recogia por error como si fuera una categoria de episodios
+# mas en la raiz del Drive (tenia 2 HTML de prueba sueltos ahi).
+Write-Host "Cache de salida TarroBot (TTS + decks de prueba):" -ForegroundColor Cyan
+Sync-Item "studio\tarrobot-out" -Recursive
+Write-Host ""
+
 # 5b. Shorts verticales (MP4 finales de TarroShort). Solo los tarroshort-*.mp4,
 #     NO la carpeta audio/ (intermedios de render). Fix 2026-06-03.
 Write-Host "Shorts TarroShort (MP4 finales):" -ForegroundColor Cyan
