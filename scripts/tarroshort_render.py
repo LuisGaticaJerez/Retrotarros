@@ -62,7 +62,7 @@ def _resolve_repo() -> Path:
 
 import sys as _sys
 _sys.path.insert(0, str(_resolve_repo() / "scripts"))
-from _studio_layout import find_html, episode_category, short_category
+from _studio_layout import STUDIO, find_html, episode_category, short_category
 
 
 def _resolve_ffmpeg() -> str:
@@ -526,7 +526,7 @@ def construir_desde_pauta(pauta_slug: str, out_slug=None, formato=None,
     deck = '<div class="deck" id="deck">\n\n' + "\n\n".join(slides) + "\n\n</div>\n\n"
     html = head + deck + foot
 
-    out_dir = repo / "studio" / "shorts-html" / short_category(f"tarroshort-{out_slug}")
+    out_dir = STUDIO / "shorts-html" / short_category(f"tarroshort-{out_slug}")
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / f"tarroshort-{out_slug}.html"
     out_path.write_text(html, encoding="utf-8")
@@ -668,7 +668,7 @@ def construir_short_highlights(source_slug: str, formato: str, out_slug=None,
 
     deck = '<div class="deck" id="deck">\n\n' + "\n\n".join(slides) + "\n\n</div>\n\n"
     cat = "colecciones" if formato == "coleccion" else "abriendo-el-tarro"
-    out_dir = repo / "studio" / "shorts-html" / cat
+    out_dir = STUDIO / "shorts-html" / cat
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / f"tarroshort-{out_slug}.html"
     out_path.write_text(head + deck + foot, encoding="utf-8")
