@@ -48,6 +48,11 @@ def _resolve_repo() -> Path:
     return Path(__file__).resolve().parent.parent
 
 
+import sys as _sys
+_sys.path.insert(0, str(_resolve_repo() / "scripts"))
+from _studio_layout import STUDIO, find_html
+
+
 def capcut_ready_dir(slug: str) -> Path:
     return _resolve_repo() / "recordings" / slug / "capcut-ready"
 
@@ -73,8 +78,7 @@ def _find_master(slug: str) -> Optional[Path]:
 
 def _find_teaser(slug: str) -> Optional[Path]:
     """Teaser generado por TarroTeaser."""
-    repo = _resolve_repo()
-    teaser_dir = repo / "studio" / "teasers" / slug
+    teaser_dir = STUDIO / "teasers" / slug
     if not teaser_dir.exists():
         return None
     candidates = sorted(
@@ -90,8 +94,11 @@ def _find_teaser(slug: str) -> Optional[Path]:
 
 def _find_cartelas(slug: str) -> list[Path]:
     """Cartelas PNG del slide del estudio (capture-slides output)."""
-    repo = _resolve_repo()
-    cap_dir = repo / "studio" / "captures" / slug
+    try:
+        html_path = find_html(slug)
+    except (FileNotFoundError, FileExistsError):
+        return []
+    cap_dir = html_path.parent / "captures" / slug
     if not cap_dir.exists():
         return []
     return sorted(cap_dir.glob("*.png"))
