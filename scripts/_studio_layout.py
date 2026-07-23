@@ -6,6 +6,7 @@ reorganizacion de 2026-07-21. Importado por los generadores de deck, el render
 de TarroShorts, y capture-slides.py -- no se repite esta logica en cada script.
 """
 from __future__ import annotations
+import os
 import re
 from pathlib import Path
 
@@ -18,8 +19,17 @@ def _repo() -> Path:
     return here.parent.parent
 
 
+def _studio_root() -> Path:
+    env = os.environ.get("RETROTARROS_STUDIO_ROOT")
+    if env:
+        p = Path(env)
+        if p.is_dir():
+            return p
+    return REPO / "studio"
+
+
 REPO = _repo()
-STUDIO = REPO / "studio"
+STUDIO = _studio_root()
 
 # Orden importa: se evalua de arriba a abajo, la primera regla que matchea gana.
 EPISODE_CATEGORY_RULES: list[tuple[str, str]] = [
