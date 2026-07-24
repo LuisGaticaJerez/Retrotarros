@@ -48,6 +48,8 @@ SHORT_CATEGORY_RULES: list[tuple[str, str]] = [
     (r"^tarroshort-datos-", "datos"),
     (r"^tarroshort-mas-caros-historia$", "cross-console"),
     (r"^tarroshort-mejor-consola-retro", "cross-console"),
+    (r"^tarroshort-mejor-mario-retro$", "cross-console"),
+    (r"^tarroshort-mejor-zelda-retro$", "cross-console"),
     (r"^tarroshort-.*-top-mundial$", "rankings/top-mundial"),
     (r"^tarroshort-.*-top-precios$", "rankings/top-precios"),
     (r"^tarroshort-.*-coleccion$", "colecciones"),
