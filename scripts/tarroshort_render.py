@@ -196,8 +196,15 @@ def generar_tarroshort(slug: str, voice: str = VOZ_DEFAULT, pitch: str = PITCH_D
     # Si llega el slug pelado (ej. 'n64-top-mundial') y existe el short
     # correspondiente, auto-corregimos para no renderizar el deck del episodio
     # (16:9 horizontal) por error.
-    if not slug.startswith("tarroshort-") and (studio / f"tarroshort-{slug}.html").exists():
-        slug = f"tarroshort-{slug}"
+    # FIX 2026-07-23: el Test-Path plano (studio/tarroshort-<slug>.html) ya no
+    # calza desde que los shorts viven anidados por categoria -- find_html()
+    # busca recursivo, igual que el resto del pipeline post-reorg.
+    if not slug.startswith("tarroshort-"):
+        try:
+            find_html(f"tarroshort-{slug}")
+            slug = f"tarroshort-{slug}"
+        except (FileNotFoundError, FileExistsError):
+            pass
     try:
         html_path = find_html(slug)
     except FileNotFoundError:

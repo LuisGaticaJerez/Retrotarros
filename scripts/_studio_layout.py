@@ -46,7 +46,8 @@ EPISODE_CATEGORY_RULES: list[tuple[str, str]] = [
 
 SHORT_CATEGORY_RULES: list[tuple[str, str]] = [
     (r"^tarroshort-datos-", "datos"),
-    (r"^tarroshort-(mas-caros-historia|mejor-consola-retro)$", "cross-console"),
+    (r"^tarroshort-mas-caros-historia$", "cross-console"),
+    (r"^tarroshort-mejor-consola-retro", "cross-console"),
     (r"^tarroshort-.*-top-mundial$", "rankings/top-mundial"),
     (r"^tarroshort-.*-top-precios$", "rankings/top-precios"),
     (r"^tarroshort-.*-coleccion$", "colecciones"),
