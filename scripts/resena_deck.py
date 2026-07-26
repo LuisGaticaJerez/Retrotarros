@@ -4,25 +4,27 @@ Genera el deck del formato RESENA: retrospectiva de UN solo juego ("¿envejecio
 bien?"), <=10 min, talento alterna Luis/Koko 1 y 1 (nunca los dos juntos, nunca
 cierra con bateria). Aprobado con Luis 2026-07-21 via brainstorming skill.
 
-Estructura (7 slides fijas, sin excepciones, + 1 opcional):
+Estructura (8 slides fijas, sin excepciones):
   01 PORTADA        - SOLO "RESEÑA RETROTARRISTICA" + titulo del juego. NUNCA
                        el nombre del presentador (se identifica hablando).
   02 FICHA TECNICA  - box art + consola/anio/developer/genero + EN COLECCION.
                        Si no hay box art real (regla: nunca logo/artwork promo),
                        usa fallback con tarjeta de color (ver _ficha_cart).
   03 CONTEXTO       - que prometia el juego en su epoca.
-  [03b COMPARATIVA] - OPCIONAL (data["comparativa"] = {"titulo","dato"}). Dos
-                       TarroVision lado a lado + VS al medio, para contexto
-                       historico que se compara mejor viendolo lado a lado
-                       (ej. arcade original vs puerto casero, original vs
-                       secuela). Las namebox bajo cada pantalla quedan VACIAS
-                       a proposito: el nombre se escribe encima en la edicion
-                       posterior, nunca se hardcodea en el HTML/capture
-                       (regla Luis 2026-07-26). Si no se pasa, no aparece.
-  04 TARROVISION 1  - jugabilidad hoy (gameplay placeholder + dato).
-  05 TARROVISION 2  - graficos/sonido hoy (gameplay placeholder + dato).
-  06 VEREDICTO      - etiqueta cualitativa grande + resumen.
-  07 CIERRE         - suscribete + campana. NUNCA bateria.
+  04 COMPARATIVA    - OBLIGATORIO en toda resena (regla Luis 2026-07-26).
+                       data["comparativa"] = {"dato": "..."}. Dos TarroVision
+                       lado a lado + VS al medio, para contexto historico que
+                       se compara mejor viendolo lado a lado (ej. arcade
+                       original vs puerto casero, original vs secuela, version
+                       occidental vs japonesa). Titulo SIEMPRE "COMPARATIVA",
+                       agnostico sin importar que se compare. Las namebox bajo
+                       cada pantalla quedan VACIAS a proposito: el nombre se
+                       escribe encima en la edicion posterior, nunca se
+                       hardcodea en el HTML/capture.
+  05 TARROVISION 1  - jugabilidad hoy (gameplay placeholder + dato).
+  06 TARROVISION 2  - graficos/sonido hoy (gameplay placeholder + dato).
+  07 VEREDICTO      - etiqueta cualitativa grande + resumen.
+  08 CIERRE         - suscribete + campana. NUNCA bateria.
 
 Capa de notas (tecla N / boton / click derecho oculto) copiada 1:1 del patron
 de los episodios SEGA (studio/master-system-top-mundial.html) - no reinventar.
@@ -157,15 +159,16 @@ def _slide_tarrovision(num: int, titulo: str, ch: int, dato: str, notas_bloque, 
     )
 
 
-def _slide_tarrovision_dual(num: int, titulo: str, ch_a: int, ch_b: int, dato: str, notas_bloque, data: dict) -> str:
+def _slide_tarrovision_dual(num: int, ch_a: int, ch_b: int, dato: str, notas_bloque, data: dict) -> str:
     """Slide de comparativa (2 TarroVision lado a lado + VS al medio), para
     contexto historico (ej. arcade vs puerto casero, original vs secuela).
-    Las namebox quedan VACIAS a proposito -- el nombre se escribe encima en
-    la edicion posterior, no se hardcodea en el HTML (regla Luis 2026-07-26)."""
+    Titulo SIEMPRE "COMPARATIVA" -- agnostico, sin importar que se compare
+    (regla Luis 2026-07-26). Las namebox quedan VACIAS a proposito -- el
+    nombre se escribe encima en la edicion posterior, no se hardcodea."""
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
-        f'<div class="gp-head"><div class="gp-title">{_esc(titulo)}</div>'
-        f'<div class="gp-meta">{_esc(data["consola"]).upper()} · {_esc(data["anio"])} · COMPARATIVA</div></div>'
+        '<div class="gp-head"><div class="gp-title">COMPARATIVA</div>'
+        f'<div class="gp-meta">{_esc(data["consola"]).upper()} · {_esc(data["anio"])}</div></div>'
         '<div class="dual-grid">'
         f'<div class="dual-cell">{_tv(ch_a)}<div class="tv-namebox"></div></div>'
         '<div class="dual-vs">VS</div>'
@@ -212,78 +215,78 @@ CSS = """
 html,body{height:100%;overflow:hidden;background:var(--dk);font-family:'Share Tech Mono',monospace;color:var(--bo)}
 body{background-image:radial-gradient(ellipse 100% 50% at 50% -5%,rgba(255,46,136,.12) 0,transparent 65%),repeating-linear-gradient(0deg,transparent 0 39px,rgba(255,255,255,.014) 39px 40px),repeating-linear-gradient(90deg,transparent 0 39px,rgba(255,255,255,.014) 39px 40px)}
 header{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;background:rgba(6,3,15,.97);border-bottom:2px solid var(--mg);display:flex;align-items:center;justify-content:space-between;padding:0 28px}
-.hdr-logo{font-family:'Orbitron';font-weight:900;font-size:20px;color:var(--mg);text-shadow:0 0 14px rgba(255,46,136,.6);letter-spacing:3px}
-.hdr-tag{font-family:'Share Tech Mono';font-size:12px;color:var(--ye);letter-spacing:3px}
-.hdr-rec{display:flex;align-items:center;gap:8px;font-family:'Press Start 2P';font-size:8px;color:var(--mg)}
+.hdr-logo{font-family:'Orbitron';font-weight:900;font-size:23px;color:var(--mg);text-shadow:0 0 14px rgba(255,46,136,.6);letter-spacing:3px}
+.hdr-tag{font-family:'Share Tech Mono';font-size:14px;color:var(--ye);letter-spacing:3px}
+.hdr-rec{display:flex;align-items:center;gap:8px;font-family:'Press Start 2P';font-size:9px;color:var(--mg)}
 .dot{width:10px;height:10px;background:var(--mg);border-radius:50%;animation:blink 1.2s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
 .deck{position:fixed;top:56px;left:0;right:0;bottom:64px;overflow:hidden;cursor:pointer}
 .slide{position:absolute;inset:0;padding:24px 40px;opacity:0;pointer-events:none;transition:opacity .22s;display:flex;flex-direction:column}
 .slide.active{opacity:1;pointer-events:auto}
-.slide-num{position:absolute;top:14px;right:22px;font-family:'Press Start 2P';font-size:9px;color:rgba(255,255,255,.22);letter-spacing:2px}
+.slide-num{position:absolute;top:14px;right:22px;font-family:'Press Start 2P';font-size:10px;color:rgba(255,255,255,.22);letter-spacing:2px}
 
 /* PORTADA (sin nombre de presentador: se identifica hablando, no en pantalla) */
 .portada{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.portada .ep-tag{font-family:'Press Start 2P';font-size:13px;color:var(--cy);letter-spacing:5px;margin-bottom:24px}
-.portada .ep-title{font-family:'Orbitron';font-weight:900;font-size:78px;line-height:1;color:#fff;margin-bottom:20px}
-.portada .ep-sub{font-family:'Share Tech Mono';font-size:22px;color:var(--ye);letter-spacing:2px;max-width:1100px}
+.portada .ep-tag{font-family:'Press Start 2P';font-size:15px;color:var(--cy);letter-spacing:5px;margin-bottom:24px}
+.portada .ep-title{font-family:'Orbitron';font-weight:900;font-size:90px;line-height:1;color:#fff;margin-bottom:20px}
+.portada .ep-sub{font-family:'Share Tech Mono';font-size:25px;color:var(--ye);letter-spacing:2px;max-width:1100px}
 
 /* FICHA TECNICA */
 .ficha-detail{flex:1;display:grid;grid-template-columns:380px 1fr;gap:40px;align-items:center;padding:0 30px;min-height:0}
 .ficha-cart{display:flex;align-items:center;justify-content:center;height:100%}
 .ficha-cart img{max-height:420px;max-width:100%;border:3px solid rgba(255,255,255,.85);border-radius:8px;box-shadow:0 18px 50px rgba(0,0,0,.7)}
 .ficha-fallback{width:100%;max-width:340px;aspect-ratio:3/4;background:linear-gradient(160deg,var(--mg),#7a0044);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;box-shadow:0 18px 50px rgba(0,0,0,.7);border:3px solid rgba(255,255,255,.3)}
-.ficha-fallback .ff-title{font-family:'Orbitron';font-weight:900;font-size:26px;color:#fff;line-height:1.15;margin-bottom:14px}
-.ficha-fallback .ff-sub{font-family:'Press Start 2P';font-size:10px;color:rgba(255,255,255,.85);letter-spacing:2px}
+.ficha-fallback .ff-title{font-family:'Orbitron';font-weight:900;font-size:30px;color:#fff;line-height:1.15;margin-bottom:14px}
+.ficha-fallback .ff-sub{font-family:'Press Start 2P';font-size:12px;color:rgba(255,255,255,.85);letter-spacing:2px}
 .ficha-info{display:flex;flex-direction:column;gap:18px}
-.ficha-title{font-family:'Orbitron';font-weight:900;font-size:50px;color:#fff;line-height:1.05}
+.ficha-title{font-family:'Orbitron';font-weight:900;font-size:57px;color:#fff;line-height:1.05}
 .ficha-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:20px 24px}
-.ficha-stat .lbl{display:block;font-family:'Press Start 2P';font-size:9px;color:var(--cy);letter-spacing:2px;margin-bottom:7px}
-.ficha-stat .val{font-family:'Share Tech Mono';font-size:22px;color:#fff}
-.ficha-owned{align-self:flex-start;font-family:'Orbitron';font-weight:900;font-size:28px;color:var(--dk);background:var(--ye);padding:9px 24px;border-radius:5px;letter-spacing:1px;box-shadow:0 0 22px rgba(255,210,63,.6)}
-.ficha-owned.faltan{color:var(--bo);background:transparent;border:2px solid rgba(255,255,255,.3);box-shadow:none;font-size:22px}
+.ficha-stat .lbl{display:block;font-family:'Press Start 2P';font-size:10px;color:var(--cy);letter-spacing:2px;margin-bottom:7px}
+.ficha-stat .val{font-family:'Share Tech Mono';font-size:25px;color:#fff}
+.ficha-owned{align-self:flex-start;font-family:'Orbitron';font-weight:900;font-size:32px;color:var(--dk);background:var(--ye);padding:9px 24px;border-radius:5px;letter-spacing:1px;box-shadow:0 0 22px rgba(255,210,63,.6)}
+.ficha-owned.faltan{color:var(--bo);background:transparent;border:2px solid rgba(255,255,255,.3);box-shadow:none;font-size:25px}
 
 /* CONTEXTO DE EPOCA */
 .contexto{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:28px;padding:0 60px}
-.contexto .ctx-tag{font-family:'Press Start 2P';font-size:13px;color:var(--mg);letter-spacing:5px}
-.contexto .ctx-year{font-family:'Orbitron';font-weight:900;font-size:58px;color:#fff}
+.contexto .ctx-tag{font-family:'Press Start 2P';font-size:15px;color:var(--mg);letter-spacing:5px}
+.contexto .ctx-year{font-family:'Orbitron';font-weight:900;font-size:67px;color:#fff}
 .contexto .ctx-year b{color:var(--ye)}
-.contexto .ctx-body{font-family:'Share Tech Mono';font-size:26px;line-height:1.6;color:rgba(255,255,255,.92);max-width:1300px;background:rgba(255,255,255,.04);border-left:4px solid var(--mg);padding:26px 34px;text-align:left}
+.contexto .ctx-body{font-family:'Share Tech Mono';font-size:30px;line-height:1.6;color:rgba(255,255,255,.92);max-width:1300px;background:rgba(255,255,255,.04);border-left:4px solid var(--mg);padding:26px 34px;text-align:left}
 
 /* TARROVISION */
 .gp-head{text-align:center;flex:none;padding-top:6px;margin-bottom:8px}
-.gp-title{font-family:'Orbitron';font-weight:900;font-size:40px;color:#fff;line-height:1}
-.gp-meta{font-family:'Share Tech Mono';font-size:15px;color:var(--ye);letter-spacing:3px;margin-top:4px}
+.gp-title{font-family:'Orbitron';font-weight:900;font-size:46px;color:#fff;line-height:1}
+.gp-meta{font-family:'Share Tech Mono';font-size:17px;color:var(--ye);letter-spacing:3px;margin-top:4px}
 .gp-body{flex:1;display:grid;grid-template-columns:1fr 440px;gap:40px;align-items:center;min-height:0;padding:0 16px 8px}
 .gp-tv{height:100%;display:flex;align-items:center;justify-content:center;min-height:0}
 .gp-tv .tarrovision{height:min(100%,640px);aspect-ratio:4/3;max-width:100%}
 .gp-side{display:flex;flex-direction:column;gap:18px}
-.gp-dato{background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:20px 24px;font-family:'Share Tech Mono';font-size:22px;line-height:1.6;color:rgba(255,255,255,.92)}
-.gp-dato .lbl{display:block;font-family:'Press Start 2P';font-size:9px;color:var(--cy);letter-spacing:2px;margin-bottom:10px}
+.gp-dato{background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:20px 24px;font-family:'Share Tech Mono';font-size:25px;line-height:1.6;color:rgba(255,255,255,.92)}
+.gp-dato .lbl{display:block;font-family:'Press Start 2P';font-size:10px;color:var(--cy);letter-spacing:2px;margin-bottom:10px}
 .tarrovision{position:relative;background:linear-gradient(180deg,#1a1a1f,#0d0d12);border-radius:22px;padding:20px 24px;box-shadow:0 0 0 2px rgba(255,255,255,.04),0 22px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08),inset 0 -2px 0 rgba(0,0,0,.4);display:grid;grid-template-rows:auto 1fr auto;gap:12px}
 
 /* TARROVISION VS (comparativa dual, regla Luis 2026-07-26) */
 .dual-grid{flex:1;display:flex;justify-content:center;align-items:center;gap:56px;min-height:0;padding:0 12px 8px}
 .dual-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;min-height:0}
 .dual-cell .tarrovision{height:min(100%,480px);aspect-ratio:4/3;max-width:100%}
-.dual-vs{font-family:'Orbitron';font-weight:900;font-size:44px;color:var(--ye);text-shadow:0 0 18px rgba(255,210,63,.55);flex:0 0 auto}
+.dual-vs{font-family:'Orbitron';font-weight:900;font-size:51px;color:var(--ye);text-shadow:0 0 18px rgba(255,210,63,.55);flex:0 0 auto}
 /* namebox VACIA a proposito: solo el marco, el nombre se escribe encima en la edicion */
 .tv-namebox{display:inline-flex;align-items:center;justify-content:center;padding:8px 24px;border:1px solid var(--ye);background:rgba(255,210,63,.04);position:relative;border-radius:2px;max-width:90%;min-width:220px;min-height:46px}
 .tv-namebox::before,.tv-namebox::after{content:"";position:absolute;width:7px;height:7px;background:var(--dk);border:1px solid var(--ye)}
 .tv-namebox::before{top:-4px;left:-4px}
 .tv-namebox::after{bottom:-4px;right:-4px}
-.gp-dato-dual{flex:none;background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:16px 24px;font-family:'Share Tech Mono';font-size:19px;line-height:1.5;color:rgba(255,255,255,.92);margin:0 16px}
-.gp-dato-dual .lbl{display:block;font-family:'Press Start 2P';font-size:9px;color:var(--cy);letter-spacing:2px;margin-bottom:8px}
+.gp-dato-dual{flex:none;background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:16px 24px;font-family:'Share Tech Mono';font-size:22px;line-height:1.5;color:rgba(255,255,255,.92);margin:0 16px}
+.gp-dato-dual .lbl{display:block;font-family:'Press Start 2P';font-size:10px;color:var(--cy);letter-spacing:2px;margin-bottom:8px}
 .tv-controls-top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 6px}
 .tv-led{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ff8fb8,var(--mg) 60%,#7a0030);box-shadow:0 0 10px rgba(255,46,136,.8)}
-.tv-brand{flex:1;text-align:center;font-family:'Press Start 2P';font-size:12px;color:var(--ye);letter-spacing:4px}
-.tv-channel{font-family:'Share Tech Mono';font-size:12px;color:var(--cy);padding:4px 10px;border:1px solid rgba(0,229,255,.4);background:rgba(0,229,255,.06)}
+.tv-brand{flex:1;text-align:center;font-family:'Press Start 2P';font-size:14px;color:var(--ye);letter-spacing:4px}
+.tv-channel{font-family:'Share Tech Mono';font-size:14px;color:var(--cy);padding:4px 10px;border:1px solid rgba(0,229,255,.4);background:rgba(0,229,255,.06)}
 .tv-screen{position:relative;background:#2a2a2f;border-radius:14px;padding:16px;box-shadow:inset 0 0 0 2px #3a3a3f,inset 0 0 14px rgba(0,0,0,.6);min-height:0}
 .tv-screen-inner{position:relative;width:100%;height:100%;background:#000;border-radius:18px/8px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),inset 0 0 40px rgba(0,0,0,.95)}
 .tv-screen-inner::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0 2px,rgba(0,0,0,.18) 2px 3px);z-index:3;mix-blend-mode:multiply}
 .tv-noscreen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 50%,rgba(45,27,105,.6),#000 80%);color:rgba(255,255,255,.35);text-align:center;padding:30px;z-index:2}
-.tv-noscreen-big{font-family:'Press Start 2P';font-size:18px;color:var(--mg);letter-spacing:4px;margin-bottom:12px;text-shadow:0 0 12px rgba(255,46,136,.5)}
-.tv-noscreen-sub{font-family:'Share Tech Mono';font-size:12px;color:rgba(0,229,255,.55)}
+.tv-noscreen-big{font-family:'Press Start 2P';font-size:21px;color:var(--mg);letter-spacing:4px;margin-bottom:12px;text-shadow:0 0 12px rgba(255,46,136,.5)}
+.tv-noscreen-sub{font-family:'Share Tech Mono';font-size:14px;color:rgba(0,229,255,.55)}
 .tv-controls-bottom{display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:14px;padding:4px 6px 0}
 .tv-knob{width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#5a5a60,#2a2a30 60%,#0a0a0e);box-shadow:inset 0 1px 0 rgba(255,255,255,.15),inset 0 -2px 0 rgba(0,0,0,.4),0 2px 4px rgba(0,0,0,.6);position:relative}
 .tv-knob::after{content:"";position:absolute;top:6px;left:50%;width:2px;height:10px;background:var(--ye);transform:translateX(-50%) rotate(45deg)}
@@ -292,42 +295,42 @@ header{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;background:rg
 
 /* VEREDICTO */
 .veredicto{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:30px}
-.veredicto .ver-pre{font-family:'Press Start 2P';font-size:13px;color:var(--cy);letter-spacing:5px}
-.veredicto .ver-tag{font-family:'Orbitron';font-weight:900;font-size:66px;color:var(--dk);background:var(--ye);padding:22px 52px;border-radius:8px;letter-spacing:2px;box-shadow:0 0 40px rgba(255,210,63,.6)}
-.veredicto .ver-resumen{font-family:'Share Tech Mono';font-size:24px;line-height:1.6;color:rgba(255,255,255,.92);max-width:1100px}
+.veredicto .ver-pre{font-family:'Press Start 2P';font-size:15px;color:var(--cy);letter-spacing:5px}
+.veredicto .ver-tag{font-family:'Orbitron';font-weight:900;font-size:76px;color:var(--dk);background:var(--ye);padding:22px 52px;border-radius:8px;letter-spacing:2px;box-shadow:0 0 40px rgba(255,210,63,.6)}
+.veredicto .ver-resumen{font-family:'Share Tech Mono';font-size:28px;line-height:1.6;color:rgba(255,255,255,.92);max-width:1100px}
 
 /* DIVIDER (cierre) */
 .divider{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.divider .pre{font-family:'Press Start 2P';font-size:12px;letter-spacing:6px;margin-bottom:22px}
+.divider .pre{font-family:'Press Start 2P';font-size:14px;letter-spacing:6px;margin-bottom:22px}
 .divider .pre.cy{color:var(--cy)}.divider .pre.mg{color:var(--mg)}
-.divider .title{font-family:'Orbitron';font-weight:900;font-size:66px;line-height:1;color:#fff;margin-bottom:20px}
+.divider .title{font-family:'Orbitron';font-weight:900;font-size:76px;line-height:1;color:#fff;margin-bottom:20px}
 .divider .title.cy{color:var(--cy);text-shadow:0 0 22px rgba(0,229,255,.5)}.divider .title.mg{color:var(--mg);text-shadow:0 0 22px rgba(255,46,136,.55)}
-.divider .sub{font-family:'Share Tech Mono';font-size:22px;color:rgba(255,255,255,.75);letter-spacing:2px;max-width:900px;line-height:1.6}
+.divider .sub{font-family:'Share Tech Mono';font-size:25px;color:rgba(255,255,255,.75);letter-spacing:2px;max-width:900px;line-height:1.6}
 
 /* CAPA DE NOTAS (teleprompter · tecla N) - copiado 1:1 del patron SEGA */
 .notas{position:absolute;top:0;right:0;width:460px;height:100%;z-index:150;display:none;flex-direction:column;gap:10px;padding:26px 22px 30px;overflow-y:auto;background:linear-gradient(90deg,rgba(6,3,15,.55) 0%,rgba(6,3,15,.96) 26%);border-left:2px solid var(--ye);backdrop-filter:blur(2px)}
 body.read-mode .slide.active .notas{display:flex}
-.notas h4{font-family:'Press Start 2P';font-size:9px;color:var(--ye);letter-spacing:2px;margin-top:4px}
+.notas h4{font-family:'Press Start 2P';font-size:10px;color:var(--ye);letter-spacing:2px;margin-top:4px}
 .notas h4:first-child{margin-top:0}
-.notas .n-line{font-family:'Share Tech Mono';font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.92);border-left:3px solid var(--cy);padding:3px 0 3px 11px}
+.notas .n-line{font-family:'Share Tech Mono';font-size:16.7px;line-height:1.5;color:rgba(255,255,255,.92);border-left:3px solid var(--cy);padding:3px 0 3px 11px}
 .notas .n-cue{border-left-color:var(--mg);color:var(--ye)}
 .notas .n-cue b{color:#fff}
-.read-indicator{position:fixed;top:64px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:8px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;box-shadow:0 0 14px rgba(255,210,63,.5)}
+.read-indicator{position:fixed;top:64px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:9px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;box-shadow:0 0 14px rgba(255,210,63,.5)}
 body.read-mode .read-indicator{display:block}
 .notas-hotzone{position:fixed;bottom:0;right:0;width:230px;height:150px;z-index:299}
-.notas-toggle{position:fixed;bottom:74px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:9px;letter-spacing:1px;color:var(--ye);background:rgba(6,3,15,.92);border:2px solid var(--ye);padding:10px 14px;border-radius:4px;cursor:pointer;box-shadow:0 0 14px rgba(255,210,63,.3);transition:opacity .2s,background .15s,color .15s;opacity:0}
+.notas-toggle{position:fixed;bottom:74px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:10px;letter-spacing:1px;color:var(--ye);background:rgba(6,3,15,.92);border:2px solid var(--ye);padding:10px 14px;border-radius:4px;cursor:pointer;box-shadow:0 0 14px rgba(255,210,63,.3);transition:opacity .2s,background .15s,color .15s;opacity:0}
 .notas-hotzone:hover ~ .notas-toggle,.notas-toggle:hover{opacity:1}
 .notas-toggle:hover{background:var(--ye);color:#000}
 body.read-mode .notas-toggle{opacity:1;background:var(--ye);color:#000;box-shadow:0 0 18px rgba(255,210,63,.6)}
 
 nav.footer{position:fixed;bottom:0;left:0;right:0;height:64px;background:rgba(6,3,15,.97);border-top:2px solid var(--cy);display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:200}
-.nav-btn{background:transparent;border:2px solid var(--cy);color:var(--cy);font-family:'Press Start 2P';font-size:9px;padding:10px 18px;letter-spacing:2px;cursor:pointer;border-radius:2px}
+.nav-btn{background:transparent;border:2px solid var(--cy);color:var(--cy);font-family:'Press Start 2P';font-size:10px;padding:10px 18px;letter-spacing:2px;cursor:pointer;border-radius:2px}
 .nav-btn:disabled{opacity:.25}
 .nav-center{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;margin:0 24px}
-.nav-counter{font-family:'Press Start 2P';font-size:10px;color:var(--mg);letter-spacing:3px}
+.nav-counter{font-family:'Press Start 2P';font-size:12px;color:var(--mg);letter-spacing:3px}
 .nav-progress{width:100%;max-width:480px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
 .nav-progress .bar{height:100%;background:linear-gradient(90deg,var(--mg),var(--cy));width:0;transition:width .25s}
-.nav-hint{font-family:'Share Tech Mono';font-size:11px;color:rgba(255,255,255,.4);letter-spacing:2px}
+.nav-hint{font-family:'Share Tech Mono';font-size:13px;color:rgba(255,255,255,.4);letter-spacing:2px}
 """
 
 SCRIPT = """
@@ -364,14 +367,15 @@ def generar_resena(data: dict, out_slug: str) -> Path:
         _slide_contexto(3, data),
     ]
     num, ch = 4, 1
-    comparativa = data.get("comparativa")
-    if comparativa:
-        slides.append(_slide_tarrovision_dual(
-            num, comparativa.get("titulo", "COMPARATIVA"), ch, ch + 1,
-            comparativa["dato"], data.get("notas", {}).get("comparativa"), data,
-        ))
-        num += 1
-        ch += 2
+    # Slide COMPARATIVA: obligatorio en toda resena (regla Luis 2026-07-26).
+    # data["comparativa"] = {"dato": "..."} -- el titulo es SIEMPRE "COMPARATIVA",
+    # agnostico sin importar que se compare (arcade vs puerto, original vs secuela, etc).
+    slides.append(_slide_tarrovision_dual(
+        num, ch, ch + 1, data["comparativa"]["dato"],
+        data.get("notas", {}).get("comparativa"), data,
+    ))
+    num += 1
+    ch += 2
     slides.append(_slide_tarrovision(num, "JUGABILIDAD HOY", ch, data["jugabilidad_dato"], data.get("notas", {}).get("jugabilidad"), data))
     num += 1
     ch += 1
