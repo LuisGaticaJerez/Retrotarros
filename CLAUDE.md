@@ -204,7 +204,9 @@ Ejemplos reales ejecutados (2026-05-15):
 
 ## Capturas de slides para edición (regla obligatoria)
 
-Cada HTML del estudio (episodios en `studio/<categoria>/[<subcategoria>/]<slug>.html`, shorts en `studio/shorts/shorts-html/<categoria>/tarroshort-<slug>.html`) genera frames PNG 1920×1080 listos para meter directo en DaVinci/CapCut como B-roll / cortina entre tomas. Sin rebordes, texto crisp a 2x DPI.
+Cada HTML del estudio (episodios en `studio/<categoria>/[<subcategoria>/]<slug>.html`, shorts en `studio/shorts/shorts-html/<categoria>/tarroshort-<slug>.html`, **reseñas en `studio/resenas/resena-<slug>.html`**) genera frames PNG 1920×1080 listos para meter directo en DaVinci/CapCut como B-roll / cortina entre tomas. Sin rebordes, texto crisp a 2x DPI.
+
+**Reseñas — regla explícita (Luis, 2026-07-26):** las reseñas quedaron sin capturas por un tiempo porque la regla general no se aplicaba en la práctica a este formato. Corren igual que cualquier otro HTML: `python scripts/capture-slides.py resena-<slug>` (16:9, sin flags — no son shorts verticales). Obligatorio al crear o modificar cada reseña, igual que rankings/sagas/shorts.
 
 **Comando (acepta el slug pelado, sin importar en qué carpeta de categoría viva el HTML):**
 ```powershell
