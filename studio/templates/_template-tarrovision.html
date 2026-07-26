@@ -640,35 +640,59 @@ header {
 
 /* ── DUAL SCREEN (comparativa) ── */
 .slide-dual {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 100%;
   padding: 20px 56px;
-  gap: 14px;
+  gap: 28px;
   max-width: 1400px;
   margin: 0 auto;
 }
 .dual-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 64px;
+  width: 100%;
   min-height: 0;
 }
 .dual-cell {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 14px;
   min-height: 0;
 }
 .dual-cell .tarrovision {
-  max-height: 100%;
+  height: 620px;
+  max-height: 620px;
 }
 .dual-cell .tv-title {
   font-size: 20px;
 }
 .dual-cell .tv-meta {
   font-size: 11px;
+}
+/* Namebox VACIA (regla Luis 2026-07-26): solo el marco, sin texto de
+   relleno -- el nombre se escribe encima en la edicion posterior. */
+.tv-namebox.empty {
+  min-width: 260px;
+  min-height: 54px;
+}
+/* VS grande centrado ENTRE las 2 pantallas (regla Luis 2026-07-26) */
+.slide-dual .tv-head {
+  justify-content: center;
+}
+.dual-vs {
+  font-family: 'Orbitron';
+  font-weight: 900;
+  font-size: 56px;
+  color: var(--ye);
+  text-shadow: 0 0 22px rgba(255,210,63,.55);
+  flex: 0 0 auto;
 }
 
 /* ── NAV FOOTER ── */
@@ -865,7 +889,6 @@ nav.footer {
     <span class="slide-num">05</span>
     <div class="slide-dual">
       <div class="tv-head">
-        <div class="tv-pos ye"><span class="hash">VS</span></div>
         <div class="tv-block-label ye">COMPARATIVA · DUAL FEED</div>
       </div>
       <div class="dual-grid">
@@ -887,11 +910,9 @@ nav.footer {
               <div class="tv-speaker"></div>
             </div>
           </div>
-          <div class="tv-namebox ye">
-            <div class="tv-title">JUEGO A</div>
-            <div class="tv-meta">CONSOLA A · AÑO</div>
-          </div>
+          <div class="tv-namebox ye empty"></div>
         </div>
+        <div class="dual-vs">VS</div>
         <div class="dual-cell">
           <div class="tarrovision">
             <div class="tv-controls-top">
@@ -910,10 +931,7 @@ nav.footer {
               <div class="tv-speaker"></div>
             </div>
           </div>
-          <div class="tv-namebox ye">
-            <div class="tv-title">JUEGO B</div>
-            <div class="tv-meta">CONSOLA B · AÑO</div>
-          </div>
+          <div class="tv-namebox ye empty"></div>
         </div>
       </div>
     </div>

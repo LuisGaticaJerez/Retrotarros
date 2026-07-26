@@ -4,13 +4,21 @@ Genera el deck del formato RESENA: retrospectiva de UN solo juego ("¿envejecio
 bien?"), <=10 min, talento alterna Luis/Koko 1 y 1 (nunca los dos juntos, nunca
 cierra con bateria). Aprobado con Luis 2026-07-21 via brainstorming skill.
 
-Estructura (7 slides fijas, sin excepciones):
+Estructura (7 slides fijas, sin excepciones, + 1 opcional):
   01 PORTADA        - SOLO "RESEÑA RETROTARRISTICA" + titulo del juego. NUNCA
                        el nombre del presentador (se identifica hablando).
   02 FICHA TECNICA  - box art + consola/anio/developer/genero + EN COLECCION.
                        Si no hay box art real (regla: nunca logo/artwork promo),
                        usa fallback con tarjeta de color (ver _ficha_cart).
   03 CONTEXTO       - que prometia el juego en su epoca.
+  [03b COMPARATIVA] - OPCIONAL (data["comparativa"] = {"titulo","dato"}). Dos
+                       TarroVision lado a lado + VS al medio, para contexto
+                       historico que se compara mejor viendolo lado a lado
+                       (ej. arcade original vs puerto casero, original vs
+                       secuela). Las namebox bajo cada pantalla quedan VACIAS
+                       a proposito: el nombre se escribe encima en la edicion
+                       posterior, nunca se hardcodea en el HTML/capture
+                       (regla Luis 2026-07-26). Si no se pasa, no aparece.
   04 TARROVISION 1  - jugabilidad hoy (gameplay placeholder + dato).
   05 TARROVISION 2  - graficos/sonido hoy (gameplay placeholder + dato).
   06 VEREDICTO      - etiqueta cualitativa grande + resumen.
@@ -149,6 +157,26 @@ def _slide_tarrovision(num: int, titulo: str, ch: int, dato: str, notas_bloque, 
     )
 
 
+def _slide_tarrovision_dual(num: int, titulo: str, ch_a: int, ch_b: int, dato: str, notas_bloque, data: dict) -> str:
+    """Slide de comparativa (2 TarroVision lado a lado + VS al medio), para
+    contexto historico (ej. arcade vs puerto casero, original vs secuela).
+    Las namebox quedan VACIAS a proposito -- el nombre se escribe encima en
+    la edicion posterior, no se hardcodea en el HTML (regla Luis 2026-07-26)."""
+    return (
+        f'<section class="slide"><span class="slide-num">{num:02d}</span>'
+        f'<div class="gp-head"><div class="gp-title">{_esc(titulo)}</div>'
+        f'<div class="gp-meta">{_esc(data["consola"]).upper()} · {_esc(data["anio"])} · COMPARATIVA</div></div>'
+        '<div class="dual-grid">'
+        f'<div class="dual-cell">{_tv(ch_a)}<div class="tv-namebox"></div></div>'
+        '<div class="dual-vs">VS</div>'
+        f'<div class="dual-cell">{_tv(ch_b)}<div class="tv-namebox"></div></div>'
+        '</div>'
+        f'<div class="gp-dato-dual"><span class="lbl">EL DATO</span>{_esc(dato)}</div>'
+        f'{_notas(notas_bloque)}'
+        '</section>'
+    )
+
+
 def _slide_veredicto(num: int, data: dict) -> str:
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
@@ -233,6 +261,19 @@ header{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;background:rg
 .gp-dato{background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:20px 24px;font-family:'Share Tech Mono';font-size:22px;line-height:1.6;color:rgba(255,255,255,.92)}
 .gp-dato .lbl{display:block;font-family:'Press Start 2P';font-size:9px;color:var(--cy);letter-spacing:2px;margin-bottom:10px}
 .tarrovision{position:relative;background:linear-gradient(180deg,#1a1a1f,#0d0d12);border-radius:22px;padding:20px 24px;box-shadow:0 0 0 2px rgba(255,255,255,.04),0 22px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08),inset 0 -2px 0 rgba(0,0,0,.4);display:grid;grid-template-rows:auto 1fr auto;gap:12px}
+
+/* TARROVISION VS (comparativa dual, regla Luis 2026-07-26) */
+.dual-grid{flex:1;display:flex;justify-content:center;align-items:center;gap:56px;min-height:0;padding:0 12px 8px}
+.dual-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;min-height:0}
+.dual-cell .tarrovision{height:min(100%,480px);aspect-ratio:4/3;max-width:100%}
+.dual-vs{font-family:'Orbitron';font-weight:900;font-size:44px;color:var(--ye);text-shadow:0 0 18px rgba(255,210,63,.55);flex:0 0 auto}
+/* namebox VACIA a proposito: solo el marco, el nombre se escribe encima en la edicion */
+.tv-namebox{display:inline-flex;align-items:center;justify-content:center;padding:8px 24px;border:1px solid var(--ye);background:rgba(255,210,63,.04);position:relative;border-radius:2px;max-width:90%;min-width:220px;min-height:46px}
+.tv-namebox::before,.tv-namebox::after{content:"";position:absolute;width:7px;height:7px;background:var(--dk);border:1px solid var(--ye)}
+.tv-namebox::before{top:-4px;left:-4px}
+.tv-namebox::after{bottom:-4px;right:-4px}
+.gp-dato-dual{flex:none;background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:16px 24px;font-family:'Share Tech Mono';font-size:19px;line-height:1.5;color:rgba(255,255,255,.92);margin:0 16px}
+.gp-dato-dual .lbl{display:block;font-family:'Press Start 2P';font-size:9px;color:var(--cy);letter-spacing:2px;margin-bottom:8px}
 .tv-controls-top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 6px}
 .tv-led{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ff8fb8,var(--mg) 60%,#7a0030);box-shadow:0 0 10px rgba(255,46,136,.8)}
 .tv-brand{flex:1;text-align:center;font-family:'Press Start 2P';font-size:12px;color:var(--ye);letter-spacing:4px}
@@ -321,11 +362,24 @@ def generar_resena(data: dict, out_slug: str) -> Path:
         _slide_portada(1, data),
         _slide_ficha(2, data),
         _slide_contexto(3, data),
-        _slide_tarrovision(4, "JUGABILIDAD HOY", 1, data["jugabilidad_dato"], data.get("notas", {}).get("jugabilidad"), data),
-        _slide_tarrovision(5, "GRAFICOS Y SONIDO HOY", 2, data["audiovisual_dato"], data.get("notas", {}).get("audiovisual"), data),
-        _slide_veredicto(6, data),
-        _slide_cierre(7, data),
     ]
+    num, ch = 4, 1
+    comparativa = data.get("comparativa")
+    if comparativa:
+        slides.append(_slide_tarrovision_dual(
+            num, comparativa.get("titulo", "COMPARATIVA"), ch, ch + 1,
+            comparativa["dato"], data.get("notas", {}).get("comparativa"), data,
+        ))
+        num += 1
+        ch += 2
+    slides.append(_slide_tarrovision(num, "JUGABILIDAD HOY", ch, data["jugabilidad_dato"], data.get("notas", {}).get("jugabilidad"), data))
+    num += 1
+    ch += 1
+    slides.append(_slide_tarrovision(num, "GRAFICOS Y SONIDO HOY", ch, data["audiovisual_dato"], data.get("notas", {}).get("audiovisual"), data))
+    num += 1
+    slides.append(_slide_veredicto(num, data))
+    num += 1
+    slides.append(_slide_cierre(num, data))
     html = (
         '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
