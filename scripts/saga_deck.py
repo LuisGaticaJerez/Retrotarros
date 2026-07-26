@@ -122,12 +122,14 @@ def _slide_gameplay(num, g, idx):
         '</div></section>')
 
 
-def _slide_gameplay_dual(num, dato, ch_a=1, ch_b=2):
+def _slide_gameplay_dual(num, ch_a=1, ch_b=2):
     """Slide de comparativa (2 TarroVision + VS al medio), disponible como
     estandar para contexto historico (ej. version original vs remaster dentro
-    de la linea de tiempo). Titulo SIEMPRE 'COMPARATIVA', agnostico. Namebox
-    VACIA a proposito -- el nombre se escribe encima en la edicion posterior
-    (regla Luis 2026-07-26). Opcional: se usa solo si el driver la llama."""
+    de la linea de tiempo). Titulo SIEMPRE 'COMPARATIVA', agnostico. SIN
+    dato/texto -- solo las dos pantallas ocupando todo el alto, el contexto se
+    cuenta hablado (ajuste Luis 2026-07-26: "es mejor ocuparlo en mostrar
+    gameplay"). Namebox VACIA a proposito -- el nombre se escribe encima en la
+    edicion posterior. Opcional: se usa solo si el driver la llama."""
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
         '<div class="gp-head"><div class="gp-title">COMPARATIVA</div></div>'
@@ -136,7 +138,6 @@ def _slide_gameplay_dual(num, dato, ch_a=1, ch_b=2):
         '  <div class="dual-vs">VS</div>'
         f'  <div class="dual-cell">{_tv(ch_b)}<div class="tv-namebox"></div></div>'
         '</div>'
-        f'<div class="gp-dato-dual"><span class="lbl">EL DATO</span>{dato}</div>'
         '</section>')
 
 
@@ -227,17 +228,16 @@ header{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;background:rg
 .gp-dato{background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:18px 22px;font-family:'Share Tech Mono';font-size:21px;line-height:1.6;color:rgba(255,255,255,.9)}
 .gp-dato .lbl{display:block;font-family:'Press Start 2P';font-size:9px;color:var(--cy);letter-spacing:2px;margin-bottom:10px}
 .gp-owned-mini{font-family:'Press Start 2P';font-size:13px;color:var(--ye);letter-spacing:2px}
-/* TARROVISION VS (comparativa dual, regla Luis 2026-07-26) */
-.dual-grid{flex:1;display:flex;justify-content:center;align-items:center;gap:56px;min-height:0;padding:0 12px 8px}
-.dual-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;min-height:0}
-.dual-cell .tarrovision{height:min(100%,480px);aspect-ratio:4/3;max-width:100%}
-.dual-vs{font-family:'Orbitron';font-weight:900;font-size:44px;color:var(--ye);text-shadow:0 0 18px rgba(255,210,63,.55);flex:0 0 auto}
+/* TARROVISION VS (comparativa dual, regla Luis 2026-07-26 -- SIN dato, solo
+   las dos pantallas + VS, todo el alto disponible) */
+.dual-grid{flex:1;display:flex;justify-content:center;align-items:center;gap:56px;min-height:0;padding:0 20px 20px}
+.dual-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:0;height:100%;flex:0 1 880px;max-width:880px}
+.dual-cell .tarrovision{height:min(100%,660px);aspect-ratio:4/3;max-width:100%}
+.dual-vs{font-family:'Orbitron';font-weight:900;font-size:56px;color:var(--ye);text-shadow:0 0 18px rgba(255,210,63,.55);flex:0 0 auto}
 .tv-namebox{display:inline-flex;align-items:center;justify-content:center;padding:8px 24px;border:1px solid var(--ye);background:rgba(255,210,63,.04);position:relative;border-radius:2px;max-width:90%;min-width:220px;min-height:46px}
 .tv-namebox::before,.tv-namebox::after{content:"";position:absolute;width:7px;height:7px;background:var(--dk);border:1px solid var(--ye)}
 .tv-namebox::before{top:-4px;left:-4px}
 .tv-namebox::after{bottom:-4px;right:-4px}
-.gp-dato-dual{flex:none;background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:16px 24px;font-family:'Share Tech Mono';font-size:19px;line-height:1.5;color:rgba(255,255,255,.92);margin:0 16px}
-.gp-dato-dual .lbl{display:block;font-family:'Press Start 2P';font-size:9px;color:var(--cy);letter-spacing:2px;margin-bottom:8px}
 .tarrovision{position:relative;background:linear-gradient(180deg,#1a1a1f,#0d0d12);border-radius:22px;padding:20px 24px;box-shadow:0 0 0 2px rgba(255,255,255,.04),0 22px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08),inset 0 -2px 0 rgba(0,0,0,.4);display:grid;grid-template-rows:auto 1fr auto;gap:12px}
 .tv-controls-top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 6px}
 .tv-led{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ff8fb8,var(--mg) 60%,#7a0030);box-shadow:0 0 10px rgba(255,46,136,.8)}
