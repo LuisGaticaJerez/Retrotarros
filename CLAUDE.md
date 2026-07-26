@@ -136,7 +136,9 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 | `docs/briefings-compositores.md` | Fichas de compositores (Kondo, Uematsu, Mitsuda, Yamaoka, Wise, Kirkhope, etc.). Documento vivo. |
 | `docs/guiones-shorts.md` | Guiones lane Luis: timings, B-roll, título YouTube, caption, hashtags, datos de respaldo. Documento vivo. |
 | `docs/guia-youtube-viral.md` | **Playbook de virality YouTube** (título, miniatura, descripción, hashtags, capítulos). Toda `descripcion-{slug}.md` lo sigue. |
-| `docs/descripcion-{slug}.md` | Descripción YouTube lista para pegar: títulos, resumen, capítulos con timestamps, hashtags, tags. Sigue `guia-youtube-viral.md`. |
+| `docs/descripcion-{slug}.md` | Descripción YouTube lista para pegar (episodios largos): títulos, resumen, capítulos con timestamps, hashtags, tags. Sigue `guia-youtube-viral.md`. Automático al cerrar el episodio (ver "Kit de publicación YouTube automático"). |
+| `docs/descripcion-tarroshort-{slug}.md` | Igual que arriba, para TarroShorts. Sin capítulos ni tags de campo (no aplican a shorts). |
+| `docs/descripcion-resena-{slug}.md` | Igual que arriba, para reseñas. Sin capítulos ni tags de campo. |
 
 > **Regla de entrega (Luis, 2026-06-07):** cada vez que cierre un kit de publicación, **pegar en el chat** el texto listo para YouTube (título + descripción + comentario fijado + tags + hashtags), no solo dejarlo en el `.md`. Luis lo copia directo desde el chat.
 | `docs/pauta-{slug}.md` | Pauta operativa de episodio largo (para Claude — denso, tablas, anclas, anexos). |
@@ -181,6 +183,25 @@ Cada episodio largo se cierra con **tres archivos**, mismo `{slug}`:
 - El `.md` de discusión es derivado del `.md` operativo — más corto, más conversacional, sin tablas pesadas.
 - El HTML se actualiza solo cuando los datos del `.md` operativo están cerrados. Fuente de verdad = `pauta-{slug}.md`.
 - Si se agrega un anexo con datos nuevos (precios, listas confirmadas), se actualizan los tres archivos en el mismo commit.
+
+## Kit de publicación YouTube automático (regla obligatoria) — Luis 2026-07-26
+
+Cada vez que se cierra un **episodio largo**, un **TarroShort**, o una **reseña**, Claude genera el kit de publicación YouTube **sin que Luis tenga que pedirlo**. Antes esto se armaba solo bajo pedido explícito y Luis tenía que acordarse de preguntar cada vez — ya no.
+
+**Qué genera (sigue `docs/guia-youtube-viral.md`):**
+- Título optimizado.
+- Descripción con **emojis con moderación** (título/miniatura/descripción sí, guión hablado no) y **CTA de suscripción siempre incluido**. 300-500 palabras para episodios largos; más corta y proporcional al tamaño del contenido para shorts/reseñas.
+- Hashtags (3-5, los primeros 3 son los que más pesan en YouTube).
+- Capítulos con timestamps (solo episodios largos).
+- Tags del campo de etiquetas (~15-20 keywords, solo episodios largos).
+
+**Dónde queda (archivo `.md` + pegado en el chat, los dos SIEMPRE):**
+- Episodios largos: `docs/descripcion-{slug}.md` (ya establecido).
+- TarroShorts: `docs/descripcion-tarroshort-{slug}.md`.
+- Reseñas: `docs/descripcion-resena-{slug}.md`.
+- Regla de entrega existente (Luis 2026-06-07) sigue aplicando: **pegar en el chat** el texto listo para YouTube, no basta con dejarlo solo en el archivo.
+
+**Cuándo:** al cerrar cada pieza — mismo momento en que se termina de armar y verificar el HTML/short/reseña (capturas + render si aplica), antes de preguntar por push/sync. No esperar a que Luis lo pida.
 
 ## Extracción de B-roll desde gameplays
 
