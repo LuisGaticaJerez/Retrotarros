@@ -1,26 +1,26 @@
-# Descripcion YouTube — Resena: Sonic the Hedgehog (Mega Drive)
+# Descripción YouTube — Reseña: Sonic the Hedgehog (Mega Drive)
 
-Doc para copiar/pegar al subir la resena. Texto publico = sin tildes (regla del canal).
-
----
-
-## Titulos sugeridos (elegir uno)
-
-1. **Sonic the Hedgehog (Mega Drive, 1991): envejecio bien el original?** — keyword + gancho. (Recomendado)
-2. **La mascota que Sega diseño para vencer a Mario** — gancho de contexto historico.
+Doc para copiar/pegar al subir la reseña. Español chileno neutro, con tildes.
 
 ---
 
-## Descripcion (copiar/pegar)
+## Títulos sugeridos (elegir uno)
+
+1. **Sonic the Hedgehog (Mega Drive, 1991): ¿envejeció bien el original?** — keyword + gancho. (Recomendado)
+2. **La mascota que Sega diseñó para vencer a Mario** — gancho de contexto histórico.
+
+---
+
+## Descripción (copiar/pegar)
 
 ```
-Repasamos el Sonic the Hedgehog original de 1991 — la mascota que Sega diseño desde cero para competir contra Mario, con un algoritmo de curvas que definio toda la sensacion de velocidad de la saga 💨🦔
+Repasamos el Sonic the Hedgehog original de 1991 — la mascota que Sega diseñó desde cero para competir contra Mario, con un algoritmo de curvas que definió toda la sensación de velocidad de la saga 💨🦔
 
-Te contamos que se siente jugarlo hoy: el nacimiento de Green Hill Zone, y el dato que casi nadie sabe: la version de Master System/Game Gear NO es un simple port, es un juego con niveles casi completamente distintos.
+Te contamos qué se siente jugarlo hoy: el nacimiento de Green Hill Zone, y el dato que casi nadie sabe: la versión de Master System/Game Gear NO es un simple port, es un juego con niveles casi completamente distintos.
 
-Cual fue tu primer juego de Genesis? Contanos en los comentarios 👇
+¿Cuál fue tu primer juego de Genesis? Cuéntanos en los comentarios 👇
 
-🔔 Suscribete a RETROTARROS para mas resenas retro — nostalgia + juegos + musica.
+🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
 #Sonic #MegaDrive #Retrogaming #Gaming #Videojuegos
 ```
@@ -30,11 +30,11 @@ Cual fue tu primer juego de Genesis? Contanos en los comentarios 👇
 ## Comentario fijado (copiar/pegar)
 
 ```
-Jugaste la version Genesis o la de Master System/Game Gear (con niveles distintos)?
+¿Jugaste la versión Genesis o la de Master System/Game Gear (con niveles distintos)?
 ```
 
 ---
 
 **Slug:** `resena-sonic-the-hedgehog`
-**Formato:** Resena (horizontal, hasta 10 min)
-**Ultima actualizacion:** 2026-07-29
+**Formato:** Reseña (horizontal, hasta 10 min)
+**Última actualización:** 2026-07-29

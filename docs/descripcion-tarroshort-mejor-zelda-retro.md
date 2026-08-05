@@ -1,24 +1,24 @@
-# Descripcion YouTube — TarroShort: Mejor Zelda retro
+# Descripción YouTube — TarroShort: Mejor Zelda retro
 
-Doc para copiar/pegar al subir el short. Texto publico = sin tildes (regla del canal).
-
----
-
-## Titulos sugeridos (elegir uno)
-
-1. **El MEJOR Zelda de la historia? Zelda 1 vs A Link to the Past vs Ocarina vs Majora's Mask** — gancho de pregunta + los 4 juegos. (Recomendado)
-2. **Zelda: 4 juegos, 1 corona (elegis vos)** — mas corto, mismo gancho.
+Doc para copiar/pegar al subir el short. Español chileno neutro, con tildes.
 
 ---
 
-## Descripcion (copiar/pegar)
+## Títulos sugeridos (elegir uno)
+
+1. **¿El MEJOR Zelda de la historia? Zelda 1 vs A Link to the Past vs Ocarina vs Majora's Mask** — gancho de pregunta + los 4 juegos. (Recomendado)
+2. **Zelda: 4 juegos, 1 corona (elige tú)** — más corto, mismo gancho.
+
+---
+
+## Descripción (copiar/pegar)
 
 ```
-The Legend of Zelda, A Link to the Past, Ocarina of Time y Majora's Mask: 4 leyendas, una sola corona 👑 Nosotros no elegimos, elegis vos.
+The Legend of Zelda, A Link to the Past, Ocarina of Time y Majora's Mask: 4 leyendas, una sola corona 👑 Nosotros no elegimos, eliges tú.
 
-Cual es TU mejor Zelda? Defendelo en los comentarios 👇 y mira los rankings completos de NES, SNES y N64 en el canal.
+¿Cuál es TU mejor Zelda? Defiéndelo en los comentarios 👇 y mira los rankings completos de NES, SNES y N64 en el canal.
 
-🔔 Suscribete a RETROTARROS — nostalgia + juegos + musica, todas las semanas.
+🔔 Suscríbete a RETROTARROS — nostalgia + juegos + música, todas las semanas.
 
 #Zelda #Nintendo #Shorts #Retrogaming #Gaming
 ```
@@ -28,11 +28,11 @@ Cual es TU mejor Zelda? Defendelo en los comentarios 👇 y mira los rankings co
 ## Comentario fijado (copiar/pegar)
 
 ```
-A Link to the Past, Ocarina of Time o Majora's Mask? Cual defendes hasta la muerte?
+¿A Link to the Past, Ocarina of Time o Majora's Mask? ¿Cuál defiendes hasta la muerte?
 ```
 
 ---
 
 **Slug:** `tarroshort-mejor-zelda-retro`
 **Formato:** TarroShort (vertical, ~71s)
-**Ultima actualizacion:** 2026-07-26
+**Última actualización:** 2026-07-29

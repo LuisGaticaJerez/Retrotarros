@@ -1,26 +1,26 @@
-# Descripcion YouTube — Resena: Chrono Trigger (SNES)
+# Descripción YouTube — Reseña: Chrono Trigger (SNES)
 
-Doc para copiar/pegar al subir la resena. Texto publico = sin tildes (regla del canal).
+Doc para copiar/pegar al subir la reseña. Español chileno neutro, con tildes.
 
 ---
 
-## Titulos sugeridos (elegir uno)
+## Títulos sugeridos (elegir uno)
 
-1. **Chrono Trigger (SNES, 1995): el RPG de un viaje de 4 dias entre 3 leyendas** — gancho de dato bomba. (Recomendado)
+1. **Chrono Trigger (SNES, 1995): el RPG de un viaje de 4 días entre 3 leyendas** — gancho de dato bomba. (Recomendado)
 2. **Cuando Final Fantasy, Dragon Quest y Dragon Ball se juntaron en un juego** — gancho directo.
 
 ---
 
-## Descripcion (copiar/pegar)
+## Descripción (copiar/pegar)
 
 ```
-Repasamos Chrono Trigger, el RPG que nacio de un viaje de 4 dias donde coincidieron los creadores de Final Fantasy, Dragon Quest y Dragon Ball 🐉⏳ El "Dream Team" mas grande que ha tenido un RPG japones.
+Repasamos Chrono Trigger, el RPG que nació de un viaje de 4 días donde coincidieron los creadores de Final Fantasy, Dragon Quest y Dragon Ball 🐉⏳ El "Dream Team" más grande que ha tenido un RPG japonés.
 
-Te contamos que se siente jugarlo hoy: los ataques combinados entre personajes, el sistema de viaje en el tiempo con multiples finales, y el arte de Akira Toriyama que le dio una identidad unica.
+Te contamos qué se siente jugarlo hoy: los ataques combinados entre personajes, el sistema de viaje en el tiempo con múltiples finales, y el arte de Akira Toriyama que le dio una identidad única.
 
-Conocias este juego antes de esta resena? Contanos en los comentarios 👇
+¿Conocías este juego antes de esta reseña? Cuéntanos en los comentarios 👇
 
-🔔 Suscribete a RETROTARROS para mas resenas retro — nostalgia + juegos + musica.
+🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
 #ChronoTrigger #SNES #Retrogaming #Gaming #Videojuegos
 ```
@@ -30,11 +30,11 @@ Conocias este juego antes de esta resena? Contanos en los comentarios 👇
 ## Comentario fijado (copiar/pegar)
 
 ```
-Conocias Chrono Trigger antes de esta resena, o es primera vez que escuchas del "Dream Team"?
+¿Conocías Chrono Trigger antes de esta reseña, o es primera vez que escuchas del "Dream Team"?
 ```
 
 ---
 
 **Slug:** `resena-chrono-trigger`
-**Formato:** Resena (horizontal, hasta 10 min)
-**Ultima actualizacion:** 2026-07-29
+**Formato:** Reseña (horizontal, hasta 10 min)
+**Última actualización:** 2026-07-29

@@ -235,10 +235,12 @@ header{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;background:rg
 .portada .ep-title{font-family:'Orbitron';font-weight:900;font-size:90px;line-height:1;color:#fff;margin-bottom:20px}
 .portada .ep-sub{font-family:'Share Tech Mono';font-size:25px;color:var(--ye);letter-spacing:2px;max-width:1100px}
 
-/* FICHA TECNICA */
-.ficha-detail{flex:1;display:grid;grid-template-columns:380px 1fr;gap:40px;align-items:center;padding:0 30px;min-height:0}
-.ficha-cart{display:flex;align-items:center;justify-content:center;height:100%}
-.ficha-cart img{max-height:420px;max-width:100%;border:3px solid rgba(255,255,255,.85);border-radius:8px;box-shadow:0 18px 50px rgba(0,0,0,.7)}
+/* FICHA TECNICA -- columna de la caja con ancho dinamico (minmax) para que
+   quepan bien tanto cajas verticales (3:4, la mayoria NTSC) como horizontales
+   (algunas ediciones/plataformas) sin comprimirse (regla Luis 2026-07-29) */
+.ficha-detail{flex:1;display:grid;grid-template-columns:minmax(320px,440px) 1fr;gap:40px;align-items:center;padding:0 30px;min-height:0}
+.ficha-cart{display:flex;align-items:center;justify-content:center;height:100%;max-height:440px}
+.ficha-cart img{max-height:440px;max-width:100%;width:auto;height:auto;object-fit:contain;border:3px solid rgba(255,255,255,.85);border-radius:8px;box-shadow:0 18px 50px rgba(0,0,0,.7)}
 .ficha-fallback{width:100%;max-width:340px;aspect-ratio:3/4;background:linear-gradient(160deg,var(--mg),#7a0044);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;box-shadow:0 18px 50px rgba(0,0,0,.7);border:3px solid rgba(255,255,255,.3)}
 .ficha-fallback .ff-title{font-family:'Orbitron';font-weight:900;font-size:30px;color:#fff;line-height:1.15;margin-bottom:14px}
 .ficha-fallback .ff-sub{font-family:'Press Start 2P';font-size:12px;color:rgba(255,255,255,.85);letter-spacing:2px}

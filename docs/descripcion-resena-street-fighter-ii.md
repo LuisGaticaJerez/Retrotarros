@@ -1,26 +1,26 @@
-# Descripcion YouTube — Resena: Street Fighter II (SNES)
+# Descripción YouTube — Reseña: Street Fighter II (SNES)
 
-Doc para copiar/pegar al subir la resena. Texto publico = sin tildes (regla del canal).
-
----
-
-## Titulos sugeridos (elegir uno)
-
-1. **Street Fighter II (SNES, 1992): envejecio bien 30 anios despues?** — keyword + numero + gancho. (Recomendado)
-2. **El juego que Capcom penso que solo seria decente** — gancho de dato bomba.
+Doc para copiar/pegar al subir la reseña. Español chileno neutro, con tildes.
 
 ---
 
-## Descripcion (copiar/pegar)
+## Títulos sugeridos (elegir uno)
+
+1. **Street Fighter II (SNES, 1992): ¿envejeció bien 30 años después?** — keyword + número + gancho. (Recomendado)
+2. **El juego que Capcom pensó que solo sería decente** — gancho de dato bomba.
+
+---
+
+## Descripción (copiar/pegar)
 
 ```
-Repasamos Street Fighter II, el juego que le dio forma al genero de pelea tal como lo conocemos — y que Capcom ni siquiera penso que seria un fenomeno 🥋🔥
+Repasamos Street Fighter II, el juego que le dio forma al género de pelea tal como lo conocemos — y que Capcom ni siquiera pensó que sería un fenómeno 🥋🔥
 
-Te contamos que se siente jugarlo hoy: los 8 estilos de pelea que definieron el molde del genero, y por que la conversion a SNES se vendio como "Arcade Perfect" y cumplio la promesa.
+Te contamos qué se siente jugarlo hoy: los 8 estilos de pelea que definieron el molde del género, y por qué la conversión a SNES se vendió como "Arcade Perfect" y cumplió la promesa.
 
-Cual era tu personaje favorito? Contanos en los comentarios 👇
+¿Cuál era tu personaje favorito? Cuéntanos en los comentarios 👇
 
-🔔 Suscribete a RETROTARROS para mas resenas retro — nostalgia + juegos + musica.
+🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
 #StreetFighterII #SNES #Retrogaming #Gaming #Videojuegos
 ```
@@ -30,11 +30,11 @@ Cual era tu personaje favorito? Contanos en los comentarios 👇
 ## Comentario fijado (copiar/pegar)
 
 ```
-Cual era tu personaje favorito de los 8 originales de Street Fighter II?
+¿Cuál era tu personaje favorito de los 8 originales de Street Fighter II?
 ```
 
 ---
 
 **Slug:** `resena-street-fighter-ii`
-**Formato:** Resena (horizontal, hasta 10 min)
-**Ultima actualizacion:** 2026-07-29
+**Formato:** Reseña (horizontal, hasta 10 min)
+**Última actualización:** 2026-07-29

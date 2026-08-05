@@ -2,7 +2,7 @@
 
 > Memoria cronológica de acuerdos y decisiones con Luis. Cada entrada apunta a dónde vive el detalle
 > (para no duplicar). Sirve para reconstruir el "por qué" cuando pasa tiempo entre sesiones.
-> Se agrega al final; no se reescribe la historia. Última entrada: 2026-07-21.
+> Se agrega al final; no se reescribe la historia. Última entrada: 2026-07-29.
 
 ## Cómo leer esto
 
@@ -73,3 +73,12 @@
 - **Primera tanda: 5 reseñas armadas** (SMB3, Sonic 2, Killer Instinct Gold, Mortal Kombat, Donkey Kong Country) via `scripts/resena_deck.py`, salida en `studio/resenas/<slug>.html` (carpeta aparte — pedido de Luis, distinto al resto de formatos que van en la raíz de `studio/`). Cero publicadas — falta crear la playlist en YouTube Studio.
 - **Bug real encontrado en la implementación (no en el diseño):** al mover la salida a una subcarpeta, las rutas relativas de box art quedaron rotas (`img/resenas/...` en vez de `../img/resenas/...`). Se detectó verificando con Playwright (el navegador interactivo se puso inestable esa sesión) — capturas confirmaron el bug y el fix. **Lección:** cuando un generador cambia de carpeta de salida, revisar TODAS las rutas relativas del HTML, no asumir que siguen siendo válidas.
 - **Regla del canal (nunca logo) aplicada de nuevo:** Mortal Kombat no tiene box art real disponible en Wikipedia (solo el logo del dragón) → se usó un fallback de tarjeta de color en vez de forzar el logo. → `CLAUDE.md` § Imágenes en HTMLs de ranking (misma regla, aplicada acá).
+
+## 2026-07-29 — Comparativa sin dato, tono vendedor, criterio de selección y fixes de reseñas
+
+- **Slide COMPARATIVA rediseñado:** sin texto/dato en pantalla, solo las 2 TarroVision + VS ocupando todo el alto disponible — el contexto se cuenta hablado mientras se muestra gameplay. Ajuste post-captura: la primera versión con dato dejaba las pantallas chicas y descentradas. → `scripts/resena_deck.py`, `CLAUDE.md` § Reseñas.
+- **Regla de tono del contexto/veredicto:** la reseña de Mortal Kombat generó rechazo en la comunidad por comparar demasiado con Street Fighter II y por un veredicto que vendía el juego "para abajo". Corregidas Killer Instinct, Altered Beast y Donkey Kong Country (Mortal Kombat se dejó igual, decisión de Luis). → `CLAUDE.md` § REGLA Tono del contexto y el veredicto.
+- **Criterio de selección de candidatos a reseña, en este orden: nostalgia > historia > diferencias tecnológicas entre versiones.** No es excluyente — un juego mono-plataforma sigue siendo buen candidato. → `CLAUDE.md` § REGLA Criterio de selección de candidatos.
+- **Bug real: las capturas de reseñas nunca se copiaban a Drive.** El bloque de sync de reseñas (agregado 2026-07-21) copiaba HTML + box art pero nunca tuvo la lógica de `captures/` que sí tiene el bloque genérico — las 17 reseñas del canal nunca tuvieron sus PNGs en `G:\Mi unidad\Studio\Resenas\`. Detectado por Luis revisando el Drive real, no por el log del script (que decía "sincronización completa"). Corregido en `scripts/sync-to-drive.ps1`. **Lección:** un script que reporta éxito no garantiza que copió todo — verificar contra el destino real de vez en cuando, no solo contra su propio log.
+- **Ficha de reseña con ancho dinámico para la caja:** el contenedor tenía 380px fijos pensado solo para cajas verticales NTSC (3:4). Cambiado a `minmax(320px,440px)` + `object-fit:contain` para que cajas horizontales (algunas ediciones/plataformas) no se compriman. → `scripts/resena_deck.py`.
+- **Los kits de YouTube (`docs/descripcion-*.md`) SÍ llevan tildes y Ñ correctas** — a diferencia de los HTML on-screen del canal (que van sin tildes por diseño visual), la descripción que se pega en YouTube es prosa normal para el público y debe tener ortografía completa. Se encontró voseo argentino real ("elegís vos", "defendés") en 3 kits de TarroShorts y falta sistemática de tildes/Ñ (ej. "anios" en vez de "años") en todos los kits de reseñas — corregidos los 22 archivos existentes. → `CLAUDE.md` § REGLA INMUTABLE Tono y lengua.

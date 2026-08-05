@@ -1,26 +1,26 @@
-# Descripcion YouTube — Resena: Kirby's Adventure (NES)
+# Descripción YouTube — Reseña: Kirby's Adventure (NES)
 
-Doc para copiar/pegar al subir la resena. Texto publico = sin tildes (regla del canal).
-
----
-
-## Titulos sugeridos (elegir uno)
-
-1. **Kirby's Adventure (NES, 1993): envejecio bien 30 anios despues?** — keyword + numero + gancho. (Recomendado)
-2. **El Kirby que nacio porque HAL Laboratory casi quiebra** — gancho de dato historico.
+Doc para copiar/pegar al subir la reseña. Español chileno neutro, con tildes.
 
 ---
 
-## Descripcion (copiar/pegar)
+## Títulos sugeridos (elegir uno)
+
+1. **Kirby's Adventure (NES, 1993): ¿envejeció bien 30 años después?** — keyword + número + gancho. (Recomendado)
+2. **El Kirby que nació porque HAL Laboratory casi quiebra** — gancho de dato histórico.
+
+---
+
+## Descripción (copiar/pegar)
 
 ```
-Repasamos Kirby's Adventure, el juego que HAL Laboratory hizo con urgencia financiera real detras — casi quebraron despues de Kirby's Dream Land 🩷
+Repasamos Kirby's Adventure, el juego que HAL Laboratory hizo con urgencia financiera real detrás — casi quebraron después de Kirby's Dream Land 🩷
 
-Te contamos que se siente jugarlo hoy: el nacimiento del copy ability (ausente en el juego anterior), unos graficos que sorprenden sabiendo que es NES de 1993, y por que esta mecanica sigue siendo el corazon de toda la franquicia.
+Te contamos qué se siente jugarlo hoy: el nacimiento del copy ability (ausente en el juego anterior), unos gráficos que sorprenden sabiendo que es NES de 1993, y por qué esta mecánica sigue siendo el corazón de toda la franquicia.
 
-Cual poder copiado es tu favorito de toda la saga? Contanos en los comentarios 👇
+¿Cuál poder copiado es tu favorito de toda la saga? Cuéntanos en los comentarios 👇
 
-🔔 Suscribete a RETROTARROS para mas resenas retro — nostalgia + juegos + musica.
+🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
 #Kirby #NES #Retrogaming #Gaming #Videojuegos
 ```
@@ -30,11 +30,11 @@ Cual poder copiado es tu favorito de toda la saga? Contanos en los comentarios �
 ## Comentario fijado (copiar/pegar)
 
 ```
-Cual poder copiado de Kirby es tu favorito de toda la franquicia?
+¿Cuál poder copiado de Kirby es tu favorito de toda la franquicia?
 ```
 
 ---
 
 **Slug:** `resena-kirbys-adventure`
-**Formato:** Resena (horizontal, hasta 10 min)
-**Ultima actualizacion:** 2026-07-29
+**Formato:** Reseña (horizontal, hasta 10 min)
+**Última actualización:** 2026-07-29

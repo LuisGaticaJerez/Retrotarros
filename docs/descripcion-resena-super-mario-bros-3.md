@@ -1,26 +1,26 @@
-# Descripcion YouTube — Resena: Super Mario Bros. 3 (NES)
+# Descripción YouTube — Reseña: Super Mario Bros. 3 (NES)
 
-Doc para copiar/pegar al subir la resena. Texto publico = sin tildes (regla del canal).
-
----
-
-## Titulos sugeridos (elegir uno)
-
-1. **Super Mario Bros. 3 (NES, 1990): envejecio bien 35 anios despues?** — keyword + numero + gancho. (Recomendado)
-2. **El Mario que aparecio en una pelicula ANTES de salir a la venta** — gancho del dato de The Wizard, curiosidad pura.
+Doc para copiar/pegar al subir la reseña. Español chileno neutro, con tildes.
 
 ---
 
-## Descripcion (copiar/pegar)
+## Títulos sugeridos (elegir uno)
+
+1. **Super Mario Bros. 3 (NES, 1990): ¿envejeció bien 35 años después?** — keyword + número + gancho. (Recomendado)
+2. **El Mario que apareció en una película ANTES de salir a la venta** — gancho del dato de The Wizard, curiosidad pura.
+
+---
+
+## Descripción (copiar/pegar)
 
 ```
-Repasamos Super Mario Bros. 3, el juego que Nintendo mostro en la pelicula The Wizard (1989) casi un ano antes de que llegara a las tiendas 🎬🍄
+Repasamos Super Mario Bros. 3, el juego que Nintendo mostró en la película The Wizard (1989) casi un año antes de que llegara a las tiendas 🎬🍄
 
-Te contamos que se siente jugarlo hoy: el mapa de mundo que cambio los plataformas para siempre, los power-ups (hoja mapache, traje Tanooki) y si sigue siendo una clase magistral de diseño de niveles tres decadas despues.
+Te contamos qué se siente jugarlo hoy: el mapa de mundo que cambió los plataformas para siempre, los power-ups (hoja mapache, traje Tanooki) y si sigue siendo una clase magistral de diseño de niveles tres décadas después.
 
-Cual era tu power-up favorito? Contanos en los comentarios 👇
+¿Cuál era tu power-up favorito? Cuéntanos en los comentarios 👇
 
-🔔 Suscribete a RETROTARROS para mas resenas retro — nostalgia + juegos + musica.
+🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
 #SuperMarioBros3 #NES #Retrogaming #Gaming #Videojuegos
 ```
@@ -30,11 +30,11 @@ Cual era tu power-up favorito? Contanos en los comentarios 👇
 ## Comentario fijado (copiar/pegar)
 
 ```
-Cual era tu power-up favorito de Super Mario Bros. 3: hoja mapache, traje rana o Tanooki?
+¿Cuál era tu power-up favorito de Super Mario Bros. 3: hoja mapache, traje rana o Tanooki?
 ```
 
 ---
 
 **Slug:** `resena-super-mario-bros-3`
-**Formato:** Resena (horizontal, hasta 10 min)
-**Ultima actualizacion:** 2026-07-26
+**Formato:** Reseña (horizontal, hasta 10 min)
+**Última actualización:** 2026-07-29

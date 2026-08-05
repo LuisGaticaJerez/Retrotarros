@@ -1,26 +1,26 @@
-# Descripcion YouTube — Resena: Donkey Kong Country (SNES)
+# Descripción YouTube — Reseña: Donkey Kong Country (SNES)
 
-Doc para copiar/pegar al subir la resena. Texto publico = sin tildes (regla del canal).
-
----
-
-## Titulos sugeridos (elegir uno)
-
-1. **Donkey Kong Country (SNES, 1994): envejecio bien 30 anios despues?** — keyword + numero + gancho. (Recomendado)
-2. **El truco grafico que hizo creer que el SNES tenia graficos del futuro** — gancho de dato tecnico.
+Doc para copiar/pegar al subir la reseña. Español chileno neutro, con tildes.
 
 ---
 
-## Descripcion (copiar/pegar)
+## Títulos sugeridos (elegir uno)
+
+1. **Donkey Kong Country (SNES, 1994): ¿envejeció bien 30 años después?** — keyword + número + gancho. (Recomendado)
+2. **El truco gráfico que hizo creer que el SNES tenía gráficos del futuro** — gancho de dato técnico.
+
+---
+
+## Descripción (copiar/pegar)
 
 ```
-Repasamos Donkey Kong Country, el juego que uso estaciones de renderizado de cine (las mismas de Hollywood) para hacer creer que el SNES tenia graficos de la siguiente generacion 🦍🎮
+Repasamos Donkey Kong Country, el juego que usó estaciones de renderizado de cine (las mismas de Hollywood) para hacer creer que el SNES tenía gráficos de la siguiente generación 🦍🎮
 
-Te contamos que se siente jugarlo hoy: el diseño de Donkey y Diddy (fuerte y lento vs rapido y debil), la banda sonora de David Wise que se sigue citando como una de las mejores de 16 bits, y si los niveles de carro minero envejecieron bien o mal.
+Te contamos qué se siente jugarlo hoy: el diseño de Donkey y Diddy (fuerte y lento vs rápido y débil), la banda sonora de David Wise que se sigue citando como una de las mejores de 16 bits, y si los niveles de carro minero siguen siendo un desafío que vale la pena superar.
 
-Cual nivel te traumo mas: minecart o los de agua? Contanos en los comentarios 👇
+¿Qué nivel te costó más: minecart o los de agua? Cuéntanos en los comentarios 👇
 
-🔔 Suscribete a RETROTARROS para mas resenas retro — nostalgia + juegos + musica.
+🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
 #DonkeyKongCountry #SNES #Retrogaming #Gaming #Videojuegos
 ```
@@ -30,11 +30,11 @@ Cual nivel te traumo mas: minecart o los de agua? Contanos en los comentarios �
 ## Comentario fijado (copiar/pegar)
 
 ```
-Cual nivel de Donkey Kong Country te traumo mas: los de carro minero o los de agua?
+¿Qué nivel de Donkey Kong Country te costó más: los de carro minero o los de agua?
 ```
 
 ---
 
 **Slug:** `resena-donkey-kong-country`
-**Formato:** Resena (horizontal, hasta 10 min)
-**Ultima actualizacion:** 2026-07-27
+**Formato:** Reseña (horizontal, hasta 10 min)
+**Última actualización:** 2026-07-29

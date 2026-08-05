@@ -1,24 +1,24 @@
-# Descripcion YouTube — TarroShort: Los finales mas raros del retro
+# Descripción YouTube — TarroShort: Los finales más raros del retro
 
-Doc para copiar/pegar al subir el short. Texto publico = sin tildes (regla del canal).
-
----
-
-## Titulos sugeridos (elegir uno)
-
-1. **Los 5 finales mas RAROS del retrogaming** — gancho directo, keyword fuerte. (Recomendado)
-2. **"A winner is you": los finales que rompieron el ingles** — gancho de cita, mas curioso.
+Doc para copiar/pegar al subir el short. Español chileno neutro, con tildes.
 
 ---
 
-## Descripcion (copiar/pegar)
+## Títulos sugeridos (elegir uno)
+
+1. **Los 5 finales más RAROS del retrogaming** — gancho directo, keyword fuerte. (Recomendado)
+2. **"A winner is you": los finales que rompieron el inglés** — gancho de cita, más curioso.
+
+---
+
+## Descripción (copiar/pegar)
 
 ```
-Del 5 al 1: los finales mas raros y rotos del retrogaming, narrados por TarroBot 🤖 Desde "a winner is you" hasta el final trampa de Ghosts 'n Goblins.
+Del 5 al 1: los finales más raros y rotos del retrogaming, narrados por TarroBot 🤖 Desde "a winner is you" hasta el final trampa de Ghosts 'n Goblins.
 
-Cual te dejo mas loco? Comenta abajo 👇
+¿Cuál te dejó más loco? Comenta abajo 👇
 
-🔔 Suscribete a RETROTARROS para mas datos del retro — nostalgia + juegos + musica.
+🔔 Suscríbete a RETROTARROS para más datos del retro — nostalgia + juegos + música.
 
 #Shorts #Retrogaming #Gaming #Videojuegos #Retro
 ```
@@ -28,11 +28,11 @@ Cual te dejo mas loco? Comenta abajo 👇
 ## Comentario fijado (copiar/pegar)
 
 ```
-Cual final te dejo mas loco: A Winner Is You, o la trampa de Ghosts 'n Goblins?
+¿Cuál final te dejó más loco: A Winner Is You, o la trampa de Ghosts 'n Goblins?
 ```
 
 ---
 
 **Slug:** `tarroshort-datos-finales-raros`
 **Formato:** TarroShort · lane Datos (TarroBot, modo countdown)
-**Ultima actualizacion:** 2026-07-28
+**Última actualización:** 2026-07-29

@@ -1,26 +1,26 @@
-# Descripcion YouTube — Resena: EarthBound (SNES)
+# Descripción YouTube — Reseña: EarthBound (SNES)
 
-Doc para copiar/pegar al subir la resena. Texto publico = sin tildes (regla del canal).
-
----
-
-## Titulos sugeridos (elegir uno)
-
-1. **EarthBound (SNES, 1994): el RPG de culto que casi nadie compro** — gancho de dato bomba. (Recomendado)
-2. **El RPG que escribio un ensayista, no un diseñador de videojuegos** — gancho de contexto.
+Doc para copiar/pegar al subir la reseña. Español chileno neutro, con tildes.
 
 ---
 
-## Descripcion (copiar/pegar)
+## Títulos sugeridos (elegir uno)
+
+1. **EarthBound (SNES, 1994): el RPG de culto que casi nadie compró** — gancho de dato bomba. (Recomendado)
+2. **El RPG que escribió un ensayista, no un diseñador de videojuegos** — gancho de contexto.
+
+---
+
+## Descripción (copiar/pegar)
 
 ```
-Repasamos EarthBound, el RPG que Nintendo dejo escribir a un ensayista y copywriter en vez de un diseñador de videojuegos — y que fue un fracaso comercial en su lanzamiento y hoy es una joya de culto 👽🍔
+Repasamos EarthBound, el RPG que Nintendo dejó escribir a un ensayista y copywriter en vez de un diseñador de videojuegos — y que fue un fracaso comercial en su lanzamiento y hoy es una joya de culto 👽🍔
 
-Te contamos que se siente jugarlo hoy: la ambientacion moderna en vez de fantasia medieval, el sistema de vida "rodante" en combate, y el humor absurdo que lo hace unico.
+Te contamos qué se siente jugarlo hoy: la ambientación moderna en vez de fantasía medieval, el sistema de vida "rodante" en combate, y el humor absurdo que lo hace único.
 
-Conocias este juego antes de esta resena? Contanos en los comentarios 👇
+¿Conocías este juego antes de esta reseña? Cuéntanos en los comentarios 👇
 
-🔔 Suscribete a RETROTARROS para mas resenas retro — nostalgia + juegos + musica.
+🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
 #EarthBound #SNES #Retrogaming #Gaming #Videojuegos
 ```
@@ -30,11 +30,11 @@ Conocias este juego antes de esta resena? Contanos en los comentarios 👇
 ## Comentario fijado (copiar/pegar)
 
 ```
-Conocias EarthBound antes de esta resena, o es primera vez que escuchas de el?
+¿Conocías EarthBound antes de esta reseña, o es primera vez que escuchas de él?
 ```
 
 ---
 
 **Slug:** `resena-earthbound`
-**Formato:** Resena (horizontal, hasta 10 min)
-**Ultima actualizacion:** 2026-07-29
+**Formato:** Reseña (horizontal, hasta 10 min)
+**Última actualización:** 2026-07-29

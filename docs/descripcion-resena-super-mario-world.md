@@ -1,26 +1,26 @@
-# Descripcion YouTube — Resena: Super Mario World (SNES)
+# Descripción YouTube — Reseña: Super Mario World (SNES)
 
-Doc para copiar/pegar al subir la resena. Texto publico = sin tildes (regla del canal).
-
----
-
-## Titulos sugeridos (elegir uno)
-
-1. **Super Mario World (SNES, 1990): envejecio bien el debut de Yoshi?** — keyword + gancho. (Recomendado)
-2. **Yoshi estuvo 5 anios esperando este juego para nacer** — gancho de dato bomba.
+Doc para copiar/pegar al subir la reseña. Español chileno neutro, con tildes.
 
 ---
 
-## Descripcion (copiar/pegar)
+## Títulos sugeridos (elegir uno)
+
+1. **Super Mario World (SNES, 1990): ¿envejeció bien el debut de Yoshi?** — keyword + gancho. (Recomendado)
+2. **Yoshi estuvo 5 años esperando este juego para nacer** — gancho de dato bomba.
+
+---
+
+## Descripción (copiar/pegar)
 
 ```
-Repasamos Super Mario World, el juego de lanzamiento del SNES — y el que por fin le dio vida a Yoshi despues de que el boceto estuviera pegado 5 anios en el escritorio de Miyamoto 🦕🍄
+Repasamos Super Mario World, el juego de lanzamiento del SNES — y el que por fin le dio vida a Yoshi después de que el boceto estuviera pegado 5 años en el escritorio de Miyamoto 🦕🍄
 
-Te contamos que se siente jugarlo hoy: el mapa de mundo con caminos secretos, el Modo 7 reservado para momentos especiales, y por que sigue siendo la carta de presentacion perfecta del SNES.
+Te contamos qué se siente jugarlo hoy: el mapa de mundo con caminos secretos, el Modo 7 reservado para momentos especiales, y por qué sigue siendo la carta de presentación perfecta del SNES.
 
-Tu primer Mario fue este o el de NES? Contanos en los comentarios 👇
+¿Tu primer Mario fue este o el de NES? Cuéntanos en los comentarios 👇
 
-🔔 Suscribete a RETROTARROS para mas resenas retro — nostalgia + juegos + musica.
+🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
 #SuperMarioWorld #SNES #Retrogaming #Gaming #Videojuegos
 ```
@@ -30,11 +30,11 @@ Tu primer Mario fue este o el de NES? Contanos en los comentarios 👇
 ## Comentario fijado (copiar/pegar)
 
 ```
-Tu primer Mario fue este de SNES o el de NES? Y tu power-up favorito con Yoshi?
+¿Tu primer Mario fue este de SNES o el de NES? ¿Y tu power-up favorito con Yoshi?
 ```
 
 ---
 
 **Slug:** `resena-super-mario-world`
-**Formato:** Resena (horizontal, hasta 10 min)
-**Ultima actualizacion:** 2026-07-29
+**Formato:** Reseña (horizontal, hasta 10 min)
+**Última actualización:** 2026-07-29

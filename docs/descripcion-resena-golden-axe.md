@@ -1,26 +1,26 @@
-# Descripcion YouTube — Resena: Golden Axe (Mega Drive)
+# Descripción YouTube — Reseña: Golden Axe (Mega Drive)
 
-Doc para copiar/pegar al subir la resena. Texto publico = sin tildes (regla del canal).
-
----
-
-## Titulos sugeridos (elegir uno)
-
-1. **Golden Axe (Mega Drive, 1989): envejecio bien el beat em up de Sega?** — keyword + gancho. (Recomendado)
-2. **El juego que Sega inspiro en las peliculas de Conan** — gancho de contexto.
+Doc para copiar/pegar al subir la reseña. Español chileno neutro, con tildes.
 
 ---
 
-## Descripcion (copiar/pegar)
+## Títulos sugeridos (elegir uno)
+
+1. **Golden Axe (Mega Drive, 1989): ¿envejeció bien el beat 'em up de Sega?** — keyword + gancho. (Recomendado)
+2. **El juego que Sega inspiró en las películas de Conan** — gancho de contexto.
+
+---
+
+## Descripción (copiar/pegar)
 
 ```
-Repasamos Golden Axe, el beat 'em up que Sega diseño inspirado en las peliculas de Conan el Barbaro — del mismo creador de Altered Beast 🪓🐉
+Repasamos Golden Axe, el beat 'em up que Sega diseñó inspirado en las películas de Conan el Bárbaro — del mismo creador de Altered Beast 🪓🐉
 
-Te contamos que se siente jugarlo hoy: montar criaturas para aplastar enemigos, los ataques magicos con medidor visible, y un dato poco comun: el port a Mega Drive AGREGO contenido en vez de recortarlo.
+Te contamos qué se siente jugarlo hoy: montar criaturas para aplastar enemigos, los ataques mágicos con medidor visible, y un dato poco común: el port a Mega Drive AGREGÓ contenido en vez de recortarlo.
 
-Cual de los 3 personajes usabas siempre? Contanos en los comentarios 👇
+¿Cuál de los 3 personajes usabas siempre? Cuéntanos en los comentarios 👇
 
-🔔 Suscribete a RETROTARROS para mas resenas retro — nostalgia + juegos + musica.
+🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
 #GoldenAxe #MegaDrive #Retrogaming #Gaming #Videojuegos
 ```
@@ -30,11 +30,11 @@ Cual de los 3 personajes usabas siempre? Contanos en los comentarios 👇
 ## Comentario fijado (copiar/pegar)
 
 ```
-Cual de los 3 personajes de Golden Axe usabas siempre: Ax Battler, Tyris Flare o Gilius?
+¿Cuál de los 3 personajes de Golden Axe usabas siempre: Ax Battler, Tyris Flare o Gilius?
 ```
 
 ---
 
 **Slug:** `resena-golden-axe`
-**Formato:** Resena (horizontal, hasta 10 min)
-**Ultima actualizacion:** 2026-07-29
+**Formato:** Reseña (horizontal, hasta 10 min)
+**Última actualización:** 2026-07-29
