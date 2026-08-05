@@ -194,6 +194,22 @@ if (Test-Path $resenasDir) {
                 Write-Host "  IMG  → $destResenaImg ($($imgs.Count) archivos)" -ForegroundColor Cyan
             }
         }
+        # FIX 2026-07-29: las capturas de resenas nunca se copiaban (bug desde el
+        # origen del formato, 2026-07-21) -- este bloque vivia separado del generico
+        # de arriba y nadie agrego la logica de captures. Luis lo detecto porque
+        # faltaban en el Drive real pese a que el sync decia "completo".
+        $destResenaCaptures = Join-Path $destDir "captures"
+        $srcResenaCaptures = Join-Path $resenasDir "captures\$slug"
+        if (Test-Path $srcResenaCaptures) {
+            if (-not (Test-Path $destResenaCaptures)) {
+                New-Item -ItemType Directory -Path $destResenaCaptures -Force | Out-Null
+            }
+            $caps = Get-ChildItem -Path $srcResenaCaptures -File -Filter "*.png" -ErrorAction SilentlyContinue
+            if ($caps.Count -gt 0) {
+                Copy-Item -Path "$srcResenaCaptures\*.png" -Destination $destResenaCaptures -Force
+                Write-Host "  CAP  → $destResenaCaptures ($($caps.Count) PNGs)" -ForegroundColor Cyan
+            }
+        }
     }
 }
 
