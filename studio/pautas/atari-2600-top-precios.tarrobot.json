@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "slug": "atari-2600-top-precios",
+  "episodio": "Top 10 Atari 2600 mas caros del mundo (retail)",
+  "creado": "2026-07-29",
+  "actualizado": "2026-07-29",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "atari-2600-top-precios-10",
+      "tema": "Karate",
+      "texto": "Karate lo lanzo primero Ultravision, que casi enseguida le paso la distribucion a Froggo. La version Froggo es comun y vale casi nada, pero la version Ultravision original hoy es de las mas dificiles de encontrar completa: ronda los mil dolares.",
+      "estado": "wow",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Ultravision",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Karate de Ultravision vale mil dolares, pero la version Froggo del mismo juego vale casi nada!",
+      "precio_short": "CIB ~USD 1.000"
+    },
+    {
+      "id": "atari-2600-top-precios-9",
+      "tema": "Ghost Manor",
+      "texto": "Ghost Manor vino en un cartucho 'Double-Ender' de Xonox: dos juegos completos compartiendo una sola carcasa con forma de X, este junto a Spike's Peak. Tuvo una tirada chica de fin de ciclo, asi que hoy un completo en caja ronda los mil doscientos dolares.",
+      "estado": "wow",
+      "consola": "Atari 2600",
+      "ano": 1983,
+      "editor": "Xonox",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Ghost Manor venia en un cartucho con forma de X, compartiendo carcasa con OTRO juego completo!",
+      "precio_short": "CIB ~USD 1.226"
+    },
+    {
+      "id": "atari-2600-top-precios-8",
+      "tema": "Gravitar",
+      "texto": "Gravitar es el port del arcade vectorial de Atari. La variante 'silver label' -de los ultimos lanzamientos de la empresa antes del crash de 1983- se produjo en cantidades minimas, asi que hoy un completo en caja ronda los mil trescientos dolares.",
+      "estado": "wow",
+      "consola": "Atari 2600",
+      "ano": 1983,
+      "editor": "Atari",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡La etiqueta plateada de Gravitar marca los ultimos juegos de Atari antes del crash del 83!",
+      "precio_short": "CIB ~USD 1.300"
+    },
+    {
+      "id": "atari-2600-top-precios-7",
+      "tema": "Eli'S Ladder",
+      "texto": "Eli's Ladder es considerado el juego educativo mas raro de toda la historia del Atari 2600 -ensenaba matematicas basicas con una escalera visual. Tuvo una tirada extremadamente limitada, y hoy sobreviven muy pocas copias completas: un CIB ronda los mil quinientos dolares.",
+      "estado": "wow",
+      "consola": "Atari 2600",
+      "ano": 1983,
+      "editor": "Answer Software",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡El juego mas raro del Atari 2600 no es de accion, es uno que ensenaba matematicas!",
+      "precio_short": "CIB ~USD 1.500"
+    },
+    {
+      "id": "atari-2600-top-precios-6",
+      "tema": "Quadrun",
+      "texto": "Quadrun es uno de los ultimos juegos que Atari lanzo antes de que el crash de 1983 hundiera a la industria completa. Tuvo produccion minima y distribucion casi nula, asi que hoy un completo en caja ronda los mil quinientos dolares.",
+      "estado": "wow",
+      "consola": "Atari 2600",
+      "ano": 1983,
+      "editor": "Atari",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Quadrun salio justo cuando el crash del 83 estaba hundiendo a toda la industria!",
+      "precio_short": ""
+    },
+    {
+      "id": "atari-2600-top-precios-5",
+      "tema": "Cakewalk",
+      "texto": "Cakewalk lo publico US Games, una subsidiaria de Quaker Oats -la marca de cereales- que se metio al negocio de los videojuegos durante el boom y se retiro rapido apenas llego el crash de 1983. Esa salida temprana dejo una tirada muy chica: hoy completo ronda los mil setecientos ochenta dolares.",
+      "estado": "wow",
+      "consola": "Atari 2600",
+      "ano": 1983,
+      "editor": "US Games",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Cakewalk lo hizo la marca de los cereales Quaker Oats! Se metieron y salieron del negocio de videojuegos casi al tiro.",
+      "precio_short": ""
+    },
+    {
+      "id": "atari-2600-top-precios-4",
+      "tema": "Halloween",
+      "texto": "Halloween es la adaptacion de la pelicula slasher de John Carpenter para el Atari 2600. Muchas tiendas se negaron a venderlo por su violencia, y las que si lo hacian lo guardaban bajo el mostrador, solo disponible si lo pedias. Vendio pesimo -y justo por eso hoy es tan dificil de encontrar completo: ronda los dos mil ciento veinticinco dolares.",
+      "estado": "wow",
+      "consola": "Atari 2600",
+      "ano": 1983,
+      "editor": "Wizard Video Games",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Las tiendas escondian Halloween bajo el mostrador porque era 'demasiado violento' para 1983!",
+      "precio_short": ""
+    },
+    {
+      "id": "atari-2600-top-precios-3",
+      "tema": "Out Of Control",
+      "texto": "Out of Control es otro de los ultimos juegos que Atari lanzo antes del crash de 1983. La produccion minima de esos meses finales convirtio a varios titulos de esa camada en rarezas instantaneas: hoy un completo en caja ronda los dos mil cuatrocientos veinticinco dolares.",
+      "estado": "wow",
+      "consola": "Atari 2600",
+      "ano": 1983,
+      "editor": "Atari",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Otro juego de los ultimos meses de Atari antes del crash! Esa epoca dejo puras rarezas.",
+      "precio_short": ""
+    },
+    {
+      "id": "atari-2600-top-precios-2",
+      "tema": "Texas Chainsaw Massacre",
+      "texto": "The Texas Chainsaw Massacre es el juego mas controvertido de toda la historia del Atari 2600: una adaptacion directa de la pelicula de terror, publicada por Wizard Video, una distribuidora de VHS de terror que se metio a los videojuegos. Las tiendas se negaron a venderlo en masa, asi que hoy es de los completos en caja mas dificiles de conseguir: ronda los dos mil cuatrocientos noventa dolares.",
+      "estado": "wow",
+      "consola": "Atari 2600",
+      "ano": 1983,
+      "editor": "Wizard Video Games",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Texas Chainsaw Massacre lo hizo una distribuidora de peliculas de terror en VHS, no un estudio de videojuegos!",
+      "precio_short": ""
+    },
+    {
+      "id": "atari-2600-top-precios-1",
+      "tema": "River Patrol",
+      "texto": "River Patrol es el juego retail 'normal' mas caro de toda la historia del Atari 2600. Fox Video Games era una compania chica que broto y murio con el crash de 1983 -dejando una de las tiradas mas escasas de toda la consola. Hoy un completo en caja pasa los cuatro mil dolares.",
+      "estado": "wow",
+      "consola": "Atari 2600",
+      "ano": 1983,
+      "editor": "Fox Video Games",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡River Patrol, el juego retail mas caro de TODO el Atari 2600! Mas de cuatro mil dolares completo.",
+      "precio_short": ""
+    }
+  ]
+}

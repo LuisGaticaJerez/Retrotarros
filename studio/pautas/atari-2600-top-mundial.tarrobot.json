@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "atari-2600-top-mundial",
+  "episodio": "Top 10 Atari 2600 mundial - los mejores juegos",
+  "creado": "2026-07-29",
+  "actualizado": "2026-07-29",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "atari-2600-top-mundial-10",
+      "tema": "Combat",
+      "texto": "Combat vino incluido con la consola desde el dia uno, en 1977. Con 27 variantes de tanques, aviones y biplanos, para millones de personas este fue literalmente el primer videojuego que jugaron en su vida.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1977,
+      "editor": "Atari",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Combat era el juego que venia GRATIS con la consola! El primer videojuego de toda una generacion."
+    },
+    {
+      "id": "atari-2600-top-mundial-9",
+      "tema": "Kaboom!",
+      "texto": "Kaboom! lo diseño Larry Kaplan, uno de los cofundadores de Activision. Girabas el paddle para atrapar bombas que tiraba un ladron loco desde arriba. Simple, adictivo, y el control de paddle se sentia como tocar un instrumento.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1981,
+      "editor": "Activision",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Kaboom! convertia el paddle en un instrumento! Puro reflejo puro."
+    },
+    {
+      "id": "atari-2600-top-mundial-8",
+      "tema": "Missile Command",
+      "texto": "Missile Command trajo el arcade de 1980 a la casa: defender seis ciudades de una lluvia de misiles con una mira estrategica. El propio desarrollador, Dave Theurer, conto que el juego le provoco pesadillas reales sobre guerra nuclear.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1981,
+      "editor": "Atari",
+      "fuente": "pauta-manual",
+      "reaccion_short": "El creador de Missile Command tuvo pesadillas nucleares por su propio juego. ¡Asi de intenso era!"
+    },
+    {
+      "id": "atari-2600-top-mundial-7",
+      "tema": "Raiders Of The Lost Ark",
+      "texto": "Raiders of the Lost Ark fue uno de los primeros juegos con licencia de pelicula tomado en serio: tenia mapa gigante, sistema de inventario y puzzles reales de resolver. Una ambicion enorme para un cartucho de 1982.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Atari",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Raiders tenia inventario y puzzles reales en 1982! Un juego con licencia hecho en serio, algo rarisimo."
+    },
+    {
+      "id": "atari-2600-top-mundial-6",
+      "tema": "Space Invaders",
+      "texto": "Space Invaders fue el puerto que convirtio al Atari 2600 en un exito de verdad. Vendio mas de 2 millones de copias y disparo las ventas de la consola misma -se le considera el primer 'killer app' de la historia de los videojuegos.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1980,
+      "editor": "Atari",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Space Invaders fue el PRIMER killer app de la historia! Disparo las ventas de toda la consola."
+    },
+    {
+      "id": "atari-2600-top-mundial-5",
+      "tema": "River Raid",
+      "texto": "River Raid lo diseño y programo sola Carol Shaw, la primera disenadora de videojuegos mujer ampliamente reconocida de la historia. Su scroll vertical fluido y el exito del juego -mas de un millon de copias- le permitieron a Carol retirarse joven.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Activision",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡River Raid lo hizo sola Carol Shaw, la primera disenadora de videojuegos mujer reconocida de la historia!"
+    },
+    {
+      "id": "atari-2600-top-mundial-4",
+      "tema": "Yars' Revenge",
+      "texto": "Yars' Revenge es el juego original mas vendido de toda la historia del Atari 2600 -no era un port de arcade, se diseño desde cero para la consola. Howard Scott Warshaw creo un shooter abstracto que se convirtio en el buque insignia de Atari.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Atari",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Yars' Revenge no vino de ningun arcade! Se creo desde cero para el 2600 y fue el mas vendido de todos."
+    },
+    {
+      "id": "atari-2600-top-mundial-3",
+      "tema": "Adventure",
+      "texto": "Warren Robinett escondio su nombre en una sala secreta del juego, como protesta silenciosa porque Atari no le daba credito a los disenadores. Un chico de 15 años lo descubrio, y asi nacio el termino 'Easter egg' en la historia de los videojuegos.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1980,
+      "editor": "Atari",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Adventure escondia el PRIMER Easter egg de la historia! Un disenador protestando en silencio contra su propia empresa."
+    },
+    {
+      "id": "atari-2600-top-mundial-2",
+      "tema": "Pac-Man",
+      "texto": "Pac-Man es el juego mas vendido de toda la historia del Atari 2600: mas de 8 millones de copias. El problema es que la conversion parpadeaba constantemente y se veia muy inferior al arcade original -se le considera la decepcion mas famosa de la historia de Atari.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Atari",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Pac-Man vendio 8 millones de copias pero decepciono a todo el mundo! La conversion mas famosa que salio mal."
+    },
+    {
+      "id": "atari-2600-top-mundial-1",
+      "tema": "Pitfall!",
+      "texto": "David Crane diseño 255 pantallas completas de selva, trampas y tesoros en apenas 4 kilobytes de memoria -una hazana tecnica brutal para 1982. Pitfall es considerado el padre del genero plataformas de accion, y el juego mas aclamado por la critica de toda la historia del Atari 2600.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Activision",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Pitfall metio 255 pantallas completas en 4 kilobytes! El padre de todos los plataformas de accion que vinieron despues."
+    }
+  ]
+}

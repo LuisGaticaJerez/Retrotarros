@@ -58,10 +58,14 @@ def _slug(s: str) -> str:
 
 
 def _auto_img(it: dict, out_slug: str) -> None:
-    """Si no hay 'img' pero existe studio/img/<out_slug>/<slug(title)>.jpg, la usa."""
+    """Si no hay 'img', busca <categoria-episodio>/img/<out_slug>/<slug(title)>.jpg
+    -- relativo a donde el HTML realmente aterriza (episode_category), no a la
+    raiz plana de studio/. Bug historico: quedo apuntando a la raiz plana tras
+    la migracion de carpetas por categoria (2026-07-29, Luis lo detecto porque
+    las cajas de Atari 2600 no cargaban en la captura)."""
     if it.get("img"):
         return
-    cand = REPO / "studio" / "img" / out_slug / f"{_slug(it['title'])}.jpg"
+    cand = REPO / "studio" / episode_category(out_slug) / "img" / out_slug / f"{_slug(it['title'])}.jpg"
     if cand.exists():
         it["img"] = f"img/{out_slug}/{_slug(it['title'])}.jpg"
 
