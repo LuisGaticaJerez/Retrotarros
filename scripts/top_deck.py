@@ -57,6 +57,22 @@ def _slug(s: str) -> str:
     return _re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
 
+def _esc(s: str) -> str:
+    return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def _notas(bloque: dict | None) -> str:
+    """<aside class="notas"> por slide -- capa de teleprompter (tecla N), NUNCA
+    sale en capture-slides.py. bloque = {'titulo':.., 'lineas':[...], 'cue': '...'}.
+    Debe dar MAS info de la que ya esta en pantalla (regla Luis 2026-06-15)."""
+    if not bloque:
+        return ""
+    titulo = _esc(bloque.get("titulo", "NOTAS"))
+    lineas = "".join(f'<div class="n-line">{_esc(t)}</div>' for t in bloque.get("lineas", []))
+    cue = f'<div class="n-cue">{_esc(bloque["cue"])}</div>' if bloque.get("cue") else ""
+    return f'<aside class="notas"><h4>{titulo}</h4>{lineas}{cue}</aside>'
+
+
 def _auto_img(it: dict, out_slug: str) -> None:
     """Si no hay 'img', busca <categoria-episodio>/img/<out_slug>/<slug(title)>.jpg
     -- relativo a donde el HTML realmente aterriza (episode_category), no a la
@@ -146,6 +162,7 @@ def _slide_item(num: int, it: dict, consola: str, ch: int | None = None) -> str:
         f'      <div class="hybrid-title"><div class="game-title">{it["title"]}</div><div class="game-meta">{meta}</div></div>\n'
         f'      <div class="game-why"><span class="lbl">{it.get("why_label","▶ POR QUE")}</span>{it["why"]}</div>\n'
         '    </div>\n'
+        f'{_notas(it.get("notas"))}'
         '  </section>'
     )
 
@@ -160,6 +177,7 @@ def _slide_portada(num: int, data: dict) -> str:
         f'      <div class="ep-title">{p["title"]}</div>\n'
         f'      <div class="ep-sub">{p["sub"]}</div>\n'
         '    </div>\n'
+        f'{_notas(p.get("notas"))}'
         '  </section>'
     )
 
@@ -175,6 +193,7 @@ def _slide_divider(num: int, d: dict) -> str:
         f'      <div class="title {color}"{style}>{d["title"]}</div>\n'
         f'      <div class="sub">{d["sub"]}</div>\n'
         '    </div>\n'
+        f'{_notas(d.get("notas"))}'
         '  </section>'
     )
 
@@ -185,15 +204,35 @@ def generar_top(data: dict, out_slug: str) -> Path:
     foot = base[base.index('<nav class="footer">'):]
 
     # CSS del PRECIO grande en la esquina superior derecha (top de precios)
+    # + CAPA DE NOTAS DE LECTURA (teleprompter, tecla N) -- regla obligatoria del
+    # canal para HTML de ranking del formato nuevo (CLAUDE.md, patron psvita-top-mundial.html).
+    # top_deck.py nunca la tuvo implementada hasta este fix (Luis 2026-08-06: "no
+    # pusiste las notas" en los episodios de Atari 2600).
     price_css = (
         "<style>\n"
         ".game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;"
         "color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);"
         "letter-spacing:1px;white-space:nowrap;border:3px solid var(--ye);"
         "padding:8px 18px;border-radius:6px;background:rgba(255,210,63,.07);align-self:flex-start}\n"
+        ".notas{position:absolute;top:0;right:0;width:460px;height:100%;z-index:150;display:none;"
+        "flex-direction:column;gap:10px;padding:26px 22px 30px;overflow-y:auto;"
+        "background:linear-gradient(90deg,rgba(6,3,15,.55) 0%,rgba(6,3,15,.96) 26%);"
+        "border-left:2px solid var(--ye);backdrop-filter:blur(2px)}\n"
+        "body.read-mode .slide.active .notas{display:flex}\n"
+        ".notas h4{font-family:'Press Start 2P';font-size:9px;color:var(--ye);letter-spacing:2px;margin-top:4px}\n"
+        ".notas h4:first-child{margin-top:0}\n"
+        ".notas .n-line{font-family:'Share Tech Mono';font-size:14.5px;line-height:1.5;"
+        "color:rgba(255,255,255,.92);border-left:3px solid var(--cy);padding:3px 0 3px 11px}\n"
+        ".notas .n-cue{border-left-color:var(--mg);color:var(--ye)}\n"
+        ".notas .n-cue b{color:#fff}\n"
+        ".read-indicator{position:fixed;top:64px;right:16px;z-index:300;font-family:'Press Start 2P';"
+        "font-size:8px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;"
+        "box-shadow:0 0 14px rgba(255,210,63,.5)}\n"
+        "body.read-mode .read-indicator{display:block}\n"
         "</style>\n</head>"
     )
     head = head.replace("</head>", price_css, 1)
+    head += '\n<div class="read-indicator">● MODO LECTURA (N)</div>\n'
 
     consola = data.get("consola", "NES")
     slides = []
@@ -231,6 +270,27 @@ def generar_top(data: dict, out_slug: str) -> Path:
     )
     head = re.sub(r"<title>.*?</title>",
                   f'<title>RETROTARROS · {data["doc_title"]}</title>', head, flags=re.DOTALL)
+
+    # Nav-hint + script: agregar boton/tecla N para el modo lectura (notas). El BASE
+    # (snes-top-mundial.html) no lo trae, asi que se inyecta aca por texto.
+    foot = foot.replace(
+        '<div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>',
+        '<div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR · '
+        '<kbd id="notasBtn" style="cursor:pointer" title="Mostrar/ocultar notas">N</kbd> NOTAS</div>',
+        1,
+    )
+    foot = foot.replace(
+        "  if (e.key === 'End') { go(total - 1); }\n});",
+        "  if (e.key === 'End') { go(total - 1); }\n"
+        "  if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }\n"
+        "});\n"
+        "function setRead(on) { document.body.classList.toggle('read-mode', on); }\n"
+        "if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);\n"
+        "const notasBtn = document.getElementById('notasBtn');\n"
+        "if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));",
+        1,
+    )
+
     out_dir = REPO / "studio" / episode_category(out_slug)
     out_dir.mkdir(parents=True, exist_ok=True)
     out = out_dir / f"{out_slug}.html"

@@ -52,12 +52,14 @@ Formato presentacion visual con HTML del estudio (`studio/rankings/top-precios/a
 
 ## Apartado RAREZAS / NO-RETAIL
 
+Orden ascendente por valor verificado (fix 2026-08-06: el orden anterior no seguia el precio, y Pepsi Invaders no mostraba ningun valor en pantalla).
+
 | Juego | Dato | Valor |
 |-------|------|-------|
-| Gamma Attack | 1 sola copia conocida en el mundo | Pedido USD 500.000 (nunca vendido a ese precio) |
-| Red Sea Crossing | Mail-order religioso, 2 copias conocidas | ~USD 13.800 |
-| Pepsi Invaders | Promocional Coca-Cola/Atari, ~125 copias | Nunca estuvo a la venta |
+| Pepsi Invaders | Promocional Coca-Cola/Atari, ~125 copias | Venta verificada USD 1.825 (eBay, 2005 — fuente Engadget) |
 | Gauntlet (Answer Software) | Mail-order, sin relacion al arcade homonimo | CIB ~USD 5.000 |
+| Red Sea Crossing | Mail-order religioso, 2 copias conocidas | ~USD 13.800 |
+| Gamma Attack | 1 sola copia conocida en el mundo | Pedido USD 500.000 (nunca vendido a ese precio) |
 
 ## SANTO GRIAL
 

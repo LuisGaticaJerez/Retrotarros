@@ -117,9 +117,20 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
 </style>
 <style>
 .game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);letter-spacing:1px;white-space:nowrap;border:3px solid var(--ye);padding:8px 18px;border-radius:6px;background:rgba(255,210,63,.07);align-self:flex-start}
+.notas{position:absolute;top:0;right:0;width:460px;height:100%;z-index:150;display:none;flex-direction:column;gap:10px;padding:26px 22px 30px;overflow-y:auto;background:linear-gradient(90deg,rgba(6,3,15,.55) 0%,rgba(6,3,15,.96) 26%);border-left:2px solid var(--ye);backdrop-filter:blur(2px)}
+body.read-mode .slide.active .notas{display:flex}
+.notas h4{font-family:'Press Start 2P';font-size:9px;color:var(--ye);letter-spacing:2px;margin-top:4px}
+.notas h4:first-child{margin-top:0}
+.notas .n-line{font-family:'Share Tech Mono';font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.92);border-left:3px solid var(--cy);padding:3px 0 3px 11px}
+.notas .n-cue{border-left-color:var(--mg);color:var(--ye)}
+.notas .n-cue b{color:#fff}
+.read-indicator{position:fixed;top:64px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:8px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;box-shadow:0 0 14px rgba(255,210,63,.5)}
+body.read-mode .read-indicator{display:block}
 </style>
 </head>
 <body>
+<div class="read-indicator">● MODO LECTURA (N)</div>
+
 
 <header>
   <div class="hdr-logo">RETROTARROS</div>
@@ -136,7 +147,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="ep-title">TOP 10 <span class="vs">PRECIOS</span> ATARI 2600</div>
       <div class="ep-sub">LOS CARTUCHOS QUE ROMPEN BILLETERAS</div>
     </div>
-  </section>
+<aside class="notas"><h4>INTRO · DATO BOMBA</h4><div class="n-line">El episodio anterior (top mundial) tenia a Pitfall! en el numero 1. Ese juego vendio mas de 4 millones de copias -por eso hoy vale casi nada. La logica de este episodio es la OPUESTA: escasez, no calidad.</div><div class="n-line">Ningun juego de este top esta en la coleccion fisica de Retrotarros -son valores de mercado generales, no una vitrina propia. Aclarar eso desde el arranque.</div><div class="n-cue">ANTES DE GRABAR: recalcar SIEMPRE que son valores de mercado, no consejo de inversion -regla del canal, decirlo temprano y de nuevo en el cierre.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">02</span>
@@ -145,7 +156,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title mg" style="font-size:78px;">DEL #10 AL #1</div>
       <div class="sub">Solo juegos RETAIL: los que de verdad se vendieron en tiendas. Valores CIB aproximados (RetroGamePriceGuide, PriceCharting, 2026). Las rarezas de mail-order y promocionales van aparte. El numero uno se escapa de la liga.</div>
     </div>
-  </section>
+<aside class="notas"><h4>METODOLOGIA</h4><div class="n-line">Fuente base: retrogamepriceguide.com, cruzada con gamerant.com y racketboy.com para los casos puntuales (Karate Ultravision, Eli's Ladder).</div><div class="n-line">Se excluyeron 2 entradas de la fuente original que NO son juegos: un 'Color Bar Generator' (herramienta de calibracion de TV) y un 'Copy Cart' (accesorio para copiar cartuchos) -ninguno de los dos es software jugable.</div><div class="n-cue">Angulo de apertura: 'estos son solo los que de verdad se vendieron en tiendas -las rarezas de mail-order son otra liga completa, van aparte.'</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">03</span>
@@ -165,7 +176,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">KARATE</div><div class="game-meta">Atari 2600 · 1982 · ULTRAVISION · CIB ~USD 1.000</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Ultravision lanzo el juego y casi enseguida le paso la distribucion a Froggo. La version Froggo es comun y vale casi nada -pero la Ultravision original es de las mas dificiles de encontrar completa.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Es el ejemplo perfecto para explicarle a la audiencia como funciona el coleccionismo: NO es el juego lo que vale, es la escasez de la EDICION especifica -mismo contenido, valor totalmente distinto.</div><div class="n-line">Trampa real para coleccionistas nuevos: mucha gente compra la version Froggo (comun) pensando que vale lo mismo que la Ultravision -verificar siempre la etiqueta antes de pagar caro.</div><div class="n-cue">ANGULO DE APERTURA DEL BLOQUE: usar este caso para explicar el concepto de escasez de edicion antes de seguir con el resto del top.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">04</span>
@@ -185,7 +196,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">GHOST MANOR</div><div class="game-meta">Atari 2600 · 1983 · XONOX · CIB ~USD 1.226</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Vino en un cartucho 'Double-Ender': dos juegos completos en un solo cartucho con forma de X, compartiendo carcasa con Spike's Peak. Tirada chica de fin de ciclo.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">El formato 'Double-Ender' de Xonox metia DOS juegos completos y separados (no una compilacion) en un solo cartucho fisico -una forma de abaratar costos de fabricacion en plena crisis.</div><div class="n-line">El otro juego del mismo cartucho, Spike's Peak, no entra a este top -pero vale la pena mencionarlo como curiosidad: comprabas 2 juegos completos por el precio de 1 cartucho.</div><div class="n-cue">Mostrar el cartucho en camara con forma de X si se consigue una foto -es visualmente muy distinto a un cartucho normal.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">05</span>
@@ -205,7 +216,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">GRAVITAR</div><div class="game-meta">Atari 2600 · 1983 · ATARI · SILVER LABEL · CIB ~USD 1.300</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Port del arcade vectorial de Atari. La variante 'silver label' -de los ultimos lanzamientos de Atari antes del crash del 83- se produjo en cantidades minimas.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">El cambio de las cajas 'arcoiris' elaboradas de Atari a las 'silver label' austeras fue un recorte de costos real -la empresa estaba sangrando dinero mientras la industria se hundia en 1983.</div><div class="n-line">Es un buen ejemplo visual para mostrar en camara: la diferencia de diseño entre una caja Atari normal y una silver label es notoria a simple vista.</div><div class="n-cue">Si se consigue una caja Atari 'normal' de comparacion, mostrar lado a lado con la silver label -contraste visual fuerte.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">06</span>
@@ -225,7 +236,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">ELI'S LADDER</div><div class="game-meta">Atari 2600 · 1983 · ANSWER SOFTWARE · CIB ~USD 1.500</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El juego educativo mas raro de toda la consola: ensenaba matematicas basicas. Tirada extremadamente limitada, sobreviven muy pocas copias completas.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Los juegos educativos en general vendieron pesimo en los 80: el publico que compraba cartuchos queria accion, no matematicas -eso mismo es lo que hoy los hace raros y caros.</div><div class="n-line">Answer Software (la editorial) operaba solo por correo -sin distribucion en tiendas fisicas, lo que limito aun mas la tirada real.</div><div class="n-cue">CONTRASTE: el juego mas raro del top NO es de accion ni terror -es uno educativo que nadie queria comprar en su epoca.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">07</span>
@@ -245,7 +256,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">QUADRUN</div><div class="game-meta">Atari 2600 · 1983 · ATARI · CIB ~USD 1.500</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Uno de los ultimos juegos que Atari lanzo antes de que el crash del 83 hundiera a la industria completa. Produccion minima, distribucion casi nula.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Fue el primer juego del Atari 2600 con sintesis de voz -el cartucho literalmente decia 'Quadrun! Quadrun! Quadrun!' en voz digitalizada. Solo otro juego de la consola (Open Sesame) tuvo esta tecnologia.</div><div class="n-line">Atari solo fabrico unas 10.000 unidades: en pruebas internas, los jugadores lo comparaban mal contra Ms. Pac-Man, y la empresa asumio de antemano que iba a fracasar -asi que redujo la produccion antes de lanzarlo.</div><div class="n-cue">DATO SORPRESA: si consiguen audio o video del juego, mostrar la voz digitalizada -es un detalle tecnico que nadie espera de 1983.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">08</span>
@@ -265,7 +276,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">CAKEWALK</div><div class="game-meta">Atari 2600 · 1983 · US GAMES · CIB ~USD 1.786</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>US Games era una subsidiaria de Quaker Oats -la marca de cereales- que se metio al negocio de los videojuegos durante el boom y se retiro rapido cuando llego el crash. Tirada muy chica.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">US Games no fue la unica marca 'rara' que se metio a hacer cartuchos en el boom de 1982-83: tambien hubo compania de peliculas de terror en VHS (Wizard Video, ver #4 y #2 mas adelante) -cualquier empresa con plata queria un pedazo del negocio.</div><div class="n-line">Esa fiebre de entrada masiva de marcas sin experiencia en videojuegos es una de las causas que los historiadores citan para el crash del 83: demasiados juegos malos saturando el mercado.</div><div class="n-cue">PUENTE: mencionar que en un par de puestos mas aparece OTRA marca fuera de lo comun (Wizard Video, distribuidora de peliculas de terror) -mismo fenomeno.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">09</span>
@@ -285,7 +296,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">HALLOWEEN</div><div class="game-meta">Atari 2600 · 1983 · WIZARD VIDEO GAMES · CIB ~USD 2.125</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Adaptacion de la pelicula slasher de John Carpenter. Las tiendas se negaron a venderlo por su violencia -algunas lo guardaban bajo el mostrador. Vendio pesimo, y por eso hoy es tan dificil de encontrar completo.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Wizard Video Games era, antes que nada, una distribuidora de peliculas de terror en VHS -no un estudio de videojuegos. Vieron el boom del 82-83 y decidieron adaptar su catalogo de peliculas a cartuchos.</div><div class="n-line">Manejar con cuidado en camara: encuadrar como contexto historico de la epoca (los videojuegos todavia se veian como juguete de niños, asi que esto causaba controversia real), sin sonar a que se celebra el contenido violento.</div><div class="n-cue">OJO: mismo editor que Texas Chainsaw Massacre (viene 2 puestos mas arriba) -mencionar la conexion cuando aparezca.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">10</span>
@@ -305,7 +316,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">OUT OF CONTROL</div><div class="game-meta">Atari 2600 · 1983 · ATARI · CIB ~USD 2.425</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Otro de los ultimos lanzamientos de Atari antes del crash de 1983. La produccion minima de esa epoca convirtio a varios titulos de esos meses en rarezas instantaneas.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Es uno de los puestos con menos historia documentada de todo el top -un titulo generico de accion que no dejo mayor huella cultural, solo escasez por la epoca en que salio.</div><div class="n-line">Buen momento para el analisis del patron general del top: no todos los juegos caros tienen una historia jugosa detras, algunos valen simplemente por el momento exacto en que salieron a la venta.</div><div class="n-cue">Ritmo rapido aca -el gancho real de este puesto es el PATRON del crash, no el juego en si mismo.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">11</span>
@@ -325,7 +336,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">TEXAS CHAINSAW MASSACRE</div><div class="game-meta">Atari 2600 · 1983 · WIZARD VIDEO GAMES · CIB ~USD 2.490</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El juego mas controvertido de toda la consola: adaptacion directa de la pelicula de terror. Las tiendas se negaron a venderlo en masa, asi que hoy es de los CIB mas dificiles de conseguir.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA · MANEJAR CON CUIDADO</h4><div class="n-line">El gameplay real es bastante generico (te mueves esquivando personajes) -parte de por que se recuerda mas por la controversia que por ser un buen juego. Es honesto decirlo en camara, no hace falta venderlo como una joya jugable.</div><div class="n-line">Wizard Video (mismo editor de Halloween, #4) hizo solo estos dos juegos antes de salir del rubro completamente -su paso por los videojuegos duro literalmente un año.</div><div class="n-cue">REGLA DEL CANAL: encuadrar como contexto historico/censura de la epoca, nunca como 'que genial la sangre' -mismo cuidado que con Halloween.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">12</span>
@@ -345,7 +356,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">RIVER PATROL</div><div class="game-meta">Atari 2600 · 1983 · FOX VIDEO GAMES · CIB ~USD 4.219</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El juego retail 'normal' mas caro de toda la consola. Fox Video Games era una compania chica que broto y murio con el crash del 83 -dejando una de las tiradas mas escasas de toda la historia del 2600.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA · EL TRONO</h4><div class="n-line">A diferencia de casi todo el resto del top, River Patrol no tiene controversia ni gimmick -es un juego de accion 'normal' que simplemente tuvo una tirada minima. Eso reafirma el mensaje central del episodio: escasez pura, sin necesidad de historia rara detras.</div><div class="n-line">Fox Video Games (sin relacion con el estudio de cine) broto y desaparecio en menos de un año, justo en la ventana del crash -tipico de decenas de editoriales chicas de esa epoca.</div><div class="n-cue">CIERRE DEL BLOQUE RETAIL: 'el mas caro de todos no es el mas raro ni el mas controvertido -es simplemente el mas escaso.' Buen remate antes de pasar a rarezas.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">13</span>
@@ -354,15 +365,15 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title mg" style="font-size:60px;">RAREZAS &amp; NO-RETAIL</div>
       <div class="sub">Estos NO se vendieron en tiendas normales: mail-order religioso, promocionales corporativos y un juego con una sola copia conocida en el mundo entero. Otra liga, otra historia.</div>
     </div>
-  </section>
+<aside class="notas"><h4>ANTES DE ESTE BLOQUE</h4><div class="n-line">Orden de este bloque: de menor a mayor valor verificado, terminando en Gamma Attack (el numero mas grande del episodio, aunque sea un precio de pedido y no una venta confirmada).</div><div class="n-line">Diferencia clave a explicar en camara: mail-order = se podia comprar por correo/telefono aunque fuera raro; promocional = nunca estuvo a la venta, se regalo.</div><div class="n-cue">Marcar la diferencia entre 'raro pero comprable' (mail-order) y 'nunca estuvo en venta' (promocional) antes de entrar al bloque.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">14</span>
     <div class="slide-hybrid">
-      <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">1 COPIA CONOCIDA</div><div class="game-price">USD 500.000</div></div>
+      <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">~125 COPIAS · PROMOCIONAL</div><div class="game-price">USD 1.825</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">GAMMA ATTACK</div><div class="sub">Atari 2600</div></div></div>
+          <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">PEPSI INVADERS</div><div class="sub">Atari 2600</div></div></div>
           <div class="cart-console">Atari 2600</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
@@ -371,53 +382,13 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">GAMMA ATTACK</div><div class="game-meta">Atari 2600 · 1983 · GAMMATION · 1 COPIA · PEDIDO USD 500.000</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUE</span>El programador aficionado dueño de Gammation lo anuncio una sola vez en una revista. Solo se conoce UNA copia autentica en todo el mundo, y su dueño ha pedido hasta 500 mil dolares por ella -nunca vendida a ese precio.</div>
+      <div class="hybrid-title"><div class="game-title">PEPSI INVADERS</div><div class="game-meta">Atari 2600 · 1983 · ATARI · VENTA 2005 · USD 1.825</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Version modificada de Space Invaders donde disparabas a la letra P-E-P-S-I. Coca-Cola la encargo como regalo interno para convenciones -se hicieron unas 125 copias, nunca se vendio en tiendas. Una copia se remato en eBay en 1.825 dolares en 2005.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Fuente verificada: Engadget reporto la venta de 1.825 dolares en octubre de 2005 -el vendedor la habia comprado en un mercado de pulgas una decada antes sin saber lo que tenia.</div><div class="n-line">Es una de las primeras ventas retro documentadas por prensa NO especializada -15 años antes del boom de coleccionismo graduado (WATA) de 2020-2021. El hobby ya generaba estos numeros mucho antes de ser 'tendencia'.</div><div class="n-cue">GANCHO: 'esto se vendio caro en 2005, antes de que el coleccionismo retro fuera cool -no es una moda nueva.'</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">15</span>
-    <div class="slide-hybrid">
-      <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">2 COPIAS · MAIL ORDER</div><div class="game-price">USD 13.800</div></div>
-      <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-2600-top-precios/red-sea-crossing.jpg" alt="" aria-hidden="true"><img src="img/atari-2600-top-precios/red-sea-crossing.jpg" alt="RED SEA CROSSING box art"></div>
-          <div class="cart-console">Atari 2600</div>
-        </div></div>
-        <div class="tv-wrap"><div class="tarrovision">
-          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
-          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
-          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
-        </div></div>
-      </div>
-      <div class="hybrid-title"><div class="game-title">RED SEA CROSSING</div><div class="game-meta">Atari 2600 · 1983 · INSPIRATIONAL VIDEO CONCEPTS · 2 COPIAS · ~USD 13.800</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUE</span>Juego religioso vendido solo por telefono, anunciado una vez en la revista Christianity Today. Solo se conocen dos copias en el mundo -una aparecio en una venta de garage recien en 2007.</div>
-    </div>
-  </section>
-
-  <section class="slide">
-    <span class="slide-num">16</span>
-    <div class="slide-hybrid">
-      <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">~125 COPIAS · PROMOCIONAL</div></div>
-      <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">PEPSI INVADERS</div><div class="sub">Atari 2600</div></div></div>
-          <div class="cart-console">Atari 2600</div>
-        </div></div>
-        <div class="tv-wrap"><div class="tarrovision">
-          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
-          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
-          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
-        </div></div>
-      </div>
-      <div class="hybrid-title"><div class="game-title">PEPSI INVADERS</div><div class="game-meta">Atari 2600 · 1983 · ATARI · PROMO · NUNCA A LA VENTA</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUE</span>Version modificada de Space Invaders donde disparabas a la letra P-E-P-S-I. Coca-Cola la encargo como regalo interno para convenciones -se hicieron unas 125 copias, nunca se vendio en tiendas.</div>
-    </div>
-  </section>
-
-  <section class="slide">
-    <span class="slide-num">17</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">MAIL ORDER · CIB ~USD 5.000</div><div class="game-price">USD 5.000</div></div>
       <div class="hybrid-body">
@@ -426,7 +397,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="cart-console">Atari 2600</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
-          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
           <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
@@ -434,7 +405,47 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">GAUNTLET</div><div class="game-meta">Atari 2600 · 1983 · ANSWER SOFTWARE · MAIL ORDER · CIB ~USD 5.000</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Sin relacion con el arcade homonimo de 1985: este Gauntlet es un juego original para Atari 2600 vendido solo por correo. Un completo en caja hoy ronda los cinco mil dolares.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">El nombre genera confusion real: buscar 'Gauntlet Atari' en internet trae mayormente resultados del arcade de 1985 (sin relacion), no de este mail-order de 1983 -aclarar bien en camara para que no parezca error.</div><div class="n-line">Answer Software es la MISMA editorial de Eli's Ladder (#7 del top retail) -otra empresa chica de mail-order que desaparecio con el crash.</div><div class="n-cue">ACLARAR EN VIVO: NO es el arcade Gauntlet que todos conocen -es un juego distinto, sin relacion.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">16</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">2 COPIAS · MAIL ORDER</div><div class="game-price">USD 13.800</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-2600-top-precios/red-sea-crossing.jpg" alt="" aria-hidden="true"><img src="img/atari-2600-top-precios/red-sea-crossing.jpg" alt="RED SEA CROSSING box art"></div>
+          <div class="cart-console">Atari 2600</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">RED SEA CROSSING</div><div class="game-meta">Atari 2600 · 1983 · INSPIRATIONAL VIDEO CONCEPTS · 2 COPIAS · ~USD 13.800</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Juego religioso vendido solo por telefono, anunciado una vez en la revista Christianity Today. Solo se conocen dos copias en el mundo -una aparecio en una venta de garage recien en 2007.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">El mercado de mail-order religioso era un nicho real en los 80 -mismo modelo de venta que casetes y VHS cristianos de la epoca, solo que aplicado a un videojuego.</div><div class="n-line">La historia del hallazgo de 2007 en una venta de garage es conocida en los foros de AtariAge -el comprador no tenia idea de lo que habia encontrado hasta publicarlo ahi.</div><div class="n-cue">DATO CURIOSO: de solo 2 copias conocidas, UNA estuvo perdida hasta 2007 -pudo haber una tercera dando vueltas sin que nadie lo sepa.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">17</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">1 COPIA CONOCIDA</div><div class="game-price">USD 500.000</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">GAMMA ATTACK</div><div class="sub">Atari 2600</div></div></div>
+          <div class="cart-console">Atari 2600</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">GAMMA ATTACK</div><div class="game-meta">Atari 2600 · 1983 · GAMMATION · 1 COPIA · PEDIDO USD 500.000</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>El programador aficionado dueño de Gammation lo anuncio una sola vez en una revista. Solo se conoce UNA copia autentica en todo el mundo, y su dueño ha pedido hasta 500 mil dolares por ella -nunca vendida a ese precio.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · OJO CON ESTO</h4><div class="n-line">IMPORTANTE para decir en camara: los 500 mil dolares son un PRECIO DE PEDIDO del dueño actual, no una venta real confirmada -aclarar la diferencia para no exagerar el dato.</div><div class="n-line">Gammation era literalmente una sola persona vendiendo accesorios de hardware para el 2600 -el juego funciono casi como un aviso publicitario de una sola vez en una revista, no como un producto real.</div><div class="n-cue">CLIMAX DEL BLOQUE RAREZAS: el numero mas grande de todo el episodio (aunque no sea venta real) -cerrar el bloque con esta.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">18</span>
@@ -454,7 +465,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">AIR RAID</div><div class="game-meta">ATARI 2600 · 1982 · MEN-A-VISION · SOLO 13 COPIAS · VENTA RECORD USD 33.433</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El cartucho mas raro de toda la consola: forma de T unica en toda la historia del Atari 2600, y solo se conocen 13 copias en el mundo. Una copia sellada se remato en 33.433 dolares en 2012 -el record de venta que se mantiene hasta hoy. No es solo rareza: es el juego retail mas caro jamas vendido de la consola.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA · EL CIERRE</h4><div class="n-line">La forma de T del cartucho no fue un capricho esteico: se dice que era una medida anti-falsificacion -un molde tan poco comun que es casi imposible de replicar de forma convincente, a diferencia de un cartucho rectangular normal.</div><div class="n-line">Men-A-Vision no tenia relacion oficial con Atari -lo aclaraba la propia caja del juego ('is not related to Atari Inc.'). Fue una editorial externa aprovechando que cualquiera podia programar para el 2600 sin licencia.</div><div class="n-cue">ACLARAR SIEMPRE: es venta RECORD de un ejemplar sellado y sin abrir (2012), no el valor tipico de un cartucho suelto comun -mismo cuidado que con el fenomeno WATA. Cerrar con la frase fija de arriba (juego retail mas caro jamas vendido).</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">19</span>
@@ -463,7 +474,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title mg" style="font-size:48px;">EL CRASH DEL 83 ESCRIBIO ESTA LISTA</div>
       <div class="sub">Casi todo el top retail (Quadrun, Out of Control, Cakewalk, Gravitar silver label) son juegos de los ultimos meses de 1983, justo cuando el crash de la industria hundio las tiradas a su minimo historico. Y los dos juegos mas controvertidos -Texas Chainsaw Massacre y Halloween- valen caro precisamente porque las tiendas se negaron a venderlos.</div>
     </div>
-  </section>
+<aside class="notas"><h4>PARA EL CIERRE</h4><div class="n-line">Patron a remarcar: NINGUNO de estos 10 juegos vale caro por ser BUENO -valen caro por escasez de produccion, censura de tiendas, o pura mala suerte de timing con el crash.</div><div class="n-line">Dato de contraste fuerte para mencionar: E.T. the Extra-Terrestrial, el juego mas famoso por 'arruinar todo' el mercado, hoy vale casi nada -Atari produjo tantas copias que sobreviven miles, muy lejos de la escasez real de este top.</div><div class="n-cue">GANCHO DE CONTRASTE: 'el juego mas famoso por hundir la industria hoy vale centavos -la fama no es lo mismo que la escasez.'</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">20</span>
@@ -472,7 +483,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title cy" style="font-size:50px;">ATARI 2600 COMPLETO</div>
       <div class="sub">Cerramos Atari 2600: los mejores del mundo y los mas caros. Cuentanos cual de estos grales te gustaria tener. Suscribete para la proxima consola.</div>
     </div>
-  </section>
+<aside class="notas"><h4>CIERRE FIJO</h4><div class="n-line">Recordar en el cierre: son valores de mercado generales, NO consejo de inversion -decirlo explicito una ultima vez antes de despedirse.</div><div class="n-line">Callback final al episodio anterior: 'Pitfall!, el numero 1 en calidad, ni siquiera aparecio hoy -y el juego mas raro de todos (Gamma Attack) casi nadie lo conoce.'</div><div class="n-cue">LINEA FIJA: cerrar preguntando cual gral se llevarian, invitar a comentar, suscribirse para la proxima consola.</div></aside>  </section>
 
 </div>
 
@@ -482,7 +493,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
     <div class="nav-counter" id="counter">01 / 14</div>
     <div class="nav-progress"><div class="bar" id="bar"></div></div>
   </div>
-  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR · <kbd id="notasBtn" style="cursor:pointer" title="Mostrar/ocultar notas">N</kbd> NOTAS</div>
   <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
 </nav>
 
@@ -512,7 +523,12 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
   if (e.key === 'Home') { go(0); }
   if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }
 });
+function setRead(on) { document.body.classList.toggle('read-mode', on); }
+if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
+const notasBtn = document.getElementById('notasBtn');
+if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
 go(0);
 </script>
 

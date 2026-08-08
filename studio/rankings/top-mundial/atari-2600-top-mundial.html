@@ -117,9 +117,20 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
 </style>
 <style>
 .game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);letter-spacing:1px;white-space:nowrap;border:3px solid var(--ye);padding:8px 18px;border-radius:6px;background:rgba(255,210,63,.07);align-self:flex-start}
+.notas{position:absolute;top:0;right:0;width:460px;height:100%;z-index:150;display:none;flex-direction:column;gap:10px;padding:26px 22px 30px;overflow-y:auto;background:linear-gradient(90deg,rgba(6,3,15,.55) 0%,rgba(6,3,15,.96) 26%);border-left:2px solid var(--ye);backdrop-filter:blur(2px)}
+body.read-mode .slide.active .notas{display:flex}
+.notas h4{font-family:'Press Start 2P';font-size:9px;color:var(--ye);letter-spacing:2px;margin-top:4px}
+.notas h4:first-child{margin-top:0}
+.notas .n-line{font-family:'Share Tech Mono';font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.92);border-left:3px solid var(--cy);padding:3px 0 3px 11px}
+.notas .n-cue{border-left-color:var(--mg);color:var(--ye)}
+.notas .n-cue b{color:#fff}
+.read-indicator{position:fixed;top:64px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:8px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;box-shadow:0 0 14px rgba(255,210,63,.5)}
+body.read-mode .read-indicator{display:block}
 </style>
 </head>
 <body>
+<div class="read-indicator">● MODO LECTURA (N)</div>
+
 
 <header>
   <div class="hdr-logo">RETROTARROS</div>
@@ -136,7 +147,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="ep-title">TOP 10 <span class="vs">ATARI 2600</span> MUNDIAL</div>
       <div class="ep-sub">LO QUE LA CRITICA AMA · CONSENSO 2026</div>
     </div>
-  </section>
+<aside class="notas"><h4>INTRO · DATO BOMBA</h4><div class="n-line">El Atari 2600 vendio mas de 30 millones de consolas en toda su vida util (1977-1992) -mas que cualquier consola anterior a el. Fue literalmente la puerta de entrada de una generacion completa a los videojuegos.</div><div class="n-line">Hilo secreto de este episodio: 3 de los 10 juegos (Kaboom!, River Raid, Pitfall) los hizo Activision, fundada en 1979 por 4 programadores de Atari que renunciaron por falta de credito. Se va a ir mencionando en cada uno -remata en el #1.</div><div class="n-cue">ANTES DE GRABAR: ritmo ~90 seg por slide, el #1 puede tomar mas -es el cierre del hilo Activision, no lo apures.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">02</span>
@@ -145,7 +156,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title cy" style="font-size:78px;">DEL #10 AL #1</div>
       <div class="sub">Cruce de critica retro (SVG, CBR, GamesRadar, RetroDodo) e hitos historicos verificables. El Atari 2600 fue el origen de casi todo lo que vino despues: el primer Easter egg, la primera disenadora reconocida, el primer killer app. Empezamos desde abajo.</div>
     </div>
-  </section>
+<aside class="notas"><h4>METODOLOGIA</h4><div class="n-line">El consenso critico entre estos 4 sitios es alto para los primeros 4-5 puestos, pero el 6-10 varia bastante segun el sitio -aclarar que es UNA lectura posible, no una verdad absoluta.</div><div class="n-line">Se cruzo cada 'primero historico' citado (Easter egg, killer app, etc.) contra Wikipedia y AtariAge antes de meterlo al guion -ningun dato de este top es sin respaldo.</div><div class="n-cue">Angulo de apertura: 'esto no es solo nostalgia, cada uno de estos 10 juegos inicio algo que sigue vivo hoy.'</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">03</span>
@@ -165,7 +176,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">COMBAT</div><div class="game-meta">Atari 2600 · 1977 · ATARI</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El juego pack-in que veniia incluido con la consola. Tanques, aviones y biplanos en 27 variantes -para millones fue el PRIMER videojuego que jugaron en su vida.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Fue pack-in (vino incluido, gratis) hasta 1982 -asi que probablemente sea el juego mas JUGADO de toda la historia del 2600, aunque casi nadie lo nombra como su favorito.</div><div class="n-line">27 variantes de juego seleccionables con el switch de arriba -tanques, biplanos, jets- fue de los primeros ejemplos de 'modos de juego' como los conocemos hoy.</div><div class="n-cue">ANGULO: el juego que TODOS jugaron pero nadie recuerda como favorito -contraste con el resto del top.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">04</span>
@@ -185,7 +196,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">KABOOM!</div><div class="game-meta">Atari 2600 · 1981 · ACTIVISION</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Disenado por Larry Kaplan (cofundador de Activision). Usabas el paddle giratorio para atrapar bombas de un ladron loco. Simple, adictivo, y el paddle se sentia como un instrumento.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Activision nacio en 1979 cuando 4 programadores de Atari (Kaplan entre ellos) renunciaron porque la empresa no daba credito publico a quien hacia los juegos -ni el nombre salia en la caja.</div><div class="n-line">Kaboom! fue uno de los primeros grandes exitos de esa apuesta: probo que un estudio SIN ser dueño del hardware podia vender millones. Nacio el modelo third-party tal como existe hoy.</div><div class="n-cue">HILO DEL EPISODIO: esta pelea por el credito vuelve a aparecer en River Raid (#5) y en Pitfall (#1) -los tres son Activision.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">05</span>
@@ -205,7 +216,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">MISSILE COMMAND</div><div class="game-meta">Atari 2600 · 1981 · ATARI</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Port del arcade de 1980. Defender seis ciudades de una lluvia de misiles con una mira que se sentia tensa y estrategica. El desarrollador confeso que le dio pesadillas nucleares reales.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">La idea original del arcade era sobre una erupcion volcanica, no misiles -Theurer la cambio a tema nuclear en plena tension de Guerra Fria (1980), y eso es justo lo que le dio las pesadillas.</div><div class="n-line">No hay forma de 'ganar' el juego: solo puedes sobrevivir mas tiempo. Esa desesperanza era intencional, parte del mensaje del disenador.</div><div class="n-cue">DATO REAL, no leyenda urbana -Theurer lo conto el mismo en varias entrevistas retro a lo largo de los años.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">06</span>
@@ -225,7 +236,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">RAIDERS OF THE LOST ARK</div><div class="game-meta">Atari 2600 · 1982 · ATARI</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Uno de los primeros juegos con licencia de pelicula hecho en serio: mapa gigante, inventario, puzzles reales. Adelantado a su epoca para 1982.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Lo diseño Howard Scott Warshaw -el MISMO programador que un año despues hizo E.T. the Extra-Terrestrial, el juego que se volvio sinonimo del crash del 83.</div><div class="n-line">Ironia real: el tipo que hizo uno de los juegos con licencia MEJOR hechos de la consola tambien hizo el que se usa como simbolo de todo lo que salio mal.</div><div class="n-cue">GANCHO: 'el mismo diseñador que hizo esto, un año despues hizo el juego que casi hunde a la industria entera.'</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">07</span>
@@ -245,7 +256,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">SPACE INVADERS</div><div class="game-meta">Atari 2600 · 1980 · ATARI</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El puerto que convirtio al Atari 2600 en un exito real. Vendio mas de 2 millones de copias y disparo las ventas de la consola: el primer 'killer app' de la historia de los videojuegos.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Antes de este port, el 2600 vendia bien pero sin destacar. Despues del lanzamiento en 1980 las ventas de LA CONSOLA se dispararon -la gente compraba el Atari 2600 especificamente para jugar esto.</div><div class="n-line">Es el concepto de 'killer app' tal como se sigue usando hoy: un solo software que vende el hardware completo (mismo fenomeno que Tetris con Game Boy, años despues).</div><div class="n-cue">COMPARACION EN VIVO: es el 'Tetris de Game Boy' del Atari 2600, pero 8 años antes.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">08</span>
@@ -265,7 +276,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">RIVER RAID</div><div class="game-meta">Atari 2600 · 1982 · ACTIVISION</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Disenado y programado en solitario por Carol Shaw, la primera disenadora de videojuegos mujer ampliamente reconocida de la historia. Scroll vertical fluido, mas de un millon de copias vendidas.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Antes de River Raid, Carol Shaw ya habia trabajado en Atari en Video Checkers y 3-D Tic-Tac-Toe -River Raid fue su salto a Activision, la misma empresa de Kaboom! (#9).</div><div class="n-line">El terreno del rio NO esta dibujado a mano: se genera con un algoritmo. Es un logro tecnico poco reconocido para 1982 -procedural antes de que existiera esa palabra en videojuegos.</div><div class="n-cue">CALLBACK a Kaboom! (#9): mismo estudio, misma pelea por el credito que fundo Activision en 1979.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">09</span>
@@ -285,7 +296,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">YARS' REVENGE</div><div class="game-meta">Atari 2600 · 1982 · ATARI</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El juego ORIGINAL mas vendido de toda la consola -no un port de arcade, sino disenado desde cero para el 2600. Howard Scott Warshaw creo un shooter abstracto y adictivo que se convirtio en el buque insignia de Atari.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Iba a ser un port directo del arcade Star Castle, pero Atari no consiguio la licencia a tiempo -Warshaw (el mismo de Raiders, #7) tomo la base y creo algo original desde cero.</div><div class="n-line">Algunas copias incluian un comic corto que contaba el trasfondo de la historia -un experimento temprano de narrativa transmedia que casi nadie recuerda hoy.</div><div class="n-cue">CALLBACK a Raiders (#7): mismo diseñador, Howard Scott Warshaw -el mismo que despues hizo E.T.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">10</span>
@@ -305,7 +316,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">ADVENTURE</div><div class="game-meta">Atari 2600 · 1980 · ATARI</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Warren Robinett escondio su nombre en una sala secreta como protesta porque Atari no daba credito a los disenadores. Nacio asi el termino 'Easter egg' en los videojuegos, descubierto por un chico de 15 años.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Adventure se inspiro directo en Colossal Cave Adventure, el juego de texto de los años 70 -Robinett lo tradujo a un mapa grafico explorable, algo nunca antes hecho en consola.</div><div class="n-line">Es considerado el primer juego de accion-aventura de la historia: mapa persistente, objetos que se cargan y un avatar grafico que te representa en pantalla.</div><div class="n-cue">MISMO PROBLEMA que fundo Activision (ver Kaboom! #9): Atari no daba credito a los disenadores. Robinett protesto escondiendose; otros se fueron y fundaron su propio estudio.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">11</span>
@@ -325,7 +336,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">PAC-MAN</div><div class="game-meta">Atari 2600 · 1982 · ATARI</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El juego mas vendido de toda la consola: mas de 8 millones de copias. El problema es que la conversion parpadeaba y se veia muy inferior al arcade original -la decepcion mas famosa de la historia de Atari.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA</h4><div class="n-line">Lo programo practicamente solo Tod Frye, bajo presion de tiempo, comprimiendo el juego en apenas 4 kilobytes de ROM -muy por debajo de lo que pedia el hardware del arcade original.</div><div class="n-line">Atari fabrico MAS cartuchos (se estima que unos 12 millones) que consolas 2600 vendidas hasta ese momento -sobreproduccion que termino en bodegas llenas de copias sin vender, parte del origen del crash del 83.</div><div class="n-cue">PUENTE al Top Precios: el juego mas VENDIDO de la consola hoy vale casi nada -sobreproduccion mata valor de coleccion. Buen contraste para el proximo episodio.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">12</span>
@@ -345,7 +356,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="hybrid-title"><div class="game-title">PITFALL!</div><div class="game-meta">Atari 2600 · 1982 · ACTIVISION</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>David Crane diseño 255 pantallas de selva, trampas y tesoros en apenas 4 kilobytes de memoria. El padre del genero plataformas de accion, y el juego mas aclamado por la critica de toda la consola.</div>
     </div>
-  </section>
+<aside class="notas"><h4>DATO EXTRA · CIERRE DEL HILO</h4><div class="n-line">David Crane es OTRO de los 4 programadores que se fue de Atari en 1979 y fundo Activision -el mismo enojo por falta de credito que aparecio en Kaboom! (#9) y River Raid (#5) termino creando el juego mas aclamado de toda la lista.</div><div class="n-line">Vendio mas de 4 millones de copias y genero una ola de imitadores tan grande que 'Pitfall clone' se volvio una categoria propia -practicamente invento el genero plataformas de accion tal como lo conocemos.</div><div class="n-cue">CIERRE: 'la pelea por el credito de 1979 termino escribiendo el juego mas aclamado de toda esta lista' -remata el hilo que viene desde el puesto #9.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">13</span>
@@ -354,7 +365,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title mg" style="font-size:50px;">LA CUNA DE LOS ORIGENES</div>
       <div class="sub">Este top no es solo nostalgia: cada juego marco un 'primero' que definio la industria entera. El primer Easter egg (Adventure), la primera disenadora mujer reconocida (River Raid), el primer killer app (Space Invaders), el padre del plataformas de accion (Pitfall). El 2600 escribio las reglas antes de que existieran.</div>
     </div>
-  </section>
+<aside class="notas"><h4>PARA EL CIERRE</h4><div class="n-line">Remarcar el patron Activision (Kaboom!, River Raid, Pitfall) como el verdadero hilo del episodio: la pelea por el credito de los diseñadores literalmente inventó el modelo de estudio independiente que existe hasta hoy.</div><div class="n-line">Si hay tiempo, mencionar que Pac-Man (#2, el mas vendido) y Pitfall (#1, el mas aclamado) NO son el mismo juego -separa 'lo que vendio mas' de 'lo que la critica ama mas', gancho para el proximo episodio de precios.</div><div class="n-cue">TRANSICION: 'lo mas vendido y lo mas amado no siempre son lo mismo -y lo que vale mas hoy tampoco es lo que esperarian.'</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">14</span>
@@ -363,7 +374,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="title cy" style="font-size:54px;">¿CUANTO VALEN HOY?</div>
       <div class="sub">Estos son los mejores en lo critico, pero ¿cuanto cuesta hoy un cartucho de Atari 2600 sellado? Spoiler: hay uno que se vendio por mas que un auto de lujo. La proxima: Top Precios Atari 2600.</div>
     </div>
-  </section>
+<aside class="notas"><h4>CIERRE FIJO</h4><div class="n-line">Memorizar la frase de cierre: menciona que el numero 1 de HOY (Pitfall!) practicamente no aparece en el top de precios de la proxima semana -shock value real, no exageracion.</div><div class="n-line">El grial del proximo episodio (Air Raid, USD 33.433) no esta en este top mundial -es un juego oscuro que casi nadie recuerda. Buen contraste para plantar la semilla.</div><div class="n-cue">LINEA FIJA: 'suscribete si quieres saber cual es el cartucho que se vendio por mas que un auto usado.'</div></aside>  </section>
 
 </div>
 
@@ -373,7 +384,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
     <div class="nav-counter" id="counter">01 / 14</div>
     <div class="nav-progress"><div class="bar" id="bar"></div></div>
   </div>
-  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR · <kbd id="notasBtn" style="cursor:pointer" title="Mostrar/ocultar notas">N</kbd> NOTAS</div>
   <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
 </nav>
 
@@ -403,7 +414,12 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
   if (e.key === 'Home') { go(0); }
   if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }
 });
+function setRead(on) { document.body.classList.toggle('read-mode', on); }
+if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
+const notasBtn = document.getElementById('notasBtn');
+if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
 go(0);
 </script>
 
