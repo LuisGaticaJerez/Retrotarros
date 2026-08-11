@@ -229,6 +229,15 @@ def generar_top(data: dict, out_slug: str) -> Path:
         "font-size:8px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;"
         "box-shadow:0 0 14px rgba(255,210,63,.5)}\n"
         "body.read-mode .read-indicator{display:block}\n"
+        # Letra mas grande para legibilidad en TV (Luis 2026-08-08: "las letras estan
+        # mas grandes para usuarios de youtube tv?" -- el BASE (snes-top-mundial.html)
+        # se queda con el tamano viejo a proposito (Luis pidio no tocar NES/SNES/N64),
+        # asi que el aumento se inyecta aca para que aplique a todo episodio nuevo
+        # generado con este script sin depender de editar el BASE.
+        ".game-title{font-size:34px !important}\n"
+        ".game-meta{font-size:16px !important}\n"
+        ".game-why{font-size:19px !important}\n"
+        ".game-why .lbl{font-size:10px !important}\n"
         "</style>\n</head>"
     )
     head = head.replace("</head>", price_css, 1)
