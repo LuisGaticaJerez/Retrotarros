@@ -36,13 +36,15 @@ EPISODE_CATEGORY_RULES: list[tuple[str, str]] = [
     (r"^teaser-", "teasers"),
     (r"-top-mundial$", "rankings/top-mundial"),
     (r"-top-precios$", "rankings/top-precios"),
-    (r"-retrotarros-vs-mundo$", "rankings/retrotarros-vs-mundo"),
     (r"-coleccion$", "colecciones"),
     (r"^saga-", "sagas"),
     (r"^retro-", "specials"),
     (r"^n64-(hardware-raro|joyas-ocultas|kirkhope-rare|nintendo-vs-playstation|no-latam)$", "curaduria-n64"),
-    (r"-archivo-koko$", "colecciones/archivo-koko"),
 ]
+# Formatos discontinuados (Luis, 2026-08-11) — NO recrear:
+#   "-retrotarros-vs-mundo$" (game show Coco vs critica) y "-archivo-koko$"
+#   (coleccion completa sin curaduria). Eliminados de EPISODE_CATEGORY_RULES
+#   a proposito para que nunca mas se genere/rutee un HTML con estos slugs.
 
 SHORT_CATEGORY_RULES: list[tuple[str, str]] = [
     (r"^tarroshort-datos-", "datos"),

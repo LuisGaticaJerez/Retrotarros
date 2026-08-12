@@ -77,7 +77,13 @@ El **dueño de la colección es Retrotarros** (el canal/estudio). Luis y Coco so
 
 - Se habla de **la colección de Retrotarros**: tags **"EN LA COLECCIÓN" / "NO ESTÁ EN LA COLECCIÓN"**, y frases tipo "esto lo tenemos / esto nos falta".
 - **NUNCA** "Coco lo tiene", "a Coco le falta", "la colección de Coco". La posesión es del canal, no de una persona.
-- El presentador es **Coco** (no "Koko"). Los slugs/archivos heredados (`coleccion_koko.csv`, `archivo-koko`, clase CSS `koko-tag`) son paths internos y **no** se renombran por ahora; la regla aplica al texto visible/hablado.
+- El presentador es **Coco** (no "Koko"). Los slugs/archivos heredados (`coleccion_koko.csv`, clase CSS `koko-tag`) son paths internos y **no** se renombran por ahora; la regla aplica al texto visible/hablado.
+
+### REGLA — Formatos discontinuados: NO recrear (Luis, 2026-08-11)
+
+Los formatos **"archivo-koko"** (colección completa de una consola sin curaduría) y **"retrotarros-vs-mundo"** (game show Coco vs crítica mundial) están **discontinuados** — ya no existen en el canal. Todo su contenido (pautas, discusiones, descripciones, HTML del estudio, imágenes, capturas) fue eliminado del repo y del Drive el 2026-08-11.
+
+**No generar nunca más episodios con estos formatos**, ni siquiera por error al replicar un arco de consola completo (ej. al armar N64/PS Vita para una consola nueva no incluir "archivo" ni "vs-mundo" en la lista de episodios del arco). Si algún doc viejo (arcos, inventario, discusiones de episodios hermanos) todavía menciona alguno de los dos como "próximo episodio" o "hermano del arco", es referencia obsoleta — corregirla, no seguirla.
 
 ## REGLA INMUTABLE — Tono y lengua
 
@@ -159,7 +165,7 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 
 ## Imágenes en HTMLs de ranking (regla obligatoria)
 
-**En todo HTML que rankee juegos (top mundial, top precios, archivo, joyas, retrotarros-vs-mundo, etc.) la imagen del juego debe ser SIEMPRE la box art real, NUNCA el logo del juego.**
+**En todo HTML que rankee juegos (top mundial, top precios, joyas, etc.) la imagen del juego debe ser SIEMPRE la box art real, NUNCA el logo del juego.**
 
 - ✓ Sí: caja NTSC USA del cartucho (Wikipedia `File:<Juego> Cover.png` o equivalente).
 - ✗ No: logo/wordmark del juego (PNG transparente con el título estilizado).
@@ -178,7 +184,7 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 
 **Wiring automatico:** las box van en `studio/img/<slug>/<key>.jpg` donde `key = slug del titulo` (mismo `_slugify`). `scripts/top_deck.py` las detecta solas (`_auto_img`): si existe el archivo, la usa; si no, `cart-fallback`. Los TarroShorts tambien las toman solas (item-photo con `onerror` que oculta si falta). Asi: bajar la box con la key correcta + regenerar deck / re-render short = aparece sin tocar drivers.
 
-**Aplica a rankings ya hechos:** N64 (top-mundial, top-precios, retrotarros-vs-mundo, archivo-koko, joyas-ocultas) + PS Vita (top-mundial, top-precios, retrotarros-vs-mundo, archivo-koko) + futuros SNES, PS1, etc.
+**Aplica a rankings ya hechos:** N64 (top-mundial, top-precios, joyas-ocultas) + PS Vita (top-mundial, top-precios) + futuros SNES, PS1, etc.
 
 ## Convención de pautas (obligatoria)
 
@@ -248,7 +254,7 @@ python scripts/capture-slides.py <slug>
 - **Salida Drive:** `G:\Mi unidad\Studio\<categoria>\[<subcategoria>\]<slug>\captures\<slug>-slide-NN.png` (sincronizada con `scripts/sync-to-drive.ps1`, que también refleja la categoría).
 
 **Cuándo correrlo (obligatorio):**
-1. Al **crear** un HTML de ranking nuevo (top mundial, top precios, retrotarros-vs-mundo, archivo, joyas, etc.).
+1. Al **crear** un HTML de ranking nuevo (top mundial, top precios, joyas, etc.).
 2. Al **modificar** un HTML existente (cambios de texto, box arts, datos, slides nuevos) — re-generar las capturas para que la edición siempre tenga frames actualizados.
 3. Cualquier cambio visible en el HTML pide regenerar captures.
 

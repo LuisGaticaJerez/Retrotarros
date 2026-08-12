@@ -6,7 +6,7 @@ Documento de trabajo: el "detras de escena" del armado. NO es la pauta.
 
 ## Por que este episodio
 
-Cierra el arco Vita (ya estan top-mundial, top-precios, archivo-koko, retrotarros-vs-mundo). La coleccion es la pieza ancla: 91 juegos fisicos = autoridad real sobre una consola que la mayoria descarto. El angulo es **reivindicacion**: la Vita era increible y aca esta la prueba.
+Cierra el arco Vita (ya estan top-mundial, top-precios). La coleccion es la pieza ancla: 91 juegos fisicos = autoridad real sobre una consola que la mayoria descarto. El angulo es **reivindicacion**: la Vita era increible y aca esta la prueba.
 
 A diferencia de las consolas de cartucho, la Vita es **moderna y digital-heavy**, asi que tener 91 FISICOS es en si mismo un flex (mucha gente solo tuvo digitales).
 

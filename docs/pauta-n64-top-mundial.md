@@ -138,7 +138,7 @@ Plano cerrado de un cartucho N64 sobre la mesa. Luis a cámara: *"Estos son los 
 
 - **Parte 2 de 2:** `n64-top-precios` (top precios CIB + NFR + valor colección de Koko).
 - **Hermanos en el arco N64:** `n64-hardware-raro` (consolas y periféricos), `n64-no-latam` (juegos cancelados / JP only).
-- **Próximos del arco:** `n64-kirkhope-rare`, `n64-nintendo-vs-playstation`, `n64-archivo-koko`, `n64-ost-bateria`.
+- **Próximos del arco:** `n64-kirkhope-rare`, `n64-nintendo-vs-playstation`, `n64-ost-bateria`.
 - Tablero completo en `docs/arcos/n64.md`.
 
 ---

@@ -27,8 +27,6 @@ G:\Mi unidad\Studio\pautas\pauta-n64-top-mundial.docx  ← DOCX para imprimir/le
 |------|----------|--------|---------|
 | `n64-top-mundial` | Top 10 N64 según la crítica (Parte 1 de 2) | ✓ Grabado, en edición | [arco](arcos/n64.md) |
 | `n64-top-precios` | Top 10 N64 más caros (Parte 2 de 2) | ✓ Grabado, en edición | [arco](arcos/n64.md) |
-| `n64-retrotarros-vs-mundo` | Game show · Koko vs la crítica | ✓ Grabado, en edición | [arco](arcos/n64.md) |
-| `n64-archivo-koko` | La colección N64 entera de Koko (58 cartuchos) | ✓ Grabado, en edición | [arco](arcos/n64.md) |
 | `n64-hardware-raro` | Consolas y periféricos más raros | ✓ Cerrado para grabar | [arco](arcos/n64.md) |
 | `n64-no-latam` | Juegos que nunca llegaron a Latam | ✓ Cerrado para grabar | [arco](arcos/n64.md) |
 | `n64-joyas-ocultas` | 10 olvidados Metacritic 84+ de la colección de Koko | ✓ Cerrado — pendiente reunión Koko | [arco](arcos/n64.md) |
@@ -40,10 +38,8 @@ G:\Mi unidad\Studio\pautas\pauta-n64-top-mundial.docx  ← DOCX para imprimir/le
 
 | Slug | Episodio | Estado | Tablero |
 |------|----------|--------|---------|
-| `psvita-archivo-koko` | Los 91 cartuchos · €2,601 CIB | ✓ Cerrado para grabar | [arco](arcos/psvita.md) |
 | `psvita-top-mundial` | Top 10 PS Vita según la crítica | ✓ Cerrado para grabar | [arco](arcos/psvita.md) |
 | `psvita-top-precios` | Top 10 PS Vita más caros del mundo | ✓ Cerrado para grabar | [arco](arcos/psvita.md) |
-| `psvita-retrotarros-vs-mundo` | Game show · Koko vs la crítica | ✓ Cerrado para grabar | [arco](arcos/psvita.md) |
 | `psvita-joyas-ocultas` | Curaduría de joyas de la colección | ☐ Pendiente | [arco](arcos/psvita.md) |
 | `psvita-no-latam` | La consola que Sony abandonó en Latam | ☐ Pendiente | [arco](arcos/psvita.md) |
 | `psvita-vs-3ds` | Cómo Sony perdió la guerra portátil | ☐ Pendiente | [arco](arcos/psvita.md) |
@@ -72,11 +68,11 @@ G:\Mi unidad\Studio\pautas\pauta-n64-top-mundial.docx  ← DOCX para imprimir/le
   - `ranking` — top de juegos por crítica + precios
   - `hardware-raro` — consolas y periféricos
   - `no-latam` — exclusivos regionales / cancelados
-  - `archivo-koko` — la colección física de Koko
   - `ost-bateria` — episodio musical (serie paralela)
   - `kirkhope-rare` / `uematsu-square` / etc. — biográficos de compositor + estudio
   - `nintendo-vs-playstation` / `sega-vs-nintendo` / etc. — contexto histórico generacional
 - **Para Indie Lat:** `indie-lat-NNN` con número correlativo.
+- **Formatos discontinuados (NO usar, 2026-08-11):** `archivo-koko` y `retrotarros-vs-mundo` fueron eliminados del canal. Ver regla en `CLAUDE.md`.
 
 ---
 

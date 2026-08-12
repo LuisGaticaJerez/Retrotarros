@@ -12,7 +12,7 @@ Documento de trabajo · Luis Balbrigame & Koko
 
 ## Propósito de esta pauta
 
-Este episodio es la **curaduría del arco N64**. Después de mostrar lo que el mundo amó (top mundial), lo que paga el mercado (top precios), lo que Koko ama (Retrotarros vs el mundo) y la colección entera (archivo), este episodio extrae **10 juegos olvidados pero objetivamente buenos** que están en la colección de Koko.
+Este episodio es la **curaduría del arco N64**. Después de mostrar lo que el mundo amó (top mundial) y lo que paga el mercado (top precios), este episodio extrae **10 juegos olvidados pero objetivamente buenos** que están en la colección de Koko.
 
 El ángulo: *"Estos diez juegos estaban en la lista de los mejores cuando salieron — Metacritic 85+, prensa lo recomendaba — y hoy nadie los menciona. Eclipsados por el éxito de sus contemporáneos."*
 
@@ -168,7 +168,6 @@ Las 10 box arts están en `studio/img/n64-joyas-ocultas/` (descargadas de Wikipe
 
 - **Antes en el arco:** los tres rankings + archivo de la colección. Esos episodios establecieron qué hay y qué vale. Este filtra los olvidados.
 - **Después:** `n64-hardware-raro` (lo no jugado se mueve a lo no tenido), `n64-kirkhope-rare` (zoom a un compositor de joyas), `n64-nintendo-vs-playstation` (contexto histórico), `n64-ost-bateria` (cierre musical).
-- **Patrón de continuidad:** este episodio cita a `n64-archivo-koko` ("estos diez salen de mi archivo") y a `n64-retrotarros-vs-mundo` ("ninguno entró en mi top 10 personal").
 
 ---
 

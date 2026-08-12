@@ -167,9 +167,7 @@ def get_duration(video: Path) -> float:
 TRIVIA_BY_TYPE = {
     "top-mundial": "¿SABES CUAL ES EL #1 DEL MUNDO?",
     "top-precios": "¿CUAL ES EL JUEGO MAS CARO?",
-    "archivo-koko": "¿CUANTO VALE LA COLECCION?",
     "joyas-ocultas": "¿CUAL ES LA JOYA OCULTA?",
-    "retrotarros-vs-mundo": "¿KOKO LE GANA A LA CRITICA?",
     "hardware-raro": "¿CUAL ES EL HARDWARE MAS RARO?",
     "no-latam": "¿QUE JUEGOS NUNCA LLEGARON?",
     "kirkhope-rare": "¿QUE HIZO RARE EN LOS 90?",

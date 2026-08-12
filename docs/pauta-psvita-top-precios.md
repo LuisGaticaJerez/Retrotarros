@@ -149,7 +149,6 @@ Plano cerrado de un cartucho Vita caro (Persona 4 Golden Solid Gold o Muramasa).
 
 ## Conexión con el resto del arco
 
-- **Archivo:** si Koko tiene alguno de estos en su colección, callback a `psvita-archivo-koko` (verificar en cámara cuáles tiene, sin guion).
 - **No-Latam:** muchos de los caros NO llegaron a Latam (la consola casi no llegó).
 - **vs 3DS:** el 3DS tiene MUCHO más catálogo pero precios más bajos, porque Nintendo siguió produciendo hasta 2020.
 

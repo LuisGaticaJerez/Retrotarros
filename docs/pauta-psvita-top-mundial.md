@@ -16,7 +16,7 @@ Episodio del ranking según la crítica internacional de PS Vita 2026. Es el con
 
 El ángulo: *"En diez años desde que salió la PS Vita, la crítica nunca cambió mucho de opinión. Estos diez juegos están en TODAS las listas de mejores PS Vita. Y a diferencia de los más caros — que son JRPGs nicho — los amados son universales: Persona, Uncharted, Tearaway, Gravity Rush."*
 
-Lo notable: **Koko tiene 8 de los 10** en su colección. Callback fuerte al `psvita-archivo-koko`.
+Lo notable: **Koko tiene 8 de los 10** en su colección.
 
 > **Estado:** pendiente grabar. Pauta y HTML listos.
 
@@ -133,9 +133,8 @@ Plano: cartucho de Persona 4 Golden + cartucho de Invizimals al lado. Luis: *"La
 
 ## Conexión con el resto del arco
 
-- **Hermanos:** `psvita-top-precios` (la otra cara) + `psvita-retrotarros-vs-mundo` (Koko vs crítica).
-- **Trilogía completa:** los 3 rankings del arco PS Vita.
-- **Después:** `psvita-archivo-koko` ya está · siguiente sería `psvita-joyas-ocultas`.
+- **Hermano:** `psvita-top-precios` (la otra cara).
+- **Después:** `psvita-joyas-ocultas`.
 
 ---
 

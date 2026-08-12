@@ -213,8 +213,7 @@ Plano cerrado del DK Rap sonando + cartuchos de Rare cayendo a la mesa. Luis a c
 
 ## ANEXO A — Conexión con el resto del arco
 
-- **Hermano natural:** `n64-archivo-koko` — Koko tiene 9 de los juegos de Rare en N64. Este episodio les da contexto biográfico.
-- **Callbacks:** Banjo-Kazooie y Mario Kart 64 desde `n64-top-mundial` (#3 y #5 mundial respectivamente — los dos Rare en top mundial). Conker desde `n64-top-precios` (#10 más caro). Killer Instinct Gold desde `n64-retrotarros-vs-mundo` (la carta solitaria — compuesto por Beanland + Norgate, hermanos musicales de Kirkhope en Rare).
+- **Callbacks:** Banjo-Kazooie y Mario Kart 64 desde `n64-top-mundial` (#3 y #5 mundial respectivamente — los dos Rare en top mundial). Conker desde `n64-top-precios` (#10 más caro).
 - **Posición en el calendario:** después del archivo, antes del Nintendo vs PlayStation. Sirve como pivote: pasamos de "qué tiene Koko" a "qué pasó con la industria".
 
 ---

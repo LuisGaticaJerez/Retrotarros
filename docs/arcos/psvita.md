@@ -8,10 +8,11 @@
 
 ## Resumen
 
-- **Episodios planeados:** 8 largos + 1 musical paralelo (total 9).
-- **Cerrados:** 4 de 9 (44%) — los 3 rankings (mundial / precios / Retrotarros vs mundo) + el archivo. Faltan joyas, no-Latam, vs 3DS, biográfico, OST.
-- **Objetivo narrativo:** cubrir la PS Vita desde 7 ángulos complementarios — la crítica, el mercado, la voz personal de Koko, el archivo entero, las joyas ocultas, lo que Sony abandonó en Latam, el contexto vs 3DS y un biográfico.
-- **Cuándo cerramos el arco:** cuando los 9 episodios estén publicados. Después saltamos a **SNES** (114 ítems en colección — el arco más grande).
+- **Episodios planeados:** 6 largos + 1 musical paralelo (total 7).
+- **Cerrados:** 2 de 7 (29%) — los 2 rankings (mundial / precios). Faltan joyas, no-Latam, vs 3DS, biográfico, OST.
+- **Objetivo narrativo:** cubrir la PS Vita desde ángulos complementarios — la crítica, el mercado, las joyas ocultas, lo que Sony abandonó en Latam, el contexto vs 3DS y un biográfico.
+- **Cuándo cerramos el arco:** cuando los episodios estén publicados. Después saltamos a **SNES** (114 ítems en colección — el arco más grande).
+- **Nota (2026-08-11):** los formatos `archivo-koko` y `retrotarros-vs-mundo` fueron **discontinuados y eliminados** — no forman parte de este arco. Ver regla en `CLAUDE.md`.
 
 ---
 
@@ -35,8 +36,6 @@
 |---|------|------|--------|-------|-----------|------|
 | 1a | `psvita-top-mundial` | Ranking · crítica | ✓ Cerrado para grabar | [pauta](../pauta-psvita-top-mundial.md) | [discusion](../discusion-psvita-top-mundial.md) | [html](../../studio/rankings/top-mundial/psvita-top-mundial.html) |
 | 1b | `psvita-top-precios` | Ranking · mercado | ✓ Cerrado para grabar | [pauta](../pauta-psvita-top-precios.md) | [discusion](../discusion-psvita-top-precios.md) | [html](../../studio/rankings/top-precios/psvita-top-precios.html) |
-| 1c | `psvita-retrotarros-vs-mundo` | Ranking · Koko personal (game show) | ✓ Cerrado para grabar | [pauta](../pauta-psvita-retrotarros-vs-mundo.md) | [discusion](../discusion-psvita-retrotarros-vs-mundo.md) | [html](../../studio/rankings/retrotarros-vs-mundo/psvita-retrotarros-vs-mundo.html) |
-| 2 | `psvita-archivo-koko` | Íntimo · los 91 juegos | ✓ Cerrado para grabar | [pauta](../pauta-psvita-archivo-koko.md) | [discusion](../discusion-psvita-archivo-koko.md) | [html](../../studio/colecciones/archivo-koko/psvita-archivo-koko.html) |
 | 3 | `psvita-joyas-ocultas` | Curaduría · joyas Metacritic 80+ de la colección | ☐ Idea | — | — | — |
 | 4 | `psvita-no-latam` | La consola que Sony abandonó en Latam | ☐ Idea | — | — | — |
 | 5 | `psvita-vs-3ds` | Cómo Sony perdió la guerra portátil | ☐ Idea | — | — | — |
@@ -47,14 +46,12 @@
 
 ## Decisiones del arco — pendientes con Luis
 
-### 1. Episodios "rankings" (trilogía como en N64)
+### 1. Episodios "rankings"
 
-**¿Reproducimos la trilogía?**
 - (a) **Top mundial PS Vita** según la crítica (Metacritic + reviews)
 - (b) **Top precios PS Vita** según mercado actual (PriceCharting)
-- (c) **Retrotarros vs el mundo** — Koko trae 10 de su colección y se comparan
 
-**Recomendación:** sí, los tres. Funcionó muy bien en N64.
+**Nota (2026-08-11):** el tercer episodio de la trilogía original, "Retrotarros vs el mundo" (game show Koko vs crítica), fue discontinuado junto con el formato — no se produce más.
 
 ### 2. Episodio de "hardware raro" — ¿lo hacemos?
 
@@ -65,7 +62,7 @@ La PS Vita tiene menos hardware raro que el N64 (no hay 64DD, ni VRU, ni 6 edici
 - Memory Cards propietarias (la estafa más grande del hardware Sony)
 - Algunas ediciones limitadas regionales
 
-**Recomendación:** NO hacer episodio de hardware raro independiente. Cubrir el hardware como **slide(s) extra dentro del episodio "archivo de Koko"** + un short corto sobre las memory cards propietarias. PS Vita merece más volumen de episodios de catálogo que de hardware.
+**Recomendación:** NO hacer episodio de hardware raro independiente. Cubrir el hardware como **slide(s) extra dentro de `psvita-coleccion`** + un short corto sobre las memory cards propietarias. PS Vita merece más volumen de episodios de catálogo que de hardware.
 
 ### 3. Episodio biográfico — ¿quién?
 
@@ -89,7 +86,7 @@ En N64, "no-Latam" era sobre juegos JP/USA limitados que no llegaron. **En PS Vi
 
 **Invizimals: The Alliance** a €240 es un dato BOMBA. Sony Computer Entertainment Europe lo lanzó solo en EU y nunca tuvo distribución NA ni JP. Es el equivalente al "ISS 2000 NTSC USA" del arco N64 — la joya escondida de la colección que tiene precio mundial.
 
-**Decisión:** este dato es el ancla narrativa del arco entero. Aparece en top precios + archivo de Koko + joyas ocultas.
+**Decisión:** este dato es el ancla narrativa del arco entero. Aparece en top precios + joyas ocultas.
 
 ---
 
@@ -97,13 +94,11 @@ En N64, "no-Latam" era sobre juegos JP/USA limitados que no llegaron. **En PS Vi
 
 1. `psvita-top-mundial` — apertura del arco con el ranking de la crítica.
 2. `psvita-top-precios` — el callback fuerte (incluye Invizimals).
-3. `psvita-retrotarros-vs-mundo` — game show con los 10 de Koko.
-4. `psvita-archivo-koko` — los 91 + el sistema.
-5. `psvita-joyas-ocultas` — curaduría.
-6. `psvita-no-latam` — el dolor regional.
-7. `psvita-vs-3ds` — el contexto histórico.
-8. `psvita-biografico` — biográfico (Meguro/Persona o Japan Studio).
-9. `psvita-ost-bateria` — cierre musical de la generación.
+3. `psvita-joyas-ocultas` — curaduría.
+4. `psvita-no-latam` — el dolor regional.
+5. `psvita-vs-3ds` — el contexto histórico.
+6. `psvita-biografico` — biográfico (Meguro/Persona o Japan Studio).
+7. `psvita-ost-bateria` — cierre musical de la generación.
 
 ---
 
@@ -119,10 +114,9 @@ En N64, "no-Latam" era sobre juegos JP/USA limitados que no llegaron. **En PS Vi
 
 **Confirmar con Luis:**
 
-1. ¿La estructura de 9 episodios te parece o querés ajustar (agregar, sacar, fusionar)?
+1. ¿La estructura de episodios te parece o querés ajustar (agregar, sacar, fusionar)?
 2. ¿Vamos con Persona/Meguro o Sony Japan Studio para el biográfico?
-3. ¿Confirmamos que NO hacemos episodio "hardware raro" separado (cubrirlo dentro de archivo)?
-4. ¿Querés que arme YA los archivos de los 3 rankings + archivo (los 4 primeros) y los otros después?
+3. ¿Confirmamos que NO hacemos episodio "hardware raro" separado?
 
 Cuando confirmes, arranco con los slugs en orden.
 

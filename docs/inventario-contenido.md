@@ -70,7 +70,8 @@ traiga el invitado. Assets:
 ### G-OLD — playlist archivada, no se alimenta más
 
 "EP01 Colección RetroTarros N64" y "EP02 Ranking Retrotarros vs el mundo N64": versiones
-**viejas/superadas** de lo que hoy son los formatos Colecciones y Retrotarros-vs-Mundo.
+**viejas/superadas** de lo que hoy es el formato Colecciones (el segundo, "Retrotarros vs
+el mundo", fue discontinuado del todo el 2026-08-11 — ver nota más abajo).
 Se dejaron archivadas como playlist separada en vez de borrarlas. No production activa acá.
 
 ### Curaduría N64-only — armados, sin playlist propia todavía
@@ -81,16 +82,12 @@ armados y cerrados para grabar (ver `docs/arcos/n64.md`), **ninguno publicado, y
 decidido en qué playlist van a caer** cuando se suban (¿Specials? ¿playlist nueva por
 tipo?). **Pendiente de decidir con Luis.**
 
-### Retrotarros vs Mundo — 2 armados, sin publicar en su forma actual
+### Retrotarros vs Mundo / Archivo Koko — DISCONTINUADOS (2026-08-11)
 
-`n64-retrotarros-vs-mundo`, `psvita-retrotarros-vs-mundo`. La versión N64 de este formato
-ya existió una vez (quedó en G-OLD como EP02) y se rehizo; la nueva versión armada en el
-repo todavía no se subió. PS Vita tampoco.
-
-### Archivo Koko — 2 armados, sin publicar
-
-`n64-archivo-koko`, `psvita-archivo-koko`. Íntimo, cartucho por cartucho. Sin playlist
-propia definida aún.
+Ambos formatos fueron eliminados del canal por decisión de Luis: `n64-retrotarros-vs-mundo`,
+`psvita-retrotarros-vs-mundo`, `n64-archivo-koko`, `psvita-archivo-koko`. Todo su contenido
+(pautas, discusiones, descripciones, HTML, imágenes, capturas) se borró del repo y del
+Drive. **No se vuelven a producir** — ver regla en `CLAUDE.md`.
 
 ### Indie Lat — solo formato, sin ningún asset
 
@@ -177,7 +174,7 @@ cual — alimenta el proceso de armar el short/trailer final.
 - **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **la brecha más grande del canal**.
 - **Rankings:** 16 armados, 9 publicados (7 de backlog).
 - **TarroShorts:** 32 armados, 17 publicados (15 de backlog) — más sano de lo que parecía a primera vista.
-- **Episodios sin playlist asignada** (curaduría N64, Archivo Koko, Retrotarros vs Mundo): 9 armados, 0 publicados.
+- **Episodios sin playlist asignada** (curaduría N64): 5 armados, 0 publicados.
 - **Reseñas** (playlist nueva, aún no creada en YouTube): 5 armadas, 0 publicadas.
 
 **Colecciones es la única categoría al día** (4 armadas = 4 publicadas).
@@ -185,8 +182,8 @@ cual — alimenta el proceso de armar el short/trailer final.
 ## 4. Pendiente de decidir con Luis
 
 1. Playlist de destino para la curaduría N64-only (hardware-raro, joyas-ocultas,
-   kirkhope-rare, nintendo-vs-playstation, no-latam) y para Archivo Koko / Retrotarros vs
-   Mundo — hoy no tienen casa en el menú de playlists del canal.
+   kirkhope-rare, nintendo-vs-playstation, no-latam) — hoy no tiene casa en el menú de
+   playlists del canal.
 2. Ritmo de publicación del backlog de Sagas y TarroShorts — ¿calendario fijo o se suben
    a medida que se van necesitando para el algoritmo?
 3. Si los shorts de B-roll simple (sin TarroBot) siguen siendo un formato válido aparte,

@@ -29,7 +29,7 @@ Canal en pre-lanzamiento con una base grande de contenido armado. Arco **SEGA ce
 
 ## Historia de arcos
 
-- **Arco N64** — 3 de 7 episodios cerrados en mayo 2026 (ranking, hardware-raro, no-latam). Tablero en [`docs/arcos/n64.md`](docs/arcos/n64.md). Ideas pendientes: kirkhope-rare, nintendo-vs-playstation, archivo-koko, ost-bateria.
+- **Arco N64** — 3 de 6 episodios cerrados en mayo 2026 (ranking, hardware-raro, no-latam). Tablero en [`docs/arcos/n64.md`](docs/arcos/n64.md). Ideas pendientes: kirkhope-rare, nintendo-vs-playstation, ost-bateria. (Formatos `archivo-koko` y `retrotarros-vs-mundo` discontinuados 2026-08-11 — ver `CLAUDE.md`.)
 - **Arcos NES / SNES / PS Vita** — episodios y colecciones armados (top-mundial, top-precios, colección, etc.). Ver `docs/pauta-*.md`.
 - **12 sagas** (Mario, Zelda, Metroid, Metal Gear, Sonic, Street Fighter, etc.) — líneas de tiempo cerradas.
 - **Arco SEGA** — cerrado 2026 (ver Estado actual).

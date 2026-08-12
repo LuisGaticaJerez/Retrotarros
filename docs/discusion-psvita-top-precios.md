@@ -33,7 +33,7 @@
 
 ### Koko
 - [ ] **NO mirar los precios del HTML antes de cámara** — reacciones genuinas son el oro.
-- [ ] Confirmar en cámara cuáles del ranking tiene en su colección (callback a `psvita-archivo-koko`), sin guion.
+- [ ] Confirmar en cámara cuáles del ranking tiene en su colección, sin guion.
 - [ ] Anécdota: ¿pagaste lo que costaban hoy o conseguiste alguno barato?
 
 ---
@@ -88,7 +88,6 @@ La frase escrita es larga. Confirmar palabra por palabra antes de grabar (está 
 
 ## 6. Continuidad con el resto del arco
 
-- **Callback:** si Koko tiene alguno del ranking, conecta con `psvita-archivo-koko`.
 - **Sembrar:** mencionar que el próximo episodio será `psvita-top-mundial` ("el mercado paga unos, la crítica ama otros").
 - **Patrón con N64:** mismo formato que `n64-top-precios` funcionó muy bien. Repetirlo aquí con datos PS Vita.
 

@@ -11,13 +11,15 @@ Selección automática:
 
 Tipos soportados (auto-detectados del slug):
   ranking         → reveal del #1
-  archivo         → valor total de la colección
   joyas           → joya principal
   top-precios     → el más caro
   hardware-raro   → hardware más raro
   no-latam        → exclusivo regional
-  vs-mundo        → puntaje final
   generic         → despedida (Apóyenos, vemos, chao)
+
+NOTA (Luis, 2026-08-11): los tipos "archivo" (archivo-koko) y "vs-mundo"
+(retrotarros-vs-mundo) fueron DISCONTINUADOS junto con esos formatos de
+episodio. No reintroducir estas ramas de deteccion.
 
 Output: MP4 vertical 1080x1920 con audio ORIGINAL del master.
 SIN overlays, SIN intro/outro, SIN música agregada. Listo para edición manual.
@@ -43,7 +45,7 @@ Workflow esperado:
 Uso:
     python scripts/tarroteaser.py <video.mp4> --slug <slug>
     python scripts/tarroteaser.py <video.mp4> --slug n64-top-mundial --type ranking
-    python scripts/tarroteaser.py <video.mp4> --slug psvita-archivo-koko
+    python scripts/tarroteaser.py <video.mp4> --slug psvita-top-precios
 
 Defaults:
     --num-highlights 3
@@ -159,12 +161,6 @@ CLIMAX_KEYWORDS = {
         "en el uno", "en el número uno",
         "número 1", "numero 1", "el número 1", "el numero 1",
     ],
-    "archivo": [
-        "valor total", "vale la colección", "vale la coleccion",
-        "el total", "valor de la colección", "valor de la coleccion",
-        "vale en total", "suma total", "todos juntos",
-        "en plata", "en lucas", "en dólares", "en dolares",
-    ],
     "joyas": [
         "la joya", "esta es la joya",
         "infravalorado", "infravalorada",
@@ -188,11 +184,6 @@ CLIMAX_KEYWORDS = {
         "exclusivo", "solo en japón", "solo en japon",
         "no se vendió", "no se vendio",
     ],
-    "vs-mundo": [
-        "puntaje final", "ganó koko", "gano koko",
-        "ganó el mundo", "gano el mundo",
-        "scorecard", "puntos finales",
-    ],
     "generic": [
         # Despedida típica (lo que antes era find_farewell)
         "esto fue retrotarros", "fue retrotarros",
@@ -208,14 +199,10 @@ def detect_episode_type(slug: str) -> str:
     """Mapea slug → tipo de episodio para elegir keywords del clímax."""
     s = slug.lower()
     # Orden importa: más específico primero
-    if "vs-mundo" in s or "retrotarros-vs" in s:
-        return "vs-mundo"
     if "top-precios" in s:
         return "top-precios"
     if "top-mundial" in s or "ranking" in s:
         return "ranking"
-    if "archivo" in s:
-        return "archivo"
     if "joyas" in s:
         return "joyas"
     if "hardware-raro" in s:
@@ -429,7 +416,7 @@ def find_climax(segments: list[dict], video_duration: float,
         cutoff_end = max(cutoff_start + 1, video_duration - 30.0)
 
     # Tipos con reveals numericos: dar mas margen de extension (precio o valor)
-    PRICE_REVEAL_TYPES = {"top-precios", "archivo", "joyas", "ranking", "vs-mundo"}
+    PRICE_REVEAL_TYPES = {"top-precios", "joyas", "ranking"}
     max_extra = 3.5 if episode_type in PRICE_REVEAL_TYPES else 2.5
 
     candidates = []

@@ -103,8 +103,6 @@ Robin Beanland (Conker, Killer Instinct) y Graeme Norgate (GoldenEye, Perfect Da
 - **Callbacks fuertes:**
   - Banjo + Mario Kart 64 desde top mundial (en realidad solo Banjo desde Rare, MK64 es Nintendo EAD)
   - Conker desde top precios (#10 más caro)
-  - Killer Instinct Gold desde retrotarros-vs-mundo (la carta solitaria, OST de Beanland + Norgate — colegas de Kirkhope)
-  - Los 9 Rare desde archivo-koko (sesgo Rare del coleccionista)
 - **Sienta base para episodios futuros:** Beanland, Norgate, David Wise (DKC) — todos eran o son de Rare.
 
 ---

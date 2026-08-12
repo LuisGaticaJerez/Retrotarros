@@ -12,7 +12,6 @@
 **Qué SÍ es:**
 - Top 10 PS Vita según la crítica internacional (consenso 2026).
 - Contraste explícito con el episodio de precios (la crítica ama A, el mercado paga B).
-- Cierre con transición fuerte al `psvita-retrotarros-vs-mundo`.
 - **Koko tiene 8 de los 10** — dato narrativo clave del episodio.
 
 **Qué NO es:**
@@ -84,14 +83,14 @@ La frase de cierre tiene un teaser explícito al próximo episodio del arco. Con
 
 ## 5. Continuidad
 
-- **Trilogía rankings PS Vita:** archivo (datos) → precios (mercado) → mundial (crítica) → retrotarros-vs-mundo (Koko personal · cierra trilogía).
+- **Rankings PS Vita:** precios (mercado) → mundial (crítica).
 - **Patrón con N64:** mismo formato que `n64-top-mundial` funcionó muy bien. Repetimos con datos PS Vita.
 
 ---
 
 ## 6. Decisiones pendientes
 
-- [ ] Día de grabación (idealmente la misma sesión que el de precios + retrotarros-vs-mundo).
+- [ ] Día de grabación (idealmente la misma sesión que el de precios).
 - [ ] ¿Pinned comment con los 10 + Metacritic? Recomendación: sí.
 - [ ] Confirmar tono y frase fija final.
 

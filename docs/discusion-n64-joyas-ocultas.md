@@ -102,7 +102,6 @@ Lo más valioso del episodio: **tu memoria de cada juego.**
 
 ## 6. Continuidad con el resto del arco
 
-- **Callbacks:** este episodio cita a `n64-archivo-koko` ("salen de mi archivo de 58") y a `n64-retrotarros-vs-mundo` ("ninguno entró en mi top 10 personal").
 - **Posición en el calendario:** después de los rankings + archivo. Es un episodio de "zoom" sobre el archivo.
 - **Anticipo:** sembrar al cierre que el próximo episodio del arco sería `n64-kirkhope-rare` o `n64-nintendo-vs-playstation`.
 

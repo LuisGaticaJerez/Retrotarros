@@ -72,7 +72,7 @@ Video completo en el canal.
 ## Pantalla final / cards (end screen)
 
 - **Card al minuto ~2 y ~13:** apuntar al TarroShort del episodio (si se hace uno corto).
-- **End screen (últimos 20s):** 1) video sugerido = `n64-archivo-koko` (mismo arco), 2) botón suscribirse, 3) playlist "Curaduría N64".
+- **End screen (últimos 20s):** 1) video sugerido = `n64-joyas-ocultas` (mismo arco), 2) botón suscribirse, 3) playlist "Curaduría N64".
 - Dejar 15-20s de cierre con Coco para que calce el end screen.
 
 ## Notas de producción

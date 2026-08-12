@@ -177,7 +177,7 @@ Slide 16 con dos cards comparando #1 crítica (Ocarina $147) vs #1 mercado (Clay
 
 - **Parte 1 de 2:** `n64-top-mundial` (top mundial según la crítica).
 - **Hermanos en el arco N64:** `n64-hardware-raro` (consolas y periféricos), `n64-no-latam` (juegos cancelados / JP only).
-- **Próximos del arco:** `n64-kirkhope-rare`, `n64-nintendo-vs-playstation`, `n64-archivo-koko`, `n64-ost-bateria`.
+- **Próximos del arco:** `n64-kirkhope-rare`, `n64-nintendo-vs-playstation`, `n64-ost-bateria`.
 - Tablero completo en `docs/arcos/n64.md`.
 
 ---
