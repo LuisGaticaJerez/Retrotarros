@@ -34,8 +34,8 @@
 
 | # | Slug | Tipo | Estado | Pauta | Discusion | HTML |
 |---|------|------|--------|-------|-----------|------|
-| 1a | `psvita-top-mundial` | Ranking · crítica | ✓ Cerrado para grabar | [pauta](../pauta-psvita-top-mundial.md) | [discusion](../discusion-psvita-top-mundial.md) | [html](../../studio/rankings/top-mundial/psvita-top-mundial.html) |
-| 1b | `psvita-top-precios` | Ranking · mercado | ✓ Cerrado para grabar | [pauta](../pauta-psvita-top-precios.md) | [discusion](../discusion-psvita-top-precios.md) | [html](../../studio/rankings/top-precios/psvita-top-precios.html) |
+| 1a | `psvita-top-mundial` | Ranking · crítica | ✓ Cerrado para grabar | [pauta](docs/pautas/pauta-psvita-top-mundial.md) | [discusion](docs/discusiones/discusion-psvita-top-mundial.md) | [html](../../studio/rankings/top-mundial/psvita-top-mundial.html) |
+| 1b | `psvita-top-precios` | Ranking · mercado | ✓ Cerrado para grabar | [pauta](docs/pautas/pauta-psvita-top-precios.md) | [discusion](docs/discusiones/discusion-psvita-top-precios.md) | [html](../../studio/rankings/top-precios/psvita-top-precios.html) |
 | 3 | `psvita-joyas-ocultas` | Curaduría · joyas Metacritic 80+ de la colección | ☐ Idea | — | — | — |
 | 4 | `psvita-no-latam` | La consola que Sony abandonó en Latam | ☐ Idea | — | — | — |
 | 5 | `psvita-vs-3ds` | Cómo Sony perdió la guerra portátil | ☐ Idea | — | — | — |

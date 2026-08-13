@@ -192,7 +192,7 @@ Mismo patron para los paneos (slide paneo) y los gameplay (slide triple).
 | Clips de gameplay (27) | ☐ Pendiente |
 | Material perifericos (Super Scope, Super GB) | ☐ Pendiente |
 | Pauta MD (este archivo) | ✓ |
-| Discusion MD (`docs/discusion-snes-coleccion.md`) | ✓ |
+| Discusion MD (`docs/discusiones/discusion-snes-coleccion.md`) | ✓ |
 | Cuentas TarroBot pre-cargadas | ☐ Opcional (no es episodio TarroBot) |
 
 ---
@@ -209,4 +209,4 @@ Mismo patron para los paneos (slide paneo) y los gameplay (slide triple).
 **Ultima actualizacion:** 2026-05-21
 **Slug:** `snes-coleccion`
 **HTML asociado:** `studio/snes-coleccion.html`
-**Discusion:** `docs/discusion-snes-coleccion.md`
+**Discusion:** `docs/discusiones/discusion-snes-coleccion.md`

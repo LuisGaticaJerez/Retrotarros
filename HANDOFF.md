@@ -17,7 +17,7 @@ Canal en pre-lanzamiento con una base grande de contenido armado. Arco **SEGA ce
 ## Decidido y cerrado (vigente)
 
 - Nombre del canal: **Retrotarros**. Tagline público: `Nostalgia + Juegos + Música`.
-- Identidad visual base (paleta synthwave/arcade). Detalle en `docs/identidad-visual.md`.
+- Identidad visual base (paleta synthwave/arcade). Detalle en `docs/canal/identidad-visual.md`.
 - **La colección es del canal, no de una persona.** Presentadores: Luis y **Coco**. → `CLAUDE.md`.
 - **Convención de pautas:** tres archivos por episodio con mismo slug (`pauta` + `discusion` + `html`).
 - **Convención de arcos:** un MD por generación en `docs/arcos/{generación}.md`.
@@ -30,7 +30,7 @@ Canal en pre-lanzamiento con una base grande de contenido armado. Arco **SEGA ce
 ## Historia de arcos
 
 - **Arco N64** — 3 de 6 episodios cerrados en mayo 2026 (ranking, hardware-raro, no-latam). Tablero en [`docs/arcos/n64.md`](docs/arcos/n64.md). Ideas pendientes: kirkhope-rare, nintendo-vs-playstation, ost-bateria. (Formatos `archivo-koko` y `retrotarros-vs-mundo` discontinuados 2026-08-11 — ver `CLAUDE.md`.)
-- **Arcos NES / SNES / PS Vita** — episodios y colecciones armados (top-mundial, top-precios, colección, etc.). Ver `docs/pauta-*.md`.
+- **Arcos NES / SNES / PS Vita** — episodios y colecciones armados (top-mundial, top-precios, colección, etc.). Ver `docs/pautas/pauta-*.md`.
 - **12 sagas** (Mario, Zelda, Metroid, Metal Gear, Sonic, Street Fighter, etc.) — líneas de tiempo cerradas.
 - **Arco SEGA** — cerrado 2026 (ver Estado actual).
 
@@ -45,7 +45,7 @@ Canal en pre-lanzamiento con una base grande de contenido armado. Arco **SEGA ce
 
 1. Leer este archivo + `CLAUDE.md` completo.
 2. Leer `docs/modus-operandi/README.md` (estilo de shorts + bitácora de decisiones).
-3. Si vas a un arco → leer su `docs/arcos/{gen}.md`. Si vas a un episodio → su `docs/pauta-{slug}.md`.
+3. Si vas a un arco → leer su `docs/arcos/{gen}.md`. Si vas a un episodio → su `docs/pautas/pauta-{slug}.md`.
 4. Si vas a tocar un TarroShort → leer `docs/modus-operandi/convenciones-tarroshorts.md` ANTES de copiar cualquier molde (evita usar el estilo viejo).
 5. Antes de generar contenido nuevo, confirmar con Luis qué se ataca.
 
@@ -55,9 +55,9 @@ Canal en pre-lanzamiento con una base grande de contenido armado. Arco **SEGA ce
 |---------|-----|
 | `CLAUDE.md` | Reglas operativas, convenciones, workflow Git, sync Drive. |
 | `docs/modus-operandi/` | Convenciones de estilo de shorts + bitácora de decisiones. |
-| `docs/estrategia.md` | Documento maestro del canal. |
-| `docs/formatos.md` | Formatos (largos, shorts por lane, Indie Lat). |
-| `docs/briefings-compositores.md` | Fichas de compositores. |
+| `docs/canal/estrategia.md` | Documento maestro del canal. |
+| `docs/canal/formatos.md` | Formatos (largos, shorts por lane, Indie Lat). |
+| `docs/canal/briefings-compositores.md` | Fichas de compositores. |
 | `data/coleccion/coleccion-retrotarros.csv` | Colección física — fuente de verdad (export GameEye, ~898 juegos). |
 | `scripts/top_deck.py` · `saga_deck.py` · `coleccion_deck.py` | Generadores de decks. |
 | `scripts/tarroshort_render.py` | Render MP4 de los TarroShorts. |

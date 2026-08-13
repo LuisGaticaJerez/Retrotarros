@@ -1,0 +1,108 @@
+# Descripción YouTube — Top Precios Sega Master System
+
+Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos son estimados; ajustar a los tiempos del corte final.
+
+---
+
+## Títulos sugeridos (elegir uno)
+
+1. **Los 10 Master System MÁS CAROS del mundo** — 44 chars. (Recomendado)
+2. **El santo grial de Master System es un juego de boxeo** — 55 chars.
+3. **Buster Douglas: el cartucho más caro de la Master System** — 59 chars.
+
+---
+
+## Descripción (copiar/pegar)
+
+```
+El juego más caro de la Master System no es Phantasy Star, ni Wonder Boy, ni Sonic. Es un juego de boxeo que nadie recuerda 🥊 Hoy: los 10 cartuchos que hoy cuestan una fortuna.
+
+James "Buster" Douglas Knockout Boxing es el santo grial: Sega lo lanzó rápido para aprovechar el hype cuando Douglas noqueó a Mike Tyson en 1990 (la mayor sorpresa del boxeo, apuestas 42 a 1). Douglas perdió el título a los 8 meses, el hype murió, el juego vendió casi nada. Ese fracaso comercial es justo lo que hoy lo hace valer más de 1.300 dólares CIB.
+
+Dato curioso: Phantasy Star, la joya #1 de nuestro top mundial, es relativamente barato. En coleccionismo, precio no es calidad — es rareza.
+
+Cuéntanos en los comentarios si sabías la historia de Buster Douglas.
+
+00:00 Intro
+00:45 Formato: retail CIB
+02:00 #10 Alex Kidd in Shinobi World
+03:20 #9 Ghouls'n Ghosts
+04:40 #8 Asterix and the Great Rescue
+06:00 #7 Power Strike (Aleste)
+07:20 #6 Dick Tracy
+08:40 #5 Golden Axe Warrior
+10:00 #4 Power Strike II
+11:20 #3 Mah-Jong
+12:40 #2 Sonic the Hedgehog (8-bit)
+14:00 #1 James "Buster" Douglas Knockout Boxing — EL SANTO GRIAL
+16:00 Veredicto: precio es rareza, no calidad
+17:00 Cierre + próxima semana
+
+Suscríbete: se vienen los precios de Mega Drive, Dreamcast y Saturn.
+Retrotarros — Nostalgia + Juegos + Música.
+
+#MasterSystem #Sega #Retrogaming #Gaming #Videojuegos
+```
+
+---
+
+## Hashtags adicionales (pool — preferir los MÁS MASIVOS, elegir 3-5)
+
+Masivos (alto volumen, primero): `#MasterSystem #Sega #Retrogaming #Gaming #Videojuegos #Retro`
+Nicho/relleno (opcional): `#BusterDouglas #RetroTarros #Chile`
+
+## Tags YouTube (keywords, separadas por coma)
+
+```
+sega master system precios, master system, buster douglas knockout boxing, sonic the hedgehog 8 bit master system, mah-jong master system, power strike ii, golden axe warrior, dick tracy master system, asterix great rescue, ghouls n ghosts master system, juegos mas caros master system, retrogaming, retrotarros
+```
+
+---
+
+## Comentario fijado (copiar/pegar)
+
+```
+¿Sabías la historia de Buster Douglas noqueando a Mike Tyson? ¿Tienes alguno de estos botado en una caja?
+```
+
+## Post para redes (TikTok / IG / X)
+
+```
+El juego más caro de la Master System no es Phantasy Star ni Sonic. Es un juego de boxeo olvidado, y la historia detrás es una locura.
+
+Video completo en el canal.
+
+#MasterSystem #Sega #Retrogaming #Gaming
+```
+
+## Pantalla final / cards (end screen)
+
+- **Card al minuto ~2 y ~14:** apuntar al TarroShort del ranking (si se hace uno corto).
+- **End screen (últimos 20s):** 1) video sugerido = `master-system-top-mundial` (mismo arco), 2) botón suscribirse, 3) playlist "Rankings".
+- Dejar 15-20s de cierre con Coco para que calce el end screen.
+
+## Notas de producción
+
+- **Capítulos:** timestamps estimados sobre estructura de 17-19 min. Ajustar al corte real (primero en 00:00, mínimo 3 capítulos de 10s+).
+- **Miniatura sugerida:** caja de James "Buster" Douglas Knockout Boxing + Phantasy Star + texto "TOP PRECIOS · MASTER SYSTEM" + TarroBot.
+- Fuente de datos: `docs/pautas/pauta-master-system-top-precios.md`.
+
+---
+
+## Checklist de publicación (según docs/canal/guia-youtube-viral.md)
+
+- [ ] Subir video + setear **título** (≤65 chars, opción #1).
+- [ ] Subir **miniatura**.
+- [ ] Pegar **descripción** (bloque de arriba).
+- [ ] Ajustar **capítulos** al corte real (primero en 00:00).
+- [ ] Cargar **tags** (bloque keywords).
+- [ ] Confirmar **3-5 hashtags** en la descripción (los primeros 3 salen sobre el título).
+- [ ] Setear **end screen** + cards.
+- [ ] Publicar y **fijar el comentario**.
+- [ ] Publicar **post de redes**.
+- [ ] Agregar el video a la **playlist** "Rankings".
+
+---
+
+**Slug:** `master-system-top-precios`
+**Última actualización:** 2026-08-11

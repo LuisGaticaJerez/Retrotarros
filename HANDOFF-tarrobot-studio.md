@@ -115,9 +115,9 @@ D:\Recursos Retrotarros\repo\
 ├── HANDOFF.md                     # estado canal (general)
 ├── HANDOFF-tarrobot-studio.md     # ESTE archivo
 ├── docs/
-│   ├── HANDOFF-tarrobot.md        # legacy
-│   ├── discord-bot-setup.md       # setup Discord bot (sesion previa)
-│   ├── app-estudio-mensajeria.md  # legacy brainstorm
+│   ├── docs/tarrobot/HANDOFF-tarrobot.md        # legacy
+│   ├── docs/notas/discord-bot-setup.md       # setup Discord bot (sesion previa)
+│   ├── docs/notas/app-estudio-mensajeria.md  # legacy brainstorm
 │   ├── pauta-*.md                 # pautas de episodios del canal
 │   ├── handoff-claude-studio/     # bundle para Claude del PC del estudio
 │   └── ...
@@ -180,7 +180,7 @@ Pasos concretos:
 3. Migrar el frontend React: o se mantiene como esta y conversa con el FastAPI nuevo, o se sustituye por extension del panel control HTML de TarroBot.
 4. Eliminar `studio-panel/` Node una vez todo migrado.
 
-### Backlog TarroBot (heredado del HANDOFF-tarrobot.md)
+### Backlog TarroBot (heredado del docs/tarrobot/HANDOFF-tarrobot.md)
 
 Top 5 prioridades para Sprint 13 alternativo si el de migracion se posterga:
 1. Sesion persistente en disco (~1h)
@@ -244,7 +244,7 @@ git push origin master
 
 ## Discord bot (estado actual)
 
-App `Tarrobot` (ID `1507235440527413368`) creada, configurada e invitada al servidor `RetroTarros` (ID `1507239039747756094`). Detalle completo en `docs/discord-bot-setup.md`.
+App `Tarrobot` (ID `1507235440527413368`) creada, configurada e invitada al servidor `RetroTarros` (ID `1507239039747756094`). Detalle completo en `docs/notas/discord-bot-setup.md`.
 
 Canales del servidor:
 | Canal | ID |
@@ -285,8 +285,8 @@ Heredadas de los proyectos originales, ahora unificadas:
 ## Cross-references
 
 - HANDOFF general canal Retrotarros: `HANDOFF.md`
-- HANDOFF legacy solo TarroBot: `docs/HANDOFF-tarrobot.md`
-- Setup Discord bot: `docs/discord-bot-setup.md`
+- HANDOFF legacy solo TarroBot: `docs/tarrobot/HANDOFF-tarrobot.md`
+- Setup Discord bot: `docs/notas/discord-bot-setup.md`
 - Bundle Claude del estudio: `docs/handoff-claude-studio/`
 - README Studio Panel: `studio-panel/README.md`
 - CLAUDE.md Studio Panel (legacy): `studio-panel/CLAUDE.md`

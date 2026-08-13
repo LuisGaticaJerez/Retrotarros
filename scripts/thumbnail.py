@@ -3,7 +3,7 @@ thumbnail.py - Retrotarros Studio Suite
 Genera una miniatura YouTube 1280x720 estilo canal (synthwave), alto CTR:
 numero gigante + 2-3 palabras + collage de box art + mascota TarroBot.
 
-Sigue docs/guia-youtube-viral.md: <=3 palabras de texto grande, alto contraste,
+Sigue docs/canal/guia-youtube-viral.md: <=3 palabras de texto grande, alto contraste,
 legible en movil. Sin tildes (asset publico).
 
 Uso (modulo):

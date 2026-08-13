@@ -51,7 +51,7 @@ Output: `D:\Recursos Retrotarros\Drive\Studio\<slug>\teasers\<slug>-tarroteaser-
 
 **Limpiar música de fondo del master:** el audio del teaser viene del master con su música embebida. Para aislarla, aplicar **"Voice Enhancement"** o **"Noise Reduction"** de CapCut sobre los clips importados. NO se hace en el script (probamos Demucs pero requiere torchcodec + ffmpeg full-shared build, no vale la pena vs CapCut nativo).
 
-**Generar proyectos CapCut programáticamente:** investigamos cómo automatizar la creación de proyectos `.draft` con Voice Enhancement + lower-thirds + intro/outro pre-cargados. **Pausado** porque el ROI no se justifica para cadencia ~1 teaser/semana. Findings completos en `docs/capcut-automation-research.md` por si en el futuro queremos retomar (3+ teasers/semana o producto SaaS).
+**Generar proyectos CapCut programáticamente:** investigamos cómo automatizar la creación de proyectos `.draft` con Voice Enhancement + lower-thirds + intro/outro pre-cargados. **Pausado** porque el ROI no se justifica para cadencia ~1 teaser/semana. Findings completos en `docs/notas/capcut-automation-research.md` por si en el futuro queremos retomar (3+ teasers/semana o producto SaaS).
 
 **Stack:**
 - Whisper local (modelo `small`, 244MB) con cache en `.cache/whisper/` para iteraciones rápidas
@@ -62,7 +62,7 @@ Output: `D:\Recursos Retrotarros\Drive\Studio\<slug>\teasers\<slug>-tarroteaser-
 
 ## Qué es esto
 
-Canal de YouTube en español sobre **Nostalgia + Juegos + Música** (retrogaming + batería). Proyecto chileno. Ver `docs/proyecto.md` para contexto completo.
+Canal de YouTube en español sobre **Nostalgia + Juegos + Música** (retrogaming + batería). Proyecto chileno. Ver `docs/canal/proyecto.md` para contexto completo.
 
 > **Tagline público canónico:** `Nostalgia + Juegos + Música`. Es lo que va en banners, gráficas de inicio/fin, headers de pautas y cualquier touchpoint visible al público. Internamente seguimos describiendo el formato como "retrogaming + batería" porque eso describe la mecánica (juegos retro + Koko tocando), pero el tagline al público es el de arriba.
 
@@ -97,7 +97,7 @@ Los formatos **"archivo-koko"** (colección completa de una consola sin curadur�
 - **Sin españolismos.** No "vale", "tío", "guay", "molar".
 - **Sin tildes en tildes débiles** (á/é/í/ó/ú → a/e/i/o/u) en los HTMLs y outputs públicos. En chat con Luis pueden ir tildes (decisión de Luis: si pide aplicar también al chat, sí; si no, el chat puede tener tildes para legibilidad).
 - **EXCEPCIÓN TarroBot (TTS):** los textos que reproduce TarroBot por voz (Edge TTS) SÍ deben llevar tildes correctas + números en palabras ("20 mil" en vez de "20,000"). Sin tildes, Edge TTS no pronuncia bien las palabras. Aplica a: prompts de Claude en `scripts/tarrobot*.py`, listas hardcoded (SALUDOS_GEEK, DESPEDIDAS_CORTAS, CATCHPHRASES), respuestas pregeneradas de `/api/precio`, y cualquier texto que vaya a edge-tts. Los HTMLs y assets visuales del canal siguen sin tildes (regla general).
-- **EXCEPCIÓN kits de publicación YouTube (`docs/descripcion-*.md`) — Luis 2026-07-29:** la descripción/título/comentario fijado que se pega directo en YouTube SÍ lleva tildes y Ñ correctas ("años", no "anios") — es prosa normal para el público, no un HTML con límite visual. Solo los HTML on-screen del canal (rankings, colecciones, reseñas, sagas, shorts) van sin tildes débiles. Se encontró voseo argentino real ("elegís vos", "defendés") colado en varios kits de TarroShorts — repasar cada kit nuevo con cuidado antes de entregarlo, el chileno neutro con tuteo aplica igual acá.
+- **EXCEPCIÓN kits de publicación YouTube (`docs/descripciones/descripcion-*.md`) — Luis 2026-07-29:** la descripción/título/comentario fijado que se pega directo en YouTube SÍ lleva tildes y Ñ correctas ("años", no "anios") — es prosa normal para el público, no un HTML con límite visual. Solo los HTML on-screen del canal (rankings, colecciones, reseñas, sagas, shorts) van sin tildes débiles. Se encontró voseo argentino real ("elegís vos", "defendés") colado en varios kits de TarroShorts — repasar cada kit nuevo con cuidado antes de entregarlo, el chileno neutro con tuteo aplica igual acá.
 - **Registro conversacional.** Dos chilenos en un café, no locutores de noticiero.
 - **Si el output sale con marcas regionales equivocadas → corregir y reescribir.** No usar "boludo", "che", "vamos a tirarle" en sentido argentino.
 
@@ -105,8 +105,8 @@ Si Luis señala que sonaste argentino → disculparte breve, reescribir el últi
 
 ## Formatos
 
-Ver `docs/formatos.md` para estructura de producción (bloques, tiempos). Ver
-**`docs/inventario-contenido.md`** para el inventario real de qué tipos de video existen,
+Ver `docs/canal/formatos.md` para estructura de producción (bloques, tiempos). Ver
+**`docs/canal/inventario-contenido.md`** para el inventario real de qué tipos de video existen,
 grounded en las playlists del canal de YouTube (`@Retrotarros`) — cuál está publicado,
 armado sin subir, o solo definido como formato. Revisar ese doc antes de asumir qué
 formatos tiene el canal; se desactualiza rápido y no hay que reconstruirlo solo desde
@@ -115,7 +115,7 @@ formatos tiene el canal; se desactualiza rápido y no hay que reconstruirlo solo
 Resumen de formatos:
 
 - **Episodios largos** (15–25 min): 5 bloques, cierra con Koko tocando en batería. Cadencia: 1 cada 10–12 días. Sub-tipos con playlist propia en YouTube: **Rankings** (top mundial/precios por consola), **Colecciones**, **Sagas de videojuegos**, **Specials** (multi-consola, atados a fecha chilena).
-- **Abriendo el tarro**: entrevista a un coleccionista invitado (no Luis/Koko) mostrando su propia colección — de lo que sea, no solo videojuegos. Kit para el invitado en `docs/kit-coleccionista-abriendo-el-tarro.md`, formulario en `docs/abriendo-el-tarro-google-form.gs`, template `studio/templates/_template-abriendo-el-tarro.html`.
+- **Abriendo el tarro**: entrevista a un coleccionista invitado (no Luis/Koko) mostrando su propia colección — de lo que sea, no solo videojuegos. Kit para el invitado en `docs/abriendo-el-tarro/kit-coleccionista-abriendo-el-tarro.md`, formulario en `docs/abriendo-el-tarro/abriendo-el-tarro-google-form.gs`, template `studio/templates/_template-abriendo-el-tarro.html`.
 - **Reseñas** (playlist nueva, desde 2026-07-21): un juego por video, ángulo retrospectivo ("¿envejeció bien?"), máximo 10 min, talento alterna Luis/Koko 1 y 1 (nunca juntos, nunca cierra con batería). Diseño completo en `docs/superpowers/specs/2026-07-21-resena-format-design.md`. Generador `scripts/resena_deck.py`, salida en `studio/resenas/<slug>.html` (carpeta aparte).
 
   **REGLA — Tono del contexto y el veredicto (obligatoria) — Luis 2026-07-29:** la reseña de Mortal Kombat generó rechazo en la comunidad por dos motivos puntuales, y la correccion aplica a toda reseña desde ahí en adelante:
@@ -138,7 +138,7 @@ Resumen de formatos:
 
 ## Identidad visual
 
-Ver `docs/identidad-visual.md`. Paleta exacta:
+Ver `docs/canal/identidad-visual.md`. Paleta exacta:
 
 - Magenta neón `#FF2E88` — primario
 - Cyan eléctrico `#00E5FF` — secundario
@@ -154,17 +154,17 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 
 | Archivo | Rol |
 |---|---|
-| `docs/estrategia.md` | Documento maestro: nombre, enfoques, formatos, plan 3 meses, Indie Lat, identidad visual. |
-| `docs/briefings-compositores.md` | Fichas de compositores (Kondo, Uematsu, Mitsuda, Yamaoka, Wise, Kirkhope, etc.). Documento vivo. |
-| `docs/guiones-shorts.md` | Guiones lane Luis: timings, B-roll, título YouTube, caption, hashtags, datos de respaldo. Documento vivo. |
-| `docs/guia-youtube-viral.md` | **Playbook de virality YouTube** (título, miniatura, descripción, hashtags, capítulos). Toda `descripcion-{slug}.md` lo sigue. |
-| `docs/descripcion-{slug}.md` | Descripción YouTube lista para pegar (episodios largos): títulos, resumen, capítulos con timestamps, hashtags, tags. Sigue `guia-youtube-viral.md`. Automático al cerrar el episodio (ver "Kit de publicación YouTube automático"). |
-| `docs/descripcion-tarroshort-{slug}.md` | Igual que arriba, para TarroShorts. Sin capítulos ni tags de campo (no aplican a shorts). |
-| `docs/descripcion-resena-{slug}.md` | Igual que arriba, para reseñas. Sin capítulos ni tags de campo. |
+| `docs/canal/estrategia.md` | Documento maestro: nombre, enfoques, formatos, plan 3 meses, Indie Lat, identidad visual. |
+| `docs/canal/briefings-compositores.md` | Fichas de compositores (Kondo, Uematsu, Mitsuda, Yamaoka, Wise, Kirkhope, etc.). Documento vivo. |
+| `docs/canal/guiones-shorts.md` | Guiones lane Luis: timings, B-roll, título YouTube, caption, hashtags, datos de respaldo. Documento vivo. |
+| `docs/canal/guia-youtube-viral.md` | **Playbook de virality YouTube** (título, miniatura, descripción, hashtags, capítulos). Toda `descripcion-{slug}.md` lo sigue. |
+| `docs/descripciones/descripcion-{slug}.md` | Descripción YouTube lista para pegar (episodios largos): títulos, resumen, capítulos con timestamps, hashtags, tags. Sigue `docs/canal/guia-youtube-viral.md`. Automático al cerrar el episodio (ver "Kit de publicación YouTube automático"). |
+| `docs/descripciones/descripcion-tarroshort-{slug}.md` | Igual que arriba, para TarroShorts. Sin capítulos ni tags de campo (no aplican a shorts). |
+| `docs/descripciones/descripcion-resena-{slug}.md` | Igual que arriba, para reseñas. Sin capítulos ni tags de campo. |
 
 > **Regla de entrega (Luis, 2026-06-07):** cada vez que cierre un kit de publicación, **pegar en el chat** el texto listo para YouTube (título + descripción + comentario fijado + tags + hashtags), no solo dejarlo en el `.md`. Luis lo copia directo desde el chat.
-| `docs/pauta-{slug}.md` | Pauta operativa de episodio largo (para Claude — denso, tablas, anclas, anexos). |
-| `docs/discusion-{slug}.md` | Versión conversacional de la pauta (para Luis + Koko — bullets, preguntas guía, decisiones pendientes). |
+| `docs/pautas/pauta-{slug}.md` | Pauta operativa de episodio largo (para Claude — denso, tablas, anclas, anexos). |
+| `docs/discusiones/discusion-{slug}.md` | Versión conversacional de la pauta (para Luis + Koko — bullets, preguntas guía, decisiones pendientes). |
 | `studio/{slug}.html` | Monitor visual del estudio durante la grabación (paleta synthwave, navegable). |
 | `data/coleccion_koko.csv` | **Fuente de verdad** de la colección física de Koko. 899 ítems, 26 plataformas. Leer con `grep`/`csv` directo. |
 | `ref/Retrotarros_Referencia_Visual_N64.html` | Referencia visual estilo (header, cards, paleta) para HTML del estudio. |
@@ -196,8 +196,8 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 
 Cada episodio largo se cierra con **tres archivos**, mismo `{slug}`:
 
-1. **`docs/pauta-{slug}.md`** — para Claude. Operativo y denso: rankings, datos precisos, fuentes, anclas históricas, scorecard, tiempos por bloque, anexos. Es lo que Claude lee como contexto.
-2. **`docs/discusion-{slug}.md`** — para Luis + Koko. Conversacional: bullets cortos, preguntas guía para discutir antes de grabar, decisiones pendientes, qué falta cerrar. Es lo que abren impreso o en el celular.
+1. **`docs/pautas/pauta-{slug}.md`** — para Claude. Operativo y denso: rankings, datos precisos, fuentes, anclas históricas, scorecard, tiempos por bloque, anexos. Es lo que Claude lee como contexto.
+2. **`docs/discusiones/discusion-{slug}.md`** — para Luis + Koko. Conversacional: bullets cortos, preguntas guía para discutir antes de grabar, decisiones pendientes, qué falta cerrar. Es lo que abren impreso o en el celular.
 3. **`studio/{slug}.html`** — para el estudio. Monitor visual que ven Luis y Koko en pantalla durante la grabación. Navegable con teclas ← →. Paleta synthwave (`#FF2E88` / `#00E5FF` / `#FFD23F` / `#06030f`). Base de estilo: `ref/Retrotarros_Referencia_Visual_N64.html`.
 
 **Reglas:**
@@ -210,7 +210,7 @@ Cada episodio largo se cierra con **tres archivos**, mismo `{slug}`:
 
 Cada vez que se cierra un **episodio largo**, un **TarroShort**, o una **reseña**, Claude genera el kit de publicación YouTube **sin que Luis tenga que pedirlo**. Antes esto se armaba solo bajo pedido explícito y Luis tenía que acordarse de preguntar cada vez — ya no.
 
-**Qué genera (sigue `docs/guia-youtube-viral.md`):**
+**Qué genera (sigue `docs/canal/guia-youtube-viral.md`):**
 - Título optimizado.
 - Descripción con **emojis con moderación** (título/miniatura/descripción sí, guión hablado no) y **CTA de suscripción siempre incluido**. 300-500 palabras para episodios largos; más corta y proporcional al tamaño del contenido para shorts/reseñas.
 - Hashtags (3-5, los primeros 3 son los que más pesan en YouTube).
@@ -218,9 +218,9 @@ Cada vez que se cierra un **episodio largo**, un **TarroShort**, o una **reseña
 - Tags del campo de etiquetas (~15-20 keywords, solo episodios largos).
 
 **Dónde queda (archivo `.md` + pegado en el chat, los dos SIEMPRE):**
-- Episodios largos: `docs/descripcion-{slug}.md` (ya establecido).
-- TarroShorts: `docs/descripcion-tarroshort-{slug}.md`.
-- Reseñas: `docs/descripcion-resena-{slug}.md`.
+- Episodios largos: `docs/descripciones/descripcion-{slug}.md` (ya establecido).
+- TarroShorts: `docs/descripciones/descripcion-tarroshort-{slug}.md`.
+- Reseñas: `docs/descripciones/descripcion-resena-{slug}.md`.
 - Regla de entrega existente (Luis 2026-06-07) sigue aplicando: **pegar en el chat** el texto listo para YouTube, no basta con dejarlo solo en el archivo.
 
 **Cuándo:** al cerrar cada pieza — mismo momento en que se termina de armar y verificar el HTML/short/reseña (capturas + render si aplica), antes de preguntar por push/sync. No esperar a que Luis lo pida.
@@ -343,8 +343,8 @@ G:\Mi unidad\Studio\
 - **Nunca usar** `--force`, `--no-verify`, `commit --amend` (sobre commits ya pusheados), `git reset --hard` sin confirmación explícita en el mismo turno.
 
 ### Output esperado
-- **Pautas de episodio largo** → tres archivos por slug (ver "Convención de pautas"): `docs/pauta-{slug}.md` + `docs/discusion-{slug}.md` + `studio/{slug}.html`.
-- **Guiones de shorts y briefings de compositores** → se agregan al documento vivo correspondiente (`docs/guiones-shorts.md`, `docs/briefings-compositores.md`).
+- **Pautas de episodio largo** → tres archivos por slug (ver "Convención de pautas"): `docs/pautas/pauta-{slug}.md` + `docs/discusiones/discusion-{slug}.md` + `studio/{slug}.html`.
+- **Guiones de shorts y briefings de compositores** → se agregan al documento vivo correspondiente (`docs/canal/guiones-shorts.md`, `docs/canal/briefings-compositores.md`).
 - **Brainstorm interno** → Markdown libre en `docs/` con nombre descriptivo.
 - Archivos reales en el repo — no solo mostrar contenido en chat.
 
@@ -387,11 +387,11 @@ Qué juegos entran al hilo de un episodio SAGA (las 12 hechas siguen esto; toda 
 7. **Corte pragmático de tamaño**: el hilo no debiera pasar de ~16 juegos. Si la saga es muy grande, dejar fuera mainline menores (caso Sonic: Colors/Secret Rings fuera) y decir el criterio al aire.
 8. **Entrega doble multi-plataforma = una entrada** (Smash 4 3DS+Wii U).
 
-Cada decisión particular queda escrita en el `docs/discusion-saga-<slug>.md` del episodio (sección "El criterio del mainline").
+Cada decisión particular queda escrita en el `docs/discusiones/discusion-saga-<slug>.md` del episodio (sección "El criterio del mainline").
 
 ### REGLA — Lista de paneo por colección (obligatoria, automática) — Luis 2026-06-08
 
-Cada vez que se genera una **colección** con `coleccion_deck.generar_deck()`, el generador escribe **además** `docs/lista-paneo-<slug>.md`: el catálogo COMPLETO por categoría, con las 3 joyas marcadas con ⭐. Sirve para consultar/compartir al grabar los paneos de cámara.
+Cada vez que se genera una **colección** con `coleccion_deck.generar_deck()`, el generador escribe **además** `docs/descripciones/lista-paneo-<slug>.md`: el catálogo COMPLETO por categoría, con las 3 joyas marcadas con ⭐. Sirve para consultar/compartir al grabar los paneos de cámara.
 
 - Para que la lista traiga el detalle completo de títulos (no solo conteo + joyas), cada categoría del `data` debe incluir `"juegos": [<títulos>]`. Los drivers de colección **deben** pasar esa lista (sale del CSV `data/coleccion/coleccion-retrotarros.csv`).
 - El emparejamiento joya↔juego es por mejor coincidencia de prefijo (las joyas vienen en mayúsculas/abreviadas), así que basta con que la joya empiece igual que el título real.
@@ -415,7 +415,7 @@ El episodio de precios SIEMPRE se arma en tres bloques, igual que `snes-top-prec
 
 ## TarroShorts de DATOS (lane TarroBot) — desde 2026-06-08
 
-Lane nueva de shorts conducidos por **TarroBot** (mascota) sobre un **tema curioso libre** (no atado a la colección): presenta el tema, suelta 5 datos y reacciona al gameplay en cada TarroVisión (placeholder para CapCut). Distinto a los TarroShorts derivados de episodios y a los guiones narrados por Luis (`docs/guiones-shorts.md`).
+Lane nueva de shorts conducidos por **TarroBot** (mascota) sobre un **tema curioso libre** (no atado a la colección): presenta el tema, suelta 5 datos y reacciona al gameplay en cada TarroVisión (placeholder para CapCut). Distinto a los TarroShorts derivados de episodios y a los guiones narrados por Luis (`docs/canal/guiones-shorts.md`).
 
 - **Generador:** `scripts/tarroshort_datos.py` (`generar_short_datos(data, slug)`), clona `_template-tarroshort.html`.
 - **Flag `modo`:** `"countdown"` (ranking #5→#1, rank-badge) o `"lista"` (5 datos con etiqueta `DATO N`).
@@ -459,8 +459,8 @@ printf '%s\n' "titulo" "" "linea cuerpo" > .git/COMMIT_EDITMSG_TMP.txt && git co
 
 Identificar el escenario y revisar archivos relevantes antes de proponer output:
 
-1. **Short nuevo** → preguntar lane (Luis o Koko) + tema + consultar `docs/guiones-shorts.md` para no repetir ángulos.
-2. **Pauta episodio largo** → `docs/estrategia.md` para formato + `data/coleccion_koko.csv` para chequear colección. Generar los tres archivos (pauta + discusión + html) en el mismo flujo, con el mismo slug.
-3. **Investigar compositor** → `docs/briefings-compositores.md`, agregar ficha si es nuevo.
+1. **Short nuevo** → preguntar lane (Luis o Koko) + tema + consultar `docs/canal/guiones-shorts.md` para no repetir ángulos.
+2. **Pauta episodio largo** → `docs/canal/estrategia.md` para formato + `data/coleccion_koko.csv` para chequear colección. Generar los tres archivos (pauta + discusión + html) en el mismo flujo, con el mismo slug.
+3. **Investigar compositor** → `docs/canal/briefings-compositores.md`, agregar ficha si es nuevo.
 4. **Brainstorm tendencias** → revisar redes, traer 3–5 formatos que peguen ahora + adaptaciones al canal.
-5. **Producción** (miniaturas, banners, gráficas, HTML estudio) → respetar paleta e identidad visual en `docs/identidad-visual.md`. Para HTML de estudio, basarse en `ref/Retrotarros_Referencia_Visual_N64.html`.
+5. **Producción** (miniaturas, banners, gráficas, HTML estudio) → respetar paleta e identidad visual en `docs/canal/identidad-visual.md`. Para HTML de estudio, basarse en `ref/Retrotarros_Referencia_Visual_N64.html`.

@@ -187,7 +187,7 @@ def infer_title_and_trivia(slug: str, pauta_md: Path | None = None) -> tuple[str
 
     # Intentar leer del MD
     if pauta_md is None:
-        pauta_md = REPO / "docs" / f"pauta-{slug}.md"
+        pauta_md = REPO / "docs" / "pautas" / f"pauta-{slug}.md"
     if pauta_md.exists():
         text = pauta_md.read_text(encoding="utf-8")
         for line in text.split("\n")[:20]:

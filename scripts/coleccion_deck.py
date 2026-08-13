@@ -192,7 +192,7 @@ def _slide_cierre(num: int, data: dict) -> str:
 
 
 def _escribir_lista_md(data: dict, out_slug: str) -> Path:
-    """Escribe docs/lista-paneo-<slug>.md con el catalogo por categoria.
+    """Escribe docs/descripciones/lista-paneo-<slug>.md con el catalogo por categoria.
 
     Cada categoria puede traer 'juegos' (lista completa de titulos) para el
     detalle por paneo; si no la trae, se listan solo las 3 joyas + el conteo.
@@ -273,7 +273,7 @@ def _escribir_lista_md(data: dict, out_slug: str) -> Path:
             L.append(f"- {h['name']}")
         L.append("")
 
-    out_md = REPO / "docs" / f"lista-paneo-{out_slug}.md"
+    out_md = REPO / "docs" / "descripciones" / f"lista-paneo-{out_slug}.md"
     out_md.write_text("\n".join(L), encoding="utf-8")
     return out_md
 

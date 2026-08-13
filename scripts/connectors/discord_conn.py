@@ -4,7 +4,7 @@ scripts/connectors/discord_conn.py
 Conector Discord usando discord.py. Bot reader que se conecta al servidor
 de Discord especificado y escucha mensajes en los canales configurados.
 
-Setup previo (ver docs/discord-bot-setup.md):
+Setup previo (ver docs/notas/discord-bot-setup.md):
   - App Discord creada con Privileged Gateway Intents activados
     (Presence + Server Members + Message Content)
   - Bot invitado al servidor con permisos lector/reactor

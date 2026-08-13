@@ -13,7 +13,7 @@
 - No hay PC de estudio con TarroBot instalado todavia (confirmado por Luis) -> no hace falta paso de migracion inmediato, solo dejar la instruccion documentada.
 - `RETROTARROS_STUDIO_ROOT` ausente -> fallback a `REPO/studio`, para no romper el desarrollo local (repo = fuente unica hoy).
 - No se toca `tarrobot.py` ni `obs_recorder.py` (su uso de `studio/` es datos propios de la app: templates, pautas, melodias, tarrobot-out, sesiones -- confirmado revisando cada linea antes de escribir este plan).
-- No se toca `studio/exports/` (descripciones YouTube generadas por `tarrobot-live.py`) -- es output propio de la app, agrupado junto a `studio/shorts/`/`studio/sessions/` en la documentacion existente (`docs/HANDOFF-tarrobot.md:66`).
+- No se toca `studio/exports/` (descripciones YouTube generadas por `tarrobot-live.py`) -- es output propio de la app, agrupado junto a `studio/shorts/`/`studio/sessions/` en la documentacion existente (`docs/tarrobot/HANDOFF-tarrobot.md:66`).
 - Referencia de diseño completa: `docs/superpowers/specs/2026-07-23-tarrobot-studio-root-split-design.md`.
 
 ---

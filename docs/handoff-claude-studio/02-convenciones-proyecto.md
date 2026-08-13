@@ -10,8 +10,8 @@ repo-retrotarros/
 │   ├── pauta-{slug}.md       # pauta de cada episodio
 │   ├── discusion-{slug}.md   # decisiones editoriales del episodio
 │   ├── arcos/                # tableros por generacion (n64.md, snes.md, etc)
-│   ├── briefings-compositores.md
-│   ├── guiones-shorts.md
+│   ├── docs/canal/briefings-compositores.md
+│   ├── docs/canal/guiones-shorts.md
 │   └── handoff-claude-studio/  # ESTE BUNDLE (sub-repo de contexto)
 ├── studio/
 │   ├── {slug}.html           # HTML del episodio (lo que se proyecta en grabacion)
@@ -49,13 +49,13 @@ Ejemplos validos:
 Cada episodio largo tiene **3 archivos con el mismo slug**:
 
 1. **`studio/{slug}.html`** — la presentacion visual que se ve en pantalla durante la grabacion (es lo que el espectador ve en el video final). Slides navegables con flechas izq/der.
-2. **`docs/pauta-{slug}.md`** — el guion/pauta del episodio: estructura por bloques, voz off, transiciones, lista de items.
-3. **`docs/discusion-{slug}.md`** — el "detras de escena": por que se eligieron esos items, descartados, riesgos, anecdotas para Luis y Koko.
+2. **`docs/pautas/pauta-{slug}.md`** — el guion/pauta del episodio: estructura por bloques, voz off, transiciones, lista de items.
+3. **`docs/discusiones/discusion-{slug}.md`** — el "detras de escena": por que se eligieron esos items, descartados, riesgos, anecdotas para Luis y Koko.
 
 ### Cuando crear los 3 archivos
 
 - Si es un **episodio largo (>10 min)**: SI, los 3.
-- Si es un **short (<60 seg)**: NO, se documenta en `docs/guiones-shorts.md`.
+- Si es un **short (<60 seg)**: NO, se documenta en `docs/canal/guiones-shorts.md`.
 - Si es un **briefing** (material de apoyo): NO, se documenta en `docs/briefings-*.md`.
 
 ## Convencion de arcos
@@ -117,8 +117,8 @@ Set canonico (checklist por episodio con slug `<slug>`):
 | # | Archivo | Cuando se genera |
 |---|---------|------------------|
 | 1 | `studio/<slug>.html` | Diseño visual del episodio (proyectado en grabacion) |
-| 2 | `docs/pauta-<slug>.md` | Pauta editorial: estructura, bloques, tiempos, lo que SI/NO se dice |
-| 3 | `docs/discusion-<slug>.md` | Decisiones argumentadas: criterios, descartes, casos disputables |
+| 2 | `docs/pautas/pauta-<slug>.md` | Pauta editorial: estructura, bloques, tiempos, lo que SI/NO se dice |
+| 3 | `docs/discusiones/discusion-<slug>.md` | Decisiones argumentadas: criterios, descartes, casos disputables |
 | 4 | `studio/pautas/<slug>.tarrobot.json` | **Solo si lleva TarroBot.** Datos TTS pre-cargados (con MP3s al cargar pauta) |
 | 5 | `studio/captures/<slug>/*.png` | Capturas 1920x1080 @ 2x DPI con `scripts/capture-slides.py <slug>` |
 | 6 | Sync Drive | `robocopy /MIR` a `G:\Mi unidad\Studio\<slug>\captures\` para que llegue al estudio |

@@ -28,6 +28,6 @@ Slug en minúscula, sin guiones intermedios cuando es una sola palabra, sin sufi
 - Cuando se cierra un episodio (pauta + discusion + html publicados), **actualizar el estado del episodio en el arco**.
 - Si surge una idea nueva durante una sesión, agregarla al arco como "idea" sin armar pauta todavía.
 
-## Relación con `docs/pauta-{slug}.md`, `docs/discusion-{slug}.md` y `studio/{slug}.html`
+## Relación con `docs/pautas/pauta-{slug}.md`, `docs/discusiones/discusion-{slug}.md` y `studio/{slug}.html`
 
 Cada episodio del arco tiene su trío de archivos según la convención de pautas (ver `CLAUDE.md`). El arco solo los **lista y enlaza** — no duplica contenido. Si el episodio cambia, se actualiza en sus 3 archivos y se ajusta la línea del arco.

@@ -67,7 +67,7 @@ Si te piden cambios en TarroBot, no los hagas desde el proyecto del estudio — 
 - Nombre del canal: **Retrotarros**.
 - Convencion de pautas: 3 archivos por episodio con mismo slug (HTML + pauta MD + discusion MD).
 - Convencion de arcos: 1 MD por generacion como tablero de control.
-- Identidad visual base: paleta synthwave (ver `01-identidad-visual.md`).
+- Identidad visual base: paleta synthwave (ver `01-docs/canal/identidad-visual.md`).
 - TarroBot es la mascota oficial. Aparece en todos los episodios largos.
 
 ## Decisiones abiertas (puedes proponer)

@@ -12,7 +12,7 @@ Trabajas codo a codo con **Luis Balbrigame** (productor del canal) iterando sobr
 
 ### 1. Respetar las convenciones del proyecto
 
-Estan documentadas en `02-convenciones-proyecto.md`. Las criticas:
+Estan documentadas en `02-convenciones-docs/canal/proyecto.md`. Las criticas:
 
 - **Chileno neutro tuteo** en TODO output (chat con Luis, codigo, comments, commits, pautas).
 - **Prohibido voseo argentino**: `vos / tenés / decime / podés / sabés / sos`, etc.
@@ -21,7 +21,7 @@ Estan documentadas en `02-convenciones-proyecto.md`. Las criticas:
 
 ### 2. Mantener el look and feel
 
-Esta documentado en `01-identidad-visual.md`. Resumen:
+Esta documentado en `01-docs/canal/identidad-visual.md`. Resumen:
 
 - Paleta: magenta (`--mg: #FF2E88`), cyan (`--cy: #00E5FF`), amarillo (`--ye: #FFD23F`), violeta profundo (`--pu`), oscuro (`--dk`), hueso (`--bo`).
 - 3 tipografias: Press Start 2P (labels), Orbitron 700/900 (titulos), Share Tech Mono (body).
@@ -31,8 +31,8 @@ Esta documentado en `01-identidad-visual.md`. Resumen:
 
 Documentada en `03-estructura-pautas.md`. Cada episodio largo tiene 3 archivos:
 - `studio/{slug}.html`
-- `docs/pauta-{slug}.md`
-- `docs/discusion-{slug}.md`
+- `docs/pautas/pauta-{slug}.md`
+- `docs/discusiones/discusion-{slug}.md`
 
 ### 4. Reusar componentes
 
@@ -42,8 +42,8 @@ Documentada en `03-estructura-pautas.md`. Cada episodio largo tiene 3 archivos:
 
 Hoy el episodio en curso es **SNES Coleccion**:
 - HTML: `studio/snes-coleccion.html`
-- Pauta: `05-pauta-snes-coleccion.md` (en este bundle, copia de `docs/pauta-snes-coleccion.md`)
-- Discusion: `06-discusion-snes-coleccion.md`
+- Pauta: `05-docs/pautas/pauta-snes-coleccion.md` (en este bundle, copia de `docs/pautas/pauta-snes-coleccion.md`)
+- Discusion: `06-docs/discusiones/discusion-snes-coleccion.md`
 
 Si Luis te pide cambios en este episodio, editar y avisar.
 
@@ -130,9 +130,9 @@ Pasos:
 Pasos:
 1. Pedir contexto: tema, generacion, formato (ranking/coleccion/duelo/entrevista).
 2. Proponer slug.
-3. Crear `docs/discusion-{slug}.md` con propuesta de lista (8-15 items).
+3. Crear `docs/discusiones/discusion-{slug}.md` con propuesta de lista (8-15 items).
 4. Iterar con Luis sobre la lista.
-5. Cuando aprueba: crear `docs/pauta-{slug}.md` con estructura completa.
+5. Cuando aprueba: crear `docs/pautas/pauta-{slug}.md` con estructura completa.
 6. Cuando aprueba: crear `studio/{slug}.html` con todos los slides.
 7. Validar visualmente (abrir en navegador).
 8. Marcar todo como cerrado.
@@ -179,12 +179,12 @@ NO eres autonomo. NO tomas decisiones de canal (que arco hacer, que tono usar, q
 Vuelve a leer cuando lo necesites:
 
 - `00-contexto-canal.md` — que es Retrotarros, equipo, plan, tono.
-- `01-identidad-visual.md` — paleta, tipografias, marca.
-- `02-convenciones-proyecto.md` — slugs, naming, git workflow, idioma.
+- `01-docs/canal/identidad-visual.md` — paleta, tipografias, marca.
+- `02-convenciones-docs/canal/proyecto.md` — slugs, naming, git workflow, idioma.
 - `03-estructura-pautas.md` — como se hacen las pautas.
 - `04-componentes-html.md` — bloques HTML reutilizables.
-- `05-pauta-snes-coleccion.md` — pauta del episodio en curso.
-- `06-discusion-snes-coleccion.md` — discusion del episodio en curso.
+- `05-docs/pautas/pauta-snes-coleccion.md` — pauta del episodio en curso.
+- `06-docs/discusiones/discusion-snes-coleccion.md` — discusion del episodio en curso.
 
 ---
 

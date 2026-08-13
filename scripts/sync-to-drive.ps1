@@ -270,7 +270,7 @@ if (-not $PandocExe) {
     }
     $mdPattern = @("pauta-*.md", "discusion-*.md")
     foreach ($pattern in $mdPattern) {
-        $mds = Get-ChildItem -Path $RepoDocs -Filter $pattern -File
+        $mds = Get-ChildItem -Path $RepoDocs -Filter $pattern -File -Recurse
         foreach ($md in $mds) {
             $base = [System.IO.Path]::GetFileNameWithoutExtension($md.Name)
             $outDocx = Join-Path $DrivePautas "$base.docx"

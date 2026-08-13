@@ -6,7 +6,7 @@ con carpetas dispersas: master OBS + teaser TarroTeaser + cartelas PNG +
 descripcion YT + thumbnails sugeridos + README con orden de import.
 
 NO genera el .draft de CapCut (eso es research pausado en
-docs/capcut-automation-research.md). Solo organiza los assets para
+docs/notas/capcut-automation-research.md). Solo organiza los assets para
 que arrastres a CapCut en 30 segundos.
 
 Output:

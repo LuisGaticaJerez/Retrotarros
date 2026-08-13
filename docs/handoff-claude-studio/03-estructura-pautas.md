@@ -2,7 +2,7 @@
 
 ## Anatomia de una pauta del canal
 
-Cada episodio largo tiene **3 archivos** (ver `02-convenciones-proyecto.md`). Aca explicamos cada uno.
+Cada episodio largo tiene **3 archivos** (ver `02-convenciones-docs/canal/proyecto.md`). Aca explicamos cada uno.
 
 ---
 
@@ -102,7 +102,7 @@ Ver `04-componentes-html.md` para el HTML especifico de cada tipo.
 
 ---
 
-## 2. Pauta MD (`docs/pauta-{slug}.md`)
+## 2. Pauta MD (`docs/pautas/pauta-{slug}.md`)
 
 Es el guion del episodio. Lo que Luis y Koko leen antes de grabar para tener la estructura clara.
 
@@ -175,7 +175,7 @@ Documento de trabajo · Luis Balbrigame & Koko
 **Ultima actualizacion:** YYYY-MM-DD
 **Slug:** `{slug}`
 **HTML asociado:** `studio/{slug}.html`
-**Discusion:** `docs/discusion-{slug}.md`
+**Discusion:** `docs/discusiones/discusion-{slug}.md`
 ```
 
 ### Reglas para escribir pautas
@@ -188,7 +188,7 @@ Documento de trabajo · Luis Balbrigame & Koko
 
 ---
 
-## 3. Discusion MD (`docs/discusion-{slug}.md`)
+## 3. Discusion MD (`docs/discusiones/discusion-{slug}.md`)
 
 Es el "detras de escena". Por que se tomaron las decisiones, descartados, anecdotas para tener a mano, riesgos.
 
@@ -245,7 +245,7 @@ Descartados: ... porque ...
 ---
 
 **Ultima actualizacion:** YYYY-MM-DD
-**Pauta asociada:** `docs/pauta-{slug}.md`
+**Pauta asociada:** `docs/pautas/pauta-{slug}.md`
 **HTML:** `studio/{slug}.html`
 ```
 
@@ -261,9 +261,9 @@ Descartados: ... porque ...
 ## Flujo de trabajo tipico
 
 1. Luis trae idea de episodio → discusion verbal con Claude.
-2. Claude crea `docs/discusion-{slug}.md` con propuesta de lista.
+2. Claude crea `docs/discusiones/discusion-{slug}.md` con propuesta de lista.
 3. Iteran: Luis aprueba/rechaza items, Claude actualiza.
-4. Cuando la lista esta cerrada → Claude crea `docs/pauta-{slug}.md` con estructura.
+4. Cuando la lista esta cerrada → Claude crea `docs/pautas/pauta-{slug}.md` con estructura.
 5. Luis revisa pauta MD.
 6. Claude crea `studio/{slug}.html` con todos los slides.
 7. Luis abre el HTML en navegador, valida visualmente.
