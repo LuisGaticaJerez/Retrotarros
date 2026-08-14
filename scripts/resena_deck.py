@@ -263,19 +263,19 @@ header{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;background:rg
 .gp-head{text-align:center;flex:none;padding-top:6px;margin-bottom:8px}
 .gp-title{font-family:'Orbitron';font-weight:900;font-size:46px;color:#fff;line-height:1}
 .gp-meta{font-family:'Share Tech Mono';font-size:17px;color:var(--ye);letter-spacing:3px;margin-top:4px}
-.gp-body{flex:1;display:grid;grid-template-columns:1fr 440px;gap:40px;align-items:center;min-height:0;padding:0 16px 8px}
+.gp-body{flex:1;display:grid;grid-template-columns:1fr 480px;gap:40px;align-items:center;min-height:0;padding:0 16px 8px}
 .gp-tv{height:100%;display:flex;align-items:center;justify-content:center;min-height:0}
-.gp-tv .tarrovision{height:min(100%,640px);aspect-ratio:4/3;max-width:100%}
+.gp-tv .tarrovision{height:min(100%,780px);aspect-ratio:4/3;max-width:100%}
 .gp-side{display:flex;flex-direction:column;gap:18px}
-.gp-dato{background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:20px 24px;font-family:'Share Tech Mono';font-size:25px;line-height:1.6;color:rgba(255,255,255,.92)}
-.gp-dato .lbl{display:block;font-family:'Press Start 2P';font-size:10px;color:var(--cy);letter-spacing:2px;margin-bottom:10px}
+.gp-dato{background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:20px 24px;font-family:'Share Tech Mono';font-size:28px;line-height:1.5;color:rgba(255,255,255,.92)}
+.gp-dato .lbl{display:block;font-family:'Press Start 2P';font-size:14px;color:var(--cy);letter-spacing:2px;margin-bottom:12px}
 .tarrovision{position:relative;background:linear-gradient(180deg,#1a1a1f,#0d0d12);border-radius:22px;padding:20px 24px;box-shadow:0 0 0 2px rgba(255,255,255,.04),0 22px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08),inset 0 -2px 0 rgba(0,0,0,.4);display:grid;grid-template-rows:auto 1fr auto;gap:12px}
 
 /* TARROVISION VS (comparativa dual, regla Luis 2026-07-26 -- SIN dato, solo
    las dos pantallas + VS, todo el alto disponible) */
 .dual-grid{flex:1;display:flex;justify-content:center;align-items:center;gap:28px;min-height:0;padding:0 20px 20px}
-.dual-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:0;height:100%;flex:0 1 880px;max-width:880px}
-.dual-cell .tarrovision{height:min(100%,660px);aspect-ratio:4/3;max-width:100%}
+.dual-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:0;height:100%;flex:0 1 900px;max-width:900px;min-width:0}
+.dual-cell .tarrovision{height:min(100%,675px);aspect-ratio:4/3;max-width:100%}
 .dual-vs{font-family:'Orbitron';font-weight:900;font-size:56px;color:var(--ye);text-shadow:0 0 18px rgba(255,210,63,.55);flex:0 0 auto}
 /* namebox VACIA a proposito: solo el marco, el nombre se escribe encima en la edicion */
 .tv-namebox{display:inline-flex;align-items:center;justify-content:center;padding:8px 24px;border:1px solid var(--ye);background:rgba(255,210,63,.04);position:relative;border-radius:2px;max-width:90%;min-width:220px;min-height:46px}
