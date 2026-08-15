@@ -4,7 +4,12 @@ Genera el deck del formato RESENA: retrospectiva de UN solo juego ("¿envejecio
 bien?"), <=10 min, talento alterna Luis/Koko 1 y 1 (nunca los dos juntos, nunca
 cierra con bateria). Aprobado con Luis 2026-07-21 via brainstorming skill.
 
-Estructura (8 slides fijas, sin excepciones):
+Estructura (8 slides fijas, sin excepciones; +1 opcional si el juego vino de
+un pedido de la comunidad -- ver 00 PEDIDO):
+  00 PEDIDO         - OPCIONAL, solo si data["pedido"] existe. Muestra la
+                       captura de pantalla del comentario que pidio el juego
+                       (leida en voz alta como cold-open) antes de revelar el
+                       nombre en la Portada. Aprobado con Luis 2026-08-15.
   01 PORTADA        - SOLO "RESEÑA RETROTARRISTICA" + titulo del juego. NUNCA
                        el nombre del presentador (se identifica hablando).
   02 FICHA TECNICA  - box art + consola/anio/developer/genero + EN COLECCION.
@@ -87,9 +92,35 @@ def _ficha_cart(data: dict) -> str:
     )
 
 
-def _slide_portada(num: int, data: dict) -> str:
+def _slide_pedido(num: int, data: dict) -> str:
+    """Slide 00 opcional -- cold-open con la captura del comentario que pidio
+    el juego, leida en voz alta antes de revelar el nombre en la Portada
+    (regla Luis 2026-08-15: el reveal va al INICIO, no despues del veredicto,
+    porque ahi ya se dijo/mostro el nombre todo el video y pierde el gancho)."""
+    pedido = data["pedido"]
+    key = pedido.get("img_key") or f'{data.get("img_key") or _slug(data["juego"])}-pedido'
+    img_path = REPO / "studio" / "resenas" / "img" / "resenas" / f"{key}.png"
+    img_html = (
+        f'<img class="ped-shot" src="img/resenas/{key}.png" alt="" onerror="this.style.display=\'none\'">'
+        if img_path.exists() else ""
+    )
+    cta = _esc(pedido.get("cta") or "Y eso hicimos.")
     return (
         f'<section class="slide active"><span class="slide-num">{num:02d}</span>'
+        '<div class="pedido">'
+        '<div class="ped-tag">NOS LO PIDIERON</div>'
+        f'{img_html}'
+        f'<div class="ped-cta">{cta}</div>'
+        '</div>'
+        f'{_notas(data.get("notas", {}).get("pedido"))}'
+        '</section>'
+    )
+
+
+def _slide_portada(num: int, data: dict, active: bool = True) -> str:
+    cls = "slide active" if active else "slide"
+    return (
+        f'<section class="{cls}"><span class="slide-num">{num:02d}</span>'
         '<div class="portada">'
         '<div class="ep-tag">RESEÑA RETROTARRISTICA</div>'
         f'<div class="ep-title">{_esc(data["juego"]).upper()}</div>'
@@ -235,6 +266,12 @@ header{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;background:rg
 .portada .ep-title{font-family:'Orbitron';font-weight:900;font-size:90px;line-height:1;color:#fff;margin-bottom:20px}
 .portada .ep-sub{font-family:'Share Tech Mono';font-size:25px;color:var(--ye);letter-spacing:2px;max-width:1100px}
 
+/* PEDIDO (00, opcional -- captura del comentario que pidio el juego) */
+.pedido{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:28px}
+.pedido .ped-tag{font-family:'Press Start 2P';font-size:15px;color:var(--cy);letter-spacing:5px}
+.pedido .ped-shot{max-width:820px;max-height:440px;width:auto;height:auto;border-radius:14px;border:2px solid rgba(255,255,255,.25);box-shadow:0 22px 60px rgba(0,0,0,.7)}
+.pedido .ped-cta{font-family:'Orbitron';font-weight:900;font-size:38px;color:var(--ye)}
+
 /* FICHA TECNICA -- columna de la caja con ancho dinamico (minmax) para que
    quepan bien tanto cajas verticales (3:4, la mayoria NTSC) como horizontales
    (algunas ediciones/plataformas) sin comprimirse (regla Luis 2026-07-29) */
@@ -366,12 +403,20 @@ go(0);
 
 
 def generar_resena(data: dict, out_slug: str) -> Path:
-    slides = [
-        _slide_portada(1, data),
-        _slide_ficha(2, data),
-        _slide_contexto(3, data),
-    ]
-    num, ch = 4, 1
+    slides = []
+    num = 1
+    if data.get("pedido"):
+        slides.append(_slide_pedido(num, data))
+        num += 1
+        slides.append(_slide_portada(num, data, active=False))
+    else:
+        slides.append(_slide_portada(num, data))
+    num += 1
+    slides.append(_slide_ficha(num, data))
+    num += 1
+    slides.append(_slide_contexto(num, data))
+    num += 1
+    ch = 1
     # Slide COMPARATIVA: obligatorio en toda resena (regla Luis 2026-07-26).
     # El titulo es SIEMPRE "COMPARATIVA", agnostico sin importar que se compare
     # (arcade vs puerto, original vs secuela, etc). SIN dato/texto en el slide --
