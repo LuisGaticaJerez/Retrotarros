@@ -19,6 +19,13 @@ autorizado por defecto).
 
 Box art / fotos en studio/retronotas/img/<slug>/<key>.jpg. Salida en
 studio/retronotas/<slug>.html (carpeta aparte, mismo patron que Resenas).
+
+Cada bloque tipo "contenido" puede llevar `tv: True` en vez de (o ademas de,
+con prioridad sobre) `img_key` -- muestra un TarroVision (mismo componente que
+Resena/Special) con placeholder "NO SIGNAL / Inserta video/gameplay aqui",
+para insertar en edicion clips reales relacionados al dato (video de archivo,
+gameplay, entrevista, etc) en vez de dejar el slide solo con texto. Pedido de
+Luis 2026-08-17 tras ver el primer borrador del formato.
 """
 from __future__ import annotations
 from pathlib import Path
@@ -67,11 +74,30 @@ header{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;background:rg
 .contenido-titulo{font-family:'Orbitron';font-weight:900;font-size:38px;color:#fff;line-height:1.1}
 .contenido-body{flex:1;display:grid;grid-template-columns:1fr;gap:32px;align-items:center;min-height:0}
 .contenido-body.con-img{grid-template-columns:1fr 46%}
+.contenido-body.con-tv{grid-template-columns:1fr 48%}
 .contenido-texto-wrap{display:flex;flex-direction:column;justify-content:center;min-height:0;height:100%;overflow-y:auto;max-width:1500px;margin:0 auto;width:100%}
 .contenido-texto{font-family:'Share Tech Mono';font-size:22px;line-height:1.65;color:rgba(255,255,255,.9);background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:26px 30px}
 .contenido-img-wrap{display:flex;align-items:center;justify-content:center;height:100%;min-height:0}
 .contenido-img-wrap img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:10px;border:2px solid rgba(255,255,255,.18);box-shadow:0 18px 50px rgba(0,0,0,.6)}
 .contenido-fuente{font-family:'Share Tech Mono';font-size:13px;color:rgba(255,255,255,.4);letter-spacing:1px;margin-top:14px;text-align:right}
+
+.contenido-tv-wrap{display:flex;align-items:center;justify-content:center;height:100%;width:100%;min-height:0;container-type:size}
+.tarrovision{width:min(100cqh,100cqw);height:min(100cqh,100cqw);max-width:100%;max-height:100%;background:linear-gradient(180deg,#1a1a1f 0,#0d0d12 100%);border-radius:22px;padding:18px 22px;box-shadow:0 0 0 2px rgba(255,255,255,.04),0 18px 50px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08),inset 0 -2px 0 rgba(0,0,0,.4);display:grid;grid-template-rows:auto 1fr auto;gap:10px}
+.tv-controls-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 4px}
+.tv-led{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ff8fb8 0,var(--mg) 60%,#7a0030 100%);box-shadow:0 0 10px rgba(255,46,136,.8),inset 0 0 2px rgba(0,0,0,.5)}
+.tv-brand{flex:1;text-align:center;font-family:'Press Start 2P';font-size:10px;color:var(--ye);letter-spacing:3px;text-shadow:0 0 8px rgba(255,210,63,.4)}
+.tv-channel{font-family:'Share Tech Mono';font-size:11px;color:var(--cy);letter-spacing:2px;padding:3px 9px;border:1px solid rgba(0,229,255,.4);background:rgba(0,229,255,.06)}
+.tv-screen{position:relative;background:#2a2a2f;border-radius:12px;padding:14px;box-shadow:inset 0 0 0 2px #3a3a3f,inset 0 0 14px rgba(0,0,0,.6);min-height:0}
+.tv-screen-inner{position:relative;width:100%;height:100%;background:#000;border-radius:16px/8px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),inset 0 0 40px rgba(0,0,0,.95)}
+.tv-screen-inner::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.18) 2px,rgba(0,0,0,.18) 3px);z-index:3;mix-blend-mode:multiply}
+.tv-noscreen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 50%,rgba(45,27,105,.6) 0,#000 80%);color:rgba(255,255,255,.35);text-align:center;padding:24px;z-index:2}
+.tv-noscreen-big{font-family:'Press Start 2P';font-size:14px;color:var(--mg);letter-spacing:3px;margin-bottom:10px;text-shadow:0 0 12px rgba(255,46,136,.5)}
+.tv-noscreen-sub{font-family:'Share Tech Mono';font-size:11px;letter-spacing:2px;color:rgba(0,229,255,.55)}
+.tv-controls-bottom{display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:12px;padding:2px 4px 0}
+.tv-knob{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#5a5a60 0,#2a2a30 60%,#0a0a0e 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.15),inset 0 -2px 0 rgba(0,0,0,.4),0 2px 4px rgba(0,0,0,.6);position:relative}
+.tv-knob::after{content:"";position:absolute;top:5px;left:50%;width:2px;height:9px;background:var(--ye);transform-origin:bottom center;transform:translateX(-50%) rotate(45deg);box-shadow:0 0 4px rgba(255,210,63,.6)}
+.tv-knob.cy::after{background:var(--cy);box-shadow:0 0 4px rgba(0,229,255,.6);transform:translateX(-50%) rotate(-30deg)}
+.tv-speaker{height:22px;background:repeating-linear-gradient(90deg,#0a0a0e 0,#0a0a0e 3px,#1a1a1f 3px,#1a1a1f 6px);border-radius:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),inset 0 -1px 0 rgba(0,0,0,.6)}
 
 .divider{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 .divider .pre{font-family:'Press Start 2P';font-size:13px;color:var(--cy);letter-spacing:5px;margin-bottom:20px}
@@ -127,11 +153,25 @@ def _slide_capitulo(num: int, bloque: dict) -> str:
     )
 
 
-def _slide_contenido(num: int, bloque: dict, out_slug: str) -> str:
+def _tv(ch: int) -> str:
+    return (
+        '<div class="tarrovision">'
+        f'<div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH {ch:02d}</span></div>'
+        '<div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen">'
+        '<div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta video/gameplay aqui</div></div></div></div>'
+        '<div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>'
+        '</div>'
+    )
+
+
+def _slide_contenido(num: int, bloque: dict, out_slug: str, ch: int) -> str:
     img_key = bloque.get("img_key")
     img_html = ""
     body_class = "contenido-body"
-    if img_key:
+    if bloque.get("tv"):
+        img_html = f'<div class="contenido-tv-wrap">{_tv(ch)}</div>'
+        body_class += " con-tv"
+    elif img_key:
         img_dir = REPO / "studio" / "retronotas" / "img" / out_slug
         ext = None
         for e in ("jpg", "png"):
@@ -182,6 +222,7 @@ def _slide_divider(num: int, pre: str, titulo: str, texto: str) -> str:
 
 def generar_retronota(data: dict, out_slug: str) -> Path:
     num = 1
+    ch = 1
     slides = [_slide_portada(num, data)]
     num += 1
     for bloque in data["bloques"]:
@@ -189,7 +230,9 @@ def generar_retronota(data: dict, out_slug: str) -> Path:
         if tipo == "capitulo":
             slides.append(_slide_capitulo(num, bloque))
         elif tipo == "contenido":
-            slides.append(_slide_contenido(num, bloque, out_slug))
+            slides.append(_slide_contenido(num, bloque, out_slug, ch))
+            if bloque.get("tv"):
+                ch += 1
         num += 1
     ci = data["cierre"]
     slides.append(_slide_divider(num, ci.get("pre", "CIERRE"), ci["titulo"], ci["texto"]))
