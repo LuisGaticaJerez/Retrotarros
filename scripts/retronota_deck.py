@@ -26,6 +26,13 @@ Resena/Special) con placeholder "NO SIGNAL / Inserta video/gameplay aqui",
 para insertar en edicion clips reales relacionados al dato (video de archivo,
 gameplay, entrevista, etc) en vez de dejar el slide solo con texto. Pedido de
 Luis 2026-08-17 tras ver el primer borrador del formato.
+
+Bloque tipo "panorama": TarroVision a pantalla casi completa, SIN bloque de
+texto largo al lado -- solo un titulo corto arriba. Pensado para paneos
+generales (locacion, publico, ambiente) donde la imagen/video debe ocupar
+la mayor parte de la pantalla en vez de competir con un parrafo de texto.
+Distinto del TV de "contenido" (que va al 48% del ancho, al lado del texto).
+Pedido de Luis 2026-08-17, mismo dia que el TV de contenido.
 """
 from __future__ import annotations
 from pathlib import Path
@@ -98,6 +105,13 @@ header{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;background:rg
 .tv-knob::after{content:"";position:absolute;top:5px;left:50%;width:2px;height:9px;background:var(--ye);transform-origin:bottom center;transform:translateX(-50%) rotate(45deg);box-shadow:0 0 4px rgba(255,210,63,.6)}
 .tv-knob.cy::after{background:var(--cy);box-shadow:0 0 4px rgba(0,229,255,.6);transform:translateX(-50%) rotate(-30deg)}
 .tv-speaker{height:22px;background:repeating-linear-gradient(90deg,#0a0a0e 0,#0a0a0e 3px,#1a1a1f 3px,#1a1a1f 6px);border-radius:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),inset 0 -1px 0 rgba(0,0,0,.6)}
+
+.panorama{flex:1;display:flex;flex-direction:column;padding-top:6px;min-height:0}
+.panorama-head{text-align:center;flex:none;margin-bottom:16px}
+.panorama-cap{font-family:'Press Start 2P';font-size:10px;color:var(--cy);letter-spacing:3px;margin-bottom:8px}
+.panorama-titulo{font-family:'Orbitron';font-weight:900;font-size:42px;color:#fff;line-height:1.1}
+.panorama-tv-wrap{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;container-type:size}
+.panorama-tv-wrap .tarrovision{width:min(100cqh,100cqw);height:min(100cqh,100cqw)}
 
 .divider{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 .divider .pre{font-family:'Press Start 2P';font-size:13px;color:var(--cy);letter-spacing:5px;margin-bottom:20px}
@@ -209,6 +223,19 @@ def _slide_contenido(num: int, bloque: dict, out_slug: str, ch: int) -> str:
     )
 
 
+def _slide_panorama(num: int, bloque: dict, ch: int) -> str:
+    return (
+        f'<section class="slide"><span class="slide-num">{num:02d}</span>'
+        '<div class="panorama">'
+        '<div class="panorama-head">'
+        f'<div class="panorama-cap">CAPITULO {bloque["cap_num"]} · {_esc(bloque["cap_nombre"]).upper()}</div>'
+        f'<div class="panorama-titulo">{_esc(bloque["titulo"]).upper()}</div>'
+        '</div>'
+        f'<div class="panorama-tv-wrap">{_tv(ch)}</div>'
+        '</div></section>'
+    )
+
+
 def _slide_divider(num: int, pre: str, titulo: str, texto: str) -> str:
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
@@ -233,6 +260,9 @@ def generar_retronota(data: dict, out_slug: str) -> Path:
             slides.append(_slide_contenido(num, bloque, out_slug, ch))
             if bloque.get("tv"):
                 ch += 1
+        elif tipo == "panorama":
+            slides.append(_slide_panorama(num, bloque, ch))
+            ch += 1
         num += 1
     ci = data["cierre"]
     slides.append(_slide_divider(num, ci.get("pre", "CIERRE"), ci["titulo"], ci["texto"]))
