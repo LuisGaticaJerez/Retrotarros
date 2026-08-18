@@ -33,6 +33,15 @@ generales (locacion, publico, ambiente) donde la imagen/video debe ocupar
 la mayor parte de la pantalla en vez de competir con un parrafo de texto.
 Distinto del TV de "contenido" (que va al 48% del ancho, al lado del texto).
 Pedido de Luis 2026-08-17, mismo dia que el TV de contenido.
+
+Capa de notas (tecla N / boton / hotzone) copiada 1:1 del patron de
+Resena/episodios SEGA -- no reinventar. Cualquier bloque (capitulo, contenido,
+panorama) o el cierre puede llevar `"notas": {"titulo":.., "lineas":[...],
+"cue": "..."}`. Las notas dan MAS informacion de la que aparece en pantalla
+(anecdotas, cifras extra, angulos alternativos, cue de transicion), nunca
+repiten el texto visible. NUNCA aparecen en las capturas (capture-slides.py
+ya fuerza read-mode off antes de capturar, generico para todo el estudio).
+Pedido de Luis 2026-08-17: "para tener mas que hablar en camara".
 """
 from __future__ import annotations
 from pathlib import Path
@@ -118,6 +127,21 @@ header{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;background:rg
 .divider .title{font-family:'Orbitron';font-weight:900;font-size:60px;color:#fff;line-height:1.05;margin-bottom:20px;text-shadow:0 0 22px rgba(0,229,255,.4)}
 .divider .sub{font-family:'Share Tech Mono';font-size:20px;color:rgba(255,255,255,.75);letter-spacing:1px;max-width:950px;line-height:1.6}
 
+.notas{position:absolute;top:0;right:0;width:460px;height:100%;z-index:150;display:none;flex-direction:column;gap:10px;padding:26px 22px 30px;overflow-y:auto;background:linear-gradient(90deg,rgba(6,3,15,.55) 0%,rgba(6,3,15,.96) 26%);border-left:2px solid var(--ye);backdrop-filter:blur(2px)}
+body.read-mode .slide.active .notas{display:flex}
+.notas h4{font-family:'Press Start 2P';font-size:10px;color:var(--ye);letter-spacing:2px;margin-top:4px}
+.notas h4:first-child{margin-top:0}
+.notas .n-line{font-family:'Share Tech Mono';font-size:16.7px;line-height:1.5;color:rgba(255,255,255,.92);border-left:3px solid var(--cy);padding:3px 0 3px 11px}
+.notas .n-cue{border-left-color:var(--mg);color:var(--ye)}
+.notas .n-cue b{color:#fff}
+.read-indicator{position:fixed;top:64px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:9px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;box-shadow:0 0 14px rgba(255,210,63,.5)}
+body.read-mode .read-indicator{display:block}
+.notas-hotzone{position:fixed;bottom:0;right:0;width:230px;height:150px;z-index:299}
+.notas-toggle{position:fixed;bottom:74px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:10px;letter-spacing:1px;color:var(--ye);background:rgba(6,3,15,.92);border:2px solid var(--ye);padding:10px 14px;border-radius:4px;cursor:pointer;box-shadow:0 0 14px rgba(255,210,63,.3);transition:opacity .2s,background .15s,color .15s;opacity:0}
+.notas-hotzone:hover ~ .notas-toggle,.notas-toggle:hover{opacity:1}
+.notas-toggle:hover{background:var(--ye);color:#000}
+body.read-mode .notas-toggle{opacity:1;background:var(--ye);color:#000;box-shadow:0 0 18px rgba(255,210,63,.6)}
+
 nav.footer{position:fixed;bottom:0;left:0;right:0;height:64px;background:rgba(6,3,15,.97);border-top:2px solid var(--cy);display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:200}
 .nav-btn{background:transparent;border:2px solid var(--cy);color:var(--cy);font-family:'Press Start 2P';font-size:9px;padding:10px 18px;letter-spacing:2px;cursor:pointer;border-radius:2px}
 .nav-btn:disabled{opacity:.25}
@@ -140,9 +164,25 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowLeft'){e.preventDefault();go(current-1)}
   if(e.key==='Home'){go(0)}
   if(e.key==='End'){go(total-1)}
+  if(e.key==='n'||e.key==='N'){toggleRead()}
 });
+function toggleRead(){document.body.classList.toggle('read-mode')}
+document.getElementById('notasToggle').addEventListener('click',toggleRead);
 go(0);
 """
+
+
+def _notas(bloque: dict | None) -> str:
+    """<aside class="notas"> por slide. bloque = {'titulo':.., 'lineas':[...], 'cue': '...'}
+    Copiado 1:1 del patron de Resena/episodios SEGA -- no reinventar. Las notas dan
+    MAS informacion de la que aparece en pantalla (anecdotas, cifras extra, angulos
+    alternativos), nunca repiten el texto visible."""
+    if not bloque:
+        return ""
+    titulo = _esc(bloque.get("titulo", "NOTAS"))
+    lineas = "".join(f'<div class="n-line">{_esc(t)}</div>' for t in bloque.get("lineas", []))
+    cue = f'<div class="n-cue">{_esc(bloque["cue"])}</div>' if bloque.get("cue") else ""
+    return f'<aside class="notas"><h4>{titulo}</h4>{lineas}{cue}</aside>'
 
 
 def _slide_portada(num: int, data: dict) -> str:
@@ -152,7 +192,9 @@ def _slide_portada(num: int, data: dict) -> str:
         '<div class="rn-tag">RETRONOTA</div>'
         f'<div class="rn-title">{_esc(data["titulo"]).upper()}</div>'
         f'<div class="rn-sub">{_esc(data["subtitulo"])}</div>'
-        '</div></section>'
+        '</div>'
+        f'{_notas(data.get("notas_portada"))}'
+        '</section>'
     )
 
 
@@ -163,7 +205,9 @@ def _slide_capitulo(num: int, bloque: dict) -> str:
         f'<div class="cap-num">CAPITULO {bloque["cap_num"]}</div>'
         f'<div class="cap-titulo">{_esc(bloque["titulo"]).upper()}</div>'
         f'<div class="cap-texto">{_esc(bloque["texto"])}</div>'
-        '</div></section>'
+        '</div>'
+        f'{_notas(bloque.get("notas"))}'
+        '</section>'
     )
 
 
@@ -219,7 +263,9 @@ def _slide_contenido(num: int, bloque: dict, out_slug: str, ch: int) -> str:
         f'{fuente_html}'
         '</div>'
         f'{img_html}'
-        '</div></div></section>'
+        '</div></div>'
+        f'{_notas(bloque.get("notas"))}'
+        '</section>'
     )
 
 
@@ -232,18 +278,22 @@ def _slide_panorama(num: int, bloque: dict, ch: int) -> str:
         f'<div class="panorama-titulo">{_esc(bloque["titulo"]).upper()}</div>'
         '</div>'
         f'<div class="panorama-tv-wrap">{_tv(ch)}</div>'
-        '</div></section>'
+        '</div>'
+        f'{_notas(bloque.get("notas"))}'
+        '</section>'
     )
 
 
-def _slide_divider(num: int, pre: str, titulo: str, texto: str) -> str:
+def _slide_divider(num: int, pre: str, titulo: str, texto: str, notas: dict | None = None) -> str:
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
         '<div class="divider">'
         f'<div class="pre">{_esc(pre).upper()}</div>'
         f'<div class="title">{_esc(titulo).upper()}</div>'
         f'<div class="sub">{_esc(texto)}</div>'
-        '</div></section>'
+        '</div>'
+        f'{_notas(notas)}'
+        '</section>'
     )
 
 
@@ -265,13 +315,16 @@ def generar_retronota(data: dict, out_slug: str) -> Path:
             ch += 1
         num += 1
     ci = data["cierre"]
-    slides.append(_slide_divider(num, ci.get("pre", "CIERRE"), ci["titulo"], ci["texto"]))
+    slides.append(_slide_divider(num, ci.get("pre", "CIERRE"), ci["titulo"], ci["texto"], ci.get("notas")))
 
     html = (
         '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
         f'<title>RETROTARROS · RETRONOTA · {_esc(data["titulo"]).upper()}</title>'
         f'<style>{CSS}</style></head><body>'
+        '<div class="read-indicator no-capture">● MODO LECTURA (N)</div>'
+        '<div class="notas-hotzone no-capture"></div>'
+        '<button class="notas-toggle no-capture" id="notasToggle">📖 NOTAS (N)</button>'
         '<header><div class="hdr-logo">RETROTARROS</div>'
         f'<div class="hdr-tag">RETRONOTA · {_esc(data.get("header_tag", data["titulo"])).upper()}</div>'
         '<div class="hdr-rec"><div class="dot"></div>EN VIVO</div></header>'
