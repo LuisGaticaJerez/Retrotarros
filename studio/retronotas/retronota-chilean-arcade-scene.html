@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>RETROTARROS · RETRONOTA · LA ESCENA ARCADE CHILENA</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root{--mg:#FF2E88;--cy:#00E5FF;--ye:#FFD23F;--dk:#06030f;--bo:#F5F0E8;--gr:#2ECC71;--rd:#FF4D4D}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:var(--dk);font-family:'Share Tech Mono',monospace;color:var(--bo)}
+body{background-image:radial-gradient(ellipse 100% 50% at 50% -5%,rgba(255,46,136,.12) 0,transparent 65%),repeating-linear-gradient(0deg,transparent 0 39px,rgba(255,255,255,.014) 39px 40px),repeating-linear-gradient(90deg,transparent 0 39px,rgba(255,255,255,.014) 39px 40px)}
+header{position:fixed;top:0;left:0;right:0;height:56px;z-index:200;background:rgba(6,3,15,.97);border-bottom:2px solid var(--mg);display:flex;align-items:center;justify-content:space-between;padding:0 28px}
+.hdr-logo{font-family:'Orbitron';font-weight:900;font-size:20px;color:var(--mg);text-shadow:0 0 14px rgba(255,46,136,.6);letter-spacing:3px}
+.hdr-tag{font-family:'Share Tech Mono';font-size:12px;color:var(--ye);letter-spacing:3px}
+.hdr-rec{display:flex;align-items:center;gap:8px;font-family:'Press Start 2P';font-size:8px;color:var(--mg)}
+.dot{width:10px;height:10px;background:var(--mg);border-radius:50%;animation:blink 1.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+.deck{position:fixed;top:56px;left:0;right:0;bottom:64px;overflow:hidden}
+.slide{position:absolute;inset:0;padding:28px 56px;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .22s;display:flex;flex-direction:column}
+.slide.active{opacity:1;pointer-events:auto}
+.slide-num{position:absolute;top:16px;right:24px;font-family:'Press Start 2P';font-size:9px;color:rgba(255,255,255,.22);letter-spacing:2px}
+
+.portada{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.portada .rn-tag{font-family:'Press Start 2P';font-size:13px;color:var(--cy);letter-spacing:6px;margin-bottom:22px}
+.portada .rn-title{font-family:'Orbitron';font-weight:900;font-size:58px;line-height:1.1;color:#fff;margin-bottom:20px;max-width:1300px}
+.portada .rn-sub{font-family:'Share Tech Mono';font-size:20px;color:var(--ye);letter-spacing:2px;max-width:1000px}
+
+.capitulo{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px}
+.capitulo .cap-num{font-family:'Orbitron';font-weight:900;font-size:26px;color:var(--mg);letter-spacing:4px}
+.capitulo .cap-titulo{font-family:'Orbitron';font-weight:900;font-size:60px;color:#fff;line-height:1.05;max-width:1200px;text-shadow:0 0 22px rgba(255,46,136,.4)}
+.capitulo .cap-texto{font-family:'Share Tech Mono';font-size:21px;color:rgba(255,255,255,.8);letter-spacing:1px;max-width:950px;line-height:1.6}
+
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:'Press Start 2P';font-size:11px;letter-spacing:2px;padding:8px 16px;border-radius:4px;margin-bottom:18px;align-self:flex-start}
+.badge.verificado{color:#0a2e18;background:var(--gr);box-shadow:0 0 16px rgba(46,204,113,.5)}
+.badge.mito{color:#3a0a0a;background:var(--rd);box-shadow:0 0 16px rgba(255,77,77,.5)}
+
+.contenido{flex:1;display:flex;flex-direction:column;padding-top:6px;min-height:0}
+.contenido-head{text-align:center;flex:none;margin-bottom:18px}
+.contenido-cap{font-family:'Press Start 2P';font-size:10px;color:var(--cy);letter-spacing:3px;margin-bottom:8px}
+.contenido-titulo{font-family:'Orbitron';font-weight:900;font-size:38px;color:#fff;line-height:1.1}
+.contenido-body{flex:1;display:grid;grid-template-columns:1fr;gap:32px;align-items:center;min-height:0}
+.contenido-body.con-img{grid-template-columns:1fr 46%}
+.contenido-texto-wrap{display:flex;flex-direction:column;justify-content:center;min-height:0;height:100%;overflow-y:auto;max-width:1500px;margin:0 auto;width:100%}
+.contenido-texto{font-family:'Share Tech Mono';font-size:22px;line-height:1.65;color:rgba(255,255,255,.9);background:rgba(255,255,255,.04);border-left:4px solid var(--cy);padding:26px 30px}
+.contenido-img-wrap{display:flex;align-items:center;justify-content:center;height:100%;min-height:0}
+.contenido-img-wrap img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:10px;border:2px solid rgba(255,255,255,.18);box-shadow:0 18px 50px rgba(0,0,0,.6)}
+.contenido-fuente{font-family:'Share Tech Mono';font-size:13px;color:rgba(255,255,255,.4);letter-spacing:1px;margin-top:14px;text-align:right}
+
+.divider{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.divider .pre{font-family:'Press Start 2P';font-size:13px;color:var(--cy);letter-spacing:5px;margin-bottom:20px}
+.divider .title{font-family:'Orbitron';font-weight:900;font-size:60px;color:#fff;line-height:1.05;margin-bottom:20px;text-shadow:0 0 22px rgba(0,229,255,.4)}
+.divider .sub{font-family:'Share Tech Mono';font-size:20px;color:rgba(255,255,255,.75);letter-spacing:1px;max-width:950px;line-height:1.6}
+
+nav.footer{position:fixed;bottom:0;left:0;right:0;height:64px;background:rgba(6,3,15,.97);border-top:2px solid var(--cy);display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:200}
+.nav-btn{background:transparent;border:2px solid var(--cy);color:var(--cy);font-family:'Press Start 2P';font-size:9px;padding:10px 18px;letter-spacing:2px;cursor:pointer;border-radius:2px}
+.nav-btn:disabled{opacity:.25}
+.nav-center{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;margin:0 24px}
+.nav-counter{font-family:'Press Start 2P';font-size:10px;color:var(--mg);letter-spacing:3px}
+.nav-progress{width:100%;max-width:480px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+.nav-progress .bar{height:100%;background:linear-gradient(90deg,var(--mg),var(--cy));width:0;transition:width .25s}
+.nav-hint{font-family:'Share Tech Mono';font-size:11px;color:rgba(255,255,255,.4);letter-spacing:2px}
+</style></head><body><header><div class="hdr-logo">RETROTARROS</div><div class="hdr-tag">RETRONOTA · ESCENA ARCADE CHILENA</div><div class="hdr-rec"><div class="dot"></div>EN VIVO</div></header><div class="deck" id="deck">
+<section class="slide active"><span class="slide-num">01</span><div class="portada"><div class="rn-tag">RETRONOTA</div><div class="rn-title">LA ESCENA ARCADE CHILENA</div><div class="rn-sub">El local que lleva 90 años, el programa de TV que jugabas por telefono, y el documental que lo rescato</div></div></section>
+<section class="slide"><span class="slide-num">02</span><div class="capitulo"><div class="cap-num">CAPITULO 1</div><div class="cap-titulo">EL GANCHO</div><div class="cap-texto">En pleno centro de Santiago, a pasos de La Moneda, hay un local que lleva casi NOVENTA años entreteniendo generaciones. Y no, no empezo con videojuegos -empezo con un rifle de tiro al blanco en 1934.</div></div></section>
+<section class="slide"><span class="slide-num">03</span><div class="contenido"><div class="contenido-head"><div class="contenido-cap">CAPITULO 1 · EL GANCHO</div><div class="contenido-titulo">ENTRETENIMIENTOS DIANA: EL SOBREVIVIENTE</div></div><div class="contenido-body"><div class="contenido-texto-wrap"><div class="badge verificado">✔ HECHO VERIFICADO</div><div class="contenido-texto">Fundado en 1934 por Roberto Zuñiga Peñailillo, el local nacio con un pequeño juego de tiro al blanco -el nombre 'Diana' viene de un rifle de marca alemana que le cayo en las manos por casualidad. Noventa años despues, sigue funcionando en pleno centro de Santiago, hoy en Merced 839, con mas de 100 maquinas: arcades, pinballs y simuladores. Fue de los primeros locales en traer 'Videos Simuladores' a Chile.</div><div class="contenido-fuente">Fuente: diana.cl/historia, Diario Usach</div></div></div></div></section>
+<section class="slide"><span class="slide-num">04</span><div class="capitulo"><div class="cap-num">CAPITULO 2</div><div class="cap-titulo">POR QUE CHILE TUVO SU PROPIA ESCENA</div><div class="cap-texto">El boom arcade chileno de los 90 no fue un fenomeno aislado -fue parte de como llegaba la tecnologia a la region en esa epoca.</div></div></section>
+<section class="slide"><span class="slide-num">05</span><div class="contenido"><div class="contenido-head"><div class="contenido-cap">CAPITULO 2 · POR QUE CHILE TUVO SU PROPIA ESCENA</div><div class="contenido-titulo">SIN OPERACION OFICIAL FUERTE HASTA LOS 90</div></div><div class="contenido-body"><div class="contenido-texto-wrap"><div class="badge verificado">✔ HECHO VERIFICADO</div><div class="contenido-texto">Durante los 80 y buena parte de los 90, Nintendo y Sega no tenian una operacion comercial fuerte y directa en Sudamerica -dependian de importadores y distribuidores regionales. Un hito concreto: la revista oficial Club Nintendo recien se publico para Argentina y Chile desde septiembre de 1992. Antes de eso, el acceso a novedades, arcades y consolas dependia mucho mas del boca a boca y de locales como Diana que de una campaña oficial de marketing.</div><div class="contenido-fuente">Fuente: Tarreo, registros de la revista Club Nintendo</div></div></div></div></section>
+<section class="slide"><span class="slide-num">06</span><div class="capitulo"><div class="cap-num">CAPITULO 3</div><div class="cap-titulo">LA ESCENA EN SU MOMENTO DE ORO</div><div class="cap-texto">Salas arcade en cada esquina, y hasta un programa de TV que te dejaba jugar Sega sin salir de tu casa.</div></div></section>
+<section class="slide"><span class="slide-num">07</span><div class="contenido"><div class="contenido-head"><div class="contenido-cap">CAPITULO 3 · LA ESCENA EN SU MOMENTO DE ORO</div><div class="contenido-titulo">ARCADES EN TODO CHILE, NO SOLO SANTIAGO</div></div><div class="contenido-body"><div class="contenido-texto-wrap"><div class="badge verificado">✔ HECHO VERIFICADO</div><div class="contenido-texto">Durante los 90, practicamente cualquier ciudad chilena tenia su sala arcade -desde el centro de Santiago hasta ciudades como Calama. El modelo de negocio era simple: monedas, una tras otra, hasta que con los años empezaron a aparecer las tarjetas precargadas. En paralelo, videoclubs tipo Blockbuster se sumaron como canal de acceso a juegos de consola -arrendar el titulo que querias no siempre era facil, la demanda superaba la oferta de copias.</div><div class="contenido-fuente">Fuente: SrDato, La Tercera</div></div></div></div></section>
+<section class="slide"><span class="slide-num">08</span><div class="contenido"><div class="contenido-head"><div class="contenido-cap">CAPITULO 3 · LA ESCENA EN SU MOMENTO DE ORO</div><div class="contenido-titulo">SEGACCION: JUGABAS SEGA POR TELEFONO</div></div><div class="contenido-body"><div class="contenido-texto-wrap"><div class="badge verificado">✔ HECHO VERIFICADO</div><div class="contenido-texto">Entre la segunda mitad de 1995 y la primera mitad de 1996, Megavision transmitio Segaccion, programa infantil conducido por Jennifer Warner -su primer trabajo en TV-. La dinamica: espectadores competian jugando titulos de Sega Genesis EN VIVO desde su casa, controlando el juego con los botones de su telefono. Fue parte de una ola de dos canales chilenos que apostaron por captar audiencia infantil de las tardes con concursos basados en videojuegos.</div><div class="contenido-fuente">Fuente: Wikipedia (Jennifer Warner), Canal Preto, Logopedia</div></div></div></div></section>
+<section class="slide"><span class="slide-num">09</span><div class="capitulo"><div class="cap-num">CAPITULO 4</div><div class="cap-titulo">EL LEGADO</div><div class="cap-texto">Quien se encargo de que esta historia no se perdiera del todo -y por que el local sigue ahi.</div></div></section>
+<section class="slide"><span class="slide-num">10</span><div class="contenido"><div class="contenido-head"><div class="contenido-cap">CAPITULO 4 · EL LEGADO</div><div class="contenido-titulo">CHILE GAME: LA TESIS QUE SE VOLVIO DOCUMENTAL</div></div><div class="contenido-body"><div class="contenido-texto-wrap"><div class="badge verificado">✔ HECHO VERIFICADO</div><div class="contenido-texto">En 2013, el periodista Daniel Madrid -que antes habia estudiado cine- presento 'Chile Game' como su tesis de titulacion: un documental nostalgico que reconstruye la historia de los videojuegos en el pais, desde las maquinas arcade y el Atari hasta las primeras Sega y NES. Fue de los primeros esfuerzos serios por dejar registro de esta escena antes de que la memoria oral se perdiera.</div><div class="contenido-fuente">Fuente: BioBioChile, Tarreo</div></div></div></div></section>
+<section class="slide"><span class="slide-num">11</span><div class="contenido"><div class="contenido-head"><div class="contenido-cap">CAPITULO 4 · EL LEGADO</div><div class="contenido-titulo">DIANA SIGUE AHI, Y NO ESTA SOLA</div></div><div class="contenido-body"><div class="contenido-texto-wrap"><div class="badge verificado">✔ HECHO VERIFICADO</div><div class="contenido-texto">Entretenimientos Diana cumplio 90 años todavia recibiendo publico en el centro de Santiago. Hoy convive con salas mas nuevas como Dream Match, tambien en el centro, que mantienen vivo el habito de ir a jugar fuera de casa. La escena arcade chilena nunca desaparecio del todo -solo se hizo mas chica y mas nostalgica.</div><div class="contenido-fuente">Fuente: Meteored, La Nacion</div></div></div></div></section>
+<section class="slide"><span class="slide-num">12</span><div class="divider"><div class="pre">CIERRE</div><div class="title">NOVENTA AÑOS Y CONTANDO</div><div class="sub">De un rifle de tiro al blanco en 1934 a una tesis de periodismo en 2013, la escena arcade chilena tiene mas historia de la que parece -solo que casi nadie se habia puesto a contarla completa. ¿Fuiste a Entretenimientos Diana alguna vez? ¿Viste Segaccion? Contanos en los comentarios.</div></div></section>
+</div><nav class="footer"><button class="nav-btn" id="prevBtn">◀ ANTERIOR</button><div class="nav-center"><div class="nav-counter" id="counter">01 / 01</div><div class="nav-progress"><div class="bar" id="bar"></div></div></div><div class="nav-hint">← → NAVEGAR</div><button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button></nav><script>
+const slides=document.querySelectorAll('.slide');const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');const counter=document.getElementById('counter');const bar=document.getElementById('bar');
+let current=0;const total=slides.length;function pad(n){return String(n).padStart(2,'0')}
+function go(i){if(i<0||i>=total)return;slides[current].classList.remove('active');current=i;slides[current].classList.add('active');
+prevBtn.disabled=current===0;nextBtn.disabled=current===total-1;counter.textContent=pad(current+1)+' / '+pad(total);bar.style.width=((current+1)/total*100)+'%'}
+prevBtn.addEventListener('click',()=>go(current-1));nextBtn.addEventListener('click',()=>go(current+1));
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(current+1)}
+  if(e.key==='ArrowLeft'){e.preventDefault();go(current-1)}
+  if(e.key==='Home'){go(0)}
+  if(e.key==='End'){go(total-1)}
+});
+go(0);
+</script></body></html>
