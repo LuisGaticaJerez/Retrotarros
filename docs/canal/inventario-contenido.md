@@ -2,131 +2,125 @@
 
 > Qué tipos de video hace el canal y qué assets tenemos para cada uno. A diferencia de
 > `docs/canal/formatos.md` (estructura de producción: bloques, tiempos) y `docs/canal/estrategia.md`
-> (documento maestro), este doc está **grounded en las playlists reales de YouTube**
-> (`@Retrotarros`), no solo en lo que hay armado en el repo — la vez pasada armamos una
-> lista solo desde `studio/` y salió incompleta (faltó "Abriendo el tarro" completo, y no
-> reflejaba cuánto está realmente publicado vs. solo armado). Revisar el canal antes de
-> asumir que este doc sigue vigente — se desactualiza rápido.
+> (documento maestro), este doc está **grounded en las playlists/pestaña Videos reales de
+> YouTube** (`@Retrotarros`), no solo en lo que hay armado en el repo.
 >
-> **Última verificación contra YouTube: 2026-07-21.** Canal: 603 suscriptores, 41 videos.
+> **Última verificación contra YouTube: 2026-08-20** (canal, pestaña Videos, extraído del
+> JSON interno `ytInitialData` — 1.26 K suscriptores, 55 videos totales incluyendo shorts).
+> La sección 1 (capítulos largos) fue reconstruida completa esta fecha. La sección 2
+> (shorts) sigue con la última verificación de 2026-07-21 — no se reauditó esta vez.
 
 ## Cómo leer esto
 
-- **Publicado** = está subido a YouTube, en una playlist real.
-- **Armado** = HTML + pauta listos en el repo (`studio/`, `docs/pautas/pauta-*.md`), no subido todavía.
-- **Pendiente** = solo formato/idea definida, sin asset armado.
+- **Publicado** = está subido a YouTube ahora mismo (verificado en vivo).
+- **Programado** = tiene fecha de estreno fijada en YouTube Studio (fuente: captura de
+  pantalla de la pestaña "Contenido → Programado" que Luis compartió 2026-08-20).
+- **Armado** = HTML + pauta + descripción listos en el repo, sin fecha asignada todavía —
+  es el backlog real, lo que se puede programar en cualquier momento.
+- **Sin armar** = solo formato/idea definida, cero asset.
 
 ---
 
-## 1. Episodios largos
+## 1. Episodios largos (capítulos)
 
-### Rankings — playlist activa, 9 episodios publicados
+### 1.0 Resumen
 
-Top Mundial (crítica) + Top Precios (mercado) por consola. Es la playlist que más se
-actualiza y el formato ancla del canal.
+| Categoría | Armados | Publicados | Programados | Backlog sin fecha |
+|---|---:|---:|---:|---:|
+| Reseñas | 32 | 8 | 7 | 17 |
+| Rankings (Top Mundial + Top Precios, 10 consolas) | 20 | 10 | 1 | 9 |
+| Sagas de videojuegos | 12 | 1 | 0 | 11 |
+| Specials | 5 | 2 | 0 | 3 |
+| Curaduría N64-only | 5 | 0 | 0 | 5 |
+| RetroNotas | 2 | 0 | 0 | 2 |
+| Colecciones | 4 | 4 | 0 | 0 |
+| **TOTAL** | **80** | **25** | **8** | **47** |
 
-| Consola | Top Mundial | Top Precios |
-|---|---|---|
-| Master System | ✓ Publicado | ✓ Publicado |
-| Mega Drive | ✓ Publicado | Armado, sin subir |
-| NES | ✓ Publicado | ✓ Publicado |
-| SNES | ✓ Publicado | ✓ Publicado |
-| N64 | ✓ Publicado (EP03) | ✓ Publicado (EP04) |
-| Dreamcast | Armado, sin subir | Armado, sin subir |
-| Saturn | Armado, sin subir | Armado, sin subir |
-| PS Vita | Armado, sin subir | Armado, sin subir |
+Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
+invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
+superadas, playlist muerta, no cuentan como activo). 25 + 8 + 1 + 2 = 36 de los 28 videos
+"largos" reales del canal — los G-OLD y Abriendo el Tarro están dentro de esos 28
+publicados totales verificados en YouTube; los 8 programados todavía no cuentan como
+publicados.
 
-**Backlog: 7 episodios armados esperando subir** (Mega Drive precios, Dreamcast x2, Saturn x2, PS Vita x2).
+---
 
-### Colecciones RetroTarros — playlist, 4 videos, **al día**
+### 1.1 Programados (8) — fuente: captura YouTube Studio (2026-08-20) + fecha agregada por Luis
 
-PS Vita, NES, N64, SNES. Los 4 armados en el repo (`studio/*-coleccion.html`) están
-publicados — sin backlog acá.
+| Fecha | Título | Slug | Categoría |
+|---|---|---|---|
+| 20 ago 2026 | Zombies Ate My Neighbors: ¿envejeció bien el shooter de LucasArts? | `resena-zombies-ate-my-neighbors` | Reseña |
+| 23 ago 2026 | Atari 2600: el Top 10 mundial según la crítica | `atari-2600-top-mundial` | Ranking |
+| 25 ago 2026 | Yoshi estuvo 5 años esperando este juego para nacer (Super Mario World) | `resena-super-mario-world` | Reseña |
+| 27 ago 2026 | El juego que Sega inspiró en las películas de Conan (Golden Axe) | `resena-golden-axe` | Reseña |
+| 1 sept 2026 | El juego que Capcom no le tenía Fe (Street Fighter II) | `resena-street-fighter-ii` | Reseña |
+| 4 sept 2026 | Chrono Trigger: el RPG de un viaje de 4 días entre 3 leyendas | `resena-chrono-trigger` | Reseña |
+| 8 sept 2026 | Top Gear: el juego de carreras que creció con toda Latinoamérica | `resena-top-gear` | Reseña |
+| 10 sept 2026 | Pokémon Rojo y Azul: la versión que jugaste NO es la que creías | `resena-pokemon-red-blue` | Reseña |
 
-### Sagas de videojuegos — playlist, 1 video publicado, **11 armadas sin subir**
+**Nota:** Zombies Ate My Neighbors figura programado para HOY (20 ago) en la captura, pero
+al verificar el canal en vivo todavía no aparece publicado — sigue en cola.
 
-Solo Zelda está arriba. Armadas y listas: Donkey Kong, Kirby, Mario, Mega Man, Metal
-Gear, Metroid, Mortal Kombat, Resident Evil, Smash Bros, Sonic, Street Fighter (11).
-Generador: `scripts/saga_deck.py`. **Es el mayor backlog de publicación del canal.**
+---
 
-### Specials — playlist, 2 videos publicados, 2 armados sin subir
+### 1.2 Publicados (25 + Abriendo el Tarro + 2 G-OLD)
 
-Publicados: Día del Padre (`retro-padres-gamer`), Glorias Navales (`retro-glorias-navales`).
-Armados sin subir: Cuadrilla del Frío (`retro-cuadrilla-frio`), Día del Trabajador
-(`retro-dia-trabajador`). Multi-consola, top 10 temático atado a fecha chilena.
+**Reseñas (8):** Donkey Kong Country, Kirby's Adventure, Killer Instinct, Mega Man 2,
+Mortal Kombat, Pitfall: The Mayan Adventure, Super Mario Bros. 3, Super Metroid.
 
-### Abriendo el tarro — playlist activa, se actualiza seguido
+**Rankings (10):** Master System Top Mundial + Top Precios, Mega Drive Top Mundial, NES
+Top Mundial + Top Precios, SNES Top Mundial + Top Precios, N64 Top Mundial + Top Precios,
+PS Vita Top Mundial.
 
-Entrevista a un **coleccionista invitado** (no Luis/Koko) mostrando su colección propia
-— puede ser de lo que sea, no solo videojuegos ("Los tesoros numismáticos de Arturo").
-No sigue el molde de pauta operativa de los otros formatos porque depende de lo que
-traiga el invitado. Assets:
-- `docs/abriendo-el-tarro/kit-coleccionista-abriendo-el-tarro.md` — kit que se manda al invitado (qué esperar, preguntas guía).
-- `docs/abriendo-el-tarro/abriendo-el-tarro-google-form.gs` — formulario de levantamiento de datos del invitado.
-- `studio/_template-abriendo-el-tarro.html` — template de monitor de estudio para este formato.
+**Sagas (1):** Zelda.
 
-**Este formato no estaba documentado en `CLAUDE.md`** — corregido en este mismo commit.
+**Specials (2):** Día del Padre (`retro-padres-gamer`), Mes del Mar / Glorias Navales
+(`retro-glorias-navales`).
 
-### G-OLD — playlist archivada, no se alimenta más
+**Colecciones (4, al día):** N64, SNES, NES, PS Vita.
 
-"EP01 Colección RetroTarros N64" y "EP02 Ranking Retrotarros vs el mundo N64": versiones
-**viejas/superadas** de lo que hoy es el formato Colecciones (el segundo, "Retrotarros vs
-el mundo", fue discontinuado del todo el 2026-08-11 — ver nota más abajo).
-Se dejaron archivadas como playlist separada en vez de borrarlas. No production activa acá.
+**Abriendo el tarro (1):** Los tesoros numismáticos de Arturo.
 
-### Curaduría N64-only — armados, sin playlist propia todavía
+**G-OLD archivado (2, discontinuado, no se repite):** "Coleccion RetroTarros N64" y
+"Ranking Retrotarros vs el mundo N64" — versiones viejas de los primeros pasos del canal.
 
-`n64-hardware-raro`, `n64-joyas-ocultas`, `n64-kirkhope-rare` (biográfico compositor),
-`n64-nintendo-vs-playstation` (contexto histórico), `n64-no-latam` (regional). 5 episodios
-armados y cerrados para grabar (ver `docs/arcos/n64.md`), **ninguno publicado, y no está
-decidido en qué playlist van a caer** cuando se suban (¿Specials? ¿playlist nueva por
-tipo?). **Pendiente de decidir con Luis.**
+---
 
-### Retrotarros vs Mundo / Archivo Koko — DISCONTINUADOS (2026-08-11)
+### 1.3 Backlog armado — listo para programar, sin fecha (48)
 
-Ambos formatos fueron eliminados del canal por decisión de Luis: `n64-retrotarros-vs-mundo`,
-`psvita-retrotarros-vs-mundo`, `n64-archivo-koko`, `psvita-archivo-koko`. Todo su contenido
-(pautas, discusiones, descripciones, HTML, imágenes, capturas) se borró del repo y del
-Drive. **No se vuelven a producir** — ver regla en `CLAUDE.md`.
+**Reseñas (17):** Aladdin, Altered Beast, Battletoads, Contra, Crash Bandicoot, Earthbound,
+Earthworm Jim, Fatal Fury, Final Fight, International Superstar Soccer, King of Fighters '94,
+Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star Fox,
+Yoshi's Island.
 
-### Indie Lat — solo formato, sin ningún asset
+**Rankings (9):** Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
+Top Precios, Saturn Top Mundial + Top Precios, Atari 2600 Top Precios, Game Boy Top
+Mundial + Top Precios (recién armados 2026-08-20).
 
-Entrevistas a devs indie latinoamericanos. Descrito en `docs/canal/formatos.md` y
-`docs/canal/estrategia.md`, **cero episodios armados o grabados**.
+**Sagas (11):** Donkey Kong, Kirby, Mario, Mega Man, Metal Gear, Metroid, Mortal Kombat,
+Resident Evil, Smash Bros, Sonic, Street Fighter. **Sigue siendo el mayor backlog del
+canal en volumen** (11 de 12 sin publicar).
 
-### Musical / OST en batería — solo formato, sin asset
+**Specials (3):** Cuadrilla del Frío (`retro-cuadrilla-frio`), Día del Trabajador
+(`retro-dia-trabajador`), Día del Gato (`retro-dia-del-gato`).
 
-Koko interpreta el tema icónico de una generación en batería. Sembrado como idea
-(`n64-ost-bateria` en `docs/arcos/n64.md`), sin pauta ni HTML armados.
+**Curaduría N64-only (5):** Hardware Raro, Joyas Ocultas, Kirkhope Rare (biográfico
+compositor), Nintendo vs PlayStation, No-Latam. **Sigue sin playlist de destino
+asignada** (pendiente de decidir con Luis — ver sección 4).
 
-### Reseñas — playlist NUEVA (pendiente crear en YouTube), 5 armadas
-
-Un juego por video, ángulo retrospectivo ("¿envejeció bien?"), máximo 10 min, talento
-alterna Luis/Koko 1 y 1, nunca cierra con batería. Diseño completo en
-`docs/superpowers/specs/2026-07-21-resena-format-design.md`. Generador:
-`scripts/resena_deck.py`. Salida en `studio/resenas/<slug>.html` (carpeta aparte, no la
-raíz plana de `studio/` como el resto de formatos).
-
-**Primera tanda armada (0 publicadas):** Super Mario Bros. 3 (NES), Sonic the Hedgehog 2
-(Mega Drive), Killer Instinct Gold (N64), Mortal Kombat (SNES), Donkey Kong Country
-(SNES). **Pendiente:** crear la playlist "Reseñas" en YouTube Studio (no se puede crear
-por API/Claude).
+**RetroNotas (2):** Lost Localizations, Chilean Arcade Scene. Formato nuevo (agosto 2026),
+0 publicadas todavía — sin playlist propia definida.
 
 ---
 
 ## 2. Shorts (9:16)
 
-> Corrección 2026-07-21: el primer barrido de la pestaña Shorts del canal quedó cortado
-> por límites de scroll del navegador automatizado (solo cargó 5 de 22). Los números de
-> abajo salen de leer `ytInitialData` (`shortsLockupViewModel`) directo del JSON interno
-> de la página, que sí trae el listado completo. Si se vuelve a auditar esto, no confiar
-> en un scroll simple — extraer del JSON embebido.
+> **Sin reauditar en esta pasada (2026-08-20).** Datos de la última verificación,
+> 2026-07-21 — pueden estar desactualizados; el canal pasó de 41 a 55 videos totales en un
+> mes, así que hay shorts nuevos sin contar acá. Reauditar del JSON `ytInitialData` de la
+> pestaña Shorts cuando se necesite el número real.
 
 ### TarroShorts (pipeline HTML + render automático)
-
-Narrados por TarroBot (voz edge-tts), armados con `scripts/tarroshort_render.py` +
-generadores (`tarroshort_datos.py`, o a mano siguiendo el molde `item-tag` — ver
-`docs/modus-operandi/convenciones-tarroshorts.md`).
 
 | Sub-tipo | Armados | Publicados | Backlog |
 |---|---:|---:|---:|
@@ -150,48 +144,46 @@ generadores (`tarroshort_datos.py`, o a mano siguiendo el molde `item-tag` — v
 
 5 publicados: "Generaciones Nintendo en sus controles", "controles N64", "Pequeña
 colección de consolas de Nintendo 64", "La mujer que inventó los videojuegos", "El primer
-juego de plantas". Edición directa en CapCut (los de controles/colección sobre clips de
-`scripts/extract-broll.ps1`; los dos de trivia histórica parecen lane Luis grabado
-directo). Sin HTML ni narración generada — no tienen contraparte en `studio/`.
+juego de plantas". Edición directa en CapCut, sin HTML ni narración generada.
 
 ### Lane Luis / Lane Koko (guionados, sin HTML)
 
 Curiosidades históricas (Luis solo) y batería/performance (Koko solo). Documentados en
-`docs/canal/guiones-shorts.md` con guion, timings, B-roll y datos de respaldo — formato
-definido, pendiente confirmar cuántos de los shorts ya publicados corresponden a este
-molde vs. al de B-roll simple de arriba.
+`docs/canal/guiones-shorts.md`.
 
 ### TarroTeaser (no es contenido final, es insumo de edición)
 
-`scripts/tarroteaser.py` corta automáticamente un teaser crudo del video master de un
-episodio (Whisper local + ffmpeg) para que Luis lo edite en CapCut. No se publica tal
-cual — alimenta el proceso de armar el short/trailer final.
+`scripts/tarroteaser.py` corta un teaser crudo del video master para editar en CapCut. No
+se publica tal cual.
 
 ---
 
 ## 3. La brecha principal: se produce más rápido de lo que se publica
 
-- **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **la brecha más grande del canal**.
-- **Rankings:** 16 armados, 9 publicados (7 de backlog).
-- **TarroShorts:** 32 armados, 17 publicados (15 de backlog) — más sano de lo que parecía a primera vista.
-- **Episodios sin playlist asignada** (curaduría N64): 5 armados, 0 publicados.
-- **Reseñas** (playlist nueva, aún no creada en YouTube): 5 armadas, 0 publicadas.
-
-**Colecciones es la única categoría al día** (4 armadas = 4 publicadas).
+- **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **sigue siendo la brecha más
+  grande del canal**, sin cambios desde julio.
+- **Reseñas:** 32 armadas, 8 publicadas, 7 programadas (17 de backlog puro) — formato más
+  nuevo del canal y ya es el segundo backlog más grande en volumen absoluto.
+- **Rankings:** 20 armados, 10 publicados, 1 programado (9 de backlog).
+- **Curaduría N64:** 5 armados, 0 publicados — sigue sin casa en el menú de playlists.
+- **RetroNotas:** 2 armadas, 0 publicadas — formato nuevo, sin playlist propia todavía.
+- **Colecciones sigue siendo la única categoría 100% al día** (4 armadas = 4 publicadas).
 
 ## 4. Pendiente de decidir con Luis
 
 1. Playlist de destino para la curaduría N64-only (hardware-raro, joyas-ocultas,
-   kirkhope-rare, nintendo-vs-playstation, no-latam) — hoy no tiene casa en el menú de
-   playlists del canal.
-2. Ritmo de publicación del backlog de Sagas y TarroShorts — ¿calendario fijo o se suben
-   a medida que se van necesitando para el algoritmo?
-3. Si los shorts de B-roll simple (sin TarroBot) siguen siendo un formato válido aparte,
-   o fueron pruebas tempranas que ya no se repiten.
+   kirkhope-rare, nintendo-vs-playstation, no-latam) — sigue sin casa en el menú de
+   playlists del canal (arrastrado desde julio, sin resolver).
+2. Playlist de destino para RetroNotas (formato nuevo, agosto 2026) — mismo problema.
+3. Ritmo de publicación del backlog de Sagas, Reseñas y Rankings — ¿calendario fijo o se
+   suben a medida que se van necesitando para el algoritmo? El ritmo actual de
+   "Programado" en YouTube Studio (1 cada 3-4 días, casi todo Reseñas) sugiere que Reseñas
+   se está usando como la cadencia principal mientras Sagas queda estancado.
+4. Si los shorts de B-roll simple (sin TarroBot) siguen siendo un formato válido aparte.
 
 ---
 
-*Fuente: playlists reales de `youtube.com/@retrotarros` (revisadas en vivo) cruzadas con
-`studio/`, `docs/pautas/pauta-*.md` y `docs/arcos/`. Actualizar este doc cuando cambie
-significativamente lo publicado — no es una foto que se pueda dar por vigente para
-siempre.*
+*Fuente: pestaña "Videos" de `youtube.com/@Retrotarros` (JSON `ytInitialData` extraído en
+vivo, 28 videos largos totales) + captura de YouTube Studio "Programado" (Luis,
+2026-08-20) + `studio/`, `docs/pautas/pauta-*.md`, `docs/descripciones/descripcion-*.md`.
+Actualizar este doc cuando cambie significativamente lo publicado/programado.*
