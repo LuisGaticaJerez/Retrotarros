@@ -472,3 +472,14 @@ Identificar el escenario y revisar archivos relevantes antes de proponer output:
 3. **Investigar compositor** → `docs/canal/briefings-compositores.md`, agregar ficha si es nuevo.
 4. **Brainstorm tendencias** → revisar redes, traer 3–5 formatos que peguen ahora + adaptaciones al canal.
 5. **Producción** (miniaturas, banners, gráficas, HTML estudio) → respetar paleta e identidad visual en `docs/canal/identidad-visual.md`. Para HTML de estudio, basarse en `ref/Retrotarros_Referencia_Visual_N64.html`.
+
+## Reglas de eficiencia de trabajo (Luis 2026-08-20)
+
+Reglas operativas generales, tomadas de `github.com/drona23/claude-token-efficient` (revisadas antes de aplicar, adaptadas donde chocaban con reglas ya existentes del canal):
+
+- Leer archivos existentes antes de escribir. No releerlos de nuevo salvo que hayan cambiado.
+- Razonamiento exhaustivo internamente, output conciso al entregar.
+- Saltarse archivos de más de 100KB salvo que sean imprescindibles para la tarea.
+- Sin aperturas aduladoras ("¡Excelente pregunta!") ni cierres de relleno en las respuestas.
+- **Sin emojis ni guiones largos (—) en el output de código, commits y explicaciones de chat.** Esto NO reemplaza la regla de "Anti-patrones" de más arriba sobre emojis en assets públicos del canal (descripciones YouTube, captions, miniaturas) — esa sigue vigente tal cual, con moderación. Esta regla nueva aplica solo a la conversación/código/commits.
+- No asumir APIs, versiones, flags, hashes de commit o nombres de paquetes — verificar leyendo el código o la documentación antes de afirmarlo.
