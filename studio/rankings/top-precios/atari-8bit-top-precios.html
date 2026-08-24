@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · TOP 10 ATARI 800XL / 65XE PRECIOS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root {
+  --mg: #FF2E88; --cy: #00E5FF; --ye: #FFD23F; --pu: #2D1B69;
+  --bo: #F5F0E8; --dk: #06030f; --card-bg: rgba(12, 6, 32, 0.92);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6, 3, 15, 0.97); border-bottom: 2px solid var(--mg); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size:23px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size:14px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size:9px; color: var(--mg); }
+.dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 28px 44px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size:10px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size:13px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size:71px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .vs { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size:21px; color: var(--ye); letter-spacing: 4px; }
+.divider { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.divider .pre { font-family: 'Press Start 2P'; font-size:13px; letter-spacing: 6px; margin-bottom: 24px; }
+.divider .pre.cy { color: var(--cy); } .divider .pre.mg { color: var(--mg); }
+.divider .title { font-family: 'Orbitron'; font-weight: 900; font-size:90px; letter-spacing: 2px; line-height: 1; color: #fff; margin-bottom: 22px; }
+.divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
+.divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.divider .sub { font-family: 'Share Tech Mono'; font-size:21px; color: rgba(255,255,255,.7); letter-spacing: 2px; max-width: 800px; line-height: 1.6; }
+
+/* HIBRIDO */
+.slide-hybrid { display: grid; grid-template-rows: auto 1fr auto auto; height: 100%; gap: 14px; max-width: 1400px; margin: 0 auto; }
+.hybrid-head { display: flex; align-items: center; justify-content: space-between; }
+.game-pos { font-family: 'Orbitron'; font-weight: 900; font-size:74px; line-height: 1; letter-spacing: 1px; }
+.game-pos.cy { color: var(--cy); text-shadow: 0 0 20px rgba(0,229,255,.55); }
+.game-pos.mg { color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.6); }
+.game-pos .hash { font-size:32px; color: rgba(255,255,255,.35); margin-right: 4px; }
+.game-block-label { font-family: 'Press Start 2P'; font-size:10px; letter-spacing: 3px; padding: 6px 12px; border: 1px solid; }
+.game-block-label.cy { color: var(--cy); border-color: var(--cy); }
+.game-block-label.mg { color: var(--mg); border-color: var(--mg); }
+.hybrid-body { display: grid; grid-template-columns: 38% 1fr; gap: 32px; align-items: center; justify-items: center; min-height: 0; }
+.cart-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; }
+.cart { position: relative; width: min(100%, 380px); aspect-ratio: 5/4; max-height: 100%; background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%); border-radius: 12px 12px 6px 6px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08); }
+.cart::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 78%; height: 14%; background: linear-gradient(180deg, #2a2a2f 0%, #1a1a1f 100%); border-radius: 0 0 6px 6px; box-shadow: inset 0 -1px 0 rgba(0,0,0,.6); z-index: 3; }
+.cart-img-wrap { position: absolute; inset: 14% 10% 10%; border-radius: 4px; overflow: hidden; background: var(--label-1, #2D1B69); box-shadow: inset 0 0 0 3px rgba(255,255,255,.07), inset 0 0 0 6px rgba(0,0,0,.25), 0 4px 14px rgba(0,0,0,.4); }
+.cart-img-wrap img { display: block; width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 2; }
+.cart-img-wrap img.cart-img-bg { object-fit: cover; filter: blur(22px) brightness(0.55) saturate(1.2); transform: scale(1.1); z-index: 1; position: absolute; inset: 0; }
+.cart-fallback { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; background: linear-gradient(135deg, var(--label-1, #2D1B69) 0%, var(--label-2, #4a2a99) 100%); text-align: center; }
+.cart-fallback::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 22%; background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 100%); pointer-events: none; }
+.cart-fallback .title { font-family: 'Orbitron'; font-weight: 900; font-size: clamp(14px, 1.8vw, 22px); line-height: 1.05; color: #fff; letter-spacing: .5px; text-shadow: 0 2px 4px rgba(0,0,0,.5); z-index: 2; }
+.cart-fallback .sub { font-family: 'Press Start 2P'; font-size:9px; letter-spacing: 2px; color: rgba(255,255,255,.7); margin-top: 8px; z-index: 2; }
+.cart-console { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-family: 'Press Start 2P'; font-size:8px; letter-spacing: 3px; color: rgba(255,255,255,.22); z-index: 4; }
+.lb-default { --label-1:#2D1B69; --label-2:#4a2a99; }
+.lb-mario   { --label-1:#a01818; --label-2:#d62828; }
+.lb-zelda   { --label-1:#1a4a1a; --label-2:#2f7a2f; }
+.lb-rpg     { --label-1:#5a1a8a; --label-2:#8a2fc4; }
+.lb-action  { --label-1:#a01818; --label-2:#d62828; }
+.lb-metroid { --label-1:#3a1a6b; --label-2:#5a2a9b; }
+.lb-yoshi   { --label-1:#1a6b3a; --label-2:#2f9b5a; }
+.lb-dkc     { --label-1:#7a3a1a; --label-2:#b85820; }
+.lb-eb      { --label-1:#c2872f; --label-2:#e8b04a; }
+.lb-kart    { --label-1:#c25c00; --label-2:#ff8a1f; }
+.lb-fox     { --label-1:#1a2a4a; --label-2:#3a5fa0; }
+
+.tv-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; container-type: size; }
+.tarrovision { width: min(100cqh, 100cqw); height: min(100cqh, 100cqw); max-width: 100%; max-height: 100%; background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%); border-radius: 22px; padding: 18px 22px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(0,0,0,.4); display: grid; grid-template-rows: auto 1fr auto; gap: 10px; }
+.tv-controls-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px; }
+.tv-led { width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, var(--mg) 60%, #7a0030 100%); box-shadow: 0 0 10px rgba(255,46,136,.8), inset 0 0 2px rgba(0,0,0,.5); }
+.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size:12px; color: var(--ye); letter-spacing: 3px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
+.tv-channel { font-family: 'Share Tech Mono'; font-size:13px; color: var(--cy); letter-spacing: 2px; padding: 3px 9px; border: 1px solid rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
+.tv-screen { position: relative; background: #2a2a2f; border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 2px #3a3a3f, inset 0 0 14px rgba(0,0,0,.6); min-height: 0; }
+.tv-screen-inner { position: relative; width: 100%; height: 100%; background: #000; border-radius: 16px / 8px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 40px rgba(0,0,0,.95); }
+.tv-screen-inner img, .tv-screen-inner video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tv-screen-inner::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 3px); z-index: 3; mix-blend-mode: multiply; }
+.tv-screen-inner::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255,255,255,.08) 0%, transparent 55%), radial-gradient(ellipse 90% 50% at 50% 100%, rgba(0,229,255,.06) 0%, transparent 60%); z-index: 4; }
+.tv-noscreen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, rgba(45,27,105,.6) 0%, #000 80%), repeating-linear-gradient(0deg, #0a0a14 0px, #0a0a14 1px, #14142a 1px, #14142a 2px); color: rgba(255,255,255,.35); text-align: center; padding: 24px; z-index: 2; }
+.tv-noscreen .tv-noscreen-big { font-family: 'Press Start 2P'; font-size:16px; color: var(--mg); letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 12px rgba(255,46,136,.5); }
+.tv-noscreen .tv-noscreen-sub { font-family: 'Share Tech Mono'; font-size:13px; letter-spacing: 2px; color: rgba(0,229,255,.55); }
+.tv-controls-bottom { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; padding: 2px 4px 0; }
+.tv-knob { width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #5a5a60 0%, #2a2a30 60%, #0a0a0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.6); position: relative; }
+.tv-knob::after { content: ""; position: absolute; top: 5px; left: 50%; width: 2px; height: 9px; background: var(--ye); transform-origin: bottom center; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 4px rgba(255,210,63,.6); }
+.tv-knob.cy::after { background: var(--cy); box-shadow: 0 0 4px rgba(0,229,255,.6); transform: translateX(-50%) rotate(-30deg); }
+.tv-speaker { height: 22px; background: repeating-linear-gradient(90deg, #0a0a0e 0px, #0a0a0e 3px, #1a1a1f 3px, #1a1a1f 6px); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6); }
+
+.hybrid-title { text-align: center; display: flex; flex-direction: column; gap: 4px; }
+.game-title { font-family: 'Orbitron'; font-weight: 900; font-size:30px; color: #fff; letter-spacing: 1px; line-height: 1.1; }
+.game-meta { font-family: 'Share Tech Mono'; font-size:14px; color: rgba(255,255,255,.5); letter-spacing: 2px; }
+.game-why { max-width: 1200px; margin: 0 auto; padding: 12px 22px; background: rgba(255,255,255,.04); border-left: 4px solid var(--ye); font-family: 'Share Tech Mono'; font-size:16.7px; line-height: 1.55; color: rgba(255,255,255,.86); text-align: left; }
+.game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size:9px; color: var(--ye); letter-spacing: 2px; margin-bottom: 6px; }
+
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size:10px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size:12px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(255,46,136,.5); }
+.nav-hint { font-family: 'Share Tech Mono'; font-size:13px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size:13px; color: var(--ye); margin: 0 2px; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+<style>
+.game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);letter-spacing:1px;white-space:nowrap;border:3px solid var(--ye);padding:8px 18px;border-radius:6px;background:rgba(255,210,63,.07);align-self:flex-start}
+.notas{position:absolute;top:0;right:0;width:460px;height:100%;z-index:150;display:none;flex-direction:column;gap:10px;padding:26px 22px 30px;overflow-y:auto;background:linear-gradient(90deg,rgba(6,3,15,.55) 0%,rgba(6,3,15,.96) 26%);border-left:2px solid var(--ye);backdrop-filter:blur(2px)}
+body.read-mode .slide.active .notas{display:flex}
+.notas h4{font-family:'Press Start 2P';font-size:9px;color:var(--ye);letter-spacing:2px;margin-top:4px}
+.notas h4:first-child{margin-top:0}
+.notas .n-line{font-family:'Share Tech Mono';font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.92);border-left:3px solid var(--cy);padding:3px 0 3px 11px}
+.notas .n-cue{border-left-color:var(--mg);color:var(--ye)}
+.notas .n-cue b{color:#fff}
+.read-indicator{position:fixed;top:64px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:8px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;box-shadow:0 0 14px rgba(255,210,63,.5)}
+body.read-mode .read-indicator{display:block}
+.game-title{font-size:34px !important}
+.game-meta{font-size:16px !important}
+.game-why{font-size:19px !important}
+.game-why .lbl{font-size:10px !important}
+</style>
+</head>
+<body>
+<div class="read-indicator">● MODO LECTURA (N)</div>
+
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ATARI 800XL / 65XE · TOP PRECIOS</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">TOP 10 PRECIOS</div>
+      <div class="ep-title">ATARI 800XL / 65XE</div>
+      <div class="ep-sub">Los juegos de las computadoras Atari de 8 bits que hoy valen una fortuna</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="divider">
+      <div class="pre cy">CONTEXTO</div>
+      <div class="title cy">MENOS TRACKEADO, MAS SORPRESA</div>
+      <div class="sub">PriceCharting trackea apenas 150 items para toda la familia Atari de 8 bits -mucho menos que consolas mas populares. Pero justo esa poca cobertura hace que los precios reales sorprendan: nada de esto es lo que uno esperaria. Precios CIB actualizados agosto 2026, valores aproximados, nunca consejo de inversion.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 184.54</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/airball.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/airball.jpg" alt="Airball box art"></div>
+          <div class="cart-console">ATARI 800XL / 65XE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 10</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">Airball</div><div class="game-meta">ATARI 800XL / 65XE · 1988 · MICRODEAL</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Juego de pinball-plataforma de Atari XE tardio -salio casi al final de la vida comercial de la linea, tirada chica.</div>
+    </div>
+<aside class="notas"><h4>#10 · MAS DATOS</h4><div class="n-line">El jugador controla una burbuja de aire que hay que guiar por una mesa de pinball gigante -mecanica poco comun para la epoca.</div><div class="n-line">Salio en 1988, cuando Atari ya estaba enfocada en la XEGS -uno de los ultimos lanzamientos oficiales de la linea 8-bit clasica.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 192.00</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/crystal-castles.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/crystal-castles.jpg" alt="Crystal Castles box art"></div>
+          <div class="cart-console">ATARI 800XL / 65XE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 09</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">Crystal Castles</div><div class="game-meta">ATARI 800XL / 65XE · 1986 · ATARI</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Port casero del exitoso arcade de Atari -salio años despues del arcade original, tirada mas chica que otros ports de la epoca dorada.</div>
+    </div>
+<aside class="notas"><h4>#9 · MAS DATOS</h4><div class="n-line">En el arcade original (1983) Bentley Bear recolecta gemas evitando enemigos en un castillo isometrico -de los primeros juegos con joystick de 8 direcciones + boton de salto.</div><div class="n-line">El port de computadora salio recien en 1986, tres años despues del arcade -explica en parte por que hoy es mas dificil de encontrar.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 199.99</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/carnival-massacre.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/carnival-massacre.jpg" alt="Carnival Massacre box art"></div>
+          <div class="cart-console">ATARI 800XL / 65XE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 08</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">Carnival Massacre</div><div class="game-meta">ATARI 800XL / 65XE · 1983 · THORN EMI</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Juego de carnaval/montaña rusa de un publisher chico de la epoca (Thorn EMI) -tirada limitada que hoy lo vuelve dificil de encontrar completo.</div>
+    </div>
+<aside class="notas"><h4>#8 · MAS DATOS</h4><div class="n-line">Thorn EMI era una division britanica de electronica y entretenimiento -publico software de computadora de forma intermitente en los 80.</div><div class="n-line">El tema es literal: manejar una montaña rusa de carnaval mientras se evitan obstaculos y accidentes.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 200.00</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/mario-bros-atari8bit.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/mario-bros-atari8bit.jpg" alt="Mario Bros. box art"></div>
+          <div class="cart-console">ATARI 800XL / 65XE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 07</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">Mario Bros.</div><div class="game-meta">ATARI 800XL / 65XE · 1983 · ATARISOFT</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Port de Atarisoft del arcade de Nintendo -Atari tenia licencia para portear Mario Bros a sus propias plataformas, incluida la linea de computadoras.</div>
+    </div>
+<aside class="notas"><h4>#7 · MAS DATOS</h4><div class="n-line">Atarisoft fue la division de Atari dedicada a portear juegos de arcade de terceros (incluido Nintendo) a computadoras y consolas de la competencia -practica comun antes del crash de 1983.</div><div class="n-line">Es el original Mario Bros de 1983 (Mario y Luigi contra criaturas en alcantarillas), no el Super Mario Bros de NES de 1985.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 250.00</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/chopper-rescue.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/chopper-rescue.jpg" alt="Chopper Rescue box art"></div>
+          <div class="cart-console">ATARI 800XL / 65XE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 06</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">Chopper Rescue</div><div class="game-meta">ATARI 800XL / 65XE · 1982 · MICROPROSE</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Uno de los primeros juegos publicados por MicroProse -el estudio que despues se volveria sinonimo de simuladores como Civilization.</div>
+    </div>
+<aside class="notas"><h4>#6 · MAS DATOS</h4><div class="n-line">MicroProse fue fundada en 1982 por Sid Meier y Bill Stealey -Chopper Rescue es de sus primerisimos lanzamientos, antes de que la empresa se especializara en simuladores/estrategia.</div><div class="n-line">El jugador pilotea un helicoptero rescatando soldados heridos en zona de combate.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 325.00</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/captain-beeble.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/captain-beeble.jpg" alt="Captain Beeble box art"></div>
+          <div class="cart-console">ATARI 800XL / 65XE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">Captain Beeble</div><div class="game-meta">ATARI 800XL / 65XE · 1983 · INHOME SOFTWARE</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformero de nave espacial de un publisher pequeño (InHome) -de los cartuchos de 16K que menos circulan hoy en el mercado de coleccion.</div>
+    </div>
+<aside class="notas"><h4>#5 · MAS DATOS</h4><div class="n-line">La caja se anuncia como cartucho de 16K 'for all Atari home computers' -compatible con toda la familia, no solo un modelo.</div><div class="n-line">InHome Software fue un publisher de vida corta en los 80 -parte de por que este cartucho es dificil de encontrar hoy.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 516.00</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/mutant-camels.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/mutant-camels.jpg" alt="Attack of the Mutant Camels box art"></div>
+          <div class="cart-console">ATARI 800XL / 65XE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">Attack of the Mutant Camels</div><div class="game-meta">ATARI 800XL / 65XE · 1983 · LLAMASOFT</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>El shooter de camellos gigantes del legendario Jeff Minter (Llamasoft) -culto absoluto, tirada de publisher independiente.</div>
+    </div>
+<aside class="notas"><h4>#4 · MAS DATOS</h4><div class="n-line">Jeff Minter es uno de los desarrolladores independientes mas peculiares de la historia del gaming britanico -Llamasoft es su estudio, y los camellos/llamas son su firma personal en decenas de juegos.</div><div class="n-line">El jugador dispara a naves gigantes con forma de camello mientras esquiva sus ataques -parodia abierta de Star Wars (la nave enemiga recuerda al Death Star).</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 525.00</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/diamond-mine.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/diamond-mine.jpg" alt="Diamond Mine box art"></div>
+          <div class="cart-console">ATARI 800XL / 65XE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">Diamond Mine</div><div class="game-meta">ATARI 800XL / 65XE · 1985 · BLUE RIBBON</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Juego de laberinto y minado -port de un titulo britanico (originario de BBC Micro/Acorn Electron) que llego tarde y en tirada chica a Atari 8-bit.</div>
+    </div>
+<aside class="notas"><h4>#3 · MAS DATOS</h4><div class="n-line">Creado por Mike Williams, publicado originalmente por MRM Software para maquinas britanicas (BBC Micro, Acorn Electron) en 1984, y reeditado por Blue Ribbon en 1985 con ports a mas plataformas, incluida Atari 8-bit.</div><div class="n-line">Ser un port tardio de un juego pensado para el mercado britanico explica por que circulan pocas copias en el mercado norteamericano hoy.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 878.84</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/ultima-1.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/ultima-1.jpg" alt="Ultima I: The Original box art"></div>
+          <div class="cart-console">ATARI 800XL / 65XE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">Ultima I: The Original</div><div class="game-meta">ATARI 800XL / 65XE · 1986 · ORIGIN SYSTEMS</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>El primer Ultima, de Richard Garriott (Lord British) -pieza fundacional del RPG de computadora, reeditado por Origin Systems para la linea Atari 8-bit.</div>
+    </div>
+<aside class="notas"><h4>#2 · MAS DATOS</h4><div class="n-line">Ultima I salio originalmente en 1981 para Apple II -esta es la reedicion de Origin Systems ('The Original', 1986) para Atari 8-bit, ya con Origin como estudio propio de Garriott.</div><div class="n-line">Ultima es una de las sagas de RPG mas influyentes de la historia -su version de mundo abierto, progresion de personaje y combate por turnos definio buena parte del genero.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 894.24</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/alley-cat.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/alley-cat.jpg" alt="Alley Cat box art"></div>
+          <div class="cart-console">ATARI 800XL / 65XE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">Alley Cat</div><div class="game-meta">ATARI 800XL / 65XE · 1983 · SYNAPSE SOFTWARE</div></div>
+      <div class="game-why"><span class="lbl">▶ EL TRONO</span>El mismo juego que aparece en el Top Mundial -pese a venir preinstalado en muchas maquinas de fabrica, hoy es el cartucho suelto mas caro de toda la plataforma.</div>
+    </div>
+<aside class="notas"><h4>#1 · MAS DATOS</h4><div class="n-line">La paradoja: Alley Cat es de los juegos MAS jugados de toda la epoca (vino preinstalado en el firmware de varias 800XL/65XE), pero conseguir una copia FISICA completa hoy es carisimo -la mayoria de la gente nunca tuvo la caja porque el juego ya venia en la maquina.</div><div class="n-line">Diseñado por Bill Williams para Synapse Software -aparece tambien en el puesto #8 del Top Mundial.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <div class="divider">
+      <div class="pre cy">RAREZAS</div>
+      <div class="title cy">LO QUE NUNCA SE VENDIO EN TIENDA</div>
+      <div class="sub">La familia Atari 8-bit tuvo un canal unico de distribucion no-retail: el Atari Program Exchange (APX), catalogo por correo directo de Atari a los dueños registrados de la maquina (1981-1984), con tiradas bajo pedido. Muchos titulos nunca pisaron una tienda.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">APX ORIGEN</div><div class="game-price">USD 68.00</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/caverns-of-mars.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/caverns-of-mars.jpg" alt="Caverns of Mars box art"></div>
+          <div class="cart-console">ATARI 800XL / 65XE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">Caverns of Mars</div><div class="game-meta">ATARI 800XL / 65XE · 1981 · ATARI (EX-APX)</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>Empezo como venta por catalogo postal APX -de tirada limitada- antes de que Atari lo pasara a cartucho retail oficial por su exito.</div>
+    </div>
+<aside class="notas"><h4>RAREZA · MAS DATOS</h4><div class="n-line">Shooter de naves en cavernas verticales -uno de los pocos titulos APX que Atari considero lo bastante bueno como para 'graduarlo' a cartucho retail oficial.</div><div class="n-line">El resto del catalogo APX en general es mucho mas raro que esto -la mayoria de esos titulos ni siquiera tienen tracking de precio moderno porque circulan poquisimas copias.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">15</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 995.95</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/caverns-of-callisto.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/caverns-of-callisto.jpg" alt="Caverns of Callisto box art"></div>
+          <div class="cart-console">ATARI 800XL / 65XE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">Caverns of Callisto</div><div class="game-meta">ATARI 800XL / 65XE · 1983 · ORIGIN SYSTEMS</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>El segundo juego publicado por Origin Systems -el estudio de Richard Garriott- en su primer año de vida. Hoy, ridiculamente dificil de encontrar completo.</div>
+    </div>
+<aside class="notas"><h4>SANTO GRIAL · MAS DATOS</h4><div class="n-line">Escrito por Chuck 'Chuckles' Bueche -el unico cofundador de Origin Systems que no era parte del clan Garriott.</div><div class="n-line">Solo salio en Apple II y Atari 8-bit -nunca se porteo a mas plataformas, lo que limito su circulacion desde el dia uno.</div><div class="n-line">Origin Systems es el estudio que despues crearia la saga Ultima completa y, décadas mas tarde, Ultima Online -este es uno de sus primerisimos lanzamientos, casi olvidado hoy.</div><div class="n-line">Es el item mas caro de TODA la plataforma en PriceCharting -por eso cierra el episodio como santo grial en vez de ir en el top 10 numerado.</div><div class="n-cue">Aclarar en camara: no es una rareza de coleccion sellada/graduada (como el fenomeno WATA) -es simplemente un juego que casi nadie compro en su momento y casi nadie conserva hoy.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">16</span>
+    <div class="divider">
+      <div class="pre cy">ANALISIS DEL TOP</div>
+      <div class="title cy">PUBLISHERS CHICOS, TIRADAS CHICAS</div>
+      <div class="sub">El patron se repite: Origin Systems, InHome, Llamasoft, Blue Ribbon, Thorn EMI -ningun gigante como Activision o Electronic Arts aparece en el top 10. Los mas caros de Atari 8-bit no son los mas famosos, son los de publishers chicos con tiradas minimas que hoy casi no circulan. Alley Cat es la excepcion que confirma la regla: es famoso, pero casi nadie guardo la caja porque venia de fabrica.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="slide-num">17</span>
+    <div class="divider">
+      <div class="pre cy">CIERRE</div>
+      <div class="title cy">¿TENIAN ALGUNO DE ESTOS?</div>
+      <div class="sub">¿Sabian que Alley Cat era el mas caro? ¿Conocian Caverns of Callisto antes de este video? Comenten abajo. Retrotarros -Nostalgia + Juegos + Musica.</div>
+    </div>
+  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 14</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR · <kbd id="notasBtn" style="cursor:pointer" title="Mostrar/ocultar notas">N</kbd> NOTAS</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }
+});
+function setRead(on) { document.body.classList.toggle('read-mode', on); }
+if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
+const notasBtn = document.getElementById('notasBtn');
+if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
+go(0);
+</script>
+
+</body>
+</html>
