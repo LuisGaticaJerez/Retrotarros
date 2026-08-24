@@ -325,7 +325,20 @@ def generar_top(data: dict, out_slug: str) -> Path:
         "function setRead(on) { document.body.classList.toggle('read-mode', on); }\n"
         "if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);\n"
         "const notasBtn = document.getElementById('notasBtn');\n"
-        "if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));",
+        "if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));\n"
+        # Click en los costados para avanzar/retroceder (Luis 2026-08-24): en grabacion
+        # es mas rapido que buscar el teclado. Zonas en el 20% izquierdo/derecho de la
+        # pantalla -el 60% central queda libre para no interferir con click en el
+        # cartucho/texto. Excluye .notas -si el panel de lectura esta abierto (ocupa el
+        # borde derecho), hacer click ahi para leer/seleccionar texto NO debe pasar de
+        # slide.\n"
+        "const deckEl = document.getElementById('deck');\n"
+        "deckEl.addEventListener('click', (e) => {\n"
+        "  if (e.target.closest('.notas, button, a, kbd, input, textarea, select')) return;\n"
+        "  const w = window.innerWidth;\n"
+        "  if (e.clientX < w * 0.2) { go(current - 1); }\n"
+        "  else if (e.clientX > w * 0.8) { go(current + 1); }\n"
+        "});",
         1,
     )
 
