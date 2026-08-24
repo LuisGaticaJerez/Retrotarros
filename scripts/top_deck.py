@@ -236,8 +236,8 @@ def generar_top(data: dict, out_slug: str) -> Path:
         # generado con este script sin depender de editar el BASE.
         ".game-title{font-size:44px !important}\n"
         ".game-meta{font-size:19px !important}\n"
-        ".game-why{font-size:22px !important}\n"
-        ".game-why .lbl{font-size:12px !important}\n"
+        ".game-why{font-size:26px !important;line-height:1.5 !important}\n"
+        ".game-why .lbl{font-size:13px !important}\n"
         # Enfasis en el gameplay (Luis 2026-08-20, iterado en vivo sobre el episodio
         # de Atari 8-bit): el layout viejo (cart | tv lado a lado, titulo+why abajo a
         # todo el ancho, slide-hybrid limitado a 1400px de un canvas de 1920px) dejaba
