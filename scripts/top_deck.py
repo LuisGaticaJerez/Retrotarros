@@ -198,17 +198,18 @@ def _slide_divider(num: int, d: dict) -> str:
     )
 
 
-def generar_top(data: dict, out_slug: str) -> Path:
-    base = BASE.read_text(encoding="utf-8")
-    head = base[: base.index("<body>") + len("<body>")]
-    foot = base[base.index('<nav class="footer">'):]
-
+def _shared_css() -> str:
+    """CSS inyectado en todo episodio generado con generar_top(): precio grande,
+    capa de notas de lectura (teleprompter, tecla N), letras mas grandes para TV,
+    y el layout de enfasis en el gameplay. Extraida a funcion propia (Luis
+    2026-08-20) para poder reutilizarla al parchear episodios viejos que quedaron
+    con el layout anterior sin tener que regenerarlos desde cero."""
     # CSS del PRECIO grande en la esquina superior derecha (top de precios)
     # + CAPA DE NOTAS DE LECTURA (teleprompter, tecla N) -- regla obligatoria del
     # canal para HTML de ranking del formato nuevo (CLAUDE.md, patron psvita-top-mundial.html).
     # top_deck.py nunca la tuvo implementada hasta este fix (Luis 2026-08-06: "no
     # pusiste las notas" en los episodios de Atari 2600).
-    price_css = (
+    return (
         "<style>\n"
         ".game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;"
         "color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);"
@@ -261,7 +262,14 @@ def generar_top(data: dict, out_slug: str) -> Path:
         ".game-why{grid-area:why;max-width:none}\n"
         "</style>\n</head>"
     )
-    head = head.replace("</head>", price_css, 1)
+
+
+def generar_top(data: dict, out_slug: str) -> Path:
+    base = BASE.read_text(encoding="utf-8")
+    head = base[: base.index("<body>") + len("<body>")]
+    foot = base[base.index('<nav class="footer">'):]
+
+    head = head.replace("</head>", _shared_css(), 1)
     head += '\n<div class="read-indicator">● MODO LECTURA (N)</div>\n'
 
     consola = data.get("consola", "NES")
