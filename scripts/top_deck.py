@@ -234,10 +234,31 @@ def generar_top(data: dict, out_slug: str) -> Path:
         # se queda con el tamano viejo a proposito (Luis pidio no tocar NES/SNES/N64),
         # asi que el aumento se inyecta aca para que aplique a todo episodio nuevo
         # generado con este script sin depender de editar el BASE.
-        ".game-title{font-size:34px !important}\n"
-        ".game-meta{font-size:16px !important}\n"
-        ".game-why{font-size:19px !important}\n"
-        ".game-why .lbl{font-size:10px !important}\n"
+        ".game-title{font-size:44px !important}\n"
+        ".game-meta{font-size:19px !important}\n"
+        ".game-why{font-size:22px !important}\n"
+        ".game-why .lbl{font-size:12px !important}\n"
+        # Enfasis en el gameplay (Luis 2026-08-20, iterado en vivo sobre el episodio
+        # de Atari 8-bit): el layout viejo (cart | tv lado a lado, titulo+why abajo a
+        # todo el ancho, slide-hybrid limitado a 1400px de un canvas de 1920px) dejaba
+        # el TarroVision chico y con margenes muertos a los costados sin usar. Ahora:
+        # caja+titulo+why se apilan en una columna izquierda mas ancha y legible, el
+        # TarroVision ocupa toda la columna derecha (alineado arriba con la caja,
+        # llenando el alto y ancho disponibles) y el contenido usa casi todo el canvas
+        # (1400px -> 1750px). Sin forzar 16:9 en el TarroVision a proposito -gameplay
+        # grabado en 4:3 (bastante comun en Atari 8-bit) se veria distorsionado o con
+        # pilarbox exagerado dentro de un marco angosto.
+        ".hybrid-body{display:contents}\n"
+        ".slide-hybrid{max-width:1750px;grid-template-columns:32% 1fr;"
+        "grid-template-rows:auto auto auto 1fr;"
+        "grid-template-areas:\"head head\" \"cart tv\" \"title tv\" \"why tv\";gap:20px 44px}\n"
+        ".hybrid-head{grid-area:head}\n"
+        ".cart-wrap{grid-area:cart;align-self:start}\n"
+        ".cart{width:min(100%,520px)}\n"
+        ".tv-wrap{grid-area:tv;align-items:flex-start}\n"
+        ".tarrovision{width:100%;height:100%;aspect-ratio:auto;max-width:100%;max-height:100%}\n"
+        ".hybrid-title{grid-area:title;text-align:left;align-items:flex-start}\n"
+        ".game-why{grid-area:why;max-width:none}\n"
         "</style>\n</head>"
     )
     head = head.replace("</head>", price_css, 1)
