@@ -3,6 +3,8 @@
 Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos son estimados; ajustar a los tiempos del corte final.
 
 > Basado en el export previo `studio/exports/n64-top-precios-publicacion.txt` (2026-05-28, local, no versionado), convertido al formato canónico `docs/descripciones/descripcion-*.md` con tildes agregadas. **El export indica que este episodio ya fue publicado en YouTube como EP 04** ("Ranking los más caros N64") — verificar antes de re-publicar.
+>
+> **REFORGE 2026-08-24:** los precios de este video (ya publicado) se recontrastaron contra PriceCharting y varios se movieron fuerte en 3 meses — ver `docs/pautas/pauta-n64-top-precios.md` (tabla completa mayo→agosto). Si Luis quiere reflejarlo en YouTube, el ANEXO C de esa pauta trae un comentario de errata listo para postear aparte del fijado original — no reemplaza la descripción/título ya publicados.
 
 ---
 

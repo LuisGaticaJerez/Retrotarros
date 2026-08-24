@@ -1,5 +1,7 @@
 # Reunión previa con Koko — Episodio N64 Top Precios (Parte 2 de 2)
 
+> **NOTA REFORGE 2026-08-24:** este episodio ya está publicado (video grabado con los datos de mayo 2026). Este doc de reunión queda como historial de esa grabación. El HTML del estudio y la pauta operativa se recontrastaron y regeneraron con el layout nuevo — ver `pauta-n64-top-precios.md` (incluye tabla de movimientos de precio mayo→agosto y un ANEXO C con comentario de errata opcional para el video ya publicado). El slide 02 recap mencionado abajo ya no existe como slide propio — pasó a ser notas de lectura del divider.
+>
 > Documento conversacional para revisar con Koko antes de grabar/editar. **Tiempo estimado: 20-25 min.**
 >
 > Doc operativo completo: [`docs/pautas/pauta-n64-top-precios.md`](docs/pautas/pauta-n64-top-precios.md).

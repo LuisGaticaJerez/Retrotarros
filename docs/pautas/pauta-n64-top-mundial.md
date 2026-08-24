@@ -34,6 +34,8 @@ Formato de presentación visual con HTML del estudio (`studio/rankings/top-mundi
 
 ---
 
+> **REFORGE 2026-08-24:** episodio recontrastado (formato visual nuevo de enfasis en gameplay + verificacion de datos). El consenso critico se revisó contra rankings actuales (GamesRadar, game8, Ultimate Ranks) — **sin cambios**: Ocarina, Mario 64, GoldenEye y Banjo siguen top absoluto en todas las fuentes nuevas consultadas. El HTML (`studio/rankings/top-mundial/n64-top-mundial.html`) se regeneró completo con `top_deck.py` (antes era HTML a mano, formato viejo sin TarroVision).
+
 ## El Top 10 mundial — consenso crítico 2026
 
 Cruce de 5 fuentes (Nintendo Life mar 2025, GamesRadar feb 2026, Dexerto ene 2026, The Phrasemaker mar 2026, Cousin Gaming dic 2025). Los primeros 4 son consenso absoluto. Del 5 al 10 hay variación entre listas.
@@ -87,7 +89,9 @@ Plano cerrado de un cartucho N64 sobre la mesa. Luis a cámara: *"Estos son los 
 - Slide del cierre con dos cards: "EL VEREDICTO" + "PRÓXIMA SEMANA".
 - Frase fija de cierre (memorizar palabra por palabra):
 
-> *"Ese es el top que la crítica del mundo te diría que tení que jugar antes de morirte. Diez juegos, diez razones. Pero hay otro top — el del bolsillo. El que paga el mercado del coleccionismo. Y casi ninguno de estos diez aparece ahí. La próxima semana revelamos los N64 más caros del planeta. Spoiler: el más caro vale más de nueve mil dólares, y nunca lo viste en una vitrina."*
+> *"Ese es el top que la crítica del mundo te diría que tení que jugar antes de morirte. Diez juegos, diez razones. Pero hay otro top — el del bolsillo. El que paga el mercado del coleccionismo. Y casi ninguno de estos diez aparece ahí. La próxima semana revelamos los N64 más caros del planeta. Spoiler: el más caro vale más de dieciocho mil dólares, y nunca lo viste en una vitrina."*
+>
+> **Actualizado 2026-08-24:** cifra corregida de "nueve mil" a "dieciocho mil" — el valor sellado (`new`) de ClayFighter Sculptor's Cut en PriceCharting subió de US$9.199 a US$18.056 desde mayo. Ver `pauta-n64-top-precios.md`.
 
 - Outro: suscribite, dejá tu top en comentarios, nos vemos la próxima semana.
 
