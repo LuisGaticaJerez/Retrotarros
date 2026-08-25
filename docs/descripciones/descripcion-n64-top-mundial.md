@@ -4,7 +4,7 @@ Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Ca
 
 > Basado en el export previo `studio/exports/n64-top-mundial-publicacion.txt` (2026-05-28, local, no versionado), convertido al formato canónico `docs/descripciones/descripcion-*.md` con tildes agregadas.
 >
-> **REFORGE 2026-08-24:** video ya publicado, sin cambios de contenido — el consenso crítico se recontrastó y sigue igual. El HTML del estudio se regeneró con el layout nuevo de énfasis en gameplay (uso interno, no afecta lo ya publicado en YouTube).
+> **REFORGE 2026-08-24:** video ya publicado (con este título "Parte 1 de 2" — no se toca lo ya publicado en YouTube), sin cambios de contenido — el consenso crítico se recontrastó y sigue igual. El HTML del estudio se regeneró con el layout nuevo de énfasis en gameplay y se sacó el rótulo "Parte 1 de 2" del HTML/pauta: desde ahora cada episodio se regenera como capítulo independiente, sin numeración de serie (uso interno hacia adelante, no afecta lo ya publicado en YouTube).
 
 ---
 

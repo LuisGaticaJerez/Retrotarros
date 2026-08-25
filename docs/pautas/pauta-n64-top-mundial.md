@@ -4,7 +4,7 @@
 
 **Top 10 N64 Mundial — Lo que la crítica ama**
 
-*Generación 5 · Nintendo 64 · Parte 1 de 2*
+*Generación 5 · Nintendo 64*
 
 Documento de trabajo · Luis Balbrigame & Koko
 
@@ -12,11 +12,13 @@ Documento de trabajo · Luis Balbrigame & Koko
 
 ## Propósito de esta pauta
 
-Esta pauta cubre la **primera parte** del duelo ranking N64. Es un episodio sobre el top 10 de juegos según la crítica internacional: cinco rankings consultados (Nintendo Life, GamesRadar, Dexerto, The Phrasemaker, Cousin Gaming), revelados del #10 al #1 con suspenso ascendente.
+> **REFORGE 2026-08-24:** se sacó el rótulo "Parte 1 de 2" — Luis pidió que cada regeneración se trate como capítulo independiente, no como partes numeradas de una serie. El episodio sigue teniendo un cierre que teasea el top de precios (contenido relacionado natural, no una numeración forzada), pero ya no se presenta como "1 de 2".
 
-**Cierra con un cliffhanger fuerte hacia la Parte 2** — el top de precios. Esa transición es lo que trae a la audiencia al próximo episodio.
+Episodio sobre el top 10 de juegos según la crítica internacional: cinco rankings consultados (Nintendo Life, GamesRadar, Dexerto, The Phrasemaker, Cousin Gaming), revelados del #10 al #1 con suspenso ascendente.
 
-> **Nota:** este episodio se grabó originalmente junto al de precios (1 hora total). Decisión editorial: cortar en 2 partes de 18-22 min cada una. Mejor para retención en canal nuevo, mejor SEO, doble inventario en el calendario.
+**Cierra con un cliffhanger hacia el episodio de precios** — sin numerarlo como "parte 2", solo como contenido relacionado que conviene ver después.
+
+> **Nota histórica:** este episodio se grabó originalmente junto al de precios (1 hora total) y se cortó en dos videos de 18-22 min cada uno. Esa decisión de producción (grabar ambos juntos) se mantiene; lo que cambió es que ya no se presentan como partes numeradas de una serie.
 
 ---
 
@@ -25,7 +27,7 @@ Esta pauta cubre la **primera parte** del duelo ranking N64. Es un episodio sobr
 Formato de presentación visual con HTML del estudio (`studio/rankings/top-mundial/n64-top-mundial.html`):
 
 - 14 slides navegables del 01 al 14.
-- Portada con tag "PARTE 1 DE 2" para anclar la audiencia en la serie.
+- Portada sin numeración de partes — episodio independiente.
 - Separador de bloque → 10 slides de juegos del #10 al #1 → cierre con transición.
 - Koko reacciona desde su experiencia personal con cada juego.
 - Cierre fija el cliffhanger: "El mundo ama estos. Pero el mercado paga otros."
@@ -65,7 +67,7 @@ Plano cerrado de un cartucho N64 sobre la mesa. Luis a cámara: *"Estos son los 
 
 - Luis explica las 5 fuentes consultadas.
 - Aclara que vamos del #10 al #1 — suspenso ascendente.
-- Avisa que es la PARTE 1 de 2 — al final se viene el top de precios.
+- Avisa que se viene el top de precios en otro episodio (sin numerarlo como "parte 2").
 - Koko: "yo no tengo idea cómo viene el ranking, vamos a ver".
 
 ### Bloque 3 · Cuenta regresiva (1:30 – 17:00)
@@ -134,13 +136,13 @@ Plano cerrado de un cartucho N64 sobre la mesa. Luis a cámara: *"Estos son los 
 - [ ] Cartuchos físicos a la vista en mesa.
 - [ ] Cronómetro visible. ~90 seg promedio por juego.
 - [ ] Tono conversacional. NO leer los slides, USAR los slides como soporte.
-- [ ] Sembrar fuerte el episodio 2 — el cliffhanger es lo que trae audiencia al próximo.
+- [ ] Sembrar fuerte el episodio de precios — el cliffhanger es lo que trae audiencia al próximo, sin numerarlo como "parte 2".
 
 ---
 
 ## ANEXO A — Conexión con el resto del arco
 
-- **Parte 2 de 2:** `n64-top-precios` (top precios CIB + NFR + valor colección de Koko).
+- **Episodio relacionado (no numerado como serie):** `n64-top-precios` (top precios CIB + NFR + valor colección de Koko).
 - **Hermanos en el arco N64:** `n64-hardware-raro` (consolas y periféricos), `n64-no-latam` (juegos cancelados / JP only).
 - **Próximos del arco:** `n64-kirkhope-rare`, `n64-nintendo-vs-playstation`, `n64-ost-bateria`.
 - Tablero completo en `docs/arcos/n64.md`.
@@ -148,4 +150,4 @@ Plano cerrado de un cartucho N64 sobre la mesa. Luis a cámara: *"Estos son los 
 ---
 
 *RETROTARROS · pauta de episodio · documento de trabajo*
-*Gen 5 · Nintendo 64 · Top Mundial (Parte 1 de 2)*
+*Gen 5 · Nintendo 64 · Top Mundial*

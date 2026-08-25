@@ -1,6 +1,6 @@
-# Reunión previa con Koko — Episodio N64 Top Mundial (Parte 1 de 2)
+# Reunión previa con Koko — Episodio N64 Top Mundial
 
-> **NOTA REFORGE 2026-08-24:** este episodio ya está publicado. Este doc queda como historial de esa grabación. El HTML del estudio se regeneró con el layout nuevo de énfasis en gameplay y el consenso crítico se recontrastó (sin cambios de fondo) — ver `pauta-n64-top-mundial.md`.
+> **NOTA REFORGE 2026-08-24:** este episodio ya está publicado (en su momento como "Parte 1 de 2"). Este doc queda como historial de esa grabación. El HTML del estudio se regeneró con el layout nuevo de énfasis en gameplay, el consenso crítico se recontrastó (sin cambios de fondo), y se sacó el rótulo de "parte" — desde ahora cada regeneración se trata como capítulo independiente. Ver `pauta-n64-top-mundial.md`.
 >
 > Documento conversacional para revisar con Koko antes de grabar. **Tiempo estimado: 20-25 min.**
 >

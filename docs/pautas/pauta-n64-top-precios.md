@@ -4,7 +4,7 @@
 
 **Los N64 más caros del mundo — Lo que el mercado paga**
 
-*Generación 5 · Nintendo 64 · Parte 2 de 2*
+*Generación 5 · Nintendo 64*
 
 Documento de trabajo · Luis Balbrigame & Koko
 
@@ -12,11 +12,13 @@ Documento de trabajo · Luis Balbrigame & Koko
 
 ## Propósito de esta pauta
 
-Esta pauta cubre la **segunda parte** del duelo ranking N64. El episodio anterior mostró el top 10 según la crítica (Ocarina, Mario 64, Banjo, GoldenEye, etc.). Este muestra el top 10 según el mercado de coleccionismo: PriceCharting CIB USD mayo 2026. Spoiler: **casi ninguno aparece en el top mundial**.
+> **REFORGE 2026-08-24:** se sacó el rótulo "Parte 2 de 2" — Luis pidió que cada regeneración se trate como capítulo independiente, sin numeración de serie. La estructura de slides también cambió (19 slides, no 17 — ver "Concepto del episodio" abajo).
 
-Cierra con el kicker de los Not For Resale ($9.199 ClayFighter sealed, $8.500 Majora gris) y el valor total de los 10 cartuchos físicos de Koko sobre la mesa (~US$1.470).
+El episodio de top mundial mostró el top 10 según la crítica (Ocarina, Mario 64, Banjo, GoldenEye, etc.). Este muestra el top 10 según el mercado de coleccionismo: PriceCharting CIB USD. Spoiler: **casi ninguno aparece en el top mundial**.
 
-> **Nota:** este episodio se grabó originalmente junto al de mundial (1 hora total). Cortamos en 2 partes de 18-22 min cada una.
+Cierra con el kicker de los Not For Resale (Majora gris $7,100, DK64 gris $1,856, Turok 2 $1,547), el slide HOLY GRAIL (ClayFighter sealed $18,056) y el valor total de los 10 cartuchos físicos de Koko sobre la mesa (~US$1,804).
+
+> **Nota histórica:** este episodio se grabó originalmente junto al de mundial (1 hora total) y se cortó en dos videos de 18-22 min cada uno. Esa decisión de producción se mantiene; lo que cambió es que ya no se presentan como partes numeradas de una serie.
 
 ---
 
@@ -24,10 +26,10 @@ Cierra con el kicker de los Not For Resale ($9.199 ClayFighter sealed, $8.500 Ma
 
 Formato de presentación visual con HTML del estudio (`studio/rankings/top-precios/n64-top-precios.html`):
 
-- 17 slides navegables del 01 al 17.
-- Portada con tag "PARTE 2 DE 2" para anclar la continuidad.
-- **Slide 02: recap rápido del top mundial** (5×2 grid con los 10 ganadores de la crítica) — sirve a quien no vio el episodio anterior y crea callback explícito.
-- Separador top precios → 10 slides de juegos del #10 al #1 → NFR Kicker → valor colección → cierre.
+- 19 slides navegables (regenerado 2026-08-24 con `top_deck.py` — antes eran 17, HTML a mano).
+- Portada sin numeración de partes — episodio independiente.
+- **Recap del top mundial:** ya no es un slide propio (el viejo "slide 02" con grid 5×2) — ahora vive en las notas de lectura (tecla N) del divider "TOP 10 PRECIOS", para no repetir en pantalla lo que ya se vio en el otro video.
+- Separador top precios → 10 slides de juegos del #10 al #1 → NFR Kicker (divider + 3 rarezas) → HOLY GRAIL (ClayFighter sealed) → valor colección → cierre.
 - Koko reacciona en vivo a cada precio. **NO sabe los valores antes de cámara.** Las reacciones genuinas son el oro del episodio.
 
 **Duración objetivo:** 18-22 minutos.
@@ -178,13 +180,13 @@ Slide 19 (cliffhanger) con la comparación #1 crítica (Ocarina, ~$179) vs #1 me
 - [ ] Cartuchos físicos a la vista durante todo el episodio. El contraste "yo tengo esto que vale $180 vs aquel que vale $5,824" es visualmente fuerte.
 - [ ] Cronómetro visible. ~70 seg promedio por juego.
 - [ ] Memorizar la frase de cierre palabra por palabra. Es lo que la gente clipea.
-- [ ] Referenciar al episodio anterior (Parte 1) — el recap ahora vive en las notas de lectura del slide 02, no en pantalla.
+- [ ] Referenciar al episodio de top mundial (sin numerarlo como "parte 1") — el recap ahora vive en las notas de lectura del slide 02, no en pantalla.
 
 ---
 
 ## ANEXO A — Conexión con el resto del arco
 
-- **Parte 1 de 2:** `n64-top-mundial` (top mundial según la crítica).
+- **Episodio relacionado (no numerado como serie):** `n64-top-mundial` (top mundial según la crítica).
 - **Hermanos en el arco N64:** `n64-hardware-raro` (consolas y periféricos), `n64-no-latam` (juegos cancelados / JP only).
 - **Próximos del arco:** `n64-kirkhope-rare`, `n64-nintendo-vs-playstation`, `n64-ost-bateria`.
 - Tablero completo en `docs/arcos/n64.md`.
@@ -218,5 +220,5 @@ El orden del top 10 no cambió — solo los montos. Así de rápido se mueve est
 ---
 
 *RETROTARROS · pauta de episodio · documento de trabajo*
-*Gen 5 · Nintendo 64 · Top Precios (Parte 2 de 2)*
+*Gen 5 · Nintendo 64 · Top Precios*
 *Recontrastado 2026-08-24*
