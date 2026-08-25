@@ -453,6 +453,13 @@ function setRead(on) { document.body.classList.toggle('read-mode', on); }
 if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
 const notasBtn = document.getElementById('notasBtn');
 if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
+const deckEl = document.getElementById('deck');
+deckEl.addEventListener('click', (e) => {
+  if (e.target.closest('.notas, button, a, kbd, input, textarea, select')) return;
+  const w = window.innerWidth;
+  if (e.clientX < w * 0.2) { go(current - 1); }
+  else if (e.clientX > w * 0.8) { go(current + 1); }
+});
 go(0);
 </script>
 
