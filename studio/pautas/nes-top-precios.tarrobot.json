@@ -12,122 +12,122 @@
     {
       "id": "nes-top-precios-10",
       "tema": "Bucky O'Hare",
-      "texto": "Bucky O'Hare es un plataformero de Konami de 1992 basado en el comic, dificil y muy querido por los que lo jugaron. Tuvo una tirada chica, asi que hoy un completo en caja ronda los quinientos dolares.",
+      "texto": "Bucky O'Hare es un plataformero de Konami de 1992 basado en el comic, dificil y muy querido por los que lo jugaron. Tuvo una tirada chica, asi que hoy un completo en caja ronda los quinientos setenta dolares.",
       "estado": "wow",
       "consola": "NES",
       "ano": 1992,
       "editor": "Konami",
       "fuente": "pauta-manual",
-      "reaccion_short": "Bucky O'Hare, un Konami dificil y olvidado. Hoy cuesta quinientos dolares completo.",
-      "precio_short": "CIB ~USD 500"
+      "reaccion_short": "Bucky O'Hare, un Konami dificil y olvidado. Hoy cuesta mas de quinientos dolares completo.",
+      "precio_short": "CIB ~USD 573"
     },
     {
       "id": "nes-top-precios-9",
-      "tema": "Gun-Nac",
-      "texto": "Gun-Nac es un shoot'em up vertical de Compile, considerado de los mejores del NES. Llego en pocas cantidades a Estados Unidos, asi que hoy los fanaticos del genero pagan cerca de setecientos dolares por uno completo.",
-      "estado": "wow",
-      "consola": "NES",
-      "ano": 1991,
-      "editor": "ASCII",
-      "fuente": "pauta-manual",
-      "reaccion_short": "Gun-Nac, uno de los mejores shmups del NES. Setecientos dolares por la rareza.",
-      "precio_short": "CIB ~USD 700"
-    },
-    {
-      "id": "nes-top-precios-8",
-      "tema": "Snow Brothers",
-      "texto": "Snow Brothers es el port del arcade de Toaplan, un clasico de culto cooperativo. Tuvo un lanzamiento limitado en NES, asi que hoy un completo en caja supera los ochocientos dolares.",
-      "estado": "wow",
-      "consola": "NES",
-      "ano": 1991,
-      "editor": "Capcom",
-      "fuente": "pauta-manual",
-      "reaccion_short": "Snow Brothers, joya de culto cooperativa. Ochocientos dolares por la edicion NES.",
-      "precio_short": "CIB ~USD 800"
-    },
-    {
-      "id": "nes-top-precios-7",
-      "tema": "Bonk'S Adventure",
-      "texto": "Bonk's Adventure para NES salio en 1994, cuando la consola ya estaba muerta. Esa tirada minima de fin de ciclo la volvio rara: hoy un completo en caja ronda los novecientos dolares.",
-      "estado": "wow",
-      "consola": "NES",
-      "ano": 1994,
-      "editor": "Hudson",
-      "fuente": "pauta-manual",
-      "reaccion_short": "Bonk en NES salio en el 94 con la consola muerta. Por eso vale novecientos dolares.",
-      "precio_short": "CIB ~USD 900"
-    },
-    {
-      "id": "nes-top-precios-6",
       "tema": "Ducktales 2",
-      "texto": "DuckTales 2 es la secuela tardia del clasico de Capcom, lanzada en 1993 cuando casi nadie compraba NES. Por eso se hicieron pocas copias y hoy un completo en caja pasa los mil dolares.",
+      "texto": "DuckTales 2 es la secuela tardia del clasico de Capcom, lanzada en 1993 cuando casi nadie compraba NES. Por eso se hicieron pocas copias y hoy un completo en caja ronda los ochocientos treinta dolares.",
       "estado": "wow",
       "consola": "NES",
       "ano": 1993,
       "editor": "Capcom",
       "fuente": "pauta-manual",
-      "reaccion_short": "DuckTales 2 salio tan tarde que casi nadie lo compro. Hoy vale mas de mil dolares.",
-      "precio_short": "CIB ~USD 1.000"
+      "reaccion_short": "DuckTales 2 salio tan tarde que casi nadie lo compro. Hoy vale mas de ochocientos dolares.",
+      "precio_short": "CIB ~USD 830"
     },
     {
-      "id": "nes-top-precios-5",
+      "id": "nes-top-precios-8",
+      "tema": "Gun-Nac",
+      "texto": "Gun-Nac es un shoot'em up vertical de Compile, considerado de los mejores del NES. Llego en pocas cantidades a Estados Unidos, asi que hoy los fanaticos del genero pagan cerca de ochocientos cincuenta dolares por uno completo.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1991,
+      "editor": "ASCII",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Gun-Nac, uno de los mejores shmups del NES. Mas de ochocientos dolares por la rareza.",
+      "precio_short": "CIB ~USD 850"
+    },
+    {
+      "id": "nes-top-precios-7",
       "tema": "Chip 'N Dale Rescue Rangers 2",
-      "texto": "Chip 'n Dale Rescue Rangers 2 es otra secuela Disney de Capcom lanzada en el ocaso del NES, en 1994. La tirada fue minima, asi que hoy un completo en caja ronda los mil doscientos dolares.",
+      "texto": "Chip 'n Dale Rescue Rangers 2 es otra secuela Disney de Capcom lanzada en el ocaso del NES, en 1994. La tirada fue minima, asi que hoy un completo en caja ronda los novecientos cincuenta dolares.",
       "estado": "wow",
       "consola": "NES",
       "ano": 1994,
       "editor": "Capcom",
       "fuente": "pauta-manual",
-      "reaccion_short": "Rescue Rangers 2: secuela Disney de fin de ciclo. Mil doscientos dolares por la rareza.",
-      "precio_short": "CIB ~USD 1.200"
+      "reaccion_short": "Rescue Rangers 2: secuela Disney de fin de ciclo. Casi mil dolares por la rareza.",
+      "precio_short": "CIB ~USD 953"
+    },
+    {
+      "id": "nes-top-precios-6",
+      "tema": "Snow Brothers",
+      "texto": "Snow Brothers es el port del arcade de Toaplan, un clasico de culto cooperativo. Tuvo un lanzamiento limitado en NES, asi que hoy un completo en caja ronda los novecientos ochenta dolares.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1991,
+      "editor": "Capcom",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Snow Brothers, joya de culto cooperativa. Casi mil dolares por la edicion NES.",
+      "precio_short": "CIB ~USD 980"
+    },
+    {
+      "id": "nes-top-precios-5",
+      "tema": "Panic Restaurant",
+      "texto": "Panic Restaurant es un plataformero de Taito de 1992, adorable pero totalmente ignorado en su epoca. Justo por eso casi nadie lo tiene, y hoy un completo en caja supera los dos mil doscientos dolares.",
+      "estado": "wow",
+      "consola": "NES",
+      "ano": 1992,
+      "editor": "Taito",
+      "fuente": "pauta-manual",
+      "reaccion_short": "Panic Restaurant: nadie lo pesco en su momento, ahora vale mas de dos mil dolares.",
+      "precio_short": "CIB ~USD 2.203"
     },
     {
       "id": "nes-top-precios-4",
-      "tema": "Power Blade 2",
-      "texto": "Power Blade 2 es un action-platformer de Taito con vibra Mega Man, muy solido. Tuvo poca distribucion en NES, asi que hoy un completo en caja se mueve entre mil y mil trescientos dolares.",
+      "tema": "Bonk'S Adventure",
+      "texto": "Bonk's Adventure para NES salio en 1994, cuando la consola ya estaba muerta. Esa tirada minima de fin de ciclo lo volvio rarisimo: hoy un completo en caja pasa los tres mil doscientos dolares.",
       "estado": "wow",
       "consola": "NES",
-      "ano": 1992,
-      "editor": "Taito",
+      "ano": 1994,
+      "editor": "Hudson",
       "fuente": "pauta-manual",
-      "reaccion_short": "Power Blade 2, un Mega Man encubierto de Taito. Mil trescientos dolares completo.",
-      "precio_short": "CIB ~USD 1.300"
+      "reaccion_short": "Bonk en NES salio en el 94 con la consola muerta. ¡Hoy vale mas de tres mil dolares!",
+      "precio_short": "CIB ~USD 3.294"
     },
     {
       "id": "nes-top-precios-3",
-      "tema": "Panic Restaurant",
-      "texto": "Panic Restaurant es un plataformero de Taito de 1992, adorable pero totalmente ignorado en su epoca. Justo por eso casi nadie lo tiene, y hoy un completo en caja supera los mil setecientos dolares.",
+      "tema": "Power Blade 2",
+      "texto": "Power Blade 2 es un action-platformer de Taito con vibra Mega Man, muy solido. Tuvo poca distribucion en NES, asi que hoy un completo en caja pasa los tres mil setecientos dolares.",
       "estado": "wow",
       "consola": "NES",
       "ano": 1992,
       "editor": "Taito",
       "fuente": "pauta-manual",
-      "reaccion_short": "Panic Restaurant: nadie lo pesco en su momento, ahora vale mil setecientos dolares.",
-      "precio_short": "CIB ~USD 1.700"
+      "reaccion_short": "Power Blade 2, un Mega Man encubierto de Taito. ¡Casi cuatro mil dolares completo!",
+      "precio_short": "CIB ~USD 3.700"
     },
     {
       "id": "nes-top-precios-2",
       "tema": "Little Samson",
-      "texto": "Little Samson es un action-platformer buenisimo que vendio pesimo por llegar tarde al NES. Esa combinacion de calidad y rareza lo convirtio en leyenda del coleccionismo: hoy un completo en caja pasa los tres mil dolares.",
+      "texto": "Little Samson es un action-platformer buenisimo que vendio pesimo por llegar tarde al NES. Esa combinacion de calidad y rareza lo convirtio en leyenda del coleccionismo: hoy un completo en caja vale cinco mil dolares.",
       "estado": "wow",
       "consola": "NES",
       "ano": 1992,
       "editor": "Taito",
       "fuente": "pauta-manual",
-      "reaccion_short": "Little Samson: un juegazo que nadie compro. Hoy cuesta tres mil dolares completo.",
-      "precio_short": "CIB ~USD 3.000"
+      "reaccion_short": "Little Samson: un juegazo que nadie compro. ¡Hoy cuesta cinco mil dolares completo!",
+      "precio_short": "CIB ~USD 5.000"
     },
     {
       "id": "nes-top-precios-1",
       "tema": "Stadium Events",
-      "texto": "Stadium Events de Bandai es el juego retail mas caro del NES. Nintendo compro los derechos, lo retiro de tiendas y lo rebautizo World Class Track Meet, dejando poquisimas copias originales. Una sellada se remato en casi cuarenta y dos mil dolares.",
+      "texto": "Stadium Events de Bandai es el juego retail mas caro del NES. Nintendo compro los derechos, lo retiro de tiendas y lo rebautizo World Class Track Meet, dejando poquisimas copias originales. Hoy un completo en caja vale casi cuarenta mil dolares.",
       "estado": "wow",
       "consola": "NES",
       "ano": 1987,
       "editor": "Bandai",
       "fuente": "pauta-manual",
-      "reaccion_short": "¡Stadium Events, el rey retail! Una copia sellada se vendio en casi 42 mil dolares.",
-      "precio_short": "CIB ~USD 25.000"
+      "reaccion_short": "¡Stadium Events, el rey retail! Casi cuarenta mil dolares por un completo en caja.",
+      "precio_short": "CIB ~USD 39.600"
     }
   ]
 }

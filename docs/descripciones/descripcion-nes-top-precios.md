@@ -2,6 +2,8 @@
 
 Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos son estimados; ajustar a los tiempos del corte final. **Cierra el arco NES** (colección + mundial + precios).
 
+> **REFORGE 2026-08-25:** precios recontrastados contra PriceCharting — el orden del top 10 retail cambió (Bonk's Adventure y Power Blade 2 subieron al podio) y el grial (Super Mario Bros. sellado) pasó de USD 2M a USD 3M, récord roto en junio 2026. Ver `pauta-nes-top-precios.md` para la tabla completa mayo→agosto.
+
 ---
 
 ## Títulos sugeridos (elegir uno)

@@ -1,5 +1,7 @@
 # Discusion editorial · `snes-top-precios`
 
+> **NOTA REFORGE 2026-08-25:** episodio ya publicado, con los precios de mayo 2026. El HTML se regenero con el layout nuevo y precios recontrastados -el orden cambio fuerte: Aero Fighters subio al #1 (desde el #3), Earthbound bajo al #2, Wild Guns se desplomo del #2 al #6. Earthbound sigue siendo el unico cruce con `snes-top-mundial`. Ver `pauta-snes-top-precios.md` para la tabla completa mayo→agosto.
+
 > Documento de decisiones que se tomaron al armar el episodio. Lectura
 > obligatoria antes de grabar para no abrir debates resueltos.
 

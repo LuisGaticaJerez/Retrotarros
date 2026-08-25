@@ -19,36 +19,36 @@ body {
     repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
 }
 header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6, 3, 15, 0.97); border-bottom: 2px solid var(--mg); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
-.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size: 20px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
-.hdr-tag { font-family: 'Share Tech Mono'; font-size: 12px; color: var(--ye); letter-spacing: 3px; }
-.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size: 8px; color: var(--mg); }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size:23px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size:14px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size:9px; color: var(--mg); }
 .dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
 .deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
 .slide { position: absolute; inset: 0; padding: 28px 44px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .22s; }
 .slide.active { opacity: 1; pointer-events: auto; }
-.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size:10px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
 .portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
-.portada .ep-tag { font-family: 'Press Start 2P'; font-size: 11px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
-.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size: 62px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size:13px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size:71px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
 .portada .ep-title .vs { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
-.portada .ep-sub { font-family: 'Share Tech Mono'; font-size: 18px; color: var(--ye); letter-spacing: 4px; }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size:21px; color: var(--ye); letter-spacing: 4px; }
 .divider { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
-.divider .pre { font-family: 'Press Start 2P'; font-size: 11px; letter-spacing: 6px; margin-bottom: 24px; }
+.divider .pre { font-family: 'Press Start 2P'; font-size:13px; letter-spacing: 6px; margin-bottom: 24px; }
 .divider .pre.cy { color: var(--cy); } .divider .pre.mg { color: var(--mg); }
-.divider .title { font-family: 'Orbitron'; font-weight: 900; font-size: 78px; letter-spacing: 2px; line-height: 1; color: #fff; margin-bottom: 22px; }
+.divider .title { font-family: 'Orbitron'; font-weight: 900; font-size:90px; letter-spacing: 2px; line-height: 1; color: #fff; margin-bottom: 22px; }
 .divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
 .divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
-.divider .sub { font-family: 'Share Tech Mono'; font-size: 18px; color: rgba(255,255,255,.7); letter-spacing: 2px; max-width: 800px; line-height: 1.6; }
+.divider .sub { font-family: 'Share Tech Mono'; font-size:21px; color: rgba(255,255,255,.7); letter-spacing: 2px; max-width: 800px; line-height: 1.6; }
 
 /* HIBRIDO */
 .slide-hybrid { display: grid; grid-template-rows: auto 1fr auto auto; height: 100%; gap: 14px; max-width: 1400px; margin: 0 auto; }
 .hybrid-head { display: flex; align-items: center; justify-content: space-between; }
-.game-pos { font-family: 'Orbitron'; font-weight: 900; font-size: 64px; line-height: 1; letter-spacing: 1px; }
+.game-pos { font-family: 'Orbitron'; font-weight: 900; font-size:74px; line-height: 1; letter-spacing: 1px; }
 .game-pos.cy { color: var(--cy); text-shadow: 0 0 20px rgba(0,229,255,.55); }
 .game-pos.mg { color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.6); }
-.game-pos .hash { font-size: 28px; color: rgba(255,255,255,.35); margin-right: 4px; }
-.game-block-label { font-family: 'Press Start 2P'; font-size: 9px; letter-spacing: 3px; padding: 6px 12px; border: 1px solid; }
+.game-pos .hash { font-size:32px; color: rgba(255,255,255,.35); margin-right: 4px; }
+.game-block-label { font-family: 'Press Start 2P'; font-size:10px; letter-spacing: 3px; padding: 6px 12px; border: 1px solid; }
 .game-block-label.cy { color: var(--cy); border-color: var(--cy); }
 .game-block-label.mg { color: var(--mg); border-color: var(--mg); }
 .hybrid-body { display: grid; grid-template-columns: 38% 1fr; gap: 32px; align-items: center; justify-items: center; min-height: 0; }
@@ -61,8 +61,8 @@ header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200;
 .cart-fallback { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; background: linear-gradient(135deg, var(--label-1, #2D1B69) 0%, var(--label-2, #4a2a99) 100%); text-align: center; }
 .cart-fallback::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 22%; background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 100%); pointer-events: none; }
 .cart-fallback .title { font-family: 'Orbitron'; font-weight: 900; font-size: clamp(14px, 1.8vw, 22px); line-height: 1.05; color: #fff; letter-spacing: .5px; text-shadow: 0 2px 4px rgba(0,0,0,.5); z-index: 2; }
-.cart-fallback .sub { font-family: 'Press Start 2P'; font-size: 8px; letter-spacing: 2px; color: rgba(255,255,255,.7); margin-top: 8px; z-index: 2; }
-.cart-console { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-family: 'Press Start 2P'; font-size: 7px; letter-spacing: 3px; color: rgba(255,255,255,.22); z-index: 4; }
+.cart-fallback .sub { font-family: 'Press Start 2P'; font-size:9px; letter-spacing: 2px; color: rgba(255,255,255,.7); margin-top: 8px; z-index: 2; }
+.cart-console { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-family: 'Press Start 2P'; font-size:8px; letter-spacing: 3px; color: rgba(255,255,255,.22); z-index: 4; }
 .lb-default { --label-1:#2D1B69; --label-2:#4a2a99; }
 .lb-mario   { --label-1:#a01818; --label-2:#d62828; }
 .lb-zelda   { --label-1:#1a4a1a; --label-2:#2f7a2f; }
@@ -79,16 +79,16 @@ header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200;
 .tarrovision { width: min(100cqh, 100cqw); height: min(100cqh, 100cqw); max-width: 100%; max-height: 100%; background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%); border-radius: 22px; padding: 18px 22px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(0,0,0,.4); display: grid; grid-template-rows: auto 1fr auto; gap: 10px; }
 .tv-controls-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px; }
 .tv-led { width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, var(--mg) 60%, #7a0030 100%); box-shadow: 0 0 10px rgba(255,46,136,.8), inset 0 0 2px rgba(0,0,0,.5); }
-.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size: 10px; color: var(--ye); letter-spacing: 3px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
-.tv-channel { font-family: 'Share Tech Mono'; font-size: 11px; color: var(--cy); letter-spacing: 2px; padding: 3px 9px; border: 1px solid rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
+.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size:12px; color: var(--ye); letter-spacing: 3px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
+.tv-channel { font-family: 'Share Tech Mono'; font-size:13px; color: var(--cy); letter-spacing: 2px; padding: 3px 9px; border: 1px solid rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
 .tv-screen { position: relative; background: #2a2a2f; border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 2px #3a3a3f, inset 0 0 14px rgba(0,0,0,.6); min-height: 0; }
 .tv-screen-inner { position: relative; width: 100%; height: 100%; background: #000; border-radius: 16px / 8px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 40px rgba(0,0,0,.95); }
 .tv-screen-inner img, .tv-screen-inner video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .tv-screen-inner::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 3px); z-index: 3; mix-blend-mode: multiply; }
 .tv-screen-inner::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255,255,255,.08) 0%, transparent 55%), radial-gradient(ellipse 90% 50% at 50% 100%, rgba(0,229,255,.06) 0%, transparent 60%); z-index: 4; }
 .tv-noscreen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, rgba(45,27,105,.6) 0%, #000 80%), repeating-linear-gradient(0deg, #0a0a14 0px, #0a0a14 1px, #14142a 1px, #14142a 2px); color: rgba(255,255,255,.35); text-align: center; padding: 24px; z-index: 2; }
-.tv-noscreen .tv-noscreen-big { font-family: 'Press Start 2P'; font-size: 14px; color: var(--mg); letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 12px rgba(255,46,136,.5); }
-.tv-noscreen .tv-noscreen-sub { font-family: 'Share Tech Mono'; font-size: 11px; letter-spacing: 2px; color: rgba(0,229,255,.55); }
+.tv-noscreen .tv-noscreen-big { font-family: 'Press Start 2P'; font-size:16px; color: var(--mg); letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 12px rgba(255,46,136,.5); }
+.tv-noscreen .tv-noscreen-sub { font-family: 'Share Tech Mono'; font-size:13px; letter-spacing: 2px; color: rgba(0,229,255,.55); }
 .tv-controls-bottom { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; padding: 2px 4px 0; }
 .tv-knob { width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #5a5a60 0%, #2a2a30 60%, #0a0a0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.6); position: relative; }
 .tv-knob::after { content: ""; position: absolute; top: 5px; left: 50%; width: 2px; height: 9px; background: var(--ye); transform-origin: bottom center; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 4px rgba(255,210,63,.6); }
@@ -96,40 +96,54 @@ header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200;
 .tv-speaker { height: 22px; background: repeating-linear-gradient(90deg, #0a0a0e 0px, #0a0a0e 3px, #1a1a1f 3px, #1a1a1f 6px); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6); }
 
 .hybrid-title { text-align: center; display: flex; flex-direction: column; gap: 4px; }
-.game-title { font-family: 'Orbitron'; font-weight: 900; font-size: 26px; color: #fff; letter-spacing: 1px; line-height: 1.1; }
-.game-meta { font-family: 'Share Tech Mono'; font-size: 12px; color: rgba(255,255,255,.5); letter-spacing: 2px; }
-.game-why { max-width: 1200px; margin: 0 auto; padding: 12px 22px; background: rgba(255,255,255,.04); border-left: 4px solid var(--ye); font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,.86); text-align: left; }
-.game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size: 8px; color: var(--ye); letter-spacing: 2px; margin-bottom: 6px; }
+.game-title { font-family: 'Orbitron'; font-weight: 900; font-size:30px; color: #fff; letter-spacing: 1px; line-height: 1.1; }
+.game-meta { font-family: 'Share Tech Mono'; font-size:14px; color: rgba(255,255,255,.5); letter-spacing: 2px; }
+.game-why { max-width: 1200px; margin: 0 auto; padding: 12px 22px; background: rgba(255,255,255,.04); border-left: 4px solid var(--ye); font-family: 'Share Tech Mono'; font-size:16.7px; line-height: 1.55; color: rgba(255,255,255,.86); text-align: left; }
+.game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size:9px; color: var(--ye); letter-spacing: 2px; margin-bottom: 6px; }
 
 nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
-.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size: 9px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size:10px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
 .nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
 .nav-btn:disabled { opacity: .25; cursor: not-allowed; }
 .nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
-.nav-counter { font-family: 'Press Start 2P'; font-size: 10px; color: var(--mg); letter-spacing: 3px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size:12px; color: var(--mg); letter-spacing: 3px; }
 .nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
 .nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(255,46,136,.5); }
-.nav-hint { font-family: 'Share Tech Mono'; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
-.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size: 11px; color: var(--ye); margin: 0 2px; }
+.nav-hint { font-family: 'Share Tech Mono'; font-size:13px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size:13px; color: var(--ye); margin: 0 2px; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--dk); }
 ::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
-
-/* ============ CAPA DE NOTAS DE LECTURA (teleprompter) ============ */
-.notas { position: absolute; top: 0; right: 0; width: 460px; height: 100%; z-index: 150; display: none; flex-direction: column; gap: 10px; padding: 26px 22px 30px; overflow-y: auto; background: linear-gradient(90deg, rgba(6,3,15,.55) 0%, rgba(6,3,15,.96) 26%); border-left: 2px solid var(--ye); backdrop-filter: blur(2px); }
-body.read-mode .slide.active .notas { display: flex; }
-.notas h4 { font-family: 'Press Start 2P'; font-size: 9px; color: var(--ye); letter-spacing: 2px; margin-top: 4px; }
-.notas h4:first-child { margin-top: 0; }
-.notas .n-line { font-family: 'Share Tech Mono'; font-size: 14.5px; line-height: 1.5; color: rgba(255,255,255,.92); border-left: 3px solid var(--cy); padding: 3px 0 3px 11px; }
-.notas .n-cue { border-left-color: var(--mg); color: var(--ye); }
-.notas .n-cue b { color: #fff; }
-.read-indicator { position: fixed; top: 64px; right: 16px; z-index: 300; font-family: 'Press Start 2P'; font-size: 8px; color: #000; background: var(--ye); padding: 6px 10px; border-radius: 3px; display: none; box-shadow: 0 0 14px rgba(255,210,63,.5); }
-body.read-mode .read-indicator { display: block; }
+</style>
+<style>
+.game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);letter-spacing:1px;white-space:nowrap;border:3px solid var(--ye);padding:8px 18px;border-radius:6px;background:rgba(255,210,63,.07);align-self:flex-start}
+.notas{position:absolute;top:0;right:0;width:460px;height:100%;z-index:150;display:none;flex-direction:column;gap:10px;padding:26px 22px 30px;overflow-y:auto;background:linear-gradient(90deg,rgba(6,3,15,.55) 0%,rgba(6,3,15,.96) 26%);border-left:2px solid var(--ye);backdrop-filter:blur(2px)}
+body.read-mode .slide.active .notas{display:flex}
+.notas h4{font-family:'Press Start 2P';font-size:9px;color:var(--ye);letter-spacing:2px;margin-top:4px}
+.notas h4:first-child{margin-top:0}
+.notas .n-line{font-family:'Share Tech Mono';font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.92);border-left:3px solid var(--cy);padding:3px 0 3px 11px}
+.notas .n-cue{border-left-color:var(--mg);color:var(--ye)}
+.notas .n-cue b{color:#fff}
+.read-indicator{position:fixed;top:64px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:8px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;box-shadow:0 0 14px rgba(255,210,63,.5)}
+body.read-mode .read-indicator{display:block}
+.game-title{font-size:44px !important}
+.game-meta{font-size:19px !important}
+.game-why{font-size:26px !important;line-height:1.5 !important}
+.game-why .lbl{font-size:13px !important}
+.hybrid-body{display:contents}
+.slide-hybrid{max-width:1750px;grid-template-columns:40% 1fr;grid-template-rows:auto auto auto 1fr;grid-template-areas:"head head" "cart tv" "title tv" "why tv";gap:20px 44px}
+.hybrid-head{grid-area:head}
+.cart-wrap{grid-area:cart;align-self:start}
+.cart{width:min(100%,620px)}
+.tv-wrap{grid-area:tv;align-items:flex-start}
+.tarrovision{width:100%;height:100%;aspect-ratio:auto;max-width:100%;max-height:100%}
+.hybrid-title{grid-area:title;text-align:left;align-items:flex-start}
+.game-why{grid-area:why;max-width:none}
 </style>
 </head>
 <body>
-
 <div class="read-indicator">● MODO LECTURA (N)</div>
+
 
 <header>
   <div class="hdr-logo">RETROTARROS</div>
@@ -146,14 +160,7 @@ body.read-mode .read-indicator { display: block; }
       <div class="ep-title">TOP 10 <span class="vs">NES</span> MUNDIAL</div>
       <div class="ep-sub">LO QUE LA CRITICA AMA · CONSENSO 2026</div>
     </div>
-    <aside class="notas">
-      <h4>INTRO · DATOS BOMBA</h4>
-      <div class="n-line">Fuentes cruzadas: IGN, Nintendo Life, GamesRadar, Edge, Metacritic retrospectivo 2026. Los primeros 3 del top = consenso absoluto — casi ninguna lista los mueve del podio.</div>
-      <div class="n-line">La NES definio 5 generos enteros desde cero: plataformero (Mario), action-RPG (Zelda), metroidvania (Metroid), run-and-gun (Contra), puzzle-plataformero (Kirby). Una sola consola de 8 bits.</div>
-      <div class="n-line">La NES vendio 62 millones de unidades mundialmente. Rescato la industria del gaming tras el crash de 1983 — sin la NES, posiblemente no existiria la industria moderna.</div>
-      <div class="n-cue">DATO GANCHO: 6 de los 10 son first-party Nintendo puro. Konami puso 2, Capcom 1, Tecmo 1. La NES se construyo sobre exclusivos perfectos.</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>ANTES DE GRABAR</h4><div class="n-line">Audio: lavalier para ambos, prioridad uno.</div><div class="n-line">Cartuchos fisicos de los 10 juegos sobre la mesa.</div><div class="n-line">Gameplay real de al menos 1 min por juego cargado en la TarroVision antes de grabar -las notas de cada slide estan escritas para sostener ese minuto de conversacion.</div><div class="n-cue">Meta: 20-26 min totales. No apurar el podio (#3 Zelda, #2 SMB, #1 SMB3).</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">02</span>
@@ -162,12 +169,7 @@ body.read-mode .read-indicator { display: block; }
       <div class="title cy" style="font-size:78px;">DEL #10 AL #1</div>
       <div class="sub">Cruce de IGN, Nintendo Life, Edge y GamesRadar. La NES es la raiz de todo: definio generos enteros. Los primeros 3 son casi sagrados. Empezamos desde abajo.</div>
     </div>
-    <aside class="notas">
-      <h4>ANTES DE ARRANCAR</h4>
-      <div class="n-line">Ritmo: ~75 seg por slide de juego. Los del podio (#3, #2, #1) pueden tomar 90 seg — son los climax. No apurar el #1 (SMB3).</div>
-      <div class="n-cue">Angulo de entrada: "la NES tiene 40 anos y sus juegos siguen siendo referencia. ¿Por que? Porque el diseno sin relleno envejece bien."</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>METODOLOGIA · MAS DATOS</h4><div class="n-line">Recontrastado agosto 2026 contra rankings nuevos (GamesRadar, emulatorgamer Top 100, joblo) -Super Mario Bros. 3 sigue #1 sin discusion en practicamente todas las fuentes.</div><div class="n-line">Zelda y Mega Man 2 aparecen en posiciones mas altas en algunas listas nuevas -normal variacion entre fuentes, se mantiene el orden curado del canal.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">03</span>
@@ -187,14 +189,7 @@ body.read-mode .read-indicator { display: block; }
       <div class="hybrid-title"><div class="game-title">CASTLEVANIA III: DRACULA'S CURSE</div><div class="game-meta">NES · 1990 · KONAMI</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El pico de la saga en 8 bits: ramas de nivel, personajes jugables como Alucard y el chip de sonido VRC6 que sonaba imposible en NES. Dificultad brutal y diseño impecable.</div>
     </div>
-    <aside class="notas">
-      <h4>CASTLEVANIA III · DATOS EXTRA</h4>
-      <div class="n-line">El chip VRC6 era hardware extra DENTRO del cartucho — Konami lo meto adentro. Generaba 3 canales extra de sonido. La version Famicom (Japon) suena completamente distinto y superior a la NES americana. Los que jugamos la NES de USA/Chile tuvimos version con peor audio sin saberlo.</div>
-      <div class="n-line">Las rutas de nivel son reales: puedes ir por el camino norte o sur del mapa, lo que cambia que personajes desbloqueas. Alucard (hijo de Dracula) por una ruta, Grant DaNasty (acrobata) y Sypha Belnades (maga) por otras.</div>
-      <div class="n-line">Alucard aqui es un personaje secundario — el mismo Alucard que protagonizo Castlevania: Symphony of the Night (PS1, 1997), el metroidvania definitivo. Esta NES es el primer capitulo de su historia.</div>
-      <div class="n-cue">Angulo: "la version que jugamos era inferior a la japonesa — Konami tenia un chip secreto que Nintendo USA no dejo usar". Dato bomba para la discusion.</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>#10 · MAS DATOS</h4><div class="n-line">El cartucho japones (Akumajou Densetsu) traia el chip VRC6 soldado adentro -mas canales de audio que la NES base. La version USA no tiene el chip fisico, mismo audio pero recreado por el motherboard.</div><div class="n-line">Tres rutas alternativas segun el aliado que eliges: Alucard (transformacion en murcielago), Sypha (magia) o Grant (trepar paredes) -primera vez que Castlevania ofrecio recorridos distintos en la misma partida.</div><div class="n-line">Considerado por buena parte de la comunidad el Castlevania mas dificil de la era clasica -sin puntos de guardado, checkpoints duros y enemigos que empujan a los pozos de pinches.</div><div class="n-line">Salio casi al final de la vida comercial del NES (1989 en Japon, 1990 en USA) -ejemplo de un estudio exprimiendo el hardware justo antes del salto a 16 bits.</div><div class="n-cue">Cue Koko: preguntale que aliado eligio (Alucard/Sypha/Grant) y si sabia que cambiaba la ruta completa del juego.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">04</span>
@@ -214,14 +209,7 @@ body.read-mode .read-indicator { display: block; }
       <div class="hybrid-title"><div class="game-title">NINJA GAIDEN</div><div class="game-meta">NES · 1989 · TECMO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Trajo las cinematicas estilo comic a la consola y un action-platformer rapidisimo. Dificil hasta la leyenda, pero su ritmo y narrativa marcaron una era.</div>
     </div>
-    <aside class="notas">
-      <h4>NINJA GAIDEN · DATOS EXTRA</h4>
-      <div class="n-line">Las cinematicas eran paneles fijos tipo comic entre niveles — primera vez que una consola contaba una historia con ese nivel narrativo. Antes era solo texto en pantalla (si es que habia historia). NES, 1989.</div>
-      <div class="n-line">La dificultad del ultimo jefe es legendaria: si mueres en el jefe final, el juego te regresa al inicio del ACTO 6-1 (tres escenas atras), no al jefe. Genera furia real — hay videos de gente rompiendose los nervios en speedruns.</div>
-      <div class="n-line">Ryu Hayabusa (protagonista) aparecio despues en Dead or Alive (Team Ninja) como personaje secreto. La saga cambio completamente de genero (action-platformer → hack-and-slash en Xbox 2004) pero el personaje sobrevivio.</div>
-      <div class="n-cue">Angulo: "el primer juego de consola que te hace sentir que estas en una pelicula de accion — y te castiga si no sos bueno". Preguntar si Coco/Luis llegaron al final alguna vez.</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>#9 · MAS DATOS</h4><div class="n-line">Las cinematicas entre niveles usaban mas de 100 imagenes distintas -una barbaridad de memoria para un cartucho de NES, algo nunca visto en la consola hasta ese momento.</div><div class="n-line">El personaje Ryu Hayabusa via este juego se volvio la cara de Tecmo por decadas -hoy sigue protagonizando la saga Ninja Gaiden moderna en consolas actuales.</div><div class="n-line">Famoso por su dificultad injusta en el nivel 6-2 y 6-3: enemigos voladores empujan a Ryu a pozos sin fondo -uno de los tramos mas citados como 'el mas dificil del NES'.</div><div class="n-line">Tuvo dos secuelas directas en NES (Ninja Gaiden II y III) que continuaron la historia -trilogia completa en la misma consola, poco comun para la epoca.</div><div class="n-cue">Cue Koko: preguntale si llego al nivel 6-2 sin perder una vida -es el filtro clasico entre quien jugo Ninja Gaiden en serio y quien no.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">05</span>
@@ -241,14 +229,7 @@ body.read-mode .read-indicator { display: block; }
       <div class="hybrid-title"><div class="game-title">CONTRA</div><div class="game-meta">NES · 1988 · KONAMI</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El run-and-gun definitivo. Cooperativo a dos jugadores, armas iconicas y el codigo Konami mas famoso de la historia. Puro adrenalina arcade en casa.</div>
     </div>
-    <aside class="notas">
-      <h4>CONTRA · DATOS EXTRA</h4>
-      <div class="n-line">El Konami Code (↑↑↓↓←→←→BA) se popularizo en Contra — daba 30 vidas. Se convirtio en el cheat code mas famoso de la historia del gaming. Aparece como easter egg en cientos de juegos y sitios web hasta hoy.</div>
-      <div class="n-line">Los disenadores se inspiraron directamente en Alien (1979) y Predator (1987) — los enemigos finales y los disenios de nivel son referencias directas. Habia temor de problemas legales, pero Konami los diseno lo suficientemente distintos.</div>
-      <div class="n-line">La version arcade (1987) llego antes que la NES. En arcade los personajes se llamaban Bill y Lance — referencias a Bill Rizer y Lance Bean, inspirados en Arnold Schwarzenegger y Sylvester Stallone visualmente.</div>
-      <div class="n-cue">Angulo cooperativo: "el primer juego en el que dos amigos podian fracasar juntos y pasarlo bien". ¿Lo jugaron en cooperativo? Preguntar anecdota de quien se quedaba sin vidas primero.</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>#8 · MAS DATOS</h4><div class="n-line">El Konami Code (arriba arriba abajo abajo izquierda derecha izquierda derecha B A start) nacio en Gradius, pero fue Contra el que lo volvio famoso mundialmente -da 30 vidas extra.</div><div class="n-line">La version arcade original (1987) ya tenia cooperativo -Konami logro portarla a NES con graficos y velocidad casi identicos, algo poco comun en conversiones de la epoca.</div><div class="n-line">El spread gun es considerada una de las armas mas satisfactorias del NES -dispara en abanico y arrasa con pantallas enteras.</div><div class="n-line">Sin el codigo, el juego se puede terminar de una sentada solo con reflejos -pero la dificultad real (sin trampa) es brutal, sobre todo la base final.</div><div class="n-cue">Cue Koko: hagan el codigo Konami juntos a camara antes de arrancar el gameplay -es el momento mas clipeable del segmento.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">06</span>
@@ -268,15 +249,7 @@ body.read-mode .read-indicator { display: block; }
       <div class="hybrid-title"><div class="game-title">KIRBY'S ADVENTURE</div><div class="game-meta">NES · 1993 · HAL LABORATORY</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Uno de los ultimos grandes NES. Estreno la mecanica de copiar poderes de Kirby y exprimio el hardware al limite con efectos que parecian de 16 bits.</div>
     </div>
-    <aside class="notas">
-      <h4>KIRBY'S ADVENTURE · DATOS EXTRA</h4>
-      <div class="n-line">Salio en 1993 — cuando el SNES ya llevaba 3 anos en el mercado. Fue uno de los ultimos grandes exclusivos de NES. HAL Laboratory uso 6 megabytes de ROM — enorme para la consola. De ahi los efectos pseudo-3D imposibles para el hardware.</div>
-      <div class="n-line">Lo diseno Masahiro Sakurai — el mismo que creo Super Smash Bros. (1999). Tenia 21 anos cuando desarrollo Kirby's Adventure. Hoy tiene 53 anos y todavia dirige la saga Smash.</div>
-      <div class="n-line">El Kirby original de Game Boy (1992) NO tenia copiar poderes — era solo aspirar y escupir. La mecanica de copiar (24 poderes en Kirby's Adventure) nacio en este juego y se convirtio en el sello de la saga para siempre.</div>
-      <div class="n-line">Kirby en Game Boy era blanco/gris por la pantalla monocroma. Aqui, en NES a color, por primera vez se confirmo que era rosado — su look definitivo.</div>
-      <div class="n-cue">Angulo: "el ultimo gran juego de NES salio cuando la gente ya estaba con el SNES — y era MEJOR que la mayoria de los juegos del SNES de ese ano". Dato de cierre sorpresivo.</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>#7 · MAS DATOS</h4><div class="n-line">Salio en Japon y USA en 1993, cuando el SNES ya llevaba 2 años en el mercado -HAL lo diseño a proposito como el 'ultimo gran juego' de la consola vieja.</div><div class="n-line">Fue el primer juego de la saga Kirby en introducir las Copy Abilities -absorber el poder de un enemigo tragandolo. Se volvio LA mecanica que define a Kirby hasta hoy.</div><div class="n-line">Usa un chip mapper (MMC3) que le permite mas colores en pantalla y scroll mas fluido que juegos NES tempranos -por eso se ve 'mas moderno' que otros titulos de la consola.</div><div class="n-line">Masahiro Sakurai (creador de Kirby, luego Smash Bros.) trabajo en este titulo siendo todavia muy joven en HAL Laboratory.</div><div class="n-cue">Cue Koko: preguntale cual Copy Ability recuerda mas -Sword y Wheel suelen ser las favoritas de la gente que lo jugo de niño.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">07</span>
@@ -296,14 +269,7 @@ body.read-mode .read-indicator { display: block; }
       <div class="hybrid-title"><div class="game-title">PUNCH-OUT!!</div><div class="game-meta">NES · 1987 · NINTENDO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Boxeo de patrones puro: memorizar el tell de cada rival y contraatacar. Little Mac contra gigantes carismaticos. Adictivo, justo y eterno.</div>
     </div>
-    <aside class="notas">
-      <h4>PUNCH-OUT!! · DATOS EXTRA</h4>
-      <div class="n-line">Little Mac pesa 107 libras y mide 5'7 — el mas chico de todos sus rivales. La narrativa visual completa es David vs Goliat. El referee del ring de fondo es Mario — su primera aparicion como personaje secundario en otro juego.</div>
-      <div class="n-line">Los rivales son estereotipos culturales exagerados: Bald Bull (turco), King Hippo (islas ficticias), Soda Popinski (ruso — en Arcade se llamaba "Vodka Drunkenski" pero Nintendo censuro el nombre para NES), Don Flamenco (espanol).</div>
-      <div class="n-line">La version original se llamo "Mike Tyson's Punch-Out!!" (1987) porque Nintendo pago la licencia. En 1990 la licencia expiro y fue reemplazado por "Mr. Dream" — personaje inventado. La version con Tyson es la coleccionable y vale mas en el mercado.</div>
-      <div class="n-cue">Angulo: "el primer juego de boxeo que era un puzzle disfrazado — no pegas, LEES al rival". Preguntar si llegaron a Mike Tyson / Mr. Dream. Casi nadie lo termino sin guia.</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>#6 · MAS DATOS</h4><div class="n-line">La version original de NES se llamaba Mike Tyson's Punch-Out!! -Nintendo tenia licencia real de Tyson. Cuando perdio el titulo mundial en 1990, Nintendo reemplazo su cara por 'Mr. Dream' en reimpresiones.</div><div class="n-line">Little Mac es notablemente mas bajo que todos sus rivales -decision de diseño deliberada para vender la fantasia del desvalido venciendo a gigantes.</div><div class="n-line">Cada rival tiene un patron de ataque fijo y aprendible: Glass Joe es el tutorial viviente, Bald Bull tiene el temido 'Bull Charge' que hay que esquivar con timing exacto.</div><div class="n-line">El cartucho NFR (Not For Resale) mencionado en el episodio de precios usa splash art distinto -otro dato para conectar ambos episodios si Koko pregunta.</div><div class="n-cue">Cue Koko: preguntale si le toco jugar la version con Mike Tyson o la version con Mr. Dream -depende de que tan viejo era el cartucho que tuvo.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">08</span>
@@ -323,14 +289,7 @@ body.read-mode .read-indicator { display: block; }
       <div class="hybrid-title"><div class="game-title">MEGA MAN 2</div><div class="game-meta">NES · 1989 · CAPCOM</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El que perfecciono la formula: ocho jefes, robar sus armas, banda sonora legendaria (Dr. Wily Stage 1). El Mega Man que todos recuerdan.</div>
     </div>
-    <aside class="notas">
-      <h4>MEGA MAN 2 · DATOS EXTRA</h4>
-      <div class="n-line">Mega Man 1 fue mediocre en ventas y Capcom queria discontinuarlo. El equipo original lo desarrollo en horas extra, sin presupuesto oficial — lo hicieron por pasion. Si Mega Man 2 fallaba, la saga terminaba ahi. Vendio 1.5 millones: 10 veces mas que el primero.</div>
-      <div class="n-line">Los 8 robot masters se eligieron por concurso de fans en Japon: Air Man, Bubble Man, Crash Man, Flash Man, Heat Man, Metal Man, Quick Man, Wood Man. Los fans disenan los villanos del juego — inedito para la epoca.</div>
-      <div class="n-line">La banda sonora es de Takashi Tateishi "Okinawa". El tema de Dr. Wily Stage 1 se convirtio en uno de los memes musicales mas reconocidos de internet — versiones metal, covers, remixes. Identificable para cualquiera aunque no haya jugado NES.</div>
-      <div class="n-cue">Angulo: "este juego existe porque el equipo desobedecio a Capcom y lo hizo de noche". Historia de amor por el proyecto contra las ordenes corporativas — funciona bien en camara.</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>#5 · MAS DATOS</h4><div class="n-line">Capcom estuvo a punto de cancelar el desarrollo de Mega Man 2 por el pobre desempeño en ventas del primer Mega Man -el equipo lo termino casi en tiempo extra, fuera de horario oficial.</div><div class="n-line">El sistema de 'piedra papel tijera' entre los 8 Robot Masters (cada arma es fuerte contra un jefe especifico) se convirtio en la formula que la saga entera repite hasta hoy.</div><div class="n-line">La banda sonora, compuesta por Takashi Tateishi con el equipo de audio de Capcom, sigue siendo remixada por artistas y orquestas 35+ años despues -Dr. Wily Stage 1 es de los temas de videojuego mas covereados de la historia.</div><div class="n-line">Item-2 (la plataforma voladora) fue de las primeras herramientas de movimiento no-lineal en un plataformero de accion -adelantada a su tiempo.</div><div class="n-cue">Cue Koko: preguntale que Robot Master eligio primero -Metal Man suele ser la respuesta 'meta' porque su arma rompe a casi todos los demas jefes.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">09</span>
@@ -350,14 +309,7 @@ body.read-mode .read-indicator { display: block; }
       <div class="hybrid-title"><div class="game-title">METROID</div><div class="game-meta">NES · 1987 · NINTENDO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El nacimiento de la exploracion no-lineal. Planeta Zebes, Samus, el giro final que nadie vio venir. Raiz del genero metroidvania entero.</div>
     </div>
-    <aside class="notas">
-      <h4>METROID · DATOS EXTRA</h4>
-      <div class="n-line">El plot twist final: Samus Aran es mujer. Al terminar el juego rapido (menos de 5 horas) se revela su identidad quitandose el casco. En 1987 fue el giro mas famoso del gaming — nadie lo esperaba, no habia internet para spoilear.</div>
-      <div class="n-line">Samus fue disenada originalmente como hombre. La decision de hacerla mujer fue de ultimo momento por uno de los desarrolladores para sorprender a los jugadores. Se convirtio en uno de los primeros protagonistas femeninos iconicos del gaming.</div>
-      <div class="n-line">El genero "Metroidvania" lleva la mitad del nombre de este juego. Junto a Castlevania (mismo ano, misma consola), definieron la exploracion no-lineal con backtracking. Castlevania: Symphony of the Night (1997) combino ambas formulas y le dio el nombre al genero.</div>
-      <div class="n-cue">Angulo: "el personaje que todos pensaban que era hombre en 1987 — y resulto ser la accionista mas importante de Nintendo hasta hoy". Samus sigue siendo un icono cultural.</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>#4 · MAS DATOS</h4><div class="n-line">El termino 'metroidvania' (genero entero que mezcla Metroid + Castlevania) nacio literalmente de este juego -es la raiz genealogica de un genero que sigue vivo hoy (Hollow Knight, Ori, etc.).</div><div class="n-line">Terminar el juego rapido (bajo cierto tiempo) revela a Samus SIN el traje -en la version original solo en ropa interior/traje ajustado; terminarlo aun mas rapido la muestra en bikini. Fue un secreto que se difundio boca a boca antes de internet.</div><div class="n-line">Sin mapa en pantalla en la version original NES -los jugadores de la epoca dibujaban el mapa de Zebes a mano en papel cuadriculado. La version remake posterior (Metroid: Zero Mission) sí trae mapa.</div><div class="n-line">Yoshio Sakamoto (director) queria un tono de terror aislado, opuesto al heroismo de Mario -Zebes se siente hostil y solitario a proposito.</div><div class="n-cue">Cue Koko: preguntale si sabia del final alternativo revelando a Samus sin casco -mucha gente de la epoca se entero por rumor de patio de colegio, no jugandolo.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">10</span>
@@ -377,14 +329,7 @@ body.read-mode .read-indicator { display: block; }
       <div class="hybrid-title"><div class="game-title">THE LEGEND OF ZELDA</div><div class="game-meta">NES · 1987 · NINTENDO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El cartucho dorado. Mundo abierto, exploracion libre, guardado en bateria. Fundo una de las sagas mas importantes de la historia del videojuego.</div>
     </div>
-    <aside class="notas">
-      <h4>ZELDA · DATOS EXTRA</h4>
-      <div class="n-line">El cartucho dorado no era solo estetico: fue el PRIMER juego NES con bateria de guardado interna (SRAM). Antes de Zelda, los juegos no guardaban — terminabas en una sesion o usabas passwords interminables. Zelda cambio eso para siempre.</div>
-      <div class="n-line">Shigeru Miyamoto diseno la exploracion inspirado en sus caminatas de infancia por los bosques de Kyoto. La narrativa de "mundo misterioso por explorar" es autobiografica — el mismo encontraba cuevas reales de nino.</div>
-      <div class="n-line">En 1987 no habia internet, no habia FAQs. La gente completaba Zelda por prueba y error pura, o comprando revistas con mapas dibujados a mano. Era un juego social: en el colegio se intercambiaba informacion de donde estaban los dungeons. Experiencia comunitaria analogica.</div>
-      <div class="n-cue">Angulo: "el primer juego en el que perderse ERA el juego — y la gente no se quejaba, lo disfrutaba". Preguntar como lo jugaron sin internet. Anecdota de la primera vez que encontraron un dungeon oculto.</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>#3 · MAS DATOS</h4><div class="n-line">El cartucho dorado fue decision de marketing pura -Nintendo queria que se viera 'especial' en la estanteria de la tienda, distinto a cualquier otro cartucho gris de la epoca.</div><div class="n-line">El guardado en bateria (battery backup) era caro de fabricar en 1987 -subio el costo del cartucho, pero fue clave para que un juego tan grande fuera viable sin passwords eternos.</div><div class="n-line">Miyamoto se inspiro en sus propias exploraciones de niño en los bosques y cuevas cerca de Kyoto para el diseño del mundo abierto de Hyrule -lo conto en entrevistas multiples veces.</div><div class="n-line">El segundo quest (una vez terminado el juego) reorganiza mazmorras y enemigos -contenido extra escondido para quienes lo completaban, poco comun para la epoca.</div><div class="n-cue">Cue Koko: mostrar el cartucho dorado fisico si lo tienen -es el objeto mas reconocible de toda la coleccion NES en camara.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">11</span>
@@ -404,14 +349,7 @@ body.read-mode .read-indicator { display: block; }
       <div class="hybrid-title"><div class="game-title">SUPER MARIO BROS.</div><div class="game-meta">NES · 1985 · NINTENDO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El juego que salvo a la industria tras el crash del 83. Definio el plataformero, vendio la NES en el mundo entero y enseño game design en su primer nivel.</div>
     </div>
-    <aside class="notas">
-      <h4>SUPER MARIO BROS. · DATOS EXTRA</h4>
-      <div class="n-line">Salio con la NES como pack-in (venia con la consola) en 1985. Fue el argumento que convencio a los retailers de que la industria del gaming habia revivido tras el crash de 1983 — sin SMB, la NES podia haber muerto en los primeros meses.</div>
-      <div class="n-line">El Mundo 1-1 es el nivel de tutorial mas famoso de la historia: sin texto, sin instrucciones, te ensena a jugar en 30 segundos. Primero el hongo seguro (espacio amplio), luego el Goomba (enemigo obvio), luego el bloque de monedas. Tres objetos, todo explicado. Miyamoto lo diseno sin palabras.</div>
-      <div class="n-line">Vendio mas de 40 millones en NES. El record de speedrun actual esta en ~4:55 minutos. La musica de Koji Kondo (overworld theme) es reconocible para personas que nunca jugaron un videojuego — nivel pop culture absoluto.</div>
-      <div class="n-cue">Angulo: "la critica lo pone en #2 y no en #1 porque SMB3 lo supero tecnicamente — pero culturalmente el original es tan grande que cualquiera lo reconoce". Tension interesante entre impacto cultural vs calidad critica.</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>#2 · MAS DATOS</h4><div class="n-line">El crash de 1983 en USA fue tan grave que tiendas literalmente enterraron cartuchos en el desierto de Nuevo Mexico (el mito de los cartuchos de Atari) -Nintendo tuvo que reconstruir la confianza del mercado desde cero.</div><div class="n-line">El nivel 1-1 es citado en universidades de diseño de videojuegos como ejemplo perfecto de 'enseñar sin texto': el primer Goomba enseña a saltar, el primer bloque ? enseña a golpear, todo sin un tutorial escrito.</div><div class="n-line">Shigeru Miyamoto y Takashi Tezuka diseñaron el juego pensando en la fisica del salto primero -programaron el 'feel' del salto antes de diseñar un solo nivel.</div><div class="n-line">Vendio mas de 40 millones de copias contando reediciones -por decadas fue el juego mas vendido de la historia hasta que Wii Sports lo supero.</div><div class="n-cue">Cue Koko: preguntale si se acuerda de la primera vez que murio en el primer Goomba del 1-1 -a casi todos les paso.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">12</span>
@@ -431,14 +369,7 @@ body.read-mode .read-indicator { display: block; }
       <div class="hybrid-title"><div class="game-title">SUPER MARIO BROS. 3</div><div class="game-meta">NES · 1990 · NINTENDO</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Para la critica, el mejor juego de la NES. Mapas de mundo, trajes (mapache, rana, tanooki), niveles inagotables. El plataformero 2D que perfecciono el genero.</div>
     </div>
-    <aside class="notas">
-      <h4>SUPER MARIO BROS. 3 · DATOS EXTRA (TOMARSE 90 SEG)</h4>
-      <div class="n-line">Antes de lanzarse, fue "presentado" en la pelicula The Wizard (1989) — Hollywood entero hizo una pelicula para promocionar un videojuego. Los ultimos 20 minutos son gameplay de SMB3 ante una audiencia que lo veia por primera vez. El hype fue tan masivo que la gente esperaba en filas para verla.</div>
-      <div class="n-line">En Japon salio en 1988. En USA salio en 1990 — dos anos de espera despues de la pelicula. En Chile llego aun despues. Esa espera entre paises era normal y brutal para los fans de esa generacion.</div>
-      <div class="n-line">Los trajes son la revolucion de diseno: cada uno cambia fisica Y mecanica completa. Raccoon = vuelo. Frog = nadar eficiente. Tanooki = invulnerabilidad temporal como estatua. Hammer = lanzar martillos. No son solo cosmeticos — cambian como se juega. Vendio 17 millones en NES.</div>
-      <div class="n-cue">TOMARSE 90 SEG — es el climax. Angulo: "la pregunta de oro es si SMB o SMB3 es el mejor juego de la historia. La critica dice SMB3. El corazon dice SMB. En camara: ¿cual elegirian ustedes y por que?"</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>#1 · MAS DATOS</h4><div class="n-line">Fue protagonista de la pelicula 'The Wizard' (1989) antes de salir en USA -la escena donde un niño lo revela en un torneo de videojuegos funciono como comercial de 2 horas para Nintendo.</div><div class="n-line">El equipo de desarrollo (Miyamoto, Tezuka) diseño cada mundo con una identidad tematica fuerte (desierto, agua, gigantes, hielo, cielo) -estructura de 'mapa de mundo' que se volvio estandar en plataformeros despues.</div><div class="n-line">El traje Tanooki (mapache con hoja) permite convertirse en estatua invencible temporalmente -mecanica que genero controversia moderna por parecerse a un stereotipo racial japones (tanuki), tema que se discute hoy en retrospectivas.</div><div class="n-line">Es, ajustado por inflacion y unidades vendidas, uno de los videojuegos mas rentables de la historia -Nintendo vendio mas de 17 millones de copias solo en su lanzamiento original.</div><div class="n-cue">Cue cierre del bloque: es el climax del episodio -dejar que Koko reaccione con calma antes de pasar al analisis.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">13</span>
@@ -447,28 +378,16 @@ body.read-mode .read-indicator { display: block; }
       <div class="title mg" style="font-size:58px;">DOMINIO NINTENDO</div>
       <div class="sub">6 de 10 son first-party Nintendo. La NES se construyo sobre exclusivos perfectos, pero Konami (Castlevania, Contra), Capcom (Mega Man) y Tecmo (Ninja Gaiden) pusieron joyas que envejecieron como el vino.</div>
     </div>
-    <aside class="notas">
-      <h4>ANALISIS · DATOS EXTRA</h4>
-      <div class="n-line">Desglose: Nintendo (6): SMB, SMB3, Zelda, Metroid, Kirby, Punch-Out. Konami (2): Castlevania III, Contra. Capcom (1): Mega Man 2. Tecmo (1): Ninja Gaiden. Sin terceros japoneses, el top seria mas pobre.</div>
-      <div class="n-line">Ninguno de los 10 salio despues de 1993. La NES tuvo su catalogo de culto en 5-6 anos (1987-1993). Velocidad de innovacion que no se ha vuelto a ver en una sola plataforma.</div>
-      <div class="n-cue">Angulo de cierre: "hoy estos juegos siguen siendo referencia en escuelas de diseno de videojuegos. Se estudian como se estudian peliculas clasicas de Hitchcock — para aprender como hacerlo bien".</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>ANALISIS · MAS DATOS</h4><div class="n-line">Konami y Capcom eran, en los 80s, 'second party' de facto de Nintendo -desarrollaban casi en exclusiva para NES antes de expandirse a otras plataformas en los 90s.</div><div class="n-line">Tecmo (Ninja Gaiden) nunca repitio ese nivel de exito first-party propio -hoy es mas conocida por licencias (Dead or Alive, colaboraciones) que por IP propia nueva.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">14</span>
     <div class="divider">
       <div class="pre cy">PROXIMA SEMANA</div>
       <div class="title cy" style="font-size:54px;">¿CUANTO VALEN HOY?</div>
-      <div class="sub">Estos son los mejores en lo critico, pero ¿cuanto cuesta hoy un cartucho NES sellado? Spoiler: hay uno que vale como un auto. La proxima: Top Precios NES.</div>
+      <div class="sub">Estos son los mejores en lo critico, pero ¿cuanto cuesta hoy un cartucho NES sellado? Spoiler: uno se vendio por tres millones de dolares. La proxima: Top Precios NES.</div>
     </div>
-    <aside class="notas">
-      <h4>GANCHO PROXIMO EPISODIO</h4>
-      <div class="n-line">El cartucho mas caro de NES en subasta: Super Mario Bros. sealed (gold seal Heritage Auctions 2021) = $660,000 USD. No es broma — hay uno que vale mas que un departamento.</div>
-      <div class="n-line">No todos los del top critico son los mas caros — esa tension es el tema del proximo episodio. La critica y el mercado no siempre coinciden.</div>
-      <div class="n-cue">Cerrar: invitar a comentar cual es el favorito personal de los 10 + suscribirse para el episodio de precios. Ritmo rapido en este cierre.</div>
-    </aside>
-  </section>
+<aside class="notas"><h4>CIERRE · DATO ACTUALIZADO 2026-08-25</h4><div class="n-line">El dato del cliffhanger se actualizo: en junio 2026 una copia sellada de Super Mario Bros. (grado PSA 9.6 A++, variante gloss-sticker de la segunda tirada de 1986) se vendio en USD 3.000.000 en Heritage Auctions -nuevo record mundial, supera el record anterior de USD 2.000.000 (2021). Detalle completo en el episodio de precios.</div></aside>  </section>
 
 </div>
 
@@ -491,11 +410,6 @@ const bar = document.getElementById('bar');
 let current = 0;
 const total = slides.length;
 function pad(n) { return String(n).padStart(2, '0'); }
-slides.forEach((s, i) => { const sn = s.querySelector('.slide-num'); if (sn) sn.textContent = pad(i + 1); });
-function setRead(on) { document.body.classList.toggle('read-mode', on); }
-if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
-const notasBtn = document.getElementById('notasBtn');
-if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
 function go(i) {
   if (i < 0 || i >= total) return;
   slides[current].classList.remove('active');
@@ -514,6 +428,17 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Home') { go(0); }
   if (e.key === 'End') { go(total - 1); }
   if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }
+});
+function setRead(on) { document.body.classList.toggle('read-mode', on); }
+if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
+const notasBtn = document.getElementById('notasBtn');
+if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
+const deckEl = document.getElementById('deck');
+deckEl.addEventListener('click', (e) => {
+  if (e.target.closest('.notas, button, a, kbd, input, textarea, select')) return;
+  const w = window.innerWidth;
+  if (e.clientX < w * 0.2) { go(current - 1); }
+  else if (e.clientX > w * 0.8) { go(current + 1); }
 });
 go(0);
 </script>

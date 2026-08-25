@@ -269,11 +269,22 @@ def _shared_css() -> str:
     )
 
 
+_SHARED_CSS_BLOCK_RE = re.compile(r"<style>\n\.game-price\{.*?</style>\n</head>", re.DOTALL)
+
+
 def generar_top(data: dict, out_slug: str) -> Path:
     base = BASE.read_text(encoding="utf-8")
     head = base[: base.index("<body>") + len("<body>")]
     foot = base[base.index('<nav class="footer">'):]
 
+    # BASE (snes-top-mundial.html) es tambien un output valido de generar_top()
+    # -si BASE ya trae un _shared_css() inyectado de una corrida anterior, hay
+    # que sacarlo antes de inyectar el actual. Si no, cada regeneracion de BASE
+    # deja el bloque viejo pegado y el nuevo se apila encima (Luis 2026-08-25,
+    # detectado al reforge de SNES: nes-top-mundial.html salio con el CSS
+    # duplicado porque BASE ya tenia su propia copia inyectada).
+    if _SHARED_CSS_BLOCK_RE.search(head):
+        head = _SHARED_CSS_BLOCK_RE.sub("</head>", head, count=1)
     head = head.replace("</head>", _shared_css(), 1)
     head += '\n<div class="read-indicator">● MODO LECTURA (N)</div>\n'
 

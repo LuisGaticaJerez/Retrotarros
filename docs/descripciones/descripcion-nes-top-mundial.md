@@ -2,6 +2,8 @@
 
 Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos son estimados; ajustar a los tiempos del corte final.
 
+> **REFORGE 2026-08-25:** el HTML del estudio se regeneró con el layout nuevo (énfasis en gameplay, click-costados, notas enriquecidas). El cliffhanger ahora cita el récord real de venta de Super Mario Bros. sellado — se rompió en junio 2026 (USD 3.000.000, ver `pauta-nes-top-precios.md`) — más impactante que el dato original de mayo.
+
 ---
 
 ## Títulos sugeridos (elegir uno)

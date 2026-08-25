@@ -1,5 +1,7 @@
 # Discusion editorial · `snes-top-mundial`
 
+> **NOTA REFORGE 2026-08-25:** este episodio ya esta publicado (EP 06 en YouTube). El HTML del estudio se regenero con el layout nuevo de enfasis en gameplay y notas mas ricas (~1 min de material por juego). Ojo: este archivo es tambien el BASE que clona `top_deck.py` para todos los demas rankings del canal -se verifico que sigue funcionando correctamente como fuente de clonado. Consenso critico recontrastado, sin cambios de fondo. Ver `pauta-snes-top-mundial.md`.
+
 > Documento de decisiones que se tomaron al armar el episodio.
 
 ---

@@ -12,6 +12,8 @@ Documento de trabajo · Luis Balbrigame & Koko
 
 ## Proposito de esta pauta
 
+> **REFORGE 2026-08-25:** HTML regenerado con `top_deck.py` (layout de enfasis en gameplay, click-costados, ratio 40/60). Se agregaron notas de lectura enriquecidas (3-4 lineas + cue por item) para sostener ~1 min de gameplay real por juego -antes el material visual solo pedia clips de 10-15 seg. Consenso critico recontrastado (GamesRadar, emulatorgamer, joblo): SMB3 sigue #1 sin discusion. El cliffhanger se actualizo con el nuevo record de venta de Super Mario Bros. sellado (USD 3.000.000, junio 2026 -ver `pauta-nes-top-precios.md`).
+
 Top 10 mundial de la NES segun el consenso critico (IGN, Nintendo Life, Edge, GamesRadar). Es el **ranking de CALIDAD** del catalogo NES — la contraparte de `nes-top-precios` (ranking de mercado).
 
 Sirve como:

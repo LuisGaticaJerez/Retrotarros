@@ -3,6 +3,8 @@
 Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos son estimados; ajustar a los tiempos del corte final.
 
 > Basado en el export previo `studio/exports/snes-top-precios-publicacion.txt` (2026-05-24, actualizado 2026-05-31, local, no versionado), convertido al formato canónico `docs/descripciones/descripcion-*.md` con tildes agregadas.
+>
+> **REFORGE 2026-08-25:** video ya publicado con los precios de mayo. Precios recontrastados contra PriceCharting — el orden cambió fuerte: Aero Fighters subió al #1 (desde el #3), Earthbound bajó al #2. Ver `pauta-snes-top-precios.md` para la tabla completa mayo→agosto.
 
 ---
 

@@ -47,22 +47,26 @@ Formato presentacion visual con HTML del estudio (`studio/rankings/top-precios/n
 
 ---
 
+> **REFORGE 2026-08-25:** precios recontrastados en vivo contra PriceCharting. El orden del top 10 **cambio**: Bonk's Adventure subio del puesto 7 al 4, Power Blade 2 del puesto 4 al 3. El grial (Super Mario Bros. sellado) subio de USD 2.000.000 a USD 3.000.000 -record roto en junio 2026 (Heritage Auctions, copia PSA 9.6 A++ variante gloss-sticker). Ver tabla actualizada abajo.
+
 ## Bloque 1 · TOP 10 RETAIL (#10 → #1)
 
-Solo juegos comerciales que se vendieron en tiendas. Valor CIB aproximado 2026.
+Solo juegos comerciales que se vendieron en tiendas. Valor CIB aproximado.
 
-| # | Juego | Año | Editor | CIB aprox. (USD) | Por que es caro |
-|---|-------|-----|--------|------------------|-----------------|
-| 10 | Bucky O'Hare | 1992 | Konami | 500 | Tirada chica, plataformero de culto. |
-| 9 | Gun-Nac | 1991 | ASCII / Compile | 700 | Shmup top, poca distribucion USA. |
-| 8 | Snow Brothers | 1991 | Capcom / Toaplan | 800 | Port arcade de lanzamiento limitado. |
-| 7 | Bonk's Adventure | 1994 | Hudson | 900 | Tirada minima de fin de ciclo. |
-| 6 | DuckTales 2 | 1993 | Capcom | 1.000 | Secuela tardia, pocas copias. |
-| 5 | Chip 'n Dale Rescue Rangers 2 | 1994 | Capcom | 1.200 | Secuela Disney de fin de ciclo. |
-| 4 | Power Blade 2 | 1992 | Taito | 1.300 | Poca distribucion. |
-| 3 | Panic Restaurant | 1992 | Taito | 1.700 | Obscuro, casi nadie lo compro. |
-| 2 | Little Samson | 1992 | Taito | 3.000 | Gran juego, vendio pesimo. |
-| 1 | Stadium Events | 1987 | Bandai | 25.000 | Retirado de tiendas: el rey retail (sellada USD 42k). |
+| # | Juego | Año | Editor | CIB mayo 2026 | CIB agosto 2026 | Movimiento |
+|---|-------|-----|--------|---------------:|------------------:|------------|
+| 10 | Bucky O'Hare | 1992 | Konami | 500 | **573** | ≈ estable |
+| 9 | DuckTales 2 | 1993 | Capcom | 1.000 | **830** | ▼ bajo del #6 |
+| 8 | Gun-Nac | 1991 | ASCII / Compile | 700 | **850** | ▼ bajo del #9 |
+| 7 | Chip 'n Dale Rescue Rangers 2 | 1994 | Capcom | 1.200 | **953** | ▼ bajo del #5 |
+| 6 | Snow Brothers | 1991 | Capcom / Toaplan | 800 | **980** | ▼ bajo del #8 |
+| 5 | Panic Restaurant | 1992 | Taito | 1.700 | **2.203** | ▲ +30% |
+| 4 | Bonk's Adventure | 1994 | Hudson | 900 | **3.294** | ▲▲ +266%, subio del #7 |
+| 3 | Power Blade 2 | 1992 | Taito | 1.300 | **3.700** | ▲▲ +185%, subio del #4 |
+| 2 | Little Samson | 1992 | Taito | 3.000 | **5.000** | ▲ +67% |
+| 1 | Stadium Events | 1987 | Bandai | 25.000 | **39.600** | ▲ +58% |
+
+**Dato fuerte para camara:** Bonk's Adventure y Power Blade 2 se dispararon (+266% y +185%) y subieron del medio de la tabla al podio -el reordenamiento mas grande visto en cualquiera de los recontrastes del canal hasta ahora.
 
 ## Bloque 2 · RAREZAS & NO-RETAIL (apartado)
 

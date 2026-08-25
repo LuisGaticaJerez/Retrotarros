@@ -33,27 +33,30 @@ Formato presentacion visual con HTML del estudio (`studio/rankings/top-precios/s
 
 ---
 
-## El Top 10 por precio · PriceCharting CIB USD mayo 2026
+> **REFORGE 2026-08-25:** HTML regenerado completo con `top_deck.py` (layout nuevo, click-costados, ratio 40/60, notas enriquecidas para ~1 min de gameplay por juego). El HTML publicado en su momento ya tenia mas contenido del que documentaba esta pauta (22 slides reales: 10 retail + divider + 6 rarezas + grial, no 16) -esta version del doc ya refleja esa estructura real. Precios recontrastados contra PriceCharting: **el orden cambio fuerte**, ver tabla abajo.
+
+## El Top 10 por precio · PriceCharting CIB USD
 
 Solo cartuchos retail NTSC USA, condicion CIB. Variantes NFR/promo van en kicker aparte.
 
-| # | Juego | CIB USD | Por que tan caro |
-|---|-------|--------:|------------------|
-| **1** | Earthbound (Big Box) | $3.500 | Caja gigante VHS-size + player's guide oficial con stickers scratch-and-sniff. Cult RPG + status legendario. |
-| **2** | Wild Guns | $2.500 | Western steampunk + galeria de tiros estilo Cabal. Tiraje NTSC limitado. Remaster 2016 disparo el original. |
-| **3** | Aero Fighters | $1.500 | Shoot 'em up port de Neo-Geo. Los shmups SNES son escasos de por si. Sin variantes, sin reediciones. |
-| **4** | Chrono Trigger | $1.200 | El JRPG perfecto. Caja amarilla brillosa se rayaba facil — boxes en buen estado son raros. |
-| **5** | Mega Man X3 | $1.100 | Ultimo de la trilogia X en SNES, lanzado tarde. En EEUU solo SNES (Japon tuvo SNES + PS1 + Saturn). |
-| **6** | Pocky & Rocky 2 | $1.000 | Secuela cult shmup japones con miko anime. Tiraje NTSC minimo. |
-| **7** | Final Fantasy III (FF VI) | $800 | El JRPG mas prestigioso del SNES. Tiraje NTSC limitado vs la fama mundial. Caja con manual original es escasa. |
-| **8** | Super Mario RPG | $700 | El unico Mario RPG en era 16-bit. Ultima colab Nintendo+Square antes de PlayStation. Remake Switch 2023 disparo demanda original. |
-| **9** | Harvest Moon | $500 | Late release SNES = tiraje bajo. Boom retroactivo del genero farming sim (Stardew, Story of Seasons). |
-| **10** | Demon's Crest | $400 | Spinoff oscuro de Gargoyle's Quest. Capcom lo lanzo al final del ciclo con poca promocion. Redescubierto post-2010. |
+| # | Juego | CIB mayo 2026 | CIB agosto 2026 | Movimiento | Por que tan caro |
+|---|-------|---------------|------------------|------------|------------------|
+| **1** | Aero Fighters | $1,500 | **$3,500** | ▲▲ +133%, subio del #3 | Shoot 'em up port de Neo-Geo. Sin remaster ni reedicion moderna -nada le quita presion de demanda al original. |
+| **2** | Earthbound (Big Box) | $3,500 | **$2,938** | ▼ -16%, bajo del #1 | Caja gigante VHS-size + player's guide oficial. Unico juego que cruza con el top mundial (#8 ahi). |
+| **3** | Mega Man X3 | $1,100 | **$1,525** | ▲ +39% | Ultimo de la trilogia X en SNES. En EEUU solo salio en SNES (Japon tuvo SNES + PS1 + Saturn). |
+| **4** | Pocky & Rocky 2 | $1,000 | **$1,329** | ▲ +33% | Secuela cult shmup japones con miko anime. Tiraje NTSC minimo. |
+| **5** | Chrono Trigger | $1,200 | **$893** | ▼ -26% | El JRPG perfecto. Caja amarilla brillosa se rayaba facil -boxes en buen estado son raros. |
+| **6** | Wild Guns | $2,500 | **$856** | ▼▼ -66%, bajo del #2 | El remaster Wild Guns Reloaded (2016) sigue disponible -parece haber saciado demanda del original. |
+| **7** | Harvest Moon | $500 | **$737** | ▲ +47% | Late release SNES = tiraje bajo. Boom retroactivo del genero farming sim (Stardew, Story of Seasons). |
+| **8** | Demon's Crest | $400 | **$479** | ≈ estable | Spinoff oscuro de Gargoyle's Quest. Redescubierto post-2010. |
+| **9** | Final Fantasy III (FF VI) | $800 | **$341** | ▼▼ -57% | El JRPG mas prestigioso del SNES, pero tiene mas reediciones que casi cualquier otro RPG de la lista. |
+| **10** | Super Mario RPG | $700 | **$250** | ▼▼ -64% | Remake completo de Switch (2023) parece haber saciado la demanda del original. |
 
 **Lectura del ranking:**
 
-- **Solo 1 juego cruza con el top mundial:** Earthbound (que es #1 aca + #8 mundial). El resto del top calidad NO esta en top precios.
-- **Patron:** 8 de 10 son "late releases" (1994-1996), cuando todos miraban PS1 y los tirajes bajaron drasticamente.
+- **El orden cambio fuerte:** Aero Fighters le quito el trono a Earthbound (#3 → #1). Wild Guns se desplomo del podio (#2 → #6).
+- **Patron nuevo (agosto 2026):** los juegos con remake/reedicion moderna (Super Mario RPG, FFVI, Wild Guns) bajaron de precio; los que NO tienen alternativa moderna (Aero Fighters, Earthbound, Mega Man X3) subieron o se mantuvieron altos.
+- **Solo 1 juego sigue cruzando con el top mundial:** Earthbound (ahora #2 aca + #8 mundial). El resto del top calidad NO esta en top precios.
 - **Generos sub-representados que valen mucho aca:** shmups (Wild Guns, Aero Fighters, Pocky & Rocky 2) y RPGs late-cycle.
 
 ---
@@ -62,11 +65,21 @@ Solo cartuchos retail NTSC USA, condicion CIB. Variantes NFR/promo van en kicker
 
 Cartucho NO For Resale. Fuera de concurso porque no es retail, es promo de torneo.
 
-| Variante | Precio | Por que importa |
-|----------|-------:|-----------------|
-| **Nintendo PowerFest '94** | **$23.000** | Torneo oficial Nintendo of America. Cartucho contiene mini-versiones de Super Mario Kart + Mario All-Stars + Ken Griffey Jr. Nintendo fabrico 33 unidades, desarmo 31 para repuestos. **Solo 2 sobreviven en el mundo.** Ultima venta documentada 2026. |
+| Variante | Precio mayo 2026 | Precio agosto 2026 | Por que importa |
+|----------|-------------------|---------------------|-----------------|
+| **Nintendo PowerFest '94** | $23.000 (venta documentada) | **$17.550** (valor tracked PriceCharting) | Torneo oficial Nintendo of America. Cartucho contiene mini-versiones de Super Mario Kart + Mario All-Stars + Ken Griffey Jr. Nintendo fabrico 33 unidades, desarmo 31 para repuestos. **Solo 2 sobreviven en el mundo.** |
 
-**Esto no es mercado, es museo.** El cartucho mas caro de SNES jamas vendido en una subasta documentada.
+**Esto no es mercado, es museo.** Con solo 2 copias conocidas, cualquier venta puntual mueve mucho el promedio -ambas cifras (23k y 17.5k) son referencias validas, no una contradiccion.
+
+**Actualizacion 2026-08-25 — el resto de las rarezas tambien se recontrastaron:**
+
+| Variante | Precio mayo 2026 | Precio agosto 2026 |
+|----------|-------------------|---------------------|
+| Final Fight Guy (Blockbuster) | $1.500 | **$2.937** |
+| Hagane: The Final Conflict (Blockbuster) | $4.000 | **$3.500** |
+| DKC Competition Cart (NFR, clamshell verde) | $4.500 | **$6.725** |
+| Exertainment Mountain Bike Rally | ~$8.000+ | **$10.397** (new trackeado) · venta sellada historica $15.993 (2022) |
+| Maximum Carnage / Doom (variantes rojas) | ~$500 / ~$300 | Sin cambio -PriceCharting no distingue precio por color de cartucho, valor sigue siendo estimado. |
 
 ---
 
@@ -100,26 +113,27 @@ Luis: "esos son los buenos. Ahora vamos por los caros."
 - Posicion grande + cartucho fisico (Luis lo levanta).
 - Box art + meta (consola/año/editor/precio).
 - Bloque "POR QUE ES CARO": Luis lee + Koko reacciona.
-- 15-20 seg por item base, 30-40 seg para los del top 3 (Aero Fighters, Wild Guns, Earthbound).
+- 15-20 seg por item base, 30-40 seg para los del top 3 (Aero Fighters, Earthbound, Mega Man X3).
 
-**Items donde NO ahorrar tiempo (top 3 + spoiler-cross):**
-- **#1 Earthbound** — destacar la big box gigante + player's guide.
-- **#2 Wild Guns** — anecdota del remaster 2016.
-- **#7 FF VI** — momento "este SI es del top mundial tambien."
+**Items donde NO ahorrar tiempo (top 3 + spoiler-cross) — actualizado 2026-08-25:**
+- **#1 Aero Fighters** — el nuevo trono. Remarcar que le quito el puesto a Earthbound desde mayo.
+- **#2 Earthbound** — destacar la big box gigante + player's guide + que es el UNICO cruce con el top mundial.
+- **#9 FF VI** — momento "este SI es del top mundial tambien" (bajo fuerte de precio, ahora casi al fondo).
 
 ### Bloque 5 · Kicker PowerFest '94 (19:00 – 22:00)
 
-Slide 12 (HOLY GRAIL).
+Slide 20 (HOLY GRAIL).
 
 - Luis cuenta la historia: torneo Nintendo 1994, 33 cartuchos, 31 desarmados.
 - "Solo dos personas en el mundo tienen esto."
-- Ultima venta 2026: $23.000.
+- Venta documentada 2026: $23.000. Valor tracked actual: $17.550 (normal con solo 2 copias conocidas).
 - Cita: "Esto ya no es mercado, es museo."
 
 ### Bloque 6 · Balance + cierre (22:00 – 25:00)
 
-- "El top 10 calidad tiene Mario, Zelda, Chrono. El top 10 precio tiene Earthbound, Wild Guns, Aero Fighters."
+- "El top 10 calidad tiene Mario, Zelda, Chrono. El top 10 precio tiene Aero Fighters, Earthbound, Mega Man X3."
 - "Solo Earthbound coincide. Eso te dice mucho."
+- Dato nuevo: "el mercado se movio fuerte en 3 meses -Aero Fighters subio 133%, Wild Guns bajo 66%."
 - Cierre: "Cuentanos cual de estos tienes. O cual te gustaria tener. Sigue suscrito."
 
 ---

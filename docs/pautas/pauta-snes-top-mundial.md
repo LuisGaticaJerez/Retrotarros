@@ -38,7 +38,9 @@ Formato presentacion visual con HTML del estudio (`studio/rankings/top-mundial/s
 
 ---
 
-## El Top 10 Mundial · segun la critica global mayo 2026
+> **REFORGE 2026-08-25:** el HTML del estudio se regenero completo con `top_deck.py` (layout de enfasis en gameplay, click-costados, ratio 40/60, notas de lectura enriquecidas para sostener ~1 min de gameplay real por juego). Ojo: `snes-top-mundial.html` es tambien el archivo BASE del que clonan todos los demas rankings del canal -se verifico que otros episodios siguen regenerando correctamente despues de este cambio. Consenso critico recontrastado (cbr.com, boundbyflame, ultimateranks): Super Mario World y Zelda ALttP siguen en el tope, sin cambios de fondo en el orden curado.
+
+## El Top 10 Mundial · segun la critica global
 
 | # | Juego | Año | Editor | Por que esta |
 |---|-------|-----|--------|--------------|

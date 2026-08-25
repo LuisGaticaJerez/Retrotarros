@@ -115,8 +115,35 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
 ::-webkit-scrollbar-track { background: var(--dk); }
 ::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
 </style>
+<style>
+.game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);letter-spacing:1px;white-space:nowrap;border:3px solid var(--ye);padding:8px 18px;border-radius:6px;background:rgba(255,210,63,.07);align-self:flex-start}
+.notas{position:absolute;top:0;right:0;width:460px;height:100%;z-index:150;display:none;flex-direction:column;gap:10px;padding:26px 22px 30px;overflow-y:auto;background:linear-gradient(90deg,rgba(6,3,15,.55) 0%,rgba(6,3,15,.96) 26%);border-left:2px solid var(--ye);backdrop-filter:blur(2px)}
+body.read-mode .slide.active .notas{display:flex}
+.notas h4{font-family:'Press Start 2P';font-size:9px;color:var(--ye);letter-spacing:2px;margin-top:4px}
+.notas h4:first-child{margin-top:0}
+.notas .n-line{font-family:'Share Tech Mono';font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.92);border-left:3px solid var(--cy);padding:3px 0 3px 11px}
+.notas .n-cue{border-left-color:var(--mg);color:var(--ye)}
+.notas .n-cue b{color:#fff}
+.read-indicator{position:fixed;top:64px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:8px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;box-shadow:0 0 14px rgba(255,210,63,.5)}
+body.read-mode .read-indicator{display:block}
+.game-title{font-size:44px !important}
+.game-meta{font-size:19px !important}
+.game-why{font-size:26px !important;line-height:1.5 !important}
+.game-why .lbl{font-size:13px !important}
+.hybrid-body{display:contents}
+.slide-hybrid{max-width:1750px;grid-template-columns:40% 1fr;grid-template-rows:auto auto auto 1fr;grid-template-areas:"head head" "cart tv" "title tv" "why tv";gap:20px 44px}
+.hybrid-head{grid-area:head}
+.cart-wrap{grid-area:cart;align-self:start}
+.cart{width:min(100%,620px)}
+.tv-wrap{grid-area:tv;align-items:flex-start}
+.tarrovision{width:100%;height:100%;aspect-ratio:auto;max-width:100%;max-height:100%}
+.hybrid-title{grid-area:title;text-align:left;align-items:flex-start}
+.game-why{grid-area:why;max-width:none}
+</style>
 </head>
 <body>
+<div class="read-indicator">● MODO LECTURA (N)</div>
+
 
 <header>
   <div class="hdr-logo">RETROTARROS</div>
@@ -133,26 +160,25 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
       <div class="ep-title">TOP 10 <span class="vs">SNES</span> MUNDIAL</div>
       <div class="ep-sub">LO QUE LA CRITICA AMA · CONSENSO 2026</div>
     </div>
-  </section>
+<aside class="notas"><h4>ANTES DE GRABAR</h4><div class="n-line">Audio: lavalier para ambos, prioridad uno.</div><div class="n-line">Cartuchos fisicos de los 10 juegos sobre la mesa.</div><div class="n-line">Gameplay real de al menos 1 min por juego cargado en la TarroVision -las notas de cada slide estan escritas para sostener ese minuto de conversacion.</div><div class="n-cue">Meta: 22-28 min totales. Top 3 (Mario World, Zelda ALttP, Chrono Trigger) pueden estirarse a 3 min con anecdotas.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">02</span>
     <div class="divider">
       <div class="pre cy">CONSENSO CRITICO 2026</div>
-      <div class="title cy">DEL #10 AL #1</div>
-      <div class="sub">Cruce de IGN, Edge Magazine, Nintendo Life, GamesRadar y Polygon. La SNES tiene un fondo de catalogo brutal — los primeros 3 son casi inamovibles. Empezamos desde abajo.</div>
+      <div class="title cy" style="font-size:78px;">DEL #10 AL #1</div>
+      <div class="sub">Cruce de IGN, Edge Magazine, Nintendo Life, GamesRadar y Polygon. La SNES tiene un fondo de catalogo brutal -los primeros 3 son casi inamovibles. Empezamos desde abajo.</div>
     </div>
-  </section>
+<aside class="notas"><h4>METODOLOGIA · MAS DATOS</h4><div class="n-line">Recontrastado agosto 2026 contra rankings nuevos (cbr.com, boundbyflame, ultimateranks) -Super Mario World y Zelda ALttP siguen en el tope en practicamente todas las fuentes.</div><div class="n-line">Street Fighter II aparece muy alto en algunas listas nuevas -no esta en este top 10 porque el canal prioriza catalogo Nintendo/RPG de la epoca; queda como candidato para un ranking distinto de peleas.</div></aside>  </section>
 
-  <!-- 03 #10 STAR FOX -->
   <section class="slide">
     <span class="slide-num">03</span>
     <div class="slide-hybrid">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-fox"><img class="cart-img-bg" src="img/snes-top-mundial/star-fox.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/star-fox.jpg" alt="Star Fox SNES box art"></div>
-          <div class="cart-console">SNES</div>
+          <div class="cart-img-wrap lb-fox"><img class="cart-img-bg" src="img/snes-top-mundial/star-fox.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/star-fox.jpg" alt="Star Fox box art"></div>
+          <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
           <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 10</span></div>
@@ -160,20 +186,19 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">STAR FOX</div><div class="game-meta">SNES · 1993 · NINTENDO EAD / ARGONAUT</div></div>
+      <div class="hybrid-title"><div class="game-title">Star Fox</div><div class="game-meta">SNES · 1993 · NINTENDO EAD / ARGONAUT</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El primer juego SNES con chip Super FX. Poligonos 3D en una consola 16 bits que no deberia poder hacerlo. Estetica abstracta, banda sonora orquestal y el nacimiento del "rail shooter" moderno.</div>
     </div>
-  </section>
+<aside class="notas"><h4>#10 · MAS DATOS</h4><div class="n-line">El chip Super FX vivia DENTRO del cartucho, no en la consola -Nintendo tuvo que negociar con Argonaut Software (creadores del chip) para meterlo en un juego propio.</div><div class="n-line">Miyamoto queria un juego de naves desde antes del SNES -Star Fox fue la primera vez que el hardware pudo sostener esa vision con poligonos reales en vez de sprites.</div><div class="n-line">El elenco de personajes-animal (Fox, Falco, Peppy, Slippy) se diseño para que fueran reconocibles al instante incluso con los poligonos simples de la epoca.</div><div class="n-line">Tuvo secuela cancelada para SNES (Star Fox 2) que no salio hasta decadas despues, en la SNES Classic Mini de 2017.</div><div class="n-cue">Cue Koko: preguntale si sabia que Star Fox 2 existio terminado en 1995 pero no salio hasta 2017 en la mini-consola.</div></aside>  </section>
 
-  <!-- 04 #9 SUPER MARIO KART -->
   <section class="slide">
     <span class="slide-num">04</span>
     <div class="slide-hybrid">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-kart"><img class="cart-img-bg" src="img/snes-top-mundial/super-mario-kart.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/super-mario-kart.jpg" alt="Super Mario Kart SNES box art"></div>
-          <div class="cart-console">SNES</div>
+          <div class="cart-img-wrap lb-kart"><img class="cart-img-bg" src="img/snes-top-mundial/super-mario-kart.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/super-mario-kart.jpg" alt="Super Mario Kart box art"></div>
+          <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
           <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 09</span></div>
@@ -181,20 +206,19 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SUPER MARIO KART</div><div class="game-meta">SNES · 1992 · NINTENDO EAD</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUE</span>El que invento el genero. Mode 7, items, friccion en circuitos cortos, batalla para 2 jugadores. 30 años despues la formula sigue intacta — todo Mario Kart vive de las decisiones que se tomaron aca.</div>
+      <div class="hybrid-title"><div class="game-title">Super Mario Kart</div><div class="game-meta">SNES · 1992 · NINTENDO EAD</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>El que invento el genero. Mode 7, items, friccion en circuitos cortos, batalla para 2 jugadores. 30 años despues la formula sigue intacta -todo Mario Kart vive de las decisiones que se tomaron aca.</div>
     </div>
-  </section>
+<aside class="notas"><h4>#9 · MAS DATOS</h4><div class="n-line">Uso el chip grafico Mode 7 del SNES (rotacion y escalado de fondo) para simular pseudo-3D -truco tecnico que definio el look de toda una generacion de juegos de carreras.</div><div class="n-line">El Battle Mode con globos nacio como modo extra, casi de relleno -hoy es una de las razones por las que la gente recuerda el juego con tanto cariño.</div><div class="n-line">No tenia online ni modo Grand Prix con mas de 8 personajes -el roster reducido (solo 8 personajes) obligo a un balance de personajes muy cuidado que se volvio plantilla.</div><div class="n-line">El caparazon azul (Spiny Shell) NO existia en este juego -se introdujo recien en Mario Kart 64, otro dato para conectar con el episodio de N64 si Koko pregunta.</div><div class="n-cue">Cue Koko: preguntale cual personaje usaba mas -Bowser y Peach eran los extremos de peso/velocidad del roster original.</div></aside>  </section>
 
-  <!-- 05 #8 EARTHBOUND -->
   <section class="slide">
     <span class="slide-num">05</span>
     <div class="slide-hybrid">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-eb"><img class="cart-img-bg" src="img/snes-top-mundial/earthbound.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/earthbound.jpg" alt="EarthBound SNES box art"></div>
-          <div class="cart-console">SNES</div>
+          <div class="cart-img-wrap lb-eb"><img class="cart-img-bg" src="img/snes-top-mundial/earthbound.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/earthbound.jpg" alt="EarthBound box art"></div>
+          <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
           <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 08</span></div>
@@ -202,20 +226,19 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">EARTHBOUND</div><div class="game-meta">SNES · 1994 · APE / HAL LABORATORY</div></div>
+      <div class="hybrid-title"><div class="game-title">EarthBound</div><div class="game-meta">SNES · 1994 · APE / HAL LABORATORY</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El RPG que rompio las reglas: ambientado en una America suburbana, humor absurdo, contador HP que se mueve en tiempo real. Fracaso comercial en su epoca, hoy es de culto absoluto y base de Undertale y mil mas.</div>
     </div>
-  </section>
+<aside class="notas"><h4>#8 · MAS DATOS</h4><div class="n-line">Vendio tan mal en su lanzamiento (1995 en USA) que Nintendo lo considero un fracaso -la campaña de marketing "This Game Stinks" (con olor a chicle en los anuncios) es hoy citada como ejemplo de campaña que confundio al publico.</div><div class="n-line">El contador de HP en 'rodillo' (baja gradualmente en vez de instantaneo) permite curarte o incluso ganar un turno despues de recibir un golpe letal -mecanica que ningun otro RPG de la epoca tenia.</div><div class="n-line">Toby Fox (creador de Undertale) ha citado a EarthBound como influencia directa multiples veces -el humor, el tono y hasta mecanicas de combate se sienten herederos directos.</div><div class="n-line">La secuela (Mother 3) nunca salio oficialmente de Japon -parte de por que la saga completa mantiene un aura de culto/rareza entre fans occidentales.</div><div class="n-cue">Cue Koko: es el UNICO juego que cruza con el episodio de precios (tambien aparece ahi) -mencionarlo como dato de conexion entre ambos videos.</div></aside>  </section>
 
-  <!-- 06 #7 DKC 2 -->
   <section class="slide">
     <span class="slide-num">06</span>
     <div class="slide-hybrid">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-dkc"><img class="cart-img-bg" src="img/snes-top-mundial/dkc2.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/dkc2.jpg" alt="Donkey Kong Country 2 SNES box art"></div>
-          <div class="cart-console">SNES</div>
+          <div class="cart-img-wrap lb-dkc"><img class="cart-img-bg" src="img/snes-top-mundial/dkc2.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/dkc2.jpg" alt="Donkey Kong Country 2 box art"></div>
+          <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
           <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 07</span></div>
@@ -223,20 +246,19 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">DONKEY KONG COUNTRY 2</div><div class="game-meta">SNES · 1995 · RARE</div></div>
+      <div class="hybrid-title"><div class="game-title">Donkey Kong Country 2</div><div class="game-meta">SNES · 1995 · RARE</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>La secuela que mejora todo: niveles mas complejos, banda sonora de David Wise considerada de las mejores de la historia, graficos pre-renderizados que parecian imposibles en 16 bits. Diddy y Dixie en vez de DK fue genial.</div>
     </div>
-  </section>
+<aside class="notas"><h4>#7 · MAS DATOS</h4><div class="n-line">Los graficos usaban modelos 3D renderizados en estaciones Silicon Graphics y despues comprimidos a sprites 2D -tecnica cara y lenta, pero le dio a Rare una ventaja visual que nadie mas tenia en 16 bits.</div><div class="n-line">Dixie Kong introdujo la habilidad de planear con su cola de pelo -mecanica de movimiento que muchos fans prefieren sobre el moveset del DK original.</div><div class="n-line">David Wise compuso la banda sonora en un periodo de intensa presion de tiempo -temas como 'Stickerbrush Symphony' siguen en listas de 'mejor musica de videojuegos' 30 años despues.</div><div class="n-line">Vendio mas de 5 millones de copias -uno de los titulos mas exitosos comercialmente de todo el catalogo SNES.</div><div class="n-cue">Cue Koko: preguntale si prefiere Diddy o Dixie -la habilidad de planear de Dixie suele ganar la discusion.</div></aside>  </section>
 
-  <!-- 07 #6 YOSHI'S ISLAND -->
   <section class="slide">
     <span class="slide-num">07</span>
     <div class="slide-hybrid">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-yoshi"><img class="cart-img-bg" src="img/snes-top-mundial/yoshis-island.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/yoshis-island.jpg" alt="Yoshi's Island SNES box art"></div>
-          <div class="cart-console">SNES</div>
+          <div class="cart-img-wrap lb-yoshi"><img class="cart-img-bg" src="img/snes-top-mundial/yoshis-island.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/yoshis-island.jpg" alt="Yoshi's Island box art"></div>
+          <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
           <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 06</span></div>
@@ -244,20 +266,19 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">YOSHI'S ISLAND</div><div class="game-meta">SNES · 1995 · NINTENDO EAD</div></div>
+      <div class="hybrid-title"><div class="game-title">Yoshi's Island</div><div class="game-meta">SNES · 1995 · NINTENDO EAD</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Miyamoto rompiendo el molde post-DKC: estetica de libro de dibujos a mano, mecanica del huevo, Baby Mario llorando. Diseño de niveles considerado de los mas finos de la consola. Chip Super FX 2 para los jefes gigantes.</div>
     </div>
-  </section>
+<aside class="notas"><h4>#6 · MAS DATOS</h4><div class="n-line">Miyamoto decidio deliberadamente NO competir tecnicamente con Donkey Kong Country -eligio un estilo de crayon/lapiz a mano en vez de graficos pre-renderizados, una apuesta artistica contraria a la tendencia del momento.</div><div class="n-line">Usa el chip Super FX 2 (version mejorada del de Star Fox) para escalar y rotar sprites en tiempo real -por eso los jefes se ven tan grandes y fluidos.</div><div class="n-line">El llanto de Baby Mario cuando Yoshi es golpeado se volvio un sonido icónico/molesto por igual -diseñado a proposito para generar urgencia real en el jugador.</div><div class="n-line">Es tecnicamente el primer juego de la sub-serie Yoshi como protagonista propio, separada de la serie principal de Mario.</div><div class="n-cue">Cue Koko: preguntale si el llanto de Baby Mario lo estresaba de chico -es una reaccion casi universal.</div></aside>  </section>
 
-  <!-- 08 #5 FINAL FANTASY VI -->
   <section class="slide">
     <span class="slide-num">08</span>
     <div class="slide-hybrid">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/snes-top-mundial/final-fantasy-vi.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/final-fantasy-vi.jpg" alt="Final Fantasy III SNES box art"></div>
-          <div class="cart-console">SNES</div>
+          <div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/snes-top-mundial/final-fantasy-vi.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/final-fantasy-vi.jpg" alt="Final Fantasy VI box art"></div>
+          <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
           <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div>
@@ -265,20 +286,19 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">FINAL FANTASY VI</div><div class="game-meta">SNES · 1994 · SQUARE</div></div>
-      <div class="game-why"><span class="lbl">▶ POR QUE</span>14 personajes jugables, narrativa coral con villano (Kefka) memorable, banda sonora epica de Nobuo Uematsu. El RPG japones mas ambicioso de los 16 bits — algunos lo ponen sobre Chrono Trigger por su escala.</div>
+      <div class="hybrid-title"><div class="game-title">Final Fantasy VI</div><div class="game-meta">SNES · 1994 · SQUARE</div></div>
+      <div class="game-why"><span class="lbl">▶ POR QUE</span>14 personajes jugables, narrativa coral con villano (Kefka) memorable, banda sonora epica de Nobuo Uematsu. El RPG japones mas ambicioso de los 16 bits -algunos lo ponen sobre Chrono Trigger por su escala.</div>
     </div>
-  </section>
+<aside class="notas"><h4>#5 · MAS DATOS</h4><div class="n-line">Salio en USA como 'Final Fantasy III' -la numeracion se salto varias entregas porque Square no habia publicado FFII, III ni V fuera de Japon todavia; se corrigio recien en relanzamientos posteriores.</div><div class="n-line">Kefka es frecuentemente citado como uno de los mejores villanos de la historia de los videojuegos -su arco (de bufon a dios del caos que literalmente gana en el punto medio de la historia) era muy poco comun para la epoca.</div><div class="n-line">Es de los primeros JRPGs en dejar que el jugador elija el ORDEN de ciertos eventos y mundo -en el Mundo Arruinado (segunda mitad) la exploracion es no-lineal.</div><div class="n-line">Nobuo Uematsu compuso mas de 60 temas distintos para este juego -uno de los scores mas extensos de toda la era 16-bit.</div><div class="n-cue">Cue Koko: preguntale que personaje eligio primero al empezar el Mundo Arruinado -es la decision mas recordada por los fans.</div></aside>  </section>
 
-  <!-- 09 #4 SUPER METROID -->
   <section class="slide">
     <span class="slide-num">09</span>
     <div class="slide-hybrid">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-metroid"><img class="cart-img-bg" src="img/snes-top-mundial/super-metroid.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/super-metroid.jpg" alt="Super Metroid SNES box art"></div>
-          <div class="cart-console">SNES</div>
+          <div class="cart-img-wrap lb-metroid"><img class="cart-img-bg" src="img/snes-top-mundial/super-metroid.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/super-metroid.jpg" alt="Super Metroid box art"></div>
+          <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
           <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
@@ -286,20 +306,19 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SUPER METROID</div><div class="game-meta">SNES · 1994 · NINTENDO R&D1 / INTELLIGENT SYSTEMS</div></div>
+      <div class="hybrid-title"><div class="game-title">Super Metroid</div><div class="game-meta">SNES · 1994 · NINTENDO R&D1 / INTELLIGENT SYSTEMS</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El blueprint del genero "metroidvania". Exploracion no-lineal, atmosfera opresiva en planeta Zebes, lore contado sin texto. Sigue siendo la vara: cada Hollow Knight, Ori o Dread le debe algo a este cartucho.</div>
     </div>
-  </section>
+<aside class="notas"><h4>#4 · MAS DATOS</h4><div class="n-line">El equipo uso 'show, don't tell' de forma radical -no hay dialogo humano en todo el juego, la historia se cuenta 100% con ambiente, musica y escenas silenciosas (como la muerte del bebe Metroid al inicio).</div><div class="n-line">El sistema de secuence breaking (usar habilidades fuera de orden con trucos de movimiento) nacio como accidente de programacion -hoy es una escena de speedrunning entera dedicada a explotarlo.</div><div class="n-line">Considerado por la industria uno de los juegos mejor diseñados de todos los tiempos -aparece consistentemente en el top 10 de casi cualquier lista 'greatest games ever' seria.</div><div class="n-line">El mapa del juego se revela progresivamente sala por sala -innovacion de UI que se volvio estandar en el genero que ayudo a fundar.</div><div class="n-cue">Cue Koko: preguntale si llego al final rapido (secreto revela a Samus sin traje) -mismo gancho que en el Metroid original de NES.</div></aside>  </section>
 
-  <!-- 10 #3 CHRONO TRIGGER -->
   <section class="slide">
     <span class="slide-num">10</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/snes-top-mundial/chrono-trigger.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/chrono-trigger.jpg" alt="Chrono Trigger SNES box art"></div>
-          <div class="cart-console">SNES</div>
+          <div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/snes-top-mundial/chrono-trigger.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/chrono-trigger.jpg" alt="Chrono Trigger box art"></div>
+          <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
           <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
@@ -307,20 +326,19 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">CHRONO TRIGGER</div><div class="game-meta">SNES · 1995 · SQUARE</div></div>
+      <div class="hybrid-title"><div class="game-title">Chrono Trigger</div><div class="game-meta">SNES · 1995 · SQUARE</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Equipo soñado: Yuji Horii (Dragon Quest), Hironobu Sakaguchi (FF), Akira Toriyama (Dragon Ball). 13 finales segun decisiones, batallas sin pantalla aparte, viaje en el tiempo. Considerado el JRPG perfecto.</div>
     </div>
-  </section>
+<aside class="notas"><h4>#3 · MAS DATOS</h4><div class="n-line">El equipo se auto-denomino 'Dream Team' en el marketing original -era la primera vez que tres figuras de ese calibre (Dragon Quest, Final Fantasy, Dragon Ball) trabajaban juntas en un solo proyecto.</div><div class="n-line">Las batallas ocurren directamente en el mapa del mundo, sin pantalla de transicion -decision de diseño que reduce fricción y se adelanto casi 15 años a la tendencia moderna de 'combate seamless'.</div><div class="n-line">Tiene 13 finales distintos segun en que punto de la historia decidas enfrentar al jefe final -sistema de New Game+ (Nueva Partida+) fue de los primeros en popularizar el concepto en consola.</div><div class="n-line">Nunca salio en Europa en su lanzamiento original de SNES -los jugadores europeos tuvieron que esperar hasta el port de PS1 (1999) o Nintendo DS (2008) para jugarlo oficialmente.</div><div class="n-cue">Cue Koko: preguntale cual de los 13 finales vio -es contenido natural para el podio, dejar que se explaye.</div></aside>  </section>
 
-  <!-- 11 #2 ZELDA ALTTP -->
   <section class="slide">
     <span class="slide-num">11</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-zelda"><img class="cart-img-bg" src="img/snes-top-mundial/zelda-alttp.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/zelda-alttp.jpg" alt="Zelda A Link to the Past SNES box art"></div>
-          <div class="cart-console">SNES</div>
+          <div class="cart-img-wrap lb-zelda"><img class="cart-img-bg" src="img/snes-top-mundial/zelda-alttp.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/zelda-alttp.jpg" alt="The Legend of Zelda: A Link to the Past box art"></div>
+          <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
           <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
@@ -328,20 +346,19 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">THE LEGEND OF ZELDA: A LINK TO THE PAST</div><div class="game-meta">SNES · 1991 · NINTENDO EAD</div></div>
+      <div class="hybrid-title"><div class="game-title">The Legend of Zelda: A Link to the Past</div><div class="game-meta">SNES · 1991 · NINTENDO EAD</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El que definio el Zelda 2D para siempre: mundo dual claro/oscuro, dungeons iconicos, items puzzle (Hookshot, Spin Attack). Plantilla que Link's Awakening, Oracle, A Link Between Worlds siguen al pie de la letra.</div>
     </div>
-  </section>
+<aside class="notas"><h4>#2 · MAS DATOS</h4><div class="n-line">El Light World y Dark World son el mismo mapa con capas distintas de puzzles -la resolucion de un dungeon en un mundo frecuentemente desbloquea progreso en el otro, mecanica de diseño muy adelantada a su epoca.</div><div class="n-line">Introdujo el Hookshot, item que se volveria un pilar recurrente de casi toda la saga Zelda desde entonces (incluyendo el Clawshot/Gancho de entregas 3D posteriores).</div><div class="n-line">El equipo redisenio el juego desde cero -la primera version en desarrollo era mas cercana al Zelda original de NES (top-down simple), pero se descarto para aprovechar mejor el hardware nuevo.</div><div class="n-line">Sigue siendo, segun encuestas de la propia Nintendo y de la prensa especializada, uno de los Zelda mejor puntuados de toda la franquicia, compitiendo directamente con Ocarina of Time.</div><div class="n-cue">Cue Koko: preguntale que dungeon del Dark World le costo mas -Turtle Rock o Ganon's Tower suelen ganar esa encuesta informal.</div></aside>  </section>
 
-  <!-- 12 #1 SUPER MARIO WORLD -->
   <section class="slide">
     <span class="slide-num">12</span>
     <div class="slide-hybrid">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL TRONO</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart">
-          <div class="cart-img-wrap lb-mario"><img class="cart-img-bg" src="img/snes-top-mundial/super-mario-world.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/super-mario-world.jpg" alt="Super Mario World SNES box art"></div>
-          <div class="cart-console">SNES</div>
+          <div class="cart-img-wrap lb-mario"><img class="cart-img-bg" src="img/snes-top-mundial/super-mario-world.jpg" alt="" aria-hidden="true"><img src="img/snes-top-mundial/super-mario-world.jpg" alt="Super Mario World box art"></div>
+          <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
         <div class="tv-wrap"><div class="tarrovision">
           <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
@@ -349,28 +366,28 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SUPER MARIO WORLD</div><div class="game-meta">SNES · 1990 · NINTENDO EAD</div></div>
+      <div class="hybrid-title"><div class="game-title">Super Mario World</div><div class="game-meta">SNES · 1990 · NINTENDO EAD</div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El pack-in. Yoshi nace aca. 96 salidas. Cape Feather, Star World, Special Zone. Diseño de niveles que despues escuelas enteras usan para enseñar game design. Para muchos es el plataformero 2D perfecto.</div>
     </div>
-  </section>
+<aside class="notas"><h4>#1 · MAS DATOS</h4><div class="n-line">Vino incluido de fabrica (pack-in) con la consola SNES en varios mercados -eso lo convirtio, solo por distribucion, en uno de los juegos mas jugados de la historia sin siquiera venderse aparte.</div><div class="n-line">Yoshi debuto en este juego -Miyamoto queria un compañero montable desde el NES original pero el hardware no lo permitia; recien en SNES fue tecnicamente viable.</div><div class="n-line">96 salidas de nivel distintas (mas que niveles individuales, porque varios niveles tienen 2 salidas secretas) -numero que se convirtio en trivia recurrente de la comunidad por decadas.</div><div class="n-line">El Star World y la Special Zone son contenido postgame escondido con los niveles mas dificiles del juego -estructura de 'juego dentro del juego' que pocos plataformeros de la epoca intentaban.</div><div class="n-cue">Cue cierre del bloque: es el climax del episodio -dejar que Koko reaccione con calma antes de pasar al analisis.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">13</span>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg" style="font-size:67px;">DOMINIO NINTENDO</div>
-      <div class="sub">9 de 10 son first-party Nintendo o de su segundo partido (Rare, HAL). La SNES vivio de exclusivos pulidos hasta el milimetro — third parties grandes (Square, Konami, Capcom) si aparecen, pero el trono lo defiende Kyoto.</div>
+      <div class="sub">9 de 10 son first-party Nintendo o de su segundo partido (Rare, HAL). La SNES vivio de exclusivos pulidos hasta el milimetro -third parties grandes (Square, Konami, Capcom) si aparecen, pero el trono lo defiende Kyoto.</div>
     </div>
-  </section>
+<aside class="notas"><h4>ANALISIS · MAS DATOS</h4><div class="n-line">Square (Chrono Trigger, FFVI) desarrollaba en exclusiva para Nintendo en esta era -recien se paso a Sony a fines de los 90s por limitaciones de espacio del cartucho SNES frente al CD de PlayStation.</div><div class="n-line">Rare y HAL Laboratory eran, en la practica, estudios 'second-party' de Nintendo -desarrollaban casi exclusivamente para sus consolas, similar a lo que pasaba con Rare y GoldenEye en N64.</div></aside>  </section>
 
   <section class="slide">
     <span class="slide-num">14</span>
     <div class="divider">
       <div class="pre cy">PROXIMA SEMANA</div>
       <div class="title cy" style="font-size:62px;">¿CUANTO VALEN HOY?</div>
-      <div class="sub">Estos top mundial son joyas en lo critico — pero en plata, ¿cuanto cuesta hoy armar este top 10? Spoiler: hay un cartucho que cuesta mas que toda tu pieza. La semana que viene: Top Precios SNES.</div>
+      <div class="sub">Estos top mundial son joyas en lo critico -pero en plata, ¿cuanto cuesta hoy armar este top 10? Spoiler: hay un cartucho que cuesta mas que toda tu pieza. La semana que viene: Top Precios SNES.</div>
     </div>
-  </section>
+<aside class="notas"><h4>CIERRE · MAS DATOS</h4><div class="n-line">Solo Earthbound cruza entre ambos rankings (calidad y precio) -sembrar ese dato como gancho explicito para el proximo episodio.</div></aside>  </section>
 
 </div>
 
@@ -380,7 +397,7 @@ nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; backgr
     <div class="nav-counter" id="counter">01 / 14</div>
     <div class="nav-progress"><div class="bar" id="bar"></div></div>
   </div>
-  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR · <kbd id="notasBtn" style="cursor:pointer" title="Mostrar/ocultar notas">N</kbd> NOTAS</div>
   <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
 </nav>
 
@@ -410,6 +427,18 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
   if (e.key === 'Home') { go(0); }
   if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }
+});
+function setRead(on) { document.body.classList.toggle('read-mode', on); }
+if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
+const notasBtn = document.getElementById('notasBtn');
+if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
+const deckEl = document.getElementById('deck');
+deckEl.addEventListener('click', (e) => {
+  if (e.target.closest('.notas, button, a, kbd, input, textarea, select')) return;
+  const w = window.innerWidth;
+  if (e.clientX < w * 0.2) { go(current - 1); }
+  else if (e.clientX > w * 0.8) { go(current + 1); }
 });
 go(0);
 </script>
