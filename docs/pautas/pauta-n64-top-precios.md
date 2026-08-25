@@ -72,9 +72,11 @@ Cartuchos grises de demo en kioscos. NO fueron releases comerciales. El dato bom
 | Variante | Precio mayo 2026 | Precio agosto 2026 | Por qué importa |
 |----------|-------------------|---------------------|------------------|
 | **ClayFighter Sculptor's Cut sealed** | $9,199 (subasta puntual) | **$18,056** (valor "new" trackeado) · graduado top: $175,000 | Nunca existió como producto retail — solo copia de alquiler. Una copia sellada es casi imposible de encontrar. |
-| **Majora's Mask Gray "NFR"** | $8,500 | **$7,100** | Cartucho gris de demo con contenido beta. Solo a empleados de tiendas. |
-| Donkey Kong 64 Gray "NFR" | ~$2,000 | **$1,856** | Cartucho gris con contenido beta. Ojo: existe también un NFR "Yellow" mucho más común (~$350) — no confundir en cámara. |
 | Turok 2 "NFR" | ~$1,800 | **$1,547** | Segunda más rara. Etiqueta blanca sin arte final. |
+| Donkey Kong 64 Gray "NFR" | ~$2,000 | **$1,856** | Cartucho gris con contenido beta. Ojo: existe también un NFR "Yellow" mucho más común (~$350) — no confundir en cámara. |
+| **Majora's Mask Gray "NFR"** | $8,500 | **$7,100** | Cartucho gris de demo con contenido beta. Solo a empleados de tiendas. |
+
+> **Corrección 2026-08-25:** las rarezas NFR van ordenadas de más barata a más cara (convención del canal, igual que NES/SNES) — antes estaban al revés.
 
 **Actualización clave (2026-08-24):** el valor sellado de ClayFighter Sculptor's Cut se DUPLICÓ en 3 meses (US$9,199 → US$18,056), y una copia graduada llegó a cotizarse en US$175,000. En el HTML nuevo este ítem pasó de "rareza" NFR a slide HOLY GRAIL único (convención del canal) — las otras 3 variantes NFR se mantienen como rarezas.
 
@@ -125,7 +127,7 @@ Plano cerrado de un billete de 100 dólares al lado de un cartucho N64. Luis: *"
 
 ### Bloque 3 · NFR Kicker + Valor colección (13:30 – 16:30)
 
-**Actualizado 2026-08-24 (nueva numeración de slides tras el reforge):** divider NFR (13) → Majora gris $7,100 (14) → DK64 gris $1,856 (15) → Turok 2 NFR $1,547 (16) → HOLY GRAIL ClayFighter sealed $18,056 (17, slide único, ya no cuenta como NFR más) → valor colección (18, divider "analisis").
+**Actualizado 2026-08-25 (nueva numeración de slides, rarezas reordenadas ascendente):** divider NFR (13) → Turok 2 NFR $1,547 (14) → DK64 gris $1,856 (15) → Majora gris $7,100 (16) → HOLY GRAIL ClayFighter sealed $18,056 (17, slide único, ya no cuenta como NFR más) → valor colección (18, divider "analisis").
 
 **Frase de transición a cierre (Luis):** *"Antes de cerrar — lo que acaban de ver sobre esta mesa, los diez cartuchos de Koko en condición CIB, vale más de un millón setecientas mil lucas chilenas en el mercado mundial. Y esto es solo lo que él trajo hoy."*
 
