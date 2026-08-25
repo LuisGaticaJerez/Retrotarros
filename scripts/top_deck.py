@@ -249,13 +249,18 @@ def _shared_css() -> str:
         # (1400px -> 1750px). Sin forzar 16:9 en el TarroVision a proposito -gameplay
         # grabado en 4:3 (bastante comun en Atari 8-bit) se veria distorsionado o con
         # pilarbox exagerado dentro de un marco angosto.
+        # Ratio 40/60 (Luis 2026-08-25: "las cajas muchas veces se ven muy pequeñas
+        # y el tarrovision demasiado ancho" -viendo el 30/70 ya en video, las cajas
+        # de box art quedaban chicas contra un TarroVision con mucho margen muerto
+        # a los costados en formatos de gameplay 4:3/16:9 mas angostos). Se subio
+        # el ancho de columna izquierda y el cap de .cart en la misma proporcion.
         ".hybrid-body{display:contents}\n"
-        ".slide-hybrid{max-width:1750px;grid-template-columns:32% 1fr;"
+        ".slide-hybrid{max-width:1750px;grid-template-columns:40% 1fr;"
         "grid-template-rows:auto auto auto 1fr;"
         "grid-template-areas:\"head head\" \"cart tv\" \"title tv\" \"why tv\";gap:20px 44px}\n"
         ".hybrid-head{grid-area:head}\n"
         ".cart-wrap{grid-area:cart;align-self:start}\n"
-        ".cart{width:min(100%,520px)}\n"
+        ".cart{width:min(100%,620px)}\n"
         ".tv-wrap{grid-area:tv;align-items:flex-start}\n"
         ".tarrovision{width:100%;height:100%;aspect-ratio:auto;max-width:100%;max-height:100%}\n"
         ".hybrid-title{grid-area:title;text-align:left;align-items:flex-start}\n"
