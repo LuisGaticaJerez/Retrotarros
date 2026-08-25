@@ -12,6 +12,19 @@ Documento de trabajo · Luis Balbrigame & Koko
 > precios y el ranking de esta pauta reflejan EXACTAMENTE lo que muestra el HTML.
 > Si tocas uno, toca el otro. Valores CIB aproximados, PriceCharting 2026.
 
+> **REFORGE 2026-08-25 (episodio aún sin grabar):** precios recontrastados en vivo
+> contra PriceCharting. Cambios grandes: **Atelier Rorona Plus SALE** del ranking
+> (nunca tuvo release físico NTSC-US en Vita — fue digital-only vía PSN, error
+> heredado del driver original) y **entra Gravity Rush** (exclusivo insignia de la
+> consola). El orden retail se reordenó fuerte: Silent Hill Book of Memories subió
+> del #5 al #2 ($90→$134), Persona 4 Golden Solid Gold subió a $302 (#1). Disgaea 4,
+> Trails of Cold Steel II e Ys Memories of Celceta se desplomaron 60-77% y cayeron
+> al fondo de la tabla. Se agregó **Papers Please** a las rarezas Limited Run (antes
+> tenía 4 ítems, ahora 5) y también se corrigió el orden de las rarezas a ascendente
+> (convención del canal — venían sin criterio de orden claro). El HTML, el driver
+> (`.cache/gen_psvita_precios.py`) y esta pauta quedaron sincronizados en el mismo
+> commit. Ver tablas actualizadas abajo.
+
 ---
 
 ## Propósito de esta pauta
@@ -43,44 +56,48 @@ El ángulo: *"Cinco años después que Sony mató la PS Vita en 2019, los cartuc
 
 ## LIGA 1 · El Top 10 RETAIL (vendidos en tiendas)
 
-Solo juegos retail. Valores CIB aproximados (PriceCharting, 2026). El #1 se escapa de la liga.
+Solo juegos retail. Valores CIB aproximados (PriceCharting, agosto 2026). El #1 se escapa de la liga.
 
-| # | Juego | Año | Editor | CIB aprox. (USD) | Por qué cuesta tanto |
-|---|-------|-----|--------|------------------|----------------------|
-| 1 | **Persona 4 Golden: Solid Gold Premium Edition** | 2012 | Atlus | **200** | Edición de lanzamiento con steelbook dorado y OST. El P4G más buscado: el rey retail, ~200 y subiendo. |
-| 2 | Muramasa Rebirth | 2013 | Aksys | 150 | Action de Vanillaware con espadas, arte 2D brutal. Tirada chica de Aksys: ronda los 150. |
-| 3 | The Legend of Heroes: Trails of Cold Steel II | 2016 | XSEED | 130 | JRPG querido de Falcom, salió tarde y en poca cantidad. De los retail más buscados: 130+. |
-| 4 | Disgaea 4: A Promise Revisited | 2014 | NIS America | 100 | Tactical JRPG enorme, tirada NISA limitada. Pasa los 100 completo y subiendo. |
-| 5 | Silent Hill: Book of Memories | 2012 | Konami | 90 | El único Silent Hill de Vita (spin-off dungeon crawler). Rareza por marca: ronda los 90. |
-| 6 | Atelier Rorona Plus | 2014 | NIS America | 85 | JRPG de alquimia de Gust, tirada NISA limitada. Saga de coleccionistas: completo pasa los 85. |
-| 7 | Toukiden 2 | 2017 | Koei Tecmo | 75 | Cazador de demonios estilo Monster Hunter, lanzado tarde en la vida de la Vita. Pocas copias. |
-| 8 | Ys: Memories of Celceta | 2013 | XSEED | 70 | Action-RPG de Falcom localizado por XSEED. Localizaciones chicas = precios que suben. |
-| 9 | Dragon's Crown | 2013 | Atlus | 65 | Beat-em-up de Vanillaware, arte pintado a mano. Clásico de la consola que sube de a poco. |
-| 10 | Hatsune Miku: Project Diva F 2nd | 2014 | Sega | 55 | Rhythm de culto. Tirada moderada y demanda alta de fans: hoy un completo ronda los 55. |
+| # | Juego | Año | Editor | CIB mayo 2026 | CIB agosto 2026 | Por qué cuesta tanto |
+|---|-------|-----|--------|---------------:|------------------:|----------------------|
+| 1 | **Persona 4 Golden: Solid Gold Premium Edition** | 2012 | Atlus | 200 | **302** | Edición de lanzamiento con steelbook dorado y OST. El P4G más buscado: el rey retail, subió a 302 y sigue subiendo. |
+| 2 | Silent Hill: Book of Memories | 2012 | Konami | 90 | **134** | El único Silent Hill de Vita (spin-off dungeon crawler). Subió fuerte: el mayor salto del podio. |
+| 3 | Muramasa Rebirth | 2013 | Aksys | 150 | **61** | Action de Vanillaware con espadas, arte 2D brutal. Bajó fuerte pero se mantiene en el podio. |
+| 4 | Gravity Rush *(nuevo)* | 2012 | SIE Japan Studio | — | **53** | El exclusivo insignia de la Vita: Kat controla la gravedad. Entra al top por primera vez. |
+| 5 | Hatsune Miku: Project Diva F 2nd | 2014 | Sega | 55 | **46** | Rhythm de culto. El que menos bajó: los fans de Miku son fieles. |
+| 6 | The Legend of Heroes: Trails of Cold Steel II | 2016 | XSEED | 130 | **40** | JRPG querido de Falcom. La caída más grande en dólares absolutos del top retail. |
+| 7 | Toukiden 2 | 2017 | Koei Tecmo | 75 | **36** | Cazador de demonios estilo Monster Hunter, de los últimos lanzamientos retail de la Vita. |
+| 8 | Dragon's Crown | 2013 | Atlus | 65 | **26** | Beat-em-up de Vanillaware, arte pintado a mano. Ya no es escaso, sigue siendo hermoso. |
+| 9 | Disgaea 4: A Promise Revisited | 2014 | NIS America | 100 | **23** | Tactical JRPG enorme. La corrección más dura del top retail: de 100 a 23. |
+| 10 | Ys: Memories of Celceta | 2013 | XSEED | 70 | **23** | Action-RPG de Falcom. El mercado JRPG de Vita se enfrió fuerte este año. |
 
-**Lectura del ranking retail:**
-- **Dominan JRPG / Action JP** (Falcom, NIS, Gust, Atlus, Vanillaware) — el público adulto japonés mantuvo viva la Vita hasta 2019.
-- **El retail techa en ~$200** (Persona 4 Golden Solid Gold). De ahí para arriba ya no es retail: es Limited Run.
-- **Ningún Mario, Zelda, Pokémon** — esa es la trampa: en Nintendo mandan los first-party; en Sony los caros son nicho third-party.
+**Ítem removido:** Atelier Rorona Plus (antes #6, ~$85) — **nunca tuvo release físico NTSC-US en Vita**, fue digital-only vía PlayStation Store (confirmado: blog.playstation.com, junio 2014). Era un error del ranking original; PriceCharting solo trackea la versión física japonesa. Se reemplazó por Gravity Rush.
+
+**Lectura del ranking retail (actualizada):**
+- **El mercado JRPG se enfrió fuerte** en 3 meses: Disgaea 4, Trails of Cold Steel II e Ys Memories of Celceta perdieron entre 60% y 77% de su valor de mayo a agosto.
+- **Pero no todo bajó parejo**: Silent Hill Book of Memories y Persona 4 Golden Solid Gold **subieron** — la demanda no se mueve igual para todos los títulos.
+- **El retail techa en ~$302** (Persona 4 Golden Solid Gold). De ahí para arriba ya no es retail: es Limited Run.
+- **Ningún Mario, Zelda, Pokémon** — esa es la trampa: en Nintendo mandan los first-party; en Sony los caros son nicho third-party (y ahora también el propio first-party de Sony, con Gravity Rush).
 
 ---
 
 ## LIGA 2 · Limited Run Games (no se vendieron en tiendas)
 
-Tiradas mínimas de Limited Run Games y ediciones de coleccionista. Otra liga de precios, miles de dólares.
+Tiradas mínimas de Limited Run Games. Otra liga de precios, cientos y miles de dólares. **Orden ascendente** (convención del canal — antes no tenían un orden claro).
 
-| Juego | Año | Sello | CIB aprox. (USD) | Por qué |
-|-------|-----|-------|------------------|---------|
-| A.W.: Phoenix Festa | 2016 | Bandai Namco · LRG | ~600 | Tirada mínima de LRG. Suelto ronda 450, completo pasa los 600. |
-| VVVVVV | 2017 | Limited Run | ~1.000 | Plataformero indie en físico vía LRG. Suelto sobre 800, completo supera los mil. |
-| Revenge of the Bird King | 2019 | Limited Run · LRG FINAL | ~1.200 | Pensado como el último lanzamiento físico de Vita de LRG. Rareza histórica de la consola. |
-| 1001 Spikes | 2014 | Limited Run | ~1.500 | Una de las primeras LRG y de las más escasas. Hoy ronda los mil quinientos. |
+| Juego | Año | Sello | CIB aprox. agosto 2026 (USD) | Por qué |
+|-------|-----|-------|------------------------------:|---------|
+| Papers, Please *(nuevo)* | 2020 | Limited Run #224 | 145 | El clásico de fronteras de Lucas Pope, en cartucho físico vía LRG. Tirada de 3.000 copias mundiales. |
+| A.W.: Phoenix Festa | 2016 | Bandai Namco · LRG | 451 | Bandai Namco nunca lo trajo a tiendas de Occidente: LRG hizo el port físico. |
+| 1001 Spikes | 2014 | Limited Run | 568 | Plataformero de precisión brutal, de las primeras LRG de Vita. |
+| VVVVVV | 2017 | Limited Run | 949 | Plataformero indie de gravedad invertida en físico vía LRG. |
+| Revenge of the Bird King | 2019 | Limited Run · LRG FINAL | 1.029 | Pensado explícitamente como el ÚLTIMO lanzamiento físico de Vita de LRG. |
 
 ---
 
 ## LIGA 3 · EL SANTO GRIAL
 
-**The Binding of Isaac: Rebirth** — 2015 · Limited Run · tirada mínima · **CIB ~USD 4.000**
+**The Binding of Isaac: Rebirth** — 2015 · Limited Run · tirada mínima · **CIB ~USD 4.000** (estable, único ítem que no se movió entre mayo y agosto)
 
 > El santo grial de la Vita. Tirada tan mínima que los coleccionistas dudaban que existiera en físico. Un completo en caja supera los cuatro mil dólares: **el juego de Vita más caro del planeta.**
 
@@ -110,7 +127,7 @@ Plano cerrado de un cartucho Vita caro (Persona 4 Golden Solid Gold o Muramasa).
 ### Bloque 4 · Liga Limited Run (13:00 – 16:00)
 
 - El patrón LRG: tirada 3-5k, precio inicial ~$30, hoy cientos a miles.
-- Phoenix Festa $600 → VVVVVV $1.000 → Revenge of the Bird King $1.200 → 1001 Spikes $1.500.
+- Orden ascendente: Papers Please $145 → Phoenix Festa $451 → 1001 Spikes $568 → VVVVVV $949 → Revenge of the Bird King $1.029.
 
 ### Bloque 5 · El grial + cierre (16:00 – 19:00)
 
@@ -123,15 +140,15 @@ Plano cerrado de un cartucho Vita caro (Persona 4 Golden Solid Gold o Muramasa).
 
 ## Anclas para cámara
 
-1. **Persona 4 Golden Solid Gold = $200 CIB · #1 retail.** Steelbook dorado + OST.
-2. **El retail Vita techa en ~$200** — de ahí para arriba ya es Limited Run.
+1. **Persona 4 Golden Solid Gold = $302 CIB · #1 retail.** Subió desde los $200 de mayo. Steelbook dorado + OST.
+2. **Silent Hill Book of Memories subió a $134** — el mayor salto del podio (venía de $90).
 3. **Sony cerró producción PS Vita en marzo de 2019** — todo lo físico es finito desde entonces.
 4. **Limited Run Games hizo 120+ títulos PS Vita.** Tiradas de 3,000-5,000.
-5. **VVVVVV LRG ronda los $1.000** completo — un plataformero indie en físico.
-6. **1001 Spikes ~$1.500** — una de las primeras y más escasas LRG.
-7. **Binding of Isaac: Rebirth ~$4.000** — el santo grial, el Vita físico más caro del mundo.
-8. **Dominan los JRPG / Action JP** (Falcom, NIS, Gust, Atlus) — público adulto japonés.
-9. **Muramasa Rebirth $150 + Dragon's Crown $65** — dos Vanillaware, distinta tirada, distinto precio.
+5. **Gravity Rush entra al top por primera vez** ($53) — el exclusivo insignia de la consola, reemplaza a Atelier Rorona Plus (que nunca tuvo release físico NTSC-US).
+6. **Revenge of the Bird King ~$1.029** — la LRG más cara, marketeada como el último físico de Vita.
+7. **Binding of Isaac: Rebirth ~$4.000** — el santo grial, estable, el Vita físico más caro del mundo.
+8. **Dominan los JRPG / Action JP** (Falcom, NIS, Atlus) — público adulto japonés, aunque el mercado se enfrió fuerte en 2026.
+9. **Muramasa Rebirth $61 + Dragon's Crown $26** — dos Vanillaware, ambos bajaron fuerte pero mantienen su lugar relativo.
 10. **PSN store cerró en 2021** (luego revertido) — el caos digital empujó el coleccionismo físico.
 
 ---
@@ -142,7 +159,7 @@ Plano cerrado de un cartucho Vita caro (Persona 4 Golden Solid Gold o Muramasa).
 2. "Sony mató la PS Vita en 2019 · y los precios explotaron desde ese día".
 3. "Limited Run Games · cómo una distribuidora hizo que los indies fueran coleccionables".
 4. "El Persona 4 Golden dorado es el cartucho retail más caro de la Vita" — Solid Gold Edition.
-5. "Dos juegos de Vanillaware en Vita: uno vale 65 y otro 150 dólares · por qué".
+5. "Dos juegos de Vanillaware en Vita, los dos bajaron de precio · por qué".
 6. "Por qué los JRPG japoneses dominan el ranking de precios PS Vita".
 
 ---
@@ -166,7 +183,7 @@ Plano cerrado de un cartucho Vita caro (Persona 4 Golden Solid Gold o Muramasa).
 
 *RETROTARROS · Gen 8 portátil · Top precios PS Vita*
 
-**Última actualización:** 2026-06-14 (sincronizada con el HTML)
+**Última actualización:** 2026-08-25 (reforge de precios, sincronizada con el HTML)
 **Slug:** `psvita-top-precios`
 **HTML asociado:** `studio/rankings/top-precios/psvita-top-precios.html`
 **Discusión:** `docs/discusiones/discusion-psvita-top-precios.md`

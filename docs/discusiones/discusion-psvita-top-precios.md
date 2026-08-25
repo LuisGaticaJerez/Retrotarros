@@ -8,6 +8,12 @@
 > **Sincronizado con el HTML (formato TarroVisión, 3 ligas).** Ranking y precios
 > reflejan el HTML real. Versión anterior (Invizimals #1 / "Koko tiene 4") quedó
 > obsoleta y se descartó.
+>
+> **REFORGE 2026-08-25 (previo a grabar):** precios recontrastados en vivo contra
+> PriceCharting. El orden retail cambió fuerte — Silent Hill Book of Memories subió
+> al #2, Trails of Cold Steel II y Disgaea 4 se desplomaron, Atelier Rorona Plus salió
+> del ranking (nunca tuvo release físico NTSC-US, era digital-only) y entró Gravity
+> Rush. Se sumó Papers Please a las rarezas. Ver `pauta-psvita-top-precios.md`.
 
 ---
 
@@ -67,8 +73,8 @@ La frase escrita es larga. Confirmar palabra por palabra antes de grabar (está 
 ```
 0:00–1:00     Cold open    Cartucho caro + hook "Sony la mató en 2019"
 1:00–2:30     Setup        Por qué los precios PS Vita son altos + las 3 ligas
-2:30–13:00    Retail 10→1  Los 10 retail más caros (~60 seg c/u) · #1 Persona 4 Golden Solid Gold $200
-13:00–16:00   Limited Run  El patrón LRG: Phoenix Festa → VVVVVV → Bird King → 1001 Spikes
+2:30–13:00    Retail 10→1  Los 10 retail más caros (~60 seg c/u) · #1 Persona 4 Golden Solid Gold $302
+13:00–16:00   Limited Run  El patrón LRG (orden ascendente): Papers Please → Phoenix Festa → 1001 Spikes → VVVVVV → Bird King
 16:00–19:00   El grial     Binding of Isaac Rebirth ~$4.000 + cierre
 ```
 

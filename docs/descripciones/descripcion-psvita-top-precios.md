@@ -17,7 +17,7 @@ Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Ca
 ```
 Sony mató la PS Vita en marzo de 2019. Y desde ese día, los cartuchos físicos no paran de subir 📈 Los 10 más caros que se vendieron en tiendas... y después los que nunca llegaron a una tienda y valen miles.
 
-Persona 4 Golden: Solid Gold Premium Edition (steelbook dorado + OST) corona el retail en 200 dólares. Pero eso es apenas el techo: la liga Limited Run Games juega en los miles, y el santo grial absoluto es The Binding of Isaac: Rebirth, un físico tan escaso que los coleccionistas dudaban que existiera. Hoy supera los 4.000 dólares completo.
+Persona 4 Golden: Solid Gold Premium Edition (steelbook dorado + OST) corona el retail en 302 dólares. Pero eso es apenas el techo: la liga Limited Run Games juega en los cientos y miles, y el santo grial absoluto es The Binding of Isaac: Rebirth, un físico tan escaso que los coleccionistas dudaban que existiera. Se mantiene estable sobre los 4.000 dólares completo.
 
 Catálogo finito + demanda creciente = esto. Cinco años después que Sony cerró producción, lo único estable es lo que ya está en cajas en la casa de la gente.
 
@@ -25,15 +25,15 @@ Cuéntanos en los comentarios cuál de estos griales tienes o quisieras tener.
 
 00:00 Intro
 01:00 Por qué los precios de PS Vita explotaron
-02:30 #10 Hatsune Miku: Project Diva F 2nd
-03:30 #9 Dragon's Crown
-04:30 #8 Ys: Memories of Celceta
+02:30 #10 Ys: Memories of Celceta
+03:30 #9 Disgaea 4: A Promise Revisited
+04:30 #8 Dragon's Crown
 05:30 #7 Toukiden 2
-06:30 #6 Atelier Rorona Plus
-07:30 #5 Silent Hill: Book of Memories
-08:30 #4 Disgaea 4: A Promise Revisited
-09:30 #3 Trails of Cold Steel II
-10:30 #2 Muramasa Rebirth
+06:30 #6 Trails of Cold Steel II
+07:30 #5 Hatsune Miku: Project Diva F 2nd
+08:30 #4 Gravity Rush
+09:30 #3 Muramasa Rebirth
+10:30 #2 Silent Hill: Book of Memories
 11:30 #1 Persona 4 Golden: Solid Gold Premium Edition
 13:00 Liga Limited Run Games
 16:00 Santo Grial: The Binding of Isaac: Rebirth
@@ -55,7 +55,7 @@ Nicho/relleno (opcional): `#BindingOfIsaac #LimitedRunGames #RetroTarros #Chile`
 ## Tags YouTube (keywords, separadas por coma)
 
 ```
-ps vita precios, playstation vita, persona 4 golden solid gold, binding of isaac rebirth vita, limited run games, muramasa rebirth, trails of cold steel ii, disgaea 4, silent hill book of memories, juegos mas caros ps vita, retrogaming, retrotarros
+ps vita precios, playstation vita, persona 4 golden solid gold, binding of isaac rebirth vita, limited run games, muramasa rebirth, gravity rush, silent hill book of memories, papers please vita, juegos mas caros ps vita, retrogaming, retrotarros
 ```
 
 ---
@@ -106,4 +106,4 @@ Video completo en el canal.
 ---
 
 **Slug:** `psvita-top-precios`
-**Última actualización:** 2026-08-11
+**Última actualización:** 2026-08-25 (reforge de precios — episodio aún sin grabar)
