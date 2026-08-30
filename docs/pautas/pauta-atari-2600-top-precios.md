@@ -117,7 +117,7 @@ Divider + 4 slides rapidas (~1 min cada una). Estos son los que generan la reacc
 ## Material visual necesario
 
 - [ ] **14 clips de gameplay** (10 retail + 4 rarezas), 10-15 seg.
-- [x] Box art real para 6/15 items (Texas Chainsaw Massacre, Halloween, Quadrun, Gravitar, Ghost Manor, Red Sea Crossing, Air Raid) — el resto usa fallback de color (Karate Ultravision, Eli's Ladder, Cakewalk, Out of Control, River Patrol, Gamma Attack, Pepsi Invaders, Gauntlet: no se encontro box art real confiable, varias busquedas de Wikipedia resolvieron a articulos incorrectos y se descartaron).
+- [x] **Box art real 14/14 items (2026-08-29, Luis consiguio las 8 que faltaban).** Karate: dos ediciones circulan (Ultravision rara ~USD 1.000 vs Froggo comun ~USD 42) — se uso la caja Ultravision, la version cara, consistente con el dato del slide. Pepsi Invaders: la imagen real es la caja blanca lisa con el sticker "Atari goes better with Coke" (asi era la caja original, sin arte — se descarto una portada fan-made/repro con marca de agua "ATARIBOY 2005" que llego primero por error). Completan el set: Eli's Ladder, Cakewalk, Out of Control, River Patrol, Gauntlet, Gamma Attack.
 - [ ] Considerar conseguir foto real de un cartucho Atari 2600 cualquiera para B-roll generico (no hay ninguno en la coleccion fisica).
 
 ---
@@ -128,7 +128,7 @@ Divider + 4 slides rapidas (~1 min cada una). Estos son los que generan la reacc
 |------|--------|
 | HTML estudio (`studio/rankings/top-precios/atari-2600-top-precios.html`) | ✓ Cerrado (20 slides) |
 | JSON TarroBot (`studio/pautas/atari-2600-top-precios.tarrobot.json`) | ✓ 10 datos #10→#1 |
-| Box art (6/15 reales, resto fallback) | ✓ |
+| Box art (14/14 reales) | ✓ |
 | Clips de gameplay (14) | ☐ Pendiente |
 | Pauta MD (este archivo) | ✓ |
 | Discusion MD (`docs/discusiones/discusion-atari-2600-top-precios.md`) | ✓ |
