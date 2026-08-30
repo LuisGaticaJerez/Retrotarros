@@ -52,8 +52,8 @@ Dato bomba del episodio: ese cartucho de "999999999 juegos" en realidad tenía e
 ## Notas de producción
 
 - **Miniatura sugerida:** un cartucho/consola tipo Family (o PolyStation) + el número "999999999" tachado + texto "¿ERAN REALES?" + TarroBot.
-- Imágenes pendientes: ningún bloque tiene foto todavía (ver discusión). El HTML funciona sin imagen, con TarroVision reservado para el bloque de los 6 juegos confirmados (gameplay real en edición).
-- Falta la anécdota personal de Luis/Coco antes de grabar (ver discusión, punto 5).
+- Foto real de la Dendy Junior ya incluida (Wikipedia Commons). 4 bloques quedaron abiertos con TarroVision para insertar video/foto real en edición (chip NES-on-a-Chip, leyenda del cartucho infinito, los 6 juegos confirmados, situación legal actual).
+- Anécdotas personales de Luis/Coco: se improvisan libres en cámara, sin guion (ver discusión, punto 5).
 - Fuente de datos: `docs/pautas/pauta-retronota-consola-pirata-latam.md`.
 
 ---

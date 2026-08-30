@@ -81,13 +81,17 @@ que incluyen exactamente esta seleccion de titulos).
   Polybius", sino para desmontar una creencia de infancia con un dato real). Aprovechar
   el contraste visual mito-rojo → verificado-verde en cámara, es el momento mas fuerte
   del episodio.
-- **Falta la anecdota personal de Luis/Coco.** El driver dejo una nota explicita en el
-  cierre para que se agregue en vivo -donde compraban el Family, como llegaba, algun
-  juego propio del cartucho que no esté en la lista de 6 confirmados.
-- Sin fotos/imagenes todavia (ningun bloque usa img_key en esta version) -el formato
-  funciona bien sin imagen, con TarroVision reservado para el bloque de los 6 juegos
-  (gameplay real en edición). Si Luis consigue una foto real de un Family o de un
-  cartucho "999999999 en 1", se puede agregar despues regenerando el HTML.
+- **Anecdotas personales SIN scriptear** (decision de Luis 2026-08-30): Luis y Coco las
+  van a improvisar libremente en camara, no hace falta dejar placeholder en las notas.
+- **Foto real agregada:** Dendy Junior (consola + controles + cartucho) en el bloque de
+  paralelo internacional -fuente Wikipedia Commons, foto legitima del objeto real.
+- **4 bloques abiertos a video/imagen en vez de solo texto** (pedido de Luis 2026-08-30,
+  "algunas secciones necesitan imagen o video, no solo texto"): el chip NES-on-a-Chip,
+  la leyenda del cartucho infinito (MITO), los 6 juegos confirmados, y la situacion
+  legal actual. Cada uno queda con TarroVision reservado para gameplay/b-roll real en
+  edicion. Si Luis tiene una foto real de un Family fisico o de un cartucho
+  "999999999 en 1", esos dos primeros bloques son los candidatos ideales para
+  reemplazar el TarroVision por una imagen fija (regenerar el HTML con img_key).
 - Reusa el dato de Club Nintendo 1992 ya verificado en `retronota-chilean-arcade-scene`
   -mismo pilar de contexto, dos episodios distintos.
 
@@ -99,7 +103,7 @@ que incluyen exactamente esta seleccion de titulos).
 |------|--------|
 | HTML estudio | ✓ Cerrado (14 slides) |
 | Capturas | ✓ 14 PNGs |
-| Imagenes | Pendiente (ningun bloque con foto todavia) |
+| Imagenes | ✓ Dendy Junior real · 4 bloques con TarroVision abierto a video/foto |
 | Pauta MD | ✓ |
 | Discusion MD | ✓ |
 | Descripcion YouTube | ✓ |

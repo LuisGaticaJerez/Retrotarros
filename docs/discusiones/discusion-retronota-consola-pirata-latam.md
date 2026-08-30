@@ -72,16 +72,18 @@ nombre internacional.
 
 ---
 
-## 5. Pendiente antes de grabar
+## 5. Anecdotas y visuales (decision Luis 2026-08-30)
 
-- **Anecdota personal de Luis/Coco:** el episodio quedo con un placeholder en las notas
-  del cierre pidiendo la anecdota real (donde compraban el Family, como llegaba a la
-  casa, algun juego propio del cartucho que no este en la lista de 6 confirmados). Sin
-  esto el cierre funciona pero pierde el toque personal que hizo funcionar a
-  `retronota-chilean-arcade-scene` (Segaccion).
-- **Imagenes:** ningun bloque tiene foto todavia. Buenos candidatos si se consiguen:
-  foto real de una consola Family/PolyStation, foto de un cartucho "999999999 en 1", o
-  screenshots de los 6 juegos confirmados.
+- **Sin anecdota scripteada:** Luis prefiere improvisar en camara con Coco en vez de
+  dejar un placeholder en las notas -se saco esa linea del driver. Distinto del patron
+  de `retronota-chilean-arcade-scene` (Segaccion), que si dejaba una nota-cue explicita.
+- **4 bloques se abrieron a TarroVision** (video/foto real en vez de solo texto): el
+  chip NES-on-a-Chip, la leyenda del cartucho infinito (MITO), los 6 juegos confirmados,
+  y la situacion legal actual hoy. Se agrego ademas una foto real de la Dendy Junior
+  (Wikipedia Commons) en el bloque del paralelo internacional -unico bloque con imagen
+  fija por ahora, el resto queda abierto para que Luis inserte su propio material en
+  edicion (o una foto real del Family fisico si aparece, que reemplazaria el TarroVision
+  del chip o del cartucho infinito).
 - **Verificar el modelo exacto de GameTech** mencionado en el juicio de 2005: la fuente
   Wikipedia dice "PocketFami", DonnierocK dice "Power Player Super Joy III" -se opto por
   el segundo nombre en el driver por ser un producto mas facil de corroborar de forma
