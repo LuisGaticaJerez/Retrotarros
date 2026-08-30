@@ -16,9 +16,9 @@ Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes.
 ```
 En pleno centro de Santiago, a pasos de La Moneda, hay un local que lleva casi NOVENTA años entreteniendo generaciones. Y no, no empezó con videojuegos -empezó con un rifle de tiro al blanco en 1934 🎯
 
-En esta segunda RetroNota investigamos la escena arcade chilena: desde Entretenimientos Diana (fundado 1934, sigue funcionando HOY en Merced 839) hasta Segacción, el programa de TV de Megavisión donde jugabas Sega Genesis por teléfono desde tu casa en 1995. Y te contamos sobre "Chile Game", el documental que un estudiante de periodismo hizo en 2013 para que esta historia no se perdiera.
+En esta RetroNota investigamos la escena arcade chilena completa: el subterráneo legendario de Entretenimientos Diana en Paseo Ahumada (con House of the Dead, Tekken, Mortal Kombat) que cerró en 2006 por delincuencia antes de renacer en Merced 839, la firma hermana Juegos Diana de calle San Diego (la de la rueda de Chicago), y Segacción, el programa de TV de Megavisión donde jugabas Sega Genesis por teléfono desde tu casa en 1995. Te contamos sobre "Chile Game", el documental de 2013 que rescató esta historia, y por qué Dream Match -la sala más nueva del centro- no corrió la misma suerte que Diana y cerró en 2022.
 
-¿Fuiste a Entretenimientos Diana alguna vez? ¿Viste Segacción? Contáno en los comentarios.
+Todo lo documentado de esta época es de Santiago. Pero la escena fue nacional: ¿cómo se llamaba el arcade de tu ciudad? Contáno en los comentarios.
 
 Retrotarros — Nostalgia + Juegos + Música.
 
@@ -43,17 +43,17 @@ entretenimientos diana santiago, segaccion jennifer warner, chile game documenta
 ## Comentario fijado
 
 ```
-¿Fuiste a Entretenimientos Diana alguna vez? ¿Viste Segacción? Contáno en los comentarios.
+¿Cómo se llamaba el arcade de tu ciudad? Nosotros sabemos de los Yokos en Concepción y salas propias en San Fernando -pero de eso casi no hay nada escrito. Ayúdanos a completar la historia en los comentarios.
 ```
 
 ## Notas de producción
 
 - **Miniatura sugerida:** fachada o interior de Entretenimientos Diana + texto "90 AÑOS" + TarroBot.
-- Imágenes pendientes: no se consiguieron fotos verificadas de Diana ni capturas de Segacción en esta sesión (ver discusión). El HTML funciona sin imagen, pero si se consiguen fotos propias o de archivo, regenerar el driver.
+- Imágenes pendientes: 2 bloques con TarroVision abierto para foto/video real en edición (el subterráneo de Ahumada, la rueda de Chicago de San Diego). El resto funciona sin imagen. Si se consiguen fotos propias o de archivo, regenerar el driver.
 - Fuente de datos: `docs/pautas/pauta-retronota-chilean-arcade-scene.md`.
 
 ---
 
 **Slug:** `retronota-chilean-arcade-scene`
 **Formato:** RetroNota (reportaje, 15-20 min)
-**Última actualización:** 2026-08-17
+**Última actualización:** 2026-08-30

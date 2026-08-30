@@ -57,6 +57,48 @@ fotos:
 
 ---
 
+## 5.5. Expansion del episodio (2026-08-30) — por que solo hablabamos de Diana
+
+Luis pregunto directamente por que el episodio solo cubria Diana y no otros locales
+importantes. Investigando la respuesta se encontraron dos cosas:
+
+**a) La propia historia de Diana estaba incompleta.** El slide original decia "90 años
+funcionando" como si fuera una linea recta -pero La Tercera (Andres Lopez, 2017) tiene
+un reportaje completo sobre el subterraneo de Ahumada (1985-2006): la sala arcade mas
+importante de Santiago en su momento (House of the Dead, Tekken, Virtua Fighter, Mortal
+Kombat, KOF, SFII), que cerro por delincuencia y poca rentabilidad, con una "ultima
+cena" de despedida en 2007, antes de renacer en Merced. Se agrego este bloque completo
+mas otro sobre Juegos Diana San Diego (la firma hermana, misma familia, rueda de
+Chicago) -ambos citando la misma fuente La Tercera.
+
+**b) Dream Match tenia un error factual.** El slide de cierre decia que Diana "convive
+con salas mas nuevas como Dream Match" -pero Dream Match cerro definitivamente en marzo
+de 2022 (Alerta Geek). Se corrigio para contar la historia real: Dream Match abrio 2014,
+se volvio comunidad de juegos de pelea, y cerro 7 años despues golpeado por la pandemia.
+El contraste con Diana (que TAMBIEN cerro una vez, en Ahumada, y volvio) se volvio parte
+del argumento del capitulo 4: sobrevivir 90 años es la excepcion, no la regla.
+
+**c) Arcades regionales (Concepcion, San Fernando, etc.):** Luis menciono los Yokos de
+Concepcion y una sala de San Fernando. Se investigo a fondo si existia cobertura
+verificable: la unica tesis universitaria sobre el tema (U. de Chile, "Entre fichas y
+pantallas") esta explicitamente acotada a Santiago (1982-1997); los foros chilenos de
+retro (RetroGames.cl) tienen apenas comentarios sueltos sobre Valparaiso sin nombres ni
+fechas; la prensa regional no arrojo resultados verificables. Conclusion: no hay como
+cumplir la regla de "cruzar minimo 2 fuentes" para arcades regionales especificos.
+
+En vez de forzar una fuente que no existe, se decidio usar el propio vacio de
+documentacion como parte del contenido: un slide nuevo nombra los Yokos y San Fernando
+explicitamente como **memoria personal de Luis** (tag "MEMORIA PERSONAL", no "HECHO
+VERIFICADO" -el formato ya permite esto para anecdotas propias, ver seccion 1 de este
+documento), y cierra invitando a la audiencia a nombrar su propio arcade regional en los
+comentarios. Convierte una limitacion real de investigacion en un gancho de
+participacion, en vez de forzar un dato sin respaldo o simplemente omitir el tema.
+
+Luis aprobo esta direccion explicitamente ("si esta super vamos con eso, somos buenos
+para improvisar") antes de implementarla.
+
+---
+
 ## 5. Contexto que se dejo fuera (para no sobrecargar)
 
 - Detalle sobre "Nintendomania" (mencionado de pasada en un foro junto a Segaccion,
