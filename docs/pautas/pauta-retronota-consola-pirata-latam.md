@@ -76,6 +76,13 @@ que incluyen exactamente esta seleccion de titulos).
 
 ## Notas de grabacion
 
+- **Titulos de capitulo corregidos (2026-08-30):** los capitulos 1 y 4 mostraban en
+  pantalla literalmente "EL GANCHO" y "EL LEGADO" -etiquetas de estructura interna del
+  formato, no titulos de contenido. Luis lo noto viendo el HTML. Se cambiaron a
+  "El Family" (cap 1) y "Lo Que Dejo El Family" (cap 4), y se corrigio el mismo patron
+  en los otros 2 episodios existentes (`retronota-chilean-arcade-scene` ->
+  "Entretenimientos Diana" / "Lo Que Quedo"; `retronota-lost-localizations` ->
+  "Marth y Roy" / "El Trabajo De Los Fans").
 - **Unico episodio del canal hasta ahora con badge MITO/LEYENDA usado de forma
   "productiva"** (no sobre folclore de arcades embrujados como el pendiente "Chilean
   Polybius", sino para desmontar una creencia de infancia con un dato real). Aprovechar

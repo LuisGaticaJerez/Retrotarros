@@ -58,6 +58,10 @@ Vice, Inverse, ResetEra, The Gamer, Game Informer.
 
 ## Notas de grabacion
 
+- **Titulo del capitulo 1/4 corregido (2026-08-30):** mostraban en pantalla literalmente
+  "EL GANCHO" y "EL LEGADO" (etiqueta de estructura interna del formato). Se cambiaron a
+  "Marth y Roy" (cap 1) y "El Trabajo De Los Fans" (cap 4) -mismo fix aplicado a los
+  otros 2 episodios RetroNota existentes.
 - Ritmo sugerido: ~1:15-1:30 por slide de contenido para llegar a 15-20 min con 14 slides.
 - El capitulo 3 (los 4 casos) es el cuerpo central — no acortar.
 - Badge verde "HECHO VERIFICADO" en pantalla en todos los slides de dato -- no hay

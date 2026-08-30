@@ -58,6 +58,10 @@ juegos de consola.
 
 ## Notas de grabacion
 
+- **Titulo del capitulo 1/4 corregido (2026-08-30):** mostraban en pantalla literalmente
+  "EL GANCHO" y "EL LEGADO" (etiqueta de estructura interna del formato). Se cambiaron a
+  "Entretenimientos Diana" (cap 1) y "Lo Que Quedo" (cap 4) -mismo fix aplicado a los
+  otros 2 episodios RetroNota existentes.
 - Sin badge de MITO/LEYENDA en este episodio -todo el contenido es hecho verificado.
   Si en el futuro se hace una "parte 2" tocando folclore tipo Polybius chileno, ESE
   episodio si necesita el badge rojo.
