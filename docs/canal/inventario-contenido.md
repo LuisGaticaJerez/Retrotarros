@@ -52,19 +52,15 @@ publicados.
 
 ---
 
-### 1.1 Programados — Reseñas (4, estado 2026-09-03)
+### 1.1 Programados — Reseñas (4, confirmado por Luis 2026-09-03)
 
-**OBSOLETO, no confiar en las fechas:** esta tabla venía de una captura de YouTube Studio
-del 2026-08-20. Al reverificar el canal en vivo el 2026-09-03, 4 de las 8 filas que tenía
-(Zombies Ate My Neighbors, Atari 2600 Top Mundial, Top Gear, Pokémon Rojo/Azul) ya estaban
-publicadas — se movieron a 1.2. Las 4 que quedan abajo siguen SIN aparecer en el canal
-pese a que sus fechas programadas ya pasaron (o están por pasar) — el orden real de
-publicación de Luis no coincidió con este calendario viejo. Sin una captura nueva de
-YouTube Studio no se puede confirmar si siguen programadas para esas fechas, si se
-reordenaron, o si volvieron a backlog sin fecha — pedirle a Luis una captura actualizada
-de "Contenido → Programado" si esta columna importa de nuevo.
+De las 8 filas que tenía esta tabla en la captura de YouTube Studio del 2026-08-20, 4 ya
+se publicaron (Zombies Ate My Neighbors, Atari 2600 Top Mundial, Top Gear, Pokémon
+Rojo/Azul — movidas a 1.2). Las 4 que quedan abajo Luis confirmó que siguen siendo las
+programadas actuales, pese a que las fechas originales de la captura vieja ya pasaron
+(quedan solo como referencia de cuándo se armó la cola, no como fecha real de estreno).
 
-| Fecha (obsoleta) | Título | Slug | Categoría |
+| Fecha (referencial, no confirmada) | Título | Slug | Categoría |
 |---|---|---|---|
 | 25 ago 2026 | Yoshi estuvo 5 años esperando este juego para nacer (Super Mario World) | `resena-super-mario-world` | Reseña |
 | 27 ago 2026 | El juego que Sega inspiró en las películas de Conan (Golden Axe) | `resena-golden-axe` | Reseña |
@@ -176,10 +172,11 @@ se publica tal cual.
 
 - **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **sigue siendo la brecha más
   grande del canal**, sin cambios desde julio.
-- **Reseñas:** 38 armadas, 13 publicadas (verificado en vivo 2026-09-03), 4 con fecha
-  programada obsoleta sin confirmar (21 de backlog puro) — formato más nuevo del canal,
-  el que más rápido está publicando (5 reseñas nuevas en las últimas 2 semanas), y aun así
-  sigue siendo el segundo backlog más grande en volumen absoluto.
+- **Reseñas:** 38 armadas, 13 publicadas (verificado en vivo 2026-09-03), 4 programadas
+  confirmadas por Luis (Golden Axe, Super Mario World, Chrono Trigger, Street Fighter II —
+  21 de backlog puro) — formato más nuevo del canal, el que más rápido está publicando (5
+  reseñas nuevas en las últimas 2 semanas), y aun así sigue siendo el segundo backlog más
+  grande en volumen absoluto.
 - **Rankings:** 20 armados, 10 publicados, 1 programado (9 de backlog).
 - **Curaduría N64:** 5 armados, 0 publicados — sigue sin casa en el menú de playlists.
 - **RetroNotas:** 2 armadas, 0 publicadas — formato nuevo, sin playlist propia todavía.
