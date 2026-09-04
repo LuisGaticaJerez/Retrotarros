@@ -9,6 +9,13 @@
 > JSON interno `ytInitialData` — 1.26 K suscriptores, 55 videos totales incluyendo shorts).
 > La sección 1 (capítulos largos) fue reconstruida completa esta fecha. La sección 2
 > (shorts) sigue con la última verificación de 2026-07-21 — no se reauditó esta vez.
+>
+> **Re-verificación puntual de Reseñas: 2026-09-03** (pestaña Videos en vivo, orden "Más
+> recientes", 1.41 K suscriptores, 64 videos). Solo se reauditó la categoría Reseñas (fila
+> 1.1/1.2/1.3 de abajo) — Rankings/Sagas/Specials/Curaduría/RetroNotas siguen con los datos
+> del 2026-08-20 aunque 3 de esos videos (Atari 2600 Top Mundial + Top Precios, PS Vita Top
+> Mundial) también se confirmaron publicados de paso; sus conteos de categoría no se
+> recalcularon todavía.
 
 ## Cómo leer esto
 
@@ -27,7 +34,7 @@
 
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
-| Reseñas | 32 | 8 | 7 | 17 |
+| Reseñas | 38 | 13 | 4 | 21 |
 | Rankings (Top Mundial + Top Precios, 10 consolas) | 20 | 10 | 1 | 9 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
@@ -45,28 +52,34 @@ publicados.
 
 ---
 
-### 1.1 Programados (8) — fuente: captura YouTube Studio (2026-08-20) + fecha agregada por Luis
+### 1.1 Programados — Reseñas (4, estado 2026-09-03)
 
-| Fecha | Título | Slug | Categoría |
+**OBSOLETO, no confiar en las fechas:** esta tabla venía de una captura de YouTube Studio
+del 2026-08-20. Al reverificar el canal en vivo el 2026-09-03, 4 de las 8 filas que tenía
+(Zombies Ate My Neighbors, Atari 2600 Top Mundial, Top Gear, Pokémon Rojo/Azul) ya estaban
+publicadas — se movieron a 1.2. Las 4 que quedan abajo siguen SIN aparecer en el canal
+pese a que sus fechas programadas ya pasaron (o están por pasar) — el orden real de
+publicación de Luis no coincidió con este calendario viejo. Sin una captura nueva de
+YouTube Studio no se puede confirmar si siguen programadas para esas fechas, si se
+reordenaron, o si volvieron a backlog sin fecha — pedirle a Luis una captura actualizada
+de "Contenido → Programado" si esta columna importa de nuevo.
+
+| Fecha (obsoleta) | Título | Slug | Categoría |
 |---|---|---|---|
-| 20 ago 2026 | Zombies Ate My Neighbors: ¿envejeció bien el shooter de LucasArts? | `resena-zombies-ate-my-neighbors` | Reseña |
-| 23 ago 2026 | Atari 2600: el Top 10 mundial según la crítica | `atari-2600-top-mundial` | Ranking |
 | 25 ago 2026 | Yoshi estuvo 5 años esperando este juego para nacer (Super Mario World) | `resena-super-mario-world` | Reseña |
 | 27 ago 2026 | El juego que Sega inspiró en las películas de Conan (Golden Axe) | `resena-golden-axe` | Reseña |
 | 1 sept 2026 | El juego que Capcom no le tenía Fe (Street Fighter II) | `resena-street-fighter-ii` | Reseña |
 | 4 sept 2026 | Chrono Trigger: el RPG de un viaje de 4 días entre 3 leyendas | `resena-chrono-trigger` | Reseña |
-| 8 sept 2026 | Top Gear: el juego de carreras que creció con toda Latinoamérica | `resena-top-gear-pedido` | Reseña |
-| 10 sept 2026 | Pokémon Rojo y Azul: la versión que jugaste NO es la que creías | `resena-pokemon-red-blue-pedido` | Reseña |
-
-**Nota:** Zombies Ate My Neighbors figura programado para HOY (20 ago) en la captura, pero
-al verificar el canal en vivo todavía no aparece publicado — sigue en cola.
 
 ---
 
-### 1.2 Publicados (25 + Abriendo el Tarro + 2 G-OLD)
+### 1.2 Publicados (25 + Abriendo el Tarro + 2 G-OLD, más las Reseñas nuevas de abajo)
 
-**Reseñas (8):** Donkey Kong Country, Kirby's Adventure, Killer Instinct, Mega Man 2,
-Mortal Kombat, Pitfall: The Mayan Adventure, Super Mario Bros. 3, Super Metroid.
+**Reseñas (13) — verificado en vivo 2026-09-03, orden del más reciente al más antiguo:**
+Cadillacs and Dinosaurs (recién publicada, hace minutos), Jewel Master, Top Gear, Pokémon
+Rojo/Azul, Zombies Ate My Neighbors, Super Metroid, Mega Man 2, Donkey Kong Country,
+Kirby's Adventure, Killer Instinct, Pitfall: The Mayan Adventure, Mortal Kombat, Super
+Mario Bros. 3.
 
 **Rankings (10):** Master System Top Mundial + Top Precios, Mega Drive Top Mundial, NES
 Top Mundial + Top Precios, SNES Top Mundial + Top Precios, N64 Top Mundial + Top Precios,
@@ -88,10 +101,11 @@ PS Vita Top Mundial.
 
 ### 1.3 Backlog armado — listo para programar, sin fecha (48)
 
-**Reseñas (17):** Aladdin, Altered Beast, Battletoads, Contra, Crash Bandicoot, Earthbound,
-Earthworm Jim, Fatal Fury, Final Fight, International Superstar Soccer, King of Fighters '94,
-Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star Fox,
-Yoshi's Island.
+**Reseñas (21) — verificado en vivo 2026-09-03:** Aladdin, Altered Beast, Battletoads,
+Contra, Crash Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, International
+Superstar Soccer, King of Fighters '94, Kirby Super Star, A Link to the Past, Sonic the
+Hedgehog, Sonic the Hedgehog 2, Star Fox, Yoshi's Island, más 4 pedidas: The Legend of
+Zelda, Metal Gear Solid, Metal Warriors, Super Smash Bros. Melee.
 
 **Rankings (9):** Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
 Top Precios, Saturn Top Mundial + Top Precios, Atari 2600 Top Precios, Game Boy Top
@@ -162,8 +176,10 @@ se publica tal cual.
 
 - **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **sigue siendo la brecha más
   grande del canal**, sin cambios desde julio.
-- **Reseñas:** 32 armadas, 8 publicadas, 7 programadas (17 de backlog puro) — formato más
-  nuevo del canal y ya es el segundo backlog más grande en volumen absoluto.
+- **Reseñas:** 38 armadas, 13 publicadas (verificado en vivo 2026-09-03), 4 con fecha
+  programada obsoleta sin confirmar (21 de backlog puro) — formato más nuevo del canal,
+  el que más rápido está publicando (5 reseñas nuevas en las últimas 2 semanas), y aun así
+  sigue siendo el segundo backlog más grande en volumen absoluto.
 - **Rankings:** 20 armados, 10 publicados, 1 programado (9 de backlog).
 - **Curaduría N64:** 5 armados, 0 publicados — sigue sin casa en el menú de playlists.
 - **RetroNotas:** 2 armadas, 0 publicadas — formato nuevo, sin playlist propia todavía.
