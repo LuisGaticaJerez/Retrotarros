@@ -16,7 +16,7 @@ Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes.
 ```
 Ningún juego de este top apareció en nuestro Top Mundial de Game Boy. Esa es la paradoja: lo caro no es lo famoso. Hoy repasamos los 10 cartuchos de Game Boy que hoy valen más que la consola misma 💰
 
-Del piso al techo: Castlevania Legends, Mega Man V, Kid Dracula (un import japonés que nunca tuvo traducción oficial hasta 2019), hasta el trono de Amazing Tater -una papa protagonista que hoy vale más de 4.000 dólares completo en caja-. Y cerramos con el santo grial: Trip World, un juego que NUNCA se vendió en Estados Unidos.
+Del piso al techo: Castlevania Legends, Mega Man V, Kid Dracula (un import japonés que nunca tuvo traducción oficial hasta 2019), hasta el trono del #1: Trip World, un juego que NUNCA se vendió en Estados Unidos. Y cerramos con el santo grial de verdad: Amazing Tater -una papa protagonista que hoy vale más de 4.000 dólares completo en caja, el precio más alto de todo el top-.
 
 Precios CIB actualizados agosto 2026, vía PriceCharting. Valores aproximados, nunca consejo de inversión.
 
@@ -33,8 +33,8 @@ Precios CIB actualizados agosto 2026, vía PriceCharting. Valores aproximados, n
 10:30 #4 Spud's Adventure (~$2.420)
 12:00 #3 F1 Pole Position (~$2.447)
 13:30 #2 Sumo Fighter (~$3.421)
-15:00 #1 Amazing Tater (~$4.381)
-16:30 Santo Grial: Trip World (~$4.200, nunca salió en USA)
+15:00 #1 Trip World (~$4.200, nunca salió en USA)
+16:30 Santo Grial: Amazing Tater (~$4.381, el más caro de todo el top)
 18:00 Análisis del top
 19:00 Cierre
 
@@ -73,4 +73,4 @@ game boy juegos caros, amazing tater precio, trip world game boy, mega man v gam
 
 **Slug:** `gameboy-top-precios`
 **Formato:** Ranking (episodio largo, horizontal)
-**Última actualización:** 2026-08-20
+**Última actualización:** 2026-09-03 (se invirtieron los roles de #1 y Santo Grial -ver pauta)

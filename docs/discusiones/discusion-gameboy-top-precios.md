@@ -8,6 +8,8 @@ Documento de trabajo: el "detras de escena" del armado del ranking. NO es la pau
 
 Ranking 100% objetivo por precio CIB (Complete In Box) via PriceCharting, consultado agosto 2026. A diferencia del Top Mundial (subjetivo, invita a debate), aca los numeros mandan -pero el ANGULO editorial es la paradoja: ninguno de los 10 mas caros aparecio en el Top Mundial. Lo caro es lo raro, no lo famoso.
 
+> **Corrección 2026-09-03 (grabando):** el armado original (ver tabla y sección "Decisiones de armado" abajo) puso a Trip World como Santo Grial pese a valer MENOS en dolares que el #1 (Amazing Tater) -la logica era "region manda sobre precio". Al grabar, a Luis no le cuadro: en un top de PRECIOS, el grial deberia ser el techo, no un peldaño mas abajo que #1. Se invirtieron los roles: Amazing Tater ($4.381, el precio mas alto del top) pasa a Santo Grial; Trip World ($4.200) pasa a #1, con la aclaracion de que nunca se vendio en EEUU. La tabla de abajo y la seccion 3 de "Decisiones de armado" quedan como registro del razonamiento VIEJO -el HTML ya tiene el orden nuevo.
+
 ---
 
 ## El orden y sus polemicas
@@ -61,8 +63,8 @@ Ranking 100% objetivo por precio CIB (Complete In Box) via PriceCharting, consul
    - F1 Pole Position: Wikipedia trajo la caja de SNES (existe un "F1 Pole Position" distinto en esa consola). Corregido con LaunchBox, entrada especifica de Game Boy (id 18050).
    - Toxic Crusaders: Wikipedia trajo la caja de Sega Genesis. Corregido con LaunchBox (id 21154, confirmado plataforma Game Boy).
    - Sumo Fighter y Knight Quest: la busqueda automatica fallo directamente (sin match o match incorrecto tipo "Vega Street Fighter"/"Quest for Camelot"). Ambas resueltas manualmente via LaunchBox.
-3. Trip World como Santo Grial en vez de incluirlo en el top 10 retail -su valor real no es solo el precio (de hecho es MENOS caro en dolares que Amazing Tater), es que nunca estuvo a la venta en EEUU. Encaja mejor como cierre mitico que como entrada #1 del top retail.
-4. Kid Dracula se mantuvo en el top 10 normal (no como grial aparte) pese a ser import japones, aclarando la excepcion en pantalla -a diferencia de Trip World, si tuvo venta retail real (en Japon).
+3. ~~Trip World como Santo Grial en vez de incluirlo en el top 10 retail -su valor real no es solo el precio (de hecho es MENOS caro en dolares que Amazing Tater), es que nunca estuvo a la venta en EEUU. Encaja mejor como cierre mitico que como entrada #1 del top retail.~~ **Revertido 2026-09-03**: Luis prefirio que el precio mande sin excepcion -Trip World paso a #1 (con la aclaracion de region en pantalla), Amazing Tater paso a Santo Grial (el precio mas alto de todos, sin discusion posible).
+4. Kid Dracula se mantuvo en el top 10 normal (no como grial aparte) pese a ser import japones, aclarando la excepcion en pantalla -a diferencia de Trip World (ahora #1), si tuvo venta retail real (en Japon). Mismo patron de "aclarar la excepcion en pantalla" se aplico a Trip World en su nuevo puesto.
 
 ---
 
