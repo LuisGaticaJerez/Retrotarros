@@ -37,6 +37,6 @@ Dato curioso: para vencer a Psycho Mantis en el juego original, la clave literal
 
 ---
 
-**Slug:** `resena-metal-gear-solid`
+**Slug:** `resena-metal-gear-solid-pedido`
 **Formato:** Reseña (horizontal, hasta 10 min)
 **Última actualización:** 2026-08-26

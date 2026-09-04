@@ -35,6 +35,6 @@ Dato curioso: este beat-em-up nunca tuvo port a consola casera -ni siquiera hoy 
 
 ---
 
-**Slug:** `resena-cadillacs-and-dinosaurs`
+**Slug:** `resena-cadillacs-and-dinosaurs-pedido`
 **Formato:** Reseña (horizontal, hasta 10 min)
 **Última actualización:** 2026-08-26

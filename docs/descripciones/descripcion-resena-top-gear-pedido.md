@@ -35,6 +35,6 @@ Dato random: Top Gear NO usa Mode 7 para la pista -eso es solo en la pantalla de
 
 ---
 
-**Slug:** `resena-top-gear`
+**Slug:** `resena-top-gear-pedido`
 **Formato:** Reseña (horizontal, hasta 10 min)
 **Última actualización:** 2026-08-15

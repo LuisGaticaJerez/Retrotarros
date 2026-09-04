@@ -37,6 +37,6 @@ Dato curioso: en la version japonesa original (Famicom Disk System), el enemigo 
 
 ---
 
-**Slug:** `resena-legend-of-zelda`
+**Slug:** `resena-legend-of-zelda-pedido`
 **Formato:** Reseña (horizontal, hasta 10 min)
 **Última actualización:** 2026-08-26

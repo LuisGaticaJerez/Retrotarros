@@ -37,6 +37,6 @@ Te contamos por qué el cable Link fue la primera mecánica social real en un vi
 
 ---
 
-**Slug:** `resena-pokemon-red-blue`
+**Slug:** `resena-pokemon-red-blue-pedido`
 **Formato:** Reseña (horizontal, hasta 10 min)
 **Última actualización:** 2026-08-13

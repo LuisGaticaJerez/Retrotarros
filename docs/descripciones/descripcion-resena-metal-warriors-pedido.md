@@ -35,6 +35,6 @@ Dato curioso: mucha gente cree que Metal Warriors es la secuela de Cybernator -n
 
 ---
 
-**Slug:** `resena-metal-warriors`
+**Slug:** `resena-metal-warriors-pedido`
 **Formato:** Reseña (horizontal, hasta 10 min)
 **Última actualización:** 2026-08-31

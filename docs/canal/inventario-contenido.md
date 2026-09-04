@@ -55,8 +55,8 @@ publicados.
 | 27 ago 2026 | El juego que Sega inspiró en las películas de Conan (Golden Axe) | `resena-golden-axe` | Reseña |
 | 1 sept 2026 | El juego que Capcom no le tenía Fe (Street Fighter II) | `resena-street-fighter-ii` | Reseña |
 | 4 sept 2026 | Chrono Trigger: el RPG de un viaje de 4 días entre 3 leyendas | `resena-chrono-trigger` | Reseña |
-| 8 sept 2026 | Top Gear: el juego de carreras que creció con toda Latinoamérica | `resena-top-gear` | Reseña |
-| 10 sept 2026 | Pokémon Rojo y Azul: la versión que jugaste NO es la que creías | `resena-pokemon-red-blue` | Reseña |
+| 8 sept 2026 | Top Gear: el juego de carreras que creció con toda Latinoamérica | `resena-top-gear-pedido` | Reseña |
+| 10 sept 2026 | Pokémon Rojo y Azul: la versión que jugaste NO es la que creías | `resena-pokemon-red-blue-pedido` | Reseña |
 
 **Nota:** Zombies Ate My Neighbors figura programado para HOY (20 ago) en la captura, pero
 al verificar el canal en vivo todavía no aparece publicado — sigue en cola.

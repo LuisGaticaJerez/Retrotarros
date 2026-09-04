@@ -37,6 +37,6 @@ Este pedido tiene una historia curiosa: Jewel Master iba a ser otro juego comple
 
 ---
 
-**Slug:** `resena-jewel-master`
+**Slug:** `resena-jewel-master-pedido`
 **Formato:** Reseña (horizontal, hasta 10 min)
 **Última actualización:** 2026-08-26
