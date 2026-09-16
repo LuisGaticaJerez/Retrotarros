@@ -14,7 +14,7 @@ Doc para copiar/pegar al subir la reseña. Español chileno neutro, con tildes.
 ## Descripción (copiar/pegar)
 
 ```
-Repasamos Montezuma's Revenge, el cartucho de Atari de 1984 que programó un chico de 16 años en su pieza -Robert Jaeger lo mostró en el CES de 1983 y Parker Brothers se lo compró para publicarlo en toda la familia Atari 🗝️🔥
+Nos lo pidieron en los comentarios: Montezuma's Revenge, el cartucho de Atari de 1984 que programó un chico de 16 años en su pieza -Robert Jaeger lo mostró en el CES de 1983 y Parker Brothers se lo compró para publicarlo en toda la familia Atari 🗝️🔥
 
 Panama Joe explora una pirámide azteca de 9 pisos sin mapa, sin pistas y sin puntos de guardado -precursor real del género que hoy conocemos como Metroidvania, dos años antes de que existiera Metroid. Te contamos por qué la versión de Atari 2600 que todos recuerdan es literalmente la mitad del juego original, y por qué este cartucho de 1984 sigue vivo hoy en los laboratorios de inteligencia artificial: DeepMind y otros lo usan para probar algoritmos, porque conseguir la primera recompensa requiere una secuencia larga y precisa de movimientos sin ninguna señal de que vas bien.
 
@@ -35,6 +35,6 @@ Dato curioso: para conseguir la primera recompensa del juego, un algoritmo de in
 
 ---
 
-**Slug:** `resena-montezumas-revenge`
+**Slug:** `resena-montezumas-revenge-pedido`
 **Formato:** Reseña (horizontal, hasta 10 min)
-**Última actualización:** 2026-09-14
+**Última actualización:** 2026-09-15 (corregida como pedido de @rodrigorivera5519 — el mismo comentario pide también Samurai Shodown de arcade, queda en la cola)
