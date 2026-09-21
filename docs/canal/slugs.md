@@ -48,13 +48,14 @@ G:\Mi unidad\Studio\pautas\pauta-n64-top-mundial.docx  ← DOCX para imprimir/le
 
 ### Otros (futuros)
 
-| Slug | Episodio | Estado |
-|------|----------|--------|
-| `snes-ranking` | Top SNES (mismo formato que N64) | ☐ Futuro |
-| `snes-hardware-raro` | Consolas y periféricos SNES | ☐ Futuro |
-| `snes-no-latam` | Juegos SNES que no llegaron a Latam | ☐ Futuro |
-| `snes-ost-bateria` | OST en batería · Gen 4 SNES | ☐ Futuro |
-| `ps1-ranking` | Top PS1 | ☐ Futuro |
+| Slug | Episodio | Estado | Tablero |
+|------|----------|--------|---------|
+| `snes-ranking` | Top SNES (mismo formato que N64) | ☐ Futuro | |
+| `snes-hardware-raro` | Consolas y periféricos SNES | ☐ Futuro | |
+| `snes-no-latam` | Juegos SNES que no llegaron a Latam | ☐ Futuro | |
+| `snes-ost-bateria` | OST en batería · Gen 4 SNES | ☐ Futuro | |
+| `ps1-top-mundial` | Top 10 PS1 según la crítica | ✓ Cerrado para grabar | [arco](../arcos/ps1.md) |
+| `ps1-top-precios` | Top 10 PS1 más caros del mundo | ✓ Cerrado para grabar | [arco](../arcos/ps1.md) |
 | `indie-lat-001` | Primer episodio Indie Lat (TBD) | ☐ Futuro |
 
 ---

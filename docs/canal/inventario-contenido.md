@@ -35,7 +35,7 @@
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
 | Reseñas | 38 | 13 | 4 | 21 |
-| Rankings (Top Mundial + Top Precios, 10 consolas) | 20 | 10 | 1 | 9 |
+| Rankings (Top Mundial + Top Precios, 11 consolas) | 22 | 10 | 1 | 11 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
@@ -103,9 +103,10 @@ Superstar Soccer, King of Fighters '94, Kirby Super Star, A Link to the Past, So
 Hedgehog, Sonic the Hedgehog 2, Star Fox, Yoshi's Island, más 4 pedidas: The Legend of
 Zelda, Metal Gear Solid, Metal Warriors, Super Smash Bros. Melee.
 
-**Rankings (9):** Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
+**Rankings (11):** Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
 Top Precios, Saturn Top Mundial + Top Precios, Atari 2600 Top Precios, Game Boy Top
-Mundial + Top Precios (recién armados 2026-08-20).
+Mundial + Top Precios (recién armados 2026-08-20), PS1 Top Mundial + Top Precios (recién
+armados 2026-09-21 — apertura del arco PS1, ver `docs/arcos/ps1.md`).
 
 **Sagas (11):** Donkey Kong, Kirby, Mario, Mega Man, Metal Gear, Metroid, Mortal Kombat,
 Resident Evil, Smash Bros, Sonic, Street Fighter. **Sigue siendo el mayor backlog del
