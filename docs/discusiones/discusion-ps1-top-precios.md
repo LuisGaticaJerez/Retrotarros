@@ -32,8 +32,8 @@ Ranking 100% objetivo por precio CIB (Complete In Box) via PriceCharting, consul
 ## Decisiones duras (que quedo afuera)
 
 - **Koudelka, Shadow Tower, Einhander, Castlevania Chronicles**: todos con precios CIB similares o mayores a varios del top 10 elegido, pero se priorizo variedad de generos/publishers antes que meter 4 juegos mas de nicho similar. Quedan como candidatos para un "top precios volumen 2" si se retoma la consola.
-- **NFL Blitz 2000 [Greatest Hits]**: se considero para el top 10 retail por su precio ($3.600 sellado) pero se dejo en rarezas porque el precio "headline" es de una copia sellada, no CIB estandar -mismo criterio que el santo grial, para no mezclar escalas de precio distintas en la misma tabla.
-- **Mortal Kombat 3 [Jewel Case]**: se incluyo en rarezas pese a NO tener precio de mercado establecido -el dato en si (solo 3-4 copias confirmadas existentes) es mas fuerte narrativamente que cualquier cifra.
+- **NFL Blitz 2000 [Greatest Hits]**: primer intento uso una cifra de $3.600 sacada de un blog secundario -al verificar directo en PriceCharting el CIB real es USD 11.225 (con solo 4 ventas completadas EN TOTAL registradas, nunca por año). Se queda en rarezas y NO compite por posicion en el top 10 pese a ser mas caro que todo el top junto, porque nunca se vendio en retail normal -"se imprimio por error y se retiro casi por completo antes de salir a la venta" segun la propia ficha de PriceCharting. Aclarar esto en camara: el apartado de rarezas no es "menos caro", es "no vendido en tiendas".
+- **Mortal Kombat 3 [Jewel Case]**: primer intento lo dejo sin precio por falta de dato. Se encontro el precio real en PriceCharting: USD 961 CIB, con apenas ~3 ventas por año registradas -confirma que es autentica rareza de mercado, no solo falta de investigacion.
 
 ---
 
@@ -61,3 +61,13 @@ Ranking 100% objetivo por precio CIB (Complete In Box) via PriceCharting, consul
 2. **2 correcciones de box art durante la investigacion**: Tales of Destiny II (Wikipedia trajo la portada JAPONESA con el titulo real "Tales of Eternia"), JoJo's Bizarre Adventure (Wikipedia trajo un flyer de ARCADE de "JoJo's Venture", nombre distinto al juego de PS1 "JoJo's Bizarre Adventure") -ambas corregidas via LaunchBox Games Database, buscando especificamente la entrada de PlayStation.
 3. Resident Evil 2 (usado en el Top Mundial, no en este top) tambien tuvo correccion: el primer resultado de LaunchBox era la reedicion "Platinum", se busco especificamente el SKU original de 1998.
 4. Rarezas y grial no estaban en Wikipedia/LaunchBox en formato utilizable -se recurrio a fuentes especializadas: blog.pricecharting.com para Syphon Filter 3 911 Edition, game-rave.com para NFL Blitz 2000 Greatest Hits (recortada de un spread front+back+disc), psxdatacenter.com para el Tekken Long Box (escaneo especifico del formato de empaque, distinto del jewel case estandar).
+
+## Correccion 2026-09-21 (mismo dia, antes de grabar)
+
+Luis pidio revisar que el grial fuera siempre el mas caro y que las rarezas fueran rarezas de verdad. Al reverificar los 3 precios de rarezas DIRECTO en PriceCharting (en vez de fuentes secundarias como blogs/wikis), 2 de los 3 cambiaron fuerte:
+
+- **Syphon Filter 3 [911 Edition]**: de "~$1.000+" (estimado de fuentes secundarias) a **USD 1.062** (rango real $600-$2.761 en PriceCharting) -ajuste menor, confirma el dato.
+- **Mortal Kombat 3 [Jewel Case]**: de "sin precio" a **USD 961 CIB** -SI existe entrada en PriceCharting, con ~3 ventas por año registradas. No hacia falta dejarlo sin precio.
+- **NFL Blitz 2000 [Greatest Hits]**: de "~$3.600 sellado" (un blog) a **USD 11.225 CIB** (PriceCharting directo) -correccion grande. Ademas la ficha de PriceCharting confirma que "se imprimio por error y se retiro casi por completo antes de salir a la venta", con apenas 4 ventas CIB completadas EN TOTAL en la historia del listado -esto es mejor dato narrativo que la version anterior ("nunca debio tener Greatest Hits", que sonaba a especulacion sin fuente clara).
+
+Con los 3 corregidos, la jerarquia de precios en pantalla queda: $653 (techo del top 10 retail) < $961 < $1.062 < $11.225 (rarezas) < **$55.200 (grial)**. El grial sigue siendo, por mucho margen, el precio mas alto de todo el episodio -y las 3 rarezas quedan confirmadas como genuinamente "no-retail" (ninguna se vendio en tiendas de forma normal: Syphon Filter 3 y NFL Blitz 2000 fueron retiradas antes/durante el lanzamiento, Mortal Kombat 3 Jewel Case es una variante de produccion anomala con apenas 3-4 copias conocidas).

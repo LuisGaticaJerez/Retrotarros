@@ -16,7 +16,7 @@ Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes.
 ```
 Nada de esto es Final Fantasy VII ni Metal Gear Solid. Lo caro en PS1 son los JRPG y juegos de nicho japonés que vendieron poco en Occidente. Hoy repasamos los 10 discos que hoy valen más que la consola misma, más un santo grial que se vendió en subasta por 55 mil dólares 💰
 
-Del piso al techo: Suikoden II, Klonoa, Persona 2, hasta el trono de The Misadventures of Tron Bonne -un spin-off de Mega Man Legends tan poco vendido que Capcom nunca repitió la fórmula-. Y cerramos con rarezas reales: la portada de Syphon Filter 3 retirada tras el 11-S, una variante de Mortal Kombat 3 de la que solo existen 3 o 4 copias, y el santo grial: un Tekken sellado y graduado que rompió récords de subasta.
+Del piso al techo: Suikoden II, Klonoa, Persona 2, hasta el trono de The Misadventures of Tron Bonne -un spin-off de Mega Man Legends tan poco vendido que Capcom nunca repitió la fórmula-. Y cerramos con rarezas reales, ninguna vendida jamás en tiendas: la portada de Syphon Filter 3 retirada tras el 11-S, un NFL Blitz 2000 impreso por error y retirado antes de salir a la venta (con apenas 4 ventas registradas en la historia del mercado retro), una variante de Mortal Kombat 3 de la que solo existen 3 o 4 copias, y el santo grial: un Tekken sellado y graduado que rompió récords de subasta.
 
 Precios CIB actualizados septiembre 2026, vía PriceCharting. Valores aproximados, nunca consejo de inversión.
 
