@@ -56,6 +56,8 @@ G:\Mi unidad\Studio\pautas\pauta-n64-top-mundial.docx  ← DOCX para imprimir/le
 | `snes-ost-bateria` | OST en batería · Gen 4 SNES | ☐ Futuro | |
 | `ps1-top-mundial` | Top 10 PS1 según la crítica | ✓ Cerrado para grabar | [arco](../arcos/ps1.md) |
 | `ps1-top-precios` | Top 10 PS1 más caros del mundo | ✓ Cerrado para grabar | [arco](../arcos/ps1.md) |
+| `gamecube-top-mundial` | Top 10 GameCube según la crítica | ✓ Cerrado para grabar | [arco](../arcos/gamecube.md) |
+| `gamecube-top-precios` | Top 10 GameCube más caros del mundo | ☐ En investigación | [arco](../arcos/gamecube.md) |
 | `indie-lat-001` | Primer episodio Indie Lat (TBD) | ☐ Futuro |
 
 ---
