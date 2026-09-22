@@ -35,7 +35,7 @@
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
 | Reseñas | 38 | 13 | 4 | 21 |
-| Rankings (Top Mundial + Top Precios, 11 consolas) | 22 | 10 | 1 | 11 |
+| Rankings (Top Mundial + Top Precios, 11 consolas) | 22 | 14 | ? | 8 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |

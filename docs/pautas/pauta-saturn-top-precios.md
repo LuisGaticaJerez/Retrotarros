@@ -16,27 +16,30 @@ El juego mas caro del Saturn americano valia 5 mil dolares y solo lo conseguias 
 
 ## Retail CIB (#9 → #1)
 
-| # | Juego | CIB | Por que |
+> **Reverificado 2026-09-21 directo en PriceCharting** (auditoria canon disparada por la correccion de PS1). Todos los precios cambiaron -la mayoria mas de 20%- y el orden se reordeno completo. Fuente anterior (CBR/GameRant/Racketboy) quedo desactualizada.
+
+| # | Juego | CIB (PriceCharting sept 2026) | Por que |
 |---|---|---|---|
-| 9 | Saturn Bomberman | ~$172 | Party game (top mundial), demanda multiplayer |
-| 8 | Shining Force III | ~$174 | SRPG; los Scenario 2/3 japoneses aun mas caros |
-| 7 | The House of the Dead | ~$245 | Origen saga zombies, late release 1998 |
-| 6 | Contra: Legacy of War | ~$279 | Contra 3D odiado = tirada minima = raro |
-| 5 | Radiant Silvergun | ~$300 | Shmup Treasure, exclusivo Japon |
-| 4 | Magic Knight Rayearth | ~$435 | Working Designs, ULTIMO juego oficial USA |
-| 3 | Mega Man 8 | ~$500 | Version Saturn con 2 jefes exclusivos |
-| 2 | Burning Rangers | ~$750 | Ultimo Sonic Team del Saturn, late release |
-| 1 | Panzer Dragoon Saga | ~$1.000+ | 30 mil copias, codigo perdido, rey retail |
+| 9 | Radiant Silvergun | ~$198 (solo listado JP, sin version NTSC USA) | Shmup Treasure, exclusivo Japon |
+| 8 | Shining Force III | ~$276 | SRPG; los Scenario 2/3 japoneses aun mas caros |
+| 7 | Contra: Legacy of War | ~$299 | Contra 3D odiado = tirada minima = raro |
+| 6 | The House of the Dead | ~$481 | Origen saga zombies, late release 1998 |
+| 5 | Saturn Bomberman | ~$510 | Party game (top mundial), demanda multiplayer |
+| 4 | Mega Man 8 | ~$630 | Version Saturn con 2 jefes exclusivos |
+| 3 | Burning Rangers | ~$708 | Ultimo Sonic Team del Saturn, late release |
+| 2 | Magic Knight Rayearth | ~$975 | Working Designs, ULTIMO juego oficial USA -casi alcanza al #1 |
+| 1 | Panzer Dragoon Saga | ~$1.225 | 30 mil copias, codigo perdido, rey retail |
 
 ## Santo Grial
 
-- **Daytona USA: CCE NetLink Edition** (~$5.000): version online (NetLink) de Daytona CCE, solo por pedido directo a Sega por correo. Userbase chico + venta por correo = poquisimas copias. El juego de Saturn USA mas caro documentado.
+- **Daytona USA: CCE NetLink Edition** (~$6.500 CIB, verificado PriceCharting sept 2026, venta mas reciente $6.499,99 abril 2026): version online (NetLink) de Daytona CCE, solo por pedido directo a Sega por correo. Userbase chico + venta por correo = poquisimas copias (historial de ventas: $1.750 en 2021 a $9.999,99 en 2022, apenas 1 venta al año). El juego de Saturn USA mas caro documentado -sigue siendo, por lejos, mas caro que el #1 del retail ($1.225).
 
 ## Puntos polemicos (para comentarios)
 
-- Lo caro no es lo bueno: Contra Legacy of War (mediocre) cuesta mas que muchas joyas. Rareza > calidad.
+- Lo caro no es lo bueno: Contra Legacy of War (mediocre) cuesta mas que varias joyas del top. Rareza > calidad.
 - Mega Man 8 Saturn vale por 2 jefes extra que PS1 no tiene. Dato fino para fans.
-- El grial es un Daytona online que se pedia por correo: casi nadie sabe que existe.
+- El grial es un Daytona online que se pedia por correo: casi nadie sabe que existe. Y con los precios reverificados, sigue siendo mas del quintuple del #1 retail.
+- Magic Knight Rayearth (Working Designs) resulto MUCHO mas caro de lo estimado originalmente -pasa a ser el #2, casi empata con Panzer Dragoon Saga.
 
 ## Veredicto (slide 14)
 

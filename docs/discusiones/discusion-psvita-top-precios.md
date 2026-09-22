@@ -14,6 +14,15 @@
 > al #2, Trails of Cold Steel II y Disgaea 4 se desplomaron, Atelier Rorona Plus salió
 > del ranking (nunca tuvo release físico NTSC-US, era digital-only) y entró Gravity
 > Rush. Se sumó Papers Please a las rarezas. Ver `pauta-psvita-top-precios.md`.
+>
+> **Auditoría canon 2026-09-21** (revisión de todo el backlog top-precios sin
+> estrenar, disparada por la corrección de PS1): reverificados directo en
+> PriceCharting el techo retail y el grial. Persona 4 Golden Solid Gold sigue en
+> $302, Revenge of the Bird King (tope de Limited Run) confirmado en $1.028,85, y
+> el santo grial Binding of Isaac: Rebirth confirmado en $4.000,04 CIB (solo 3
+> ventas completadas registradas históricamente, rango $3.000-$6.631 — "unreleased
+> but ESRB rated game", nunca tuvo lanzamiento oficial en Vita). Jerarquía
+> confirmada correcta: $302 < $1.029 < $4.000. Sin cambios necesarios.
 
 ---
 

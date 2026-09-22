@@ -435,6 +435,13 @@ El episodio de precios SIEMPRE se arma en tres bloques, igual que `snes-top-prec
 - Distinguir **dos ejes** de "el más caro": por **rareza/escasez** (ej. NWC dorado, 26 copias) vs por **venta récord de copia sellada graduada** (ej. Super Mario Bros. sellado WATA 9.8 = USD 2M, récord NES 2026). El grial suele ser el récord de venta.
 - **Aclarar SIEMPRE en vivo** cuando el grial es una copia SELLADA Y GRADUADA (fenómeno boom WATA 2020-2021): NO es el cartucho suelto común. Da credibilidad y evita el "yo tengo ese, ¿valgo millones?".
 
+**REGLA CANON — auditoría grial/rarezas obligatoria antes de cerrar (Luis 2026-09-21):** nace de la corrección de PS1 Top Precios (2 de 3 rarezas tenían precios de fuentes secundarias, uno ~3x subestimado). Aplica a **todo top-precios sin estrenar**, tanto nuevo como backlog existente:
+1. **El santo grial debe ser, sin excepción, el ítem más caro de todo el episodio** — más caro que el #1 del top retail Y que cualquier rareza/joya del apartado intermedio. Si un dato vago ("$1.000+") o desactualizado deja esto en duda, hay que resolverlo con el número real antes de cerrar.
+2. **Toda rareza/joya del apartado intermedio debe ser genuinamente no-retail** (nunca se vendió en tiendas normales: promocional, torneo, prototipo, recall, exclusivo de canal directo/correo) — no solo "cara por tirada corta", eso pertenece al top retail numerado.
+3. **Precios de rarezas y grial: fuente PRIMARIA siempre** (fetch directo a pricecharting.com por juego, no blogs/wikis de segunda mano). Si el ítem no está en PriceCharting (exclusivos de Japón, ventas por correo, prototipos destruidos), usar la venta documentada más confiable posible (Heritage Auctions, foros serios, eBay sold listings) y decirlo así en las notas, nunca inventar un número.
+4. **Antes de tocar cualquier ranking backlog para esta auditoría, confirmar que sigue sin grabarse** (no publicado Y no programado/grabado aunque no sea público todavía) — mismo corolario que las reseñas: nunca desfasar un video ya filmado.
+5. Documentar el resultado de la auditoría en `discusion-{slug}.md` aunque no haya cambios (nota breve confirmando los números re-verificados) — así queda registro de que se revisó y no solo de las correcciones.
+
 ## TarroShorts de DATOS (lane TarroBot) — desde 2026-06-08
 
 Lane nueva de shorts conducidos por **TarroBot** (mascota) sobre un **tema curioso libre** (no atado a la colección): presenta el tema, suelta 5 datos y reacciona al gameplay en cada TarroVisión (placeholder para CapCut). Distinto a los TarroShorts derivados de episodios y a los guiones narrados por Luis (`docs/canal/guiones-shorts.md`).
