@@ -35,13 +35,13 @@
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
 | Reseñas | 38 | 13 | 4 | 21 |
-| Rankings (Top Mundial + Top Precios, 12 consolas) | 23 | 14 | ? | 9 |
+| Rankings (Top Mundial + Top Precios, 12 consolas) | 24 | 14 | ? | 10 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
 | RetroNotas | 2 | 0 | 0 | 2 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **81** | **25** | **8** | **48** |
+| **TOTAL** | **82** | **25** | **8** | **49** |
 
 Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
@@ -103,12 +103,14 @@ Superstar Soccer, King of Fighters '94, Kirby Super Star, A Link to the Past, So
 Hedgehog, Sonic the Hedgehog 2, Star Fox, Yoshi's Island, más 4 pedidas: The Legend of
 Zelda, Metal Gear Solid, Metal Warriors, Super Smash Bros. Melee.
 
-**Rankings (12):** Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
-Top Precios, Saturn Top Mundial + Top Precios, Atari 2600 Top Precios, Game Boy Top
-Mundial + Top Precios (recién armados 2026-08-20), PS1 Top Mundial + Top Precios (recién
+**Rankings (10):** Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
+Top Precios, Saturn Top Mundial + Top Precios, PS1 Top Mundial + Top Precios (recién
 armados 2026-09-21 — apertura del arco PS1, ver `docs/arcos/ps1.md`), GameCube Top Mundial
-(recién armado 2026-09-22 — apertura del arco GameCube, ver `docs/arcos/gamecube.md`;
-GameCube Top Precios todavía en investigación, no cuenta como armado hasta cerrar el HTML).
++ Top Precios (recién armados 2026-09-22 — apertura del arco GameCube completa, ver
+`docs/arcos/gamecube.md`; Top Precios con la auditoría canon aplicada desde el arranque).
+Atari 2600 Top Precios y Game Boy Top Mundial + Top Precios salieron de esta lista: ya
+están publicados en el canal (verificado en vivo 2026-09-21/22), el doc los tenía mal
+clasificados como backlog.
 
 **Sagas (11):** Donkey Kong, Kirby, Mario, Mega Man, Metal Gear, Metroid, Mortal Kombat,
 Resident Evil, Smash Bros, Sonic, Street Fighter. **Sigue siendo el mayor backlog del

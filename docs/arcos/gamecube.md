@@ -2,14 +2,14 @@
 
 **Generación 6 · 2001-2007 · El cubo morado, la generación más corta de Nintendo**
 
-> Cuarto arco del canal. GameCube vendió menos que N64 y muchísimo menos que PS2, pero fue de las generaciones más aclamadas por crítica de la historia de Nintendo: 5 de los 10 juegos del Top Mundial superan el 90 en Metacritic. Catálogo chico en volumen, altísimo en calidad -y con un santo grial de coleccionismo (Tetris Mega Drive Japón fue el de Mega Drive; acá el ángulo de precios recién se está armando).
+> Cuarto arco del canal. GameCube vendió menos que N64 y muchísimo menos que PS2, pero fue de las generaciones más aclamadas por crítica de la historia de Nintendo: 5 de los 10 juegos del Top Mundial superan el 90 en Metacritic. Catálogo chico en volumen, altísimo en calidad -y con un santo grial de coleccionismo propio: la steelbook sellada y graduada de Resident Evil 4 GameStop Special Edition, USD 1.499+.
 
 ---
 
 ## Resumen
 
-- **Episodios planeados:** 2 rankings. Top Mundial cerrado, Top Precios en investigación (auditoria canon aplicada desde el inicio).
-- **Cerrados:** 1 de 2 conocidos (50%).
+- **Episodios planeados:** 2 rankings. Ambos cerrados.
+- **Cerrados:** 2 de 2 conocidos (100%).
 - **Objetivo narrativo:** cubrir GameCube desde la crítica (top mundial) y el mercado (top precios) como apertura del arco -el resto se define con Luis.
 - **Colección de Retrotarros en GameCube:** 25 juegos -catálogo mediano, mezcla de first-party fuerte (Smash Melee, Mario Sunshine, Pokémon XD) y third-party de licencia (Batman Begins, Catwoman, Shrek, LEGO Star Wars).
 
@@ -32,7 +32,7 @@
 | # | Slug | Tipo | Estado | Pauta | Discusion | HTML |
 |---|------|------|--------|-------|-----------|------|
 | 1a | `gamecube-top-mundial` | Ranking · crítica | ✓ Cerrado para grabar | [pauta](docs/pautas/pauta-gamecube-top-mundial.md) | [discusion](docs/discusiones/discusion-gamecube-top-mundial.md) | [html](../../studio/rankings/top-mundial/gamecube-top-mundial.html) |
-| 1b | `gamecube-top-precios` | Ranking · mercado | ☐ En investigación (canon aplicado desde inicio) | — | — | — |
+| 1b | `gamecube-top-precios` | Ranking · mercado | ✓ Cerrado para grabar | [pauta](docs/pautas/pauta-gamecube-top-precios.md) | [discusion](docs/discusiones/discusion-gamecube-top-precios.md) | [html](../../studio/rankings/top-precios/gamecube-top-precios.html) |
 | 3 | `gamecube-coleccion` | Colección de Retrotarros | ☐ Idea, evaluar con 25 juegos | — | — | — |
 | 4 | `gamecube-no-latam` | Ángulo regional (TBD) | ☐ Idea | — | — | — |
 | 5 | `gamecube-biografico` | Compositor/estudio clave (TBD) | ☐ Idea | — | — | — |
@@ -45,9 +45,9 @@
 
 10 juegos de Paper Mario: The Thousand-Year Door (#10) a Metroid Prime (#1), por consenso crítico Metacritic + legado histórico. Ver `docs/discusiones/discusion-gamecube-top-mundial.md` para el detalle de por qué quedó ese orden y qué candidatos (Viewtiful Joe, Tales of Symphonia, Star Fox Assault) se dejaron fuera.
 
-### 2. Top Precios — en investigación
+### 2. Top Precios — cerrado
 
-Aplicando desde el arranque la **regla canon 2026-09-21** (auditoría grial/rarezas obligatoria, fuente primaria PriceCharting directo) -no se va a repetir el ciclo de corrección que tuvieron PS1/Dreamcast/Saturn/Mega Drive. Candidatos a investigar: Fire Emblem: Path of Radiance, Chibi-Robo!, Ikaruga, Baten Kaitos Origins, Killer7, Gotcha Force, Pokémon XD (ya en la colección), entre otros late-releases y tiradas cortas 2006-2007.
+Aplicando desde el arranque la **regla canon 2026-09-21** (auditoría grial/rarezas obligatoria, fuente primaria PriceCharting directo) -sin ciclo de corrección posterior como tuvieron PS1/Dreamcast/Saturn/Mega Drive. Top 10 retail de Ikaruga (#10, ~$66) a Cubivore: Survival of the Fittest (#1, ~$684). 2 rarezas confirmadas no-retail (Demo Disc Version 16, Zelda Collector's Edition) y santo grial confirmado como el más caro del episodio: Resident Evil 4 [GameStop Special Edition] sellado/graduado, ~$1.499 (ventas WATA cruzadas hasta $2.950+).
 
 ### 3. Episodio "colección" — ¿vale la pena?
 
@@ -61,16 +61,16 @@ GameCube SÍ tuvo distribución oficial en Latam (más débil que PS2 pero prese
 
 Candidatos sin solapar con arcos anteriores: **Kenji Yamamoto/Kenji Ito** (Metroid Prime, trabajo atmosférico), **Koji Kondo** (ya cubierto parcialmente en Mario, pero Sunshine tiene score propio interesante), o un ángulo de estudio en vez de compositor: **Retro Studios**, el estudio texano sin experiencia previa en Metroid que entregó el juego más aclamado de la consola -buen gancho narrativo poco explotado por otros canales.
 
-### 6. Hito del arco — el dato ancla (pendiente de Top Precios)
+### 6. Hito del arco — el dato ancla
 
-Aún sin definir hasta cerrar el Top Precios con la auditoría canon. Candidato preliminar a investigar: Pokémon XD - Gale of Darkness (ya en la colección, con precio "New" alto en el export GameEye) o alguna rareza de late-release 2006-2007.
+**Resident Evil 4 [GameStop Special Edition] — USD 1.499+ (sellado/graduado WATA, hasta $2.950+ en ventas cruzadas)** es el dato bomba del arco. Mismo rol narrativo que Tekken Long Box en PS1 o Invizimals en PS Vita: la cifra que se repite en shorts, miniaturas y el cierre del top precios. Gancho extra: es la MISMA steelbook del juego #2 del Top Mundial, solo que en versión de coleccionista sellada -conecta ambos episodios del arco.
 
 ---
 
 ## Orden de producción propuesto
 
 1. `gamecube-top-mundial` — apertura del arco con el ranking de la crítica. **Cerrado.**
-2. `gamecube-top-precios` — con la auditoría canon aplicada desde el inicio (grial siempre el más caro, rarezas genuinas, fuente primaria PriceCharting).
+2. `gamecube-top-precios` — con la auditoría canon aplicada desde el inicio (grial siempre el más caro, rarezas genuinas, fuente primaria PriceCharting). **Cerrado.**
 3. Resto del arco (colección/no-Latam/biográfico) — a definir con Luis, ver sección de decisiones arriba.
 
 ---
@@ -87,10 +87,9 @@ Aún sin definir hasta cerrar el Top Precios con la auditoría canon. Candidato 
 
 **Confirmar con Luis:**
 
-1. Investigar y cerrar `gamecube-top-precios` con la auditoría canon aplicada desde el arranque.
-2. ¿Seguimos con más episodios del arco GameCube (colección/no-Latam/biográfico) o pasamos a otra consola después de los 2 rankings?
-3. Si seguimos: ¿qué ángulo para "no-Latam" -demora de lanzamientos, o piratería/modchips regional?
-4. ¿Biográfico de compositor o ángulo de estudio (Retro Studios)?
+1. ¿Seguimos con más episodios del arco GameCube (colección/no-Latam/biográfico) o pasamos a otra consola después de los 2 rankings?
+2. Si seguimos: ¿qué ángulo para "no-Latam" -demora de lanzamientos, o piratería/modchips regional?
+3. ¿Biográfico de compositor o ángulo de estudio (Retro Studios)?
 
 Cuando confirme, arranco con los slugs en orden.
 
