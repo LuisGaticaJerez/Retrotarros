@@ -670,15 +670,30 @@ def api_install(_body=None) -> dict:
     return spawn(job, work)
 
 
-PICK_SCRIPT = r"""
+# Ventana "duena" invisible, siempre encima y activa: sin ella el dialogo (lanzado desde un proceso sin
+# ventana) queda escondido detras de la ventana del programa y parece que "no abre nada".
+PICK_PREAMBLE = r"""
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 Add-Type -AssemblyName System.Windows.Forms
-$owner = New-Object System.Windows.Forms.Form -Property @{TopMost = $true}
+Add-Type -AssemblyName System.Drawing
+$owner = New-Object System.Windows.Forms.Form
+$owner.TopMost = $true
+$owner.ShowInTaskbar = $false
+$owner.FormBorderStyle = 'None'
+$owner.StartPosition = 'CenterScreen'
+$owner.Size = New-Object System.Drawing.Size(1, 1)
+$owner.Opacity = 0
+$owner.Show()
+$owner.Activate()
+"""
+
+PICK_SCRIPT = PICK_PREAMBLE + r"""
 $d = New-Object System.Windows.Forms.FolderBrowserDialog
 $d.Description = if ($env:TARRODL_TITLE) { $env:TARRODL_TITLE } else { "Carpeta donde guardar los videos" }
 $d.ShowNewFolderButton = $true
 if ($env:TARRODL_START) { $d.SelectedPath = $env:TARRODL_START }
 if ($d.ShowDialog($owner) -eq [System.Windows.Forms.DialogResult]::OK) { Write-Output $d.SelectedPath }
+$owner.Close()
 """
 
 
@@ -696,6 +711,7 @@ def api_pickfolder(body: dict) -> dict:
     ps = shutil.which("powershell")
     if not ps:
         raise ApiError("No encontre PowerShell para abrir el selector de carpetas.")
+    log.info("abriendo selector de carpeta (%s), inicio en %s", which, start)
     r = subprocess.run([ps, "-NoProfile", "-STA", "-Command", PICK_SCRIPT], capture_output=True, text=True,
                        encoding="utf-8", errors="replace", timeout=600, creationflags=NOWIN,
                        env={**os.environ, "TARRODL_START": str(start), "TARRODL_TITLE": title})
@@ -711,15 +727,13 @@ def api_pickfolder(body: dict) -> dict:
     return folders_state()
 
 
-PICK_VIDEO_SCRIPT = r"""
-[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-Add-Type -AssemblyName System.Windows.Forms
-$owner = New-Object System.Windows.Forms.Form -Property @{TopMost = $true}
+PICK_VIDEO_SCRIPT = PICK_PREAMBLE + r"""
 $d = New-Object System.Windows.Forms.OpenFileDialog
 $d.Title = "Elige el video a cortar"
 $d.Filter = "Videos|*.mp4;*.mkv;*.webm;*.mov;*.avi;*.m4v|Todos los archivos|*.*"
 if ($env:TARRODL_START -and (Test-Path -LiteralPath $env:TARRODL_START)) { $d.InitialDirectory = $env:TARRODL_START }
 if ($d.ShowDialog($owner) -eq [System.Windows.Forms.DialogResult]::OK) { Write-Output $d.FileName }
+$owner.Close()
 """
 
 
@@ -731,6 +745,7 @@ def api_pickvideo(body: dict) -> dict:
     hint = Path(str(body.get("start") or "").strip().strip('"'))
     if hint.is_file():
         start = hint.parent
+    log.info("abriendo selector de video, inicio en %s", start)
     r = subprocess.run([ps, "-NoProfile", "-STA", "-Command", PICK_VIDEO_SCRIPT], capture_output=True, text=True,
                        encoding="utf-8", errors="replace", timeout=600, creationflags=NOWIN,
                        env={**os.environ, "TARRODL_START": str(start)})

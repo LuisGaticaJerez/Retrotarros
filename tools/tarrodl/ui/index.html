@@ -291,9 +291,10 @@ async function ensureFolder(which) {
 }
 for (const [btn, which] of [["btnOut", "out"], ["btnClipsDir", "clips"]]) {
   $(btn).onclick = async () => {
-    $(btn).disabled = true;
+    const label = $(btn).textContent;
+    $(btn).disabled = true; $(btn).textContent = "ABRIENDO...";
     try { await pickFolder(which); } catch (e) { alert(e.message); }
-    $(btn).disabled = false;
+    $(btn).disabled = false; $(btn).textContent = label;
   };
 }
 ["slug", "clipFile"].forEach(id => $(id).addEventListener("input", renderDest));
@@ -328,10 +329,12 @@ $("container").onchange = () => { onContainer(); renderDest(); };
 $("btnDownload").onclick = async () => {
   $("btnDownload").disabled = true;
   try {
+    showProg($("progDl"), folders.output_saved ? "Iniciando descarga..." : "Abriendo el selector de carpetas (si no lo ves, búscalo en la barra de tareas)...", 0, "");
     if (!(await ensureFolder("out"))) {
       showProg($("progDl"), "Elige primero la carpeta donde se guardarán los videos (queda guardada para la próxima).", 0, "", true);
       $("btnDownload").disabled = false; return;
     }
+    showProg($("progDl"), "Iniciando descarga en " + folders.output_base + " ...", 0, "");
     const r = await api("download", { url: $("url").value, slug: $("slug").value, container: $("container").value,
       height: $("height").value, h264: $("h264").checked });
     watchJob(r.job, $("progDl"), j => {
@@ -345,12 +348,12 @@ $("btnDownload").onclick = async () => {
 };
 
 $("btnPickVideo").onclick = async () => {
-  $("btnPickVideo").disabled = true;
+  $("btnPickVideo").disabled = true; $("btnPickVideo").textContent = "ABRIENDO...";
   try {
     const r = await api("pickvideo", { start: $("clipFile").value });
     if (r.file) { $("clipFile").value = r.file; renderDest(); schedulePlan(); }
   } catch (e) { alert(e.message); }
-  $("btnPickVideo").disabled = false;
+  $("btnPickVideo").disabled = false; $("btnPickVideo").textContent = "ELEGIR VIDEO";
 };
 
 const fmtLen = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
@@ -448,6 +451,7 @@ refreshClipUi(); clearPlan();
 $("btnClips").onclick = async () => {
   $("btnClips").disabled = true; $("btnOpenClips").classList.add("hide");
   try {
+    showProg($("progClips"), folders.clips_saved ? "Iniciando..." : "Abriendo el selector de carpetas (si no lo ves, búscalo en la barra de tareas)...", 0, "");
     if (!(await ensureFolder("clips"))) {
       showProg($("progClips"), "Elige primero la carpeta donde dejar los clips (queda guardada para la próxima).", 0, "", true);
       $("btnClips").disabled = false; return;
