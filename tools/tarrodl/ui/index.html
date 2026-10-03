@@ -41,6 +41,7 @@ input:disabled, select:disabled { opacity:.4; }
 .btn.ye { border-color:var(--ye); color:var(--ye); } .btn.ye:hover:not(:disabled) { background:var(--ye); color:#000; }
 .btn.sm { font-size:8px; padding:8px 12px; }
 .btn:disabled { opacity:.3; cursor:not-allowed; }
+.btn.cancel { border-color:var(--mg); color:var(--mg); } .btn.cancel:hover:not(:disabled) { background:var(--mg); color:#000; }
 .hide { display:none !important; }
 .preview { display:grid; grid-template-columns:minmax(220px,300px) 1fr; gap:22px; }
 .tv { background:linear-gradient(180deg,#1a1a1f,#0d0d12); border-radius:18px; padding:12px; box-shadow:0 0 0 2px rgba(255,255,255,.04),0 14px 40px rgba(0,0,0,.7); align-self:start; }
@@ -135,6 +136,8 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
           <label class="field"><span>CALIDAD</span><select id="height"></select></label>
           <label class="check" id="h264row"><input type="checkbox" id="h264" checked>
             <span>H.264 compatible con DaVinci / CapCut (tope 1080p). Desmárcalo para bajar 1440p o 4K en VP9/AV1 (usa MKV).</span></label>
+          <label class="check"><input type="checkbox" id="antiSlow" checked>
+            <span>Evitar descargas lentas: si YouTube limita la velocidad bajo 8 MB/s, pide un enlace nuevo y retoma donde iba. Desmárcalo si tu internet es más lento que eso.</span></label>
           <label class="field" style="grid-column:1 / -1"><span>NOMBRE DEL ARCHIVO (kebab-case)</span><input type="text" id="slug" autocomplete="off"></label>
           <div class="out"><span>SE GUARDARÁ EN</span><b id="dlDest"></b><button class="btn sm" id="btnOut">ELEGIR CARPETA</button><span id="outNote"></span></div>
         </div>
@@ -143,6 +146,7 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
     </div>
     <div class="prog hide" id="progDl">
       <div class="bar"><i></i></div><div class="ptext"></div><div class="pmeta"></div>
+      <div class="row" style="margin-top:10px"><button class="btn sm cancel hide">CANCELAR DESCARGA</button></div>
       <details><summary>DETALLE</summary><pre></pre></details>
     </div>
   </section>
@@ -185,7 +189,7 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
     <div class="row" style="margin-top:14px"><button class="btn mg" id="btnClips">CREAR CLIPS</button></div>
     <div class="hint" id="clipHint"></div>
     <div class="prog hide" id="progClips"><div class="bar"><i></i></div><div class="ptext"></div>
-      <div class="row" style="margin-top:10px"><button class="btn sm hide" id="btnOpenClips">ABRIR CARPETA</button></div></div>
+      <div class="row" style="margin-top:10px"><button class="btn sm cancel hide">CANCELAR</button><button class="btn sm hide" id="btnOpenClips">ABRIR CARPETA</button></div></div>
   </section>
 
   <div class="note">Los gameplays de otros creadores pueden traer Content ID o strikes en un canal monetizado. Anota de dónde sale cada clip.</div>
@@ -224,12 +228,23 @@ function showProg(box, text, pct, meta, isErr) {
 }
 
 function watchJob(id, box, onDone) {
+  const cancel = box.querySelector(".cancel");
+  const resetCancel = () => { if (cancel) { cancel.classList.add("hide"); cancel.disabled = false; cancel.textContent = cancel.dataset.label; } };
+  if (cancel) {
+    cancel.dataset.label = cancel.dataset.label || cancel.textContent;
+    cancel.disabled = false; cancel.textContent = cancel.dataset.label; cancel.classList.remove("hide");
+    cancel.onclick = async () => {
+      cancel.disabled = true; cancel.textContent = "CANCELANDO...";
+      try { await api("cancel", { job: id }); } catch (e) { alert(e.message); cancel.disabled = false; cancel.textContent = cancel.dataset.label; }
+    };
+  }
   const tick = async () => {
     let j;
-    try { j = await api("job?id=" + id); } catch (e) { showProg(box, e.message, 0, "", true); return onDone && onDone(null); }
+    try { j = await api("job?id=" + id); } catch (e) { resetCancel(); showProg(box, e.message, 0, "", true); return onDone && onDone(null); }
     showProg(box, j.text, j.percent, j.meta, j.state === "error");
     const pre = box.querySelector("pre"); if (pre) pre.textContent = (j.log || []).join("\n");
     if (j.state === "running") return setTimeout(tick, 700);
+    resetCancel();
     onDone && onDone(j.state === "done" ? j : null);
   };
   tick();
@@ -336,7 +351,7 @@ $("btnDownload").onclick = async () => {
     }
     showProg($("progDl"), "Iniciando descarga en " + folders.output_base + " ...", 0, "");
     const r = await api("download", { url: $("url").value, slug: $("slug").value, container: $("container").value,
-      height: $("height").value, h264: $("h264").checked });
+      height: $("height").value, h264: $("h264").checked, anti_slow: $("antiSlow").checked });
     watchJob(r.job, $("progDl"), j => {
       $("btnDownload").disabled = false;
       if (j && j.result.file) {

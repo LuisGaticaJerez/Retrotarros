@@ -50,11 +50,18 @@ CONTAINERS = {"mp4", "mkv", "mp3", "m4a"}
 VIDEO_EXTS = {".mp4", ".mkv", ".webm", ".mov", ".avi", ".m4v"}
 # lineas de `ffmpeg -progress pipe:1`: no sirven en el log ni en el detalle del job
 FF_PROGRESS_RE = re.compile(r"^(out_time|out_time_us|out_time_ms|bitrate|total_size|frame|fps|stream_\d|dup_frames|drop_frames|speed|progress)=")
+ANTI_SLOW_RATE = "8M"   # velocidad minima aceptable antes de pedir un enlace nuevo a YouTube
 CLIP_MIN_SEC, CLIP_MAX_SEC = 60, 180
 PIECE_MIN_SEC, PIECE_MAX_SEC = 10, 60
 STATE = {"last_ping": time.time(), "bye_at": None, "seen": False}
 
 JOBS: dict[str, dict] = {}
+PROCS: dict[str, subprocess.Popen] = {}   # proceso externo vivo de cada job (para poder cancelarlo)
+CLEANUPS: dict[str, object] = {}          # funcion que borra lo que un job dejo a medias si lo cancelan
+
+
+class Cancelled(Exception):
+    """El usuario cancelo el proceso (boton CANCELAR)."""
 
 
 class ApiError(Exception):
@@ -145,7 +152,7 @@ def need_tool(name: str, label: str | None = None) -> str:
 
 def new_job(kind: str) -> dict:
     job = {"id": uuid.uuid4().hex[:8], "kind": kind, "state": "running", "percent": 0,
-           "text": "Iniciando...", "meta": "", "log": deque(maxlen=60), "result": {}}
+           "text": "Iniciando...", "meta": "", "log": deque(maxlen=60), "result": {}, "cancel": False}
     JOBS[job["id"]] = job
     return job
 
@@ -164,6 +171,12 @@ def spawn(job: dict, fn) -> dict:
                 job["state"] = "done"
                 job["percent"] = 100
             log.info("job %s (%s) OK en %.1fs: %s", job["id"], job["kind"], time.time() - t0, job["text"])
+        except Cancelled:
+            removed = run_cleanup(job)
+            job["state"] = "cancelled"
+            job["text"] = "Cancelado." + (f" Se borro lo que quedo a medias ({removed})." if removed else "")
+            job["meta"] = ""
+            log.info("job %s (%s) CANCELADO por el usuario en %.1fs: %s", job["id"], job["kind"], time.time() - t0, job["text"])
         except ApiError as e:
             job["state"], job["text"] = "error", str(e)
             log.warning("job %s (%s) ERROR en %.1fs: %s", job["id"], job["kind"], time.time() - t0, e)
@@ -175,10 +188,51 @@ def spawn(job: dict, fn) -> dict:
     return {"job": job["id"]}
 
 
+def check_cancel(job: dict) -> None:
+    if job.get("cancel"):
+        raise Cancelled()
+
+
+def kill_tree(p: subprocess.Popen) -> None:
+    """Mata el proceso y sus hijos (yt-dlp lanza ffmpeg al unir pistas)."""
+    subprocess.run(["taskkill", "/PID", str(p.pid), "/T", "/F"], capture_output=True, creationflags=NOWIN)
+
+
+def delete_files(paths: list[Path]) -> list[str]:
+    """Borra archivos; en Windows el archivo puede seguir bloqueado un instante tras matar el proceso."""
+    removed = []
+    for f in paths:
+        for _ in range(12):
+            try:
+                if f.exists():
+                    f.unlink()
+                    removed.append(f.name)
+                break
+            except OSError:
+                time.sleep(0.5)
+        else:
+            log.warning("no pude borrar %s (sigue en uso)", f)
+    return removed
+
+
+def run_cleanup(job: dict) -> str:
+    fn = CLEANUPS.pop(job["id"], None)
+    if not fn:
+        return ""
+    removed = fn()
+    log.info("job %s limpieza tras cancelar: %s", job["id"], removed)
+    n = len(removed)
+    return f"{n} archivo{'s' if n != 1 else ''}" if n else ""
+
+
 def stream(cmd: list[str], job: dict, on_line) -> int:
+    check_cancel(job)
     log.info("job %s cmd: %s", job["id"], subprocess.list2cmdline(cmd))
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
                          encoding="utf-8", errors="replace", creationflags=NOWIN)
+    PROCS[job["id"]] = p
+    if job.get("cancel"):  # cancelaron justo mientras arrancaba
+        kill_tree(p)
     for line in p.stdout:
         line = line.rstrip()
         if line:
@@ -189,8 +243,37 @@ def stream(cmd: list[str], job: dict, on_line) -> int:
                     log.info("job %s | %s", job["id"], line[:400])
             on_line(line)
     code = p.wait()
+    PROCS.pop(job["id"], None)
     log.info("job %s proceso termino con codigo %s", job["id"], code)
+    check_cancel(job)
     return code
+
+
+def num(text: str) -> float | None:
+    """Numero que yt-dlp imprimio en la plantilla de progreso ('NA'/'None' si no lo sabe)."""
+    try:
+        return float(str(text).strip())
+    except ValueError:
+        return None
+
+
+def fmt_bytes(n: float | None) -> str:
+    if n is None:
+        return "?"
+    for unit, size in (("GB", 1 << 30), ("MB", 1 << 20), ("KB", 1 << 10)):
+        if n >= size:
+            v = n / size
+            return f"{v:.2f} {unit}".replace(".", ",") if unit == "GB" else f"{v:.1f} {unit}".replace(".", ",")
+    return f"{int(n)} B"
+
+
+def fmt_eta(sec: float | None) -> str:
+    if sec is None:
+        return "?"
+    sec = int(sec)
+    h, rest = divmod(sec, 3600)
+    m, s = divmod(rest, 60)
+    return f"{h} h {m:02d} min" if h else f"{m}:{s:02d}"
 
 
 def view_job(job: dict) -> dict:
@@ -396,7 +479,8 @@ def api_download(body: dict) -> dict:
 
     cmd = [yt, "--no-playlist", "--newline", "--encoding", "utf-8",
            "--ffmpeg-location", str(Path(ff).parent),
-           "--progress-template", "download:TDL|%(progress._percent_str)s|%(progress._speed_str)s|%(progress._eta_str)s",
+           "--progress-template", "download:TDL|%(progress._percent_str)s|%(progress.speed)s|%(progress.eta)s|%(progress.downloaded_bytes)s"
+           "|%(progress.total_bytes)s|%(progress.total_bytes_estimate)s",
            "-o", str(base / f"{slug}.%(ext)s")]
     if audio:
         cmd += ["-f", "bestaudio/best", "-x", "--audio-format", container, "--audio-quality", "0"]
@@ -404,26 +488,56 @@ def api_download(body: dict) -> dict:
         cmd += ["-f", f"bv*[height<={height}]+ba/b[height<={height}]", "--merge-output-format", container]
         if body.get("h264", True):
             cmd += ["-S", "vcodec:h264,acodec:aac"]
+    if body.get("anti_slow", True):
+        # YouTube a veces asigna un enlace lento (2-4 MB/s) a una conexion que podria bajar a 30+ MB/s.
+        # Con esto yt-dlp pide un enlace nuevo y retoma donde iba si la velocidad cae bajo el limite.
+        cmd += ["--throttled-rate", ANTI_SLOW_RATE]
     cmd += ["--", url]
 
     job = new_job("download")
+    started = time.time()
+
+    def cleanup_download() -> list[str]:
+        # todo lo que esta descarga creo: <slug>.f298.mp4.part, <slug>.mp4.part, .ytdl, pistas sueltas...
+        mine = [f for f in base.glob(f"{slug}.*") if f.is_file() and f.stat().st_ctime >= started - 2]
+        return delete_files(mine)
 
     def work(j):
+        CLEANUPS[j["id"]] = cleanup_download
         stages, stage = (1 if audio else 2), 0
+        seen_dest: set[str] = set()
 
         def on_line(line: str):
             nonlocal stage
             if line.startswith("[download] Destination:"):
-                stage += 1
+                # al pedir un enlace nuevo yt-dlp repite la linea con el mismo archivo: no es otra pista
+                dest = line.split("Destination:", 1)[1].strip()
+                if dest not in seen_dest:
+                    seen_dest.add(dest)
+                    stage += 1
+            elif "below throttle limit" in line:
+                j["meta"] = "YouTube limito la velocidad: pidiendo un enlace nuevo y retomando..."
             elif line.startswith("TDL|"):
-                _, pct, speed, eta = (line.split("|") + ["", "", ""])[:4]
+                _, pct, speed, eta, done, total, estimate = (line.split("|") + [""] * 6)[:7]
                 try:
                     p = float(pct.strip().rstrip("%"))
                 except ValueError:
                     return
-                j["percent"] = min(99, ((max(stage, 1) - 1) + p / 100) / stages * 100)
-                j["text"] = f"Descargando pista {max(stage, 1)} de {stages}: {p:.0f}%"
-                j["meta"] = f"{speed.strip()}  ·  quedan {eta.strip()}"
+                n = max(stage, 1)
+                kind = "audio" if audio or n == 2 else "video"
+                j["percent"] = min(99, ((n - 1) + p / 100) / stages * 100)
+                j["text"] = (f"Descargando {kind}: {p:.0f}%" if stages == 1 else
+                             f"Descargando {kind} (pista {n} de {stages}): {p:.0f}%")
+                size_total = num(total) or num(estimate)
+                size = f"{fmt_bytes(num(done))} de {fmt_bytes(size_total)}" if size_total else f"{fmt_bytes(num(done))} descargados"
+                if not num(total) and size_total:
+                    size += " (aprox.)"
+                parts = [size]
+                if num(speed):
+                    parts.append(f"{fmt_bytes(num(speed))}/s")
+                if num(eta) is not None and eta.strip() not in ("", "NA", "None"):
+                    parts.append(f"quedan {fmt_eta(num(eta))}")
+                j["meta"] = "  ·  ".join(parts)
             elif line.startswith(("[Merger]", "[ExtractAudio]", "[VideoConvertor]")):
                 j["percent"], j["text"], j["meta"] = 99, "Procesando archivo...", ""
 
@@ -598,7 +712,11 @@ def api_clips(body: dict) -> dict:
         paths = [out_dir / f"{src.stem}_clip{first + i}{ext}" for i in range(len(plan))]
         log.info("job %s clips a %s: %s", j["id"], out_dir, [p_.name for p_ in paths])
         audio = has_audio(fp, src) if mode == "mosaico" else True
+        current: list[Path] = []   # clip en curso: es lo unico que queda a medias si cancelan (los terminados se conservan)
+        CLEANUPS[j["id"]] = lambda: delete_files(current)
         for i, (starts_i, path) in enumerate(zip(plan, paths), 1):
+            check_cancel(j)
+            current[:] = [path]
             base_pct = (i - 1) / len(plan) * 100
             if mode == "seguido":
                 j["text"], j["percent"] = f"Cortando clip {i} de {len(plan)}...", base_pct
@@ -607,6 +725,7 @@ def api_clips(body: dict) -> dict:
                 if r.returncode != 0:
                     log.warning("job %s ffmpeg clip %s fallo: %s", j["id"], i, r.stderr.strip()[-1500:])
                     raise ApiError(f"ffmpeg fallo en el clip {i}: {r.stderr.strip()[-200:]}")
+                current.clear()
                 continue
             j["text"], j["percent"] = f"Armando mosaico {i} de {len(plan)} ({len(starts_i)} trozos, recodifica)...", base_pct
             cmd = [ff, "-hide_banner", "-loglevel", "error", "-nostats", "-progress", "pipe:1", "-n"]
@@ -632,11 +751,25 @@ def api_clips(body: dict) -> dict:
                 path.unlink(missing_ok=True)
                 tail = " | ".join(list(j["log"])[-3:])
                 raise ApiError(f"ffmpeg fallo armando el mosaico {i}: {tail[-250:]}")
+            current.clear()
         kind = "mosaicos" if mode == "mosaico" else "clips"
         j["text"] = f"Listo: {len(plan)} {kind} de {label} ({paths[0].name}" + (f" ... {paths[-1].name}" if len(paths) > 1 else "") + f") en {out_dir}"
         j["result"] = {"dir": str(out_dir), "count": len(plan)}
 
     return spawn(job, work)
+
+
+def api_cancel(body: dict) -> dict:
+    job = JOBS.get(str(body.get("job") or ""))
+    if not job or job["state"] != "running":
+        raise ApiError("Ese proceso ya termino, no hay nada que cancelar.")
+    job["cancel"] = True
+    job["text"] = "Cancelando..."
+    log.info("job %s: el usuario pidio CANCELAR (%s)", job["id"], job["kind"])
+    p = PROCS.get(job["id"])
+    if p:
+        kill_tree(p)
+    return {}
 
 
 def api_update(_body=None) -> dict:
@@ -795,7 +928,7 @@ def api_bye(_body=None) -> dict:
 
 ROUTES = {
     ("GET", "status"): api_status, ("POST", "analyze"): api_analyze, ("POST", "download"): api_download,
-    ("POST", "clips"): api_clips, ("POST", "plan"): api_plan,("POST", "update"): api_update, ("POST", "install"): api_install,
+    ("POST", "clips"): api_clips, ("POST", "plan"): api_plan, ("POST", "cancel"): api_cancel, ("POST", "update"): api_update, ("POST", "install"): api_install,
     ("POST", "pickfolder"): api_pickfolder, ("POST", "pickvideo"): api_pickvideo, ("POST", "open"): api_open,
     ("POST", "clientlog"): api_clientlog, ("POST", "openlog"): api_openlog, ("POST", "ping"): api_ping,
     ("POST", "bye"): api_bye,
