@@ -26,6 +26,7 @@ $py = Join-Path $PSScriptRoot ".venv\Scripts\python.exe"
 if ($LASTEXITCODE -ne 0) { throw "No se pudo instalar PyInstaller" }
 
 & $py -m PyInstaller --noconfirm --onefile --noconsole --name TarroDL `
+    --icon "$PSScriptRoot\ui\favicon.ico" `
     --add-data "$PSScriptRoot\ui;ui" `
     --distpath "$PSScriptRoot\dist" --workpath "$PSScriptRoot\build" --specpath "$PSScriptRoot\build" `
     "$PSScriptRoot\tarrodl.py"

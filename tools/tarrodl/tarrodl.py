@@ -152,7 +152,7 @@ def need_tool(name: str, label: str | None = None) -> str:
 
 def new_job(kind: str) -> dict:
     job = {"id": uuid.uuid4().hex[:8], "kind": kind, "state": "running", "percent": 0,
-           "text": "Iniciando...", "meta": "", "log": deque(maxlen=60), "result": {}, "cancel": False}
+           "text": "Iniciando...", "meta": "", "log": deque(maxlen=60), "result": {}, "cancel": False, "indeterminate": False}
     JOBS[job["id"]] = job
     return job
 
@@ -274,6 +274,29 @@ def fmt_eta(sec: float | None) -> str:
     h, rest = divmod(sec, 3600)
     m, s = divmod(rest, 60)
     return f"{h} h {m:02d} min" if h else f"{m}:{s:02d}"
+
+
+def live_size(path: Path) -> int:
+    """Tamano real de un archivo que otro proceso esta escribiendo (os.stat en Windows puede ir atrasado)."""
+    try:
+        with open(path, "rb") as fh:
+            return fh.seek(0, os.SEEK_END)
+    except OSError:
+        try:
+            return path.stat().st_size
+        except OSError:
+            return 0
+
+
+def monitor_merge(job: dict, base: Path, slug: str, expected: float, stop: threading.Event) -> None:
+    """Avance de la union video+audio (yt-dlp -> ffmpeg no informa progreso): tamano del temporal / tamano esperado."""
+    while not stop.wait(0.7):
+        files = [f for f in base.glob(f"{slug}.temp.*") if f.is_file()]
+        size = max((live_size(f) for f in files), default=0)
+        if expected and size:
+            frac = min(size / expected, 0.99)
+            job.update(percent=frac * 100, indeterminate=False, text=f"Uniendo video y audio: {frac * 100:.0f}%",
+                       meta=f"{fmt_bytes(size)} de ~{fmt_bytes(expected)}")
 
 
 def view_job(job: dict) -> dict:
@@ -506,6 +529,8 @@ def api_download(body: dict) -> dict:
         CLEANUPS[j["id"]] = cleanup_download
         stages, stage = (1 if audio else 2), 0
         seen_dest: set[str] = set()
+        track_total: dict[int, float] = {}
+        stop_merge = threading.Event()
 
         def on_line(line: str):
             nonlocal stage
@@ -529,6 +554,8 @@ def api_download(body: dict) -> dict:
                 j["text"] = (f"Descargando {kind}: {p:.0f}%" if stages == 1 else
                              f"Descargando {kind} (pista {n} de {stages}): {p:.0f}%")
                 size_total = num(total) or num(estimate)
+                if size_total:
+                    track_total[n] = size_total
                 size = f"{fmt_bytes(num(done))} de {fmt_bytes(size_total)}" if size_total else f"{fmt_bytes(num(done))} descargados"
                 if not num(total) and size_total:
                     size += " (aprox.)"
@@ -538,10 +565,19 @@ def api_download(body: dict) -> dict:
                 if num(eta) is not None and eta.strip() not in ("", "NA", "None"):
                     parts.append(f"quedan {fmt_eta(num(eta))}")
                 j["meta"] = "  ·  ".join(parts)
-            elif line.startswith(("[Merger]", "[ExtractAudio]", "[VideoConvertor]")):
-                j["percent"], j["text"], j["meta"] = 99, "Procesando archivo...", ""
+            elif line.startswith("[Merger]"):
+                # ffmpeg une las pistas sin avisar avance: se mide por el tamano del archivo temporal
+                j.update(percent=0, indeterminate=True, text="Uniendo video y audio...", meta="")
+                threading.Thread(target=monitor_merge, args=(j, base, slug, sum(track_total.values()), stop_merge),
+                                 daemon=True).start()
+            elif line.startswith(("[ExtractAudio]", "[VideoConvertor]")):
+                j.update(percent=0, indeterminate=True, text="Convirtiendo el audio (puede tardar un momento)...", meta="")
 
-        code = stream(cmd, j, on_line)
+        try:
+            code = stream(cmd, j, on_line)
+        finally:
+            stop_merge.set()
+        j["indeterminate"] = False
         if code != 0:
             errs = [ln for ln in j["log"] if ln.startswith("ERROR")]
             base_msg = errs[-1] if errs else f"yt-dlp fallo (codigo {code})."
@@ -961,8 +997,10 @@ class Handler(BaseHTTPRequestHandler):
         if not self._host_ok():
             return self._json(403, {"error": "host no permitido"})
         url = urlparse(self.path)
-        if url.path == "/favicon.ico":
-            return self._send(204, b"", "image/x-icon")
+        icons = {"/favicon.ico": "image/x-icon", "/favicon.svg": "image/svg+xml", "/favicon-256.png": "image/png"}
+        if url.path in icons:
+            icon = RES / "ui" / url.path.lstrip("/")
+            return self._send(200, icon.read_bytes(), icons[url.path]) if icon.is_file() else self._send(204, b"", icons[url.path])
         if url.path in ("/", "/index.html"):
             html = (RES / "ui" / "index.html").read_text(encoding="utf-8").replace("__TOKEN__", TOKEN)
             return self._send(200, html.encode("utf-8"), "text/html; charset=utf-8")

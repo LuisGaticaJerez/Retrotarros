@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TarroDL · Retrotarros</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
 :root { --mg:#FF2E88; --cy:#00E5FF; --ye:#FFD23F; --pu:#2D1B69; --bo:#F5F0E8; --dk:#06030f; --gr:#3CE88A; }
@@ -59,6 +61,8 @@ input:disabled, select:disabled { opacity:.4; }
 .prog { margin-top:16px; }
 .bar { height:8px; background:rgba(255,255,255,.08); border-radius:3px; overflow:hidden; }
 .bar > i { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--gr),var(--ye)); box-shadow:0 0 8px rgba(60,232,138,.5); transition:width .3s; }
+.bar.ind > i { width:35% !important; animation:slide 1.1s ease-in-out infinite alternate; }
+@keyframes slide { from { margin-left:0; } to { margin-left:65%; } }
 .ptext { margin-top:8px; font-size:15px; } .pmeta { font-size:13px; color:rgba(255,255,255,.5); min-height:18px; }
 .ptext.err { color:var(--mg); }
 details { margin-top:10px; font-size:12px; color:rgba(255,255,255,.55); } summary { cursor:pointer; letter-spacing:2px; }
@@ -220,9 +224,11 @@ window.addEventListener("pagehide", () => fetch("/api/bye", { method: "POST", ke
 const fmtTime = s => { s = Math.round(s || 0); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
   return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(x).padStart(2, "0"); };
 
-function showProg(box, text, pct, meta, isErr) {
+function showProg(box, text, pct, meta, isErr, indeterminate) {
   box.classList.remove("hide");
-  box.querySelector(".bar i").style.width = (pct || 0) + "%";
+  const bar = box.querySelector(".bar");
+  bar.classList.toggle("ind", !!indeterminate);
+  box.querySelector(".bar i").style.width = indeterminate ? "" : (pct || 0) + "%";
   const t = box.querySelector(".ptext"); t.textContent = text || ""; t.classList.toggle("err", !!isErr);
   const m = box.querySelector(".pmeta"); if (m) m.textContent = meta || "";
 }
@@ -241,7 +247,7 @@ function watchJob(id, box, onDone) {
   const tick = async () => {
     let j;
     try { j = await api("job?id=" + id); } catch (e) { resetCancel(); showProg(box, e.message, 0, "", true); return onDone && onDone(null); }
-    showProg(box, j.text, j.percent, j.meta, j.state === "error");
+    showProg(box, j.text, j.percent, j.meta, j.state === "error", j.state === "running" && j.indeterminate);
     const pre = box.querySelector("pre"); if (pre) pre.textContent = (j.log || []).join("\n");
     if (j.state === "running") return setTimeout(tick, 700);
     resetCancel();
