@@ -1,0 +1,723 @@
+"""TarroDL - descargador personal de gameplays (yt-dlp + ffmpeg) con front local estilo TarroBot.
+
+Servidor HTTP en 127.0.0.1 que sirve ui/index.html y abre una ventana de Edge en modo app.
+Solo libreria estandar: yt-dlp y ffmpeg se llaman como programas externos (asi se
+actualizan sin recompilar el exe).
+
+Uso en desarrollo:  python tarrodl.py [--no-browser] [--port 8765]
+"""
+from __future__ import annotations
+
+import argparse
+import glob
+import json
+import logging
+import os
+import re
+import secrets
+import shutil
+import subprocess
+import sys
+import threading
+import time
+import traceback
+import unicodedata
+import urllib.request
+import uuid
+import webbrowser
+from collections import deque
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from logging.handlers import RotatingFileHandler
+from pathlib import Path
+from urllib.parse import parse_qs, urlparse
+
+APP = "TarroDL"
+VERSION = "1.0"
+DEFAULT_OUT = r"D:\Recursos Retrotarros\videos"
+CONFIG_DIR = Path(os.environ.get("APPDATA", str(Path.home()))) / APP
+CONFIG_FILE = CONFIG_DIR / "config.json"
+LOG_FILE = CONFIG_DIR / "tarrodl.log"
+QUIET_ROUTES = {"ping"}
+log = logging.getLogger("tarrodl")
+RES = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))
+NOWIN = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
+
+TOKEN = secrets.token_urlsafe(16)
+PORT = 0
+SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
+URL_RE = re.compile(r"^https?://\S+$", re.I)
+CONTAINERS = {"mp4", "mkv", "mp3", "m4a"}
+VIDEO_EXTS = {".mp4", ".mkv", ".webm", ".mov", ".avi", ".m4v"}
+STATE = {"last_ping": time.time(), "bye_at": None, "seen": False}
+
+JOBS: dict[str, dict] = {}
+
+
+class ApiError(Exception):
+    pass
+
+
+# ---------- utilidades ----------
+
+def setup_logging() -> None:
+    CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+    handler = RotatingFileHandler(LOG_FILE, maxBytes=1_000_000, backupCount=3, encoding="utf-8")
+    handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)-7s %(message)s"))
+    log.setLevel(logging.INFO)
+    log.addHandler(handler)
+    threading.excepthook = lambda a: log.error("hilo %s fallo", a.thread, exc_info=(a.exc_type, a.exc_value, a.exc_traceback))
+
+
+def load_config() -> dict:
+    try:
+        return json.loads(CONFIG_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def out_base() -> Path:
+    return Path(load_config().get("output_base") or DEFAULT_OUT)
+
+
+def find_tool(name: str) -> str | None:
+    found = shutil.which(name)
+    if found:
+        return found
+    local = os.environ.get("LOCALAPPDATA", "")
+    pkgs = Path(local) / "Microsoft" / "WinGet" / "Packages"
+    cands = [Path(local) / "Microsoft" / "WinGet" / "Links" / f"{name}.exe"]
+    for pat in (f"*/{name}.exe", f"*/*/bin/{name}.exe", f"*/*/{name}.exe"):
+        cands += [Path(p) for p in glob.glob(str(pkgs / pat))]
+    for c in cands:
+        if c.exists():
+            return str(c)
+    return None
+
+
+def run(cmd: list[str], timeout: int | None = None) -> subprocess.CompletedProcess:
+    return subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8",
+                          errors="replace", timeout=timeout, creationflags=NOWIN)
+
+
+def slugify(text: str, limit: int = 40) -> str:
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    text = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+    return text[:limit].rstrip("-") or "gameplay"
+
+
+def clean_url(raw: object) -> str:
+    url = str(raw or "").strip()
+    if not URL_RE.match(url) or len(url) > 500:
+        raise ApiError("El link no parece una URL valida (debe empezar con http:// o https://).")
+    return url
+
+
+def clean_slug(raw: object) -> str:
+    slug = str(raw or "").strip()
+    if not SLUG_RE.match(slug):
+        raise ApiError("El nombre debe ir en kebab-case: minusculas, numeros y guiones (ej. starfox-64).")
+    return slug
+
+
+def need_tool(name: str, label: str | None = None) -> str:
+    path = find_tool(name)
+    if not path:
+        raise ApiError(f"{label or name} no esta instalado.")
+    return path
+
+
+# ---------- jobs ----------
+
+def new_job(kind: str) -> dict:
+    job = {"id": uuid.uuid4().hex[:8], "kind": kind, "state": "running", "percent": 0,
+           "text": "Iniciando...", "meta": "", "log": deque(maxlen=60), "result": {}}
+    JOBS[job["id"]] = job
+    return job
+
+
+def running_jobs() -> bool:
+    return any(j["state"] == "running" for j in list(JOBS.values()))
+
+
+def spawn(job: dict, fn) -> dict:
+    def wrapper():
+        t0 = time.time()
+        log.info("job %s (%s) inicia", job["id"], job["kind"])
+        try:
+            fn(job)
+            if job["state"] == "running":
+                job["state"] = "done"
+                job["percent"] = 100
+            log.info("job %s (%s) OK en %.1fs: %s", job["id"], job["kind"], time.time() - t0, job["text"])
+        except ApiError as e:
+            job["state"], job["text"] = "error", str(e)
+            log.warning("job %s (%s) ERROR en %.1fs: %s", job["id"], job["kind"], time.time() - t0, e)
+        except Exception as e:  # noqa: BLE001
+            job["state"], job["text"] = "error", f"Error inesperado: {e}"
+            job["log"].append(traceback.format_exc())
+            log.exception("job %s (%s) fallo inesperado", job["id"], job["kind"])
+    threading.Thread(target=wrapper, daemon=True).start()
+    return {"job": job["id"]}
+
+
+def stream(cmd: list[str], job: dict, on_line) -> int:
+    log.info("job %s cmd: %s", job["id"], subprocess.list2cmdline(cmd))
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+                         encoding="utf-8", errors="replace", creationflags=NOWIN)
+    for line in p.stdout:
+        line = line.rstrip()
+        if line:
+            job["log"].append(line)
+            if not line.startswith("TDL|"):
+                log.info("job %s | %s", job["id"], line[:400])
+            on_line(line)
+    code = p.wait()
+    log.info("job %s proceso termino con codigo %s", job["id"], code)
+    return code
+
+
+def view_job(job: dict) -> dict:
+    return {**job, "log": list(job["log"])}
+
+
+# ---------- API ----------
+
+_VERSION_CACHE: dict[str, str | None] = {}
+
+HEALTH_FILE = CONFIG_DIR / "health.json"
+PROBE_URL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+RELEASES_URL = "https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest"
+HEALTH: dict = {"state": "checking", "summary": "Revisando YouTube...", "advice": []}
+ADVICE = [
+    (r"confirm you.{0,3}re not a bot|sign in to confirm",
+     "YouTube pide verificar que no eres un bot. Primero ACTUALIZAR YT-DLP; si persiste, cambia de red o usa cookies del navegador."),
+    (r"HTTP Error 429|Too Many Requests",
+     "YouTube limito las peticiones (429). Espera unos minutos o cambia de red; no es un problema de la app."),
+    (r"HTTP Error 403|Forbidden",
+     "YouTube rechazo la descarga (403): casi siempre es yt-dlp desactualizado. Pulsa ACTUALIZAR YT-DLP."),
+    (r"n challenge|nsig|JS runtime|js_runtime|JavaScript runtime|Signature extraction|player JS",
+     "YouTube cambio su reproductor. Pulsa ACTUALIZAR YT-DLP; si sigue fallando instala un runtime JS: winget install DenoLand.Deno"),
+    (r"Unable to extract|Unsupported URL|extractor error",
+     "yt-dlp no entiende la pagina: YouTube cambio algo. Pulsa ACTUALIZAR YT-DLP y reintenta."),
+    (r"getaddrinfo|timed out|Temporary failure|Network is unreachable|Unable to download webpage|URLError|ConnectionError",
+     "Parece un problema de internet, no de YouTube. Revisa la conexion."),
+    (r"video (is )?unavailable|Private video|members-only|age.restricted|has been removed",
+     "El problema es de ese video (privado, borrado, con edad o region), no de la app ni de YouTube en general."),
+    (r"ffmpeg|ffprobe", "Falla en ffmpeg: revisa que siga instalado (winget install Gyan.FFmpeg)."),
+]
+
+
+def match_advice(text: str) -> str | None:
+    for pattern, advice in ADVICE:
+        if re.search(pattern, text or "", re.I):
+            return advice
+    return None
+
+
+def diagnose(text: str) -> str:
+    return match_advice(text) or "Error no reconocido: actualiza yt-dlp y, si persiste, revisa el detalle en tarrodl.log."
+
+
+def ytdlp_version(yt: str) -> str | None:
+    if yt not in _VERSION_CACHE:
+        try:
+            _VERSION_CACHE[yt] = run([yt, "--version"], timeout=20).stdout.strip() or None
+        except Exception:
+            log.exception("no pude leer la version de yt-dlp")
+            _VERSION_CACHE[yt] = None
+    return _VERSION_CACHE[yt]
+
+
+def version_tuple(v: str | None) -> tuple[int, ...]:
+    return tuple(int(x) for x in re.findall(r"\d+", v or ""))
+
+
+def latest_ytdlp() -> str | None:
+    try:
+        req = urllib.request.Request(RELEASES_URL, headers={"User-Agent": APP, "Accept": "application/vnd.github+json"})
+        with urllib.request.urlopen(req, timeout=10) as r:
+            return json.load(r).get("tag_name")
+    except Exception as e:  # noqa: BLE001
+        log.warning("no pude consultar la ultima version de yt-dlp en GitHub: %s", e)
+        return None
+
+
+def load_health() -> dict:
+    try:
+        return json.loads(HEALTH_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def compare_health(prev: dict, cur: dict) -> tuple[list[str], list[str]]:
+    """Devuelve (cambios detectados, acciones recomendadas) respecto de la revision anterior."""
+    if not prev:
+        return [], []
+    changes, actions = [], []
+    if prev.get("ytdlp") != cur.get("ytdlp"):
+        changes.append(f"yt-dlp cambio de {prev.get('ytdlp')} a {cur.get('ytdlp')}")
+    if prev.get("probe_ok") and not cur.get("probe_ok"):
+        changes.append("la sonda funcionaba la ultima vez y ahora FALLA: YouTube cambio algo (o no hay internet)")
+        actions.append("Si hay internet: pulsa ACTUALIZAR YT-DLP y reinicia la app.")
+    if cur.get("probe_ok") and prev.get("probe_ok") is False:
+        changes.append("la sonda vuelve a funcionar (la vez anterior fallaba)")
+    if cur.get("probe_ok") and prev.get("probe_ok"):
+        for key, label in (("max_height", "resolucion maxima"), ("h264_max_height", "resolucion maxima en H.264")):
+            if prev.get(key) is not None and cur.get(key) != prev[key]:
+                changes.append(f"{label} disponible cambio de {prev[key]}p a {cur.get(key)}p")
+                if cur.get(key, 0) < prev[key]:
+                    actions.append(f"YouTube ofrece menos calidad ({label}: {cur.get(key)}p). Los videos pueden bajar en menor resolucion que antes.")
+        if abs(cur.get("formats", 0) - prev.get("formats", 0)) >= 5:
+            changes.append(f"cantidad de formatos cambio de {prev.get('formats')} a {cur.get('formats')}")
+    for w in sorted(set(cur.get("warnings", [])) - set(prev.get("warnings", []))):
+        changes.append(f"advertencia nueva de yt-dlp: {w[:300]}")
+        actions.append(match_advice(w) or "Advertencia desconocida: copia la linea del log y revisala antes de que rompa descargas.")
+    if prev.get("js_runtime") != cur.get("js_runtime"):
+        changes.append(f"runtime JS (deno/node/bun) cambio de {prev.get('js_runtime')} a {cur.get('js_runtime')}")
+    return changes, actions
+
+
+def startup_check() -> None:
+    t0 = time.time()
+    try:
+        yt = find_tool("yt-dlp")
+        if not yt:
+            HEALTH.update(state="fail", summary="yt-dlp no esta instalado", advice=["Pulsa INSTALAR YT-DLP."])
+            log.error("SALUD YOUTUBE: FALLA | yt-dlp no esta instalado")
+            return
+        HEALTH.update(state="checking", summary="Revisando YouTube...", advice=[])
+        cur: dict = {"time": time.strftime("%Y-%m-%d %H:%M:%S"), "ytdlp": ytdlp_version(yt),
+                     "js_runtime": next((n for n in ("deno", "node", "bun") if find_tool(n)), None)}
+        advice: list[str] = []
+        cur["latest"] = latest_ytdlp()
+        if cur["latest"] and version_tuple(cur["latest"]) > version_tuple(cur["ytdlp"]):
+            advice.append(f"Hay un yt-dlp mas nuevo ({cur['latest']}; instalado {cur['ytdlp']}). Pulsa ACTUALIZAR YT-DLP: "
+                          "YouTube cambia seguido y las versiones viejas dejan de funcionar.")
+
+        p0 = time.time()
+        r = run([yt, "--no-playlist", "--encoding", "utf-8", "-J", "--", PROBE_URL], timeout=120)
+        cur["probe_seconds"] = round(time.time() - p0, 1)
+        cur["warnings"] = [ln.strip() for ln in r.stderr.splitlines() if ln.startswith(("WARNING", "ERROR"))]
+        if r.returncode == 0:
+            formats = json.loads(r.stdout).get("formats", [])
+            video = [f for f in formats if f.get("vcodec") not in (None, "none") and f.get("height")]
+            cur.update(probe_ok=True, formats=len(formats), max_height=max((f["height"] for f in video), default=0),
+                       h264_max_height=max((f["height"] for f in video if str(f.get("vcodec", "")).startswith("avc1")), default=0))
+        else:
+            cur.update(probe_ok=False, probe_error=(cur["warnings"][-1] if cur["warnings"] else r.stderr.strip()[-300:]))
+            log.warning("la sonda de YouTube fallo (codigo %s). stderr completo: %s", r.returncode, r.stderr.strip()[-2000:])
+            advice.append(diagnose(r.stderr))
+
+        prev = load_health()
+        if not prev:
+            log.info("SALUD YOUTUBE: primera revision, se guarda la linea base para comparar la proxima vez")
+        changes, actions = compare_health(prev, cur)
+        advice += [a for a in actions if a not in advice]
+        state = "fail" if not cur["probe_ok"] else ("warn" if advice else "ok")
+        summary = (f"yt-dlp {cur['ytdlp']} | sonda OK en {cur['probe_seconds']}s: {cur['formats']} formatos, hasta "
+                   f"{cur['max_height']}p (H.264 hasta {cur['h264_max_height']}p)") if cur["probe_ok"] else \
+                  f"yt-dlp {cur['ytdlp']} | la sonda de YouTube fallo: {cur.get('probe_error', '')[:200]}"
+        HEALTH.update(state=state, summary=summary, advice=advice)
+        cur["state"] = state
+        CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+        HEALTH_FILE.write_text(json.dumps(cur, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        log.info("SALUD YOUTUBE: %s | %s | js_runtime=%s | ultima_ytdlp=%s | advertencias=%d | revision en %.1fs",
+                 state.upper(), summary, cur["js_runtime"] or "ninguno", cur["latest"] or "?", len(cur["warnings"]), time.time() - t0)
+        for w in cur["warnings"]:
+            log.info("SALUD YOUTUBE advertencia de yt-dlp: %s", w[:500])
+        for c in changes:
+            log.warning("CAMBIO DETECTADO: %s", c)
+        for a in advice:
+            log.warning("ACCION RECOMENDADA: %s", a)
+    except Exception as e:  # noqa: BLE001
+        HEALTH.update(state="warn", summary=f"No pude completar la revision de YouTube: {e}", advice=[])
+        log.exception("la revision de salud de YouTube fallo")
+
+
+def api_status(_body=None) -> dict:
+    yt = find_tool("yt-dlp")
+    return {"ytdlp": ytdlp_version(yt) if yt else None, "ffmpeg": bool(find_tool("ffmpeg")),
+            "output_base": str(out_base()), "health": HEALTH}
+
+
+def api_analyze(body: dict) -> dict:
+    url = clean_url(body.get("url"))
+    yt = need_tool("yt-dlp")
+    r = run([yt, "--no-playlist", "--encoding", "utf-8", "-J", "--", url], timeout=90)
+    if r.returncode != 0:
+        log.warning("analyze fallo (codigo %s) url=%s stderr=%s", r.returncode, url, r.stderr.strip()[-1500:])
+        errs = [ln for ln in r.stderr.splitlines() if ln.startswith("ERROR")]
+        msg = errs[-1] if errs else (r.stderr.strip().splitlines() or ["No se pudo leer el video."])[-1]
+        advice = diagnose(r.stderr)
+        log.warning("DIAGNOSTICO analyze: %s", advice)
+        raise ApiError(f"{msg} | Que hacer: {advice}")
+    info = json.loads(r.stdout)
+    heights = sorted({f["height"] for f in info.get("formats", [])
+                      if f.get("height") and f.get("vcodec") not in (None, "none")}, reverse=True)
+    return {"title": info.get("title") or "", "channel": info.get("channel") or info.get("uploader") or "",
+            "duration": info.get("duration"), "thumbnail": info.get("thumbnail"),
+            "heights": heights, "slug": slugify(info.get("title") or "gameplay")}
+
+
+def api_download(body: dict) -> dict:
+    url, slug = clean_url(body.get("url")), clean_slug(body.get("slug"))
+    container = str(body.get("container") or "mp4")
+    if container not in CONTAINERS:
+        raise ApiError("Formato no soportado.")
+    try:
+        height = max(144, min(4320, int(body.get("height") or 1080)))
+    except (TypeError, ValueError):
+        raise ApiError("Calidad invalida.")
+    yt, ff = need_tool("yt-dlp"), need_tool("ffmpeg")
+    audio = container in ("mp3", "m4a")
+    base = out_base()
+    base.mkdir(parents=True, exist_ok=True)
+    final = base / f"{slug}.{container}"
+    if final.exists():
+        raise ApiError(f"Ya existe {final.name} en la carpeta de salida. Cambia el nombre o borra el archivo.")
+
+    cmd = [yt, "--no-playlist", "--newline", "--encoding", "utf-8",
+           "--ffmpeg-location", str(Path(ff).parent),
+           "--progress-template", "download:TDL|%(progress._percent_str)s|%(progress._speed_str)s|%(progress._eta_str)s",
+           "-o", str(base / f"{slug}.%(ext)s")]
+    if audio:
+        cmd += ["-f", "bestaudio/best", "-x", "--audio-format", container, "--audio-quality", "0"]
+    else:
+        cmd += ["-f", f"bv*[height<={height}]+ba/b[height<={height}]", "--merge-output-format", container]
+        if body.get("h264", True):
+            cmd += ["-S", "vcodec:h264,acodec:aac"]
+    cmd += ["--", url]
+
+    job = new_job("download")
+
+    def work(j):
+        stages, stage = (1 if audio else 2), 0
+
+        def on_line(line: str):
+            nonlocal stage
+            if line.startswith("[download] Destination:"):
+                stage += 1
+            elif line.startswith("TDL|"):
+                _, pct, speed, eta = (line.split("|") + ["", "", ""])[:4]
+                try:
+                    p = float(pct.strip().rstrip("%"))
+                except ValueError:
+                    return
+                j["percent"] = min(99, ((max(stage, 1) - 1) + p / 100) / stages * 100)
+                j["text"] = f"Descargando pista {max(stage, 1)} de {stages}: {p:.0f}%"
+                j["meta"] = f"{speed.strip()}  ·  quedan {eta.strip()}"
+            elif line.startswith(("[Merger]", "[ExtractAudio]", "[VideoConvertor]")):
+                j["percent"], j["text"], j["meta"] = 99, "Procesando archivo...", ""
+
+        code = stream(cmd, j, on_line)
+        if code != 0:
+            errs = [ln for ln in j["log"] if ln.startswith("ERROR")]
+            base_msg = errs[-1] if errs else f"yt-dlp fallo (codigo {code})."
+            advice = diagnose("\n".join(j["log"]))
+            log.warning("DIAGNOSTICO descarga: %s", advice)
+            raise ApiError(f"{base_msg} | Que hacer: {advice}")
+        out = final if final.exists() else max(base.glob(f"{slug}.*"), key=lambda p: p.stat().st_mtime, default=None)
+        if not out:
+            raise ApiError("La descarga termino pero no encuentro el archivo.")
+        size = out.stat().st_size / 1048576
+        j["text"], j["meta"] = f"Listo: {out.name} ({size:.0f} MB)", ""
+        j["result"] = {"file": str(out)}
+
+    return spawn(job, work)
+
+
+def probe_duration(ffprobe: str, src: Path) -> float:
+    r = run([ffprobe, "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(src)], timeout=60)
+    try:
+        return float(r.stdout.strip())
+    except ValueError:
+        raise ApiError("No pude leer la duracion del video (¿archivo corrupto?).")
+
+
+def plan_clips(duration: float, length: int, max_clips: int) -> list[float]:
+    n = int(duration // length)
+    if n < 1:
+        return []
+    if 0 < max_clips < n:
+        if max_clips == 1:
+            return [(duration - length) / 2]
+        step = (duration - length) / (max_clips - 1)
+        return [i * step for i in range(max_clips)]
+    return [float(i * length) for i in range(n)]
+
+
+def api_clips(body: dict) -> dict:
+    src = Path(str(body.get("file") or "").strip().strip('"'))
+    if not src.is_file() or src.suffix.lower() not in VIDEO_EXTS:
+        raise ApiError("El archivo no existe o no es un video (mp4, mkv, webm, mov, avi).")
+    slug = clean_slug(body.get("slug"))
+    try:
+        minutes = int(body.get("length_min"))
+        max_clips = max(0, int(body.get("max_clips") or 0))
+    except (TypeError, ValueError):
+        raise ApiError("Duracion o cantidad de clips invalida.")
+    if minutes not in (1, 2, 3):
+        raise ApiError("Los clips deben durar 1, 2 o 3 minutos.")
+    ff, fp = need_tool("ffmpeg"), need_tool("ffprobe", "ffprobe (viene con ffmpeg)")
+    out_dir = out_base() / "clips" / f"clips-{slug}"
+    length = minutes * 60
+    job = new_job("clips")
+
+    def work(j):
+        duration = probe_duration(fp, src)
+        starts = plan_clips(duration, length, max_clips)
+        log.info("job %s clips: src=%s duracion=%.1fs largo=%ss max=%s plan=%s", j["id"], src, duration, length,
+                 max_clips, [round(s) for s in starts])
+        if not starts:
+            raise ApiError(f"El video dura {duration / 60:.1f} min: es mas corto que un clip de {minutes} min.")
+        out_dir.mkdir(parents=True, exist_ok=True)
+        names = [out_dir / f"{slug}-{minutes}m-{i:02d}{src.suffix.lower()}" for i in range(1, len(starts) + 1)]
+        if names[0].exists():
+            raise ApiError(f"Ya hay clips de {minutes} min en {out_dir.name}. Usa otro nombre o borra esa carpeta.")
+        for i, (start, name) in enumerate(zip(starts, names), 1):
+            j["text"], j["percent"] = f"Cortando clip {i} de {len(starts)}...", (i - 1) / len(starts) * 100
+            r = run([ff, "-hide_banner", "-loglevel", "error", "-n", "-ss", f"{start:.3f}", "-i", str(src),
+                     "-t", str(length), "-c", "copy", "-avoid_negative_ts", "make_zero", str(name)])
+            if r.returncode != 0:
+                log.warning("job %s ffmpeg clip %s fallo: %s", j["id"], i, r.stderr.strip()[-1500:])
+                raise ApiError(f"ffmpeg fallo en el clip {i}: {r.stderr.strip()[-200:]}")
+        j["text"] = f"Listo: {len(starts)} clips de {minutes} min en {out_dir.name}"
+        j["result"] = {"dir": str(out_dir), "count": len(starts)}
+
+    return spawn(job, work)
+
+
+def api_update(_body=None) -> dict:
+    yt = need_tool("yt-dlp")
+    job = new_job("update")
+
+    def work(j):
+        if stream([yt, "-U"], j, lambda ln: j.update(text=ln[:120])) != 0:
+            raise ApiError("No se pudo actualizar yt-dlp (si lo instalaste con winget, usa: winget upgrade yt-dlp.yt-dlp).")
+        _VERSION_CACHE.clear()
+        threading.Thread(target=startup_check, daemon=True).start()
+        j["text"] = "yt-dlp actualizado."
+
+    return spawn(job, work)
+
+
+def api_install(_body=None) -> dict:
+    winget = shutil.which("winget")
+    if not winget:
+        raise ApiError("winget no esta disponible. Instala yt-dlp a mano.")
+    job = new_job("install")
+
+    def work(j):
+        cmd = [winget, "install", "--id=yt-dlp.yt-dlp", "-e", "--accept-package-agreements", "--accept-source-agreements"]
+        if stream(cmd, j, lambda ln: j.update(text=ln[:120])) != 0 or not find_tool("yt-dlp"):
+            raise ApiError("La instalacion de yt-dlp fallo. Revisa el detalle.")
+        _VERSION_CACHE.clear()
+        threading.Thread(target=startup_check, daemon=True).start()
+        j["text"] = "yt-dlp instalado."
+
+    return spawn(job, work)
+
+
+PICK_SCRIPT = r"""
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+Add-Type -AssemblyName System.Windows.Forms
+$owner = New-Object System.Windows.Forms.Form -Property @{TopMost = $true}
+$d = New-Object System.Windows.Forms.FolderBrowserDialog
+$d.Description = "Carpeta donde guardar los videos"
+$d.ShowNewFolderButton = $true
+if ($env:TARRODL_START) { $d.SelectedPath = $env:TARRODL_START }
+if ($d.ShowDialog($owner) -eq [System.Windows.Forms.DialogResult]::OK) { Write-Output $d.SelectedPath }
+"""
+
+
+def save_output_base(path: Path) -> str:
+    CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+    CONFIG_FILE.write_text(json.dumps({**load_config(), "output_base": str(path)}, indent=2), encoding="utf-8")
+    return str(path)
+
+
+def api_pickfolder(_body=None) -> dict:
+    ps = shutil.which("powershell")
+    if not ps:
+        raise ApiError("No encontre PowerShell para abrir el selector de carpetas.")
+    r = subprocess.run([ps, "-NoProfile", "-STA", "-Command", PICK_SCRIPT], capture_output=True, text=True,
+                       encoding="utf-8", errors="replace", timeout=600, creationflags=NOWIN,
+                       env={**os.environ, "TARRODL_START": str(out_base())})
+    chosen = r.stdout.strip()
+    if not chosen:
+        log.info("selector de carpeta cancelado (stderr=%s)", r.stderr.strip()[-300:])
+        return {"cancelled": True, "output_base": str(out_base())}
+    path = Path(chosen)
+    if not path.is_dir():
+        raise ApiError("Esa carpeta no existe.")
+    log.info("carpeta de salida cambiada a %s", path)
+    return {"output_base": save_output_base(path)}
+
+
+def api_clientlog(body: dict) -> dict:
+    log.warning("front: %s", str(body.get("msg") or "")[:800])
+    return {}
+
+
+def api_openlog(_body=None) -> dict:
+    if not LOG_FILE.exists():
+        raise ApiError("Todavia no hay log.")
+    subprocess.Popen(["explorer", f"/select,{LOG_FILE}"])
+    return {"path": str(LOG_FILE)}
+
+
+def api_open(body: dict) -> dict:
+    path = Path(str(body.get("path") or "").strip())
+    if path.is_dir():
+        os.startfile(str(path))  # type: ignore[attr-defined]
+    elif path.is_file():
+        subprocess.Popen(["explorer", f"/select,{path}"])
+    else:
+        raise ApiError("Esa ruta ya no existe.")
+    return {}
+
+
+def api_ping(_body=None) -> dict:
+    STATE.update(last_ping=time.time(), bye_at=None, seen=True)
+    return {}
+
+
+def api_bye(_body=None) -> dict:
+    STATE["bye_at"] = time.time() + 8
+    return {}
+
+
+ROUTES = {
+    ("GET", "status"): api_status, ("POST", "analyze"): api_analyze, ("POST", "download"): api_download,
+    ("POST", "clips"): api_clips, ("POST", "update"): api_update, ("POST", "install"): api_install,
+    ("POST", "pickfolder"): api_pickfolder, ("POST", "open"): api_open,
+    ("POST", "clientlog"): api_clientlog, ("POST", "openlog"): api_openlog, ("POST", "ping"): api_ping,
+    ("POST", "bye"): api_bye,
+}
+
+
+# ---------- servidor ----------
+
+class Handler(BaseHTTPRequestHandler):
+    server_version = APP
+
+    def log_message(self, *args):
+        pass
+
+    def _send(self, code: int, payload: bytes, ctype: str = "application/json; charset=utf-8"):
+        self.send_response(code)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Content-Length", str(len(payload)))
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+        self.wfile.write(payload)
+
+    def _json(self, code: int, data: dict):
+        self._send(code, json.dumps(data, default=str).encode("utf-8"))
+
+    def _host_ok(self) -> bool:
+        return self.headers.get("Host", "") in (f"127.0.0.1:{PORT}", f"localhost:{PORT}")
+
+    def do_GET(self):
+        if not self._host_ok():
+            return self._json(403, {"error": "host no permitido"})
+        url = urlparse(self.path)
+        if url.path == "/favicon.ico":
+            return self._send(204, b"", "image/x-icon")
+        if url.path in ("/", "/index.html"):
+            html = (RES / "ui" / "index.html").read_text(encoding="utf-8").replace("__TOKEN__", TOKEN)
+            return self._send(200, html.encode("utf-8"), "text/html; charset=utf-8")
+        if url.path == "/api/job":
+            if self.headers.get("X-Token") != TOKEN:
+                return self._json(403, {"error": "token invalido"})
+            job = JOBS.get((parse_qs(url.query).get("id") or [""])[0])
+            return self._json(200, view_job(job)) if job else self._json(404, {"error": "job desconocido"})
+        self._dispatch("GET", url.path)
+
+    def do_POST(self):
+        self._dispatch("POST", urlparse(self.path).path)
+
+    def _dispatch(self, method: str, path: str):
+        route = path.removeprefix("/api/")
+        if not self._host_ok() or self.headers.get("X-Token") != TOKEN:
+            log.warning("403 %s %s host=%s", method, path, self.headers.get("Host"))
+            return self._json(403, {"error": "acceso denegado"})
+        fn = ROUTES.get((method, route))
+        if not fn:
+            log.warning("404 %s %s", method, path)
+            return self._json(404, {"error": "ruta desconocida"})
+        t0, body = time.time(), {}
+        try:
+            length = int(self.headers.get("Content-Length") or 0)
+            body = json.loads(self.rfile.read(length) or b"{}") if method == "POST" else {}
+            code, result = 200, fn(body)
+        except ApiError as e:
+            code, result = 400, {"error": str(e)}
+        except Exception as e:  # noqa: BLE001
+            log.exception("500 %s /%s body=%s", method, route, body)
+            code, result = 500, {"error": f"Error interno: {e}"}
+        if route not in QUIET_ROUTES:
+            level = logging.INFO if code == 200 else logging.WARNING
+            log.log(level, "%s /%s -> %s (%d ms) body=%s%s", method, route, code, (time.time() - t0) * 1000,
+                    json.dumps(body, ensure_ascii=False)[:300], f" error={result['error']}" if code != 200 else "")
+        self._json(code, result)
+
+
+def find_browser() -> str | None:
+    for p in (r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+              r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
+              r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+              r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"):
+        if Path(p).exists():
+            return p
+    return None
+
+
+def main() -> None:
+    global PORT
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--no-browser", action="store_true")
+    ap.add_argument("--port", type=int, default=0)
+    args = ap.parse_args()
+
+    server = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
+    server.daemon_threads = True
+    PORT = server.server_address[1]
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    url = f"http://127.0.0.1:{PORT}/"
+    browser = None if args.no_browser else find_browser()
+    log.info("=== %s %s inicia | frozen=%s python=%s | puerto=%s | salida=%s | yt-dlp=%s | ffmpeg=%s | navegador=%s",
+             APP, VERSION, getattr(sys, "frozen", False), sys.version.split()[0], PORT, out_base(),
+             find_tool("yt-dlp"), find_tool("ffmpeg"), browser or ("ninguno" if args.no_browser else "webbrowser"))
+
+    threading.Thread(target=startup_check, daemon=True).start()
+
+    if not args.no_browser:
+        if browser:
+            subprocess.Popen([browser, f"--app={url}", "--window-size=1120,900",
+                              f"--user-data-dir={CONFIG_DIR / 'browser'}", "--no-first-run",
+                              "--no-default-browser-check"])
+        else:
+            webbrowser.open(url)
+
+    while True:
+        time.sleep(2)
+        if running_jobs():
+            continue
+        now = time.time()
+        if STATE["bye_at"] and now > STATE["bye_at"]:
+            log.info("cierre: se cerro la ventana")
+            break
+        if now - STATE["last_ping"] > (150 if STATE["seen"] else 90):
+            log.info("cierre: sin senal de la ventana (%s)", "timeout" if STATE["seen"] else "nunca se conecto")
+            break
+
+
+if __name__ == "__main__":
+    setup_logging()
+    try:
+        main()
+    except Exception:
+        log.exception("la app se cayo")
+        raise

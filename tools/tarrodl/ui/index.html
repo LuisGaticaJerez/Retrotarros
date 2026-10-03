@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TarroDL · Retrotarros</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root { --mg:#FF2E88; --cy:#00E5FF; --ye:#FFD23F; --pu:#2D1B69; --bo:#F5F0E8; --dk:#06030f; --gr:#3CE88A; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { min-height:100vh; background:var(--dk); color:var(--bo); font-family:'Share Tech Mono',monospace; font-size:16px;
+  background-image:radial-gradient(ellipse 100% 50% at 50% -5%, rgba(0,229,255,.11) 0%, transparent 65%),
+  repeating-linear-gradient(0deg,transparent 0,transparent 39px,rgba(255,255,255,.014) 39px,rgba(255,255,255,.014) 40px),
+  repeating-linear-gradient(90deg,transparent 0,transparent 39px,rgba(255,255,255,.014) 39px,rgba(255,255,255,.014) 40px); }
+header { position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  padding:12px 28px; background:rgba(6,3,15,.97); border-bottom:2px solid var(--ye); }
+.logo { font-family:'Orbitron'; font-weight:900; font-size:20px; letter-spacing:3px; color:var(--mg); text-shadow:0 0 14px rgba(255,46,136,.6); }
+.tag { font-size:12px; letter-spacing:3px; color:var(--ye); }
+.pills { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.pill { font-size:11px; letter-spacing:2px; padding:4px 10px; border:1px solid rgba(255,255,255,.25); color:rgba(255,255,255,.7); }
+.pill.ok { border-color:var(--gr); color:var(--gr); } .pill.bad { border-color:var(--mg); color:var(--mg); }
+.pill.warn { border-color:var(--ye); color:var(--ye); }
+.advice { display:flex; flex-direction:column; gap:8px; font-size:15px; line-height:1.45; }
+.advice div { border-left:3px solid var(--ye); padding-left:10px; }
+main { max-width:1000px; margin:0 auto; padding:28px 24px 60px; display:flex; flex-direction:column; gap:22px; }
+.card { background:rgba(6,3,15,.72); border-left:5px solid var(--cy); padding:18px 22px; box-shadow:0 6px 22px rgba(0,0,0,.5); }
+.card.mg { border-left-color:var(--mg); } .card.ye { border-left-color:var(--ye); }
+.lbl { display:block; font-family:'Press Start 2P'; font-size:10px; letter-spacing:2px; color:var(--cy); margin-bottom:14px; }
+.card.mg .lbl { color:var(--mg); } .card.ye .lbl { color:var(--ye); }
+.row { display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; }
+.field { display:flex; flex-direction:column; gap:6px; flex:1; min-width:180px; }
+.field > span { font-size:12px; letter-spacing:2px; color:rgba(255,255,255,.55); }
+input[type=text], input[type=number], select { width:100%; padding:10px 12px; background:#0d0d12; color:var(--bo); border:2px solid rgba(0,229,255,.4);
+  font-family:'Share Tech Mono',monospace; font-size:16px; border-radius:2px; }
+input:focus, select:focus { outline:none; border-color:var(--cy); box-shadow:0 0 10px rgba(0,229,255,.35); }
+input:disabled, select:disabled { opacity:.4; }
+.btn { background:transparent; border:2px solid var(--cy); color:var(--cy); font-family:'Press Start 2P'; font-size:10px; letter-spacing:2px;
+  padding:13px 18px; cursor:pointer; border-radius:2px; transition:all .15s; white-space:nowrap; }
+.btn:hover:not(:disabled) { background:var(--cy); color:#000; }
+.btn.mg { border-color:var(--mg); color:var(--mg); } .btn.mg:hover:not(:disabled) { background:var(--mg); color:#000; }
+.btn.ye { border-color:var(--ye); color:var(--ye); } .btn.ye:hover:not(:disabled) { background:var(--ye); color:#000; }
+.btn.sm { font-size:8px; padding:8px 12px; }
+.btn:disabled { opacity:.3; cursor:not-allowed; }
+.hide { display:none !important; }
+.preview { display:grid; grid-template-columns:minmax(220px,300px) 1fr; gap:22px; }
+.tv { background:linear-gradient(180deg,#1a1a1f,#0d0d12); border-radius:18px; padding:12px; box-shadow:0 0 0 2px rgba(255,255,255,.04),0 14px 40px rgba(0,0,0,.7); align-self:start; }
+.tv .scr { position:relative; border-radius:10px / 6px; overflow:hidden; background:#000; aspect-ratio:16/9; box-shadow:inset 0 0 0 1px rgba(255,255,255,.05); }
+.tv .scr img { width:100%; height:100%; object-fit:cover; display:block; }
+.tv .scr::after { content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.18) 2px,rgba(0,0,0,.18) 3px); }
+.tv .brand { text-align:center; font-family:'Press Start 2P'; font-size:8px; letter-spacing:3px; color:var(--ye); margin-top:8px; }
+.vtitle { font-family:'Orbitron'; font-weight:700; font-size:20px; line-height:1.25; color:#fff; }
+.vmeta { margin-top:6px; font-size:14px; letter-spacing:1px; color:rgba(255,255,255,.62); }
+.opts { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+.check { display:flex; gap:10px; align-items:flex-start; grid-column:1 / -1; font-size:14px; line-height:1.4; cursor:pointer; }
+.check input { margin-top:3px; accent-color:var(--mg); width:18px; height:18px; }
+.out { grid-column:1 / -1; display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:13px; color:rgba(255,255,255,.6); word-break:break-all; }
+.out b { color:var(--bo); font-weight:400; }
+.prog { margin-top:16px; }
+.bar { height:8px; background:rgba(255,255,255,.08); border-radius:3px; overflow:hidden; }
+.bar > i { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--gr),var(--ye)); box-shadow:0 0 8px rgba(60,232,138,.5); transition:width .3s; }
+.ptext { margin-top:8px; font-size:15px; } .pmeta { font-size:13px; color:rgba(255,255,255,.5); min-height:18px; }
+.ptext.err { color:var(--mg); }
+details { margin-top:10px; font-size:12px; color:rgba(255,255,255,.55); } summary { cursor:pointer; letter-spacing:2px; }
+pre { margin-top:8px; padding:10px; background:#0d0d12; max-height:150px; overflow:auto; white-space:pre-wrap; word-break:break-all; font-family:inherit; }
+.radios { display:flex; gap:10px; }
+.radios label { flex:1; text-align:center; padding:10px 0; border:2px solid rgba(255,46,136,.4); cursor:pointer; font-family:'Orbitron'; font-weight:700; }
+.radios input { display:none; } .radios input:checked + span { color:var(--mg); }
+.radios label:has(input:checked) { border-color:var(--mg); background:rgba(255,46,136,.1); box-shadow:0 0 12px rgba(255,46,136,.35); }
+.note { font-size:12px; color:rgba(255,255,255,.4); letter-spacing:1px; text-align:center; }
+.hint { font-size:13px; color:rgba(255,255,255,.5); margin-top:10px; }
+@media (max-width:760px) { .preview { grid-template-columns:1fr; } .opts { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div><div class="logo">RETROTARROS</div></div>
+  <div class="tag">TARRODL · DESCARGADOR DE GAMEPLAY</div>
+  <div class="pills">
+    <span class="pill" id="pYt">yt-dlp ...</span>
+    <span class="pill" id="pFf">ffmpeg ...</span>
+    <span class="pill" id="pHealth">YouTube ...</span>
+    <button class="btn sm" id="btnUpdate" title="Actualiza yt-dlp (YouTube lo rompe seguido)">ACTUALIZAR YT-DLP</button>
+    <button class="btn sm" id="btnLog" title="Muestra tarrodl.log, el registro de todo lo que hace la app">VER LOG</button>
+  </div>
+</header>
+
+<main>
+  <section class="card ye hide" id="healthCard">
+    <span class="lbl">▶ AVISO DE YOUTUBE</span>
+    <div class="advice" id="healthAdvice"></div>
+  </section>
+
+  <section class="card mg hide" id="missing">
+    <span class="lbl">▶ FALTA YT-DLP</span>
+    <div class="row">
+      <div class="field"><span>TarroDL usa yt-dlp para bajar los videos. Se instala con winget, sin permisos de administrador.</span></div>
+      <button class="btn mg" id="btnInstall">INSTALAR YT-DLP</button>
+    </div>
+    <div class="prog hide" id="progInstall"><div class="bar"><i></i></div><div class="ptext"></div></div>
+  </section>
+
+  <section class="card">
+    <span class="lbl">▶ 01 · PEGA EL LINK</span>
+    <div class="row">
+      <label class="field"><span>URL DEL VIDEO</span><input type="text" id="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off"></label>
+      <button class="btn" id="btnAnalyze">ANALIZAR</button>
+    </div>
+    <div class="ptext err hide" id="anaErr"></div>
+  </section>
+
+  <section class="card ye hide" id="dlCard">
+    <span class="lbl">▶ OPCIONES DE DESCARGA</span>
+    <div class="preview">
+      <div class="tv"><div class="scr"><img id="thumb" alt=""></div><div class="brand">TARROVISION</div></div>
+      <div>
+        <div class="vtitle" id="vtitle"></div>
+        <div class="vmeta" id="vmeta"></div>
+        <div class="opts">
+          <label class="field"><span>FORMATO</span>
+            <select id="container">
+              <option value="mp4">MP4 · video</option><option value="mkv">MKV · video</option>
+              <option value="mp3">MP3 · solo audio</option><option value="m4a">M4A · solo audio</option>
+            </select></label>
+          <label class="field"><span>CALIDAD</span><select id="height"></select></label>
+          <label class="check" id="h264row"><input type="checkbox" id="h264" checked>
+            <span>H.264 compatible con DaVinci / CapCut (tope 1080p). Desmárcalo para bajar 1440p o 4K en VP9/AV1 (usa MKV).</span></label>
+          <label class="field" style="grid-column:1 / -1"><span>NOMBRE DEL ARCHIVO (kebab-case)</span><input type="text" id="slug" autocomplete="off"></label>
+          <div class="out">Se guarda en <b id="outBase"></b><button class="btn sm" id="btnOut">ELEGIR CARPETA</button><span>(queda guardada para la próxima vez; los clips van en la subcarpeta clips)</span></div>
+        </div>
+        <div class="row" style="margin-top:18px"><button class="btn mg" id="btnDownload">DESCARGAR</button></div>
+      </div>
+    </div>
+    <div class="prog hide" id="progDl">
+      <div class="bar"><i></i></div><div class="ptext"></div><div class="pmeta"></div>
+      <details><summary>DETALLE</summary><pre></pre></details>
+    </div>
+  </section>
+
+  <section class="card mg" id="clipCard">
+    <span class="lbl">▶ 02 · CLIPS DEL GAMEPLAY</span>
+    <div class="row">
+      <label class="field" style="flex:3"><span>VIDEO A CORTAR (se llena solo al descargar, o pega una ruta)</span><input type="text" id="clipFile" autocomplete="off" placeholder="D:\Recursos Retrotarros\videos\starfox.mp4"></label>
+      <label class="field"><span>NOMBRE DE LA CARPETA</span><input type="text" id="clipSlug" autocomplete="off"></label>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <div class="field"><span>DURACIÓN DE CADA CLIP</span>
+        <div class="radios">
+          <label><input type="radio" name="len" value="1"><span>1 MIN</span></label>
+          <label><input type="radio" name="len" value="2" checked><span>2 MIN</span></label>
+          <label><input type="radio" name="len" value="3"><span>3 MIN</span></label>
+        </div></div>
+      <label class="field"><span>MÁXIMO DE CLIPS (0 = TODO EL VIDEO SEGUIDO)</span><input type="number" id="maxClips" value="0" min="0" max="200"></label>
+      <button class="btn mg" id="btnClips">CREAR CLIPS</button>
+    </div>
+    <div class="hint">Con un máximo, los clips se reparten parejo a lo largo de todo el video. Los cortes son rápidos (sin recodificar) y empiezan en el keyframe más cercano.</div>
+    <div class="prog hide" id="progClips"><div class="bar"><i></i></div><div class="ptext"></div>
+      <div class="row" style="margin-top:10px"><button class="btn sm hide" id="btnOpenClips">ABRIR CARPETA</button></div></div>
+  </section>
+
+  <div class="note">Los gameplays de otros creadores pueden traer Content ID o strikes en un canal monetizado. Anota de dónde sale cada clip.</div>
+</main>
+
+<script>
+const TOKEN = "__TOKEN__";
+const $ = id => document.getElementById(id);
+let lastFile = "", clipsDir = "", analyzed = null;
+
+async function api(path, body) {
+  const opt = { headers: { "X-Token": TOKEN, "Content-Type": "application/json" } };
+  if (body !== undefined) { opt.method = "POST"; opt.body = JSON.stringify(body); }
+  const r = await fetch("/api/" + path, opt);
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(d.error || ("Error " + r.status));
+  return d;
+}
+
+const reportError = msg => fetch("/api/clientlog", { method: "POST", keepalive: true,
+  headers: { "X-Token": TOKEN, "Content-Type": "application/json" }, body: JSON.stringify({ msg }) }).catch(() => {});
+window.addEventListener("error", e => reportError((e.message || "error") + " @ " + (e.filename || "") + ":" + (e.lineno || "")));
+window.addEventListener("unhandledrejection", e => reportError("promesa sin capturar: " + (e.reason && e.reason.message || e.reason)));
+
+setInterval(() => api("ping", {}).catch(() => {}), 3000);
+window.addEventListener("pagehide", () => fetch("/api/bye", { method: "POST", keepalive: true, headers: { "X-Token": TOKEN } }));
+
+const fmtTime = s => { s = Math.round(s || 0); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
+  return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(x).padStart(2, "0"); };
+const slugFromPath = p => (p.split(/[\\/]/).pop() || "").replace(/\.[^.]+$/, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+
+function showProg(box, text, pct, meta, isErr) {
+  box.classList.remove("hide");
+  box.querySelector(".bar i").style.width = (pct || 0) + "%";
+  const t = box.querySelector(".ptext"); t.textContent = text || ""; t.classList.toggle("err", !!isErr);
+  const m = box.querySelector(".pmeta"); if (m) m.textContent = meta || "";
+}
+
+function watchJob(id, box, onDone) {
+  const tick = async () => {
+    let j;
+    try { j = await api("job?id=" + id); } catch (e) { showProg(box, e.message, 0, "", true); return onDone && onDone(null); }
+    showProg(box, j.text, j.percent, j.meta, j.state === "error");
+    const pre = box.querySelector("pre"); if (pre) pre.textContent = (j.log || []).join("\n");
+    if (j.state === "running") return setTimeout(tick, 700);
+    onDone && onDone(j.state === "done" ? j : null);
+  };
+  tick();
+}
+
+async function refreshStatus() {
+  try {
+    const s = await api("status");
+    $("pYt").textContent = s.ytdlp ? "yt-dlp " + s.ytdlp : "yt-dlp falta";
+    $("pYt").className = "pill " + (s.ytdlp ? "ok" : "bad");
+    $("pFf").textContent = s.ffmpeg ? "ffmpeg ok" : "ffmpeg falta";
+    $("pFf").className = "pill " + (s.ffmpeg ? "ok" : "bad");
+    $("outBase").textContent = s.output_base;
+    $("missing").classList.toggle("hide", !!s.ytdlp);
+    $("btnUpdate").classList.toggle("hide", !s.ytdlp);
+    const h = s.health || {};
+    const labels = { checking: "YouTube: revisando...", ok: "YouTube ok", warn: "YouTube: revisar", fail: "YouTube: falla" };
+    $("pHealth").textContent = labels[h.state] || "YouTube ?";
+    $("pHealth").className = "pill " + ({ ok: "ok", warn: "warn", fail: "bad" }[h.state] || "");
+    $("pHealth").title = h.summary || "";
+    const adv = $("healthAdvice"); adv.replaceChildren();
+    (h.advice || []).forEach(t => { const d = document.createElement("div"); d.textContent = t; adv.appendChild(d); });
+    $("healthCard").classList.toggle("hide", !(h.advice || []).length);
+    if (h.state === "checking") setTimeout(refreshStatus, 2500);
+  } catch (e) { $("pYt").textContent = "sin conexion"; $("pYt").className = "pill bad"; }
+}
+
+$("btnInstall").onclick = () => {
+  $("btnInstall").disabled = true;
+  api("install", {}).then(r => watchJob(r.job, $("progInstall"), () => { $("btnInstall").disabled = false; refreshStatus(); }))
+    .catch(e => { showProg($("progInstall"), e.message, 0, "", true); $("btnInstall").disabled = false; });
+};
+$("btnUpdate").onclick = () => {
+  $("btnUpdate").disabled = true;
+  api("update", {}).then(r => watchJob(r.job, $("progInstall"), () => { $("btnUpdate").disabled = false; $("missing").classList.remove("hide"); refreshStatus(); }))
+    .catch(e => { alert(e.message); $("btnUpdate").disabled = false; });
+};
+$("btnLog").onclick = () => api("openlog", {}).catch(e => alert(e.message));
+$("btnOut").onclick = async () => {
+  $("btnOut").disabled = true;
+  try { const r = await api("pickfolder", {}); $("outBase").textContent = r.output_base; }
+  catch (e) { alert(e.message); }
+  $("btnOut").disabled = false;
+};
+
+$("btnAnalyze").onclick = async () => {
+  $("anaErr").classList.add("hide");
+  $("btnAnalyze").disabled = true; $("btnAnalyze").textContent = "ANALIZANDO...";
+  try {
+    analyzed = await api("analyze", { url: $("url").value });
+    $("thumb").src = analyzed.thumbnail || "";
+    $("vtitle").textContent = analyzed.title;
+    $("vmeta").textContent = [analyzed.channel, fmtTime(analyzed.duration)].filter(Boolean).join("  ·  ");
+    const sel = $("height"); sel.replaceChildren();
+    const hs = analyzed.heights.length ? analyzed.heights : [1080];
+    hs.forEach(h => sel.add(new Option(h + "p", h)));
+    sel.value = hs.find(h => h <= 1080) || hs[0];
+    $("slug").value = analyzed.slug;
+    $("progDl").classList.add("hide");
+    $("dlCard").classList.remove("hide");
+    onContainer();
+  } catch (e) { $("anaErr").textContent = e.message; $("anaErr").classList.remove("hide"); }
+  $("btnAnalyze").disabled = false; $("btnAnalyze").textContent = "ANALIZAR";
+};
+$("url").addEventListener("keydown", e => { if (e.key === "Enter") $("btnAnalyze").click(); });
+
+const onContainer = () => {
+  const audio = ["mp3", "m4a"].includes($("container").value);
+  $("height").disabled = audio; $("h264").disabled = audio; $("h264row").style.opacity = audio ? .4 : 1;
+};
+$("container").onchange = onContainer;
+
+$("btnDownload").onclick = async () => {
+  $("btnDownload").disabled = true;
+  try {
+    const r = await api("download", { url: $("url").value, slug: $("slug").value, container: $("container").value,
+      height: $("height").value, h264: $("h264").checked });
+    watchJob(r.job, $("progDl"), j => {
+      $("btnDownload").disabled = false;
+      if (j && j.result.file) {
+        lastFile = j.result.file; $("clipFile").value = lastFile; $("clipSlug").value = slugFromPath(lastFile);
+        $("clipCard").scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  } catch (e) { showProg($("progDl"), e.message, 0, "", true); $("btnDownload").disabled = false; }
+};
+
+$("clipFile").oninput = () => { $("clipSlug").value = slugFromPath($("clipFile").value); };
+$("btnClips").onclick = async () => {
+  $("btnClips").disabled = true; $("btnOpenClips").classList.add("hide");
+  try {
+    const r = await api("clips", { file: $("clipFile").value, slug: $("clipSlug").value,
+      length_min: document.querySelector("input[name=len]:checked").value, max_clips: $("maxClips").value });
+    watchJob(r.job, $("progClips"), j => {
+      $("btnClips").disabled = false;
+      if (j && j.result.dir) { clipsDir = j.result.dir; $("btnOpenClips").classList.remove("hide"); }
+    });
+  } catch (e) { showProg($("progClips"), e.message, 0, "", true); $("btnClips").disabled = false; }
+};
+$("btnOpenClips").onclick = () => api("open", { path: clipsDir }).catch(e => alert(e.message));
+
+refreshStatus();
+</script>
+</body>
+</html>
