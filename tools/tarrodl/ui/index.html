@@ -69,6 +69,14 @@ pre { margin-top:8px; padding:10px; background:#0d0d12; max-height:150px; overfl
 input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:pointer; }
 .val { color:var(--ye); font-family:'Orbitron'; font-size:16px; letter-spacing:1px; }
 .ticks { display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,.4); letter-spacing:1px; }
+.sec { display:grid; grid-template-columns:110px 1fr; gap:8px 14px; align-items:center; }
+.sec label { display:flex; flex-direction:column; gap:4px; font-size:11px; letter-spacing:2px; color:rgba(255,255,255,.55); }
+.sec input[type=text] { padding:7px 10px; font-size:15px; }
+.tl .dim { position:absolute; top:0; bottom:0; background:rgba(0,0,0,.65); }
+.tl { position:relative; height:26px; background:#0d0d12; border:2px solid rgba(0,229,255,.4); overflow:hidden; }
+.tl i { position:absolute; top:0; bottom:0; min-width:3px; background:var(--mg); }
+.tl i.b { background:var(--cy); }
+.tl.empty::after { content:"elige un video para ver el plan"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12px; color:rgba(255,255,255,.35); letter-spacing:1px; }
 .note { font-size:12px; color:rgba(255,255,255,.4); letter-spacing:1px; text-align:center; }
 .hint { font-size:13px; color:rgba(255,255,255,.5); margin-top:10px; }
 @media (max-width:760px) { .preview { grid-template-columns:1fr; } .opts { grid-template-columns:1fr; } }
@@ -162,6 +170,18 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
         <input type="range" id="pieceSec" min="10" max="30" step="1" value="15">
         <div class="ticks"><span>10 s</span><span>20 s</span><span>30 s</span></div></div>
     </div>
+    <div class="row" style="margin-top:14px">
+      <div class="field" style="flex:2"><span>SECCIÓN DEL VIDEO DE DONDE SALE: <b class="val" id="secVal">todo el video</b></span>
+        <div class="sec">
+          <label><span>DESDE</span><input type="text" id="secFrom" value="0:00" autocomplete="off" disabled></label>
+          <input type="range" id="secFromR" min="0" max="1" step="1" value="0" disabled>
+          <label><span>HASTA</span><input type="text" id="secTo" value="0:00" autocomplete="off" disabled></label>
+          <input type="range" id="secToR" min="0" max="1" step="1" value="1" disabled>
+        </div></div>
+    </div>
+    <div class="field" style="margin-top:14px"><span>PLAN <b class="val" id="tlInfo"></b></span>
+      <div class="tl" id="tl"></div>
+      <div class="ticks"><span>0:00</span><span id="tlEnd"></span></div></div>
     <div class="row" style="margin-top:14px"><button class="btn mg" id="btnClips">CREAR CLIPS</button></div>
     <div class="hint" id="clipHint"></div>
     <div class="prog hide" id="progClips"><div class="bar"><i></i></div><div class="ptext"></div>
@@ -291,7 +311,7 @@ $("btnDownload").onclick = async () => {
     watchJob(r.job, $("progDl"), j => {
       $("btnDownload").disabled = false;
       if (j && j.result.file) {
-        lastFile = j.result.file; $("clipFile").value = lastFile; $("clipSlug").value = slugFromPath(lastFile);
+        lastFile = j.result.file; $("clipFile").value = lastFile; $("clipSlug").value = slugFromPath(lastFile); schedulePlan();
         $("clipCard").scrollIntoView({ behavior: "smooth" });
       }
     });
@@ -303,7 +323,7 @@ $("btnPickVideo").onclick = async () => {
   $("btnPickVideo").disabled = true;
   try {
     const r = await api("pickvideo", { start: $("clipFile").value });
-    if (r.file) { $("clipFile").value = r.file; $("clipSlug").value = slugFromPath(r.file); }
+    if (r.file) { $("clipFile").value = r.file; $("clipSlug").value = slugFromPath(r.file); schedulePlan(); }
   } catch (e) { alert(e.message); }
   $("btnPickVideo").disabled = false;
 };
@@ -316,23 +336,95 @@ function refreshClipUi() {
   $("pieceVal").textContent = piece + " s";
   $("pieceBox").classList.toggle("hide", !mosaic);
   $("pieceSec").max = Math.min(30, len);
-  $("maxLbl").textContent = mosaic ? "CANTIDAD DE CLIPS (0 = 1 SOLO CON TODO EL VIDEO)" : "MÁXIMO DE CLIPS (0 = TODO EL VIDEO SEGUIDO)";
+  $("maxLbl").textContent = mosaic ? "CANTIDAD DE CLIPS (0 = AUTOMÁTICO: 1 CADA ~10 MIN DE VIDEO)" : "MÁXIMO DE CLIPS (0 = TODO EL VIDEO SEGUIDO)";
   if (mosaic) {
     const k = Math.max(1, Math.floor(len / piece));
-    $("clipHint").textContent = `Cada clip dura ${fmtLen(len)} y junta ${k} trozos de ~${(len / k).toFixed(1)} s repartidos por su parte del video, pegados uno tras otro. Recodifica (H.264 + AAC), así que tarda más que el corte seguido.`;
+    $("clipHint").textContent = `Cada clip dura ${fmtLen(len)} y junta ${k} trozos de ~${(len / k).toFixed(1)} s, repartidos parejo por su parte del video (no seguidos) y pegados uno tras otro. Con 0 clips el programa decide según el largo del video: uno de 10 min da 1 mosaico, uno de 1 hora da varios, cada uno cubriendo un tramo distinto. Recodifica (H.264 + AAC), así que tarda más que el corte seguido.`;
   } else {
     $("clipHint").textContent = "Con un máximo, los clips se reparten parejo a lo largo de todo el video. Los cortes son rápidos (sin recodificar) y empiezan en el keyframe más cercano.";
   }
 }
+const fmtClock = s => { s = Math.round(s); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
+  return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(x).padStart(2, "0"); };
+const parseClock = t => { const p = t.trim().split(":").map(Number); if (!p.length || p.length > 3 || p.some(n => !Number.isFinite(n) || n < 0)) return NaN;
+  return p.reduce((acc, n) => acc * 60 + n, 0); };
+
+// Seccion del video: se activa cuando el plan trae la duracion del video elegido.
+let planTimer = null, planSeq = 0, secFile = "", vidDur = 0;
+function secDisable() {
+  secFile = ""; vidDur = 0;
+  for (const id of ["secFrom", "secTo", "secFromR", "secToR"]) $(id).disabled = true;
+  $("secVal").textContent = "todo el video";
+}
+function secInit(file, dur) {
+  secFile = file; vidDur = Math.floor(dur);
+  for (const id of ["secFromR", "secToR"]) { $(id).max = vidDur; $(id).disabled = false; }
+  $("secFrom").disabled = $("secTo").disabled = false;
+  $("secFromR").value = 0; $("secToR").value = vidDur; secShow();
+}
+function secShow() {
+  const a = +$("secFromR").value, b = +$("secToR").value;
+  $("secFrom").value = fmtClock(a); $("secTo").value = fmtClock(b);
+  $("secVal").textContent = (a === 0 && b === vidDur) ? "todo el video" : `${fmtClock(a)} → ${fmtClock(b)} (${fmtClock(b - a)})`;
+}
+function secFromSlider(which) {
+  const fr = $("secFromR"), to = $("secToR");
+  if (which === "from" && +fr.value > +to.value - 1) fr.value = Math.max(0, +to.value - 1);
+  if (which === "to" && +to.value < +fr.value + 1) to.value = Math.min(vidDur, +fr.value + 1);
+  secShow(); schedulePlan();
+}
+function secFromText(which) {
+  const el = which === "from" ? $("secFrom") : $("secTo"), v = parseClock(el.value);
+  if (!Number.isNaN(v)) $(which === "from" ? "secFromR" : "secToR").value = Math.round(Math.min(vidDur, v));
+  secFromSlider(which);
+}
+$("secFromR").addEventListener("input", () => secFromSlider("from"));
+$("secToR").addEventListener("input", () => secFromSlider("to"));
+$("secFrom").addEventListener("change", () => secFromText("from"));
+$("secTo").addEventListener("change", () => secFromText("to"));
+
+function clearPlan(msg) {
+  $("tl").replaceChildren(); $("tl").classList.add("empty"); $("tlInfo").textContent = msg || ""; $("tlEnd").textContent = "";
+}
+const sectionBody = () => ($("clipFile").value.trim() === secFile && secFile)
+  ? { range_start: $("secFromR").value, range_end: $("secToR").value } : {};
+async function refreshPlan() {
+  const file = $("clipFile").value.trim(), seq = ++planSeq;
+  if (!file) { secDisable(); return clearPlan(); }
+  try {
+    const r = await api("plan", { file, mode: clipMode(), length_sec: $("lenSec").value, piece_sec: $("pieceSec").value,
+      max_clips: $("maxClips").value, ...sectionBody() });
+    if (seq !== planSeq) return;
+    if (file !== secFile) secInit(file, r.duration);
+    const tl = $("tl"); tl.classList.remove("empty"); tl.replaceChildren();
+    const pct = s => (s / r.duration * 100) + "%";
+    const [ra, rb] = r.range;
+    if (ra > 0) { const d = document.createElement("div"); d.className = "dim"; d.style.left = "0"; d.style.width = pct(ra); tl.appendChild(d); }
+    if (rb < r.duration) { const d = document.createElement("div"); d.className = "dim"; d.style.left = pct(rb); d.style.right = "0"; tl.appendChild(d); }
+    r.clips.forEach((starts, c) => starts.forEach(s => {
+      const bar = document.createElement("i"); if (c % 2) bar.className = "b";
+      bar.style.left = pct(s); bar.style.width = pct(r.seg);
+      bar.title = `clip ${c + 1} · desde ${fmtClock(s)}`; tl.appendChild(bar);
+    }));
+    $("tlEnd").textContent = fmtClock(r.duration);
+    const k = r.clips.length ? r.clips[0].length : 0;
+    $("tlInfo").textContent = r.clips.length
+      ? `video de ${fmtClock(r.duration)} → ${r.clips.length} clip(s)` + (clipMode() === "mosaico" ? ` de ${k} trozos` : "")
+      : `no alcanza con estas opciones: baja la duración o la cantidad, o amplía la sección`;
+  } catch (e) { if (seq === planSeq) clearPlan(e.message); }
+}
+function schedulePlan() { clearTimeout(planTimer); planTimer = setTimeout(refreshPlan, 350); }
+["lenSec", "pieceSec", "maxClips"].forEach(id => $(id).addEventListener("input", schedulePlan));
+$("clipFile").addEventListener("input", () => { secDisable(); schedulePlan(); });
+document.querySelectorAll("input[name=mode]").forEach(r => r.addEventListener("change", () => { refreshClipUi(); schedulePlan(); }));
 ["lenSec", "pieceSec"].forEach(id => $(id).addEventListener("input", refreshClipUi));
-document.querySelectorAll("input[name=mode]").forEach(r => r.addEventListener("change", refreshClipUi));
-refreshClipUi();
+refreshClipUi(); clearPlan();
 
 $("btnClips").onclick = async () => {
   $("btnClips").disabled = true; $("btnOpenClips").classList.add("hide");
   try {
     const r = await api("clips", { file: $("clipFile").value, slug: $("clipSlug").value, mode: clipMode(),
-      length_sec: $("lenSec").value, piece_sec: $("pieceSec").value, max_clips: $("maxClips").value });
+      length_sec: $("lenSec").value, piece_sec: $("pieceSec").value, max_clips: $("maxClips").value, ...sectionBody() });
     watchJob(r.job, $("progClips"), j => {
       $("btnClips").disabled = false;
       if (j && j.result.dir) { clipsDir = j.result.dir; $("btnOpenClips").classList.remove("hide"); }

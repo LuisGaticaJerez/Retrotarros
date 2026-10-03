@@ -460,27 +460,84 @@ def fmt_len(sec: int) -> str:
     return f"{m}m" if m else f"{s}s"
 
 
-def plan_mosaic(duration: float, length: int, piece: int, n_clips: int) -> tuple[list[list[float]], float]:
-    """Cada clip se arma con k trozos repartidos parejo dentro de su ventana del video.
+AUTO_CLIP_EVERY_SEC = 600   # en automatico: un mosaico por cada ~10 min de video
 
-    k = length // piece, asi cada trozo dura length / k >= piece (nunca menos de lo pedido) y el
-    clip suma exactamente `length`. Devuelve (inicios por clip, duracion de cada trozo); lista
-    vacia si las ventanas no alcanzan para `length` segundos de material sin repetir.
+
+def plan_mosaic(span: float, length: int, piece: int, n_clips: int) -> tuple[list[list[float]], float]:
+    """Cada clip se arma con k trozos repartidos parejo dentro de su ventana de la seccion.
+
+    `span` es el largo de la seccion elegida (inicios relativos a ella). k = length // piece, asi
+    cada trozo dura length / k >= piece (nunca menos de lo pedido) y el clip suma exactamente
+    `length`. n_clips = 0 es automatico: un mosaico por cada ~10 min de seccion (un gameplay de
+    1 hora da varios mosaicos, uno de 10 min da uno), sin pasar de los que caben sin repetir
+    material. Devuelve (inicios por clip, duracion de cada trozo); lista vacia si la seccion no
+    alcanza para `length` segundos por clip.
     """
     k = max(1, length // piece)
     p = length / k
-    n = max(1, n_clips)
-    win = duration / n
+    fit = int(span // length)
+    if fit < 1:
+        return [], p
+    n = n_clips if n_clips > 0 else min(fit, max(1, round(span / AUTO_CLIP_EVERY_SEC)))
+    win = span / n
     if win < length:
         return [], p
     step = win / k
     return [[c * win + j * step + (step - p) / 2 for j in range(k)] for c in range(n)], p
 
 
+def resolve_range(body: dict, duration: float) -> tuple[float, float]:
+    """Seccion del video de la que se cortan los clips (por defecto, todo el video)."""
+    try:
+        a = float(body["range_start"]) if body.get("range_start") not in (None, "") else 0.0
+        b = float(body["range_end"]) if body.get("range_end") not in (None, "") else duration
+    except (TypeError, ValueError):
+        raise ApiError("La seccion del video (desde/hasta) no es valida.")
+    a, b = max(0.0, a), min(duration, b)
+    if b - a < 1:
+        raise ApiError("La seccion elegida es muy corta: 'hasta' tiene que ser mayor que 'desde'.")
+    return a, b
+
+
+def plan_section(mode: str, duration: float, a: float, b: float, length: int, piece: int,
+                 max_clips: int) -> tuple[list[list[float]], float]:
+    """Plan de cortes con inicios absolutos: (clips -> inicios de sus trozos, duracion de cada trozo)."""
+    if mode == "mosaico":
+        clips, seg = plan_mosaic(b - a, length, piece, max_clips)
+    else:
+        clips, seg = [[s] for s in plan_clips(b - a, length, max_clips)], float(length)
+    return [[a + s for s in c] for c in clips], seg
+
+
 def has_audio(fp: str, src: Path) -> bool:
     r = run([fp, "-v", "error", "-select_streams", "a:0", "-show_entries", "stream=index", "-of", "csv=p=0", str(src)],
             timeout=60)
     return bool(r.stdout.strip())
+
+
+def validate_clip_params(mode: str, length: int, piece: int) -> None:
+    if not CLIP_MIN_SEC <= length <= CLIP_MAX_SEC:
+        raise ApiError(f"Los clips deben durar entre {CLIP_MIN_SEC // 60} y {CLIP_MAX_SEC // 60} minutos.")
+    if mode == "mosaico" and not PIECE_MIN_SEC <= piece <= min(PIECE_MAX_SEC, length):
+        raise ApiError(f"Cada trozo del mosaico debe durar entre {PIECE_MIN_SEC} y {min(PIECE_MAX_SEC, length)} segundos.")
+
+
+def api_plan(body: dict) -> dict:
+    """Vista previa: de que partes del video saldria cada trozo (misma logica que api_clips)."""
+    src = Path(str(body.get("file") or "").strip().strip('"'))
+    if not src.is_file() or src.suffix.lower() not in VIDEO_EXTS:
+        raise ApiError("El archivo no existe o no es un video (mp4, mkv, webm, mov, avi).")
+    mode = str(body.get("mode") or "seguido")
+    try:
+        length, piece = int(body.get("length_sec")), int(body.get("piece_sec") or 15)
+        max_clips = max(0, int(body.get("max_clips") or 0))
+    except (TypeError, ValueError):
+        raise ApiError("Duracion, trozos o cantidad de clips invalida.")
+    validate_clip_params(mode, length, piece)
+    duration = probe_duration(need_tool("ffprobe", "ffprobe (viene con ffmpeg)"), src)
+    a, b = resolve_range(body, duration)
+    clips, seg = plan_section(mode, duration, a, b, length, piece, max_clips)
+    return {"duration": duration, "range": [a, b], "clips": clips, "seg": seg}
 
 
 def api_clips(body: dict) -> dict:
@@ -500,10 +557,7 @@ def api_clips(body: dict) -> dict:
         max_clips = max(0, int(body.get("max_clips") or 0))
     except (TypeError, ValueError):
         raise ApiError("Duracion, trozos o cantidad de clips invalida.")
-    if not CLIP_MIN_SEC <= length <= CLIP_MAX_SEC:
-        raise ApiError(f"Los clips deben durar entre {CLIP_MIN_SEC // 60} y {CLIP_MAX_SEC // 60} minutos.")
-    if mode == "mosaico" and not PIECE_MIN_SEC <= piece <= min(PIECE_MAX_SEC, length):
-        raise ApiError(f"Cada trozo del mosaico debe durar entre {PIECE_MIN_SEC} y {min(PIECE_MAX_SEC, length)} segundos.")
+    validate_clip_params(mode, length, piece)
     ff, fp = need_tool("ffmpeg"), need_tool("ffprobe", "ffprobe (viene con ffmpeg)")
     out_dir = out_base() / "clips" / f"clips-{slug}"
     label = fmt_len(length)
@@ -511,22 +565,19 @@ def api_clips(body: dict) -> dict:
 
     def work(j):
         duration = probe_duration(fp, src)
+        a, b = resolve_range(body, duration)
+        plan, p = plan_section(mode, duration, a, b, length, piece, max_clips)
+        log.info("job %s %s: src=%s duracion=%.1fs seccion=%.0f-%.0fs largo=%ss trozo=%ss->%.2fs max=%s clips=%s inicios=%s",
+                 j["id"], mode, src, duration, a, b, length, piece, p, max_clips, len(plan),
+                 [[round(s) for s in c] for c in plan])
+        if not plan:
+            raise ApiError(f"La seccion elegida dura {(b - a) / 60:.1f} min: no alcanza para "
+                           f"{f'{max_clips} clip(s)' if max_clips else 'un clip'} de {label}"
+                           f"{' sin repetir material' if mode == 'mosaico' else ''}. "
+                           f"Amplia la seccion, baja la cantidad de clips o acorta la duracion.")
         if mode == "mosaico":
-            plan, p = plan_mosaic(duration, length, piece, max_clips)
-            log.info("job %s mosaico: src=%s duracion=%.1fs largo=%ss trozo=%ss->%.2fs clips=%s",
-                     j["id"], src, duration, length, piece, p, len(plan))
-            if not plan:
-                n = max(1, max_clips)
-                raise ApiError(f"El video dura {duration / 60:.1f} min: no alcanza para {n} clip(s) de {label} sin repetir "
-                               f"material. Baja la cantidad de clips o la duracion.")
             names = [f"{slug}-{label}-mosaico-{i:02d}.mp4" for i in range(1, len(plan) + 1)]
         else:
-            starts = plan_clips(duration, length, max_clips)
-            log.info("job %s clips: src=%s duracion=%.1fs largo=%ss max=%s plan=%s", j["id"], src, duration, length,
-                     max_clips, [round(s) for s in starts])
-            if not starts:
-                raise ApiError(f"El video dura {duration / 60:.1f} min: es mas corto que un clip de {label}.")
-            plan = [[s] for s in starts]
             names = [f"{slug}-{label}-{i:02d}{src.suffix.lower()}" for i in range(1, len(plan) + 1)]
         out_dir.mkdir(parents=True, exist_ok=True)
         paths = [out_dir / n for n in names]
@@ -710,7 +761,7 @@ def api_bye(_body=None) -> dict:
 
 ROUTES = {
     ("GET", "status"): api_status, ("POST", "analyze"): api_analyze, ("POST", "download"): api_download,
-    ("POST", "clips"): api_clips, ("POST", "update"): api_update, ("POST", "install"): api_install,
+    ("POST", "clips"): api_clips, ("POST", "plan"): api_plan,("POST", "update"): api_update, ("POST", "install"): api_install,
     ("POST", "pickfolder"): api_pickfolder, ("POST", "pickvideo"): api_pickvideo, ("POST", "open"): api_open,
     ("POST", "clientlog"): api_clientlog, ("POST", "openlog"): api_openlog, ("POST", "ping"): api_ping,
     ("POST", "bye"): api_bye,
