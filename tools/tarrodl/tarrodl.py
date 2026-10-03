@@ -83,6 +83,17 @@ def out_base() -> Path:
     return Path(load_config().get("output_base") or DEFAULT_OUT)
 
 
+def clips_base() -> Path:
+    return Path(load_config().get("clips_base") or (out_base() / "clips"))
+
+
+def folders_state() -> dict:
+    """Carpetas vigentes y si Luis ya las eligio (guardadas en config.json) o son las de por defecto."""
+    cfg = load_config()
+    return {"output_base": str(out_base()), "output_saved": bool(cfg.get("output_base")),
+            "clips_base": str(clips_base()), "clips_saved": bool(cfg.get("clips_base"))}
+
+
 def find_tool(name: str) -> str | None:
     found = shutil.which(name)
     if found:
@@ -344,7 +355,7 @@ def startup_check() -> None:
 def api_status(_body=None) -> dict:
     yt = find_tool("yt-dlp")
     return {"ytdlp": ytdlp_version(yt) if yt else None, "ffmpeg": bool(find_tool("ffmpeg")),
-            "output_base": str(out_base()), "health": HEALTH}
+            **folders_state(), "health": HEALTH}
 
 
 def api_analyze(body: dict) -> dict:
@@ -509,6 +520,13 @@ def plan_section(mode: str, duration: float, a: float, b: float, length: int, pi
     return [[a + s for s in c] for c in clips], seg
 
 
+def next_clip_index(out_dir: Path, stem: str) -> int:
+    """Primer numero libre para <stem>_clipN (sigue la numeracion si ya hay clips de ese video)."""
+    pat = re.compile(re.escape(stem) + r"_clip(\d+)\.[A-Za-z0-9]+$", re.I)
+    used = [int(m.group(1)) for f in out_dir.iterdir() if (m := pat.match(f.name))]
+    return max(used, default=0) + 1
+
+
 def has_audio(fp: str, src: Path) -> bool:
     r = run([fp, "-v", "error", "-select_streams", "a:0", "-show_entries", "stream=index", "-of", "csv=p=0", str(src)],
             timeout=60)
@@ -544,7 +562,6 @@ def api_clips(body: dict) -> dict:
     src = Path(str(body.get("file") or "").strip().strip('"'))
     if not src.is_file() or src.suffix.lower() not in VIDEO_EXTS:
         raise ApiError("El archivo no existe o no es un video (mp4, mkv, webm, mov, avi).")
-    slug = clean_slug(body.get("slug"))
     mode = str(body.get("mode") or "seguido")
     if mode not in ("seguido", "mosaico"):
         raise ApiError("Modo de clip desconocido (seguido o mosaico).")
@@ -559,7 +576,7 @@ def api_clips(body: dict) -> dict:
         raise ApiError("Duracion, trozos o cantidad de clips invalida.")
     validate_clip_params(mode, length, piece)
     ff, fp = need_tool("ffmpeg"), need_tool("ffprobe", "ffprobe (viene con ffmpeg)")
-    out_dir = out_base() / "clips" / f"clips-{slug}"
+    out_dir = clips_base()
     label = fmt_len(length)
     job = new_job("clips")
 
@@ -575,14 +592,11 @@ def api_clips(body: dict) -> dict:
                            f"{f'{max_clips} clip(s)' if max_clips else 'un clip'} de {label}"
                            f"{' sin repetir material' if mode == 'mosaico' else ''}. "
                            f"Amplia la seccion, baja la cantidad de clips o acorta la duracion.")
-        if mode == "mosaico":
-            names = [f"{slug}-{label}-mosaico-{i:02d}.mp4" for i in range(1, len(plan) + 1)]
-        else:
-            names = [f"{slug}-{label}-{i:02d}{src.suffix.lower()}" for i in range(1, len(plan) + 1)]
         out_dir.mkdir(parents=True, exist_ok=True)
-        paths = [out_dir / n for n in names]
-        if paths[0].exists():
-            raise ApiError(f"Ya hay clips de {label} ({mode}) en {out_dir.name}. Usa otro nombre o borra esa carpeta.")
+        ext = ".mp4" if mode == "mosaico" else src.suffix.lower()
+        first = next_clip_index(out_dir, src.stem)
+        paths = [out_dir / f"{src.stem}_clip{first + i}{ext}" for i in range(len(plan))]
+        log.info("job %s clips a %s: %s", j["id"], out_dir, [p_.name for p_ in paths])
         audio = has_audio(fp, src) if mode == "mosaico" else True
         for i, (starts_i, path) in enumerate(zip(plan, paths), 1):
             base_pct = (i - 1) / len(plan) * 100
@@ -619,7 +633,7 @@ def api_clips(body: dict) -> dict:
                 tail = " | ".join(list(j["log"])[-3:])
                 raise ApiError(f"ffmpeg fallo armando el mosaico {i}: {tail[-250:]}")
         kind = "mosaicos" if mode == "mosaico" else "clips"
-        j["text"] = f"Listo: {len(plan)} {kind} de {label} en {out_dir.name}"
+        j["text"] = f"Listo: {len(plan)} {kind} de {label} ({paths[0].name}" + (f" ... {paths[-1].name}" if len(paths) > 1 else "") + f") en {out_dir}"
         j["result"] = {"dir": str(out_dir), "count": len(plan)}
 
     return spawn(job, work)
@@ -661,35 +675,40 @@ PICK_SCRIPT = r"""
 Add-Type -AssemblyName System.Windows.Forms
 $owner = New-Object System.Windows.Forms.Form -Property @{TopMost = $true}
 $d = New-Object System.Windows.Forms.FolderBrowserDialog
-$d.Description = "Carpeta donde guardar los videos"
+$d.Description = if ($env:TARRODL_TITLE) { $env:TARRODL_TITLE } else { "Carpeta donde guardar los videos" }
 $d.ShowNewFolderButton = $true
 if ($env:TARRODL_START) { $d.SelectedPath = $env:TARRODL_START }
 if ($d.ShowDialog($owner) -eq [System.Windows.Forms.DialogResult]::OK) { Write-Output $d.SelectedPath }
 """
 
 
-def save_output_base(path: Path) -> str:
+def save_config_key(key: str, path: Path) -> None:
     CONFIG_DIR.mkdir(parents=True, exist_ok=True)
-    CONFIG_FILE.write_text(json.dumps({**load_config(), "output_base": str(path)}, indent=2), encoding="utf-8")
-    return str(path)
+    CONFIG_FILE.write_text(json.dumps({**load_config(), key: str(path)}, indent=2), encoding="utf-8")
 
 
-def api_pickfolder(_body=None) -> dict:
+def api_pickfolder(body: dict) -> dict:
+    which = str(body.get("which") or "out")
+    if which not in ("out", "clips"):
+        raise ApiError("Carpeta desconocida (out o clips).")
+    key, start, title = (("output_base", out_base(), "Carpeta donde guardar los videos descargados") if which == "out"
+                         else ("clips_base", clips_base(), "Carpeta donde dejar los clips"))
     ps = shutil.which("powershell")
     if not ps:
         raise ApiError("No encontre PowerShell para abrir el selector de carpetas.")
     r = subprocess.run([ps, "-NoProfile", "-STA", "-Command", PICK_SCRIPT], capture_output=True, text=True,
                        encoding="utf-8", errors="replace", timeout=600, creationflags=NOWIN,
-                       env={**os.environ, "TARRODL_START": str(out_base())})
+                       env={**os.environ, "TARRODL_START": str(start), "TARRODL_TITLE": title})
     chosen = r.stdout.strip()
     if not chosen:
-        log.info("selector de carpeta cancelado (stderr=%s)", r.stderr.strip()[-300:])
-        return {"cancelled": True, "output_base": str(out_base())}
+        log.info("selector de carpeta (%s) cancelado (stderr=%s)", which, r.stderr.strip()[-300:])
+        return {"cancelled": True, **folders_state()}
     path = Path(chosen)
     if not path.is_dir():
         raise ApiError("Esa carpeta no existe.")
-    log.info("carpeta de salida cambiada a %s", path)
-    return {"output_base": save_output_base(path)}
+    save_config_key(key, path)
+    log.info("carpeta %s guardada: %s", key, path)
+    return folders_state()
 
 
 PICK_VIDEO_SCRIPT = r"""

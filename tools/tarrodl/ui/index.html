@@ -136,7 +136,7 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
           <label class="check" id="h264row"><input type="checkbox" id="h264" checked>
             <span>H.264 compatible con DaVinci / CapCut (tope 1080p). Desmárcalo para bajar 1440p o 4K en VP9/AV1 (usa MKV).</span></label>
           <label class="field" style="grid-column:1 / -1"><span>NOMBRE DEL ARCHIVO (kebab-case)</span><input type="text" id="slug" autocomplete="off"></label>
-          <div class="out">Se guarda en <b id="outBase"></b><button class="btn sm" id="btnOut">ELEGIR CARPETA</button><span>(queda guardada para la próxima vez; los clips van en la subcarpeta clips)</span></div>
+          <div class="out"><span>SE GUARDARÁ EN</span><b id="dlDest"></b><button class="btn sm" id="btnOut">ELEGIR CARPETA</button><span id="outNote"></span></div>
         </div>
         <div class="row" style="margin-top:18px"><button class="btn mg" id="btnDownload">DESCARGAR</button></div>
       </div>
@@ -152,8 +152,8 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
     <div class="row">
       <label class="field" style="flex:3"><span>VIDEO A CORTAR (se llena solo al descargar, o elígelo con el botón)</span><input type="text" id="clipFile" autocomplete="off" placeholder="D:\Recursos Retrotarros\videos\starfox.mp4"></label>
       <button class="btn" id="btnPickVideo">ELEGIR VIDEO</button>
-      <label class="field"><span>NOMBRE DE LA CARPETA</span><input type="text" id="clipSlug" autocomplete="off"></label>
     </div>
+    <div class="out" style="margin-top:12px"><span>LOS CLIPS SE GUARDARÁN EN</span><b id="clipDest"></b><button class="btn sm" id="btnClipsDir">ELEGIR CARPETA</button><span id="clipsNote"></span></div>
     <div class="row" style="margin-top:14px">
       <div class="field" style="flex:2"><span>DURACIÓN DE CADA CLIP: <b class="val" id="lenVal">2:00</b></span>
         <input type="range" id="lenSec" min="60" max="180" step="5" value="120">
@@ -215,7 +215,6 @@ window.addEventListener("pagehide", () => fetch("/api/bye", { method: "POST", ke
 
 const fmtTime = s => { s = Math.round(s || 0); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
   return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(x).padStart(2, "0"); };
-const slugFromPath = p => (p.split(/[\\/]/).pop() || "").replace(/\.[^.]+$/, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
 function showProg(box, text, pct, meta, isErr) {
   box.classList.remove("hide");
@@ -243,7 +242,7 @@ async function refreshStatus() {
     $("pYt").className = "pill " + (s.ytdlp ? "ok" : "bad");
     $("pFf").textContent = s.ffmpeg ? "ffmpeg ok" : "ffmpeg falta";
     $("pFf").className = "pill " + (s.ffmpeg ? "ok" : "bad");
-    $("outBase").textContent = s.output_base;
+    folders = s; renderDest();
     $("missing").classList.toggle("hide", !!s.ytdlp);
     $("btnUpdate").classList.toggle("hide", !s.ytdlp);
     const h = s.health || {};
@@ -269,12 +268,35 @@ $("btnUpdate").onclick = () => {
     .catch(e => { alert(e.message); $("btnUpdate").disabled = false; });
 };
 $("btnLog").onclick = () => api("openlog", {}).catch(e => alert(e.message));
-$("btnOut").onclick = async () => {
-  $("btnOut").disabled = true;
-  try { const r = await api("pickfolder", {}); $("outBase").textContent = r.output_base; }
-  catch (e) { alert(e.message); }
-  $("btnOut").disabled = false;
-};
+const joinPath = (base, name) => (base || "").replace(/[\\/]+$/, "") + "\\" + name;
+const stemOf = p => (p.split(/[\\/]/).pop() || "").replace(/\.[^.]+$/, "");
+let folders = {};
+function renderDest() {
+  $("dlDest").textContent = joinPath(folders.output_base, ($("slug").value || "nombre") + "." + $("container").value);
+  $("outNote").textContent = folders.output_saved ? "(carpeta guardada para la próxima vez)" : "(carpeta por defecto: elige una y queda guardada)";
+  const stem = stemOf($("clipFile").value) || "video";
+  $("clipDest").textContent = joinPath(folders.clips_base, stem + "_clip1");
+  $("clipsNote").textContent = (folders.clips_saved ? "(carpeta guardada) " : "(carpeta por defecto: elige una y queda guardada) ")
+    + "Los clips llevan el nombre del video + _clip1, _clip2... Si ya hay clips de ese video, sigue la numeración.";
+}
+// which: "out" (descargas) o "clips". Devuelve false si no hay carpeta elegida todavia y se cancelo el selector.
+async function pickFolder(which) {
+  const r = await api("pickfolder", { which });
+  folders = r; renderDest();
+  return !r.cancelled;
+}
+async function ensureFolder(which) {
+  if (folders[which === "out" ? "output_saved" : "clips_saved"]) return true;
+  return pickFolder(which);
+}
+for (const [btn, which] of [["btnOut", "out"], ["btnClipsDir", "clips"]]) {
+  $(btn).onclick = async () => {
+    $(btn).disabled = true;
+    try { await pickFolder(which); } catch (e) { alert(e.message); }
+    $(btn).disabled = false;
+  };
+}
+["slug", "clipFile"].forEach(id => $(id).addEventListener("input", renderDest));
 
 $("btnAnalyze").onclick = async () => {
   $("anaErr").classList.add("hide");
@@ -288,7 +310,7 @@ $("btnAnalyze").onclick = async () => {
     const hs = analyzed.heights.length ? analyzed.heights : [1080];
     hs.forEach(h => sel.add(new Option(h + "p", h)));
     sel.value = hs.find(h => h <= 1080) || hs[0];
-    $("slug").value = analyzed.slug;
+    $("slug").value = analyzed.slug; renderDest();
     $("progDl").classList.add("hide");
     $("dlCard").classList.remove("hide");
     onContainer();
@@ -301,29 +323,32 @@ const onContainer = () => {
   const audio = ["mp3", "m4a"].includes($("container").value);
   $("height").disabled = audio; $("h264").disabled = audio; $("h264row").style.opacity = audio ? .4 : 1;
 };
-$("container").onchange = onContainer;
+$("container").onchange = () => { onContainer(); renderDest(); };
 
 $("btnDownload").onclick = async () => {
   $("btnDownload").disabled = true;
   try {
+    if (!(await ensureFolder("out"))) {
+      showProg($("progDl"), "Elige primero la carpeta donde se guardarán los videos (queda guardada para la próxima).", 0, "", true);
+      $("btnDownload").disabled = false; return;
+    }
     const r = await api("download", { url: $("url").value, slug: $("slug").value, container: $("container").value,
       height: $("height").value, h264: $("h264").checked });
     watchJob(r.job, $("progDl"), j => {
       $("btnDownload").disabled = false;
       if (j && j.result.file) {
-        lastFile = j.result.file; $("clipFile").value = lastFile; $("clipSlug").value = slugFromPath(lastFile); schedulePlan();
+        lastFile = j.result.file; $("clipFile").value = lastFile; renderDest(); schedulePlan();
         $("clipCard").scrollIntoView({ behavior: "smooth" });
       }
     });
   } catch (e) { showProg($("progDl"), e.message, 0, "", true); $("btnDownload").disabled = false; }
 };
 
-$("clipFile").oninput = () => { $("clipSlug").value = slugFromPath($("clipFile").value); };
 $("btnPickVideo").onclick = async () => {
   $("btnPickVideo").disabled = true;
   try {
     const r = await api("pickvideo", { start: $("clipFile").value });
-    if (r.file) { $("clipFile").value = r.file; $("clipSlug").value = slugFromPath(r.file); schedulePlan(); }
+    if (r.file) { $("clipFile").value = r.file; renderDest(); schedulePlan(); }
   } catch (e) { alert(e.message); }
   $("btnPickVideo").disabled = false;
 };
@@ -423,7 +448,11 @@ refreshClipUi(); clearPlan();
 $("btnClips").onclick = async () => {
   $("btnClips").disabled = true; $("btnOpenClips").classList.add("hide");
   try {
-    const r = await api("clips", { file: $("clipFile").value, slug: $("clipSlug").value, mode: clipMode(),
+    if (!(await ensureFolder("clips"))) {
+      showProg($("progClips"), "Elige primero la carpeta donde dejar los clips (queda guardada para la próxima).", 0, "", true);
+      $("btnClips").disabled = false; return;
+    }
+    const r = await api("clips", { file: $("clipFile").value, mode: clipMode(),
       length_sec: $("lenSec").value, piece_sec: $("pieceSec").value, max_clips: $("maxClips").value, ...sectionBody() });
     watchJob(r.job, $("progClips"), j => {
       $("btnClips").disabled = false;
