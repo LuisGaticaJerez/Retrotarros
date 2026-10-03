@@ -48,6 +48,10 @@ SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
 URL_RE = re.compile(r"^https?://\S+$", re.I)
 CONTAINERS = {"mp4", "mkv", "mp3", "m4a"}
 VIDEO_EXTS = {".mp4", ".mkv", ".webm", ".mov", ".avi", ".m4v"}
+# lineas de `ffmpeg -progress pipe:1`: no sirven en el log ni en el detalle del job
+FF_PROGRESS_RE = re.compile(r"^(out_time|out_time_us|out_time_ms|bitrate|total_size|frame|fps|stream_\d|dup_frames|drop_frames|speed|progress)=")
+CLIP_MIN_SEC, CLIP_MAX_SEC = 60, 180
+PIECE_MIN_SEC, PIECE_MAX_SEC = 10, 60
 STATE = {"last_ping": time.time(), "bye_at": None, "seen": False}
 
 JOBS: dict[str, dict] = {}
@@ -167,9 +171,11 @@ def stream(cmd: list[str], job: dict, on_line) -> int:
     for line in p.stdout:
         line = line.rstrip()
         if line:
-            job["log"].append(line)
-            if not line.startswith("TDL|"):
-                log.info("job %s | %s", job["id"], line[:400])
+            noisy = bool(FF_PROGRESS_RE.match(line))
+            if not noisy:
+                job["log"].append(line)
+                if not line.startswith("TDL|"):
+                    log.info("job %s | %s", job["id"], line[:400])
             on_line(line)
     code = p.wait()
     log.info("job %s proceso termino con codigo %s", job["id"], code)
@@ -447,43 +453,123 @@ def plan_clips(duration: float, length: int, max_clips: int) -> list[float]:
     return [float(i * length) for i in range(n)]
 
 
+def fmt_len(sec: int) -> str:
+    m, s = divmod(sec, 60)
+    if m and s:
+        return f"{m}m{s:02d}s"
+    return f"{m}m" if m else f"{s}s"
+
+
+def plan_mosaic(duration: float, length: int, piece: int, n_clips: int) -> tuple[list[list[float]], float]:
+    """Cada clip se arma con k trozos repartidos parejo dentro de su ventana del video.
+
+    k = length // piece, asi cada trozo dura length / k >= piece (nunca menos de lo pedido) y el
+    clip suma exactamente `length`. Devuelve (inicios por clip, duracion de cada trozo); lista
+    vacia si las ventanas no alcanzan para `length` segundos de material sin repetir.
+    """
+    k = max(1, length // piece)
+    p = length / k
+    n = max(1, n_clips)
+    win = duration / n
+    if win < length:
+        return [], p
+    step = win / k
+    return [[c * win + j * step + (step - p) / 2 for j in range(k)] for c in range(n)], p
+
+
+def has_audio(fp: str, src: Path) -> bool:
+    r = run([fp, "-v", "error", "-select_streams", "a:0", "-show_entries", "stream=index", "-of", "csv=p=0", str(src)],
+            timeout=60)
+    return bool(r.stdout.strip())
+
+
 def api_clips(body: dict) -> dict:
     src = Path(str(body.get("file") or "").strip().strip('"'))
     if not src.is_file() or src.suffix.lower() not in VIDEO_EXTS:
         raise ApiError("El archivo no existe o no es un video (mp4, mkv, webm, mov, avi).")
     slug = clean_slug(body.get("slug"))
+    mode = str(body.get("mode") or "seguido")
+    if mode not in ("seguido", "mosaico"):
+        raise ApiError("Modo de clip desconocido (seguido o mosaico).")
     try:
-        minutes = int(body.get("length_min"))
+        if body.get("length_sec") is not None:
+            length = int(body["length_sec"])
+        else:  # compatibilidad con el selector viejo de 1/2/3 minutos
+            length = int(body.get("length_min")) * 60
+        piece = int(body.get("piece_sec") or 15)
         max_clips = max(0, int(body.get("max_clips") or 0))
     except (TypeError, ValueError):
-        raise ApiError("Duracion o cantidad de clips invalida.")
-    if minutes not in (1, 2, 3):
-        raise ApiError("Los clips deben durar 1, 2 o 3 minutos.")
+        raise ApiError("Duracion, trozos o cantidad de clips invalida.")
+    if not CLIP_MIN_SEC <= length <= CLIP_MAX_SEC:
+        raise ApiError(f"Los clips deben durar entre {CLIP_MIN_SEC // 60} y {CLIP_MAX_SEC // 60} minutos.")
+    if mode == "mosaico" and not PIECE_MIN_SEC <= piece <= min(PIECE_MAX_SEC, length):
+        raise ApiError(f"Cada trozo del mosaico debe durar entre {PIECE_MIN_SEC} y {min(PIECE_MAX_SEC, length)} segundos.")
     ff, fp = need_tool("ffmpeg"), need_tool("ffprobe", "ffprobe (viene con ffmpeg)")
     out_dir = out_base() / "clips" / f"clips-{slug}"
-    length = minutes * 60
+    label = fmt_len(length)
     job = new_job("clips")
 
     def work(j):
         duration = probe_duration(fp, src)
-        starts = plan_clips(duration, length, max_clips)
-        log.info("job %s clips: src=%s duracion=%.1fs largo=%ss max=%s plan=%s", j["id"], src, duration, length,
-                 max_clips, [round(s) for s in starts])
-        if not starts:
-            raise ApiError(f"El video dura {duration / 60:.1f} min: es mas corto que un clip de {minutes} min.")
+        if mode == "mosaico":
+            plan, p = plan_mosaic(duration, length, piece, max_clips)
+            log.info("job %s mosaico: src=%s duracion=%.1fs largo=%ss trozo=%ss->%.2fs clips=%s",
+                     j["id"], src, duration, length, piece, p, len(plan))
+            if not plan:
+                n = max(1, max_clips)
+                raise ApiError(f"El video dura {duration / 60:.1f} min: no alcanza para {n} clip(s) de {label} sin repetir "
+                               f"material. Baja la cantidad de clips o la duracion.")
+            names = [f"{slug}-{label}-mosaico-{i:02d}.mp4" for i in range(1, len(plan) + 1)]
+        else:
+            starts = plan_clips(duration, length, max_clips)
+            log.info("job %s clips: src=%s duracion=%.1fs largo=%ss max=%s plan=%s", j["id"], src, duration, length,
+                     max_clips, [round(s) for s in starts])
+            if not starts:
+                raise ApiError(f"El video dura {duration / 60:.1f} min: es mas corto que un clip de {label}.")
+            plan = [[s] for s in starts]
+            names = [f"{slug}-{label}-{i:02d}{src.suffix.lower()}" for i in range(1, len(plan) + 1)]
         out_dir.mkdir(parents=True, exist_ok=True)
-        names = [out_dir / f"{slug}-{minutes}m-{i:02d}{src.suffix.lower()}" for i in range(1, len(starts) + 1)]
-        if names[0].exists():
-            raise ApiError(f"Ya hay clips de {minutes} min en {out_dir.name}. Usa otro nombre o borra esa carpeta.")
-        for i, (start, name) in enumerate(zip(starts, names), 1):
-            j["text"], j["percent"] = f"Cortando clip {i} de {len(starts)}...", (i - 1) / len(starts) * 100
-            r = run([ff, "-hide_banner", "-loglevel", "error", "-n", "-ss", f"{start:.3f}", "-i", str(src),
-                     "-t", str(length), "-c", "copy", "-avoid_negative_ts", "make_zero", str(name)])
-            if r.returncode != 0:
-                log.warning("job %s ffmpeg clip %s fallo: %s", j["id"], i, r.stderr.strip()[-1500:])
-                raise ApiError(f"ffmpeg fallo en el clip {i}: {r.stderr.strip()[-200:]}")
-        j["text"] = f"Listo: {len(starts)} clips de {minutes} min en {out_dir.name}"
-        j["result"] = {"dir": str(out_dir), "count": len(starts)}
+        paths = [out_dir / n for n in names]
+        if paths[0].exists():
+            raise ApiError(f"Ya hay clips de {label} ({mode}) en {out_dir.name}. Usa otro nombre o borra esa carpeta.")
+        audio = has_audio(fp, src) if mode == "mosaico" else True
+        for i, (starts_i, path) in enumerate(zip(plan, paths), 1):
+            base_pct = (i - 1) / len(plan) * 100
+            if mode == "seguido":
+                j["text"], j["percent"] = f"Cortando clip {i} de {len(plan)}...", base_pct
+                r = run([ff, "-hide_banner", "-loglevel", "error", "-n", "-ss", f"{starts_i[0]:.3f}", "-i", str(src),
+                         "-t", str(length), "-c", "copy", "-avoid_negative_ts", "make_zero", str(path)])
+                if r.returncode != 0:
+                    log.warning("job %s ffmpeg clip %s fallo: %s", j["id"], i, r.stderr.strip()[-1500:])
+                    raise ApiError(f"ffmpeg fallo en el clip {i}: {r.stderr.strip()[-200:]}")
+                continue
+            j["text"], j["percent"] = f"Armando mosaico {i} de {len(plan)} ({len(starts_i)} trozos, recodifica)...", base_pct
+            cmd = [ff, "-hide_banner", "-loglevel", "error", "-nostats", "-progress", "pipe:1", "-n"]
+            for st in starts_i:
+                cmd += ["-ss", f"{st:.3f}", "-t", f"{p:.3f}", "-i", str(src)]
+            parts = [f"[{k}:v:0]setpts=PTS-STARTPTS[v{k}]" + (f";[{k}:a:0]asetpts=PTS-STARTPTS[a{k}]" if audio else "")
+                     for k in range(len(starts_i))]
+            joined = "".join(f"[v{k}][a{k}]" if audio else f"[v{k}]" for k in range(len(starts_i)))
+            parts.append(f"{joined}concat=n={len(starts_i)}:v=1:a={1 if audio else 0}[v]" + ("[a]" if audio else ""))
+            cmd += ["-filter_complex", ";".join(parts), "-map", "[v]"] + (["-map", "[a]"] if audio else [])
+            cmd += ["-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p"]
+            cmd += (["-c:a", "aac", "-b:a", "192k"] if audio else []) + ["-movflags", "+faststart", str(path)]
+
+            def on_line(line, base=base_pct):
+                if line.startswith("out_time_us="):
+                    try:
+                        frac = min(1.0, int(line.split("=", 1)[1]) / 1e6 / length)
+                    except ValueError:
+                        return
+                    j["percent"] = base + frac * (100 / len(plan))
+            code = stream(cmd, j, on_line)
+            if code != 0:
+                path.unlink(missing_ok=True)
+                tail = " | ".join(list(j["log"])[-3:])
+                raise ApiError(f"ffmpeg fallo armando el mosaico {i}: {tail[-250:]}")
+        kind = "mosaicos" if mode == "mosaico" else "clips"
+        j["text"] = f"Listo: {len(plan)} {kind} de {label} en {out_dir.name}"
+        j["result"] = {"dir": str(out_dir), "count": len(plan)}
 
     return spawn(job, work)
 
@@ -555,6 +641,40 @@ def api_pickfolder(_body=None) -> dict:
     return {"output_base": save_output_base(path)}
 
 
+PICK_VIDEO_SCRIPT = r"""
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+Add-Type -AssemblyName System.Windows.Forms
+$owner = New-Object System.Windows.Forms.Form -Property @{TopMost = $true}
+$d = New-Object System.Windows.Forms.OpenFileDialog
+$d.Title = "Elige el video a cortar"
+$d.Filter = "Videos|*.mp4;*.mkv;*.webm;*.mov;*.avi;*.m4v|Todos los archivos|*.*"
+if ($env:TARRODL_START -and (Test-Path -LiteralPath $env:TARRODL_START)) { $d.InitialDirectory = $env:TARRODL_START }
+if ($d.ShowDialog($owner) -eq [System.Windows.Forms.DialogResult]::OK) { Write-Output $d.FileName }
+"""
+
+
+def api_pickvideo(body: dict) -> dict:
+    ps = shutil.which("powershell")
+    if not ps:
+        raise ApiError("No encontre PowerShell para abrir el selector de archivos.")
+    start = out_base()
+    hint = Path(str(body.get("start") or "").strip().strip('"'))
+    if hint.is_file():
+        start = hint.parent
+    r = subprocess.run([ps, "-NoProfile", "-STA", "-Command", PICK_VIDEO_SCRIPT], capture_output=True, text=True,
+                       encoding="utf-8", errors="replace", timeout=600, creationflags=NOWIN,
+                       env={**os.environ, "TARRODL_START": str(start)})
+    chosen = r.stdout.strip()
+    if not chosen:
+        log.info("selector de video cancelado (stderr=%s)", r.stderr.strip()[-300:])
+        return {"cancelled": True}
+    path = Path(chosen)
+    if not path.is_file() or path.suffix.lower() not in VIDEO_EXTS:
+        raise ApiError("Ese archivo no es un video (mp4, mkv, webm, mov, avi).")
+    log.info("video elegido para clips: %s", path)
+    return {"file": str(path)}
+
+
 def api_clientlog(body: dict) -> dict:
     log.warning("front: %s", str(body.get("msg") or "")[:800])
     return {}
@@ -591,7 +711,7 @@ def api_bye(_body=None) -> dict:
 ROUTES = {
     ("GET", "status"): api_status, ("POST", "analyze"): api_analyze, ("POST", "download"): api_download,
     ("POST", "clips"): api_clips, ("POST", "update"): api_update, ("POST", "install"): api_install,
-    ("POST", "pickfolder"): api_pickfolder, ("POST", "open"): api_open,
+    ("POST", "pickfolder"): api_pickfolder, ("POST", "pickvideo"): api_pickvideo, ("POST", "open"): api_open,
     ("POST", "clientlog"): api_clientlog, ("POST", "openlog"): api_openlog, ("POST", "ping"): api_ping,
     ("POST", "bye"): api_bye,
 }

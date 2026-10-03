@@ -66,6 +66,9 @@ pre { margin-top:8px; padding:10px; background:#0d0d12; max-height:150px; overfl
 .radios label { flex:1; text-align:center; padding:10px 0; border:2px solid rgba(255,46,136,.4); cursor:pointer; font-family:'Orbitron'; font-weight:700; }
 .radios input { display:none; } .radios input:checked + span { color:var(--mg); }
 .radios label:has(input:checked) { border-color:var(--mg); background:rgba(255,46,136,.1); box-shadow:0 0 12px rgba(255,46,136,.35); }
+input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:pointer; }
+.val { color:var(--ye); font-family:'Orbitron'; font-size:16px; letter-spacing:1px; }
+.ticks { display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,.4); letter-spacing:1px; }
 .note { font-size:12px; color:rgba(255,255,255,.4); letter-spacing:1px; text-align:center; }
 .hint { font-size:13px; color:rgba(255,255,255,.5); margin-top:10px; }
 @media (max-width:760px) { .preview { grid-template-columns:1fr; } .opts { grid-template-columns:1fr; } }
@@ -139,20 +142,28 @@ pre { margin-top:8px; padding:10px; background:#0d0d12; max-height:150px; overfl
   <section class="card mg" id="clipCard">
     <span class="lbl">▶ 02 · CLIPS DEL GAMEPLAY</span>
     <div class="row">
-      <label class="field" style="flex:3"><span>VIDEO A CORTAR (se llena solo al descargar, o pega una ruta)</span><input type="text" id="clipFile" autocomplete="off" placeholder="D:\Recursos Retrotarros\videos\starfox.mp4"></label>
+      <label class="field" style="flex:3"><span>VIDEO A CORTAR (se llena solo al descargar, o elígelo con el botón)</span><input type="text" id="clipFile" autocomplete="off" placeholder="D:\Recursos Retrotarros\videos\starfox.mp4"></label>
+      <button class="btn" id="btnPickVideo">ELEGIR VIDEO</button>
       <label class="field"><span>NOMBRE DE LA CARPETA</span><input type="text" id="clipSlug" autocomplete="off"></label>
     </div>
     <div class="row" style="margin-top:14px">
-      <div class="field"><span>DURACIÓN DE CADA CLIP</span>
-        <div class="radios">
-          <label><input type="radio" name="len" value="1"><span>1 MIN</span></label>
-          <label><input type="radio" name="len" value="2" checked><span>2 MIN</span></label>
-          <label><input type="radio" name="len" value="3"><span>3 MIN</span></label>
-        </div></div>
-      <label class="field"><span>MÁXIMO DE CLIPS (0 = TODO EL VIDEO SEGUIDO)</span><input type="number" id="maxClips" value="0" min="0" max="200"></label>
-      <button class="btn mg" id="btnClips">CREAR CLIPS</button>
+      <div class="field" style="flex:2"><span>DURACIÓN DE CADA CLIP: <b class="val" id="lenVal">2:00</b></span>
+        <input type="range" id="lenSec" min="60" max="180" step="5" value="120">
+        <div class="ticks"><span>1:00</span><span>2:00</span><span>3:00</span></div></div>
+      <label class="field"><span id="maxLbl">MÁXIMO DE CLIPS (0 = TODO EL VIDEO SEGUIDO)</span><input type="number" id="maxClips" value="0" min="0" max="200"></label>
     </div>
-    <div class="hint">Con un máximo, los clips se reparten parejo a lo largo de todo el video. Los cortes son rápidos (sin recodificar) y empiezan en el keyframe más cercano.</div>
+    <div class="row" style="margin-top:14px">
+      <div class="field" style="flex:2"><span>FORMA DEL CLIP</span>
+        <div class="radios">
+          <label><input type="radio" name="mode" value="seguido" checked><span>SEGUIDO</span></label>
+          <label><input type="radio" name="mode" value="mosaico"><span>MOSAICO</span></label>
+        </div></div>
+      <div class="field hide" id="pieceBox" style="flex:2"><span>DURACIÓN MÍNIMA DE CADA TROZO: <b class="val" id="pieceVal">15 s</b></span>
+        <input type="range" id="pieceSec" min="10" max="30" step="1" value="15">
+        <div class="ticks"><span>10 s</span><span>20 s</span><span>30 s</span></div></div>
+    </div>
+    <div class="row" style="margin-top:14px"><button class="btn mg" id="btnClips">CREAR CLIPS</button></div>
+    <div class="hint" id="clipHint"></div>
     <div class="prog hide" id="progClips"><div class="bar"><i></i></div><div class="ptext"></div>
       <div class="row" style="margin-top:10px"><button class="btn sm hide" id="btnOpenClips">ABRIR CARPETA</button></div></div>
   </section>
@@ -288,11 +299,40 @@ $("btnDownload").onclick = async () => {
 };
 
 $("clipFile").oninput = () => { $("clipSlug").value = slugFromPath($("clipFile").value); };
+$("btnPickVideo").onclick = async () => {
+  $("btnPickVideo").disabled = true;
+  try {
+    const r = await api("pickvideo", { start: $("clipFile").value });
+    if (r.file) { $("clipFile").value = r.file; $("clipSlug").value = slugFromPath(r.file); }
+  } catch (e) { alert(e.message); }
+  $("btnPickVideo").disabled = false;
+};
+
+const fmtLen = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+const clipMode = () => document.querySelector("input[name=mode]:checked").value;
+function refreshClipUi() {
+  const len = +$("lenSec").value, piece = +$("pieceSec").value, mosaic = clipMode() === "mosaico";
+  $("lenVal").textContent = fmtLen(len);
+  $("pieceVal").textContent = piece + " s";
+  $("pieceBox").classList.toggle("hide", !mosaic);
+  $("pieceSec").max = Math.min(30, len);
+  $("maxLbl").textContent = mosaic ? "CANTIDAD DE CLIPS (0 = 1 SOLO CON TODO EL VIDEO)" : "MÁXIMO DE CLIPS (0 = TODO EL VIDEO SEGUIDO)";
+  if (mosaic) {
+    const k = Math.max(1, Math.floor(len / piece));
+    $("clipHint").textContent = `Cada clip dura ${fmtLen(len)} y junta ${k} trozos de ~${(len / k).toFixed(1)} s repartidos por su parte del video, pegados uno tras otro. Recodifica (H.264 + AAC), así que tarda más que el corte seguido.`;
+  } else {
+    $("clipHint").textContent = "Con un máximo, los clips se reparten parejo a lo largo de todo el video. Los cortes son rápidos (sin recodificar) y empiezan en el keyframe más cercano.";
+  }
+}
+["lenSec", "pieceSec"].forEach(id => $(id).addEventListener("input", refreshClipUi));
+document.querySelectorAll("input[name=mode]").forEach(r => r.addEventListener("change", refreshClipUi));
+refreshClipUi();
+
 $("btnClips").onclick = async () => {
   $("btnClips").disabled = true; $("btnOpenClips").classList.add("hide");
   try {
-    const r = await api("clips", { file: $("clipFile").value, slug: $("clipSlug").value,
-      length_min: document.querySelector("input[name=len]:checked").value, max_clips: $("maxClips").value });
+    const r = await api("clips", { file: $("clipFile").value, slug: $("clipSlug").value, mode: clipMode(),
+      length_sec: $("lenSec").value, piece_sec: $("pieceSec").value, max_clips: $("maxClips").value });
     watchJob(r.job, $("progClips"), j => {
       $("btnClips").disabled = false;
       if (j && j.result.dir) { clipsDir = j.result.dir; $("btnOpenClips").classList.remove("hide"); }
