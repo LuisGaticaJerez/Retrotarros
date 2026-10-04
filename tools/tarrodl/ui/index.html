@@ -102,6 +102,23 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
 .ifoot { margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
 .qbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px; font-size:13px; color:rgba(255,255,255,.62); letter-spacing:1px; }
 .linkbtn { background:none; border:none; color:var(--cy); font-family:inherit; font-size:13px; cursor:pointer; text-decoration:underline; padding:0; }
+/* ---- pestañas y TarroMosaico ---- */
+#tabs { display:flex; max-width:1000px; margin:14px auto 0; padding:0 24px; gap:6px; }
+#tabs button { background:transparent; border:2px solid rgba(255,255,255,.18); border-bottom:none; color:rgba(255,255,255,.55); font-family:'Press Start 2P'; font-size:10px; letter-spacing:2px; padding:12px 18px; cursor:pointer; }
+#tabs button:hover { color:#fff; } #tabs button.on { color:var(--mg); border-color:var(--mg); background:rgba(255,46,136,.08); }
+.tab { display:flex; flex-direction:column; gap:22px; }
+.mrow { margin-top:10px; padding:10px 14px; background:rgba(255,255,255,.04); border-left:4px solid var(--cy); }
+.mhead { display:flex; gap:10px; align-items:center; }
+.mturn { font-family:'Orbitron'; font-weight:900; color:var(--ye); min-width:22px; }
+.mname { flex:1; min-width:0; font-family:'Orbitron'; font-weight:700; font-size:14px; word-break:break-word; }
+.mdur { font-size:13px; color:rgba(255,255,255,.6); }
+.msecval { margin:6px 0; font-size:13px; color:var(--ye); }
+.mlane { margin-top:10px; } .mlane .mlbl { display:flex; gap:8px; font-size:12px; letter-spacing:1px; margin-bottom:4px; color:rgba(255,255,255,.7); }
+.mlane .mlbl b { font-weight:400; color:var(--bo); min-width:0; word-break:break-word; }
+.mseq { display:flex; height:24px; gap:1px; margin-top:14px; } .mseq i { flex:1; display:block; }
+.mticks { display:flex; } .mticks span { flex:1; font-size:10px; color:rgba(255,255,255,.5); white-space:nowrap; overflow:visible; }
+.mrecent label { display:flex; gap:10px; align-items:center; padding:4px 0; font-size:14px; cursor:pointer; }
+.mrecent input { accent-color:var(--mg); width:16px; height:16px; }
 @media (max-width:760px) { .grid3 { grid-template-columns:1fr; } .ihead { flex-wrap:wrap; } }
 </style>
 </head>
@@ -118,7 +135,12 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
   </div>
 </header>
 
+<nav id="tabs">
+  <button data-tab="dl">TARRODL</button>
+  <button data-tab="mosaic">TARROMOSAICO</button>
+</nav>
 <main>
+<div class="tab" id="tabDl">
   <section class="card ye hide" id="healthCard">
     <span class="lbl">▶ AVISO DE YOUTUBE</span>
     <div class="advice" id="healthAdvice"></div>
@@ -164,6 +186,58 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
   </section>
 
   <div class="note">Los gameplays de otros creadores pueden traer Content ID o strikes en un canal monetizado. Anota de dónde sale cada clip.</div>
+</div>
+
+<div class="tab hide" id="tabMosaic">
+  <section class="card">
+    <span class="lbl">▶ 01 · VIDEOS DEL MOSAICO</span>
+    <div class="row" style="align-items:center">
+      <button class="btn" id="btnMosAdd">AGREGAR VIDEOS</button>
+      <button class="btn sm" id="btnMosRecent" title="Videos que hay en tu carpeta de descargas">DESCARGADOS</button>
+      <span class="hint" id="mosVidHint" style="margin:0">Agrega al menos 2 videos.</span>
+    </div>
+    <div class="cblock mrecent hide" id="mosRecent">
+      <div id="mosRecentList"></div>
+      <div class="row" style="margin-top:10px"><button class="btn sm" id="btnMosRecentAdd">AGREGAR LOS MARCADOS</button></div>
+    </div>
+    <div id="mosVideos"></div>
+    <div class="hint">El orden de la lista es el orden del intercalado: el primer trozo sale del video 1, el segundo del 2, y así. Con las barras eliges de qué parte de cada video se sacan los trozos.</div>
+  </section>
+
+  <section class="card mg">
+    <span class="lbl">▶ 02 · PARÁMETROS</span>
+    <div class="grid3">
+      <div class="field"><span>LARGO TOTAL DEL MOSAICO: <b class="val" id="mosTotalVal">5:00</b></span>
+        <input type="range" id="mosTotal" min="60" max="900" step="15" value="300">
+        <div class="ticks"><span>1:00</span><span>8:00</span><span>15:00</span></div></div>
+      <div class="field"><span>DURACIÓN MÍNIMA DE CADA TROZO: <b class="val" id="mosPieceVal">15 s</b></span>
+        <input type="range" id="mosPiece" min="10" max="60" step="1" value="15">
+        <div class="ticks"><span>10 s</span><span>35 s</span><span>60 s</span></div></div>
+      <div class="field"><span>REPARTO ENTRE VIDEOS</span>
+        <div class="radios">
+          <label title="Mismo número de trozos por video"><input type="radio" class="mos-share" name="mosShare" value="parejo"><span>PAREJO</span></label>
+          <label title="Más trozos de los videos más largos"><input type="radio" class="mos-share" name="mosShare" value="proporcional"><span>SEGÚN LARGO</span></label>
+        </div></div>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <label class="field"><span>RESOLUCIÓN</span>
+        <select id="mosHeight"><option value="1080">1080p (1920x1080)</option><option value="720">720p (1280x720)</option></select></label>
+      <label class="field" style="flex:2"><span>NOMBRE DEL ARCHIVO (VACÍO = MOSAICO)</span><input type="text" id="mosName" maxlength="60" placeholder="mosaico" autocomplete="off"></label>
+    </div>
+  </section>
+
+  <section class="card">
+    <span class="lbl">▶ 03 · VISTA PREVIA</span>
+    <div class="row" style="align-items:center">
+      <button class="btn sm" id="btnMosRegen" title="Prueba otra distribución de los trozos">REGENERAR REPARTO</button>
+      <button class="linkbtn" id="btnMosCenter">volver al reparto centrado</button>
+    </div>
+    <div class="msg hide" id="mosMsg"></div>
+    <div id="mosPreview"></div>
+    <div class="hint" id="mosSummary"></div>
+    <div id="mosJob" class="hide"></div>
+  </section>
+</div>
 </main>
 
 <template id="tplCard">
@@ -250,6 +324,20 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
     <button class="btn sm ye b-retry-clips hide">REINTENTAR CLIPS</button>
   </div>
 </article>
+</template>
+
+<template id="tplMosRow">
+<div class="mrow">
+  <div class="mhead"><span class="mturn"></span><span class="mname"></span><span class="mdur"></span>
+    <span class="iacts"><button class="btn sm m-up" title="Subir">▲</button><button class="btn sm m-down" title="Bajar">▼</button><button class="btn sm cancel m-del">QUITAR</button></span></div>
+  <div class="msecval"></div>
+  <div class="sec">
+    <label><span>DESDE</span><input type="text" class="m-from" value="0:00" autocomplete="off"></label>
+    <input type="range" class="m-from-r" min="0" max="1" step="1" value="0">
+    <label><span>HASTA</span><input type="text" class="m-to" value="0:00" autocomplete="off"></label>
+    <input type="range" class="m-to-r" min="0" max="1" step="1" value="1">
+  </div>
+</div>
 </template>
 
 <script>
@@ -741,6 +829,161 @@ $("btnClearDone").onclick = () => {
     if (finished) removeItem(it);
   }
 };
+
+// ================= TarroMosaico =================
+const MOS = { videos: [], seed: 0, plan: null, err: "", addErr: "", job: null, jobId: null, seq: 0, timer: null };
+const MOS_COLORS = ["#FF2E88", "#00E5FF", "#FFD23F", "#3CE88A", "#B58CFF", "#FF8A3C"];
+const MOS_PREF = { total: 300, piece: 15, share: "parejo", height: 1080, ...(lsGet("tarrodl.mosaic") || {}) };
+const sameFile = (a, b) => a.replace(/\//g, "\\").toLowerCase() === b.replace(/\//g, "\\").toLowerCase();
+const mosColor = i => MOS_COLORS[i % MOS_COLORS.length];
+
+function showTab(name) {
+  $("tabDl").classList.toggle("hide", name !== "dl");
+  $("tabMosaic").classList.toggle("hide", name !== "mosaic");
+  document.querySelectorAll("#tabs button").forEach(b => b.classList.toggle("on", b.dataset.tab === name));
+  lsSet("tarrodl.tab", name);
+}
+document.querySelectorAll("#tabs button").forEach(b => { b.onclick = () => showTab(b.dataset.tab); });
+showTab(lsGet("tarrodl.tab") === "mosaic" ? "mosaic" : "dl");
+
+function mosReadParams() {
+  MOS_PREF.total = +$("mosTotal").value; MOS_PREF.piece = +$("mosPiece").value;
+  MOS_PREF.share = (document.querySelector(".mos-share:checked") || { value: "parejo" }).value;
+  MOS_PREF.height = +$("mosHeight").value;
+  $("mosTotalVal").textContent = fmtLen(MOS_PREF.total); $("mosPieceVal").textContent = MOS_PREF.piece + " s";
+  lsSet("tarrodl.mosaic", MOS_PREF);
+}
+function mosWriteParams() {
+  $("mosTotal").value = MOS_PREF.total; $("mosPiece").value = MOS_PREF.piece; $("mosHeight").value = String(MOS_PREF.height);
+  document.querySelectorAll(".mos-share").forEach(r => { r.checked = r.value === MOS_PREF.share; });
+  mosReadParams();
+}
+for (const id of ["mosTotal", "mosPiece", "mosHeight"]) $(id).oninput = $(id).onchange = () => { mosReadParams(); scheduleMosPlan(); };
+document.querySelectorAll(".mos-share").forEach(r => { r.onchange = () => { mosReadParams(); scheduleMosPlan(); }; });
+$("btnMosRegen").onclick = () => { MOS.seed = 1 + Math.floor(Math.random() * 999999); scheduleMosPlan(); };
+$("btnMosCenter").onclick = () => { MOS.seed = 0; scheduleMosPlan(); };
+
+// ---- lista de videos ----
+function mosRowShow(row, v) {
+  row.querySelector(".m-from").value = fmtClock(v.from); row.querySelector(".m-to").value = fmtClock(v.to);
+  row.querySelector(".msecval").textContent = (v.from === 0 && v.to === Math.floor(v.duration)) ? "todo el video" : `${fmtClock(v.from)} → ${fmtClock(v.to)} (${fmtClock(v.to - v.from)})`;
+}
+function mosSlide(row, v, which) {
+  const fr = row.querySelector(".m-from-r"), to = row.querySelector(".m-to-r"), dur = Math.floor(v.duration);
+  if (which === "from" && +fr.value > +to.value - 1) fr.value = Math.max(0, +to.value - 1);
+  if (which === "to" && +to.value < +fr.value + 1) to.value = Math.min(dur, +fr.value + 1);
+  v.from = +fr.value; v.to = +to.value; mosRowShow(row, v); scheduleMosPlan();
+}
+function mosText(row, v, which) {
+  const t = parseClock(row.querySelector(which === "from" ? ".m-from" : ".m-to").value);
+  if (!Number.isNaN(t)) row.querySelector(which === "from" ? ".m-from-r" : ".m-to-r").value = Math.round(Math.min(Math.floor(v.duration), t));
+  mosSlide(row, v, which);
+}
+function mosRenderVideos() {
+  const box = $("mosVideos"); box.replaceChildren();
+  MOS.videos.forEach((v, i) => {
+    const row = $("tplMosRow").content.firstElementChild.cloneNode(true), dur = Math.floor(v.duration);
+    row.style.borderLeftColor = mosColor(i);
+    row.querySelector(".mturn").textContent = String(i + 1);
+    row.querySelector(".mname").textContent = v.name; row.querySelector(".mname").title = v.file;
+    row.querySelector(".mdur").textContent = fmtClock(v.duration) + (v.audio ? "" : " · sin audio");
+    const fr = row.querySelector(".m-from-r"), to = row.querySelector(".m-to-r");
+    fr.max = to.max = dur; fr.value = v.from; to.value = v.to;
+    fr.oninput = () => mosSlide(row, v, "from"); to.oninput = () => mosSlide(row, v, "to");
+    row.querySelector(".m-from").onchange = () => mosText(row, v, "from"); row.querySelector(".m-to").onchange = () => mosText(row, v, "to");
+    row.querySelector(".m-up").disabled = i === 0; row.querySelector(".m-down").disabled = i === MOS.videos.length - 1;
+    row.querySelector(".m-up").onclick = () => { [MOS.videos[i - 1], MOS.videos[i]] = [MOS.videos[i], MOS.videos[i - 1]]; mosRenderVideos(); };
+    row.querySelector(".m-down").onclick = () => { [MOS.videos[i + 1], MOS.videos[i]] = [MOS.videos[i], MOS.videos[i + 1]]; mosRenderVideos(); };
+    row.querySelector(".m-del").onclick = () => { MOS.videos.splice(i, 1); mosRenderVideos(); };
+    mosRowShow(row, v); box.appendChild(row);
+  });
+  $("mosVidHint").textContent = MOS.videos.length < 2 ? "Agrega al menos 2 videos." : `${MOS.videos.length} videos (máximo 12).`;
+  scheduleMosPlan();
+}
+async function mosAddFiles(files) {
+  const errs = [];
+  for (const f of files) {
+    if (MOS.videos.some(v => sameFile(v.file, f))) continue;
+    if (MOS.videos.length >= 12) { errs.push("El mosaico lleva hasta 12 videos: los demás se omitieron."); break; }
+    try {
+      const v = (await api("probe", { files: [f] })).videos[0];
+      if (!MOS.videos.some(x => sameFile(x.file, v.file)))
+        MOS.videos.push({ file: v.file, name: v.name, duration: v.duration, audio: v.audio, from: 0, to: Math.floor(v.duration) });
+    } catch (e) { errs.push(e.message); }
+  }
+  MOS.addErr = errs.join("  |  "); mosRenderVideos(); mosDraw();
+}
+$("btnMosAdd").onclick = async () => {
+  const btn = $("btnMosAdd"); btn.disabled = true; btn.textContent = "ABRIENDO...";
+  try { const r = await api("pickvideos", {}); if (r.files) await mosAddFiles(r.files); }
+  catch (e) { MOS.addErr = e.message; mosDraw(); }
+  btn.disabled = false; btn.textContent = "AGREGAR VIDEOS";
+};
+$("btnMosRecent").onclick = async () => {
+  const box = $("mosRecent");
+  if (!box.classList.contains("hide")) return box.classList.add("hide");
+  try {
+    const r = await api("session_files"), list = $("mosRecentList"); list.replaceChildren();
+    if (!r.files.length) list.textContent = "No hay videos en la carpeta de descargas.";
+    r.files.forEach(f => {
+      const lb = document.createElement("label"), cb = document.createElement("input"), tx = document.createElement("span");
+      cb.type = "checkbox"; cb.value = f.file; tx.textContent = `${f.name} · ${(f.size / 1048576).toFixed(0)} MB`;
+      lb.append(cb, tx); list.appendChild(lb);
+    });
+    box.classList.remove("hide");
+  } catch (e) { MOS.addErr = e.message; mosDraw(); }
+};
+$("btnMosRecentAdd").onclick = async () => {
+  const files = [...document.querySelectorAll("#mosRecentList input:checked")].map(c => c.value);
+  $("mosRecent").classList.add("hide");
+  if (files.length) await mosAddFiles(files);
+};
+
+// ---- plan y vista previa ----
+function mosRequestBody() {
+  return { videos: MOS.videos.map(v => { const o = { file: v.file }; if (v.from > 0 || v.to < Math.floor(v.duration)) { o.range_start = v.from; o.range_end = v.to; } return o; }),
+    total_sec: MOS_PREF.total, piece_sec: MOS_PREF.piece, share: MOS_PREF.share, seed: MOS.seed, height: MOS_PREF.height, name: $("mosName").value.trim() };
+}
+function mosaicReady() { return MOS.videos.length >= 2 && !!MOS.plan && !MOS.err && !(MOS.job && isActive(MOS.job)); }
+function scheduleMosPlan() { clearTimeout(MOS.timer); MOS.timer = setTimeout(refreshMosPlan, 350); }
+async function refreshMosPlan() {
+  const seq = ++MOS.seq;
+  if (MOS.videos.length < 2) { MOS.plan = null; MOS.err = ""; return mosDraw(); }
+  try { const r = await api("mosaic_plan", mosRequestBody()); if (seq !== MOS.seq) return; MOS.plan = r; MOS.err = ""; }
+  catch (e) { if (seq !== MOS.seq) return; MOS.plan = null; MOS.err = e.message; }
+  mosDraw();
+}
+function mosDraw() {
+  const box = $("mosPreview"), msg = $("mosMsg"), text = MOS.err || MOS.addErr;
+  box.replaceChildren(); msg.textContent = text; msg.classList.toggle("hide", !text);
+  const btn = document.getElementById("btnMosaic"); if (btn) btn.disabled = !mosaicReady();
+  const p = MOS.plan;
+  if (!p) { $("mosSummary").textContent = ""; return; }
+  const mk = (tag, cls) => { const e = document.createElement(tag); if (cls) e.className = cls; return e; };
+  p.lanes.forEach((l, i) => {
+    const lane = mk("div", "mlane"), lbl = mk("div", "mlbl"), n = mk("span"), nm = mk("b"), tl = mk("div", "tl");
+    n.textContent = String(i + 1); n.style.color = mosColor(i);
+    nm.textContent = MOS.videos[i] ? MOS.videos[i].name : l.file;
+    const cnt = mk("span"); cnt.textContent = l.starts.length ? `${l.starts.length} trozos` : "sin trozos";
+    lbl.append(n, nm, cnt);
+    const pct = s => (s / l.duration * 100) + "%", [ra, rb] = l.range;
+    if (ra > 0) { const d = mk("div", "dim"); d.style.left = "0"; d.style.width = pct(ra); tl.appendChild(d); }
+    if (rb < l.duration) { const d = mk("div", "dim"); d.style.left = pct(rb); d.style.right = "0"; tl.appendChild(d); }
+    l.starts.forEach((s, k) => { const b = mk("i"); b.style.background = mosColor(i); b.style.left = pct(s); b.style.width = pct(p.seg); b.title = `trozo ${k + 1} · desde ${fmtClock(s)}`; tl.appendChild(b); });
+    lane.append(lbl, tl); box.appendChild(lane);
+  });
+  const seq = mk("div", "mseq"), ticks = mk("div", "mticks"), step = Math.max(1, Math.ceil(p.sequence.length / 12));
+  p.sequence.forEach((s, k) => {
+    const c = mk("i"); c.style.background = mosColor(s.video); c.title = `video ${s.video + 1} · desde ${fmtClock(s.start)}`; seq.appendChild(c);
+    const t = mk("span"); t.textContent = k % step === 0 ? fmtClock(s.at) : ""; ticks.appendChild(t);
+  });
+  box.append(seq, ticks);
+  const per = p.lanes.map(l => l.starts.length).join(" · ");
+  $("mosSummary").textContent = `${p.pieces} trozos de ${Number.isInteger(p.seg) ? p.seg : p.seg.toFixed(1)} s · por video: ${per} · total ${fmtLen(p.total)}`;
+}
+
+mosWriteParams();
+mosRenderVideos();
 
 renderQueue();
 refreshStatus();
