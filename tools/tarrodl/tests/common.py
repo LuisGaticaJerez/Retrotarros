@@ -43,6 +43,17 @@ def make_video(path, seconds, size="160x120", fps=30, audio=True) -> Path:
     return path
 
 
+def make_audio_only(path, seconds) -> Path:
+    """Archivo .mp4 sin pista de video (solo tono): lo que dejaria una pista suelta de yt-dlp."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    r = subprocess.run([tarrodl.find_tool("ffmpeg"), "-y", "-hide_banner", "-loglevel", "error", "-f", "lavfi", "-i",
+                        f"sine=frequency=440:duration={seconds}", "-c:a", "aac", str(path)], capture_output=True, text=True, creationflags=tarrodl.NOWIN)
+    if r.returncode != 0:
+        raise RuntimeError(r.stderr[-400:])
+    return path
+
+
 def start_server():
     """Servidor HTTP real en un puerto libre. Devuelve (server, call); call(path, body=None) -> (status, json)."""
     srv = ThreadingHTTPServer(("127.0.0.1", 0), tarrodl.Handler)

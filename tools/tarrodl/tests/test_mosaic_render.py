@@ -26,7 +26,7 @@ def graphs():
 
 class FilterUnitTest(unittest.TestCase):
     def test_mosaic_filter_estructura(self):
-        seq = [{"video": 0, "start": 0, "at": 0}, {"video": 1, "start": 0, "at": 10}, {"video": 2, "start": 0, "at": 20}]
+        seq = [{"video": 0, "start": 0, "at": 0, "frames": 300}, {"video": 1, "start": 0, "at": 10, "frames": 300}, {"video": 2, "start": 0, "at": 20, "frames": 300}]
         f = T.mosaic_filter(seq, [True, False, True], 10.0, 1080)
         self.assertEqual(f.count("scale=1920:1080"), 3)
         self.assertEqual(f.count("anullsrc"), 1)
@@ -101,6 +101,12 @@ class MosaicRenderTest(unittest.TestCase):
         self.assertEqual((vs[0]["width"], vs[0]["height"], vs[0]["r_frame_rate"]), (1280, 720, "30/1"))
         self.assertEqual((au[0]["sample_rate"], au[0]["channels"]), ("48000", 2))
         self.assertEqual(j["result"]["file"], "mosaico.mp4")
+
+    def test_largo_exacto_cuando_el_trozo_no_calza_con_30_fps(self):
+        j = self.render([self.a, self.b], total_sec=100, piece_sec=13)
+        self.assertEqual(j["state"], "done", j["text"])
+        dur = float(ffprobe(T.clips_base() / "mosaico.mp4")["format"]["duration"])
+        self.assertAlmostEqual(dur, 100, delta=0.1)
 
     def test_vertical_queda_con_barras(self):
         j = self.render([self.d, self.a])

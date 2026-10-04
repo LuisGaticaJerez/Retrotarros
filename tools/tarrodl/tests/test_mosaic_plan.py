@@ -79,6 +79,24 @@ class PlanMultiTest(unittest.TestCase):
         w = 1200 / 4
         self.assertAlmostEqual(a0["lanes"][0]["starts"][0], (w - a0["seg"]) / 2, places=6)  # centrado en su ranura
 
+    def test_frames_exactos_cuando_el_trozo_no_calza_con_30_fps(self):
+        for total, piece in ((300, 13), (885, 10), (100, 13)):
+            p = T.plan_multi([V(3600, name=str(i)) for i in range(3)], total, piece, "parejo", 0)
+            frames = [s["frames"] for s in p["sequence"]]
+            self.assertEqual(sum(frames), total * 30, (total, piece))
+            self.assertLessEqual(max(frames) - min(frames), 1)
+            acc = 0
+            for s in p["sequence"]:
+                self.assertAlmostEqual(s["at"], acc / 30, places=9)
+                acc += s["frames"]
+
+    def test_cada_trozo_cabe_en_su_video_incluso_redondeado_a_frames(self):
+        for seed in (0, 3):
+            p = T.plan_multi([V(100), V(100), V(100)], 285, 13, "parejo", seed)
+            for s in p["sequence"]:
+                lane = p["lanes"][s["video"]]
+                self.assertLessEqual(s["start"] + s["frames"] / 30, lane["range"][1] + 1e-9)
+
     def test_validate_mosaic_params(self):
         bad = [(1, 300, 15, "parejo", 0, 1080), (13, 300, 15, "parejo", 0, 1080), (2, 59, 15, "parejo", 0, 1080),
                (2, 901, 15, "parejo", 0, 1080), (2, 300, 9, "parejo", 0, 1080), (2, 300, 61, "parejo", 0, 1080),

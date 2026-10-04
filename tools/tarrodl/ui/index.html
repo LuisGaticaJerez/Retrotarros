@@ -842,7 +842,7 @@ $("btnClearDone").onclick = () => {
 };
 
 // ================= TarroMosaico =================
-const MOS = { videos: [], seed: 0, plan: null, err: "", addErr: "", job: null, jobId: null, seq: 0, timer: null };
+const MOS = { videos: [], seed: 0, plan: null, stale: false, err: "", addErr: "", job: null, jobId: null, seq: 0, timer: null };
 const MOS_COLORS = ["#FF2E88", "#00E5FF", "#FFD23F", "#3CE88A", "#B58CFF", "#FF8A3C"];
 const MOS_PREF = { total: 300, piece: 15, share: "parejo", height: 1080, ...(lsGet("tarrodl.mosaic") || {}) };
 const sameFile = (a, b) => a.replace(/\//g, "\\").toLowerCase() === b.replace(/\//g, "\\").toLowerCase();
@@ -956,15 +956,15 @@ function mosRequestBody() {
     total_sec: MOS_PREF.total, piece_sec: MOS_PREF.piece, share: MOS_PREF.share, seed: MOS.seed, height: MOS_PREF.height, name: $("mosName").value.trim() };
 }
 const mosBusy = () => !!MOS.jobId && !(MOS.job && !isActive(MOS.job));
-function mosaicReady() { return MOS.videos.length >= 2 && !!MOS.plan && !MOS.err && !mosBusy(); }
+function mosaicReady() { return MOS.videos.length >= 2 && !!MOS.plan && !MOS.stale && !MOS.err && !mosBusy(); }
 function mosSyncButton() { $("btnMosaic").disabled = !mosaicReady(); }
-function scheduleMosPlan() { clearTimeout(MOS.timer); MOS.timer = setTimeout(refreshMosPlan, 350); }
+function scheduleMosPlan() { MOS.stale = true; mosSyncButton(); clearTimeout(MOS.timer); MOS.timer = setTimeout(refreshMosPlan, 350); }
 async function refreshMosPlan() {
   const seq = ++MOS.seq;
-  if (MOS.videos.length < 2) { MOS.plan = null; MOS.err = ""; return mosDraw(); }
+  if (MOS.videos.length < 2) { MOS.plan = null; MOS.err = ""; MOS.stale = false; return mosDraw(); }
   try { const r = await api("mosaic_plan", mosRequestBody()); if (seq !== MOS.seq) return; MOS.plan = r; MOS.err = ""; }
   catch (e) { if (seq !== MOS.seq) return; MOS.plan = null; MOS.err = e.message; }
-  mosDraw();
+  MOS.stale = false; mosDraw();
 }
 function mosDraw() {
   const box = $("mosPreview"), msg = $("mosMsg"), text = MOS.err || MOS.addErr;

@@ -801,13 +801,15 @@ def plan_multi(videos: list[dict], total: int, piece: int, share: str, seed: int
     """Mosaico con trozos de varios videos, intercalados (v1, v2, v3... y vuelta a v1).
 
     `videos`: [{file, duration, a, b}] con la seccion a..b ya resuelta. k = total // piece trozos de
-    p = total / k segundos (nunca menos que `piece`, suma exacta). Cada video recibe sus trozos (parejo, o
+    p = total / k segundos (nunca menos que `piece`); cada trozo lleva un numero entero de frames a 30 fps
+    (`frames`) y el total suma exacto. Cada video recibe sus trozos (parejo, o
     proporcional al largo de su seccion) sin pasar de lo que cabe sin solaparse; dentro del video van
     repartidos en ranuras iguales (seed 0 centrados, seed > 0 corridos al azar de forma reproducible).
     """
     k = max(1, total // piece)
     p = total / k
-    caps = [int((v["b"] - v["a"]) / p + 1e-9) for v in videos]
+    pf = math.ceil(p * 30 - 1e-9) / 30   # lo que ocupa un trozo una vez redondeado a frames de 30 fps (nunca menos que p)
+    caps = [int((v["b"] - v["a"]) / pf + 1e-9) for v in videos]
     if sum(caps) < k:
         raise ApiError(f"Los videos no alcanzan para {fmt_len(total)} sin repetir material. "
                        f"Amplia secciones, agrega videos o baja el largo total.")
@@ -818,7 +820,7 @@ def plan_multi(videos: list[dict], total: int, piece: int, share: str, seed: int
         starts = []
         if m:
             w = (v["b"] - v["a"]) / m
-            margin = max(0.0, w - p)
+            margin = max(0.0, w - pf)
             rng = random.Random(f"{seed}:{idx}")
             starts = [v["a"] + j * w + (margin / 2 if seed == 0 else rng.uniform(0, margin)) for j in range(m)]
         lanes.append({"file": v["file"], "duration": v["duration"], "range": [v["a"], v["b"]], "starts": starts})
@@ -826,7 +828,9 @@ def plan_multi(videos: list[dict], total: int, piece: int, share: str, seed: int
     for turn in range(max(counts, default=0)):
         for idx, lane in enumerate(lanes):
             if turn < len(lane["starts"]):
-                sequence.append({"video": idx, "start": lane["starts"][turn], "at": len(sequence) * p})
+                n = len(sequence)   # frames enteros por trozo: los k trozos suman exactamente total * 30
+                sequence.append({"video": idx, "start": lane["starts"][turn], "at": (total * 30 * n // k) / 30,
+                                 "frames": total * 30 * (n + 1) // k - total * 30 * n // k})
     return {"pieces": k, "seg": p, "lanes": lanes, "sequence": sequence}
 
 
@@ -835,6 +839,12 @@ def next_clip_index(out_dir: Path, stem: str) -> int:
     pat = re.compile(re.escape(stem) + r"_clip(\d+)\.[A-Za-z0-9]+$", re.I)
     used = [int(m.group(1)) for f in out_dir.iterdir() if (m := pat.match(f.name))]
     return max(used, default=0) + 1
+
+
+def has_video(fp: str, src: Path) -> bool:
+    r = run([fp, "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=index", "-of", "csv=p=0", str(src)],
+            timeout=60)
+    return bool(r.stdout.strip())
 
 
 def has_audio(fp: str, src: Path) -> bool:
@@ -983,6 +993,7 @@ def api_clips(body: dict) -> dict:
 
 # ---------- mosaico multi-video ----------
 
+YT_TRACK_RE = re.compile(r"\.f\d+\.", re.I)   # pista suelta de yt-dlp (<slug>.f137.mp4): video o audio solo, no sirve para el mosaico
 PROBE_CACHE: dict[tuple, dict] = {}   # (ruta, mtime, tamano) -> {duration, audio}: no se vuelve a medir un archivo que no cambio
 
 
@@ -1006,6 +1017,8 @@ def probe_video(src: Path) -> dict:
     if key not in PROBE_CACHE:
         fp = need_tool("ffprobe", "ffprobe (viene con ffmpeg)")
         try:
+            if not has_video(fp, src):
+                raise ApiError("no tiene pista de video (¿es solo audio o una pista suelta de yt-dlp?).")
             PROBE_CACHE[key] = {"duration": probe_duration(fp, src), "audio": has_audio(fp, src)}
         except ApiError as e:
             raise ApiError(f"{src.name}: {e}")
@@ -1066,7 +1079,7 @@ def api_session_files(_body=None) -> dict:
     base, files = out_base(), []
     if base.is_dir():
         for f in base.iterdir():
-            if f.is_file() and f.suffix.lower() in VIDEO_EXTS and ".temp." not in f.name.lower():
+            if f.is_file() and f.suffix.lower() in VIDEO_EXTS and ".temp." not in f.name.lower() and not YT_TRACK_RE.search(f.name):
                 st = f.stat()
                 files.append({"file": str(f), "name": f.name, "size": st.st_size, "mtime": st.st_mtime})
     files.sort(key=lambda x: -x["mtime"])
@@ -1082,12 +1095,13 @@ def mosaic_filter(sequence: list[dict], audio: list[bool], seg: float, height: i
     w = height * 16 // 9
     lines = []
     for i, piece in enumerate(sequence):
+        n = piece.get("frames") or round(seg * 30)
         lines.append(f"[{i}:v:0]scale={w}:{height}:force_original_aspect_ratio=decrease,"
-                     f"pad={w}:{height}:(ow-iw)/2:(oh-ih)/2,setsar=1,fps=30,setpts=PTS-STARTPTS[v{i}]")
+                     f"pad={w}:{height}:(ow-iw)/2:(oh-ih)/2,setsar=1,fps=30,trim=end_frame={n},setpts=PTS-STARTPTS[v{i}]")
         if audio[piece["video"]]:
-            lines.append(f"[{i}:a:0]aresample=48000,{MOSAIC_AFMT},asetpts=PTS-STARTPTS[a{i}]")
+            lines.append(f"[{i}:a:0]aresample=48000,{MOSAIC_AFMT},atrim=duration={n / 30:.6f},asetpts=PTS-STARTPTS[a{i}]")
         else:
-            lines.append(f"anullsrc=r=48000:cl=stereo,atrim=duration={seg:.3f},{MOSAIC_AFMT},asetpts=PTS-STARTPTS[a{i}]")
+            lines.append(f"anullsrc=r=48000:cl=stereo,atrim=duration={n / 30:.6f},{MOSAIC_AFMT},asetpts=PTS-STARTPTS[a{i}]")
     joined = "".join(f"[v{i}][a{i}]" for i in range(len(sequence)))
     lines.append(f"{joined}concat=n={len(sequence)}:v=1:a=1[v][a]")
     return ";\n".join(lines)
@@ -1124,7 +1138,7 @@ def api_mosaic(body: dict) -> dict:
         j["text"] = f"Armando mosaico ({len(seq)} trozos de {len(req['videos'])} videos, recodifica)..."
         cmd = [ff, "-hide_banner", "-loglevel", "error", "-nostats", "-progress", "pipe:1", "-n"]
         for piece in seq:
-            cmd += ["-ss", f"{piece['start']:.3f}", "-t", f"{plan['seg']:.3f}", "-i", req["videos"][piece["video"]]["file"]]
+            cmd += ["-ss", f"{piece['start']:.3f}", "-t", f"{piece['frames'] / 30 + 0.1:.3f}", "-i", req["videos"][piece["video"]]["file"]]
         cmd += ["-filter_complex_script", str(tmp), "-map", "[v]", "-map", "[a]",
                 "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p",
                 "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(path)]

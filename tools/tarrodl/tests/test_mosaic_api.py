@@ -22,6 +22,7 @@ class MosaicApiTest(unittest.TestCase):
         cls.c = str(common.make_video(v / "c.mp4", 90))
         cls.mudo = str(common.make_video(v / "mudo.mp4", 30, audio=False))
         cls.raro = str(common.make_video(v / "Juego ñandú [test] (1).mp4", 30))
+        cls.solo_audio = str(common.make_audio_only(v / "solo-audio.mp4", 30))
 
     @classmethod
     def tearDownClass(cls):
@@ -93,6 +94,8 @@ class MosaicApiTest(unittest.TestCase):
             self.assertEqual(self.call("/api/mosaic_plan", c)[0], 400, str(c)[:80])
 
     def test_session_files_lista_videos_recientes_primero_y_sin_temporales(self):
+        for old_f in T.out_base().iterdir():
+            old_f.unlink()
         dl = T.out_base()
         old, new = dl / "viejo.mp4", dl / "nuevo.mkv"
         old.write_bytes(b"x")
@@ -103,6 +106,25 @@ class MosaicApiTest(unittest.TestCase):
         code, r = self.call("/api/session_files")
         self.assertEqual(code, 200)
         self.assertEqual([f["name"] for f in r["files"]], ["nuevo.mkv", "viejo.mp4"])
+
+    def test_archivo_sin_video_se_rechaza_con_su_nombre(self):
+        code, r = self.call("/api/probe", {"files": [self.solo_audio]})
+        self.assertEqual(code, 400)
+        self.assertIn("solo-audio.mp4", r["error"])
+        code, r = self.call("/api/mosaic_plan", self.body([self.a, self.solo_audio]))
+        self.assertEqual(code, 400)
+        self.assertIn("solo-audio.mp4", r["error"])
+
+    def test_session_files_excluye_pistas_sueltas_de_yt_dlp(self):
+        for old_f in T.out_base().iterdir():
+            old_f.unlink()
+        dl = T.out_base()
+        for n in ("pista.f137.mp4", "pista.f251.webm", "pista.f401.mkv"):
+            (dl / n).write_bytes(b"x")
+        (dl / "completo.mp4").write_bytes(b"x")
+        names = [f["name"] for f in self.call("/api/session_files")[1]["files"]]
+        self.assertIn("completo.mp4", names)
+        self.assertFalse([n for n in names if ".f137." in n or ".f251." in n or ".f401." in n])
 
     def test_parse_picked(self):
         self.assertEqual(T.parse_picked("C:\\a.mp4\r\n\r\nC:\\b.txt\r\nC:\\c.MKV\r\n"), ["C:\\a.mp4", "C:\\c.MKV"])
