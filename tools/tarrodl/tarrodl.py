@@ -20,6 +20,7 @@ import secrets
 import shutil
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 import traceback
@@ -1072,6 +1073,81 @@ def api_session_files(_body=None) -> dict:
     return {"files": files[:50]}
 
 
+MOSAIC_AFMT = "aformat=sample_rates=48000:sample_fmts=fltp:channel_layouts=stereo"
+
+
+def mosaic_filter(sequence: list[dict], audio: list[bool], seg: float, height: int) -> str:
+    """Filtro de ffmpeg (para -filter_complex_script): normaliza cada trozo (resolucion con barras, 30 fps, audio
+    estereo 48 kHz; silencio si el video no tiene audio) y los une. La entrada i corresponde a sequence[i]."""
+    w = height * 16 // 9
+    lines = []
+    for i, piece in enumerate(sequence):
+        lines.append(f"[{i}:v:0]scale={w}:{height}:force_original_aspect_ratio=decrease,"
+                     f"pad={w}:{height}:(ow-iw)/2:(oh-ih)/2,setsar=1,fps=30,setpts=PTS-STARTPTS[v{i}]")
+        if audio[piece["video"]]:
+            lines.append(f"[{i}:a:0]aresample=48000,{MOSAIC_AFMT},asetpts=PTS-STARTPTS[a{i}]")
+        else:
+            lines.append(f"anullsrc=r=48000:cl=stereo,atrim=duration={seg:.3f},{MOSAIC_AFMT},asetpts=PTS-STARTPTS[a{i}]")
+    joined = "".join(f"[v{i}][a{i}]" for i in range(len(sequence)))
+    lines.append(f"{joined}concat=n={len(sequence)}:v=1:a=1[v][a]")
+    return ";\n".join(lines)
+
+
+def unique_name(out_dir: Path, name: str, ext: str = ".mp4") -> Path:
+    """<nombre>.mp4, y si existe <nombre>_2.mp4, _3... (nunca pisa nada)."""
+    path, n = out_dir / f"{name}{ext}", 2
+    while path.exists():
+        path, n = out_dir / f"{name}_{n}{ext}", n + 1
+    return path
+
+
+def api_mosaic(body: dict) -> dict:
+    req = resolve_mosaic_request(body)   # valida y revisa los archivos ANTES de crear el job
+    ff = need_tool("ffmpeg")
+    plan, total, name, height = req["plan"], req["total"], req["name"], req["height"]
+    out_dir = clips_base()
+    job = new_job("mosaic")
+
+    def work(j):
+        for v in req["videos"]:
+            check_video_file(v["file"])
+        out_dir.mkdir(parents=True, exist_ok=True)
+        path = unique_name(out_dir, name)
+        seq = plan["sequence"]
+        fd, tmp_name = tempfile.mkstemp(suffix=".ffgraph")
+        tmp = Path(tmp_name)
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            fh.write(mosaic_filter(seq, [v["audio"] for v in req["videos"]], plan["seg"], height))
+        CLEANUPS[j["id"]] = lambda: delete_files([path, tmp])
+        log.info("job %s mosaico: %s trozos de %.2fs de %s videos -> %s (%sp, reparto %s, semilla %s)",
+                 j["id"], len(seq), plan["seg"], len(req["videos"]), path, height, req["share"], req["seed"])
+        j["text"] = f"Armando mosaico ({len(seq)} trozos de {len(req['videos'])} videos, recodifica)..."
+        cmd = [ff, "-hide_banner", "-loglevel", "error", "-nostats", "-progress", "pipe:1", "-n"]
+        for piece in seq:
+            cmd += ["-ss", f"{piece['start']:.3f}", "-t", f"{plan['seg']:.3f}", "-i", req["videos"][piece["video"]]["file"]]
+        cmd += ["-filter_complex_script", str(tmp), "-map", "[v]", "-map", "[a]",
+                "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p",
+                "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(path)]
+
+        def on_line(line):
+            if line.startswith("out_time_us="):
+                try:
+                    j["percent"] = min(99.0, int(line.split("=", 1)[1]) / 1e6 / total * 100)
+                except ValueError:
+                    pass
+        code = stream(cmd, j, on_line)
+        if code != 0:
+            delete_files([path, tmp])
+            tail = " | ".join(list(j["log"])[-3:])
+            raise ApiError(f"ffmpeg fallo armando el mosaico: {tail[-250:]}")
+        delete_files([tmp])
+        CLEANUPS.pop(j["id"], None)
+        j["text"] = f"Listo: {path.name} ({fmt_len(total)}) en {out_dir}"
+        j["result"] = {"dir": str(out_dir), "file": path.name, "count": 1}
+
+    return spawn(job, work, pool="clips")
+
+
 def api_cancel(body: dict) -> dict:
     job = JOBS.get(str(body.get("job") or ""))
     if not job or job["state"] not in ("running", "queued"):
@@ -1316,7 +1392,7 @@ ROUTES = {
     ("GET", "status"): api_status, ("POST", "analyze"): api_analyze, ("POST", "download"): api_download,
     ("POST", "clips"): api_clips, ("POST", "plan"): api_plan, ("POST", "cancel"): api_cancel, ("POST", "queue_move"): api_queue_move, ("POST", "settings"): api_settings, ("POST", "update"): api_update, ("POST", "install"): api_install,
     ("POST", "pickfolder"): api_pickfolder, ("POST", "pickvideo"): api_pickvideo, ("POST", "pickvideos"): api_pickvideos, ("POST", "probe"): api_probe,
-    ("POST", "mosaic_plan"): api_mosaic_plan, ("GET", "session_files"): api_session_files, ("POST", "open"): api_open,
+    ("POST", "mosaic_plan"): api_mosaic_plan, ("POST", "mosaic"): api_mosaic, ("GET", "session_files"): api_session_files, ("POST", "open"): api_open,
     ("POST", "clientlog"): api_clientlog, ("POST", "openlog"): api_openlog, ("POST", "ping"): api_ping,
     ("POST", "bye"): api_bye,
 }
