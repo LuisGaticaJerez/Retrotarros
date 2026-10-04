@@ -286,6 +286,47 @@ if (-not $PandocExe) {
     }
 }
 
+# === TOOLS: TarroDL (descargador de gameplays, clips y mosaicos) -> Studio\Tools\TarroDL ===
+# Copia solo lo que hace falta para correrlo (nada de .venv, build, dist, tests ni el .exe sin firma).
+Write-Host "`n[Tools] Copiando TarroDL..." -ForegroundColor Yellow
+$TarroDlSrc = Join-Path $RepoRoot "tools\tarrodl"
+$TarroDlDst = Join-Path $DriveRoot "Tools\TarroDL"
+if (Test-Path (Join-Path $TarroDlSrc "tarrodl.py")) {
+    New-Item -ItemType Directory -Path $TarroDlDst -Force | Out-Null
+    & robocopy $TarroDlSrc $TarroDlDst "tarrodl.py" "iniciar-tarrodl.cmd" /NJH /NJS /NDL /NP /NC /NS | Out-Null
+    & robocopy (Join-Path $TarroDlSrc "ui") (Join-Path $TarroDlDst "ui") /MIR /XD "__pycache__" /NJH /NJS /NDL /NP /NC /NS | Out-Null
+    $global:LASTEXITCODE = 0   # robocopy devuelve 1-3 cuando copio algo: no es un error
+    $leeme = @"
+TarroDL - descargador de gameplays, clips y mosaicos (Retrotarros)
+
+COMO ABRIRLO
+  Doble clic en iniciar-tarrodl.cmd. Se abre en su propia ventana.
+
+LA PRIMERA VEZ EN UN PC NUEVO
+  1. Python 3.9 o mas nuevo, con "Add to PATH" marcado (python.org, o: winget install Python.Python.3.12).
+  2. ffmpeg: winget install Gyan.FFmpeg
+  3. yt-dlp: la app lo instala sola con el boton INSTALAR YT-DLP (o: winget install yt-dlp.yt-dlp).
+  4. Al descargar o cortar clips por primera vez la app pide elegir la carpeta de videos y la de clips.
+     Queda guardada en ese PC (no se comparte con los demas).
+
+QUE HACE
+  TARRODL      Pega links de YouTube y se arma una tarjeta por video (hasta 3 descargas a la vez).
+               Opcional: cortar clips al terminar (seguidos o mosaico) o cortar un video que ya tienes.
+  TARROMOSAICO Elige varios videos del disco y arma UN clip mosaico con trozos de todos,
+               intercalados, viendo antes la distribucion en una linea de tiempo.
+
+NOTAS
+  - Esta carpeta se actualiza sola desde el repo (scripts\sync-to-drive.ps1). No edites nada aca.
+  - Si YouTube deja de bajar videos, pulsa ACTUALIZAR YT-DLP en la app.
+  - VER LOG abre el registro de todo lo que hizo la app, util si algo falla.
+  - Los gameplays de otros creadores pueden traer Content ID o strikes: anota de donde sale cada clip.
+"@
+    Set-Content -Path (Join-Path $TarroDlDst "LEEME.txt") -Value $leeme -Encoding UTF8
+    Write-Host "  TOOL → $TarroDlDst (tarrodl.py, iniciar-tarrodl.cmd, ui\, LEEME.txt)" -ForegroundColor Cyan
+} else {
+    Write-Host "  WARN: no encuentro tools\tarrodl en el repo. Saltando." -ForegroundColor Yellow
+}
+
 $ErrorActionPreference = $prevEAP
 
 Write-Host "`nSincronización completa. Drive Desktop subirá los cambios a la nube." -ForegroundColor Green
