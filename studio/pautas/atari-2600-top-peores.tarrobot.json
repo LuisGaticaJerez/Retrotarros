@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "atari-2600-top-peores",
+  "episodio": "Top 10 Atari 2600 los peores juegos",
+  "creado": "2026-10-04",
+  "actualizado": "2026-10-04",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "atari-2600-top-peores-10",
+      "tema": "Amidar",
+      "texto": "Amidar, de Parker Brothers, 1982. Es el port del arcade de Konami: pintas una grilla mientras te persiguen cerdos y guerreros. Digital Press lo incluyó en su lista de los peores del Atari 2600 en 1991, porque era lento y tan doloroso de ver como de jugar.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Parker Brothers",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Amidar! Digital Press dijo que era tan doloroso de ver como de jugar. ¡Y lo hizo la gente del Monopoly!"
+    },
+    {
+      "id": "atari-2600-top-peores-9",
+      "tema": "Warplock",
+      "texto": "Warplock, de Data Age, 1982. Es un clon de Space Invaders con paddles: te mueves abajo, disparas arriba y listo. Una pantalla, una idea. Salió en el primer lote de Data Age, una empresa que duró poco más de un año.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Data Age",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Warplock! Una pantalla, una idea, y una empresa que duró poco más de un año."
+    },
+    {
+      "id": "atari-2600-top-peores-8",
+      "tema": "Star Fox",
+      "texto": "Star Fox, de Mythicon, 1983. No es el de Nintendo: salió diez años antes y no tiene nada que ver. Recoges cristales con un enemigo y una gema por pantalla, y la dificultad no cambia nunca. Costaba nueve con noventa y cinco dólares.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1983,
+      "editor": "Mythicon",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Este Star Fox salió diez años antes que el de Nintendo! Y no tiene nada que ver."
+    },
+    {
+      "id": "atari-2600-top-peores-7",
+      "tema": "Sneak 'N Peek",
+      "texto": "Sneak 'N Peek, de U.S. Games, 1982. Es el escondite en cartucho: uno se esconde en una casa que da un poco de susto y el otro tiene que no mirar. Hay veinte escondites y casi nada de animación.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "U.S. Games",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Un escondite en cartucho! Uno se esconde y el otro tiene que no mirar la pantalla."
+    },
+    {
+      "id": "atari-2600-top-peores-6",
+      "tema": "King Kong",
+      "texto": "King Kong, de Tigervision, 1982. Es el primer cartucho de la empresa y un clon del primer nivel de Donkey Kong. La revista Electronic Games dijo que los enemigos parecían inodoros antiguos con la mecha encendida. Arcade Express le puso cuatro de diez.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Tigervision",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Electronic Games dijo que las bombas parecían inodoros antiguos con la mecha encendida!"
+    },
+    {
+      "id": "atari-2600-top-peores-5",
+      "tema": "Fire Fly",
+      "texto": "Fire Fly, de Mythicon, 1983. Mismo programador que Star Fox y mismo precio de oferta. Una crítica lo describe como un protector de pantalla primitivo que tienes que operar a mano.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1983,
+      "editor": "Mythicon",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Fire Fly! Un protector de pantalla que tienes que operar a mano, según una crítica."
+    },
+    {
+      "id": "atari-2600-top-peores-4",
+      "tema": "Karate",
+      "texto": "Karate, de Ultravision, 1982. Dos peleadores y cero lógica: los controles no tienen pies ni cabeza. Una crítica dijo que era un insulto para cualquiera que gastó plata en un videojuego. La edición original de Ultravision hoy es rarísima.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Ultravision",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Karate! Una crítica dijo que era un insulto para quien gastó plata en un videojuego. ¡Y la original es rarísima!"
+    },
+    {
+      "id": "atari-2600-top-peores-3",
+      "tema": "Sssnake",
+      "texto": "Sssnake, de Data Age, 1982. En mil novecientos noventa y uno, Digital Press abrió con él su lista de los diez peores del Atari 2600: todos los gráficos son bloques. Eres un cazador en el Amazonas contra serpientes hechas de bloques. Salió en octubre de 1982 y la empresa cerró siete meses después.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Data Age",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Sssnake! Encabeza la lista de los peores de Digital Press: todos sus gráficos son bloques."
+    },
+    {
+      "id": "atari-2600-top-peores-2",
+      "tema": "Pac-Man",
+      "texto": "Pac-Man, de Atari, 1982. El juego más vendido del Atari 2600: más de ocho millones de copias. Los fantasmas parpadean porque cada uno aparece solo una vez cada cuatro cuadros. Vendió y decepcionó a la vez: un récord difícil de igualar.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Atari",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Pac-Man vendió más de ocho millones y decepcionó a todo el mundo! Un récord difícil."
+    },
+    {
+      "id": "atari-2600-top-peores-1",
+      "tema": "E.T. The Extra-Terrestrial",
+      "texto": "E.T. the Extra-Terrestrial, de Atari, 1982. Cinco semanas para hacerlo, una licencia de veinte a veinticinco millones de dólares y un hoyo del que no puedes salir. Atari enterró cartuchos sobrantes en un vertedero de Nuevo México; en dos mil catorce recuperaron unos mil trescientos juegos y entre ellos había E.T. El mito del peor juego de la historia.",
+      "estado": "talking",
+      "consola": "Atari 2600",
+      "ano": 1982,
+      "editor": "Atari",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡E.T.! Cinco semanas para hacerlo y un hoyo del que no puedes salir. ¡El mito del peor juego de la historia!"
+    }
+  ]
+}

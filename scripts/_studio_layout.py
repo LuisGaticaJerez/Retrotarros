@@ -36,6 +36,7 @@ EPISODE_CATEGORY_RULES: list[tuple[str, str]] = [
     (r"^teaser-", "teasers"),
     (r"-top-mundial$", "rankings/top-mundial"),
     (r"-top-precios$", "rankings/top-precios"),
+    (r"-top-peores$", "rankings/top-peores"),
     (r"-coleccion$", "colecciones"),
     (r"^saga-", "sagas"),
     (r"^retro-", "specials"),
@@ -54,6 +55,7 @@ SHORT_CATEGORY_RULES: list[tuple[str, str]] = [
     (r"^tarroshort-mejor-zelda-retro$", "cross-console"),
     (r"^tarroshort-.*-top-mundial$", "rankings/top-mundial"),
     (r"^tarroshort-.*-top-precios$", "rankings/top-precios"),
+    (r"^tarroshort-.*-top-peores$", "rankings/top-peores"),
     (r"^tarroshort-.*-coleccion$", "colecciones"),
     (r"^tarroshort-retro-", "specials"),
 ]

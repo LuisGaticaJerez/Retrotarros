@@ -40,6 +40,7 @@ Output: `D:\Recursos Retrotarros\Drive\Studio\<slug>\teasers\<slug>-tarroteaser-
 |---|---|---|
 | `top-mundial` o `ranking` | `ranking` | "número uno", "el primero" |
 | `top-precios` | `top-precios` | "el más caro", "valor récord" |
+| `top-peores` | `top-peores` | "el peor", "game over" |
 | `archivo` | `archivo` | "valor total", "vale la colección" |
 | `joyas` | `joyas` | "la joya", "infravalorado" |
 | `vs-mundo` o `retrotarros-vs` | `vs-mundo` | "puntaje final", "ganó Koko/mundo" |
@@ -114,7 +115,7 @@ formatos tiene el canal; se desactualiza rápido y no hay que reconstruirlo solo
 
 Resumen de formatos:
 
-- **Episodios largos** (15–25 min): 5 bloques, cierra con Koko tocando en batería. Cadencia: 1 cada 10–12 días. Sub-tipos con playlist propia en YouTube: **Rankings** (top mundial/precios por consola), **Colecciones**, **Sagas de videojuegos**, **Specials** (multi-consola, atados a fecha chilena).
+- **Episodios largos** (15–25 min): 5 bloques, cierra con Koko tocando en batería. Cadencia: 1 cada 10–12 días. Sub-tipos con playlist propia en YouTube: **Rankings** (top mundial/precios por consola; piloto "Top Peores", los peores de una consola con tono divertido, desde 2026-10-04: ver `docs/pautas/pauta-atari-2600-top-peores.md`), **Colecciones**, **Sagas de videojuegos**, **Specials** (multi-consola, atados a fecha chilena).
 - **Abriendo el tarro**: entrevista a un coleccionista invitado (no Luis/Koko) mostrando su propia colección — de lo que sea, no solo videojuegos. Kit para el invitado en `docs/abriendo-el-tarro/kit-coleccionista-abriendo-el-tarro.md`, formulario en `docs/abriendo-el-tarro/abriendo-el-tarro-google-form.gs`, template `studio/templates/_template-abriendo-el-tarro.html`.
 - **Reseñas** (playlist nueva, desde 2026-07-21): un juego por video, ángulo retrospectivo ("¿envejeció bien?"), máximo 10 min, talento alterna Luis/Koko 1 y 1 (nunca juntos, nunca cierra con batería). Diseño completo en `docs/superpowers/specs/2026-07-21-resena-format-design.md`. Generador `scripts/resena_deck.py`, salida en `studio/resenas/<slug>.html` (carpeta aparte).
 

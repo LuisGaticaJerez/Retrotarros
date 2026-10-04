@@ -88,6 +88,7 @@ function Get-DriveCategoryPath {
         switch ($_) {
             "top-mundial" { "Top Mundial" }
             "top-precios" { "Top Precios" }
+            "top-peores" { "Top Peores" }
             default {
                 if ($_.Length -gt 0) { $_.Substring(0,1).ToUpperInvariant() + $_.Substring(1) }
                 else { $_ }

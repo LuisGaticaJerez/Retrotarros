@@ -58,6 +58,7 @@ G:\Mi unidad\Studio\pautas\pauta-n64-top-mundial.docx  ← DOCX para imprimir/le
 | `ps1-top-precios` | Top 10 PS1 más caros del mundo | ✓ Cerrado para grabar | [arco](../arcos/ps1.md) |
 | `gamecube-top-mundial` | Top 10 GameCube según la crítica | ✓ Cerrado para grabar | [arco](../arcos/gamecube.md) |
 | `gamecube-top-precios` | Top 10 GameCube más caros del mundo | ✓ Cerrado para grabar | [arco](../arcos/gamecube.md) |
+| `atari-2600-top-peores` | Top 10 Atari 2600 los peores (piloto del formato Top Peores, tono divertido) | ✓ Armado · pendiente de ok de Luis/Coco | [pauta](../pautas/pauta-atari-2600-top-peores.md) |
 | `indie-lat-001` | Primer episodio Indie Lat (TBD) | ☐ Futuro |
 
 ---

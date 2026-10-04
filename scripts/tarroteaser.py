@@ -174,6 +174,11 @@ CLIMAX_KEYWORDS = {
         "valor récord", "valor record",
         "primer puesto en precio",
     ],
+    "top-peores": [
+        "el peor", "la peor", "el más malo", "el mas malo",
+        "el número uno", "el numero uno", "puesto número uno", "puesto numero uno",
+        "game over",
+    ],
     "hardware-raro": [
         "más raro", "mas raro", "la más rara", "la mas rara",
         "única", "unica",
@@ -201,6 +206,8 @@ def detect_episode_type(slug: str) -> str:
     # Orden importa: más específico primero
     if "top-precios" in s:
         return "top-precios"
+    if "top-peores" in s:
+        return "top-peores"
     if "top-mundial" in s or "ranking" in s:
         return "ranking"
     if "joyas" in s:
