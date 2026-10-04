@@ -19,23 +19,23 @@ El espejo del Top Mundial: los 10 peores cartuchos del Atari 2600, **para reirno
 
 | # | Juego | Lo que lo condena |
 |---|-------|-------------------|
-| 10 | Amidar | Doloroso de ver, segun Digital Press |
-| 9 | Warplock | Clon apurado de Space Invaders (Data Age) |
-| 8 | Star Fox | El de 1983, diez años antes del de Nintendo |
-| 7 | Sneak 'N Peek | Un escondite en cartucho |
-| 6 | King Kong | Bombas que parecen inodoros con mecha |
-| 5 | Fire Fly | "Protector de pantalla con joystick" |
-| 4 | Karate | Cero golpes que se entiendan; el original es rarisimo |
-| 3 | Sssnake | Encabeza la lista de Digital Press: "todo son bloques" |
-| 2 | Pac-Man | 8 millones vendidos y todos decepcionados |
+| 10 | Chuck Norris Superkicks | La licencia de Chuck Norris vencio y siguio como Kung Fu Superkicks |
+| 9 | Amidar | Doloroso de ver, segun Digital Press |
+| 8 | Warplock | Clon apurado de Space Invaders (Data Age) |
+| 7 | Star Fox | El de 1983, diez años antes del de Nintendo |
+| 6 | Sneak 'N Peek | Un escondite en cartucho |
+| 5 | King Kong | Bombas que parecen inodoros con mecha |
+| 4 | Fire Fly | "Protector de pantalla con joystick" |
+| 3 | Karate | Cero golpes que se entiendan; el original es rarisimo |
+| 2 | Sssnake | Encabeza la lista de Digital Press: "todo son bloques" |
 | 1 | E.T. | Cinco semanas, un hoyo y un vertedero |
 
 ## Preguntas guia (para discutir antes de grabar)
 
 1. **¿E.T. es el #1?** Es el peor por **fama**. Pero la lista de Digital Press la encabeza Sssnake, y una de las listas dice que E.T. "no es el peor, eso no es cierto". ¿Lo dejamos #1 y lo contamos como twist, o ponemos a Sssnake de #1?
-2. **Pac-Man en el #2**: sale tambien #2 en el Top Mundial. ¿Nos reimos de eso al aire ("el unico en los dos tops")?
+2. **Pac-Man quedo afuera**: ya salio en el Top Mundial (#2) y no queremos el mismo juego como mejor y peor. ¿Lo mencionamos al aire como "el que dejamos fuera a proposito" o ni lo nombramos?
 3. **El orden es nuestro**: usamos listas + nota + leyenda. ¿Se lo decimos asi, en 20 segundos, al principio?
-4. **Los que quedaron afuera**: Star Gunner, Sea Hawk, Chuck Norris Superkicks, Zaxxon... ¿hacemos un bonus "los que no cupieron" o lo dejamos para despues?
+4. **Los que quedaron afuera**: Star Gunner, Sea Hawk, Zaxxon, Pac-Man... ¿hacemos un bonus "los que no cupieron" o lo dejamos para despues?
 5. **Chistes**: ¿que juego les da mas risa para el reto de 30 segundos? (Mi apuesta: Sneak 'N Peek y Karate.)
 6. **Cierre**: ¿Coco toca un Game Over clasico o algo propio?
 7. **Si funciona**, ¿cual consola sigue? (NES, N64 y Genesis tienen material de sobra.)
@@ -44,7 +44,7 @@ El espejo del Top Mundial: los 10 peores cartuchos del Atari 2600, **para reirno
 
 - Las cifras de E.T. (cuantos cartuchos se hicieron, cuantos se vendieron, cuantos se enterraron) **cambian segun la fuente**: decir "segun la fuente" o no decirlas.
 - Lo seguro: **cinco semanas** para hacerlo, licencia de **US$ 20 a 25 millones**, vertedero de Alamogordo excavado el **26 de abril de 2014** (algo mas de 1.300 juegos recuperados).
-- La caja de Karate que mostramos es la de la **reedicion de Froggo**; la original de Ultravision es rarisima.
+- La caja de Karate que mostramos es la de la **reedicion de Froggo** (la original de Ultravision es rarisima) y la de Chuck Norris Superkicks es la de la **reedicion Kung Fu Superkicks**: no hay escaneo de las originales.
 
 ## Que falta cerrar
 

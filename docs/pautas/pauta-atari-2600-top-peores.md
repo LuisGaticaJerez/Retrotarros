@@ -34,22 +34,23 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado. Contraparte
 
 | # | Juego | Año | Editor | Evidencia (pantalla) | Premio comico |
 |---|-------|-----|--------|----------------------|---------------|
-| 10 | Amidar | 1982 | Parker Brothers | En 2 listas (Digital Press 1991, CBR) | Port mas doloroso de ver |
-| 9 | Warplock | 1982 | Data Age | En 2 listas (Digital Press, CBR) | Clon mas apurado |
-| 8 | Star Fox | 1983 | Mythicon | En 2 listas (Digital Press, CBR) | El Star Fox que no es Star Fox |
-| 7 | Sneak 'N Peek | 1982 | U.S. Games (Vidtec) | En 2 listas (SVG, CBR) | Escondite mas espeluznante |
-| 6 | King Kong | 1982 | Tigervision | En 3 listas (Digital Press, Creative Loafing, CBR) | Inodoro explosivo |
-| 5 | Fire Fly | 1983 | Mythicon | En 3 listas (Orphaned, Creative Loafing, CBR) | Protector de pantalla con joystick |
-| 4 | Karate | 1982 | Ultravision | En 2 listas (Creative Loafing, CBR) | Karate sin golpes |
-| 3 | Sssnake | 1982 | Data Age | En 3 listas (Digital Press, Creative Loafing, CBR) | Encabeza la lista de Digital Press |
-| 2 | Pac-Man | 1982 | Atari | Nota 47% (14 criticas AtariAge) | Fantasma parpadeante |
+| 10 | Chuck Norris Superkicks | 1983-84 | Xonox | En 1 lista (Orphaned Computers) | Kung fu con licencia vencida |
+| 9 | Amidar | 1982 | Parker Brothers | En 2 listas (Digital Press 1991, CBR) | Port mas doloroso de ver |
+| 8 | Warplock | 1982 | Data Age | En 2 listas (Digital Press, CBR) | Clon mas apurado |
+| 7 | Star Fox | 1983 | Mythicon | En 2 listas (Digital Press, CBR) | El Star Fox que no es Star Fox |
+| 6 | Sneak 'N Peek | 1982 | U.S. Games (Vidtec) | En 2 listas (SVG, CBR) | Escondite mas espeluznante |
+| 5 | King Kong | 1982 | Tigervision | En 3 listas (Digital Press, Creative Loafing, CBR) | Inodoro explosivo |
+| 4 | Fire Fly | 1983 | Mythicon | En 3 listas (Orphaned, Creative Loafing, CBR) | Protector de pantalla con joystick |
+| 3 | Karate | 1982 | Ultravision | En 2 listas (Creative Loafing, CBR) | Karate sin golpes |
+| 2 | Sssnake | 1982 | Data Age | En 3 listas (Digital Press, Creative Loafing, CBR) | Encabeza la lista de Digital Press |
 | 1 | E.T. the Extra-Terrestrial | 1982 | Atari | Nota 46% (7 criticas AtariAge) | Hoyo mas famoso de la historia |
 
 **Hilos del episodio:**
-- **Data Age** (Warplock #9, Sssnake #3): fundada en abril de 1982, cerrada en mayo de 1983. Se planta en #9 y se cierra en #3.
-- **Mythicon** (Star Fox #8, Fire Fly #5): mismo programador (Bruce de Graaf), juegos de US$ 9,95.
-- **1982-1983**: los 10 salieron en esos dos años (el año de la inundacion de cartuchos, justo antes del crash del 83).
-- **Callback al Top Mundial**: Pac-Man es el #2 en los dos tops. Y Howard Scott Warshaw hizo Raiders (#7) y Yars' Revenge (#4) del Top Mundial y tambien E.T.
+- **Data Age** (Warplock #8, Sssnake #2): fundada en abril de 1982, cerrada en mayo de 1983. Se planta en #8 y se cierra en #2.
+- **Mythicon** (Star Fox #7, Fire Fly #4): mismo programador (Bruce de Graaf), juegos de US$ 9,95.
+- **1982 a principios de 1984**: los 10 salieron en esa epoca (la inundacion de cartuchos, antes y durante el crash del 83). Chuck Norris Superkicks es el unico de 1983-84: Orphaned y AtariAge lo ubican en 1983, Wikipedia en enero de 1984.
+- **Callback al Top Mundial**: Howard Scott Warshaw hizo Raiders (#7) y Yars' Revenge (#4) del Top Mundial y tambien E.T.
+- **Pac-Man queda fuera a proposito** (decision de Luis, 2026-10-04): ya salio en el Top Mundial de Atari 2600 (#2) y no queremos al mismo juego como mejor y peor. Su lugar (el #2) lo tomo Chuck Norris Superkicks y el resto se corrio; SVG lo nombra entre los peores, sigue en la lista de fuentes.
 
 **Twist del #1**: E.T. es el peor por FAMA, no por nota ni por listas (Creative Loafing escribe que "a menudo se considera el peor juego jamas hecho, pero eso simplemente no es cierto", y la lista de Digital Press la encabeza Sssnake). Decirlo al aire.
 
@@ -66,13 +67,13 @@ Listas historicas contadas (cada juego suma 1 por lista en que aparece):
 - **(E) CBR**, "10 Worst Atari Video Games", https://www.cbr.com/worst-atari-games/ — 3D Tic-Tac-Toe, Karate, Fire Fly, Sneak 'N Peek, Sssnake, Warplock, Sorcerer, King Kong, Star Fox, Amidar.
 - Apoyo (no cuenta como lista): consenso de r/Atari2600 y foros AtariAge (Karate, trio Mythicon, Swordquest Fireworld, Spider Droid).
 
-**Conteo por juego:** Sssnake 3 (A, D, E) · King Kong 3 (A, D, E) · Fire Fly 3 (B, D, E) · Karate 2 (D, E) · Warplock 2 (A, E) · Star Fox 2 (A, E) · Sneak 'N Peek 2 (C, E) · Amidar 2 (A, E) · E.T. 2 (C, D) · Pac-Man 1 (C).
+**Conteo por juego:** Sssnake 3 (A, D, E) · King Kong 3 (A, D, E) · Fire Fly 3 (B, D, E) · Karate 2 (D, E) · Warplock 2 (A, E) · Star Fox 2 (A, E) · Sneak 'N Peek 2 (C, E) · Amidar 2 (A, E) · E.T. 2 (C, D) · Chuck Norris Superkicks 1 (B).
 
-**Nota (AtariAge, promedio de criticas retro externas):** solo E.T. (46%, 7 criticas) y Pac-Man (47%, 14 criticas) tienen suficientes criticas para mostrar nota. Para el resto un promedio con 1-2 criticas no es defendible (ej. Fire Fly 38% con 2; Journey Escape 73% y Warplock 72% con 1-2 criticas, benevolentes): **por eso la nota sola NO decide el orden**.
+**Nota (AtariAge, promedio de criticas retro externas):** solo E.T. (46%, 7 criticas) tiene suficientes criticas para mostrar nota (Pac-Man tambien, 47% con 14, pero quedo fuera del top). Para el resto un promedio con 1-2 criticas no es defendible (ej. Fire Fly 38% con 2; Journey Escape 73% y Warplock 72% con 1-2 criticas, benevolentes): **por eso la nota sola NO decide el orden**.
 
 > Nota sobre las posiciones: las listas B-E las leimos con extraccion automatica y no aseguramos el ORDEN interno de cada una, asi que en pantalla/notas solo se dice "aparece en la lista", sin numero de puesto. La lista de Digital Press si es fuente primaria: los puestos citados (Amidar #2, Warplock #8, Star Fox #7, King Kong #10, Sssnake #1) son los de esa lista.
 
-**Dejados afuera a proposito** (muy malos pero muy oscuros, o fuera de regla): Star Gunner, Sea Hawk, Sea Hunt, Spider Droid, Universal Chaos (Digital Press), Coconuts, Picnic, Airlock, Sorcerer, Frogs and Flies, Chuck Norris Superkicks, Zaxxon (Orphaned), Basic Math, Custer's Revenge (sin licencia), Skeet Shoot, Racquetball, Dishaster, Bugs, 3D Tic-Tac-Toe. Candidatos si el formato se repite o para un bonus "los que quedaron afuera".
+**Dejados afuera a proposito** (muy malos pero muy oscuros, o fuera de regla): Star Gunner, Sea Hawk, Sea Hunt, Spider Droid, Universal Chaos (Digital Press), Coconuts, Picnic, Airlock, Sorcerer, Frogs and Flies, Zaxxon (Orphaned), Pac-Man (fuera por ya estar en el Top Mundial), Basic Math, Custer's Revenge (sin licencia), Skeet Shoot, Racquetball, Dishaster, Bugs, 3D Tic-Tac-Toe. Candidatos si el formato se repite o para un bonus "los que quedaron afuera".
 
 ---
 
@@ -86,7 +87,7 @@ Listas historicas contadas (cada juego suma 1 por lista en que aparece):
 - **Fire Fly** — Mythicon, 1983, Bruce de Graaf, sonido de Bill Bryner, modelo 1002, US$ 9,95 (AtariAge y caja). Orphaned: "un protector de pantalla primitivo que tienes que operar a mano" (cita de la nota de Orphaned, atribuir).
 - **Karate** — Ultravision, 1982, diseñado por Joseph Amelio; reeditado por Froggo (Wikipedia). Ultravision solo lanzo dos juegos para el 2600; la edicion original es rareza 10 "increiblemente rara" (AtariAge). La caja de la captura es la de la **reedicion de Froggo** (la unica con caja escaneada).
 - **Sssnake** — Data Age, octubre de 1982, modelo DA1003 (AtariAge), cazador en el Amazonas. Digital Press 1991 la encabeza: "todos los graficos son bloques". Data Age cerro en mayo de 1983 con US$ 7,9 millones de deuda (Wikipedia).
-- **Pac-Man** — Atari, marzo de 1982, Tod Frye, 4 KB de ROM; cada fantasma aparece una de cada cuatro frames; mas de 1 millon de copias en menos de un mes y mas de 8 millones en total, el juego mas vendido de la consola (Wikipedia; coherente con la pauta del Top Mundial).
+- **Chuck Norris Superkicks** — Xonox, programado por Rebecca Heineman (Wikipedia); 1983 segun Orphaned y AtariAge, enero de 1984 segun Wikipedia. Llegar a un monasterio en seis minutos, tres movimientos (golpe, patada, bloqueo), cinturones, ninjas invisibles en la ultima etapa. Rebautizado Kung Fu Superkicks al expirar la licencia (Wikipedia y AtariAge). Xonox: subsidiaria de K-tel, fundada en 1983, cerro con el crash, famosa por los cartuchos double-ender. Recepcion mayoritariamente negativa (AllGame: 'despareja y a ratos risible'), pero AtariAge muestra una critica de Video Game Critic con 75%: por eso va al fondo. La caja es la de la reedicion Kung Fu Superkicks (Telegames); no hay escaneo de la original.
 - **E.T.** — Atari, diciembre de 1982, Howard Scott Warshaw; cinco semanas de desarrollo (Wikipedia, Mental Floss, entrevistas a Warshaw); licencia de US$ 20 a 25 millones (Wikipedia); excavacion del vertedero de Alamogordo el 26 de abril de 2014, algo mas de 1.300 juegos recuperados (Wikipedia, Waste360, UND/tDAR).
 
 **Cifras en disputa (no decirlas como dato firme):** cartuchos de E.T. fabricados (4 millones segun varias fuentes) y vendidos (Wikipedia: 2,6 millones a fines de 1982; otras fuentes, 1,5 millones); cartuchos enterrados en Alamogordo (800.000 segun UND, 728.000 segun Wikipedia); monto de la subasta de 2014 (US$ 107.000-108.000). Decir "segun la fuente" o no decirlas.
@@ -103,16 +104,16 @@ Luis con la caja de E.T. tapada con un pañuelo:
 20 segundos: "no habia Metacritic en 1982, asi que contamos en cuantas listas de peores sale cada uno, miramos la nota y sumamos la leyenda. El orden es nuestro; si no estan de acuerdo, comenten."
 
 ### Bloque 3 · #10 al #6 (1:30 – 11:30)
-~2 min por juego. Reto de 30 seg en la TarroVision en cada uno. Plantar el hilo Data Age en #9.
+~2 min por juego. Reto de 30 seg en la TarroVision en cada uno. Plantar el hilo Data Age en #8.
 
 ### Bloque 4 · #5 al #2 (11:30 – 20:00)
-Se cierra el hilo Data Age en #3 (Sssnake). Pac-Man #2: guiño al Top Mundial ("el unico que sale en los dos tops, y en los dos esta #2").
+Se cierra el hilo Data Age en #2 (Sssnake), que ademas encabeza la lista de Digital Press. Mencionar al pasar que Pac-Man se dejo fuera a proposito (ya salio en el Top Mundial).
 
 ### Bloque 5 · #1 E.T. (20:00 – 22:30)
 Redoble de bateria de Coco para la revelacion. Remate: el mismo programador del #4 y el #7 del Top Mundial hizo el peor de la historia en cinco semanas. Twist: es el peor por fama, no por nota.
 
 ### Bloque 6 · Analisis + Game Over (22:30 – 25:00)
-"El año en que todos hicieron juegos" (1982-83). Cierre con Coco tocando el tema de Game Over en bateria. CTA: ¿que consola sigue?
+"Los años en que todos hicieron juegos" (1982 a principios de 1984). Cierre con Coco tocando el tema de Game Over en bateria. CTA: ¿que consola sigue?
 
 ---
 

@@ -23,17 +23,17 @@ Hay un Star Fox que salió diez años antes que el de Nintendo, una bomba que pa
 
 00:00 Intro
 00:45 Cómo elegimos
-01:30 #10 Amidar
-03:30 #9 Warplock
-05:30 #8 Star Fox
-07:30 #7 Sneak 'N Peek
-09:30 #6 King Kong
-11:30 #5 Fire Fly
-13:30 #4 Karate
-15:30 #3 Sssnake
-17:45 #2 Pac-Man
+01:30 #10 Chuck Norris Superkicks
+03:30 #9 Amidar
+05:30 #8 Warplock
+07:30 #7 Star Fox
+09:30 #6 Sneak 'N Peek
+11:30 #5 King Kong
+13:30 #4 Fire Fly
+15:30 #3 Karate
+17:45 #2 Sssnake
 20:00 #1 E.T.
-22:30 El año en que todos hicieron juegos
+22:30 Los años en que todos hicieron juegos
 24:00 Game Over
 
 Suscríbete y dinos qué consola quieres que siga en el Top Peores.
