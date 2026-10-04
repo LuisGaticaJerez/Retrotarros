@@ -150,22 +150,84 @@ def need_tool(name: str, label: str | None = None) -> str:
 
 # ---------- jobs ----------
 
+class Pool:
+    """Cupos de ejecucion: cuantos trabajos de un tipo corren a la vez; el resto espera en cola (FIFO)."""
+
+    def __init__(self, name: str, limit: int):
+        self.name, self.limit, self.active, self.waiting = name, limit, 0, []
+        self.cond = threading.Condition()
+
+
+MAX_DOWNLOADS_DEFAULT, MAX_DOWNLOADS_RANGE = 3, (1, 6)
+POOLS = {"dl": Pool("dl", MAX_DOWNLOADS_DEFAULT),   # descargas: hasta N a la vez (configurable)
+         "clips": Pool("clips", 1)}                 # clips/mosaicos: de a uno (el mosaico recodifica y usa mucho CPU)
+
+
+def max_downloads() -> int:
+    try:
+        n = int(load_config().get("max_downloads", MAX_DOWNLOADS_DEFAULT))
+    except (TypeError, ValueError):
+        n = MAX_DOWNLOADS_DEFAULT
+    return max(MAX_DOWNLOADS_RANGE[0], min(MAX_DOWNLOADS_RANGE[1], n))
+
+
+def apply_settings() -> None:
+    pool = POOLS["dl"]
+    with pool.cond:
+        pool.limit = max_downloads()
+        pool.cond.notify_all()
+
+
 def new_job(kind: str) -> dict:
-    job = {"id": uuid.uuid4().hex[:8], "kind": kind, "state": "running", "percent": 0,
+    job = {"id": uuid.uuid4().hex[:8], "kind": kind, "state": "running", "percent": 0, "queue_pos": 0, "pool": None,
            "text": "Iniciando...", "meta": "", "log": deque(maxlen=60), "result": {}, "cancel": False, "indeterminate": False}
     JOBS[job["id"]] = job
     return job
 
 
 def running_jobs() -> bool:
-    return any(j["state"] == "running" for j in list(JOBS.values()))
+    return any(j["state"] in ("running", "queued") for j in list(JOBS.values()))
 
 
-def spawn(job: dict, fn) -> dict:
-    def wrapper():
-        t0 = time.time()
-        log.info("job %s (%s) inicia", job["id"], job["kind"])
+def pool_acquire(pool: Pool, job: dict) -> None:
+    """Espera un cupo. Mientras espera el job queda 'queued' con su puesto; si lo cancelan, sale con Cancelled."""
+    with pool.cond:
+        pool.waiting.append(job["id"])
         try:
+            while True:
+                if job.get("cancel"):
+                    raise Cancelled()
+                pos = pool.waiting.index(job["id"])
+                free = pool.limit - pool.active
+                if pos < free:
+                    break
+                job["queue_pos"] = pos - free + 1
+                job["text"] = f"En cola, puesto {job['queue_pos']}"
+                pool.cond.wait(0.5)
+        finally:
+            if job["id"] in pool.waiting:
+                pool.waiting.remove(job["id"])
+        pool.active += 1
+        job["state"], job["queue_pos"], job["text"] = "running", 0, "Iniciando..."
+
+
+def pool_release(pool: Pool) -> None:
+    with pool.cond:
+        pool.active -= 1
+        pool.cond.notify_all()
+
+
+def spawn(job: dict, fn, pool: str | None = None) -> dict:
+    if pool:
+        job["pool"], job["state"], job["text"] = pool, "queued", "En cola..."
+
+    def wrapper():
+        t0, acquired = time.time(), False
+        try:
+            if pool:
+                pool_acquire(POOLS[pool], job)
+                acquired, t0 = True, time.time()
+            log.info("job %s (%s) inicia", job["id"], job["kind"])
             fn(job)
             if job["state"] == "running":
                 job["state"] = "done"
@@ -184,6 +246,9 @@ def spawn(job: dict, fn) -> dict:
             job["state"], job["text"] = "error", f"Error inesperado: {e}"
             job["log"].append(traceback.format_exc())
             log.exception("job %s (%s) fallo inesperado", job["id"], job["kind"])
+        finally:
+            if acquired:
+                pool_release(POOLS[pool])
     threading.Thread(target=wrapper, daemon=True).start()
     return {"job": job["id"]}
 
@@ -461,7 +526,7 @@ def startup_check() -> None:
 def api_status(_body=None) -> dict:
     yt = find_tool("yt-dlp")
     return {"ytdlp": ytdlp_version(yt) if yt else None, "ffmpeg": bool(find_tool("ffmpeg")),
-            **folders_state(), "health": HEALTH}
+            **folders_state(), "max_downloads": max_downloads(), "health": HEALTH}
 
 
 def api_analyze(body: dict) -> dict:
@@ -494,11 +559,19 @@ def api_download(body: dict) -> dict:
         raise ApiError("Calidad invalida.")
     yt, ff = need_tool("yt-dlp"), need_tool("ffmpeg")
     audio = container in ("mp3", "m4a")
+    clip_plan = body.get("clips") or None
+    if clip_plan:
+        if audio:
+            raise ApiError("Los clips necesitan un video: elige MP4 o MKV, o quita el plan de clips.")
+        validate_clip_plan(clip_plan)
     base = out_base()
     base.mkdir(parents=True, exist_ok=True)
     final = base / f"{slug}.{container}"
     if final.exists():
         raise ApiError(f"Ya existe {final.name} en la carpeta de salida. Cambia el nombre o borra el archivo.")
+    if any(j["kind"] == "download" and j["state"] in ("running", "queued") and j.get("target") == str(final)
+           for j in list(JOBS.values())):
+        raise ApiError(f"Ya hay otra descarga en la cola que va a crear {final.name}. Cambia el nombre.")
 
     cmd = [yt, "--no-playlist", "--newline", "--encoding", "utf-8",
            "--ffmpeg-location", str(Path(ff).parent),
@@ -518,6 +591,7 @@ def api_download(body: dict) -> dict:
     cmd += ["--", url]
 
     job = new_job("download")
+    job["target"] = str(final)
     started = time.time()
 
     def cleanup_download() -> list[str]:
@@ -527,6 +601,8 @@ def api_download(body: dict) -> dict:
 
     def work(j):
         CLEANUPS[j["id"]] = cleanup_download
+        if final.exists():  # otra descarga de la cola lo creo mientras esperaba su turno
+            raise ApiError(f"Ya existe {final.name} en la carpeta de salida. Cambia el nombre o borra el archivo.")
         stages, stage = (1 if audio else 2), 0
         seen_dest: set[str] = set()
         track_total: dict[int, float] = {}
@@ -590,8 +666,15 @@ def api_download(body: dict) -> dict:
         size = out.stat().st_size / 1048576
         j["text"], j["meta"] = f"Listo: {out.name} ({size:.0f} MB)", ""
         j["result"] = {"file": str(out)}
+        if clip_plan:  # encadenado: los clips parten solos al terminar la descarga (en la cola de clips)
+            try:
+                j["result"]["clips_job"] = api_clips({**clip_plan, "file": str(out)})["job"]
+                log.info("job %s encadeno clips: job %s", j["id"], j["result"]["clips_job"])
+            except ApiError as e:
+                j["result"]["clips_error"] = str(e)
+                log.warning("job %s: no pude encadenar los clips: %s", j["id"], e)
 
-    return spawn(job, work)
+    return spawn(job, work, pool="dl")
 
 
 def probe_duration(ffprobe: str, src: Path) -> float:
@@ -690,11 +773,36 @@ def validate_clip_params(mode: str, length: int, piece: int) -> None:
         raise ApiError(f"Cada trozo del mosaico debe durar entre {PIECE_MIN_SEC} y {min(PIECE_MAX_SEC, length)} segundos.")
 
 
+def validate_clip_plan(plan: dict) -> None:
+    """Revisa un plan de clips (el que viaja encadenado a una descarga) antes de aceptarla."""
+    mode = str(plan.get("mode") or "seguido")
+    if mode not in ("seguido", "mosaico"):
+        raise ApiError("Modo de clip desconocido (seguido o mosaico).")
+    try:
+        length, piece = int(plan.get("length_sec")), int(plan.get("piece_sec") or 15)
+        max(0, int(plan.get("max_clips") or 0))
+    except (TypeError, ValueError):
+        raise ApiError("Duracion, trozos o cantidad de clips invalida.")
+    validate_clip_params(mode, length, piece)
+
+
 def api_plan(body: dict) -> dict:
-    """Vista previa: de que partes del video saldria cada trozo (misma logica que api_clips)."""
-    src = Path(str(body.get("file") or "").strip().strip('"'))
-    if not src.is_file() or src.suffix.lower() not in VIDEO_EXTS:
-        raise ApiError("El archivo no existe o no es un video (mp4, mkv, webm, mov, avi).")
+    """Vista previa: de que partes del video saldria cada trozo (misma logica que api_clips).
+
+    Sirve con un archivo ya descargado o, antes de descargar, con la duracion que informo YouTube (`duration`)."""
+    duration = None
+    if body.get("file"):
+        src = Path(str(body.get("file")).strip().strip('"'))
+        if not src.is_file() or src.suffix.lower() not in VIDEO_EXTS:
+            raise ApiError("El archivo no existe o no es un video (mp4, mkv, webm, mov, avi).")
+    else:
+        src = None
+        try:
+            duration = float(body.get("duration"))
+        except (TypeError, ValueError):
+            raise ApiError("Falta el video o su duracion.")
+        if duration < 1:
+            raise ApiError("El video dura menos de un segundo.")
     mode = str(body.get("mode") or "seguido")
     try:
         length, piece = int(body.get("length_sec")), int(body.get("piece_sec") or 15)
@@ -702,7 +810,8 @@ def api_plan(body: dict) -> dict:
     except (TypeError, ValueError):
         raise ApiError("Duracion, trozos o cantidad de clips invalida.")
     validate_clip_params(mode, length, piece)
-    duration = probe_duration(need_tool("ffprobe", "ffprobe (viene con ffmpeg)"), src)
+    if duration is None:
+        duration = probe_duration(need_tool("ffprobe", "ffprobe (viene con ffmpeg)"), src)
     a, b = resolve_range(body, duration)
     clips, seg = plan_section(mode, duration, a, b, length, piece, max_clips)
     return {"duration": duration, "range": [a, b], "clips": clips, "seg": seg}
@@ -792,20 +901,59 @@ def api_clips(body: dict) -> dict:
         j["text"] = f"Listo: {len(plan)} {kind} de {label} ({paths[0].name}" + (f" ... {paths[-1].name}" if len(paths) > 1 else "") + f") en {out_dir}"
         j["result"] = {"dir": str(out_dir), "count": len(plan)}
 
-    return spawn(job, work)
+    return spawn(job, work, pool="clips")
 
 
 def api_cancel(body: dict) -> dict:
     job = JOBS.get(str(body.get("job") or ""))
-    if not job or job["state"] != "running":
+    if not job or job["state"] not in ("running", "queued"):
         raise ApiError("Ese proceso ya termino, no hay nada que cancelar.")
     job["cancel"] = True
     job["text"] = "Cancelando..."
+    for pool in POOLS.values():
+        with pool.cond:
+            pool.cond.notify_all()
     log.info("job %s: el usuario pidio CANCELAR (%s)", job["id"], job["kind"])
     p = PROCS.get(job["id"])
     if p:
         kill_tree(p)
     return {}
+
+
+def api_queue_move(body: dict) -> dict:
+    """Sube o baja un trabajo que espera en la cola (direction: up | down | top)."""
+    job = JOBS.get(str(body.get("job") or ""))
+    direction = str(body.get("direction") or "")
+    if not job or job["state"] != "queued" or not job.get("pool"):
+        raise ApiError("Ese trabajo ya no esta esperando en la cola.")
+    if direction not in ("up", "down", "top"):
+        raise ApiError("Direccion invalida (up, down o top).")
+    pool = POOLS[job["pool"]]
+    with pool.cond:
+        if job["id"] not in pool.waiting:
+            raise ApiError("Ese trabajo ya no esta esperando en la cola.")
+        i = pool.waiting.index(job["id"])
+        j = {"up": max(0, i - 1), "down": min(len(pool.waiting) - 1, i + 1), "top": 0}[direction]
+        pool.waiting.insert(j, pool.waiting.pop(i))
+        pool.cond.notify_all()
+    log.info("job %s movido en la cola (%s): puesto %s -> %s", job["id"], direction, i + 1, j + 1)
+    return {}
+
+
+def api_settings(body: dict) -> dict:
+    if "max_downloads" in body:
+        try:
+            n = int(body["max_downloads"])
+        except (TypeError, ValueError):
+            raise ApiError("Cantidad de descargas invalida.")
+        lo, hi = MAX_DOWNLOADS_RANGE
+        if not lo <= n <= hi:
+            raise ApiError(f"Las descargas a la vez van de {lo} a {hi}.")
+        CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+        CONFIG_FILE.write_text(json.dumps({**load_config(), "max_downloads": n}, indent=2), encoding="utf-8")
+        apply_settings()
+        log.info("descargas a la vez: %s", n)
+    return {"max_downloads": max_downloads()}
 
 
 def api_update(_body=None) -> dict:
@@ -964,7 +1112,7 @@ def api_bye(_body=None) -> dict:
 
 ROUTES = {
     ("GET", "status"): api_status, ("POST", "analyze"): api_analyze, ("POST", "download"): api_download,
-    ("POST", "clips"): api_clips, ("POST", "plan"): api_plan, ("POST", "cancel"): api_cancel, ("POST", "update"): api_update, ("POST", "install"): api_install,
+    ("POST", "clips"): api_clips, ("POST", "plan"): api_plan, ("POST", "cancel"): api_cancel, ("POST", "queue_move"): api_queue_move, ("POST", "settings"): api_settings, ("POST", "update"): api_update, ("POST", "install"): api_install,
     ("POST", "pickfolder"): api_pickfolder, ("POST", "pickvideo"): api_pickvideo, ("POST", "open"): api_open,
     ("POST", "clientlog"): api_clientlog, ("POST", "openlog"): api_openlog, ("POST", "ping"): api_ping,
     ("POST", "bye"): api_bye,
@@ -1004,6 +1152,11 @@ class Handler(BaseHTTPRequestHandler):
         if url.path in ("/", "/index.html"):
             html = (RES / "ui" / "index.html").read_text(encoding="utf-8").replace("__TOKEN__", TOKEN)
             return self._send(200, html.encode("utf-8"), "text/html; charset=utf-8")
+        if url.path == "/api/jobs":
+            if self.headers.get("X-Token") != TOKEN:
+                return self._json(403, {"error": "token invalido"})
+            ids = [i for i in (parse_qs(url.query).get("ids") or [""])[0].split(",") if i]
+            return self._json(200, {i: view_job(JOBS[i]) for i in ids if i in JOBS})
         if url.path == "/api/job":
             if self.headers.get("X-Token") != TOKEN:
                 return self._json(403, {"error": "token invalido"})
@@ -1067,6 +1220,7 @@ def main() -> None:
              APP, VERSION, getattr(sys, "frozen", False), sys.version.split()[0], PORT, out_base(),
              find_tool("yt-dlp"), find_tool("ffmpeg"), browser or ("ninguno" if args.no_browser else "webbrowser"))
 
+    apply_settings()
     threading.Thread(target=startup_check, daemon=True).start()
 
     if not args.no_browser:

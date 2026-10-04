@@ -30,11 +30,12 @@ main { max-width:1000px; margin:0 auto; padding:28px 24px 60px; display:flex; fl
 .lbl { display:block; font-family:'Press Start 2P'; font-size:10px; letter-spacing:2px; color:var(--cy); margin-bottom:14px; }
 .card.mg .lbl { color:var(--mg); } .card.ye .lbl { color:var(--ye); }
 .row { display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; }
-.field { display:flex; flex-direction:column; gap:6px; flex:1; min-width:180px; }
+.field { display:flex; flex-direction:column; gap:6px; flex:1; min-width:150px; }
 .field > span { font-size:12px; letter-spacing:2px; color:rgba(255,255,255,.55); }
-input[type=text], input[type=number], select { width:100%; padding:10px 12px; background:#0d0d12; color:var(--bo); border:2px solid rgba(0,229,255,.4);
+input[type=text], input[type=number], select, textarea { width:100%; padding:10px 12px; background:#0d0d12; color:var(--bo); border:2px solid rgba(0,229,255,.4);
   font-family:'Share Tech Mono',monospace; font-size:16px; border-radius:2px; }
-input:focus, select:focus { outline:none; border-color:var(--cy); box-shadow:0 0 10px rgba(0,229,255,.35); }
+textarea { resize:vertical; min-height:74px; }
+input:focus, select:focus, textarea:focus { outline:none; border-color:var(--cy); box-shadow:0 0 10px rgba(0,229,255,.35); }
 input:disabled, select:disabled { opacity:.4; }
 .btn { background:transparent; border:2px solid var(--cy); color:var(--cy); font-family:'Press Start 2P'; font-size:10px; letter-spacing:2px;
   padding:13px 18px; cursor:pointer; border-radius:2px; transition:all .15s; white-space:nowrap; }
@@ -45,20 +46,11 @@ input:disabled, select:disabled { opacity:.4; }
 .btn:disabled { opacity:.3; cursor:not-allowed; }
 .btn.cancel { border-color:var(--mg); color:var(--mg); } .btn.cancel:hover:not(:disabled) { background:var(--mg); color:#000; }
 .hide { display:none !important; }
-.preview { display:grid; grid-template-columns:minmax(220px,300px) 1fr; gap:22px; }
-.tv { background:linear-gradient(180deg,#1a1a1f,#0d0d12); border-radius:18px; padding:12px; box-shadow:0 0 0 2px rgba(255,255,255,.04),0 14px 40px rgba(0,0,0,.7); align-self:start; }
-.tv .scr { position:relative; border-radius:10px / 6px; overflow:hidden; background:#000; aspect-ratio:16/9; box-shadow:inset 0 0 0 1px rgba(255,255,255,.05); }
-.tv .scr img { width:100%; height:100%; object-fit:cover; display:block; }
-.tv .scr::after { content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.18) 2px,rgba(0,0,0,.18) 3px); }
-.tv .brand { text-align:center; font-family:'Press Start 2P'; font-size:8px; letter-spacing:3px; color:var(--ye); margin-top:8px; }
-.vtitle { font-family:'Orbitron'; font-weight:700; font-size:20px; line-height:1.25; color:#fff; }
-.vmeta { margin-top:6px; font-size:14px; letter-spacing:1px; color:rgba(255,255,255,.62); }
-.opts { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
-.check { display:flex; gap:10px; align-items:flex-start; grid-column:1 / -1; font-size:14px; line-height:1.4; cursor:pointer; }
-.check input { margin-top:3px; accent-color:var(--mg); width:18px; height:18px; }
-.out { grid-column:1 / -1; display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:13px; color:rgba(255,255,255,.6); word-break:break-all; }
+.check { display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.4; cursor:pointer; }
+.check input { margin-top:3px; accent-color:var(--mg); width:18px; height:18px; flex:none; }
+.out { display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:13px; color:rgba(255,255,255,.6); word-break:break-all; }
 .out b { color:var(--bo); font-weight:400; }
-.prog { margin-top:16px; }
+.prog { margin-top:12px; }
 .bar { height:8px; background:rgba(255,255,255,.08); border-radius:3px; overflow:hidden; }
 .bar > i { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--gr),var(--ye)); box-shadow:0 0 8px rgba(60,232,138,.5); transition:width .3s; }
 .bar.ind > i { width:35% !important; animation:slide 1.1s ease-in-out infinite alternate; }
@@ -68,23 +60,49 @@ input:disabled, select:disabled { opacity:.4; }
 details { margin-top:10px; font-size:12px; color:rgba(255,255,255,.55); } summary { cursor:pointer; letter-spacing:2px; }
 pre { margin-top:8px; padding:10px; background:#0d0d12; max-height:150px; overflow:auto; white-space:pre-wrap; word-break:break-all; font-family:inherit; }
 .radios { display:flex; gap:10px; }
-.radios label { flex:1; text-align:center; padding:10px 0; border:2px solid rgba(255,46,136,.4); cursor:pointer; font-family:'Orbitron'; font-weight:700; }
+.radios label { flex:1; text-align:center; padding:8px 0; border:2px solid rgba(255,46,136,.4); cursor:pointer; font-family:'Orbitron'; font-weight:700; font-size:14px; }
 .radios input { display:none; } .radios input:checked + span { color:var(--mg); }
 .radios label:has(input:checked) { border-color:var(--mg); background:rgba(255,46,136,.1); box-shadow:0 0 12px rgba(255,46,136,.35); }
 input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:pointer; }
-.val { color:var(--ye); font-family:'Orbitron'; font-size:16px; letter-spacing:1px; }
+.val { color:var(--ye); font-family:'Orbitron'; font-size:15px; letter-spacing:1px; }
 .ticks { display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,.4); letter-spacing:1px; }
 .sec { display:grid; grid-template-columns:110px 1fr; gap:8px 14px; align-items:center; }
 .sec label { display:flex; flex-direction:column; gap:4px; font-size:11px; letter-spacing:2px; color:rgba(255,255,255,.55); }
 .sec input[type=text] { padding:7px 10px; font-size:15px; }
+.tl { position:relative; height:24px; background:#0d0d12; border:2px solid rgba(0,229,255,.4); overflow:hidden; }
 .tl .dim { position:absolute; top:0; bottom:0; background:rgba(0,0,0,.65); }
-.tl { position:relative; height:26px; background:#0d0d12; border:2px solid rgba(0,229,255,.4); overflow:hidden; }
 .tl i { position:absolute; top:0; bottom:0; min-width:3px; background:var(--mg); }
 .tl i.b { background:var(--cy); }
-.tl.empty::after { content:"elige un video para ver el plan"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:12px; color:rgba(255,255,255,.35); letter-spacing:1px; }
 .note { font-size:12px; color:rgba(255,255,255,.4); letter-spacing:1px; text-align:center; }
-.hint { font-size:13px; color:rgba(255,255,255,.5); margin-top:10px; }
-@media (max-width:760px) { .preview { grid-template-columns:1fr; } .opts { grid-template-columns:1fr; } }
+.hint { font-size:13px; color:rgba(255,255,255,.5); margin-top:8px; }
+.empty { font-size:14px; color:rgba(255,255,255,.45); line-height:1.5; }
+/* ---- cola de tarjetas ---- */
+#queue { display:flex; flex-direction:column; gap:14px; }
+.item { background:rgba(6,3,15,.72); border-left:5px solid rgba(255,255,255,.3); padding:14px 18px; box-shadow:0 6px 22px rgba(0,0,0,.5); }
+.item[data-tone=config] { border-left-color:var(--cy); } .item[data-tone=running] { border-left-color:var(--gr); }
+.item[data-tone=queued] { border-left-color:rgba(255,255,255,.4); } .item[data-tone=done] { border-left-color:var(--ye); }
+.item[data-tone=error] { border-left-color:var(--mg); }
+.ihead { display:flex; gap:14px; align-items:flex-start; }
+.ithumb { position:relative; width:128px; aspect-ratio:16/9; flex:none; background:#000; border-radius:6px; overflow:hidden; box-shadow:0 0 0 2px rgba(255,255,255,.06); }
+.ithumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.ithumb::after { content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.18) 2px,rgba(0,0,0,.18) 3px); }
+.imain { flex:1; min-width:0; }
+.ititle { font-family:'Orbitron'; font-weight:700; font-size:16px; line-height:1.25; color:#fff; word-break:break-word; }
+.imeta { margin-top:4px; font-size:13px; letter-spacing:1px; color:rgba(255,255,255,.6); }
+.st { display:inline-block; margin-top:6px; font-size:12px; letter-spacing:2px; color:var(--cy); }
+.item[data-tone=running] .st { color:var(--gr); } .item[data-tone=done] .st { color:var(--ye); } .item[data-tone=error] .st { color:var(--mg); }
+.item[data-tone=queued] .st { color:rgba(255,255,255,.7); }
+.iacts { display:flex; gap:6px; flex:none; }
+.isum { margin-top:10px; font-size:13px; color:rgba(255,255,255,.62); line-height:1.5; }
+.cfg { margin-top:12px; }
+.grid3 { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; }
+.cblock { margin-top:12px; padding:12px 14px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); }
+.cplan { margin-top:12px; display:flex; flex-direction:column; gap:12px; }
+.msg { margin-top:10px; font-size:14px; color:var(--mg); }
+.ifoot { margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.qbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:14px; font-size:13px; color:rgba(255,255,255,.62); letter-spacing:1px; }
+.linkbtn { background:none; border:none; color:var(--cy); font-family:inherit; font-size:13px; cursor:pointer; text-decoration:underline; padding:0; }
+@media (max-width:760px) { .grid3 { grid-template-columns:1fr; } .ihead { flex-wrap:wrap; } }
 </style>
 </head>
 <body>
@@ -116,93 +134,127 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
   </section>
 
   <section class="card">
-    <span class="lbl">▶ 01 · PEGA EL LINK</span>
+    <span class="lbl">▶ 01 · AGREGA VIDEOS</span>
     <div class="row">
-      <label class="field"><span>URL DEL VIDEO</span><input type="text" id="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off"></label>
-      <button class="btn" id="btnAnalyze">ANALIZAR</button>
-    </div>
-    <div class="ptext err hide" id="anaErr"></div>
-  </section>
-
-  <section class="card ye hide" id="dlCard">
-    <span class="lbl">▶ OPCIONES DE DESCARGA</span>
-    <div class="preview">
-      <div class="tv"><div class="scr"><img id="thumb" alt=""></div><div class="brand">TARROVISION</div></div>
-      <div>
-        <div class="vtitle" id="vtitle"></div>
-        <div class="vmeta" id="vmeta"></div>
-        <div class="opts">
-          <label class="field"><span>FORMATO</span>
-            <select id="container">
-              <option value="mp4">MP4 · video</option><option value="mkv">MKV · video</option>
-              <option value="mp3">MP3 · solo audio</option><option value="m4a">M4A · solo audio</option>
-            </select></label>
-          <label class="field"><span>CALIDAD</span><select id="height"></select></label>
-          <label class="check" id="h264row"><input type="checkbox" id="h264" checked>
-            <span>H.264 compatible con DaVinci / CapCut (tope 1080p). Desmárcalo para bajar 1440p o 4K en VP9/AV1 (usa MKV).</span></label>
-          <label class="check"><input type="checkbox" id="antiSlow" checked>
-            <span>Evitar descargas lentas: si YouTube limita la velocidad bajo 8 MB/s, pide un enlace nuevo y retoma donde iba. Desmárcalo si tu internet es más lento que eso.</span></label>
-          <label class="field" style="grid-column:1 / -1"><span>NOMBRE DEL ARCHIVO (kebab-case)</span><input type="text" id="slug" autocomplete="off"></label>
-          <div class="out"><span>SE GUARDARÁ EN</span><b id="dlDest"></b><button class="btn sm" id="btnOut">ELEGIR CARPETA</button><span id="outNote"></span></div>
-        </div>
-        <div class="row" style="margin-top:18px"><button class="btn mg" id="btnDownload">DESCARGAR</button></div>
+      <label class="field" style="flex:3"><span>LINKS (UNO POR LÍNEA)</span><textarea id="links" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off"></textarea></label>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button class="btn" id="btnAddLinks">AGREGAR</button>
+        <button class="btn sm" id="btnAddDisk" title="Corta clips de un video que ya tienes en el disco">VIDEO DEL DISCO</button>
       </div>
     </div>
-    <div class="prog hide" id="progDl">
-      <div class="bar"><i></i></div><div class="ptext"></div><div class="pmeta"></div>
-      <div class="row" style="margin-top:10px"><button class="btn sm cancel hide">CANCELAR DESCARGA</button></div>
-      <details><summary>DETALLE</summary><pre></pre></details>
-    </div>
+    <div class="msg hide" id="addErr"></div>
+    <div class="out" style="margin-top:14px"><span>DESCARGAS EN</span><b id="dlFolder"></b><button class="btn sm" id="btnOut">ELEGIR CARPETA</button><span id="outNote"></span></div>
+    <div class="out" style="margin-top:8px"><span>CLIPS EN</span><b id="clipFolder"></b><button class="btn sm" id="btnClipsDir">ELEGIR CARPETA</button><span id="clipsNote"></span></div>
+    <div class="out" style="margin-top:8px"><span>DESCARGAS A LA VEZ</span>
+      <select id="maxDl" style="width:auto; padding:6px 10px; font-size:14px;"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select>
+      <span>los clips se hacen de a uno, solos, apenas termina cada descarga</span></div>
   </section>
 
-  <section class="card mg" id="clipCard">
-    <span class="lbl">▶ 02 · CLIPS DEL GAMEPLAY</span>
-    <div class="row">
-      <label class="field" style="flex:3"><span>VIDEO A CORTAR (se llena solo al descargar, o elígelo con el botón)</span><input type="text" id="clipFile" autocomplete="off" placeholder="D:\Recursos Retrotarros\videos\starfox.mp4"></label>
-      <button class="btn" id="btnPickVideo">ELEGIR VIDEO</button>
+  <section class="card mg">
+    <span class="lbl">▶ 02 · COLA</span>
+    <div class="empty" id="emptyQ">Aún no hay videos. Pega uno o varios links arriba y se arma una tarjeta por video, con sus propias opciones y su propio plan de clips.</div>
+    <div id="queue"></div>
+    <div class="qbar hide" id="qbar">
+      <span id="qsum"></span>
+      <span style="display:flex; gap:8px;">
+        <button class="btn sm" id="btnClearDone">QUITAR TERMINADAS</button>
+        <button class="btn mg" id="btnStartAll">INICIAR TODO</button>
+      </span>
     </div>
-    <div class="out" style="margin-top:12px"><span>LOS CLIPS SE GUARDARÁN EN</span><b id="clipDest"></b><button class="btn sm" id="btnClipsDir">ELEGIR CARPETA</button><span id="clipsNote"></span></div>
-    <div class="row" style="margin-top:14px">
-      <div class="field" style="flex:2"><span>DURACIÓN DE CADA CLIP: <b class="val" id="lenVal">2:00</b></span>
-        <input type="range" id="lenSec" min="60" max="180" step="5" value="120">
-        <div class="ticks"><span>1:00</span><span>2:00</span><span>3:00</span></div></div>
-      <label class="field"><span id="maxLbl">MÁXIMO DE CLIPS (0 = TODO EL VIDEO SEGUIDO)</span><input type="number" id="maxClips" value="0" min="0" max="200"></label>
-    </div>
-    <div class="row" style="margin-top:14px">
-      <div class="field" style="flex:2"><span>FORMA DEL CLIP</span>
-        <div class="radios">
-          <label><input type="radio" name="mode" value="seguido" checked><span>SEGUIDO</span></label>
-          <label><input type="radio" name="mode" value="mosaico"><span>MOSAICO</span></label>
-        </div></div>
-      <div class="field hide" id="pieceBox" style="flex:2"><span>DURACIÓN MÍNIMA DE CADA TROZO: <b class="val" id="pieceVal">15 s</b></span>
-        <input type="range" id="pieceSec" min="10" max="30" step="1" value="15">
-        <div class="ticks"><span>10 s</span><span>20 s</span><span>30 s</span></div></div>
-    </div>
-    <div class="row" style="margin-top:14px">
-      <div class="field" style="flex:2"><span>SECCIÓN DEL VIDEO DE DONDE SALE: <b class="val" id="secVal">todo el video</b></span>
-        <div class="sec">
-          <label><span>DESDE</span><input type="text" id="secFrom" value="0:00" autocomplete="off" disabled></label>
-          <input type="range" id="secFromR" min="0" max="1" step="1" value="0" disabled>
-          <label><span>HASTA</span><input type="text" id="secTo" value="0:00" autocomplete="off" disabled></label>
-          <input type="range" id="secToR" min="0" max="1" step="1" value="1" disabled>
-        </div></div>
-    </div>
-    <div class="field" style="margin-top:14px"><span>PLAN <b class="val" id="tlInfo"></b></span>
-      <div class="tl" id="tl"></div>
-      <div class="ticks"><span>0:00</span><span id="tlEnd"></span></div></div>
-    <div class="row" style="margin-top:14px"><button class="btn mg" id="btnClips">CREAR CLIPS</button></div>
-    <div class="hint" id="clipHint"></div>
-    <div class="prog hide" id="progClips"><div class="bar"><i></i></div><div class="ptext"></div>
-      <div class="row" style="margin-top:10px"><button class="btn sm cancel hide">CANCELAR</button><button class="btn sm hide" id="btnOpenClips">ABRIR CARPETA</button></div></div>
   </section>
 
   <div class="note">Los gameplays de otros creadores pueden traer Content ID o strikes en un canal monetizado. Anota de dónde sale cada clip.</div>
 </main>
 
+<template id="tplCard">
+<article class="item" data-tone="config">
+  <div class="ihead">
+    <div class="ithumb"><img alt=""></div>
+    <div class="imain">
+      <div class="ititle"></div>
+      <div class="imeta"></div>
+      <span class="st"></span>
+    </div>
+    <div class="iacts">
+      <button class="btn sm b-up hide" title="Subir en la cola">▲</button>
+      <button class="btn sm b-down hide" title="Bajar en la cola">▼</button>
+      <button class="btn sm b-remove" title="Quitar de la lista">QUITAR</button>
+    </div>
+  </div>
+  <div class="isum hide"></div>
+  <div class="msg hide"></div>
+
+  <div class="cfg hide">
+    <div class="grid3 o-grid">
+      <label class="field"><span>FORMATO</span>
+        <select class="o-container"><option value="mp4">MP4 · video</option><option value="mkv">MKV · video</option>
+          <option value="mp3">MP3 · solo audio</option><option value="m4a">M4A · solo audio</option></select></label>
+      <label class="field o-height-box"><span>CALIDAD</span><select class="o-height"></select></label>
+      <label class="field"><span>NOMBRE DEL ARCHIVO</span><input type="text" class="o-slug" autocomplete="off"></label>
+    </div>
+    <div class="row o-checks" style="margin-top:10px; gap:22px;">
+      <label class="check o-h264-box"><input type="checkbox" class="o-h264"><span>H.264 compatible con DaVinci / CapCut (tope 1080p)</span></label>
+      <label class="check"><input type="checkbox" class="o-anti"><span>Evitar descargas lentas</span></label>
+    </div>
+
+    <div class="cblock">
+      <label class="check c-toggle"><input type="checkbox" class="c-enabled"><span>Cortar clips al terminar la descarga</span></label>
+      <div class="hint c-na hide">Los clips necesitan un video: elige MP4 o MKV.</div>
+      <div class="cplan hide">
+        <div class="grid3">
+          <div class="field"><span>FORMA</span>
+            <div class="radios">
+              <label><input type="radio" class="c-mode" value="seguido"><span>SEGUIDO</span></label>
+              <label><input type="radio" class="c-mode" value="mosaico"><span>MOSAICO</span></label>
+            </div></div>
+          <div class="field"><span>DURACIÓN DE CADA CLIP: <b class="val c-len-val">2:00</b></span>
+            <input type="range" class="c-len" min="60" max="180" step="5" value="120">
+            <div class="ticks"><span>1:00</span><span>2:00</span><span>3:00</span></div></div>
+          <label class="field"><span class="c-count-lbl">CANTIDAD (0 = AUTOMÁTICO)</span><input type="number" class="c-count" value="0" min="0" max="200"></label>
+        </div>
+        <div class="field c-piece-box hide"><span>DURACIÓN MÍNIMA DE CADA TROZO: <b class="val c-piece-val">15 s</b></span>
+          <input type="range" class="c-piece" min="10" max="30" step="1" value="15">
+          <div class="ticks"><span>10 s</span><span>20 s</span><span>30 s</span></div></div>
+        <div class="field"><span>SECCIÓN DEL VIDEO: <b class="val c-sec-val">todo el video</b></span>
+          <div class="sec">
+            <label><span>DESDE</span><input type="text" class="c-from" value="0:00" autocomplete="off"></label>
+            <input type="range" class="c-from-r" min="0" max="1" step="1" value="0">
+            <label><span>HASTA</span><input type="text" class="c-to" value="0:00" autocomplete="off"></label>
+            <input type="range" class="c-to-r" min="0" max="1" step="1" value="1">
+          </div></div>
+        <div class="field"><span>PLAN <b class="val c-tl-info"></b></span>
+          <div class="tl"></div>
+          <div class="ticks"><span>0:00</span><span class="c-tl-end"></span></div></div>
+        <div><button class="linkbtn b-copy-plan">Usar este plan en todas las tarjetas por configurar</button></div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:14px; justify-content:flex-end;">
+      <button class="btn mg b-add">AGREGAR A LA COLA</button>
+    </div>
+  </div>
+
+  <div class="prog dl-prog hide">
+    <div class="bar"><i></i></div><div class="ptext"></div><div class="pmeta"></div>
+    <div class="row" style="margin-top:8px"><button class="btn sm cancel dl-cancel hide">CANCELAR DESCARGA</button></div>
+    <details><summary>DETALLE</summary><pre></pre></details>
+  </div>
+  <div class="prog clip-prog hide">
+    <div class="bar"><i></i></div><div class="ptext"></div><div class="pmeta"></div>
+    <div class="row" style="margin-top:8px"><button class="btn sm cancel clip-cancel hide">CANCELAR CLIPS</button></div>
+  </div>
+  <div class="ifoot">
+    <button class="btn sm b-open-dl hide">VER VIDEO</button>
+    <button class="btn sm b-open-clips hide">ABRIR CARPETA DE CLIPS</button>
+    <button class="btn sm ye b-retry hide">REINTENTAR</button>
+    <button class="btn sm ye b-retry-clips hide">REINTENTAR CLIPS</button>
+  </div>
+</article>
+</template>
+
 <script>
 const TOKEN = "__TOKEN__";
 const $ = id => document.getElementById(id);
-let lastFile = "", clipsDir = "", analyzed = null;
 
 async function api(path, body) {
   const opt = { headers: { "X-Token": TOKEN, "Content-Type": "application/json" } };
@@ -221,8 +273,13 @@ window.addEventListener("unhandledrejection", e => reportError("promesa sin capt
 setInterval(() => api("ping", {}).catch(() => {}), 3000);
 window.addEventListener("pagehide", () => fetch("/api/bye", { method: "POST", keepalive: true, headers: { "X-Token": TOKEN } }));
 
-const fmtTime = s => { s = Math.round(s || 0); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
+const fmtClock = s => { s = Math.round(s || 0); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
   return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(x).padStart(2, "0"); };
+const fmtLen = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+const parseClock = t => { const p = t.trim().split(":").map(Number); if (!p.length || p.length > 3 || p.some(n => !Number.isFinite(n) || n < 0)) return NaN;
+  return p.reduce((acc, n) => acc * 60 + n, 0); };
+const joinPath = (base, name) => (base || "").replace(/[\\/]+$/, "") + "\\" + name;
+const stemOf = p => (p.split(/[\\/]/).pop() || "").replace(/\.[^.]+$/, "");
 
 function showProg(box, text, pct, meta, isErr, indeterminate) {
   box.classList.remove("hide");
@@ -233,77 +290,29 @@ function showProg(box, text, pct, meta, isErr, indeterminate) {
   const m = box.querySelector(".pmeta"); if (m) m.textContent = meta || "";
 }
 
-function watchJob(id, box, onDone) {
-  const cancel = box.querySelector(".cancel");
-  const resetCancel = () => { if (cancel) { cancel.classList.add("hide"); cancel.disabled = false; cancel.textContent = cancel.dataset.label; } };
-  if (cancel) {
-    cancel.dataset.label = cancel.dataset.label || cancel.textContent;
-    cancel.disabled = false; cancel.textContent = cancel.dataset.label; cancel.classList.remove("hide");
-    cancel.onclick = async () => {
-      cancel.disabled = true; cancel.textContent = "CANCELANDO...";
-      try { await api("cancel", { job: id }); } catch (e) { alert(e.message); cancel.disabled = false; cancel.textContent = cancel.dataset.label; }
-    };
-  }
+// instalar / actualizar yt-dlp (un solo trabajo, con su propia barra)
+function watchSimpleJob(id, box, onDone) {
   const tick = async () => {
     let j;
-    try { j = await api("job?id=" + id); } catch (e) { resetCancel(); showProg(box, e.message, 0, "", true); return onDone && onDone(null); }
+    try { j = await api("job?id=" + id); } catch (e) { showProg(box, e.message, 0, "", true); return onDone && onDone(null); }
     showProg(box, j.text, j.percent, j.meta, j.state === "error", j.state === "running" && j.indeterminate);
-    const pre = box.querySelector("pre"); if (pre) pre.textContent = (j.log || []).join("\n");
-    if (j.state === "running") return setTimeout(tick, 700);
-    resetCancel();
+    if (j.state === "running" || j.state === "queued") return setTimeout(tick, 700);
     onDone && onDone(j.state === "done" ? j : null);
   };
   tick();
 }
 
-async function refreshStatus() {
-  try {
-    const s = await api("status");
-    $("pYt").textContent = s.ytdlp ? "yt-dlp " + s.ytdlp : "yt-dlp falta";
-    $("pYt").className = "pill " + (s.ytdlp ? "ok" : "bad");
-    $("pFf").textContent = s.ffmpeg ? "ffmpeg ok" : "ffmpeg falta";
-    $("pFf").className = "pill " + (s.ffmpeg ? "ok" : "bad");
-    folders = s; renderDest();
-    $("missing").classList.toggle("hide", !!s.ytdlp);
-    $("btnUpdate").classList.toggle("hide", !s.ytdlp);
-    const h = s.health || {};
-    const labels = { checking: "YouTube: revisando...", ok: "YouTube ok", warn: "YouTube: revisar", fail: "YouTube: falla" };
-    $("pHealth").textContent = labels[h.state] || "YouTube ?";
-    $("pHealth").className = "pill " + ({ ok: "ok", warn: "warn", fail: "bad" }[h.state] || "");
-    $("pHealth").title = h.summary || "";
-    const adv = $("healthAdvice"); adv.replaceChildren();
-    (h.advice || []).forEach(t => { const d = document.createElement("div"); d.textContent = t; adv.appendChild(d); });
-    $("healthCard").classList.toggle("hide", !(h.advice || []).length);
-    if (h.state === "checking") setTimeout(refreshStatus, 2500);
-  } catch (e) { $("pYt").textContent = "sin conexion"; $("pYt").className = "pill bad"; }
-}
-
-$("btnInstall").onclick = () => {
-  $("btnInstall").disabled = true;
-  api("install", {}).then(r => watchJob(r.job, $("progInstall"), () => { $("btnInstall").disabled = false; refreshStatus(); }))
-    .catch(e => { showProg($("progInstall"), e.message, 0, "", true); $("btnInstall").disabled = false; });
-};
-$("btnUpdate").onclick = () => {
-  $("btnUpdate").disabled = true;
-  api("update", {}).then(r => watchJob(r.job, $("progInstall"), () => { $("btnUpdate").disabled = false; $("missing").classList.remove("hide"); refreshStatus(); }))
-    .catch(e => { alert(e.message); $("btnUpdate").disabled = false; });
-};
-$("btnLog").onclick = () => api("openlog", {}).catch(e => alert(e.message));
-const joinPath = (base, name) => (base || "").replace(/[\\/]+$/, "") + "\\" + name;
-const stemOf = p => (p.split(/[\\/]/).pop() || "").replace(/\.[^.]+$/, "");
+// ---------- estado global: carpetas, ajustes, preferencias ----------
 let folders = {};
-function renderDest() {
-  $("dlDest").textContent = joinPath(folders.output_base, ($("slug").value || "nombre") + "." + $("container").value);
-  $("outNote").textContent = folders.output_saved ? "(carpeta guardada para la próxima vez)" : "(carpeta por defecto: elige una y queda guardada)";
-  const stem = stemOf($("clipFile").value) || "video";
-  $("clipDest").textContent = joinPath(folders.clips_base, stem + "_clip1");
-  $("clipsNote").textContent = (folders.clips_saved ? "(carpeta guardada) " : "(carpeta por defecto: elige una y queda guardada) ")
-    + "Los clips llevan el nombre del video + _clip1, _clip2... Si ya hay clips de ese video, sigue la numeración.";
+function renderFolders() {
+  $("dlFolder").textContent = folders.output_base || "";
+  $("outNote").textContent = folders.output_saved ? "(guardada)" : "(por defecto: elige una y queda guardada)";
+  $("clipFolder").textContent = folders.clips_base || "";
+  $("clipsNote").textContent = folders.clips_saved ? "(guardada) · nombre: <video>_clip1, _clip2..." : "(por defecto: elige una y queda guardada) · nombre: <video>_clip1, _clip2...";
 }
-// which: "out" (descargas) o "clips". Devuelve false si no hay carpeta elegida todavia y se cancelo el selector.
 async function pickFolder(which) {
   const r = await api("pickfolder", { which });
-  folders = r; renderDest();
+  folders = { ...folders, ...r }; renderFolders();
   return !r.cancelled;
 }
 async function ensureFolder(which) {
@@ -318,175 +327,422 @@ for (const [btn, which] of [["btnOut", "out"], ["btnClipsDir", "clips"]]) {
     $(btn).disabled = false; $(btn).textContent = label;
   };
 }
-["slug", "clipFile"].forEach(id => $(id).addEventListener("input", renderDest));
+$("maxDl").onchange = () => api("settings", { max_downloads: +$("maxDl").value }).catch(e => alert(e.message));
 
-$("btnAnalyze").onclick = async () => {
-  $("anaErr").classList.add("hide");
-  $("btnAnalyze").disabled = true; $("btnAnalyze").textContent = "ANALIZANDO...";
+const lsGet = k => { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch (e) { return null; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* sin almacenamiento: no pasa nada */ } };
+const DEF = { container: "mp4", maxH: 1080, h264: true, anti: true,
+  clips: { enabled: false, mode: "seguido", length: 120, piece: 15, count: 0 }, ...(lsGet("tarrodl.defaults") || {}) };
+DEF.clips = { enabled: false, mode: "seguido", length: 120, piece: 15, count: 0, ...(DEF.clips || {}) };
+
+async function refreshStatus() {
   try {
-    analyzed = await api("analyze", { url: $("url").value });
-    $("thumb").src = analyzed.thumbnail || "";
-    $("vtitle").textContent = analyzed.title;
-    $("vmeta").textContent = [analyzed.channel, fmtTime(analyzed.duration)].filter(Boolean).join("  ·  ");
-    const sel = $("height"); sel.replaceChildren();
-    const hs = analyzed.heights.length ? analyzed.heights : [1080];
-    hs.forEach(h => sel.add(new Option(h + "p", h)));
-    sel.value = hs.find(h => h <= 1080) || hs[0];
-    $("slug").value = analyzed.slug; renderDest();
-    $("progDl").classList.add("hide");
-    $("dlCard").classList.remove("hide");
-    onContainer();
-  } catch (e) { $("anaErr").textContent = e.message; $("anaErr").classList.remove("hide"); }
-  $("btnAnalyze").disabled = false; $("btnAnalyze").textContent = "ANALIZAR";
+    const s = await api("status");
+    $("pYt").textContent = s.ytdlp ? "yt-dlp " + s.ytdlp : "yt-dlp falta";
+    $("pYt").className = "pill " + (s.ytdlp ? "ok" : "bad");
+    $("pFf").textContent = s.ffmpeg ? "ffmpeg ok" : "ffmpeg falta";
+    $("pFf").className = "pill " + (s.ffmpeg ? "ok" : "bad");
+    folders = { ...folders, ...s }; renderFolders();
+    if (s.max_downloads) $("maxDl").value = String(s.max_downloads);
+    $("missing").classList.toggle("hide", !!s.ytdlp);
+    $("btnUpdate").classList.toggle("hide", !s.ytdlp);
+    const h = s.health || {};
+    const labels = { checking: "YouTube: revisando...", ok: "YouTube ok", warn: "YouTube: revisar", fail: "YouTube: falla" };
+    $("pHealth").textContent = labels[h.state] || "YouTube ?";
+    $("pHealth").className = "pill " + ({ ok: "ok", warn: "warn", fail: "bad" }[h.state] || "");
+    $("pHealth").title = h.summary || "";
+    const adv = $("healthAdvice"); adv.replaceChildren();
+    (h.advice || []).forEach(t => { const d = document.createElement("div"); d.textContent = t; adv.appendChild(d); });
+    $("healthCard").classList.toggle("hide", !(h.advice || []).length);
+    if (h.state === "checking") setTimeout(refreshStatus, 2500);
+  } catch (e) { $("pYt").textContent = "sin conexion"; $("pYt").className = "pill bad"; }
+}
+$("btnInstall").onclick = () => {
+  $("btnInstall").disabled = true;
+  api("install", {}).then(r => watchSimpleJob(r.job, $("progInstall"), () => { $("btnInstall").disabled = false; refreshStatus(); }))
+    .catch(e => { showProg($("progInstall"), e.message, 0, "", true); $("btnInstall").disabled = false; });
 };
-$("url").addEventListener("keydown", e => { if (e.key === "Enter") $("btnAnalyze").click(); });
-
-const onContainer = () => {
-  const audio = ["mp3", "m4a"].includes($("container").value);
-  $("height").disabled = audio; $("h264").disabled = audio; $("h264row").style.opacity = audio ? .4 : 1;
+$("btnUpdate").onclick = () => {
+  $("btnUpdate").disabled = true;
+  api("update", {}).then(r => watchSimpleJob(r.job, $("progInstall"), () => { $("btnUpdate").disabled = false; $("missing").classList.remove("hide"); refreshStatus(); }))
+    .catch(e => { alert(e.message); $("btnUpdate").disabled = false; });
 };
-$("container").onchange = () => { onContainer(); renderDest(); };
+$("btnLog").onclick = () => api("openlog", {}).catch(e => alert(e.message));
 
-$("btnDownload").onclick = async () => {
-  $("btnDownload").disabled = true;
-  try {
-    showProg($("progDl"), folders.output_saved ? "Iniciando descarga..." : "Abriendo el selector de carpetas (si no lo ves, búscalo en la barra de tareas)...", 0, "");
-    if (!(await ensureFolder("out"))) {
-      showProg($("progDl"), "Elige primero la carpeta donde se guardarán los videos (queda guardada para la próxima).", 0, "", true);
-      $("btnDownload").disabled = false; return;
-    }
-    showProg($("progDl"), "Iniciando descarga en " + folders.output_base + " ...", 0, "");
-    const r = await api("download", { url: $("url").value, slug: $("slug").value, container: $("container").value,
-      height: $("height").value, h264: $("h264").checked, anti_slow: $("antiSlow").checked });
-    watchJob(r.job, $("progDl"), j => {
-      $("btnDownload").disabled = false;
-      if (j && j.result.file) {
-        lastFile = j.result.file; $("clipFile").value = lastFile; renderDest(); schedulePlan();
-        $("clipCard").scrollIntoView({ behavior: "smooth" });
-      }
-    });
-  } catch (e) { showProg($("progDl"), e.message, 0, "", true); $("btnDownload").disabled = false; }
-};
+// ---------- la cola: una tarjeta por video ----------
+const ITEMS = [];
+let nextId = 1;
+const queueEl = $("queue");
 
-$("btnPickVideo").onclick = async () => {
-  $("btnPickVideo").disabled = true; $("btnPickVideo").textContent = "ABRIENDO...";
-  try {
-    const r = await api("pickvideo", { start: $("clipFile").value });
-    if (r.file) { $("clipFile").value = r.file; renderDest(); schedulePlan(); }
-  } catch (e) { alert(e.message); }
-  $("btnPickVideo").disabled = false; $("btnPickVideo").textContent = "ELEGIR VIDEO";
-};
+const isActive = j => !!j && (j.state === "queued" || j.state === "running");
+const isVideoFmt = c => c === "mp4" || c === "mkv";
 
-const fmtLen = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
-const clipMode = () => document.querySelector("input[name=mode]:checked").value;
-function refreshClipUi() {
-  const len = +$("lenSec").value, piece = +$("pieceSec").value, mosaic = clipMode() === "mosaico";
-  $("lenVal").textContent = fmtLen(len);
-  $("pieceVal").textContent = piece + " s";
-  $("pieceBox").classList.toggle("hide", !mosaic);
-  $("pieceSec").max = Math.min(30, len);
-  $("maxLbl").textContent = mosaic ? "CANTIDAD DE CLIPS (0 = AUTOMÁTICO: 1 CADA ~10 MIN DE VIDEO)" : "MÁXIMO DE CLIPS (0 = TODO EL VIDEO SEGUIDO)";
-  if (mosaic) {
-    const k = Math.max(1, Math.floor(len / piece));
-    $("clipHint").textContent = `Cada clip dura ${fmtLen(len)} y junta ${k} trozos de ~${(len / k).toFixed(1)} s, repartidos parejo por su parte del video (no seguidos) y pegados uno tras otro. Con 0 clips el programa decide según el largo del video: uno de 10 min da 1 mosaico, uno de 1 hora da varios, cada uno cubriendo un tramo distinto. Recodifica (H.264 + AAC), así que tarda más que el corte seguido.`;
-  } else {
-    $("clipHint").textContent = "Con un máximo, los clips se reparten parejo a lo largo de todo el video. Los cortes son rápidos (sin recodificar) y empiezan en el keyframe más cercano.";
+function newItem(kind, info) {
+  const it = { id: nextId++, kind, info, phase: "analyzing", url: "", file: "", msg: "", dlId: null, clipId: null, dl: null, clipJob: null,
+    opts: { container: DEF.container, height: 0, h264: DEF.h264, anti: DEF.anti, slug: "" },
+    clips: { ...DEF.clips }, sec: { dur: 0, from: 0, to: 0 }, planTimer: null, planSeq: 0 };
+  if (kind === "disk") it.clips.enabled = true;
+  ITEMS.push(it);
+  return it;
+}
+
+function uniqueSlug(base, self) {
+  const taken = new Set(ITEMS.filter(i => i !== self && i.kind === "yt").map(i => i.opts.slug));
+  let s = base || "gameplay", n = 2;
+  while (taken.has(s)) s = (base || "gameplay") + "-" + n++;
+  return s;
+}
+
+function buildCard(it) {
+  const el = $("tplCard").content.firstElementChild.cloneNode(true);
+  it.el = el; const q = s => el.querySelector(s); it.q = q;
+  q(".ititle").textContent = it.info.title || "";
+  const img = q(".ithumb img"); if (it.info.thumbnail) img.src = it.info.thumbnail; else q(".ithumb").classList.add("hide");
+  q(".c-mode[value=seguido]").name = q(".c-mode[value=mosaico]").name = "mode-" + it.id;
+
+  q(".b-remove").onclick = () => removeItem(it);
+  q(".b-up").onclick = () => api("queue_move", { job: it.dlId, direction: "up" }).catch(e => alert(e.message));
+  q(".b-down").onclick = () => api("queue_move", { job: it.dlId, direction: "down" }).catch(e => alert(e.message));
+  q(".dl-cancel").onclick = () => cancelJob(it.dlId, q(".dl-cancel"));
+  q(".clip-cancel").onclick = () => cancelJob(it.clipId, q(".clip-cancel"));
+  q(".b-add").onclick = () => it.kind === "disk" ? startClipsOnly(it) : enqueue(it);
+  q(".b-retry").onclick = () => { it.phase = "config"; it.dlId = it.clipId = null; it.dl = it.clipJob = null; it.msg = ""; renderItem(it); schedulePlan(it); };
+  q(".b-retry-clips").onclick = () => startClips(it, it.dl && it.dl.result && it.dl.result.file);
+  q(".b-open-dl").onclick = () => api("open", { path: (it.dl && it.dl.result && it.dl.result.file) || it.file }).catch(e => alert(e.message));
+  q(".b-open-clips").onclick = () => api("open", { path: it.clipJob && it.clipJob.result && it.clipJob.result.dir }).catch(e => alert(e.message));
+  q(".b-copy-plan").onclick = () => copyPlanToAll(it);
+
+  // opciones de descarga
+  for (const cls of [".o-container", ".o-height", ".o-slug", ".o-h264", ".o-anti"]) {
+    q(cls).addEventListener("input", () => { readState(it); renderItem(it); schedulePlan(it); });
   }
+  // plan de clips
+  for (const cls of [".c-enabled", ".c-len", ".c-piece", ".c-count"]) {
+    q(cls).addEventListener("input", () => { readState(it); renderItem(it); schedulePlan(it); });
+  }
+  el.querySelectorAll(".c-mode").forEach(r => r.addEventListener("change", () => { readState(it); renderItem(it); schedulePlan(it); }));
+  q(".c-from-r").addEventListener("input", () => secFromSlider(it, "from"));
+  q(".c-to-r").addEventListener("input", () => secFromSlider(it, "to"));
+  q(".c-from").addEventListener("change", () => secFromText(it, "from"));
+  q(".c-to").addEventListener("change", () => secFromText(it, "to"));
+  queueEl.appendChild(el);
+  return el;
 }
-const fmtClock = s => { s = Math.round(s); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
-  return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(x).padStart(2, "0"); };
-const parseClock = t => { const p = t.trim().split(":").map(Number); if (!p.length || p.length > 3 || p.some(n => !Number.isFinite(n) || n < 0)) return NaN;
-  return p.reduce((acc, n) => acc * 60 + n, 0); };
 
-// Seccion del video: se activa cuando el plan trae la duracion del video elegido.
-let planTimer = null, planSeq = 0, secFile = "", vidDur = 0;
-function secDisable() {
-  secFile = ""; vidDur = 0;
-  for (const id of ["secFrom", "secTo", "secFromR", "secToR"]) $(id).disabled = true;
-  $("secVal").textContent = "todo el video";
+function removeItem(it) {
+  if (isActive(it.dl) || isActive(it.clipJob)) return;
+  clearTimeout(it.planTimer);
+  it.el.remove();
+  ITEMS.splice(ITEMS.indexOf(it), 1);
+  renderQueue();
 }
-function secInit(file, dur) {
-  secFile = file; vidDur = Math.floor(dur);
-  for (const id of ["secFromR", "secToR"]) { $(id).max = vidDur; $(id).disabled = false; }
-  $("secFrom").disabled = $("secTo").disabled = false;
-  $("secFromR").value = 0; $("secToR").value = vidDur; secShow();
+
+async function cancelJob(id, btn) {
+  if (!id) return;
+  btn.disabled = true; btn.textContent = "CANCELANDO...";
+  try { await api("cancel", { job: id }); } catch (e) { alert(e.message); btn.disabled = false; }
 }
-function secShow() {
-  const a = +$("secFromR").value, b = +$("secToR").value;
-  $("secFrom").value = fmtClock(a); $("secTo").value = fmtClock(b);
-  $("secVal").textContent = (a === 0 && b === vidDur) ? "todo el video" : `${fmtClock(a)} → ${fmtClock(b)} (${fmtClock(b - a)})`;
+
+// ---- estado <-> controles de la tarjeta ----
+function readState(it) {
+  const q = it.q;
+  it.opts.container = q(".o-container").value;
+  it.opts.height = +q(".o-height").value || 0;
+  it.opts.slug = q(".o-slug").value.trim();
+  it.opts.h264 = q(".o-h264").checked; it.opts.anti = q(".o-anti").checked;
+  it.clips.enabled = it.kind === "disk" ? true : q(".c-enabled").checked && isVideoFmt(it.opts.container);
+  it.clips.mode = (it.el.querySelector(".c-mode:checked") || { value: "seguido" }).value;
+  it.clips.length = +q(".c-len").value; it.clips.piece = +q(".c-piece").value;
+  it.clips.count = Math.max(0, parseInt(q(".c-count").value, 10) || 0);
 }
-function secFromSlider(which) {
-  const fr = $("secFromR"), to = $("secToR");
+function writeState(it) {
+  const q = it.q;
+  q(".o-container").value = it.opts.container; q(".o-slug").value = it.opts.slug;
+  q(".o-h264").checked = it.opts.h264; q(".o-anti").checked = it.opts.anti;
+  if (it.opts.height) q(".o-height").value = String(it.opts.height);
+  q(".c-enabled").checked = it.clips.enabled;
+  it.el.querySelectorAll(".c-mode").forEach(r => { r.checked = r.value === it.clips.mode; });
+  q(".c-len").value = it.clips.length; q(".c-piece").value = it.clips.piece; q(".c-count").value = it.clips.count;
+}
+
+// ---- seccion del video (desde / hasta) ----
+function secInit(it, dur) {
+  it.sec = { dur: Math.floor(dur), from: 0, to: Math.floor(dur) };
+  for (const c of [".c-from-r", ".c-to-r"]) it.q(c).max = it.sec.dur;
+  it.q(".c-from-r").value = 0; it.q(".c-to-r").value = it.sec.dur; secShow(it);
+}
+function secShow(it) {
+  const a = +it.q(".c-from-r").value, b = +it.q(".c-to-r").value; it.sec.from = a; it.sec.to = b;
+  it.q(".c-from").value = fmtClock(a); it.q(".c-to").value = fmtClock(b);
+  it.q(".c-sec-val").textContent = (a === 0 && b === it.sec.dur) ? "todo el video" : `${fmtClock(a)} → ${fmtClock(b)} (${fmtClock(b - a)})`;
+}
+function secFromSlider(it, which) {
+  const fr = it.q(".c-from-r"), to = it.q(".c-to-r");
   if (which === "from" && +fr.value > +to.value - 1) fr.value = Math.max(0, +to.value - 1);
-  if (which === "to" && +to.value < +fr.value + 1) to.value = Math.min(vidDur, +fr.value + 1);
-  secShow(); schedulePlan();
+  if (which === "to" && +to.value < +fr.value + 1) to.value = Math.min(it.sec.dur, +fr.value + 1);
+  secShow(it); schedulePlan(it);
 }
-function secFromText(which) {
-  const el = which === "from" ? $("secFrom") : $("secTo"), v = parseClock(el.value);
-  if (!Number.isNaN(v)) $(which === "from" ? "secFromR" : "secToR").value = Math.round(Math.min(vidDur, v));
-  secFromSlider(which);
+function secFromText(it, which) {
+  const el = it.q(which === "from" ? ".c-from" : ".c-to"), v = parseClock(el.value);
+  if (!Number.isNaN(v)) it.q(which === "from" ? ".c-from-r" : ".c-to-r").value = Math.round(Math.min(it.sec.dur, v));
+  secFromSlider(it, which);
 }
-$("secFromR").addEventListener("input", () => secFromSlider("from"));
-$("secToR").addEventListener("input", () => secFromSlider("to"));
-$("secFrom").addEventListener("change", () => secFromText("from"));
-$("secTo").addEventListener("change", () => secFromText("to"));
 
-function clearPlan(msg) {
-  $("tl").replaceChildren(); $("tl").classList.add("empty"); $("tlInfo").textContent = msg || ""; $("tlEnd").textContent = "";
+// ---- plan de clips: se manda tal cual al servidor ----
+function planParams(it) {
+  const p = { mode: it.clips.mode, length_sec: it.clips.length, piece_sec: it.clips.piece, max_clips: it.clips.count };
+  if (it.sec.dur && (it.sec.from > 0 || it.sec.to < it.sec.dur)) { p.range_start = it.sec.from; p.range_end = it.sec.to; }
+  return p;
 }
-const sectionBody = () => ($("clipFile").value.trim() === secFile && secFile)
-  ? { range_start: $("secFromR").value, range_end: $("secToR").value } : {};
-async function refreshPlan() {
-  const file = $("clipFile").value.trim(), seq = ++planSeq;
-  if (!file) { secDisable(); return clearPlan(); }
+function schedulePlan(it) { clearTimeout(it.planTimer); it.planTimer = setTimeout(() => refreshPlan(it), 350); }
+async function refreshPlan(it) {
+  if (it.phase !== "config" || !it.clips.enabled || !it.sec.dur) return;
+  const q = it.q, seq = ++it.planSeq;
   try {
-    const r = await api("plan", { file, mode: clipMode(), length_sec: $("lenSec").value, piece_sec: $("pieceSec").value,
-      max_clips: $("maxClips").value, ...sectionBody() });
-    if (seq !== planSeq) return;
-    if (file !== secFile) secInit(file, r.duration);
-    const tl = $("tl"); tl.classList.remove("empty"); tl.replaceChildren();
+    const src = it.kind === "disk" ? { file: it.file } : { duration: it.info.duration };
+    const r = await api("plan", { ...src, ...planParams(it) });
+    if (seq !== it.planSeq) return;
+    const tl = q(".tl"); tl.replaceChildren();
     const pct = s => (s / r.duration * 100) + "%";
     const [ra, rb] = r.range;
     if (ra > 0) { const d = document.createElement("div"); d.className = "dim"; d.style.left = "0"; d.style.width = pct(ra); tl.appendChild(d); }
     if (rb < r.duration) { const d = document.createElement("div"); d.className = "dim"; d.style.left = pct(rb); d.style.right = "0"; tl.appendChild(d); }
     r.clips.forEach((starts, c) => starts.forEach(s => {
       const bar = document.createElement("i"); if (c % 2) bar.className = "b";
-      bar.style.left = pct(s); bar.style.width = pct(r.seg);
-      bar.title = `clip ${c + 1} · desde ${fmtClock(s)}`; tl.appendChild(bar);
+      bar.style.left = pct(s); bar.style.width = pct(r.seg); bar.title = `clip ${c + 1} · desde ${fmtClock(s)}`; tl.appendChild(bar);
     }));
-    $("tlEnd").textContent = fmtClock(r.duration);
+    q(".c-tl-end").textContent = fmtClock(r.duration);
     const k = r.clips.length ? r.clips[0].length : 0;
-    $("tlInfo").textContent = r.clips.length
-      ? `video de ${fmtClock(r.duration)} → ${r.clips.length} clip(s)` + (clipMode() === "mosaico" ? ` de ${k} trozos` : "")
-      : `no alcanza con estas opciones: baja la duración o la cantidad, o amplía la sección`;
-  } catch (e) { if (seq === planSeq) clearPlan(e.message); }
+    q(".c-tl-info").textContent = r.clips.length
+      ? `${r.clips.length} clip(s)` + (it.clips.mode === "mosaico" ? ` de ${k} trozos` : "")
+      : "no alcanza: baja la duración o la cantidad, o amplía la sección";
+  } catch (e) { if (seq === it.planSeq) { q(".tl").replaceChildren(); q(".c-tl-info").textContent = e.message; } }
 }
-function schedulePlan() { clearTimeout(planTimer); planTimer = setTimeout(refreshPlan, 350); }
-["lenSec", "pieceSec", "maxClips"].forEach(id => $(id).addEventListener("input", schedulePlan));
-$("clipFile").addEventListener("input", () => { secDisable(); schedulePlan(); });
-document.querySelectorAll("input[name=mode]").forEach(r => r.addEventListener("change", () => { refreshClipUi(); schedulePlan(); }));
-["lenSec", "pieceSec"].forEach(id => $(id).addEventListener("input", refreshClipUi));
-refreshClipUi(); clearPlan();
+function copyPlanToAll(src) {
+  readState(src);
+  ITEMS.filter(i => i !== src && i.kind === "yt" && i.phase === "config").forEach(i => {
+    i.clips = { ...src.clips, enabled: isVideoFmt(i.opts.container) };
+    writeState(i); renderItem(i); schedulePlan(i);
+  });
+}
 
-$("btnClips").onclick = async () => {
-  $("btnClips").disabled = true; $("btnOpenClips").classList.add("hide");
+// ---- arrancar: descarga (con plan encadenado) o solo clips ----
+function downloadBody(it) {
+  const o = it.opts, body = { url: it.url, slug: o.slug, container: o.container, height: o.height || 1080, h264: o.h264, anti_slow: o.anti };
+  if (it.clips.enabled && isVideoFmt(o.container)) body.clips = planParams(it);
+  return body;
+}
+function saveDefaults(it) {
+  const o = it.opts;
+  // el tope de calidad solo se recuerda si lo bajaste a propósito: un video que ofrece solo 240p no cambia tu preferencia
+  const top = Math.max(0, ...((it.info.heights || []).filter(h => h <= 1080)));
+  const d = { container: o.container, maxH: (o.height && o.height < top) ? o.height : 1080, h264: o.h264, anti: o.anti, clips: { ...it.clips } };
+  Object.assign(DEF, d); lsSet("tarrodl.defaults", d);
+}
+async function enqueue(it) {
+  readState(it);
+  const btn = it.q(".b-add"); btn.disabled = true;
   try {
-    showProg($("progClips"), folders.clips_saved ? "Iniciando..." : "Abriendo el selector de carpetas (si no lo ves, búscalo en la barra de tareas)...", 0, "");
-    if (!(await ensureFolder("clips"))) {
-      showProg($("progClips"), "Elige primero la carpeta donde dejar los clips (queda guardada para la próxima).", 0, "", true);
-      $("btnClips").disabled = false; return;
-    }
-    const r = await api("clips", { file: $("clipFile").value, mode: clipMode(),
-      length_sec: $("lenSec").value, piece_sec: $("pieceSec").value, max_clips: $("maxClips").value, ...sectionBody() });
-    watchJob(r.job, $("progClips"), j => {
-      $("btnClips").disabled = false;
-      if (j && j.result.dir) { clipsDir = j.result.dir; $("btnOpenClips").classList.remove("hide"); }
-    });
-  } catch (e) { showProg($("progClips"), e.message, 0, "", true); $("btnClips").disabled = false; }
-};
-$("btnOpenClips").onclick = () => api("open", { path: clipsDir }).catch(e => alert(e.message));
+    if (!(await ensureFolder("out"))) { it.msg = "Elige primero la carpeta donde se guardarán los videos (queda guardada para la próxima)."; return; }
+    if (it.clips.enabled && isVideoFmt(it.opts.container) && !(await ensureFolder("clips"))) { it.msg = "Elige primero la carpeta donde dejar los clips (queda guardada para la próxima)."; return; }
+    const r = await api("download", downloadBody(it));
+    it.dlId = r.job; it.dl = null; it.phase = "job"; it.msg = ""; saveDefaults(it);
+  } catch (e) { it.msg = e.message; }
+  finally { btn.disabled = false; renderItem(it); renderQueue(); }
+}
+async function startClipsOnly(it) {
+  readState(it);
+  const btn = it.q(".b-add"); btn.disabled = true;
+  try {
+    if (!(await ensureFolder("clips"))) { it.msg = "Elige primero la carpeta donde dejar los clips (queda guardada para la próxima)."; return; }
+    const r = await api("clips", { file: it.file, ...planParams(it) });
+    it.clipId = r.job; it.clipJob = null; it.phase = "job"; it.msg = ""; saveDefaults(it);
+  } catch (e) { it.msg = e.message; }
+  finally { btn.disabled = false; renderItem(it); renderQueue(); }
+}
+async function startClips(it, file) {
+  if (!file) return;
+  try {
+    const r = await api("clips", { file, ...planParams(it) });
+    it.clipId = r.job; it.clipJob = null; it.msg = "";
+  } catch (e) { it.msg = e.message; }
+  renderItem(it); renderQueue();
+}
 
+// ---- pintar una tarjeta segun su estado ----
+function clipSummary(it) {
+  if (!it.clips.enabled) return "sin clips";
+  const c = it.clips, n = c.count ? `${c.count} clip(s)` : "cantidad automática";
+  return `clips: ${c.mode} de ${fmtLen(c.length)}${c.mode === "mosaico" ? `, trozos de ${c.piece} s` : ""}, ${n}`;
+}
+function renderItem(it) {
+  const q = it.q, el = it.el, dl = it.dl, cj = it.clipJob;
+  let label = "", tone = "config";
+  if (it.phase === "analyzing") label = "Analizando el link...";
+  else if (it.phase === "aerror") { label = "No se pudo leer el video"; tone = "error"; }
+  else if (it.phase === "config") label = it.kind === "disk" ? "Por configurar los clips" : "Por configurar";
+  else if (it.kind === "yt" && !dl) { label = "En cola..."; tone = "queued"; }
+  else if (it.kind === "yt" && dl.state !== "done") {
+    ({ queued: () => { label = `En cola, puesto ${dl.queue_pos || 1}`; tone = "queued"; }, running: () => { label = "Descargando"; tone = "running"; },
+       error: () => { label = "Error en la descarga"; tone = "error"; }, cancelled: () => { label = "Descarga cancelada"; tone = "error"; } }[dl.state] || (() => {}))();
+  } else if (cj) {
+    ({ queued: () => { label = "Descargado · clips en cola"; tone = "queued"; }, running: () => { label = "Cortando clips"; tone = "running"; },
+       done: () => { label = "Listo"; tone = "done"; }, error: () => { label = "Descargado · error en los clips"; tone = "error"; },
+       cancelled: () => { label = "Descargado · clips cancelados"; tone = "error"; } }[cj.state] || (() => {}))();
+  } else if (it.kind === "yt" && dl && dl.state === "done") {
+    label = dl.result && dl.result.clips_job ? "Descargado · armando los clips..." : "Descargado"; tone = "done";
+    if (dl.result && dl.result.clips_error) { label = "Descargado · no se pudo armar el clip"; tone = "error"; }
+  } else if (it.kind === "disk") label = "Cortando clips...", tone = "running";
+  q(".st").textContent = label; el.dataset.tone = tone;
+
+  const inCfg = it.phase === "config";
+  q(".cfg").classList.toggle("hide", !inCfg);
+  const sum = q(".isum");
+  sum.classList.toggle("hide", inCfg || it.phase === "analyzing" || it.phase === "aerror");
+  sum.textContent = it.kind === "disk" ? `${it.file} · ${clipSummary(it)}`
+    : `${it.opts.container.toUpperCase()}${isVideoFmt(it.opts.container) ? ` · ${it.opts.height || "?"}p${it.opts.h264 ? " · H.264" : ""}` : ""} · ${it.opts.slug}.${it.opts.container} · ${clipSummary(it)}`;
+  q(".imeta").textContent = [it.info.channel, it.info.duration ? fmtClock(it.info.duration) : ""].filter(Boolean).join("  ·  ");
+  const msg = q(".msg"); msg.textContent = it.msg || ""; msg.classList.toggle("hide", !it.msg);
+
+  // controles de configuracion que dependen del formato
+  if (inCfg) {
+    const video = isVideoFmt(it.opts.container);
+    q(".o-height-box").classList.toggle("hide", !video); q(".o-h264-box").classList.toggle("hide", !video);
+    const noDur = !it.sec.dur;
+    q(".c-toggle").classList.toggle("hide", it.kind === "disk" || !video || noDur);
+    q(".c-na").classList.toggle("hide", it.kind === "disk" || (video && !noDur));
+    q(".c-na").textContent = !video ? "Los clips necesitan un video: elige MP4 o MKV." : "YouTube no informó la duración de este video: no se puede planear el corte antes de descargar.";
+    q(".cplan").classList.toggle("hide", !(it.clips.enabled && video && !noDur) && it.kind !== "disk");
+    q(".c-len-val").textContent = fmtLen(it.clips.length); q(".c-piece-val").textContent = it.clips.piece + " s";
+    q(".c-piece-box").classList.toggle("hide", it.clips.mode !== "mosaico");
+    q(".c-piece").max = Math.min(30, it.clips.length);
+    q(".c-count-lbl").textContent = it.clips.mode === "mosaico" ? "CANTIDAD (0 = AUTOMÁTICO: 1 CADA ~10 MIN)" : "MÁXIMO DE CLIPS (0 = TODO SEGUIDO)";
+    q(".b-add").textContent = it.kind === "disk" ? "CREAR CLIPS" : "AGREGAR A LA COLA";
+    q(".o-grid").classList.toggle("hide", it.kind === "disk");
+    q(".o-checks").classList.toggle("hide", it.kind === "disk");
+    q(".b-copy-plan").classList.toggle("hide", it.kind === "disk");
+  }
+
+  // progreso de descarga y de clips
+  const dlBox = q(".dl-prog"), clBox = q(".clip-prog");
+  if (dl) {
+    showProg(dlBox, dl.text, dl.state === "queued" ? 0 : dl.percent, dl.meta, dl.state === "error", dl.state === "running" && dl.indeterminate);
+    const pre = dlBox.querySelector("pre"); pre.textContent = (dl.log || []).join("\n");
+  } else dlBox.classList.add("hide");
+  if (cj) showProg(clBox, cj.text, cj.state === "queued" ? 0 : cj.percent, "", cj.state === "error", cj.state === "running" && cj.indeterminate);
+  else clBox.classList.add("hide");
+  q(".dl-cancel").classList.toggle("hide", !isActive(dl)); q(".clip-cancel").classList.toggle("hide", !isActive(cj));
+  if (!isActive(dl)) { q(".dl-cancel").disabled = false; q(".dl-cancel").textContent = "CANCELAR DESCARGA"; }
+  if (!isActive(cj)) { q(".clip-cancel").disabled = false; q(".clip-cancel").textContent = "CANCELAR CLIPS"; }
+
+  // botones de la tarjeta
+  const busy = isActive(dl) || isActive(cj);
+  q(".b-remove").classList.toggle("hide", busy);
+  q(".b-up").classList.toggle("hide", !(dl && dl.state === "queued")); q(".b-down").classList.toggle("hide", !(dl && dl.state === "queued"));
+  q(".b-open-dl").classList.toggle("hide", !(dl && dl.state === "done") && !(it.kind === "disk" && cj && cj.state === "done"));
+  q(".b-open-clips").classList.toggle("hide", !(cj && cj.state === "done"));
+  q(".b-retry").classList.toggle("hide", !(it.kind === "yt" && dl && (dl.state === "error" || dl.state === "cancelled")));
+  const clipFailed = dl && dl.state === "done" && it.clips.enabled && ((cj && (cj.state === "error" || cj.state === "cancelled")) || (dl.result && dl.result.clips_error));
+  q(".b-retry-clips").classList.toggle("hide", !clipFailed);
+}
+
+function renderQueue() {
+  $("emptyQ").classList.toggle("hide", ITEMS.length > 0);
+  $("qbar").classList.toggle("hide", ITEMS.length === 0);
+  const n = pred => ITEMS.filter(pred).length;
+  const running = n(i => i.dl && i.dl.state === "running"), queued = n(i => (i.dl && i.dl.state === "queued") || (i.phase === "job" && i.kind === "yt" && !i.dl));
+  const cutting = n(i => i.clipJob && i.clipJob.state === "running"), cfg = n(i => i.phase === "config" && i.kind === "yt");
+  const done = n(i => (i.clipJob && i.clipJob.state === "done") || (i.kind === "yt" && i.dl && i.dl.state === "done" && !i.clipId && !(i.dl.result && i.dl.result.clips_job)));
+  $("qsum").textContent = [running && `${running} descargando`, queued && `${queued} en cola`, cutting && `cortando ${cutting}`, cfg && `${cfg} por configurar`, done && `${done} listas`]
+    .filter(Boolean).join(" · ") || "sin trabajo en curso";
+  $("btnStartAll").disabled = cfg === 0;
+  $("btnStartAll").textContent = cfg ? `INICIAR TODO (${cfg})` : "INICIAR TODO";
+}
+
+// ---- un solo ciclo consulta todos los trabajos activos ----
+async function poll() {
+  const ids = [];
+  for (const it of ITEMS) {
+    if (it.phase !== "job") continue;
+    if (it.dlId && !(it.dl && !isActive(it.dl))) ids.push(it.dlId);
+    if (it.clipId && !(it.clipJob && !isActive(it.clipJob))) ids.push(it.clipId);
+  }
+  if (!ids.length) return;
+  let data; try { data = await api("jobs?ids=" + ids.join(",")); } catch (e) { return; }
+  for (const it of ITEMS) {
+    if (it.phase !== "job") continue;
+    let touched = false;
+    if (it.dlId && data[it.dlId]) { it.dl = data[it.dlId]; touched = true; }
+    if (it.dl && it.dl.state === "done" && it.dl.result && it.dl.result.clips_job && !it.clipId) it.clipId = it.dl.result.clips_job;
+    if (it.clipId && data[it.clipId]) { it.clipJob = data[it.clipId]; touched = true; }
+    if (touched) renderItem(it);
+  }
+  renderQueue();
+}
+setInterval(poll, 1000);
+
+// ---- agregar videos ----
+async function addYt(url) {
+  if (ITEMS.some(i => i.url === url)) return null;
+  const it = newItem("yt", { title: url, channel: "", duration: null, thumbnail: "" });
+  it.url = url; buildCard(it); renderItem(it); renderQueue();
+  try {
+    const a = await api("analyze", { url });
+    it.info = a;
+    const heights = a.heights.length ? a.heights : [1080];
+    const sel = it.q(".o-height"); sel.replaceChildren();
+    heights.forEach(h => sel.add(new Option(h + "p", h)));
+    it.opts.height = heights.find(h => h <= DEF.maxH) || heights[0];
+    it.opts.slug = uniqueSlug(a.slug, it);
+    if (!isVideoFmt(it.opts.container)) it.clips.enabled = false;
+    it.q(".ititle").textContent = a.title; const img = it.q(".ithumb img");
+    if (a.thumbnail) { img.src = a.thumbnail; it.q(".ithumb").classList.remove("hide"); }
+    if (a.duration) secInit(it, a.duration);
+    writeState(it); it.phase = "config";
+    renderItem(it); schedulePlan(it);
+  } catch (e) { it.phase = "aerror"; it.msg = e.message; renderItem(it); }
+  renderQueue();
+  return it;
+}
+
+$("btnAddLinks").onclick = async () => {
+  const err = $("addErr"); err.classList.add("hide");
+  const lines = $("links").value.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+  const bad = lines.filter(l => !/^https?:\/\/\S+$/i.test(l));
+  if (!lines.length) { err.textContent = "Pega al menos un link (empieza con http:// o https://)."; err.classList.remove("hide"); return; }
+  if (bad.length) { err.textContent = "Estas líneas no parecen un link y se omitieron: " + bad.join("  |  "); err.classList.remove("hide"); }
+  const good = [...new Set(lines.filter(l => /^https?:\/\/\S+$/i.test(l)))];
+  $("links").value = bad.join("\n");
+  await Promise.all(good.map(addYt));
+};
+$("btnAddDisk").onclick = async () => {
+  const btn = $("btnAddDisk"); btn.disabled = true; btn.textContent = "ABRIENDO...";
+  try {
+    const r = await api("pickvideo", { start: "" });
+    if (r.file) {
+      const it = newItem("disk", { title: stemOf(r.file), channel: "Video del disco", duration: null, thumbnail: "" });
+      it.file = r.file; it.url = "disk:" + r.file; buildCard(it); renderItem(it);
+      try {
+        const p = await api("plan", { file: r.file, mode: "seguido", length_sec: 60, piece_sec: 15, max_clips: 0 });
+        it.info.duration = p.duration; secInit(it, p.duration); writeState(it); it.phase = "config";
+        renderItem(it); schedulePlan(it);
+      } catch (e) { it.phase = "aerror"; it.msg = e.message; renderItem(it); }
+      renderQueue();
+    }
+  } catch (e) { alert(e.message); }
+  btn.disabled = false; btn.textContent = "VIDEO DEL DISCO";
+};
+$("btnStartAll").onclick = async () => {
+  for (const it of ITEMS.filter(i => i.phase === "config" && i.kind === "yt")) await enqueue(it);
+};
+$("btnClearDone").onclick = () => {
+  for (const it of [...ITEMS]) {
+    const finished = it.phase === "aerror" || (it.phase === "job" && !isActive(it.dl) && !isActive(it.clipJob) && (it.dl || it.clipJob) && !(it.dl && it.dl.state === "done" && it.dl.result && it.dl.result.clips_job && !it.clipJob));
+    if (finished) removeItem(it);
+  }
+};
+
+renderQueue();
 refreshStatus();
 </script>
 </body>
