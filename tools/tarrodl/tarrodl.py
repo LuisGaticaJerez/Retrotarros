@@ -12,7 +12,9 @@ import argparse
 import glob
 import json
 import logging
+import math
 import os
+import random
 import re
 import secrets
 import shutil
@@ -53,6 +55,10 @@ FF_PROGRESS_RE = re.compile(r"^(out_time|out_time_us|out_time_ms|bitrate|total_s
 ANTI_SLOW_RATE = "8M"   # velocidad minima aceptable antes de pedir un enlace nuevo a YouTube
 CLIP_MIN_SEC, CLIP_MAX_SEC = 60, 180
 PIECE_MIN_SEC, PIECE_MAX_SEC = 10, 60
+MOSAIC_MIN_SEC, MOSAIC_MAX_SEC = 60, 900          # mosaico multi-video: largo total del clip
+MOSAIC_MIN_VIDEOS, MOSAIC_MAX_VIDEOS = 2, 12
+MOSAIC_HEIGHTS = (720, 1080)
+MOSAIC_SHARES = ("parejo", "proporcional")
 STATE = {"last_ping": time.time(), "bye_at": None, "seen": False}
 
 JOBS: dict[str, dict] = {}
@@ -751,6 +757,76 @@ def plan_section(mode: str, duration: float, a: float, b: float, length: int, pi
     else:
         clips, seg = [[s] for s in plan_clips(b - a, length, max_clips)], float(length)
     return [[a + s for s in c] for c in clips], seg
+
+
+def validate_mosaic_params(n_videos: int, total: int, piece: int, share: str, seed: int, height: int) -> None:
+    if not MOSAIC_MIN_VIDEOS <= n_videos <= MOSAIC_MAX_VIDEOS:
+        raise ApiError(f"El mosaico lleva entre {MOSAIC_MIN_VIDEOS} y {MOSAIC_MAX_VIDEOS} videos.")
+    if not MOSAIC_MIN_SEC <= total <= MOSAIC_MAX_SEC:
+        raise ApiError(f"El mosaico debe durar entre {MOSAIC_MIN_SEC // 60} y {MOSAIC_MAX_SEC // 60} minutos.")
+    if not PIECE_MIN_SEC <= piece <= min(PIECE_MAX_SEC, total):
+        raise ApiError(f"Cada trozo del mosaico debe durar entre {PIECE_MIN_SEC} y {min(PIECE_MAX_SEC, total)} segundos.")
+    if share not in MOSAIC_SHARES:
+        raise ApiError("El reparto entre videos es parejo o proporcional.")
+    if seed < 0:
+        raise ApiError("La semilla del reparto no es valida.")
+    if height not in MOSAIC_HEIGHTS:
+        raise ApiError("La resolucion del mosaico es 720 o 1080.")
+
+
+def _allocate(k: int, weights: list[float], caps: list[int], lens: list[float]) -> list[int]:
+    """Reparte k trozos por cuota entera + resto mayor; el que supera su capacidad se queda en ella y el exceso se reparte de nuevo."""
+    alloc = [0] * len(weights)
+    while True:
+        free = [i for i in range(len(weights)) if alloc[i] < caps[i]]
+        left = k - sum(alloc)
+        if left <= 0 or not free:
+            return alloc
+        tw = sum(weights[i] for i in free)
+        quota = {i: left * weights[i] / tw for i in free}
+        base = {i: int(quota[i]) for i in free}
+        for i in sorted(free, key=lambda i: (-(quota[i] - base[i]), -lens[i], i))[:left - sum(base.values())]:
+            base[i] += 1
+        over = [i for i in free if base[i] > caps[i] - alloc[i]]
+        if not over:
+            for i in free:
+                alloc[i] += base[i]
+            return alloc
+        for i in over:
+            alloc[i] = caps[i]
+
+
+def plan_multi(videos: list[dict], total: int, piece: int, share: str, seed: int) -> dict:
+    """Mosaico con trozos de varios videos, intercalados (v1, v2, v3... y vuelta a v1).
+
+    `videos`: [{file, duration, a, b}] con la seccion a..b ya resuelta. k = total // piece trozos de
+    p = total / k segundos (nunca menos que `piece`, suma exacta). Cada video recibe sus trozos (parejo, o
+    proporcional al largo de su seccion) sin pasar de lo que cabe sin solaparse; dentro del video van
+    repartidos en ranuras iguales (seed 0 centrados, seed > 0 corridos al azar de forma reproducible).
+    """
+    k = max(1, total // piece)
+    p = total / k
+    caps = [int((v["b"] - v["a"]) / p + 1e-9) for v in videos]
+    if sum(caps) < k:
+        raise ApiError(f"Los videos no alcanzan para {fmt_len(total)} sin repetir material. "
+                       f"Amplia secciones, agrega videos o baja el largo total.")
+    lens = [v["b"] - v["a"] for v in videos]
+    counts = _allocate(k, [1.0] * len(videos) if share == "parejo" else lens, caps, lens)
+    lanes = []
+    for idx, (v, m) in enumerate(zip(videos, counts)):
+        starts = []
+        if m:
+            w = (v["b"] - v["a"]) / m
+            margin = max(0.0, w - p)
+            rng = random.Random(f"{seed}:{idx}")
+            starts = [v["a"] + j * w + (margin / 2 if seed == 0 else rng.uniform(0, margin)) for j in range(m)]
+        lanes.append({"file": v["file"], "duration": v["duration"], "range": [v["a"], v["b"]], "starts": starts})
+    sequence = []
+    for turn in range(max(counts, default=0)):
+        for idx, lane in enumerate(lanes):
+            if turn < len(lane["starts"]):
+                sequence.append({"video": idx, "start": lane["starts"][turn], "at": len(sequence) * p})
+    return {"pieces": k, "seg": p, "lanes": lanes, "sequence": sequence}
 
 
 def next_clip_index(out_dir: Path, stem: str) -> int:
