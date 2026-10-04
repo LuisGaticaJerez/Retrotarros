@@ -980,6 +980,98 @@ def api_clips(body: dict) -> dict:
     return spawn(job, work, pool="clips")
 
 
+# ---------- mosaico multi-video ----------
+
+PROBE_CACHE: dict[tuple, dict] = {}   # (ruta, mtime, tamano) -> {duration, audio}: no se vuelve a medir un archivo que no cambio
+
+
+def norm_path(raw: object) -> str:
+    """Ruta comparable: absoluta y sin diferencias de mayusculas ni de barras (Windows)."""
+    return os.path.normcase(os.path.abspath(str(raw).strip().strip('"')))
+
+
+def check_video_file(raw: object) -> Path:
+    src = Path(str(raw or "").strip().strip('"'))
+    if not src.is_file():
+        raise ApiError(f"No encuentro el archivo {src.name or raw}.")
+    if src.suffix.lower() not in VIDEO_EXTS:
+        raise ApiError(f"{src.name} no es un video (mp4, mkv, webm, mov, avi, m4v).")
+    return src
+
+
+def probe_video(src: Path) -> dict:
+    st = src.stat()
+    key = (norm_path(src), st.st_mtime_ns, st.st_size)
+    if key not in PROBE_CACHE:
+        fp = need_tool("ffprobe", "ffprobe (viene con ffmpeg)")
+        try:
+            PROBE_CACHE[key] = {"duration": probe_duration(fp, src), "audio": has_audio(fp, src)}
+        except ApiError as e:
+            raise ApiError(f"{src.name}: {e}")
+    return PROBE_CACHE[key]
+
+
+def clean_mosaic_name(raw: object) -> str:
+    text = str(raw or "").strip()
+    return slugify(text, 60) if text else "mosaico"
+
+
+def resolve_mosaic_request(body: dict) -> dict:
+    """Valida el pedido y calcula el plan. La vista previa y el render pasan por aqui: mismo plan siempre."""
+    vids = body.get("videos")
+    if not isinstance(vids, list):
+        raise ApiError("Faltan los videos del mosaico.")
+    try:
+        total, piece = int(body.get("total_sec")), int(body.get("piece_sec") or 15)
+        seed, height = int(body.get("seed") or 0), int(body.get("height") or 1080)
+    except (TypeError, ValueError):
+        raise ApiError("Largo total, trozo, semilla o resolucion invalidos.")
+    share = str(body.get("share") or "parejo")
+    validate_mosaic_params(len(vids), total, piece, share, seed, height)
+    seen, items = set(), []
+    for entry in vids:
+        if not isinstance(entry, dict):
+            raise ApiError("Lista de videos invalida.")
+        src = check_video_file(entry.get("file"))
+        if norm_path(src) in seen:
+            raise ApiError(f"El video {src.name} esta repetido en la lista.")
+        seen.add(norm_path(src))
+        info = probe_video(src)
+        a, b = resolve_range(entry, info["duration"])
+        items.append({"file": str(src), "duration": info["duration"], "a": a, "b": b, "audio": info["audio"]})
+    return {"videos": items, "total": total, "piece": piece, "share": share, "seed": seed, "height": height,
+            "name": clean_mosaic_name(body.get("name")), "plan": plan_multi(items, total, piece, share, seed)}
+
+
+def api_probe(body: dict) -> dict:
+    files = body.get("files")
+    if not isinstance(files, list) or not files or len(files) > 50:
+        raise ApiError("Faltan los archivos a medir.")
+    out = []
+    for raw in files:
+        src = check_video_file(raw)
+        info = probe_video(src)
+        out.append({"file": str(src), "name": src.name, "duration": info["duration"], "audio": info["audio"]})
+    return {"videos": out}
+
+
+def api_mosaic_plan(body: dict) -> dict:
+    r = resolve_mosaic_request(body)
+    return {**r["plan"], "total": r["total"]}
+
+
+def api_session_files(_body=None) -> dict:
+    """Videos que hay en la carpeta de descargas (sin los temporales de una descarga en curso), los mas nuevos primero."""
+    base, files = out_base(), []
+    if base.is_dir():
+        for f in base.iterdir():
+            if f.is_file() and f.suffix.lower() in VIDEO_EXTS and ".temp." not in f.name.lower():
+                st = f.stat()
+                files.append({"file": str(f), "name": f.name, "size": st.st_size, "mtime": st.st_mtime})
+    files.sort(key=lambda x: -x["mtime"])
+    return {"files": files[:50]}
+
+
 def api_cancel(body: dict) -> dict:
     job = JOBS.get(str(body.get("job") or ""))
     if not job or job["state"] not in ("running", "queued"):
@@ -1153,6 +1245,40 @@ def api_pickvideo(body: dict) -> dict:
     return {"file": str(path)}
 
 
+PICK_VIDEOS_SCRIPT = PICK_PREAMBLE + r"""
+$d = New-Object System.Windows.Forms.OpenFileDialog
+$d.Title = "Elige los videos para el mosaico"
+$d.Multiselect = $true
+$d.Filter = "Videos|*.mp4;*.mkv;*.webm;*.mov;*.avi;*.m4v|Todos los archivos|*.*"
+if ($env:TARRODL_START -and (Test-Path -LiteralPath $env:TARRODL_START)) { $d.InitialDirectory = $env:TARRODL_START }
+if ($d.ShowDialog($owner) -eq [System.Windows.Forms.DialogResult]::OK) { $d.FileNames | ForEach-Object { Write-Output $_ } }
+$owner.Close()
+"""
+
+
+def parse_picked(stdout: str) -> list[str]:
+    """Rutas que devolvio el selector (una por linea), solo las que son videos."""
+    lines = [ln.strip() for ln in stdout.splitlines() if ln.strip()]
+    return [ln for ln in lines if Path(ln).suffix.lower() in VIDEO_EXTS]
+
+
+def api_pickvideos(body: dict) -> dict:
+    ps = shutil.which("powershell")
+    if not ps:
+        raise ApiError("No encontre PowerShell para abrir el selector de archivos.")
+    start = out_base()
+    log.info("abriendo selector multiple de videos, inicio en %s", start)
+    r = subprocess.run([ps, "-NoProfile", "-STA", "-Command", PICK_VIDEOS_SCRIPT], capture_output=True, text=True,
+                       encoding="utf-8", errors="replace", timeout=600, creationflags=NOWIN,
+                       env={**os.environ, "TARRODL_START": str(start)})
+    files = parse_picked(r.stdout)
+    if not files:
+        log.info("selector multiple cancelado o sin videos (stderr=%s)", r.stderr.strip()[-300:])
+        return {"cancelled": True}
+    log.info("videos elegidos para el mosaico: %s", files)
+    return {"files": files}
+
+
 def api_clientlog(body: dict) -> dict:
     log.warning("front: %s", str(body.get("msg") or "")[:800])
     return {}
@@ -1189,7 +1315,8 @@ def api_bye(_body=None) -> dict:
 ROUTES = {
     ("GET", "status"): api_status, ("POST", "analyze"): api_analyze, ("POST", "download"): api_download,
     ("POST", "clips"): api_clips, ("POST", "plan"): api_plan, ("POST", "cancel"): api_cancel, ("POST", "queue_move"): api_queue_move, ("POST", "settings"): api_settings, ("POST", "update"): api_update, ("POST", "install"): api_install,
-    ("POST", "pickfolder"): api_pickfolder, ("POST", "pickvideo"): api_pickvideo, ("POST", "open"): api_open,
+    ("POST", "pickfolder"): api_pickfolder, ("POST", "pickvideo"): api_pickvideo, ("POST", "pickvideos"): api_pickvideos, ("POST", "probe"): api_probe,
+    ("POST", "mosaic_plan"): api_mosaic_plan, ("GET", "session_files"): api_session_files, ("POST", "open"): api_open,
     ("POST", "clientlog"): api_clientlog, ("POST", "openlog"): api_openlog, ("POST", "ping"): api_ping,
     ("POST", "bye"): api_bye,
 }

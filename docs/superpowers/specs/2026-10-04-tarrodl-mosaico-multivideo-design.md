@@ -71,6 +71,7 @@ trabajo pesado a la vez (los clips y los mosaicos se turnan).
 | Ruta | Metodo | Uso |
 |---|---|---|
 | `/api/pickvideos` | POST | Selector de Windows con `Multiselect = true`; devuelve `{files: [...]}` o `{cancelled: true}`. Reusa `PICK_PREAMBLE`; script nuevo `PICK_VIDEOS_SCRIPT` (un `OpenFileDialog` con multiselect, una ruta por linea). |
+| `/api/probe` | POST | Mide duracion y audio de cada archivo (cache en memoria) para armar las barras desde/hasta apenas se agrega un video. Error 400 con el nombre del archivo si alguno no sirve. |
 | `/api/mosaic_plan` | POST | Vista previa. Mide duraciones (ffprobe, cache en memoria por `(ruta, mtime, size)`), resuelve cada `range_start/end` con `resolve_range` y llama `plan_multi`. No crea nada. |
 | `/api/mosaic` | POST | Crea el job: valida, recalcula el plan con los mismos parametros y la misma semilla, y arma el mp4. Devuelve el job (pool `clips`). |
 | `/api/session_files` | GET | Videos de la carpeta de descargas (los ya terminados), mas recientes primero, para el boton "Descargados". |
