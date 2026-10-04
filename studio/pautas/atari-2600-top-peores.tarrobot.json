@@ -100,7 +100,7 @@
     {
       "id": "atari-2600-top-peores-2",
       "tema": "Pac-Man",
-      "texto": "Pac-Man, de Atari, 1982. El juego más vendido del Atari 2600: más de ocho millones de copias. Los fantasmas parpadean porque cada uno aparece solo una vez cada cuatro cuadros. Vendió y decepcionó a la vez: un récord difícil de igualar.",
+      "texto": "Pac-Man, de Atari, 1982. El juego más vendido del Atari 2600: más de ocho millones de copias. Los fantasmas parpadean porque cada uno aparece solo una vez cada cuatro frames. Vendió y decepcionó a la vez: un récord difícil de igualar.",
       "estado": "talking",
       "consola": "Atari 2600",
       "ano": 1982,

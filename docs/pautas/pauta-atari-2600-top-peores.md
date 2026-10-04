@@ -34,7 +34,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado. Contraparte
 
 | # | Juego | Año | Editor | Evidencia (pantalla) | Premio comico |
 |---|-------|-----|--------|----------------------|---------------|
-| 10 | Amidar | 1982 | Parker Brothers | En 2 listas (Digital Press 1991, CBR) | Puerto mas doloroso de ver |
+| 10 | Amidar | 1982 | Parker Brothers | En 2 listas (Digital Press 1991, CBR) | Port mas doloroso de ver |
 | 9 | Warplock | 1982 | Data Age | En 2 listas (Digital Press, CBR) | Clon mas apurado |
 | 8 | Star Fox | 1983 | Mythicon | En 2 listas (Digital Press, CBR) | El Star Fox que no es Star Fox |
 | 7 | Sneak 'N Peek | 1982 | U.S. Games (Vidtec) | En 2 listas (SVG, CBR) | Escondite mas espeluznante |
@@ -86,7 +86,7 @@ Listas historicas contadas (cada juego suma 1 por lista en que aparece):
 - **Fire Fly** — Mythicon, 1983, Bruce de Graaf, sonido de Bill Bryner, modelo 1002, US$ 9,95 (AtariAge y caja). Orphaned: "un protector de pantalla primitivo que tienes que operar a mano" (cita de la nota de Orphaned, atribuir).
 - **Karate** — Ultravision, 1982, diseñado por Joseph Amelio; reeditado por Froggo (Wikipedia). Ultravision solo lanzo dos juegos para el 2600; la edicion original es rareza 10 "increiblemente rara" (AtariAge). La caja de la captura es la de la **reedicion de Froggo** (la unica con caja escaneada).
 - **Sssnake** — Data Age, octubre de 1982, modelo DA1003 (AtariAge), cazador en el Amazonas. Digital Press 1991 la encabeza: "todos los graficos son bloques". Data Age cerro en mayo de 1983 con US$ 7,9 millones de deuda (Wikipedia).
-- **Pac-Man** — Atari, marzo de 1982, Tod Frye, 4 KB de ROM; cada fantasma aparece una de cada cuatro cuadros; mas de 1 millon de copias en menos de un mes y mas de 8 millones en total, el juego mas vendido de la consola (Wikipedia; coherente con la pauta del Top Mundial).
+- **Pac-Man** — Atari, marzo de 1982, Tod Frye, 4 KB de ROM; cada fantasma aparece una de cada cuatro frames; mas de 1 millon de copias en menos de un mes y mas de 8 millones en total, el juego mas vendido de la consola (Wikipedia; coherente con la pauta del Top Mundial).
 - **E.T.** — Atari, diciembre de 1982, Howard Scott Warshaw; cinco semanas de desarrollo (Wikipedia, Mental Floss, entrevistas a Warshaw); licencia de US$ 20 a 25 millones (Wikipedia); excavacion del vertedero de Alamogordo el 26 de abril de 2014, algo mas de 1.300 juegos recuperados (Wikipedia, Waste360, UND/tDAR).
 
 **Cifras en disputa (no decirlas como dato firme):** cartuchos de E.T. fabricados (4 millones segun varias fuentes) y vendidos (Wikipedia: 2,6 millones a fines de 1982; otras fuentes, 1,5 millones); cartuchos enterrados en Alamogordo (800.000 segun UND, 728.000 segun Wikipedia); monto de la subasta de 2014 (US$ 107.000-108.000). Decir "segun la fuente" o no decirlas.
