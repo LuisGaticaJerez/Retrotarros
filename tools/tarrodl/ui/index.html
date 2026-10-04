@@ -235,7 +235,16 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
     <div class="msg hide" id="mosMsg"></div>
     <div id="mosPreview"></div>
     <div class="hint" id="mosSummary"></div>
-    <div id="mosJob" class="hide"></div>
+    <div class="ifoot"><button class="btn mg" id="btnMosaic" disabled>CREAR MOSAICO</button><span class="hint" style="margin:0">Se guarda en tu carpeta de clips; si el nombre ya existe agrega _2, _3...</span></div>
+    <div id="mosJob" class="prog hide">
+      <div class="bar"><i></i></div><div class="ptext"></div><div class="pmeta"></div>
+      <div class="row" style="margin-top:8px">
+        <button class="btn sm cancel hide" id="mosCancel">CANCELAR</button>
+        <button class="btn sm hide" id="mosOpenFile">VER VIDEO</button>
+        <button class="btn sm hide" id="mosOpenDir">ABRIR CARPETA DE CLIPS</button>
+        <button class="btn sm hide" id="mosRetry">REINTENTAR</button>
+      </div>
+    </div>
   </section>
 </div>
 </main>
@@ -755,6 +764,7 @@ async function poll() {
     if (it.dlId && !(it.dl && !isActive(it.dl))) ids.push(it.dlId);
     if (it.clipId && !(it.clipJob && !isActive(it.clipJob))) ids.push(it.clipId);
   }
+  if (mosBusy()) ids.push(MOS.jobId);
   if (!ids.length) return;
   let data; try { data = await api("jobs?ids=" + ids.join(",")); } catch (e) { return; }
   for (const it of ITEMS) {
@@ -765,6 +775,7 @@ async function poll() {
     if (it.clipId && data[it.clipId]) { it.clipJob = data[it.clipId]; touched = true; }
     if (touched) renderItem(it);
   }
+  if (MOS.jobId && data[MOS.jobId]) { MOS.job = data[MOS.jobId]; renderMosJob(); mosSyncButton(); }
   renderQueue();
 }
 setInterval(poll, 1000);
@@ -944,7 +955,9 @@ function mosRequestBody() {
   return { videos: MOS.videos.map(v => { const o = { file: v.file }; if (v.from > 0 || v.to < Math.floor(v.duration)) { o.range_start = v.from; o.range_end = v.to; } return o; }),
     total_sec: MOS_PREF.total, piece_sec: MOS_PREF.piece, share: MOS_PREF.share, seed: MOS.seed, height: MOS_PREF.height, name: $("mosName").value.trim() };
 }
-function mosaicReady() { return MOS.videos.length >= 2 && !!MOS.plan && !MOS.err && !(MOS.job && isActive(MOS.job)); }
+const mosBusy = () => !!MOS.jobId && !(MOS.job && !isActive(MOS.job));
+function mosaicReady() { return MOS.videos.length >= 2 && !!MOS.plan && !MOS.err && !mosBusy(); }
+function mosSyncButton() { $("btnMosaic").disabled = !mosaicReady(); }
 function scheduleMosPlan() { clearTimeout(MOS.timer); MOS.timer = setTimeout(refreshMosPlan, 350); }
 async function refreshMosPlan() {
   const seq = ++MOS.seq;
@@ -956,7 +969,7 @@ async function refreshMosPlan() {
 function mosDraw() {
   const box = $("mosPreview"), msg = $("mosMsg"), text = MOS.err || MOS.addErr;
   box.replaceChildren(); msg.textContent = text; msg.classList.toggle("hide", !text);
-  const btn = document.getElementById("btnMosaic"); if (btn) btn.disabled = !mosaicReady();
+  mosSyncButton();
   const p = MOS.plan;
   if (!p) { $("mosSummary").textContent = ""; return; }
   const mk = (tag, cls) => { const e = document.createElement(tag); if (cls) e.className = cls; return e; };
@@ -981,6 +994,33 @@ function mosDraw() {
   const per = p.lanes.map(l => l.starts.length).join(" · ");
   $("mosSummary").textContent = `${p.pieces} trozos de ${Number.isInteger(p.seg) ? p.seg : p.seg.toFixed(1)} s · por video: ${per} · total ${fmtLen(p.total)}`;
 }
+
+// ---- crear el mosaico ----
+function renderMosJob() {
+  const box = $("mosJob"), j = MOS.job;
+  if (!MOS.jobId) return box.classList.add("hide");
+  const state = j ? j.state : "queued", active = !j || isActive(j);
+  showProg(box, j ? j.text : "Enviando...", j ? j.percent : 0, j ? j.meta : "", state === "error", false);
+  $("mosCancel").classList.toggle("hide", !active);
+  if (!active) { $("mosCancel").disabled = false; $("mosCancel").textContent = "CANCELAR"; }
+  $("mosOpenFile").classList.toggle("hide", state !== "done");
+  $("mosOpenDir").classList.toggle("hide", state !== "done");
+  $("mosRetry").classList.toggle("hide", !(state === "error" || state === "cancelled"));
+}
+async function mosCreate() {
+  $("btnMosaic").disabled = true; $("mosRetry").disabled = true; MOS.addErr = "";
+  try {
+    if (!(await ensureFolder("clips"))) { MOS.addErr = "Elige primero la carpeta donde dejar el mosaico (queda guardada para la próxima)."; return; }
+    const r = await api("mosaic", mosRequestBody());
+    MOS.jobId = r.job; MOS.job = null; renderMosJob();
+  } catch (e) { MOS.addErr = e.message; }
+  finally { $("mosRetry").disabled = false; mosDraw(); }
+}
+$("btnMosaic").onclick = mosCreate;
+$("mosRetry").onclick = mosCreate;
+$("mosCancel").onclick = () => cancelJob(MOS.jobId, $("mosCancel"));
+$("mosOpenFile").onclick = () => api("open", { path: joinPath(MOS.job.result.dir, MOS.job.result.file) }).catch(e => alert(e.message));
+$("mosOpenDir").onclick = () => api("open", { path: MOS.job.result.dir }).catch(e => alert(e.message));
 
 mosWriteParams();
 mosRenderVideos();
