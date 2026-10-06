@@ -52,7 +52,7 @@ Nicho/relleno (opcional): `#Friday13th #WorstGames #LJN #RetroTarros #Chile`
 ## Tags YouTube (keywords, separadas por coma)
 
 ```
-peores juegos nes, nes, nintendo nes, peores juegos de nintendo, friday the 13th nes, dr jekyll and mr hyde nes, deadly towers, back to the future nes, uncanny x-men nes, where's waldo nes, juegos malos retro, top 10 peores juegos, retrogaming, lJN, videojuegos retro, retrotarros
+peores juegos nes, nes, nintendo nes, peores juegos de nintendo, friday the 13th nes, dr jekyll and mr hyde nes, deadly towers, back to the future nes, uncanny x-men nes, where's waldo nes, juegos malos retro, top 10 peores juegos, retrogaming, LJN, videojuegos retro, retrotarros
 ```
 
 ---

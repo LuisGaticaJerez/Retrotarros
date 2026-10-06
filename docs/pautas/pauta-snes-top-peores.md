@@ -37,7 +37,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 | 10 | Barbie: Super Model | 1993 | Hi Tech Expressions | En 1 Lista (Nintendo Power 1997 (10 Peores)) | Al desfile con prueba de memoria |
 | 9 | Michael Jordan: Chaos in the Windy City | 1994 | Electronic Arts | En 1 Lista (Nintendo Power 1997 (#7)) | Al partido benefico mas complicado |
 | 8 | Lester the Unlikely | 1994 | DTMC | En 2 Listas (Den Of Geek (#2) + Thegamer) | Al heroe que quiere irse tanto como tu |
-| 7 | Ballz 3d | 1994 | Accolade | En 3 Listas (Den Of Geek (#9) + Thegamer + Game Informer 2011 (#7)) | Al torneo de pelotas con eslogan censurado |
+| 7 | Ballz 3D | 1994 | Accolade | En 3 Listas (Den Of Geek (#9) + Thegamer + Game Informer 2011 (#7)) | Al torneo de pelotas con eslogan censurado |
 | 6 | Rap Jam: Volume One | 1995 | Motown Games | En 3 Listas (Egm 1997 (#9) + Seanbaby (#14) + Game Rant) | Al volumen uno... y unico |
 | 5 | Space Ace | 1994 | Absolute Entertainment | En 3 Listas (Thegamer (#1) + Den Of Geek (#6) + Time Extension) | Al dibujo animado que se volvio castigo |
 | 4 | Race Drivin' | 1992 | THQ | En 3 Listas (Den Of Geek (#3) + Game Rant + Cbr) | A la presentacion de diapositivas con volante |
@@ -80,7 +80,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 *Cue:* RETO 30 SEG: ver cuantas veces Lester grita antes de moverse. CHISTE: 'el unico protagonista que dice lo que piensa el jugador: quiero irme a casa'.
 
-### #7 — Ballz 3d (1994, Accolade)
+### #7 — Ballz 3D (1994, Accolade)
 
 **En pantalla:** Un juego de pelea donde todos los luchadores estan hechos de pelotas: un mono, un payaso, un sumo, un avestruz, una bailarina y un rinoceronte. Nintendo pidio cambiar el eslogan de la intro. Game Informer lo puso en su lista de peleas que queremos olvidar.
 

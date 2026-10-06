@@ -22,7 +22,7 @@ El espejo del Top Mundial de SNES: los 10 peores juegos, **para reirnos**. Del m
 | 10 | Barbie: Super Model | Un desfile con prueba de memoria; Nintendo Power la puso en sus 10 peores (1997) |
 | 9 | Michael Jordan: Chaos in the Windy City | Balones bomba y un cientifico llamado Maximus Cranium |
 | 8 | Lester the Unlikely | Un heroe cobarde que grita y huye de todo |
-| 7 | Ballz 3d | Luchadores hechos de pelotas y un eslogan que Nintendo pidio cambiar |
+| 7 | Ballz 3D | Luchadores hechos de pelotas y un eslogan que Nintendo pidio cambiar |
 | 6 | Rap Jam: Volume One | Basquet callejero sin faltas; el unico volumen que existio |
 | 5 | Space Ace | El dibujo animado de laserdisc convertido en castigo; TheGamer: el peor del SNES |
 | 4 | Race Drivin' | Un arcade 3D que corre a ~4 frames por segundo (sin Super FX) |

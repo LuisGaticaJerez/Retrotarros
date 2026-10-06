@@ -26,7 +26,7 @@ Hay un arcade de autos que corre a cuatro frames por segundo, luchadores hechos 
 01:30 #10 Barbie: Super Model
 03:30 #9 Michael Jordan: Chaos in the Windy City
 05:30 #8 Lester the Unlikely
-07:30 #7 Ballz 3d
+07:30 #7 Ballz 3D
 09:30 #6 Rap Jam: Volume One
 11:30 #5 Space Ace
 13:30 #4 Race Drivin'

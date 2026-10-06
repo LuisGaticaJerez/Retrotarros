@@ -25,7 +25,7 @@ Hay un juego que se anunció, se canceló, se revivió y salió dos años tarde,
 00:45 Cómo elegimos
 01:30 #10 Time Killers
 03:30 #9 X-Perts
-05:30 #8 Journey From Darkness: Strider Returns
+05:30 #8 Journey from Darkness: Strider Returns
 07:30 #7 Batman Forever
 09:30 #6 Wayne's World
 11:30 #5 Fantasia

@@ -21,7 +21,7 @@ El espejo del Top Mundial de Mega Drive: los 10 peores juegos, **para reirnos**.
 |---|-------|-------------------|
 | 10 | Time Killers | Anunciado, cancelado, revivido y lanzado 2 años tarde, igual |
 | 9 | X-Perts | Un equipo de elite que se queda parado apretando botones |
-| 8 | Journey From Darkness: Strider Returns | El Strider de otra familia: 'un ser querido revivido como zombi' |
+| 8 | Journey from Darkness: Strider Returns | El Strider de otra familia: 'un ser querido revivido como zombi' |
 | 7 | Batman Forever | Golpes que siguen despues de que el enemigo ya murio |
 | 6 | Wayne's World | Un juego de saltar y juntar cosas con Schwing; Sega-16 le puso 1/10 |
 | 5 | Fantasia | Mickey sin permiso; segun Wikipedia, ~5.000 copias destruidas |

@@ -36,7 +36,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 |---|-------|-----|--------|----------------------|---------------|
 | 10 | Time Killers | 1996 | Black Pearl | En 1 Lista (Den Of Geek (#2)) | Al que llego dos años tarde a la pelea |
 | 9 | X-Perts | 1996 | Sega | En 2 Listas (Den Of Geek (#4) + Svg (#5)) | Al equipo de elite que se quedo parado |
-| 8 | Journey From Darkness: Strider Returns | 1992 | U.S. Gold | En 2 Listas (Den Of Geek (#5) + Thegamer) | Al strider de la otra familia |
+| 8 | Journey from Darkness: Strider Returns | 1992 | U.S. Gold | En 2 Listas (Den Of Geek (#5) + Thegamer) | Al strider de la otra familia |
 | 7 | Batman Forever | 1995 | Acclaim | En 2 Listas (Thegamer + Watchmojo (#13)) | Al golpe que sigue aunque el enemigo ya se fue |
 | 6 | Wayne's World | 1993 | THQ | En 3 Listas (Den Of Geek (#3) + Thegamer + Flux 1995 (#19)) | Al schwing que no llega |
 | 5 | Fantasia | 1991 | Sega | En 3 Listas (Mega (#6) + Den Of Geek (#8) + Watchmojo (#15)) | A la magia que se destruyo en bodega |
@@ -69,7 +69,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 *Cue:* RETO 30 SEG: quedarse parado apretando botones y 'salvar el mundo'. CHISTE: 'la unica mision donde el equipo de elite gana si no se mueve'.
 
-### #8 — Journey From Darkness: Strider Returns (1992, U.S. Gold)
+### #8 — Journey from Darkness: Strider Returns (1992, U.S. Gold)
 
 **En pantalla:** La secuela de Strider que hizo otro estudio, con licencia de Capcom, para computadoras, y que llego al Genesis con otro nombre. Una critica dijo que era como ver a un ser querido revivido como un zombi sin mente.
 
