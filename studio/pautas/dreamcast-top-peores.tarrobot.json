@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "dreamcast-top-peores",
+  "episodio": "Top 10 Dreamcast los peores juegos",
+  "creado": "2026-10-06",
+  "actualizado": "2026-10-06",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "dreamcast-top-peores-10",
+      "tema": "Death Crimson OX",
+      "texto": "Death Crimson OX, de Sammy, dos mil uno. Un juego de pistola de luz que, según GameSpot, es un clon de segunda del House of the Dead, sin ninguna razón real para seguir apretando el gatillo. Metacritic le puso cuarenta y seis. Pero ojo: en Japón, el arcade fue el decimotercero más popular del dos mil. Allá les encantó; acá, ni a tiros.",
+      "estado": "talking",
+      "consola": "Dreamcast",
+      "ano": 2001,
+      "editor": "Sammy",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Death Crimson OX! Un clon de segunda del House of the Dead... que en Japón fue un éxito de arcade."
+    },
+    {
+      "id": "dreamcast-top-peores-9",
+      "tema": "South Park Rally",
+      "texto": "South Park Rally, de Acclaim, dos mil. Un juego de karts con los personajes del programa, hecho en siete meses. Next Generation dijo que era un intento descarado de pegarle el nombre de South Park a un mal juego de carreras, y TheGamer lo llama de los peores controles imaginables. En el Nintendo sesenta y cuatro vendió más de un millón de copias. Moraleja: el nombre vende.",
+      "estado": "talking",
+      "consola": "Dreamcast",
+      "ano": 2000,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡South Park Rally! Hecho en siete meses para pegarle el nombre a un juego de carreras. Y en Nintendo sesenta y cuatro vendió más de un millón."
+    },
+    {
+      "id": "dreamcast-top-peores-8",
+      "tema": "Ducati World: Racing Challenge",
+      "texto": "Ducati World Racing Challenge, de Acclaim, dos mil uno. Un juego de motos que en la Dreamcast salió con gráficos que parecen de PlayStation y, curiosamente, peores notas que en la PlayStation: sesenta y ocho allá, cuarenta acá. IGN le puso dos coma siete. La consola más poderosa de su época, con la nota más baja.",
+      "estado": "talking",
+      "consola": "Dreamcast",
+      "ano": 2001,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Ducati World! En Dreamcast sacó cuarenta en Metacritic y en PlayStation, sesenta y ocho. La consola más poderosa, la peor nota."
+    },
+    {
+      "id": "dreamcast-top-peores-7",
+      "tema": "ECW Anarchy Rulz",
+      "texto": "ECW Anarchy Rulz, de Acclaim, dos mil. Un juego de lucha libre extrema con cinco arenas, mesas, infiernos y basureros. Dreamcast Junkyard dice que el público es de cartón y que es igual a los anteriores de Acclaim. Metacritic le puso treinta y ocho. Fue el último juego de la ECW antes de su quiebra. Un público de cartón para el último combate.",
+      "estado": "talking",
+      "consola": "Dreamcast",
+      "ano": 2000,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡ECW Anarchy Rulz! Público de cartón y treinta y ocho en Metacritic. Y fue el último juego de la ECW antes de la quiebra."
+    },
+    {
+      "id": "dreamcast-top-peores-6",
+      "tema": "Slave Zero",
+      "texto": "Slave Zero, de Infogrames, mil novecientos noventa y nueve. Un robot biomecánico de dieciocho metros que pelea en una megaciudad. CBR dice que el mapeo de controles es atroz, y IGN, que el frame rate es muy malo, que no hay música y que el juego se cuelga. Un robot gigante que no cabe en la consola.",
+      "estado": "talking",
+      "consola": "Dreamcast",
+      "ano": 1999,
+      "editor": "Infogrames",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Slave Zero! Un robot de dieciocho metros, sin música y con un frame rate que se arrastra. Según IGN, hasta se cuelga."
+    },
+    {
+      "id": "dreamcast-top-peores-5",
+      "tema": "Spec Ops Ii: Omega Squad",
+      "texto": "Spec Ops dos: Omega Squad, de Ripcord, dos mil. Un shooter táctico que en la Dreamcast llegó con otro nombre. Según Dreamcast Junkyard, tu soldado se hunde en el suelo, los enemigos disparan a través de las paredes y el escenario solo aparece cuando estás a quince metros. TheGamer dice que no tiene historia: es una colección de misiones. Una crítica dijo que es una segunda parte que, asombrosamente, es mucho peor que la primera.",
+      "estado": "talking",
+      "consola": "Dreamcast",
+      "ano": 2000,
+      "editor": "Ripcord",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Spec Ops dos Omega Squad! Los enemigos disparan a través de las paredes y el escenario aparece cuando estás a quince metros."
+    },
+    {
+      "id": "dreamcast-top-peores-4",
+      "tema": "Nightmare Creatures II",
+      "texto": "Nightmare Creatures dos, de Konami, dos mil. Es mil novecientos treinta y cuatro, escapas de un hospital de genética con un hacha y recorres Londres y París hasta la Torre Eiffel. La mira se fija sola en los enemigos, así que no puedes escapar, y combatir es machacar el botón de ataque. TheGamer dice que no entendió qué hace tenso al survival horror. Y GameRevolution le puso una F.",
+      "estado": "talking",
+      "consola": "Dreamcast",
+      "ano": 2000,
+      "editor": "Konami",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Nightmare Creatures dos! La mira se fija sola y no puedes escapar. GameRevolution le puso una F."
+    },
+    {
+      "id": "dreamcast-top-peores-3",
+      "tema": "Jeremy McGrath Supercross 2000",
+      "texto": "Jeremy McGrath Supercross dos mil, de Acclaim, dos mil. Un juego de motocross con dieciséis pistas y editor, pero con controles que, según Dreamcast Junkyard, se sienten como andar sobre un lago congelado. CBR dice que el frame rate tartamudea justo cuando tienes que cronometrar los saltos. Next Generation sugirió que el juego mandaría a la gente a comprar Excitebike sesenta y cuatro.",
+      "estado": "talking",
+      "consola": "Dreamcast",
+      "ano": 2000,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Jeremy McGrath Supercross dos mil! Los controles se sienten como andar en moto sobre un lago congelado. Y Next Generation recomendó mejor comprar Excitebike."
+    },
+    {
+      "id": "dreamcast-top-peores-2",
+      "tema": "Urban Chaos",
+      "texto": "Urban Chaos, de Eidos, dos mil. Arrestas a los bandidos para mejorar las relaciones públicas, y peleas con patadas, bates y deslizamientos. GameSpot lo eligió finalista a peor juego del dos mil y lo llamó un desastre entrecortado e incontrolable. TheGamer y Dreamcast Junkyard también lo ponen entre los peores. Pero IGN le puso seis coma ocho: hay quien disfrutó el caos.",
+      "estado": "talking",
+      "consola": "Dreamcast",
+      "ano": 2000,
+      "editor": "Eidos",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Urban Chaos! Arrestas bandidos para mejorar las relaciones públicas. GameSpot lo llamó un desastre incontrolable y entrecortado."
+    },
+    {
+      "id": "dreamcast-top-peores-1",
+      "tema": "Spirit of Speed 1937",
+      "texto": "Spirit of Speed mil novecientos treinta y siete, de Acclaim, dos mil. Quince autos clásicos de los años treinta y nueve circuitos desde Libia hasta Italia, y todos se manejan igual de mal. GameSpot le puso uno coma nueve y lo eligió el peor videojuego del dos mil, en la primera vez que dio ese premio. IGN lo llamó la peor excusa de juego para Dreamcast. Y aun así, en Japón Famitsu le puso veinticinco sobre cuarenta.",
+      "estado": "talking",
+      "consola": "Dreamcast",
+      "ano": 2000,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Spirit of Speed mil novecientos treinta y siete! GameSpot lo eligió el peor videojuego del año dos mil. En Japón, veinticinco sobre cuarenta."
+    }
+  ]
+}
