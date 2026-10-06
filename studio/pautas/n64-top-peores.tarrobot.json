@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "n64-top-peores",
+  "episodio": "Top 10 N64 los peores juegos",
+  "creado": "2026-10-06",
+  "actualizado": "2026-10-06",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "n64-top-peores-10",
+      "tema": "Earthworm Jim 3D",
+      "texto": "Earthworm Jim 3D, de Rockstar, mil novecientos noventa y nueve. Una vaca voladora deja a Jim en coma, y tú tienes que recuperar su cordura juntando canicas verdes y Ubres Doradas de la Lucidez. Sí, existen. GameSpot dijo que la cámara estaba en una misión kamikaze para destruir el juego. Jim perdió las canicas, y la cámara también.",
+      "estado": "talking",
+      "consola": "N64",
+      "ano": 1999,
+      "editor": "Rockstar",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Earthworm Jim 3D! Una vaca voladora lo deja en coma y hay que juntar Ubres Doradas de la Lucidez. La cámara también perdió las canicas."
+    },
+    {
+      "id": "n64-top-peores-9",
+      "tema": "Olympic Hockey '98",
+      "texto": "Olympic Hockey noventa y ocho, de Midway, mil novecientos noventa y ocho. Es el juego de hockey de Wayne Gretzky con otra caja: casi todo es idéntico, salvo los logos, los colores y una cancha más grande. IGN le puso cero sobre diez, con una frase que dice: publicaremos una nueva reseña cuando Midway lance un juego nuevo. Medalla de oro en reciclaje.",
+      "estado": "talking",
+      "consola": "N64",
+      "ano": 1998,
+      "editor": "Midway",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Olympic Hockey noventa y ocho! Es el hockey de Gretzky con otra caja. IGN: nueva reseña cuando Midway lance un juego nuevo."
+    },
+    {
+      "id": "n64-top-peores-8",
+      "tema": "Blues Brothers 2000",
+      "texto": "Blues Brothers dos mil, de Titus, dos mil. Elwood sale de la cárcel de Joliet para juntar a la banda en dos días, y en el camino se enfrenta al alcaide, a Willie y a un árbol malvado. Den of Geek lo llama una secuela innecesaria con poca conexión con la franquicia, y IGN le puso cinco coma cuatro. Eso sí: una revista oficial de Nintendo le puso ochenta y cinco. Una misión de Dios, con un árbol malvado de por medio.",
+      "estado": "talking",
+      "consola": "N64",
+      "ano": 2000,
+      "editor": "Titus",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Blues Brothers dos mil! Uno de los jefes es un árbol malvado. Y aun así, una revista oficial le puso ochenta y cinco."
+    },
+    {
+      "id": "n64-top-peores-7",
+      "tema": "Mortal Kombat Mythologies: Sub-Zero",
+      "texto": "Mortal Kombat Mythologies: Sub-Zero, de Midway, mil novecientos noventa y siete. Es un juego mitad pelea, mitad plataformas, y en el Nintendo sesenta y cuatro le quitaron los videos, que era lo mejor del de PlayStation. Para darse la vuelta tienes que apretar un botón de acción: Sub-Zero, el ninja más ágil... que no puede girar solo. IGN le puso tres de diez, y la revista N64 Magazine, nueve por ciento.",
+      "estado": "talking",
+      "consola": "N64",
+      "ano": 1997,
+      "editor": "Midway",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Mortal Kombat Mythologies Sub-Zero! Para darse la vuelta hay que apretar un botón. El ninja más helado, y el que no puede girar."
+    },
+    {
+      "id": "n64-top-peores-6",
+      "tema": "Power Rangers: Lightspeed Rescue",
+      "texto": "Power Rangers: Lightspeed Rescue, de THQ, dos mil. Los Rangers, los vehículos y los Megazords, con voces del elenco de la serie. Den of Geek dice que los gráficos parecen hechos en una semana. Metacritic le puso veinticinco sobre cien, y la revista N64 Magazine, nueve por ciento. Los Rangers se transforman, pero los gráficos, no.",
+      "estado": "talking",
+      "consola": "N64",
+      "ano": 2000,
+      "editor": "THQ",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Power Rangers Lightspeed Rescue! Veinticinco sobre cien en Metacritic. Los Rangers se transforman, pero los gráficos, no."
+    },
+    {
+      "id": "n64-top-peores-5",
+      "tema": "Carmageddon 64",
+      "texto": "Carmageddon sesenta y cuatro, de Titus. El juego de atropellar peatones llegó al Nintendo sesenta y cuatro con zombis en lugar de peatones y, según Den of Geek, sin animaciones de destrucción que satisfagan. N64 Magazine le puso ocho por ciento, su nota más baja entre mil novecientos noventa y nueve y dos mil cuatro. Otra revista dijo que ni todo el puré de peatones tapa sus fallas.",
+      "estado": "talking",
+      "consola": "N64",
+      "ano": 1999,
+      "editor": "Titus",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Carmageddon sesenta y cuatro! Atropellar zombis sin satisfacción. N64 Magazine le puso ocho por ciento, su nota más baja en cinco años."
+    },
+    {
+      "id": "n64-top-peores-4",
+      "tema": "ClayFighter 63 1/3",
+      "texto": "ClayFighter sesenta y tres y un tercio, de Interplay, mil novecientos noventa y siete. Un juego de pelea con personajes de plastilina que se burla de Street Fighter, Mortal Kombat y Killer Instinct. IGN dijo que era tan malo que fijaba el estándar de lo malo. Y su edición para alquilar en Blockbuster, el Sculptor's Cut, de solo veinte mil copias, hoy es una de las más raras del Nintendo sesenta y cuatro. A veces lo malo se cotiza.",
+      "estado": "talking",
+      "consola": "N64",
+      "ano": 1997,
+      "editor": "Interplay",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡ClayFighter sesenta y tres y un tercio! IGN dijo que fija el estándar de lo malo. Y su edición de Blockbuster hoy es una de las más raras."
+    },
+    {
+      "id": "n64-top-peores-3",
+      "tema": "John Romero's Daikatana",
+      "texto": "John Romero's Daikatana, de Kemco, dos mil. Un shooter que llegó al Nintendo sesenta y cuatro primero como exclusivo de alquiler en Blockbuster, con dieciocho niveles en vez de veinticuatro. Nintendo Power dijo que el Doom del Super Nintendo era superior, y GameTrailers lo ubicó entre las mayores decepciones de la década. Hasta su campaña de publicidad, dijo su propio creador, le hizo daño. La versión de Game Boy Color era mejor, y no salió en Norteamérica.",
+      "estado": "talking",
+      "consola": "N64",
+      "ano": 2000,
+      "editor": "Kemco",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Daikatana! Nintendo Power dijo que el Doom del Super Nintendo era superior. Y la versión de Game Boy Color era mejor."
+    },
+    {
+      "id": "n64-top-peores-2",
+      "tema": "Batman Beyond: Return of the Joker",
+      "texto": "Batman Beyond: Return of the Joker, de Ubisoft, dos mil. Un juego de pelea lateral con cuatro trajes, y el defensivo es tan poderoso que, según Den of Geek, termina el juego en unos treinta minutos. Electronic Gaming Monthly le puso uno coma cinco sobre diez y lo incluyó entre los diez juegos peor evaluados de su historia. Un traje que gana solo y un juego que se pierde solo.",
+      "estado": "talking",
+      "consola": "N64",
+      "ano": 2000,
+      "editor": "Ubisoft",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Batman Beyond Return of the Joker! Con el traje defensivo te pasas el juego en treinta minutos. Un traje que gana solo y un juego que se pierde solo."
+    },
+    {
+      "id": "n64-top-peores-1",
+      "tema": "Superman 64",
+      "texto": "Superman sesenta y cuatro, de Titus, mil novecientos noventa y nueve. Lex Luthor atrapa a sus amigos en una Metrópolis virtual, y tú, el hombre más poderoso del planeta, tienes que volar por anillos en medio de una niebla espesa. El director técnico lo llamó un desastre de principio a fin, y de su diseño original sobrevivió solo un diez por ciento. Tiene el récord Guinness al juego de superhéroes peor evaluado, con veintidós coma nueve por ciento. Y aun así vendió más de quinientas mil copias.",
+      "estado": "talking",
+      "consola": "N64",
+      "ano": 1999,
+      "editor": "Titus",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Superman sesenta y cuatro! Tiene el récord Guinness al superhéroe peor evaluado. Y vendió más de quinientas mil copias."
+    }
+  ]
+}
