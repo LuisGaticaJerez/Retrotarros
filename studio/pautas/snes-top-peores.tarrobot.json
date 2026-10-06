@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "snes-top-peores",
+  "episodio": "Top 10 SNES los peores juegos",
+  "creado": "2026-10-06",
+  "actualizado": "2026-10-06",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "snes-top-peores-10",
+      "tema": "Barbie: Super Model",
+      "texto": "Barbie Super Model, de Hi Tech Expressions, mil novecientos noventa y tres. Hay que recordar la coreografía de un desfile, manejar un convertible por Hollywood, patinar en Hawái y esquiar en Vail. Es el único juego donde el jefe final es acordarte de los pasos. Nintendo Power lo puso en su lista de los diez peores juegos de la historia, en mil novecientos noventa y siete.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1993,
+      "editor": "Hi Tech Expressions",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Barbie Super Model! El jefe final es acordarte de la coreografía. Y Nintendo Power la puso entre los diez peores."
+    },
+    {
+      "id": "snes-top-peores-9",
+      "tema": "Michael Jordan: Chaos in the Windy City",
+      "texto": "Michael Jordan: Chaos in the Windy City, de Electronic Arts, mil novecientos noventa y cuatro. Un científico loco llamado Maximus Cranium secuestra a los compañeros de Jordan antes de un partido benéfico, y tú los rescatas lanzando balones que congelan o explotan. Cada mate activa un checkpoint. Nintendo Power dijo que era un desperdicio de licencia, y lo puso séptimo entre los peores de la historia.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Electronic Arts",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Michael Jordan Chaos in the Windy City! Balones bomba, un científico llamado Maximus Cranium y un partido benéfico. Normal."
+    },
+    {
+      "id": "snes-top-peores-8",
+      "tema": "Lester the Unlikely",
+      "texto": "Lester the Unlikely, de DTMC, mil novecientos noventa y cuatro. Eres un adolescente fanático de los cómics que termina varado en una isla, y tu personaje se asusta de todo: grita, huye y recién después agarra confianza. Es el único héroe que quiere irse tanto como tú. Den of Geek lo puso segundo entre los peores del SNES.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "DTMC",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Lester the Unlikely! Un héroe que le tiene miedo a todo, igual que tú cuando ves los controles."
+    },
+    {
+      "id": "snes-top-peores-7",
+      "tema": "Ballz 3d",
+      "texto": "Ballz 3D, de Accolade, mil novecientos noventa y cuatro. Es un juego de pelea donde todos los luchadores están hechos de pelotas: un mono, un payaso, un sumo, un avestruz, una bailarina y un rinoceronte. Nintendo le pidió a la empresa que cambiara el eslogan de la intro, por si se entendía mal. Y Game Informer lo puso en su lista de peleas que queremos olvidar.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Accolade",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Ballz 3D! Luchadores hechos de pelotas, y Nintendo pidió cambiar el eslogan. Tiene sentido."
+    },
+    {
+      "id": "snes-top-peores-6",
+      "tema": "Rap Jam: Volume One",
+      "texto": "Rap Jam, Volume One, de Motown Games, mil novecientos noventa y cinco. Es básquetbol callejero con raperos de los noventa, a golpes y sin faltas. Se llama Volumen Uno porque iba a haber más, pero no hubo: fue el único volumen, y el último juego de Motown Software. Electronic Gaming Monthly lo puso noveno entre los peores de la historia.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1995,
+      "editor": "Motown Games",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Rap Jam Volume One! Básquetbol callejero sin faltas, y fue el único volumen que existió."
+    },
+    {
+      "id": "snes-top-peores-5",
+      "tema": "Space Ace",
+      "texto": "Space Ace, de Absolute Entertainment, mil novecientos noventa y cuatro. Era un arcade de dibujos animados en laserdisc y aquí se volvió un plataformas con controles blandos y una dificultad cruel. GamePro dijo que era uno de los juegos más injugables en mucho tiempo. Y Nintendo temía que un sonido del arcade pareciera una mala palabra. Spoiler: el juego no necesitó ayuda para sonar mal.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Absolute Entertainment",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Space Ace! Nintendo temía que un sonido sonara a grosería, pero el juego solo necesitaba controles."
+    },
+    {
+      "id": "snes-top-peores-4",
+      "tema": "Race Drivin'",
+      "texto": "Race Drivin', de THQ, mil novecientos noventa y dos. Es el arcade de manejo en tres dimensiones convertido para el SNES sin usar el chip Super FX, y corre a unos cuatro frames por segundo. Es una presentación de diapositivas con volante. Nintendo Power le dio nueve coma siete sobre veinte, y la revista británica Super Play, treinta y cinco por ciento.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1992,
+      "editor": "THQ",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Race Drivin'! Cuatro frames por segundo: una presentación de diapositivas con volante."
+    },
+    {
+      "id": "snes-top-peores-3",
+      "tema": "Pit-Fighter",
+      "texto": "Pit-Fighter, de THQ, mil novecientos noventa y dos. Es el arcade de luchadores digitalizados, pero en el SNES llegó sin el público, sin las armas y sin tres de los rivales. Nintendo Power dijo que era extremadamente difícil de controlar. Den of Geek lo puso primero entre los peores del SNES, y Nintendo Power lo metió en su lista de los diez peores de la historia.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1992,
+      "editor": "THQ",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Pit-Fighter! Llegó al SNES sin público, sin armas y sin tres rivales. Solo quedaron los golpes... y los controles."
+    },
+    {
+      "id": "snes-top-peores-2",
+      "tema": "Bebe's Kids",
+      "texto": "Bebe's Kids, de Motown Games, mil novecientos noventa y cuatro. Es un juego de pelea basado en una película animada, en un parque de diversiones lleno de guardias, mascotas y piratas. Nintendo Power dijo que la acción era extremadamente lenta y que los enemigos aguantaban golpes como si fueran de acero. Y lo incluyó en su lista de los diez peores juegos de la historia.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Motown Games",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Bebe's Kids! Nintendo Power dijo que las peleas parecían no terminar nunca, porque los enemigos aguantaban de todo."
+    },
+    {
+      "id": "snes-top-peores-1",
+      "tema": "Shaq Fu",
+      "texto": "Shaq Fu, de Electronic Arts, mil novecientos noventa y cuatro. Shaq va camino a un partido benéfico, entra a un dojo en Tokio por error, lo confunden con un guerrero elegido y termina en otra dimensión peleando con una momia. Nintendo Power lo puso tercero entre los peores juegos de la historia, Electronic Gaming Monthly lo puso décimo y GameTrailers, cuarto. Y para colmo, la versión de Genesis trae cinco personajes más.",
+      "estado": "talking",
+      "consola": "SNES",
+      "ano": 1994,
+      "editor": "Electronic Arts",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Shaq Fu! Va a un partido benéfico, se equivoca de puerta y termina peleando con una momia en otra dimensión."
+    }
+  ]
+}
