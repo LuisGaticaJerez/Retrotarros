@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · NES · Top Peores</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root {
+  --mg: #FF2E88; --cy: #00E5FF; --ye: #FFD23F; --pu: #2D1B69;
+  --bo: #F5F0E8; --dk: #06030f; --card-bg: rgba(12, 6, 32, 0.92);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6, 3, 15, 0.97); border-bottom: 2px solid var(--mg); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size:23px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size:14px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size:9px; color: var(--mg); }
+.dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 28px 44px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size:10px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size:13px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size:71px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .vs { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size:21px; color: var(--ye); letter-spacing: 4px; }
+.divider { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.divider .pre { font-family: 'Press Start 2P'; font-size:13px; letter-spacing: 6px; margin-bottom: 24px; }
+.divider .pre.cy { color: var(--cy); } .divider .pre.mg { color: var(--mg); }
+.divider .title { font-family: 'Orbitron'; font-weight: 900; font-size:90px; letter-spacing: 2px; line-height: 1; color: #fff; margin-bottom: 22px; }
+.divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
+.divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.divider .sub { font-family: 'Share Tech Mono'; font-size:21px; color: rgba(255,255,255,.7); letter-spacing: 2px; max-width: 800px; line-height: 1.6; }
+
+/* HIBRIDO */
+.slide-hybrid { display: grid; grid-template-rows: auto 1fr auto auto; height: 100%; gap: 14px; max-width: 1400px; margin: 0 auto; }
+.hybrid-head { display: flex; align-items: center; justify-content: space-between; }
+.game-pos { font-family: 'Orbitron'; font-weight: 900; font-size:74px; line-height: 1; letter-spacing: 1px; }
+.game-pos.cy { color: var(--cy); text-shadow: 0 0 20px rgba(0,229,255,.55); }
+.game-pos.mg { color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.6); }
+.game-pos .hash { font-size:32px; color: rgba(255,255,255,.35); margin-right: 4px; }
+.game-block-label { font-family: 'Press Start 2P'; font-size:10px; letter-spacing: 3px; padding: 6px 12px; border: 1px solid; }
+.game-block-label.cy { color: var(--cy); border-color: var(--cy); }
+.game-block-label.mg { color: var(--mg); border-color: var(--mg); }
+.hybrid-body { display: grid; grid-template-columns: 38% 1fr; gap: 32px; align-items: center; justify-items: center; min-height: 0; }
+.cart-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; }
+.cart { position: relative; width: min(100%, 380px); aspect-ratio: 5/4; max-height: 100%; background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%); border-radius: 12px 12px 6px 6px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08); }
+.cart::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 78%; height: 14%; background: linear-gradient(180deg, #2a2a2f 0%, #1a1a1f 100%); border-radius: 0 0 6px 6px; box-shadow: inset 0 -1px 0 rgba(0,0,0,.6); z-index: 3; }
+.cart-img-wrap { position: absolute; inset: 14% 10% 10%; border-radius: 4px; overflow: hidden; background: var(--label-1, #2D1B69); box-shadow: inset 0 0 0 3px rgba(255,255,255,.07), inset 0 0 0 6px rgba(0,0,0,.25), 0 4px 14px rgba(0,0,0,.4); }
+.cart-img-wrap img { display: block; width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 2; }
+.cart-img-wrap img.cart-img-bg { object-fit: cover; filter: blur(22px) brightness(0.55) saturate(1.2); transform: scale(1.1); z-index: 1; position: absolute; inset: 0; }
+.cart-fallback { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; background: linear-gradient(135deg, var(--label-1, #2D1B69) 0%, var(--label-2, #4a2a99) 100%); text-align: center; }
+.cart-fallback::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 22%; background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 100%); pointer-events: none; }
+.cart-fallback .title { font-family: 'Orbitron'; font-weight: 900; font-size: clamp(14px, 1.8vw, 22px); line-height: 1.05; color: #fff; letter-spacing: .5px; text-shadow: 0 2px 4px rgba(0,0,0,.5); z-index: 2; }
+.cart-fallback .sub { font-family: 'Press Start 2P'; font-size:9px; letter-spacing: 2px; color: rgba(255,255,255,.7); margin-top: 8px; z-index: 2; }
+.cart-console { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-family: 'Press Start 2P'; font-size:8px; letter-spacing: 3px; color: rgba(255,255,255,.22); z-index: 4; }
+.lb-default { --label-1:#2D1B69; --label-2:#4a2a99; }
+.lb-mario   { --label-1:#a01818; --label-2:#d62828; }
+.lb-zelda   { --label-1:#1a4a1a; --label-2:#2f7a2f; }
+.lb-rpg     { --label-1:#5a1a8a; --label-2:#8a2fc4; }
+.lb-action  { --label-1:#a01818; --label-2:#d62828; }
+.lb-metroid { --label-1:#3a1a6b; --label-2:#5a2a9b; }
+.lb-yoshi   { --label-1:#1a6b3a; --label-2:#2f9b5a; }
+.lb-dkc     { --label-1:#7a3a1a; --label-2:#b85820; }
+.lb-eb      { --label-1:#c2872f; --label-2:#e8b04a; }
+.lb-kart    { --label-1:#c25c00; --label-2:#ff8a1f; }
+.lb-fox     { --label-1:#1a2a4a; --label-2:#3a5fa0; }
+
+.tv-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; container-type: size; }
+.tarrovision { width: min(100cqh, 100cqw); height: min(100cqh, 100cqw); max-width: 100%; max-height: 100%; background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%); border-radius: 22px; padding: 18px 22px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(0,0,0,.4); display: grid; grid-template-rows: auto 1fr auto; gap: 10px; }
+.tv-controls-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px; }
+.tv-led { width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, var(--mg) 60%, #7a0030 100%); box-shadow: 0 0 10px rgba(255,46,136,.8), inset 0 0 2px rgba(0,0,0,.5); }
+.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size:12px; color: var(--ye); letter-spacing: 3px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
+.tv-channel { font-family: 'Share Tech Mono'; font-size:13px; color: var(--cy); letter-spacing: 2px; padding: 3px 9px; border: 1px solid rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
+.tv-screen { position: relative; background: #2a2a2f; border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 2px #3a3a3f, inset 0 0 14px rgba(0,0,0,.6); min-height: 0; }
+.tv-screen-inner { position: relative; width: 100%; height: 100%; background: #000; border-radius: 16px / 8px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 40px rgba(0,0,0,.95); }
+.tv-screen-inner img, .tv-screen-inner video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tv-screen-inner::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 3px); z-index: 3; mix-blend-mode: multiply; }
+.tv-screen-inner::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255,255,255,.08) 0%, transparent 55%), radial-gradient(ellipse 90% 50% at 50% 100%, rgba(0,229,255,.06) 0%, transparent 60%); z-index: 4; }
+.tv-noscreen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, rgba(45,27,105,.6) 0%, #000 80%), repeating-linear-gradient(0deg, #0a0a14 0px, #0a0a14 1px, #14142a 1px, #14142a 2px); color: rgba(255,255,255,.35); text-align: center; padding: 24px; z-index: 2; }
+.tv-noscreen .tv-noscreen-big { font-family: 'Press Start 2P'; font-size:16px; color: var(--mg); letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 12px rgba(255,46,136,.5); }
+.tv-noscreen .tv-noscreen-sub { font-family: 'Share Tech Mono'; font-size:13px; letter-spacing: 2px; color: rgba(0,229,255,.55); }
+.tv-controls-bottom { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; padding: 2px 4px 0; }
+.tv-knob { width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #5a5a60 0%, #2a2a30 60%, #0a0a0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.6); position: relative; }
+.tv-knob::after { content: ""; position: absolute; top: 5px; left: 50%; width: 2px; height: 9px; background: var(--ye); transform-origin: bottom center; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 4px rgba(255,210,63,.6); }
+.tv-knob.cy::after { background: var(--cy); box-shadow: 0 0 4px rgba(0,229,255,.6); transform: translateX(-50%) rotate(-30deg); }
+.tv-speaker { height: 22px; background: repeating-linear-gradient(90deg, #0a0a0e 0px, #0a0a0e 3px, #1a1a1f 3px, #1a1a1f 6px); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6); }
+
+.hybrid-title { text-align: center; display: flex; flex-direction: column; gap: 4px; }
+.game-title { font-family: 'Orbitron'; font-weight: 900; font-size:30px; color: #fff; letter-spacing: 1px; line-height: 1.1; }
+.game-meta { font-family: 'Share Tech Mono'; font-size:14px; color: rgba(255,255,255,.5); letter-spacing: 2px; }
+.game-why { max-width: 1200px; margin: 0 auto; padding: 12px 22px; background: rgba(255,255,255,.04); border-left: 4px solid var(--ye); font-family: 'Share Tech Mono'; font-size:16.7px; line-height: 1.55; color: rgba(255,255,255,.86); text-align: left; }
+.game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size:9px; color: var(--ye); letter-spacing: 2px; margin-bottom: 6px; }
+
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size:10px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size:12px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(255,46,136,.5); }
+.nav-hint { font-family: 'Share Tech Mono'; font-size:13px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size:13px; color: var(--ye); margin: 0 2px; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+<style>
+.game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);letter-spacing:1px;white-space:nowrap;border:3px solid var(--ye);padding:8px 18px;border-radius:6px;background:rgba(255,210,63,.07);align-self:flex-start}
+.notas{position:absolute;top:0;right:0;width:460px;height:100%;z-index:150;display:none;flex-direction:column;gap:10px;padding:26px 22px 30px;overflow-y:auto;background:linear-gradient(90deg,rgba(6,3,15,.55) 0%,rgba(6,3,15,.96) 26%);border-left:2px solid var(--ye);backdrop-filter:blur(2px)}
+body.read-mode .slide.active .notas{display:flex}
+.notas h4{font-family:'Press Start 2P';font-size:9px;color:var(--ye);letter-spacing:2px;margin-top:4px}
+.notas h4:first-child{margin-top:0}
+.notas .n-line{font-family:'Share Tech Mono';font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.92);border-left:3px solid var(--cy);padding:3px 0 3px 11px}
+.notas .n-cue{border-left-color:var(--mg);color:var(--ye)}
+.notas .n-cue b{color:#fff}
+.read-indicator{position:fixed;top:64px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:8px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;box-shadow:0 0 14px rgba(255,210,63,.5)}
+body.read-mode .read-indicator{display:block}
+.game-title{font-size:44px !important}
+.game-meta{font-size:19px !important}
+.game-why{font-size:26px !important;line-height:1.5 !important}
+.game-why .lbl{font-size:13px !important}
+.hybrid-body{display:contents}
+.slide-hybrid{max-width:1750px;grid-template-columns:40% 1fr;grid-template-rows:auto auto auto 1fr;grid-template-areas:"head head" "cart tv" "title tv" "why tv";gap:20px 44px}
+.hybrid-head{grid-area:head}
+.cart-wrap{grid-area:cart;align-self:start}
+.cart{width:min(100%,620px)}
+.tv-wrap{grid-area:tv;align-items:flex-start}
+.tarrovision{width:100%;height:100%;aspect-ratio:auto;max-width:100%;max-height:100%}
+.hybrid-title{grid-area:title;text-align:left;align-items:flex-start}
+.game-why{grid-area:why;max-width:none}
+</style>
+</head>
+<body>
+<div class="read-indicator">● MODO LECTURA (N)</div>
+
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · NES TOP PEORES · GEN 3</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACION 3 · 8 BITS · NINTENDO</div>
+      <div class="ep-title">TOP 10 <span class="vs">NES</span> LOS PEORES</div>
+      <div class="ep-sub">LOS CARTUCHOS POR LOS QUE SOPLAMOS EN VANO</div>
+    </div>
+<aside class="notas"><h4>INTRO · TONO DEL EPISODIO</h4><div class="n-line">Este es un top para REIRNOS. El humor apunta al juego y a lo que paso con el (plazos, licencias, controles, titulos de pelicula pegados a un cartucho), nunca a las personas que lo hicieron ni a quienes lo quieren. Los chistes mas fuertes van en las notas, no en pantalla.</div><div class="n-line">Dinamica: reto de aguantar 30 segundos de cada juego en la TarroVision con reaccion en vivo. Los clips se sacan con TarroDL (seccion de un minuto o mosaico).</div><div class="n-line">Dato bomba de apertura: 6 de los 10 son juegos basados en pelicula, comic, libro o novela (Friday the 13th, Volver al Futuro, X-Men, Ghostbusters, Where's Waldo y Dr. Jekyll), y 3 salieron de la misma marca: LJN.</div><div class="n-cue">Apertura sugerida: 'hoy hacemos el top que el NES nos dijo que no soplaramos. Del malo al peor.' ANTES DE GRABAR: ritmo ~90 seg por juego.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="divider">
+      <div class="pre cy">EL CRITERIO</div>
+      <div class="title cy" style="font-size:78px;">DEL MALO AL PEOR</div>
+      <div class="sub">No existe un Metacritic del NES. Contamos en cuantas listas de peores aparece cada juego (Den of Geek, Interesting Engineering, CBR, Seanbaby y las revistas de la epoca), sumamos la nota cuando hay y la leyenda del cartucho. Solo juegos con licencia Nintendo y venta normal.</div>
+    </div>
+<aside class="notas"><h4>METODOLOGIA (DEFENDIBLE)</h4><div class="n-line">Listas usadas: (A) Den of Geek, 15 peores juegos del NES; (B) Interesting Engineering, 10 peores; (C) CBR, 10 mas injugables del NES; (D) Seanbaby (Electronic Gaming Monthly): sus peores juegos de Nintendo y sus 20 peores de todos los tiempos; (E) la lista de Wikipedia de juegos considerados los peores; y las listas de peores de EGM (1997), Nintendo Power (septiembre de 1997) y GamePro, citadas en la ficha de Friday the 13th. El numero 'EN N LISTAS' en pantalla cuenta estas listas.</div><div class="n-line">Fuera por regla: juegos sin licencia (Action 52, Cheetahman II, los de Color Dreams, etc.) y todo lo que ya esta en el Top Mundial del NES. Casi entran: Tag Team Wrestling, Silver Surfer, Bill &amp; Ted's Excellent Video Game Adventure y The Adventures of Gilligan's Island (una sola lista cada uno).</div><div class="n-line">Desempate: a igual numero de listas manda la leyenda del cartucho. Dr. Jekyll y Friday the 13th empatan en 4; lo dejamos como Friday the 13th en el #1 por fama y por las tres revistas de la epoca.</div><div class="n-cue">Apertura de criterio en 20 segundos. Remate: 'el orden lo decidimos nosotros, mezclando listas y leyenda; si no estan de acuerdo, comenten.'</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">EN 2 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/nes-top-peores/bad-street-brawler.jpg" alt="" aria-hidden="true"><img src="img/nes-top-peores/bad-street-brawler.jpg" alt="BAD STREET BRAWLER box art"></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 10</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">BAD STREET BRAWLER</div><div class="game-meta">NES · 1989 · MATTEL · DEN OF GEEK + SEANBABY (EGM #16)</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO A LA PELEA DE CALLE CON GUANTE INCLUIDO</span>Un beat 'em up pensado para el Power Glove, el guante del futuro de Mattel. Peleas contra pandilleros, gorilas y artistas de circo, y antes de cada etapa te sueltan una frase motivacional. La vas a necesitar.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL OTRO JUEGO DEL GUANTE</h4><div class="n-line">Wikipedia: desarrollado por Beam Software y publicado por Mattel en septiembre de 1989 para el NES; sale de un juego de computador de 1987 (Commodore 64, ZX Spectrum, MS-DOS). Es uno de los dos unicos juegos pensados para el Power Glove. Controlas a Duke Davis, un ex rockero punk experto en artes marciales, por 15 etapas contra pandilleros, gorilas y artistas de circo.</div><div class="n-line">Las listas: Den of Geek (15 peores del NES) lo incluye por estar hecho para el guante con controles casi injugables; y Seanbaby, en Electronic Gaming Monthly, lo puso 16 de sus 20 peores juegos de todos los tiempos.</div><div class="n-line">Equilibrio: la version de computador de 1987 no cayo tan mal: Zzap!64 le dio 80% y la llamo 'extremadamente extraña pero entretenida'. El problema es el port del NES.</div><div class="n-cue">RETO 30 SEG: ganarle a un gorila. CHISTE: 'el guante prometia el futuro; el futuro prometia no jugar esto'. Plantar: 'estamos en el #10, el piso de la lista, y ya hay gorilas.'</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">EN 2 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/nes-top-peores/ghostbusters.jpg" alt="" aria-hidden="true"><img src="img/nes-top-peores/ghostbusters.jpg" alt="GHOSTBUSTERS box art"></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 09</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">GHOSTBUSTERS</div><div class="game-meta">NES · 1988 · ACTIVISION · INTERESTING ENGINEERING + CBR</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL CAZAFANTASMAS CON PLANILLA DE GASTOS</span>Te venden cazar fantasmas y te entregan una planilla: administras plata, compras equipo y manejas un auto rigido por un mapa. El gran final es subir un edificio de escaleras identicas apretando botones.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL PORT QUE PERDIO ANIMACIONES</h4><div class="n-line">Wikipedia: port para el NES publicado por Activision en octubre de 1988 (en Japon salio antes, en Famicom, en 1986) del juego de Commodore 64 de 1984. Edge dijo que los graficos eran 'tan primitivos que cuesta seguir lo que pasa'; la recepcion del port fue negativa y perdio animaciones respecto al original.</div><div class="n-line">Las listas: Interesting Engineering lo pone entre los 10 peores y lo llama 'uno de los peores juegos basados en una licencia'; CBR (10 mas injugables del NES) lo critica por la administracion de recursos tediosa, los menus confusos, el auto rigido y el final: subir un edificio con docenas de escaleras iguales apretando botones.</div><div class="n-line">Ojo: es un port de un juego de computador de 1984. El problema no es la idea, es lo que se perdio al pasarlo al NES.</div><div class="n-cue">RETO 30 SEG: subir las escaleras sin soltar el boton. CHISTE: 'a quien vas a llamar? a nadie: estas ocupado apretando el boton'. Transicion: 'y ahora un clasico de los cazadores de tesoros...'</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">EN 2 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/nes-top-peores/super-pitfall.jpg" alt="" aria-hidden="true"><img src="img/nes-top-peores/super-pitfall.jpg" alt="SUPER PITFALL box art"></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 08</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">SUPER PITFALL</div><div class="game-meta">NES · 1987 · ACTIVISION · DEN OF GEEK + CBR</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL TESORO INVISIBLE</span>Pitfall Harry vuelve, pero los tesoros son invisibles: aparecen solo si saltas justo en el lugar correcto y nadie te dice cual es. Es una busqueda del tesoro donde el mapa dice 'salta y reza'.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL PITFALL QUE NO ES PITFALL</h4><div class="n-line">Wikipedia: desarrollado por Micronics; en Japon lo publico Pony en septiembre de 1986 y en Norteamerica Activision en noviembre de 1987, su primer juego para el NES. Pitfall Harry recupera el diamante Raj en cavernas andinas, rescata a su sobrina Rhonda y al gato Quickclaw. Hay items invisibles que solo salen si saltas en el momento justo, y un puzzle esoterico: hay que saltar sobre un enemigo concreto para teletransportarse.</div><div class="n-line">Las listas: Den of Geek (#3 de sus 15 peores del NES, por lo dificil y los items invisibles) y CBR (#6 de los 10 mas injugables: saltos torpes, retraso en los controles y items que solo aparecen en baldosas sin marcar).</div><div class="n-line">Equilibrio: al salir se elogio la escala de la exploracion; las criticas fueron por los controles 'flotantes'. Y la gente lo compara con el Pitfall del Atari 2600, que sale mejor parado.</div><div class="n-cue">RETO 30 SEG: encontrar UN tesoro sin mirar guia. CHISTE: 'un juego de busqueda del tesoro donde el tesoro ni siquiera quiere que lo encuentren'. Conectar con el Pitfall! del Atari 2600 del Top Mundial.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">EN 2 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/nes-top-peores/dragon-s-lair.jpg" alt="" aria-hidden="true"><img src="img/nes-top-peores/dragon-s-lair.jpg" alt="DRAGON'S LAIR box art"></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 07</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">DRAGON'S LAIR</div><div class="game-meta">NES · 1990 · CSG IMAGESOFT (DEV. MOTIVETIME) · DEN OF GEEK + CBR</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO A LA BARRA DE VIDA DECORATIVA</span>El arcade de dibujos animados que todos querian jugar, convertido en un plataformas donde caminas como si cargaras el castillo. Tiene barra de vida, pero casi todo te mata de un toque. Mean Machines le puso 21%.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · DEL LASERDISC A LA TORTURA</h4><div class="n-line">Wikipedia: version del NES desarrollada por Motivetime (Elite Systems) y publicada por CSG Imagesoft en diciembre de 1990 en Norteamerica. Es un plataformas 2D basado en el arcade de LaserDisc de 1983: misma historia (rescatar a la princesa Daphne de Singe, el dragon), otro juego. Infame por los controles lentos, la progresion criptica y que casi todo mata de un golpe pese a tener barra de vida.</div><div class="n-line">Las listas: Den of Geek (#12) dice que la primera pantalla no tiene una solucion logica; CBR (#7 de los 10 mas injugables) habla del protagonista que se mueve con una lentitud agonizante y de la pantalla inicial que exige precision de pixel.</div><div class="n-line">Notas: Mean Machines 21% ('el peor juego de consola que se ha visto', segun la propia revista), AllGame 1,5 de 5, EGM promedio 4 de 10. Equilibrio: GamePro le dio 18/25 y elogio los graficos aunque advirtio la frustracion. Las versiones japonesa y europea son mas rapidas y con mas enemigos.</div><div class="n-cue">RETO 30 SEG: pasar la primera pantalla. CHISTE: 'el unico juego donde la barra de vida es una sugerencia'. Tambien: 'los dibujos de Don Bluth, los controles de un sofa'.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">EN 2 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/nes-top-peores/deadly-towers.jpg" alt="" aria-hidden="true"><img src="img/nes-top-peores/deadly-towers.jpg" alt="DEADLY TOWERS box art"></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 06</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">DEADLY TOWERS</div><div class="game-meta">NES · 1987 · BRODERBUND (DEV. LENAR/TAMTEX, IREM) · DEN OF GEEK + CBR</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL BEST SELLER ARREPENTIDO</span>Tu principe empieza tan debil que lanza una espada a la vez, y hay enemigos que aguantan 8 golpes. Fue el mas vendido de los 4 juegos con que Broderbund debuto en el NES. O sea: alguien pago por esto.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL MAS VENDIDO QUE NADIE DEFIENDE</h4><div class="n-line">Wikipedia: Mashō en Japon (diciembre de 1986), codesarrollado por Lenar y Tamtex para Irem; Broderbund lo publico en Norteamerica en septiembre de 1987 y fue el mas vendido de sus cuatro juegos de lanzamiento del NES. Es un action RPG: hay que juntar siete campanas magicas venciendo a los jefes de las torres (el titulo en ingles iba a ser Hell's Bells, pero lo rechazaron). Hay 10 mazmorras ocultas: la primera tiene 167 pantallas y la ultima 235.</div><div class="n-line">Por que es infame: el principe Myer parte muy debil (lanza una espada a la vez), algunos enemigos aguantan 8 golpes y hay entradas y portales invisibles. Las listas: Den of Geek (#11) y CBR (#4 de los 10 mas injugables).</div><div class="n-line">Frases historicas: Sean Reiley lo llamo 'el peor juego de Nintendo de la historia' (2001) y J.C. Fletcher (Joystiq, 2007) 'el juego mas frustrante del NES'. Dato curioso: el cartucho japones tenia un LED rojo que se prendia al encender la consola.</div><div class="n-cue">CHISTE: 'el mas vendido de su empresa... el dinero no devuelve las horas'. RETO 30 SEG: llegar a la primera torre sin morir. Gancho: 'y ahora un juego donde el problema no es morir: es encontrar a alguien'.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">EN 3 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/nes-top-peores/where-s-waldo.jpg" alt="" aria-hidden="true"><img src="img/nes-top-peores/where-s-waldo.jpg" alt="WHERE'S WALDO? box art"></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">WHERE'S WALDO?</div><div class="game-meta">NES · 1991 · THQ (DEV. BETHESDA SOFTWORKS) · DEN OF GEEK + CBR + SEANBABY (#12)</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL MUNDO DE PIXELES DONDE NADIE ENCUENTRA A NADIE</span>Buscar a Waldo, pero con los pixeles de un NES: todo se ve borroso y hay cosas con las mismas rayas. Y en los niveles dificiles Waldo cambia de colores. Game Informer le puso 1 de 10.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL MAS PIXELADO</h4><div class="n-line">Wikipedia: desarrollado por Bethesda Softworks y publicado por THQ en julio de 1991 (si, el sello Bethesda que anos despues publico Skyrim). Es un juego de objetos ocultos con una lupa como cursor, 8 niveles, limite de tiempo (16 minutos facil, 11 medio, 7:40 dificil) y 10 segundos menos por cada error. Hay niveles especiales: una cueva a oscuras, un metro-laberinto y uno de emparejar imagenes.</div><div class="n-line">Las listas: Den of Geek (#5), CBR (#9 de los 10 mas injugables) y Seanbaby (#12 de sus peores juegos de Nintendo). Cracked dijo que tenia 'los peores graficos de cualquier juego del NES'.</div><div class="n-line">Notas: Game Informer 1/10 ('un juego para los que les da flojera dar vuelta la pagina'); otros sitios retro lo dejan en 0,5/5. Dato de equilibrio: Nintendo World Report solo lo llama 'una coleccion de pixel art'.</div><div class="n-cue">RETO 30 SEG: encontrar a Waldo en TarroVision; el que lo encuentre primero elige el siguiente castigo. CHISTE: 'por primera vez Waldo es facil de encontrar: esta en la lista de los peores'.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">EN 3 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/nes-top-peores/back-to-the-future-part-ii-iii.jpg" alt="" aria-hidden="true"><img src="img/nes-top-peores/back-to-the-future-part-ii-iii.jpg" alt="BACK TO THE FUTURE PART II & III box art"></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">BACK TO THE FUTURE PART II & III</div><div class="game-meta">NES · 1990 · LJN (DEV. BEAM SOFTWARE) · DEN OF GEEK + INTERESTING ENGINEERING + CBR</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL QUE TE ROBA EL TIEMPO</span>Dos peliculas en un cartucho, tres epocas y ni una pista de que hay que hacer. No tiene claves ni guardado y es larguisimo: un resenista tardo 6 horas solo en dibujar el mapa.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · LJN, LA MARCA QUE SE HIZO FAMOSA</h4><div class="n-line">Wikipedia: desarrollado por Beam Software (los mismos de Bad Street Brawler, #10) y publicado por LJN en septiembre de 1990. Plataformas y aventura en tres epocas (1955, 1985, 2015): juntar combustible y comida, abrir cuartos con llaves, minijuegos de 60 segundos con cronometros, puzzles de objetos y el DeLorean para viajar entre epocas; plantar bellotas hace arboles que sirven de plataforma.</div><div class="n-line">Las listas: Den of Geek (#6), Interesting Engineering (#8: 'repetitivo, con poca conexion a la historia y una musica que drena el alma') y CBR (#10 de los 10 mas injugables). Defecto repetido: sin claves ni guardado; Gamefreaks365 tardo 6 horas solo en mapearlo.</div><div class="n-line">Equilibrio (no cargar la mano): AllGame lo llamo 'un clon decente de Super Mario Bros.' con controles 'razonablemente ajustados'; Nintendo Power le dio 3,22 de 5. Hilo del episodio: LJN aparece 3 veces (este, X-Men #3 y Friday the 13th #1).</div><div class="n-cue">CHISTE: 'es el unico DeLorean que necesita 88 millas por hora... para escapar del cartucho'. Plantar el hilo: 'LJN... acuerdense del nombre, vuelve dos veces mas'.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">EN 3 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/nes-top-peores/the-uncanny-x-men.jpg" alt="" aria-hidden="true"><img src="img/nes-top-peores/the-uncanny-x-men.jpg" alt="THE UNCANNY X-MEN box art"></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">THE UNCANNY X-MEN</div><div class="game-meta">NES · 1989 · LJN · DEN OF GEEK + CBR + SEANBABY (#3)</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO A LA CAJA SORPRESA MUTANTE</span>Seis X-Men jugables y objetos de ayuda que a veces te curan y a veces te explotan, y se ven casi iguales. Seanbaby lo puso tercero entre los peores juegos del NES y AllGame le dio 1 estrella de 5.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL NIVEL SECRETO CON CLAVE EN EL CARTUCHO</h4><div class="n-line">Wikipedia: publicado por LJN en diciembre de 1989. Es un plataformas de accion con seis X-Men jugables (Wolverine, Cyclops, Storm, Colossus, Nightcrawler e Iceman), cada uno con habilidades distintas; 5 misiones principales y un sexto nivel oculto que se activa con un codigo de botones, y parte de la clave viene impresa en la etiqueta del cartucho (hay que descifrar mensajes de las pantallas de fin de nivel para completarla). Se puede jugar de a dos.</div><div class="n-line">Las listas: Den of Geek (#13), CBR (#5 de los 10 mas injugables: mala deteccion de golpes y los items 'trampa' que parecen mejoras pero explotan o quitan vida) y Seanbaby (#3 de sus peores del NES: critica la forma en que se representa a los personajes y la IA del companero). AllGame: 1 estrella, 'un desastre extraño y risible'.</div><div class="n-line">Dato de contexto: fue el penultimo juego bajo la linea 'Enteractive Video Games' de LJN.</div><div class="n-cue">RETO 30 SEG: recoger items a ciegas y ver cuantos son bombas. CHISTE: 'el unico juego donde el botiquin tiene mala intencion'. Plantar: 'LJN, segunda vez... y falta la tercera'.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">EN 4 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/nes-top-peores/dr-jekyll-and-mr-hyde.jpg" alt="" aria-hidden="true"><img src="img/nes-top-peores/dr-jekyll-and-mr-hyde.jpg" alt="DR. JEKYLL AND MR. HYDE box art"></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">DR. JEKYLL AND MR. HYDE</div><div class="game-meta">NES · 1989 · BANDAI (DEV. ADVANCE COMMUNICATION) · DEN OF GEEK + INTERESTING ENGINEERING + CBR + WIKIPEDIA</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL CAMINO A LA BODA MAS PELIGROSO</span>Solo quieres llegar a tu boda, pero te tiran bombas y te atacan los perros, y si te estresas te conviertes en Hyde. Una critica dijo que hace todo perfectamente mal. Aparece en 4 listas.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL LIDER DE LAS LISTAS</h4><div class="n-line">Wikipedia: desarrollado por Advance Communication Company; Toho lo publico en Japon el 8 de abril de 1988 y Bandai en Norteamerica en julio de 1989. Jekyll camina hacia su boda esquivando obstaculos; el dano y el estres lo transforman en Hyde, que pelea contra monstruos en un mundo espejo y demoniaco; matar monstruos baja su ira y lo devuelve a Jekyll.</div><div class="n-line">Las listas: Den of Geek (#9), Interesting Engineering (#1: 'las mecanicas del juego son atroces'), CBR (#2 de los 10 mas injugables: townsfolk que lanzan bombas, perros callejeros) y la lista de Wikipedia de juegos considerados los peores. AllGame lo llama 'en gran parte injugable' y de accion 'extremadamente aburrida'; Eurogamer: 'lo hace todo perfectamente mal'; la revista Famitsu ya lo veia frustrante en su epoca.</div><div class="n-line">Curiosidad: fue el segundo video del Angry Video Game Nerd, y segun Wikipedia el efecto fue el contrario al buscado: el video desperto curiosidad y mucha gente fue a jugarlo.</div><div class="n-cue">RETO 30 SEG: llegar a la iglesia sin transformarte. CHISTE: 'el unico novio que llega a la boda con mas heridas que el que pelea en el ring'. Plantar el #1: 'y el que sigue... lo odiaron hasta los que lo juegan por amor al horror'.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">EN 4 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/nes-top-peores/friday-the-13th.jpg" alt="" aria-hidden="true"><img src="img/nes-top-peores/friday-the-13th.jpg" alt="FRIDAY THE 13TH box art"></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">FRIDAY THE 13TH</div><div class="game-meta">NES · 1989 · LJN (DEV. ATLUS) · DEN OF GEEK + EGM 1997 (#8) + NINTENDO POWER 1997 (#6) + GAMEPRO</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL JASON EN COLORES PASTEL</span>Eliges un monitor, recorres un bosque que parece hecho para perderte, con alarmas y Jason por todos lados. Electronic Gaming Monthly lo puso 8 entre los peores de la historia y Nintendo Power, 6. Y la caja es turquesa y morada.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL MAS FAMOSO (CIERRE)</h4><div class="n-line">Wikipedia: desarrollado por Atlus (si, la misma que anos despues haria Persona) y publicado por LJN en febrero de 1989, solo en Norteamerica. Eliges uno de seis monitores con habilidades distintas y recorres Camp Crystal Lake en 2D: cabañas, cuevas, lagos y bosques. Hay que vencer a Jason tres veces; suenan alarmas con tiempo limite para llegar a el antes de que dañe a los niños y a los monitores. Dentro de las cabañas las peleas con Jason se parecen a Punch-Out!!, y Pamela Voorhees aparece como una cabeza flotante estilo Medusa.</div><div class="n-line">Las listas: Den of Geek (#2 de sus 15 peores del NES, por el mapa desconcertante y los controles), Electronic Gaming Monthly (1997: el octavo peor juego de consola de todos los tiempos), Nintendo Power (septiembre de 1997: el sexto peor juego de la historia) y GamePro (el 10º peor juego basado en una pelicula, por la musica repetitiva y la frustracion).</div><div class="n-line">TWIST FINAL: empata en listas con Dr. Jekyll (4 cada uno); lo dejamos #1 por fama y por el apoyo de las tres revistas de la epoca. Si prefieren al Jekyll como #1, el cambio es de dos lineas. Y otro giro: GamesRadar se rio de la caja 'neon pastel' del juego; en 2013 NECA hizo una figura de Jason con esa paleta turquesa y morada, y en 2017 el juego Friday the 13th: The Game sumo una skin 'Retro Jason'.</div><div class="n-line">CIERRE DEL HILO LJN: Back to the Future II &amp; III (#4), X-Men (#3) y este: tres de los diez salieron de la misma marca.</div><div class="n-cue">REMATE: 'tres de los diez llevan el sello LJN: si ves ese sello, soplale al cartucho y sigue de largo'. Coco: redoble de bateria y pasar al Game Over.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <div class="divider">
+      <div class="pre mg">ANALISIS DEL TOP</div>
+      <div class="title mg" style="font-size:42px;">CUANDO LA LICENCIA PESABA MAS QUE EL JUEGO</div>
+      <div class="sub">Los 10 salieron entre 1987 y 1991. Seis son adaptaciones (peliculas, un comic, un libro infantil y una novela) y tres llevan el sello LJN. Un cartucho con un nombre famoso se vendia solo, y se notaba. Deadly Towers fue el mas vendido de su empresa, y eso tambien cuenta.</div>
+    </div>
+<aside class="notas"><h4>PARA EL CIERRE</h4><div class="n-line">Años: Super Pitfall y Deadly Towers (1987), Ghostbusters (1988), Bad Street Brawler, X-Men, Dr. Jekyll y Friday the 13th (1989), Volver al Futuro II &amp; III y Dragon's Lair (1990) y Where's Waldo? (1991). Dos juegos de Beam Software (Bad Street Brawler y Volver al Futuro) y tres de LJN en la lista.</div><div class="n-line">Hilo que se cierra: LJN (Volver al Futuro #4, X-Men #3, Friday the 13th #1). Matiz importante para no cargar la mano: no todo lo licenciado era malo; el Top Mundial del NES tiene licencias y obras maestras. La idea es que un nombre famoso se vendia solo, y eso incluyo esto.</div><div class="n-line">Matiz extra: en varias recepciones hay defensores (Super Pitfall se elogio por la exploracion, Volver al Futuro por los controles, el Bad Street Brawler de computador tuvo 80% en Zzap!64). Lo malo no siempre es parejo.</div><div class="n-cue">TRANSICION: 'y lo mas loco es que algunos de estos hoy valen mas de lo que costaron... pero eso es el Top Precios.'</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <div class="divider">
+      <div class="pre cy">GAME OVER</div>
+      <div class="title cy" style="font-size:54px;">INSERTA MONEDA PARA CONTINUAR</div>
+      <div class="sub">Coco cierra tocando el tema de Game Over en bateria. ¿Cual fue el peor cartucho del NES que les toco jugar? Cuentanos en los comentarios y cual consola quieren que siga.</div>
+    </div>
+<aside class="notas"><h4>CIERRE FIJO</h4><div class="n-line">Cierre con bateria (episodio largo): Coco toca el tema de Game Over. Aprovechar el redoble para la revelacion del #1 y volver al Game Over al final.</div><div class="n-line">CTA sugerido: 'suscribete y dinos que consola sigue'. No prometer fecha ni consola concreta al aire.</div><div class="n-line">Gancho: preguntar si ellos habrian puesto otro #1 (Dr. Jekyll tambien lo merece).</div><div class="n-cue">LINEA FIJA: 'si te gusto este top de lo peor, dinos cual es la consola que sigue.'</div></aside>  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 14</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR · <kbd id="notasBtn" style="cursor:pointer" title="Mostrar/ocultar notas">N</kbd> NOTAS</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }
+});
+function setRead(on) { document.body.classList.toggle('read-mode', on); }
+if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
+const notasBtn = document.getElementById('notasBtn');
+if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
+const deckEl = document.getElementById('deck');
+deckEl.addEventListener('click', (e) => {
+  if (e.target.closest('.notas, button, a, kbd, input, textarea, select')) return;
+  const w = window.innerWidth;
+  if (e.clientX < w * 0.2) { go(current - 1); }
+  else if (e.clientX > w * 0.8) { go(current + 1); }
+});
+go(0);
+</script>
+
+</body>
+</html>

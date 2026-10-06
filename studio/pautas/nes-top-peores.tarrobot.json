@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "nes-top-peores",
+  "episodio": "Top 10 NES los peores juegos",
+  "creado": "2026-10-06",
+  "actualizado": "2026-10-06",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "nes-top-peores-10",
+      "tema": "Bad Street Brawler",
+      "texto": "Bad Street Brawler, de Mattel, mil novecientos ochenta y nueve. Es un juego de pelea callejera pensado para el Power Glove, el guante que prometía el futuro. Peleas contra pandilleros, gorilas y artistas de circo, y antes de cada etapa te sueltan una frase motivacional. La vas a necesitar. Era uno de los dos únicos juegos hechos para el guante, y el guante tampoco tuvo suerte.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1989,
+      "editor": "Mattel",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Bad Street Brawler! Gorilas, pandilleros y un guante del futuro. Y aun así terminas perdiendo."
+    },
+    {
+      "id": "nes-top-peores-9",
+      "tema": "Ghostbusters",
+      "texto": "Ghostbusters, de Activision, mil novecientos ochenta y ocho. Te venden cazar fantasmas y te entregan una planilla: administras plata, compras equipo y manejas un auto rígido por un mapa. Y el gran final es subir un edificio de escaleras idénticas apretando botones. Es un juego donde el peor fantasma es el aburrimiento.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1988,
+      "editor": "Activision",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Ghostbusters! Prometía cazar fantasmas y trajo una planilla de gastos con auto incluido."
+    },
+    {
+      "id": "nes-top-peores-8",
+      "tema": "Super Pitfall",
+      "texto": "Super Pitfall, de Activision, mil novecientos ochenta y siete. Pitfall Harry vuelve, y ahora los tesoros son invisibles: aparecen solo si saltas justo en el lugar correcto, y nadie te avisa cuál es. Es una búsqueda del tesoro donde el mapa dice: salta y reza. Y fue el primer juego que Activision sacó en el NES.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1987,
+      "editor": "Activision",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Super Pitfall! Los tesoros son invisibles y el mapa dice: salta y reza."
+    },
+    {
+      "id": "nes-top-peores-7",
+      "tema": "Dragon's Lair",
+      "texto": "Dragon's Lair, mil novecientos noventa. El arcade de dibujos animados que todos querían jugar, convertido en un plataformas donde caminas como si cargaras el castillo. Tiene barra de vida, pero casi todo te mata de un solo toque: es decorativa. La revista británica Mean Machines le puso veintiuno por ciento.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1990,
+      "editor": "CSG Imagesoft",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Dragon's Lair! Una barra de vida decorativa: casi todo te mata de un solo toque."
+    },
+    {
+      "id": "nes-top-peores-6",
+      "tema": "Deadly Towers",
+      "texto": "Deadly Towers, mil novecientos ochenta y siete. Tu príncipe empieza tan débil que lanza una espada a la vez, y hay enemigos que aguantan ocho golpes. Para ser justos, fue el más vendido de los cuatro juegos con que Broderbund debutó en el NES. O sea: alguien pagó por esto. Y casi se llama Hell's Bells, campanas del infierno, porque hay que juntar siete campanas.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1987,
+      "editor": "Broderbund",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Deadly Towers! Fue el más vendido de su empresa, y hoy es el meme de lo más frustrante del NES."
+    },
+    {
+      "id": "nes-top-peores-5",
+      "tema": "Where's Waldo?",
+      "texto": "Where's Waldo, de THQ, mil novecientos noventa y uno. Es buscar a Waldo, pero con los píxeles de un NES: todo se ve borroso y hay un montón de cosas con las mismas rayas rojas y blancas. Y en los niveles difíciles, Waldo cambia de colores, porque ya no bastaba con que fuera chico. Game Informer le puso uno de diez.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1991,
+      "editor": "THQ",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Where's Waldo! Game Informer le puso uno de diez. Waldo, ya te encontramos: estás en la lista de los peores."
+    },
+    {
+      "id": "nes-top-peores-4",
+      "tema": "Back to the Future Part II & III",
+      "texto": "Volver al Futuro dos y tres, de LJN, mil novecientos noventa. Dos películas en un cartucho, tres épocas, y cero pistas de qué hay que hacer. No tiene claves ni guardado, y es larguísimo: un reseñista tardó seis horas solo en dibujar el mapa. Marty McFly viaja en el tiempo, pero a ti nadie te devuelve las horas.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1990,
+      "editor": "LJN",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Volver al Futuro dos y tres! Viajas por tres épocas, pero las seis horas de mapa no te las devuelve nadie."
+    },
+    {
+      "id": "nes-top-peores-3",
+      "tema": "The Uncanny X-Men",
+      "texto": "The Uncanny X-Men, de LJN, mil novecientos ochenta y nueve. Eliges entre seis mutantes y recoges ítems que a veces te curan y a veces te explotan, y se ven casi iguales. Es la caja sorpresa del NES: nunca sabes si te regalan vida o una bomba. Seanbaby lo puso tercero en su lista de los peores del NES, y AllGame le dio una estrella de cinco.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1989,
+      "editor": "LJN",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡The Uncanny X-Men! Los ítems a veces te curan y a veces te explotan, y se ven iguales. Caja sorpresa nivel mutante."
+    },
+    {
+      "id": "nes-top-peores-2",
+      "tema": "Dr. Jekyll and Mr. Hyde",
+      "texto": "Dr. Jekyll and Mr. Hyde, de Bandai, mil novecientos ochenta y nueve. Solo quieres llegar a tu boda, y en el camino te tiran bombas y te atacan perros callejeros. Cuando te estresas te conviertes en Hyde y peleas en un mundo espejo lleno de demonios. Una revista dijo que hace todo perfectamente mal. Y se hizo famoso por un video que lo criticaba.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1989,
+      "editor": "Bandai",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Dr. Jekyll and Mr. Hyde! Solo querías llegar a tu boda, y hasta los perros te atacan."
+    },
+    {
+      "id": "nes-top-peores-1",
+      "tema": "Friday the 13th",
+      "texto": "Friday the Thirteenth, de LJN, mil novecientos ochenta y nueve. Eliges a un monitor del campamento y recorres un bosque que parece diseñado para que te pierdas, mientras suenan alarmas y Jason amenaza a los niños. Las peleas con Jason son como un Punch-Out de terror. Electronic Gaming Monthly lo puso octavo entre los peores juegos de consola de la historia, y Nintendo Power, sexto. Y para colmo, Jason sale en colores pastel.",
+      "estado": "talking",
+      "consola": "NES",
+      "ano": 1989,
+      "editor": "LJN",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Friday the Thirteenth! Sexto peor juego de la historia para Nintendo Power, y con Jason en colores pastel."
+    }
+  ]
+}
