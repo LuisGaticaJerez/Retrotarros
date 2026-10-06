@@ -35,13 +35,13 @@
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
 | Reseñas | 38 | 13 | 4 | 21 |
-| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64 y Game Boy) | 31 | 14 | ? | 17 |
+| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube) | 34 | 14 | ? | 20 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
 | RetroNotas | 2 | 0 | 0 | 2 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **89** | **25** | **8** | **56** |
+| **TOTAL** | **92** | **25** | **8** | **59** |
 
 Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
@@ -114,7 +114,8 @@ armado 2026-10-04; pendiente de ok de Luis y Coco sobre el orden — ver
 (tanda 1 de los Top Peores por consola, armados 2026-10-06; cuñas chistosas a pedido de Luis; pendientes de
 ok de Luis y Coco sobre el orden — ver `docs/pautas/pauta-nes-top-peores.md`, `pauta-snes-top-peores.md` y
 `pauta-mega-drive-top-peores.md`); tanda 2 (PS1, N64 y Game Boy) armada 2026-10-06, ver `pauta-ps1-top-peores.md`,
-`pauta-n64-top-peores.md` y `pauta-gameboy-top-peores.md`.
+`pauta-n64-top-peores.md` y `pauta-gameboy-top-peores.md`; tanda 3 (Dreamcast, Saturn y GameCube) armada 2026-10-06, ver `pauta-dreamcast-top-peores.md`,
+`pauta-saturn-top-peores.md` y `pauta-gamecube-top-peores.md` (Saturn relaja la regla NTSC USA con 2 juegos solo Japon, avisado en pantalla).
 Atari 2600 Top Precios y Game Boy Top Mundial + Top Precios salieron de esta lista: ya
 están publicados en el canal (verificado en vivo 2026-09-21/22), el doc los tenía mal
 clasificados como backlog.

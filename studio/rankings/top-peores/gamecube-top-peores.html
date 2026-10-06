@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · GameCube · Top Peores</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root {
+  --mg: #FF2E88; --cy: #00E5FF; --ye: #FFD23F; --pu: #2D1B69;
+  --bo: #F5F0E8; --dk: #06030f; --card-bg: rgba(12, 6, 32, 0.92);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6, 3, 15, 0.97); border-bottom: 2px solid var(--mg); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size:23px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size:14px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size:9px; color: var(--mg); }
+.dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 28px 44px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size:10px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size:13px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size:71px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .vs { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size:21px; color: var(--ye); letter-spacing: 4px; }
+.divider { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.divider .pre { font-family: 'Press Start 2P'; font-size:13px; letter-spacing: 6px; margin-bottom: 24px; }
+.divider .pre.cy { color: var(--cy); } .divider .pre.mg { color: var(--mg); }
+.divider .title { font-family: 'Orbitron'; font-weight: 900; font-size:90px; letter-spacing: 2px; line-height: 1; color: #fff; margin-bottom: 22px; }
+.divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
+.divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.divider .sub { font-family: 'Share Tech Mono'; font-size:21px; color: rgba(255,255,255,.7); letter-spacing: 2px; max-width: 800px; line-height: 1.6; }
+
+/* HIBRIDO */
+.slide-hybrid { display: grid; grid-template-rows: auto 1fr auto auto; height: 100%; gap: 14px; max-width: 1400px; margin: 0 auto; }
+.hybrid-head { display: flex; align-items: center; justify-content: space-between; }
+.game-pos { font-family: 'Orbitron'; font-weight: 900; font-size:74px; line-height: 1; letter-spacing: 1px; }
+.game-pos.cy { color: var(--cy); text-shadow: 0 0 20px rgba(0,229,255,.55); }
+.game-pos.mg { color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.6); }
+.game-pos .hash { font-size:32px; color: rgba(255,255,255,.35); margin-right: 4px; }
+.game-block-label { font-family: 'Press Start 2P'; font-size:10px; letter-spacing: 3px; padding: 6px 12px; border: 1px solid; }
+.game-block-label.cy { color: var(--cy); border-color: var(--cy); }
+.game-block-label.mg { color: var(--mg); border-color: var(--mg); }
+.hybrid-body { display: grid; grid-template-columns: 38% 1fr; gap: 32px; align-items: center; justify-items: center; min-height: 0; }
+.cart-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; }
+.cart { position: relative; width: min(100%, 380px); aspect-ratio: 5/4; max-height: 100%; background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%); border-radius: 12px 12px 6px 6px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08); }
+.cart::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 78%; height: 14%; background: linear-gradient(180deg, #2a2a2f 0%, #1a1a1f 100%); border-radius: 0 0 6px 6px; box-shadow: inset 0 -1px 0 rgba(0,0,0,.6); z-index: 3; }
+.cart-img-wrap { position: absolute; inset: 14% 10% 10%; border-radius: 4px; overflow: hidden; background: var(--label-1, #2D1B69); box-shadow: inset 0 0 0 3px rgba(255,255,255,.07), inset 0 0 0 6px rgba(0,0,0,.25), 0 4px 14px rgba(0,0,0,.4); }
+.cart-img-wrap img { display: block; width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 2; }
+.cart-img-wrap img.cart-img-bg { object-fit: cover; filter: blur(22px) brightness(0.55) saturate(1.2); transform: scale(1.1); z-index: 1; position: absolute; inset: 0; }
+.cart-fallback { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; background: linear-gradient(135deg, var(--label-1, #2D1B69) 0%, var(--label-2, #4a2a99) 100%); text-align: center; }
+.cart-fallback::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 22%; background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 100%); pointer-events: none; }
+.cart-fallback .title { font-family: 'Orbitron'; font-weight: 900; font-size: clamp(14px, 1.8vw, 22px); line-height: 1.05; color: #fff; letter-spacing: .5px; text-shadow: 0 2px 4px rgba(0,0,0,.5); z-index: 2; }
+.cart-fallback .sub { font-family: 'Press Start 2P'; font-size:9px; letter-spacing: 2px; color: rgba(255,255,255,.7); margin-top: 8px; z-index: 2; }
+.cart-console { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-family: 'Press Start 2P'; font-size:8px; letter-spacing: 3px; color: rgba(255,255,255,.22); z-index: 4; }
+.lb-default { --label-1:#2D1B69; --label-2:#4a2a99; }
+.lb-mario   { --label-1:#a01818; --label-2:#d62828; }
+.lb-zelda   { --label-1:#1a4a1a; --label-2:#2f7a2f; }
+.lb-rpg     { --label-1:#5a1a8a; --label-2:#8a2fc4; }
+.lb-action  { --label-1:#a01818; --label-2:#d62828; }
+.lb-metroid { --label-1:#3a1a6b; --label-2:#5a2a9b; }
+.lb-yoshi   { --label-1:#1a6b3a; --label-2:#2f9b5a; }
+.lb-dkc     { --label-1:#7a3a1a; --label-2:#b85820; }
+.lb-eb      { --label-1:#c2872f; --label-2:#e8b04a; }
+.lb-kart    { --label-1:#c25c00; --label-2:#ff8a1f; }
+.lb-fox     { --label-1:#1a2a4a; --label-2:#3a5fa0; }
+
+.tv-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; container-type: size; }
+.tarrovision { width: min(100cqh, 100cqw); height: min(100cqh, 100cqw); max-width: 100%; max-height: 100%; background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%); border-radius: 22px; padding: 18px 22px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(0,0,0,.4); display: grid; grid-template-rows: auto 1fr auto; gap: 10px; }
+.tv-controls-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px; }
+.tv-led { width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, var(--mg) 60%, #7a0030 100%); box-shadow: 0 0 10px rgba(255,46,136,.8), inset 0 0 2px rgba(0,0,0,.5); }
+.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size:12px; color: var(--ye); letter-spacing: 3px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
+.tv-channel { font-family: 'Share Tech Mono'; font-size:13px; color: var(--cy); letter-spacing: 2px; padding: 3px 9px; border: 1px solid rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
+.tv-screen { position: relative; background: #2a2a2f; border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 2px #3a3a3f, inset 0 0 14px rgba(0,0,0,.6); min-height: 0; }
+.tv-screen-inner { position: relative; width: 100%; height: 100%; background: #000; border-radius: 16px / 8px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 40px rgba(0,0,0,.95); }
+.tv-screen-inner img, .tv-screen-inner video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tv-screen-inner::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 3px); z-index: 3; mix-blend-mode: multiply; }
+.tv-screen-inner::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255,255,255,.08) 0%, transparent 55%), radial-gradient(ellipse 90% 50% at 50% 100%, rgba(0,229,255,.06) 0%, transparent 60%); z-index: 4; }
+.tv-noscreen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, rgba(45,27,105,.6) 0%, #000 80%), repeating-linear-gradient(0deg, #0a0a14 0px, #0a0a14 1px, #14142a 1px, #14142a 2px); color: rgba(255,255,255,.35); text-align: center; padding: 24px; z-index: 2; }
+.tv-noscreen .tv-noscreen-big { font-family: 'Press Start 2P'; font-size:16px; color: var(--mg); letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 12px rgba(255,46,136,.5); }
+.tv-noscreen .tv-noscreen-sub { font-family: 'Share Tech Mono'; font-size:13px; letter-spacing: 2px; color: rgba(0,229,255,.55); }
+.tv-controls-bottom { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; padding: 2px 4px 0; }
+.tv-knob { width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #5a5a60 0%, #2a2a30 60%, #0a0a0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.6); position: relative; }
+.tv-knob::after { content: ""; position: absolute; top: 5px; left: 50%; width: 2px; height: 9px; background: var(--ye); transform-origin: bottom center; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 4px rgba(255,210,63,.6); }
+.tv-knob.cy::after { background: var(--cy); box-shadow: 0 0 4px rgba(0,229,255,.6); transform: translateX(-50%) rotate(-30deg); }
+.tv-speaker { height: 22px; background: repeating-linear-gradient(90deg, #0a0a0e 0px, #0a0a0e 3px, #1a1a1f 3px, #1a1a1f 6px); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6); }
+
+.hybrid-title { text-align: center; display: flex; flex-direction: column; gap: 4px; }
+.game-title { font-family: 'Orbitron'; font-weight: 900; font-size:30px; color: #fff; letter-spacing: 1px; line-height: 1.1; }
+.game-meta { font-family: 'Share Tech Mono'; font-size:14px; color: rgba(255,255,255,.5); letter-spacing: 2px; }
+.game-why { max-width: 1200px; margin: 0 auto; padding: 12px 22px; background: rgba(255,255,255,.04); border-left: 4px solid var(--ye); font-family: 'Share Tech Mono'; font-size:16.7px; line-height: 1.55; color: rgba(255,255,255,.86); text-align: left; }
+.game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size:9px; color: var(--ye); letter-spacing: 2px; margin-bottom: 6px; }
+
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size:10px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size:12px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(255,46,136,.5); }
+.nav-hint { font-family: 'Share Tech Mono'; font-size:13px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size:13px; color: var(--ye); margin: 0 2px; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+<style>
+.game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);letter-spacing:1px;white-space:nowrap;border:3px solid var(--ye);padding:8px 18px;border-radius:6px;background:rgba(255,210,63,.07);align-self:flex-start}
+.notas{position:absolute;top:0;right:0;width:460px;height:100%;z-index:150;display:none;flex-direction:column;gap:10px;padding:26px 22px 30px;overflow-y:auto;background:linear-gradient(90deg,rgba(6,3,15,.55) 0%,rgba(6,3,15,.96) 26%);border-left:2px solid var(--ye);backdrop-filter:blur(2px)}
+body.read-mode .slide.active .notas{display:flex}
+.notas h4{font-family:'Press Start 2P';font-size:9px;color:var(--ye);letter-spacing:2px;margin-top:4px}
+.notas h4:first-child{margin-top:0}
+.notas .n-line{font-family:'Share Tech Mono';font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.92);border-left:3px solid var(--cy);padding:3px 0 3px 11px}
+.notas .n-cue{border-left-color:var(--mg);color:var(--ye)}
+.notas .n-cue b{color:#fff}
+.read-indicator{position:fixed;top:64px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:8px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;box-shadow:0 0 14px rgba(255,210,63,.5)}
+body.read-mode .read-indicator{display:block}
+.game-title{font-size:44px !important}
+.game-meta{font-size:19px !important}
+.game-why{font-size:26px !important;line-height:1.5 !important}
+.game-why .lbl{font-size:13px !important}
+.hybrid-body{display:contents}
+.slide-hybrid{max-width:1750px;grid-template-columns:40% 1fr;grid-template-rows:auto auto auto 1fr;grid-template-areas:"head head" "cart tv" "title tv" "why tv";gap:20px 44px}
+.hybrid-head{grid-area:head}
+.cart-wrap{grid-area:cart;align-self:start}
+.cart{width:min(100%,620px)}
+.tv-wrap{grid-area:tv;align-items:flex-start}
+.tarrovision{width:100%;height:100%;aspect-ratio:auto;max-width:100%;max-height:100%}
+.hybrid-title{grid-area:title;text-align:left;align-items:flex-start}
+.game-why{grid-area:why;max-width:none}
+</style>
+</head>
+<body>
+<div class="read-indicator">● MODO LECTURA (N)</div>
+
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESTUDIO · GAMECUBE TOP PEORES · GEN 6</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">GENERACION 6 · 128 BITS · NINTENDO</div>
+      <div class="ep-title">TOP 10 <span class="vs">GAMECUBE</span> LOS PEORES</div>
+      <div class="ep-sub">LA CAJITA MORADA... Y LAS LICENCIAS QUE SE ESCAPARON</div>
+    </div>
+<aside class="notas"><h4>INTRO · TONO DEL EPISODIO</h4><div class="n-line">Este es un top para REIRNOS. El humor apunta al juego y a lo que paso con el (licencias apuradas, camaras que no cooperan, minijuegos olvidables), nunca a las personas que lo hicieron ni a quienes lo quieren. Los chistes mas fuertes van en las notas, no en pantalla.</div><div class="n-line">Dinamica: reto de aguantar 30 segundos de cada juego en la TarroVision con reaccion en vivo. Los clips se sacan con TarroDL (seccion de un minuto o mosaico).</div><div class="n-line">Datos bomba de apertura: OCHO de los diez usan una licencia (peliculas, comics, TV y Nintendo), el #1 es el de puntaje mas bajo de toda la consola, y Aquaman tiene fama de 'Superman 64 submarino' (callback al #1 del Top Peores de N64).</div><div class="n-cue">Apertura sugerida: 'el GameCube tiene Wind Waker, Metroid Prime y Resident Evil 4... y tambien tiene esto. Del malo al peor.' ANTES DE GRABAR: ritmo ~90 seg por juego.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="divider">
+      <div class="pre cy">EL CRITERIO</div>
+      <div class="title cy" style="font-size:78px;">DEL MALO AL PEOR</div>
+      <div class="sub">Contamos en cuantas listas de peores aparece cada juego (TheGamer, WatchMojo, Cultured Vultures, 8bitpickle y GamesRadar). Desempatamos con las notas de la prensa, y a todos, la leyenda del disco. Dejamos afuera lo que ya esta en nuestro Top Mundial.</div>
+    </div>
+<aside class="notas"><h4>METODOLOGIA (DEFENDIBLE)</h4><div class="n-line">Listas usadas: (A) TheGamer, 15 peores juegos de GameCube (cuenta de 15 a 1; solo pude leer los puestos 15 al 6, asi que los conteos de TheGamer son un MINIMO); (B) WatchMojo, 'Worst GameCube Games' (diez titulos); (C) Cultured Vultures, 15 peores (cuenta de 15 a 1; #1 es Spyro: Enter the Dragonfly); (D) 8bitpickle, 15 peores (cuenta de 1 a 15; #15 es Charlie's Angels); (E) GamesRadar, 'los peores juegos jamas hechos' (Charlie's Angels 50º).</div><div class="n-line">Cuenta: Charlie's Angels y Monsters Inc. Scream Arena tienen 4 listas cada uno (desempate por la leyenda: el Metacritic 23 y GameRankings 24%, el mas bajo de la consola, de Charlie's Angels); Batman: Dark Tomorrow, Aquaman y Universal Studios Theme Parks Adventure, 3; el resto, 2. Los numeros de puesto dentro de cada lista no se citan en pantalla.</div><div class="n-line">Fuera por regla: todo lo del Top Mundial de GameCube; los que casi entran: Nickelodeon Party Blast (IGN 1,1, solo en TheGamer), Spyro: Enter the Dragonfly (el peor segun Cultured Vultures), Finding Nemo, Bad Boys: Miami Takedown, Shrek Super Party, Catwoman. WatchMojo tambien tiene una pagina de sugerencias del mismo tema; no la cuento.</div><div class="n-cue">Apertura de criterio en 20 segundos. Remate: 'el orden lo decidimos nosotros, mezclando listas, notas y leyenda; si no estan de acuerdo, comenten.'</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">03</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">EN 2 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-peores/pokemon-channel.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-peores/pokemon-channel.jpg" alt="POKEMON CHANNEL box art"></div>
+          <div class="cart-console">GameCube</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 10</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">POKEMON CHANNEL</div><div class="game-meta">GAMECUBE · 2003 · NINTENDO (DEV. AMBRELLA) · WATCHMOJO + CULTURED VULTURES · METACRITIC 55</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL JUEGO DONDE GANAS... VIENDO TELE</span>Una mascota virtual donde ves la tele junto a Pikachu y no mucho mas. GameSpot dijo que el juego es debil; GameSpy le puso 1 de 5. Cultured Vultures lo llama de las mascotas virtuales mas caras y superficiales. En Japon, Famitsu: 31 de 40.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · LA TELE CON PIKACHU</h4><div class="n-line">Wikipedia: desarrollado por Ambrella y publicado por Nintendo (Norteamerica, 1 de diciembre de 2003). Con una vista en primera persona, ves programas de television con Pikachu en la red de television del Profesor Oak; hay cartas coleccionables y una consola Pokemon Mini virtual para mas actividades.</div><div class="n-line">Notas: Metacritic 55/100; GameSpot 5,4/10 (Ricardo Torres: la jugabilidad es 'debil' por 'el truco de tener que ver television de forma virtual'); IGN 5/10; GameSpy 1/5; Game Informer 6,5/10; 1UP C+; GamePro 3/5; Nintendo Power 7,2/10; Famitsu 31/40 (contraste: en Japon gusto bastante).</div><div class="n-line">Las listas: WatchMojo (lo describe como un 'juego' de ver tele con muy poca jugabilidad) y Cultured Vultures ('uno de los simuladores de mascota virtual mas caros y superficiales jamas hechos'). Matiz: es un juego para publico infantil y gustos distintos; la risa va al concepto, no a quien lo disfruta.</div><div class="n-cue">RETO 30 SEG: ver un programa con Pikachu sin cambiar de canal. CHISTE: 'es el unico juego donde el control remoto... no sirve para nada, porque tampoco hay otra cosa que hacer'. Tono: cariñoso, abre el top suave.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">04</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">EN 2 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-peores/mary-kate-and-ashley-sweet-16-licensed-to-drive.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-peores/mary-kate-and-ashley-sweet-16-licensed-to-drive.jpg" alt="MARY-KATE AND ASHLEY: SWEET 16 - LICENSED TO DRIVE box art"></div>
+          <div class="cart-console">GameCube</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 09</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">MARY-KATE AND ASHLEY: SWEET 16 - LICENSED TO DRIVE</div><div class="game-meta">GAMECUBE · 2002 · ACCLAIM (DEV. N-SPACE) · CULTURED VULTURES + 8BITPICKLE · METACRITIC 49</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL MARIO PARTY SIN FIESTA</span>Un juego de mesa con minijuegos y la licencia de las gemelas Olsen. IGN lo llamo un claro clon de Mario Party con la licencia pegada encima. Cultured Vultures y 8bitpickle lo ponen entre los peores: minijuegos mal explicados y olvidables.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL MARIO PARTY SIN MARIO</h4><div class="n-line">Wikipedia: desarrollado por n-Space y publicado por Acclaim bajo el sello Club Acclaim (Norteamerica, octubre de 2002). Juego de mesa por turnos para cuatro personajes: se avanza por casillas, se juntan amigos y monedas, y despues de cada vuelta hay minijuegos; los ganadores avanzan y los perdedores retroceden.</div><div class="n-line">Notas: Metacritic 49/100; IGN 5/10 ('un claro clon de Mario Party con la licencia de las gemelas Olsen pegada encima'); GameRankings 55,75%; Nintendo Power 14,5/20 ('apropiado para jugadores jovenes y mayores', pero 'sin la personalidad carismatica de Mary-Kate y Ashley').</div><div class="n-line">Las listas: Cultured Vultures ('minijuegos mal explicados, una combinacion asombrosa de lo involuntariamente monstruoso con baja calidad de produccion') y 8bitpickle ('un clon lento de Mario Party con minijuegos olvidables'). Hilo ACCLAIM: el sello vuelve, esta vez en GameCube; antes, 5 de los 10 del Dreamcast y 4 del Saturn.</div><div class="n-cue">RETO 30 SEG: ganar un minijuego sin entender las reglas. CHISTE: 'el unico Mario Party donde el primer premio es olvidarlo'. Plantar: 'Acclaim... otra vez'.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">05</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">EN 2 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-peores/mc-groovz-dance-craze.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-peores/mc-groovz-dance-craze.jpg" alt="MC GROOVZ DANCE CRAZE box art"></div>
+          <div class="cart-console">GameCube</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 08</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">MC GROOVZ DANCE CRAZE</div><div class="game-meta">GAMECUBE · 2004 · MAD CATZ · THEGAMER + WATCHMOJO · METACRITIC: GENERALMENTE DESFAVORABLE</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL BAILE QUE NO SIGUE LA MUSICA</span>Un juego de baile con tapete incluido y modo para contar calorias. IGN dijo que es jugable, pero no divertido, y que los pasos no coinciden con la musica. WatchMojo dice que el timing casi nunca funciona.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL TAPETE QUE NO SABIA BAILAR</h4><div class="n-line">Wikipedia: desarrollado y publicado por Mad Catz (Norteamerica, 22 de noviembre de 2004). Dos modos principales: Scroll (pisar cuatro flechas direccionales a medida que se acercan) y Spin (cuatro direcciones mas); tambien Dance Workout (cuenta las calorias), Dance Together (cooperativo) y Dance Faceoff (competitivo). Trae el tapete Beat Pad incluido.</div><div class="n-line">Notas: Metacritic lo marca como 'criticas generalmente desfavorables'; IGN: 'jugable, pero no divertido' y 'el trabajo de pies no coincide con la musica'; GameSpot: el modo de entrenamiento 'puede contar calorias' pero no se diferencia de la jugabilidad normal.</div><div class="n-line">Las listas: TheGamer (presentacion sosa, sin el atractivo visual de Dance Dance Revolution, con costos ocultos por los accesorios) y WatchMojo ('el timing del ritmo casi nunca funciona').</div><div class="n-cue">RETO 30 SEG: bailar un tema entero sin que el juego se desincronice. CHISTE: 'es el unico tapete donde la musica baila sola y nosotros... bueno, tambien'. Tono: reirnos de la mecanica, no de quien baila.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">06</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">EN 2 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-peores/charlie-and-the-chocolate-factory.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-peores/charlie-and-the-chocolate-factory.jpg" alt="CHARLIE AND THE CHOCOLATE FACTORY box art"></div>
+          <div class="cart-console">GameCube</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 07</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">CHARLIE AND THE CHOCOLATE FACTORY</div><div class="game-meta">GAMECUBE · 2005 · 2K GAMES (DEV. HIGH VOLTAGE SOFTWARE) · CULTURED VULTURES + 8BITPICKLE · METACRITIC 39</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO A LA FABRICA DONDE LO UNICO DULCE ES LA MUSICA</span>Mandas a los Oompa Loompas a trabajar en la fabrica de Wonka. Nintendo Power le puso 2,5 de 10 por una camara torpe, y Cultured Vultures habla de graficos con errores y controles que enloquecen. Eso si: IGN elogio la banda sonora.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · LA FABRICA DE LOS CONTROLES AMARGOS</h4><div class="n-line">Wikipedia: desarrollado por High Voltage Software y publicado por 2K Games (Norteamerica, 22 de julio de 2005). Ayudas a Charlie a conseguir el Boleto Dorado juntando dinero para una barra de Wonka y luego, en la fabrica, diriges a Oompa Loompas especializados (cosechar, soldar...) para rescatar a los otros niños y reparar la fabrica.</div><div class="n-line">Notas: Metacritic 39/100; IGN 4,5/10 (elogio la musica: 'una banda sonora realmente buena'); GameSpot 4/10; Nintendo Power 2,5/10 ('control de camara torpe'); USA Today: 'bellamente creado', pero 'mas frustracion que disfrute'.</div><div class="n-line">Las listas: Cultured Vultures ('visuales con fallas, actuacion de voz mediocre y controles que enloquecen') y 8bitpickle ('un juego de pelicula con controles pobres, camara problematica y una campaña corta'). Dato: salio al mismo tiempo que la pelicula de 2005.</div><div class="n-cue">RETO 30 SEG: mandar a un Oompa Loompa a soldar algo sin que la camara se pierda. CHISTE: 'la unica fabrica de chocolate donde el control es mas amargo que el cacao puro'.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">07</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">EN 2 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-peores/trigger-man.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-peores/trigger-man.jpg" alt="TRIGGER MAN box art"></div>
+          <div class="cart-console">GameCube</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 06</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">TRIGGER MAN</div><div class="game-meta">GAMECUBE · 2004 · CRAVE (DEV. WNT GAMES) · CULTURED VULTURES + 8BITPICKLE · METACRITIC 35 · IGN 2</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO A LA OFERTA QUE TODOS RECHAZARON</span>Un asesino a sueldo de la mafia que debe robar diamantes de la boveda de un casino. IGN le puso 2 de 10 y Nintendo Power, 1,3 de 5. Cultured Vultures dice que imita a El Padrino y Los Soprano sin su profundidad.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL PADRINO DE BAJO PRESUPUESTO</h4><div class="n-line">Wikipedia: desarrollado por WNT Games y publicado por Crave Entertainment (Norteamerica, 28 de septiembre de 2004). Shooter en tercera persona: un asesino sin nombre que trabaja para el jefe mafioso Don Coladangelo debe robar diamantes de la boveda de un casino para debilitar financieramente a una familia rival y evitar una guerra mafiosa; mezcla sigilo, combate y objetivos.</div><div class="n-line">Notas (GameCube): Metacritic 35/100 ('criticas desfavorables'); IGN 2/10; Nintendo Power 1,3/5.</div><div class="n-line">Las listas: Cultured Vultures ('mecanicas derivadas, graficos feos y controles malos'; imita a El Padrino y Los Soprano sin su profundidad) y 8bitpickle ('shooter en tercera persona torpe, con movimiento lento y dificultad desequilibrada').</div><div class="n-cue">RETO 30 SEG: apuntar a un enemigo sin que el movimiento lento ayude. CHISTE: 'una oferta que no podias rechazar... pero que los criticos rechazaron todas juntas'.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">08</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">EN 3 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-peores/universal-studios-theme-parks-adventure.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-peores/universal-studios-theme-parks-adventure.jpg" alt="UNIVERSAL STUDIOS THEME PARKS ADVENTURE box art"></div>
+          <div class="cart-console">GameCube</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">UNIVERSAL STUDIOS THEME PARKS ADVENTURE</div><div class="game-meta">GAMECUBE · 2001 · KEMCO (DEV. NAI'A DIGITAL WORKS) · THEGAMER + CULTURED VULTURES + 8BITPICKLE · IGN 3</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL PARQUE DONDE LO DIVERTIDO ES RECOGER BASURA</span>Recorres Universal Studios juntando sellos en minijuegos, y para subir a un juego debes juntar basura. IGN lo llamo un lio de metas desordenadas, navegacion torpe y destinos aburridos. Y hay problemas de framerate de los peores de la consola.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL PARQUE DE LA BASURA</h4><div class="n-line">Wikipedia: desarrollado por Nai'a Digital Works y publicado por Kemco (Norteamerica, 18 de diciembre de 2001). Exploras Universal Studios Japan juntando sellos con minijuegos basados en atracciones reales; para subir a las atracciones juntas basura y te encuentras con personajes disfrazados, y luego gastas los puntos en mercancia. Camaras fijas y fondos pre-renderizados; atracciones como Volver al Futuro, Tiburon y Jurassic Park.</div><div class="n-line">Notas: Metacritic 39/100; GameRankings 34,47%; IGN 3/10 ('un lio de metas desordenadas, navegacion torpe y destinos aburridos'); GameSpot 3,5/10 ('demasiado frustrante y confuso para que los niños se diviertan'); Game Informer 4/10; EGM 4,5/10.</div><div class="n-line">Las listas: TheGamer ('tareas tediosas como recoger basura y la falta de personalizacion de personajes'), Cultured Vultures ('algunos de los peores problemas de framerate de la historia del GameCube') y 8bitpickle ('simulador de caminar sin rumbo, con atracciones aburridas y paredes invisibles'). Hilo KEMCO: tambien publico Batman: Dark Tomorrow (#3).</div><div class="n-cue">RETO 30 SEG: juntar basura para ganarte el derecho de subir a un juego. CHISTE: 'el unico parque de diversiones donde el pase de entrada es una bolsa de basura'.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">09</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">EN 3 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-peores/aquaman-battle-for-atlantis.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-peores/aquaman-battle-for-atlantis.jpg" alt="AQUAMAN: BATTLE FOR ATLANTIS box art"></div>
+          <div class="cart-console">GameCube</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">AQUAMAN: BATTLE FOR ATLANTIS</div><div class="game-meta">GAMECUBE · 2003 · TDK MEDIACTIVE (DEV. LUCKY CHICKEN GAMES) · THEGAMER + CULTURED VULTURES + 8BITPICKLE · METACRITIC 27</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL SUPERMAN 64 SUBMARINO</span>Un heroe que nada, pelea y maneja submarinos. TheGamer lo compara con Superman 64, con mala IA y misiones de submarino que no enganchan. Metacritic: 27. GameSpot, 2,3. Game Informer, 2 de 10.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL SUPERMAN 64 SUBMARINO</h4><div class="n-line">Wikipedia: desarrollado por Lucky Chicken Games y publicado por TDK Mediactive (solo Norteamerica, 30 de julio de 2003; GameCube y Xbox). Niveles submarinos en que se nada y se pelea con punos, patadas y llaves, mas secuencias en que se pilotan submarinos contra naves enemigas.</div><div class="n-line">Notas (GameCube): Metacritic 27/100 ('criticas generalmente desfavorables'; en Xbox, 26); Game Informer 2/10; GameSpot 2,3/10; IGN 3/10; Nintendo Power 1,6/5.</div><div class="n-line">Las listas: TheGamer ('parecido a Superman 64: IA enemiga pobre y misiones de submarino que no atrapan'; callback: Superman 64 es el #1 del Top Peores de N64), Cultured Vultures ('combate frustrante y a veces incomprensible, lentitud y camaras que estorban') y 8bitpickle ('pelea repetitiva y navegacion submarina tediosa'). Dato curioso: salio el 30 de julio de 2003, tres semanas despues de Charlie's Angels (#1).</div><div class="n-cue">RETO 30 SEG: nadar con la camara tapando todo. CHISTE: 'es el unico superheroe cuyo mayor poder... es no ahogarse. Y ni eso'. Mencionar el callback al Superman 64 del Top N64.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">10</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">EN 3 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-peores/batman-dark-tomorrow.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-peores/batman-dark-tomorrow.jpg" alt="BATMAN: DARK TOMORROW box art"></div>
+          <div class="cart-console">GameCube</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">BATMAN: DARK TOMORROW</div><div class="game-meta">GAMECUBE · 2003 · KEMCO · THEGAMER + CULTURED VULTURES + 8BITPICKLE · METACRITIC 29 · GAME INFORMER 0,75</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL MURCIELAGO QUE ESPERO CUATRO AÑOS EN LA CUEVA</span>Anunciado en el E3 de 2001 como un mundo abierto, tardo cuatro años y llego como un juego lineal. Game Informer le puso 0,75 de 10 y lo llamo incomprensible y lleno de errores. Metacritic: 29. Eso si: la historia y la musica recibieron elogios.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · CUATRO AÑOS EN LA CUEVA</h4><div class="n-line">Wikipedia: desarrollado y publicado por Kemco (Norteamerica, 18 de marzo de 2003; GameCube y Xbox; la version de PlayStation 2 se cancelo). Anunciado en el E3 de 2001 como exclusivo de GameCube con ambiciones de mundo abierto al estilo Spider-Man 2, se reorientó a una aventura lineal de sigilo; el desarrollo duro cuatro años con varios retrasos. Guion de Scott Peterson y Kenji Terada; musica con la Royal Philharmonic Orchestra. Batman usa batarangs y gancho, esposa a los enemigos en vez de matarlos, hay checkpoints y varios finales segun lo que hagas.</div><div class="n-line">Notas (GameCube): Metacritic 29/100; Game Informer 0,75/10 ('incomprensible y lleno de errores'); IGN 3,5/10; Nintendo Power 1,9/5; GameSpot 2,8/10. Se elogiaron la historia y las escenas; se criticaron los controles, las misiones y la camara.</div><div class="n-line">Las listas: TheGamer ('malos controles, camaras incomodas y sin guia en el juego para lograr el final verdadero'), Cultured Vultures ('promesa de mundo abierto arruinada por controles terribles y muchos errores', IA 'ridiculamente simple') y 8bitpickle ('combate horrible y controles pobres sobre los tejados'). Hilo KEMCO y callback: Batman Forever es el #7 del Top Peores de Mega Drive.</div><div class="n-cue">RETO 30 SEG: usar el gancho para llegar a un tejado sin que los controles se opongan. CHISTE: 'cuatro años de desarrollo... y el murcielago salio de la cueva, vio el resultado, y decidio quedarse adentro'. Hilo: Batman Forever, Mega Drive.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">11</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">EN 4 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-peores/monsters-inc-scream-arena.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-peores/monsters-inc-scream-arena.jpg" alt="MONSTERS, INC.: SCREAM ARENA box art"></div>
+          <div class="cart-console">GameCube</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">MONSTERS, INC.: SCREAM ARENA</div><div class="game-meta">GAMECUBE · 2002 · THQ (DEV. RADICAL ENTERTAINMENT) · THEGAMER + WATCHMOJO + CULTURED VULTURES + 8BITPICKLE · IGN 2,5</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO A LA PELOTA DE RISA QUE NO DIO RISA</span>Dodgeball con los personajes de Pixar y solo siete arenas. IGN dijo que es basico dodgeball, como el que jugabas en el patio del colegio. Game Informer: la falta de variedad apenas lo califica como juego. Aparece en 4 listas de peores.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL PATIO DE COLEGIO DE PIXAR</h4><div class="n-line">Wikipedia: desarrollado por Radical Entertainment y publicado por THQ (Norteamerica, 19 de septiembre de 2002). Partidos de dodgeball de uno a cuatro jugadores: se lanzan 'bolas de risa' de distintas propiedades para sacar a los rivales y llenar los frascos de risa. Segun TheGamer, el contenido es escaso: solo siete arenas, con personajes limitados al inicio.</div><div class="n-line">Notas: Metacritic 39/100; IGN 2,5/10 ('nada mas que dodgeball basico, del que jugabas en el patio del colegio'; elogio la banda sonora, 'espléndida', pero la jugabilidad 'aburrida hasta lo risible'); Game Informer 5/10 ('replica maravillosamente el encanto de la pelicula, pero la falta de variedad apenas lo califica siquiera como juego'); Nintendo Power 3,2/5; Jeuxvideo.com 10/20.</div><div class="n-line">Las listas (4): TheGamer, WatchMojo, Cultured Vultures ('ejecucion perezosa y graficos horribles') y 8bitpickle ('coleccion de minijuegos rigida, hecha para ganar dinero rapido'). Es el que mas listas junta junto a Charlie's Angels (#1). Matiz: es un juego para ninos y el humor va a la ejecucion, no a la licencia.</div><div class="n-cue">RETO 30 SEG: ganar una ronda de dodgeball sin que el juego te diga como. CHISTE: 'la pelota de risa es la unica cosa del juego que si funciona... porque da pena'. Plantar: 'el #1 empata en listas con este'.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">12</span>
+    <div class="slide-hybrid">
+      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">EN 4 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-peores/charlie-s-angels.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-peores/charlie-s-angels.jpg" alt="CHARLIE'S ANGELS box art"></div>
+          <div class="cart-console">GameCube</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">CHARLIE'S ANGELS</div><div class="game-meta">GAMECUBE · 2003 · UBI SOFT (DEV. NEKO ENTERTAINMENT) · THEGAMER + CULTURED VULTURES + 8BITPICKLE + GAMESRADAR · METACRITIC 23</div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL PEOR PUNTAJE DE LA HISTORIA DE LA CONSOLA</span>Un beat 'em up con las tres angeles y una camara que no coopera. Metacritic: 23. GameRankings: 24%, el mas bajo de todos los juegos de GameCube. GamesRadar lo puso entre los 50 peores de la historia y dijo que fue peor que la pelicula.</div>
+    </div>
+<aside class="notas"><h4>DATO EXTRA · EL MAS FAMOSO (CIERRE)</h4><div class="n-line">Wikipedia: desarrollado por Neko Entertainment y publicado por Ubi Soft (Norteamerica, 8 de julio de 2003). Beat 'em up: peleas contra grupos de enemigos con puños, patadas y combinaciones con armas; avanzas al derrotar a todos los enemigos de cada zona; se puede cambiar entre las tres Angeles solo fuera del combate (TheGamer lo critica como un combate desequilibrado).</div><div class="n-line">Notas: Metacritic 23/100; GameRankings 24% (segun Guinness World Records, al 6 de marzo de 2016 tenia 23,74% con 23 reseñas, el mas bajo de cualquier videojuego, de cualquier genero; Wikipedia lo describe como el mas bajo de GameRankings entre los juegos de GameCube). GamesRadar lo ubico 50º en 'los peores juegos jamas hechos' ('incluso peor que la pelicula en que esta basado').</div><div class="n-line">Las listas (4): TheGamer ('combate desequilibrado y una estetica incomoda'), Cultured Vultures ('un brawler roto, ahogado en errores, con una camara agresivamente poco cooperativa y mala deteccion de golpes'), 8bitpickle ('probablemente el juego mas feo del GameCube') y GamesRadar (peores de la historia).</div><div class="n-line">Cierre del hilo: 8 de los 10 usan una licencia (peliculas, comics, TV, Nintendo). Y Charlie's Angels (8 de julio) y Aquaman (30 de julio) salieron con tres semanas de diferencia en 2003.</div><div class="n-cue">REMATE: 'tres angeles, cuatro listas, veintitres en Metacritic y ni una sola oportunidad de que la camara coopere'. Coco: redoble de bateria y pasar al Game Over.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <div class="divider">
+      <div class="pre mg">ANALISIS DEL TOP</div>
+      <div class="title mg" style="font-size:54px;">OCHO DE DIEZ TIENEN LICENCIA</div>
+      <div class="sub">Ocho de los diez usan una licencia (peliculas, comics, TV y Nintendo), casi todos salieron entre 2002 y 2004, y Kemco publico dos (Batman: Dark Tomorrow y Universal Studios). Mientras el GameCube tenia obras maestras, las licencias apuradas se colaron a la fiesta.</div>
+    </div>
+<aside class="notas"><h4>PARA EL CIERRE</h4><div class="n-line">Años: Universal Studios (2001); Monsters Inc. Scream Arena y Mary-Kate and Ashley (2002); Batman: Dark Tomorrow, Aquaman, Charlie's Angels y Pokemon Channel (2003); Trigger Man y MC Groovz (2004); Charlie and the Chocolate Factory (2005). Licencias: Pokemon, Mary-Kate and Ashley, Charlie y la fabrica de chocolate, Universal, Aquaman, Batman, Monsters Inc. y Charlie's Angels (8 de 10). Sin licencia: MC Groovz y Trigger Man.</div><div class="n-line">Hilos que se cierran: (1) licencias, 8 de 10; (2) KEMCO, con Universal Studios (#5) y Batman: Dark Tomorrow (#3); (3) callbacks: Aquaman = 'Superman 64 submarino' (#1 del Top Peores de N64), Batman: Dark Tomorrow vs Batman Forever (#7 del Mega Drive), Acclaim con Mary-Kate and Ashley (#9). Matiz importante: el GameCube tiene una de las mejores bibliotecas de la historia (el Top Mundial lo prueba) y estos juegos son la excepcion.</div><div class="n-line">Matiz extra: varios tienen defensores o puntos buenos: la musica de Charlie and the Chocolate Factory, la historia y la orquesta de Batman: Dark Tomorrow, y Pokemon Channel fue un exito en Japon (Famitsu 31/40).</div><div class="n-cue">TRANSICION: 'y varios de estos hoy valen mas de lo que costaron... pero eso es el Top Precios.'</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <div class="divider">
+      <div class="pre cy">GAME OVER</div>
+      <div class="title cy" style="font-size:54px;">INSERTA MONEDA PARA CONTINUAR</div>
+      <div class="sub">Coco cierra tocando el tema de Game Over en bateria. ¿Cual fue el peor juego de GameCube que les toco jugar? Cuentanos en los comentarios y cual consola quieren que siga.</div>
+    </div>
+<aside class="notas"><h4>CIERRE FIJO</h4><div class="n-line">Cierre con bateria (episodio largo): Coco toca el tema de Game Over. Aprovechar el redoble para la revelacion del #1 y volver al Game Over al final.</div><div class="n-line">CTA sugerido: 'suscribete y dinos que consola sigue'. No prometer fecha ni consola concreta al aire.</div><div class="n-line">Gancho: 'Charlie's Angels tiene el puntaje mas bajo del GameCube... ¿cual otro lo habria superado?'</div><div class="n-cue">LINEA FIJA: 'si te gusto este top de lo peor, dinos cual es la consola que sigue.'</div></aside>  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 14</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR · <kbd id="notasBtn" style="cursor:pointer" title="Mostrar/ocultar notas">N</kbd> NOTAS</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }
+});
+function setRead(on) { document.body.classList.toggle('read-mode', on); }
+if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
+const notasBtn = document.getElementById('notasBtn');
+if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
+const deckEl = document.getElementById('deck');
+deckEl.addEventListener('click', (e) => {
+  if (e.target.closest('.notas, button, a, kbd, input, textarea, select')) return;
+  const w = window.innerWidth;
+  if (e.clientX < w * 0.2) { go(current - 1); }
+  else if (e.clientX > w * 0.8) { go(current + 1); }
+});
+go(0);
+</script>
+
+</body>
+</html>

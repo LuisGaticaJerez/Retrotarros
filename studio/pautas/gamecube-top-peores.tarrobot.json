@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "gamecube-top-peores",
+  "episodio": "Top 10 GameCube los peores juegos",
+  "creado": "2026-10-06",
+  "actualizado": "2026-10-06",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "gamecube-top-peores-10",
+      "tema": "Pokémon Channel",
+      "texto": "Pokémon Channel, de Nintendo, dos mil tres. Una mascota virtual donde ves la tele junto a Pikachu y no mucho más. GameSpot dijo que el juego es débil, GameSpy le puso uno de cinco, y Cultured Vultures lo llama una de las mascotas virtuales más caras y superficiales jamás hechas. WatchMojo dice que logra que ver tele sea aburrido. Pero ojo: en Japón, Famitsu le puso treinta y uno sobre cuarenta. Es el único juego donde ganas, sentado, viendo la tele... y Pikachu también.",
+      "estado": "talking",
+      "consola": "GameCube",
+      "ano": 2003,
+      "editor": "Nintendo",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Pokémon Channel! Es un juego donde ves la tele con Pikachu. GameSpy le puso uno de cinco, pero en Japón sacó treinta y uno sobre cuarenta."
+    },
+    {
+      "id": "gamecube-top-peores-9",
+      "tema": "Mary-Kate and Ashley: Sweet 16 - Licensed to Drive",
+      "texto": "Mary-Kate and Ashley, Sweet Sixteen, Licensed to Drive, de Acclaim, dos mil dos. Un juego de mesa con minijuegos y la licencia de las gemelas Olsen. IGN lo llamó un claro clon de Mario Party con la licencia pegada encima. Cultured Vultures y 8bitpickle lo ponen entre los peores de la consola: minijuegos mal explicados y fáciles de olvidar. Es un Mario Party al que se le olvidó la fiesta... y a Mario.",
+      "estado": "talking",
+      "consola": "GameCube",
+      "ano": 2002,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Mary-Kate and Ashley! Según IGN, es un Mario Party con la licencia pegada encima. Faltó la fiesta, y también Mario."
+    },
+    {
+      "id": "gamecube-top-peores-8",
+      "tema": "MC Groovz Dance Craze",
+      "texto": "MC Groovz Dance Craze, de Mad Catz, dos mil cuatro. Un juego de baile con tapete incluido y hasta un modo para contar calorías. IGN dijo que es jugable, pero no divertido, y que los pasos no coinciden con la música. WatchMojo dice que el timing casi nunca funciona, y TheGamer, que cuesta más de lo que parece por los accesorios. Es el único juego de baile donde la música baila por un lado y tú por otro. Y a las calorías no les importa.",
+      "estado": "talking",
+      "consola": "GameCube",
+      "ano": 2004,
+      "editor": "Mad Catz",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡MC Groovz Dance Craze! IGN dijo: jugable, pero no divertido. Los pasos no coinciden con la música."
+    },
+    {
+      "id": "gamecube-top-peores-7",
+      "tema": "Charlie and the Chocolate Factory",
+      "texto": "Charlie and the Chocolate Factory, de dos K Games, dos mil cinco. Mandas a los Oompa Loompas a cosechar y soldar dentro de la fábrica de Wonka, y rescatas a los otros niños de sus desgracias. Nintendo Power le puso dos coma cinco de diez por una cámara torpe. Cultured Vultures habla de gráficos con errores y controles que enloquecen. Eso sí: IGN elogió la banda sonora. La fábrica de chocolate donde lo único dulce es la música.",
+      "estado": "talking",
+      "consola": "GameCube",
+      "ano": 2005,
+      "editor": "2K Games",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Charlie and the Chocolate Factory! Gráficos con errores y controles que enloquecen. Eso sí, la música estaba buena."
+    },
+    {
+      "id": "gamecube-top-peores-6",
+      "tema": "Trigger Man",
+      "texto": "Trigger Man, de Crave, dos mil cuatro. Eres un asesino a sueldo de la mafia que debe robar diamantes de la bóveda de un casino para frenar una guerra entre familias. IGN le puso dos de diez, Nintendo Power, uno coma tres de cinco, y Metacritic, treinta y cinco. Cultured Vultures dice que imita a El Padrino y Los Soprano sin su profundidad. Una oferta que no podías rechazar... y que todos rechazaron.",
+      "estado": "talking",
+      "consola": "GameCube",
+      "ano": 2004,
+      "editor": "Crave Entertainment",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Trigger Man! Imita a El Padrino y Los Soprano, pero sin la profundidad. IGN le puso dos de diez."
+    },
+    {
+      "id": "gamecube-top-peores-5",
+      "tema": "Universal Studios Theme Parks Adventure",
+      "texto": "Universal Studios Theme Parks Adventure, de Kemco, dos mil uno. Recorres el parque juntando sellos en minijuegos, y para subir a una atracción tienes que juntar basura y saludar a personajes disfrazados. IGN lo llamó un lío de metas desordenadas, navegación torpe y destinos aburridos. Cultured Vultures dice que tiene algunos de los peores problemas de framerate de la historia del GameCube. Un parque de diversiones donde lo más divertido es recoger basura.",
+      "estado": "talking",
+      "consola": "GameCube",
+      "ano": 2001,
+      "editor": "Kemco",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Universal Studios Theme Parks Adventure! Para subir a un juego tienes que juntar basura. IGN: un lío de metas desordenadas y destinos aburridos."
+    },
+    {
+      "id": "gamecube-top-peores-4",
+      "tema": "Aquaman: Battle for Atlantis",
+      "texto": "Aquaman: Battle for Atlantis, de TDK Mediactive, dos mil tres. Un héroe que nada, pelea y maneja submarinos. TheGamer lo compara con Superman sesenta y cuatro, con mala inteligencia artificial y misiones de submarino que no enganchan. Cultured Vultures lo llama frustrante y a ratos incomprensible. Metacritic le puso veintisiete, GameSpot, dos coma tres, y Game Informer, dos de diez. Y lo más gracioso: un héroe que vive bajo el agua... y aun así se ahogó.",
+      "estado": "talking",
+      "consola": "GameCube",
+      "ano": 2003,
+      "editor": "TDK Mediactive",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Aquaman! Un Superman sesenta y cuatro submarino. Metacritic le puso veintisiete y GameSpot, dos coma tres."
+    },
+    {
+      "id": "gamecube-top-peores-3",
+      "tema": "Batman: Dark Tomorrow",
+      "texto": "Batman: Dark Tomorrow, de Kemco, dos mil tres. Anunciado en el E3 de dos mil uno como un mundo abierto, tardó cuatro años en llegar y salió como un juego lineal de sigilo. Game Informer le puso cero coma setenta y cinco de diez y lo llamó incomprensible y lleno de errores. Metacritic, veintinueve. Eso sí: la historia, las escenas y la música con orquesta recibieron elogios. Cuatro años de espera, y el murciélago salió sin ganas.",
+      "estado": "talking",
+      "consola": "GameCube",
+      "ano": 2003,
+      "editor": "Kemco",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Batman Dark Tomorrow! Cuatro años de desarrollo y Game Informer le puso cero coma setenta y cinco de diez. La música, con orquesta, sí estaba buena."
+    },
+    {
+      "id": "gamecube-top-peores-2",
+      "tema": "Monsters, Inc. Scream Arena",
+      "texto": "Monsters Inc. Scream Arena, de THQ, dos mil dos. Dodgeball con los personajes de Pixar, jugando con pelotas de risa, y solo siete arenas. IGN dijo que es dodgeball básico, como el que jugabas en el patio del colegio. Game Informer dijo que la falta de variedad apenas lo califica como juego. Y aparece en cuatro listas de los peores: TheGamer, WatchMojo, Cultured Vultures y 8bitpickle. Una pelota de risa que no dio nada de risa. Eso sí: IGN elogió la banda sonora.",
+      "estado": "talking",
+      "consola": "GameCube",
+      "ano": 2002,
+      "editor": "THQ",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Monsters Inc Scream Arena! Dodgeball como el del patio del colegio. Está en cuatro listas de peores, y solo tiene siete arenas."
+    },
+    {
+      "id": "gamecube-top-peores-1",
+      "tema": "Charlie's Angels",
+      "texto": "Charlie's Angels, de Ubi Soft, dos mil tres. Un beat 'em up con las tres ángeles, donde peleas con puños, patadas y armas, pero la cámara no coopera. Metacritic le puso veintitrés. GameRankings, veinticuatro por ciento: el puntaje más bajo de todos los juegos de GameCube. GamesRadar lo puso en el puesto cincuenta de los peores juegos de la historia, y dijo que fue peor que la película. Cultured Vultures habló de un brawler roto, lleno de errores. Y 8bitpickle dijo que es probablemente el juego más feo del GameCube. Tres ángeles, y ni una oportunidad.",
+      "estado": "talking",
+      "consola": "GameCube",
+      "ano": 2003,
+      "editor": "Ubi Soft",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Charlie's Angels! Veintitrés en Metacritic y veinticuatro por ciento en GameRankings: el más bajo de todo el GameCube. Peor que la película, según GamesRadar."
+    }
+  ]
+}
