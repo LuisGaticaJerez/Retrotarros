@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "saturn-top-peores",
+  "episodio": "Top 10 Saturn los peores juegos",
+  "creado": "2026-10-06",
+  "actualizado": "2026-10-06",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "saturn-top-peores-10",
+      "tema": "Scud: The Disposable Assassin",
+      "texto": "Scud, el asesino desechable, de SegaSoft, mil novecientos noventa y siete. Un juego inspirado en el cómic de un asesino robot, y que en el Saturn terminó con reseñas mixtas y sesenta y tres por ciento en GameRankings. Es el más amable de la lista. Un juego tan desechable como su protagonista: lo juegas, lo olvidas y ni siquiera lo devuelves.",
+      "estado": "talking",
+      "consola": "Saturn",
+      "ano": 1997,
+      "editor": "SegaSoft",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Scud, el asesino desechable! Y el juego salió igual de desechable que el título."
+    },
+    {
+      "id": "saturn-top-peores-9",
+      "tema": "Iron Man and X-O Manowar in Heavy Metal",
+      "texto": "Iron Man y X-O Manowar en Heavy Metal, de Acclaim, mil novecientos noventa y seis. Dos héroes de cómic juntos para detener a los villanos que buscan los fragmentos de un cubo cósmico. GameSpot dijo que cada aspecto del juego es una decepción: gráficos, sonido y jugabilidad, y que parece hecho a la rápida. Sega Saturn Magazine le puso treinta y tres por ciento, con música pobre y gráficos de la generación anterior. Dos héroes, y ninguno puede salvar el juego.",
+      "estado": "talking",
+      "consola": "Saturn",
+      "ano": 1996,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Iron Man y X-O Manowar! Dos superhéroes y ni los dos juntos pudieron salvar el juego."
+    },
+    {
+      "id": "saturn-top-peores-8",
+      "tema": "Courier Crisis",
+      "texto": "Courier Crisis, de GT Interactive, mil novecientos noventa y siete. Eres mensajero en bicicleta y entregas paquetes contra el reloj para comprarte una bici mejor. Sega Saturn Magazine lo llamó el peor juego de Saturn que habían recibido ese año, por mucho. Y le reprochó a Sega de Europa haberlo traído mientras dejaba fuera juegos como Grandia y Dead or Alive. Como si hubieran entregado el paquete equivocado... a todo el continente.",
+      "estado": "talking",
+      "consola": "Saturn",
+      "ano": 1997,
+      "editor": "GT Interactive",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Courier Crisis! Un repartidor en bici. Y la revista dijo que fue el peor Saturn del año, por mucho."
+    },
+    {
+      "id": "saturn-top-peores-7",
+      "tema": "Battle Monsters",
+      "texto": "Battle Monsters, de Acclaim, mil novecientos noventa y seis. Un juego de pelea con doce luchadores hechos con actores digitalizados, inspirado en Pit-Fighter y Mortal Kombat. Electronic Gaming Monthly lo llamó un lío lamentable de juego de pelea, AllGame le dio uno de cinco, y GamePro dijo que ni siquiera merece cobertura. O sea: la revista se negó a hablar de él. Hasta los monstruos se quedaron callados.",
+      "estado": "talking",
+      "consola": "Saturn",
+      "ano": 1996,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Battle Monsters! GamePro dijo que ni siquiera merece cobertura. La revista se negó a hablar de él."
+    },
+    {
+      "id": "saturn-top-peores-6",
+      "tema": "Virtual Hydlide",
+      "texto": "Virtual Hydlide, de Atlus, mil novecientos noventa y cinco. Un RPG de acción en 3D con mapas que cambian cada vez: más de veinticinco mil millones de mundos posibles. Next Generation dijo que era visualmente impresionante, pero torpe y bastante tedioso. Y Games Done Quick lo ha metido varias veces en su Awful Block, el bloque de los peores juegos. Veinticinco mil millones de mundos, y en ninguno hay gracia.",
+      "estado": "talking",
+      "consola": "Saturn",
+      "ano": 1995,
+      "editor": "Atlus",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Virtual Hydlide! Veinticinco mil millones de mundos posibles, y en ninguno tienen gracia."
+    },
+    {
+      "id": "saturn-top-peores-5",
+      "tema": "Rise 2: Resurrection",
+      "texto": "Rise dos: Resurrection, de Acclaim, mil novecientos noventa y seis. La secuela de Rise of the Robots, el peor del Mega Drive en este canal, con veintiocho robots y música de Brian May, el de Queen. Next Generation le puso uno de cinco y dijo que es un paso atrás respecto al ya excepcionalmente pobre original. O sea: la secuela del peor juego del Mega Drive... y consiguió superarlo. Resurrection, pero hacia abajo.",
+      "estado": "talking",
+      "consola": "Saturn",
+      "ano": 1996,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Rise dos! La secuela de Rise of the Robots. Next Generation: un paso atrás del ya pobre original. Y música de Brian May."
+    },
+    {
+      "id": "saturn-top-peores-4",
+      "tema": "Revolution X",
+      "texto": "Revolution X, de Acclaim, mil novecientos noventa y cinco. El shooter de Aerosmith que fue un éxito en las arcades. GamePro dijo que Acclaim tomó el éxito de Midway y lo convirtió en un fracaso completo para el Saturn: gráficos en bloques, fondos aburridos, jugabilidad repetitiva y mucho slowdown. Sega Saturn Magazine lo llamó increíblemente soso y monótono, igual que la banda. Next Generation le puso uno de cinco. La música es el arma... y también la condena.",
+      "estado": "talking",
+      "consola": "Saturn",
+      "ano": 1995,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Revolution X! El éxito de arcade de Aerosmith convertido en un fracaso en Saturn. Mucho slowdown y gráficos en bloques."
+    },
+    {
+      "id": "saturn-top-peores-3",
+      "tema": "The Incredible Hulk: The Pantheon Saga",
+      "texto": "The Incredible Hulk: The Pantheon Saga, de Eidos, mil novecientos noventa y siete. Cinco niveles con el Hulk contra robots, con passwords en vez de memory card. Sega Saturn Magazine le puso quince por ciento y dijo que es una vergüenza para Eidos, para los desarrolladores, para Marvel y para el Saturn. Los enemigos que vuelan son casi imposibles de golpear. Y aparece en tres listas de los peores juegos de superhéroes: GamesRadar Plus, Screen Rant y CBR. El Hulk se enojó, pero el juego se enojó más.",
+      "estado": "talking",
+      "consola": "Saturn",
+      "ano": 1997,
+      "editor": "Eidos",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡The Incredible Hulk! Quince por ciento en Sega Saturn Magazine: una vergüenza para Eidos, Marvel y el Saturn. Y está en tres listas."
+    },
+    {
+      "id": "saturn-top-peores-2",
+      "tema": "D-Xhird",
+      "texto": "D-Xhird, de Takara, mil novecientos noventa y siete. Un juego de pelea en tres D con armas, a la sombra de Battle Arena Toshinden. GameSpot dijo que era, de lejos, el peor juego de pelea que había jugado, y le puso uno coma cuatro. Next Generation escribió que si Soul Edge es un Lexus, D-Xhird es un Hyundai: no tiene muchos lujos, pero lo logra. Apenas. Y GameSpot dijo que ni siquiera vale el CD en que está grabado. Un juego tan malo que sonaba como una botella de agua cayendo al suelo.",
+      "estado": "talking",
+      "consola": "Saturn",
+      "ano": 1997,
+      "editor": "Takara",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡D-Xhird! GameSpot dijo que es el peor juego de pelea que había jugado, y que cuando golpean suena como una botella cayendo."
+    },
+    {
+      "id": "saturn-top-peores-1",
+      "tema": "Death Crimson",
+      "texto": "Death Crimson, de Ecole Software, mil novecientos noventa y seis. Un shooter de pistola Virtua Gun que en la encuesta de lectores de Sega Saturn Magazine de Japón sacó uno coma cero nueve sobre diez: el último de novecientos cuarenta y cinco juegos. Lo llaman el Emperador del Kusogē, la palabra japonesa para los juegos basura. Salió solo en Japón. Y aun así vendió unas diecisiete mil quinientas copias, y se convirtió en un clásico de culto. El peor Saturn de la historia... y todavía hay gente que lo ama.",
+      "estado": "talking",
+      "consola": "Saturn",
+      "ano": 1996,
+      "editor": "Ecole Software",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Death Crimson! Último de novecientos cuarenta y cinco juegos en la encuesta de lectores. El Emperador del Kusogē. Y vendió diecisiete mil copias."
+    }
+  ]
+}
