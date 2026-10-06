@@ -35,13 +35,13 @@
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
 | Reseñas | 38 | 13 | 4 | 21 |
-| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES y Mega Drive) | 28 | 14 | ? | 14 |
+| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64 y Game Boy) | 31 | 14 | ? | 17 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
 | RetroNotas | 2 | 0 | 0 | 2 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **86** | **25** | **8** | **53** |
+| **TOTAL** | **89** | **25** | **8** | **56** |
 
 Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
@@ -103,7 +103,7 @@ Superstar Soccer, King of Fighters '94, Kirby Super Star, A Link to the Past, So
 Hedgehog, Sonic the Hedgehog 2, Star Fox, Yoshi's Island, más 4 pedidas: The Legend of
 Zelda, Metal Gear Solid, Metal Warriors, Super Smash Bros. Melee.
 
-**Rankings (14):** Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
+**Rankings (17):** Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
 Top Precios, Saturn Top Mundial + Top Precios, PS1 Top Mundial + Top Precios (recién
 armados 2026-09-21 — apertura del arco PS1, ver `docs/arcos/ps1.md`), GameCube Top Mundial
 + Top Precios (recién armados 2026-09-22 — apertura del arco GameCube completa, ver
@@ -113,7 +113,8 @@ armado 2026-10-04; pendiente de ok de Luis y Coco sobre el orden — ver
 `docs/pautas/pauta-atari-2600-top-peores.md`), NES Top Peores, SNES Top Peores y Mega Drive Top Peores
 (tanda 1 de los Top Peores por consola, armados 2026-10-06; cuñas chistosas a pedido de Luis; pendientes de
 ok de Luis y Coco sobre el orden — ver `docs/pautas/pauta-nes-top-peores.md`, `pauta-snes-top-peores.md` y
-`pauta-mega-drive-top-peores.md`).
+`pauta-mega-drive-top-peores.md`); tanda 2 (PS1, N64 y Game Boy) armada 2026-10-06, ver `pauta-ps1-top-peores.md`,
+`pauta-n64-top-peores.md` y `pauta-gameboy-top-peores.md`.
 Atari 2600 Top Precios y Game Boy Top Mundial + Top Precios salieron de esta lista: ya
 están publicados en el canal (verificado en vivo 2026-09-21/22), el doc los tenía mal
 clasificados como backlog.

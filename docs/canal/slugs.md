@@ -62,6 +62,9 @@ G:\Mi unidad\Studio\pautas\pauta-n64-top-mundial.docx  ← DOCX para imprimir/le
 | `nes-top-peores` | Top 10 NES los peores (Top Peores, cuñas chistosas) | ✓ Armado · pendiente de ok de Luis/Coco | [pauta](../pautas/pauta-nes-top-peores.md) |
 | `snes-top-peores` | Top 10 SNES los peores (Top Peores, cuñas chistosas) | ✓ Armado · pendiente de ok de Luis/Coco | [pauta](../pautas/pauta-snes-top-peores.md) |
 | `mega-drive-top-peores` | Top 10 Mega Drive los peores (Top Peores, cuñas chistosas) | ✓ Armado · pendiente de ok de Luis/Coco | [pauta](../pautas/pauta-mega-drive-top-peores.md) |
+| `ps1-top-peores` | Top 10 PS1 los peores (Top Peores, cuñas chistosas) | ✓ Armado · pendiente de ok de Luis/Coco | [pauta](../pautas/pauta-ps1-top-peores.md) |
+| `n64-top-peores` | Top 10 N64 los peores (Top Peores, cuñas chistosas) | ✓ Armado · pendiente de ok de Luis/Coco | [pauta](../pautas/pauta-n64-top-peores.md) |
+| `gameboy-top-peores` | Top 10 Game Boy los peores (Top Peores, cuñas chistosas) | ✓ Armado · pendiente de ok de Luis/Coco | [pauta](../pautas/pauta-gameboy-top-peores.md) |
 | `indie-lat-001` | Primer episodio Indie Lat (TBD) | ☐ Futuro |
 
 ---

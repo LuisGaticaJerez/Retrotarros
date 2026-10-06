@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "gameboy-top-peores",
+  "episodio": "Top 10 Game Boy los peores juegos",
+  "creado": "2026-10-06",
+  "actualizado": "2026-10-06",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "gameboy-top-peores-10",
+      "tema": "X-Men: Mutant Wars",
+      "texto": "X-Men Mutant Wars, de Activision, dos mil. Cinco mutantes, y puedes cambiar de personaje cuando quieras, mientras el que sale descansa para recuperar su poder. Es el único juego donde el equipo se turna para aburrirse. Electronic Gaming Monthly le puso tres coma cinco sobre diez, y AllGame, una estrella y media. Eso sí, la banda sonora gustó.",
+      "estado": "talking",
+      "consola": "Game Boy",
+      "ano": 2000,
+      "editor": "Activision",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡X-Men Mutant Wars! Cinco mutantes que se turnan... para aburrirse. Eso sí, la banda sonora gustó."
+    },
+    {
+      "id": "gameboy-top-peores-9",
+      "tema": "Raging Fighter",
+      "texto": "Raging Fighter, de Konami, mil novecientos noventa y tres. Un juego de pelea con solo dos botones, donde la dirección cambia el golpe, y siete luchadores a los que, según Den of Geek, cuesta distinguir. Se llama Outburst en Japón. AllGame le puso dos estrellas de cinco. Siete peleadores, un solo parecido.",
+      "estado": "talking",
+      "consola": "Game Boy",
+      "ano": 1993,
+      "editor": "Konami",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Raging Fighter! Siete luchadores que cuesta distinguir y solo dos botones. Ah, y en Japón se llama Outburst."
+    },
+    {
+      "id": "gameboy-top-peores-8",
+      "tema": "Grand Theft Auto",
+      "texto": "Grand Theft Auto, de Rockstar, mil novecientos noventa y nueve. Sí, existió en la Game Boy Color: ciudades enteras copiadas casilla por casilla del original de computador, pero con las groserías y la sangre recortadas. Los trenes se reemplazaron por teletransportes. Den of Geek dice que no hay suficientes vehículos y que robar autos se vuelve incómodo. IGN le puso cuatro de diez. El robo de autos, ahora apto para todo público.",
+      "estado": "talking",
+      "consola": "Game Boy",
+      "ano": 1999,
+      "editor": "Rockstar",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Grand Theft Auto en Game Boy Color! Las ciudades salieron completas, pero sin sangre ni groserías. Y los trenes son teletransportes."
+    },
+    {
+      "id": "gameboy-top-peores-7",
+      "tema": "Bart Simpson's Escape from Camp Deadly",
+      "texto": "Bart Simpson's Escape from Camp Deadly, de Acclaim, mil novecientos noventa y uno. Fue el primer juego de Los Simpson en una consola portátil, y su trama del campamento llegó un año antes que el capítulo de la tele. Bart pelea con bolitas de papel, bumeranes y comida de cafetería. Den of Geek dice que los enemigos aparecen sin parar y que ganar depende de la suerte. Una revista le puso ochenta y nueve por ciento. Una crítica lo llamó un tren descarrilado.",
+      "estado": "talking",
+      "consola": "Game Boy",
+      "ano": 1991,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Bart Simpson's Escape from Camp Deadly! El campamento llegó un año antes que el capítulo de la tele. UGO lo llamó un tren descarrilado."
+    },
+    {
+      "id": "gameboy-top-peores-6",
+      "tema": "Tasmania Story",
+      "texto": "Tasmania Story, de FCI, mil novecientos noventa y uno. Es un juego de otra cosa disfrazado: un port de un juego japonés de MSX sobre juntar frutas, parecido a Mappy, al que le pusieron la historia de un papá que busca un tigre de Tasmania. Den of Geek dice que los controles son mucho peores que los del original y que es excesivamente difícil. Un tigre de Tasmania, y lo que juntas son plantas.",
+      "estado": "talking",
+      "consola": "Game Boy",
+      "ano": 1991,
+      "editor": "FCI",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Tasmania Story! Era un juego de juntar frutas de MSX al que le pusieron la historia de un papá buscando un tigre."
+    },
+    {
+      "id": "gameboy-top-peores-5",
+      "tema": "Toy Story",
+      "texto": "Toy Story, de Tiertex, mil novecientos noventa y seis. En la Game Boy, los gráficos pre-renderizados de la película se ven tan mal en blanco y negro, según Den of Geek, que no se distinguen las plataformas. Son diez niveles, y la carrera de autos del Genesis ni llegó. GamePro dijo que era lento y repetitivo, y que la cuerda no funcionaba como debía. Hasta el infinito, y más allá de la pantalla.",
+      "estado": "talking",
+      "consola": "Game Boy",
+      "ano": 1996,
+      "editor": "Tiertex",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Toy Story! En la Game Boy, las plataformas se confunden con el fondo. Hasta el infinito, y más allá de la pantalla."
+    },
+    {
+      "id": "gameboy-top-peores-4",
+      "tema": "Men in Black: the Series",
+      "texto": "Men in Black: The Series, de Crave, mil novecientos noventa y ocho. El Agente J recorre seis niveles de Manhattan peleando con doce tipos de alienígenas que, según Den of Geek, casi no se diferencian. GameRankings le da veintisiete por ciento. Lo único que falta es un neuralizador para olvidar que lo jugaste. Eso sí: los videos de dibujos animados entre niveles impresionaron.",
+      "estado": "talking",
+      "consola": "Game Boy",
+      "ano": 1998,
+      "editor": "Crave",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Men in Black The Series! Doce tipos de aliens que casi no se diferencian. Falta un neuralizador para olvidar los controles."
+    },
+    {
+      "id": "gameboy-top-peores-3",
+      "tema": "Shrek: Fairy Tale Freakdown",
+      "texto": "Shrek: Fairy Tale Freakdown, de TDK Mediactive, dos mil uno. Un juego de pelea de nueve personajes y nueve etapas, y no tiene modo para dos jugadores: Shrek pelea solo. Game Informer lo llamó miseria portátil y le puso medio punto sobre diez. GameRankings, treinta y seis por ciento. Y aun así, se enviaron cien mil copias a Europa. Los ogros son como las cebollas, tienen capas. Este juego, no.",
+      "estado": "talking",
+      "consola": "Game Boy",
+      "ano": 2001,
+      "editor": "TDK Mediactive",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Shrek Fairy Tale Freakdown! Game Informer lo llamó miseria portátil. Los ogros son como las cebollas, tienen capas. Este juego, no."
+    },
+    {
+      "id": "gameboy-top-peores-2",
+      "tema": "Mortal Kombat 4",
+      "texto": "Mortal Kombat cuatro para Game Boy Color, de Midway, mil novecientos noventa y ocho. Recortaron el plantel casi a la mitad, sacaron los combos y las armas, y la sangre solo aparece en los videos de los Fatalities. Den of Geek dice que los gráficos parecen hechos en Paint y que la música son cuatro notas en repetición. GameSpot le puso tres coma cinco sobre diez. Un Mortal Kombat sin sangre es como un vampiro vegetariano.",
+      "estado": "talking",
+      "consola": "Game Boy",
+      "ano": 1998,
+      "editor": "Midway",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Mortal Kombat cuatro para Game Boy Color! Sin sangre, salvo en los videos de los Fatalities. Un Mortal Kombat vegetariano."
+    },
+    {
+      "id": "gameboy-top-peores-1",
+      "tema": "Castlevania: the Adventure",
+      "texto": "Castlevania: The Adventure, de Konami, mil novecientos ochenta y nueve. Christopher Belmont, ancestro de Simon, sin armas secundarias, con el látigo que se debilita cada vez que te pegan y con controles que, según Den of Geek, son extremadamente lentos. CBR dice que no hace nada bien, y Time Extension lo puso penúltimo entre todos los Castlevania. Pero ojo: en mil novecientos ochenta y nueve la crítica le puso ochos, y vendió casi nueve millones de dólares. Hoy hay hasta un parche de fans, llamado Quick Fix, para arreglarlo.",
+      "estado": "talking",
+      "consola": "Game Boy",
+      "ano": 1989,
+      "editor": "Konami",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Castlevania The Adventure! En mil novecientos ochenta y nueve sacó ochos en la crítica. Hoy hasta tiene un parche de fans para arreglarlo."
+    }
+  ]
+}
