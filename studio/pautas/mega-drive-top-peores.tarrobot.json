@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "mega-drive-top-peores",
+  "episodio": "Top 10 Mega Drive los peores juegos",
+  "creado": "2026-10-06",
+  "actualizado": "2026-10-06",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "mega-drive-top-peores-10",
+      "tema": "Time Killers",
+      "texto": "Time Killers, de Black Pearl, mil novecientos noventa y seis. Era un arcade de pelea anunciado para mil novecientos noventa y cuatro, cancelado, revivido y lanzado casi dos años tarde, igualito que la copia de prueba. La revista Next Generation le puso uno de cinco y dijo que era, ojo, el peor ejemplo de pelea en dos dimensiones de la historia. Dos años de espera para esto.",
+      "estado": "talking",
+      "consola": "Mega Drive",
+      "ano": 1996,
+      "editor": "Black Pearl",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Time Killers! Lo anunciaron, lo cancelaron, lo revivieron y salió dos años tarde... exactamente igual."
+    },
+    {
+      "id": "mega-drive-top-peores-9",
+      "tema": "X-Perts",
+      "texto": "X-Perts, de Sega, mil novecientos noventa y seis. Un ninja de Eternal Champions lidera un equipo para detener a terroristas en una fábrica submarina con una bomba termonuclear. Tienes tres personajes con gráficos pre-renderizados, pero muchas misiones consisten en quedarte parado apretando botones. Y con el arma en la mano, no puedes saltar. Salvar el mundo nunca fue tan quieto.",
+      "estado": "talking",
+      "consola": "Mega Drive",
+      "ano": 1996,
+      "editor": "Sega",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡X-Perts! Una bomba termonuclear, un equipo de élite... y tú parado apretando botones."
+    },
+    {
+      "id": "mega-drive-top-peores-8",
+      "tema": "Journey From Darkness: Strider Returns",
+      "texto": "Journey from Darkness: Strider Returns, de U.S. Gold, mil novecientos noventa y dos. Es la secuela de Strider que hizo otro estudio, para computadoras, y que llegó al Genesis con otro nombre. Una crítica dijo que era como ver a un ser querido revivido como un zombi sin mente. Tiene voces y un tamaño enorme, pero la animación va a saltos.",
+      "estado": "talking",
+      "consola": "Mega Drive",
+      "ano": 1992,
+      "editor": "U.S. Gold",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Strider Returns! Una crítica dijo que era como ver a un ser querido revivido como un zombi sin mente."
+    },
+    {
+      "id": "mega-drive-top-peores-7",
+      "tema": "Batman Forever",
+      "texto": "Batman Forever, de Acclaim, mil novecientos noventa y cinco. Batman y Robin pelean con captura de movimiento al estilo Mortal Kombat, y el resultado es que cada golpe parece una animación atrasada. Electronic Gaming Monthly dijo que pegarle a un enemigo era una secuencia retrasada que sigue mucho después de que el enemigo ya está muerto. O sea: Batman golpea al aire con estilo. Fue un gran fracaso comercial.",
+      "estado": "talking",
+      "consola": "Mega Drive",
+      "ano": 1995,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Batman Forever! Los golpes siguen mucho después de que el enemigo ya murió. Batman golpea al aire, con estilo."
+    },
+    {
+      "id": "mega-drive-top-peores-6",
+      "tema": "Wayne's World",
+      "texto": "Wayne's World, de THQ, mil novecientos noventa y tres. Wayne ataca con una guitarra que se mejora con amplificadores, y junta cosas llamadas Schwing para eliminar a todos los enemigos de la pantalla. Es un juego de saltar y juntar cosas, con un diseño de niveles que Den of Geek llama atroz. Sega-16 le puso uno de diez, y la revista Flux lo ubicó en el puesto diecinueve de los veinticinco peores juegos de todos los tiempos.",
+      "estado": "talking",
+      "consola": "Mega Drive",
+      "ano": 1993,
+      "editor": "THQ",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Wayne's World! Un juego de saltar y juntar cosas con una guitarra. Sega-16 le puso uno de diez."
+    },
+    {
+      "id": "mega-drive-top-peores-5",
+      "tema": "Fantasia",
+      "texto": "Fantasia, de Sega, mil novecientos noventa y uno. Mickey es el aprendiz de hechicero y junta notas musicales por cuatro mundos: agua, tierra, aire y fuego. La revista Mega lo puso sexto entre los diez peores del Mega Drive. Y según Wikipedia, la licencia se dio por error y se destruyeron unas cinco mil copias sin vender. O sea: la magia terminó en la bodega.",
+      "estado": "talking",
+      "consola": "Mega Drive",
+      "ano": 1991,
+      "editor": "Sega",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Fantasia! Según Wikipedia, destruyeron cinco mil copias sin vender. La magia terminó en la bodega."
+    },
+    {
+      "id": "mega-drive-top-peores-4",
+      "tema": "Awesome Possum",
+      "texto": "Awesome Possum, de Tengen, mil novecientos noventa y tres. Una zarigüeya ecologista pelea contra los robots contaminantes del doctor Machino, junta botellas para reciclar y usa a un rinoceronte como catapulta. Tiene ochenta voces digitalizadas, y CBR dice que son bastante molestas. Una revista le puso noventa y tres por ciento y otra, veinticinco. Ustedes decidan en qué bando están.",
+      "estado": "talking",
+      "consola": "Mega Drive",
+      "ano": 1993,
+      "editor": "Tengen",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Awesome Possum! Ochenta voces digitalizadas, un rinoceronte catapulta... y una revista le puso noventa y tres por ciento."
+    },
+    {
+      "id": "mega-drive-top-peores-3",
+      "tema": "Dark Castle",
+      "texto": "Dark Castle, de Electronic Arts, mil novecientos noventa y uno. Duncan lanza piedras y bolas de fuego en un castillo donde los controles parecen dormidos. Den of Geek lo llama uno de los juegos más desagradables que uno podría obligarse a jugar, y dice que su sonido te vuelve loco. SVG habla de plataformas sin respuesta y de mala detección de golpes. Un castillo donde lo único oscuro es tu paciencia.",
+      "estado": "talking",
+      "consola": "Mega Drive",
+      "ano": 1991,
+      "editor": "Electronic Arts",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Dark Castle! Controles dormidos y un sonido que, según Den of Geek, te vuelve loco."
+    },
+    {
+      "id": "mega-drive-top-peores-2",
+      "tema": "Sword of Sodan",
+      "texto": "Sword of Sodan, de Electronic Arts, mil novecientos noventa. En el Amiga fue un éxito de crítica, con sprites gigantes y un nueve sobre diez. En el Genesis perdió tres niveles de once y, según SVG, quedó terminantemente aburrido y sin respuesta, peor incluso que Altered Beast. SVG lo puso primero entre los peores del Genesis. Lo que se ganó en espadazos se perdió en niveles.",
+      "estado": "talking",
+      "consola": "Mega Drive",
+      "ano": 1990,
+      "editor": "Electronic Arts",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Sword of Sodan! En el Amiga sacó nueve sobre diez; en el Genesis perdió tres niveles y las ganas."
+    },
+    {
+      "id": "mega-drive-top-peores-1",
+      "tema": "Rise of the Robots",
+      "texto": "Rise of the Robots, de Acclaim, mil novecientos noventa y cinco. Iba a ser el comienzo de una franquicia con novela, juguetes, cómics, serie animada y película, con música de Brian May en la caja. Salió un juego de pelea donde controlas a un solo personaje, con pocos movimientos y una inteligencia artificial que, según dicen, nunca apareció. Sega Power le puso tres por ciento. Les presento el plan de franquicia de un solo juego.",
+      "estado": "talking",
+      "consola": "Mega Drive",
+      "ano": 1995,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Rise of the Robots! Prometía novela, juguetes, cómics y película, y terminó siendo un solo juego con un solo personaje."
+    }
+  ]
+}
