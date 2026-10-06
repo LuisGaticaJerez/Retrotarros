@@ -34,16 +34,16 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 | # | Juego | Año | Editor | Evidencia (pantalla) | Premio comico |
 |---|-------|-----|--------|----------------------|---------------|
-| 10 | Time Killers | 1996 | Black Pearl | En 1 Lista (Den Of Geek (#2)) | Al que llego dos años tarde a la pelea |
-| 9 | X-Perts | 1996 | Sega | En 2 Listas (Den Of Geek (#4) + Svg (#5)) | Al equipo de elite que se quedo parado |
-| 8 | Journey from Darkness: Strider Returns | 1992 | U.S. Gold | En 2 Listas (Den Of Geek (#5) + Thegamer) | Al strider de la otra familia |
+| 10 | Time Killers | 1996 | Black Pearl | En 1 Lista (Den Of Geek (#14)) | Al que llego dos años tarde a la pelea |
+| 9 | X-Perts | 1996 | Sega | En 2 Listas (Den Of Geek (#12) + Svg (#5)) | Al equipo de elite que se quedo parado |
+| 8 | Journey from Darkness: Strider Returns | 1992 | U.S. Gold | En 2 Listas (Den Of Geek (#11) + Thegamer) | Al strider de la otra familia |
 | 7 | Batman Forever | 1995 | Acclaim | En 2 Listas (Thegamer + Watchmojo (#13)) | Al golpe que sigue aunque el enemigo ya se fue |
-| 6 | Wayne's World | 1993 | THQ | En 3 Listas (Den Of Geek (#3) + Thegamer + Flux 1995 (#19)) | Al schwing que no llega |
+| 6 | Wayne's World | 1993 | THQ | En 3 Listas (Den Of Geek (#13) + Thegamer + Flux 1995 (#19)) | Al schwing que no llega |
 | 5 | Fantasia | 1991 | Sega | En 3 Listas (Mega (#6) + Den Of Geek (#8) + Watchmojo (#15)) | A la magia que se destruyo en bodega |
-| 4 | Awesome Possum | 1993 | Tengen | En 3 Listas (Den Of Geek (#11) + Cbr + Svg (#3)) | Al reciclaje con mas voces que juego |
-| 3 | Dark Castle | 1991 | Electronic Arts | En 3 Listas (Den Of Geek (#13) + Svg (#2) + Watchmojo (#7)) | Al castillo de los controles dormidos |
-| 2 | Sword of Sodan | 1990 | Electronic Arts | En 3 Listas (Den Of Geek (#15) + Svg (#1) + Watchmojo (#10)) | Al port que perdio tres niveles en el viaje |
-| 1 | Rise of the Robots | 1995 | Acclaim | En 4 Listas (Gamesradar + Den Of Geek (#12) + Svg (#4) + Watchmojo (#2)) | Al plan de franquicia de un solo juego |
+| 4 | Awesome Possum | 1993 | Tengen | En 3 Listas (Den Of Geek (#5) + Cbr + Svg (#3)) | Al reciclaje con mas voces que juego |
+| 3 | Dark Castle | 1991 | Electronic Arts | En 3 Listas (Den Of Geek (#3) + Svg (#2) + Watchmojo (#7)) | Al castillo de los controles dormidos |
+| 2 | Sword of Sodan | 1990 | Electronic Arts | En 3 Listas (Den Of Geek (#1) + Svg (#1) + Watchmojo (#10)) | Al port que perdio tres niveles en el viaje |
+| 1 | Rise of the Robots | 1995 | Acclaim | En 4 Listas (Gamesradar + Den Of Geek (#4) + Svg (#4) + Watchmojo (#2)) | Al plan de franquicia de un solo juego |
 
 ---
 
@@ -55,7 +55,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 - Wikipedia: la version de Genesis la desarrollo THQ (que termino el port antes de que lo cancelaran) y la publico Black Pearl. Se anuncio para la primavera de 1994, se cancelo a mediados de 1994, se revivio y salio en julio de 1996. Segun la pagina, salio 'completamente igual a la copia de prueba de 1994'. Vendio mal, y a principios de 1997 se cancelaron todos los demas ports de Time Killers.
 - Notas de la epoca: Electronic Gaming Monthly 4,2/10 y despues 3,5/10 ('una conversion fallida'); GamePro critico los controles malos, la animacion entrecortada y los fondos que 'parecen casi de 8 bits'; Next Generation 1/5: 'no tiene ningun merito' y 'facilmente el peor ejemplo de juego de pelea 2D de la historia'.
-- La lista: Den of Geek (#2 de los 15 peores del Genesis: sprites 'mucho mas pequenos', colores apagados y cuadros de animacion que faltan respecto al arcade). Es el unico del top con una sola lista; entra por la leyenda y por las notas de la epoca.
+- La lista: Den of Geek (#14 de los 15 peores del Genesis: sprites 'mucho mas pequenos', colores apagados y cuadros de animacion que faltan respecto al arcade). Es el unico del top con una sola lista; entra por la leyenda y por las notas de la epoca.
 
 *Cue:* RETO 30 SEG: ver cuantos segundos aguanta alguien sin decir 'esto salio dos anos tarde'. CHISTE: 'el unico juego que se cancelo, se revivio y siguio exactamente igual: un zombi con garantia'. Plantar: 'estamos en el #10 y ya hay un zombi.'
 
@@ -65,7 +65,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 - Wikipedia: desarrollado por Abalone y publicado por Sega of America en 1996, solo en Norteamerica y solo para Genesis. Shadow Yamoto, un asesino ninja de la saga Eternal Champions, lidera al equipo vigilante X-Perts contra terroristas que tomaron una fabrica submarina de armas y amenazan con detonar un artefacto termonuclear. Beat 'em up lateral con cambio entre tres personajes en plena mision, graficos 3D pre-renderizados y sprites digitalizados. Algunas misiones se resuelven quedandote en un lugar apretando botones.
 - Notas: Electronic Gaming Monthly 5,125/10 (elogio el concepto de tres personajes, critico las misiones repetitivas); GamePro critico la IA 'moronica' de los enemigos y los controles; Next Generation 1/5 por controles lentos y pocos movimientos (no puedes saltar con el arma en la mano), aunque dijo que los graficos eran mejores que el promedio del Genesis.
-- Las listas: Den of Geek (#4: graficos pre-renderizados 'mal animados', accion monotona y ambientes repetitivos) y SVG (#5: controles que no responden, niveles repetitivos y animacion lenta que opaca los sprites).
+- Las listas: Den of Geek (#12: graficos pre-renderizados 'mal animados', accion monotona y ambientes repetitivos) y SVG (#5: controles que no responden, niveles repetitivos y animacion lenta que opaca los sprites).
 
 *Cue:* RETO 30 SEG: quedarse parado apretando botones y 'salvar el mundo'. CHISTE: 'la unica mision donde el equipo de elite gana si no se mueve'.
 
@@ -75,7 +75,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 - Wikipedia: se llama Strider II en Europa (noviembre de 1990, en Amiga, Amstrad CPC, Atari ST, Commodore 64 y ZX Spectrum), lo desarrollo Tiertex y lo publico U.S. Gold con licencia de Capcom; en 1992 llego a Sega Genesis, Master System y Game Gear, y en Norteamerica se llamo 'Journey from Darkness: Strider Returns'. Plataformas con escalada de muros, cuerdas y un rifle; si juntas energia el protagonista se transforma en un robot con ruedas y laser. Son cinco etapas.
 - Notas: Electronic Gaming Monthly le puso 6,75/10 al Genesis (elogio la escala y las voces, critico la animacion entrecortada); la version de Game Gear 7/10. Retrospectivamente, una critica lo describio como 'ver a un ser querido revivido como un zombi sin mente'. Dato: un port para Atari Lynx llego al 50% y nunca salio.
-- Las listas: Den of Geek (#5: 'secuela sin alma, con niveles sin vida, mala deteccion de golpes y ralentizaciones constantes') y TheGamer ('le faltaba la emocion y la originalidad del arcade original').
+- Las listas: Den of Geek (#11: 'secuela sin alma, con niveles sin vida, mala deteccion de golpes y ralentizaciones constantes') y TheGamer ('le faltaba la emocion y la originalidad del arcade original').
 
 *Cue:* CHISTE: 'el Strider que llego a la fiesta con el nombre mal escrito en la tarjeta'. Conectar con el Strider del arcade/Genesis de Capcom si aparece en otra serie del canal.
 
@@ -95,7 +95,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 - Wikipedia: version de Genesis desarrollada por Gray Matter y publicada por THQ el 18 de febrero de 1993 en Norteamerica. Plataformas donde solo juegas con Wayne: una guitarra que se potencia con amplificadores y efectos, items 'Schwing' que eliminan a todos los enemigos de la pantalla y cuatro niveles surrealistas basados en lugares reales de la pelicula.
 - Notas: Computer and Video Games 63/100; Electronic Gaming Monthly con cuatro resenistas: 5, 6, 4 y 3 sobre 10; GamesMaster 29%; Sega-16 1/10. Se le critica la jugabilidad repetitiva de 'saltar juntando cosas'. Lo curioso: se le llama 'uno de los peores juegos de 1993'.
-- Las listas: Den of Geek (#3: 'diseno de niveles atroz' y 'peores graficos y audio que el de SNES'), TheGamer (lo llama 'uno de los peores juegos de todos los tiempos' pese a la fama de la pelicula) y Flux (1995, '25 peores videojuegos de todos los tiempos': puesto 19). Hilo THQ: el #10 (Time Killers) es un port que desarrollo THQ.
+- Las listas: Den of Geek (#13: 'diseno de niveles atroz' y 'peores graficos y audio que el de SNES'), TheGamer (lo llama 'uno de los peores juegos de todos los tiempos' pese a la fama de la pelicula) y Flux (1995, '25 peores videojuegos de todos los tiempos': puesto 19). Hilo THQ: el #10 (Time Killers) es un port que desarrollo THQ.
 
 *Cue:* RETO 30 SEG: juntar Schwing sin reirse. CHISTE: 'el unico juego de Wayne's World donde nadie dice excelente'. Sugerencia: no hace falta imitar a nadie, la lista ya habla sola.
 
@@ -117,7 +117,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 - Wikipedia: nombre completo 'Awesome Possum... Kicks Dr. Machino's Butt', desarrollado y publicado por Tengen en noviembre de 1993 en Norteamerica (25 de diciembre en Japon). Plataformas ecologista: junta objetos reciclables (botellas y latas) para bonus, hay quizzes sobre medio ambiente, compañeros rideables (la abeja Killer Bee para volar y el rinoceronte Rad Rhino como catapulta), cuatro mundos con 13 niveles y 12 etapas bonus, y 80 muestras de voz digitalizada: un logro tecnico en 1993.
 - Desarrollo: el diseñador Richard Seaborne creo el personaje en 1984 para un trabajo de debate en el liceo; Tengen penso que una zarigueya norteamericana era 'demasiado feroz' y la cambio por una de cola anillada.
 - Notas muy polarizadas: Electronic Games 93% ('muy pocos juegos producen este nivel de emocion'); Mean Machines Sega 39/100; Sega Pro 25%.
-- Las listas: Den of Geek (#11: 'imitacion descarada de Sonic' con un framerate 'horrible'), CBR (voces digitalizadas molestas) y SVG (#3: 'una autoparodia de la industria').
+- Las listas: Den of Geek (#5: 'imitacion descarada de Sonic' con un framerate 'horrible'), CBR (voces digitalizadas molestas) y SVG (#3: 'una autoparodia de la industria').
 
 *Cue:* RETO 30 SEG: contar cuantas veces habla la zarigueya. CHISTE: 'es tan ecologista que hasta el framerate lo reciclo de otro juego'. (Chiste al juego, no a la causa: el mensaje ambiental esta muy bien.)
 
@@ -126,7 +126,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 **En pantalla:** Duncan lanza piedras y bolas de fuego en un castillo donde los controles parecen dormidos. Den of Geek lo llama uno de los juegos mas desagradables que uno podria obligarse a jugar, y su sonido te vuelve loco.
 
 - Wikipedia: version de Mega Drive/Genesis publicada por Electronic Arts en 1991 y desarrollada por Artech Studios. Duncan es el protagonista, tira piedras a los enemigos y tiene una bola de fuego; mantiene las mecanicas del juego original. La pagina no da notas ni criticas de epoca para este port: sus tres listas son retrospectivas.
-- Las listas: Den of Geek (#13: 'uno de los juegos mas desagradables que uno podria obligarse a jugar', con un sonido que vuelve loco), SVG (#2 de sus 5 peores del Genesis: 'controles que no responden, mala deteccion de golpes y plataformas absolutamente fangosas') y WatchMojo (#7 de sus 20 peores: controles 'muy quisquillosos').
+- Las listas: Den of Geek (#3: 'uno de los juegos mas desagradables que uno podria obligarse a jugar', con un sonido que vuelve loco), SVG (#2 de sus 5 peores del Genesis: 'controles que no responden, mala deteccion de golpes y plataformas absolutamente fangosas') y WatchMojo (#7 de sus 20 peores: controles 'muy quisquillosos').
 - Hilo ELECTRONIC ARTS: el que sigue, Sword of Sodan (#2), tambien es de EA: dos seguidos.
 
 *Cue:* RETO 30 SEG: saltar sin que el control se quede dormido. CHISTE: 'el castillo mas oscuro del Genesis: no por la historia, por los controles'. Gancho: 'y el siguiente es de la misma empresa'.
@@ -137,7 +137,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 - Wikipedia: Discovery Software creo la version original de Amiga en 1988; Electronic Arts publico el port de Sega Genesis en 1990 en Norteamerica y Europa; en 1993 hubo una version de Macintosh (via Bethesda Softworks). Hack and slash con dos mellizos que pelean por once niveles hacia el enfrentamiento final; el Genesis lo redujo a ocho areas y cambio el comportamiento de los enemigos: atacan desde varias direcciones en vez de una.
 - Recepcion: la version original recibio un 9/10 ('si compras un juego de accion de Amiga este año, que sea este') y elogios por sus sprites gigantes y su nivel de detalle para 1989. Del Genesis, en cambio, se ha dicho que tiene 'malos graficos, efectos de sonido molestos y controles frustrantes'. Dato: vendio unas 55.000 copias en Amiga.
-- Las listas: Den of Geek (#15: movimiento lento; promete una experiencia 'a lo Conan' pero entrega algo tedioso), SVG (#1 de sus 5 peores del Genesis: 'terminantemente aburrido y sin respuesta', inferior incluso a Altered Beast) y WatchMojo (#10 de sus 20 peores).
+- Las listas: Den of Geek (#1: movimiento lento; promete una experiencia 'a lo Conan' pero entrega algo tedioso), SVG (#1 de sus 5 peores del Genesis: 'terminantemente aburrido y sin respuesta', inferior incluso a Altered Beast) y WatchMojo (#10 de sus 20 peores).
 - Hilo EA cerrado: Dark Castle (#3) y este, dos seguidos.
 
 *Cue:* CHISTE: 'en el Amiga era una leyenda; en el Genesis, un recuerdo con menos niveles'. Plantar el #1: 'y el que sigue prometio una franquicia entera... y entrego un juego'.
@@ -147,7 +147,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 **En pantalla:** Iba a ser el comienzo de una franquicia con novela, juguetes, comics, serie animada y pelicula, con musica de Brian May en la caja. Salio un juego de pelea con un solo personaje controlable y pocos movimientos. Sega Power le puso 3%.
 
 - Wikipedia: los ports de Mega Drive/Genesis y Game Gear los desarrollo Data Design Interactive; Acclaim lo publico en Europa en febrero de 1995 (estaba previsto para diciembre de 1994 y se atraso). La campaña de marketing costo multimillones de libras, con musica de Brian May (de Queen: 'The Dark' iba a incluirse, pero solo aparecio parcialmente) y planes de novela, juguetes, comics, serie animada y pelicula. En todas sus versiones se critico que la 'inteligencia artificial sin precedentes' que prometia el marketing no se materializo. Sega Power le puso 3%.
-- Las listas: GamesRadar (segun Wikipedia, puesto 100 de los 'peores videojuegos de todos los tiempos', 2014; verificar antes de decirlo), Den of Geek (#12: 'esteril y sin vida', con 'jugabilidad simple y sin inspiracion' y un solo personaje controlable), SVG (#4: 'controles torpes, movimiento lento' y animaciones terribles) y WatchMojo (#2 de sus 20 peores).
+- Las listas: GamesRadar (segun Wikipedia, puesto 100 de los 'peores videojuegos de todos los tiempos', 2014; verificar antes de decirlo), Den of Geek (#4: 'esteril y sin vida', con 'jugabilidad simple y sin inspiracion' y un solo personaje controlable), SVG (#4: 'controles torpes, movimiento lento' y animaciones terribles) y WatchMojo (#2 de sus 20 peores).
 - Equilibrio: al salir, los graficos pre-renderizados fueron lo mas elogiado. Y ojo con la caja: la que mostramos es la europea del Mega Drive ('incluye musica de Brian May').
 - CIERRE DEL HILO ACCLAIM: Batman Forever (#7) tambien es de Acclaim. EA aparecio dos veces seguidas (#3 y #2) y Acclaim abre y cierra el top.
 

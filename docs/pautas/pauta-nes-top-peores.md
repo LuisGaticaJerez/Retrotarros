@@ -74,7 +74,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 **En pantalla:** Pitfall Harry vuelve, pero los tesoros son invisibles: aparecen solo si saltas justo en el lugar correcto y nadie te dice cual es. Es una busqueda del tesoro donde el mapa dice 'salta y reza'.
 
 - Wikipedia: desarrollado por Micronics; en Japon lo publico Pony en septiembre de 1986 y en Norteamerica Activision en noviembre de 1987, su primer juego para el NES. Pitfall Harry recupera el diamante Raj en cavernas andinas, rescata a su sobrina Rhonda y al gato Quickclaw. Hay items invisibles que solo salen si saltas en el momento justo, y un puzzle esoterico: hay que saltar sobre un enemigo concreto para teletransportarse.
-- Las listas: Den of Geek (#3 de sus 15 peores del NES, por lo dificil y los items invisibles) y CBR (#6 de los 10 mas injugables: saltos torpes, retraso en los controles y items que solo aparecen en baldosas sin marcar).
+- Las listas: Den of Geek (#13 de sus 15 peores del NES, por lo dificil y los items invisibles) y CBR (lista de los 10 mas injugables: saltos torpes, retraso en los controles y items que solo aparecen en baldosas sin marcar).
 - Equilibrio: al salir se elogio la escala de la exploracion; las criticas fueron por los controles 'flotantes'. Y la gente lo compara con el Pitfall del Atari 2600, que sale mejor parado.
 
 *Cue:* RETO 30 SEG: encontrar UN tesoro sin mirar guia. CHISTE: 'un juego de busqueda del tesoro donde el tesoro ni siquiera quiere que lo encuentren'. Conectar con el Pitfall! del Atari 2600 del Top Mundial.
@@ -84,7 +84,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 **En pantalla:** El arcade de dibujos animados que todos querian jugar, convertido en un plataformas donde caminas como si cargaras el castillo. Tiene barra de vida, pero casi todo te mata de un toque. Mean Machines le puso 21%.
 
 - Wikipedia: version del NES desarrollada por Motivetime (Elite Systems) y publicada por CSG Imagesoft en diciembre de 1990 en Norteamerica. Es un plataformas 2D basado en el arcade de LaserDisc de 1983: misma historia (rescatar a la princesa Daphne de Singe, el dragon), otro juego. Infame por los controles lentos, la progresion criptica y que casi todo mata de un golpe pese a tener barra de vida.
-- Las listas: Den of Geek (#12) dice que la primera pantalla no tiene una solucion logica; CBR (#7 de los 10 mas injugables) habla del protagonista que se mueve con una lentitud agonizante y de la pantalla inicial que exige precision de pixel.
+- Las listas: Den of Geek (#2) dice que la primera pantalla no tiene una solucion logica; CBR (lista de los 10 mas injugables) habla del protagonista que se mueve con una lentitud agonizante y de la pantalla inicial que exige precision de pixel.
 - Notas: Mean Machines 21% ('el peor juego de consola que se ha visto', segun la propia revista), AllGame 1,5 de 5, EGM promedio 4 de 10. Equilibrio: GamePro le dio 18/25 y elogio los graficos aunque advirtio la frustracion. Las versiones japonesa y europea son mas rapidas y con mas enemigos.
 
 *Cue:* RETO 30 SEG: pasar la primera pantalla. CHISTE: 'el unico juego donde la barra de vida es una sugerencia'. Tambien: 'los dibujos de Don Bluth, los controles de un sofa'.
@@ -94,7 +94,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 **En pantalla:** Tu principe empieza tan debil que lanza una espada a la vez, y hay enemigos que aguantan 8 golpes. Fue el mas vendido de los 4 juegos con que Broderbund debuto en el NES. O sea: alguien pago por esto.
 
 - Wikipedia: Mashō en Japon (diciembre de 1986), codesarrollado por Lenar y Tamtex para Irem; Broderbund lo publico en Norteamerica en septiembre de 1987 y fue el mas vendido de sus cuatro juegos de lanzamiento del NES. Es un action RPG: hay que juntar siete campanas magicas venciendo a los jefes de las torres (el titulo en ingles iba a ser Hell's Bells, pero lo rechazaron). Hay 10 mazmorras ocultas: la primera tiene 167 pantallas y la ultima 235.
-- Por que es infame: el principe Myer parte muy debil (lanza una espada a la vez), algunos enemigos aguantan 8 golpes y hay entradas y portales invisibles. Las listas: Den of Geek (#11) y CBR (#4 de los 10 mas injugables).
+- Por que es infame: el principe Myer parte muy debil (lanza una espada a la vez), algunos enemigos aguantan 8 golpes y hay entradas y portales invisibles. Las listas: Den of Geek (#3) y CBR (lista de los 10 mas injugables).
 - Frases historicas: Sean Reiley lo llamo 'el peor juego de Nintendo de la historia' (2001) y J.C. Fletcher (Joystiq, 2007) 'el juego mas frustrante del NES'. Dato curioso: el cartucho japones tenia un LED rojo que se prendia al encender la consola.
 
 *Cue:* CHISTE: 'el mas vendido de su empresa... el dinero no devuelve las horas'. RETO 30 SEG: llegar a la primera torre sin morir. Gancho: 'y ahora un juego donde el problema no es morir: es encontrar a alguien'.
@@ -104,7 +104,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 **En pantalla:** Buscar a Waldo, pero con los pixeles de un NES: todo se ve borroso y hay cosas con las mismas rayas. Y en los niveles dificiles Waldo cambia de colores. Game Informer le puso 1 de 10.
 
 - Wikipedia: desarrollado por Bethesda Softworks y publicado por THQ en julio de 1991 (si, el sello Bethesda que anos despues publico Skyrim). Es un juego de objetos ocultos con una lupa como cursor, 8 niveles, limite de tiempo (16 minutos facil, 11 medio, 7:40 dificil) y 10 segundos menos por cada error. Hay niveles especiales: una cueva a oscuras, un metro-laberinto y uno de emparejar imagenes.
-- Las listas: Den of Geek (#5), CBR (#9 de los 10 mas injugables) y Seanbaby (#12 de sus peores juegos de Nintendo). Cracked dijo que tenia 'los peores graficos de cualquier juego del NES'.
+- Las listas: Den of Geek (#11), CBR (lista de los 10 mas injugables) y Seanbaby (#12 de sus peores juegos de Nintendo). Cracked dijo que tenia 'los peores graficos de cualquier juego del NES'.
 - Notas: Game Informer 1/10 ('un juego para los que les da flojera dar vuelta la pagina'); otros sitios retro lo dejan en 0,5/5. Dato de equilibrio: Nintendo World Report solo lo llama 'una coleccion de pixel art'.
 
 *Cue:* RETO 30 SEG: encontrar a Waldo en TarroVision; el que lo encuentre primero elige el siguiente castigo. CHISTE: 'por primera vez Waldo es facil de encontrar: esta en la lista de los peores'.
@@ -114,7 +114,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 **En pantalla:** Dos peliculas en un cartucho, tres epocas y ni una pista de que hay que hacer. No tiene claves ni guardado y es larguisimo: un resenista tardo 6 horas solo en dibujar el mapa.
 
 - Wikipedia: desarrollado por Beam Software (los mismos de Bad Street Brawler, #10) y publicado por LJN en septiembre de 1990. Plataformas y aventura en tres epocas (1955, 1985, 2015): juntar combustible y comida, abrir cuartos con llaves, minijuegos de 60 segundos con cronometros, puzzles de objetos y el DeLorean para viajar entre epocas; plantar bellotas hace arboles que sirven de plataforma.
-- Las listas: Den of Geek (#6), Interesting Engineering (#8: 'repetitivo, con poca conexion a la historia y una musica que drena el alma') y CBR (#10 de los 10 mas injugables). Defecto repetido: sin claves ni guardado; Gamefreaks365 tardo 6 horas solo en mapearlo.
+- Las listas: Den of Geek (#10), Interesting Engineering ( 'repetitivo, con poca conexion a la historia y una musica que drena el alma') y CBR (lista de los 10 mas injugables). Defecto repetido: sin claves ni guardado; Gamefreaks365 tardo 6 horas solo en mapearlo.
 - Equilibrio (no cargar la mano): AllGame lo llamo 'un clon decente de Super Mario Bros.' con controles 'razonablemente ajustados'; Nintendo Power le dio 3,22 de 5. Hilo del episodio: LJN aparece 3 veces (este, X-Men #3 y Friday the 13th #1).
 
 *Cue:* CHISTE: 'es el unico DeLorean que necesita 88 millas por hora... para escapar del cartucho'. Plantar el hilo: 'LJN... acuerdense del nombre, vuelve dos veces mas'.
@@ -124,7 +124,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 **En pantalla:** Seis X-Men jugables y objetos de ayuda que a veces te curan y a veces te explotan, y se ven casi iguales. Seanbaby lo puso tercero entre los peores juegos del NES y AllGame le dio 1 estrella de 5.
 
 - Wikipedia: publicado por LJN en diciembre de 1989. Es un plataformas de accion con seis X-Men jugables (Wolverine, Cyclops, Storm, Colossus, Nightcrawler e Iceman), cada uno con habilidades distintas; 5 misiones principales y un sexto nivel oculto que se activa con un codigo de botones, y parte de la clave viene impresa en la etiqueta del cartucho (hay que descifrar mensajes de las pantallas de fin de nivel para completarla). Se puede jugar de a dos.
-- Las listas: Den of Geek (#13), CBR (#5 de los 10 mas injugables: mala deteccion de golpes y los items 'trampa' que parecen mejoras pero explotan o quitan vida) y Seanbaby (#3 de sus peores del NES: critica la forma en que se representa a los personajes y la IA del companero). AllGame: 1 estrella, 'un desastre extraño y risible'.
+- Las listas: Den of Geek (#1), CBR (lista de los 10 mas injugables: mala deteccion de golpes y los items 'trampa' que parecen mejoras pero explotan o quitan vida) y Seanbaby (#3 de sus peores del NES: critica la forma en que se representa a los personajes y la IA del companero). AllGame: 1 estrella, 'un desastre extraño y risible'.
 - Dato de contexto: fue el penultimo juego bajo la linea 'Enteractive Video Games' de LJN.
 
 *Cue:* RETO 30 SEG: recoger items a ciegas y ver cuantos son bombas. CHISTE: 'el unico juego donde el botiquin tiene mala intencion'. Plantar: 'LJN, segunda vez... y falta la tercera'.
@@ -134,7 +134,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 **En pantalla:** Solo quieres llegar a tu boda, pero te tiran bombas y te atacan los perros, y si te estresas te conviertes en Hyde. Una critica dijo que hace todo perfectamente mal. Aparece en 4 listas.
 
 - Wikipedia: desarrollado por Advance Communication Company; Toho lo publico en Japon el 8 de abril de 1988 y Bandai en Norteamerica en julio de 1989. Jekyll camina hacia su boda esquivando obstaculos; el dano y el estres lo transforman en Hyde, que pelea contra monstruos en un mundo espejo y demoniaco; matar monstruos baja su ira y lo devuelve a Jekyll.
-- Las listas: Den of Geek (#9), Interesting Engineering (#1: 'las mecanicas del juego son atroces'), CBR (#2 de los 10 mas injugables: townsfolk que lanzan bombas, perros callejeros) y la lista de Wikipedia de juegos considerados los peores. AllGame lo llama 'en gran parte injugable' y de accion 'extremadamente aburrida'; Eurogamer: 'lo hace todo perfectamente mal'; la revista Famitsu ya lo veia frustrante en su epoca.
+- Las listas: Den of Geek (#5), Interesting Engineering ( 'las mecanicas del juego son atroces'), CBR (lista de los 10 mas injugables: townsfolk que lanzan bombas, perros callejeros) y la lista de Wikipedia de juegos considerados los peores. AllGame lo llama 'en gran parte injugable' y de accion 'extremadamente aburrida'; Eurogamer: 'lo hace todo perfectamente mal'; la revista Famitsu ya lo veia frustrante en su epoca.
 - Curiosidad: fue el segundo video del Angry Video Game Nerd, y segun Wikipedia el efecto fue el contrario al buscado: el video desperto curiosidad y mucha gente fue a jugarlo.
 
 *Cue:* RETO 30 SEG: llegar a la iglesia sin transformarte. CHISTE: 'el unico novio que llega a la boda con mas heridas que el que pelea en el ring'. Plantar el #1: 'y el que sigue... lo odiaron hasta los que lo juegan por amor al horror'.
@@ -144,7 +144,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 **En pantalla:** Eliges un monitor, recorres un bosque que parece hecho para perderte, con alarmas y Jason por todos lados. Electronic Gaming Monthly lo puso 8 entre los peores de la historia y Nintendo Power, 6. Y la caja es turquesa y morada.
 
 - Wikipedia: desarrollado por Atlus (si, la misma que anos despues haria Persona) y publicado por LJN en febrero de 1989, solo en Norteamerica. Eliges uno de seis monitores con habilidades distintas y recorres Camp Crystal Lake en 2D: cabañas, cuevas, lagos y bosques. Hay que vencer a Jason tres veces; suenan alarmas con tiempo limite para llegar a el antes de que dañe a los niños y a los monitores. Dentro de las cabañas las peleas con Jason se parecen a Punch-Out!!, y Pamela Voorhees aparece como una cabeza flotante estilo Medusa.
-- Las listas: Den of Geek (#2 de sus 15 peores del NES, por el mapa desconcertante y los controles), Electronic Gaming Monthly (1997: el octavo peor juego de consola de todos los tiempos), Nintendo Power (septiembre de 1997: el sexto peor juego de la historia) y GamePro (el 10º peor juego basado en una pelicula, por la musica repetitiva y la frustracion).
+- Las listas: Den of Geek (#14 de sus 15 peores del NES, por el mapa desconcertante y los controles), Electronic Gaming Monthly (1997: el octavo peor juego de consola de todos los tiempos), Nintendo Power (septiembre de 1997: el sexto peor juego de la historia) y GamePro (el 10º peor juego basado en una pelicula, por la musica repetitiva y la frustracion).
 - TWIST FINAL: empata en listas con Dr. Jekyll (4 cada uno); lo dejamos #1 por fama y por el apoyo de las tres revistas de la epoca. Si prefieren al Jekyll como #1, el cambio es de dos lineas. Y otro giro: GamesRadar se rio de la caja 'neon pastel' del juego; en 2013 NECA hizo una figura de Jason con esa paleta turquesa y morada, y en 2017 el juego Friday the 13th: The Game sumo una skin 'Retro Jason'.
 - CIERRE DEL HILO LJN: Back to the Future II & III (#4), X-Men (#3) y este: tres de los diez salieron de la misma marca.
 

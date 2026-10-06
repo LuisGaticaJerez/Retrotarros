@@ -34,7 +34,7 @@ El espejo del Top Mundial de Mega Drive: los 10 peores juegos, **para reirnos**.
 
 1. **¿Rise of the Robots es el #1?** Es el que tiene mas listas (4) y el que mas hype tuvo. Pero los graficos pre-renderizados se elogiaron al salir y la lista de GamesRadar la cita Wikipedia. ¿Lo dejamos #1?
 2. **Shaq Fu** sale en las listas del Genesis (WatchMojo #1, CBR), pero ya es el #1 de SNES. ¿Lo mencionamos al aire como 'el que no repetimos' o ni lo nombramos?
-3. **Bart vs. the Space Mutants** es el #1 de Den of Geek pero vendio mas de un millon y tuvo criticas buenas en Mega Drive: lo dejamos fuera. ¿Lo contamos como curiosidad?
+3. **Bart vs. the Space Mutants** es el #15 de Den of Geek (el que abre su lista) pero vendio mas de un millon y tuvo criticas buenas en Mega Drive: lo dejamos fuera. ¿Lo contamos como curiosidad?
 4. **El hilo Acclaim y EA**: ¿lo plantamos desde el #7 (Acclaim) y el #3 (EA)? Cierra con Acclaim en el #1.
 5. **La anecdota de Fantasia** (copias destruidas, la licencia por error) sale solo de Wikipedia. ¿La decimos con 'segun Wikipedia' o esperamos a confirmarla con otra fuente?
 6. **Chistes**: ¿cual les da mas risa para el reto de 30 segundos? (Mi apuesta: Batman Forever, pegarle a un enemigo ya derrotado, y Time Killers.)

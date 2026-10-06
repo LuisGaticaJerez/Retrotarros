@@ -32,7 +32,7 @@ El espejo del Top Mundial de NES: los 10 peores juegos, **para reirnos**. Del ma
 
 ## Preguntas guia (para discutir antes de grabar)
 
-1. **¿Friday the 13th o Dr. Jekyll como #1?** Empatan en 4 listas. Dejamos Friday por fama y por EGM y Nintendo Power; el cambio es de dos lineas si prefieren a Jekyll (que tiene a Interesting Engineering #1 y a CBR #2).
+1. **¿Friday the 13th o Dr. Jekyll como #1?** Empatan en 4 listas. Dejamos Friday por fama y por EGM y Nintendo Power; el cambio es de dos lineas si prefieren a Jekyll (que tiene a Interesting Engineering y CBR, entre otras).
 2. **El hilo LJN**: Volver al Futuro (#4), X-Men (#3) y Friday the 13th (#1). ¿Lo plantamos desde el #4 y lo cerramos en el #1?
 3. **Los que casi entran**: Tag Team Wrestling, Silver Surfer, Bill & Ted y Gilligan's Island (una sola lista cada uno). ¿Bonus 'los que no cupieron' o lo dejamos para despues?
 4. **Los sin licencia** (Action 52, Cheetahman II, Color Dreams) quedaron fuera por regla. ¿Los mencionamos al aire o ni los nombramos?
