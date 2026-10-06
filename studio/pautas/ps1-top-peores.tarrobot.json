@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "slug": "ps1-top-peores",
+  "episodio": "Top 10 PS1 los peores juegos",
+  "creado": "2026-10-06",
+  "actualizado": "2026-10-06",
+  "voz": "es-CL-CatalinaNeural",
+  "pitch": "+12Hz",
+  "rate": "+0%",
+  "top": 10,
+  "datos": [
+    {
+      "id": "ps1-top-peores-10",
+      "tema": "Criticom",
+      "texto": "Criticom, de Vic Tokai, mil novecientos noventa y cinco. Fue uno de los primeros juegos de pelea en tres dimensiones del PlayStation: ocho guerreros galácticos peleando por un cristal, en plataformas redondas. Den of Geek y SVG coinciden en que los controles responden con retraso, y Next Generation dijo que el frame rate entrecortado arruinaba la jugabilidad. Es el golpe que sale cuando la pelea ya terminó.",
+      "estado": "talking",
+      "consola": "PS1",
+      "ano": 1995,
+      "editor": "Vic Tokai",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Criticom! Uno de los primeros peleas en tres dimensiones del PlayStation. El golpe sale tan tarde que ya empezó la siguiente ronda."
+    },
+    {
+      "id": "ps1-top-peores-9",
+      "tema": "The Simpsons Wrestling",
+      "texto": "The Simpsons Wrestling, de Activision, dos mil uno. Veinte personajes de Springfield peleando, pero sin mecánicas de lucha libre de verdad: es una pelea a golpes donde juntas las letras A-U-N-T para ser invencible. IGN le puso uno de diez, y un crítico lo llamó la demolición más horrible de una licencia. Según Wikipedia, hasta el creador de la serie sacó su nombre de la caja. Eso sí: los diálogos son graciosos.",
+      "estado": "talking",
+      "consola": "PS1",
+      "ano": 2001,
+      "editor": "Activision",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡The Simpsons Wrestling! Un crítico lo llamó la demolición más horrible de una licencia. Pero los diálogos, graciosos."
+    },
+    {
+      "id": "ps1-top-peores-8",
+      "tema": "Rascal",
+      "texto": "Rascal, de Psygnosis, mil novecientos noventa y ocho. Un niño con una pistola de burbujas viaja por el tiempo para rescatar a su papá, en cinco mundos con pasado, presente y futuro. Eso sí: se controla como un tanque. Electronic Gaming Monthly dijo que era una de las peores experiencias de plataformas en tres dimensiones hasta entonces. Y el director contó que el control de tanque lo impuso el publicador. Viajas por todas las épocas, menos hacia unos controles que funcionen.",
+      "estado": "talking",
+      "consola": "PS1",
+      "ano": 1998,
+      "editor": "Psygnosis",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Rascal! Pistola de burbujas, viajes en el tiempo y controles de tanque. Viaja por todas las épocas, menos hacia unos controles que funcionen."
+    },
+    {
+      "id": "ps1-top-peores-7",
+      "tema": "Fantastic Four",
+      "texto": "Fantastic Four, de Acclaim, mil novecientos noventa y siete. Un juego de pelea para cuatro jugadores con Mr. Fantástico, la Mujer Invisible, la Mole, la Antorcha Humana y She-Hulk. Mientras carga, te dejan jugar a unos autitos. IGN le puso uno de diez y dijo que podía ser el peor juego jamás hecho, y Electronic Gaming Monthly lo premió como el peor uso de una buena licencia.",
+      "estado": "talking",
+      "consola": "PS1",
+      "ano": 1997,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Fantastic Four! Tiene un juego de autitos mientras carga, y aun así IGN le puso uno de diez."
+    },
+    {
+      "id": "ps1-top-peores-6",
+      "tema": "Hellboy: Asylum Seeker",
+      "texto": "Hellboy: Asylum Seeker, de Dreamcatcher, dos mil tres. Es un Hellboy que casi no pelea: te toca resolver puzzles en seis niveles con tu fuerza normal, como un demonio de oficina. Salió en el PlayStation tres años después de que saliera el PlayStation dos. La revista oficial le puso medio punto de cinco.",
+      "estado": "talking",
+      "consola": "PS1",
+      "ano": 2003,
+      "editor": "Dreamcatcher",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Hellboy Asylum Seeker! Un demonio sin superpoderes, en un PlayStation que ya era de museo. Medio punto de cinco."
+    },
+    {
+      "id": "ps1-top-peores-5",
+      "tema": "Santa Claus Saves the Earth",
+      "texto": "Santa Claus Saves the Earth, de Telegames, dos mil dos. Un hada malvada llamada Nilam atrapa a Santa en tierras mágicas, y tú lo guías por quince etapas lanzando bolas de nieve, dulces y... tomates. Den of Geek lo llama un dolor para los ojos, con una física rara y golpes que casi no funcionan. Es el regalo que nadie quiso abrir.",
+      "estado": "talking",
+      "consola": "PS1",
+      "ano": 2002,
+      "editor": "Telegames",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Santa Claus Saves the Earth! Santa lanza tomates y la física parece embrujada. El regalo que nadie quiso abrir."
+    },
+    {
+      "id": "ps1-top-peores-4",
+      "tema": "Hooters Road Trip",
+      "texto": "Hooters Road Trip, de Ubi Soft, dos mil dos. Era un juego de carreras llamado Free Wheelin' USA hasta que le pusieron la marca encima: un anuncio con volante, con videos de las meseras entre carrera y carrera. Den of Geek dice que el manejo es peligrosamente flojo, y Game Informer lo llamó uno de los peores juegos jamás hechos. Fue de los últimos lanzamientos del PlayStation original. Un cierre a la altura.",
+      "estado": "talking",
+      "consola": "PS1",
+      "ano": 2002,
+      "editor": "Ubi Soft",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Hooters Road Trip! Era un juego de carreras llamado Free Wheelin' USA hasta que le pusieron la marca. Un anuncio con volante."
+    },
+    {
+      "id": "ps1-top-peores-3",
+      "tema": "The Crow: City of Angels",
+      "texto": "The Crow: City of Angels, de Acclaim, mil novecientos noventa y siete. Den of Geek y SVG lo ponen primero en sus listas de peores del PlayStation. SVG cuenta que es difícil hasta lograr que el personaje mire en la dirección correcta. IGN le puso uno de diez, y Electronic Gaming Monthly lo eligió como la peor película convertida en juego. Lo único que se salva son los fondos, que son lindos y oscuros.",
+      "estado": "talking",
+      "consola": "PS1",
+      "ano": 1997,
+      "editor": "Acclaim",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡The Crow City of Angels! Costó hacer que el personaje mirara hacia el lado correcto. Pero los fondos, preciosos."
+    },
+    {
+      "id": "ps1-top-peores-2",
+      "tema": "Mortal Kombat: Special Forces",
+      "texto": "Mortal Kombat: Special Forces, de Midway, dos mil. Jax persigue a Kano para evitar que se lleve un artefacto, pero el juego es buscar tarjetas llave por edificios iguales. No puedes saltar, y Sonya Blade, que iba a ser jugable, quedó fuera. Salió a diecinueve noventa y nueve dólares. Electronic Gaming Monthly le puso uno coma cinco sobre diez, y Daily Radar, cero. Next Generation dijo que ni el precio bajo lo salvaba.",
+      "estado": "talking",
+      "consola": "PS1",
+      "ano": 2000,
+      "editor": "Midway",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Mortal Kombat Special Forces! No puedes saltar, no hay Sonya, y Daily Radar le puso cero. Next Generation: ni vale el viaje a la tienda."
+    },
+    {
+      "id": "ps1-top-peores-1",
+      "tema": "Bubsy 3D",
+      "texto": "Bubsy 3D, de Accolade, mil novecientos noventa y seis. Salió con controles de tanque y una cámara que desorienta, justo después de Super Mario 64 y Crash Bandicoot. Aparece en seis listas de peores: Den of Geek, WatchMojo, SVG, Electronic Gaming Monthly, The Guardian y GameTrailers. Su propio creador lo llamó su mayor fracaso, y la serie tardó veintiún años en volver. Un plataformas en tres dimensiones donde lo más difícil es ver al gato.",
+      "estado": "talking",
+      "consola": "PS1",
+      "ano": 1996,
+      "editor": "Accolade",
+      "fuente": "pauta-manual",
+      "reaccion_short": "¡Bubsy 3D! Seis listas de peores, controles de tanque... y su propio creador lo llamó su mayor fracaso."
+    }
+  ]
+}
