@@ -34,14 +34,14 @@
 
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
-| Reseñas | 38 | 13 | 4 | 21 |
+| Reseñas | 40 | 13 | 4 | 23 |
 | Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube) | 34 | 14 | ? | 20 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
 | RetroNotas | 2 | 0 | 0 | 2 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **92** | **25** | **8** | **59** |
+| **TOTAL** | **94** | **25** | **8** | **61** |
 
 Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
@@ -97,7 +97,7 @@ PS Vita Top Mundial.
 
 ### 1.3 Backlog armado — listo para programar, sin fecha (49)
 
-**Reseñas (21) — verificado en vivo 2026-09-03:** Aladdin, Altered Beast, Battletoads,
+**Reseñas (21 + 2 nuevas 2026-10-07: Mighty Morphin Power Rangers y JoJo's Bizarre Adventure, ambas pedidas, comentario de @jesusreyna525) — verificado en vivo 2026-09-03:** Aladdin, Altered Beast, Battletoads,
 Contra, Crash Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, International
 Superstar Soccer, King of Fighters '94, Kirby Super Star, A Link to the Past, Sonic the
 Hedgehog, Sonic the Hedgehog 2, Star Fox, Yoshi's Island, más 4 pedidas: The Legend of
