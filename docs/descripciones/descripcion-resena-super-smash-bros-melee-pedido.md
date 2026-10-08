@@ -14,7 +14,7 @@ Doc para copiar/pegar al subir la reseña. Español chileno neutro, con tildes.
 ## Descripción (copiar/pegar)
 
 ```
-Repasamos Super Smash Bros. Melee, el juego de pelea de GameCube que Masahiro Sakurai armó en apenas 13 meses de desarrollo brutal -él mismo lo llamó después el ciclo más agotador de toda su carrera- y que más de veinte años después sigue siendo el Smash que la escena competitiva elige jugar en torneos 🥊🎮
+Nos lo pidieron en los comentarios: reseña de Smash Melee. Y aquí está. Repasamos Super Smash Bros. Melee, el juego de pelea de GameCube que Masahiro Sakurai armó en apenas 13 meses de desarrollo brutal -él mismo lo llamó después el ciclo más agotador de toda su carrera- y que más de veinte años después sigue siendo el Smash que la escena competitiva elige jugar en torneos 🥊🎮
 
 Te contamos cómo técnicas que nadie planeó -el wavedash, el L-cancel- se volvieron la base del juego de alto nivel, y por qué la secuela directa (Brawl, 2007) no logró reemplazarlo: cambios de física, el polémico tropiezo aleatorio, y una comunidad que prefirió quedarse con el original. Algo poco común en un género donde normalmente el juego nuevo reemplaza al viejo.
 
@@ -35,6 +35,6 @@ Dato curioso: el wavedash y el L-cancel, las dos técnicas más importantes del 
 
 ---
 
-**Slug:** `resena-super-smash-bros-melee`
+**Slug:** `resena-super-smash-bros-melee-pedido`
 **Formato:** Reseña (horizontal, hasta 10 min)
-**Última actualización:** 2026-08-30
+**Última actualización:** 2026-10-07
