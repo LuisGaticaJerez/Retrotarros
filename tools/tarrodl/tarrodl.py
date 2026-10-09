@@ -1086,6 +1086,46 @@ def api_session_files(_body=None) -> dict:
     return {"files": files[:50]}
 
 
+# restos de una descarga a medias: <slug>.f298.mp4.part / <slug>.mp4.part / .ytdl / .part-FragN / <slug>.temp.mp4 / pista suelta <slug>.f298.mp4
+PARTIAL_RES = (
+    re.compile(r"^(?P<slug>.+?)(?:\.f[\w-]+)?\.[A-Za-z0-9]{2,4}\.(?:part(?:-Frag\d+)?|ytdl)$", re.I),
+    re.compile(r"^(?P<slug>.+?)\.part(?:-Frag\d+)?$", re.I),
+    re.compile(r"^(?P<slug>.+?)\.temp\.[A-Za-z0-9]{2,4}$", re.I),
+    re.compile(r"^(?P<slug>.+?)\.f\d+[\w-]*\.[A-Za-z0-9]{2,4}$", re.I),
+)
+
+
+def api_partials(_body=None) -> dict:
+    """Busca en la carpeta de descargas los archivos que dejo una descarga inconclusa, agrupados por nombre de video.
+    Solo mira, no borra nada. 'retomable' = el nombre final aun no existe, asi que volver a descargar con el mismo
+    nombre y calidad continua desde donde iba (yt-dlp retoma los .part)."""
+    base = out_base()
+    groups: dict[str, dict] = {}
+    if base.is_dir():
+        for f in base.iterdir():
+            if not f.is_file():
+                continue
+            m = next((r.match(f.name) for r in PARTIAL_RES if r.match(f.name)), None)
+            if not m:
+                continue
+            st = f.stat()
+            g = groups.setdefault(m.group("slug"), {"slug": m.group("slug"), "files": [], "size": 0, "mtime": 0.0})
+            g["files"].append({"name": f.name, "size": st.st_size, "mtime": st.st_mtime})
+            g["size"] += st.st_size
+            g["mtime"] = max(g["mtime"], st.st_mtime)
+    active = {Path(j["target"]).stem for j in list(JOBS.values())
+              if j.get("kind") == "download" and j.get("state") in ("running", "queued") and j.get("target")}
+    items = []
+    for g in groups.values():
+        g["files"].sort(key=lambda x: x["name"])
+        g["active"] = g["slug"] in active
+        g["final_exists"] = any((base / f"{g['slug']}.{c}").is_file() for c in CONTAINERS)
+        g["resumable"] = not g["active"] and not g["final_exists"] and any(".part" in x["name"].lower() for x in g["files"])
+        items.append(g)
+    items.sort(key=lambda g: -g["mtime"])
+    return {"folder": str(base), "items": items, "exists": base.is_dir()}
+
+
 MOSAIC_AFMT = "aformat=sample_rates=48000:sample_fmts=fltp:channel_layouts=stereo"
 
 
@@ -1406,7 +1446,7 @@ ROUTES = {
     ("GET", "status"): api_status, ("POST", "analyze"): api_analyze, ("POST", "download"): api_download,
     ("POST", "clips"): api_clips, ("POST", "plan"): api_plan, ("POST", "cancel"): api_cancel, ("POST", "queue_move"): api_queue_move, ("POST", "settings"): api_settings, ("POST", "update"): api_update, ("POST", "install"): api_install,
     ("POST", "pickfolder"): api_pickfolder, ("POST", "pickvideo"): api_pickvideo, ("POST", "pickvideos"): api_pickvideos, ("POST", "probe"): api_probe,
-    ("POST", "mosaic_plan"): api_mosaic_plan, ("POST", "mosaic"): api_mosaic, ("GET", "session_files"): api_session_files, ("POST", "open"): api_open,
+    ("POST", "mosaic_plan"): api_mosaic_plan, ("POST", "mosaic"): api_mosaic, ("GET", "session_files"): api_session_files, ("GET", "partials"): api_partials, ("POST", "open"): api_open,
     ("POST", "clientlog"): api_clientlog, ("POST", "openlog"): api_openlog, ("POST", "ping"): api_ping,
     ("POST", "bye"): api_bye,
 }

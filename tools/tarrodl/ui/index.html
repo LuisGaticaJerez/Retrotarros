@@ -48,6 +48,13 @@ input:disabled, select:disabled { opacity:.4; }
 .hide { display:none !important; }
 .check { display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.4; cursor:pointer; }
 .check input { margin-top:3px; accent-color:var(--mg); width:18px; height:18px; flex:none; }
+.plist { margin-top:8px; padding:10px 12px; border:1px solid rgba(255,255,255,.18); border-radius:4px; font-size:13px; color:rgba(255,255,255,.75); }
+.plist .prow { padding:6px 0; border-top:1px solid rgba(255,255,255,.08); word-break:break-all; }
+.plist .prow:first-of-type { border-top:0; }
+.plist .pname { color:#fff; font-weight:700; }
+.plist .ptag { margin-left:8px; font-size:11px; letter-spacing:1px; color:var(--cy, #00e5ff); }
+.plist .ptag.warn { color:var(--ye, #ffd23f); }
+.plist .phint { margin-top:2px; color:rgba(255,255,255,.55); }
 .out { display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:13px; color:rgba(255,255,255,.6); word-break:break-all; }
 .out b { color:var(--bo); font-weight:400; }
 .prog { margin-top:12px; }
@@ -165,7 +172,8 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
       </div>
     </div>
     <div class="msg hide" id="addErr"></div>
-    <div class="out" style="margin-top:14px"><span>DESCARGAS EN</span><b id="dlFolder"></b><button class="btn sm" id="btnOut">ELEGIR CARPETA</button><span id="outNote"></span></div>
+    <div class="out" style="margin-top:14px"><span>DESCARGAS EN</span><b id="dlFolder"></b><button class="btn sm" id="btnOut">ELEGIR CARPETA</button><button class="btn sm" id="btnPartials" title="Busca en esta carpeta restos de descargas que quedaron a medias">REVISAR PARCIALES</button><span id="outNote"></span></div>
+    <div class="plist hide" id="partialsBox"></div>
     <div class="out" style="margin-top:8px"><span>CLIPS EN</span><b id="clipFolder"></b><button class="btn sm" id="btnClipsDir">ELEGIR CARPETA</button><span id="clipsNote"></span></div>
     <div class="out" style="margin-top:8px"><span>DESCARGAS A LA VEZ</span>
       <select id="maxDl" style="width:auto; padding:6px 10px; font-size:14px;"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select>
@@ -463,6 +471,44 @@ $("btnUpdate").onclick = () => {
   $("btnUpdate").disabled = true;
   api("update", {}).then(r => watchSimpleJob(r.job, $("progInstall"), () => { $("btnUpdate").disabled = false; $("missing").classList.remove("hide"); refreshStatus(); }))
     .catch(e => { alert(e.message); $("btnUpdate").disabled = false; });
+};
+// ---------- revisar parciales: restos de descargas a medias en la carpeta de descargas ----------
+const fmtSize = n => n >= 1073741824 ? (n / 1073741824).toFixed(2) + " GB" : n >= 1048576 ? (n / 1048576).toFixed(0) + " MB" : Math.max(1, Math.round(n / 1024)) + " KB";
+const fmtAgo = t => { const m = Math.max(0, Math.round((Date.now() / 1000 - t) / 60));
+  return m < 2 ? "recién" : m < 60 ? `hace ${m} min` : m < 1440 ? `hace ${Math.round(m / 60)} h` : `hace ${Math.round(m / 1440)} días`; };
+function partialsRow(g) {
+  const row = document.createElement("div"); row.className = "prow";
+  const name = document.createElement("span"); name.className = "pname"; name.textContent = g.slug;
+  const tag = document.createElement("span"); tag.className = "ptag";
+  tag.textContent = g.active ? "DESCARGANDO AHORA" : g.resumable ? "SE PUEDE RETOMAR" : g.final_exists ? "RESTOS: EL VIDEO YA EXISTE" : "RESTOS SUELTOS";
+  tag.classList.toggle("warn", !g.active && !g.resumable);
+  const info = document.createElement("span"); info.textContent = `  ·  ${g.files.length} archivo(s)  ·  ${fmtSize(g.size)}  ·  ${fmtAgo(g.mtime)}`;
+  row.append(name, tag, info);
+  const hint = document.createElement("div"); hint.className = "phint";
+  hint.textContent = g.active ? "Va en la cola: no hace falta hacer nada."
+    : g.resumable ? `Para retomar: agrega el mismo link otra vez con el nombre «${g.slug}» y la misma calidad; sigue desde donde quedó.`
+    : g.final_exists ? "El video terminado ya está en la carpeta; estos archivos sobran y puedes borrarlos a mano."
+    : "No hay un .part que retomar: son archivos temporales sueltos.";
+  row.appendChild(hint);
+  return row;
+}
+$("btnPartials").onclick = async () => {
+  const btn = $("btnPartials"), box = $("partialsBox"); btn.disabled = true; btn.textContent = "REVISANDO...";
+  try {
+    const r = await api("partials");
+    box.replaceChildren(); box.classList.remove("hide");
+    const head = document.createElement("div");
+    head.textContent = !r.exists ? `La carpeta ${r.folder} no existe todavía.`
+      : r.items.length ? `${r.items.length} descarga(s) con archivos parciales en ${r.folder}:` : `No hay archivos parciales en ${r.folder}.`;
+    box.appendChild(head);
+    r.items.forEach(g => box.appendChild(partialsRow(g)));
+    if (r.exists) {
+      const open = document.createElement("button"); open.className = "btn sm"; open.style.marginTop = "8px"; open.textContent = "ABRIR CARPETA";
+      open.onclick = () => api("open", { path: r.folder }).catch(e => alert(e.message));
+      box.appendChild(open);
+    }
+  } catch (e) { alert(e.message); }
+  btn.disabled = false; btn.textContent = "REVISAR PARCIALES";
 };
 $("btnLog").onclick = () => api("openlog", {}).catch(e => alert(e.message));
 
