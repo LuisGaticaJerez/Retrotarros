@@ -14,16 +14,16 @@ Ranking 100% objetivo por precio CIB (Complete In Box) via PriceCharting, consul
 
 | # | Juego | CIB | Por que tan caro |
 |---|-------|-----|-------------------|
-| 1 | The Misadventures of Tron Bonne | ~$653 | Spin-off de Mega Man Legends, ventas tan bajas que Capcom nunca repitio la formula |
-| 2 | Tail Concerto | ~$525 | Derechos de publicacion pasaron entre estudios, tirada occidental retrasada |
-| 3 | Revelations: Persona | ~$508 | Localizacion muy alterada del original, nunca en Europa hasta PSP 2010 |
-| 4 | Persona 2: Eternal Punishment | ~$490 | Unica localizacion oficial en ingles de esa entrega |
-| 5 | Clock Tower II | ~$458 | Recepcion critica tibia, hoy nicho de culto horror |
-| 6 | Klonoa: Door to Phantomile | ~$409 | Exito en Japon, distribucion occidental limitada |
-| 7 | JoJo's Bizarre Adventure | ~$312 | Conversion CPS3, arte exclusivo de Araki, tirada corta |
-| 8 | Valkyrie Profile | ~$309 | RPG tardio, traduccion masiva compleja |
-| 9 | Tales of Destiny II | ~$200 | Lanzamiento tardio (2002), confusion de nombre con la saga real |
-| 10 | Suikoden II | ~$177 | Tirada minima pese a ser de los JRPG mas aclamados de la consola |
+| 1 | The Misadventures of Tron Bonne | ~$625 | Spin-off de Mega Man Legends, ventas tan bajas que Capcom nunca repitio la formula |
+| 2 | Revelations: Persona | ~$536 | Localizacion muy alterada del original, nunca en Europa hasta PSP 2010 |
+| 3 | Tail Concerto | ~$525 | Derechos de publicacion pasaron entre estudios, tirada occidental retrasada |
+| 4 | Shadow Tower | ~$502 | De los creadores de King's Field, Agetec lo trajo a EE.UU. en noviembre de 1999 |
+| 5 | Persona 2: Eternal Punishment | ~$495 | Unica localizacion oficial en ingles de esa entrega |
+| 6 | Clock Tower II | ~$458 | Recepcion critica tibia, hoy nicho de culto horror |
+| 7 | Koudelka | ~$427 | Survival horror RPG de 4 discos, sucesor espiritual: Shadow Hearts |
+| 8 | Klonoa: Door to Phantomile | ~$408 | Exito en Japon, distribucion occidental limitada |
+| 9 | The Adventures of Lomax | ~$400 | Spin-off de Lemmings de Psygnosis, 1996 |
+| 10 | Pink Panther: Pinkadelic Pursuit | ~$350 | Licencia infantil de 2002, con la PS1 ya en retirada |
 
 **Santo Grial: Tekken [Long Box]** (record USD 55.200, copia sellada/graduada Wata 9.8 A++, Heritage Auctions marzo 2024) -el CIB normal ronda apenas los USD 90.
 
@@ -31,7 +31,7 @@ Ranking 100% objetivo por precio CIB (Complete In Box) via PriceCharting, consul
 
 ## Decisiones duras (que quedo afuera)
 
-- **Koudelka, Shadow Tower, Einhander, Castlevania Chronicles**: todos con precios CIB similares o mayores a varios del top 10 elegido, pero se priorizo variedad de generos/publishers antes que meter 4 juegos mas de nicho similar. Quedan como candidatos para un "top precios volumen 2" si se retoma la consola.
+- **Koudelka y Shadow Tower (corregido 2026-10-09):** la primera version los dejaba afuera por "variedad de generos", pero cuestan mas que varios del top (USD 427 y USD 502). Eso rompia la premisa del episodio, que es ser el top 10 por precio CIB, asi que entraron. Salen Suikoden II, Tales of Destiny II, Valkyrie Profile y JoJo's. Aclararlo en camara: Suikoden II y Valkyrie son queridos, pero hoy se pagan por debajo de USD 310. Einhander y Castlevania Chronicles no se re-verificaron en esta revision: antes de grabar, mirar si superan a Pink Panther (USD 350).
 - **NFL Blitz 2000 [Greatest Hits]**: primer intento uso una cifra de $3.600 sacada de un blog secundario -al verificar directo en PriceCharting el CIB real es USD 11.225 (con solo 4 ventas completadas EN TOTAL registradas, nunca por año). Se queda en rarezas y NO compite por posicion en el top 10 pese a ser mas caro que todo el top junto, porque nunca se vendio en retail normal -"se imprimio por error y se retiro casi por completo antes de salir a la venta" segun la propia ficha de PriceCharting. Aclarar esto en camara: el apartado de rarezas no es "menos caro", es "no vendido en tiendas".
 - **Mortal Kombat 3 [Jewel Case]**: primer intento lo dejo sin precio por falta de dato. Se encontro el precio real en PriceCharting: USD 961 CIB, con apenas ~3 ventas por año registradas -confirma que es autentica rareza de mercado, no solo falta de investigacion.
 
@@ -71,3 +71,12 @@ Luis pidio revisar que el grial fuera siempre el mas caro y que las rarezas fuer
 - **NFL Blitz 2000 [Greatest Hits]**: de "~$3.600 sellado" (un blog) a **USD 11.225 CIB** (PriceCharting directo) -correccion grande. Ademas la ficha de PriceCharting confirma que "se imprimio por error y se retiro casi por completo antes de salir a la venta", con apenas 4 ventas CIB completadas EN TOTAL en la historia del listado -esto es mejor dato narrativo que la version anterior ("nunca debio tener Greatest Hits", que sonaba a especulacion sin fuente clara).
 
 Con los 3 corregidos, la jerarquia de precios en pantalla queda: $653 (techo del top 10 retail) < $961 < $1.062 < $11.225 (rarezas) < **$55.200 (grial)**. El grial sigue siendo, por mucho margen, el precio mas alto de todo el episodio -y las 3 rarezas quedan confirmadas como genuinamente "no-retail" (ninguna se vendio en tiendas de forma normal: Syphon Filter 3 y NFL Blitz 2000 fueron retiradas antes/durante el lanzamiento, Mortal Kombat 3 Jewel Case es una variante de produccion anomala con apenas 3-4 copias conocidas).
+
+## Revision de precios 2026-10-09 (auditoria CANON)
+
+Reforge hecho leyendo PriceCharting directo (listado de la consola ordenado por precio y ficha por juego):
+
+- **Cambios en el top 10 retail:** entran Pink Panther: Pinkadelic Pursuit (USD 350), The Adventures of Lomax (USD 400), Koudelka (USD 427) y Shadow Tower (USD 502). Salen Suikoden II, Tales of Destiny II, Valkyrie Profile y JoJo's. Revelations: Persona sube al #2 (USD 536). Persona 2 queda en USD 495 y Tron Bonne en USD 625.
+- **Rarezas:** Syphon Filter 3 [911 Edition] hoy USD 1.053 contra USD 1.062 en pantalla (menos de 1% de diferencia, se deja igual). Mortal Kombat 3 Jewel Case y NFL Blitz 2000 no se re-leyeron hoy: siguen con las cifras del 2026-09-21.
+- **Grial:** Tekken [Long Box] sigue en USD 55.200 (subasta Heritage, marzo 2024), con mucha distancia sobre todo lo demas. La jerarquia queda $625 (techo retail) < $961 < $1.062 < $11.225 < $55.200.
+- **Limite de la revision:** el listado de PriceCharting viene ordenado por precio suelto, asi que un disco con suelto bajo y CIB alto podria no haberse visto. Se miraron los 150 primeros por suelto.

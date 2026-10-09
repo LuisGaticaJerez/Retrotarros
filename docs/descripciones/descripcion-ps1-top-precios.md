@@ -16,24 +16,24 @@ Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes.
 ```
 Nada de esto es Final Fantasy VII ni Metal Gear Solid. Lo caro en PS1 son los JRPG y juegos de nicho japonés que vendieron poco en Occidente. Hoy repasamos los 10 discos que hoy valen más que la consola misma, más un santo grial que se vendió en subasta por 55 mil dólares 💰
 
-Del piso al techo: Suikoden II, Klonoa, Persona 2, hasta el trono de The Misadventures of Tron Bonne -un spin-off de Mega Man Legends tan poco vendido que Capcom nunca repitió la fórmula-. Y cerramos con rarezas reales, ninguna vendida jamás en tiendas: la portada de Syphon Filter 3 retirada tras el 11-S, un NFL Blitz 2000 impreso por error y retirado antes de salir a la venta (con apenas 4 ventas registradas en la historia del mercado retro), una variante de Mortal Kombat 3 de la que solo existen 3 o 4 copias, y el santo grial: un Tekken sellado y graduado que rompió récords de subasta.
+Del piso al techo: Pink Panther, Lomax, Koudelka, Shadow Tower, Persona 2, hasta el trono de The Misadventures of Tron Bonne -un spin-off de Mega Man Legends tan poco vendido que Capcom nunca repitió la fórmula-. Y cerramos con rarezas reales, ninguna vendida jamás en tiendas: la portada de Syphon Filter 3 retirada tras el 11-S, un NFL Blitz 2000 impreso por error y retirado antes de salir a la venta (con apenas 4 ventas registradas en la historia del mercado retro), una variante de Mortal Kombat 3 de la que solo existen 3 o 4 copias, y el santo grial: un Tekken sellado y graduado que rompió récords de subasta.
 
-Precios CIB actualizados septiembre 2026, vía PriceCharting. Valores aproximados, nunca consejo de inversión.
+Precios CIB actualizados octubre 2026, vía PriceCharting. Valores aproximados, nunca consejo de inversión.
 
 ¿Sabían de Tron Bonne antes de este video? ¿Tienen algún disco de esta lista guardado? Cuéntanos en los comentarios.
 
 00:00 Cold open
 00:30 Contexto: lo raro gana, no lo famoso
-01:30 #10 Suikoden II (~$177)
-03:00 #9 Tales of Destiny II (~$200)
-04:30 #8 Valkyrie Profile (~$309)
-06:00 #7 JoJo's Bizarre Adventure (~$312)
-07:30 #6 Klonoa: Door to Phantomile (~$409)
-09:00 #5 Clock Tower II (~$458)
-10:30 #4 Persona 2: Eternal Punishment (~$490)
-12:00 #3 Revelations: Persona (~$508)
-13:30 #2 Tail Concerto (~$525)
-15:00 #1 The Misadventures of Tron Bonne (~$653)
+01:30 #10 Pink Panther: Pinkadelic Pursuit (~$350)
+03:00 #9 The Adventures of Lomax (~$400)
+04:30 #8 Klonoa: Door to Phantomile (~$408)
+06:00 #7 Koudelka (~$427)
+07:30 #6 Clock Tower II (~$458)
+09:00 #5 Persona 2: Eternal Punishment (~$495)
+10:30 #4 Shadow Tower (~$502)
+12:00 #3 Tail Concerto (~$525)
+13:30 #2 Revelations: Persona (~$536)
+15:00 #1 The Misadventures of Tron Bonne (~$625)
 16:30 Rarezas: Syphon Filter 3, Mortal Kombat 3, NFL Blitz 2000
 18:00 Santo Grial: Tekken [Long Box] ($55.200 en subasta)
 19:00 Análisis del top
@@ -54,7 +54,7 @@ Nicho: `#Coleccionismo #Tekken #TronBonne #JRPG`
 ## Tags YouTube (keywords)
 
 ```
-ps1 juegos caros, tron bonne precio, tekken long box, suikoden 2 ps1, persona 2 eternal punishment, klonoa ps1, syphon filter 3 911, mortal kombat 3 jewel case, nfl blitz 2000 greatest hits, coleccionismo retro, pricecharting, retrotarros
+ps1 juegos caros, tron bonne precio, tekken long box, shadow tower ps1, koudelka ps1, persona 2 eternal punishment, klonoa ps1, syphon filter 3 911, mortal kombat 3 jewel case, nfl blitz 2000 greatest hits, coleccionismo retro, pricecharting, retrotarros
 ```
 
 ---
@@ -74,4 +74,4 @@ ps1 juegos caros, tron bonne precio, tekken long box, suikoden 2 ps1, persona 2 
 
 **Slug:** `ps1-top-precios`
 **Formato:** Ranking (episodio largo, horizontal)
-**Última actualización:** 2026-09-21
+**Última actualización:** 2026-10-09 (top 10 corregido con precios de PriceCharting)

@@ -4,6 +4,8 @@
 > HTML: `studio/rankings/top-precios/ps1-top-precios.html`
 > Formato: ranking hibrido por precio CIB · 19 slides
 
+> **REVISION 2026-10-09 (reforge de precios, con PriceCharting leido directo):** el top 10 retail tenia un hueco: Shadow Tower (CIB USD 502) y Koudelka (USD 427) estaban afuera por decision editorial de variedad, pero cuestan mas que varios del top. Se corrigio para que sea de verdad el top 10 por CIB. **Entran:** Pink Panther: Pinkadelic Pursuit (USD 350), The Adventures of Lomax (USD 400), Koudelka (USD 427) y Shadow Tower (USD 502). **Salen:** Suikoden II (USD 177), Tales of Destiny II (USD 200), Valkyrie Profile (USD 307) y JoJo's Bizarre Adventure (USD 320). Revelations: Persona sube al #2 (USD 536 contra USD 525 de Tail Concerto). Los demas precios se ajustaron a la ficha actual. Rarezas y grial no cambian.
+
 ## Gancho / Cold open
 
 Nada de esto es Final Fantasy VII ni Metal Gear Solid. Lo caro en PS1 son los JRPG y juegos de nicho japones que vendieron poco en Occidente. Hoy: del piso al techo del top 10 retail, mas rarezas y un santo grial que se vendio en subasta por 55 mil dolares.
@@ -19,16 +21,16 @@ Nada de esto es Final Fantasy VII ni Metal Gear Solid. Lo caro en PS1 son los JR
 
 | # | Juego | CIB | Por que |
 |---|---|---|---|
-| 10 | Suikoden II | ~$177 | Konami nunca reimprimio pese a la demanda creciente |
-| 9 | Tales of Destiny II | ~$200 | Lanzamiento tardio de la consola (2002), confusion de nombre con la saga |
-| 8 | Valkyrie Profile | ~$309 | Dialogo masivo, traduccion compleja, tirada limitada |
-| 7 | JoJo's Bizarre Adventure | ~$312 | Conversion CPS3, arte exclusivo de Hirohiko Araki |
-| 6 | Klonoa: Door to Phantomile | ~$409 | Vendio bien en Japon, distribucion occidental limitada |
-| 5 | Clock Tower II | ~$458 | Recepcion tibia en su momento, hoy nicho de culto horror |
-| 4 | Persona 2: Eternal Punishment | ~$490 | Unica localizacion oficial en ingles, demanda post-Persona 5 |
-| 3 | Revelations: Persona | ~$508 | Localizacion muy alterada, nunca salio en Europa hasta PSP 2010 |
-| 2 | Tail Concerto | ~$525 | Derechos de publicacion pasaron entre estudios, tirada retrasada |
-| 1 | The Misadventures of Tron Bonne | ~$653 | Ventas tan bajas que Capcom nunca repitio el spin-off |
+| 10 | Pink Panther: Pinkadelic Pursuit | ~$350 | Licencia infantil de 2002, PS1 ya en retirada, casi nadie guardo el disco completo |
+| 9 | The Adventures of Lomax | ~$400 | Spin-off de Lemmings (Psygnosis, 1996) |
+| 8 | Klonoa: Door to Phantomile | ~$408 | Vendio bien en Japon, distribucion occidental limitada |
+| 7 | Koudelka | ~$427 | Survival horror RPG de Sacnoth, 4 discos, sucesor espiritual: Shadow Hearts |
+| 6 | Clock Tower II | ~$458 | Recepcion tibia en su momento, hoy nicho de culto horror |
+| 5 | Persona 2: Eternal Punishment | ~$495 | Unica localizacion oficial en ingles, demanda post-Persona 5 |
+| 4 | Shadow Tower | ~$502 | FromSoftware (King's Field), Agetec en EE.UU. noviembre 1999 |
+| 3 | Tail Concerto | ~$525 | Derechos de publicacion pasaron entre estudios, tirada retrasada |
+| 2 | Revelations: Persona | ~$536 | Localizacion muy alterada, nunca salio en Europa hasta PSP 2010 |
+| 1 | The Misadventures of Tron Bonne | ~$625 | Ventas tan bajas que Capcom nunca repitio el spin-off |
 
 ## Rarezas / No-Retail
 
@@ -56,6 +58,6 @@ Lo raro gana, no lo famoso. Ningun juego de este top aparecio en el Top Mundial.
 
 ## Notas de produccion
 
-- Box arts: 14/14 reales, verificadas visualmente. 10 de Wikipedia REST summary + LaunchBox Games Database para las que Wikipedia trajo version incorrecta (Tales of Destiny II traia la portada japonesa "Tales of Eternia"; JoJo's Bizarre Adventure traia un flyer de arcade de "JoJo's Venture", nombre distinto al del juego de PS1).
+- Box arts: 14/14 reales, verificadas visualmente (las 4 que entran en la revision de octubre 2026: Shadow Tower de Wikipedia; Koudelka y Adventures of Lomax en version NTSC USA desde libretro, porque Wikipedia trajo la caja PAL; Pink Panther desde libretro, Wikipedia no tiene imagen). 10 de Wikipedia REST summary + LaunchBox Games Database para las que Wikipedia trajo version incorrecta (Tales of Destiny II traia la portada japonesa "Tales of Eternia"; JoJo's Bizarre Adventure traia un flyer de arcade de "JoJo's Venture", nombre distinto al del juego de PS1).
 - Rarezas y grial requirieron busqueda extra fuera de Wikipedia/LaunchBox: Syphon Filter 3 911 Edition (blog especializado pricecharting.com), NFL Blitz 2000 Greatest Hits (game-rave.com, recortada del spread front+back+disc), Tekken Long Box (psxdatacenter.com, scan especifico del formato long box distinto del jewel case estandar).
 - Notas teleprompter: tecla N o boton (no-capture). Precio en pantalla igual para retail/rarezas/grial (misma pastilla amarilla), salvo Mortal Kombat 3 Jewel Case que no lleva precio por no tener venta de referencia.
