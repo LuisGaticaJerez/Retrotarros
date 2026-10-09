@@ -198,7 +198,26 @@ def _slide_divider(num: int, d: dict) -> str:
     )
 
 
-def _shared_css() -> str:
+def _tv_css() -> str:
+    """Letra mas grande para ver el estudio en una TV a distancia (Luis 2026-10-09, Top Peores: el texto del
+    veredicto y la explicacion del ranking se leian muy chicos). Se activa con data["tv_grande"]=True.
+    Mide: why 26->32 px, titulo 44->52, meta 19->24, etiqueta del premio 13->19, textos de divisores y de la
+    portada 21->34 px. La columna izquierda sube a 46% y la caja baja a 440 px para que el why mas largo (PS1,
+    ~320 caracteres) siga cabiendo entero sin tocar el TarroVision (verificado en los 10 Top Peores a 1920x1080)."""
+    return (
+        ".game-title{font-size:52px !important}\n"
+        ".game-meta{font-size:24px !important;line-height:1.35 !important}\n"
+        ".game-why{font-size:32px !important;line-height:1.4 !important}\n"
+        ".game-why .lbl{font-size:19px !important;margin-bottom:10px !important;line-height:1.5 !important}\n"
+        ".slide-hybrid{grid-template-columns:46% 1fr !important}\n"
+        ".cart{width:min(100%,440px) !important}\n"
+        ".divider .pre{font-size:22px !important;letter-spacing:5px !important}\n"
+        ".divider .sub{font-size:34px !important;line-height:1.5 !important;max-width:1500px !important;letter-spacing:1px !important}\n"
+        ".portada .ep-sub{font-size:34px !important}\n"
+    )
+
+
+def _shared_css(tv_grande: bool = False) -> str:
     """CSS inyectado en todo episodio generado con generar_top(): precio grande,
     capa de notas de lectura (teleprompter, tecla N), letras mas grandes para TV,
     y el layout de enfasis en el gameplay. Extraida a funcion propia (Luis
@@ -265,7 +284,8 @@ def _shared_css() -> str:
         ".tarrovision{width:100%;height:100%;aspect-ratio:auto;max-width:100%;max-height:100%}\n"
         ".hybrid-title{grid-area:title;text-align:left;align-items:flex-start}\n"
         ".game-why{grid-area:why;max-width:none}\n"
-        "</style>\n</head>"
+        + (_tv_css() if tv_grande else "")
+        + "</style>\n</head>"
     )
 
 
@@ -285,7 +305,7 @@ def generar_top(data: dict, out_slug: str) -> Path:
     # duplicado porque BASE ya tenia su propia copia inyectada).
     if _SHARED_CSS_BLOCK_RE.search(head):
         head = _SHARED_CSS_BLOCK_RE.sub("</head>", head, count=1)
-    head = head.replace("</head>", _shared_css(), 1)
+    head = head.replace("</head>", _shared_css(bool(data.get("tv_grande"))), 1)
     head += '\n<div class="read-indicator">● MODO LECTURA (N)</div>\n'
 
     consola = data.get("consola", "NES")
