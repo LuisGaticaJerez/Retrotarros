@@ -16,6 +16,11 @@
 > del 2026-08-20 aunque 3 de esos videos (Atari 2600 Top Mundial + Top Precios, PS Vita Top
 > Mundial) también se confirmaron publicados de paso; sus conteos de categoría no se
 > recalcularon todavía.
+>
+> **Re-verificación de Reseñas: 2026-10-09** (pestaña Videos en vivo, 2.24 K suscriptores, 80
+> videos). Hay 24 reseñas publicadas y 20 en backlog; ese mismo día se sacaron del estudio
+> (repo y Drive) las 24 publicadas. De paso se vio publicado el Top Mundial de GameCube; el
+> resto de las categorías no se recontó.
 
 ## Cómo leer esto
 
@@ -34,14 +39,14 @@
 
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
-| Reseñas | 40 | 13 | 4 | 23 |
+| Reseñas | 44 | 24 | 0 | 20 |
 | Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube) | 34 | 14 | ? | 20 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
 | RetroNotas | 2 | 0 | 0 | 2 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **94** | **25** | **8** | **61** |
+| **TOTAL** | **98** | **36** | **4** | **58** |
 
 Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
@@ -52,16 +57,13 @@ publicados.
 
 ---
 
-### 1.1 Programados — Reseñas (4, confirmado por Luis 2026-09-03)
+### 1.1 Programados — Reseñas (0 confirmadas, 2026-10-09)
 
-De las 8 filas que tenía esta tabla en la captura de YouTube Studio del 2026-08-20, 4 ya
-se publicaron (Zombies Ate My Neighbors, Atari 2600 Top Mundial, Top Gear, Pokémon
-Rojo/Azul — movidas a 1.2). Las 4 que quedan abajo Luis confirmó que siguen siendo las
-programadas actuales, pese a que las fechas originales de la captura vieja ya pasaron
-(quedan solo como referencia de cuándo se armó la cola, no como fecha real de estreno).
+Las 4 que figuraban acá (Super Mario World, Golden Axe, Street Fighter II y Chrono Trigger)
+ya están publicadas en el canal (movidas a 1.2). No se revisó YouTube Studio, así que no hay
+reseñas programadas confirmadas hoy.
 
-| Fecha (referencial, no confirmada) | Título | Slug | Categoría |
-|---|---|---|---|
+---|---|---|---|
 | 25 ago 2026 | Yoshi estuvo 5 años esperando este juego para nacer (Super Mario World) | `resena-super-mario-world` | Reseña |
 | 27 ago 2026 | El juego que Sega inspiró en las películas de Conan (Golden Axe) | `resena-golden-axe` | Reseña |
 | 1 sept 2026 | El juego que Capcom no le tenía Fe (Street Fighter II) | `resena-street-fighter-ii` | Reseña |
@@ -71,11 +73,14 @@ programadas actuales, pese a que las fechas originales de la captura vieja ya pa
 
 ### 1.2 Publicados (25 + Abriendo el Tarro + 2 G-OLD, más las Reseñas nuevas de abajo)
 
-**Reseñas (13) — verificado en vivo 2026-09-03, orden del más reciente al más antiguo:**
-Cadillacs and Dinosaurs (recién publicada, hace minutos), Jewel Master, Top Gear, Pokémon
-Rojo/Azul, Zombies Ate My Neighbors, Super Metroid, Mega Man 2, Donkey Kong Country,
-Kirby's Adventure, Killer Instinct, Pitfall: The Mayan Adventure, Mortal Kombat, Super
-Mario Bros. 3.
+**Reseñas (24) — verificado en vivo 2026-10-09, del más reciente al más antiguo:**
+Worms Armageddon (pedida), Samurai Shodown (pedida), Doom (pedida), King of Fighters '94,
+Battletoads, Super Mario World, Street Fighter II, Golden Axe, Metal Gear Solid (pedida),
+Chrono Trigger, The Legend of Zelda (pedida), Cadillacs and Dinosaurs (pedida), Jewel Master
+(pedida), Top Gear (pedida), Pokémon Rojo/Azul (pedida), Zombies Ate My Neighbors, Super
+Metroid (pedida), Mega Man 2, Donkey Kong Country, Kirby's Adventure, Killer Instinct,
+Pitfall: The Mayan Adventure (pedida), Mortal Kombat, Super Mario Bros. 3. Sus HTML, carpetas
+del Drive y kits de YouTube (`docs/descripciones/`) se retiraron el 2026-10-09 (siguen en el historial de git).
 
 **Rankings (10):** Master System Top Mundial + Top Precios, Mega Drive Top Mundial, NES
 Top Mundial + Top Precios, SNES Top Mundial + Top Precios, N64 Top Mundial + Top Precios,
@@ -97,11 +102,11 @@ PS Vita Top Mundial.
 
 ### 1.3 Backlog armado — listo para programar, sin fecha (49)
 
-**Reseñas (21 + 2 nuevas 2026-10-07: Mighty Morphin Power Rangers y JoJo's Bizarre Adventure, ambas pedidas, comentario de @jesusreyna525) — verificado en vivo 2026-09-03:** Aladdin, Altered Beast, Battletoads,
-Contra, Crash Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, International
-Superstar Soccer, King of Fighters '94, Kirby Super Star, A Link to the Past, Sonic the
-Hedgehog, Sonic the Hedgehog 2, Star Fox, Yoshi's Island, más 4 pedidas: The Legend of
-Zelda, Metal Gear Solid, Metal Warriors, Super Smash Bros. Melee.
+**Reseñas (20) — verificado en vivo 2026-10-09:** Aladdin, Altered Beast, Contra, Crash
+Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, International Superstar
+Soccer, Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star
+Fox, Yoshi's Island, más 5 pedidas: Metal Warriors, Super Smash Bros. Melee, Mighty Morphin
+Power Rangers, JoJo's Bizarre Adventure y Montezuma's Revenge.
 
 **Rankings (17):** Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
 Top Precios, Saturn Top Mundial + Top Precios, PS1 Top Mundial + Top Precios (recién
@@ -185,11 +190,9 @@ se publica tal cual.
 
 - **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **sigue siendo la brecha más
   grande del canal**, sin cambios desde julio.
-- **Reseñas:** 38 armadas, 13 publicadas (verificado en vivo 2026-09-03), 4 programadas
-  confirmadas por Luis (Golden Axe, Super Mario World, Chrono Trigger, Street Fighter II —
-  21 de backlog puro) — formato más nuevo del canal, el que más rápido está publicando (5
-  reseñas nuevas en las últimas 2 semanas), y aun así sigue siendo el segundo backlog más
-  grande en volumen absoluto.
+- **Reseñas:** 44 armadas, 24 publicadas (verificado en vivo 2026-10-09), 20 de backlog sin
+  fecha, 0 programadas confirmadas — el formato que más rápido está publicando, y aun así
+  sigue siendo el segundo backlog más grande en volumen absoluto.
 - **Rankings:** 20 armados, 10 publicados, 1 programado (9 de backlog).
 - **Curaduría N64:** 5 armados, 0 publicados — sigue sin casa en el menú de playlists.
 - **RetroNotas:** 2 armadas, 0 publicadas — formato nuevo, sin playlist propia todavía.
