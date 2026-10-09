@@ -45,19 +45,19 @@ Solo cartuchos retail, NTSC USA, condición Complete In Box. Variantes Not For R
 | # | Juego | CIB mayo 2026 | CIB agosto 2026 | Movimiento | Por qué tan caro |
 |---|-------|---------------|------------------|------------|------------------|
 | **1** | ClayFighter 63⅓: Sculptor's Cut | $4,800 | **$5,824** | ▲ +21% | Solo distribuido en alquiler en Blockbuster. Sealed hoy: US$18,056 (ver kicker). |
-| **2** | Stunt Racer 64 | $2,300 | **$1,500** | ▼ -35% | Otro exclusivo Blockbuster. Cuando cerraron las tiendas, se perdieron casi todas. |
-| **3** | Super Bowling | $1,836 | **$2,100** | ▲ +14% | Tirada microscópica de THQ. Marzo 1999, sin marketing. |
-| **4** | F1 Racing Championship | $1,706 | **$1,665** | ≈ estable | Cancelado USA a último minuto. NTSC llegó SOLO a Brasil. |
-| **5** | Worms Armageddon | $1,017 | **$762** | ▼ -25% | La PAL vale $50. La NTSC USA es la cara. Diferencia regional brutal. |
-| **6** | Bomberman 64: The Second Attack | $845 | **$860** | ≈ estable | Pasó de $488 a $990 en enero-febrero 2022. Las cajas son lo escaso. |
-| **7** | Transformers: Beast Wars Transmetals | $693 | **$784** | ▲ +13% | Tirada baja. Demanda explotó por nostalgia de la serie. |
+| **2** | Super Bowling | $1,836 | **$2,100** | ▲ +14% | Tirada microscópica de THQ. Marzo 1999, sin marketing. |
+| **3** | F1 Racing Championship | $1,706 | **$1,665** | ≈ estable | Cancelado USA a último minuto. NTSC llegó SOLO a Brasil. |
+| **4** | Stunt Racer 64 | $2,300 | **$1,500** | ▼ -35% | Otro exclusivo Blockbuster. Cuando cerraron las tiendas, se perdieron casi todas. |
+| **5** | Bomberman 64: The Second Attack | $845 | **$860** | ≈ estable | Pasó de $488 a $990 en enero-febrero 2022. Las cajas son lo escaso. |
+| **6** | Transformers: Beast Wars Transmetals | $693 | **$784** | ▲ +13% | Tirada baja. Demanda explotó por nostalgia de la serie. |
+| **7** | Worms Armageddon | $1,017 | **$762** | ▼ -25% | La PAL vale $50. La NTSC USA es la cara. Diferencia regional brutal. |
 | **8** | Rat Attack! | $685 | **$710** | ≈ estable | Puzzle de Mindscape 2000. Vendió mal, rareza por accidente. |
-| **9** | International Superstar Soccer 2000 | $650 | **$268** | ▼ -59% | Corrección real de mercado, verificada en la ficha individual. Tirada baja, nunca pegó frente a FIFA. |
-| **10** | Conker's Bad Fur Day | $338 | **$500** | ▲ +48% | El único de los "populares" del ranking. Rating M en consola de niños. |
+| **9** | Conker's Bad Fur Day | $338 | **$500** | ▲ +48% | El único de los "populares" del ranking. Rating M en consola de niños. |
+| **10** | International Superstar Soccer 2000 | $650 | **$268** | ▼ -59% | Corrección real de mercado, verificada en la ficha individual. Tirada baja, nunca pegó frente a FIFA. |
 
 **Lectura del ranking:**
 
-- El orden #1 al #10 se mantiene igual que en mayo — el reordenamiento por precio no cambió, solo los montos.
+- El orden se corrigió el 2026-10-09: el reforge de agosto actualizó los montos pero dejó los puestos del orden de mayo, así que Stunt Racer 64 ($1,500) figuraba sobre Super Bowling ($2,100). Ahora el #1 al #10 sigue estrictamente el precio de agosto (ISS 2000 pasó a #10 y Conker a #9).
 - 9 de los 10 son juegos que casi nadie jugó. Solo Conker entra a la lista siendo famoso.
 - 4 de los 10 son exclusivos Blockbuster o de regiones específicas.
 - Ningún Mario, Zelda, ni Donkey Kong retail estándar. El mercado pagaría más por ClayFighter que por Ocarina.

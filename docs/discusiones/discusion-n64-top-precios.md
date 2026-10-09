@@ -14,7 +14,7 @@
 **Qué SÍ es:**
 - Episodio del **Top 10 precios** (CIB USD, PriceCharting mayo 2026).
 - 17 slides, duración objetivo **18-22 min**.
-- Orden #10 → #1 (Conker $338 → ClayFighter $4,800).
+- Orden #10 → #1 por precio de agosto 2026 (ISS 2000 $268 → ClayFighter $5,824). Corregido el 2026-10-09: antes quedó con el orden de mayo.
 - Incluye NFR Kicker ($9,199 sealed ClayFighter / $8,500 Majora gris).
 - Cierra con valor total colección Koko (US$1,470) + frase fija viral.
 
