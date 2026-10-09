@@ -636,7 +636,24 @@ function saveDefaults(it) {
   const d = { container: o.container, maxH: (o.height && o.height < top) ? o.height : 1080, h264: o.h264, anti: o.anti, clips: { ...it.clips } };
   Object.assign(DEF, d); lsSet("tarrodl.defaults", d);
 }
+// Cantidad de clips en 0 = sin tope (o automática): pide confirmar por cada video antes de crear nada.
+async function confirmZeroCount(it) {
+  readState(it);
+  if (!it.clips.enabled || it.clips.count !== 0) return true;
+  let n = "";
+  if (it.sec.dur) {
+    try {
+      const r = await api("plan", { ...(it.kind === "disk" ? { file: it.file } : { duration: it.info.duration }), ...planParams(it) });
+      n = ` Con esta configuración se crearían ${r.clips.length} clip(s).`;
+    } catch (e) { /* sin plan: el aviso sale igual, solo sin la cantidad */ }
+  }
+  const que = it.clips.mode === "mosaico" ? "automática (1 cada ~10 min)" : "sin tope (todo el video seguido)";
+  const ok = confirm(`"${it.info.title || it.file}"\n\nLa cantidad de clips está en 0: ${que}.${n}\n\n¿Seguro que quieres dejarla en 0?`);
+  if (!ok) { it.msg = "No se creó nada: cambia la cantidad de clips y vuelve a intentar."; renderItem(it); try { it.q(".c-count").focus(); } catch (e) { /* tarjeta sin campo visible */ } }
+  return ok;
+}
 async function enqueue(it) {
+  if (!(await confirmZeroCount(it))) return;
   readState(it);
   const btn = it.q(".b-add"); btn.disabled = true;
   try {
@@ -648,6 +665,7 @@ async function enqueue(it) {
   finally { btn.disabled = false; renderItem(it); renderQueue(); }
 }
 async function startClipsOnly(it) {
+  if (!(await confirmZeroCount(it))) return;
   readState(it);
   const btn = it.q(".b-add"); btn.disabled = true;
   try {
@@ -659,6 +677,7 @@ async function startClipsOnly(it) {
 }
 async function startClips(it, file) {
   if (!file) return;
+  if (!(await confirmZeroCount(it))) return;
   try {
     const r = await api("clips", { file, ...planParams(it) });
     it.clipId = r.job; it.clipJob = null; it.msg = "";
