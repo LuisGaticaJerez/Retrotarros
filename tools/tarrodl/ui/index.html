@@ -172,7 +172,7 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
       </div>
     </div>
     <div class="msg hide" id="addErr"></div>
-    <div class="out" style="margin-top:14px"><span>DESCARGAS EN</span><b id="dlFolder"></b><button class="btn sm" id="btnOut">ELEGIR CARPETA</button><button class="btn sm" id="btnPartials" title="Busca en esta carpeta restos de descargas que quedaron a medias">REVISAR PARCIALES</button><span id="outNote"></span></div>
+    <div class="out" style="margin-top:14px"><span>DESCARGAS EN</span><b id="dlFolder"></b><button class="btn sm" id="btnOut">ELEGIR CARPETA</button><button class="btn sm" id="btnPartials" title="Busca en esta carpeta restos de descargas que quedaron a medias">REVISAR PARCIALES</button><button class="btn sm" id="btnLinks" title="Abre el archivo de texto con los links de tus descargas de las últimas 48 horas">LINKS DE LAS ÚLTIMAS 48 H</button><span id="outNote"></span></div>
     <div class="plist hide" id="partialsBox"></div>
     <div class="out" style="margin-top:8px"><span>CLIPS EN</span><b id="clipFolder"></b><button class="btn sm" id="btnClipsDir">ELEGIR CARPETA</button><span id="clipsNote"></span></div>
     <div class="out" style="margin-top:8px"><span>DESCARGAS A LA VEZ</span>
@@ -490,24 +490,55 @@ function partialsRow(g) {
     : g.final_exists ? "El video terminado ya está en la carpeta; estos archivos sobran y puedes borrarlos a mano."
     : "No hay un .part que retomar: son archivos temporales sueltos.";
   row.appendChild(hint);
+  if (g.link) {
+    const lk = document.createElement("div"); lk.className = "phint"; lk.textContent = "Link guardado: " + g.link + "  ";
+    const cp = document.createElement("button"); cp.className = "btn sm"; cp.textContent = "COPIAR LINK";
+    cp.onclick = () => navigator.clipboard.writeText(g.link).then(() => { cp.textContent = "COPIADO"; setTimeout(() => { cp.textContent = "COPIAR LINK"; }, 1500); }).catch(e => alert(e.message));
+    lk.appendChild(cp); row.appendChild(lk);
+  } else if (g.resumable) {
+    const lk = document.createElement("div"); lk.className = "phint"; lk.textContent = "No tengo guardado el link (pasaron más de 48 h o la descarga empezó en otra versión)."; row.appendChild(lk);
+  }
+  if (!g.active) {
+    const del = document.createElement("button"); del.className = "btn sm"; del.style.marginTop = "6px"; del.textContent = "BORRAR RESTOS";
+    const resumeNote = g.resumable ? "\n\nSe podía retomar: si los borras, la próxima descarga empieza de cero." : "";
+    del.onclick = () => deletePartials({ slug: g.slug }, `"${g.slug}"\n${g.files.length} archivo(s), ${fmtSize(g.size)}.${resumeNote}`);
+    row.appendChild(del);
+  }
   return row;
 }
-$("btnPartials").onclick = async () => {
-  const btn = $("btnPartials"), box = $("partialsBox"); btn.disabled = true; btn.textContent = "REVISANDO...";
+async function deletePartials(body, what) {
+  if (!confirm(`${what}\n\nSe borran de la carpeta de descargas y no se pueden recuperar. ¿Borrarlos?`)) return;
   try {
-    const r = await api("partials");
-    box.replaceChildren(); box.classList.remove("hide");
-    const head = document.createElement("div");
-    head.textContent = !r.exists ? `La carpeta ${r.folder} no existe todavía.`
-      : r.items.length ? `${r.items.length} descarga(s) con archivos parciales en ${r.folder}:` : `No hay archivos parciales en ${r.folder}.`;
-    box.appendChild(head);
-    r.items.forEach(g => box.appendChild(partialsRow(g)));
-    if (r.exists) {
-      const open = document.createElement("button"); open.className = "btn sm"; open.style.marginTop = "8px"; open.textContent = "ABRIR CARPETA";
-      open.onclick = () => api("open", { path: r.folder }).catch(e => alert(e.message));
-      box.appendChild(open);
-    }
-  } catch (e) { alert(e.message); }
+    const r = await api("partials_delete", body);
+    await showPartials(r.deleted.length ? `Se borraron ${r.deleted.length} archivo(s).` + (r.skipped.length ? ` Se omitió lo que está descargándose ahora: ${r.skipped.join(", ")}.` : "") : "");
+  } catch (e) { alert(e.message); await showPartials(); }
+}
+async function showPartials(note) {
+  const box = $("partialsBox"), r = await api("partials");
+  box.replaceChildren(); box.classList.remove("hide");
+  const head = document.createElement("div");
+  head.textContent = (note ? note + "  " : "") + (!r.exists ? `La carpeta ${r.folder} no existe todavía.`
+    : r.items.length ? `${r.items.length} descarga(s) con archivos parciales en ${r.folder}:` : `No hay archivos parciales en ${r.folder}.`);
+  box.appendChild(head);
+  r.items.forEach(g => box.appendChild(partialsRow(g)));
+  const bar = document.createElement("div"); bar.style.cssText = "display:flex; gap:8px; margin-top:8px; flex-wrap:wrap";
+  const stale = r.items.filter(g => !g.active);
+  if (stale.length > 1) {
+    const all = document.createElement("button"); all.className = "btn sm"; all.textContent = "BORRAR TODOS LOS RESTOS";
+    all.onclick = () => deletePartials({ all: true }, `Todos los restos de ${stale.length} descargas (${fmtSize(stale.reduce((n, g) => n + g.size, 0))}).`);
+    bar.appendChild(all);
+  }
+  if (r.exists) {
+    const open = document.createElement("button"); open.className = "btn sm"; open.textContent = "ABRIR CARPETA";
+    open.onclick = () => api("open", { path: r.folder }).catch(e => alert(e.message));
+    bar.appendChild(open);
+  }
+  box.appendChild(bar);
+}
+$("btnLinks").onclick = () => api("open_links", {}).catch(e => alert(e.message));
+$("btnPartials").onclick = async () => {
+  const btn = $("btnPartials"); btn.disabled = true; btn.textContent = "REVISANDO...";
+  try { await showPartials(); } catch (e) { alert(e.message); }
   btn.disabled = false; btn.textContent = "REVISAR PARCIALES";
 };
 $("btnLog").onclick = () => api("openlog", {}).catch(e => alert(e.message));

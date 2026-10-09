@@ -599,6 +599,7 @@ def api_download(body: dict) -> dict:
 
     job = new_job("download")
     job["target"] = str(final)
+    links_add(url, slug, container, body.get("height") or "")
     started = time.time()
 
     def cleanup_download() -> list[str]:
@@ -1086,6 +1087,89 @@ def api_session_files(_body=None) -> dict:
     return {"files": files[:50]}
 
 
+# ---------- links recientes: un .txt con los links de las descargas de las ultimas 48 h (para poder retomarlas) ----------
+LINKS_TTL = 48 * 3600
+LINKS_LOCK = threading.Lock()
+LINKS_HEADER = ("# TarroDL: links de las descargas de las ultimas 48 horas (sirven para retomar una descarga que quedo a medias).\n"
+                "# Cada linea: fecha | link | nombre | formato | calidad. Las lineas con mas de 48 horas se borran solas.\n")
+
+
+def _links_line(when: str, url: str, slug: str, container: str, height) -> str:
+    clean = lambda x: str(x).replace(" | ", " / ").replace("\r", " ").replace("\n", " ").strip()
+    return f"{when} | {clean(url)} | {clean(slug)} | {clean(container)} | {clean(height)}\n"
+
+
+def links_file() -> Path:
+    return CONFIG_DIR / "links-recientes.txt"
+
+
+def _links_parse(text: str, now: float) -> list[dict]:
+    out = []
+    for ln in text.splitlines():
+        if not ln.strip() or ln.startswith("#"):
+            continue
+        parts = [x.strip() for x in ln.split(" | ")]
+        if len(parts) < 3:
+            continue
+        try:
+            ts = time.mktime(time.strptime(parts[0], "%Y-%m-%d %H:%M:%S"))
+        except ValueError:
+            continue
+        if now - ts <= LINKS_TTL:
+            out.append({"ts": ts, "when": parts[0], "url": parts[1], "slug": parts[2],
+                        "container": parts[3] if len(parts) > 3 else "", "height": parts[4] if len(parts) > 4 else ""})
+    return out
+
+
+def links_recent(now: float | None = None) -> list[dict]:
+    """Links guardados de las ultimas 48 h. Reescribe el archivo sin las lineas vencidas (y sin el archivo si no hay nada)."""
+    now = now or time.time()
+    f = links_file()
+    with LINKS_LOCK:
+        try:
+            text = f.read_text(encoding="utf-8") if f.exists() else ""
+        except OSError:
+            return []
+        keep = _links_parse(text, now)
+        lines_before = sum(1 for ln in text.splitlines() if ln.strip() and not ln.startswith("#"))
+        if lines_before != len(keep):
+            try:
+                if keep:
+                    f.write_text(LINKS_HEADER + "".join(_links_line(k["when"], k["url"], k["slug"], k["container"], k["height"]) for k in keep), encoding="utf-8")
+                else:
+                    f.unlink()
+            except OSError as e:
+                log.warning("no pude limpiar %s: %s", f, e)
+        return keep
+
+
+def links_add(url: str, slug: str, container: str, height) -> None:
+    """Anota un link de descarga (al encolarla). Nunca debe romper la descarga: cualquier fallo solo se registra."""
+    try:
+        links_recent()  # limpia lo vencido antes de sumar
+        line = _links_line(time.strftime("%Y-%m-%d %H:%M:%S"), url, slug, container, height)
+        f = links_file()
+        with LINKS_LOCK:
+            f.parent.mkdir(parents=True, exist_ok=True)
+            new = not f.exists()
+            with open(f, "a", encoding="utf-8") as fh:
+                if new:
+                    fh.write(LINKS_HEADER)
+                fh.write(line)
+    except Exception as e:  # noqa: BLE001
+        log.warning("no pude guardar el link reciente: %s", e)
+
+
+def api_open_links(_body=None) -> dict:
+    f = links_file()
+    links_recent()
+    if not f.exists():
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(LINKS_HEADER, encoding="utf-8")
+    os.startfile(str(f))  # type: ignore[attr-defined]
+    return {"path": str(f)}
+
+
 # restos de una descarga a medias: <slug>.f298.mp4.part / <slug>.mp4.part / .ytdl / .part-FragN / <slug>.temp.mp4 / pista suelta <slug>.f298.mp4
 PARTIAL_RES = (
     re.compile(r"^(?P<slug>.+?)(?:\.f[\w-]+)?\.[A-Za-z0-9]{2,4}\.(?:part(?:-Frag\d+)?|ytdl)$", re.I),
@@ -1095,10 +1179,8 @@ PARTIAL_RES = (
 )
 
 
-def api_partials(_body=None) -> dict:
-    """Busca en la carpeta de descargas los archivos que dejo una descarga inconclusa, agrupados por nombre de video.
-    Solo mira, no borra nada. 'retomable' = el nombre final aun no existe, asi que volver a descargar con el mismo
-    nombre y calidad continua desde donde iba (yt-dlp retoma los .part)."""
+def scan_partials() -> tuple[Path, list[dict]]:
+    """Restos de descargas a medias en la carpeta de descargas, agrupados por nombre de video (cada grupo trae sus Path)."""
     base = out_base()
     groups: dict[str, dict] = {}
     if base.is_dir():
@@ -1109,21 +1191,52 @@ def api_partials(_body=None) -> dict:
             if not m:
                 continue
             st = f.stat()
-            g = groups.setdefault(m.group("slug"), {"slug": m.group("slug"), "files": [], "size": 0, "mtime": 0.0})
+            g = groups.setdefault(m.group("slug"), {"slug": m.group("slug"), "files": [], "paths": [], "size": 0, "mtime": 0.0})
             g["files"].append({"name": f.name, "size": st.st_size, "mtime": st.st_mtime})
+            g["paths"].append(f)
             g["size"] += st.st_size
             g["mtime"] = max(g["mtime"], st.st_mtime)
     active = {Path(j["target"]).stem for j in list(JOBS.values())
               if j.get("kind") == "download" and j.get("state") in ("running", "queued") and j.get("target")}
+    recent = links_recent()
     items = []
     for g in groups.values():
         g["files"].sort(key=lambda x: x["name"])
         g["active"] = g["slug"] in active
         g["final_exists"] = any((base / f"{g['slug']}.{c}").is_file() for c in CONTAINERS)
         g["resumable"] = not g["active"] and not g["final_exists"] and any(".part" in x["name"].lower() for x in g["files"])
+        match = [k for k in recent if k["slug"] == g["slug"]]
+        g["link"] = max(match, key=lambda k: k["ts"])["url"] if match else ""
         items.append(g)
     items.sort(key=lambda g: -g["mtime"])
-    return {"folder": str(base), "items": items, "exists": base.is_dir()}
+    return base, items
+
+
+def api_partials(_body=None) -> dict:
+    """Lista los restos de descargas inconclusas. 'retomable' = el nombre final aun no existe, asi que volver a
+    descargar con el mismo nombre y calidad continua desde donde iba (yt-dlp retoma los .part)."""
+    base, items = scan_partials()
+    return {"folder": str(base), "exists": base.is_dir(), "items": [{k: v for k, v in g.items() if k != "paths"} for g in items]}
+
+
+def api_partials_delete(body: dict) -> dict:
+    """Borra los restos de UN video ({slug}) o de todos ({all: true}). Vuelve a escanear: solo toca archivos que siguen
+    siendo restos dentro de la carpeta de descargas, y nunca los de una descarga en curso."""
+    slug, everything = body.get("slug"), bool(body.get("all"))
+    if not everything and not isinstance(slug, str):
+        raise ApiError("Falta indicar que video limpiar.")
+    base, items = scan_partials()
+    chosen = [g for g in items if everything or g["slug"] == slug]
+    if not everything and not chosen:
+        raise ApiError("Esos restos ya no estan en la carpeta.")
+    deleted, skipped = [], []
+    for g in chosen:
+        if g["active"]:
+            skipped.append(g["slug"])
+            continue
+        deleted += delete_files([p for p in g["paths"] if p.parent == base])
+    log.info("partials: borrados %s | omitidos (en curso) %s", deleted, skipped)
+    return {"deleted": deleted, "skipped": skipped}
 
 
 MOSAIC_AFMT = "aformat=sample_rates=48000:sample_fmts=fltp:channel_layouts=stereo"
@@ -1446,7 +1559,7 @@ ROUTES = {
     ("GET", "status"): api_status, ("POST", "analyze"): api_analyze, ("POST", "download"): api_download,
     ("POST", "clips"): api_clips, ("POST", "plan"): api_plan, ("POST", "cancel"): api_cancel, ("POST", "queue_move"): api_queue_move, ("POST", "settings"): api_settings, ("POST", "update"): api_update, ("POST", "install"): api_install,
     ("POST", "pickfolder"): api_pickfolder, ("POST", "pickvideo"): api_pickvideo, ("POST", "pickvideos"): api_pickvideos, ("POST", "probe"): api_probe,
-    ("POST", "mosaic_plan"): api_mosaic_plan, ("POST", "mosaic"): api_mosaic, ("GET", "session_files"): api_session_files, ("GET", "partials"): api_partials, ("POST", "open"): api_open,
+    ("POST", "mosaic_plan"): api_mosaic_plan, ("POST", "mosaic"): api_mosaic, ("GET", "session_files"): api_session_files, ("GET", "partials"): api_partials, ("POST", "partials_delete"): api_partials_delete, ("POST", "open_links"): api_open_links, ("POST", "open"): api_open,
     ("POST", "clientlog"): api_clientlog, ("POST", "openlog"): api_openlog, ("POST", "ping"): api_ping,
     ("POST", "bye"): api_bye,
 }
@@ -1554,6 +1667,7 @@ def main() -> None:
              find_tool("yt-dlp"), find_tool("ffmpeg"), browser or ("ninguno" if args.no_browser else "webbrowser"))
 
     apply_settings()
+    links_recent()  # al abrir TarroDL se borran los links con mas de 48 h
     threading.Thread(target=startup_check, daemon=True).start()
 
     if not args.no_browser:

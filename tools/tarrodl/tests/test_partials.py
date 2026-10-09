@@ -102,6 +102,44 @@ class PartialsApiTest(unittest.TestCase):
         finally:
             self.dl.mkdir()
 
+    def test_borrar_un_video_solo_toca_sus_restos(self):
+        self.touch("uno.f298.mp4.part", 30)
+        self.touch("uno.f298.mp4.ytdl", 5)
+        self.touch("dos.f298.mp4.part", 30)
+        self.touch("terminado.mp4", 99)
+        st, r = self.call("/api/partials_delete", {"slug": "uno"})
+        self.assertEqual(st, 200)
+        self.assertEqual(sorted(r["deleted"]), ["uno.f298.mp4.part", "uno.f298.mp4.ytdl"])
+        self.assertEqual(sorted(p.name for p in self.dl.iterdir()), ["dos.f298.mp4.part", "terminado.mp4"])
+
+    def test_borrar_todos_deja_los_videos_terminados(self):
+        self.touch("a.mp4.part")
+        self.touch("b.temp.mp4")
+        self.touch("final.mp4", 99)
+        st, r = self.call("/api/partials_delete", {"all": True})
+        self.assertEqual(st, 200)
+        self.assertEqual(len(r["deleted"]), 2)
+        self.assertEqual([p.name for p in self.dl.iterdir()], ["final.mp4"])
+
+    def test_no_borra_una_descarga_en_curso(self):
+        self.touch("bajando.f298.mp4.part", 50)
+        T.JOBS["j1"] = {"id": "j1", "kind": "download", "state": "running", "target": str(self.dl / "bajando.mp4")}
+        st, r = self.call("/api/partials_delete", {"all": True})
+        self.assertEqual(r["deleted"], [])
+        self.assertEqual(r["skipped"], ["bajando"])
+        self.assertTrue((self.dl / "bajando.f298.mp4.part").exists())
+
+    def test_borrar_sin_slug_o_inexistente_da_error(self):
+        self.assertEqual(self.call("/api/partials_delete", {})[0], 400)
+        self.assertEqual(self.call("/api/partials_delete", {"slug": "no-existe"})[0], 400)
+
+    def test_no_sale_de_la_carpeta_con_slug_raro(self):
+        outside = self.tmp / "fuera.mp4.part"
+        outside.write_bytes(b"x")
+        st, _ = self.call("/api/partials_delete", {"slug": "../fuera"})
+        self.assertEqual(st, 400)
+        self.assertTrue(outside.exists())
+
 
 if __name__ == "__main__":
     unittest.main()
