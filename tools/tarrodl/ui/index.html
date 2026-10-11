@@ -316,6 +316,7 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
         <div class="field"><span>PLAN <b class="val c-tl-info"></b></span>
           <div class="tl"></div>
           <div class="ticks"><span>0:00</span><span class="c-tl-end"></span></div></div>
+        <label class="check c-delsrc-box"><input type="checkbox" class="c-delsrc"><span class="c-delsrc-lbl">Borrar el video original cuando terminen los clips (te queda solo lo cortado)</span></label>
         <div><button class="linkbtn b-copy-plan">Usar este plan en todas las tarjetas por configurar</button></div>
       </div>
     </div>
@@ -591,7 +592,7 @@ function buildCard(it) {
     q(cls).addEventListener("input", () => { readState(it); renderItem(it); schedulePlan(it); });
   }
   // plan de clips
-  for (const cls of [".c-enabled", ".c-len", ".c-piece", ".c-count"]) {
+  for (const cls of [".c-enabled", ".c-len", ".c-piece", ".c-count", ".c-delsrc"]) {
     q(cls).addEventListener("input", () => { readState(it); renderItem(it); schedulePlan(it); });
   }
   el.querySelectorAll(".c-mode").forEach(r => r.addEventListener("change", () => { readState(it); renderItem(it); schedulePlan(it); }));
@@ -628,6 +629,7 @@ function readState(it) {
   it.clips.mode = (it.el.querySelector(".c-mode:checked") || { value: "seguido" }).value;
   it.clips.length = +q(".c-len").value; it.clips.piece = +q(".c-piece").value;
   it.clips.count = Math.max(0, parseInt(q(".c-count").value, 10) || 0);
+  it.delsrc = q(".c-delsrc").checked;   // a proposito fuera de it.clips: nunca se guarda como preferencia ni se copia a otras tarjetas
 }
 function writeState(it) {
   const q = it.q;
@@ -637,6 +639,7 @@ function writeState(it) {
   q(".c-enabled").checked = it.clips.enabled;
   it.el.querySelectorAll(".c-mode").forEach(r => { r.checked = r.value === it.clips.mode; });
   q(".c-len").value = it.clips.length; q(".c-piece").value = it.clips.piece; q(".c-count").value = it.clips.count;
+  q(".c-delsrc").checked = !!it.delsrc;
 }
 
 // ---- seccion del video (desde / hasta) ----
@@ -668,6 +671,7 @@ function planParams(it) {
   if (it.sec.dur && (it.sec.from > 0 || it.sec.to < it.sec.dur)) { p.range_start = it.sec.from; p.range_end = it.sec.to; }
   return p;
 }
+function delParam(it) { return it.delsrc ? { delete_source: true } : {}; }   // el servidor borra el original solo si todos los clips quedaron bien
 function schedulePlan(it) { clearTimeout(it.planTimer); it.planTimer = setTimeout(() => refreshPlan(it), 350); }
 async function refreshPlan(it) {
   if (it.phase !== "config" || !it.clips.enabled || !it.sec.dur) return;
@@ -703,7 +707,7 @@ function copyPlanToAll(src) {
 // ---- arrancar: descarga (con plan encadenado) o solo clips ----
 function downloadBody(it) {
   const o = it.opts, body = { url: it.url, slug: o.slug, container: o.container, height: o.height || 1080, h264: o.h264, anti_slow: o.anti };
-  if (it.clips.enabled && isVideoFmt(o.container)) body.clips = planParams(it);
+  if (it.clips.enabled && isVideoFmt(o.container)) body.clips = { ...planParams(it), ...delParam(it) };
   return body;
 }
 function saveDefaults(it) {
@@ -747,7 +751,10 @@ async function startClipsOnly(it) {
   const btn = it.q(".b-add"); btn.disabled = true;
   try {
     if (!(await ensureFolder("clips"))) { it.msg = "Elige primero la carpeta donde dejar los clips (queda guardada para la próxima)."; return; }
-    const r = await api("clips", { file: it.file, ...planParams(it) });
+    if (it.delsrc && !confirm(`Al terminar los clips se va a BORRAR tu video original:\n\n${it.file}\n\nSolo se borra si todos los clips quedan bien. ¿Seguro?`)) {
+      it.msg = "No se creó nada: desmarca la opción de borrar el original o confirma."; return;
+    }
+    const r = await api("clips", { file: it.file, ...planParams(it), ...delParam(it) });
     it.clipId = r.job; it.clipJob = null; it.phase = "job"; it.msg = ""; saveDefaults(it);
   } catch (e) { it.msg = e.message; }
   finally { btn.disabled = false; renderItem(it); renderQueue(); }
@@ -756,7 +763,7 @@ async function startClips(it, file) {
   if (!file) return;
   if (!(await confirmZeroCount(it))) return;
   try {
-    const r = await api("clips", { file, ...planParams(it) });
+    const r = await api("clips", { file, ...planParams(it), ...delParam(it) });
     it.clipId = r.job; it.clipJob = null; it.msg = "";
   } catch (e) { it.msg = e.message; }
   renderItem(it); renderQueue();
@@ -766,7 +773,7 @@ async function startClips(it, file) {
 function clipSummary(it) {
   if (!it.clips.enabled) return "sin clips";
   const c = it.clips, n = c.count ? `${c.count} clip(s)` : "cantidad automática";
-  return `clips: ${c.mode} de ${fmtLen(c.length)}${c.mode === "mosaico" ? `, trozos de ${c.piece} s` : ""}, ${n}`;
+  return `clips: ${c.mode} de ${fmtLen(c.length)}${c.mode === "mosaico" ? `, trozos de ${c.piece} s` : ""}, ${n}${it.delsrc ? ", borra el original al terminar" : ""}`;
 }
 function renderItem(it) {
   const q = it.q, el = it.el, dl = it.dl, cj = it.clipJob;
@@ -814,6 +821,8 @@ function renderItem(it) {
     q(".o-grid").classList.toggle("hide", it.kind === "disk");
     q(".o-checks").classList.toggle("hide", it.kind === "disk");
     q(".b-copy-plan").classList.toggle("hide", it.kind === "disk");
+    q(".c-delsrc-lbl").textContent = it.kind === "disk" ? "Borrar este video del disco cuando terminen los clips (te queda solo lo cortado)"
+      : "Borrar el video original cuando terminen los clips (te queda solo lo cortado)";
   }
 
   // progreso de descarga y de clips
@@ -832,7 +841,8 @@ function renderItem(it) {
   const busy = isActive(dl) || isActive(cj);
   q(".b-remove").classList.toggle("hide", busy);
   q(".b-up").classList.toggle("hide", !(dl && dl.state === "queued")); q(".b-down").classList.toggle("hide", !(dl && dl.state === "queued"));
-  q(".b-open-dl").classList.toggle("hide", !(dl && dl.state === "done") && !(it.kind === "disk" && cj && cj.state === "done"));
+  const srcGone = !!(cj && cj.result && cj.result.source_deleted);   // el original ya se borro: no hay nada que abrir
+  q(".b-open-dl").classList.toggle("hide", srcGone || (!(dl && dl.state === "done") && !(it.kind === "disk" && cj && cj.state === "done")));
   q(".b-open-clips").classList.toggle("hide", !(cj && cj.state === "done"));
   q(".b-retry").classList.toggle("hide", !(it.kind === "yt" && dl && (dl.state === "error" || dl.state === "cancelled")));
   const clipFailed = dl && dl.state === "done" && it.clips.enabled && ((cj && (cj.state === "error" || cj.state === "cancelled")) || (dl.result && dl.result.clips_error));

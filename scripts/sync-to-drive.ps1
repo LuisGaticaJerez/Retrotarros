@@ -312,6 +312,8 @@ LA PRIMERA VEZ EN UN PC NUEVO
 QUE HACE
   TARRODL      Pega links de YouTube y se arma una tarjeta por video (hasta 3 descargas a la vez).
                Opcional: cortar clips al terminar (seguidos o mosaico) o cortar un video que ya tienes.
+               En el plan de clips hay una casilla para BORRAR EL VIDEO ORIGINAL cuando terminen los clips
+               (solo borra si todos los clips quedaron bien): asi bajas rapido y te queda solo lo cortado.
   TARROMOSAICO Elige varios videos del disco y arma UN clip mosaico con trozos de todos,
                intercalados, viendo antes la distribucion en una linea de tiempo.
 

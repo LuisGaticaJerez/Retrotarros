@@ -988,6 +988,19 @@ def api_clips(body: dict) -> dict:
         kind = "mosaicos" if mode == "mosaico" else "clips"
         j["text"] = f"Listo: {len(plan)} {kind} de {label} ({paths[0].name}" + (f" ... {paths[-1].name}" if len(paths) > 1 else "") + f") en {out_dir}"
         j["result"] = {"dir": str(out_dir), "count": len(plan)}
+        if body.get("delete_source"):   # solo si TODOS los clips quedaron bien: un fallo o una cancelacion nunca llegan hasta aca
+            if src not in paths and all(p_.is_file() and p_.stat().st_size > 0 for p_ in paths):
+                if delete_files([src]):
+                    j["result"]["source_deleted"] = True
+                    j["text"] += " Se borro el video original."
+                    log.info("job %s borro el video original %s (opcion del usuario, clips listos)", j["id"], src)
+                else:
+                    j["result"]["source_delete_error"] = True
+                    j["text"] += " No pude borrar el video original (sigue en uso)."
+            else:
+                j["result"]["source_delete_error"] = True
+                j["text"] += " No borre el video original porque algun clip no quedo completo."
+                log.warning("job %s no borro %s: algun clip falta o esta vacio", j["id"], src)
 
     return spawn(job, work, pool="clips")
 

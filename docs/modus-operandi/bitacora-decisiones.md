@@ -117,3 +117,12 @@
 - **Regla NTSC USA relajada solo en el Saturn:** D-Xhird (#2) y Death Crimson (#1) salieron únicamente en Japón; entran con la marca "SOLO JAPON" en pantalla y en la voz. Si Luis prefiere la regla estricta, se cambian por dos títulos de Norteamérica (Amok, por ejemplo).
 - **Tanda 4 (Master System, PS Vita, Atari 8-bit) descartada por Luis.** La evidencia no alcanzaba para un Top 10 defendible: no hay listas editoriales de "peores" para ninguna de las tres. PS Vita tiene solo ~8 títulos con nota baja de Metacritic (Black Ops Declassified 33, Ridge Racer 44, Asphalt: Injection 49, Dungeon Hunter: Alliance 49, Spy Hunter 50-51, Army Corps of Hell 57, Silent Hill: Book of Memories 58, Resistance: Burning Skies 60). Si se retoma, la opción recomendada era un Top 5 u 8 solo de Vita, adaptando el generador.
 - **Pendiente de confirmar antes de grabar (están en cada `discusion-*-top-peores.md`):** Famitsu de Death Crimson (14/40 o 33 según la fuente, no se cita), GameRankings 63% de Scud, y que TheGamer GameCube solo se leyó del puesto 15 al 6 (los conteos son un mínimo).
+
+## 2026-10-11 — TarroDL: opción "borrar el video original" al terminar los clips
+
+- **Pedido de Luis:** poder bajar solo un fragmento para ir más rápido y ahorrar disco. La idea inicial era una pestaña TarroFragmento con `--download-sections`.
+- **Prueba (video de 23 min, 720p, red libre):** bajar el video completo tardó 17 s (181 MB, ~6 MB/s); bajar un tramo de 60 s con `--download-sections` no avanzó en 4 minutos (ffmpeg se queda esperando a YouTube; falló igual con tres formatos distintos). El tramo por YouTube no sirve para ganar velocidad.
+- **Decisión de Luis:** no crear la pestaña. En su lugar, una casilla en el plan de clips: "Borrar el video original cuando terminen los clips". Se baja a velocidad normal, se corta y queda solo lo cortado.
+- **Cómo funciona:** el servidor (`api_clips`, parámetro `delete_source`) borra el original solo si TODOS los clips existen y no están vacíos; si algo falla o se cancela, el original se conserva. Si Windows lo tiene bloqueado, avisa y deja los clips. La casilla nunca se guarda como preferencia ni se copia a otras tarjetas (empieza desmarcada). En videos del disco pide confirmación antes de crear los clips. 6 pruebas nuevas (69 en total).
+- **Pendiente:** el "mosaico directo" (armar el mosaico de varios videos y borrar los originales) quedó para después; con este hallazgo, se haría igual: bajar completo, armar y borrar.
+
