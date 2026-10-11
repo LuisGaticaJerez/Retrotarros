@@ -200,7 +200,7 @@ def _slide_divider(num: int, d: dict) -> str:
 
 def _tv_css() -> str:
     """Letra mas grande para ver el estudio en una TV a distancia (Luis 2026-10-09, Top Peores: el texto del
-    veredicto y la explicacion del ranking se leian muy chicos). Se activa con data["tv_grande"]=True.
+    veredicto y la explicacion del ranking se leian muy chicos). Viene ACTIVA por defecto en generar_top() (Luis 2026-10-09, no volver atras); solo se apaga con data["tv_grande"]=False.
     Mide: why 26->32 px, titulo 44->52, meta 19->24, etiqueta del premio 13->19, textos de divisores y de la
     portada 21->34 px. La columna izquierda sube a 46% y la caja baja a 440 px para que el why mas largo (PS1,
     ~320 caracteres) siga cabiendo entero sin tocar el TarroVision (verificado en los 10 Top Peores a 1920x1080)."""
@@ -305,7 +305,7 @@ def generar_top(data: dict, out_slug: str) -> Path:
     # duplicado porque BASE ya tenia su propia copia inyectada).
     if _SHARED_CSS_BLOCK_RE.search(head):
         head = _SHARED_CSS_BLOCK_RE.sub("</head>", head, count=1)
-    head = head.replace("</head>", _shared_css(bool(data.get("tv_grande"))), 1)
+    head = head.replace("</head>", _shared_css(bool(data.get("tv_grande", True))), 1)
     head += '\n<div class="read-indicator">● MODO LECTURA (N)</div>\n'
 
     consola = data.get("consola", "NES")

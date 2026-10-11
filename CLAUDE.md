@@ -398,6 +398,14 @@ Para no escribir HTML a mano, hay dos generadores que clonan el CSS/JS canónico
 - Driver one-off por episodio en `.cache/gen_<slug>.py` (gitignored). El generador (`scripts/*.py`) sí se commitea.
 - Box art para sagas: `scripts/fetch_boxart_wiki.py` (Wikipedia REST summary → `studio/img/<slug>/`).
 
+### REGLA — Letra grande para TV en los rankings (obligatoria) — Luis 2026-10-09
+
+Los rankings (Top Mundial, Top Precios, Top Peores) se ven en una TV desde lejos: el veredicto, el "por qué" de cada juego y los textos de los divisores/portada se leían muy chicos. Quedó corregido en los 49 decks y **no se vuelve atrás**:
+
+- `top_deck.generar_top()` trae la letra grande **activa por defecto** (`_tv_css()`: why 32 px, título 52, meta 24, divisores y portada 34). Solo se apaga con `data["tv_grande"] = False`, y no hay razón para hacerlo.
+- Al regenerar cualquier deck, el driver NO necesita pasar nada: sale con la letra grande igual. No bajar esos tamaños ni quitar `_tv_css()` para "hacer caber" un texto largo: se acorta el texto o se ajusta el layout.
+- Después de regenerar, revisar las capturas (`capture-slides.py`) por desbordes, sobre todo los `why` largos.
+
 ### REGLA — Criterio de la línea de tiempo SAGA (obligatorio) — Luis 2026-06-10
 
 Qué juegos entran al hilo de un episodio SAGA (las 12 hechas siguen esto; toda saga nueva igual):
