@@ -27,6 +27,14 @@ Te contamos qué se siente jugarlo hoy: la transformación en bestias, la frase 
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+altered beast sega, altered beast mega drive, altered beast genesis, altered beast arcade, rise from your grave, altered beast 1988, juegos de lanzamiento mega drive, beat em up retro, sega mega drive juegos, juegos clásicos de sega, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

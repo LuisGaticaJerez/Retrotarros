@@ -27,6 +27,14 @@ Te contamos qué se siente jugarlo hoy: la narrativa más elaborada que cualquie
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+zelda a link to the past, zelda snes, zelda super nintendo, a link to the past reseña, zelda 1991, legend of zelda snes, mejor zelda, zelda clásico, link to the past 25 años, juegos de aventura snes, saga zelda, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

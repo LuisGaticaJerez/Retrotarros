@@ -27,6 +27,14 @@ Te contamos qué se siente jugarlo hoy: el "helper system" cooperativo, el forma
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+kirby super star snes, kirby super star super nintendo, kirby super star 1996, kirby snes, kirby reseña, kirby hal laboratory, kirby super star ultra, meta knight revenge, kirby juegos clásicos, juegos de plataformas snes, kirby retro, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

@@ -27,6 +27,14 @@ Es un beat 'em up de siete etapas donde eliges a uno de los cinco Rangers -Jason
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+power rangers snes, mighty morphin power rangers snes, power rangers super nintendo, power rangers 1994, power rangers juego retro, power rangers banpresto, mighty morphin power rangers the fighting edition, power rangers reseña, juegos de power rangers, juegos de pelea snes, nostalgia 90s, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

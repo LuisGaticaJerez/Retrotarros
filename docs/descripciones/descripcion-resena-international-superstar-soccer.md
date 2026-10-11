@@ -27,6 +27,14 @@ Konami venía de Konami Hyper Soccer (NES, 1991) -velocidad exagerada, cero real
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+international superstar soccer snes, iss snes, iss super nintendo, iss konami, super nintendo fútbol, juegos de fútbol retro, international superstar soccer 1995, iss vs fifa, konami fútbol, mejor juego de fútbol 16 bits, winning eleven origen, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

@@ -27,6 +27,14 @@ Te contamos por qué el port a SNES le sacó un personaje jugable completo (Guy)
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+final fight arcade, final fight snes, final fight super nintendo, final fight capcom, final fight 1989, mike haggar, beat em up retro, final fight reseña, juegos de capcom, mejores beat em up, final fight street fighter, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

@@ -27,6 +27,14 @@ Nintendo se juntó con el estudio británico Argonaut Software para meter una es
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+star fox snes, star fox super nintendo, star fox 1993, star fox super fx, chip super fx, star fox reseña, fox mccloud, juegos 3d snes, shooter 3d retro, juegos de naves retro, nintendo argonaut, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

@@ -27,6 +27,14 @@ Te contamos cómo técnicas que nadie planeó -el wavedash, el L-cancel- se volv
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+super smash bros melee, smash melee, smash bros gamecube, melee gamecube, smash melee 2001, melee reseña, smash bros melee competitivo, juegos de gamecube, mejores juegos de gamecube, gamecube retro, nintendo gamecube, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

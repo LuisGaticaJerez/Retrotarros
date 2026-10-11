@@ -183,7 +183,7 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 | `docs/canal/guia-youtube-viral.md` | **Playbook de virality YouTube** (título, miniatura, descripción, hashtags, capítulos). Toda `descripcion-{slug}.md` lo sigue. |
 | `docs/descripciones/descripcion-{slug}.md` | Descripción YouTube lista para pegar (episodios largos): títulos, resumen, capítulos con timestamps, hashtags, tags. Sigue `docs/canal/guia-youtube-viral.md`. Automático al cerrar el episodio (ver "Kit de publicación YouTube automático"). |
 | `docs/descripciones/descripcion-tarroshort-{slug}.md` | Igual que arriba, para TarroShorts. Sin capítulos ni tags de campo (no aplican a shorts). |
-| `docs/descripciones/descripcion-resena-{slug}.md` | Igual que arriba, para reseñas. Sin capítulos ni tags de campo. |
+| `docs/descripciones/descripcion-resena-{slug}.md` | Igual que arriba, para reseñas. Sin capítulos, **pero CON la sección "Tags YouTube (keywords)"** (~15-20 tags, bajo 500 caracteres; Luis 2026-10-11). |
 
 > **Regla de entrega (Luis, 2026-06-07):** cada vez que cierre un kit de publicación, **pegar en el chat** el texto listo para YouTube (título + descripción + comentario fijado + tags + hashtags), no solo dejarlo en el `.md`. Luis lo copia directo desde el chat.
 | `docs/pautas/pauta-{slug}.md` | Pauta operativa de episodio largo (para Claude — denso, tablas, anclas, anexos). |
@@ -238,7 +238,7 @@ Cada vez que se cierra un **episodio largo**, un **TarroShort**, o una **reseña
 - Descripción con **emojis con moderación** (título/miniatura/descripción sí, guión hablado no) y **CTA de suscripción siempre incluido**. 300-500 palabras para episodios largos; más corta y proporcional al tamaño del contenido para shorts/reseñas.
 - Hashtags (3-5, los primeros 3 son los que más pesan en YouTube).
 - Capítulos con timestamps (solo episodios largos).
-- Tags del campo de etiquetas (~15-20 keywords, solo episodios largos).
+- Tags del campo de etiquetas (~15-20 keywords, bajo 500 caracteres en total): episodios largos y reseñas (Luis 2026-10-11, las reseñas no los traían). TarroShorts no.
 
 **Dónde queda (archivo `.md` + pegado en el chat, los dos SIEMPRE):**
 - Episodios largos: `docs/descripciones/descripcion-{slug}.md` (ya establecido).

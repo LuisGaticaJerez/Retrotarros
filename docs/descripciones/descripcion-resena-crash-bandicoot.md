@@ -27,6 +27,14 @@ Naughty Dog, un estudio chico que hasta entonces hacía juegos menores, se propu
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+crash bandicoot ps1, crash bandicoot playstation, crash bandicoot 1996, naughty dog crash, crash bandicoot original, crash bandicoot reseña, juegos de playstation 1, plataformas 3d retro, mascota de playstation, sony playstation retro, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

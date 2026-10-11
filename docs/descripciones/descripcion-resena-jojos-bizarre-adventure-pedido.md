@@ -27,6 +27,14 @@ Cada peleador invoca a su Stand, un espíritu que pelea a su lado: activarlo da 
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+jojo's bizarre adventure capcom, jojo's bizarre adventure arcade, jojo heritage for the future, jojo dreamcast, jojo ps1, jojo capcom 1998, cps3 jojo, jojo juego de pelea, hirohiko araki, jojo reseña, jojo retro, juegos de pelea capcom, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

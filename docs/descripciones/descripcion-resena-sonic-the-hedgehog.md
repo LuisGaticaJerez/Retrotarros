@@ -27,6 +27,14 @@ Te contamos qué se siente jugarlo hoy: el nacimiento de Green Hill Zone, y el d
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+sonic the hedgehog, sonic 1 mega drive, sonic 1 genesis, sonic 1991, sonic reseña, green hill zone, sonic the hedgehog 1991, sega mega drive juegos, mascota de sega, sonic clásico, sonic vs mario, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

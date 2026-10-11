@@ -27,6 +27,14 @@ Te contamos qué se siente jugarlo hoy: el Spin Dash que arregló el problema m�
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+sonic the hedgehog 2, sonic 2 mega drive, sonic 2 genesis, sonic 2 1992, sonic 2 tails, sonic 2 reseña, chemical plant zone, sega mega drive juegos, sonic 2 sega, mejor sonic 16 bits, sonic clásico, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

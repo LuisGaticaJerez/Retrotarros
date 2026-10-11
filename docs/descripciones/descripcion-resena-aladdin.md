@@ -29,6 +29,14 @@ Te contamos cómo se sostiene cada una hoy, y por qué -en un momento donde "jue
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+aladdin sega genesis, aladdin super nintendo, aladdin mega drive, aladdin disney juego, disney's aladdin 1993, aladdin virgin games, aladdin capcom snes, aladdin genesis vs snes, juegos de disney retro, mejores juegos de disney, juegos de plataformas 16 bits, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

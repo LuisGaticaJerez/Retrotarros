@@ -27,6 +27,14 @@ Nacieron Terry Bogard, Andy Bogard y el villano Geese Howard, con el sistema de 
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+fatal fury neo geo, fatal fury snes, fatal fury king of fighters, terry bogard, fatal fury 1991, snk fighting game, juegos de pelea retro, neo geo juegos, juegos de pelea 90s, rivalidad street fighter snk, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

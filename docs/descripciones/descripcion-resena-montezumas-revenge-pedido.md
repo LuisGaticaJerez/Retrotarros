@@ -27,6 +27,14 @@ Panama Joe explora una pirámide azteca de 9 pisos sin mapa, sin pistas y sin pu
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+montezuma's revenge atari, montezuma's revenge atari 2600, montezuma's revenge parker brothers, montezuma's revenge 1984, atari 2600 juegos, atari retro, juegos de atari, montezuma's revenge reseña, juegos de plataformas atari, indiana jones juego retro, atari 2600 clásicos, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

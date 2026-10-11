@@ -29,6 +29,14 @@ Te contamos las diferencias reales entre el arcade (pantalla vertical) y el NES 
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+contra nes, contra arcade, contra konami, código konami, código konami contra, contra 30 vidas, contra 1987, run and gun retro, juegos de nes, nes clásicos, contra cooperativo, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

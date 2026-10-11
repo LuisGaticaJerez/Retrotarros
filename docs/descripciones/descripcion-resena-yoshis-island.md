@@ -27,6 +27,14 @@ Mientras todos perseguían gráficos "realistas" tipo CGI (como Donkey Kong Coun
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+yoshi's island snes, super mario world 2 yoshi's island, yoshi's island super nintendo, yoshi's island 1995, yoshi's island reseña, yoshi snes, super fx 2, arte de yoshi's island, plataformas snes, mejores juegos de snes, nintendo snes clásico, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

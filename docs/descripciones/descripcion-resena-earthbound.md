@@ -27,6 +27,14 @@ Te contamos qué se siente jugarlo hoy: la ambientación moderna en vez de fanta
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+earthbound snes, earthbound super nintendo, earthbound mother 2, mother 2, earthbound reseña, ness earthbound, shigesato itoi, rpg super nintendo, mejores rpg snes, juego de culto snes, rpg retro, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

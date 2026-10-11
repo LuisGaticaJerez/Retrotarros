@@ -27,6 +27,14 @@ Doug TenNapel -diseñador del juego- también puso la voz de Jim, y el humor abs
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+earthworm jim sega genesis, earthworm jim super nintendo, earthworm jim mega drive, earthworm jim 1994, shiny entertainment, earthworm jim reseña, earthworm jim genesis vs snes, juegos de run and gun, plataformas 16 bits, juegos de culto 90s, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```

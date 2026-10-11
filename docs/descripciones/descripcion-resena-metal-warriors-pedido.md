@@ -27,6 +27,14 @@ Te contamos su mecánica más particular: en cualquier momento podías bajarte d
 
 ---
 
+## Tags YouTube (keywords)
+
+```
+metal warriors snes, metal warriors super nintendo, metal warriors lucasarts, metal warriors 1995, juegos de mechas snes, juegos de robots retro, lucasarts snes, metal warriors reseña, juegos raros snes, snes joyas ocultas, mechas 16 bits, retroreseñas, reseña retro, retrogaming, juegos retro, nostalgia gamer, ¿envejeció bien?, retrotarros
+```
+
+---
+
 ## Comentario fijado (copiar/pegar)
 
 ```
