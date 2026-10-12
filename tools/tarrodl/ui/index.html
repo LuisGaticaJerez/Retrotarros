@@ -232,6 +232,7 @@ input[type=range] { width:100%; accent-color:var(--mg); height:28px; cursor:poin
         <select id="mosHeight"><option value="1080">1080p (1920x1080)</option><option value="720">720p (1280x720)</option></select></label>
       <label class="field" style="flex:2"><span>NOMBRE DEL ARCHIVO (VACÍO = MOSAICO)</span><input type="text" id="mosName" maxlength="60" placeholder="mosaico" autocomplete="off"></label>
     </div>
+    <label class="check" style="margin-top:12px"><input type="checkbox" id="mosDel"><span>Borrar los videos originales cuando termine el mosaico (te queda solo el mosaico)</span></label>
   </section>
 
   <section class="card">
@@ -1112,12 +1113,24 @@ function renderMosJob() {
   $("mosOpenFile").classList.toggle("hide", state !== "done");
   $("mosOpenDir").classList.toggle("hide", state !== "done");
   $("mosRetry").classList.toggle("hide", !(state === "error" || state === "cancelled"));
+  if (state === "done" && j.result && j.result.sources_deleted && MOS.clearedFor !== MOS.jobId) {
+    // los originales ya no existen: se vacia la lista para no armar otro mosaico con archivos borrados, y la casilla vuelve a quedar desmarcada
+    MOS.clearedFor = MOS.jobId; $("mosDel").checked = false;
+    if (!j.result.sources_delete_error) { MOS.videos = []; mosRenderVideos(); scheduleMosPlan(); }
+  }
 }
 async function mosCreate() {
   $("btnMosaic").disabled = true; $("mosRetry").disabled = true; MOS.addErr = "";
   try {
     if (!(await ensureFolder("clips"))) { MOS.addErr = "Elige primero la carpeta donde dejar el mosaico (queda guardada para la próxima)."; return; }
-    const r = await api("mosaic", mosRequestBody());
+    const del = $("mosDel").checked;
+    if (del) {
+      const files = [...new Set(MOS.videos.map(v => v.file))];
+      if (!confirm(`Al terminar el mosaico se van a BORRAR ${files.length} videos originales:\n\n${files.join("\n")}\n\nSolo se borran si el mosaico queda bien. ¿Seguro?`)) {
+        MOS.addErr = "No se creó nada: desmarca la opción de borrar los originales o confirma."; return;
+      }
+    }
+    const r = await api("mosaic", { ...mosRequestBody(), ...(del ? { delete_sources: true } : {}) });
     MOS.jobId = r.job; MOS.job = null; renderMosJob();
   } catch (e) { MOS.addErr = e.message; }
   finally { $("mosRetry").disabled = false; mosDraw(); }

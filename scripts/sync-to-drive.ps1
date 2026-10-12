@@ -316,6 +316,7 @@ QUE HACE
                (solo borra si todos los clips quedaron bien): asi bajas rapido y te queda solo lo cortado.
   TARROMOSAICO Elige varios videos del disco y arma UN clip mosaico con trozos de todos,
                intercalados, viendo antes la distribucion en una linea de tiempo.
+               Tambien tiene la casilla para BORRAR LOS VIDEOS ORIGINALES cuando termine el mosaico (solo si quedo bien).
 
 NOTAS
   - Esta carpeta se actualiza sola desde el repo (scripts\sync-to-drive.ps1). No edites nada aca.

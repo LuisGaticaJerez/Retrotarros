@@ -1324,6 +1324,21 @@ def api_mosaic(body: dict) -> dict:
         CLEANUPS.pop(j["id"], None)
         j["text"] = f"Listo: {path.name} ({fmt_len(total)}) en {out_dir}"
         j["result"] = {"dir": str(out_dir), "file": path.name, "count": 1}
+        if body.get("delete_sources"):   # solo si el mosaico quedo escrito y no esta vacio: un fallo o una cancelacion nunca llegan hasta aca
+            sources = sorted({Path(v["file"]) for v in req["videos"]} - {path})
+            if path.is_file() and path.stat().st_size > 0:
+                removed = delete_files(sources)
+                j["result"]["sources_deleted"] = len(removed)
+                if len(removed) == len(sources):
+                    j["text"] += f" Se borraron los {len(removed)} videos originales."
+                else:
+                    j["result"]["sources_delete_error"] = len(sources) - len(removed)
+                    j["text"] += f" Se borraron {len(removed)} de {len(sources)} videos originales (el resto sigue en uso)."
+                log.info("job %s borro %s de %s videos originales del mosaico (opcion del usuario)", j["id"], len(removed), len(sources))
+            else:
+                j["result"]["sources_delete_error"] = len(sources)
+                j["text"] += " No borre los videos originales porque el mosaico no quedo completo."
+                log.warning("job %s no borro los originales: el mosaico %s falta o esta vacio", j["id"], path)
 
     return spawn(job, work, pool="clips")
 
