@@ -15,6 +15,7 @@ Uso:
 """
 import argparse
 import json
+import os
 import re
 import sys
 import time
@@ -44,7 +45,14 @@ def servicio():
             if not secret.exists():
                 sys.exit(f"Falta {secret}. Mira las instrucciones al inicio de este archivo.")
             creds = InstalledAppFlow.from_client_secrets_file(str(secret), SCOPES).run_local_server(port=0)
-        token.write_text(creds.to_json(), encoding="utf-8")
+        CACHE.mkdir(parents=True, exist_ok=True)
+        fd = os.open(str(token), os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)   # el token da acceso al canal: solo el dueño lo lee
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(creds.to_json())
+        try:
+            os.chmod(token, 0o600)
+        except OSError:
+            pass   # en Windows el permiso real lo da la carpeta del usuario; igual queda fuera de git (.cache/)
     return build("youtube", "v3", credentials=creds)
 
 
@@ -79,7 +87,12 @@ def main() -> None:
     ap.add_argument("--titulos", action="store_true", help="tambien quita los hashtags escritos dentro del titulo")
     ap.add_argument("--respaldo", action="store_true")
     ap.add_argument("--aplicar", action="store_true")
+    ap.add_argument("--olvidar", action="store_true", help="borra el token guardado (termina la autorizacion en este PC) y sale")
     a = ap.parse_args()
+    if a.olvidar:
+        (CACHE / "token.json").unlink(missing_ok=True)
+        print("Token borrado. Para revocar el permiso del todo: myaccount.google.com/permissions")
+        return
     prop_path = Path(a.propuesta) if a.propuesta else sorted((REPO / "data" / "youtube").glob("propuesta-*.json"))[-1]
     props = {p["id"]: p for p in json.loads(prop_path.read_text(encoding="utf-8"))["videos"]}
     ids = [x for x in a.solo.split(",") if x] or list(props)
