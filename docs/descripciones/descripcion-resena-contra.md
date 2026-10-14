@@ -24,7 +24,7 @@ Te contamos las diferencias reales entre el arcade (pantalla vertical) y el NES 
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#Contra #NES #Arcade #Retrogaming #Videojuegos
+#RetroReseñas #Contra #NES #Retrogaming #Retrotarros
 ```
 
 ---

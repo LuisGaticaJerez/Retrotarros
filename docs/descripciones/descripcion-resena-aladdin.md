@@ -24,7 +24,7 @@ Te contamos cómo se sostiene cada una hoy, y por qué -en un momento donde "jue
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#Aladdin #Genesis #SuperNintendo #Retrogaming #Videojuegos
+#RetroReseñas #Aladdin #MegaDrive #Retrogaming #Retrotarros
 ```
 
 ---

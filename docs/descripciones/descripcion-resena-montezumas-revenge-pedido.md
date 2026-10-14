@@ -22,7 +22,7 @@ Panama Joe explora una pirámide azteca de 9 pisos sin mapa, sin pistas y sin pu
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#MontezumasRevenge #Atari #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #MontezumasRevenge #Atari2600 #Retrogaming #Retrotarros
 ```
 
 ---

@@ -22,7 +22,7 @@ Nintendo se juntó con el estudio británico Argonaut Software para meter una es
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#StarFox #SuperNintendo #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #StarFox #SNES #Retrogaming #Retrotarros
 ```
 
 ---

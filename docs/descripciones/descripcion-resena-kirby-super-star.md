@@ -22,7 +22,7 @@ Te contamos qué se siente jugarlo hoy: el "helper system" cooperativo, el forma
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#Kirby #SNES #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #KirbySuperStar #SNES #Retrogaming #Retrotarros
 ```
 
 ---

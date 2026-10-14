@@ -64,15 +64,22 @@ deben seguir esta guia.
 
 ---
 
-## 4. HASHTAGS
+## 4. HASHTAGS Y ETIQUETAS (regla vigente desde 2026-10-14, medida contra YouTube)
 
-- **3 a 5 hashtags** relevantes. Los **primeros 3** del cuadro de descripcion aparecen ENCIMA del titulo (los que mas pesan).
-- **Preferencia de Luis (2026-06-07): usar hashtags MASIVOS** (alto volumen de busqueda) por sobre los de nicho/marca. El alcance pesa mas que la especificidad.
-  - Por defecto: `#Nintendo64 #Nintendo #Retrogaming #Gaming #Videojuegos` (1 especifico-pero-buscado + 4 masivos).
-  - Pool masivo: `#Nintendo #Gaming #Retrogaming #Videojuegos #Retro #Gamer #VideoGames`.
-  - Nicho/marca (`#RetroTarros`, `#Funtastic`, `#Chile`): solo como relleno opcional, NO en los primeros 3.
-- **Maximo 15 hashtags**: si pones mas de 15, YouTube los IGNORA TODOS. No abusar.
-- Cada hashtag < 60 caracteres, sin espacios.
+> Cambia la preferencia del 2026-06-07 ("masivos por sobre nicho"). Se midieron las paginas de hashtag de YouTube (`youtube.com/hashtag/<tag>` muestra videos y canales): `#Gaming` tiene 185 M de videos y `#Gamer` 20 M, un video chico se pierde ahi. Lo util esta entre ~100 mil y ~3 M.
+
+- **4 a 5 hashtags**, nunca mas de 15 (si pasas de 15 YouTube ignora TODOS: ya nos paso en 6 videos). Los **primeros 3** del bloque final de la descripcion aparecen sobre el titulo.
+- **Mayusculas/minusculas da lo mismo** (`#retrogaming` = `#Retrogaming`, misma pagina y mismas cifras). Usar CamelCase solo para leerlos mejor.
+- **Receta por tipo** (orden = prioridad): serie o tema, juego o consola, uno amplio, marca.
+  - Reseña: `#RetroReseñas #<Juego> #<Consola> #Retrogaming #Retrotarros`
+  - Top Mundial / Top Peores: `#Top10 #<Consola> #Retrogaming #Videojuegos #Retrotarros`
+  - Top Precios: `#Coleccionismo #<Consola> #Retrogaming #Top10 #Retrotarros`
+  - Coleccion: `#Coleccionismo #<Consola> #Retrogaming #Videojuegos #Retrotarros`
+  - Short: `#Shorts #<tema o consola> #Retrogaming #Retrotarros #TarroBot`
+- **Referencia de tamaños (2026-10-14):** #Retrogaming 3,3 M · #Videojuegos 3,5 M · #Retro 2,5 M · #Top10 2,3 M · #Zelda 1,1 M · #RetroGames 758 k · #NES 390 k · #SNES 422 k · #GameBoy 269 k · #Coleccionismo 233 k · #SuperNintendo 217 k · #Nintendo64 195 k · #MegaDrive 126 k · #Coleccionistas 30 k · #RetroReseñas 132 videos (16 canales, la serie es nuestra) · #Retrotarros 100 videos. No usar: #Gaming, #Gamer, #VideoGames (masivos) ni nada de otras redes (#fyp, #love, #happy, #inspiration, #viral).
+- **Nada de hashtags dentro del titulo** y cada hashtag < 60 caracteres, sin espacios.
+- **Etiquetas (campo de Studio):** SIN `#`, 15 a 20 palabras clave en minusculas, bajo 500 caracteres en total. Pesan poco, sirven para variantes de escritura.
+- **Actualizacion masiva:** `scripts/youtube_inventario.py` (lee el canal), `scripts/youtube_propuesta.py` (propone por tipo) y `scripts/youtube_aplicar.py` (aplica con la API; prueba por defecto, respaldo antes de escribir). Se aplico a los 82 videos el 2026-10-14; respaldos en `data/youtube/`. Medir en ~28 dias comparando las vistas contra `inventario-2026-10-14.json`.
 
 ---
 
@@ -106,7 +113,7 @@ deben seguir esta guia.
 - [ ] Miniatura: ≤3 palabras, cara/emocion, alto contraste, legible en movil.
 - [ ] Descripcion: gancho+keyword en lineas 1-2, 300-500 palabras, sin tildes debiles.
 - [ ] Capitulos: primero en 00:00, nombres con keyword.
-- [ ] 3-5 hashtags (primeros 3 = los importantes), nunca >15.
+- [ ] 4-5 hashtags medidos (receta por tipo en la seccion 4), nunca >15, sin #Gaming ni basura de otras redes.
 - [ ] 3-7 links (canal/redes/playlist).
 - [ ] CTA + pregunta para comentarios + tagline.
 - [ ] Tags llenos (~15-20 keywords).
@@ -137,4 +144,4 @@ Retrotarros — Nostalgia + Juegos + Musica.
 
 **Fuentes consultadas (2026):** guias de YouTube SEO/CTR de fluxnote.io (formulas de titulo), ampifire / thumbmagic (miniatura y benchmarks CTR), seocircular / influenceflow / jctgrowth (descripcion, keywords, capitulos).
 
-**Ultima actualizacion:** 2026-06-07
+**Ultima actualizacion:** 2026-10-14 (seccion 4 de hashtags)

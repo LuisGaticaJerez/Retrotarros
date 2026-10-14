@@ -56,6 +56,8 @@ MANUAL = {
     "geqtJjvYw7I": ("TopGear", "SNES", "top gear", "snes"),
     "Ub33C3AjKKU": ("Pokemon", "GameBoy", "pokemon rojo azul", "game boy"),
 }
+# Videos que Luis ya habia curado a mano: se respeta su eleccion (WorstGames) dentro de la regla de 4 a 5.
+HASHTAGS_A_MANO = {"SXdGEd-uKdg": ["WorstGames", "Nintendo64", "Top10", "Retrogaming", "Retrotarros"]}
 TAGS_ARCADE = ["arcade", "maquinitas", "juegos de arcade"]
 TEMAS_SHORT = [(r"zelda", "Zelda"), (r"mario", "SuperMario"), (r"sonic", "Sonic"), (r"tetris", "Tetris"), (r"mortal kombat", "MortalKombat"),
                (r"sega", "Sega"), (r"padre", "DiaDelPadre"), (r"videojuegos", "Videojuegos")]
@@ -153,6 +155,8 @@ def proponer(v: dict) -> dict:
         tags = ["tarrobot", "retro", "datos curiosos", "videojuegos curiosidades"] + ctags + ([tema.lower()] if tema else [])
     else:
         h = ["Retrogaming", "Videojuegos", "Retrotarros"]
+    if k in HASHTAGS_A_MANO:
+        h = HASHTAGS_A_MANO[k]
     h = dedup([x for x in h if x])
     tags = dedup([x for x in tags + BASE_TAGS if x])
     corte, total = [], 0

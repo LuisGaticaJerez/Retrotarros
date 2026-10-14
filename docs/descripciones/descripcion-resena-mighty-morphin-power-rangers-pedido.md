@@ -22,7 +22,7 @@ Es un beat 'em up de siete etapas donde eliges a uno de los cinco Rangers -Jason
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#PowerRangers #SuperNintendo #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #PowerRangers #SNES #Retrogaming #Retrotarros
 ```
 
 ---

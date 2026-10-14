@@ -22,7 +22,7 @@ Te contamos cómo técnicas que nadie planeó -el wavedash, el L-cancel- se volv
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#SuperSmashBrosMelee #GameCube #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #SuperSmashBrosMelee #GameCube #Retrogaming #Retrotarros
 ```
 
 ---

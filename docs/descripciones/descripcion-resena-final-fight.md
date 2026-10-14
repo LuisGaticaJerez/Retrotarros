@@ -22,7 +22,7 @@ Te contamos por qué el port a SNES le sacó un personaje jugable completo (Guy)
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#FinalFight #Arcade #SuperNintendo #Retrogaming #Videojuegos
+#RetroReseñas #FinalFight #SNES #Retrogaming #Retrotarros
 ```
 
 ---

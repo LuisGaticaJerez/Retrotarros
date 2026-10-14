@@ -22,7 +22,7 @@ Cada peleador invoca a su Stand, un espíritu que pelea a su lado: activarlo da 
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#JoJo #Capcom #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #JoJosBizarreAdventure #Capcom #Retrogaming #Retrotarros
 ```
 
 ---

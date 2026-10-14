@@ -22,7 +22,7 @@ Naughty Dog, un estudio chico que hasta entonces hacía juegos menores, se propu
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#CrashBandicoot #PlayStation #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #CrashBandicoot #PlayStation #Retrogaming #Retrotarros
 ```
 
 ---

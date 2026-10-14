@@ -22,7 +22,7 @@ Te contamos qué se siente jugarlo hoy: la transformación en bestias, la frase 
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#AlteredBeast #Sega #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #AlteredBeast #MegaDrive #Retrogaming #Retrotarros
 ```
 
 ---

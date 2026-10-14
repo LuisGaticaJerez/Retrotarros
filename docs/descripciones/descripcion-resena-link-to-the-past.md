@@ -22,7 +22,7 @@ Te contamos qué se siente jugarlo hoy: la narrativa más elaborada que cualquie
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#Zelda #SNES #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #Zelda #SNES #Retrogaming #Retrotarros
 ```
 
 ---

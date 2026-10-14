@@ -22,7 +22,7 @@ Te contamos su mecánica más particular: en cualquier momento podías bajarte d
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#MetalWarriors #SNES #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #MetalWarriors #SNES #Retrogaming #Retrotarros
 ```
 
 ---

@@ -22,7 +22,7 @@ Te contamos qué se siente jugarlo hoy: el nacimiento de Green Hill Zone, y el d
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#Sonic #MegaDrive #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #Sonic #MegaDrive #Retrogaming #Retrotarros
 ```
 
 ---

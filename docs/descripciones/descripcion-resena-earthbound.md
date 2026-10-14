@@ -22,7 +22,7 @@ Te contamos qué se siente jugarlo hoy: la ambientación moderna en vez de fanta
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#EarthBound #SNES #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #EarthBound #SNES #Retrogaming #Retrotarros
 ```
 
 ---

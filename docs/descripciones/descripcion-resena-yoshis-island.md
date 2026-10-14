@@ -22,7 +22,7 @@ Mientras todos perseguían gráficos "realistas" tipo CGI (como Donkey Kong Coun
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#YoshisIsland #SuperNintendo #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #YoshisIsland #SNES #Retrogaming #Retrotarros
 ```
 
 ---

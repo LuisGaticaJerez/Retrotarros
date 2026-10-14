@@ -22,7 +22,7 @@ Konami venía de Konami Hyper Soccer (NES, 1991) -velocidad exagerada, cero real
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#InternationalSuperstarSoccer #SuperNintendo #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #InternationalSuperstarSoccer #SNES #Retrogaming #Retrotarros
 ```
 
 ---

@@ -65,8 +65,10 @@ def leer_snippets(yt, ids: list[str]) -> dict[str, dict]:
     return out
 
 
-def nueva_descripcion(desc: str, hashtags: list[str]) -> str:
+def nueva_descripcion(desc: str, hashtags: list[str], limpiar_cuerpo: bool = False) -> str:
     """Quita la basura de otras redes, reemplaza el bloque final de hashtags y deja el resto del texto intacto."""
+    if limpiar_cuerpo:   # quita CUALQUIER hashtag suelto dentro del texto (no solo la basura conocida) y restos como "゚viral"
+        desc = re.sub(r"[ 	]*#(?!\d)\S*|゚\w*", "", desc)
     for b in BASURA:
         desc = re.sub(rf"(?i)(?<!\w){re.escape(b)}(?!\w)", "", desc)
     lineas = desc.rstrip().split("\n")
@@ -87,6 +89,7 @@ def main() -> None:
     ap.add_argument("--titulos", action="store_true", help="tambien quita los hashtags escritos dentro del titulo")
     ap.add_argument("--respaldo", action="store_true")
     ap.add_argument("--aplicar", action="store_true")
+    ap.add_argument("--limpiar-cuerpo", action="store_true", help="quita tambien los hashtags sueltos dentro del texto de la descripcion")
     ap.add_argument("--olvidar", action="store_true", help="borra el token guardado (termina la autorizacion en este PC) y sale")
     a = ap.parse_args()
     if a.olvidar:
@@ -101,7 +104,7 @@ def main() -> None:
     faltan = [i for i in ids if i not in snips]
     if faltan:
         print("AVISO: no son de este canal o no existen:", faltan)
-    resp = REPO / "data" / "youtube" / f"respaldo-api-{date.today().isoformat()}.json"
+    resp = REPO / "data" / "youtube" / f"respaldo-api-{time.strftime('%Y-%m-%d-%H%M%S')}.json"   # nunca pisa un respaldo anterior
     resp.write_text(json.dumps(snips, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Respaldo con la metadata real de {len(snips)} videos -> {resp}")
     if a.respaldo:
@@ -109,7 +112,7 @@ def main() -> None:
     cambios = []
     for vid, sn in snips.items():
         p = props[vid]
-        desc = nueva_descripcion(sn.get("description", ""), p["hashtags_nuevos"])
+        desc = nueva_descripcion(sn.get("description", ""), p["hashtags_nuevos"], a.limpiar_cuerpo)
         tags = p["etiquetas_nuevas"]
         titulo = nuevo_titulo(sn["title"]) if a.titulos else sn["title"]
         if desc == sn.get("description") and tags == sn.get("tags") and titulo == sn["title"]:

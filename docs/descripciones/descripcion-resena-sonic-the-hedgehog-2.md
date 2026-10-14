@@ -22,7 +22,7 @@ Te contamos qué se siente jugarlo hoy: el Spin Dash que arregló el problema m�
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#Sonic #MegaDrive #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #Sonic2 #MegaDrive #Retrogaming #Retrotarros
 ```
 
 ---

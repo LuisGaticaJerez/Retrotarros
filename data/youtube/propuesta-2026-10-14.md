@@ -5,7 +5,7 @@ Origen: `inventario-2026-10-14.json`. Solo lectura: nada se aplica hasta que se 
 | Tipo | Video | Hashtags actuales | Hashtags nuevos |
 |---|---|---|---|
 | resena | Metal Warriors: el juego de mechs que casi fue de Ninte | #MetalWarriors #SNES #Retrogaming #Gaming #Videojuegos | #RetroReseñas #MetalWarriors #SNES #Retrogaming #Retrotarros |
-| peores | Los 10 peores juegos de N64 (el #1 tiene récord Guinnes | #N64 #Nintendo64 #Retrogaming #Videojuegos #Gaming #Retro #Nintendo #Superman64 | #Top10 #Nintendo64 #Retrogaming #Videojuegos #Retrotarros |
+| peores | Los 10 peores juegos de N64 (el #1 tiene récord Guinnes | #N64 #Nintendo64 #Retrogaming #Videojuegos #Gaming #Retro #Nintendo #Superman64 | #WorstGames #Nintendo64 #Top10 #Retrogaming #Retrotarros |
 | resena | Worms Armageddon: el juego de 1999 que Team17 parchó po | #WormsArmageddon #Retrogaming #PC #Gaming #Videojuegos | #RetroReseñas #WormsArmageddon #Retrogaming #Retrotarros |
 | resena | Samurai Shodown: el fighting game que cambió los puños  | #SamuraiShodown #NeoGeo #Retrogaming #Gaming #Videojuegos #fyp | #RetroReseñas #SamuraiShodown #NeoGeo #Retrogaming #Retrotarros |
 | mundial | Ranking de los mejores títulos de Gamecube | #GameCube #Nintendo #Retrogaming #Videojuegos #MetroidPrime #Gaming #Retro | #Top10 #GameCube #Retrogaming #Videojuegos #Retrotarros |

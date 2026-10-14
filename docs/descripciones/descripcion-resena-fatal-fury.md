@@ -22,7 +22,7 @@ Nacieron Terry Bogard, Andy Bogard y el villano Geese Howard, con el sistema de 
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#FatalFury #NeoGeo #Retrogaming #Gaming #Videojuegos
+#RetroReseñas #FatalFury #NeoGeo #Retrogaming #Retrotarros
 ```
 
 ---

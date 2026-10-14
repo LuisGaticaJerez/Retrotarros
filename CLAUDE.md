@@ -236,7 +236,7 @@ Cada vez que se cierra un **episodio largo**, un **TarroShort**, o una **reseña
 **Qué genera (sigue `docs/canal/guia-youtube-viral.md`):**
 - Título optimizado.
 - Descripción con **emojis con moderación** (título/miniatura/descripción sí, guión hablado no) y **CTA de suscripción siempre incluido**. 300-500 palabras para episodios largos; más corta y proporcional al tamaño del contenido para shorts/reseñas.
-- Hashtags (3-5, los primeros 3 son los que más pesan en YouTube).
+- Hashtags (4-5, los primeros 3 son los que más pesan en YouTube). **Receta por tipo y tamaños medidos en `docs/canal/guia-youtube-viral.md` sección 4 (Luis 2026-10-14):** nada de #Gaming/#Gamer ni hashtags de otras redes, `#RetroReseñas` para reseñas, `#Retrotarros` como marca; mayúsculas/minúsculas da lo mismo.
 - Capítulos con timestamps (solo episodios largos).
 - Tags del campo de etiquetas (~15-20 keywords, bajo 500 caracteres en total): episodios largos y reseñas (Luis 2026-10-11, las reseñas no los traían). TarroShorts no.
 

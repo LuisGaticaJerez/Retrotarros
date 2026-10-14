@@ -22,7 +22,7 @@ Doug TenNapel -diseñador del juego- también puso la voz de Jim, y el humor abs
 
 🔔 Suscríbete a RETROTARROS para más reseñas retro — nostalgia + juegos + música.
 
-#EarthwormJim #SegaGenesis #SuperNintendo #Retrogaming #Videojuegos
+#RetroReseñas #EarthwormJim #MegaDrive #Retrogaming #Retrotarros
 ```
 
 ---
