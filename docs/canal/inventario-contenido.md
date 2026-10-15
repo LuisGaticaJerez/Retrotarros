@@ -57,11 +57,16 @@ publicados.
 
 ---
 
-### 1.1 Programados — Reseñas (0 confirmadas, 2026-10-09)
+### 1.1 Programados (leídos de YouTube con la API, 2026-10-14)
 
-Las 4 que figuraban acá (Super Mario World, Golden Axe, Street Fighter II y Chrono Trigger)
-ya están publicadas en el canal (movidas a 1.2). No se revisó YouTube Studio, así que no hay
-reseñas programadas confirmadas hoy.
+Se actualiza solo los lunes, miércoles y viernes con `scripts/youtube_estado.py` (datos en `data/youtube/estado-canal.json`). **Un video programado ya está grabado: no tocar su HTML ni sus textos.**
+
+| Publicación (hora de Chile) | Título | Contenido del repo |
+|---|---|---|
+| Vie 16 oct 2026, 20:30 | Por qué Melee sigue siendo el Smash más jugado en torneos \| RetroReseñas | `resena-super-smash-bros-melee-pedido` |
+| Dom 18 oct 2026, 20:30 | Los 10 mejores juegos de PS1 según la crítica | `ps1-top-mundial` |
+
+Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09).
 
 ---|---|---|---|
 | 25 ago 2026 | Yoshi estuvo 5 años esperando este juego para nacer (Super Mario World) | `resena-super-mario-world` | Reseña |
