@@ -1,77 +1,77 @@
-# Descripción YouTube — Top 10 GameCube Precios
+# Descripción YouTube — Top Precios GameCube
 
-Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes.
+Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos estimados; ajustar a los tiempos del corte final. Reforge de precios 2026-10-15 (PriceCharting, NTSC USA, CIB).
 
 ---
 
 ## Títulos sugeridos (elegir uno)
 
-1. **El juego más caro de GameCube no es Metroid Prime (es sobre animales cúbicos)** — 74 chars. (Recomendado)
-2. **Top 10 GameCube más caros: ni Metroid Prime ni Resident Evil 4 aparecen** — 74 chars.
+1. **Los 10 juegos de GameCube MÁS CAROS (el #1 es de básquetbol de Disney)** — 67 chars. (Recomendado)
+2. **El juego más caro de GameCube solo se vendía en una tienda de Nueva York** — 73 chars, largo para móvil.
+3. **GameCube Top Precios: Disney Sports Basketball vale más de mil dólares** — 71 chars, largo para móvil.
 
 ---
 
 ## Descripción (copiar/pegar)
 
 ```
-En GameCube lo caro tampoco es lo famoso: Metroid Prime y Resident Evil 4 (versión estándar) valen una fracción de lo que vale hoy Cubivore, un juego de animales cúbicos devorándose entre sí que Atlus trajo con una tirada mínima 💰
+En GameCube lo caro tampoco es lo famoso: un juego de básquetbol con personajes de Disney cuesta hoy más de mil dólares completo, más que Metroid Prime y que Resident Evil 4 💰 Repasamos los 10 más caros en versión completa, NTSC USA, con precios de PriceCharting de octubre de 2026.
 
-Del piso al techo del top 10 retail: Ikaruga, Killer7, P.N.03 (los "Capcom Five" que casi nadie compró), hasta el trono de Cubivore: Survival of the Fittest. Y cerramos con dos rarezas que JAMÁS se vendieron en tiendas -un disco de demos de kiosko y la promocional de Zelda con 4 juegos clásicos- más el santo grial: la propia steelbook de Resident Evil 4 de GameStop, sellada y graduada, vendida por más de 2.950 dólares.
+Del piso al techo: Fire Emblem: Path of Radiance, Disney Sports Football, Zatch Bell! Mamodo Fury, Phantasy Star Online Plus, NCAA College Basketball 2K3, Resident Evil Code: Veronica X, Go! Go! Hypergrind, Gotcha Force, Cubivore y el trono: Disney Sports Basketball.
 
-Precios CIB actualizados septiembre 2026, vía PriceCharting directo. Valores aproximados, nunca consejo de inversión.
+Después, las rarezas que nunca se vendieron en tiendas normales: el disco promocional de Zelda Collector's Edition, un disco de demos de kiosko y un Animal Crossing Not For Resale. Y el santo grial: Pokémon Box en caja grande, que en Norteamérica solo se vendía en el Pokémon Center de Nueva York y hoy ronda los 4.400 dólares.
 
-¿Sabían que Cubivore era el retail más caro de GameCube? ¿Tienen algún disco de esta lista guardado? Cuéntanos en los comentarios.
+Valores aproximados, fluctúan y nunca son consejo de inversión.
+
+¿Sabías que el retail más caro de GameCube es un juego de básquetbol de Disney? ¿Tienes algún disco de esta lista guardado? Cuéntanos en los comentarios 👇
+
+🔔 Suscríbete a RETROTARROS para más rankings y nostalgia retro.
 
 00:00 Cold open
-00:30 Contexto: lo raro gana, no lo famoso
-01:30 #10 Ikaruga (~$66)
-03:00 #9 Killer7 (~$76)
-04:30 #8 P.N.03 (~$115)
-06:00 #7 Pokémon Colosseum (~$161)
-07:30 #6 Skies of Arcadia Legends (~$172)
-09:00 #5 Pokémon XD: Gale of Darkness (~$182)
-10:30 #4 Chibi-Robo! (~$201)
-12:00 #3 Fire Emblem: Path of Radiance (~$205)
-13:30 #2 Gotcha Force (~$486)
-15:00 #1 Cubivore: Survival of the Fittest (~$684)
-16:30 Rarezas: Demo Disc Version 16, Zelda Collector's Edition
-18:00 Santo Grial: Resident Evil 4 GameStop Special Edition ($1.499+)
-19:00 Análisis del top
-20:00 Cierre
+00:30 Contexto: lo caro no es lo famoso
+01:30 #10 Fire Emblem: Path of Radiance (~$220)
+02:45 #9 Disney Sports Football (~$221)
+04:00 #8 Zatch Bell! Mamodo Fury (~$250)
+05:15 #7 Phantasy Star Online Plus (~$250)
+06:30 #6 NCAA College Basketball 2K3 (~$251)
+07:45 #5 Resident Evil Code: Veronica X (~$300)
+09:00 #4 Go! Go! Hypergrind (~$513)
+10:15 #3 Gotcha Force (~$516)
+11:30 #2 Cubivore (~$665)
+12:45 #1 Disney Sports Basketball (~$1.025)
+14:00 Rarezas: Zelda Collector's Edition, Demo Disc v16 y Animal Crossing NFR
+16:00 Santo grial: Pokémon Box [Big Box]
+17:30 Análisis del top
+18:30 Cierre
 
 Retrotarros — Nostalgia + Juegos + Música.
 
-#GameCube #Nintendo #Retrogaming #Videojuegos #Coleccionismo
+#Coleccionismo #GameCube #Retrogaming #Top10 #Retrotarros
 ```
 
 ---
-
-## Hashtags adicionales (pool)
-
-Masivos: `#GameCube #Nintendo #Retrogaming #Videojuegos #Gaming #Retro`
-Nicho: `#Coleccionismo #ResidentEvil4 #Cubivore #Capcom`
 
 ## Tags YouTube (keywords)
 
 ```
-gamecube juegos caros, cubivore precio, resident evil 4 special edition, gotcha force gamecube, ikaruga gamecube, killer7 capcom five, pokemon xd gale of darkness, fire emblem path of radiance, coleccionismo retro, pricecharting, retrotarros
+juegos mas caros de gamecube, gamecube juegos caros, cuanto valen los juegos de gamecube, precio de juegos gamecube, disney sports basketball, cubivore precio, gotcha force gamecube, pokemon box gamecube, nintendo gamecube, gamecube, top 10 gamecube, coleccionismo retro, juegos retro, pricecharting, top precios, retrotarros, videojuegos retro
 ```
 
 ---
 
-## Comentario fijado
+## Comentario fijado (copiar/pegar)
 
 ```
-¿Sabían que Cubivore era el retail más caro de GameCube? ¿Tienen algún disco de esta lista guardado? Cuéntanos en los comentarios.
+¿Sabías que el retail más caro de GameCube es un juego de básquetbol de Disney? ¿Cuál de esta lista tienes tú? Cuéntanos en los comentarios.
 ```
 
 ## Notas de producción
 
-- **Miniatura sugerida:** box art de Cubivore + steelbook RE4 + texto "$1.499" + TarroBot.
-- Fuente de datos: `docs/pautas/pauta-gamecube-top-precios.md`.
+- **Miniatura sugerida:** caja de Disney Sports Basketball + texto "GAMECUBE TOP PRECIOS" + precio USD 1.025 + TarroBot.
+- Fuente de datos: `docs/pautas/pauta-gamecube-top-precios.md` y `docs/discusiones/discusion-gamecube-top-precios.md`.
 
 ---
 
 **Slug:** `gamecube-top-precios`
 **Formato:** Ranking (episodio largo, horizontal)
-**Última actualización:** 2026-09-22
+**Última actualización:** 2026-10-15 (top 10 corregido con PriceCharting)

@@ -2,57 +2,60 @@
 
 > Episodio: Los discos de GameCube que hoy valen una fortuna (retail CIB + rarezas + santo grial)
 > HTML: `studio/rankings/top-precios/gamecube-top-precios.html`
-> Formato: ranking hibrido por precio CIB · 18 slides
-> Cierra (por ahora) la apertura del arco GameCube junto a `gamecube-top-mundial` (ver `docs/arcos/gamecube.md`)
+> Formato: ranking hibrido por precio CIB · 19 slides
+> Reforge 2026-10-15: top 10 rehecho con el listado completo de PriceCharting (ver `docs/discusiones/discusion-gamecube-top-precios.md`)
+> Arco GameCube junto a `gamecube-top-mundial` (ver `docs/arcos/gamecube.md`)
 
 ## Gancho / Cold open
 
-En GameCube lo caro tampoco es lo famoso: Metroid Prime y Resident Evil 4 estandar valen poco comparado a Cubivore o Gotcha Force, juegos que casi nadie compro en su momento. Hoy: del techo del retail a un santo grial que es la propia steelbook de Resident Evil 4, sellada y graduada.
+En GameCube lo caro tampoco es lo famoso: un juego de basquetbol con personajes de Disney, Disney Sports Basketball, cuesta mas de mil dolares completo. Mas que Metroid Prime y que Resident Evil 4. Del piso del retail a un santo grial que solo se vendia en una tienda de Nueva York.
 
-## Metodologia (auditoria canon aplicada desde el arranque)
+## Metodologia
 
-Precios verificados DIRECTO en PriceCharting (septiembre 2026), sin fuentes secundarias -aplicando desde el inicio la regla canon nacida de la correccion de PS1 (ver CLAUDE.md, "Convencion del TOP PRECIOS"). Grial confirmado como el item mas caro del episodio antes de cerrar el ranking; rarezas confirmadas como genuinamente no-retail.
+Precios CIB (Complete In Box, NTSC USA) leidos directo del listado de PriceCharting el 2026-10-15, con las columnas exactas (suelto, CIB, sellado) y fichas individuales para los juegos nuevos. Sin fuentes secundarias. Grial confirmado como el item mas caro del episodio; rarezas confirmadas como genuinamente no-retail.
 
 ## Retail CIB (#10 → #1)
 
 | # | Juego | CIB | Por que |
 |---|---|---|---|
-| 10 | Ikaruga | ~$66 | Shmup de culto Treasure, publicado via Atari en tirada corta |
-| 9 | Killer7 | ~$76 | Capcom Five, Suda51, culto que crecio con los años |
-| 8 | P.N.03 | ~$115 | Capcom Five, Shinji Mikami, shooter-baile |
-| 7 | Pokemon Colosseum | ~$161 | Primer Pokemon 3D de sobremesa, demanda constante de marca |
-| 6 | Skies of Arcadia Legends | ~$172 | Port GameCube del JRPG Dreamcast, tirada limitada |
-| 5 | Pokemon XD: Gale of Darkness | ~$182 | Ultimo Pokemon de GameCube. EN LA COLECCION |
-| 4 | Chibi-Robo! | ~$201 | Late release 2006, ventas bajisimas, culto querido |
-| 3 | Fire Emblem: Path of Radiance | ~$205 | Unico Fire Emblem GameCube, introdujo a Ike |
-| 2 | Gotcha Force | ~$486 | Capcom, marketing casi nulo, tirada corta |
-| 1 | Cubivore: Survival of the Fittest | ~$684 | Atlus, tirada minima, el mas caro y raro de toda la consola |
+| 10 | Fire Emblem: Path of Radiance | USD 220 | Unico Fire Emblem de GameCube, introdujo a Ike. Empata con Samurai Jack: Shadow of Aku (USD 220) |
+| 9 | Disney Sports Football | USD 221 | Licencia Disney de Konami que nadie guardo |
+| 8 | Zatch Bell! Mamodo Fury | USD 250 | Pelea basada en el anime, Bandai |
+| 7 | Phantasy Star Online Episode I & II Plus | USD 250 | RPG online de Sega, quedo el disco |
+| 6 | NCAA College Basketball 2K3 | USD 251 | Deportivo anual, pocos completos |
+| 5 | Resident Evil Code: Veronica X | USD 300 | Dos discos, completo con caja y manual |
+| 4 | Go! Go! Hypergrind | USD 513 | Atlus, tirada corta de nicho |
+| 3 | Gotcha Force | USD 516 | Capcom, marketing casi nulo |
+| 2 | Cubivore: Survival of the Fittest | USD 665 | Atlus, tirada minima |
+| 1 | Disney Sports Basketball | USD 1.025 | Licencia Disney de Konami, el retail NTSC USA mas caro de la consola |
 
-## Rarezas / No-Retail
+## Rarezas / No-Retail (de menos a mas caro)
 
-- **Interactive Multi-Game Demo Disc Version 16** (~$488, PriceCharting): disco de kiosko de tiendas, nunca se vendio al publico. Traia el parche del Zigzagoon shiny para Pokemon Ruby/Zafiro.
-- **The Legend of Zelda: Collector's Edition** (~$80, PriceCharting): disco promocional con 4 Zelda clasicos, la propia caja dice "PROMOTIONAL DISC · NOT FOR RESALE". Se conseguia solo via Nintendo Power o registro de GameCube+2 juegos.
+- **The Legend of Zelda: Collector's Edition** (~USD 80): disco promocional con 4 Zelda clasicos, la caja dice PROMOTIONAL DISC · NOT FOR RESALE. Se conseguia via Nintendo Power o registrando el GameCube y dos juegos.
+- **Interactive Multi-Game Demo Disc Version 16** (~USD 488): disco de kiosko de tiendas, nunca se vendio al publico. Traia el parche del Zigzagoon shiny para Pokemon Ruby y Zafiro.
+- **Animal Crossing [Not For Resale]** (~USD 1.045, suelto USD 758): copia promocional, nunca destinada a la venta. Cuidado: en el slide va la portada normal, la NFR lleva el sello.
 
 ## Santo Grial
 
-- **Resident Evil 4 [GameStop Special Edition]** (~$1.499, precio graduado en PriceCharting; ventas WATA cruzadas hasta $2.950+): steelbook exclusiva de GameStop, sellada y graduada. CIB normal apenas $200, sellada sin graduar $433,51 -la brecha es el ejemplo GameCube del boom WATA. ACLARAR SIEMPRE en camara que es precio de copia sellada/graduada, no del steelbook suelto.
+- **Pokemon Box [Big Box]** (~USD 4.443, pocas ventas registradas): Pokemon Box: Ruby & Sapphire en caja grande. Segun PriceCharting, en Norteamerica solo se vendia en el Pokemon Center de Nueva York; en Europa venia en el paquete Pokemon Colosseum Mega Pak. La version de caja normal ronda USD 2.500 completa. Es mas de cuatro veces el #1 del retail y mas que cualquier rareza.
 
 ## Puntos polemicos (para comentarios)
 
-- Cubivore #1 del retail sorprende: nadie esperaria que el juego mas caro de GameCube sea sobre animales cubicos comiendose entre si.
-- Metroid Prime y Resident Evil 4 (version estandar) del Top Mundial NO aparecen aca -la critica y el mercado premian cosas distintas.
-- El grial es la propia steelbook de RE4 sellada -mismo juego que ya salio en el Top Mundial, pero en una version de coleccionista que vale 7.5x el CIB normal.
+- Un juego de basquetbol con personajes de Disney es el retail mas caro de GameCube, por encima de Cubivore y Gotcha Force.
+- Los deportivos y juegos de licencia dominan el piso del top: Disney Sports Football, NCAA 2K3 y Disney Sports Basketball valen poco sueltos y mucho completos porque nadie los guardaba.
+- Metroid Prime y Resident Evil 4 estandar (del Top Mundial) no aparecen aca.
 
-## Veredicto (slide 17)
+## Veredicto (slide 18)
 
-Tirada corta + publisher chico + late release = precio alto, igual que en el resto del canal. Y arriba de todo, el fenomeno WATA convirtiendo una steelbook de GameStop en el objeto mas caro de la consola.
+En GameCube lo caro no es lo famoso: tirada corta, licencia que nadie guardo y venta en una sola tienda mandan sobre la fama.
 
-## Cierre / CTA (slide 18)
+## Cierre / CTA (slide 19)
 
-¿Sabian que Cubivore era el retail mas caro de GameCube? ¿Tienen algun disco de esta lista guardado? Comenten.
+¿Sabian que el retail mas caro de GameCube es un juego de basquetbol de Disney? ¿Tienen algun disco de esta lista guardado? Comenten. Suscribete a Retrotarros.
 
 ## Notas de produccion
 
-- Box arts: 13/13 reales, verificadas visualmente. 8 de Wikipedia REST summary + 5 corregidas via LaunchBox/PriceCharting directo (Ikaruga traia el flyer de arcade NAOMI; Chibi-Robo! traia solo el logo; Skies of Arcadia Legends traia la portada Dreamcast original en vez de la de GameCube; Zelda Collector's Edition traia la portada de Wind Waker por error de busqueda; Resident Evil 4 Special Edition necesito imagen especifica de la steelbook, no la portada estandar).
-- Demo Disc Version 16 usa `cart-fallback` (sin box art comercial, es un disco de kiosko sin caja retail) -comportamiento correcto, no error.
+- Box arts: 13 de 14 ítems con caja real (libretro / Wikipedia). Excepcion: PSO Plus usa por ahora la portada PAL (se ve el sello PAL y ELSPA en la imagen); conviene reemplazarla por la NTSC USA si aparece. Las rarezas Animal Crossing NFR y Pokemon Box usan la portada de la edicion normal como referencia (se aclara en las notas). Demo Disc Version 16 va con `cart-fallback` (sin caja retail).
+- Anos sin verificar con segunda fuente: Disney Sports Football (2002) y Zatch Bell! Mamodo Fury (2005). Confirmar antes de decirlos en camara.
 - Notas teleprompter: tecla N o boton (no-capture).
+- Capturas regeneradas el 2026-10-15 (`python scripts/capture-slides.py gamecube-top-precios`).
