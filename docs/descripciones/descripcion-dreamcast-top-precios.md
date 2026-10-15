@@ -1,61 +1,60 @@
 # Descripción YouTube — Top Precios Sega Dreamcast
 
-Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos son estimados; ajustar a los tiempos del corte final.
+Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos estimados; ajustar a los tiempos del corte final. Reforge de precios 2026-10-15 (PriceCharting, NTSC USA, CIB).
 
 ---
 
 ## Títulos sugeridos (elegir uno)
 
-1. **Los 10 Dreamcast MÁS CAROS del mundo (2026)** — 46 chars. (Recomendado)
-2. **El set de terror secreto de Dreamcast vale 2.500 dólares** — 58 chars.
-3. **Sonic Adventure 2 Edición Limitada: el Dreamcast más caro** — 60 chars.
+1. **Los 10 juegos de Dreamcast MÁS CAROS (y un set de terror secreto)** — 64 chars. (Recomendado)
+2. **Cannon Spike, Illbleed y compañía: lo que cuesta hoy una Dreamcast completa** — 77 chars, largo para móvil.
+3. **Dreamcast: 10 juegos que hoy valen una fortuna** — 49 chars.
 
 ---
 
 ## Descripción (copiar/pegar)
 
 ```
-La Dreamcast tiene un set de terror secreto que casi nadie pudo comprar, y vale como un auto usado 👻 Repasamos del retail carísimo al santo grial japonés en los precios más locos de la Dreamcast.
+La Dreamcast duró apenas dos años en Occidente, así que muchos de sus juegos tuvieron tiradas cortas, y hoy cuestan una fortuna 💰 Repasamos los 10 más caros en versión completa, NTSC USA, con precios de PriceCharting de octubre de 2026.
 
-Sonic Adventure 2 Limited Edition corona el retail (edición 10° aniversario de Sonic). Pero el grial de verdad es Grauen no Torikago ("La Jaula Gris"), una novela visual de terror vendida capítulo por capítulo, solo por la tienda web de Sega Japón.
+Del piso al techo: D2, Seaman con micrófono, Sonic Adventure 2, ECW Anarchy Rulz, JoJo's Bizarre Adventure, la portada "Clean Cover" de Speed Devils que Wal-Mart exigió cambiar, Resident Evil 2, Giga Wing 2, Illbleed y el trono: Cannon Spike, el shooter de Capcom con Mega Man, Cammy y Arthur.
 
-Dato curioso: las reediciones baratas "Sega All Stars" (Power Stone, Marvel vs Capcom) hoy valen MÁS que el juego original. Paradoja perfecta del coleccionismo.
+Después, las rarezas que nunca se vendieron en tiendas normales: una copia de alquiler de Power Stone y una copia promocional de AirForce Delta. Y el santo grial: Grauen no Torikago, un set japonés de terror que Sega solo vendía por su tienda web.
 
-Cuéntanos en los comentarios si sabías del set de terror secreto.
+Valores aproximados, fluctúan y nunca son consejo de inversión.
 
-00:00 Intro
-00:45 Formato: retail CIB + santo grial
-02:00 #10 Seaman (Mic Bundle)
-03:15 #9 JoJo's Bizarre Adventure
-04:30 #8 Mars Matrix
-05:45 #7 Illbleed
-07:00 #6 Skies of Arcadia
-08:15 #5 Speed Devils (First Run)
-09:30 #4 Giga Wing 2
-10:45 #3 Power Stone (Sega All Stars)
-12:00 #2 Marvel vs Capcom (Sega All Stars)
-13:15 #1 Sonic Adventure 2 Limited Edition
-14:30 Santo Grial: Grauen no Torikago
-16:00 Veredicto + cierre
-17:00 Próxima semana: cerramos la saga Sega con el Saturn
+¿Sabías del set de terror secreto? ¿Tienes alguno de esta lista guardado? Cuéntanos en los comentarios 👇
 
-Suscríbete para el cierre de la saga Sega con el Saturn.
+🔔 Suscríbete a RETROTARROS para más rankings y nostalgia retro.
+
+00:00 Cold open
+00:30 Contexto: la consola que murió joven
+01:30 #10 D2 (~$165)
+02:45 #9 Seaman [Mic Bundle] (~$170)
+04:00 #8 Sonic Adventure 2 (~$175)
+05:15 #7 ECW Anarchy Rulz (~$190)
+06:30 #6 JoJo's Bizarre Adventure (~$193)
+07:45 #5 Speed Devils [Clean Cover] (~$200)
+09:00 #4 Resident Evil 2 (~$220)
+10:15 #3 Giga Wing 2 (~$284)
+11:30 #2 Illbleed (~$335)
+12:45 #1 Cannon Spike (~$353)
+14:00 Rarezas: Power Stone (alquiler) y AirForce Delta (NFR)
+15:30 Santo grial: Grauen no Torikago
+16:30 Análisis del top
+17:30 Cierre
+
 Retrotarros — Nostalgia + Juegos + Música.
 
-#Dreamcast #Sega #Retrogaming #Gaming #Videojuegos
+#Coleccionismo #Dreamcast #Retrogaming #Top10 #Retrotarros
 ```
 
 ---
 
-## Hashtags adicionales (pool — preferir los MÁS MASIVOS, elegir 3-5)
-
-Masivos (alto volumen, primero): `#Dreamcast #Sega #Retrogaming #Gaming #Videojuegos #Retro`
-Nicho/relleno (opcional): `#SonicAdventure2 #RetroTarros #Chile`
-
-## Tags YouTube (keywords, separadas por coma)
+## Tags YouTube (keywords)
 
 ```
-sega dreamcast, dreamcast precios, sonic adventure 2 limited edition, grauen no torikago, marvel vs capcom sega all stars, power stone sega all stars, giga wing 2, illbleed, mars matrix, jojo bizarre adventure dreamcast, juegos mas caros dreamcast, retrogaming, retrotarros
+juegos mas caros de dreamcast, dreamcast juegos caros, cuanto valen los juegos de dreamcast, precio de juegos dreamcast, cannon spike dreamcast, illbleed dreamcast, resident evil 2 dreamcast, sega dreamcast, dreamcast, top 10 dreamcast, coleccionismo retro, juegos retro, pricecharting, top precios, retrotarros, videojuegos retro
 ```
 
 ---
@@ -63,47 +62,16 @@ sega dreamcast, dreamcast precios, sonic adventure 2 limited edition, grauen no 
 ## Comentario fijado (copiar/pegar)
 
 ```
-¿Sabías del set de terror secreto japonés? ¿Tienes alguna de las reediciones Sega All Stars?
+¿Sabías que el juego retail más caro de Dreamcast hoy es Cannon Spike, y no un juegazo famoso? ¿Cuál de esta lista tienes tú? Cuéntanos en los comentarios.
 ```
-
-## Post para redes (TikTok / IG / X)
-
-```
-La Dreamcast tiene un set de terror secreto que casi nadie pudo comprar, y vale como un auto usado. Los precios más locos del catálogo Dreamcast.
-
-Video completo en el canal.
-
-#Dreamcast #Sega #Retrogaming #Gaming
-```
-
-## Pantalla final / cards (end screen)
-
-- **Card al minuto ~2 y ~14:** apuntar al TarroShort del ranking (si se hace uno corto).
-- **End screen (últimos 20s):** 1) video sugerido = `dreamcast-top-mundial` (mismo arco), 2) botón suscribirse, 3) playlist "Rankings".
-- Dejar 15-20s de cierre con Coco para que calce el end screen.
 
 ## Notas de producción
 
-- **Capítulos:** timestamps estimados sobre estructura de 17-19 min. Ajustar al corte real (primero en 00:00, mínimo 3 capítulos de 10s+).
-- **Miniatura sugerida:** caja de Sonic Adventure 2 Limited Edition + arte del grial + texto "TOP PRECIOS · DREAMCAST" + TarroBot.
-- Fuente de datos: `docs/pautas/pauta-dreamcast-top-precios.md`.
-
----
-
-## Checklist de publicación (según docs/canal/guia-youtube-viral.md)
-
-- [ ] Subir video + setear **título** (≤65 chars, opción #1).
-- [ ] Subir **miniatura**.
-- [ ] Pegar **descripción** (bloque de arriba).
-- [ ] Ajustar **capítulos** al corte real (primero en 00:00).
-- [ ] Cargar **tags** (bloque keywords).
-- [ ] Confirmar **3-5 hashtags** en la descripción (los primeros 3 salen sobre el título).
-- [ ] Setear **end screen** + cards.
-- [ ] Publicar y **fijar el comentario**.
-- [ ] Publicar **post de redes**.
-- [ ] Agregar el video a la **playlist** "Rankings".
+- **Miniatura sugerida:** caja de Cannon Spike + texto "DREAMCAST TOP PRECIOS" + precio USD 353 + TarroBot.
+- Fuente de datos: `docs/pautas/pauta-dreamcast-top-precios.md` y `docs/discusiones/discusion-dreamcast-top-precios.md`.
 
 ---
 
 **Slug:** `dreamcast-top-precios`
-**Última actualización:** 2026-08-11
+**Formato:** Ranking (episodio largo, horizontal)
+**Última actualización:** 2026-10-15 (top 10 corregido con PriceCharting)
