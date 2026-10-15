@@ -1,60 +1,59 @@
 # Descripción YouTube — Top Precios Sega Saturn
 
-Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos son estimados; ajustar a los tiempos del corte final. **Cierra la saga Sega (Master System, Mega Drive, Dreamcast y Saturn).**
+Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos estimados; ajustar a los tiempos del corte final. Reforge de precios 2026-10-15 (PriceCharting, NTSC USA, CIB). Cierra la saga Sega.
 
 ---
 
 ## Títulos sugeridos (elegir uno)
 
-1. **Los 10 Sega Saturn MÁS CAROS del mundo (cierra la saga Sega)** — 61 chars. (Recomendado)
-2. **El juego de Saturn más caro valía 5 mil dólares por correo** — 58 chars.
-3. **Panzer Dragoon Saga: el Saturn retail más caro del mundo** — 57 chars.
+1. **Los 10 juegos de Sega Saturn MÁS CAROS (cierra la saga Sega)** — 61 chars. (Recomendado)
+2. **El juego de Saturn más caro se pedía por correo y vale 6 mil dólares** — 68 chars, largo para móvil.
+3. **Panzer Dragoon Saga y BattleSport: lo que cuesta hoy un Saturn completo** — 71 chars, largo para móvil.
 
 ---
 
 ## Descripción (copiar/pegar)
 
 ```
-El juego más caro del Saturn americano valía 5 mil dólares... y solo lo conseguías pidiéndolo por correo directo a Sega 📮 Cerramos la saga Sega con los precios más locos del catálogo Saturn: del retail carísimo al santo grial.
+El Sega Saturn duró poco en Norteamérica y vendió mucho menos que sus rivales, así que muchos de sus juegos tuvieron tiradas cortas, y hoy cuestan una fortuna 💰 Repasamos los 10 más caros en versión completa, NTSC USA, con precios de PriceCharting de octubre de 2026.
 
-Panzer Dragoon Saga corona el retail (30 mil copias, código perdido, hoy sobre los mil dólares completo). Pero el verdadero grial es Daytona USA: CCE NetLink Edition, la versión online que Sega vendía uno por uno por correo.
+Del piso al techo: Lunacy, Herc's Adventures, Mega Man X4, The House of the Dead, Saturn Bomberman, Mega Man 8 con sus dos jefes exclusivos, Burning Rangers, BattleSport (sí, casi 900 dólares), Magic Knight Rayearth de Working Designs y el trono: Panzer Dragoon Saga.
 
-Dato curioso: Contra Legacy of War (un juego mediocre) vale más que varias joyas del top mundial. En coleccionismo, lo caro no siempre es lo bueno.
+Y el santo grial: Daytona USA CCE NetLink Edition, una versión online que se pedía por correo directo a Sega y hoy cuesta unos 6.500 dólares.
 
-Cuéntanos en los comentarios cuál fue tu consola Sega favorita de toda la saga.
+Valores aproximados, fluctúan y nunca son consejo de inversión.
 
-00:00 Intro
-00:45 Formato: retail CIB + santo grial
-02:00 #9 Saturn Bomberman
-03:15 #8 Shining Force III
-04:30 #7 The House of the Dead
-05:45 #6 Contra: Legacy of War
-07:00 #5 Radiant Silvergun
-08:15 #4 Magic Knight Rayearth
-09:30 #3 Mega Man 8
-10:45 #2 Burning Rangers
-12:00 #1 Panzer Dragoon Saga
-13:15 Santo Grial: Daytona USA CCE NetLink Edition
-15:00 Veredicto: cerramos la saga Sega
-16:30 Cierre + despedida
+¿Sabías del Daytona que se pedía por correo? ¿Tienes alguno de esta lista guardado? Cuéntanos en los comentarios 👇
 
-Gracias por acompañarnos en la saga Sega completa. Suscríbete para lo que viene.
+🔔 Suscríbete a RETROTARROS para más rankings y nostalgia retro.
+
+00:00 Cold open
+00:30 Contexto: la consola que murió joven
+01:30 #10 Lunacy (~$390)
+02:45 #9 Herc's Adventures (~$403)
+04:00 #8 Mega Man X4 (~$406)
+05:15 #7 The House of the Dead (~$445)
+06:30 #6 Saturn Bomberman (~$500)
+07:45 #5 Mega Man 8 (~$621)
+09:00 #4 Burning Rangers (~$700)
+10:15 #3 BattleSport (~$900)
+11:30 #2 Magic Knight Rayearth (~$942)
+12:45 #1 Panzer Dragoon Saga (~$1.281)
+14:00 Santo grial: Daytona USA CCE NetLink Edition
+15:30 Análisis del top
+16:30 Cierre de la saga Sega
+
 Retrotarros — Nostalgia + Juegos + Música.
 
-#SegaSaturn #Saturn #Retrogaming #Gaming #Videojuegos
+#Coleccionismo #SegaSaturn #Retrogaming #Top10 #Retrotarros
 ```
 
 ---
 
-## Hashtags adicionales (pool — preferir los MÁS MASIVOS, elegir 3-5)
-
-Masivos (alto volumen, primero): `#SegaSaturn #Saturn #Sega #Retrogaming #Gaming #Videojuegos #Retro`
-Nicho/relleno (opcional): `#PanzerDragoonSaga #DaytonaUSA #RetroTarros #Chile`
-
-## Tags YouTube (keywords, separadas por coma)
+## Tags YouTube (keywords)
 
 ```
-sega saturn, saturn precios, panzer dragoon saga, daytona usa netlink, burning rangers, mega man 8 saturn, magic knight rayearth, radiant silvergun, contra legacy of war, the house of the dead, shining force iii, saturn bomberman, juegos mas caros saturn, retrogaming, retrotarros
+juegos mas caros de sega saturn, sega saturn juegos caros, cuanto valen los juegos de saturn, precio de juegos saturn, panzer dragoon saga, battlesport saturn, daytona usa netlink, sega saturn, saturn, top 10 saturn, coleccionismo retro, juegos retro, pricecharting, top precios, retrotarros, videojuegos retro
 ```
 
 ---
@@ -62,47 +61,16 @@ sega saturn, saturn precios, panzer dragoon saga, daytona usa netlink, burning r
 ## Comentario fijado (copiar/pegar)
 
 ```
-¿Sabías que existía un Daytona USA que solo se pedía por correo? ¿Cuál fue tu consola Sega favorita de toda la saga?
+¿Sabías que el juego de Saturn más caro es un Daytona online que se pedía por correo? ¿Cuál de esta lista tienes tú? Cuéntanos en los comentarios.
 ```
-
-## Post para redes (TikTok / IG / X)
-
-```
-El juego más caro del Saturn americano valía 5 mil dólares y solo se pedía por correo directo a Sega. Cerramos la saga Sega con los precios más locos del Saturn.
-
-Video completo en el canal.
-
-#SegaSaturn #Saturn #Retrogaming #Gaming
-```
-
-## Pantalla final / cards (end screen)
-
-- **Card al minuto ~2 y ~13:** apuntar al TarroShort del ranking (si se hace uno corto).
-- **End screen (últimos 20s):** 1) video sugerido = `saturn-top-mundial` (mismo arco), 2) botón suscribirse, 3) playlist "Rankings".
-- Dejar 15-20s de cierre con Coco para que calce el end screen.
 
 ## Notas de producción
 
-- **Capítulos:** timestamps estimados sobre estructura de 17-19 min. Ajustar al corte real (primero en 00:00, mínimo 3 capítulos de 10s+).
-- **Miniatura sugerida:** caja de Panzer Dragoon Saga + arte de Daytona USA + texto "TOP PRECIOS · SATURN" + TarroBot.
-- Fuente de datos: `docs/pautas/pauta-saturn-top-precios.md`.
-
----
-
-## Checklist de publicación (según docs/canal/guia-youtube-viral.md)
-
-- [ ] Subir video + setear **título** (≤65 chars, opción #1).
-- [ ] Subir **miniatura**.
-- [ ] Pegar **descripción** (bloque de arriba).
-- [ ] Ajustar **capítulos** al corte real (primero en 00:00).
-- [ ] Cargar **tags** (bloque keywords).
-- [ ] Confirmar **3-5 hashtags** en la descripción (los primeros 3 salen sobre el título).
-- [ ] Setear **end screen** + cards.
-- [ ] Publicar y **fijar el comentario**.
-- [ ] Publicar **post de redes**.
-- [ ] Agregar el video a la **playlist** "Rankings".
+- **Miniatura sugerida:** caja de Panzer Dragoon Saga + texto "SATURN TOP PRECIOS" + precio USD 1.281 + TarroBot.
+- Fuente de datos: `docs/pautas/pauta-saturn-top-precios.md` y `docs/discusiones/discusion-saturn-top-precios.md`.
 
 ---
 
 **Slug:** `saturn-top-precios`
-**Última actualización:** 2026-08-11
+**Formato:** Ranking (episodio largo, horizontal)
+**Última actualización:** 2026-10-15 (top 10 corregido con PriceCharting)

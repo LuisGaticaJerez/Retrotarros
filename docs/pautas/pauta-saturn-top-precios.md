@@ -10,29 +10,30 @@ El juego mas caro del Saturn americano valia 5 mil dolares y solo lo conseguias 
 
 ## Formato (regla del canal)
 
-- RETAIL CIB (#9 → #1): juegos vendidos en tiendas.
+- RETAIL CIB (#10 → #1): juegos vendidos en tiendas.
 - SANTO GRIAL: Daytona USA CCE NetLink Edition (solo por correo directo a Sega).
 - Precios reales CBR/GameRant/Racketboy 2026. "Longbox tax" (caja intacta) infla el CIB. Valores fluctuan.
 
-## Retail CIB (#9 → #1)
+## Retail CIB (#10 → #1)
 
-> **Reverificado 2026-09-21 directo en PriceCharting** (auditoria canon disparada por la correccion de PS1). Todos los precios cambiaron -la mayoria mas de 20%- y el orden se reordeno completo. Fuente anterior (CBR/GameRant/Racketboy) quedo desactualizada.
+> **REFORGE 2026-10-15 (episodio sin grabar):** releido el listado "Most Expensive Sega Saturn" de PriceCharting con columnas exactas, y confirmadas las fichas de los nuevos. Al top anterior le faltaban juegos mas caros que su #9, #8 y #7. **Entran:** BattleSport (#3), Mega Man X4, Herc's Adventures y Lunacy. **Salen:** Radiant Silvergun (solo listado JP), Shining Force III y Contra: Legacy of War. Los demas suben de puesto.
 
-| # | Juego | CIB (PriceCharting sept 2026) | Por que |
+| # | Juego | CIB (PriceCharting oct 2026) | Por que |
 |---|---|---|---|
-| 9 | Radiant Silvergun | ~$198 (solo listado JP, sin version NTSC USA) | Shmup Treasure, exclusivo Japon |
-| 8 | Shining Force III | ~$276 | SRPG; los Scenario 2/3 japoneses aun mas caros |
-| 7 | Contra: Legacy of War | ~$299 | Contra 3D odiado = tirada minima = raro |
-| 6 | The House of the Dead | ~$481 | Origen saga zombies, late release 1998 |
-| 5 | Saturn Bomberman | ~$510 | Party game (top mundial), demanda multiplayer |
-| 4 | Mega Man 8 | ~$630 | Version Saturn con 2 jefes exclusivos |
-| 3 | Burning Rangers | ~$708 | Ultimo Sonic Team del Saturn, late release |
-| 2 | Magic Knight Rayearth | ~$975 | Working Designs, ULTIMO juego oficial USA -casi alcanza al #1 |
-| 1 | Panzer Dragoon Saga | ~$1.225 | 30 mil copias, codigo perdido, rey retail |
+| 10 | Lunacy | ~$390 | Atlus 1997; sin caja NTSC USA confiable (slide con marcador de color) |
+| 9 | Herc's Adventures | ~$403 | Aventura de accion de LucasArts, mitologia griega |
+| 8 | Mega Man X4 | ~$406 | Version Saturn del X4 (Capcom, 1997) |
+| 7 | The House of the Dead | ~$445 | Origen de la saga de zombies, late release 1998 |
+| 6 | Saturn Bomberman | ~$500 | Party game (top mundial), demanda multiplayer |
+| 5 | Mega Man 8 | ~$621 | Version Saturn con 2 jefes exclusivos |
+| 4 | Burning Rangers | ~$700 | Ultimo Sonic Team del Saturn, late release |
+| 3 | BattleSport | ~$900 | Deathsport futurista de Acclaim (1997) |
+| 2 | Magic Knight Rayearth | ~$942 | Working Designs, ULTIMO juego oficial USA |
+| 1 | Panzer Dragoon Saga | ~$1.281 | 30 mil copias, codigo perdido, rey retail |
 
 ## Santo Grial
 
-- **Daytona USA: CCE NetLink Edition** (~$6.500 CIB, verificado PriceCharting sept 2026, venta mas reciente $6.499,99 abril 2026): version online (NetLink) de Daytona CCE, solo por pedido directo a Sega por correo. Userbase chico + venta por correo = poquisimas copias (historial de ventas: $1.750 en 2021 a $9.999,99 en 2022, apenas 1 venta al año). El juego de Saturn USA mas caro documentado -sigue siendo, por lejos, mas caro que el #1 del retail ($1.225).
+- **Daytona USA: CCE NetLink Edition** (~$6.500 CIB, verificado PriceCharting sept 2026, venta mas reciente $6.499,99 abril 2026): version online (NetLink) de Daytona CCE, solo por pedido directo a Sega por correo. Userbase chico + venta por correo = poquisimas copias (historial de ventas: $1.750 en 2021 a $9.999,99 en 2022, apenas 1 venta al año). El juego de Saturn USA mas caro documentado -sigue siendo, por lejos, mas caro que el #1 del retail ($1.281).
 
 ## Puntos polemicos (para comentarios)
 
@@ -51,6 +52,6 @@ Cerramos 4 consolas (Master System, Mega Drive, Dreamcast, Saturn) en mundial y 
 
 ## Notas de produccion
 
-- Box arts: 10/10 integradas en `studio/img/saturn-top-precios/` (Daytona NetLink usa la box de CCE como referencia).
+- Box arts (reforge 2026-10-15): NTSC USA desde libretro para BattleSport, Mega Man X4 y Herc's Adventures; Lunacy sin caja confiable (marcador de color); el resto ya estaban en `studio/img/saturn-top-precios/` (Daytona NetLink usa la box de CCE como referencia).
 - Notas teleprompter: tecla N o boton (no-capture). Fuentes grandes. Precio retail verde, grial amarillo.
 - TarroBot: tono de cierre epico de la saga Sega, recalcar la paradoja Contra y la mistica del Daytona por correo.
