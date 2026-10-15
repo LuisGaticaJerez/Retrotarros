@@ -66,6 +66,8 @@ publicados.
 | Jue 15 oct 2026, 20:30 | Por qué Melee sigue siendo el Smash más jugado en torneos \| RetroReseñas | `resena-super-smash-bros-melee-pedido` |
 | Dom 18 oct 2026, 20:30 | Los 10 mejores juegos de PS1 según la crítica | `ps1-top-mundial` |
 
+**Grabados y todavía sin fecha de publicación (confirmado por Luis 2026-10-14, NO tocar su HTML ni sus textos):** reseña de Montezuma's Revenge (`resena-montezumas-revenge-pedido`), reseña de Mighty Morphin Power Rangers (`resena-mighty-morphin-power-rangers-pedido`) y Top Peores de SNES (`snes-top-peores`). Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
+
 Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09).
 
 ---|---|---|---|
