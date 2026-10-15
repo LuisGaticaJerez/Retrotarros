@@ -1,111 +1,49 @@
-# Reunión previa con Koko — Episodio Top Precios PS Vita
+# Discusion — PS Vita Top Precios
 
-> Documento conversacional. **Tiempo estimado: 25 min.**
->
-> Doc operativo: [`docs/pautas/pauta-psvita-top-precios.md`](docs/pautas/pauta-psvita-top-precios.md).
-> Monitor: [`studio/rankings/top-precios/psvita-top-precios.html`](../../studio/rankings/top-precios/psvita-top-precios.html).
->
-> **Sincronizado con el HTML (formato TarroVisión, 3 ligas).** Ranking y precios
-> reflejan el HTML real. Versión anterior (Invizimals #1 / "Koko tiene 4") quedó
-> obsoleta y se descartó.
->
-> **REFORGE 2026-08-25 (previo a grabar):** precios recontrastados en vivo contra
-> PriceCharting. El orden retail cambió fuerte — Silent Hill Book of Memories subió
-> al #2, Trails of Cold Steel II y Disgaea 4 se desplomaron, Atelier Rorona Plus salió
-> del ranking (nunca tuvo release físico NTSC-US, era digital-only) y entró Gravity
-> Rush. Se sumó Papers Please a las rarezas. Ver `pauta-psvita-top-precios.md`.
->
-> **Auditoría canon 2026-09-21** (revisión de todo el backlog top-precios sin
-> estrenar, disparada por la corrección de PS1): reverificados directo en
-> PriceCharting el techo retail y el grial. Persona 4 Golden Solid Gold sigue en
-> $302, Revenge of the Bird King (tope de Limited Run) confirmado en $1.028,85, y
-> el santo grial Binding of Isaac: Rebirth confirmado en $4.000,04 CIB (solo 3
-> ventas completadas registradas históricamente, rango $3.000-$6.631 — "unreleased
-> but ESRB rated game", nunca tuvo lanzamiento oficial en Vita). Jerarquía
-> confirmada correcta: $302 < $1.029 < $4.000. Sin cambios necesarios.
+Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-psvita-top-precios.md`.
 
----
+## El orden (de menos a mas caro)
 
-## 1. Acuerdo rápido
+| # | Juego | CIB aprox. |
+|---|---|---|
+| 10 | Criminal Girls: Invite Only [Limited Edition] | USD 81 |
+| 9 | Criminal Girls 2: Party Favors | USD 92 |
+| 8 | Summon Night 6: Lost Borders [Wonderful Edition] | USD 120 |
+| 7 | Silent Hill: Book of Memories | USD 126 |
+| 6 | Muramasa Rebirth: Blessing of Amitabha [Collector's Edition] | USD 131 |
+| 5 | Valkyrie Drive Bhikkhuni [Liberator's Edition] | USD 145 |
+| 4 | A Rose in the Twilight | USD 164 |
+| 3 | Ar Nosurge Plus: Ode to an Unborn Star | USD 250 |
+| 2 | Persona 4 Golden [Solid Gold Premium Edition] | USD 285 |
+| 1 | Ar Nosurge Plus [Limited Edition] | USD 316 |
 
-**Qué SÍ es:**
-- Ranking de precios PS Vita 2026 (PriceCharting + VGPC) en **TRES ligas**: retail, Limited Run, el grial.
-- Cierre con dato bomba: el coleccionismo PS Vita como "inversión sin querer".
-- Duración: **18-22 min**.
+Rarezas y Limited Run (4 juegos): Breach & Clear (USD 215), 1001 Spikes (USD 568), VVVVVV (USD 949), Revenge of the Bird King (USD 1.029).
 
-**Qué NO es:**
-- No es ranking de calidad (eso es `psvita-top-mundial`).
-- No incluye TODAS las Limited Run — destacamos el patrón con 4-5 ejemplos + el grial.
-- No es batería en el cierre.
+Santo grial: The Binding of Isaac: Rebirth, unos USD 4.000.
 
----
+## Que cambio y por que
 
-## 2. Preparación
+- El top de agosto estaba desactualizado: el #10 valia USD 23 y habia juegos de USD 80 a 316 que no estaban. Se rehizo leyendo las fichas actuales de PriceCharting.
+- Salen de la lista todos los que cayeron bajo el corte: Gravity Rush, Muramasa Rebirth estandar, Toukiden 2, Dragon's Crown, Trails of Cold Steel II, Disgaea 4, Ys Celceta y Hatsune Miku F 2nd.
+- Ar Nosurge Plus [Limited Edition] es el nuevo #1. Persona 4 Golden Solid Gold baja al #2 (de USD 302 a 285).
+- La seccion de rarezas se redujo a 4 juegos, como pediste. Quedan Breach & Clear, 1001 Spikes, VVVVVV y Bird King. Salen Papers, Please (USD 145, por el tope de 4) y A.W. Phoenix Festa.
+- **Correccion importante del grial y las rarezas:** antes decian "Limited Run" para casi todo. Al revisar, VVVVVV y 1001 Spikes los publica Nicalis y, segun reportes de coleccionistas, casi no circularon; y Binding of Isaac: Rebirth figura en PriceCharting como "unreleased but ESRB rated". Ya no se les llama Limited Run en pantalla.
+- Orden grial / rarezas: el grial (USD 4.000) es mas caro que toda la seccion de rarezas (maximo USD 1.029), asi que va al final. Si hubiera sido mas barato, iria antes de las rarezas, como dijiste.
 
-### Luis
-- [ ] Verificar precios actualizados PriceCharting + VGPC antes de grabar.
-- [ ] Memorizar las 3 ligas + el grial (Binding of Isaac) + frase fija de cierre.
+## Para conversar antes de grabar
 
-### Koko
-- [ ] **NO mirar los precios del HTML antes de cámara** — reacciones genuinas son el oro.
-- [ ] Confirmar en cámara cuáles del ranking tiene en su colección, sin guion.
-- [ ] Anécdota: ¿pagaste lo que costaban hoy o conseguiste alguno barato?
+- Binding of Isaac: Rebirth es un grial raro: el precio descansa en muy pocas ventas (3 registradas) y el juego oficialmente no tuvo lanzamiento fisico. ¿Les parece bien dejarlo como grial con esa aclaracion en camara, o prefieren otro cierre?
+- Dejamos afuera por no ser retail de la epoca o por no ser NTSC USA: Deception IV Nightmare Princess (en Vita NA fue solo digital), A.W. Phoenix Festa (edicion de Asia), Gundam Breaker 3 Break Edition (sin lanzamiento NA confirmado) y los lanzamientos modernos de Eastasiasoft y Limited Run, salvo los 4 de la seccion.
+- Valkyrie Drive [Liberator's Edition] y Summon Night 6 [Wonderful Edition] las vendian los propios publishers (PQube por Rice Digital, Gaijinworks). Las contamos como retail. ¿De acuerdo?
+- Soul Sacrifice Delta (USD 80) queda #11, casi empatado con Criminal Girls: Invite Only.
 
----
+## Por confirmar antes de decirlo en camara
 
-## 3. Preguntas para resolver
+- Origen de las copias fisicas de VVVVVV y 1001 Spikes (teorias de coleccionistas, no confirmado).
+- Que Revenge of the Bird King iba a ser un bonus para quienes compraran todas las Limited Run de Vita (lo dice la prensa de coleccionismo, no hay fuente oficial).
+- Fechas: vienen de PriceCharting y se usaron solo los anos.
+- Las portadas de las ediciones limitadas son fotos del set de coleccionista; la de Muramasa es la portada estandar como referencia; la de Binding of Isaac es arte del juego (no hay caja que mostrar).
 
-### 3.1 — Tono del episodio
-La PS Vita coleccionismo es un **boom mundial reciente** (2020+). Hay dos formas:
-- (a) **Celebratorio**: "wow, estos cartuchos valen fortuna"
-- (b) **Crítico**: "este es el problema del modelo abandonado"
+## Auditoria de precios (regla CANON, 2026-10-15)
 
-**Recomendación:** (a) con (b) en el cierre. Empezamos con energía coleccionista, terminamos con la reflexión "es un problema que las consolas terminen así".
-
-### 3.2 — El factor Limited Run Games
-LRG necesita 1-2 min de explicación porque la audiencia general no sabe qué es. Decidir:
-- (a) **Liga dedicada** (en el HTML: la segunda liga, tras el retail)
-- (b) **Mención de pasada** en los slides individuales
-
-**Recomendación:** (a). El concepto LRG es contenido en sí mismo y explica por qué un indie físico vale mil dólares.
-
-### 3.3 — Mostrar cartuchos físicos
-Si Koko tiene alguno del ranking (Silent Hill: Book of Memories u otro), que aparezca físico en cámara. Plano cenital + reacción al valor actual.
-
-### 3.4 — Frase fija de cierre
-La frase escrita es larga. Confirmar palabra por palabra antes de grabar (está en la pauta, igual al HTML).
-
----
-
-## 4. La estructura en un minuto
-
-```
-0:00–1:00     Cold open    Cartucho caro + hook "Sony la mató en 2019"
-1:00–2:30     Setup        Por qué los precios PS Vita son altos + las 3 ligas
-2:30–13:00    Retail 10→1  Los 10 retail más caros (~60 seg c/u) · #1 Persona 4 Golden Solid Gold $302
-13:00–16:00   Limited Run  El patrón LRG (orden ascendente): Papers Please → Phoenix Festa → 1001 Spikes → VVVVVV → Bird King
-16:00–19:00   El grial     Binding of Isaac Rebirth ~$4.000 + cierre
-```
-
----
-
-## 5. Riesgos a evitar
-
-| Riesgo | Mitigación |
-|--------|------------|
-| Reacciones de Koko se sienten actuadas | NO darle los precios antes de cámara |
-| Episodio se siente "vendedor" (Sony culpable) | Tono celebratorio del coleccionismo · crítico solo en el cierre |
-| Limited Run Games confunde a la audiencia | Liga dedicada con la explicación clara |
-| Mezclar ligas (retail con LRG) | Respetar el orden del HTML: retail #10→#1, LUEGO Limited Run, LUEGO grial |
-| Ratio time per slide demasiado parejo | Slides clave (Persona 4 Golden · 1001 Spikes · grial Binding of Isaac) toman 1:30 · resto 50 seg |
-
----
-
-## 6. Continuidad con el resto del arco
-
-- **Sembrar:** mencionar que el próximo episodio será `psvita-top-mundial` ("el mercado paga unos, la crítica ama otros").
-- **Patrón con N64:** mismo formato que `n64-top-precios` funcionó muy bien. Repetirlo aquí con datos PS Vita.
-
----
-
-*Episodio que cementa la narrativa del arco PS Vita: la consola abandonada se volvió coleccionable de culto, del retail JRPG al grial Limited Run.*
+Se confirmaron en la ficha de PriceCharting los precios de los diez juegos del top y de las cuatro rarezas. El grial (Binding of Isaac: Rebirth, USD 4.000) es mas caro que el #1 del retail (USD 316) y que cualquier rareza (la mas cara, USD 1.029). El precio del grial se apoya en pocas ventas registradas; queda anotado. Las rarezas son fisicos de tirada minima o de circulacion casi nula, no retail normal.

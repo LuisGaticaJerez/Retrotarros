@@ -1,61 +1,60 @@
 # Descripción YouTube — Top Precios PS Vita
 
-Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos son estimados; ajustar a los tiempos del corte final.
+Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos estimados; ajustar a los tiempos del corte final. Reforge de precios 2026-10-15 (PriceCharting, NTSC USA, CIB).
 
 ---
 
 ## Títulos sugeridos (elegir uno)
 
-1. **Los 10 PS Vita MÁS CAROS del mundo (2026)** — 44 chars. (Recomendado)
-2. **El juego de PS Vita más caro cuesta 4.000 dólares** — 51 chars.
-3. **Persona 4 Golden dorado: el PS Vita retail más caro** — 54 chars.
+1. **Los 10 juegos de PS Vita MÁS CAROS (y uno que oficialmente nunca salió)** — 64 chars. (Recomendado)
+2. **PS Vita Top Precios: Ar Nosurge, Persona 4 Golden y un grial de 4.000 dólares** — 76 chars, largo para móvil.
+3. **Lo que cuesta hoy una PS Vita completa: del retail al santo grial** — 62 chars.
 
 ---
 
 ## Descripción (copiar/pegar)
 
 ```
-Sony mató la PS Vita en marzo de 2019. Y desde ese día, los cartuchos físicos no paran de subir 📈 Los 10 más caros que se vendieron en tiendas... y después los que nunca llegaron a una tienda y valen miles.
+Sony dejó de fabricar cartuchos de PS Vita en 2019, así que todo lo físico que existe hoy es todo lo que va a existir 💰 Repasamos los 10 juegos retail más caros en versión completa, NTSC USA, con precios de PriceCharting de octubre de 2026.
 
-Persona 4 Golden: Solid Gold Premium Edition (steelbook dorado + OST) corona el retail en 302 dólares. Pero eso es apenas el techo: la liga Limited Run Games juega en los cientos y miles, y el santo grial absoluto es The Binding of Isaac: Rebirth, un físico tan escaso que los coleccionistas dudaban que existiera. Se mantiene estable sobre los 4.000 dólares completo.
+Del piso al techo: las ediciones limitadas de Criminal Girls, Summon Night 6, Silent Hill: Book of Memories, Muramasa Rebirth, Valkyrie Drive, A Rose in the Twilight, Ar Nosurge Plus, la edición premium de Persona 4 Golden con solo 10.000 copias y el trono: la edición limitada de Ar Nosurge Plus.
 
-Catálogo finito + demanda creciente = esto. Cinco años después que Sony cerró producción, lo único estable es lo que ya está en cajas en la casa de la gente.
+Después, cuatro rarezas de tirada mínima de Limited Run Games y Nicalis: Breach & Clear, 1001 Spikes, VVVVVV y Revenge of the Bird King. Y el santo grial: The Binding of Isaac: Rebirth, un juego clasificado por la ESRB que según PriceCharting nunca tuvo lanzamiento oficial en físico y ronda los 4.000 dólares, con muy pocas ventas registradas.
 
-Cuéntanos en los comentarios cuál de estos griales tienes o quisieras tener.
+Valores aproximados, fluctúan y nunca son consejo de inversión.
 
-00:00 Intro
-01:00 Por qué los precios de PS Vita explotaron
-02:30 #10 Ys: Memories of Celceta
-03:30 #9 Disgaea 4: A Promise Revisited
-04:30 #8 Dragon's Crown
-05:30 #7 Toukiden 2
-06:30 #6 Trails of Cold Steel II
-07:30 #5 Hatsune Miku: Project Diva F 2nd
-08:30 #4 Gravity Rush
-09:30 #3 Muramasa Rebirth
-10:30 #2 Silent Hill: Book of Memories
-11:30 #1 Persona 4 Golden: Solid Gold Premium Edition
-13:00 Liga Limited Run Games
-16:00 Santo Grial: The Binding of Isaac: Rebirth
-17:30 Cierre + próxima semana
+¿Tienes algún cartucho de esta lista guardado? Cuéntanos en los comentarios 👇
 
-Suscríbete para la próxima consola.
+🔔 Suscríbete a RETROTARROS para más rankings y nostalgia retro.
+
+00:00 Cold open
+00:30 Contexto: la consola que Sony dejó de fabricar
+02:30 #10 Criminal Girls: Invite Only [Limited Edition] (~$81)
+03:30 #9 Criminal Girls 2: Party Favors (~$92)
+04:30 #8 Summon Night 6 [Wonderful Edition] (~$120)
+05:30 #7 Silent Hill: Book of Memories (~$126)
+06:30 #6 Muramasa Rebirth [Collector's Edition] (~$131)
+07:30 #5 Valkyrie Drive Bhikkhuni [Liberator's Edition] (~$145)
+08:30 #4 A Rose in the Twilight (~$164)
+09:45 #3 Ar Nosurge Plus (~$250)
+11:00 #2 Persona 4 Golden Solid Gold (~$285)
+12:15 #1 Ar Nosurge Plus [Limited Edition] (~$316)
+13:30 Rarezas: Breach & Clear, 1001 Spikes, VVVVVV, Revenge of the Bird King
+16:00 Santo grial: The Binding of Isaac: Rebirth
+17:30 Análisis del top
+18:30 Cierre
+
 Retrotarros — Nostalgia + Juegos + Música.
 
-#PSVita #PlayStation #Retrogaming #Gaming #Videojuegos
+#Coleccionismo #PSVita #Retrogaming #Top10 #Retrotarros
 ```
 
 ---
 
-## Hashtags adicionales (pool — preferir los MÁS MASIVOS, elegir 3-5)
-
-Masivos (alto volumen, primero): `#PSVita #PlayStation #Retrogaming #Gaming #Videojuegos #Retro`
-Nicho/relleno (opcional): `#BindingOfIsaac #LimitedRunGames #RetroTarros #Chile`
-
-## Tags YouTube (keywords, separadas por coma)
+## Tags YouTube (keywords)
 
 ```
-ps vita precios, playstation vita, persona 4 golden solid gold, binding of isaac rebirth vita, limited run games, muramasa rebirth, gravity rush, silent hill book of memories, papers please vita, juegos mas caros ps vita, retrogaming, retrotarros
+juegos mas caros de ps vita, ps vita juegos caros, cuanto valen los juegos de ps vita, precio de juegos ps vita, ar nosurge plus, persona 4 golden solid gold, binding of isaac rebirth vita, limited run games vita, playstation vita, ps vita, top 10 ps vita, coleccionismo retro, juegos retro, pricecharting, top precios, retrotarros, videojuegos retro
 ```
 
 ---
@@ -63,47 +62,16 @@ ps vita precios, playstation vita, persona 4 golden solid gold, binding of isaac
 ## Comentario fijado (copiar/pegar)
 
 ```
-¿Cuál de estos griales tienes o quisieras tener? ¿Sabías que Binding of Isaac: Rebirth vale 4 mil dólares en Vita?
+¿Sabías que el grial de la PS Vita es un juego que oficialmente nunca salió en físico? ¿Cuál de esta lista tienes tú? Cuéntanos en los comentarios.
 ```
-
-## Post para redes (TikTok / IG / X)
-
-```
-Sony mató la PS Vita en 2019 y desde ese día los cartuchos físicos no paran de subir. El más caro del mundo cuesta 4.000 dólares.
-
-Video completo en el canal.
-
-#PSVita #PlayStation #Retrogaming #Gaming
-```
-
-## Pantalla final / cards (end screen)
-
-- **Card al minuto ~2 y ~14:** apuntar al TarroShort del ranking (si se hace uno corto).
-- **End screen (últimos 20s):** 1) video sugerido = `psvita-top-mundial` (mismo arco), 2) botón suscribirse, 3) playlist "Rankings".
-- Dejar 15-20s de cierre con Coco para que calce el end screen.
 
 ## Notas de producción
 
-- **Capítulos:** timestamps estimados sobre estructura de 18-22 min. Ajustar al corte real (primero en 00:00, mínimo 3 capítulos de 10s+).
-- **Miniatura sugerida:** caja de Persona 4 Golden Solid Gold + arte de Binding of Isaac + texto "TOP PRECIOS · PS VITA" + TarroBot.
-- Fuente de datos: `docs/pautas/pauta-psvita-top-precios.md`.
-
----
-
-## Checklist de publicación (según docs/canal/guia-youtube-viral.md)
-
-- [ ] Subir video + setear **título** (≤65 chars, opción #1).
-- [ ] Subir **miniatura**.
-- [ ] Pegar **descripción** (bloque de arriba).
-- [ ] Ajustar **capítulos** al corte real (primero en 00:00).
-- [ ] Cargar **tags** (bloque keywords).
-- [ ] Confirmar **3-5 hashtags** en la descripción (los primeros 3 salen sobre el título).
-- [ ] Setear **end screen** + cards.
-- [ ] Publicar y **fijar el comentario**.
-- [ ] Publicar **post de redes**.
-- [ ] Agregar el video a la **playlist** "Rankings".
+- **Miniatura sugerida:** caja de Ar Nosurge Plus [Limited Edition] + texto "PS VITA TOP PRECIOS" + precio USD 316 + TarroBot.
+- Fuente de datos: `docs/pautas/pauta-psvita-top-precios.md` y `docs/discusiones/discusion-psvita-top-precios.md`.
 
 ---
 
 **Slug:** `psvita-top-precios`
-**Última actualización:** 2026-08-25 (reforge de precios — episodio aún sin grabar)
+**Formato:** Ranking (episodio largo, horizontal)
+**Última actualización:** 2026-10-15 (top 10 corregido con PriceCharting)
