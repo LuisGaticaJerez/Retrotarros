@@ -21,6 +21,9 @@
 > videos). Hay 24 reseñas publicadas y 20 en backlog; ese mismo día se sacaron del estudio
 > (repo y Drive) las 24 publicadas. De paso se vio publicado el Top Mundial de GameCube; el
 > resto de las categorías no se recontó.
+>
+> **Verificación completa con la API de YouTube: 2026-10-19** (`scripts/youtube_estado.py`,
+> 84 publicados + 1 programado). Se recalcularon las filas de Reseñas y Rankings (resumen 1.0).
 
 ## Cómo leer esto
 
@@ -39,49 +42,40 @@
 
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
-| Reseñas | 44 | 24 | 0 | 20 |
-| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube) | 34 | 14 | ? | 20 |
+| Reseñas | 44 | 26 | 1 | 17 |
+| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube) | 36 | 17 | 0 | 19 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
 | RetroNotas | 2 | 0 | 0 | 2 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **98** | **36** | **4** | **58** |
+| **TOTAL** | **108** | **50** | **1** | **57** |
 
 Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
-superadas, playlist muerta, no cuentan como activo). 25 + 8 + 1 + 2 = 36 de los 28 videos
-"largos" reales del canal — los G-OLD y Abriendo el Tarro están dentro de esos 28
-publicados totales verificados en YouTube; los 8 programados todavía no cuentan como
-publicados.
+superadas, playlist muerta, no cuentan como activo). Los Rankings suman 36 armados porque
+se contaron los 2 de Atari 8-bit (armados, sin publicar) y los 10 Top Peores.
 
 ---
 
-### 1.1 Programados (leídos de YouTube con la API, 2026-10-14)
+### 1.1 Programados (leídos de YouTube con la API, 2026-10-19)
 
 **Calendario de publicación: martes, jueves y domingo a las 20:30 (hora de Chile).** Se actualiza solo los lunes, miércoles y viernes (el día siguiente) con `scripts/youtube_estado.py` (datos en `data/youtube/estado-canal.json`). **Un video programado ya está grabado: no tocar su HTML ni sus textos.**
 
 | Publicación (hora de Chile) | Título | Contenido del repo |
 |---|---|---|
-| Jue 15 oct 2026, 20:30 | Por qué Melee sigue siendo el Smash más jugado en torneos \| RetroReseñas | `resena-super-smash-bros-melee-pedido` |
-| Dom 18 oct 2026, 20:30 | Los 10 mejores juegos de PS1 según la crítica | `ps1-top-mundial` |
+| Mar 20 oct 2026, 20:30 | Montezuma's Revenge: el Atari que hoy entrena inteligencias artificiales \| RetroReseñas | `resena-montezumas-revenge-pedido` |
 
-**Grabados y todavía sin fecha de publicación (confirmado por Luis 2026-10-14, NO tocar su HTML ni sus textos):** reseña de Montezuma's Revenge (`resena-montezumas-revenge-pedido`), reseña de Mighty Morphin Power Rangers (`resena-mighty-morphin-power-rangers-pedido`) y Top Peores de SNES (`snes-top-peores`). Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
+**Grabados y todavía sin fecha de publicación (confirmado por Luis 2026-10-14, NO tocar su HTML ni sus textos):** reseña de Mighty Morphin Power Rangers (`resena-mighty-morphin-power-rangers-pedido`) y Top Peores de SNES (`snes-top-peores`). Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
 
 Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09).
-
----|---|---|---|
-| 25 ago 2026 | Yoshi estuvo 5 años esperando este juego para nacer (Super Mario World) | `resena-super-mario-world` | Reseña |
-| 27 ago 2026 | El juego que Sega inspiró en las películas de Conan (Golden Axe) | `resena-golden-axe` | Reseña |
-| 1 sept 2026 | El juego que Capcom no le tenía Fe (Street Fighter II) | `resena-street-fighter-ii` | Reseña |
-| 4 sept 2026 | Chrono Trigger: el RPG de un viaje de 4 días entre 3 leyendas | `resena-chrono-trigger` | Reseña |
 
 ---
 
 ### 1.2 Publicados (25 + Abriendo el Tarro + 2 G-OLD, más las Reseñas nuevas de abajo)
 
-**Reseñas (24) — verificado en vivo 2026-10-09, del más reciente al más antiguo:**
-Worms Armageddon (pedida), Samurai Shodown (pedida), Doom (pedida), King of Fighters '94,
+**Reseñas (26) — API de YouTube 2026-10-19, del más reciente al más antiguo:**
+Melee (pedida), Metal Warriors (pedida), Worms Armageddon (pedida), Samurai Shodown (pedida), Doom (pedida), King of Fighters '94,
 Battletoads, Super Mario World, Street Fighter II, Golden Axe, Metal Gear Solid (pedida),
 Chrono Trigger, The Legend of Zelda (pedida), Cadillacs and Dinosaurs (pedida), Jewel Master
 (pedida), Top Gear (pedida), Pokémon Rojo/Azul (pedida), Zombies Ate My Neighbors, Super
@@ -89,9 +83,10 @@ Metroid (pedida), Mega Man 2, Donkey Kong Country, Kirby's Adventure, Killer Ins
 Pitfall: The Mayan Adventure (pedida), Mortal Kombat, Super Mario Bros. 3. Sus HTML, carpetas
 del Drive y kits de YouTube (`docs/descripciones/`) se retiraron el 2026-10-09 (siguen en el historial de git).
 
-**Rankings (10):** Master System Top Mundial + Top Precios, Mega Drive Top Mundial, NES
+**Rankings (17):** Master System Top Mundial + Top Precios, Mega Drive Top Mundial, NES
 Top Mundial + Top Precios, SNES Top Mundial + Top Precios, N64 Top Mundial + Top Precios,
-PS Vita Top Mundial.
+PS Vita Top Mundial, Atari 2600 Top Mundial + Top Precios, Game Boy Top Mundial + Top
+Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom 11 oct).
 
 **Sagas (1):** Zelda.
 
@@ -107,18 +102,18 @@ PS Vita Top Mundial.
 
 ---
 
-### 1.3 Backlog armado — listo para programar, sin fecha (49)
+### 1.3 Backlog armado — listo para programar, sin fecha (57)
 
-**Reseñas (20) — verificado en vivo 2026-10-09:** Aladdin, Altered Beast, Contra, Crash
+**Reseñas (17) — actualizado 2026-10-19:** Aladdin, Altered Beast, Contra, Crash
 Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, International Superstar
 Soccer, Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star
-Fox, Yoshi's Island, más 5 pedidas: Metal Warriors, Super Smash Bros. Melee, Mighty Morphin
-Power Rangers, JoJo's Bizarre Adventure y Montezuma's Revenge.
+Fox, Yoshi's Island, más 2 pedidas: Mighty Morphin Power Rangers (grabada) y JoJo's Bizarre
+Adventure. Metal Warriors y Melee ya se publicaron; Montezuma's Revenge está programada.
 
-**Rankings (17):** Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
-Top Precios, Saturn Top Mundial + Top Precios, PS1 Top Mundial + Top Precios (recién
-armados 2026-09-21 — apertura del arco PS1, ver `docs/arcos/ps1.md`), GameCube Top Mundial
-+ Top Precios (recién armados 2026-09-22 — apertura del arco GameCube completa, ver
+**Rankings (19):** Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
+Top Precios, Saturn Top Mundial + Top Precios, Atari 8-bit Top Mundial + Top Precios
+(armados, sin publicar), PS1 Top Precios (PS1 Top Mundial ya se publicó el 2026-10-18; el par fue armado 2026-09-21 — apertura del arco PS1, ver `docs/arcos/ps1.md`), GameCube Top Precios
+(GameCube Top Mundial ya se publicó el 2026-10-04; el par fue armado 2026-09-22 — apertura del arco GameCube completa, ver
 `docs/arcos/gamecube.md`; Top Precios con la auditoría canon aplicada desde el arranque),
 Atari 2600 Top Peores (PILOTO de un formato nuevo, espejo del Top Mundial con tono divertido,
 armado 2026-10-04; pendiente de ok de Luis y Coco sobre el orden — ver
@@ -197,10 +192,10 @@ se publica tal cual.
 
 - **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **sigue siendo la brecha más
   grande del canal**, sin cambios desde julio.
-- **Reseñas:** 44 armadas, 24 publicadas (verificado en vivo 2026-10-09), 20 de backlog sin
-  fecha, 0 programadas confirmadas — el formato que más rápido está publicando, y aun así
+- **Reseñas:** 44 armadas, 26 publicadas (API 2026-10-19), 17 de backlog sin
+  fecha, 1 programada (Montezuma's Revenge, mar 20 oct) — el formato que más rápido está publicando, y aun así
   sigue siendo el segundo backlog más grande en volumen absoluto.
-- **Rankings:** 20 armados, 10 publicados, 1 programado (9 de backlog).
+- **Rankings:** 36 armados, 17 publicados, 0 programados (19 de backlog).
 - **Curaduría N64:** 5 armados, 0 publicados — sigue sin casa en el menú de playlists.
 - **RetroNotas:** 2 armadas, 0 publicadas — formato nuevo, sin playlist propia todavía.
 - **Colecciones sigue siendo la única categoría 100% al día** (4 armadas = 4 publicadas).
