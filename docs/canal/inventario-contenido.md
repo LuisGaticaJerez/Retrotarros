@@ -82,6 +82,7 @@ Chrono Trigger, The Legend of Zelda (pedida), Cadillacs and Dinosaurs (pedida), 
 Metroid (pedida), Mega Man 2, Donkey Kong Country, Kirby's Adventure, Killer Instinct,
 Pitfall: The Mayan Adventure (pedida), Mortal Kombat, Super Mario Bros. 3. Sus HTML, carpetas
 del Drive y kits de YouTube (`docs/descripciones/`) se retiraron el 2026-10-09 (siguen en el historial de git).
+Metal Warriors y Melee se retiraron el 2026-10-19, igual que los 2 Specials publicados (Día del Padre y Mes del Mar: HTML, capturas, imágenes, kit y carpeta del Drive; se conservan sus pautas, discusiones y shorts).
 
 **Rankings (17):** Master System Top Mundial + Top Precios, Mega Drive Top Mundial, NES
 Top Mundial + Top Precios, SNES Top Mundial + Top Precios, N64 Top Mundial + Top Precios,
