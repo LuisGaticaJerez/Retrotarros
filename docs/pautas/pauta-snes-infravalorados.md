@@ -14,23 +14,23 @@ Mario World, Zelda y Chrono Trigger los conoce todo el mundo. Pero el SNES tuvo 
 - Muy bien criticados: GameRankings entre 79 y 90 %, o puestos altos en listas de mejores del SNES (IGN Top 100, Super Play, Nintendo Power).
 - Lanzados en NTSC USA.
 - No están en el Top Mundial del canal.
-- El orden #10 → #1 es **editorial**: del mejor recordado al más injustamente olvidado. Es discutible, y eso invita al debate.
+- **Regla de orden (Luis, 2026-10-20): pesa más la crítica que el olvido.** Se ordena primero por fuerza de la crítica en 3 niveles: (1) GameRankings 85 % o más, o puesto 20 o mejor en una lista de mejores SNES; (2) 80 a 81 % o puesto 21 a 50 en una lista; (3) 79 % o puesto 90 o peor en una lista. Dentro del nivel se ordena por nota, y el olvido solo desempata. Sigue siendo discutible, y eso invita al debate.
 - Tono: siempre positivo, vendiendo el juego, nunca comparándolo hacia abajo.
 
 ## Ranking (#10 → #1)
 
 | # | Juego | Año | Editor NTSC USA | Respaldo de la crítica |
 |---|-------|-----|-----------------|------------------------|
-| 10 | Tetris Attack | 1996 | Nintendo | GameRankings 90 %; EGM 8,25/10 |
+| 10 | Rock n' Roll Racing | 1993 | Interplay | Banda sonora destacada (Game Informer); GamesMaster #96 Top 100 (1996) |
 | 9 | Uniracers | 1994 | Nintendo | GameRankings 79 %; Nintendo Power: 8° mejor SNES de 1994; IGN #98 Top 100 SNES |
-| 8 | Illusion of Gaia | 1994 | Nintendo | GameRankings 80,17 %; 300.000 copias en Norteamérica |
-| 7 | Rock n' Roll Racing | 1993 | Interplay | Banda sonora destacada (Game Informer); GamesMaster #96 Top 100 (1996) |
+| 8 | Hagane: The Final Conflict | 1995 | Hudson Soft | IGN #45 Top 100 SNES |
+| 7 | Ogre Battle: The March of the Black Queen | 1995 | Enix | IGN #41 Top 100 SNES; Nintendo Power #180 Top 200 |
 | 6 | Lufia II: Rise of the Sinistrals | 1996 | Natsume | GameRankings 80 %; Famitsu Reader Cross Review 10/10 |
-| 5 | Soul Blazer | 1992 | Enix | GameRankings 85,58 % |
+| 5 | Illusion of Gaia | 1994 | Nintendo | GameRankings 80,17 %; 300.000 copias en Norteamérica |
 | 4 | Axelay | 1992 | Konami | GameRankings 81,14 % |
 | 3 | Cybernator | 1993 | Konami | Super Play #19 mejor SNES; GameFan: uno de los mejores |
-| 2 | Ogre Battle: The March of the Black Queen | 1995 | Enix | IGN #41 Top 100 SNES; Nintendo Power #180 Top 200 |
-| 1 | Hagane: The Final Conflict | 1995 | Hudson Soft | IGN #45 Top 100 SNES |
+| 2 | Soul Blazer | 1992 | Enix | GameRankings 85,58 % |
+| 1 | Tetris Attack | 1996 | Nintendo | GameRankings 90 %; EGM 8,25/10 |
 
 Fuente de críticas: artículos de Wikipedia de cada juego (que citan GameRankings, IGN, Super Play, Nintendo Power y Famitsu). Fecha y editor NTSC USA: fichas de PriceCharting.
 
