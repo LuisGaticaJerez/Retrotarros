@@ -37,6 +37,7 @@ EPISODE_CATEGORY_RULES: list[tuple[str, str]] = [
     (r"-top-mundial$", "rankings/top-mundial"),
     (r"-top-precios$", "rankings/top-precios"),
     (r"-top-peores$", "rankings/top-peores"),
+    (r"-infravalorados$", "rankings/infravalorados"),
     (r"-coleccion$", "colecciones"),
     (r"^saga-", "sagas"),
     (r"^retro-", "specials"),

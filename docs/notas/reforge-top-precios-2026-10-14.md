@@ -16,3 +16,6 @@ Melee (jue 15 oct), PS1 Top Mundial (dom 18 oct), Montezuma's Revenge, Mighty Mo
 5. **PS Vita:** aparecen Invizimals ~416, Dragon's Crown Special Edition ~400, Steins;Gate 0 Amadeus ~253, Ar Nosurge ~250 por sobre el #10 actual (~23). Decidir retail vs Limited Run. Grial: Binding of Isaac Rebirth (complete 4.000 en su ficha; la lista muestra 3.000 por el cruce de columnas).
 
 Cada rehecho incluye pauta, discusion (con la nota de auditoria CANON), HTML con `tv_grande` por defecto, box arts reales NTSC USA, capturas, kit de YouTube con hashtags de la guia (seccion 4) y los dos syncs al Drive.
+
+## Pendiente detectado el 2026-10-20 (mientras se armaba SNES Infravalorados)
+- **SNES Top Precios:** Hagane: The Final Conflict aparece en PriceCharting con CIB ~USD 3.355 (suelto ~1.491) y no esta en el top actual (#3 seria Mega Man X3 con USD 1.525). Revisar el top completo antes de grabar, igual que se hizo con las otras consolas. Confirmar primero que sigue sin grabar.
