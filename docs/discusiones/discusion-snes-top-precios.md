@@ -1,139 +1,48 @@
-# Discusion editorial · `snes-top-precios`
+# Discusion — SNES Top Precios
 
-> **NOTA REFORGE 2026-08-25:** episodio ya publicado, con los precios de mayo 2026. El HTML se regenero con el layout nuevo y precios recontrastados -el orden cambio fuerte: Aero Fighters subio al #1 (desde el #3), Earthbound bajo al #2, Wild Guns se desplomo del #2 al #6. Earthbound sigue siendo el unico cruce con `snes-top-mundial`. Ver `pauta-snes-top-precios.md` para la tabla completa mayo→agosto.
+Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-snes-top-precios.md`.
 
-> Documento de decisiones que se tomaron al armar el episodio. Lectura
-> obligatoria antes de grabar para no abrir debates resueltos.
+## El orden (de menos a mas caro)
 
----
+| # | Juego | CIB aprox. |
+|---|---|---|
+| 10 | Hurricanes | USD 1.147 |
+| 9 | Mega Man X3 | USD 1.396 |
+| 8 | Pocky & Rocky 2 | USD 1.405 |
+| 7 | International Superstar Soccer | USD 1.450 |
+| 6 | Castlevania: Dracula X | USD 1.500 |
+| 5 | 3 Ninjas Kick Back | USD 1.613 |
+| 4 | Metal Warriors | USD 1.865 |
+| 3 | SWAT Kats: The Radical Squadron | USD 1.866 |
+| 2 | EarthBound | USD 2.387 |
+| 1 | Aero Fighters | USD 3.397 |
 
-## 1. Por que ranking de precios y no de calidad
+Variantes y exclusivos: Maximum Carnage [Collector's Edition] (1.700), Final Fight Guy (2.887), Hagane (3.355), M.A.C.S. (3.542), DKC Competition Cart (6.725), Exertainment (10.397 sellado).
 
-Ya tenemos `snes-top-mundial` cubriendo calidad/critica. Este episodio existe porque **el ranking de precios contesta una pregunta distinta** y genera mas conversacion en chat:
-- Top calidad → "¿cual es el mejor?"
-- Top precios → "¿cual vale mas?" → "¿es justo que valga eso?"
+Santo grial: Nintendo PowerFest '94, USD 17.550.
 
-La segunda pregunta es mas viral y mas debatible. Por eso este episodio es probablemente el de mayor CTR de los dos.
+## Que cambio y por que
 
----
+- El top de agosto estaba desactualizado: su #10 era Super Mario RPG a USD 250, y habia juegos retail de USD 1.100 a 1.900 que no estaban. Se rehizo con el listado completo de PriceCharting.
+- Entran Hurricanes, International Superstar Soccer, Castlevania: Dracula X, 3 Ninjas Kick Back, Metal Warriors y SWAT Kats. Salen Super Mario RPG, Final Fantasy VI, Demon's Crest, Harvest Moon, Wild Guns y Chrono Trigger (quedaron bajo el corte).
+- Aero Fighters sigue #1. EarthBound sube de nota: PriceCharting lista el estandar en USD 2.387 (antes usabamos la caja grande a USD 2.938).
+- Hagane ya estaba en variantes como exclusivo de Blockbuster; sigue ahi, con precio actualizado.
+- Sale Doom [Red Cart] de las variantes: PriceCharting no lo lista aparte, no se puede confirmar el precio.
+- Entra M.A.C.S. a las variantes: un entrenador militar de Sculptured Software.
 
-## 2. Criterio de precios
+## Para conversar antes de grabar
 
-PriceCharting CIB NTSC USA mayo 2026. Razones:
-- **PriceCharting** es la referencia mas neutra del coleccionismo (no es eBay actual, es promedio historico).
-- **CIB** (Complete In Box) es el estandar de coleccionismo, no "loose".
-- **NTSC USA** porque es el region con mas demanda y mejor track historico.
-- **Mayo 2026** porque los precios se mueven — fechar el snapshot evita correcciones publicas.
+- Metal Warriors tiene reseña propia en el canal: ¿mencionamos el cruce?
+- Dejamos fuera Super Copa (USD 2.750): es la version en espanol y portugues de Tony Meola's Sidekicks Soccer, no un retail NTSC USA. Tambien Zombies Ate My Neighbors [Box Variant] (USD 1.766) por ser una variante sin confirmar, y Nintendo Campus Challenge 1992 (USD 2.250) y NTF Test Cartridge (USD 2.030) por no ser juegos de tienda. Si quieren alguno en variantes, hay que confirmarlo primero.
+- Mega Man 7 (USD 1.126) y Sonic Blast Man 2 (USD 1.101) quedan justo bajo el corte (#11 y #12).
+- SWAT Kats: se dice que salio solo en Norteamerica (Giant Bomb), no hay confirmacion oficial.
 
----
+## Por confirmar antes de decirlo en camara
 
-## 3. Top 10 + Kicker · estructura cerrada
+- M.A.C.S.: el encargo del Ejercito y la tirada de ~600 unidades vienen de prensa de coleccionismo y de un desarrollador (segunda mano). Decirlo como "se cuenta que".
+- Exertainment: el precio de USD 10.397 es de la copia sellada del combo Mountain Bikerally / Speed Racer, no del cartucho suelto (USD 2.800).
+- Fechas de PriceCharting (algunos "1 de enero" son solo el ano).
 
-Decision tomada: **10 items principales + 1 kicker fuera de concurso**. El kicker (PowerFest '94 a $23.000) no entra en el top porque:
-1. **No es retail.** Es promo de torneo. Solo 2 copias en el mundo.
-2. **Si entrara como #1, hace todo el resto del ranking pequeno.** $23.000 vs $3.500 = 6.5x. Distorsiona escala visual.
-3. **Es bomba narrativa.** Mejor reservarlo para el cierre como reveal en lugar de abrir con el.
+## Auditoria de precios (regla CANON, 2026-10-20)
 
-Patron replicado de `n64-top-precios` (que tiene el ClayFighter Sculptor's Cut sealed a $9.199 como kicker fuera del top).
-
----
-
-## 4. Cruz con top mundial
-
-El UNICO juego que aparece en ambos rankings es **Earthbound**:
-- Top mundial: #8 (calidad/influencia cultural)
-- Top precios: #1 (rareza fisica + big box)
-
-Eso es contenido narrativo IMPORTANTE. Se anticipa en el cold open ("spoiler: solo uno cruza") y se cierra en el balance final. Crea coherencia entre los dos episodios y motiva al espectador a ver los dos.
-
----
-
-## 5. Items polemicos (decisiones argumentadas)
-
-### #2 Wild Guns ($2.500)
-
-Hay debate sobre si Wild Guns vale 2500 o 1800. Decision: **2.500 USD** porque PriceCharting promedia subastas Heritage de los ultimos 12 meses. Si Luis cita un precio distinto en camara, va con "PriceCharting en mayo 2026 lo tiene en $2.500."
-
-### #4 Chrono Trigger ($1.200)
-
-Algunos coleccionistas argumentan que deberia ser mas alto por su status legendario. Pero el problema es que se imprimio **mucho** — el cartucho suelto es facil de encontrar (~$200), CIB con caja y manual sube a $1.200, pero **sealed** se va a $5.000+. Aqui hablamos de CIB, no sealed.
-
-### Earthbound a $3.500 (incluye player's guide)
-
-El precio $3.500 es por la "**Big Box CIB con player's guide**". Sin player's guide, el CIB baja a ~$1.500. La player's guide oficial sola se vende a $300+. La diferencia es crucial — lo que define el #1 NO es el cartucho, es la caja-VHS-size completa con guide y stickers.
-
-### #7 FF VI vs #4 Chrono Trigger
-
-Pareceria contradictorio que FF VI valga menos que Chrono Trigger siendo ambos Square. Razon: FF VI tuvo **mayor tiraje NTSC** que Chrono Trigger porque Square lo distribuyo mejor en USA. Chrono Trigger se imprimio menos. Mas oferta = menor precio CIB. Estos detalles los explica Luis en camara.
-
----
-
-## 6. Por que NO esta Demon's Crest mas arriba
-
-Demon's Crest tiene fans hardcore que pagarian $700+, pero el promedio PriceCharting lo deja en $400. La razon es que el mercado oferta-demanda es estrecho: poca gente lo quiere, pero la que lo quiere lo paga caro. El promedio bajo refleja que hay pocas ventas; las subastas individuales pueden ser mucho mas altas.
-
-**No incluir esta nota en el episodio** — confunde al espectador casual. Si Koko o Luis preguntan en camara, responder con "PriceCharting promedio."
-
----
-
-## 7. Estructura narrativa por bloques
-
-El ritmo del episodio NO es "10 items uno tras otro" sino:
-
-- **Items #10-#7** (Demon's Crest, Harvest Moon, Super Mario RPG, FF VI) → pasada rapida (~1 min cada uno).
-- **Items #6-#4** (Pocky & Rocky 2, Mega Man X3, Chrono Trigger) → pasada normal (~1:30 cada uno).
-- **Top 3** (Aero Fighters, Wild Guns, Earthbound) → expandidos a 2-3 min cada uno con anecdotas.
-- **Kicker** (PowerFest '94) → 3 min completos como mini-historia con suspenso.
-
-Tiempo total estimado: 4 × 1 + 3 × 1.5 + 3 × 2.5 + 3 (kicker) + 4 (intro/outro/recap/balance) = ~22 min.
-
----
-
-## 8. Bloque PowerFest '94 · que se dice exactamente
-
-Lo critico de este bloque es **no spoilearlo al inicio del episodio**. La estructura del relato:
-
-1. **Build-up:** "Despues del top, queda uno fuera de concurso. No es retail, es PROMO."
-2. **Setup historico:** "Nintendo of America organizo PowerFest '94, un torneo nacional."
-3. **El dato escalofriante:** "Fabricaron 33 cartuchos para el torneo."
-4. **El twist:** "Cuando termino, desarmaron 31 para repuestos. Quedaron 2."
-5. **La cifra:** "La ultima venta documentada fue en 2026. Veintitres mil dolares."
-6. **Cierre:** "Esto ya no es coleccionismo. Es museo."
-
----
-
-## 9. Reglas inmutables aplicadas
-
-- **TarroVisiones VACIAS** en los HTMLs (regla canal). El cartucho fisico y el box art van en `.cart-img` no en `.tv-screen-inner`.
-- **Sin tildes** en HTML visible.
-- **Sin emojis** en titulos / labels.
-- **Chileno neutro con tuteo** en pauta y discusion.
-
----
-
-## 10. Material a grabar (checklist resumido)
-
-- [ ] Cartuchos fisicos de los items que tenga Koko (al menos #1 Earthbound, #4 Chrono, #7 FF VI, #8 Super Mario RPG).
-- [ ] Render/foto Earthbound Big Box ABIERTA (cartucho + manual + player's guide visible).
-- [ ] Imagen del PowerFest '94 en alta resolucion (Wikipedia commons o similar).
-- [ ] Captura comparativa final Top Mundial vs Top Precios (cruz unica Earthbound).
-
----
-
-## 11. Para el futuro
-
-El formato "top precios" + kicker fuera de concurso se replica facil:
-- `n64-top-precios` (ya cerrado, con ClayFighter Sculptor's Cut + Majora gris NFR como kickers).
-- `psvita-top-precios` (ya cerrado).
-- Futuros: `ps1-top-precios`, `gba-top-precios`, etc.
-
-**Plantilla canonica del formato Top Precios del canal:**
-1. Recap del top mundial (slide 02).
-2. Recorrido #10 → #1 (10 slides hibridos cartucho + box art + meta + por que es caro).
-3. Kicker fuera de concurso (slide 12, "HOLY GRAIL").
-4. Balance final con cruz vs top mundial.
-5. Cierre con CTA "¿cual te falta?".
-
----
-
-*Discusion cerrada · 2026-05-24 · Luis Balbrigame*
+Se releyo el listado completo de PriceCharting por precio y se confirmo la ficha de los diez juegos del top y de las variantes. El grial (PowerFest '94, USD 17.550) es mas caro que el #1 del retail (USD 3.397) y que cualquier variante (la mas cara, Exertainment sellado, USD 10.397). Las variantes son genuinamente no-retail: variantes de color, exclusivos de alquiler Blockbuster, un entrenador militar, una pieza de torneo y un juego para gimnasios.
