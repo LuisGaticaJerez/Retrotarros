@@ -32,7 +32,10 @@
 
 param(
     [string]$Destino = "G:\Mi unidad\Studio\tarrobot",
-    [switch]$DryRun
+    [switch]$DryRun,
+    # Modo rapido (2026-10-21): salta shorts MP4, branding, instalador, melodias, tarrobot-out y el barrido
+    # recursivo de carpetas de produccion. Alcanza para actualizar scripts, DB, pautas JSON y modus operandi.
+    [switch]$Rapido
 )
 
 $ErrorActionPreference = "Stop"
@@ -163,7 +166,7 @@ Write-Host "Carpetas de produccion (Studio\<slug>):" -ForegroundColor Cyan
 $ProdRoot  = Split-Path -Parent $Destino          # G:\Mi unidad\Studio
 $StudioSrc = Join-Path $RepoRoot "studio"
 $prodOk = 0; $prodSkip = 0
-if (Test-Path $ProdRoot) {
+if ((Test-Path $ProdRoot) -and -not $Rapido) {
     Get-ChildItem $ProdRoot -Directory -ErrorAction SilentlyContinue |
         Where-Object { $_.Name -notmatch "^(tarrobot|TarroBot-Instalador|pautas|_template)" } |
         ForEach-Object {
@@ -206,7 +209,7 @@ Write-Host ""
 
 # 5. Melodias (MIDIs + soundfont)
 Write-Host "Melodias (MIDIs + soundfont):" -ForegroundColor Cyan
-Sync-Item "studio\melodias" -Recursive
+if (-not $Rapido) { Sync-Item "studio\melodias" -Recursive }
 Write-Host ""
 
 # 5a. Cache de salida de TarroBot (decks de prueba + TTS cacheado). Es dato propio
@@ -215,14 +218,14 @@ Write-Host ""
 # (sync-to-drive.ps1) lo recogia por error como si fuera una categoria de episodios
 # mas en la raiz del Drive (tenia 2 HTML de prueba sueltos ahi).
 Write-Host "Cache de salida TarroBot (TTS + decks de prueba):" -ForegroundColor Cyan
-Sync-Item "studio\tarrobot-out" -Recursive
+if (-not $Rapido) { Sync-Item "studio\tarrobot-out" -Recursive }
 Write-Host ""
 
 # 5b. Shorts verticales (MP4 finales de TarroShort). Solo los tarroshort-*.mp4,
 #     NO la carpeta audio/ (intermedios de render). Fix 2026-06-03.
 Write-Host "Shorts TarroShort (MP4 finales):" -ForegroundColor Cyan
 $shortsDir = Join-Path $RepoRoot "studio\shorts"
-if (Test-Path $shortsDir) {
+if ((Test-Path $shortsDir) -and -not $Rapido) {
     Get-ChildItem -Path $shortsDir -Filter "tarroshort-*.mp4" -File |
         ForEach-Object { Sync-Item "studio\shorts\$($_.Name)" }
 }
@@ -243,7 +246,7 @@ $brandingMap = [ordered]@{
 }
 foreach ($rel in $brandingMap.Keys) {
     $src = Join-Path $RepoRoot $rel
-    if (Test-Path $src) {
+    if ((Test-Path $src) -and -not $Rapido) {
         $dst = Join-Path $BrandingDest $brandingMap[$rel]
         if (-not $DryRun) {
             # /XD fondos: NO tocar las carpetas que Luis sube directo al Drive
@@ -288,7 +291,7 @@ if (-not $DryRun) {
 $DistDir = Resolve-Path (Join-Path $ScriptRoot "..\installers\tarrobot-studio\dist")
 $InstallerZip = Get-ChildItem -Path $DistDir -Filter "TarroBot-Studio-v*-slim.zip" |
     Sort-Object Name -Descending | Select-Object -First 1
-if ($InstallerZip) {
+if ($InstallerZip -and -not $Rapido) {
     $InstallerDest = Join-Path $Destino "TarroBot-Instalador"
     if (-not $DryRun) {
         if (-not (Test-Path $InstallerDest)) { New-Item -ItemType Directory -Path $InstallerDest -Force | Out-Null }

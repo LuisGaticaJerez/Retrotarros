@@ -27,7 +27,14 @@
 # genera TarroBot al vuelo (gitignored, no son episodios reales). Se excluyen del
 # barrido generico para que no aparezcan como categoria falsa en la raiz del Drive.
 #
+# Modo incremental (2026-10-21): .\scripts\sync-to-drive.ps1 -Episodios ps1-infravalorados,snes-top-precios
+#   copia SOLO esos episodios (HTML + imagenes + capturas + pauta/discusion DOCX) y salta TarroDL.
+#   Sin -Episodios hace el barrido completo de siempre (unos 10 min).
+#
 # Requiere: pandoc instalado (winget install JohnMacFarlane.Pandoc)
+
+param([string[]]$Episodios = @())
+$Episodios = @($Episodios -split "," | ForEach-Object { $_.Trim() } | Where-Object { $_ })   # con -File, a,b llega como un solo texto
 
 $ErrorActionPreference = "Stop"
 
@@ -113,6 +120,10 @@ Write-Host "`n[1/2] Copiando HTML + imágenes..." -ForegroundColor Yellow
 # 2026-07-21 (rankings/top-precios/, colecciones/, shorts-html/datos/, etc.)
 $htmlFiles = Get-ChildItem -Path $RepoStudio -Filter "*.html" -File -Recurse |
     Where-Object { $_.DirectoryName -notmatch '\\resenas($|\\)' -and $_.DirectoryName -notmatch '\\tarrobot-out($|\\)' }
+if ($Episodios.Count) {
+    $htmlFiles = @($htmlFiles | Where-Object { $Episodios -contains [System.IO.Path]::GetFileNameWithoutExtension($_.Name) })
+    Write-Host "  Modo incremental: solo $($Episodios -join ', ')" -ForegroundColor Magenta
+}
 
 foreach ($html in $htmlFiles) {
     $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
@@ -175,6 +186,7 @@ $resenasDir = Join-Path $RepoStudio "resenas"
 $resenaHtmlFiles = @()
 if (Test-Path $resenasDir) {
     $resenaHtmlFiles = Get-ChildItem -Path $resenasDir -Filter "*.html" -File
+    if ($Episodios.Count) { $resenaHtmlFiles = @($resenaHtmlFiles | Where-Object { $Episodios -contains [System.IO.Path]::GetFileNameWithoutExtension($_.Name) }) }
     $srcResenaImg = Join-Path $resenasDir "img\resenas"
     foreach ($html in $resenaHtmlFiles) {
         $slug = [System.IO.Path]::GetFileNameWithoutExtension($html.Name)
@@ -272,6 +284,12 @@ if (-not $PandocExe) {
     $mdPattern = @("pauta-*.md", "discusion-*.md")
     foreach ($pattern in $mdPattern) {
         $mds = Get-ChildItem -Path $RepoDocs -Filter $pattern -File -Recurse
+        if ($Episodios.Count) {
+            $mds = @($mds | Where-Object {
+                $b = [System.IO.Path]::GetFileNameWithoutExtension($_.Name)
+                ($Episodios | Where-Object { $b -eq "pauta-$_" -or $b -eq "discusion-$_" }).Count -gt 0
+            })
+        }
         foreach ($md in $mds) {
             $base = [System.IO.Path]::GetFileNameWithoutExtension($md.Name)
             $outDocx = Join-Path $DrivePautas "$base.docx"
@@ -291,7 +309,7 @@ if (-not $PandocExe) {
 Write-Host "`n[Tools] Copiando TarroDL..." -ForegroundColor Yellow
 $TarroDlSrc = Join-Path $RepoRoot "tools\tarrodl"
 $TarroDlDst = Join-Path $DriveRoot "Tools\TarroDL"
-if (Test-Path (Join-Path $TarroDlSrc "tarrodl.py")) {
+if ((Test-Path (Join-Path $TarroDlSrc "tarrodl.py")) -and -not $Episodios.Count) {
     New-Item -ItemType Directory -Path $TarroDlDst -Force | Out-Null
     & robocopy $TarroDlSrc $TarroDlDst "tarrodl.py" "iniciar-tarrodl.cmd" /NJH /NJS /NDL /NP /NC /NS | Out-Null
     & robocopy (Join-Path $TarroDlSrc "ui") (Join-Path $TarroDlDst "ui") /MIR /XD "__pycache__" /NJH /NJS /NDL /NP /NC /NS | Out-Null

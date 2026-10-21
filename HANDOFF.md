@@ -1,68 +1,37 @@
 # Retrotarros — Handoff Doc
 
-> Estado de sesión a sesión. **Leer ANTES de cualquier acción**, después leer `CLAUDE.md`,
-> `docs/modus-operandi/` y los docs relevantes al escenario.
+> Estado de sesión a sesión. **Leer ANTES de cualquier acción**, después `CLAUDE.md`, `docs/modus-operandi/flujo-rankings.md` (recetas y trampas) y los docs del escenario.
 
-## Estado actual (2026-07-20)
+## Estado actual (2026-10-21)
 
-Canal en pre-lanzamiento con una base grande de contenido armado. Arco **SEGA cerrado** (8 episodios listos para grabar) y **TarroShorts de embudo de precios SEGA — ronda completa** (los 4). Infraestructura del repo, Drive sync y app TarroBot operativas.
+**Hecho en la última tanda (todo pusheado salvo lo indicado):**
+- Top Precios rehechos con el listado completo de PriceCharting: Dreamcast, Saturn, GameCube, Mega Drive, PS Vita y **SNES** (el SNES ya estaba publicado el 2026-06-01; Luis lo va a regrabar). PS1 se corrigió el 2026-10-09.
+- Formato nuevo **Infravalorados** (ranking de calidad, sin precios): `snes-infravalorados` (Tetris Attack #1) y `ps1-infravalorados` (Wipeout XL #1). Regla de Luis: la crítica pesa más que el olvido. Categoría `studio/rankings/infravalorados/`.
+- Syncs a Drive incrementales: `sync-to-drive.ps1 -Episodios <slug>,<slug>` (~6 s) y `sync-tarrobot-to-drive.ps1 -Rapido` (~2 s). El barrido completo tarda ~10 min.
+- `scripts/wiki_reception.py` (notas MC/GR desde Wikipedia) y `docs/modus-operandi/flujo-rankings.md` (recetas). **Estos dos archivos y los cambios de scripts de sync están commiteados en local, sin push (pedir el dale de Luis).**
+- TarroDL ya tiene la pestaña TarroMosaico (2 a 12 videos, largo y trozo elegibles).
 
-**En qué estamos ahora mismo:**
-- **Arco SEGA — 8 episodios cerrados** (HTML + pauta MD + box arts reales): Master System, Mega Drive, Dreamcast, Saturn, cada uno en top-mundial + top-precios. Falta grabarlos/renderizarlos en el estudio.
-- **TarroShorts de precios SEGA — LOS 4 CERRADOS Y PUSHEADOS:** `mega-drive-top-precios`, `master-system-top-precios`, `dreamcast-top-precios` y `saturn-top-precios`, todos al estilo VIGENTE (`item-tag` PUESTO 10→6, box arts reales con padding-hack, enfoque teaser que guarda el grial SIN nombrarlo + invita a suscribirse/campana). Verificados a 1080×1920 real Y frame-por-frame en el MP4 renderizado (contact sheets), renderizados, commiteados (`0092a96`..`6df1ff3`) y pusheados a GitHub. Sincronizados a Drive (ambos scripts).
-  - En el camino se corrigieron **2 bugs reales del pipeline** `scripts/tarroshort_render.py` (afectan a cualquier TarroShort, no solo estos 4): intro filtrándose entre escenas (timing de fuentes por red) y glitch en el corte de escena (concat `-c copy` → ahora siempre re-encode). Detalle y regla de verificación en `docs/modus-operandi/convenciones-tarroshorts.md` § "Bugs corregidos en el pipeline de render".
-  - **Pendiente siguiente:** los shorts de top-mundial de la saga Sega (mismo molde, otro enfoque de contenido a definir con Luis).
-- **Nace `docs/modus-operandi/`** — carpeta canónica de convenciones de estilo + bitácora de decisiones, para que las mejoras no se pierdan entre sesiones.
+**Pendientes:**
+1. Push de lo local + `sync-to-drive.ps1` y `sync-tarrobot-to-drive.ps1` (modo incremental o completo).
+2. Auditar con la receta de `flujo-rankings.md` los Top Precios publicados sin revisar: NES, N64, Master System, Atari 2600, Game Boy. PS1: Einhänder y Castlevania Chronicles vs el #10 (USD 350).
+3. Más Infravalorados (sugeridos: Genesis, GameCube, PS2; N64 ya tiene `n64-joyas-ocultas`).
+4. Confirmar con Luis: Wipeout XL como #1 y Xenogears #10 (PS1); Tetris Attack #1 (SNES).
+5. Mediciones de la campaña de Google Ads: 29 Oct y 11 Nov; después revocar el acceso a la API (`python scripts/youtube_aplicar.py --olvidar` + myaccount.google.com/permissions). Tarea de inventario programada lun/mié/vie 09:30.
+6. Kits de YouTube de rankings sin estrenar que aún tengan hashtags viejos (guía: `docs/canal/guia-youtube-viral.md` sección 4).
+
+**No tocar (grabado o programado):** ver `docs/canal/inventario-contenido.md` y la memoria `project_grabados_sin_publicar` (SNES Top Peores, Montezuma, entre otros). Los rankings publicados no se retiran hasta hacer su reforge.
 
 ## Decidido y cerrado (vigente)
 
-- Nombre del canal: **Retrotarros**. Tagline público: `Nostalgia + Juegos + Música`.
-- Identidad visual base (paleta synthwave/arcade). Detalle en `docs/canal/identidad-visual.md`.
-- **La colección es del canal, no de una persona.** Presentadores: Luis y **Coco**. → `CLAUDE.md`.
-- **Convención de pautas:** tres archivos por episodio con mismo slug (`pauta` + `discusion` + `html`).
-- **Convención de arcos:** un MD por generación en `docs/arcos/{generación}.md`.
-- **Top precios en 3 bloques** (retail #10→#1 + rarezas + santo grial). → `CLAUDE.md`.
-- **Estilo de TarroShorts:** `item-tag` (PUESTO+dato, cyan→amarillo→dorado) + box arts con padding-hack + teaser/top directo. → `docs/modus-operandi/convenciones-tarroshorts.md`.
-- **Git workflow:** Claude ejecuta commits/push/scripts; Luis confirma solo remotas o destructivas.
-- **Drive sync:** los DOS scripts (`sync-to-drive.ps1` + `sync-tarrobot-to-drive.ps1`). Arquitectura de 3 lugares (repo → Drive sync → Drive producción).
-- **Generadores de decks reutilizables:** `coleccion_deck.py`, `top_deck.py`, `saga_deck.py`.
-
-## Historia de arcos
-
-- **Arco N64** — 3 de 6 episodios cerrados en mayo 2026 (ranking, hardware-raro, no-latam). Tablero en [`docs/arcos/n64.md`](docs/arcos/n64.md). Ideas pendientes: kirkhope-rare, nintendo-vs-playstation, ost-bateria. (Formatos `archivo-koko` y `retrotarros-vs-mundo` discontinuados 2026-08-11 — ver `CLAUDE.md`.)
-- **Arcos NES / SNES / PS Vita** — episodios y colecciones armados (top-mundial, top-precios, colección, etc.). Ver `docs/pautas/pauta-*.md`.
-- **12 sagas** (Mario, Zelda, Metroid, Metal Gear, Sonic, Street Fighter, etc.) — líneas de tiempo cerradas.
-- **Arco SEGA** — cerrado 2026 (ver Estado actual).
-
-## En proceso / por resolver
-
-- **Shorts de top-mundial SEGA** (Master System, Mega Drive, Dreamcast, Saturn) — mismo molde `item-tag`, falta definir enfoque de contenido con Luis.
-- **Grabar los episodios cerrados en el estudio con Coco** — falta feedback de cámara.
-- **Más episodios largos** con el mismo molde de ranking (ideas: Game Boy, PS1, arcade).
-- Reserva de handles, logo final, calendario editorial, primer dev Indie Lat.
+- Canal **Retrotarros**, tagline `Nostalgia + Juegos + Música`. Presentadores Luis y **Coco**; la colección es del canal.
+- Pautas: tres archivos por episodio (`pauta` + `discusion` + `html`). Top Precios en 3 bloques. Calendario de publicación: martes, jueves y domingo 20:30 (Chile).
+- Git: Claude commitea; push y syncs solo con el "dale" de Luis. Sin `Co-Authored-By`.
+- Estilo de TarroShorts: `docs/modus-operandi/convenciones-tarroshorts.md`.
 
 ## Cómo arrancar la próxima sesión
 
-1. Leer este archivo + `CLAUDE.md` completo.
-2. Leer `docs/modus-operandi/README.md` (estilo de shorts + bitácora de decisiones).
-3. Si vas a un arco → leer su `docs/arcos/{gen}.md`. Si vas a un episodio → su `docs/pautas/pauta-{slug}.md`.
-4. Si vas a tocar un TarroShort → leer `docs/modus-operandi/convenciones-tarroshorts.md` ANTES de copiar cualquier molde (evita usar el estilo viejo).
-5. Antes de generar contenido nuevo, confirmar con Luis qué se ataca.
+1. Leer este archivo, `CLAUDE.md` y `docs/modus-operandi/flujo-rankings.md`.
+2. Si vas a un episodio, leer su `docs/pautas/pauta-{slug}.md` y `docs/discusiones/discusion-{slug}.md`.
+3. Antes de generar contenido nuevo, confirmar con Luis qué se ataca. Trabajar de a un ranking por sesión (las sesiones largas se vuelven lentas).
 
-## Archivos clave del repo
-
-| Archivo | Rol |
-|---------|-----|
-| `CLAUDE.md` | Reglas operativas, convenciones, workflow Git, sync Drive. |
-| `docs/modus-operandi/` | Convenciones de estilo de shorts + bitácora de decisiones. |
-| `docs/canal/estrategia.md` | Documento maestro del canal. |
-| `docs/canal/formatos.md` | Formatos (largos, shorts por lane, Indie Lat). |
-| `docs/canal/briefings-compositores.md` | Fichas de compositores. |
-| `data/coleccion/coleccion-retrotarros.csv` | Colección física — fuente de verdad (export GameEye, ~898 juegos). |
-| `scripts/top_deck.py` · `saga_deck.py` · `coleccion_deck.py` | Generadores de decks. |
-| `scripts/tarroshort_render.py` | Render MP4 de los TarroShorts. |
-| `scripts/sync-to-drive.ps1` · `sync-tarrobot-to-drive.ps1` | Sincronización con el Drive del estudio. |
-
----
-
-*Última actualización: 2026-07-20 · Ronda completa de TarroShorts de precios SEGA (4/4), 2 bugs de render corregidos, pusheado a GitHub*
+*Última actualización: 2026-10-21*
