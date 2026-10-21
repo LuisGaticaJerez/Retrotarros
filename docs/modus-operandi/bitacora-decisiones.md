@@ -127,3 +127,11 @@
 - **Pendiente:** el "mosaico directo" (armar el mosaico de varios videos y borrar los originales) quedó para después; con este hallazgo, se haría igual: bajar completo, armar y borrar.
 - **Mosaico (mismo día):** la pestaña TarroMosaico también tiene la casilla "Borrar los videos originales cuando termine el mosaico". El servidor (`api_mosaic`, parámetro `delete_sources`) borra los originales solo si el mosaico quedó escrito y no está vacío; si alguno está en uso, avisa cuántos se borraron. Pide confirmar con la lista de archivos antes de crear, la casilla se desmarca sola al terminar y la lista de videos se vacía (los archivos ya no existen). 3 pruebas nuevas (72 en total).
 
+
+## 2026-10-14 a 2026-10-21 — Reforge de Top Precios, formato Infravalorados y syncs rápidos
+
+- **Reforge de Top Precios con el listado completo de PriceCharting:** Dreamcast, Saturn, GameCube, Mega Drive, PS Vita y SNES (el SNES ya estaba publicado el 2026-06-01; Luis lo va a regrabar). Receta y trampas en `flujo-rankings.md`.
+- **Formato nuevo Infravalorados (2026-10-19):** ranking de calidad, sin precios, categoría `rankings/infravalorados`. Primero SNES (Tetris Attack #1) y PS1 (Wipeout XL #1).
+- **Regla de Luis (2026-10-20): en Infravalorados pesa más la crítica que el olvido.** Se ordena por nota (Metacritic, o GameRankings si no hay); el olvido solo desempata. Tono siempre positivo.
+- **Syncs incrementales (2026-10-21):** `sync-to-drive.ps1 -Episodios <slug>` y `sync-tarrobot-to-drive.ps1 -Rapido` (de ~11 min a segundos). El barrido completo sigue disponible sin parámetros.
+- **Sesiones cortas:** a ~400.000 tokens de contexto cada paso se vuelve lento. Se trabaja un ranking por sesión y el estado vive en `HANDOFF.md` y `flujo-rankings.md`, no en el historial.

@@ -9,6 +9,7 @@
 | Archivo | Qué es | Cuándo abrirlo |
 |---|---|---|
 | [`convenciones-tarroshorts.md`](convenciones-tarroshorts.md) | Estilo VIGENTE de los TarroShorts: `item-tag`, box arts + padding-hack, letras grandes, teaser vs top directo, estrategia de embudo, render/sync. | Antes de crear o editar cualquier TarroShort. |
+| [`flujo-rankings.md`](flujo-rankings.md) | Recetas y trampas para Top Precios (reforge) e Infravalorados, comandos de sync rápido y problemas conocidos del shell. | Antes de armar o rehacer cualquier ranking. |
 | [`bitacora-decisiones.md`](bitacora-decisiones.md) | Registro cronológico de acuerdos con Luis, cada uno con puntero a dónde vive el detalle. | Cuando una regla te sorprenda y quieras el "por qué" y el "cuándo". |
 
 ## Cómo se relaciona con el resto

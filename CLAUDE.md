@@ -316,6 +316,7 @@ Cualquier sesión que modifique HTMLs / imágenes / box arts / pautas / discusio
 3. **Sync a Drive — LOS DOS scripts, SIEMPRE (regla de Luis 2026-06-07):**
    - **`scripts/sync-to-drive.ps1`** → `G:\Mi unidad\Studio\<slug>\` (HTML + img + **capturas** por episodio) + `Studio\pautas\*.docx` (pauta y discusión convertidas con pandoc). **Este es el que usa el PC de grabación.** Es el que mas se me olvida — NUNCA saltarlo al cerrar un episodio.
    - **`scripts/sync-tarrobot-to-drive.ps1`** → `G:\Mi unidad\Studio\tarrobot\` (la app TarroBot: scripts + HTMLs + JSON + shorts MP4 + branding).
+   - **Modo rapido (2026-10-21):** para uno o dos episodios usar `sync-to-drive.ps1 -Episodios <slug>,<slug>` (~6 s) y `sync-tarrobot-to-drive.ps1 -Rapido` (~2 s). El barrido completo (~10 min) queda para cambios masivos, TarroDL, shorts MP4 o el instalador. Detalle en `docs/modus-operandi/flujo-rankings.md`.
    - Correr AMBOS. El primero es el critico para que Luis pueda grabar; el segundo para la app/estudio TarroBot.
 4. **Avisar a Luis** del SHA del último commit + qué cambió.
 
