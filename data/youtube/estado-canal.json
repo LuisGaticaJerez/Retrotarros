@@ -1,16 +1,26 @@
 {
-  "fecha": "2026-10-19",
-  "generado": "2026-10-19T13:04:51+00:00",
+  "fecha": "2026-10-21",
+  "generado": "2026-10-21T12:33:46+00:00",
   "videos": [
     {
       "id": "k9wVrYKxsvs",
       "titulo": "Montezuma's Revenge: el Atari que hoy entrena inteligencias artificiales | RetroReseñas",
       "estado": "programado",
       "privacidad": "private",
-      "publicacion_programada": "2026-10-20T23:30:00Z",
+      "publicacion_programada": "2026-10-22T23:30:00Z",
       "subido": "2026-10-19T03:07:40Z",
-      "vistas": 0,
+      "vistas": 1,
       "duracion": "PT23M26S"
+    },
+    {
+      "id": "GY2YAeZmN3M",
+      "titulo": "Cuatro juegos con el mismo nombre: Mighty Morphin Power Rangers (1994) | RetroReseñas",
+      "estado": "publicado",
+      "privacidad": "public",
+      "publicacion_programada": null,
+      "subido": "2026-10-20T23:30:35Z",
+      "vistas": 35,
+      "duracion": "PT23M37S"
     },
     {
       "id": "2MHSObcJmys",
@@ -19,7 +29,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-18T23:30:00Z",
-      "vistas": 103,
+      "vistas": 609,
       "duracion": "PT39M53S"
     },
     {
@@ -29,7 +39,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-15T23:30:25Z",
-      "vistas": 373,
+      "vistas": 401,
       "duracion": "PT19M43S"
     },
     {
@@ -39,7 +49,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-13T23:30:25Z",
-      "vistas": 142,
+      "vistas": 144,
       "duracion": "PT23M57S"
     },
     {
@@ -49,7 +59,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-11T23:30:00Z",
-      "vistas": 460,
+      "vistas": 569,
       "duracion": "PT34M36S"
     },
     {
@@ -59,7 +69,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-08T23:30:06Z",
-      "vistas": 320,
+      "vistas": 322,
       "duracion": "PT22M51S"
     },
     {
@@ -79,7 +89,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-04T23:30:14Z",
-      "vistas": 468,
+      "vistas": 591,
       "duracion": "PT36M31S"
     },
     {
@@ -89,7 +99,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-01T23:30:29Z",
-      "vistas": 288,
+      "vistas": 289,
       "duracion": "PT25M43S"
     },
     {
@@ -99,7 +109,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-29T23:30:24Z",
-      "vistas": 123,
+      "vistas": 124,
       "duracion": "PT16M8S"
     },
     {
@@ -119,7 +129,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-24T23:30:23Z",
-      "vistas": 436,
+      "vistas": 437,
       "duracion": "PT11M39S"
     },
     {
@@ -129,7 +139,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-22T23:30:26Z",
-      "vistas": 686,
+      "vistas": 689,
       "duracion": "PT13M47S"
     },
     {
@@ -139,7 +149,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-20T23:30:33Z",
-      "vistas": 347,
+      "vistas": 353,
       "duracion": "PT31M13S"
     },
     {
@@ -149,7 +159,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-17T23:30:34Z",
-      "vistas": 921,
+      "vistas": 922,
       "duracion": "PT11M28S"
     },
     {
@@ -179,7 +189,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-10T23:30:14Z",
-      "vistas": 137,
+      "vistas": 138,
       "duracion": "PT13M48S"
     },
     {
@@ -209,7 +219,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-06T23:30:13Z",
-      "vistas": 244,
+      "vistas": 245,
       "duracion": "PT36M29S"
     },
     {
@@ -239,7 +249,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-31T00:30:14Z",
-      "vistas": 318,
+      "vistas": 319,
       "duracion": "PT39M19S"
     },
     {
@@ -249,7 +259,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-30T00:00:04Z",
-      "vistas": 22128,
+      "vistas": 22082,
       "duracion": "PT1M6S"
     },
     {
@@ -369,7 +379,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-06T02:00:34Z",
-      "vistas": 112,
+      "vistas": 113,
       "duracion": "PT11M39S"
     },
     {
@@ -439,7 +449,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-07-27T02:10:36Z",
-      "vistas": 1439,
+      "vistas": 1440,
       "duracion": "PT9M6S"
     },
     {
@@ -449,7 +459,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-07-20T02:00:00Z",
-      "vistas": 82,
+      "vistas": 83,
       "duracion": "PT30M32S"
     },
     {
@@ -559,7 +569,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-06-29T02:00:05Z",
-      "vistas": 41,
+      "vistas": 42,
       "duracion": "PT35M29S"
     },
     {
@@ -689,7 +699,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-06-08T02:00:08Z",
-      "vistas": 182,
+      "vistas": 184,
       "duracion": "PT35M2S"
     },
     {
