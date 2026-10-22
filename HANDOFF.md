@@ -24,6 +24,7 @@
 
 ## Decidido y cerrado (vigente)
 
+- **Top Mundial por consola (Luis 2026-10-22):** una entrada por franquicia, sin deportes anuales, y un juego solo va en el Top Mundial de la consola donde salió primero (no se repite entre consolas; RE4 queda en GameCube). Lo que queda fuera por legado va a Infravalorados. Sin bonus track.
 - Canal **Retrotarros**, tagline `Nostalgia + Juegos + Música`. Presentadores Luis y **Coco**; la colección es del canal.
 - Pautas: tres archivos por episodio (`pauta` + `discusion` + `html`). Top Precios en 3 bloques. Calendario de publicación: martes, jueves y domingo 20:30 (Chile).
 - Git: Claude commitea; push y syncs solo con el "dale" de Luis. Sin `Co-Authored-By`.
