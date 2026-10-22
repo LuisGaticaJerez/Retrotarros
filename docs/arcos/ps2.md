@@ -22,7 +22,7 @@
 | 1 | `ps2-top-mundial` | Ranking · crítica | Armado, sin grabar (HTML, capturas, pauta, discusión y kit listos) | [pauta](../pautas/pauta-ps2-top-mundial.md) | [discusión](../discusiones/discusion-ps2-top-mundial.md) | [html](../../studio/rankings/top-mundial/ps2-top-mundial.html) |
 | 2 | `ps2-top-precios` | Ranking · mercado | Idea | — | — | — |
 | 3 | `ps2-top-peores` | Ranking · humor | Idea (hay mucha evidencia de "peores" para PS2) | — | — | — |
-| 4 | `ps2-infravalorados` | Ranking · calidad olvidada | Idea | — | — | — |
+| 4 | `ps2-infravalorados` | Ranking · calidad olvidada | Idea con candidatos ya investigados (ver abajo) | — | — | — |
 
 ---
 
@@ -31,6 +31,10 @@
 ### 1. Top Mundial — armado
 
 Reglas de Luis (2026-10-22): **una entrada por franquicia** y **sin deportes anuales**. Resident Evil 4 queda fuera para no repetirse con GameCube. Orden por nota Metacritic de PS2, con el legado desempatando. Top 10: Grand Theft Auto III (#1), Tony Hawk's Pro Skater 3, Metal Gear Solid 2, Gran Turismo 3: A-Spec, God of War, Devil May Cry, Okami, Burnout 3: Takedown, Final Fantasy X y Shadow of the Colossus (#10). Detalle en `docs/discusiones/discusion-ps2-top-mundial.md`.
+
+### 2. Candidatos para PS2 Infravalorados (decidido con Luis, 2026-10-22)
+
+Los juegos que quedaron fuera del Top Mundial por criterio de legado, con nota alta y sin repetir franquicia, van a este ranking en vez de perderse. Notas de Metacritic de PS2 (lista "Best Games on PS2" y fichas): Virtua Fighter 4 (94, candidato a #1 por crítica), SSX (93), Guitar Hero II (92), Guitar Hero (91), Ratchet & Clank: Up Your Arsenal (91), Twisted Metal: Black (91), Klonoa 2 (91) y Dead or Alive 2 Hardcore (91). Prince of Persia: Sands of Time (92) y Soulcalibur II (92) son muy conocidos: evaluar si entran. Reglas del formato: no pueden estar en el Top Mundial de PS2, pesa más la crítica que el olvido y va sin precios. Resident Evil 4 no entra: ya está en el Top Mundial de GameCube.
 
 ---
 
