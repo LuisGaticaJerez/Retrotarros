@@ -32,9 +32,9 @@
 
 Reglas de Luis (2026-10-22): **una entrada por franquicia**, **sin deportes anuales**, un juego va solo donde salió primero y no se repite si ya está en otro Top Mundial, **sin bonus track**. Orden por nota Metacritic de la versión Xbox, con el legado desempatando. Top 10: Halo: Combat Evolved (#1, 97), Star Wars: Knights of the Old Republic, Ninja Gaiden Black, Splinter Cell: Chaos Theory, Prince of Persia: The Sands of Time, Forza Motorsport, Soulcalibur II, Half-Life 2, Panzer Dragoon Orta y Project Gotham Racing 2 (#10). Detalle en `docs/discusiones/discusion-xbox-top-mundial.md`.
 
-### 1b. Pregunta abierta (a confirmar con Luis)
+### 1b. Decidido por Luis (2026-10-22): se queda como está
 
-Prince of Persia: The Sands of Time (92) y Soulcalibur II (92 en Xbox) salieron el mismo mes en PS2, Xbox y GameCube y **ya están en GameCube Infravalorados**. Entran en el Top Mundial de Xbox por la regla de nota. Si Luis prefiere no repetirlos, suben Jade Empire (89) y The Chronicles of Riddick: Escape from Butcher Bay (89), que son las reservas (sus box arts están en libretro, `Microsoft - Xbox/Named_Boxarts`).
+Prince of Persia: The Sands of Time (92) y Soulcalibur II (92 en Xbox) salieron el mismo mes en PS2, Xbox y GameCube y **ya están en GameCube Infravalorados**. Entran en el Top Mundial de Xbox por la regla de nota y Luis dejó el top así (aceptó la repetición con GameCube Infravalorados). Reservas por si algo cambia: suben Jade Empire (89) y The Chronicles of Riddick: Escape from Butcher Bay (89), que son las reservas (sus box arts están en libretro, `Microsoft - Xbox/Named_Boxarts`).
 
 ### 1c. Regla de repetición entre consolas aplicada (Luis, 2026-10-22)
 
@@ -58,7 +58,7 @@ Notas de Metacritic de la lista "Best Games on Xbox", sin repetir franquicia ni 
 
 ## Próximo paso concreto
 
-Confirmar con Luis la pregunta 1b y los desempates (ver discusión); después, armar Wii Top Mundial en su propia sesión.
+Luis aprobó el top tal como está. Armar Wii Top Mundial en su propia sesión.
 
 ---
 

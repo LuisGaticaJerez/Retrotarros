@@ -44,7 +44,7 @@ Los juegos que quedaron fuera del Top Mundial por criterio de legado, con nota a
 
 ## Conexiones cruzadas
 
-- **Prince of Persia y Soulcalibur II (2026-10-22):** el Top Mundial de Xbox los incluye por nota (92). Si Luis los deja ahí, salen de los candidatos de PS2 Infravalorados. SSX 3 (92 en Xbox) quedó fuera de Xbox porque la saga nació en PS2.
+- **Prince of Persia y Soulcalibur II (2026-10-22):** el Top Mundial de Xbox los incluye por nota (92). Luis aprobó dejarlos en Xbox (2026-10-22): salen de los candidatos de PS2 Infravalorados. SSX 3 (92 en Xbox) quedó fuera de Xbox porque la saga nació en PS2.
 - **Regla de una entrada por franquicia:** nace en este arco. Aplicable a Xbox y Wii; GameCube y las consolas anteriores no la usaron.
 - **Resident Evil 4:** aparece en el Top Mundial de GameCube; se evita repetirlo en PS2 y, si se mantiene el criterio, tampoco debería repetirse en Wii.
 - **Okami** salió también en Wii en 2008 (posible cruce con el Top Mundial de Wii) y comparte director con Devil May Cry: Hideki Kamiya.

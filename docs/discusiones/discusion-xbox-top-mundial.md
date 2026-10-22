@@ -26,6 +26,8 @@ Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-xbox-top-mund
 
 ## Para conversar antes de grabar
 
+> **Luis aprobó el top tal como está (2026-10-22).** Prince of Persia y Soulcalibur II se quedan en Xbox aunque también estén en GameCube Infravalorados; el resto de esta sección queda como contexto.
+
 - **Dos juegos del top ya estan en GameCube Infravalorados (decision abierta):** Prince of Persia: The Sands of Time (92) y Soulcalibur II (92 en Xbox, 93 en GameCube) salieron el mismo mes en PS2, Xbox y GameCube, asi que no hay una consola "donde salieron primero". Por la regla de nota entran aqui, pero ya estan en el otro ranking. Opciones: (a) los dejamos en los dos y lo decimos al aire, (b) los sacamos de Xbox y suben **Jade Empire (89)** y **The Chronicles of Riddick: Escape from Butcher Bay (89)**, (c) los sacamos de GameCube Infravalorados y dejamos que Xbox los muestre como grandes conocidos. ¿Cual prefieren? La regla que ya teniamos para Infravalorados decia que pesa mas la critica que el olvido, y estos dos son de los mas conocidos.
 - **Empates:** hay tres. En 94: KOTOR sobre Ninja Gaiden Black y Splinter Cell (KOTOR gano varios Juego del Año de 2003, IGN incluido). En 92: Prince of Persia, Forza y Soulcalibur II (gana el que mas legado dejo, y Forza sobre Soulcalibur por ser franquicia propia de Xbox). En 90: Half-Life 2, Orta y PGR2. ¿Les parecen bien o prefieren invertir alguno?
 - **Ninja Gaiden Black en vez del original:** el original de 2004 saca 91 y Black (2005, solo Xbox) saca 94. Como la franquicia cuenta una vez, entro Black. Si prefieren el de 2004 como "el que lo empezo todo", el cupo es el mismo.
