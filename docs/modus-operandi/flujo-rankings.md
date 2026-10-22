@@ -35,6 +35,14 @@ Ranking de **calidad**, sin precios. Categoría de salida `studio/rankings/infra
 
 **Hechos:** SNES (Tetris Attack #1), PS1 (Wipeout XL #1) y Mega Drive (Shining Force II #1, 2026-10-22; la Genesis casi no tiene Metacritic, se usaron 3 niveles con EGM 1997, IGN 2007 y las listas de Mega/GamesRadar+). GameCube (Viewtiful Joe #1, 2026-10-22; la GameCube sí tiene Metacritic: se ordena por la nota de la versión GameCube, y en las multiplataforma cuenta solo esa; `wiki_reception.py` no lee los artículos que usan claves `MC_NGC` o `mc1`, ahí hay que extraer la nota de la plataforma a mano del wikitexto). Los box arts de Infravalorados viven en `studio/rankings/infravalorados/img/<slug>/`. Siguientes sugeridos: PS2, N64 (ya existe `n64-joyas-ocultas` como curaduría).
 
+## 2b. Top Mundial por consola con Metacritic (PS2, Xbox; 2026-10-22)
+
+1. Lista de la consola: `https://www.metacritic.com/browse/game/<xbox|playstation-2|...>/all/all-time/metascore/` (urllib con User-Agent Mozilla; páginas `?page=2..4`). Cada tarjeta viene tras `data-testid="filter-results"`, con título, nota y fecha.
+2. Descartar por las reglas de Luis (una entrada por franquicia, sin deportes anuales, un juego va donde salió primero y no se repite si ya está en otro Top Mundial: revisar `studio/rankings/top-mundial/*.html`). Los empates de nota se resuelven por legado.
+3. Cruzar con Wikipedia (`wikitexto` de `scripts/wiki_reception.py`; el título del artículo a veces es la franquicia: probar `(video game)` o `(2005 video game)`). **Trampa:** las fichas de Metacritic de juegos multiplataforma muestran la nota de otra plataforma (Half-Life 2 muestra 96 de PC, Soulcalibur II 93 de GameCube); la nota de la consola sale de la lista y del cuadro de Wikipedia. Las fechas NA difieren en 1-2 días entre fuentes: en pantalla solo el año.
+4. Box arts de libretro: el índice `https://thumbnails.libretro.com/<Sistema>/Named_Boxarts/` se puede listar con urllib; verificar en mosaico.
+5. Driver: copiar `.cache/gen_xbox_top_mundial.py` o el de PS2. Capturas con `capture-slides.py` y revisión en mosaico (un PNG 3x3 de 14 slides alcanza).
+
 ## 3. Sync a Drive (rápido)
 
 - Un episodio nuevo o modificado: `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/sync-to-drive.ps1 -Episodios <slug1>,<slug2>` (unos 6 s) y `... scripts/sync-tarrobot-to-drive.ps1 -Rapido` (unos 2 s).
