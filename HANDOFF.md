@@ -38,6 +38,11 @@ Medimos el contexto con `get_usage` (la herramienta de uso de sesión) al cerrar
 - **Más de 400.000:** se cambia de sesión, pero solo después de cerrar (commit, push y syncs con el dale de Luis, y este archivo al día).
 - **Nunca a mitad de un ranking.** Excepción: si el límite de 5 horas del plan pasa de 85 %, se avisa y se cierra lo que esté en curso.
 
+## Ritual de cierre y nombre de las sesiones (Luis 2026-10-22)
+
+- Al terminar un ranking se corre el comando **`/cierre`** (`.claude/skills/cierre/SKILL.md`): mide el contexto, deja este archivo, la bitácora, el arco y la memoria al día, hace el commit local y ofrece push y syncs (solo con el dale de Luis).
+- Claude crea las sesiones nuevas él mismo y les pone el nombre **`Canal Retrotarros · AAAA-MM-DD · <tarea>`** (ej. `Canal Retrotarros · 2026-10-22 · Xbox Top Mundial`). Las sesiones viejas se borran solo con la revisión y el visto bueno de Luis, y cuando no tengan cambios sin commitear ni ramas sin mergear.
+
 ## Cómo arrancar la próxima sesión
 
 1. Leer este archivo, `CLAUDE.md` y `docs/modus-operandi/flujo-rankings.md`.
