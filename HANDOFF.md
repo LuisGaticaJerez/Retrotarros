@@ -30,10 +30,18 @@
 - Git: Claude commitea; push y syncs solo con el "dale" de Luis. Sin `Co-Authored-By`.
 - Estilo de TarroShorts: `docs/modus-operandi/convenciones-tarroshorts.md`.
 
+## Cuándo cambiar de sesión (criterio de Luis, 2026-10-22)
+
+Medimos el contexto con `get_usage` (la herramienta de uso de sesión) al cerrar cada ranking, y Claude lo reporta:
+- **Menos de 300.000 tokens:** seguimos con el siguiente ranking en la misma sesión.
+- **Entre 300.000 y 400.000:** se termina el ranking en curso y se cierra; no se parte uno nuevo.
+- **Más de 400.000:** se cambia de sesión, pero solo después de cerrar (commit, push y syncs con el dale de Luis, y este archivo al día).
+- **Nunca a mitad de un ranking.** Excepción: si el límite de 5 horas del plan pasa de 85 %, se avisa y se cierra lo que esté en curso.
+
 ## Cómo arrancar la próxima sesión
 
 1. Leer este archivo, `CLAUDE.md` y `docs/modus-operandi/flujo-rankings.md`.
 2. Si vas a un episodio, leer su `docs/pautas/pauta-{slug}.md` y `docs/discusiones/discusion-{slug}.md`.
 3. Antes de generar contenido nuevo, confirmar con Luis qué se ataca. Trabajar de a un ranking por sesión (las sesiones largas se vuelven lentas).
 
-*Última actualización: 2026-10-22*
+*Última actualización: 2026-10-22 (PS2 Top Mundial armado; Xbox y Wii Top Mundial pendientes)*
