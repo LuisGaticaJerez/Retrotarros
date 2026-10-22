@@ -33,7 +33,7 @@ Ranking de **calidad**, sin precios. Categoría de salida `studio/rankings/infra
 5. Driver copiando `.cache/gen_snes_infravalorados.py` o `.cache/gen_ps1_infravalorados.py`: `items` sin `price`, `why_label` "▶ EL MEJOR CRITICADO" en el #1, `sorted([...], key=lambda x: -x["pos"])`.
 6. Docs: pauta, discusión (incluye qué confirmar en cámara) y kit.
 
-**Hechos:** SNES (Tetris Attack #1) y PS1 (Wipeout XL #1). Siguientes sugeridos: Genesis, GameCube, PS2, N64 (ya existe `n64-joyas-ocultas` como curaduría).
+**Hechos:** SNES (Tetris Attack #1), PS1 (Wipeout XL #1) y Mega Drive (Shining Force II #1, 2026-10-22; la Genesis casi no tiene Metacritic, se usaron 3 niveles con EGM 1997, IGN 2007 y las listas de Mega/GamesRadar+). Los box arts de Infravalorados viven en `studio/rankings/infravalorados/img/<slug>/`. Siguientes sugeridos: GameCube, PS2, N64 (ya existe `n64-joyas-ocultas` como curaduría).
 
 ## 3. Sync a Drive (rápido)
 
