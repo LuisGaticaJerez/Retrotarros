@@ -14,7 +14,8 @@
 **Pendientes:**
 1. Push de lo local + `sync-to-drive.ps1` y `sync-tarrobot-to-drive.ps1` (modo incremental o completo).
 2. Auditar con la receta de `flujo-rankings.md` los Top Precios publicados sin revisar: NES, N64, Master System, Atari 2600, Game Boy. PS1: Einhänder y Castlevania Chronicles vs el #10 (USD 350).
-3. Más Infravalorados (Mega Drive y GameCube hechos el 2026-10-22; GameCube sin push ni sync; sugerido: PS2; N64 ya tiene `n64-joyas-ocultas`).
+3. Más Infravalorados (Mega Drive y GameCube hechos y sincronizados el 2026-10-22; sugerido: PS2; N64 ya tiene `n64-joyas-ocultas`).
+3b. **Arcos nuevos PS2, Xbox y Wii (2026-10-22):** Luis quiere partir cada una por su Top Mundial, un ranking por sesión. PS2 Top Mundial armado (`ps2-top-mundial`, GTA III #1; reglas de Luis: una entrada por franquicia y sin deportes anuales; RE4 fuera por estar en GameCube), sin push ni sync. Faltan Xbox y Wii Top Mundial. Confirmar con Luis los desempates de PS2 (ver `docs/discusiones/discusion-ps2-top-mundial.md`).
 4. Confirmar con Luis: Wipeout XL como #1 y Xenogears #10 (PS1); Tetris Attack #1 (SNES); Shining Force II como #1 en Mega Drive (alternativa: Phantasy Star II); GameCube: Viewtiful Joe #1 (empata 93 con Soulcalibur II) y si dejan juegos conocidos (Soulcalibur II, Prince of Persia, RE remake, Tony Hawk's 4) o prefieren reservas más olvidadas.
 5. Mediciones de la campaña de Google Ads: 29 Oct y 11 Nov; después revocar el acceso a la API (`python scripts/youtube_aplicar.py --olvidar` + myaccount.google.com/permissions). Tarea de inventario programada lun/mié/vie 09:30.
 6. Kits de YouTube de rankings sin estrenar que aún tengan hashtags viejos (guía: `docs/canal/guia-youtube-viral.md` sección 4).
