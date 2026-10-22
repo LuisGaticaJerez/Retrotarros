@@ -217,7 +217,7 @@ def _tv_css() -> str:
     )
 
 
-def _shared_css(tv_grande: bool = False) -> str:
+def _shared_css(tv_grande: bool = False, cart_px: int | None = None, extra_css: str = "") -> str:
     """CSS inyectado en todo episodio generado con generar_top(): precio grande,
     capa de notas de lectura (teleprompter, tecla N), letras mas grandes para TV,
     y el layout de enfasis en el gameplay. Extraida a funcion propia (Luis
@@ -285,6 +285,8 @@ def _shared_css(tv_grande: bool = False) -> str:
         ".hybrid-title{grid-area:title;text-align:left;align-items:flex-start}\n"
         ".game-why{grid-area:why;max-width:none}\n"
         + (_tv_css() if tv_grande else "")
+        + (f".cart{{width:min(100%,{int(cart_px)}px) !important}}\n" if cart_px else "")
+        + extra_css
         + "</style>\n</head>"
     )
 
@@ -305,7 +307,7 @@ def generar_top(data: dict, out_slug: str) -> Path:
     # duplicado porque BASE ya tenia su propia copia inyectada).
     if _SHARED_CSS_BLOCK_RE.search(head):
         head = _SHARED_CSS_BLOCK_RE.sub("</head>", head, count=1)
-    head = head.replace("</head>", _shared_css(bool(data.get("tv_grande", True))), 1)
+    head = head.replace("</head>", _shared_css(bool(data.get("tv_grande", True)), data.get("cart_px"), data.get("css_extra", "")), 1)
     head += '\n<div class="read-indicator">● MODO LECTURA (N)</div>\n'
 
     consola = data.get("consola", "NES")

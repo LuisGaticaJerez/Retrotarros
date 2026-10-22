@@ -34,16 +34,16 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 | # | Juego | Año | Editor | Evidencia (pantalla) | Premio comico |
 |---|-------|-----|--------|----------------------|---------------|
-| 10 | Barbie: Super Model | 1993 | Hi Tech Expressions | En 1 Lista (Nintendo Power 1997 (10 Peores)) | Al desfile con prueba de memoria |
-| 9 | Michael Jordan: Chaos in the Windy City | 1994 | Electronic Arts | En 1 Lista (Nintendo Power 1997 (#7)) | Al partido benefico mas complicado |
-| 8 | Lester the Unlikely | 1994 | DTMC | En 2 Listas (Den Of Geek (#2) + Thegamer) | Al heroe que quiere irse tanto como tu |
-| 7 | Ballz 3D | 1994 | Accolade | En 3 Listas (Den Of Geek (#9) + Thegamer + Game Informer 2011 (#7)) | Al torneo de pelotas con eslogan censurado |
-| 6 | Rap Jam: Volume One | 1995 | Motown Games | En 3 Listas (Egm 1997 (#9) + Seanbaby (#14) + Game Rant) | Al volumen uno... y unico |
-| 5 | Space Ace | 1994 | Absolute Entertainment | En 3 Listas (Thegamer (#1) + Den Of Geek (#6) + Time Extension) | Al dibujo animado que se volvio castigo |
-| 4 | Race Drivin' | 1992 | THQ | En 3 Listas (Den Of Geek (#3) + Game Rant + Cbr) | A la presentacion de diapositivas con volante |
-| 3 | Pit-Fighter | 1992 | THQ | En 3 Listas (Den Of Geek (#1) + Cbr + Nintendo Power 1997) | Al arcade que llego sin publico |
-| 2 | Bebe's Kids | 1994 | Motown Games | En 3 Listas (Nintendo Power 1997 + Den Of Geek (#10) + Time Extension) | A la pelea en camara lenta |
-| 1 | Shaq Fu | 1994 | Electronic Arts | En 5 Listas (Nintendo Power 1997 (#3) + Egm 1997 (#10) + Gametrailers (#4) + Thegamer + Cbr) | Al camino mas largo a un partido benefico |
+| 10 | Barbie: Super Model | 1993 | Hi Tech Expressions | En 1 Lista (Nintendo Power 1997 (10 Peores)) | Al desfile de memoria |
+| 9 | Michael Jordan: Chaos in the Windy City | 1994 | Electronic Arts | En 1 Lista (Nintendo Power 1997 (#7)) | Al partido benefico |
+| 8 | Lester the Unlikely | 1994 | DTMC | En 2 Listas (Den Of Geek (#2) + Thegamer) | Al heroe con miedo |
+| 7 | Ballz 3D | 1994 | Accolade | En 3 Listas (Den Of Geek (#9) + Thegamer + Game Informer (#7)) | Al torneo de pelotas |
+| 6 | Rap Jam: Volume One | 1995 | Motown Games | En 3 Listas (Egm 1997 (#9) + Seanbaby (#14) + Game Rant) | Al volumen unico |
+| 5 | Space Ace | 1994 | Absolute Entertainment | En 3 Listas (Thegamer (#1) + Den Of Geek (#6) + Time Extension) | Al dibujo castigo |
+| 4 | Race Drivin' | 1992 | THQ | En 3 Listas (Den Of Geek (#3) + Game Rant + Cbr) | A las diapositivas |
+| 3 | Pit-Fighter | 1992 | THQ | En 3 Listas (Den Of Geek (#1) + Cbr + Nintendo Power 1997) | Al arcade sin publico |
+| 2 | Bebe's Kids | 1994 | Motown Games | En 3 Listas (Nintendo Power 1997 + Den Of Geek (#10) + Time Extension) | A la camara lenta |
+| 1 | Shaq Fu | 1994 | Electronic Arts | En 5 Listas (Np 1997 (#3) + Egm (#10) + Gametrailers (#4) + Thegamer + Cbr) | Al camino mas largo |
 
 ---
 
@@ -51,7 +51,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 ### #10 — Barbie: Super Model (1993, Hi Tech Expressions)
 
-**En pantalla:** Hay que recordar la coreografia de un desfile, manejar un convertible por Hollywood, patinar en Hawaii y esquiar en Vail. Nintendo Power la puso en su lista de los 10 peores juegos de la historia en 1997.
+**En pantalla:** Memorizar la coreografia de un desfile y manejar por Hollywood. Nintendo Power: sus 10 peores de 1997.
 
 - Wikipedia: desarrollado por Tahoe Software Productions y publicado por Hi Tech Expressions en 1993 para Sega Genesis, Super Nintendo y MS-DOS. Juego educativo de accion para uno o dos jugadores: tramos de scroll horizontal con obstaculos, minijuegos de memoria sobre la coreografia de un desfile y rondas bonus para vestir a Barbie y combinar maquillaje y accesorios con tapas de revista. Niveles: convertible en Hollywood, patines en Hawai, nieve en Vail y bicicleta en Nueva York.
 - La lista: Nintendo Power, numero 100 (septiembre de 1997), con 12 miembros del staff votando sus 10 peores juegos de todos los tiempos. Barbie: Super Model aparece entre ellos (no pude confirmar su puesto exacto; en pantalla va solo 'en 1 lista').
@@ -61,7 +61,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 ### #9 — Michael Jordan: Chaos in the Windy City (1994, Electronic Arts)
 
-**En pantalla:** Un cientifico loco llamado Maximus Cranium secuestra a los companeros de Jordan antes de un partido benefico. Los rescatas con balones que congelan o explotan, y cada mate activa un checkpoint. Nintendo Power: 'un desperdicio de licencia'.
+**En pantalla:** Un cientifico loco secuestra a los companeros de Jordan. Nintendo Power: 'desperdicio de licencia'.
 
 - Wikipedia: desarrollado y publicado por Electronic Arts para SNES en noviembre de 1994 (Ocean lo publico en Europa en 1995; la version de Genesis se cancelo). Plataformas de scroll lateral: el villano Maximus Cranium secuestra a los companeros de Jordan antes de un partido benefico; juntas llaves, vences enemigos y usas balones con habilidades (de hielo, bomba...). Los mates activan power-ups y checkpoints.
 - La lista: Nintendo Power, septiembre de 1997: puesto 7 de sus 10 peores juegos de todos los tiempos ('un desperdicio de licencia').
@@ -72,7 +72,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 ### #8 — Lester the Unlikely (1994, DTMC)
 
-**En pantalla:** Un adolescente fanatico de los comics queda varado en una isla y se asusta de todo: grita, huye y recien despues agarra confianza. Den of Geek lo puso segundo entre los peores del SNES.
+**En pantalla:** Un fanatico de los comics, varado en una isla, se asusta de todo. Den of Geek: segundo peor del SNES.
 
 - Wikipedia: desarrollado por Visual Concepts y publicado por DTMC en enero de 1994 en Norteamerica (Asmik Ace en Japon, septiembre de 1994). Un adolescente timido, fanatico de los comics, sube por error a un barco de carga, queda varado en una isla tras un ataque pirata y debe vencer sus miedos para rescatar al lider de la isla (y conquistar a su hija). Mecanica unica: al principio Lester grita y huye de las criaturas, y gana confianza a medida que avanza. Animacion rotoscopiada al estilo Prince of Persia.
 - Las listas: Den of Geek (#2 de los 15 peores del SNES: 'animaciones terribles, controles con retraso y dano constante por caidas') y TheGamer (lo cita entre los 15 juegos horribles que todos jugaron: 'algunos de los peores controles de toda la lista').
@@ -82,7 +82,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 ### #7 — Ballz 3D (1994, Accolade)
 
-**En pantalla:** Un juego de pelea donde todos los luchadores estan hechos de pelotas: un mono, un payaso, un sumo, un avestruz, una bailarina y un rinoceronte. Nintendo pidio cambiar el eslogan de la intro. Game Informer lo puso en su lista de peleas que queremos olvidar.
+**En pantalla:** Un juego de pelea donde todos los luchadores son pelotas. Game Informer: peleas por olvidar.
 
 - Wikipedia: desarrollado por PF.Magic y publicado por Accolade; salio en SNES el 18 de noviembre de 1994 en Norteamerica (en Genesis, el 5 de octubre). Cada personaje esta hecho enteramente de esferas, un pseudo 3D que ahorraba procesamiento y se veia igual desde cualquier angulo (idea del programador jefe Keith Kirby). Nueve luchadores: un mono (Yoko), un payaso (Boomer), un sumo (Tsunami), un avestruz (Guggler), un cavernicola (Kronk), un fisicoculturista (Bruiser), una bailarina (Divine), un rinoceronte (Crusher) y un superheroe (Turbo).
 - Las listas: Den of Geek (#9 de los 15 peores del SNES: 'controles de pesadilla' y disenos 'que hacen sangrar los ojos'), TheGamer (15 juegos horribles que todos jugaron) y Game Informer 2011 ('Top 10 de juegos de pelea que queremos olvidar': puesto 7).
@@ -92,7 +92,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 ### #6 — Rap Jam: Volume One (1995, Motown Games)
 
-**En pantalla:** Basquet callejero con raperos de los 90, a golpes y sin faltas. Se llama Volume One porque iba a haber mas, pero no hubo: fue el unico volumen. Electronic Gaming Monthly lo puso 9 entre los peores de la historia.
+**En pantalla:** Basquet callejero con raperos de los 90, a golpes y sin faltas. EGM lo puso 9 entre los peores.
 
 - Wikipedia: desarrollado por 64WD Creation y publicado por Motown Games y Mandingo Entertainment en enero de 1995, solo para SNES y solo en Norteamerica. Reimagina el basquetbol como deporte callejero con raperos y artistas de hip-hop de los 90: 'a golpes y sin faltas', con modos exhibicion y torneo. Pese al 'Volume One', fue la unica entrega y el ultimo juego de Motown Software.
 - Las listas: Electronic Gaming Monthly (1997): puesto 9 de sus 10 peores juegos de todos los tiempos; Seanbaby: puesto 14 de sus 20 peores juegos de todos los tiempos; Game Rant lo menciona como 'uno de los peores juegos jamas creados', por los graficos entrecortados y un estilo feo.
@@ -102,7 +102,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 ### #5 — Space Ace (1994, Absolute Entertainment)
 
-**En pantalla:** El arcade de dibujos en laserdisc se volvio un plataformas con controles blandos y dificultad cruel. TheGamer lo nombro el peor juego del SNES. Nintendo temia que un sonido del arcade se confundiera con una mala palabra.
+**En pantalla:** Un arcade de dibujos se volvio plataformas de controles blandos. TheGamer: el peor del SNES.
 
 - Wikipedia: desarrollado por Oxford Digital Enterprises y publicado por Absolute Entertainment en Norteamerica en mayo de 1994 (en Japon lo saco Imagineer el 25 de marzo de 1994; en Europa, Empire Interactive). Por el limite de memoria del cartucho se hizo un plataformas de scroll lateral en vez de la version de video de laserdisc del arcade; quedaron algunas cinematicas de baja resolucion.
 - Anecdota: Nintendo se preocupo de que el audio muestreado del arcade ('ooooh' seguido de un 'fwah') se confundiera con una mala palabra.
@@ -112,7 +112,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 ### #4 — Race Drivin' (1992, THQ)
 
-**En pantalla:** El arcade de manejo en 3D convertido para el SNES sin usar el chip Super FX: corre a unos 4 frames por segundo. Nintendo Power le dio 9,7 de 20 y Super Play, 35%.
+**En pantalla:** Arcade de manejo en 3D sin chip Super FX: unos 4 frames por segundo. Nintendo Power: 9,7 de 20.
 
 - Wikipedia: version de SNES desarrollada por Imagineering y publicada por THQ en octubre de 1992 en Norteamerica. Notas de la epoca: Nintendo Power 9,7/20 y Super Play 35%.
 - Las listas: Den of Geek (#3: corre a unos 4 frames por segundo, con controles dolorosos y un HUD enorme); Game Rant (no uso el chip Super FX del SNES: 'graficos 3D horribles, frames terribles y una ralentizacion intolerable'); CBR (una de las peores conversiones de arcade a consola: frame rate lento y entrecortado, escenarios aburridos).
@@ -122,7 +122,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 ### #3 — Pit-Fighter (1992, THQ)
 
-**En pantalla:** En el SNES llego sin el publico, sin las armas y sin tres rivales. Nintendo Power dijo que era extremadamente dificil de controlar. Den of Geek lo puso primero entre los peores del SNES, y Nintendo Power lo metio en sus 10 peores de la historia.
+**En pantalla:** Llego sin publico, sin armas y sin tres rivales. Den of Geek lo puso primero entre los peores.
 
 - Wikipedia: version de SNES desarrollada por Eastridge Technology y publicada por THQ en marzo de 1992 en Norteamerica. Frente al arcade se eliminaron las interacciones con el publico, las armas como objetos usables y tres rivales controlados por la CPU (Southside Jim, Heavy Metal y Mad Miles). Luchadores: Buzz (ex luchador profesional), Ty (campeon de kickboxing) y Kato (cinturon negro).
 - Nintendo Power (resena de la epoca): 'extremadamente dificil de controlar'; notas parciales: graficos 2,5/5, sonido 2,5/5, control 2/5, desafio 2/5 y tema/diversion 2,5/5. Un resenista escribio: 'no importa si usa tecnologia nueva o no; la pregunta es si el juego es divertido, y creo que aqui la respuesta es no'.
@@ -132,7 +132,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 ### #2 — Bebe's Kids (1994, Motown Games)
 
-**En pantalla:** Un beat 'em up basado en una pelicula animada, en un parque de diversiones lleno de guardias, mascotas y piratas. Nintendo Power dijo que la accion era extremadamente lenta y que los enemigos aguantaban golpes sin fin.
+**En pantalla:** Beat 'em up de una pelicula animada, en un parque. Nintendo Power: accion extremadamente lenta.
 
 - Wikipedia: desarrollado por Radical Entertainment y publicado por Motown Games / Paramount Interactive en abril de 1994, solo para SNES y solo en Norteamerica. Beat 'em up lateral basado en la pelicula animada de 1992: controlas a LaShawn o a Kahlil por Fun World, un parque de diversiones tipo Disneylandia, contra guardias, mascotas y piratas; hay etapas con casa embrujada, barco pirata y un foso. Ambos personajes tienen ataques especiales distintos.
 - Nintendo Power critico la 'accion extremadamente lenta' y que 'los enemigos aguantan tanto dano que las peleas parecen interminables', y el 'mal control', aunque reconocio 'buenos graficos y sonido'.
@@ -143,7 +143,7 @@ Es **episodio nuevo**: no toca ningun episodio publicado ni grabado.
 
 ### #1 — Shaq Fu (1994, Electronic Arts)
 
-**En pantalla:** Shaq va a un partido benefico, entra a un dojo en Tokio por error, lo confunden con un guerrero elegido y termina en otra dimension peleando contra una momia. Nintendo Power lo puso 3 entre los peores de la historia, EGM 10 y GameTrailers 4.
+**En pantalla:** Shaq entra a un dojo por error y pelea contra una momia. Nintendo Power lo puso 3 entre los peores.
 
 - Wikipedia: desarrollado por Delphine Software International y publicado por Electronic Arts el 28 de octubre de 1994 (Genesis y SNES, mas versiones de Game Boy, Game Gear y Amiga). Premisa: Shaquille O'Neal entra a un dojo de Tokio camino a un partido benefico, lo toman por un guerrero elegido y lo transportan a otra dimension para rescatar a un nino llamado Nezu de la momia Sett-Ra. La version de Genesis trae cinco personajes jugables extra (Auroch, Colonel, Diesel, Leotsu y Nezu) y tres etapas mas que la de SNES.
 - Las listas: Nintendo Power (septiembre de 1997): tercero de sus 10 peores juegos, con la frase 'no es posible inventar una idea peor que esta'; Electronic Gaming Monthly: puesto 10 de sus 10 peores de todos los tiempos; GameTrailers: puesto 4; TheGamer (15 juegos horribles que todos jugaron: 'animacion pulida, pero fracasa como juego de pelea y la premisa no tiene que ver con basquetbol') y CBR. Nintendo Power le habia puesto 2,9 de 5 al salir.
