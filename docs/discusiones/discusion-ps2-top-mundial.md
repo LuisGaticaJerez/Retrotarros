@@ -27,9 +27,10 @@ Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-ps2-top-mundi
 
 - **Empates:** hay tres. GTA III sobre Tony Hawk's 3 en el #1 (97 los dos, GTA gana por legado: GamePro 2007 lo llamo el juego mas importante de la historia). God of War sobre Devil May Cry (94 los dos). Okami sobre Burnout 3 (93 los dos). ¿Les parecen bien o prefieren invertir alguno?
 - **Tres juegos de 2001 estan al tope:** GTA III, Tony Hawk's 3 y Metal Gear Solid 2 salieron en un mismo trimestre. Buen gancho: el cierre de 2001 fue el mejor momento de la PS2.
-- **Sacrificios dolorosos por la regla de franquicia:** Vice City y San Andreas (95), Metal Gear Solid 3 (94) y God of War II (93). Si quieren, es buen material para comentarios: "nombra tu GTA favorito".
+- **Sacrificios dolorosos por la regla de franquicia:** Vice City y San Andreas (95), Metal Gear Solid 3 (94), Tony Hawk's Pro Skater 4 (94) y God of War II (93). Si quieren, es buen material para comentarios: "nombra tu GTA favorito".
 - **Dos del top salieron en otras consolas despues** (God of War en PS3, Okami en Wii) y varios tuvieron remakes. Si hay un video aparte de remasters, es otro episodio.
-- **Cerca del corte (91):** Ratchet & Clank: Up Your Arsenal, Virtua Fighter 4 (94), Final Fantasy XII (92), Soulcalibur II (92). Si prefieren un RPG distinto a FFX, la alternativa es Final Fantasy XII.
+- **Ojo, esto lo detecte despues de armar la lista:** Virtua Fighter 4 (94) y SSX (93) no repiten franquicia ni son deporte anual, y sacan mas nota que Final Fantasy X (92) y Shadow of the Colossus (91). Quedaron fuera por legado (menos alcance que los otros diez), pero por regla pura de Metacritic entrarian. ¿Los dejamos fuera, o entra Virtua Fighter 4 en lugar de Final Fantasy X?
+- **Otros que tambien quedaron fuera por legado, sin repetir franquicia:** Prince of Persia: The Sands of Time (92), Soulcalibur II (92), Guitar Hero II (92), Guitar Hero (91), Ratchet & Clank: Up Your Arsenal (91), Twisted Metal: Black (91), Klonoa 2 (91) y Dead or Alive 2 Hardcore (91). Final Fantasy XII (92) esta fuera por repetir franquicia con FFX.
 
 ## Por confirmar antes de decirlo en camara
 

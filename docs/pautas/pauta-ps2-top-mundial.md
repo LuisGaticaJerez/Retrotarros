@@ -39,10 +39,10 @@ Ranking por consenso crítico y legado (nota Metacritic de la versión PS2), NO 
 ## Candidatos que quedaron fuera (para comentarios)
 
 - **GTA Vice City y San Andreas** (95 cada uno): misma franquicia que el #1.
-- **Metal Gear Solid 3** (94), **God of War II** (93), **Tony Hawk's Pro Skater 4** (94), **SSX 3** (93): franquicia repetida.
+- **Metal Gear Solid 3** (94), **God of War II** (93), **Tony Hawk's Pro Skater 4** (94), **Final Fantasy XII** (92): franquicia repetida.
 - **Resident Evil 4** (96 en PS2): ya está en el Top Mundial de GameCube.
 - **Madden NFL 2003** (95), Madden 2002 y 2004, NCAA Football 2004, NFL 2K3, Pro Evolution Soccer 2: deportes anuales.
-- **Virtua Fighter 4** (94), **Final Fantasy XII** (92), **Soulcalibur II** (92), **Ratchet & Clank: Up Your Arsenal** (91), **Jak and Daxter** (90), **Persona 4** (90) e **Ico** (90): quedaron bajo el corte de 91.
+- **Dejados fuera por criterio de legado** (nota igual o mayor que algún juego del top, sin repetir franquicia ni ser deporte): **Virtua Fighter 4** (94), **SSX** (93), **Prince of Persia: The Sands of Time** (92), **Soulcalibur II** (92), **Guitar Hero II** (92), **Guitar Hero** (91), **Ratchet & Clank: Up Your Arsenal** (91), **Twisted Metal: Black** (91), **Klonoa 2** (91) y **Dead or Alive 2 Hardcore** (91). Ojo: Virtua Fighter 4 y SSX tienen más nota que Final Fantasy X y Shadow of the Colossus; ver la discusión.
 
 ## Veredicto (slide 13)
 
