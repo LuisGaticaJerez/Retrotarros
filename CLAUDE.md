@@ -330,7 +330,7 @@ El PC del estudio Retrotarros consume el contenido desde Google Drive (`G:\Mi un
 G:\Mi unidad\Studio\
 ├── <slug>/<slug>.html              ← monitor visual
 ├── <slug>/img/<slug>/*.{jpg,png}   ← box arts / hardware
-├── Tools/TarroDL/                  ← TarroDL (descargador, clips y mosaicos) para otros PCs; LEEME.txt dentro
+├── Tools/TarroDL/                  ← TarroDL para otros PCs (lo publica su propio repo: D:\Recursos Retrotarros\TarroTools\TarroDL, `publicar-en-drive.ps1`)
 └── pautas/
     ├── pauta-<slug>.docx           ← pauta operativa convertida MD→DOCX
     └── discusion-<slug>.docx       ← documento de reunión convertido MD→DOCX

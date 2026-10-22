@@ -9,7 +9,7 @@
 - Formato nuevo **Infravalorados** (ranking de calidad, sin precios): `snes-infravalorados` (Tetris Attack #1) y `ps1-infravalorados` (Wipeout XL #1). Regla de Luis: la crítica pesa más que el olvido. Categoría `studio/rankings/infravalorados/`.
 - Syncs a Drive incrementales: `sync-to-drive.ps1 -Episodios <slug>,<slug>` (~6 s) y `sync-tarrobot-to-drive.ps1 -Rapido` (~2 s). El barrido completo tarda ~10 min.
 - `scripts/wiki_reception.py` (notas MC/GR desde Wikipedia) y `docs/modus-operandi/flujo-rankings.md` (recetas). **Estos dos archivos y los cambios de scripts de sync están commiteados en local, sin push (pedir el dale de Luis).**
-- TarroDL ya tiene la pestaña TarroMosaico (2 a 12 videos, largo y trozo elegibles).
+- **TarroDL se separó del repo del canal (2026-10-22):** vive en `D:\Recursos Retrotarros\TarroTools\TarroDL` (repo privado `github.com/LuisGaticaJerez/TarroDL`, 19 commits de historia conservados). Se publica en Drive con su `publicar-en-drive.ps1`. Luis quiere que `D:\Recursos Retrotarros\TarroTools\` agrupe las herramientas que se vayan separando (primero TarroDL; el resto, cuando él lo indique). Tiene la pestaña TarroMosaico (2 a 12 videos).
 
 **Pendientes:**
 1. Push de lo local + `sync-to-drive.ps1` y `sync-tarrobot-to-drive.ps1` (modo incremental o completo).
