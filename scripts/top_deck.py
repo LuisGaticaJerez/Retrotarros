@@ -132,20 +132,25 @@ def _pick_box_layout(data: dict, out_slug: str) -> str:
     return "alta" if tall > wide else "ancha"
 
 
-def _fit_box(it: dict, out_slug: str, layout: str):
-    """Tamano final de la caja: la imagen escalada (tambien hacia arriba) para entrar en BOX_MAX."""
+def _fit_dims(sz, chars: int, layout: str):
+    """Tamano final de la caja (w, h) para una imagen de tamano sz=(ancho, alto) o None, y un "por que" de `chars`
+    caracteres. La imagen se escala (tambien hacia arriba) para entrar en BOX_MAX.
+    El "por que" crece hacia ARRIBA (queda anclado abajo, en y=988 a 1920x1080): un texto largo se mete
+    bajo la caja. Estimado medido: ~42 caracteres por linea de 45 px + ~60 px de etiqueta; la caja no puede
+    pasar de lo que deja libre (fila empieza en y=182, hueco de 26 px y 32 px para la etiqueta de consola y margen)."""
     mw, mh = BOX_MAX[layout]
-    # El "por que" crece hacia ARRIBA (queda anclado abajo, en y=988 a 1920x1080): un texto largo se mete
-    # bajo la caja. Estimado medido: ~42 caracteres por linea de 45 px + ~60 px de etiqueta; la caja no puede
-    # pasar de lo que deja libre (fila empieza en y=182, hueco de 26 px y 32 px para la etiqueta de consola y margen).
-    chars = len(re.sub(r"<[^>]+>", "", it.get("why", "")))
     why_h = 60 + 45 * -(-chars // 42)
     mh = max(260, min(mh, 988 - 182 - 26 - 32 - why_h))
-    sz = _img_size(it, out_slug)
     if not sz:
         return (int(mh * 0.72), mh) if layout == "alta" else (min(mw, int(mh / 0.75)), min(mh, int(mw * 0.75)))
     k = min(mw / sz[0], mh / sz[1])
     return int(sz[0] * k), int(sz[1] * k)
+
+
+def _fit_box(it: dict, out_slug: str, layout: str):
+    """Tamano final de la caja de un item (ver _fit_dims)."""
+    chars = len(re.sub(r"<[^>]+>", "", it.get("why", "")))
+    return _fit_dims(_img_size(it, out_slug), chars, layout)
 
 
 def _cart(it: dict, consola: str, box_wh=None) -> str:

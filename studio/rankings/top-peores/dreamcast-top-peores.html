@@ -148,6 +148,18 @@ body.read-mode .read-indicator{display:block}
 .divider .pre{font-size:22px !important;letter-spacing:5px !important}
 .divider .sub{font-size:34px !important;line-height:1.5 !important;max-width:1500px !important;letter-spacing:1px !important}
 .portada .ep-sub{font-size:34px !important}
+.slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
+.slide-hybrid.box-ancha .cart-wrap{align-self:start !important;justify-content:flex-start !important;height:auto !important}
+.slide-hybrid.box-ancha .cart{width:var(--bw) !important;height:var(--bh) !important;max-height:none !important;aspect-ratio:auto !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
+.slide-hybrid.box-ancha .cart::before{display:none !important}
+.slide-hybrid.box-ancha .cart-img-wrap{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;background:none !important;box-shadow:none !important;overflow:visible !important}
+.slide-hybrid.box-ancha .cart-img-wrap img.cart-img-bg{display:none !important}
+.slide-hybrid.box-ancha .cart-img-wrap img:not(.cart-img-bg){width:100% !important;height:100% !important;object-fit:fill !important;border-radius:6px;box-shadow:0 0 0 2px var(--cy),0 0 34px rgba(0,229,255,.35),0 18px 40px rgba(0,0,0,.65)}
+.slide-hybrid.box-ancha .cart-fallback{border-radius:6px;box-shadow:0 0 0 2px var(--cy),0 0 34px rgba(0,229,255,.35),0 18px 40px rgba(0,0,0,.65)}
+.slide-hybrid.box-ancha .cart-console{position:absolute !important;top:100% !important;bottom:auto !important;left:0 !important;transform:none !important;margin-top:8px;font-size:11px !important;color:rgba(255,255,255,.45) !important}
+.slide-hybrid.box-ancha .hybrid-title{align-self:center !important}
+.slide-hybrid.box-ancha .game-title{font-size:44px !important;line-height:1.05 !important}
+.slide-hybrid.box-ancha .game-meta{font-size:21px !important}
 </style>
 </head>
 <body>
@@ -182,10 +194,10 @@ body.read-mode .read-indicator{display:block}
 
   <section class="slide">
     <span class="slide-num">03</span>
-    <div class="slide-hybrid">
+    <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">NOTA 46%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
+        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-peores/death-crimson-ox.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-peores/death-crimson-ox.jpg" alt="DEATH CRIMSON OX box art"></div>
           <div class="cart-console">Dreamcast</div>
         </div></div>
@@ -202,10 +214,10 @@ body.read-mode .read-indicator{display:block}
 
   <section class="slide">
     <span class="slide-num">04</span>
-    <div class="slide-hybrid">
+    <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">NOTA 45%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
+        <div class="cart-wrap"><div class="cart" style="--bw:342px;--bh:330px">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-peores/south-park-rally.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-peores/south-park-rally.jpg" alt="SOUTH PARK RALLY box art"></div>
           <div class="cart-console">Dreamcast</div>
         </div></div>
@@ -222,10 +234,10 @@ body.read-mode .read-indicator{display:block}
 
   <section class="slide">
     <span class="slide-num">05</span>
-    <div class="slide-hybrid">
+    <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">NOTA 40%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
+        <div class="cart-wrap"><div class="cart" style="--bw:332px;--bh:330px">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-peores/ducati-world-racing-challenge.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-peores/ducati-world-racing-challenge.jpg" alt="DUCATI WORLD: RACING CHALLENGE box art"></div>
           <div class="cart-console">Dreamcast</div>
         </div></div>
@@ -242,10 +254,10 @@ body.read-mode .read-indicator{display:block}
 
   <section class="slide">
     <span class="slide-num">06</span>
-    <div class="slide-hybrid">
+    <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">NOTA 38%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
+        <div class="cart-wrap"><div class="cart" style="--bw:335px;--bh:330px">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-peores/ecw-anarchy-rulz.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-peores/ecw-anarchy-rulz.jpg" alt="ECW ANARCHY RULZ box art"></div>
           <div class="cart-console">Dreamcast</div>
         </div></div>
@@ -262,10 +274,10 @@ body.read-mode .read-indicator{display:block}
 
   <section class="slide">
     <span class="slide-num">07</span>
-    <div class="slide-hybrid">
+    <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">EN 2 LISTAS</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
+        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-peores/slave-zero.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-peores/slave-zero.jpg" alt="SLAVE ZERO box art"></div>
           <div class="cart-console">Dreamcast</div>
         </div></div>
@@ -282,10 +294,10 @@ body.read-mode .read-indicator{display:block}
 
   <section class="slide">
     <span class="slide-num">08</span>
-    <div class="slide-hybrid">
+    <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">EN 2 LISTAS</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
+        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-peores/spec-ops-ii-omega-squad.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-peores/spec-ops-ii-omega-squad.jpg" alt="SPEC OPS II: OMEGA SQUAD box art"></div>
           <div class="cart-console">Dreamcast</div>
         </div></div>
@@ -302,10 +314,10 @@ body.read-mode .read-indicator{display:block}
 
   <section class="slide">
     <span class="slide-num">09</span>
-    <div class="slide-hybrid">
+    <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">EN 2 LISTAS</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
+        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-peores/nightmare-creatures-ii.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-peores/nightmare-creatures-ii.jpg" alt="NIGHTMARE CREATURES II box art"></div>
           <div class="cart-console">Dreamcast</div>
         </div></div>
@@ -322,10 +334,10 @@ body.read-mode .read-indicator{display:block}
 
   <section class="slide">
     <span class="slide-num">10</span>
-    <div class="slide-hybrid">
+    <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">EN 2 LISTAS</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
+        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-peores/jeremy-mcgrath-supercross-2000.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-peores/jeremy-mcgrath-supercross-2000.jpg" alt="JEREMY MCGRATH SUPERCROSS 2000 box art"></div>
           <div class="cart-console">Dreamcast</div>
         </div></div>
@@ -342,10 +354,10 @@ body.read-mode .read-indicator{display:block}
 
   <section class="slide">
     <span class="slide-num">11</span>
-    <div class="slide-hybrid">
+    <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">EN 3 LISTAS</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
+        <div class="cart-wrap"><div class="cart" style="--bw:328px;--bh:330px">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-peores/urban-chaos.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-peores/urban-chaos.jpg" alt="URBAN CHAOS box art"></div>
           <div class="cart-console">Dreamcast</div>
         </div></div>
@@ -362,10 +374,10 @@ body.read-mode .read-indicator{display:block}
 
   <section class="slide">
     <span class="slide-num">12</span>
-    <div class="slide-hybrid">
+    <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">EN 4 LISTAS</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart">
+        <div class="cart-wrap"><div class="cart" style="--bw:337px;--bh:330px">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-peores/spirit-of-speed-1937.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-peores/spirit-of-speed-1937.jpg" alt="SPIRIT OF SPEED 1937 box art"></div>
           <div class="cart-console">Dreamcast</div>
         </div></div>
