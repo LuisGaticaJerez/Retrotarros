@@ -50,4 +50,4 @@ Medimos el contexto con `get_usage` (la herramienta de uso de sesión) al cerrar
 2. Si vas a un episodio, leer su `docs/pautas/pauta-{slug}.md` y `docs/discusiones/discusion-{slug}.md`.
 3. Antes de generar contenido nuevo, confirmar con Luis qué se ataca. Trabajar de a un ranking por sesión (las sesiones largas se vuelven lentas).
 
-*Última actualización: 2026-10-22 (PS2 y Xbox Top Mundial armados; SNES Top Peores con cartucho grande; NES, Atari 2600 y Mega Drive Top Peores con notas de 3 minutos (SNES no se toca, ya grabado); regla pendiente en los demás Top Peores sin grabar; Wii Top Mundial pendiente)*
+*Última actualización: 2026-10-22 (notas de 3 minutos hechas en NES, Atari 2600 y Mega Drive Top Peores; SNES no se toca por estar grabado; siguen PS1, Game Boy, Dreamcast, Saturn y GameCube)*
