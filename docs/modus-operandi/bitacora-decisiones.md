@@ -142,3 +142,7 @@
 - **SNES Top Peores queda fuera:** Luis confirmó el 2026-10-22 que ya está grabado; el encargo inicial de ampliarlo se canceló (el HTML y el driver no se tocaron).
 - **Hechos con notas largas (commit local, sin push):** NES, Atari 2600 y Mega Drive Top Peores. Siguen PS1, Game Boy, Dreamcast, Saturn y GameCube (N64 está publicado: no se toca).
 - **Hallazgos de fuentes:** Nintendo Power 100 (sept. 1997), de peor a menos peor: Bebe's Kids, Barbie: Super Model, Shaq Fu, AD&D Heroes of the Lance, Pit-Fighter, Friday the 13th, Michael Jordan: Chaos in the Windy City, Beethoven's 2nd, Color a Dinosaur y The Adventures of Bullwinkle (transcripción de DeviantArt y NintendoWiki; la primera fuente es indirecta). Digital Press 1991 pone Star Fox #7 aunque Wikipedia diga 19; Spider Droid (#6) es el mismo Amidar (#2).
+
+## 2026-10-22 — Criterio de tokens por sesión duplicado
+- **Decisión de Luis:** 300.000 le parecía muy poco. El criterio pasa a: menos de 600.000 se sigue con el siguiente ranking; 600.000 a 800.000 se termina el ranking en curso y se cierra; más de 800.000 se cambia de sesión tras cerrar. Actualizado en `HANDOFF.md`, `.claude/skills/cierre/SKILL.md` y `flujo-rankings.md`. La nota de "sesiones cortas" de ~400.000 de la entrada del 2026-10-21 queda como observación histórica.
+- **Idioma:** recordatorio de Luis de que el español debe ser chileno neutro con tuteo; nunca voseo ni argentinismos. Regla ya vigente en `CLAUDE.md`; reforzada en la memoria.

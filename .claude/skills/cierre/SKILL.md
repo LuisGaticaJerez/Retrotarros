@@ -1,6 +1,6 @@
 ---
 name: cierre
-description: Ritual de cierre de un ranking o tanda de trabajo del canal Retrotarros. Mide el contexto, deja HANDOFF.md, bitacora, arco y memoria al dia, hace el commit local, ofrece push y syncs a Drive (solo con el dale de Luis) y abre la sesion siguiente con un resumen. Usar al terminar un ranking, al llegar a 300.000 tokens de contexto, o cuando Luis diga "cierra", "cierre" o "/cierre".
+description: Ritual de cierre de un ranking o tanda de trabajo del canal Retrotarros. Mide el contexto, deja HANDOFF.md, bitacora, arco y memoria al dia, hace el commit local, ofrece push y syncs a Drive (solo con el dale de Luis) y abre la sesion siguiente con un resumen. Usar al terminar un ranking, al llegar a 600.000 tokens de contexto, o cuando Luis diga "cierra", "cierre" o "/cierre".
 ---
 
 # Cierre de sesion (Retrotarros)
@@ -9,7 +9,7 @@ Objetivo: que lo decidido quede escrito en archivos y la proxima sesion arranque
 
 ## Pasos (en orden)
 
-1. **Medir el contexto.** Llamar a `mcp__ccd_session_mgmt__get_usage` (cargarla con ToolSearch si esta diferida). Reportar a Luis: tokens usados, porcentaje, y los limites del plan (5 horas y semanal). Criterio de `HANDOFF.md`: menos de 300.000 sigue el siguiente ranking aqui; 300.000 a 400.000 se cierra el ranking en curso y se abre sesion nueva; mas de 400.000 se abre sesion nueva despues de cerrar. Si el limite de 5 horas pasa de 85 %, avisar.
+1. **Medir el contexto.** Llamar a `mcp__ccd_session_mgmt__get_usage` (cargarla con ToolSearch si esta diferida). Reportar a Luis: tokens usados, porcentaje, y los limites del plan (5 horas y semanal). Criterio de `HANDOFF.md`: menos de 600.000 sigue el siguiente ranking aqui; 600.000 a 800.000 se cierra el ranking en curso y se abre sesion nueva; mas de 800.000 se abre sesion nueva despues de cerrar (Luis duplico el criterio el 2026-10-22). Si el limite de 5 horas pasa de 85 %, avisar.
 2. **Revisar el estado de git.** `git status -sb` y `git log origin/master..HEAD --oneline`. Informar commits sin pushear. En un worktree `.git` es un archivo: escribir el mensaje del commit en un archivo del scratchpad y usar `git commit -F`.
 3. **Dejar los archivos al dia:**
    - `HANDOFF.md`: estado actual, pendientes (quitar lo hecho), decisiones vigentes y fecha de "Ultima actualizacion". Es el unico archivo de "estado"; no duplicar estado en otros.

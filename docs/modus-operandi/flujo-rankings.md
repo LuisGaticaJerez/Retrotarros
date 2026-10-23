@@ -59,4 +59,4 @@ Ranking de **calidad**, sin precios. Categoría de salida `studio/rankings/infra
 - **Claude in Chrome:** si el tab se pierde, `tabs_context_mcp` con `createIfEmpty: true`. La verificación "Un momento…" de Cloudflare en PriceCharting se resuelve sola esperando unos segundos; no se resuelve a mano ni se evade.
 - **Wikipedia:** pausa de 1 s entre pedidos (429).
 - **Heredoc de Python en Bash** con `from X import ...` y caracteres especiales: preferir escribir el script en un archivo.
-- **Sesiones largas:** a partir de ~400.000 tokens de contexto cada paso se vuelve lento. Cerrar la sesión y seguir en una nueva leyendo `HANDOFF.md`.
+- **Sesiones largas:** el criterio para cerrar es el de `HANDOFF.md` (seguir bajo 600.000 tokens; ver "Cuándo cambiar de sesión"). Al cerrar, seguir en una nueva leyendo `HANDOFF.md`.
