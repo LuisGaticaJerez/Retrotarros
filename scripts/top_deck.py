@@ -86,8 +86,71 @@ def _auto_img(it: dict, out_slug: str) -> None:
         it["img"] = f"img/{out_slug}/{_slug(it['title'])}.jpg"
 
 
-def _cart(it: dict, consola: str) -> str:
-    """Cartucho con etiqueta de color (cart-fallback) o imagen si hay 'img'."""
+# --- Layouts de caja (Luis 2026-10-23) -------------------------------------------------
+# Antes la caja iba siempre dentro de un marco de cartucho horizontal (5:4, max 440 px): una caja
+# vertical quedaba de ~150x215 px con fondo borroso a los lados, ilegible en la TV. Ahora hay tres modos:
+#   "alta"    -> cajas verticales (alto/ancho >= 1.15): caja grande (hasta 340x420) AL LADO del titulo.
+#   "ancha"   -> cajas cuadradas u horizontales: caja hasta 440x330 al lado del titulo.
+#   "clasica" -> el marco de cartucho de siempre (rankings ya grabados o publicados).
+# data["box_layout"] = "auto" (por defecto: la mayoria de las cajas del ranking decide) | "alta" | "ancha" | "clasica".
+# En los dos nuevos la caja va sin marco ni fondo borroso, con borde cyan; el TarroVision y el
+# texto del "por que" no cambian. El titulo queda centrado verticalmente respecto de la caja.
+BOX_MAX = {"alta": (340, 420), "ancha": (440, 330)}
+
+
+def _img_size(it: dict, out_slug: str):
+    """(ancho, alto) en px de la imagen de caja del item, o None."""
+    if not it.get("img"):
+        return None
+    f = REPO / "studio" / episode_category(out_slug) / it["img"]
+    try:
+        from PIL import Image
+        with Image.open(f) as im:
+            return im.size
+    except Exception:
+        return None
+
+
+def _pick_box_layout(data: dict, out_slug: str) -> str:
+    want = data.get("box_layout", "auto")
+    if want in ("alta", "ancha", "clasica"):
+        return want
+    items = list(data.get("items", [])) + list(data.get("rarezas", []))
+    if data.get("grial"):
+        items.append(data["grial"])
+    tall = wide = 0
+    for it in items:
+        sz = _img_size(it, out_slug)
+        if not sz:
+            continue
+        if sz[1] / sz[0] >= 1.15:
+            tall += 1
+        else:
+            wide += 1
+    if tall + wide == 0:
+        return "clasica"
+    return "alta" if tall > wide else "ancha"
+
+
+def _fit_box(it: dict, out_slug: str, layout: str):
+    """Tamano final de la caja: la imagen escalada (tambien hacia arriba) para entrar en BOX_MAX."""
+    mw, mh = BOX_MAX[layout]
+    # El "por que" crece hacia ARRIBA (queda anclado abajo, en y=988 a 1920x1080): un texto largo se mete
+    # bajo la caja. Estimado medido: ~42 caracteres por linea de 45 px + ~60 px de etiqueta; la caja no puede
+    # pasar de lo que deja libre (fila empieza en y=182, hueco de 26 px y 32 px para la etiqueta de consola y margen).
+    chars = len(re.sub(r"<[^>]+>", "", it.get("why", "")))
+    why_h = 60 + 45 * -(-chars // 42)
+    mh = max(260, min(mh, 988 - 182 - 26 - 32 - why_h))
+    sz = _img_size(it, out_slug)
+    if not sz:
+        return (int(mh * 0.72), mh) if layout == "alta" else (min(mw, int(mh / 0.75)), min(mh, int(mw * 0.75)))
+    k = min(mw / sz[0], mh / sz[1])
+    return int(sz[0] * k), int(sz[1] * k)
+
+
+def _cart(it: dict, consola: str, box_wh=None) -> str:
+    """Cartucho con etiqueta de color (cart-fallback) o imagen si hay 'img'.
+    box_wh=(w, h): tamano de la caja en los layouts "alta"/"ancha" (variables CSS --bw/--bh)."""
     lb = it.get("lb", "lb-default")
     if it.get("img"):
         img = it["img"]
@@ -97,7 +160,8 @@ def _cart(it: dict, consola: str) -> str:
         sub = it.get("fallback_sub", consola)
         body = (f'<div class="cart-img-wrap {lb}"><div class="cart-fallback">'
                 f'<div class="title">{it["title"]}</div><div class="sub">{sub}</div></div></div>')
-    return ('<div class="cart">\n'
+    style = f' style="--bw:{box_wh[0]}px;--bh:{box_wh[1]}px"' if box_wh else ""
+    return (f'<div class="cart"{style}>\n'
             f'          {body}\n'
             f'          <div class="cart-console">{consola}</div>\n'
             '        </div>')
@@ -145,18 +209,20 @@ def _right(it: dict) -> str:
     return f'<div class="game-block-label {color}">{label}</div>'
 
 
-def _slide_item(num: int, it: dict, consola: str, ch: int | None = None) -> str:
+def _slide_item(num: int, it: dict, consola: str, ch: int | None = None, box: str = "clasica", out_slug: str = "") -> str:
     ch = ch if ch is not None else it.get("pos", 1)
     meta = it.get("meta") or " · ".join(
         str(x) for x in [consola, it.get("ano"), (it.get("editor") or "").upper()] if x)
     head = _left(it) + _right(it)
+    box_cls = "" if box == "clasica" else f" box-{box}"
+    box_wh = None if box == "clasica" else _fit_box(it, out_slug, box)
     return (
         '  <section class="slide">\n'
         f'    <span class="slide-num">{num:02d}</span>\n'
-        '    <div class="slide-hybrid">\n'
+        f'    <div class="slide-hybrid{box_cls}">\n'
         f'      <div class="hybrid-head">{head}</div>\n'
         '      <div class="hybrid-body">\n'
-        f'        <div class="cart-wrap">{_cart(it, consola)}</div>\n'
+        f'        <div class="cart-wrap">{_cart(it, consola, box_wh)}</div>\n'
         f'        <div class="tv-wrap">{_tv(ch)}</div>\n'
         '      </div>\n'
         f'      <div class="hybrid-title"><div class="game-title">{it["title"]}</div><div class="game-meta">{meta}</div></div>\n'
@@ -217,7 +283,35 @@ def _tv_css() -> str:
     )
 
 
-def _shared_css(tv_grande: bool = False, cart_px: int | None = None, extra_css: str = "") -> str:
+def _box_css(box: str) -> str:
+    """CSS de los layouts de caja "alta" y "ancha" (ver BOX_MAX). Vacio para "clasica"."""
+    if box not in BOX_MAX:
+        return ""
+    c = f".slide-hybrid.box-{box}"
+    tsz, msz = (48, 22) if box == "alta" else (44, 21)
+    return (
+        f"{c}{{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;"
+        "grid-template-areas:\"head head head\" \"cart title tv\" \"why why tv\" !important;"
+        "gap:26px 40px !important;max-width:1800px !important}\n"
+        f"{c} .cart-wrap{{align-self:start !important;justify-content:flex-start !important;height:auto !important}}\n"
+        f"{c} .cart{{width:var(--bw) !important;height:var(--bh) !important;max-height:none !important;aspect-ratio:auto !important;"
+        "background:none !important;box-shadow:none !important;border-radius:0 !important}\n"
+        f"{c} .cart::before{{display:none !important}}\n"
+        f"{c} .cart-img-wrap{{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;"
+        "background:none !important;box-shadow:none !important;overflow:visible !important}\n"
+        f"{c} .cart-img-wrap img.cart-img-bg{{display:none !important}}\n"
+        f"{c} .cart-img-wrap img:not(.cart-img-bg){{width:100% !important;height:100% !important;object-fit:fill !important;"
+        "border-radius:6px;box-shadow:0 0 0 2px var(--cy),0 0 34px rgba(0,229,255,.35),0 18px 40px rgba(0,0,0,.65)}\n"
+        f"{c} .cart-fallback{{border-radius:6px;box-shadow:0 0 0 2px var(--cy),0 0 34px rgba(0,229,255,.35),0 18px 40px rgba(0,0,0,.65)}}\n"
+        f"{c} .cart-console{{position:absolute !important;top:100% !important;bottom:auto !important;left:0 !important;"
+        "transform:none !important;margin-top:8px;font-size:11px !important;color:rgba(255,255,255,.45) !important}\n"
+        f"{c} .hybrid-title{{align-self:center !important}}\n"
+        f"{c} .game-title{{font-size:{tsz}px !important;line-height:1.05 !important}}\n"
+        f"{c} .game-meta{{font-size:{msz}px !important}}\n"
+    )
+
+
+def _shared_css(tv_grande: bool = False, cart_px: int | None = None, extra_css: str = "", box: str = "clasica") -> str:
     """CSS inyectado en todo episodio generado con generar_top(): precio grande,
     capa de notas de lectura (teleprompter, tecla N), letras mas grandes para TV,
     y el layout de enfasis en el gameplay. Extraida a funcion propia (Luis
@@ -286,6 +380,7 @@ def _shared_css(tv_grande: bool = False, cart_px: int | None = None, extra_css: 
         ".game-why{grid-area:why;max-width:none}\n"
         + (_tv_css() if tv_grande else "")
         + (f".cart{{width:min(100%,{int(cart_px)}px) !important}}\n" if cart_px else "")
+        + _box_css(box)
         + extra_css
         + "</style>\n</head>"
     )
@@ -307,7 +402,10 @@ def generar_top(data: dict, out_slug: str) -> Path:
     # duplicado porque BASE ya tenia su propia copia inyectada).
     if _SHARED_CSS_BLOCK_RE.search(head):
         head = _SHARED_CSS_BLOCK_RE.sub("</head>", head, count=1)
-    head = head.replace("</head>", _shared_css(bool(data.get("tv_grande", True)), data.get("cart_px"), data.get("css_extra", "")), 1)
+    for _it in list(data.get("items", [])) + list(data.get("rarezas", [])) + ([data["grial"]] if data.get("grial") else []):
+        _auto_img(_it, out_slug)
+    box = _pick_box_layout(data, out_slug)
+    head = head.replace("</head>", _shared_css(bool(data.get("tv_grande", True)), data.get("cart_px"), data.get("css_extra", ""), box), 1)
     head += '\n<div class="read-indicator">● MODO LECTURA (N)</div>\n'
 
     consola = data.get("consola", "NES")
@@ -317,7 +415,7 @@ def generar_top(data: dict, out_slug: str) -> Path:
     slides.append(_slide_divider(n, data["intro"])); n += 1
     for it in data["items"]:           # ya ordenados #10 -> #1
         _auto_img(it, out_slug)
-        slides.append(_slide_item(n, it, consola)); n += 1
+        slides.append(_slide_item(n, it, consola, box=box, out_slug=out_slug)); n += 1
     # Apartado RAREZAS (variantes / no-retail) - opcional
     ch = 1
     if data.get("rarezas"):
@@ -325,12 +423,12 @@ def generar_top(data: dict, out_slug: str) -> Path:
             slides.append(_slide_divider(n, data["rarezas_divider"])); n += 1
         for it in data["rarezas"]:
             _auto_img(it, out_slug)
-            slides.append(_slide_item(n, it, consola, ch=ch)); n += 1; ch += 1
+            slides.append(_slide_item(n, it, consola, ch=ch, box=box, out_slug=out_slug)); n += 1; ch += 1
     # SANTO GRIAL - opcional (slide unico)
     if data.get("grial"):
         g = dict(data["grial"]); g["grial"] = True
         _auto_img(g, out_slug)
-        slides.append(_slide_item(n, g, consola, ch=ch)); n += 1
+        slides.append(_slide_item(n, g, consola, ch=ch, box=box, out_slug=out_slug)); n += 1
     slides.append(_slide_divider(n, data["analisis"])); n += 1
     slides.append(_slide_divider(n, data["cliffhanger"])); n += 1
 

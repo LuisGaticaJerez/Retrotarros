@@ -146,3 +146,7 @@
 ## 2026-10-22 — Criterio de tokens por sesión duplicado
 - **Decisión de Luis:** 300.000 le parecía muy poco. El criterio pasa a: menos de 600.000 se sigue con el siguiente ranking; 600.000 a 800.000 se termina el ranking en curso y se cierra; más de 800.000 se cambia de sesión tras cerrar. Actualizado en `HANDOFF.md`, `.claude/skills/cierre/SKILL.md` y `flujo-rankings.md`. La nota de "sesiones cortas" de ~400.000 de la entrada del 2026-10-21 queda como observación histórica.
 - **Idioma:** recordatorio de Luis de que el español debe ser chileno neutro con tuteo; nunca voseo ni argentinismos. Regla ya vigente en `CLAUDE.md`; reforzada en la memoria.
+
+## 2026-10-23 — Cajas grandes en los rankings (layouts alta y ancha)
+- **Decisión de Luis:** las cajas verticales (la mayoría desde la generación 5) se veían chicas en la TV porque iban dentro de un marco de cartucho horizontal. Ahora la caja va grande al lado del título (`alta`: hasta 340x420; `ancha` para cuadradas u horizontales: hasta 440x330), con el título centrado respecto de la caja. Luis pidió además la variante para cajas cuadradas u horizontales. De 343 imágenes de rankings, 179 son verticales, 88 cuadradas y 76 horizontales.
+- **Alcance:** solo rankings nuevos o reforjados. Los ya grabados o publicados se regeneran con `"box_layout": "clasica"`. Implementado en `scripts/top_deck.py` (`_pick_box_layout`, `_fit_box`, `_box_css`); verificado a 1920x1080 en los Top Peores de PS1, Game Boy, Dreamcast, Saturn, NES y GameCube sin solapes.
