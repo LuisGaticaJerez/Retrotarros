@@ -135,3 +135,10 @@
 - **Regla de Luis (2026-10-20): en Infravalorados pesa más la crítica que el olvido.** Se ordena por nota (Metacritic, o GameRankings si no hay); el olvido solo desempata. Tono siempre positivo.
 - **Syncs incrementales (2026-10-21):** `sync-to-drive.ps1 -Episodios <slug>` y `sync-tarrobot-to-drive.ps1 -Rapido` (de ~11 min a segundos). El barrido completo sigue disponible sin parámetros.
 - **Sesiones cortas:** a ~400.000 tokens de contexto cada paso se vuelve lento. Se trabaja un ranking por sesión y el estado vive en `HANDOFF.md` y `flujo-rankings.md`, no en el historial.
+
+## 2026-10-22 — Notas ocultas de 3 minutos en los Top Peores sin grabar
+
+- **Regla de Luis:** cada juego de un ranking sin publicar ni grabar lleva notas ocultas (tecla N) con material para hablar al menos 3 minutos (450 a 550 palabras). Humor al juego, cada dato cruzado con 2 fuentes y lo no confirmado marcado "por confirmar".
+- **SNES Top Peores queda fuera:** Luis confirmó el 2026-10-22 que ya está grabado; el encargo inicial de ampliarlo se canceló (el HTML y el driver no se tocaron).
+- **Hechos con notas largas (commit local, sin push):** NES, Atari 2600 y Mega Drive Top Peores. Siguen PS1, Game Boy, Dreamcast, Saturn y GameCube (N64 está publicado: no se toca).
+- **Hallazgos de fuentes:** Nintendo Power 100 (sept. 1997), de peor a menos peor: Bebe's Kids, Barbie: Super Model, Shaq Fu, AD&D Heroes of the Lance, Pit-Fighter, Friday the 13th, Michael Jordan: Chaos in the Windy City, Beethoven's 2nd, Color a Dinosaur y The Adventures of Bullwinkle (transcripción de DeviantArt y NintendoWiki; la primera fuente es indirecta). Digital Press 1991 pone Star Fox #7 aunque Wikipedia diga 19; Spider Droid (#6) es el mismo Amidar (#2).

@@ -134,3 +134,14 @@ Redoble de bateria de Coco para la revelacion. Remate: el mismo programador del 
 - Archivos para armar: miniatura (collage de cajas con texto "LOS 10 PEORES · ATARI 2600").
 
 > Fuente de verdad de los datos: este documento. HTML: `studio/rankings/top-peores/atari-2600-top-peores.html`.
+
+## Ampliacion de las notas ocultas (2026-10-22, regla de 3 minutos por juego)
+
+Las notas de la tecla N de los 10 juegos pasaron de unas 150 a 400-640 palabras (desarrollo, mecanicas, recepcion por lista, empresa, anecdotas y cue). Fuentes nuevas cruzadas: Wikipedia de cada juego y de Data Age, Xonox, Tigervision, U.S. Games, Warshaw y el crash de 1983; el articulo original de Digital Press (1991); Orphaned Computers (1998); theLogBook (Fire Fly). Hallazgos para cuidar al aire:
+
+- **Star Fox (#7):** Wikipedia dice que Digital Press lo ubico 19; el articulo original de 1991 trae un top 10 y lo pone #7 (fuente primaria, es la que usamos).
+- **Amidar (#9) y Spider Droid:** Digital Press pone Amidar #2 y Spider Droid #6; segun Wikipedia, Spiderdroid (Froggo, 1987) es el mismo Amidar del 2600 con otro nombre. Dato para la cuna.
+- **Fire Fly (#4):** se desarrollo con el nombre 'Night Flight' (registro de copyright citado por theLogBook).
+- **Karate (#3):** Digital Press lo reviso (version Froggo) pero no lo puso en su top 10; en el episodio cuenta por Creative Loafing y CBR.
+- **E.T. (#1):** 728.000 cartuchos de varios juegos en el vertedero segun James Heller, y solo el 10% de los ~1.300 recuperados eran E.T. (documental Atari: Game Over); las cifras de produccion y devoluciones varian por fuente: decir 'segun la fuente'.
+- **Por confirmar:** programador de Chuck Norris Superkicks (Rebecca Heineman, una sola fuente) y el diseñador real de Karate.
