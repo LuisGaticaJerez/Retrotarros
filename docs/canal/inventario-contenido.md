@@ -28,6 +28,10 @@
 > **Verificación con la API de YouTube: 2026-10-21** (85 publicados + 1 programado). Se publicó
 > la reseña de Mighty Morphin Power Rangers (mar 20 oct, 20:30); Montezuma's Revenge pasó a jueves 22 oct. Se
 > sumó al conteo el Infravalorados de SNES (armado, sin publicar).
+>
+> **Verificación con la API de YouTube: 2026-10-26** (87 publicados + 0 programados). Desde la
+> última vez se publicaron Montezuma's Revenge (jue 22 oct, 20:30) y SNES Top Peores (dom 25
+> oct, 20:30). Nada programado: el próximo hueco del calendario (martes 27) está libre.
 
 ## Cómo leer esto
 
@@ -46,14 +50,14 @@
 
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
-| Reseñas | 44 | 27 | 1 | 16 |
-| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube + Infravalorados SNES) | 37 | 17 | 0 | 20 |
+| Reseñas | 44 | 28 | 0 | 16 |
+| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube + Infravalorados SNES) | 37 | 18 | 0 | 19 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
 | RetroNotas | 2 | 0 | 0 | 2 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **109** | **51** | **1** | **57** |
+| **TOTAL** | **109** | **53** | **0** | **56** |
 
 Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
@@ -62,17 +66,19 @@ se contaron los 2 de Atari 8-bit (armados, sin publicar), los 10 Top Peores y el
 
 ---
 
-### 1.1 Programados (leídos de YouTube con la API, 2026-10-21)
+### 1.1 Programados (leídos de YouTube con la API, 2026-10-26)
 
 **Calendario de publicación: martes, jueves y domingo a las 20:30 (hora de Chile).** Se actualiza solo los lunes, miércoles y viernes (el día siguiente) con `scripts/youtube_estado.py` (datos en `data/youtube/estado-canal.json`). **Un video programado ya está grabado: no tocar su HTML ni sus textos.**
 
 | Publicación (hora de Chile) | Título | Contenido del repo |
 |---|---|---|
-| Jue 22 oct 2026, 20:30 | Montezuma's Revenge: el Atari que hoy entrena inteligencias artificiales \| RetroReseñas | `resena-montezumas-revenge-pedido` |
+| (nada programado) | Montezuma's Revenge se publicó el jue 22 oct y SNES Top Peores el dom 25 oct | |
 
-**Grabado y todavía sin fecha de publicación (confirmado por Luis 2026-10-14, NO tocar su HTML ni sus textos):** Top Peores de SNES (`snes-top-peores`). La reseña de Mighty Morphin Power Rangers ya se publicó el 2026-10-20. Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
+**Grabado y todavía sin fecha de publicación:** nada conocido a 2026-10-26 (SNES Top Peores se publicó el 25 oct; confirmar con Luis si hay algo grabado que no esté en YouTube). La reseña de Mighty Morphin Power Rangers se publicó el 2026-10-20. Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
 
 Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09).
+
+**Retiro del estudio 2026-10-26:** se retiró la reseña de Montezuma's Revenge (HTML, capturas, imágenes, kit y carpeta del Drive).
 
 **Retiro del estudio 2026-10-21:** se retiraron la reseña de Mighty Morphin Power Rangers, las 4 Colecciones (N64, NES, SNES, PS Vita) y la saga Zelda, con HTML, capturas, imágenes, kits de YouTube y discusiones (repo y Drive); se conservan las pautas y los shorts. **Los Rankings publicados (Top Mundial, Top Precios, Top Peores) NO se retiran hasta hacer los "reforge" (decisión de Luis 2026-10-21).**
 
@@ -80,8 +86,8 @@ Tras la publicación, esos HTML y kits se retiran del estudio como el resto de l
 
 ### 1.2 Publicados (26 + Abriendo el Tarro + 2 G-OLD, más las Reseñas nuevas de abajo)
 
-**Reseñas (27) — API de YouTube 2026-10-21, del más reciente al más antiguo:**
-Mighty Morphin Power Rangers (pedida), Melee (pedida), Metal Warriors (pedida), Worms Armageddon (pedida), Samurai Shodown (pedida), Doom (pedida), King of Fighters '94,
+**Reseñas (28) — API de YouTube 2026-10-26, del más reciente al más antiguo:**
+Montezuma's Revenge (pedida), Mighty Morphin Power Rangers (pedida), Melee (pedida), Metal Warriors (pedida), Worms Armageddon (pedida), Samurai Shodown (pedida), Doom (pedida), King of Fighters '94,
 Battletoads, Super Mario World, Street Fighter II, Golden Axe, Metal Gear Solid (pedida),
 Chrono Trigger, The Legend of Zelda (pedida), Cadillacs and Dinosaurs (pedida), Jewel Master
 (pedida), Top Gear (pedida), Pokémon Rojo/Azul (pedida), Zombies Ate My Neighbors, Super
@@ -90,10 +96,10 @@ Pitfall: The Mayan Adventure (pedida), Mortal Kombat, Super Mario Bros. 3. Sus H
 del Drive y kits de YouTube (`docs/descripciones/`) se retiraron el 2026-10-09 (siguen en el historial de git).
 Metal Warriors y Melee se retiraron el 2026-10-19, igual que los 2 Specials publicados (Día del Padre y Mes del Mar: HTML, capturas, imágenes, kit y carpeta del Drive; se conservan sus pautas, discusiones y shorts).
 
-**Rankings (17):** Master System Top Mundial + Top Precios, Mega Drive Top Mundial, NES
+**Rankings (18):** Master System Top Mundial + Top Precios, Mega Drive Top Mundial, NES
 Top Mundial + Top Precios, SNES Top Mundial + Top Precios, N64 Top Mundial + Top Precios,
 PS Vita Top Mundial, Atari 2600 Top Mundial + Top Precios, Game Boy Top Mundial + Top
-Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom 11 oct).
+Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom 11 oct), SNES Top Peores (dom 25 oct).
 
 **Sagas (1):** Zelda.
 
@@ -109,22 +115,22 @@ Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom
 
 ---
 
-### 1.3 Backlog armado — listo para programar, sin fecha (57)
+### 1.3 Backlog armado — listo para programar, sin fecha (56)
 
 **Reseñas (16) — actualizado 2026-10-21:** Aladdin, Altered Beast, Contra, Crash
 Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, International Superstar
 Soccer, Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star
 Fox, Yoshi's Island, más 1 pedida: JoJo's Bizarre Adventure. Mighty Morphin Power Rangers, Metal
-Warriors y Melee ya se publicaron; Montezuma's Revenge está programada.
+Warriors, Melee y Montezuma's Revenge ya se publicaron.
 
-**Rankings (20):** SNES Infravalorados (categoría nueva `rankings/infravalorados`, armado 2026-10-19), Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
+**Rankings (19):** SNES Infravalorados (categoría nueva `rankings/infravalorados`, armado 2026-10-19), Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
 Top Precios, Saturn Top Mundial + Top Precios, Atari 8-bit Top Mundial + Top Precios
 (armados, sin publicar), PS1 Top Precios (PS1 Top Mundial ya se publicó el 2026-10-18; el par fue armado 2026-09-21 — apertura del arco PS1, ver `docs/arcos/ps1.md`), GameCube Top Precios
 (GameCube Top Mundial ya se publicó el 2026-10-04; el par fue armado 2026-09-22 — apertura del arco GameCube completa, ver
 `docs/arcos/gamecube.md`; Top Precios con la auditoría canon aplicada desde el arranque),
 Atari 2600 Top Peores (PILOTO de un formato nuevo, espejo del Top Mundial con tono divertido,
 armado 2026-10-04; pendiente de ok de Luis y Coco sobre el orden — ver
-`docs/pautas/pauta-atari-2600-top-peores.md`), NES Top Peores, SNES Top Peores y Mega Drive Top Peores
+`docs/pautas/pauta-atari-2600-top-peores.md`), NES Top Peores y Mega Drive Top Peores (SNES Top Peores ya se publicó el 2026-10-25)
 (tanda 1 de los Top Peores por consola, armados 2026-10-06; cuñas chistosas a pedido de Luis; pendientes de
 ok de Luis y Coco sobre el orden — ver `docs/pautas/pauta-nes-top-peores.md`, `pauta-snes-top-peores.md` y
 `pauta-mega-drive-top-peores.md`); tanda 2 (PS1, N64 y Game Boy) armada 2026-10-06, ver `pauta-ps1-top-peores.md`,
@@ -199,10 +205,10 @@ se publica tal cual.
 
 - **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **sigue siendo la brecha más
   grande del canal**, sin cambios desde julio.
-- **Reseñas:** 44 armadas, 27 publicadas (API 2026-10-21), 16 de backlog sin
-  fecha, 1 programada (Montezuma's Revenge, jue 22 oct) — el formato que más rápido está publicando, y aun así
+- **Reseñas:** 44 armadas, 28 publicadas (API 2026-10-26), 16 de backlog sin
+  fecha, 0 programadas — el formato que más rápido está publicando, y aun así
   sigue siendo el segundo backlog más grande en volumen absoluto.
-- **Rankings:** 37 armados, 17 publicados, 0 programados (20 de backlog).
+- **Rankings:** 37 armados, 18 publicados, 0 programados (19 de backlog).
 - **Curaduría N64:** 5 armados, 0 publicados — sigue sin casa en el menú de playlists.
 - **RetroNotas:** 2 armadas, 0 publicadas — formato nuevo, sin playlist propia todavía.
 - **Colecciones sigue siendo la única categoría 100% al día** (4 armadas = 4 publicadas).
