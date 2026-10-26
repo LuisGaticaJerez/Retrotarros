@@ -78,6 +78,8 @@ se contaron los 2 de Atari 8-bit (armados, sin publicar), los 10 Top Peores y el
 
 Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09).
 
+**Retiro del estudio 2026-10-26:** se retiró la reseña de Montezuma's Revenge (HTML, capturas, imágenes, kit y carpeta del Drive).
+
 **Retiro del estudio 2026-10-21:** se retiraron la reseña de Mighty Morphin Power Rangers, las 4 Colecciones (N64, NES, SNES, PS Vita) y la saga Zelda, con HTML, capturas, imágenes, kits de YouTube y discusiones (repo y Drive); se conservan las pautas y los shorts. **Los Rankings publicados (Top Mundial, Top Precios, Top Peores) NO se retiran hasta hacer los "reforge" (decisión de Luis 2026-10-21).**
 
 ---
