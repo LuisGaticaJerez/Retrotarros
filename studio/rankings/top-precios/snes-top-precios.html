@@ -148,9 +148,9 @@ body.read-mode .read-indicator{display:block}
 .divider .pre{font-size:22px !important;letter-spacing:5px !important}
 .divider .sub{font-size:34px !important;line-height:1.5 !important;max-width:1500px !important;letter-spacing:1px !important}
 .portada .ep-sub{font-size:34px !important}
-.slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
-.slide-hybrid.box-ancha .cart-wrap{align-self:start !important;justify-content:flex-start !important;height:auto !important}
-.slide-hybrid.box-ancha .cart{width:var(--bw) !important;height:var(--bh) !important;max-height:none !important;aspect-ratio:auto !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
+.slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto 1fr auto !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
+.slide-hybrid.box-ancha .cart-wrap{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;height:auto !important;min-height:0 !important}
+.slide-hybrid.box-ancha .cart{height:100% !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
 .slide-hybrid.box-ancha .cart::before{display:none !important}
 .slide-hybrid.box-ancha .cart-img-wrap{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;background:none !important;box-shadow:none !important;overflow:visible !important}
 .slide-hybrid.box-ancha .cart-img-wrap img.cart-img-bg{display:none !important}
@@ -197,7 +197,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 1.147</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/hurricanes.png" alt="" aria-hidden="true"><img src="img/snes-top-precios/hurricanes.png" alt="HURRICANES box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -217,7 +217,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 1.396</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:322px">
+        <div class="cart-wrap"><div class="cart" style="--bh:322px;--ar:1.3665">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/mega-man-x3.jpg" alt="" aria-hidden="true"><img src="img/snes-top-precios/mega-man-x3.jpg" alt="MEGA MAN X3 box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -237,7 +237,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 1.405</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:320px">
+        <div class="cart-wrap"><div class="cart" style="--bh:320px;--ar:1.3750">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/pocky2.jpg" alt="" aria-hidden="true"><img src="img/snes-top-precios/pocky2.jpg" alt="POCKY & ROCKY 2 box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -257,7 +257,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 1.450</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/international-superstar-soccer.png" alt="" aria-hidden="true"><img src="img/snes-top-precios/international-superstar-soccer.png" alt="INTERNATIONAL SUPERSTAR SOCCER box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -277,7 +277,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 1.500</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/castlevania-dracula-x.png" alt="" aria-hidden="true"><img src="img/snes-top-precios/castlevania-dracula-x.png" alt="CASTLEVANIA: DRACULA X box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -297,7 +297,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 1.613</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/3-ninjas-kick-back.png" alt="" aria-hidden="true"><img src="img/snes-top-precios/3-ninjas-kick-back.png" alt="3 NINJAS KICK BACK box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -317,7 +317,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 1.865</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/metal-warriors.png" alt="" aria-hidden="true"><img src="img/snes-top-precios/metal-warriors.png" alt="METAL WARRIORS box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -337,7 +337,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 1.866</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/swat-kats.png" alt="" aria-hidden="true"><img src="img/snes-top-precios/swat-kats.png" alt="SWAT KATS: THE RADICAL SQUADRON box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -357,7 +357,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 2.387</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:321px">
+        <div class="cart-wrap"><div class="cart" style="--bh:321px;--ar:1.3707">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/earthbound.jpg" alt="" aria-hidden="true"><img src="img/snes-top-precios/earthbound.jpg" alt="EARTHBOUND box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -377,7 +377,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 3.397</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:439px;--bh:246px">
+        <div class="cart-wrap"><div class="cart" style="--bh:246px;--ar:1.7846">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/aero-fighters.jpg" alt="" aria-hidden="true"><img src="img/snes-top-precios/aero-fighters.jpg" alt="AERO FIGHTERS box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -406,7 +406,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">VARIANTE COLOR</div><div class="game-price">USD 1.700</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:439px;--bh:291px">
+        <div class="cart-wrap"><div class="cart" style="--bh:291px;--ar:1.5086">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/maximum-carnage.jpg" alt="" aria-hidden="true"><img src="img/snes-top-precios/maximum-carnage.jpg" alt="SPIDER-MAN: MAXIMUM CARNAGE [COLLECTOR'S EDITION] box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -426,7 +426,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">BLOCKBUSTER EXCLUSIVE</div><div class="game-price">USD 2.887</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:439px;--bh:246px">
+        <div class="cart-wrap"><div class="cart" style="--bh:246px;--ar:1.7846">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/final-fight-guy.jpg" alt="" aria-hidden="true"><img src="img/snes-top-precios/final-fight-guy.jpg" alt="FINAL FIGHT GUY box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -446,7 +446,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">BLOCKBUSTER EXCLUSIVE</div><div class="game-price">USD 3.355</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:325px">
+        <div class="cart-wrap"><div class="cart" style="--bh:325px;--ar:1.3538">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/hagane.jpg" alt="" aria-hidden="true"><img src="img/snes-top-precios/hagane.jpg" alt="HAGANE: THE FINAL CONFLICT box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -466,7 +466,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">ENTRENADOR MILITAR</div><div class="game-price">USD 3.542</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:261px">
+        <div class="cart-wrap"><div class="cart" style="--bh:261px;--ar:1.6858">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/macs.jpg" alt="" aria-hidden="true"><img src="img/snes-top-precios/macs.jpg" alt="M.A.C.S. MULTIPURPOSE ARCADE COMBAT SIMULATOR box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -486,7 +486,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NFR · 2.500 COPIAS</div><div class="game-price">USD 6.725</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:329px">
+        <div class="cart-wrap"><div class="cart" style="--bh:329px;--ar:1.3374">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/dkc-competition.jpg" alt="" aria-hidden="true"><img src="img/snes-top-precios/dkc-competition.jpg" alt="DKC: COMPETITION CART box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -506,7 +506,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">LIFE FITNESS EXCLUSIVE</div><div class="game-price">USD 10.397</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:321px">
+        <div class="cart-wrap"><div class="cart" style="--bh:321px;--ar:1.3707">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/exertainment.jpg" alt="" aria-hidden="true"><img src="img/snes-top-precios/exertainment.jpg" alt="EXERTAINMENT MOUNTAIN BIKERALLY / SPEED RACER box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>
@@ -526,7 +526,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 17.550</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-top-precios/powerfest94.jpg" alt="" aria-hidden="true"><img src="img/snes-top-precios/powerfest94.jpg" alt="NINTENDO POWERFEST '94 box art"></div>
           <div class="cart-console">SUPER NINTENDO</div>
         </div></div>

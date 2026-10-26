@@ -153,6 +153,13 @@ def _fit_box(it: dict, out_slug: str, layout: str):
     return _fit_dims(_img_size(it, out_slug), chars, layout)
 
 
+def _box_style(bw: int, bh: int, chars: int = 0) -> str:
+    """Estilo inline de la caja: alto maximo nominal --bh (valido a 1920x1080) y proporcion --ar. El alto real lo da la
+    grilla (fila 1fr, ver _box_css): la caja ocupa el espacio que deja el "por que" y nunca lo tapa, tambien en ventanas
+    de menos de 1080 px de alto (Luis 2026-10-26: con un tamano fijo en px la caja pasaba por encima del texto)."""
+    return f"--bh:{bh}px;--ar:{bw / bh:.4f}"
+
+
 def _cart(it: dict, consola: str, box_wh=None) -> str:
     """Cartucho con etiqueta de color (cart-fallback) o imagen si hay 'img'.
     box_wh=(w, h): tamano de la caja en los layouts "alta"/"ancha" (variables CSS --bw/--bh)."""
@@ -165,7 +172,8 @@ def _cart(it: dict, consola: str, box_wh=None) -> str:
         sub = it.get("fallback_sub", consola)
         body = (f'<div class="cart-img-wrap {lb}"><div class="cart-fallback">'
                 f'<div class="title">{it["title"]}</div><div class="sub">{sub}</div></div></div>')
-    style = f' style="--bw:{box_wh[0]}px;--bh:{box_wh[1]}px"' if box_wh else ""
+    style = (f' style="{_box_style(box_wh[0], box_wh[1], len(re.sub(r"<[^>]+>", "", it.get("why", ""))))}"'
+             if box_wh else "")
     return (f'<div class="cart"{style}>\n'
             f'          {body}\n'
             f'          <div class="cart-console">{consola}</div>\n'
@@ -289,25 +297,30 @@ def _tv_css() -> str:
 
 
 def _box_css(box: str) -> str:
-    """CSS de los layouts de caja "alta" y "ancha" (ver BOX_MAX). Vacio para "clasica"."""
+    """CSS de los layouts de caja "alta" y "ancha" (ver BOX_MAX). Vacio para "clasica".
+    Filas: cabecera (auto) / caja + titulo (1fr) / "por que" (auto, a lo que mida el texto). La caja mide el 100 % de su
+    fila (la etiqueta de consola cae en el hueco de 26 px que hay debajo), con tope --bh y proporcion --ar: si la ventana es baja, la caja se achica
+    en vez de pisar el texto."""
     if box not in BOX_MAX:
         return ""
     c = f".slide-hybrid.box-{box}"
     tsz, msz = (48, 22) if box == "alta" else (44, 21)
+    glow = "box-shadow:0 0 0 2px var(--cy),0 0 34px rgba(0,229,255,.35),0 18px 40px rgba(0,0,0,.65)"
     return (
-        f"{c}{{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;"
+        f"{c}{{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto 1fr auto !important;"
         "grid-template-areas:\"head head head\" \"cart title tv\" \"why why tv\" !important;"
         "gap:26px 40px !important;max-width:1800px !important}\n"
-        f"{c} .cart-wrap{{align-self:start !important;justify-content:flex-start !important;height:auto !important}}\n"
-        f"{c} .cart{{width:var(--bw) !important;height:var(--bh) !important;max-height:none !important;aspect-ratio:auto !important;"
+        f"{c} .cart-wrap{{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;"
+        "height:auto !important;min-height:0 !important}\n"
+        f"{c} .cart{{height:100% !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;"
         "background:none !important;box-shadow:none !important;border-radius:0 !important}\n"
         f"{c} .cart::before{{display:none !important}}\n"
         f"{c} .cart-img-wrap{{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;"
         "background:none !important;box-shadow:none !important;overflow:visible !important}\n"
         f"{c} .cart-img-wrap img.cart-img-bg{{display:none !important}}\n"
         f"{c} .cart-img-wrap img:not(.cart-img-bg){{width:100% !important;height:100% !important;object-fit:fill !important;"
-        "border-radius:6px;box-shadow:0 0 0 2px var(--cy),0 0 34px rgba(0,229,255,.35),0 18px 40px rgba(0,0,0,.65)}\n"
-        f"{c} .cart-fallback{{border-radius:6px;box-shadow:0 0 0 2px var(--cy),0 0 34px rgba(0,229,255,.35),0 18px 40px rgba(0,0,0,.65)}}\n"
+        f"border-radius:6px;{glow}}}\n"
+        f"{c} .cart-fallback{{border-radius:6px;{glow}}}\n"
         f"{c} .cart-console{{position:absolute !important;top:100% !important;bottom:auto !important;left:0 !important;"
         "transform:none !important;margin-top:8px;font-size:11px !important;color:rgba(255,255,255,.45) !important}\n"
         f"{c} .hybrid-title{{align-self:center !important}}\n"

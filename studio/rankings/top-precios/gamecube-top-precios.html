@@ -148,9 +148,9 @@ body.read-mode .read-indicator{display:block}
 .divider .pre{font-size:22px !important;letter-spacing:5px !important}
 .divider .sub{font-size:34px !important;line-height:1.5 !important;max-width:1500px !important;letter-spacing:1px !important}
 .portada .ep-sub{font-size:34px !important}
-.slide-hybrid.box-alta{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
-.slide-hybrid.box-alta .cart-wrap{align-self:start !important;justify-content:flex-start !important;height:auto !important}
-.slide-hybrid.box-alta .cart{width:var(--bw) !important;height:var(--bh) !important;max-height:none !important;aspect-ratio:auto !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
+.slide-hybrid.box-alta{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto 1fr auto !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
+.slide-hybrid.box-alta .cart-wrap{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;height:auto !important;min-height:0 !important}
+.slide-hybrid.box-alta .cart{height:100% !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
 .slide-hybrid.box-alta .cart::before{display:none !important}
 .slide-hybrid.box-alta .cart-img-wrap{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;background:none !important;box-shadow:none !important;overflow:visible !important}
 .slide-hybrid.box-alta .cart-img-wrap img.cart-img-bg{display:none !important}
@@ -197,7 +197,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 220</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:300px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7143">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/fire-emblem-path-of-radiance.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/fire-emblem-path-of-radiance.jpg" alt="FIRE EMBLEM: PATH OF RADIANCE box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -217,7 +217,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 221</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:291px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/disney-sports-football.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/disney-sports-football.jpg" alt="DISNEY SPORTS FOOTBALL box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -237,7 +237,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 250</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:291px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/zatch-bell.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/zatch-bell.jpg" alt="ZATCH BELL! MAMODO FURY box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -257,7 +257,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 250</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:302px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7190">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/pso-plus.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/pso-plus.jpg" alt="PHANTASY STAR ONLINE EPISODE I & II PLUS box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -277,7 +277,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 251</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:291px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/ncaa-2k3.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/ncaa-2k3.jpg" alt="NCAA COLLEGE BASKETBALL 2K3 box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -297,7 +297,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 300</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:302px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7190">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/re-code-veronica-x.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/re-code-veronica-x.jpg" alt="RESIDENT EVIL CODE: VERONICA X box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -317,7 +317,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 513</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:291px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/go-go-hypergrind.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/go-go-hypergrind.jpg" alt="GO! GO! HYPERGRIND box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -337,7 +337,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 516</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:293px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6976">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/gotcha-force.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/gotcha-force.jpg" alt="GOTCHA FORCE box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -357,7 +357,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 665</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:297px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7071">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/cubivore-survival-of-the-fittest.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/cubivore-survival-of-the-fittest.jpg" alt="CUBIVORE: SURVIVAL OF THE FITTEST box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -377,7 +377,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 1.025</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:291px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/disney-sports-basketball.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/disney-sports-basketball.jpg" alt="DISNEY SPORTS BASKETBALL box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -406,7 +406,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · PROMOCIONAL</div><div class="game-price">USD 80</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:300px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7143">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/zelda-collectors-edition.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/zelda-collectors-edition.jpg" alt="THE LEGEND OF ZELDA: COLLECTOR'S EDITION box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -426,7 +426,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · DEMO KIOSKO</div><div class="game-price">USD 488</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:302px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7190">
           <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">INTERACTIVE MULTI-GAME DEMO DISC VERSION 16</div><div class="sub">GAMECUBE</div></div></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -446,7 +446,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · NFR</div><div class="game-price">USD 1.045</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:301px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7167">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/animal-crossing.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/animal-crossing.jpg" alt="ANIMAL CROSSING [NOT FOR RESALE] box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>
@@ -466,7 +466,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 4.443</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:303px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7214">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/pokemon-box.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/pokemon-box.jpg" alt="POKEMON BOX [BIG BOX] box art"></div>
           <div class="cart-console">GAMECUBE</div>
         </div></div>

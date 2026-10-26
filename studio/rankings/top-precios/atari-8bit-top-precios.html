@@ -148,9 +148,9 @@ body.read-mode .read-indicator{display:block}
 .divider .pre{font-size:22px !important;letter-spacing:5px !important}
 .divider .sub{font-size:34px !important;line-height:1.5 !important;max-width:1500px !important;letter-spacing:1px !important}
 .portada .ep-sub{font-size:34px !important}
-.slide-hybrid.box-alta{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
-.slide-hybrid.box-alta .cart-wrap{align-self:start !important;justify-content:flex-start !important;height:auto !important}
-.slide-hybrid.box-alta .cart{width:var(--bw) !important;height:var(--bh) !important;max-height:none !important;aspect-ratio:auto !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
+.slide-hybrid.box-alta{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto 1fr auto !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
+.slide-hybrid.box-alta .cart-wrap{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;height:auto !important;min-height:0 !important}
+.slide-hybrid.box-alta .cart{height:100% !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
 .slide-hybrid.box-alta .cart::before{display:none !important}
 .slide-hybrid.box-alta .cart-img-wrap{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;background:none !important;box-shadow:none !important;overflow:visible !important}
 .slide-hybrid.box-alta .cart-img-wrap img.cart-img-bg{display:none !important}
@@ -197,7 +197,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 184.54</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:303px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7214">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/airball.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/airball.jpg" alt="Airball box art"></div>
           <div class="cart-console">ATARI 800XL / 65XE</div>
         </div></div>
@@ -217,7 +217,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 192.00</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:301px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7167">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/crystal-castles.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/crystal-castles.jpg" alt="Crystal Castles box art"></div>
           <div class="cart-console">ATARI 800XL / 65XE</div>
         </div></div>
@@ -237,7 +237,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 199.99</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:267px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6357">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/carnival-massacre.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/carnival-massacre.jpg" alt="Carnival Massacre box art"></div>
           <div class="cart-console">ATARI 800XL / 65XE</div>
         </div></div>
@@ -257,7 +257,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 200.00</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:324px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7714">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/mario-bros-atari8bit.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/mario-bros-atari8bit.jpg" alt="Mario Bros. box art"></div>
           <div class="cart-console">ATARI 800XL / 65XE</div>
         </div></div>
@@ -277,7 +277,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 250.00</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:340px;--bh:398px">
+        <div class="cart-wrap"><div class="cart" style="--bh:398px;--ar:0.8543">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/chopper-rescue.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/chopper-rescue.jpg" alt="Chopper Rescue box art"></div>
           <div class="cart-console">ATARI 800XL / 65XE</div>
         </div></div>
@@ -297,7 +297,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 325.00</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:315px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7500">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/captain-beeble.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/captain-beeble.jpg" alt="Captain Beeble box art"></div>
           <div class="cart-console">ATARI 800XL / 65XE</div>
         </div></div>
@@ -317,7 +317,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 516.00</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:289px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6881">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/mutant-camels.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/mutant-camels.jpg" alt="Attack of the Mutant Camels box art"></div>
           <div class="cart-console">ATARI 800XL / 65XE</div>
         </div></div>
@@ -337,7 +337,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 525.00</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:263px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6262">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/diamond-mine.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/diamond-mine.jpg" alt="Diamond Mine box art"></div>
           <div class="cart-console">ATARI 800XL / 65XE</div>
         </div></div>
@@ -357,7 +357,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 878.84</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:296px;--bh:419px">
+        <div class="cart-wrap"><div class="cart" style="--bh:419px;--ar:0.7064">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/ultima-1.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/ultima-1.jpg" alt="Ultima I: The Original box art"></div>
           <div class="cart-console">ATARI 800XL / 65XE</div>
         </div></div>
@@ -377,7 +377,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 894.24</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:309px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7357">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/alley-cat.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/alley-cat.jpg" alt="Alley Cat box art"></div>
           <div class="cart-console">ATARI 800XL / 65XE</div>
         </div></div>
@@ -406,7 +406,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">APX ORIGEN</div><div class="game-price">USD 68.00</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:307px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7310">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/caverns-of-mars.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/caverns-of-mars.jpg" alt="Caverns of Mars box art"></div>
           <div class="cart-console">ATARI 800XL / 65XE</div>
         </div></div>
@@ -426,7 +426,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 995.95</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:292px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6952">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-precios/caverns-of-callisto.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-precios/caverns-of-callisto.jpg" alt="Caverns of Callisto box art"></div>
           <div class="cart-console">ATARI 800XL / 65XE</div>
         </div></div>

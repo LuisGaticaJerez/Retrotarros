@@ -148,9 +148,9 @@ body.read-mode .read-indicator{display:block}
 .divider .pre{font-size:22px !important;letter-spacing:5px !important}
 .divider .sub{font-size:34px !important;line-height:1.5 !important;max-width:1500px !important;letter-spacing:1px !important}
 .portada .ep-sub{font-size:34px !important}
-.slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
-.slide-hybrid.box-ancha .cart-wrap{align-self:start !important;justify-content:flex-start !important;height:auto !important}
-.slide-hybrid.box-ancha .cart{width:var(--bw) !important;height:var(--bh) !important;max-height:none !important;aspect-ratio:auto !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
+.slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto 1fr auto !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
+.slide-hybrid.box-ancha .cart-wrap{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;height:auto !important;min-height:0 !important}
+.slide-hybrid.box-ancha .cart{height:100% !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
 .slide-hybrid.box-ancha .cart::before{display:none !important}
 .slide-hybrid.box-ancha .cart-img-wrap{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;background:none !important;box-shadow:none !important;overflow:visible !important}
 .slide-hybrid.box-ancha .cart-img-wrap img.cart-img-bg{display:none !important}
@@ -197,7 +197,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:324px">
+        <div class="cart-wrap"><div class="cart" style="--bh:324px;--ar:1.3580">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/rock-n-roll-racing.jpg" alt="" aria-hidden="true"><img src="img/snes-infravalorados/rock-n-roll-racing.jpg" alt="ROCK N' ROLL RACING box art"></div>
           <div class="cart-console">SNES</div>
         </div></div>
@@ -217,7 +217,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/uniracers.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/uniracers.png" alt="UNIRACERS box art"></div>
           <div class="cart-console">SNES</div>
         </div></div>
@@ -237,7 +237,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/hagane.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/hagane.png" alt="HAGANE: THE FINAL CONFLICT box art"></div>
           <div class="cart-console">SNES</div>
         </div></div>
@@ -257,7 +257,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/ogre-battle.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/ogre-battle.png" alt="OGRE BATTLE: THE MARCH OF THE BLACK QUEEN box art"></div>
           <div class="cart-console">SNES</div>
         </div></div>
@@ -277,7 +277,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/lufia-ii.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/lufia-ii.png" alt="LUFIA II: RISE OF THE SINISTRALS box art"></div>
           <div class="cart-console">SNES</div>
         </div></div>
@@ -297,7 +297,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/illusion-of-gaia.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/illusion-of-gaia.png" alt="ILLUSION OF GAIA box art"></div>
           <div class="cart-console">SNES</div>
         </div></div>
@@ -317,7 +317,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/axelay.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/axelay.png" alt="AXELAY box art"></div>
           <div class="cart-console">SNES</div>
         </div></div>
@@ -337,7 +337,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/cybernator.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/cybernator.png" alt="CYBERNATOR box art"></div>
           <div class="cart-console">SNES</div>
         </div></div>
@@ -357,7 +357,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:312px">
+        <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/soul-blazer.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/soul-blazer.png" alt="SOUL BLAZER box art"></div>
           <div class="cart-console">SNES</div>
         </div></div>
@@ -377,7 +377,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL TRONO</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:319px">
+        <div class="cart-wrap"><div class="cart" style="--bh:319px;--ar:1.3793">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/tetris-attack.jpg" alt="" aria-hidden="true"><img src="img/snes-infravalorados/tetris-attack.jpg" alt="TETRIS ATTACK box art"></div>
           <div class="cart-console">SNES</div>
         </div></div>

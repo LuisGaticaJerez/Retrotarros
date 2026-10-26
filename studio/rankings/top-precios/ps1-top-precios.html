@@ -148,9 +148,9 @@ body.read-mode .read-indicator{display:block}
 .divider .pre{font-size:22px !important;letter-spacing:5px !important}
 .divider .sub{font-size:34px !important;line-height:1.5 !important;max-width:1500px !important;letter-spacing:1px !important}
 .portada .ep-sub{font-size:34px !important}
-.slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
-.slide-hybrid.box-ancha .cart-wrap{align-self:start !important;justify-content:flex-start !important;height:auto !important}
-.slide-hybrid.box-ancha .cart{width:var(--bw) !important;height:var(--bh) !important;max-height:none !important;aspect-ratio:auto !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
+.slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto 1fr auto !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
+.slide-hybrid.box-ancha .cart-wrap{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;height:auto !important;min-height:0 !important}
+.slide-hybrid.box-ancha .cart{height:100% !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
 .slide-hybrid.box-ancha .cart::before{display:none !important}
 .slide-hybrid.box-ancha .cart-img-wrap{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;background:none !important;box-shadow:none !important;overflow:visible !important}
 .slide-hybrid.box-ancha .cart-img-wrap img.cart-img-bg{display:none !important}
@@ -197,7 +197,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 350</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/pink-panther-pinkadelic-pursuit.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/pink-panther-pinkadelic-pursuit.jpg" alt="Pink Panther: Pinkadelic Pursuit box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -217,7 +217,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 400</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/adventures-of-lomax.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/adventures-of-lomax.jpg" alt="The Adventures of Lomax box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -237,7 +237,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 408</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:327px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:0.9909">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/klonoa.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/klonoa.jpg" alt="Klonoa: Door to Phantomile box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -257,7 +257,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 427</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/koudelka.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/koudelka.jpg" alt="Koudelka box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -277,7 +277,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 458</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:327px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:0.9909">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/clock-tower-2.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/clock-tower-2.jpg" alt="Clock Tower II: The Struggle Within box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -297,7 +297,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 495</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:347px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0515">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/persona-2-eternal-punishment.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/persona-2-eternal-punishment.jpg" alt="Persona 2: Eternal Punishment box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -317,7 +317,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 502</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:333px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0091">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/shadow-tower.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/shadow-tower.jpg" alt="Shadow Tower box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -337,7 +337,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 525</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:334px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0121">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/tail-concerto.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/tail-concerto.jpg" alt="Tail Concerto box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -357,7 +357,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 536</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:351px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0636">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/revelations-persona.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/revelations-persona.jpg" alt="Revelations: Persona box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -377,7 +377,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 625</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/tron-bonne.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/tron-bonne.jpg" alt="The Misadventures of Tron Bonne box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -406,7 +406,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL</div><div class="game-price">USD 1.062</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:331px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0030">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/syphon-filter-3-911.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/syphon-filter-3-911.jpg" alt="Syphon Filter 3 [911 Edition] box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -426,7 +426,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL</div><div class="game-price">USD 961</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:334px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0121">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/mortal-kombat-3.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/mortal-kombat-3.jpg" alt="Mortal Kombat 3 [Jewel Case] box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -446,7 +446,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL</div><div class="game-price">USD 11.225</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:265px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:0.8030">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/nfl-blitz-2000.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/nfl-blitz-2000.jpg" alt="NFL Blitz 2000 [Greatest Hits] box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>
@@ -466,7 +466,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 55.200</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:170px;--bh:283px">
+        <div class="cart-wrap"><div class="cart" style="--bh:283px;--ar:0.6007">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/tekken-longbox.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/tekken-longbox.jpg" alt="Tekken [Long Box] box art"></div>
           <div class="cart-console">PS1</div>
         </div></div>

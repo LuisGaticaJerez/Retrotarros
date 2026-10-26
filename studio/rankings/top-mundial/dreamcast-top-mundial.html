@@ -138,9 +138,9 @@ body.read-mode .read-indicator{display:block}
 .divider .pre{font-size:22px !important;letter-spacing:5px !important}
 .divider .sub{font-size:34px !important;line-height:1.5 !important;max-width:1500px !important;letter-spacing:1px !important}
 .portada .ep-sub{font-size:34px !important}
-.slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
-.slide-hybrid.box-ancha .cart-wrap{align-self:start !important;justify-content:flex-start !important;height:auto !important}
-.slide-hybrid.box-ancha .cart{width:var(--bw) !important;height:var(--bh) !important;max-height:none !important;aspect-ratio:auto !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
+.slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto 1fr auto !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
+.slide-hybrid.box-ancha .cart-wrap{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;height:auto !important;min-height:0 !important}
+.slide-hybrid.box-ancha .cart{height:100% !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
 .slide-hybrid.box-ancha .cart::before{display:none !important}
 .slide-hybrid.box-ancha .cart-img-wrap{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;background:none !important;box-shadow:none !important;overflow:visible !important}
 .slide-hybrid.box-ancha .cart-img-wrap img.cart-img-bg{display:none !important}
@@ -198,7 +198,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:331px;--bh:330px"><div class="cart-img-wrap lb-race"><img class="cart-img-bg" src="img/dreamcast-top-mundial/crazy-taxi.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/crazy-taxi.png" alt="Crazy Taxi box art"></div><div class="cart-console">DREAMCAST</div></div></div>
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0030"><div class="cart-img-wrap lb-race"><img class="cart-img-bg" src="img/dreamcast-top-mundial/crazy-taxi.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/crazy-taxi.png" alt="Crazy Taxi box art"></div><div class="cart-console">DREAMCAST</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 10</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
       <div class="hybrid-title"><div class="game-title">CRAZY TAXI</div><div class="game-meta">DREAMCAST · 1999 · HITMAKER / SEGA</div></div>
@@ -217,7 +217,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px"><div class="cart-img-wrap lb-fight"><img class="cart-img-bg" src="img/dreamcast-top-mundial/power-stone-2.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/power-stone-2.png" alt="Power Stone 2 box art"></div><div class="cart-console">DREAMCAST</div></div></div>
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000"><div class="cart-img-wrap lb-fight"><img class="cart-img-bg" src="img/dreamcast-top-mundial/power-stone-2.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/power-stone-2.png" alt="Power Stone 2 box art"></div><div class="cart-console">DREAMCAST</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 09</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
       <div class="hybrid-title"><div class="game-title">POWER STONE 2</div><div class="game-meta">DREAMCAST · 2000 · CAPCOM</div></div>
@@ -236,7 +236,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px"><div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/dreamcast-top-mundial/phantasy-star-online.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/phantasy-star-online.png" alt="Phantasy Star Online box art"></div><div class="cart-console">DREAMCAST</div></div></div>
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000"><div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/dreamcast-top-mundial/phantasy-star-online.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/phantasy-star-online.png" alt="Phantasy Star Online box art"></div><div class="cart-console">DREAMCAST</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 08</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
       <div class="hybrid-title"><div class="game-title">PHANTASY STAR ONLINE</div><div class="game-meta">DREAMCAST · 2000 · SONIC TEAM</div></div>
@@ -255,7 +255,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:333px;--bh:330px"><div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/dreamcast-top-mundial/skies-of-arcadia.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/skies-of-arcadia.png" alt="Skies of Arcadia box art"></div><div class="cart-console">DREAMCAST</div></div></div>
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0091"><div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/dreamcast-top-mundial/skies-of-arcadia.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/skies-of-arcadia.png" alt="Skies of Arcadia box art"></div><div class="cart-console">DREAMCAST</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 07</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
       <div class="hybrid-title"><div class="game-title">SKIES OF ARCADIA</div><div class="game-meta">DREAMCAST · 2000 · OVERWORKS / SEGA</div></div>
@@ -274,7 +274,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:333px;--bh:330px"><div class="cart-img-wrap lb-platform"><img class="cart-img-bg" src="img/dreamcast-top-mundial/jet-set-radio.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/jet-set-radio.png" alt="Jet Set Radio box art"></div><div class="cart-console">DREAMCAST</div></div></div>
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0091"><div class="cart-img-wrap lb-platform"><img class="cart-img-bg" src="img/dreamcast-top-mundial/jet-set-radio.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/jet-set-radio.png" alt="Jet Set Radio box art"></div><div class="cart-console">DREAMCAST</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 06</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
       <div class="hybrid-title"><div class="game-title">JET SET RADIO</div><div class="game-meta">DREAMCAST · 2000 · SMILEBIT / SEGA</div></div>
@@ -293,7 +293,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:340px;--bh:330px"><div class="cart-img-wrap lb-action"><img class="cart-img-bg" src="img/dreamcast-top-mundial/re-code-veronica.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/re-code-veronica.png" alt="Resident Evil Code Veronica box art"></div><div class="cart-console">DREAMCAST</div></div></div>
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0303"><div class="cart-img-wrap lb-action"><img class="cart-img-bg" src="img/dreamcast-top-mundial/re-code-veronica.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/re-code-veronica.png" alt="Resident Evil Code Veronica box art"></div><div class="cart-console">DREAMCAST</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
       <div class="hybrid-title"><div class="game-title">RESIDENT EVIL CODE: VERONICA</div><div class="game-meta">DREAMCAST · 2000 · CAPCOM</div></div>
@@ -312,7 +312,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:331px;--bh:330px"><div class="cart-img-wrap lb-fight"><img class="cart-img-bg" src="img/dreamcast-top-mundial/mvc2.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/mvc2.png" alt="Marvel vs Capcom 2 box art"></div><div class="cart-console">DREAMCAST</div></div></div>
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0030"><div class="cart-img-wrap lb-fight"><img class="cart-img-bg" src="img/dreamcast-top-mundial/mvc2.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/mvc2.png" alt="Marvel vs Capcom 2 box art"></div><div class="cart-console">DREAMCAST</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
       <div class="hybrid-title"><div class="game-title">MARVEL VS. CAPCOM 2</div><div class="game-meta">DREAMCAST · 2000 · CAPCOM</div></div>
@@ -331,7 +331,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:335px;--bh:330px"><div class="cart-img-wrap lb-platform"><img class="cart-img-bg" src="img/dreamcast-top-mundial/sonic-adventure.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/sonic-adventure.png" alt="Sonic Adventure box art"></div><div class="cart-console">DREAMCAST</div></div></div>
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0152"><div class="cart-img-wrap lb-platform"><img class="cart-img-bg" src="img/dreamcast-top-mundial/sonic-adventure.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/sonic-adventure.png" alt="Sonic Adventure box art"></div><div class="cart-console">DREAMCAST</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
       <div class="hybrid-title"><div class="game-title">SONIC ADVENTURE</div><div class="game-meta">DREAMCAST · 1998 · SONIC TEAM</div></div>
@@ -350,7 +350,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:335px;--bh:330px"><div class="cart-img-wrap lb-action"><img class="cart-img-bg" src="img/dreamcast-top-mundial/shenmue.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/shenmue.png" alt="Shenmue box art"></div><div class="cart-console">DREAMCAST</div></div></div>
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0152"><div class="cart-img-wrap lb-action"><img class="cart-img-bg" src="img/dreamcast-top-mundial/shenmue.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/shenmue.png" alt="Shenmue box art"></div><div class="cart-console">DREAMCAST</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
       <div class="hybrid-title"><div class="game-title">SHENMUE</div><div class="game-meta">DREAMCAST · 1999 · SEGA AM2</div></div>
@@ -369,7 +369,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL TRONO</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px"><div class="cart-img-wrap lb-fight"><img class="cart-img-bg" src="img/dreamcast-top-mundial/soul-calibur.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/soul-calibur.png" alt="Soulcalibur box art"></div><div class="cart-console">DREAMCAST</div></div></div>
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000"><div class="cart-img-wrap lb-fight"><img class="cart-img-bg" src="img/dreamcast-top-mundial/soul-calibur.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-mundial/soul-calibur.png" alt="Soulcalibur box art"></div><div class="cart-console">DREAMCAST</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
       <div class="hybrid-title"><div class="game-title">SOULCALIBUR</div><div class="game-meta">DREAMCAST · 1999 · NAMCO</div></div>

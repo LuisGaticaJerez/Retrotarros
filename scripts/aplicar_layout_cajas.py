@@ -3,7 +3,8 @@
 Parchea el HTML sin necesitar el driver de `.cache`: agrega la clase `box-alta` / `box-ancha` a cada
 `slide-hybrid`, fija el tamano de la caja con las variables --bw/--bh y mete el CSS de `top_deck._box_css`
 dentro del bloque de estilos compartido. El layout se elige por la forma de la mayoria de las cajas
-(igual que `top_deck._pick_box_layout`). Es idempotente: un HTML que ya tiene el layout se salta.
+(igual que `top_deck._pick_box_layout`). Si el HTML ya tiene el layout, lo quita y lo vuelve a poner (sirve para actualizar la version del CSS;
+la caja se limita por la altura de la ventana, ver top_deck._box_style).
 
 Uso:
   python scripts/aplicar_layout_cajas.py <slug> [<slug> ...]            # modo prueba (solo informa)
@@ -43,11 +44,19 @@ def _size(base: Path, src: str):
         return None
 
 
+def _quitar(html: str) -> str:
+    """Deshace un parche anterior: clase box-*, estilo inline de la caja y las reglas CSS .slide-hybrid.box-*."""
+    html = re.sub(r'<div class="slide-hybrid box-(?:alta|ancha)">', '<div class="slide-hybrid">', html)
+    html = re.sub(r'<div class="cart" style="[^"]*">', '<div class="cart">', html)
+    html = re.sub(r"(?m)^\.slide-hybrid\.box-(?:alta|ancha)[^\n]*\n", "", html)
+    return html
+
+
 def parchear(slug: str, forzar: str | None, aplicar: bool) -> str:
     f = _find(slug)
     html = f.read_text(encoding="utf-8")
     if "slide-hybrid box-" in html:
-        return f"{slug}: ya tiene el layout, se salta"
+        html = _quitar(html)
     secciones = SECTION_RE.findall(html)
     datos = []   # (seccion, src, chars)
     for sec in secciones:
@@ -72,7 +81,7 @@ def parchear(slug: str, forzar: str | None, aplicar: bool) -> str:
     for (sec, src, chars), sz in zip(datos, sizes):
         bw, bh = T._fit_dims(sz, chars, layout)
         s2 = sec.replace('<div class="slide-hybrid">', f'<div class="slide-hybrid box-{layout}">', 1)
-        s2 = s2.replace('<div class="cart">', f'<div class="cart" style="--bw:{bw}px;--bh:{bh}px">', 1)
+        s2 = s2.replace('<div class="cart">', f'<div class="cart" style="{T._box_style(bw, bh, chars)}">', 1)
         nuevo = nuevo.replace(sec, s2, 1)
     # CSS: dentro del bloque compartido, justo antes de su cierre
     bloque = T._SHARED_CSS_BLOCK_RE.search(nuevo)

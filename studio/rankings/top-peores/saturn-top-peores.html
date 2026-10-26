@@ -148,9 +148,9 @@ body.read-mode .read-indicator{display:block}
 .divider .pre{font-size:22px !important;letter-spacing:5px !important}
 .divider .sub{font-size:34px !important;line-height:1.5 !important;max-width:1500px !important;letter-spacing:1px !important}
 .portada .ep-sub{font-size:34px !important}
-.slide-hybrid.box-alta{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
-.slide-hybrid.box-alta .cart-wrap{align-self:start !important;justify-content:flex-start !important;height:auto !important}
-.slide-hybrid.box-alta .cart{width:var(--bw) !important;height:var(--bh) !important;max-height:none !important;aspect-ratio:auto !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
+.slide-hybrid.box-alta{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto 1fr auto !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
+.slide-hybrid.box-alta .cart-wrap{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;height:auto !important;min-height:0 !important}
+.slide-hybrid.box-alta .cart{height:100% !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
 .slide-hybrid.box-alta .cart::before{display:none !important}
 .slide-hybrid.box-alta .cart-img-wrap{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;background:none !important;box-shadow:none !important;overflow:visible !important}
 .slide-hybrid.box-alta .cart-img-wrap img.cart-img-bg{display:none !important}
@@ -197,7 +197,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">NOTA 63%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:250px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5952">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-peores/scud-the-disposable-assassin.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-peores/scud-the-disposable-assassin.jpg" alt="SCUD: THE DISPOSABLE ASSASSIN box art"></div>
           <div class="cart-console">Saturn</div>
         </div></div>
@@ -217,7 +217,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">NOTA 52%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:247px;--bh:418px">
+        <div class="cart-wrap"><div class="cart" style="--bh:418px;--ar:0.5909">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-peores/iron-man-x-o-manowar-in-heavy-metal.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-peores/iron-man-x-o-manowar-in-heavy-metal.jpg" alt="IRON MAN / X-O MANOWAR IN HEAVY METAL box art"></div>
           <div class="cart-console">Saturn</div>
         </div></div>
@@ -237,7 +237,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">NOTA 48%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:247px;--bh:418px">
+        <div class="cart-wrap"><div class="cart" style="--bh:418px;--ar:0.5909">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-peores/courier-crisis.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-peores/courier-crisis.jpg" alt="COURIER CRISIS box art"></div>
           <div class="cart-console">Saturn</div>
         </div></div>
@@ -257,7 +257,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">NOTA 45%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:248px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5905">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-peores/battle-monsters.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-peores/battle-monsters.jpg" alt="BATTLE MONSTERS box art"></div>
           <div class="cart-console">Saturn</div>
         </div></div>
@@ -277,7 +277,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">NOTA 40%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:271px;--bh:418px">
+        <div class="cart-wrap"><div class="cart" style="--bh:418px;--ar:0.6483">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-peores/virtual-hydlide.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-peores/virtual-hydlide.jpg" alt="VIRTUAL HYDLIDE box art"></div>
           <div class="cart-console">Saturn</div>
         </div></div>
@@ -297,7 +297,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">NOTA 20%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:248px;--bh:418px">
+        <div class="cart-wrap"><div class="cart" style="--bh:418px;--ar:0.5933">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-peores/rise-2-resurrection.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-peores/rise-2-resurrection.jpg" alt="RISE 2: RESURRECTION box art"></div>
           <div class="cart-console">Saturn</div>
         </div></div>
@@ -317,7 +317,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">NOTA 20%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:249px;--bh:420px">
+        <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-peores/revolution-x.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-peores/revolution-x.jpg" alt="REVOLUTION X box art"></div>
           <div class="cart-console">Saturn</div>
         </div></div>
@@ -337,7 +337,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">EN 3 LISTAS</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:248px;--bh:418px">
+        <div class="cart-wrap"><div class="cart" style="--bh:418px;--ar:0.5933">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-peores/the-incredible-hulk-the-pantheon-saga.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-peores/the-incredible-hulk-the-pantheon-saga.jpg" alt="THE INCREDIBLE HULK: THE PANTHEON SAGA box art"></div>
           <div class="cart-console">Saturn</div>
         </div></div>
@@ -357,7 +357,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">NOTA 14%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:340px;--bh:340px">
+        <div class="cart-wrap"><div class="cart" style="--bh:340px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-peores/d-xhird.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-peores/d-xhird.jpg" alt="D-XHIRD box art"></div>
           <div class="cart-console">Saturn</div>
         </div></div>
@@ -377,7 +377,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-alta">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">NOTA 11%</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:340px;--bh:340px">
+        <div class="cart-wrap"><div class="cart" style="--bh:340px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-peores/death-crimson.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-peores/death-crimson.jpg" alt="DEATH CRIMSON box art"></div>
           <div class="cart-console">Saturn</div>
         </div></div>

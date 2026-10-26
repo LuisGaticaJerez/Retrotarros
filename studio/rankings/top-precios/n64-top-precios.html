@@ -148,9 +148,9 @@ body.read-mode .read-indicator{display:block}
 .divider .pre{font-size:22px !important;letter-spacing:5px !important}
 .divider .sub{font-size:34px !important;line-height:1.5 !important;max-width:1500px !important;letter-spacing:1px !important}
 .portada .ep-sub{font-size:34px !important}
-.slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
-.slide-hybrid.box-ancha .cart-wrap{align-self:start !important;justify-content:flex-start !important;height:auto !important}
-.slide-hybrid.box-ancha .cart{width:var(--bw) !important;height:var(--bh) !important;max-height:none !important;aspect-ratio:auto !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
+.slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto 1fr auto !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
+.slide-hybrid.box-ancha .cart-wrap{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;height:auto !important;min-height:0 !important}
+.slide-hybrid.box-ancha .cart{height:100% !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
 .slide-hybrid.box-ancha .cart::before{display:none !important}
 .slide-hybrid.box-ancha .cart-img-wrap{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;background:none !important;box-shadow:none !important;overflow:visible !important}
 .slide-hybrid.box-ancha .cart-img-wrap img.cart-img-bg{display:none !important}
@@ -197,7 +197,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD $268</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:321px">
+        <div class="cart-wrap"><div class="cart" style="--bh:321px;--ar:1.3707">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/iss2000.png" alt="" aria-hidden="true"><img src="img/n64-top-precios/iss2000.png" alt="International Superstar Soccer 2000 box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -217,7 +217,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD $500</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:321px">
+        <div class="cart-wrap"><div class="cart" style="--bh:321px;--ar:1.3707">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/conker.jpg" alt="" aria-hidden="true"><img src="img/n64-top-precios/conker.jpg" alt="Conker's Bad Fur Day box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -237,7 +237,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD $710</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:310px">
+        <div class="cart-wrap"><div class="cart" style="--bh:310px;--ar:1.4194">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/ratattack.jpg" alt="" aria-hidden="true"><img src="img/n64-top-precios/ratattack.jpg" alt="Rat Attack! box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -257,7 +257,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD $762</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:439px;--bh:320px">
+        <div class="cart-wrap"><div class="cart" style="--bh:320px;--ar:1.3719">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/worms.jpg" alt="" aria-hidden="true"><img src="img/n64-top-precios/worms.jpg" alt="Worms Armageddon box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -277,7 +277,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD $784</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:439px;--bh:306px">
+        <div class="cart-wrap"><div class="cart" style="--bh:306px;--ar:1.4346">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/transformers.jpg" alt="" aria-hidden="true"><img src="img/n64-top-precios/transformers.jpg" alt="Transformers: Beast Wars Transmetals box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -297,7 +297,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD $860</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:307px">
+        <div class="cart-wrap"><div class="cart" style="--bh:307px;--ar:1.4332">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/bomberman.jpg" alt="" aria-hidden="true"><img src="img/n64-top-precios/bomberman.jpg" alt="Bomberman 64: The Second Attack box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -317,7 +317,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD $1,500</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:321px">
+        <div class="cart-wrap"><div class="cart" style="--bh:321px;--ar:1.3707">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/stuntracer.jpg" alt="" aria-hidden="true"><img src="img/n64-top-precios/stuntracer.jpg" alt="Stunt Racer 64 box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -337,7 +337,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD $1,665</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:439px;--bh:293px">
+        <div class="cart-wrap"><div class="cart" style="--bh:293px;--ar:1.4983">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/f1racing.png" alt="" aria-hidden="true"><img src="img/n64-top-precios/f1racing.png" alt="F1 Racing Championship box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -357,7 +357,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD $2,100</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/superbowling.jpg" alt="" aria-hidden="true"><img src="img/n64-top-precios/superbowling.jpg" alt="Super Bowling box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -377,7 +377,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD $5,824</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:307px">
+        <div class="cart-wrap"><div class="cart" style="--bh:307px;--ar:1.4332">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/clayfighter.jpg" alt="" aria-hidden="true"><img src="img/n64-top-precios/clayfighter.jpg" alt="ClayFighter 63⅓: Sculptor's Cut box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -406,7 +406,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NFR</div><div class="game-price">USD $1,547</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:440px;--bh:329px">
+        <div class="cart-wrap"><div class="cart" style="--bh:329px;--ar:1.3374">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/turok2grey.jpg" alt="" aria-hidden="true"><img src="img/n64-top-precios/turok2grey.jpg" alt="Turok 2: Seeds of Evil [Not For Resale] box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -426,7 +426,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NFR GRIS</div><div class="game-price">USD $1,856</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:248px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:0.7515">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/donkey-grey.webp" alt="" aria-hidden="true"><img src="img/n64-top-precios/donkey-grey.webp" alt="Donkey Kong 64 [Not For Resale Gray] box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -446,7 +446,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NFR GRIS</div><div class="game-price">USD $7,100</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:330px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/majoras-mask-demo.jpg" alt="" aria-hidden="true"><img src="img/n64-top-precios/majoras-mask-demo.jpg" alt="Zelda: Majora's Mask [Not For Resale Gray] box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
@@ -466,7 +466,7 @@ body.read-mode .read-indicator{display:block}
     <div class="slide-hybrid box-ancha">
       <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD $18,056</div></div>
       <div class="hybrid-body">
-        <div class="cart-wrap"><div class="cart" style="--bw:439px;--bh:330px">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.3303">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/n64-top-precios/clayfighter-special.jpg" alt="" aria-hidden="true"><img src="img/n64-top-precios/clayfighter-special.jpg" alt="ClayFighter 63⅓: Sculptor's Cut [Sealed] box art"></div>
           <div class="cart-console">NINTENDO 64</div>
         </div></div>
