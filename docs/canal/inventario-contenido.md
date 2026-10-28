@@ -50,7 +50,7 @@
 
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
-| Reseñas | 51 | 28 | 0 | 23 |
+| Reseñas | 51 | 29 | 0 | 22 |
 | Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube + Infravalorados SNES) | 37 | 18 | 0 | 19 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
@@ -86,7 +86,7 @@ Tras la publicación, esos HTML y kits se retiran del estudio como el resto de l
 
 ### 1.2 Publicados (26 + Abriendo el Tarro + 2 G-OLD, más las Reseñas nuevas de abajo)
 
-**Reseñas (28) — API de YouTube 2026-10-26, del más reciente al más antiguo:**
+**Reseñas (29) — API de YouTube 2026-10-28, del más reciente al más antiguo:** International Superstar Soccer (27 oct),
 Montezuma's Revenge (pedida), Mighty Morphin Power Rangers (pedida), Melee (pedida), Metal Warriors (pedida), Worms Armageddon (pedida), Samurai Shodown (pedida), Doom (pedida), King of Fighters '94,
 Battletoads, Super Mario World, Street Fighter II, Golden Axe, Metal Gear Solid (pedida),
 Chrono Trigger, The Legend of Zelda (pedida), Cadillacs and Dinosaurs (pedida), Jewel Master
@@ -117,11 +117,10 @@ Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom
 
 ### 1.3 Backlog armado — listo para programar, sin fecha (56)
 
-**Reseñas (23) — actualizado 2026-10-27:** Aladdin, Altered Beast, Contra, Crash
-Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, International Superstar
-Soccer, Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star
+**Reseñas (22) — actualizado 2026-10-28:** Aladdin, Altered Beast, Contra, Crash
+Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star
 Fox, Yoshi's Island, God of War (PS2), Halo: Combat Evolved (Xbox), Counter-Strike (PC), Need for Speed: Underground 2, Kingdom Hearts (PS2), Age of Empires II (PC) y Diablo (PC) —armadas el 2026-10-27—, más 1 pedida: JoJo's Bizarre Adventure. Mighty Morphin Power Rangers, Metal
-Warriors, Melee y Montezuma's Revenge ya se publicaron.
+Warriors, Melee y Montezuma's Revenge e International Superstar Soccer ya se publicaron.
 
 **Rankings (19):** SNES Infravalorados (categoría nueva `rankings/infravalorados`, armado 2026-10-19), Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
 Top Precios, Saturn Top Mundial + Top Precios, Atari 8-bit Top Mundial + Top Precios
@@ -205,7 +204,7 @@ se publica tal cual.
 
 - **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **sigue siendo la brecha más
   grande del canal**, sin cambios desde julio.
-- **Reseñas:** 51 armadas, 28 publicadas (API 2026-10-26), 23 de backlog sin
+- **Reseñas:** 51 armadas, 29 publicadas (API 2026-10-28), 22 de backlog sin
   fecha, 0 programadas — el formato que más rápido está publicando, y aun así
   sigue siendo el segundo backlog más grande en volumen absoluto.
 - **Rankings:** 37 armados, 18 publicados, 0 programados (19 de backlog).
