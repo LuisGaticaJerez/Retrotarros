@@ -64,6 +64,53 @@ def test_veredicto_clasica_sin_escala():
     assert 'class="ver-escala"' not in _generar(_data(grafica="clasica"))
 
 
+# ---------------------------------------------------------------- Task 3
+
+CHIP = '<span class="chip'
+
+
+def test_ficha_chips_con_plataformas():
+    html = _generar(_data(grafica="nueva", plataformas=[["PC", "2000"], ["PS2", "2003"]]))
+    assert html.count(CHIP) == 2
+    assert html.count('<span class="chip first">') == 1
+    assert "<i>2000</i>" in html and "<i>2003</i>" in html
+
+
+def test_ficha_chips_desde_consola():
+    html = _generar(_data(grafica="nueva", consola="PC · Mac"))
+    assert html.count(CHIP) == 2 and "<i>" not in html.split('<div class="chips">')[1].split("</div>")[0]
+
+
+def test_ficha_chips_una_plataforma():
+    html = _generar(_data(grafica="nueva", consola="PC"))
+    assert html.count(CHIP) == 1
+
+
+def test_ficha_plataformas_mal_formadas():
+    html = _generar(_data(grafica="nueva", plataformas=[None, ["PC"], [], ["PS2", "2003"]]), lint=False)
+    assert html.count(CHIP) == 2
+
+
+def test_ficha_clasica_sin_chips():
+    html = _generar(_data(grafica="clasica", plataformas=[["PC", "2000"]]))
+    assert 'class="chips"' not in html
+
+
+def test_contexto_nueva_con_imagen():
+    html = _generar(_data(grafica="nueva", img_key="the-sims"))
+    assert 'class="ctx-img"' in html and "con-imagen" in html.split("</style>")[1]
+
+
+def test_contexto_nueva_sin_imagen():
+    html = _generar(_data(grafica="nueva"))
+    assert 'class="ctx-img"' not in html and 'contexto con-imagen' not in html
+
+
+def test_contexto_clasica_sin_imagen():
+    html = _generar(_data(grafica="clasica", img_key="the-sims"))
+    assert 'class="ctx-img"' not in html
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:

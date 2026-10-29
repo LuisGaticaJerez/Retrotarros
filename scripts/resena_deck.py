@@ -174,6 +174,28 @@ def _slide_portada(num: int, data: dict, active: bool = True) -> str:
     )
 
 
+def _chips_plataformas(data: dict) -> str:
+    """Chips de plataforma en orden de lanzamiento (grafica nueva). Sale de data['plataformas']
+    ([nombre, año], ignora lo mal formado) y, si no hay ninguno valido, de consola separada por '·'."""
+    pares: list[tuple[str, str]] = []
+    plataformas = data.get("plataformas")
+    if isinstance(plataformas, (list, tuple)):
+        for p in plataformas:
+            if isinstance(p, (list, tuple)) and p and isinstance(p[0], str) and p[0].strip():
+                anio = str(p[1]).strip() if len(p) > 1 and p[1] else ""
+                pares.append((p[0].strip(), anio))
+    if not pares:
+        pares = [(n.strip(), "") for n in str(data.get("consola") or "").split("·") if n.strip()]
+    chips = []
+    for i, (nombre, anio) in enumerate(pares):
+        extra = f"<i>{_esc(anio)}</i>" if anio else ""
+        clase = "chip first" if i == 0 else "chip"
+        chips.append(f'<span class="{clase}"><b>{_esc(nombre).upper()}</b>{extra}</span>')
+    if not chips:
+        return ""
+    return '<div class="chips">' + '<span class="arr">▸</span>'.join(chips) + "</div>"
+
+
 def _slide_ficha(num: int, data: dict) -> str:
     # en_coleccion: True | False | "familia" (no esta, pero hay algo de la familia
     # del juego: se explica en la linea opcional familia_texto).
@@ -183,6 +205,7 @@ def _slide_ficha(num: int, data: dict) -> str:
         owned = '<div class="ficha-owned faltan">NO ESTA EN LA COLECCION</div>'
         if data.get("en_coleccion") == "familia" and data.get("familia_texto"):
             owned += f'<div class="ficha-familia">{_esc(data["familia_texto"])}</div>'
+    consola = (_chips_plataformas(data) if _nueva(data) else "") or _esc(data["consola"])
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
         '<div class="ficha-detail">'
@@ -190,7 +213,7 @@ def _slide_ficha(num: int, data: dict) -> str:
         '<div class="ficha-info">'
         f'<div class="ficha-title">{_esc(data["juego"]).upper()}</div>'
         '<div class="ficha-stats">'
-        f'<div class="ficha-stat"><span class="lbl">CONSOLA</span><span class="val">{_esc(data["consola"])}</span></div>'
+        f'<div class="ficha-stat"><span class="lbl">CONSOLA</span><span class="val">{consola}</span></div>'
         f'<div class="ficha-stat"><span class="lbl">AÑO</span><span class="val">{_esc(data["anio"])}</span></div>'
         f'<div class="ficha-stat"><span class="lbl">DESARROLLADOR</span><span class="val">{_esc(data["developer"])}</span></div>'
         f'<div class="ficha-stat"><span class="lbl">GENERO</span><span class="val">{_esc(data["genero"])}</span></div>'
@@ -203,6 +226,20 @@ def _slide_ficha(num: int, data: dict) -> str:
 
 
 def _slide_contexto(num: int, data: dict) -> str:
+    caja = _caja_key(data) if _nueva(data) else None
+    if caja:
+        return (
+            f'<section class="slide"><span class="slide-num">{num:02d}</span>'
+            '<div class="contexto con-imagen">'
+            f'<img class="ctx-img" src="img/resenas/{caja}.jpg" alt="">'
+            '<div class="ctx-texto">'
+            '<div class="ctx-tag">CONTEXTO DE EPOCA</div>'
+            f'<div class="ctx-year">Llegamos a <b>{_esc(data["anio"])}</b></div>'
+            f'<div class="ctx-body">{_esc(data["contexto_texto"])}</div>'
+            '</div></div>'
+            f'{_notas(data.get("notas", {}).get("contexto"))}'
+            '</section>'
+        )
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
         '<div class="contexto">'
@@ -453,6 +490,16 @@ CSS_NUEVA = """
 .ver-escala{display:flex;gap:14px;margin-top:6px}
 .ver-pill{font-family:'Orbitron';font-weight:700;font-size:20px;letter-spacing:1px;padding:10px 20px;border-radius:6px;border:2px solid rgba(255,255,255,.25);color:rgba(255,255,255,.4)}
 .ver-pill.on{border-color:var(--ye);color:var(--ye);box-shadow:0 0 20px rgba(255,210,63,.5)}
+.chips{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.chip{display:inline-flex;flex-direction:column;align-items:center;padding:6px 14px;border:2px solid rgba(0,229,255,.55);border-radius:6px;color:var(--cy);font-family:'Orbitron';font-size:20px;line-height:1.1}
+.chip b{font-weight:700}
+.chip i{font-style:normal;font-family:'Share Tech Mono';font-size:14px;color:rgba(255,255,255,.65)}
+.chip.first{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.55)}
+.chip.first i{color:var(--dk)}
+.chips .arr{color:var(--mg);font-size:20px}
+.contexto.con-imagen{flex-direction:row;gap:80px;padding:0 90px;align-items:center;justify-content:center}
+.ctx-img{height:70%;border-radius:6px;box-shadow:0 0 40px rgba(0,229,255,.4);border:2px solid rgba(255,255,255,.25)}
+.ctx-texto{display:flex;flex-direction:column;gap:26px;align-items:flex-start;text-align:left;max-width:1000px}
 """
 
 SCRIPT = """
