@@ -146,14 +146,26 @@ def _caja_key(data: dict) -> str | None:
     return key if ruta.exists() else None
 
 
+def _caja_ancha(key: str) -> bool:
+    """True si la caja es cuadrada o apaisada (ancho/alto > 0.85): en la grafica nueva se
+    acota por ancho para que no tape el texto. Si no se puede medir, se trata como alta."""
+    try:
+        from PIL import Image
+        with Image.open(REPO / "studio" / "resenas" / "img" / "resenas" / f"{key}.jpg") as im:
+            return im.width / im.height > 0.85
+    except Exception:  # noqa: BLE001
+        return False
+
+
 def _slide_portada(num: int, data: dict, active: bool = True) -> str:
     cls = "slide active" if active else "slide"
     caja = _caja_key(data) if _nueva(data) else None
     if caja:
+        estilo = ' style="width:30%;height:auto"' if _caja_ancha(caja) else ""
         return (
             f'<section class="{cls}" style="overflow:hidden"><span class="slide-num">{num:02d}</span>'
             f'<div class="portada-fondo" style="background-image:url(img/resenas/{caja}.jpg)"></div>'
-            f'<img class="portada-caja" src="img/resenas/{caja}.jpg" alt="">'
+            f'<img class="portada-caja"{estilo} src="img/resenas/{caja}.jpg" alt="">'
             '<div class="portada con-caja">'
             '<div class="ep-tag">RESEÑA RETROTARRISTICA</div>'
             f'<div class="ep-title">{_esc(data["juego"]).upper()}</div>'
@@ -228,10 +240,11 @@ def _slide_ficha(num: int, data: dict) -> str:
 def _slide_contexto(num: int, data: dict) -> str:
     caja = _caja_key(data) if _nueva(data) else None
     if caja:
+        estilo_img = ' style="width:30vw;height:auto"' if _caja_ancha(caja) else ""
         return (
             f'<section class="slide"><span class="slide-num">{num:02d}</span>'
             '<div class="contexto con-imagen">'
-            f'<img class="ctx-img" src="img/resenas/{caja}.jpg" alt="">'
+            f'<img class="ctx-img"{estilo_img} src="img/resenas/{caja}.jpg" alt="">'
             '<div class="ctx-texto">'
             '<div class="ctx-tag">CONTEXTO DE EPOCA</div>'
             f'<div class="ctx-year">Llegamos a <b>{_esc(data["anio"])}</b></div>'
@@ -533,7 +546,7 @@ CSS_FAMILIA = """
 CSS_NUEVA = """
 .portada-fondo{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(18px) brightness(.38) saturate(1.2);z-index:0}
 .portada-caja{position:absolute;right:120px;top:50%;transform:translateY(-50%) rotate(3deg);height:70%;border-radius:6px;box-shadow:0 0 60px rgba(255,46,136,.55),0 18px 50px rgba(0,0,0,.8);z-index:1}
-.portada.con-caja{position:relative;z-index:2;align-items:flex-start;text-align:left;padding-left:90px;max-width:62%}
+.portada.con-caja{position:relative;z-index:2;align-items:flex-start;text-align:left;padding-left:90px;max-width:58%}
 .ver-escala{display:flex;gap:14px;margin-top:6px}
 .ver-pill{font-family:'Orbitron';font-weight:700;font-size:20px;letter-spacing:1px;padding:10px 20px;border-radius:6px;border:2px solid rgba(255,255,255,.25);color:rgba(255,255,255,.4)}
 .ver-pill.on{border-color:var(--ye);color:var(--ye);box-shadow:0 0 20px rgba(255,210,63,.5)}
@@ -545,7 +558,7 @@ CSS_NUEVA = """
 .chip.first i{color:var(--dk)}
 .chips .arr{color:var(--mg);font-size:20px}
 .contexto.con-imagen{flex-direction:row;gap:80px;padding:0 90px;align-items:center;justify-content:center}
-.ctx-img{width:auto;height:auto;max-height:62vh;max-width:30vw;flex:none;border-radius:6px;box-shadow:0 0 40px rgba(0,229,255,.4);border:2px solid rgba(255,255,255,.25)}
+.ctx-img{width:auto;height:62vh;flex:none;border-radius:6px;box-shadow:0 0 40px rgba(0,229,255,.4);border:2px solid rgba(255,255,255,.25)}
 .ctx-texto{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:26px;align-items:flex-start;text-align:left;max-width:1000px}
 .vineta{display:flex;gap:22px;align-items:center;margin-bottom:26px}
 .vn{font-family:'Press Start 2P';font-size:20px;color:var(--dk);background:var(--ye);padding:16px 14px;border-radius:6px;min-width:72px;text-align:center}

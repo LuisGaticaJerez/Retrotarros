@@ -183,6 +183,34 @@ def test_clasica_no_tiene_ninguna_marca_nueva():
         assert f'class="{clase}"' not in html, clase
 
 
+# ---------------------------------------------------------------- Cajas apaisadas y altas
+
+def _con_caja_temporal(nombre: str, ancho: int, alto: int, fn):
+    """Crea studio/resenas/img/resenas/<nombre>.jpg, corre fn() y lo borra."""
+    from PIL import Image
+    ruta = D.REPO / "studio" / "resenas" / "img" / "resenas" / f"{nombre}.jpg"
+    Image.new("RGB", (ancho, alto), (30, 30, 60)).save(ruta)
+    try:
+        return fn()
+    finally:
+        if ruta.exists():
+            ruta.unlink()
+
+
+def test_portada_y_contexto_caja_apaisada_se_acotan():
+    html = _con_caja_temporal("_test-ancha", 400, 250,
+                              lambda: _generar(_data(grafica="nueva", img_key="_test-ancha")))
+    assert 'class="portada-caja" style="width:30%;height:auto"' in html
+    assert 'class="ctx-img" style="width:30vw;height:auto"' in html
+
+
+def test_portada_y_contexto_caja_alta_sin_estilo_en_linea():
+    html = _con_caja_temporal("_test-alta", 200, 400,
+                              lambda: _generar(_data(grafica="nueva", img_key="_test-alta")))
+    assert 'class="portada-caja" src=' in html
+    assert 'class="ctx-img" src=' in html
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:
