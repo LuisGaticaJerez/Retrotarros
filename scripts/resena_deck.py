@@ -48,8 +48,11 @@ studio/img/resenas/ -> studio/resenas/img/resenas/), no al lado como los
 demas episodios -- por eso el src del HTML es relativo directo, sin '../'.
 """
 from __future__ import annotations
+import os
 import re
 from pathlib import Path
+
+from resena_lint import formatear, revisar
 
 REPO = Path(__file__).resolve().parent.parent
 
@@ -65,14 +68,27 @@ def _esc(s: str) -> str:
     return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def _notas(bloque: dict | None) -> str:
-    """<aside class="notas"> por slide. bloque = {'titulo':.., 'lineas':[...], 'cue': '...'}"""
-    if not bloque:
+def _notas(bloque: dict | None, previo: str = "") -> str:
+    """<aside class="notas"> por slide. bloque = {'titulo':.., 'lineas':[...], 'cue': '...'}
+    `previo` es HTML que va antes del titulo del bloque (ej. POR CONFIRMAR)."""
+    if not bloque and not previo:
         return ""
+    bloque = bloque or {}
     titulo = _esc(bloque.get("titulo", "NOTAS"))
     lineas = "".join(f'<div class="n-line">{_esc(t)}</div>' for t in bloque.get("lineas", []))
     cue = f'<div class="n-cue">{_esc(bloque["cue"])}</div>' if bloque.get("cue") else ""
-    return f'<aside class="notas"><h4>{titulo}</h4>{lineas}{cue}</aside>'
+    cuerpo = f"<h4>{titulo}</h4>{lineas}{cue}" if bloque else ""
+    return f'<aside class="notas">{previo}{cuerpo}</aside>'
+
+
+def _bloque_por_confirmar(data: dict) -> str:
+    """Bloque destacado al inicio de las notas de la portada con lo que hay que
+    verificar antes de grabar (data['por_confirmar'], lista de textos cortos)."""
+    items = data.get("por_confirmar") or []
+    if not items:
+        return ""
+    lineas = "".join(f'<div class="n-line">{_esc(t)}</div>' for t in items)
+    return f'<div class="n-pc"><h4>POR CONFIRMAR ANTES DE GRABAR</h4>{lineas}</div>'
 
 
 def _ficha_cart(data: dict) -> str:
@@ -126,14 +142,20 @@ def _slide_portada(num: int, data: dict, active: bool = True) -> str:
         f'<div class="ep-title">{_esc(data["juego"]).upper()}</div>'
         f'<div class="ep-sub">{_esc(data["gancho_sub"])}</div>'
         '</div>'
-        f'{_notas(data.get("notas", {}).get("portada"))}'
+        f'{_notas(data.get("notas", {}).get("portada"), _bloque_por_confirmar(data))}'
         '</section>'
     )
 
 
 def _slide_ficha(num: int, data: dict) -> str:
-    owned = ('<div class="ficha-owned">EN LA COLECCION</div>' if data.get("en_coleccion")
-             else '<div class="ficha-owned faltan">NO ESTA EN LA COLECCION</div>')
+    # en_coleccion: True | False | "familia" (no esta, pero hay algo de la familia
+    # del juego: se explica en la linea opcional familia_texto).
+    if data.get("en_coleccion") is True:
+        owned = '<div class="ficha-owned">EN LA COLECCION</div>'
+    else:
+        owned = '<div class="ficha-owned faltan">NO ESTA EN LA COLECCION</div>'
+        if data.get("en_coleccion") == "familia" and data.get("familia_texto"):
+            owned += f'<div class="ficha-familia">{_esc(data["familia_texto"])}</div>'
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
         '<div class="ficha-detail">'
@@ -375,6 +397,16 @@ nav.footer{position:fixed;bottom:0;left:0;right:0;height:64px;background:rgba(6,
 .nav-hint{font-family:'Share Tech Mono';font-size:13px;color:rgba(255,255,255,.4);letter-spacing:2px}
 """
 
+# CSS de los campos opcionales: solo se agrega al HTML cuando el DATA los usa,
+# asi una reseña que no los usa sale byte a byte igual que antes.
+CSS_POR_CONFIRMAR = """
+.notas .n-pc{border:2px solid var(--ye);background:rgba(255,210,63,.1);border-radius:4px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.notas .n-pc .n-line{border-left-color:var(--ye)}
+"""
+CSS_FAMILIA = """
+.ficha-familia{align-self:flex-start;font-family:'Share Tech Mono';font-size:21px;color:var(--cy);letter-spacing:1px;margin-top:-4px}
+"""
+
 SCRIPT = """
 const slides=document.querySelectorAll('.slide');const prevBtn=document.getElementById('prevBtn');
 const nextBtn=document.getElementById('nextBtn');const counter=document.getElementById('counter');const bar=document.getElementById('bar');
@@ -402,7 +434,17 @@ go(0);
 """
 
 
-def generar_resena(data: dict, out_slug: str) -> Path:
+def generar_resena(data: dict, out_slug: str, lint: bool = True) -> Path:
+    """Genera studio/resenas/<out_slug>.html. Corre scripts/resena_lint.py antes de
+    escribir: los errores lanzan ValueError (no se escribe nada), los avisos se
+    imprimen. `lint=False` o la variable de entorno RESENA_LINT=off lo saltan
+    (solo para excepciones historicas)."""
+    if lint and os.environ.get("RESENA_LINT", "").lower() != "off":
+        errores, avisos = revisar(data, out_slug)
+        if errores or avisos:
+            print(formatear(errores, avisos))
+        if errores:
+            raise ValueError(formatear(errores, avisos))
     slides = []
     num = 1
     if data.get("pedido"):
@@ -436,10 +478,15 @@ def generar_resena(data: dict, out_slug: str) -> Path:
     slides.append(_slide_veredicto(num, data))
     num += 1
     slides.append(_slide_cierre(num, data))
+    css = CSS
+    if data.get("por_confirmar"):
+        css += CSS_POR_CONFIRMAR
+    if data.get("en_coleccion") == "familia" and data.get("familia_texto"):
+        css += CSS_FAMILIA
     html = (
         '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
-        f'<title>RETROTARROS · RESEÑA · {_esc(data["juego"]).upper()}</title><style>{CSS}</style></head><body>'
+        f'<title>RETROTARROS · RESEÑA · {_esc(data["juego"]).upper()}</title><style>{css}</style></head><body>'
         '<div class="read-indicator no-capture">● MODO LECTURA (N)</div>'
         '<div class="notas-hotzone no-capture"></div>'
         '<button class="notas-toggle no-capture" id="notasToggle">📖 NOTAS (N)</button>'
@@ -458,4 +505,8 @@ def generar_resena(data: dict, out_slug: str) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     out = out_dir / f"{out_slug}.html"
     out.write_text(html, encoding="utf-8")
+    if data.get("por_confirmar"):
+        print("POR CONFIRMAR ANTES DE GRABAR:")
+        for t in data["por_confirmar"]:
+            print(f"  - {t}")
     return out

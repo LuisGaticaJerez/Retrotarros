@@ -212,6 +212,93 @@ def test_aviso_caja_chica():
             L.RUTA_CAJAS = original
 
 
+# ---------------------------------------------------------------- Task 3
+
+# SHA-256 del texto (saltos de linea normalizados al leer) del HTML que producia
+# generar_resena(DATA_VALIDA) ANTES de la integracion.
+HASH_ANTERIOR = "3f2c83398dfb4a3b2872ad1960533666f514166ad9fcc5d5d92b8ed6734b8e9c"
+SLUG_TMP = "_test-lint-tmp"
+
+
+def _ruta_tmp() -> Path:
+    import resena_deck as D
+    return D.REPO / "studio" / "resenas" / f"{SLUG_TMP}.html"
+
+
+def _generar(data: dict, **kw) -> str:
+    import resena_deck as D
+    try:
+        return D.generar_resena(data, SLUG_TMP, **kw).read_text(encoding="utf-8")
+    finally:
+        if _ruta_tmp().exists():
+            _ruta_tmp().unlink()
+
+
+def test_generar_con_errores_lanza_y_no_escribe():
+    import resena_deck as D
+    try:
+        D.generar_resena(_data(veredicto_tag="X"), SLUG_TMP)
+    except ValueError as exc:
+        assert "veredicto" in str(exc).lower()
+    else:
+        raise AssertionError("debia lanzar ValueError")
+    assert not _ruta_tmp().exists()
+
+
+def test_lint_false_permite_generar():
+    html = _generar(_data(veredicto_tag="X"), lint=False)
+    assert "<!DOCTYPE html>" in html
+
+
+def test_env_off():
+    import os
+    os.environ["RESENA_LINT"] = "off"
+    try:
+        html = _generar(_data(veredicto_tag="X"))
+    finally:
+        os.environ.pop("RESENA_LINT", None)
+    assert "<!DOCTYPE html>" in html
+
+
+def test_por_confirmar_en_portada():
+    html = _generar(_data(por_confirmar=["Ventas de 1998", "Version de consola"]))
+    marca = "POR CONFIRMAR ANTES DE GRABAR"
+    assert marca in html
+    assert html.index(marca) < html.index("<h4>INTRO</h4>")
+    assert "Ventas de 1998" in html and "Version de consola" in html
+    assert marca not in _generar(_data())
+
+
+def test_por_confirmar_escapa_html():
+    html = _generar(_data(por_confirmar=["Ventas <b>1&2</b>"]))
+    assert "Ventas &lt;b&gt;1&amp;2&lt;/b&gt;" in html
+    assert "<b>1&2" not in html
+
+
+def test_ficha_familia():
+    html = _generar(_data(en_coleccion="familia", familia_texto="Si tenemos MySims Kingdom (DS)"))
+    assert '<div class="ficha-owned faltan">NO ESTA EN LA COLECCION</div>' in html
+    assert '<div class="ficha-familia">Si tenemos MySims Kingdom (DS)</div>' in html
+    html = _generar(_data(en_coleccion="familia"))
+    assert '<div class="ficha-owned faltan">NO ESTA EN LA COLECCION</div>' in html
+    assert 'class="ficha-familia"' not in html
+
+
+def test_ficha_booleanos_sin_cambio():
+    html = _generar(_data(en_coleccion=True))
+    assert '<div class="ficha-owned">EN LA COLECCION</div>' in html
+    assert 'class="ficha-familia"' not in html
+    html = _generar(_data(en_coleccion=False))
+    assert '<div class="ficha-owned faltan">NO ESTA EN LA COLECCION</div>' in html
+    assert 'class="ficha-familia"' not in html
+
+
+def test_salida_identica_sin_campos_nuevos():
+    import hashlib
+    html = _generar(_data())
+    assert hashlib.sha256(html.encode("utf-8")).hexdigest() == HASH_ANTERIOR
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:
