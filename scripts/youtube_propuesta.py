@@ -181,7 +181,10 @@ def main() -> None:
               "| Tipo | Video | Hashtags actuales | Hashtags nuevos |", "|---|---|---|---|"]
     for p in props:
         lineas.append(f"| {p['tipo']}{' (revisar)' if p['revisar'] else ''} | {p['titulo'][:55].replace('|', '/')} | {' '.join(p['hashtags_actuales'][:8])} | {' '.join(p['hashtags_nuevos'])} |")
-    (REPO / "data" / "youtube" / f"propuesta-{hoy}.md").write_text("\n".join(lineas) + "\n", encoding="utf-8")
+    # el informe legible va a docs/canal/rendimiento/ (ver CLAUDE.md); el JSON queda en data/youtube/
+    informe = REPO / "docs" / "canal" / "rendimiento" / f"hashtags-propuesta-{hoy}.md"
+    informe.parent.mkdir(parents=True, exist_ok=True)
+    informe.write_text("\n".join(lineas) + "\n", encoding="utf-8")
     por_tipo: dict[str, int] = {}
     for p in props:
         por_tipo[p["tipo"]] = por_tipo.get(p["tipo"], 0) + 1

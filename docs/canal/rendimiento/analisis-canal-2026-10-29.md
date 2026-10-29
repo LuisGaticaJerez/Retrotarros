@@ -1,6 +1,6 @@
-# Análisis del canal: hashtags, tags y vistas de suscriptores (2026-10-30)
+# Análisis del canal: hashtags, tags y vistas de suscriptores (2026-10-29)
 
-Fuentes: inventario público con yt-dlp (`data/youtube/inventario-2026-10-30.json`, 88 videos, comparado con el del 14 de octubre después del cambio masivo de hashtags) y YouTube Analytics solo lectura (`data/youtube/analytics-2026-10-29.json`, periodo 27 sep a 27 oct; el periodo anterior, 29 ago a 27 sep, se consultó aparte). No se cambió nada en el canal.
+Fuentes: inventario público con yt-dlp (`data/youtube/inventario-2026-10-29.json`, 88 videos, comparado con el del 14 de octubre después del cambio masivo de hashtags) y YouTube Analytics solo lectura (`data/youtube/analytics-2026-10-29.json`, periodo 27 sep a 27 oct; el periodo anterior, 29 ago a 27 sep, se consultó aparte). No se cambió nada en el canal.
 
 ## Vistas y suscriptores
 
