@@ -1,7 +1,7 @@
 # Mejoras gráficas de las reseñas
 
 **Fecha:** 2026-10-29
-**Estado:** borrador para aprobación de Luis
+**Estado:** aprobado por Luis (2026-10-29), con la migración del backlog sin grabar incluida
 **Tamaño:** proyecto (siete cambios de render en `scripts/resena_deck.py`, campos nuevos en el DATA y extensiones del lint)
 
 ## Intención y por qué
@@ -17,7 +17,7 @@ Las reseñas se ven iguales de una a otra y varias slides son solo texto sobre f
 
 - No cambia la estructura (8 slides fijas, comparativa sin texto, notas ocultas).
 - No toca los HTML ya generados ni los 49 drivers existentes: sin la marca `grafica` todo sale como hoy.
-- No migra las reseñas del backlog a la gráfica nueva: eso exige investigar años por plataforma, compositores y viñetas de cada juego, y es una tarea aparte que se hace cuando se toque cada reseña.
+- Nunca migra una reseña grabada, programada o publicada: solo las confirmadas por Luis como sin grabar.
 - No incluye la cifra gancho en el contexto (idea E: descartada por Luis), ni el slide opcional de dato curioso, ni la etiqueta de comparativa.
 - No cambia las cajas: se usan las que ya hay en `studio/resenas/img/resenas/` (la caja en mejor resolución quedó descartada).
 
@@ -26,6 +26,20 @@ Las reseñas se ven iguales de una a otra y varias slides son solo texto sobre f
 - **A. Gráfica nueva por defecto, con `grafica="clasica"` para reproducir una reseña grabada.** Descartado tras la revisión: regenerar el driver de una reseña ya filmada la cambiaría en silencio, y solo Luis sabe cuáles están grabadas.
 - **B. Gráfica clásica por defecto y `grafica="nueva"` explícita en cada reseña nueva.** Elegido. Ningún driver existente cambia sin que alguien lo decida. Para que las nuevas no se olviden de pedirla, el lint avisa cuando falta la marca y `CLAUDE.md` lo exige para toda reseña nueva.
 - **C. Dos generadores separados.** Descartado: duplica CSS y JS de navegación y notas.
+
+## Fase 2: migración de las reseñas sin grabar
+
+Luis confirmó el 2026-10-29 que **ninguna de las 24 reseñas del backlog está grabada**: Aladdin, Altered Beast, Contra, Crash Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star Fox, Yoshi's Island, JoJo's Bizarre Adventure (pedida), God of War, Halo: Combat Evolved, Counter-Strike, Need for Speed: Underground 2, Kingdom Hearts, Age of Empires II, Diablo, Commandos: Behind Enemy Lines y The Sims. Solo esas se migran, una vez terminado el generador. Las publicadas o grabadas no se tocan.
+
+Por reseña:
+- Agregar `grafica="nueva"`.
+- `plataformas` con año por plataforma, tomados de las notas de la ficha (ya cruzados con dos fuentes) o verificados de nuevo si faltan.
+- `jugabilidad_vinetas` (3) armadas desde `jugabilidad_dato` y las notas de jugabilidad, sin crítica ni tildes.
+- `audiovisual_compositor` cuando las notas nombran compositores.
+- Si el lint marca errores (ej. falta TRAMA RESUMIDA o la mención de arcade en la ficha), ponerlas al día con las reglas vigentes: como no están grabadas, la regla de reseñas sí se aplica. Primero notas ocultas; el texto de pantalla solo se corrige si el lint lo exige.
+- Regenerar el HTML, las capturas (`python scripts/capture-slides.py resena-<slug>`) y revisar visualmente cada slide cambiada.
+- Commit con los HTML, y sync a Drive.
+- `proxima` queda sin completar: se agrega después de grabar.
 
 ## Decisiones de Luis
 
