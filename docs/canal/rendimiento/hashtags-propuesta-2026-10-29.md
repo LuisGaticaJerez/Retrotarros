@@ -9,7 +9,7 @@ Origen: `inventario-2026-10-29.json`. Solo lectura: nada se aplica hasta que se 
 | resena (revisar) | Montezuma's Revenge: el Atari que hoy entrena inteligen | #RetroReseñas #MontezumasRevenge #Atari2600 #Retrogaming #Retrotarros | #RetroReseñas #Atari2600 #Retrogaming #Retrotarros |
 | resena (revisar) | Cuatro juegos con el mismo nombre: Mighty Morphin Power | #RetroReseñas #PowerRangers #SNES #Retrogaming #Retrotarros | #RetroReseñas #Retrogaming #Retrotarros |
 | mundial | Los 10 mejores juegos de PS1 según la crítica | #playstation #ps1 #retrogaming #gaming #videojuegos #funny #fyp | #Top10 #PlayStation #Retrogaming #Videojuegos #Retrotarros |
-| resena (revisar) | Por qué Melee sigue siendo el Smash más jugado en torne | #SuperSmashBrosMelee #GameCube #Retrogaming #Gaming #Videojuegos #fyp | #RetroReseñas #Retrogaming #Retrotarros |
+| resena | Por qué Melee sigue siendo el Smash más jugado en torne | #SuperSmashBrosMelee #GameCube #Retrogaming #Gaming #Videojuegos #fyp | #RetroReseñas #SuperSmashBrosMelee #GameCube #Retrogaming #Retrotarros |
 | resena | Metal Warriors: el juego de mechs que casi fue de Ninte | #RetroReseñas #MetalWarriors #SNES #Retrogaming #Retrotarros | #RetroReseñas #MetalWarriors #SNES #Retrogaming #Retrotarros |
 | peores | Los 10 peores juegos de N64 (el #1 tiene récord Guinnes | #WorstGames #Nintendo64 #Top10 #Retrogaming #Retrotarros | #WorstGames #Nintendo64 #Top10 #Retrogaming #Retrotarros |
 | resena | Worms Armageddon: el juego de 1999 que Team17 parchó po | #RetroReseñas #WormsArmageddon #Retrogaming #Retrotarros | #RetroReseñas #WormsArmageddon #Retrogaming #Retrotarros |

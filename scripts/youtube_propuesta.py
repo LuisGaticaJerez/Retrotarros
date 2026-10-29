@@ -55,6 +55,7 @@ MANUAL = {
     "pHtdPA_CEIU": ("JewelMaster", "MegaDrive", "jewel master", "mega drive"),
     "geqtJjvYw7I": ("TopGear", "SNES", "top gear", "snes"),
     "Ub33C3AjKKU": ("Pokemon", "GameBoy", "pokemon rojo azul", "game boy"),
+    "UfFzmQnb-J4": ("SuperSmashBrosMelee", "GameCube", "super smash bros melee", "gamecube"),
 }
 # Videos que Luis ya habia curado a mano: se respeta su eleccion (WorstGames) dentro de la regla de 4 a 5.
 HASHTAGS_A_MANO = {"SXdGEd-uKdg": ["WorstGames", "Nintendo64", "Top10", "Retrogaming", "Retrotarros"]}
