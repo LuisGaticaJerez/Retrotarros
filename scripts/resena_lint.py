@@ -163,16 +163,12 @@ def formatear(errores: list[str], avisos: list[str]) -> str:
     return "\n".join(partes)
 
 
-def main(argv: list[str]) -> int:
-    """CLI: revisa el DATA de un driver sin generar nada. Ejecuta el driver con
-    generar_resena reemplazada por una funcion que solo captura (data, slug).
-    Devuelve 0 sin errores, 1 con errores, 2 por uso incorrecto o driver que
-    no llamo a generar_resena."""
+def capturar_driver(ruta: str) -> list[tuple[dict, str]]:
+    """Ejecuta un driver de reseña con generar_resena reemplazada por una funcion
+    que solo anota (data, out_slug): no se genera ningun archivo. Devuelve las
+    llamadas capturadas (lista vacia si el driver no llamo a generar_resena)."""
     import runpy
     import sys
-    if len(argv) != 1:
-        print("uso: python scripts/resena_lint.py .cache/gen_resena_<juego>.py")
-        return 2
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     import resena_deck
     capturado: list[tuple[dict, str]] = []
@@ -184,9 +180,20 @@ def main(argv: list[str]) -> int:
     original = resena_deck.generar_resena
     resena_deck.generar_resena = _captura
     try:
-        runpy.run_path(argv[0], run_name="__lint__")
+        runpy.run_path(ruta, run_name="__lint__")
     finally:
         resena_deck.generar_resena = original
+    return capturado
+
+
+def main(argv: list[str]) -> int:
+    """CLI: revisa el DATA de un driver sin generar nada.
+    Devuelve 0 sin errores, 1 con errores, 2 por uso incorrecto o driver que
+    no llamo a generar_resena."""
+    if len(argv) != 1:
+        print("uso: python scripts/resena_lint.py .cache/gen_resena_<juego>.py")
+        return 2
+    capturado = capturar_driver(argv[0])
     if not capturado:
         print("el driver no llamo a generar_resena")
         return 2

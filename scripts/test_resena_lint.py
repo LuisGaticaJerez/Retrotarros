@@ -331,6 +331,20 @@ def _driver_temporal(carpeta: Path, linea_data: str) -> Path:
     return ruta
 
 
+def test_capturar_driver():
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        ruta = _driver_temporal(Path(tmp), "T._data()")
+        capturado = L.capturar_driver(str(ruta))
+        assert len(capturado) == 1, capturado
+        assert capturado[0][1] == "resena-prueba"
+        assert capturado[0][0]["juego"] == "Juego de Prueba"
+        vacio = Path(tmp) / "sin_llamada.py"
+        vacio.write_text("x = 1\n", encoding="utf-8")
+        assert L.capturar_driver(str(vacio)) == []
+    assert not _ruta_tmp().parent.joinpath("resena-prueba.html").exists()
+
+
 def test_cli_driver_con_errores():
     import tempfile
     with tempfile.TemporaryDirectory() as tmp:
