@@ -12,6 +12,7 @@ generacion; los avisos solo se muestran. Diseño: docs/superpowers/specs/
 """
 from __future__ import annotations
 import re
+from pathlib import Path
 
 ESCALA_VEREDICTO = ("IMPRESCINDIBLE", "JUEGAZO", "MEMORABLE", "COLECCIONABLE")
 
@@ -25,6 +26,14 @@ BLOQUES_NOTAS = (
     "portada", "ficha", "contexto", "comparativa",
     "jugabilidad", "audiovisual", "veredicto", "cierre",
 )
+
+PALABRAS_CRITICA = (
+    "malo", "mala", "peor", "aburrido", "aburrida", "feo", "fea",
+    "no compite", "fracaso", "lento", "lenta", "mediocre",
+)
+
+# Carpeta de box arts de reseñas (los tests la reemplazan por una temporal).
+RUTA_CAJAS = Path(__file__).resolve().parent.parent / "studio" / "resenas" / "img" / "resenas"
 
 _TILDES = re.compile("[áéíóúüÁÉÍÓÚÜ]")
 
@@ -66,7 +75,79 @@ def revisar(data: dict, out_slug: str) -> tuple[list[str], list[str]]:
     if not es_pedido and out_slug.endswith("-pedido"):
         errores.append("el slug termina en '-pedido' pero el DATA no tiene 'pedido'")
 
+    avisos += _avisos(data)
     return errores, avisos
+
+
+def _sin_tildes(s: str) -> str:
+    for a, b in {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u", "ü": "u"}.items():
+        s = s.replace(a, b).replace(a.upper(), b.upper())
+    return s
+
+
+def _texto_bloque(bloque: dict) -> str:
+    partes = [str(bloque.get("titulo") or ""), str(bloque.get("cue") or "")]
+    partes += [str(t) for t in (bloque.get("lineas") or [])]
+    return " ".join(partes)
+
+
+def _avisos(data: dict) -> list[str]:
+    avisos: list[str] = []
+
+    palabras = len(str(data.get("contexto_texto") or "").split())
+    if palabras > 75:
+        avisos.append(f"contexto_texto tiene {palabras} palabras (meta: 50 a 70)")
+
+    for nombre in BLOQUES_NOTAS:
+        bloque = _bloque(data, nombre)
+        if not bloque:
+            avisos.append(f"falta el bloque de notas '{nombre}'")
+        elif _TILDES.search(_texto_bloque(bloque)):
+            avisos.append(f"tilde en notas.{nombre}")
+
+    for campo in CAMPOS_PANTALLA:
+        texto = _sin_tildes(str(data.get(campo) or "")).lower()
+        for palabra in PALABRAS_CRITICA:
+            if re.search(rf"\b{re.escape(palabra)}\b", texto):
+                avisos.append(f"posible critica dura en pantalla: '{palabra}' en {campo}")
+
+    lineas_ficha = " ".join(_lineas(data, "ficha")).lower()
+    if "·" in str(data.get("consola") or "") and "primer" not in lineas_ficha:
+        avisos.append("varias plataformas y notas.ficha sin linea que diga cual salio primero ('primera'/'primero')")
+
+    n_jug = len(_lineas(data, "jugabilidad"))
+    if _bloque(data, "jugabilidad") and n_jug < 3:
+        avisos.append(f"notas.jugabilidad tiene {n_jug} lineas (minimo 3 con mecanicas reales)")
+
+    todo_notas = " ".join(_texto_bloque(_bloque(data, n)) for n in BLOQUES_NOTAS).lower()
+    if "por confirmar" in todo_notas and not data.get("por_confirmar"):
+        avisos.append("las notas dicen 'por confirmar' pero el campo por_confirmar esta vacio")
+
+    avisos += _aviso_caja(data)
+    return avisos
+
+
+def _aviso_caja(data: dict) -> list[str]:
+    try:
+        from PIL import Image
+    except ImportError:
+        return []
+    clave = data.get("img_key") or _slug(str(data.get("juego") or ""))
+    ruta = RUTA_CAJAS / f"{clave}.jpg"
+    if not ruta.exists():
+        return []
+    try:
+        with Image.open(ruta) as im:
+            ancho = im.width
+    except OSError:
+        return []
+    if ancho < 400:
+        return [f"caja de {ancho} px de ancho (menos de 400 px): conviene bajar una mejor"]
+    return []
+
+
+def _slug(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", _sin_tildes(s.lower()).replace("ñ", "n")).strip("-")
 
 
 def formatear(errores: list[str], avisos: list[str]) -> str:

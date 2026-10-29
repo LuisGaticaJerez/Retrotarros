@@ -131,6 +131,87 @@ def test_campos_ausentes_o_none():
     assert errores == [], errores
 
 
+# ---------------------------------------------------------------- Task 2
+
+def test_valida_sin_avisos():
+    _, avisos = L.revisar(_data(), "resena-juego")
+    assert avisos == [], avisos
+
+
+def test_aviso_contexto_largo():
+    _, avisos = L.revisar(_data(contexto_texto=" ".join(["palabra"] * 76)), "resena-juego")
+    assert _hay(avisos, "76 palabras"), avisos
+    _, avisos = L.revisar(_data(contexto_texto=" ".join(["palabra"] * 70)), "resena-juego")
+    assert not _hay(avisos, "contexto_texto"), avisos
+
+
+def test_aviso_tildes_en_notas():
+    d = _data()
+    d["notas"]["portada"]["lineas"] = ["Presentate, él habla primero."]
+    errores, avisos = L.revisar(d, "resena-juego")
+    assert errores == [], errores
+    assert _hay(avisos, "tilde en notas"), avisos
+
+
+def test_aviso_critica_en_pantalla():
+    _, avisos = L.revisar(_data(veredicto_resumen="No compite ni de cerca con otros."), "resena-juego")
+    assert _hay(avisos, "no compite"), avisos
+    d = _data()
+    d["notas"]["veredicto"]["lineas"] = ["Critica de la epoca: no compite ni de cerca."]
+    _, avisos = L.revisar(d, "resena-juego")
+    assert avisos == [], avisos
+
+
+def test_aviso_orden_plataformas():
+    d = _data(consola="PC · PS2")
+    _, avisos = L.revisar(d, "resena-juego")
+    assert _hay(avisos, "primera"), avisos
+    d["notas"]["ficha"]["lineas"].append("Primera plataforma: PC, luego PS2. Sin arcade.")
+    _, avisos = L.revisar(d, "resena-juego")
+    assert not _hay(avisos, "primera"), avisos
+
+
+def test_aviso_jugabilidad_corta():
+    d = _data()
+    d["notas"]["jugabilidad"]["lineas"] = ["Una linea.", "Dos lineas."]
+    _, avisos = L.revisar(d, "resena-juego")
+    assert _hay(avisos, "jugabilidad"), avisos
+
+
+def test_aviso_bloques_faltantes():
+    d = _data()
+    del d["notas"]["cierre"]
+    _, avisos = L.revisar(d, "resena-juego")
+    assert _hay(avisos, "cierre"), avisos
+
+
+def test_aviso_por_confirmar_sin_campo():
+    d = _data()
+    d["notas"]["audiovisual"]["lineas"].append("Cifra de ventas: por confirmar en otra fuente.")
+    _, avisos = L.revisar(d, "resena-juego")
+    assert _hay(avisos, "por_confirmar"), avisos
+    d["por_confirmar"] = ["Cifra de ventas"]
+    _, avisos = L.revisar(d, "resena-juego")
+    assert not _hay(avisos, "por_confirmar"), avisos
+
+
+def test_aviso_caja_chica():
+    import tempfile
+    from PIL import Image
+    original = L.RUTA_CAJAS
+    with tempfile.TemporaryDirectory() as tmp:
+        L.RUTA_CAJAS = Path(tmp)
+        try:
+            Image.new("RGB", (256, 360)).save(Path(tmp) / "juego-de-prueba-inexistente.jpg")
+            _, avisos = L.revisar(_data(), "resena-juego")
+            assert _hay(avisos, "256 px"), avisos
+            Image.new("RGB", (600, 800)).save(Path(tmp) / "juego-de-prueba-inexistente.jpg")
+            _, avisos = L.revisar(_data(), "resena-juego")
+            assert not _hay(avisos, "caja"), avisos
+        finally:
+            L.RUTA_CAJAS = original
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:
