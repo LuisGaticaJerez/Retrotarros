@@ -22,6 +22,8 @@ CAMPOS_PANTALLA = (
     "veredicto_resumen", "cierre_sub", "familia_texto",
 )
 
+GRAFICAS = ("nueva", "clasica")
+
 BLOQUES_NOTAS = (
     "portada", "ficha", "contexto", "comparativa",
     "jugabilidad", "audiovisual", "veredicto", "cierre",
@@ -63,6 +65,20 @@ def revisar(data: dict, out_slug: str) -> tuple[list[str], list[str]]:
         if valor and _TILDES.search(str(valor)):
             errores.append(f"tilde en texto de pantalla: {campo}")
 
+    for campo, texto in _textos_nuevos(data):
+        if _TILDES.search(texto):
+            errores.append(f"tilde en texto de pantalla: {campo}")
+
+    grafica = data.get("grafica")
+    if grafica is not None and grafica not in GRAFICAS:
+        errores.append(f"grafica '{grafica}' fuera de {GRAFICAS}")
+
+    vinetas = data.get("jugabilidad_vinetas")
+    if vinetas is not None:
+        n = len(vinetas) if isinstance(vinetas, (list, tuple)) else -1
+        if n != 3:
+            errores.append(f"jugabilidad_vinetas debe tener 3 elementos (tiene {n})")
+
     # la marca puede ir en el titulo del bloque o en una de sus lineas
     trama = [str(_bloque(data, "contexto").get("titulo") or "")] + _lineas(data, "contexto")
     if not any("trama resumida" in t.lower() for t in trama):
@@ -93,6 +109,28 @@ def _texto_bloque(bloque: dict) -> str:
     return " ".join(partes)
 
 
+def _textos_nuevos(data: dict) -> list[tuple[str, str]]:
+    """Pares (campo, texto) de los textos de pantalla de la grafica nueva. Ignora
+    sin fallar todo lo que no tenga la forma esperada."""
+    pares: list[tuple[str, str]] = []
+    vinetas = data.get("jugabilidad_vinetas")
+    if isinstance(vinetas, (list, tuple)):
+        for i, v in enumerate(vinetas):
+            if isinstance(v, (list, tuple)):
+                pares += [(f"jugabilidad_vinetas[{i}]", t) for t in v[:2] if isinstance(t, str)]
+    compositor = data.get("audiovisual_compositor")
+    if isinstance(compositor, str):
+        pares.append(("audiovisual_compositor", compositor))
+    proxima = data.get("proxima")
+    if isinstance(proxima, dict):
+        pares += [(f"proxima.{k}", proxima[k]) for k in ("juego", "consola") if isinstance(proxima.get(k), str)]
+    plataformas = data.get("plataformas")
+    if isinstance(plataformas, (list, tuple)):
+        pares += [("plataformas", p[0]) for p in plataformas
+                  if isinstance(p, (list, tuple)) and p and isinstance(p[0], str)]
+    return pares
+
+
 def _avisos(data: dict) -> list[str]:
     avisos: list[str] = []
 
@@ -107,11 +145,21 @@ def _avisos(data: dict) -> list[str]:
         elif _TILDES.search(_texto_bloque(bloque)):
             avisos.append(f"tilde en notas.{nombre}")
 
-    for campo in CAMPOS_PANTALLA:
-        texto = _sin_tildes(str(data.get(campo) or "")).lower()
+    textos = [(c, str(data.get(c) or "")) for c in CAMPOS_PANTALLA] + _textos_nuevos(data)
+    for campo, bruto in textos:
+        texto = _sin_tildes(bruto).lower()
         for palabra in PALABRAS_CRITICA:
             if re.search(rf"\b{re.escape(palabra)}\b", texto):
                 avisos.append(f"posible critica dura en pantalla: '{palabra}' en {campo}")
+
+    grafica = data.get("grafica")
+    if grafica is None:
+        avisos.append('sin la marca grafica: sale con la grafica clasica; las reseñas nuevas deben llevar grafica="nueva"')
+    elif grafica == "nueva":
+        if not data.get("jugabilidad_vinetas"):
+            avisos.append("grafica nueva sin jugabilidad_vinetas (la slide usa el bloque de texto de hoy)")
+        if "·" in str(data.get("consola") or "") and not data.get("plataformas"):
+            avisos.append("grafica nueva con varias plataformas y falta el campo plataformas (chips sin año)")
 
     lineas_ficha = " ".join(_lineas(data, "ficha")).lower()
     if "·" in str(data.get("consola") or "") and "primer" not in lineas_ficha:

@@ -27,6 +27,7 @@ DATA_VALIDA = {
     "developer": "Estudio Ejemplo",
     "genero": "Accion",
     "en_coleccion": False,
+    "grafica": "clasica",
     "contexto_texto": CONTEXTO_OK,
     "jugabilidad_dato": "Controlas a un personaje y resuelves misiones con el mouse.",
     "audiovisual_dato": "Graficos 2D coloridos y musica pegajosa.",
@@ -360,6 +361,62 @@ def test_cli_driver_valido():
         assert L.main([str(ruta)]) == 0
     assert L.main([]) == 2  # uso incorrecto
     assert not _ruta_tmp().parent.joinpath("resena-prueba.html").exists()
+
+
+# ---------------------------------------------------------------- Grafica nueva
+
+VINETAS_OK = [["CONTROLAS CON EL MOUSE", "Clic en un objeto y eliges la accion"],
+              ["OCHO NECESIDADES", "Hambre, baño, energia y mas"],
+              ["CONSTRUYE TU CASA", "20.000 simoleones para empezar"]]
+
+
+def test_grafica_valor_invalido():
+    errores, _ = L.revisar(_data(grafica="otra"), "resena-juego")
+    assert _hay(errores, "grafica"), errores
+
+
+def test_grafica_ausente_avisa():
+    d = _data()
+    del d["grafica"]
+    _, avisos = L.revisar(d, "resena-juego")
+    assert _hay(avisos, 'grafica="nueva"'), avisos
+    for valor in ("clasica", "nueva"):
+        _, avisos = L.revisar(_data(grafica=valor), "resena-juego")
+        assert not _hay(avisos, "sin la marca grafica"), avisos
+
+
+def test_vinetas_cantidad():
+    assert _hay(L.revisar(_data(jugabilidad_vinetas=VINETAS_OK[:2]), "resena-juego")[0], "jugabilidad_vinetas")
+    assert _hay(L.revisar(_data(jugabilidad_vinetas=VINETAS_OK + [["D", "d"]]), "resena-juego")[0], "jugabilidad_vinetas")
+    assert L.revisar(_data(jugabilidad_vinetas=VINETAS_OK), "resena-juego")[0] == []
+
+
+def test_vinetas_tilde_y_critica():
+    malas = [["ACCIÓN", "texto"]] + VINETAS_OK[1:]
+    assert _hay(L.revisar(_data(jugabilidad_vinetas=malas), "resena-juego")[0], "jugabilidad_vinetas")
+    duras = [["CONTROLES", "Un manejo aburrido"]] + VINETAS_OK[1:]
+    errores, avisos = L.revisar(_data(jugabilidad_vinetas=duras), "resena-juego")
+    assert errores == [] and _hay(avisos, "aburrido"), (errores, avisos)
+
+
+def test_textos_nuevos_con_tilde():
+    assert _hay(L.revisar(_data(audiovisual_compositor="Jérry Martin"), "resena-juego")[0], "audiovisual_compositor")
+    assert _hay(L.revisar(_data(proxima={"juego": "Épico", "consola": "PS2", "anio": "2005"}), "resena-juego")[0], "proxima")
+
+
+def test_nueva_sin_vinetas_ni_plataformas_avisa():
+    _, avisos = L.revisar(_data(grafica="nueva"), "resena-juego")
+    assert _hay(avisos, "jugabilidad_vinetas"), avisos
+    _, avisos = L.revisar(_data(grafica="nueva", consola="PC · PS2"), "resena-juego")
+    assert _hay(avisos, "campo plataformas"), avisos
+    _, avisos = L.revisar(_data(grafica="nueva", consola="PC · PS2", plataformas=[["PC", "2000"], ["PS2", "2003"]]), "resena-juego")
+    assert not _hay(avisos, "campo plataformas"), avisos
+
+
+def test_textos_nuevos_mal_formados_no_fallan():
+    d = _data(jugabilidad_vinetas=[None, 5, ["solo uno"]], proxima="texto", plataformas=[None, ["PC"]])
+    errores, avisos = L.revisar(d, "resena-juego")
+    assert isinstance(errores, list) and isinstance(avisos, list)
 
 
 # ---------------------------------------------------------------- runner

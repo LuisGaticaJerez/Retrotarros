@@ -68,6 +68,12 @@ def _esc(s: str) -> str:
     return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+def _nueva(data: dict) -> bool:
+    """La grafica nueva (portada con caja, chips, escala, viñetas...) solo se activa con
+    data['grafica'] == 'nueva'. Sin la marca, o con 'clasica', el HTML sale como siempre."""
+    return data.get("grafica") == "nueva"
+
+
 def _notas(bloque: dict | None, previo: str = "") -> str:
     """<aside class="notas"> por slide. bloque = {'titulo':.., 'lineas':[...], 'cue': '...'}
     `previo` es HTML que va antes del titulo del bloque (ej. POR CONFIRMAR)."""
