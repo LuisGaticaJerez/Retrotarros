@@ -1,6 +1,6 @@
 # Prueba de anuncios GameCube: resultado (14 al 28 de octubre de 2026)
 
-Campaña "Prueba horas - rankings" (Google Ads, cuenta 235-730-4642), video zzo5Hr6KGG0, presupuesto 667 CLP/día (unos 10.000 CLP en total), CPV objetivo 12 CLP. Datos de YouTube Analytics medidos el 2026-10-29.
+Campaña "Prueba horas - rankings" (cuenta de Google Ads del canal), video zzo5Hr6KGG0, presupuesto 667 CLP/día (unos 10.000 CLP en total), CPV objetivo 12 CLP. Datos de YouTube Analytics medidos el 2026-10-29.
 
 ## Video zzo5Hr6KGG0, periodo completo
 

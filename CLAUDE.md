@@ -190,6 +190,7 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 | `docs/canal/briefings-compositores.md` | Fichas de compositores (Kondo, Uematsu, Mitsuda, Yamaoka, Wise, Kirkhope, etc.). Documento vivo. |
 | `docs/canal/guiones-shorts.md` | Guiones lane Luis: timings, B-roll, título YouTube, caption, hashtags, datos de respaldo. Documento vivo. |
 | `docs/canal/guia-youtube-viral.md` | **Playbook de virality YouTube** (título, miniatura, descripción, hashtags, capítulos). Toda `descripcion-{slug}.md` lo sigue. |
+| `docs/canal/rendimiento/` | **Informes de rendimiento del canal** (análisis de vistas y suscriptores, pruebas de anuncios, propuestas de hashtags) con un `README.md` que trae el índice y la tabla de seguimiento. Regla de uso en "Rendimiento del canal y anuncios". |
 | `docs/descripciones/descripcion-{slug}.md` | Descripción YouTube lista para pegar (episodios largos): títulos, resumen, capítulos con timestamps, hashtags, tags. Sigue `docs/canal/guia-youtube-viral.md`. Automático al cerrar el episodio (ver "Kit de publicación YouTube automático"). |
 | `docs/descripciones/descripcion-tarroshort-{slug}.md` | Igual que arriba, para TarroShorts. Sin capítulos ni tags de campo (no aplican a shorts). |
 | `docs/descripciones/descripcion-resena-{slug}.md` | Igual que arriba, para reseñas. Sin capítulos, **pero CON la sección "Tags YouTube (keywords)"** (~15-20 tags, bajo 500 caracteres; Luis 2026-10-11). |
@@ -258,6 +259,16 @@ Cada vez que se cierra un **episodio largo**, un **TarroShort**, o una **reseña
 **Cuándo:** al cerrar cada pieza — mismo momento en que se termina de armar y verificar el HTML/short/reseña (capturas + render si aplica), antes de preguntar por push/sync. No esperar a que Luis lo pida.
 
 **Herramienta para reseñas (Luis 2026-10-28):** `python scripts/resena_kit.py .cache/gen_resena_<juego>.py` crea el esqueleto del kit (hashtags, tags con la cola fija, estructura, CTA y pie ya rellenos; nunca pisa un kit existente). Lo humano queda como `[REDACTAR: ...]` y lo escribe Claude a mano con la voz del canal: nada de prosa automática, porque se lee robótica. Antes de pegar el kit en el chat, `python scripts/resena_kit.py --revisar docs/descripciones/descripcion-<slug>.md` verifica que no queden marcadores, que los tags no pasen de 500 caracteres (15 a 25 tags), que los hashtags sean 4 o 5 con `#RetroReseñas` primero y `#Retrotarros` último, que estén el CTA y el comentario fijado, y que no se haya colado voseo. Diseño en `docs/superpowers/specs/2026-10-28-resena-kit-design.md`.
+
+## Rendimiento del canal y anuncios (regla) — Luis 2026-10-30
+
+Todo lo que mide cómo anda el canal (análisis de vistas, suscriptores, hashtags y tags; pruebas de anuncios, campañas y su costo) es **parte del canal** y se guarda ordenado para usarlo después, no suelto:
+
+- **Informe legible** → `docs/canal/rendimiento/<tipo>-<tema>-AAAA-MM-DD.md` (tipos: `analisis`, `anuncios`, `hashtags`).
+- **Datos crudos** (JSON de los scripts, respaldos) → `data/youtube/`.
+- **Índice y seguimiento** → `docs/canal/rendimiento/README.md`: cada informe nuevo suma su línea en "Informes" y, si trae cifras del canal, una fila en "Seguimiento" (mismas columnas siempre).
+- Sin números de cuenta, claves ni datos de acceso en estos documentos. Cualquier cambio en el canal a partir de un informe (hashtags, títulos) pasa por `scripts/youtube_aplicar.py`: primero en prueba, y se aplica solo con el dale de Luis.
+- Aplica a todas las sesiones, incluidas las que miden anuncios o campañas por su cuenta: si dejan un documento en otro lugar, se mueve aquí.
 
 ## Extracción de B-roll desde gameplays
 
