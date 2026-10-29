@@ -42,7 +42,7 @@ def test_hashtag_juego():
 def test_hashtag_consola():
     assert K.hashtag_consola(_data(consola="SNES · Sega Genesis")) == "#SNES"
     assert K.hashtag_consola(_data(consola="PC · Mac · PlayStation 2")) == "#PC"
-    assert K.hashtag_consola(_data(consola="Sega Genesis")) == "#SegaGenesis"
+    assert K.hashtag_consola(_data(consola="Sega Genesis")) == "#MegaDrive"  # alias del canal
     assert K.hashtag_consola(_data(consola="")) == ""
     d = _data()
     del d["consola"]
@@ -193,6 +193,52 @@ def test_cli_revisar():
         assert K.main(["--revisar", str(malo)]) == 1
         assert K.main(["--revisar", str(bueno)]) == 0
         assert K.main(["--revisar", str(Path(tmp) / "no-existe.md")]) == 2
+
+
+# ---------------------------------------------------------------- Revision final
+
+def test_hashtag_consola_con_parentesis_y_alias():
+    casos = {
+        "Super Nintendo (SNES)": "#SNES",
+        "PC (Windows)": "#PC",
+        "MS-DOS (PC) · Super Nintendo (SNES)": "#PC",
+        "PlayStation 2": "#PS2",
+        "Sega Genesis / Mega Drive": "#MegaDrive",
+        "Arcade (Neo Geo MVS)": "#NeoGeo",
+        "Nintendo Entertainment System": "#NES",
+    }
+    for consola, esperado in casos.items():
+        assert K.hashtag_consola(_data(consola=consola)) == esperado, (consola, K.hashtag_consola(_data(consola=consola)))
+
+
+def test_anio_compuesto_usa_el_primer_anio():
+    kit = K.esqueleto(_data(anio="1987 (arcade) / 1988 (NES)"), "resena-juego", "2026-10-28")
+    assert "Volvemos a 1987 para revisar Juego de Prueba" in kit
+    assert "Juego de Prueba (1987):" in kit
+    assert "juego de prueba 1987" in K.tags(_data(anio="1987 (arcade) / 1988 (NES)"))
+    assert "(arcade)" not in K.tags(_data(anio="1987 (arcade) / 1988 (NES)"))
+
+
+def test_tags_plataformas_y_developer_limpios():
+    t = K.tags(_data(consola="Super Nintendo (SNES) · Sega Genesis / Mega Drive", developer="Rare, Ltd."))
+    lista = [x.strip() for x in t.split(",")]
+    for x in ("super nintendo", "sega genesis", "mega drive", "rare ltd."):
+        assert x in t, (x, t)
+    assert not any("(" in x or ")" in x or "/" in x for x in lista), lista
+    assert "ltd." not in lista
+
+
+def test_tags_genero_compuesto_se_separa():
+    lista = [x.strip() for x in K.tags(_data(genero="Accion / RPG (hibrido)")).split(",")]
+    assert "accion" in lista and "rpg" in lista, lista
+    assert not any("/" in x or "(" in x for x in lista), lista
+
+
+def test_esqueleto_pide_confirmar_datos_mecanicos():
+    kit = K.esqueleto(_data(), "resena-juego", "2026-10-28")
+    aviso = "[REDACTAR: confirmar con tildes el nombre del juego, el año y los hashtags (#Juego #Consola)]"
+    assert aviso in kit
+    assert kit.index(aviso) < kit.index(K.hashtags(_data()))
 
 
 # ---------------------------------------------------------------- runner

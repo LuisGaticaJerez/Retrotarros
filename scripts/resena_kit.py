@@ -45,8 +45,45 @@ def hashtag_juego(data: dict) -> str:
     return "#" + camel if camel else ""
 
 
+# Nombres de consola como los usa el canal en sus hashtags (prefijo en minusculas -> hashtag).
+_ALIAS_CONSOLAS = (
+    ("neo geo", "NeoGeo"), ("playstation 2", "PS2"), ("playstation 3", "PS3"),
+    ("sega genesis", "MegaDrive"), ("sega mega drive", "MegaDrive"), ("mega drive", "MegaDrive"),
+    ("super nintendo", "SNES"), ("nintendo entertainment system", "NES"), ("ms-dos", "PC"),
+)
+
+
+def _sin_parentesis(texto: str) -> str:
+    return re.sub(r"\s*\([^)]*\)", "", texto).strip()
+
+
+def _plataformas(consola: str) -> list[str]:
+    """Plataformas de la ficha, separadas por · o /, sin parentesis. 'Arcade (Neo Geo MVS)'
+    se queda con lo de adentro: 'Neo Geo MVS'."""
+    salida: list[str] = []
+    for p in re.split(r"[·/]", consola):
+        m = re.match(r"\s*arcade\s*\((.+)\)\s*$", p, re.IGNORECASE)
+        p = m.group(1).strip() if m else _sin_parentesis(p.strip())
+        if p:
+            salida.append(p)
+    return salida
+
+
+def _anio(data: dict) -> str:
+    """Primer año de 4 digitos ('1987 (arcade) / 1988 (NES)' -> '1987')."""
+    bruto = str(data.get("anio") or "").strip()
+    m = re.search(r"\d{4}", bruto)
+    return m.group(0) if m else bruto
+
+
 def hashtag_consola(data: dict) -> str:
-    primera = re.split(r"[·/]", str(data.get("consola") or ""))[0]
+    plataformas = _plataformas(str(data.get("consola") or ""))
+    if not plataformas:
+        return ""
+    primera = plataformas[0]
+    for prefijo, hashtag in _ALIAS_CONSOLAS:
+        if primera.lower().startswith(prefijo):
+            return "#" + hashtag
     camel = _camel(primera)
     return "#" + camel if camel else ""
 
@@ -57,21 +94,19 @@ def hashtags(data: dict) -> str:
     return " ".join(p for p in partes if p)
 
 
-def _sin_parentesis(texto: str) -> str:
-    return re.sub(r"\s*\([^)]*\)", "", texto).strip()
-
-
 def tags(data: dict) -> str:
     juego = str(data.get("juego") or "").strip().lower()
-    anio = str(data.get("anio") or "").strip()
+    anio = _anio(data)
     candidatos: list[str] = []
     if juego:
         candidatos += [juego, f"{juego} reseña"]
         if anio:
             candidatos.append(f"{juego} {anio}")
-    candidatos.append(_sin_parentesis(str(data.get("developer") or "")).lower())
-    candidatos += [p.strip().lower() for p in str(data.get("consola") or "").split("·")]
-    candidatos.append(_sin_parentesis(str(data.get("genero") or "")).lower())
+    for dev in re.split(r"[·/]", _sin_parentesis(str(data.get("developer") or ""))):
+        candidatos.append(dev.replace(",", "").strip().lower())
+    candidatos += [p.lower() for p in _plataformas(str(data.get("consola") or ""))]
+    candidatos += [g.strip().lower() for g in
+                   re.split(r"[/·]", _sin_parentesis(str(data.get("genero") or "")))]
     candidatos += COLA_TAGS
     vistos: list[str] = []
     for t in candidatos:
@@ -82,7 +117,7 @@ def tags(data: dict) -> str:
 
 def esqueleto(data: dict, out_slug: str, hoy: str) -> str:
     juego = str(data.get("juego") or "")
-    anio = str(data.get("anio") or "")
+    anio = _anio(data)
     consola = str(data.get("consola") or "")
     agradecer = "\n[REDACTAR: agradecer a quien lo pidió]" if data.get("pedido") else ""
     return (
@@ -99,6 +134,7 @@ def esqueleto(data: dict, out_slug: str, hoy: str) -> str:
         f"[REDACTAR: historia, cómo se juega hoy y comparativa]{agradecer}\n\n"
         "[REDACTAR: pregunta a la comunidad] Cuéntanos en los comentarios 👇\n\n"
         f"{CTA}\n\n"
+        "[REDACTAR: confirmar con tildes el nombre del juego, el año y los hashtags (#Juego #Consola)]\n"
         f"{hashtags(data)}\n"
         "```\n\n"
         "---\n\n"
