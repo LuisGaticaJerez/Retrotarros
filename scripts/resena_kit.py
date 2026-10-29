@@ -140,10 +140,85 @@ def crear(ruta_driver: str, carpeta: Path | None = None, hoy: str | None = None)
     return codigo
 
 
+_VOSEO = re.compile(r"\b(tenés|querés|sabés|decime|elegís|defendés|vos)\b", re.IGNORECASE)
+
+
+def _secciones(texto: str) -> dict[str, str]:
+    """Cuerpo de cada seccion '## ...' del kit, indexado por el titulo."""
+    partes = re.split(r"\n## ", texto)
+    return {p.split("\n", 1)[0].strip(): p.split("\n", 1)[1] if "\n" in p else "" for p in partes[1:]}
+
+
+def _bloque_codigo(cuerpo: str | None) -> str | None:
+    m = re.search(r"```\n(.*?)```", cuerpo or "", re.DOTALL)
+    return m.group(1) if m else None
+
+
+def _seccion(secciones: dict[str, str], prefijo: str) -> str | None:
+    for titulo, cuerpo in secciones.items():
+        if titulo.startswith(prefijo):
+            return cuerpo
+    return None
+
+
+def revisar_kit(texto: str) -> list[str]:
+    """Errores de un kit terminado. Lista vacia = listo para pegar en YouTube."""
+    texto = texto.replace("\r\n", "\n")
+    errores: list[str] = []
+    pendientes = texto.count("[REDACTAR")
+    if pendientes:
+        errores.append(f"quedan {pendientes} marcadores [REDACTAR sin redactar")
+    secciones = _secciones(texto)
+
+    desc = _bloque_codigo(_seccion(secciones, "Descripción"))
+    if desc is None:
+        errores.append("falta el bloque de la descripción")
+    else:
+        if "Suscríbete a RETROTARROS" not in desc:
+            errores.append("falta el CTA de suscripción en la descripción")
+        lineas = [l for l in desc.splitlines() if l.startswith("#")]
+        marcas = lineas[-1].split() if lineas else []
+        if not 4 <= len(marcas) <= 5:
+            errores.append(f"hashtags: hay {len(marcas)} (deben ser 4 o 5)")
+        if marcas and marcas[0] != "#RetroReseñas":
+            errores.append("el primer hashtag debe ser #RetroReseñas")
+        if marcas and marcas[-1] != "#Retrotarros":
+            errores.append("el último hashtag debe ser #Retrotarros")
+
+    tags_txt = _bloque_codigo(_seccion(secciones, "Tags YouTube"))
+    if tags_txt is None:
+        errores.append("falta la sección de tags")
+    else:
+        if len(tags_txt.strip()) > 500:
+            errores.append(f"el bloque de tags mide {len(tags_txt.strip())} caracteres (máximo 500)")
+        n = len([t for t in tags_txt.split(",") if t.strip()])
+        if not 15 <= n <= 25:
+            errores.append(f"tags: hay {n} (deben ser entre 15 y 25)")
+
+    comentario = _bloque_codigo(_seccion(secciones, "Comentario fijado"))
+    if not comentario or not comentario.strip():
+        errores.append("falta el comentario fijado")
+
+    for m in sorted({m.group(0).lower() for m in _VOSEO.finditer(texto)}):
+        errores.append(f"voseo rioplatense: '{m}'")
+    return errores
+
+
 def main(argv: list[str]) -> int:
+    if len(argv) == 2 and argv[0] == "--revisar":
+        ruta = Path(argv[1])
+        if not ruta.exists():
+            print(f"no existe: {ruta}")
+            return 2
+        errores = revisar_kit(ruta.read_text(encoding="utf-8"))
+        for e in errores:
+            print(f"  - {e}")
+        print(f"{ruta.name}: {len(errores)} errores")
+        return 1 if errores else 0
     if len(argv) == 1 and not argv[0].startswith("--"):
         return crear(argv[0])
     print("uso: python scripts/resena_kit.py .cache/gen_resena_<juego>.py")
+    print("     python scripts/resena_kit.py --revisar docs/descripciones/descripcion-<slug>.md")
     return 2
 
 

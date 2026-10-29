@@ -45,7 +45,7 @@ Contenido, en el formato de los kits vigentes:
 `python scripts/resena_kit.py --revisar docs/descripciones/descripcion-<slug>.md` devuelve código 1 si hay errores:
 
 - Queda algún `[REDACTAR`.
-- El bloque de tags pasa de 500 caracteres o tiene menos de 15 o más de 20 tags.
+- El bloque de tags pasa de 500 caracteres o tiene menos de 15 o más de 25 tags.
 - Los hashtags no son 4 o 5, o el primero no es `#RetroReseñas`, o el último no es `#Retrotarros`.
 - Falta el CTA de suscripción o el comentario fijado.
 - Hay voseo rioplatense (lista corta: tenés, querés, sabés, decime, elegís, defendés, "vos "), porque ya se colaron antes en kits de TarroShorts.
@@ -53,7 +53,7 @@ Contenido, en el formato de los kits vigentes:
 ## Decisiones tomadas por mí (para que las revises)
 
 - La primera plataforma de `consola` como hashtag de consola.
-- El tope inferior de 15 tags y el superior de 20 (la guía dice "~15-20").
+- El tope inferior de 15 tags y el superior de 25: la guía dice "~15-20" (aproximado) y los kits reales de The Sims y Commandos tienen 22 y 21; el límite duro es el de 500 caracteres. Ajustado tras la prueba real.
 - Código de salida 2 cuando el kit ya existe.
 - La lista corta de voseo es heurística y puede ampliarse.
 

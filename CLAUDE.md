@@ -250,6 +250,8 @@ Cada vez que se cierra un **episodio largo**, un **TarroShort**, o una **reseña
 
 **Cuándo:** al cerrar cada pieza — mismo momento en que se termina de armar y verificar el HTML/short/reseña (capturas + render si aplica), antes de preguntar por push/sync. No esperar a que Luis lo pida.
 
+**Herramienta para reseñas (Luis 2026-10-28):** `python scripts/resena_kit.py .cache/gen_resena_<juego>.py` crea el esqueleto del kit (hashtags, tags con la cola fija, estructura, CTA y pie ya rellenos; nunca pisa un kit existente). Lo humano queda como `[REDACTAR: ...]` y lo escribe Claude a mano con la voz del canal: nada de prosa automática, porque se lee robótica. Antes de pegar el kit en el chat, `python scripts/resena_kit.py --revisar docs/descripciones/descripcion-<slug>.md` verifica que no queden marcadores, que los tags no pasen de 500 caracteres (15 a 25 tags), que los hashtags sean 4 o 5 con `#RetroReseñas` primero y `#Retrotarros` último, que estén el CTA y el comentario fijado, y que no se haya colado voseo. Diseño en `docs/superpowers/specs/2026-10-28-resena-kit-design.md`.
+
 ## Extracción de B-roll desde gameplays
 
 Para resumir un gameplay largo (45–60 min de YouTube) en clips cortos listos para edición:

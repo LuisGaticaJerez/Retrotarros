@@ -107,6 +107,94 @@ def test_crear_dos_llamadas():
         assert (carpeta / "descripcion-resena-dos.md").exists()
 
 
+# ---------------------------------------------------------------- Task 3
+
+def _esq() -> str:
+    return K.esqueleto(_data(), "resena-juego", "2026-10-28")
+
+
+def _completo(kit: str | None = None) -> str:
+    """El esqueleto con cada marcador reemplazado por texto (como lo dejaria quien redacta)."""
+    import re
+    return re.sub(r"\[REDACTAR[^\]]*\]", "uno, dos, tres, cuatro", kit or _esq())
+
+
+def _tags_ok() -> str:
+    return K.tags(_data()).replace(K.MARCADOR_TAGS, "uno, dos, tres, cuatro")
+
+
+def _hay(mensajes: list[str], fragmento: str) -> bool:
+    return any(fragmento.lower() in m.lower() for m in mensajes)
+
+
+def test_revisar_esqueleto_falla():
+    assert _hay(K.revisar_kit(_esq()), "[REDACTAR")
+
+
+def test_revisar_kit_completo():
+    assert K.revisar_kit(_completo()) == [], K.revisar_kit(_completo())
+
+
+def test_revisar_tags_largos():
+    kit = _completo().replace(_tags_ok(), ", ".join(["a" * 30] * 18))
+    errores = K.revisar_kit(kit)
+    assert _hay(errores, "500"), errores
+
+
+def test_revisar_cantidad_tags():
+    base = _completo()
+    pocos = base.replace(_tags_ok(), ", ".join(f"t{i}" for i in range(14)))
+    muchos = base.replace(_tags_ok(), ", ".join(f"t{i}" for i in range(26)))
+    assert _hay(K.revisar_kit(pocos), "tags"), K.revisar_kit(pocos)
+    assert _hay(K.revisar_kit(muchos), "tags"), K.revisar_kit(muchos)
+
+
+def test_revisar_hashtags():
+    base = _completo()
+    linea = K.hashtags(_data())
+    ok4 = base.replace(linea, "#RetroReseñas #JuegoDePrueba #Retrogaming #Retrotarros")
+    assert K.revisar_kit(ok4) == [], K.revisar_kit(ok4)
+    seis = base.replace(linea, "#RetroReseñas #A #B #C #D #Retrotarros")
+    assert _hay(K.revisar_kit(seis), "hashtags")
+    primero = base.replace(linea, "#Retro #A #B #Retrogaming #Retrotarros")
+    assert _hay(K.revisar_kit(primero), "#RetroReseñas")
+    ultimo = base.replace(linea, "#RetroReseñas #A #B #Retrogaming #Otro")
+    assert _hay(K.revisar_kit(ultimo), "#Retrotarros")
+
+
+def test_revisar_falta_cta_o_comentario():
+    base = _completo()
+    sin_cta = base.replace(CTA, "")
+    assert _hay(K.revisar_kit(sin_cta), "suscri"), K.revisar_kit(sin_cta)
+    ini = base.index("## Comentario fijado")
+    fin = base.index("---\n\n**Slug")
+    sin_comentario = base[:ini] + base[fin:]
+    assert _hay(K.revisar_kit(sin_comentario), "comentario fijado")
+
+
+def test_revisar_voseo():
+    base = _completo()
+    assert _hay(K.revisar_kit(base.replace("Cuéntanos", "Decime, tenés")), "voseo")
+    assert _hay(K.revisar_kit(base.replace("Cuéntanos", "Contanos vos")), "voseo")
+    assert not _hay(K.revisar_kit(base.replace("Cuéntanos", "Con la voz de")), "voseo")
+
+
+def test_revisar_crlf_y_tags_en_varias_lineas():
+    kit = _completo().replace(_tags_ok(), _tags_ok().replace(", ", ",\n"))
+    assert K.revisar_kit(kit.replace("\n", "\r\n")) == []
+
+
+def test_cli_revisar():
+    with tempfile.TemporaryDirectory() as tmp:
+        malo = Path(tmp) / "malo.md"
+        malo.write_text(_esq(), encoding="utf-8")
+        bueno = Path(tmp) / "bueno.md"
+        bueno.write_text(_completo(), encoding="utf-8")
+        assert K.main(["--revisar", str(malo)]) == 1
+        assert K.main(["--revisar", str(bueno)]) == 0
+        assert K.main(["--revisar", str(Path(tmp) / "no-existe.md")]) == 2
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:
