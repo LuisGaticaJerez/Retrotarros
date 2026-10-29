@@ -413,6 +413,25 @@ def test_nueva_sin_vinetas_ni_plataformas_avisa():
     assert not _hay(avisos, "campo plataformas"), avisos
 
 
+def test_vinetas_forma_invalida():
+    for malas in ([None, 5, ["x"]],
+                  [["A", 1], ["B", "b"], ["C", "c"]],
+                  [["", ""], ["", ""], ["", ""]],
+                  [["A", "a"], ["B", "b"], ["C"]]):
+        errores, _ = L.revisar(_data(grafica="nueva", jugabilidad_vinetas=malas), "resena-juego")
+        assert _hay(errores, "jugabilidad_vinetas"), (malas, errores)
+    assert L.revisar(_data(grafica="nueva", jugabilidad_vinetas=VINETAS_OK), "resena-juego")[0] == []
+
+
+def test_salida_identica_sin_la_marca():
+    """El caso real de los 49 drivers existentes: sin la clave grafica el HTML no cambia."""
+    import hashlib
+    d = _data()
+    del d["grafica"]
+    html = _generar(d)
+    assert hashlib.sha256(html.encode("utf-8")).hexdigest() == HASH_ANTERIOR
+
+
 def test_textos_nuevos_mal_formados_no_fallan():
     d = _data(jugabilidad_vinetas=[None, 5, ["solo uno"]], proxima="texto", plataformas=[None, ["PC"]])
     errores, avisos = L.revisar(d, "resena-juego")

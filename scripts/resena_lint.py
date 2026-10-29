@@ -78,6 +78,9 @@ def revisar(data: dict, out_slug: str) -> tuple[list[str], list[str]]:
         n = len(vinetas) if isinstance(vinetas, (list, tuple)) else -1
         if n != 3:
             errores.append(f"jugabilidad_vinetas debe tener 3 elementos (tiene {n})")
+        elif not all(isinstance(v, (list, tuple)) and len(v) >= 2
+                     and all(isinstance(t, str) and t.strip() for t in v[:2]) for v in vinetas):
+            errores.append("jugabilidad_vinetas: cada elemento debe ser [titulo, texto] con dos textos no vacios")
 
     # la marca puede ir en el titulo del bloque o en una de sus lineas
     trama = [str(_bloque(data, "contexto").get("titulo") or "")] + _lineas(data, "contexto")
