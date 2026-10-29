@@ -117,9 +117,9 @@ Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom
 
 ### 1.3 Backlog armado — listo para programar, sin fecha (56)
 
-**Reseñas (24) — actualizado 2026-10-28:** Aladdin, Altered Beast, Contra, Crash
+**Reseñas (25) — actualizado 2026-10-29:** Aladdin, Altered Beast, Contra, Crash
 Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star
-Fox, Yoshi's Island, God of War (PS2), Halo: Combat Evolved (Xbox), Counter-Strike (PC), Need for Speed: Underground 2, Kingdom Hearts (PS2), Age of Empires II (PC) y Diablo (PC) —armadas el 2026-10-27—, Commandos: Behind Enemy Lines (PC) y The Sims (PC) —armadas el 2026-10-28—, más 1 pedida: JoJo's Bizarre Adventure. Mighty Morphin Power Rangers, Metal
+Fox, Yoshi's Island, God of War (PS2), Halo: Combat Evolved (Xbox), Counter-Strike (PC), Need for Speed: Underground 2, Kingdom Hearts (PS2), Age of Empires II (PC) y Diablo (PC) —armadas el 2026-10-27—, Commandos: Behind Enemy Lines (PC) y The Sims (PC) —armadas el 2026-10-28—, Gears of War (Xbox 360, armada el 2026-10-29, elegida por el canal), más 1 pedida: JoJo's Bizarre Adventure. Mighty Morphin Power Rangers, Metal
 Warriors, Melee y Montezuma's Revenge e International Superstar Soccer ya se publicaron.
 
 **Rankings (19):** SNES Infravalorados (categoría nueva `rankings/infravalorados`, armado 2026-10-19), Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
@@ -204,7 +204,7 @@ se publica tal cual.
 
 - **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **sigue siendo la brecha más
   grande del canal**, sin cambios desde julio.
-- **Reseñas:** 53 armadas, 29 publicadas (API 2026-10-28), 24 de backlog sin
+- **Reseñas:** 54 armadas, 29 publicadas (API 2026-10-28), 25 de backlog sin
   fecha, 0 programadas — el formato que más rápido está publicando, y aun así
   sigue siendo el segundo backlog más grande en volumen absoluto.
 - **Rankings:** 37 armados, 18 publicados, 0 programados (19 de backlog).
