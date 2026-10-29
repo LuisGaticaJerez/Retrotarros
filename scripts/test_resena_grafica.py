@@ -111,6 +111,78 @@ def test_contexto_clasica_sin_imagen():
     assert 'class="ctx-img"' not in html
 
 
+# ---------------------------------------------------------------- Task 4
+
+PROXIMA = {"juego": "God of War", "consola": "PlayStation 2", "anio": "2005", "img_key": "god-of-war"}
+
+
+def _slide(html: str, titulo: str) -> str:
+    return [s for s in html.split("<section") if titulo in s][0]
+
+
+def test_jugabilidad_vinetas():
+    html = _generar(_data(grafica="nueva", jugabilidad_vinetas=VINETAS))
+    sec = _slide(html, "JUGABILIDAD HOY")
+    assert 'class="gp-vinetas"' in sec
+    assert sec.count('<div class="vineta">') == 3
+    assert ">01<" in sec and ">02<" in sec and ">03<" in sec
+    assert 'class="gp-dato"' not in sec
+
+
+def test_jugabilidad_vinetas_cantidad_invalida():
+    for malas in (VINETAS[:2], VINETAS + [["D", "d"]]):
+        html = _generar(_data(grafica="nueva", jugabilidad_vinetas=malas), lint=False)
+        sec = _slide(html, "JUGABILIDAD HOY")
+        assert 'class="gp-vinetas"' not in sec and 'class="gp-dato"' in sec
+
+
+def test_jugabilidad_clasica_ignora_vinetas():
+    html = _generar(_data(grafica="clasica", jugabilidad_vinetas=VINETAS))
+    assert 'class="gp-vinetas"' not in html
+
+
+def test_compositor():
+    html = _generar(_data(grafica="nueva", audiovisual_compositor="Jerry Martin · Marc Russo"))
+    sec = _slide(html, "GRAFICOS Y SONIDO HOY")
+    assert 'class="gp-compositor"' in sec and "BANDA SONORA" in sec and "Jerry Martin · Marc Russo" in sec
+    assert 'class="gp-compositor"' not in _generar(_data(grafica="nueva"))
+
+
+def test_cierre_proxima():
+    html = _generar(_data(grafica="nueva", proxima=PROXIMA))
+    assert 'class="cierre-proxima"' in html
+    assert "God of War" in html and "PlayStation 2 · 2005" in html
+    assert '<img class="cp-img"' in html
+
+
+def test_cierre_proxima_sin_imagen_ni_campo():
+    sin_img = dict(PROXIMA)
+    del sin_img["img_key"]
+    html = _generar(_data(grafica="nueva", proxima=sin_img))
+    assert 'class="cierre-proxima"' in html and '<img class="cp-img"' not in html
+    assert 'class="cierre-proxima"' not in _generar(_data(grafica="nueva"))
+    assert 'class="cierre-proxima"' not in _generar(_data(grafica="nueva", proxima="texto"), lint=False)
+
+
+def test_textos_nuevos_escapados():
+    vin = [["<b>A&B</b>", "<i>x</i>"]] + VINETAS[1:]
+    html = _generar(_data(grafica="nueva", jugabilidad_vinetas=vin,
+                          audiovisual_compositor="<u>Comp & Co</u>",
+                          proxima={"juego": "<s>Juego & Co</s>", "consola": "PS2", "anio": "2005"}), lint=False)
+    for esperado in ("&lt;B&gt;A&amp;B&lt;/B&gt;", "&lt;i&gt;x&lt;/i&gt;", "&lt;u&gt;Comp &amp; Co&lt;/u&gt;",
+                     "&lt;s&gt;Juego &amp; Co&lt;/s&gt;"):
+        assert esperado in html, esperado
+    for crudo in ("<b>A&B", "<u>Comp & Co", "<s>Juego & Co"):
+        assert crudo not in html, crudo
+
+
+def test_clasica_no_tiene_ninguna_marca_nueva():
+    html = _generar(_data(grafica="clasica", img_key="the-sims", jugabilidad_vinetas=VINETAS,
+                          plataformas=[["PC", "2000"]], audiovisual_compositor="X Y", proxima=PROXIMA))
+    for clase in ("portada-fondo", "ver-escala", "chips", "ctx-img", "gp-vinetas", "gp-compositor", "cierre-proxima"):
+        assert f'class="{clase}"' not in html, clase
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:

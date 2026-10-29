@@ -190,7 +190,7 @@ def _chips_plataformas(data: dict) -> str:
     for i, (nombre, anio) in enumerate(pares):
         extra = f"<i>{_esc(anio)}</i>" if anio else ""
         clase = "chip first" if i == 0 else "chip"
-        chips.append(f'<span class="{clase}"><b>{_esc(nombre).upper()}</b>{extra}</span>')
+        chips.append(f'<span class="{clase}"><b>{_esc(nombre.upper())}</b>{extra}</span>')
     if not chips:
         return ""
     return '<div class="chips">' + '<span class="arr">▸</span>'.join(chips) + "</div>"
@@ -263,7 +263,53 @@ def _tv(ch: int) -> str:
     )
 
 
-def _slide_tarrovision(num: int, titulo: str, ch: int, dato: str, notas_bloque, data: dict) -> str:
+def _vinetas(data: dict) -> str:
+    """Tres viñetas numeradas (grafica nueva). Vacio si no hay exactamente 3 pares [titulo, texto]
+    bien formados: en ese caso la slide conserva el bloque de texto."""
+    v = data.get("jugabilidad_vinetas")
+    if not isinstance(v, (list, tuple)) or len(v) != 3:
+        return ""
+    filas = []
+    for i, e in enumerate(v, 1):
+        if not (isinstance(e, (list, tuple)) and len(e) >= 2 and isinstance(e[0], str) and isinstance(e[1], str)):
+            return ""
+        filas.append(
+            f'<div class="vineta"><div class="vn">{i:02d}</div><div class="vt">'
+            f'<div class="vtit">{_esc(e[0].upper())}</div><div class="vtxt">{_esc(e[1])}</div></div></div>'
+        )
+    return '<div class="gp-vinetas">' + "".join(filas) + "</div>"
+
+
+def _compositor(data: dict) -> str:
+    """Etiqueta BANDA SONORA con el credito del compositor (grafica nueva)."""
+    texto = data.get("audiovisual_compositor")
+    if not isinstance(texto, str) or not texto.strip():
+        return ""
+    return (f'<div class="gp-compositor"><div class="gc-lbl">BANDA SONORA</div>'
+            f'<div class="gc-txt">{_esc(texto)}</div></div>')
+
+
+def _proxima(data: dict) -> str:
+    """Tarjeta PROXIMA RESEÑA del cierre (grafica nueva). Opcional: se completa despues de grabar."""
+    p = data.get("proxima")
+    if not isinstance(p, dict) or not isinstance(p.get("juego"), str) or not p["juego"].strip():
+        return ""
+    meta = " · ".join(str(x).strip() for x in (p.get("consola"), p.get("anio")) if x and str(x).strip())
+    key = p.get("img_key")
+    hay_img = isinstance(key, str) and (REPO / "studio" / "resenas" / "img" / "resenas" / f"{key}.jpg").exists()
+    img = f'<img class="cp-img" src="img/resenas/{key}.jpg" alt="">' if hay_img else ""
+    return (
+        '<div class="cierre-proxima">' + img + '<div class="cp-info">'
+        '<div class="cp-lbl">PROXIMA RESEÑA</div>'
+        f'<div class="cp-juego">{_esc(p["juego"])}</div>'
+        f'<div class="cp-meta">{_esc(meta)}</div></div></div>'
+    )
+
+
+def _slide_tarrovision(num: int, titulo: str, ch: int, dato: str, notas_bloque, data: dict,
+                       reemplazo: str = "", extra: str = "") -> str:
+    """`reemplazo` sustituye el bloque EL DATO (viñetas); `extra` va debajo (compositor)."""
+    dato_html = reemplazo or f'<div class="gp-dato"><span class="lbl">EL DATO</span>{_esc(dato)}</div>'
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
         f'<div class="gp-head"><div class="gp-title">{_esc(titulo)}</div>'
@@ -271,7 +317,7 @@ def _slide_tarrovision(num: int, titulo: str, ch: int, dato: str, notas_bloque, 
         '<div class="gp-body">'
         f'<div class="gp-tv">{_tv(ch)}</div>'
         '<div class="gp-side">'
-        f'<div class="gp-dato"><span class="lbl">EL DATO</span>{_esc(dato)}</div>'
+        f'{dato_html}{extra}'
         '</div></div>'
         f'{_notas(notas_bloque)}'
         '</section>'
@@ -334,6 +380,7 @@ def _slide_cierre(num: int, data: dict) -> str:
         '<div class="pre mg">RETROTARROS</div>'
         '<div class="title mg">SUSCRIBETE</div>'
         f'<div class="sub">{_esc(sub)}</div>'
+        f'{_proxima(data) if _nueva(data) else ""}'
         '</div>'
         f'{_notas(data.get("notas", {}).get("cierre"))}'
         '</section>'
@@ -500,6 +547,18 @@ CSS_NUEVA = """
 .contexto.con-imagen{flex-direction:row;gap:80px;padding:0 90px;align-items:center;justify-content:center}
 .ctx-img{height:70%;border-radius:6px;box-shadow:0 0 40px rgba(0,229,255,.4);border:2px solid rgba(255,255,255,.25)}
 .ctx-texto{display:flex;flex-direction:column;gap:26px;align-items:flex-start;text-align:left;max-width:1000px}
+.vineta{display:flex;gap:22px;align-items:center;margin-bottom:26px}
+.vn{font-family:'Press Start 2P';font-size:20px;color:var(--dk);background:var(--ye);padding:16px 14px;border-radius:6px;min-width:72px;text-align:center}
+.vtit{font-family:'Orbitron';font-weight:900;font-size:26px;color:#fff;letter-spacing:1px}
+.vtxt{font-family:'Share Tech Mono';font-size:21px;color:rgba(255,255,255,.78);margin-top:4px}
+.gp-compositor{margin-top:26px;border:2px solid var(--cy);border-radius:8px;padding:16px 22px;display:flex;flex-direction:column;gap:6px}
+.gc-lbl{font-family:'Press Start 2P';font-size:12px;letter-spacing:3px;color:var(--cy)}
+.gc-txt{font-family:'Orbitron';font-weight:700;font-size:28px;color:#fff}
+.cierre-proxima{margin-top:38px;display:flex;align-items:center;gap:30px;border:2px solid var(--mg);border-radius:10px;padding:18px 34px;background:rgba(255,46,136,.08);text-align:left}
+.cp-img{height:170px;border-radius:5px;box-shadow:0 0 24px rgba(255,46,136,.5)}
+.cp-lbl{font-family:'Press Start 2P';font-size:14px;letter-spacing:4px;color:var(--ye)}
+.cp-juego{font-family:'Orbitron';font-weight:900;font-size:50px;color:#fff;margin-top:10px;text-transform:uppercase}
+.cp-meta{font-family:'Share Tech Mono';font-size:22px;color:rgba(255,255,255,.75);margin-top:8px}
 """
 
 SCRIPT = """
@@ -565,10 +624,14 @@ def generar_resena(data: dict, out_slug: str, lint: bool = True) -> Path:
     ))
     num += 1
     ch += 2
-    slides.append(_slide_tarrovision(num, "JUGABILIDAD HOY", ch, data["jugabilidad_dato"], data.get("notas", {}).get("jugabilidad"), data))
+    slides.append(_slide_tarrovision(
+        num, "JUGABILIDAD HOY", ch, data["jugabilidad_dato"], data.get("notas", {}).get("jugabilidad"), data,
+        reemplazo=_vinetas(data) if _nueva(data) else ""))
     num += 1
     ch += 1
-    slides.append(_slide_tarrovision(num, "GRAFICOS Y SONIDO HOY", ch, data["audiovisual_dato"], data.get("notas", {}).get("audiovisual"), data))
+    slides.append(_slide_tarrovision(
+        num, "GRAFICOS Y SONIDO HOY", ch, data["audiovisual_dato"], data.get("notas", {}).get("audiovisual"), data,
+        extra=_compositor(data) if _nueva(data) else ""))
     num += 1
     slides.append(_slide_veredicto(num, data))
     num += 1
