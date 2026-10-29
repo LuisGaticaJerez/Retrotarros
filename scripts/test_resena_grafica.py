@@ -27,6 +27,43 @@ def _generar(data: dict, **kw) -> str:
             ruta.unlink()
 
 
+# ---------------------------------------------------------------- Task 2
+
+def test_portada_nueva_con_caja():
+    html = _generar(_data(grafica="nueva", img_key="the-sims"))
+    assert 'class="portada-fondo"' in html and 'class="portada-caja"' in html
+
+
+def test_portada_nueva_sin_caja():
+    html = _generar(_data(grafica="nueva"))  # img_key inexistente
+    assert 'class="portada-fondo"' not in html and 'class="portada-caja"' not in html
+
+
+def test_portada_clasica_sin_cambios():
+    html = _generar(_data(grafica="clasica", img_key="the-sims"))
+    assert 'class="portada-fondo"' not in html and 'class="portada-caja"' not in html
+
+
+def test_veredicto_nueva_escala():
+    html = _generar(_data(grafica="nueva", veredicto_tag=" juegazo "))
+    assert html.count('class="ver-pill') == 4
+    assert html.count('class="ver-pill on"') == 1
+    assert '<div class="ver-pill on">JUEGAZO</div>' in html
+    orden = [html.index(f">{t}</div>", html.index('class="ver-escala"'))
+             for t in ("IMPRESCINDIBLE", "JUEGAZO", "MEMORABLE", "COLECCIONABLE")]
+    assert orden == sorted(orden), orden
+
+
+def test_veredicto_nueva_tag_fuera_de_escala():
+    html = _generar(_data(grafica="nueva", veredicto_tag="X"), lint=False)
+    assert html.count('class="ver-pill') == 4
+    assert html.count('class="ver-pill on"') == 0
+
+
+def test_veredicto_clasica_sin_escala():
+    assert 'class="ver-escala"' not in _generar(_data(grafica="clasica"))
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:

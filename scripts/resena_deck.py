@@ -52,7 +52,7 @@ import os
 import re
 from pathlib import Path
 
-from resena_lint import formatear, revisar
+from resena_lint import ESCALA_VEREDICTO, formatear, revisar
 
 REPO = Path(__file__).resolve().parent.parent
 
@@ -139,8 +139,29 @@ def _slide_pedido(num: int, data: dict) -> str:
     )
 
 
+def _caja_key(data: dict) -> str | None:
+    """Clave de la caja (studio/resenas/img/resenas/<key>.jpg) si el archivo existe."""
+    key = data.get("img_key") or _slug(data["juego"])
+    ruta = REPO / "studio" / "resenas" / "img" / "resenas" / f"{key}.jpg"
+    return key if ruta.exists() else None
+
+
 def _slide_portada(num: int, data: dict, active: bool = True) -> str:
     cls = "slide active" if active else "slide"
+    caja = _caja_key(data) if _nueva(data) else None
+    if caja:
+        return (
+            f'<section class="{cls}" style="overflow:hidden"><span class="slide-num">{num:02d}</span>'
+            f'<div class="portada-fondo" style="background-image:url(img/resenas/{caja}.jpg)"></div>'
+            f'<img class="portada-caja" src="img/resenas/{caja}.jpg" alt="">'
+            '<div class="portada con-caja">'
+            '<div class="ep-tag">RESEÑA RETROTARRISTICA</div>'
+            f'<div class="ep-title">{_esc(data["juego"]).upper()}</div>'
+            f'<div class="ep-sub">{_esc(data["gancho_sub"])}</div>'
+            '</div>'
+            f'{_notas(data.get("notas", {}).get("portada"), _bloque_por_confirmar(data))}'
+            '</section>'
+        )
     return (
         f'<section class="{cls}"><span class="slide-num">{num:02d}</span>'
         '<div class="portada">'
@@ -243,12 +264,23 @@ def _slide_tarrovision_dual(num: int, ch_a: int, ch_b: int, notas_bloque, data: 
     )
 
 
+def _escala_veredicto(data: dict) -> str:
+    """Las cuatro categorias del canal, con la del veredicto encendida (gráfica nueva)."""
+    tag = str(data.get("veredicto_tag") or "").strip().upper()
+    pastillas = "".join(
+        f'<div class="ver-pill{" on" if t == tag else ""}">{t}</div>' for t in ESCALA_VEREDICTO
+    )
+    return f'<div class="ver-escala">{pastillas}</div>'
+
+
 def _slide_veredicto(num: int, data: dict) -> str:
+    escala = _escala_veredicto(data) if _nueva(data) else ""
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
         '<div class="veredicto">'
         '<div class="ver-pre">VEREDICTO RETROTARROS</div>'
         f'<div class="ver-tag">{_esc(data["veredicto_tag"]).upper()}</div>'
+        f'{escala}'
         f'<div class="ver-resumen">{_esc(data["veredicto_resumen"])}</div>'
         '</div>'
         f'{_notas(data.get("notas", {}).get("veredicto"))}'
@@ -413,6 +445,16 @@ CSS_FAMILIA = """
 .ficha-familia{align-self:flex-start;font-family:'Share Tech Mono';font-size:21px;color:var(--cy);letter-spacing:1px;margin-top:-4px}
 """
 
+# CSS de la grafica nueva (data["grafica"] == "nueva"): solo se agrega en ese caso.
+CSS_NUEVA = """
+.portada-fondo{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(18px) brightness(.38) saturate(1.2);z-index:0}
+.portada-caja{position:absolute;right:120px;top:50%;transform:translateY(-50%) rotate(3deg);height:70%;border-radius:6px;box-shadow:0 0 60px rgba(255,46,136,.55),0 18px 50px rgba(0,0,0,.8);z-index:1}
+.portada.con-caja{position:relative;z-index:2;align-items:flex-start;text-align:left;padding-left:90px;max-width:62%}
+.ver-escala{display:flex;gap:14px;margin-top:6px}
+.ver-pill{font-family:'Orbitron';font-weight:700;font-size:20px;letter-spacing:1px;padding:10px 20px;border-radius:6px;border:2px solid rgba(255,255,255,.25);color:rgba(255,255,255,.4)}
+.ver-pill.on{border-color:var(--ye);color:var(--ye);box-shadow:0 0 20px rgba(255,210,63,.5)}
+"""
+
 SCRIPT = """
 const slides=document.querySelectorAll('.slide');const prevBtn=document.getElementById('prevBtn');
 const nextBtn=document.getElementById('nextBtn');const counter=document.getElementById('counter');const bar=document.getElementById('bar');
@@ -485,6 +527,8 @@ def generar_resena(data: dict, out_slug: str, lint: bool = True) -> Path:
     num += 1
     slides.append(_slide_cierre(num, data))
     css = CSS
+    if _nueva(data):
+        css += CSS_NUEVA
     if data.get("por_confirmar"):
         css += CSS_POR_CONFIRMAR
     if data.get("en_coleccion") == "familia" and data.get("familia_texto"):
