@@ -18,6 +18,7 @@ Los scripts que generan los datos: `scripts/youtube_inventario.py` (público, si
 | 2026-10-14 | [analisis-canal-2026-10-14](analisis-canal-2026-10-14.md) | Los Shorts suman el 87% de las vistas, pero con Analytics se corrigió: 83% de las vistas eran publicidad. Las reseñas rinden 500 a 900 vistas orgánicas cada una. |
 | 2026-10-14 | [hashtags-propuesta-2026-10-14](hashtags-propuesta-2026-10-14.md) | Propuesta de hashtags y etiquetas por tipo de video; se aplicó a los 82 videos el mismo día. La receta vigente está en `docs/canal/guia-youtube-viral.md`, sección 4. |
 | 2026-10-28 | [anuncios-gamecube-2026-10-28](anuncios-gamecube-2026-10-28.md) | Prueba de anuncios con unos 10.000 CLP: 759 vistas, 2 suscriptores y unos 1.840 CLP por hora de reproducción. Recomienda no subir el presupuesto con ese esquema. |
+| 2026-10-29 | [hashtags-propuesta-2026-10-29](hashtags-propuesta-2026-10-29.md) | Propuesta de hashtags sobre el inventario nuevo (88 videos). Solo se aplicó el caso de Melee, que había quedado fuera de la receta (6 hashtags con `#Gaming` y `#fyp`): ahora `#RetroReseñas #SuperSmashBrosMelee #GameCube #Retrogaming #Retrotarros`, con sus 18 etiquetas intactas. Respaldo previo en `data/youtube/respaldo-api-2026-10-29-154728.json`. |
 | 2026-10-29 | [analisis-canal-2026-10-29](analisis-canal-2026-10-29.md) | Las vistas bajaron con la publicidad (84% sigue siendo pagada); los suscriptores son pocos pero ven mucho más tiempo por vista; los hashtags y tags están completos y no mueven tráfico medible. |
 
 ## Seguimiento
