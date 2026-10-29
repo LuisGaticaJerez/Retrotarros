@@ -299,6 +299,55 @@ def test_salida_identica_sin_campos_nuevos():
     assert hashlib.sha256(html.encode("utf-8")).hexdigest() == HASH_ANTERIOR
 
 
+# ---------------------------------------------------------------- Revision final
+
+def test_trama_en_titulo_del_bloque():
+    d = _data()
+    d["notas"]["contexto"] = {
+        "titulo": "EPOCA · TRAMA RESUMIDA (para llevar el hilo)",
+        "lineas": ["Solo detalle, la trama va en el titulo del bloque."],
+    }
+    errores, _ = L.revisar(d, "resena-juego")
+    assert errores == [], errores
+    d["notas"]["contexto"] = {"titulo": "EPOCA", "lineas": ["Trama resumida: sandbox sin historia."]}
+    errores, _ = L.revisar(d, "resena-juego")
+    assert errores == [], errores  # sin distinguir mayusculas
+
+
+def test_familia_texto_con_tilde():
+    d = _data(en_coleccion="familia", familia_texto="Sí tenemos MySims Kingdom (DS)")
+    errores, _ = L.revisar(d, "resena-juego")
+    assert _hay(errores, "familia_texto"), errores
+
+
+def _driver_temporal(carpeta: Path, linea_data: str) -> Path:
+    ruta = carpeta / "gen_resena_prueba.py"
+    ruta.write_text(
+        "import test_resena_lint as T\n"
+        "from resena_deck import generar_resena\n"
+        f"generar_resena({linea_data}, 'resena-prueba')\n",
+        encoding="utf-8",
+    )
+    return ruta
+
+
+def test_cli_driver_con_errores():
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        ruta = _driver_temporal(Path(tmp), "T._data(veredicto_tag='X')")
+        assert L.main([str(ruta)]) == 1
+    assert not _ruta_tmp().parent.joinpath("resena-prueba.html").exists()
+
+
+def test_cli_driver_valido():
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        ruta = _driver_temporal(Path(tmp), "T._data()")
+        assert L.main([str(ruta)]) == 0
+    assert L.main([]) == 2  # uso incorrecto
+    assert not _ruta_tmp().parent.joinpath("resena-prueba.html").exists()
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:

@@ -19,7 +19,7 @@ ESCALA_VEREDICTO = ("IMPRESCINDIBLE", "JUEGAZO", "MEMORABLE", "COLECCIONABLE")
 CAMPOS_PANTALLA = (
     "juego", "gancho_sub", "consola", "developer", "genero",
     "contexto_texto", "jugabilidad_dato", "audiovisual_dato",
-    "veredicto_resumen", "cierre_sub",
+    "veredicto_resumen", "cierre_sub", "familia_texto",
 )
 
 BLOQUES_NOTAS = (
@@ -63,7 +63,9 @@ def revisar(data: dict, out_slug: str) -> tuple[list[str], list[str]]:
         if valor and _TILDES.search(str(valor)):
             errores.append(f"tilde en texto de pantalla: {campo}")
 
-    if not any("TRAMA RESUMIDA" in t for t in _lineas(data, "contexto")):
+    # la marca puede ir en el titulo del bloque o en una de sus lineas
+    trama = [str(_bloque(data, "contexto").get("titulo") or "")] + _lineas(data, "contexto")
+    if not any("trama resumida" in t.lower() for t in trama):
         errores.append("notas.contexto sin una linea con 'TRAMA RESUMIDA'")
 
     if not any("arcade" in t.lower() for t in _lineas(data, "ficha")):
@@ -159,3 +161,47 @@ def formatear(errores: list[str], avisos: list[str]) -> str:
         partes.append("AVISOS:")
         partes += [f"  - {a}" for a in avisos]
     return "\n".join(partes)
+
+
+def main(argv: list[str]) -> int:
+    """CLI: revisa el DATA de un driver sin generar nada. Ejecuta el driver con
+    generar_resena reemplazada por una funcion que solo captura (data, slug).
+    Devuelve 0 sin errores, 1 con errores, 2 por uso incorrecto o driver que
+    no llamo a generar_resena."""
+    import runpy
+    import sys
+    if len(argv) != 1:
+        print("uso: python scripts/resena_lint.py .cache/gen_resena_<juego>.py")
+        return 2
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import resena_deck
+    capturado: list[tuple[dict, str]] = []
+
+    def _captura(data, out_slug, lint=True):
+        capturado.append((data, out_slug))
+        return Path(out_slug)
+
+    original = resena_deck.generar_resena
+    resena_deck.generar_resena = _captura
+    try:
+        runpy.run_path(argv[0], run_name="__lint__")
+    finally:
+        resena_deck.generar_resena = original
+    if not capturado:
+        print("el driver no llamo a generar_resena")
+        return 2
+    codigo = 0
+    for data, out_slug in capturado:
+        errores, avisos = revisar(data, out_slug)
+        print(f"{out_slug}: {len(errores)} errores, {len(avisos)} avisos")
+        resultado = formatear(errores, avisos)
+        if resultado:
+            print(resultado)
+        if errores:
+            codigo = 1
+    return codigo
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(main(sys.argv[1:]))
