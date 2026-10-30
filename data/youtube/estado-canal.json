@@ -1,7 +1,17 @@
 {
-  "fecha": "2026-10-28",
-  "generado": "2026-10-28T14:02:01+00:00",
+  "fecha": "2026-10-30",
+  "generado": "2026-10-30T14:18:01+00:00",
   "videos": [
+    {
+      "id": "jSBcr_VcPWw",
+      "titulo": "God of War (2005): ¿sigue siendo tan brutal como lo recordamos? | RetroReseñas",
+      "estado": "publicado",
+      "privacidad": "public",
+      "publicacion_programada": null,
+      "subido": "2026-10-29T23:30:36Z",
+      "vistas": 17,
+      "duracion": "PT29M36S"
+    },
     {
       "id": "itup-OCeeTU",
       "titulo": "International Superstar Soccer: el juego que inventó el futbol \"serio\" en 16 bits | RetroReseñas",
@@ -9,7 +19,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-27T23:30:23Z",
-      "vistas": 20,
+      "vistas": 251,
       "duracion": "PT22M14S"
     },
     {
@@ -19,7 +29,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-25T23:30:35Z",
-      "vistas": 178,
+      "vistas": 220,
       "duracion": "PT40M47S"
     },
     {
@@ -29,7 +39,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-22T23:30:29Z",
-      "vistas": 98,
+      "vistas": 100,
       "duracion": "PT23M26S"
     },
     {
@@ -39,7 +49,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-20T23:30:35Z",
-      "vistas": 167,
+      "vistas": 168,
       "duracion": "PT23M37S"
     },
     {
@@ -49,7 +59,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-18T23:30:00Z",
-      "vistas": 1056,
+      "vistas": 1057,
       "duracion": "PT39M53S"
     },
     {
@@ -69,7 +79,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-13T23:30:25Z",
-      "vistas": 145,
+      "vistas": 146,
       "duracion": "PT23M57S"
     },
     {
@@ -79,7 +89,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-11T23:30:00Z",
-      "vistas": 876,
+      "vistas": 924,
       "duracion": "PT34M36S"
     },
     {
@@ -89,7 +99,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-08T23:30:06Z",
-      "vistas": 330,
+      "vistas": 333,
       "duracion": "PT22M51S"
     },
     {
@@ -99,7 +109,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-07T01:00:11Z",
-      "vistas": 435,
+      "vistas": 438,
       "duracion": "PT17M40S"
     },
     {
@@ -109,7 +119,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-04T23:30:14Z",
-      "vistas": 1036,
+      "vistas": 1084,
       "duracion": "PT36M31S"
     },
     {
@@ -119,7 +129,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-01T23:30:29Z",
-      "vistas": 293,
+      "vistas": 294,
       "duracion": "PT25M43S"
     },
     {
@@ -129,7 +139,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-29T23:30:24Z",
-      "vistas": 128,
+      "vistas": 129,
       "duracion": "PT16M8S"
     },
     {
@@ -179,7 +189,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-17T23:30:34Z",
-      "vistas": 924,
+      "vistas": 925,
       "duracion": "PT11M28S"
     },
     {
@@ -259,7 +269,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-02T00:30:35Z",
-      "vistas": 308,
+      "vistas": 309,
       "duracion": "PT14M28S"
     },
     {
@@ -289,7 +299,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-28T22:01:46Z",
-      "vistas": 27916,
+      "vistas": 27917,
       "duracion": "PT1M2S"
     },
     {
@@ -299,7 +309,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-28T00:30:26Z",
-      "vistas": 873,
+      "vistas": 875,
       "duracion": "PT14M47S"
     },
     {
@@ -379,7 +389,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-10T02:00:04Z",
-      "vistas": 134,
+      "vistas": 135,
       "duracion": "PT12M3S"
     },
     {
@@ -509,7 +519,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-07-16T15:11:03Z",
-      "vistas": 1838,
+      "vistas": 1840,
       "duracion": "PT25S"
     },
     {
@@ -559,7 +569,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-07-07T00:30:38Z",
-      "vistas": 24769,
+      "vistas": 24771,
       "duracion": "PT1M3S"
     },
     {
@@ -619,7 +629,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-06-21T11:00:30Z",
-      "vistas": 64,
+      "vistas": 65,
       "duracion": "PT30M48S"
     },
     {
@@ -719,7 +729,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-06-08T02:00:08Z",
-      "vistas": 192,
+      "vistas": 195,
       "duracion": "PT35M2S"
     },
     {

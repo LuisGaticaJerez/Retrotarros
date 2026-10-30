@@ -32,6 +32,9 @@
 > **Verificación con la API de YouTube: 2026-10-26** (87 publicados + 0 programados). Desde la
 > última vez se publicaron Montezuma's Revenge (jue 22 oct, 20:30) y SNES Top Peores (dom 25
 > oct, 20:30). Nada programado: el próximo hueco del calendario (martes 27) está libre.
+>
+> **Verificación con la API de YouTube: 2026-10-30** (89 publicados + 0 programados). Desde la
+> última vez se publicó la reseña de God of War (PS2), el jue 29 oct, 20:30. Nada programado.
 
 ## Cómo leer esto
 
@@ -50,14 +53,14 @@
 
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
-| Reseñas | 53 | 29 | 0 | 24 |
+| Reseñas | 54 | 30 | 0 | 24 |
 | Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube + Infravalorados SNES) | 37 | 18 | 0 | 19 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
 | RetroNotas | 2 | 0 | 0 | 2 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **109** | **53** | **0** | **56** |
+| **TOTAL** | **119** | **55** | **0** | **64** |
 
 Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
@@ -66,15 +69,15 @@ se contaron los 2 de Atari 8-bit (armados, sin publicar), los 10 Top Peores y el
 
 ---
 
-### 1.1 Programados (leídos de YouTube con la API, 2026-10-26)
+### 1.1 Programados (leídos de YouTube con la API, 2026-10-30)
 
 **Calendario de publicación: martes, jueves y domingo a las 20:30 (hora de Chile).** Se actualiza solo los lunes, miércoles y viernes (el día siguiente) con `scripts/youtube_estado.py` (datos en `data/youtube/estado-canal.json`). **Un video programado ya está grabado: no tocar su HTML ni sus textos.**
 
 | Publicación (hora de Chile) | Título | Contenido del repo |
 |---|---|---|
-| (nada programado) | Montezuma's Revenge se publicó el jue 22 oct y SNES Top Peores el dom 25 oct | |
+| (nada programado) | God of War (PS2) se publicó el jue 29 oct, International Superstar Soccer el mar 27 oct | |
 
-**Grabado y todavía sin fecha de publicación:** nada conocido a 2026-10-26 (SNES Top Peores se publicó el 25 oct; confirmar con Luis si hay algo grabado que no esté en YouTube). La reseña de Mighty Morphin Power Rangers se publicó el 2026-10-20. Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
+**Grabado y todavía sin fecha de publicación:** nada conocido a 2026-10-30 (SNES Top Peores se publicó el 25 oct; confirmar con Luis si hay algo grabado que no esté en YouTube). La reseña de Mighty Morphin Power Rangers se publicó el 2026-10-20. Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
 
 Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09).
 
@@ -86,7 +89,7 @@ Tras la publicación, esos HTML y kits se retiran del estudio como el resto de l
 
 ### 1.2 Publicados (26 + Abriendo el Tarro + 2 G-OLD, más las Reseñas nuevas de abajo)
 
-**Reseñas (29) — API de YouTube 2026-10-28, del más reciente al más antiguo:** International Superstar Soccer (27 oct),
+**Reseñas (30) — API de YouTube 2026-10-30, del más reciente al más antiguo:** God of War (PS2, 29 oct), International Superstar Soccer (27 oct),
 Montezuma's Revenge (pedida), Mighty Morphin Power Rangers (pedida), Melee (pedida), Metal Warriors (pedida), Worms Armageddon (pedida), Samurai Shodown (pedida), Doom (pedida), King of Fighters '94,
 Battletoads, Super Mario World, Street Fighter II, Golden Axe, Metal Gear Solid (pedida),
 Chrono Trigger, The Legend of Zelda (pedida), Cadillacs and Dinosaurs (pedida), Jewel Master
@@ -115,12 +118,12 @@ Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom
 
 ---
 
-### 1.3 Backlog armado — listo para programar, sin fecha (56)
+### 1.3 Backlog armado — listo para programar, sin fecha (64)
 
-**Reseñas (25) — actualizado 2026-10-29:** Aladdin, Altered Beast, Contra, Crash
+**Reseñas (24) — actualizado 2026-10-30:** Aladdin, Altered Beast, Contra, Crash
 Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star
-Fox, Yoshi's Island, God of War (PS2), Halo: Combat Evolved (Xbox), Counter-Strike (PC), Need for Speed: Underground 2, Kingdom Hearts (PS2), Age of Empires II (PC) y Diablo (PC) —armadas el 2026-10-27—, Commandos: Behind Enemy Lines (PC) y The Sims (PC) —armadas el 2026-10-28—, Gears of War (Xbox 360, armada el 2026-10-29, elegida por el canal), más 1 pedida: JoJo's Bizarre Adventure. Mighty Morphin Power Rangers, Metal
-Warriors, Melee y Montezuma's Revenge e International Superstar Soccer ya se publicaron.
+Fox, Yoshi's Island, Halo: Combat Evolved (Xbox), Counter-Strike (PC), Need for Speed: Underground 2, Kingdom Hearts (PS2), Age of Empires II (PC) y Diablo (PC) —armadas el 2026-10-27—, Commandos: Behind Enemy Lines (PC) y The Sims (PC) —armadas el 2026-10-28—, Gears of War (Xbox 360, armada el 2026-10-29, elegida por el canal), más 1 pedida: JoJo's Bizarre Adventure. Mighty Morphin Power Rangers, Metal
+Warriors, Melee, Montezuma's Revenge, International Superstar Soccer y God of War (PS2) ya se publicaron.
 
 **Rankings (19):** SNES Infravalorados (categoría nueva `rankings/infravalorados`, armado 2026-10-19), Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
 Top Precios, Saturn Top Mundial + Top Precios, Atari 8-bit Top Mundial + Top Precios
@@ -204,7 +207,7 @@ se publica tal cual.
 
 - **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **sigue siendo la brecha más
   grande del canal**, sin cambios desde julio.
-- **Reseñas:** 54 armadas, 29 publicadas (API 2026-10-28), 25 de backlog sin
+- **Reseñas:** 54 armadas, 30 publicadas (API 2026-10-30), 24 de backlog sin
   fecha, 0 programadas — el formato que más rápido está publicando, y aun así
   sigue siendo el segundo backlog más grande en volumen absoluto.
 - **Rankings:** 37 armados, 18 publicados, 0 programados (19 de backlog).
