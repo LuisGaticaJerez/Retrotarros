@@ -270,6 +270,18 @@ Todo lo que mide cómo anda el canal (análisis de vistas, suscriptores, hashtag
 - Sin números de cuenta, claves ni datos de acceso en estos documentos. Cualquier cambio en el canal a partir de un informe (hashtags, títulos) pasa por `scripts/youtube_aplicar.py`: primero en prueba, y se aplica solo con el dale de Luis.
 - Aplica a todas las sesiones, incluidas las que miden anuncios o campañas por su cuenta: si dejan un documento en otro lugar, se mueve aquí.
 
+## Sesiones en paralelo y estado del canal (regla) — Luis 2026-10-30
+
+Varias sesiones de Claude pueden trabajar a la vez sobre este repo (reseñas, rankings, estado del canal). Para que no se pisen:
+
+- **El estado del canal es parte del canal.** `data/youtube/estado-canal.json`, `data/youtube/historial/`, las cifras de `docs/canal/inventario-contenido.md` y los informes de `docs/canal/rendimiento/` viven en este mismo repo y se commitean como todo lo demás, aunque los genere una rutina por fuera de la sesión principal. No van en un proyecto aparte: se leen junto con el inventario, los scripts y las reglas del canal.
+- **Rutina de estado (la tarea programada de lunes, miércoles y viernes):** corre en su propia sesión o rama y toca solo `data/youtube/estado-canal.json`, `data/youtube/historial/`, las cifras del inventario y, si trae cifras nuevas, una fila de `docs/canal/rendimiento/README.md`. Su commit se sube de inmediato (con el dale de Luis).
+- **Nunca dejar commits locales sin subir en `master` del repo principal.** O se suben al tiro o el trabajo se hace en una rama o worktree. Un commit local olvidado en master es lo que provocó el push accidental y el conflicto del 2026-10-30.
+- **Antes de cualquier push:** `git fetch`, `git status` y `git log origin/master..master` en el repo principal. Si hay commits de otra sesión, subir solo la propia rama como avance limpio (`git push origin <rama>:master`), avisar a Luis y no empujar lo ajeno sin su ok.
+- **Merge y push nunca en cadena con una tubería** (`git merge ... | tail && git push`): el código de salida de `tail` oculta el fallo del merge. Usar `set -e` y mirar la salida del merge antes de subir.
+- **Si dos sesiones tocan el mismo archivo** (típico: `docs/canal/inventario-contenido.md`), quien integra resuelve conservando ambos cambios, corre las pruebas (`scripts/test_resena_*.py`) y recién ahí sube.
+- **Las pruebas no dependen de archivos del estudio que se retiran al publicar** (cajas, HTML de reseñas): usan archivos temporales propios.
+
 ## Extracción de B-roll desde gameplays
 
 Para resumir un gameplay largo (45–60 min de YouTube) en clips cortos listos para edición:
