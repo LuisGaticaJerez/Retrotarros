@@ -12,6 +12,7 @@ import resena_deck as D  # noqa: E402
 from test_resena_lint import _data  # noqa: E402
 
 SLUG_TMP = "_test-grafica-tmp"
+CAJA = "_test-caja"   # caja temporal que crea main(): las pruebas no dependen de imagenes del estudio, que se retiran al publicar
 VINETAS = [["CONTROLAS CON EL MOUSE", "Clic en un objeto y eliges la accion"],
            ["OCHO NECESIDADES", "Hambre, baño, energia y mas"],
            ["CONSTRUYE TU CASA", "20.000 simoleones para empezar"]]
@@ -30,7 +31,7 @@ def _generar(data: dict, **kw) -> str:
 # ---------------------------------------------------------------- Task 2
 
 def test_portada_nueva_con_caja():
-    html = _generar(_data(grafica="nueva", img_key="the-sims"))
+    html = _generar(_data(grafica="nueva", img_key=CAJA))
     assert 'class="portada-fondo"' in html and 'class="portada-caja"' in html
 
 
@@ -40,7 +41,7 @@ def test_portada_nueva_sin_caja():
 
 
 def test_portada_clasica_sin_cambios():
-    html = _generar(_data(grafica="clasica", img_key="the-sims"))
+    html = _generar(_data(grafica="clasica", img_key=CAJA))
     assert 'class="portada-fondo"' not in html and 'class="portada-caja"' not in html
 
 
@@ -97,7 +98,7 @@ def test_ficha_clasica_sin_chips():
 
 
 def test_contexto_nueva_con_imagen():
-    html = _generar(_data(grafica="nueva", img_key="the-sims"))
+    html = _generar(_data(grafica="nueva", img_key=CAJA))
     assert 'class="ctx-img"' in html and "con-imagen" in html.split("</style>")[1]
 
 
@@ -107,13 +108,13 @@ def test_contexto_nueva_sin_imagen():
 
 
 def test_contexto_clasica_sin_imagen():
-    html = _generar(_data(grafica="clasica", img_key="the-sims"))
+    html = _generar(_data(grafica="clasica", img_key=CAJA))
     assert 'class="ctx-img"' not in html
 
 
 # ---------------------------------------------------------------- Task 4
 
-PROXIMA = {"juego": "God of War", "consola": "PlayStation 2", "anio": "2005", "img_key": "god-of-war"}
+PROXIMA = {"juego": "God of War", "consola": "PlayStation 2", "anio": "2005", "img_key": CAJA}
 
 
 def _slide(html: str, titulo: str) -> str:
@@ -177,7 +178,7 @@ def test_textos_nuevos_escapados():
 
 
 def test_clasica_no_tiene_ninguna_marca_nueva():
-    html = _generar(_data(grafica="clasica", img_key="the-sims", jugabilidad_vinetas=VINETAS,
+    html = _generar(_data(grafica="clasica", img_key=CAJA, jugabilidad_vinetas=VINETAS,
                           plataformas=[["PC", "2000"]], audiovisual_compositor="X Y", proxima=PROXIMA))
     for clase in ("portada-fondo", "ver-escala", "chips", "ctx-img", "gp-vinetas", "gp-compositor", "cierre-proxima"):
         assert f'class="{clase}"' not in html, clase
@@ -214,14 +215,21 @@ def test_portada_y_contexto_caja_alta_sin_estilo_en_linea():
 # ---------------------------------------------------------------- runner
 
 def main() -> int:
+    from PIL import Image
     pruebas = [(n, f) for n, f in sorted(globals().items()) if n.startswith("test_") and callable(f)]
     fallas = 0
-    for nombre, fn in pruebas:
-        try:
-            fn()
-        except Exception as exc:  # noqa: BLE001
-            fallas += 1
-            print(f"FALLA {nombre}: {type(exc).__name__}: {exc}")
+    caja = D.REPO / "studio" / "resenas" / "img" / "resenas" / f"{CAJA}.jpg"
+    Image.new("RGB", (200, 300), (30, 30, 60)).save(caja)
+    try:
+        for nombre, fn in pruebas:
+            try:
+                fn()
+            except Exception as exc:  # noqa: BLE001
+                fallas += 1
+                print(f"FALLA {nombre}: {type(exc).__name__}: {exc}")
+    finally:
+        if caja.exists():
+            caja.unlink()
     if fallas:
         print(f"{fallas} de {len(pruebas)} pruebas fallaron")
         return 1
