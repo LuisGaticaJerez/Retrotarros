@@ -5,9 +5,18 @@ Seguro por defecto: sin --aplicar solo muestra el antes y el despues. Antes de e
 Diseno: docs/superpowers/specs/2026-10-30-encadenar-biblioteca-design.md
 """
 from __future__ import annotations
+import argparse
+import json
+import re
+import sys
+import time
 import unicodedata
+from pathlib import Path
 
+import youtube_aplicar as A
 from youtube_aplicar import RESTO_RE
+
+REPO = Path(__file__).resolve().parent.parent
 
 MARCA = "Sigue con:"
 # palabra clave del titulo de la lista (sin tildes, en minuscula) -> texto de la linea de la lista
@@ -49,7 +58,8 @@ def elegir_destinos(listas: list[dict], minutos: dict[str, int], titulos: dict[s
 
 
 def bloque_enlaces(d: dict) -> str:
-    return (f"{MARCA} {d['destino_titulo']} https://youtu.be/{d['destino_id']}\n"
+    titulo = re.sub(r"\s*\|\s*retro[^|]*$", "", d["destino_titulo"], flags=re.I)   # quita el sufijo de formato ("| Retroreseñas")
+    return (f"{MARCA} {titulo} https://youtu.be/{d['destino_id']}\n"
             f"{d['lista_etiqueta']}: https://www.youtube.com/playlist?list={d['lista_id']}")
 
 
@@ -64,3 +74,92 @@ def insertar_bloque(desc: str, bloque: str) -> str:
         return (cuerpo + "\n\n" if cuerpo else "") + bloque + "\n\n" + ultima
     cuerpo = desc.rstrip()
     return (cuerpo + "\n\n" if cuerpo else "") + bloque
+
+
+def cargar_entradas(repo: Path) -> tuple[list[dict], dict[str, int], dict[str, str]]:
+    """Listas, minutos vistos por video y titulos, desde los archivos mas recientes de data/youtube."""
+    datos = repo / "data" / "youtube"
+    ultimo = lambda patron: json.loads(sorted(datos.glob(patron))[-1].read_text(encoding="utf-8"))
+    listas = ultimo("listas-*.json")
+    minutos = {r["video"]: r["estimatedMinutesWatched"] for r in ultimo("horas-por-video-*.json")}
+    titulos = {v["id"]: v["titulo"] for v in ultimo("inventario-*.json")["videos"]}
+    return listas, minutos, titulos
+
+
+def construir_propuesta(snips: dict[str, dict], destinos: dict[str, dict]) -> list[tuple[str, str, str]]:
+    """(video, descripcion actual, descripcion nueva) solo para los videos con destino y con cambio."""
+    out = []
+    for vid, sn in snips.items():
+        if vid not in destinos:
+            continue
+        antes = sn.get("description", "")
+        despues = insertar_bloque(antes, bloque_enlaces(destinos[vid]))
+        if despues != antes:
+            out.append((vid, antes, despues))
+    return out
+
+
+def cuerpo_actualizacion(video_id: str, sn: dict, descripcion: str) -> dict:
+    """videos().update reemplaza el snippet completo: se reenvian titulo, categoria, etiquetas e idioma tal como vienen."""
+    snippet = {"title": sn["title"], "description": descripcion, "categoryId": sn["categoryId"]}
+    if "tags" in sn:
+        snippet["tags"] = sn["tags"]
+    if sn.get("defaultLanguage"):
+        snippet["defaultLanguage"] = sn["defaultLanguage"]
+    return {"id": video_id, "snippet": snippet}
+
+
+def _usar_credencial_del_repo_principal() -> None:
+    """En un worktree la credencial vive en el .cache del repo principal (fuera de git)."""
+    for base in (REPO, *REPO.parents):
+        if (base / ".cache" / "youtube" / "client_secret.json").exists():
+            A.CACHE = base / ".cache" / "youtube"
+            return
+
+
+def main() -> None:
+    sys.stdout.reconfigure(encoding="utf-8")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--solo", default="", help="ids separados por coma; sin esto, todos los videos con destino")
+    ap.add_argument("--aplicar", action="store_true")
+    a = ap.parse_args()
+    listas, minutos, titulos = cargar_entradas(REPO)
+    destinos = elegir_destinos(listas, minutos, titulos)
+    pedidos = [x for x in a.solo.split(",") if x] or list(destinos)
+    ids = [i for i in pedidos if i in destinos]
+    if len(ids) != len(pedidos):
+        print("AVISO: sin destino (no estan en una lista conocida):", [i for i in pedidos if i not in destinos])
+    _usar_credencial_del_repo_principal()
+    yt = A.servicio()
+    snips = A.leer_snippets(yt, ids)
+    resp = REPO / "data" / "youtube" / f"respaldo-api-{time.strftime('%Y-%m-%d-%H%M%S')}.json"   # nunca pisa un respaldo anterior
+    resp.write_text(json.dumps(snips, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Respaldo con la metadata real de {len(snips)} videos -> {resp}")
+    prop = construir_propuesta(snips, destinos)
+    for vid, _antes, despues in prop:
+        d = destinos[vid]
+        print(f"\n== {vid} | {snips[vid]['title'][:60]}")
+        print(f"   SUGIERE: {d['destino_titulo'][:60]} ({d['destino_id']})")
+        print("   DESCRIPCION NUEVA:\n" + "\n".join("     " + l for l in despues.split("\n")))
+    print(f"\n{len(prop)} videos cambiarian de {len(snips)}.")
+    if not a.aplicar:
+        print("Modo prueba: no se escribio nada. Usa --aplicar para escribir.")
+        return
+    if input(f"Escribir {len(prop)} cambios en YouTube (cuesta {50 * len(prop)} de 10000 unidades de cuota)? escribe SI: ").strip() != "SI":
+        sys.exit("Cancelado.")
+    ok = 0
+    for vid, _antes, despues in prop:
+        try:
+            yt.videos().update(part="snippet", body=cuerpo_actualizacion(vid, snips[vid], despues)).execute()
+            ok += 1
+            print(f"OK {vid}")
+        except Exception as e:  # noqa: BLE001
+            print(f"ERROR {vid}: {e}")
+            if "quota" in str(e).lower():
+                break
+        time.sleep(0.5)
+    print(f"Listo: {ok} de {len(prop)} aplicados.")
+
+
+if __name__ == "__main__":
+    main()
