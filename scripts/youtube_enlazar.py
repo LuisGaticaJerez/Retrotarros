@@ -81,7 +81,7 @@ def cargar_entradas(repo: Path) -> tuple[list[dict], dict[str, int], dict[str, s
     datos = repo / "data" / "youtube"
     ultimo = lambda patron: json.loads(sorted(datos.glob(patron))[-1].read_text(encoding="utf-8"))
     listas = ultimo("listas-*.json")
-    minutos = {r["video"]: r["estimatedMinutesWatched"] for r in ultimo("horas-por-video-*.json")}
+    minutos = {vid: x["min_org"] for vid, x in ultimo("organicas-y-subs-por-video-*.json").items()}   # sin anuncios: horas validas
     titulos = {v["id"]: v["titulo"] for v in ultimo("inventario-*.json")["videos"]}
     return listas, minutos, titulos
 

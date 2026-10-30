@@ -94,8 +94,8 @@ def test_cargar_entradas_lee_los_tres_archivos():
         carpeta = Path(tmp) / "data" / "youtube"
         carpeta.mkdir(parents=True)
         (carpeta / "listas-2026-10-30.json").write_text(json.dumps([LISTA]), encoding="utf-8")
-        (carpeta / "horas-por-video-2026-10-30.json").write_text(
-            json.dumps([{"video": "a", "estimatedMinutesWatched": 10}]), encoding="utf-8")
+        (carpeta / "organicas-y-subs-por-video-2026-10-30.json").write_text(   # minutos SIN anuncios: son las horas validas
+            json.dumps({"a": {"vistas": 99, "organicas": 20, "min_org": 10, "subs": 1, "perdidos": 0}}), encoding="utf-8")
         (carpeta / "inventario-2026-10-29.json").write_text(
             json.dumps({"videos": [{"id": "a", "titulo": "Juego A"}]}), encoding="utf-8")
         listas, minutos, titulos = E.cargar_entradas(Path(tmp))
