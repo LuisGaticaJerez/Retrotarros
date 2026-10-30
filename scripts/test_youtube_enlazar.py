@@ -121,15 +121,50 @@ def test_construir_propuesta_omite_videos_sin_destino():
 
 
 def test_cuerpo_actualizacion_conserva_tags_e_idioma():
-    sn = {"title": "Titulo", "description": "vieja", "categoryId": "20", "tags": ["x", "y"], "defaultLanguage": "es"}
+    sn = {"title": "Titulo", "description": "vieja", "categoryId": "20", "tags": ["x", "y"],
+          "defaultLanguage": "es", "defaultAudioLanguage": "es-419"}
     cuerpo = E.cuerpo_actualizacion("a", sn, "nueva")
     assert cuerpo == {"id": "a", "snippet": {"title": "Titulo", "description": "nueva", "categoryId": "20",
-                                            "tags": ["x", "y"], "defaultLanguage": "es"}}
+                                            "tags": ["x", "y"], "defaultLanguage": "es",
+                                            "defaultAudioLanguage": "es-419"}}
 
 
 def test_cuerpo_actualizacion_sin_tags_ni_idioma():
     cuerpo = E.cuerpo_actualizacion("a", {"title": "T", "categoryId": "20"}, "nueva")
     assert cuerpo == {"id": "a", "snippet": {"title": "T", "description": "nueva", "categoryId": "20"}}
+
+
+def _correr_main(argv: list[str], respuesta: str = "NO") -> list[str]:
+    """Corre E.main() con la API falsa en una carpeta temporal; devuelve los respaldos que dejo."""
+    import builtins
+    import tempfile
+    snips = {"a": {"title": "T", "description": f"Texto.\n\n{HASHTAGS}", "categoryId": "20"}}
+    original = (E.REPO, E.A.servicio, E.A.leer_snippets, E.cargar_entradas, sys.argv, builtins.input)
+    with tempfile.TemporaryDirectory() as tmp:
+        carpeta = Path(tmp) / "data" / "youtube"
+        carpeta.mkdir(parents=True)
+        E.REPO = Path(tmp)
+        E.A.servicio = lambda: object()   # sin .videos: si main intentara escribir, fallaria
+        E.A.leer_snippets = lambda yt, ids: snips
+        E.cargar_entradas = lambda repo: ([LISTA], {"a": 1, "b": 9, "c": 2}, TITULOS)
+        sys.argv = ["youtube_enlazar.py", *argv]
+        builtins.input = lambda *_: respuesta
+        try:
+            try:
+                E.main()
+            except SystemExit:
+                pass
+            return sorted(p.name for p in carpeta.glob("respaldo-api-*.json"))
+        finally:
+            E.REPO, E.A.servicio, E.A.leer_snippets, E.cargar_entradas, sys.argv, builtins.input = original
+
+
+def test_main_en_prueba_no_guarda_respaldo():
+    assert _correr_main(["--solo", "a"]) == []
+
+
+def test_main_con_aplicar_guarda_respaldo_antes_de_confirmar():
+    assert len(_correr_main(["--solo", "a", "--aplicar"], respuesta="NO")) == 1
 
 
 def main() -> int:

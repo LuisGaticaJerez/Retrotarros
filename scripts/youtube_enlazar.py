@@ -104,8 +104,9 @@ def cuerpo_actualizacion(video_id: str, sn: dict, descripcion: str) -> dict:
     snippet = {"title": sn["title"], "description": descripcion, "categoryId": sn["categoryId"]}
     if "tags" in sn:
         snippet["tags"] = sn["tags"]
-    if sn.get("defaultLanguage"):
-        snippet["defaultLanguage"] = sn["defaultLanguage"]
+    for campo in ("defaultLanguage", "defaultAudioLanguage"):   # sin el idioma de audio YouTube lo deja en en-US
+        if sn.get(campo):
+            snippet[campo] = sn[campo]
     return {"id": video_id, "snippet": snippet}
 
 
@@ -132,9 +133,6 @@ def main() -> None:
     _usar_credencial_del_repo_principal()
     yt = A.servicio()
     snips = A.leer_snippets(yt, ids)
-    resp = REPO / "data" / "youtube" / f"respaldo-api-{time.strftime('%Y-%m-%d-%H%M%S')}.json"   # nunca pisa un respaldo anterior
-    resp.write_text(json.dumps(snips, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Respaldo con la metadata real de {len(snips)} videos -> {resp}")
     prop = construir_propuesta(snips, destinos)
     for vid, _antes, despues in prop:
         d = destinos[vid]
@@ -145,6 +143,9 @@ def main() -> None:
     if not a.aplicar:
         print("Modo prueba: no se escribio nada. Usa --aplicar para escribir.")
         return
+    resp = REPO / "data" / "youtube" / f"respaldo-api-{time.strftime('%Y-%m-%d-%H%M%S')}.json"   # solo al aplicar; nunca pisa un respaldo anterior
+    resp.write_text(json.dumps(snips, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Respaldo con la metadata real de {len(snips)} videos -> {resp}")
     if input(f"Escribir {len(prop)} cambios en YouTube (cuesta {50 * len(prop)} de 10000 unidades de cuota)? escribe SI: ").strip() != "SI":
         sys.exit("Cancelado.")
     ok = 0
