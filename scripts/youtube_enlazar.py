@@ -101,13 +101,7 @@ def construir_propuesta(snips: dict[str, dict], destinos: dict[str, dict]) -> li
 
 def cuerpo_actualizacion(video_id: str, sn: dict, descripcion: str) -> dict:
     """videos().update reemplaza el snippet completo: se reenvian titulo, categoria, etiquetas e idioma tal como vienen."""
-    snippet = {"title": sn["title"], "description": descripcion, "categoryId": sn["categoryId"]}
-    if "tags" in sn:
-        snippet["tags"] = sn["tags"]
-    for campo in ("defaultLanguage", "defaultAudioLanguage"):   # sin el idioma de audio YouTube lo deja en en-US
-        if sn.get(campo):
-            snippet[campo] = sn[campo]
-    return {"id": video_id, "snippet": snippet}
+    return A.cuerpo_snippet(video_id, sn, description=descripcion)
 
 
 def _usar_credencial_del_repo_principal() -> None:

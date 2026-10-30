@@ -14,7 +14,7 @@ import time
 from pathlib import Path
 
 import youtube_aplicar as A
-from youtube_enlazar import cuerpo_actualizacion, _usar_credencial_del_repo_principal
+from youtube_enlazar import _usar_credencial_del_repo_principal
 
 REPO = Path(__file__).resolve().parent.parent
 POR_DEFECTO = "es-419"   # el canal habla en espanol latino
@@ -29,7 +29,7 @@ def plan_restauracion(snips: dict[str, dict], restaurar: dict[str, str | None]) 
 
 def cuerpo_restauracion(video_id: str, sn: dict, idioma: str) -> dict:
     """Mismo snippet que ya tiene el video, solo con el idioma de audio nuevo."""
-    return cuerpo_actualizacion(video_id, {**sn, "defaultAudioLanguage": idioma}, sn.get("description", ""))
+    return A.cuerpo_snippet(video_id, sn, defaultAudioLanguage=idioma)
 
 
 def cargar_objetivos(repo: Path) -> tuple[list[str], dict[str, str | None]]:

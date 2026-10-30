@@ -271,6 +271,7 @@ Todo lo que mide cómo anda el canal (análisis de vistas, suscriptores, hashtag
 - **Índice y seguimiento** → `docs/canal/rendimiento/README.md`: cada informe nuevo suma su línea en "Informes" y, si trae cifras del canal, una fila en "Seguimiento" (mismas columnas siempre).
 - Sin números de cuenta, claves ni datos de acceso en estos documentos. Cualquier cambio en el canal a partir de un informe (hashtags, títulos) pasa por `scripts/youtube_aplicar.py`: primero en prueba, y se aplica solo con el dale de Luis.
 - Aplica a todas las sesiones, incluidas las que miden anuncios o campañas por su cuenta: si dejan un documento en otro lugar, se mueve aquí.
+- **Escritura de videos (Luis 2026-10-30):** `videos().update` reemplaza el snippet completo, y lo que no se reenvía se pierde (así 83 videos quedaron con audio en en-US). Todo cambio a un video arma su cuerpo con `youtube_aplicar.cuerpo_snippet`, que reenvía título, descripción, categoría, etiquetas e idiomas; una prueba (`scripts/test_youtube_aplicar.py`) falla si algún script arma el cuerpo a mano. Si un video quedara en en-US, `python scripts/youtube_idioma.py` lo restaura (modo prueba por defecto).
 
 ## Sesiones en paralelo y estado del canal (regla) — Luis 2026-10-30
 

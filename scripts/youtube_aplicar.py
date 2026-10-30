@@ -65,6 +65,18 @@ def leer_snippets(yt, ids: list[str]) -> dict[str, dict]:
     return out
 
 
+CAMPOS_SNIPPET = ("title", "description", "categoryId", "tags", "defaultLanguage", "defaultAudioLanguage")
+
+
+def cuerpo_snippet(video_id: str, sn: dict, **cambios) -> dict:
+    """Cuerpo para videos().update(part="snippet"). Esa llamada REEMPLAZA el snippet completo: lo que no se reenvia se pierde
+    (asi el idioma de audio quedo en en-US). Toda escritura de videos debe armar su cuerpo aqui: reenvia cada campo escribible
+    tal como viene y aplica solo los cambios pedidos."""
+    snippet = {k: sn[k] for k in CAMPOS_SNIPPET if sn.get(k)}
+    snippet.update({k: v for k, v in cambios.items() if k in CAMPOS_SNIPPET})
+    return {"id": video_id, "snippet": snippet}
+
+
 def nueva_descripcion(desc: str, hashtags: list[str], limpiar_cuerpo: bool = False) -> str:
     """Quita la basura de otras redes, reemplaza el bloque final de hashtags y deja el resto del texto intacto."""
     if limpiar_cuerpo:   # quita CUALQUIER hashtag suelto dentro del texto (no solo la basura conocida) y restos como "゚viral"
@@ -131,11 +143,8 @@ def main() -> None:
         sys.exit("Cancelado.")
     ok = 0
     for vid, sn, titulo, desc, tags in cambios:
-        body = {"id": vid, "snippet": {"title": titulo, "description": desc, "tags": tags, "categoryId": sn["categoryId"]}}
-        if sn.get("defaultLanguage"):
-            body["snippet"]["defaultLanguage"] = sn["defaultLanguage"]
         try:
-            yt.videos().update(part="snippet", body=body).execute()
+            yt.videos().update(part="snippet", body=cuerpo_snippet(vid, sn, title=titulo, description=desc, tags=tags)).execute()
             ok += 1
             print(f"OK {vid}")
         except Exception as e:  # noqa: BLE001
