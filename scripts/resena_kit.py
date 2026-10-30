@@ -27,7 +27,8 @@ COLA_TAGS = [
     "retroreseñas", "reseña retro", "retrogaming", "juegos retro",
     "nostalgia gamer", "¿envejeció bien?", "retrotarros",
 ]
-MARCADOR_TAGS = "[REDACTAR: sumar tags propios del juego: personas, secuela, términos]"
+LISTA_RESENAS = "PLOBtQJdDMEDA"   # id de la lista Retroreseñas del canal (para el bloque "Sigue con")
+MARCADOR_TAGS ="[REDACTAR: sumar tags propios del juego: personas, secuela, términos]"
 
 
 def _camel(texto: str) -> str:
@@ -134,6 +135,8 @@ def esqueleto(data: dict, out_slug: str, hoy: str) -> str:
         f"[REDACTAR: historia, cómo se juega hoy y comparativa]{agradecer}\n\n"
         "[REDACTAR: pregunta a la comunidad] Cuéntanos en los comentarios 👇\n\n"
         f"{CTA}\n\n"
+        "Sigue con: [REDACTAR: video sugerido al publicar]\n"
+        f"Todas las reseñas: https://www.youtube.com/playlist?list={LISTA_RESENAS}\n\n"
         "[REDACTAR: confirmar con tildes el nombre del juego, el año y los hashtags (#Juego #Consola)]\n"
         f"{hashtags(data)}\n"
         "```\n\n"

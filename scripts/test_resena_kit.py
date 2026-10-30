@@ -127,6 +127,19 @@ def _hay(mensajes: list[str], fragmento: str) -> bool:
     return any(fragmento.lower() in m.lower() for m in mensajes)
 
 
+def test_esqueleto_incluye_bloque_sigue_con():
+    kit = _esq()
+    sigue = "Sigue con: [REDACTAR: video sugerido al publicar]"
+    lista = "Todas las reseñas: https://www.youtube.com/playlist?list=PLOBtQJdDMEDA"
+    assert sigue in kit and lista in kit
+    assert kit.index(CTA) < kit.index(sigue) < kit.index(lista) < kit.index("#RetroReseñas")
+
+
+def test_revisar_marca_pendiente_el_sigue_con():
+    kit = _completo().replace("Sigue con: uno, dos, tres, cuatro", "Sigue con: [REDACTAR: video sugerido al publicar]")
+    assert _hay(K.revisar_kit(kit), "[REDACTAR")
+
+
 def test_revisar_esqueleto_falla():
     assert _hay(K.revisar_kit(_esq()), "[REDACTAR")
 
