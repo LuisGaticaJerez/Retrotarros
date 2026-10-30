@@ -20,6 +20,7 @@ Los scripts que generan los datos: `scripts/youtube_inventario.py` (público, si
 | 2026-10-28 | [anuncios-gamecube-2026-10-28](anuncios-gamecube-2026-10-28.md) | Prueba de anuncios con unos 10.000 CLP: 759 vistas, 2 suscriptores y unos 1.840 CLP por hora de reproducción. Recomienda no subir el presupuesto con ese esquema. |
 | 2026-10-29 | [hashtags-propuesta-2026-10-29](hashtags-propuesta-2026-10-29.md) | Propuesta de hashtags sobre el inventario nuevo (88 videos). Solo se aplicó el caso de Melee, que había quedado fuera de la receta (6 hashtags con `#Gaming` y `#fyp`): ahora `#RetroReseñas #SuperSmashBrosMelee #GameCube #Retrogaming #Retrotarros`, con sus 18 etiquetas intactas. Respaldo previo en `data/youtube/respaldo-api-2026-10-29-154728.json`. |
 | 2026-10-29 | [analisis-canal-2026-10-29](analisis-canal-2026-10-29.md) | Las vistas bajaron con la publicidad (84% sigue siendo pagada); los suscriptores son pocos pero ven mucho más tiempo por vista; los hashtags y tags están completos y no mueven tráfico medible. |
+| 2026-10-30 | [analisis-organico-vs-publicidad-2026-10-30](analisis-organico-vs-publicidad-2026-10-30.md) | Descarta shadow ban: sin anuncios el canal rinde 138 a 193 vistas orgánicas al día, sobre las 79 de antes de pagar. Los anuncios fueron 89 días (6 jul a 17 oct), no un par de semanas, y se apagaron el 18 oct. |
 
 ## Seguimiento
 
@@ -30,5 +31,6 @@ Una fila por análisis, siempre con las mismas columnas, para ver la tendencia s
 | 14 jul a 12 oct | 153.653 | 83% | 3.272 / 1.294 | n/d (fuente suscriptores: 12.296 vistas) | 2.240 (12 oct) | n/d | análisis 10-14 |
 | 29 ago a 27 sep | 73.530 | 81% | 1.114 / 356 | 2.451 (4.856 min) | n/d | n/d | análisis 10-29 |
 | 27 sep a 27 oct | 29.834 | 84% | 746 / 300 | 1.334 (5.156 min) | 2.510 (29 oct) | 814,6 h (al 28 oct) | análisis 10-29 y anuncios |
+| 6 may a 27 oct | 178.644 | 81% | n/d | n/d | 2.510 (29 oct) | n/d | análisis orgánico 10-30 |
 
 Notas: "Vistas de suscritos" es el estado de suscripción del espectador (SUBSCRIBED), no la fuente de tráfico "feed de suscripciones". Las horas de reproducción vienen del informe de anuncios; ese informe indica 4.000 horas como el umbral que falta cubrir.
