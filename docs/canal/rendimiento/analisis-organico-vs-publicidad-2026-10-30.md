@@ -28,10 +28,27 @@ Vistas por mes, pagadas y orgánicas:
 
 Total pagado en el periodo: 145.171 vistas contra unas 33.500 orgánicas.
 
+## Gasto real (resumen de facturación de Google Ads)
+
+Leído de la pantalla de facturación de la cuenta del canal el 2026-10-30 (solo lectura; sin números de cuenta ni de tarjeta en este documento). Costo neto por mes, contra las vistas pagadas que mide Analytics:
+
+| Mes | Costo neto (CLP) | Vistas pagadas | CLP por vista pagada |
+|---|---:|---:|---:|
+| Julio | 32.117 | 35.169 | 0,91 |
+| Agosto | 38.142 | 27.899 | 1,37 |
+| Septiembre | 20.909 | 59.316 | 0,35 |
+| Octubre (al 30) | 23.601 | 22.787 | 1,04 |
+| **Total** | **114.769** | **145.171** | **0,79** |
+
+- El gasto total de julio a octubre fue de unos **115 mil CLP**, más que las 10 mil por 15 días que recordabas en julio y agosto (32 mil y 38 mil, unas tres tandas por mes). Septiembre y octubre sí fueron anuncios pagados: 20.909 y 23.601.
+- **Septiembre fue el mes más eficiente**: 0,35 CLP por vista y 59 mil vistas, casi el doble de vistas con la mitad del gasto de agosto. Vale la pena saber qué campaña fue esa antes de repetirla.
+- La lista de campañas de la cuenta solo muestra "Prueba horas - rankings" (la de GameCube, estado Finalizado, 10.023 CLP y 1.547 vistas de TrueView desde el 14 de octubre). Las campañas de julio a septiembre no aparecen en esa lista, así que su detalle por campaña sigue pendiente; los montos por mes sí están confirmados por facturación.
+- La prueba de GameCube explica solo unos 10 mil de los 23.601 CLP de octubre y unas 1.500 de las 22.787 vistas pagadas del mes: el resto (unas 21 mil vistas del 4 al 17 oct) vino de otra campaña de la que no queda detalle en la lista.
+
 ## Lo que dicen los datos
 
 - **Sin anuncios el canal no cae bajo su base de antes.** En junio, sin pagar nada, entraban unas 79 vistas al día (con un pico de Shorts a inicios de mes). Los días sin anuncios de julio a octubre promedian 138, y las últimas diez jornadas, 193.
-- **La publicidad dura más de lo recordado.** Hay anuncios en 89 días entre el 6 de julio y el 17 de octubre, con una mediana de unas 1.700 vistas pagadas diarias, y son continuos en septiembre y octubre. Los anuncios se cortaron el 18 de octubre (quedan unas 110 vistas pagadas al día de arrastre). Luis recordaba un par de semanas de julio y agosto; hay que revisar en la cuenta de anuncios si septiembre y octubre fueron otra campaña, una renovación automática o una promoción creada desde YouTube.
+- **La publicidad dura más de lo recordado.** Hay anuncios en 89 días entre el 6 de julio y el 17 de octubre, con una mediana de unas 1.700 vistas pagadas diarias, y son continuos en septiembre y octubre. Los anuncios se cortaron el 18 de octubre (quedan unas 110 vistas pagadas al día de arrastre). Luis recordaba un par de semanas de julio y agosto; la facturación confirma gasto también en septiembre y octubre (ver arriba).
 - **Lo orgánico sube cuando hay anuncios** (290 contra 138 al día). Puede ser que las vistas pagadas arrastren algo de tráfico (relacionados, suscriptores que vuelven) o que coincidan con semanas de más publicaciones; con estos datos no se separa.
 - **La caída de los últimos días es la fuente pagada que se apagó.** Octubre pasó de unas 1.800 vistas pagadas al día a 110 el 18 de octubre, y eso explica casi toda la baja de vistas totales.
 - **Alcance real orgánico.** Una vez descontada la publicidad, el canal trae unas 150 a 200 vistas diarias, con más peso de los suscriptores (feed de suscripciones) que de la búsqueda (1.094 vistas en todo el periodo).
@@ -42,6 +59,6 @@ Los no suscritos que llegan por anuncios ven en promedio unos 89 segundos (los s
 
 ## Datos que faltan
 
-- Gasto por campaña y fechas reales de cada una (para costo por vista y por suscriptor, y para confirmar septiembre y octubre).
+- Detalle por campaña de julio a septiembre (la lista de campañas de la cuenta solo muestra la de GameCube): hace falta para el costo por suscriptor de cada estrategia.
 - Impresiones y CTR por video, que Analytics no entrega con esta consulta (hay que sacarlos de YouTube Studio).
 - Suscriptores ganados por fuente de tráfico: la consulta no se permite por día y fuente.
