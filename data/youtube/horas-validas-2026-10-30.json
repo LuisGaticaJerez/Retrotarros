@@ -1,0 +1,82 @@
+{
+ "fuentes_largos": [
+  {
+   "insightTrafficSourceType": "SUBSCRIBER",
+   "views": 14880,
+   "estimatedMinutesWatched": 20348
+  },
+  {
+   "insightTrafficSourceType": "RELATED_VIDEO",
+   "views": 2899,
+   "estimatedMinutesWatched": 14578
+  },
+  {
+   "insightTrafficSourceType": "ADVERTISING",
+   "views": 4608,
+   "estimatedMinutesWatched": 4778
+  },
+  {
+   "insightTrafficSourceType": "YT_CHANNEL",
+   "views": 1178,
+   "estimatedMinutesWatched": 2950
+  },
+  {
+   "insightTrafficSourceType": "YT_SEARCH",
+   "views": 782,
+   "estimatedMinutesWatched": 1605
+  },
+  {
+   "insightTrafficSourceType": "PLAYLIST",
+   "views": 201,
+   "estimatedMinutesWatched": 1356
+  },
+  {
+   "insightTrafficSourceType": "EXT_URL",
+   "views": 280,
+   "estimatedMinutesWatched": 1223
+  },
+  {
+   "insightTrafficSourceType": "YT_OTHER_PAGE",
+   "views": 181,
+   "estimatedMinutesWatched": 1105
+  },
+  {
+   "insightTrafficSourceType": "NO_LINK_OTHER",
+   "views": 319,
+   "estimatedMinutesWatched": 1059
+  },
+  {
+   "insightTrafficSourceType": "NOTIFICATION",
+   "views": 61,
+   "estimatedMinutesWatched": 257
+  },
+  {
+   "insightTrafficSourceType": "END_SCREEN",
+   "views": 16,
+   "estimatedMinutesWatched": 177
+  },
+  {
+   "insightTrafficSourceType": "SHORTS_CONTENT_LINKS",
+   "views": 5,
+   "estimatedMinutesWatched": 4
+  }
+ ],
+ "tipo_usado": "videoOnDemand",
+ "por_tipo": [
+  {
+   "creatorContentType": "liveStream",
+   "views": 9,
+   "estimatedMinutesWatched": 3
+  },
+  {
+   "creatorContentType": "shorts",
+   "views": 153500,
+   "estimatedMinutesWatched": 18645
+  },
+  {
+   "creatorContentType": "videoOnDemand",
+   "views": 25411,
+   "estimatedMinutesWatched": 49446
+  }
+ ]
+}
