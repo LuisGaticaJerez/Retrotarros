@@ -136,6 +136,41 @@ def test_clasica_explicita_igual():
     assert _hash(_generar({**_data_mundial(), "grafica": "clasica"}, SLUG_M)) == _golden()["mundial"]
 
 
+# ---------------------------------------------------------------- Task 2: marca y enganches
+
+def test_marca_invalida_error():
+    for valor in ("Nueva", "nuevo", None):
+        try:
+            _generar({**_data_mundial(), "grafica": valor}, SLUG_M)
+        except ValueError:
+            continue
+        raise AssertionError(f"grafica={valor!r} no lanzo ValueError")
+
+
+def test_nueva_agrega_css():
+    html = _generar({**_data_mundial(), "grafica": "nueva"}, SLUG_M)
+    assert ".g-nueva{}" in html
+    assert ".game-why{font-size:32px !important" in html   # letra grande para TV intacta
+    assert ".game-price{" in html
+
+
+def _modulo_cargado(marca: str | None) -> str:
+    """Genera un deck en un proceso limpio y dice si top_grafica quedo importado."""
+    import subprocess
+    extra = "" if marca is None else f', "grafica": "{marca}"'
+    codigo = (
+        "import sys; sys.path.insert(0, r'%s'); import test_top_grafica as t; "
+        "t._generar({**t._data_mundial()%s}, t.SLUG_M); print('top_grafica' in sys.modules)"
+    ) % (str(Path(__file__).resolve().parent), extra)
+    return subprocess.run([sys.executable, "-c", codigo], capture_output=True, text=True, check=True).stdout.strip()
+
+
+def test_modulo_nuevo_solo_con_la_marca():
+    assert _modulo_cargado(None) == "False"
+    assert _modulo_cargado("clasica") == "False"
+    assert _modulo_cargado("nueva") == "True"
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:
