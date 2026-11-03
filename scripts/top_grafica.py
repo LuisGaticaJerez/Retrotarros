@@ -168,7 +168,7 @@ def _filas_chips(partes: list[str]) -> int:
     return filas
 
 
-DEV_RE = re.compile(r"^(.+?)\s*\((DEV\.[^()]*|PORT[^()]*)\)$")
+DEV_RE = re.compile(r"^(.+?)\s*\((DEV\.[^()]*|PORT[^()]*|CAJA[^()]*)\)$")
 
 
 def chips(it: dict, consola: str) -> str:

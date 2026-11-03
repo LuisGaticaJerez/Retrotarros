@@ -273,6 +273,13 @@ def test_chips_peores_enmarca_editor_y_manda_desarrollador_y_fuentes_a_gris():
     assert G.chips({"meta": "PS1 · 1998 (PS1) · NAMCO"}, "PS1").count("(PS1)") == 1   # el ano no se toca
 
 
+def test_chips_la_nota_de_caja_del_editor_tambien_va_a_la_linea_gris():
+    import top_grafica as G
+    h = G.chips({"meta": "Atari 2600 · 1982 · ULTRAVISION (CAJA: REEDICION FROGGO) · CREATIVE LOAFING + CBR"}, "Atari 2600")
+    assert h.count('<span class="g-chip') == 3 and '<span class="g-chip">ULTRAVISION</span>' in h
+    assert '<div class="game-meta g-extra">CAJA: REEDICION FROGGO · CREATIVE LOAFING + CBR</div>' in h
+
+
 def test_chips_con_un_chip_demasiado_ancho_vuelven_a_la_linea_de_hoy():
     import top_grafica as G
     assert G.chips({"meta": "PS1 · 1999 · UN EDITOR CON UN NOMBRE ABSURDAMENTE LARGO PARA UN CHIP"}, "PS1") == ""
