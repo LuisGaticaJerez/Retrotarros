@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-ancha .hybrid-title{align-self:center !important}
 .slide-hybrid.box-ancha .game-title{font-size:44px !important;line-height:1.05 !important}
 .slide-hybrid.box-ancha .game-meta{font-size:21px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/ps1-top-precios/persona-2-eternal-punishment.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tron-bonne.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tekken-longbox.jpg)"></i><i style="background-image:url(img/ps1-top-precios/clock-tower-2.jpg)"></i><i style="background-image:url(img/ps1-top-precios/koudelka.jpg)"></i><i style="background-image:url(img/ps1-top-precios/revelations-persona.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tail-concerto.jpg)"></i><i style="background-image:url(img/ps1-top-precios/syphon-filter-3-911.jpg)"></i><i style="background-image:url(img/ps1-top-precios/klonoa.jpg)"></i><i style="background-image:url(img/ps1-top-precios/shadow-tower.jpg)"></i></div>
     <div class="portada">
       <div class="ep-tag">TOP 10 PRECIOS</div>
       <div class="ep-title">PLAYSTATION</div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>PORTADA · DATOS BOMBA</h4><div class="n-line">Precios CIB (Complete In Box) via PriceCharting, actualizados a 2026.</div><div class="n-line">Valores aproximados, fluctuan con el mercado -nunca consejo de inversion.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/ps1-top-precios/persona-2-eternal-punishment.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tron-bonne.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tekken-longbox.jpg)"></i><i style="background-image:url(img/ps1-top-precios/clock-tower-2.jpg)"></i><i style="background-image:url(img/ps1-top-precios/koudelka.jpg)"></i><i style="background-image:url(img/ps1-top-precios/revelations-persona.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tail-concerto.jpg)"></i><i style="background-image:url(img/ps1-top-precios/syphon-filter-3-911.jpg)"></i><i style="background-image:url(img/ps1-top-precios/klonoa.jpg)"></i><i style="background-image:url(img/ps1-top-precios/shadow-tower.jpg)"></i></div>
     <div class="divider">
       <div class="pre cy">CONTEXTO</div>
       <div class="title cy">LO CARO NO ES LO FAMOSO</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>CONTEXTO · DATOS EXTRA</h4><div class="n-line">Casi todo el top 10 son RPG o juegos de accion japoneses de nicho -el patron se repite consola tras consola: publishers chicos en Occidente en los 90 significa tiradas cortas.</div><div class="n-line">El resurgir de la saga Persona tras Persona 5 (2016) disparo retroactivamente la demanda de coleccionistas por las entregas viejas de PS1 -Persona 2 y Revelations: Persona subieron de precio justo por eso.</div><div class="n-cue">TRANSICION: empezamos el recorrido por el fondo de la tabla.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/pink-panther-pinkadelic-pursuit.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 350</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip cur">10</div><div class="g-pip f">9</div><div class="g-pip f">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 350</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/pink-panther-pinkadelic-pursuit.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/pink-panther-pinkadelic-pursuit.jpg" alt="Pink Panther: Pinkadelic Pursuit box art"></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Pink Panther: Pinkadelic Pursuit</div><div class="game-meta">PS1 · 2002 · DREAMCATCHER</div></div>
+      <div class="hybrid-title"><div class="game-title">Pink Panther: Pinkadelic Pursuit</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">2002</span><span class="g-chip">DREAMCATCHER</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Juego con licencia de la Pantera Rosa lanzado en 2002, cuando la PS1 ya estaba en retirada y casi nadie miraba la consola. Un titulo infantil que casi nadie guardo completo, y hoy se paga mas que JoJo's o Valkyrie Profile.</div>
     </div>
 <aside class="notas"><h4>#10 · DATOS EXTRA</h4><div class="n-line">Salio en 2002, cuando la PS2 ya llevaba dos años en el mercado -es de los ultimos juegos con licencia que recibio la PS1.</div><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 349,99. Entra al top por primera vez en esta revision -antes no estaba en la lista.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/adventures-of-lomax.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 400</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip cur">9</div><div class="g-pip f">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 400</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/adventures-of-lomax.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/adventures-of-lomax.jpg" alt="The Adventures of Lomax box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">The Adventures of Lomax</div><div class="game-meta">PS1 · 1996 · PSYGNOSIS</div></div>
+      <div class="hybrid-title"><div class="game-title">The Adventures of Lomax</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1996</span><span class="g-chip">PSYGNOSIS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Spin-off de la saga Lemmings: Lomax es un lemming caballero que debe rescatar a sus compañeros, hipnotizados por el hechicero Evil Ed. Plataformas de Psygnosis que hoy se paga caro completo en caja.</div>
     </div>
 <aside class="notas"><h4>#9 · DATOS EXTRA</h4><div class="n-line">Psygnosis lo desarrollo y publico en 1996 para PlayStation y PC -es un spin-off de Lemmings, la saga de puzzles que hizo famoso al estudio.</div><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 399,99. Entra al top en esta revision.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/klonoa.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 408</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip cur">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 408</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:0.9909">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/klonoa.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/klonoa.jpg" alt="Klonoa: Door to Phantomile box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Klonoa: Door to Phantomile</div><div class="game-meta">PS1 · 1998 · NAMCO</div></div>
+      <div class="hybrid-title"><div class="game-title">Klonoa: Door to Phantomile</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1998</span><span class="g-chip">NAMCO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Vendio bien en Japon, pero mal en Occidente -distribucion internacional limitada dejo pocas copias fisicas circulando fuera de Japon.</div>
     </div>
 <aside class="notas"><h4>#8 · DATOS EXTRA</h4><div class="n-line">Pese a las ventas flojas en su momento, hoy se lo considera uno de los mejores plataformas 2.5D de toda la generacion -reconocimiento tardio de un juego que el mercado occidental ignoro.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/koudelka.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 427</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip cur">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 427</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/koudelka.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/koudelka.jpg" alt="Koudelka box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Koudelka</div><div class="game-meta">PS1 · 2000 · SACNOTH / SNK</div></div>
+      <div class="hybrid-title"><div class="game-title">Koudelka</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">2000</span><span class="g-chip">SACNOTH / SNK</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>RPG de survival horror de Sacnoth, ambientado en un monasterio embrujado de Gales y con combates por turnos sobre una grilla. Se vendio en 4 discos, y hoy completo en caja es de los discos mas buscados de la consola.</div>
     </div>
 <aside class="notas"><h4>#7 · DATOS EXTRA</h4><div class="n-line">Salio en Japon en 1999 y en Occidente en 2000. Sacnoth era un estudio ligado a SNK, y el equipo que lo hizo despues creo Shadow Hearts, considerado su sucesor espiritual.</div><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 426,60. Entra al top en esta revision.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/clock-tower-2.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 458</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip cur">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 458</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:0.9909">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/clock-tower-2.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/clock-tower-2.jpg" alt="Clock Tower II: The Struggle Within box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Clock Tower II: The Struggle Within</div><div class="game-meta">PS1 · 1998 · AGETEC / HUMAN ENTERTAINMENT</div></div>
+      <div class="hybrid-title"><div class="game-title">Clock Tower II: The Struggle Within</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1998</span><span class="g-chip">AGETEC / HUMAN ENTERTAINMENT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Tercera entrega de la saga survival horror, con recepcion critica tibia y ritmo lento que la industria de la epoca considero un paso en falso -eso mismo la volvio nicho de culto para coleccionistas de terror.</div>
     </div>
 <aside class="notas"><h4>#6 · DATOS EXTRA</h4><div class="n-line">Junto con Koudelka, es uno de los dos juegos de horror del top -mismo patron de nicho de culto con tirada corta.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/persona-2-eternal-punishment.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 495</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip cur">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 495</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0515">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/persona-2-eternal-punishment.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/persona-2-eternal-punishment.jpg" alt="Persona 2: Eternal Punishment box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Persona 2: Eternal Punishment</div><div class="game-meta">PS1 · 2000 · ATLUS</div></div>
+      <div class="hybrid-title"><div class="game-title">Persona 2: Eternal Punishment</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">2000</span><span class="g-chip">ATLUS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Unica localizacion oficial en ingles de esta entrega -nunca salio en Europa, y el port de PSP fue exclusivo japones. El resurgir de la saga Persona tras Persona 5 disparo la demanda retroactiva por esta entrega.</div>
     </div>
 <aside class="notas"><h4>#5 · DATOS EXTRA</h4><div class="n-line">Segunda mitad de la historia de Persona 2 -la primera mitad (Innocent Sin) nunca se localizo oficialmente en PS1, recien llego a Occidente via PSP en 2011.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/shadow-tower.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 502</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip cur">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 502</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0091">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/shadow-tower.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/shadow-tower.jpg" alt="Shadow Tower box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Shadow Tower</div><div class="game-meta">PS1 · 1999 · AGETEC</div></div>
+      <div class="hybrid-title"><div class="game-title">Shadow Tower</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1999</span><span class="g-chip">AGETEC</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>RPG de accion en primera persona de FromSoftware, los creadores de King's Field. Agetec lo publico en Estados Unidos en noviembre de 1999, un año despues de su estreno en Japon, y hoy es de los discos mas caros de la consola.</div>
     </div>
 <aside class="notas"><h4>#4 · DATOS EXTRA</h4><div class="n-line">Salio en Japon el 25 de junio de 1998 y en Norteamerica el 23 de noviembre de 1999. Comparte muchas similitudes con la saga King's Field -la caja dice 'From the Creators of the King's Field Series'.</div><div class="n-line">Tuvo secuela, Shadow Tower Abyss, pero solo salio en Japon para PS2.</div><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 502,31. Entra al top en esta revision.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/tail-concerto.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 525</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip cur">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 525</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0121">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/tail-concerto.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/tail-concerto.jpg" alt="Tail Concerto box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Tail Concerto</div><div class="game-meta">PS1 · 1998 · ATLUS</div></div>
+      <div class="hybrid-title"><div class="game-title">Tail Concerto</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1998</span><span class="g-chip">ATLUS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Los derechos de publicacion pasaron entre varios estudios antes del lanzamiento occidental, retrasando y limitando la tirada -precursor espiritual directo de Solatorobo, que Bandai Namco publico años despues.</div>
     </div>
 <aside class="notas"><h4>#3 · DATOS EXTRA</h4><div class="n-line">Mismo equipo creativo que despues hizo Solatorobo: Red the Hunter (DS, 2010) -mismo universo de gatos y perros antropomorfos con mechas.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/revelations-persona.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 536</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip cur">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 536</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0636">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/revelations-persona.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/revelations-persona.jpg" alt="Revelations: Persona box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Revelations: Persona</div><div class="game-meta">PS1 · 1996 · ATLUS</div></div>
+      <div class="hybrid-title"><div class="game-title">Revelations: Persona</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1996</span><span class="g-chip">ATLUS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Primer Persona en Occidente, con una localizacion tan alterada del original japones -nombres, tono, hasta contenido religioso censurado- que se considera casi una version distinta. Nunca salio en Europa hasta el port de PSP en 2010.</div>
     </div>
 <aside class="notas"><h4>#2 · DATOS EXTRA</h4><div class="n-line">La censura llego al punto de eliminar referencias religiosas y cambiar nombres de personajes completos -el port de PSP (2010) restauro gran parte del contenido original.</div><div class="n-line">Con la revision de octubre 2026 sube al #2: USD 535,58 contra USD 525 de Tail Concerto.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/tron-bonne.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 625</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip cur">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 625</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/tron-bonne.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/tron-bonne.jpg" alt="The Misadventures of Tron Bonne box art"></div>
@@ -387,13 +433,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">The Misadventures of Tron Bonne</div><div class="game-meta">PS1 · 2000 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">The Misadventures of Tron Bonne</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">2000</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL TRONO</span>Spin-off de Mega Man Legends centrado en la villana Tron Bonne, con ventas tan bajas que Capcom nunca volvio a hacer un spin-off asi de la saga. Incluia ademas una demo jugable de Mega Man Legends 2 dentro del mismo disco.</div>
     </div>
 <aside class="notas"><h4>#1 · DATOS EXTRA</h4><div class="n-line">El PS1 retail mas caro del top -y sin embargo, la propia demo de Mega Man Legends 2 que trae adentro es mas facil de conseguir suelta que el juego completo.</div><div class="n-line">Mezcla de generos poco comun para la epoca: accion, puzzle y gestion de recursos en un mismo titulo.</div><div class="n-cue">TRANSICION: con el trono claro, pasamos al apartado de rarezas.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/ps1-top-precios/persona-2-eternal-punishment.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tron-bonne.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tekken-longbox.jpg)"></i><i style="background-image:url(img/ps1-top-precios/clock-tower-2.jpg)"></i><i style="background-image:url(img/ps1-top-precios/koudelka.jpg)"></i><i style="background-image:url(img/ps1-top-precios/revelations-persona.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tail-concerto.jpg)"></i><i style="background-image:url(img/ps1-top-precios/syphon-filter-3-911.jpg)"></i><i style="background-image:url(img/ps1-top-precios/klonoa.jpg)"></i><i style="background-image:url(img/ps1-top-precios/shadow-tower.jpg)"></i></div>
     <div class="divider">
       <div class="pre mg">APARTADO ESPECIAL</div>
       <div class="title mg">RAREZAS Y NO-RETAIL</div>
@@ -401,10 +448,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">14</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/syphon-filter-3-911.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL</div><div class="game-price">USD 1.062</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr cur">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL</div><div class="game-price">USD 1.062</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0030">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/syphon-filter-3-911.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/syphon-filter-3-911.jpg" alt="Syphon Filter 3 [911 Edition] box art"></div>
@@ -416,15 +464,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Syphon Filter 3 [911 Edition]</div><div class="game-meta">PS1 · 2001 · 989 STUDIOS / SONY</div></div>
+      <div class="hybrid-title"><div class="game-title">Syphon Filter 3 [911 Edition]</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">2001</span><span class="g-chip">989 STUDIOS / SONY</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>La portada original mostraba un edificio en llamas con una bandera americana de fondo -programada para salir en septiembre de 2001. Tras el 11-S, Sony reimprimio toda la produccion, pero ya habian llegado copias con la portada vieja a algunas tiendas antes del retiro.</div>
     </div>
 <aside class="notas"><h4>RAREZA · DATOS EXTRA</h4><div class="n-line">Nunca se vendio oficialmente al publico con esa portada -las copias que circulan hoy escaparon del retiro antes de que Sony las reemplazara.</div><div class="n-line">Precio CIB via PriceCharting: rango USD 600 a 2.761 segun condicion -mucha variacion porque son pocas ventas, todas de coleccionista a coleccionista.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">15</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/mortal-kombat-3.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL</div><div class="game-price">USD 961</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr cur">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL</div><div class="game-price">USD 961</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0121">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/mortal-kombat-3.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/mortal-kombat-3.jpg" alt="Mortal Kombat 3 [Jewel Case] box art"></div>
@@ -436,15 +485,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Mortal Kombat 3 [Jewel Case]</div><div class="game-meta">PS1 · 1995 · WILLIAMS / GT INTERACTIVE</div></div>
+      <div class="hybrid-title"><div class="game-title">Mortal Kombat 3 [Jewel Case]</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1995</span><span class="g-chip">WILLIAMS / GT INTERACTIVE</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>La inmensa mayoria de copias de MK3 vinieron en el empaque 'long box' alto de los primeros lanzamientos de PS1 -solo se conocen 3 o 4 copias confirmadas en el empaque jewel case cuadrado estandar, sin explicacion oficial de por que existen.</div>
     </div>
 <aside class="notas"><h4>RAREZA · DATOS EXTRA</h4><div class="n-line">PriceCharting registra apenas ~3 ventas CIB por año -ventas completadas recientes van de USD 500 a USD 1.300, reflejo de lo poco que circula.</div><div class="n-line">El arte impreso es identico al long box normal -la diferencia esta 100% en la forma fisica del empaque, no en el diseño grafico. Mismo UPC que la version long box, dato que ayuda a confirmar que es autentica y no una falsificacion.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">16</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/nfl-blitz-2000.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL</div><div class="game-price">USD 11.225</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-pip rr cur">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL</div><div class="game-price">USD 11.225</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:0.8030">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/nfl-blitz-2000.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/nfl-blitz-2000.jpg" alt="NFL Blitz 2000 [Greatest Hits] box art"></div>
@@ -456,15 +506,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">NFL Blitz 2000 [Greatest Hits]</div><div class="game-meta">PS1 · 1999 · MIDWAY</div></div>
+      <div class="hybrid-title"><div class="game-title">NFL Blitz 2000 [Greatest Hits]</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1999</span><span class="g-chip">MIDWAY</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Se imprimio por error y se retiro casi por completo antes de salir a la venta -la coleccion 'mejores ventas' de Sony normalmente evitaba juegos deportivos con licencia anual, que se desactualizan rapido. Un puñado de copias escapo del retiro antes de completarse.</div>
     </div>
 <aside class="notas"><h4>RAREZA · DATOS EXTRA</h4><div class="n-line">PriceCharting solo registra 4 ventas CIB completadas EN TOTAL (nunca por año, en toda la historia del listado), entre USD 2.500 y USD 14.950 -la rareza mas extrema de las 3 de este apartado.</div><div class="n-line">Mismo codigo UPC que la version normal (no Greatest Hits) del juego -asi es como los coleccionistas confirman que una copia es autentica y no una etiqueta Greatest Hits pegada encima.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">17</span>
+    <div class="g-bg" style="background-image:url(img/ps1-top-precios/tekken-longbox.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 55.200</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-sep"></div><div class="g-pip gg cur">★</div></div><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 55.200</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:283px;--ar:0.6007">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-top-precios/tekken-longbox.jpg" alt="" aria-hidden="true"><img src="img/ps1-top-precios/tekken-longbox.jpg" alt="Tekken [Long Box] box art"></div>
@@ -476,13 +527,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Tekken [Long Box]</div><div class="game-meta">PS1 · 1995 · NAMCO</div></div>
+      <div class="hybrid-title"><div class="game-title">Tekken [Long Box]</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1995</span><span class="g-chip">NAMCO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El santo grial real de PS1 no es un juego raro de nicho -es el PRIMER Tekken, en el empaque alto 'long box' que Sony uso solo durante 1995 antes de estandarizar el jewel case cuadrado. Una copia SELLADA Y GRADUADA Wata 9.8 A++ se vendio en Heritage Auctions en marzo de 2024 por USD 55.200 -el disco suelto comun vale apenas USD 15 a 30.</div>
     </div>
 <aside class="notas"><h4>SANTO GRIAL · DATOS EXTRA</h4><div class="n-line">ACLARAR SIEMPRE EN CAMARA: el precio en pantalla es de una copia sellada y graduada por Wata, no del cartucho suelto que cualquiera podria tener -ese vale apenas USD 15 a 30 en PriceCharting.</div><div class="n-line">El precio CIB normal (sin sellar, sin graduar) de Tekken Long Box es de apenas USD 90 aproximadamente -la diferencia de casi 600 veces entre el CIB comun y el record de subasta es el ejemplo mas extremo de todo el canal del fenomeno WATA/coleccionismo graduado (boom 2020-2021).</div><div class="n-cue">PREGUNTA AL PUBLICO: ¿tenian alguno de estos en su coleccion sin saber que valia tanto?</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">18</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/ps1-top-precios/persona-2-eternal-punishment.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tron-bonne.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tekken-longbox.jpg)"></i><i style="background-image:url(img/ps1-top-precios/clock-tower-2.jpg)"></i><i style="background-image:url(img/ps1-top-precios/koudelka.jpg)"></i><i style="background-image:url(img/ps1-top-precios/revelations-persona.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tail-concerto.jpg)"></i><i style="background-image:url(img/ps1-top-precios/syphon-filter-3-911.jpg)"></i><i style="background-image:url(img/ps1-top-precios/klonoa.jpg)"></i><i style="background-image:url(img/ps1-top-precios/shadow-tower.jpg)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg">LO RARO GANA, NO LO FAMOSO</div>
@@ -490,8 +542,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">19</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/ps1-top-precios/persona-2-eternal-punishment.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tron-bonne.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tekken-longbox.jpg)"></i><i style="background-image:url(img/ps1-top-precios/clock-tower-2.jpg)"></i><i style="background-image:url(img/ps1-top-precios/koudelka.jpg)"></i><i style="background-image:url(img/ps1-top-precios/revelations-persona.jpg)"></i><i style="background-image:url(img/ps1-top-precios/tail-concerto.jpg)"></i><i style="background-image:url(img/ps1-top-precios/syphon-filter-3-911.jpg)"></i><i style="background-image:url(img/ps1-top-precios/klonoa.jpg)"></i><i style="background-image:url(img/ps1-top-precios/shadow-tower.jpg)"></i></div>
     <div class="divider">
       <div class="pre cy">CIERRE</div>
       <div class="title cy">¿TENIAN ALGUNO?</div>

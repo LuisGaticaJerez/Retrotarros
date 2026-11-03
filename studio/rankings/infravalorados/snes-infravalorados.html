@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-ancha .hybrid-title{align-self:center !important}
 .slide-hybrid.box-ancha .game-title{font-size:44px !important;line-height:1.05 !important}
 .slide-hybrid.box-ancha .game-meta{font-size:21px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/snes-infravalorados/lufia-ii.png)"></i><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><i style="background-image:url(img/snes-infravalorados/tetris-attack.jpg)"></i><i style="background-image:url(img/snes-infravalorados/axelay.png)"></i><i style="background-image:url(img/snes-infravalorados/hagane.png)"></i><i style="background-image:url(img/snes-infravalorados/cybernator.png)"></i><i style="background-image:url(img/snes-infravalorados/ogre-battle.png)"></i><i style="background-image:url(img/snes-infravalorados/soul-blazer.png)"></i><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><i style="background-image:url(img/snes-infravalorados/illusion-of-gaia.png)"></i></div>
     <div class="portada">
       <div class="ep-tag">SUPER NINTENDO · JOYAS QUE NADIE NOMBRA</div>
       <div class="ep-title">SNES <span class="vs">INFRAVALORADOS</span></div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>INTRO · DATOS BOMBA</h4><div class="n-line">Ranking de CALIDAD, no de precios: juegos de SNES que la prensa de la epoca puso bien alto y que hoy casi no salen en ninguna lista.</div><div class="n-line">El criterio: buena critica (GameRankings 79 a 90 % o puestos altos en listas como el Top 100 SNES de IGN), lanzamiento en NTSC USA y que no esten en el Top Mundial del canal.</div><div class="n-line">El orden pesa primero la fuerza de la critica (nota agregada o puesto en listas de mejores del SNES) y, a igual nivel, el olvido desempata. Es discutible: ese es el punto del episodio.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-ye">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/snes-infravalorados/lufia-ii.png)"></i><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><i style="background-image:url(img/snes-infravalorados/tetris-attack.jpg)"></i><i style="background-image:url(img/snes-infravalorados/axelay.png)"></i><i style="background-image:url(img/snes-infravalorados/hagane.png)"></i><i style="background-image:url(img/snes-infravalorados/cybernator.png)"></i><i style="background-image:url(img/snes-infravalorados/ogre-battle.png)"></i><i style="background-image:url(img/snes-infravalorados/soul-blazer.png)"></i><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><i style="background-image:url(img/snes-infravalorados/illusion-of-gaia.png)"></i></div>
     <div class="divider">
       <div class="pre ye">NO SON LOS FAMOSOS</div>
       <div class="title ye">BUENOS Y OLVIDADOS · #10 AL #1</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:53px;--dx:0px"><div class="g-th cur" style="--w:1.358"><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><em>10</em></div><div class="g-th f" style="--w:1.407"><em>9</em></div><div class="g-th f" style="--w:1.407"><em>8</em></div><div class="g-th f" style="--w:1.407"><em>7</em></div><div class="g-th f" style="--w:1.407"><em>6</em></div><div class="g-th f" style="--w:1.407"><em>5</em></div><div class="g-th f" style="--w:1.407"><em>4</em></div><div class="g-th f" style="--w:1.407"><em>3</em></div><div class="g-th f" style="--w:1.407"><em>2</em></div><div class="g-th f" style="--w:1.379"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>10</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:324px;--ar:1.3580">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/rock-n-roll-racing.jpg" alt="" aria-hidden="true"><img src="img/snes-infravalorados/rock-n-roll-racing.jpg" alt="ROCK N' ROLL RACING box art"></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">ROCK N' ROLL RACING</div><div class="game-meta">SNES · 1993 · INTERPLAY</div></div>
+      <div class="hybrid-title"><div class="game-title">ROCK N' ROLL RACING</div><div class="game-meta g-chips"><span class="g-chip">SNES</span><span class="g-chip y">1993</span><span class="g-chip">INTERPLAY</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Carreras con armas de Silicon & Synapse, hoy Blizzard, con una banda sonora de rock y metal que se sigue citando como de las mejores del SNES.</div>
     </div>
 <aside class="notas"><h4>#10 · DATOS EXTRA</h4><div class="n-line">Fuente: la prensa destaco su banda sonora (Game Informer la puso entre las mejores del SNES) y GamesMaster lo ubico 96 en su Top 100 de todos los tiempos de 1996.</div><div class="n-line">Nacio como RPM II, secuela de RPM Racing. Interplay le agrego los temas de rock con licencia al final del desarrollo.</div><div class="n-line">Silicon &amp; Synapse es el estudio que despues se llamo Blizzard Entertainment. En 2021 Blizzard lo relanzo dentro de la Blizzard Arcade Collection.</div><div class="n-line">Por que esta olvidado: salio un año despues de Super Mario Kart y todo carrera del SNES vive a su sombra.</div><div class="n-cue">Cue Koko: si pone los temas de la banda sonora de fondo, que lo reconozca.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/snes-infravalorados/uniracers.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:53px;--dx:0px"><div class="g-th r" style="--w:1.358"><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><em>10</em></div><div class="g-th cur" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><em>9</em></div><div class="g-th f" style="--w:1.407"><em>8</em></div><div class="g-th f" style="--w:1.407"><em>7</em></div><div class="g-th f" style="--w:1.407"><em>6</em></div><div class="g-th f" style="--w:1.407"><em>5</em></div><div class="g-th f" style="--w:1.407"><em>4</em></div><div class="g-th f" style="--w:1.407"><em>3</em></div><div class="g-th f" style="--w:1.407"><em>2</em></div><div class="g-th f" style="--w:1.379"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>9</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/uniracers.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/uniracers.png" alt="UNIRACERS box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">UNIRACERS</div><div class="game-meta">SNES · 1994 · NINTENDO</div></div>
+      <div class="hybrid-title"><div class="game-title">UNIRACERS</div><div class="game-meta g-chips"><span class="g-chip">SNES</span><span class="g-chip y">1994</span><span class="g-chip">NINTENDO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Carreras de monociclos con acrobacias, de DMA Design, los futuros creadores de Grand Theft Auto. Nintendo Power lo puso octavo mejor juego de SNES de 1994.</div>
     </div>
 <aside class="notas"><h4>#9 · DATOS EXTRA</h4><div class="n-line">Fuente: GameRankings 79 % (5 reseñas); Nintendo Power lo ranqueo 8 entre los mejores SNES de 1994; IGN lo puso 98 en su Top 100 SNES.</div><div class="n-line">En Europa se llamo Unirally. DMA Design y Nintendo dejaron de fabricar el cartucho y nunca se reedito. Se reporta que fue por una demanda de Pixar por el parecido con el corto Red's Dream, de 1987.</div><div class="n-line">Segun Mike Dailly (DMA), el equipo practico con monociclos de verdad en la oficina para entender la fisica. Su nombre de trabajo era 1x1.</div><div class="n-line">DMA Design es el estudio que despues se convirtio en Rockstar North.</div><div class="n-cue">Cue Koko: contar la anecdota de la demanda de Pixar, es de lo mas curioso del episodio.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/snes-infravalorados/hagane.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:53px;--dx:0px"><div class="g-th r" style="--w:1.358"><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><em>9</em></div><div class="g-th cur" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/hagane.png)"></i><em>8</em></div><div class="g-th f" style="--w:1.407"><em>7</em></div><div class="g-th f" style="--w:1.407"><em>6</em></div><div class="g-th f" style="--w:1.407"><em>5</em></div><div class="g-th f" style="--w:1.407"><em>4</em></div><div class="g-th f" style="--w:1.407"><em>3</em></div><div class="g-th f" style="--w:1.407"><em>2</em></div><div class="g-th f" style="--w:1.379"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>8</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/hagane.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/hagane.png" alt="HAGANE: THE FINAL CONFLICT box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">HAGANE: THE FINAL CONFLICT</div><div class="game-meta">SNES · 1995 · HUDSON SOFT</div></div>
+      <div class="hybrid-title"><div class="game-title">HAGANE: THE FINAL CONFLICT</div><div class="game-meta g-chips"><span class="g-chip">SNES</span><span class="g-chip y">1995</span><span class="g-chip">HUDSON SOFT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Accion ninja cyborg de Hudson Soft, oscura y muy rapida. IGN lo puso 45 en su Top 100 SNES por su ambientacion y su ritmo.</div>
     </div>
 <aside class="notas"><h4>#8 · DATOS EXTRA</h4><div class="n-line">Fuente: IGN lo ubico 45 en su Top 100 SNES y lo describio como 'moody' y 'fast but furious'.</div><div class="n-line">Hudson Soft lo lanzo en NTSC USA en 1995, ya en el tramo final de la consola.</div><div class="n-line">Es un juego que casi nadie nombra y que quienes lo conocen defienden con pasion.</div><div class="n-line">Por que esta olvidado: llego tarde y sin ruido.</div><div class="n-cue">Cue Koko: es un juego que casi nadie nombra, dejar que Coco diga si lo conocia.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/snes-infravalorados/ogre-battle.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:53px;--dx:0px"><div class="g-th r" style="--w:1.358"><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/hagane.png)"></i><em>8</em></div><div class="g-th cur" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/ogre-battle.png)"></i><em>7</em></div><div class="g-th f" style="--w:1.407"><em>6</em></div><div class="g-th f" style="--w:1.407"><em>5</em></div><div class="g-th f" style="--w:1.407"><em>4</em></div><div class="g-th f" style="--w:1.407"><em>3</em></div><div class="g-th f" style="--w:1.407"><em>2</em></div><div class="g-th f" style="--w:1.379"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>7</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/ogre-battle.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/ogre-battle.png" alt="OGRE BATTLE: THE MARCH OF THE BLACK QUEEN box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">OGRE BATTLE: THE MARCH OF THE BLACK QUEEN</div><div class="game-meta">SNES · 1995 · ENIX</div></div>
+      <div class="hybrid-title"><div class="game-title">OGRE BATTLE: THE MARCH OF THE BLACK QUEEN</div><div class="game-meta g-chips"><span class="g-chip">SNES</span><span class="g-chip y">1995</span><span class="g-chip">ENIX</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Estrategia en tiempo real con alma de RPG, de Quest. IGN lo puso 41 en su Top 100 SNES y Nintendo Power lo incluyo entre los 200 mejores juegos de Nintendo.</div>
     </div>
 <aside class="notas"><h4>#7 · DATOS EXTRA</h4><div class="n-line">Fuente: IGN lo ubico 41 en su Top 100 SNES; Nintendo Power lo puso 180 en su Top 200 Juegos de Nintendo.</div><div class="n-line">Eliges unidades y las mandas por el mapa, y se pelean solas. El sistema de reputacion y alineamiento cambia el final que consigues.</div><div class="n-line">Lo creo Quest. Es de los juegos mas especiales del catalogo SNES.</div><div class="n-line">Por que esta olvidado: estrategia en una consola de plataformas y accion.</div><div class="n-cue">Cue Koko: explicar en una frase que las unidades pelean solas, es lo mas raro para quien nunca lo jugo.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/snes-infravalorados/lufia-ii.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:53px;--dx:0px"><div class="g-th r" style="--w:1.358"><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/hagane.png)"></i><em>8</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/ogre-battle.png)"></i><em>7</em></div><div class="g-th cur" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/lufia-ii.png)"></i><em>6</em></div><div class="g-th f" style="--w:1.407"><em>5</em></div><div class="g-th f" style="--w:1.407"><em>4</em></div><div class="g-th f" style="--w:1.407"><em>3</em></div><div class="g-th f" style="--w:1.407"><em>2</em></div><div class="g-th f" style="--w:1.379"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>6</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/lufia-ii.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/lufia-ii.png" alt="LUFIA II: RISE OF THE SINISTRALS box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">LUFIA II: RISE OF THE SINISTRALS</div><div class="game-meta">SNES · 1996 · NATSUME</div></div>
+      <div class="hybrid-title"><div class="game-title">LUFIA II: RISE OF THE SINISTRALS</div><div class="game-meta g-chips"><span class="g-chip">SNES</span><span class="g-chip y">1996</span><span class="g-chip">NATSUME</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>RPG de Neverland con cientos de puzzles y sin combates aleatorios en las mazmorras. 80 % en GameRankings y un 10 sobre 10 de los lectores de Famitsu.</div>
     </div>
 <aside class="notas"><h4>#6 · DATOS EXTRA</h4><div class="n-line">Fuente: GameRankings 80 % (5 reseñas); en Japon, Famitsu le dio 30 sobre 40 y un 10 sobre 10 en su Reader Cross Review.</div><div class="n-line">Es una precuela del primer Lufia: cuenta el origen de la guerra entre los humanos y los Sinistrals.</div><div class="n-line">En Norteamerica se esperaba para mayo de 1996 pero llego a las tiendas cerca de septiembre, tarde, con la Nintendo 64 y la PlayStation ya a la venta.</div><div class="n-line">Natsume lo publico en NTSC USA; Nintendo lo hizo en Europa.</div><div class="n-cue">Cue Koko: los puzzles de las mazmorras son la firma del juego, vale la pena mencionarlos.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/snes-infravalorados/illusion-of-gaia.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:53px;--dx:0px"><div class="g-th r" style="--w:1.358"><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/hagane.png)"></i><em>8</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/ogre-battle.png)"></i><em>7</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/lufia-ii.png)"></i><em>6</em></div><div class="g-th cur" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/illusion-of-gaia.png)"></i><em>5</em></div><div class="g-th f" style="--w:1.407"><em>4</em></div><div class="g-th f" style="--w:1.407"><em>3</em></div><div class="g-th f" style="--w:1.407"><em>2</em></div><div class="g-th f" style="--w:1.379"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>5</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/illusion-of-gaia.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/illusion-of-gaia.png" alt="ILLUSION OF GAIA box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">ILLUSION OF GAIA</div><div class="game-meta">SNES · 1994 · NINTENDO / QUINTET</div></div>
+      <div class="hybrid-title"><div class="game-title">ILLUSION OF GAIA</div><div class="game-meta g-chips"><span class="g-chip">SNES</span><span class="g-chip y">1994</span><span class="g-chip">NINTENDO / QUINTET</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>RPG de accion de Quintet con niveles inspirados en las maravillas del mundo. 80 % en GameRankings y 300.000 copias solo en Norteamerica.</div>
     </div>
 <aside class="notas"><h4>#5 · DATOS EXTRA</h4><div class="n-line">Fuente: GameRankings 80,17 % (9 reseñas). Quintet reporta 650.000 copias en total, 300.000 de ellas en Norteamerica.</div><div class="n-line">Se jugaba con Will, Freedan y Shadow, cada uno con habilidades propias, en ruinas reales como la Gran Piramide y la Gran Muralla.</div><div class="n-line">Se suele agrupar con Soul Blazer y Terranigma como una trilogia de Quintet, pero el productor de Enix USA aclaro que no comparten universo.</div><div class="n-line">En NTSC USA lo publico Nintendo y la caja traia el Nintendo Power Explorer Handbook gratis.</div><div class="n-cue">Cue Koko: preguntar si lo jugo o si solo conoce Chrono Trigger y FFVI de esa epoca.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/snes-infravalorados/axelay.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:53px;--dx:0px"><div class="g-th r" style="--w:1.358"><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/hagane.png)"></i><em>8</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/ogre-battle.png)"></i><em>7</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/lufia-ii.png)"></i><em>6</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/illusion-of-gaia.png)"></i><em>5</em></div><div class="g-th cur" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/axelay.png)"></i><em>4</em></div><div class="g-th f" style="--w:1.407"><em>3</em></div><div class="g-th f" style="--w:1.407"><em>2</em></div><div class="g-th f" style="--w:1.379"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>4</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/axelay.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/axelay.png" alt="AXELAY box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">AXELAY</div><div class="game-meta">SNES · 1992 · KONAMI</div></div>
+      <div class="hybrid-title"><div class="game-title">AXELAY</div><div class="game-meta g-chips"><span class="g-chip">SNES</span><span class="g-chip y">1992</span><span class="g-chip">KONAMI</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Shooter de Konami que alterna niveles verticales y horizontales con efectos 3D del SNES. 81 % en GameRankings.</div>
     </div>
 <aside class="notas"><h4>#4 · DATOS EXTRA</h4><div class="n-line">Fuente: GameRankings 81,14 % (7 reseñas).</div><div class="n-line">Se elige el armamento antes de cada etapa, y los niveles pasan de scroll vertical a un vuelo hacia la pantalla usando el Mode 7 de la consola.</div><div class="n-line">En Japon vendio apenas 4.625 copias en toda su vida, segun Famitsu.</div><div class="n-line">Por que esta olvidado: un shooter dificil en un catalogo dominado por plataformas y RPG.</div><div class="n-cue">Cue Koko: la musica del primer nivel es de lo mas recordado del juego.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/snes-infravalorados/cybernator.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:53px;--dx:0px"><div class="g-th r" style="--w:1.358"><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/hagane.png)"></i><em>8</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/ogre-battle.png)"></i><em>7</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/lufia-ii.png)"></i><em>6</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/illusion-of-gaia.png)"></i><em>5</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/axelay.png)"></i><em>4</em></div><div class="g-th cur" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/cybernator.png)"></i><em>3</em></div><div class="g-th f" style="--w:1.407"><em>2</em></div><div class="g-th f" style="--w:1.379"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>3</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/cybernator.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/cybernator.png" alt="CYBERNATOR box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">CYBERNATOR</div><div class="game-meta">SNES · 1993 · KONAMI</div></div>
+      <div class="hybrid-title"><div class="game-title">CYBERNATOR</div><div class="game-meta g-chips"><span class="g-chip">SNES</span><span class="g-chip y">1993</span><span class="g-chip">KONAMI</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Accion con mechas de Masaya, conocido en Japon como Assault Suits Valken. Super Play lo ubico 19 entre los mejores juegos de SNES.</div>
     </div>
 <aside class="notas"><h4>#3 · DATOS EXTRA</h4><div class="n-line">Fuente: Super Play lo listo 19 entre los mejores SNES (abril de 1996); GameFan lo considero uno de los mejores juegos de SNES.</div><div class="n-line">En Japon se llama Assault Suits Valken y vendio 10.782 copias en su vida. Konami lo llevo a Norteamerica como Cybernator.</div><div class="n-line">Se destaca por su ambientacion, su historia y la sensacion de peso del mecha.</div><div class="n-line">Por que esta olvidado: un juego de mechas de nicho en una consola dominada por plataformas.</div><div class="n-cue">Cue Koko: la sensacion de peso del mecha es lo que lo distingue de otros shooters.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/snes-infravalorados/soul-blazer.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:53px;--dx:0px"><div class="g-th r" style="--w:1.358"><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/hagane.png)"></i><em>8</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/ogre-battle.png)"></i><em>7</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/lufia-ii.png)"></i><em>6</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/illusion-of-gaia.png)"></i><em>5</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/axelay.png)"></i><em>4</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/cybernator.png)"></i><em>3</em></div><div class="g-th cur" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/soul-blazer.png)"></i><em>2</em></div><div class="g-th f" style="--w:1.379"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>2</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:312px;--ar:1.4103">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/soul-blazer.png" alt="" aria-hidden="true"><img src="img/snes-infravalorados/soul-blazer.png" alt="SOUL BLAZER box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SOUL BLAZER</div><div class="game-meta">SNES · 1992 · ENIX</div></div>
+      <div class="hybrid-title"><div class="game-title">SOUL BLAZER</div><div class="game-meta g-chips"><span class="g-chip">SNES</span><span class="g-chip y">1992</span><span class="g-chip">ENIX</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Primer juego de Quintet, un RPG de accion donde liberas pueblos y los repueblas. 85,6 % en GameRankings, entre los mejores de este top.</div>
     </div>
 <aside class="notas"><h4>#2 · DATOS EXTRA</h4><div class="n-line">Fuente: GameRankings 85,58 % (6 reseñas). Quintet reporta 295.000 copias en el mundo, 70.000 de ellas en Norteamerica.</div><div class="n-line">Cada vez que derrotas a los monstruos de una zona, liberas a sus habitantes y el pueblo se va reconstruyendo.</div><div class="n-line">Segun el productor de Enix USA, esta emparentado con ActRaiser, no con Illusion of Gaia.</div><div class="n-line">Por que esta olvidado: salio el mismo año que A Link to the Past y se comparaba siempre con el.</div><div class="n-cue">Cue Koko: la idea de repoblar el pueblo es lo que mas recuerda la gente que lo jugo.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/snes-infravalorados/tetris-attack.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL TRONO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:53px;--dx:0px"><div class="g-th r" style="--w:1.358"><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/hagane.png)"></i><em>8</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/ogre-battle.png)"></i><em>7</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/lufia-ii.png)"></i><em>6</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/illusion-of-gaia.png)"></i><em>5</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/axelay.png)"></i><em>4</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/cybernator.png)"></i><em>3</em></div><div class="g-th r" style="--w:1.407"><i style="background-image:url(img/snes-infravalorados/soul-blazer.png)"></i><em>2</em></div><div class="g-th cur" style="--w:1.379"><i style="background-image:url(img/snes-infravalorados/tetris-attack.jpg)"></i><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>1</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:319px;--ar:1.3793">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/snes-infravalorados/tetris-attack.jpg" alt="" aria-hidden="true"><img src="img/snes-infravalorados/tetris-attack.jpg" alt="TETRIS ATTACK box art"></div>
@@ -387,13 +433,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">TETRIS ATTACK</div><div class="game-meta">SNES · 1996 · NINTENDO</div></div>
+      <div class="hybrid-title"><div class="game-title">TETRIS ATTACK</div><div class="game-meta g-chips"><span class="g-chip">SNES</span><span class="g-chip y">1996</span><span class="g-chip">NINTENDO</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL MEJOR CRITICADO</span>Puzzle de Intelligent Systems con los personajes de Yoshi's Island. Tiene 90 % en GameRankings, la nota mas alta de este top.</div>
     </div>
 <aside class="notas"><h4>#1 · DATOS EXTRA</h4><div class="n-line">Fuente de la critica: GameRankings 90 % de promedio, segun Wikipedia. EGM le dio 8,25 sobre 10 entre sus cuatro criticos.</div><div class="n-line">En Japon se llamo Panel de Pon, con hadas como protagonistas. Fuera de Japon le pusieron los personajes de Yoshi's Island y el nombre Tetris Attack, aunque no tiene relacion con Tetris.</div><div class="n-line">Lo produjo Gunpei Yokoi, el creador de la Game Boy. En Norteamerica salio en agosto de 1996, con la Nintendo 64 ya en el horizonte.</div><div class="n-line">Por que esta olvidado: el nombre lo hacia pasar por un Tetris mas y la consola nueva se llevo toda la atencion.</div><div class="n-cue">Cue Koko: cierre del ranking, preguntar si alguna vez cayo en la trampa del nombre y pensaba que era un Tetris.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/snes-infravalorados/lufia-ii.png)"></i><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><i style="background-image:url(img/snes-infravalorados/tetris-attack.jpg)"></i><i style="background-image:url(img/snes-infravalorados/axelay.png)"></i><i style="background-image:url(img/snes-infravalorados/hagane.png)"></i><i style="background-image:url(img/snes-infravalorados/cybernator.png)"></i><i style="background-image:url(img/snes-infravalorados/ogre-battle.png)"></i><i style="background-image:url(img/snes-infravalorados/soul-blazer.png)"></i><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><i style="background-image:url(img/snes-infravalorados/illusion-of-gaia.png)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg">BUENOS Y OLVIDADOS</div>
@@ -401,8 +448,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">14</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/snes-infravalorados/lufia-ii.png)"></i><i style="background-image:url(img/snes-infravalorados/uniracers.png)"></i><i style="background-image:url(img/snes-infravalorados/tetris-attack.jpg)"></i><i style="background-image:url(img/snes-infravalorados/axelay.png)"></i><i style="background-image:url(img/snes-infravalorados/hagane.png)"></i><i style="background-image:url(img/snes-infravalorados/cybernator.png)"></i><i style="background-image:url(img/snes-infravalorados/ogre-battle.png)"></i><i style="background-image:url(img/snes-infravalorados/soul-blazer.png)"></i><i style="background-image:url(img/snes-infravalorados/rock-n-roll-racing.jpg)"></i><i style="background-image:url(img/snes-infravalorados/illusion-of-gaia.png)"></i></div>
     <div class="divider">
       <div class="pre cy">TU TURNO</div>
       <div class="title cy">¿CUAL AGREGARIAS?</div>

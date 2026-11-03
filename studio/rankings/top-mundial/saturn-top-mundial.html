@@ -150,6 +150,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-alta .hybrid-title{align-self:center !important}
 .slide-hybrid.box-alta .game-title{font-size:48px !important;line-height:1.05 !important}
 .slide-hybrid.box-alta .game-meta{font-size:22px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -167,8 +201,9 @@ body.read-mode .read-indicator{display:block}
 <div class="deck" id="deck">
 
   <!-- 01 PORTADA -->
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/saturn-top-mundial/virtua-fighter-2.png)"></i><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><i style="background-image:url(img/saturn-top-mundial/shining-force-iii.png)"></i><i style="background-image:url(img/saturn-top-mundial/guardian-heroes.png)"></i><i style="background-image:url(img/saturn-top-mundial/dragon-force.png)"></i><i style="background-image:url(img/saturn-top-mundial/radiant-silvergun.png)"></i><i style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></i><i style="background-image:url(img/saturn-top-mundial/panzer-dragoon-saga.png)"></i><i style="background-image:url(img/saturn-top-mundial/nights.png)"></i><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i></div>
     <div class="portada">
       <div class="ep-tag">SEGA SATURN · 32 BITS · LOS MEJORES</div>
       <div class="ep-title">SATURN <span class="vs">TOP MUNDIAL</span></div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 02 DIVIDER -->
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/saturn-top-mundial/virtua-fighter-2.png)"></i><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><i style="background-image:url(img/saturn-top-mundial/shining-force-iii.png)"></i><i style="background-image:url(img/saturn-top-mundial/guardian-heroes.png)"></i><i style="background-image:url(img/saturn-top-mundial/dragon-force.png)"></i><i style="background-image:url(img/saturn-top-mundial/radiant-silvergun.png)"></i><i style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></i><i style="background-image:url(img/saturn-top-mundial/panzer-dragoon-saga.png)"></i><i style="background-image:url(img/saturn-top-mundial/nights.png)"></i><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i></div>
     <div class="divider">
       <div class="pre cy">PRESENTACION</div>
       <div class="title cy">DEL #10 AL #1</div>
@@ -193,15 +229,16 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 03 #10 SEGA RALLY -->
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th cur" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><em>10</em></div><div class="g-th f" style="--w:0.600"><em>9</em></div><div class="g-th f" style="--w:0.600"><em>8</em></div><div class="g-th f" style="--w:0.600"><em>7</em></div><div class="g-th f" style="--w:0.600"><em>6</em></div><div class="g-th f" style="--w:0.600"><em>5</em></div><div class="g-th f" style="--w:0.600"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:0.649"><em>2</em></div><div class="g-th f" style="--w:0.647"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5929"><div class="cart-img-wrap lb-race"><img class="cart-img-bg" src="img/saturn-top-mundial/sega-rally.png" alt="" aria-hidden="true"><img src="img/saturn-top-mundial/sega-rally.png" alt="Sega Rally box art"></div><div class="cart-console">SATURN</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 10</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SEGA RALLY CHAMPIONSHIP</div><div class="game-meta">SATURN · 1995 · SEGA AM3</div></div>
+      <div class="hybrid-title"><div class="game-title">SEGA RALLY CHAMPIONSHIP</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1995</span><span class="g-chip">SEGA AM3</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El rally arcade que innovo con superficies distintas (asfalto, tierra, nieve) que cambiaban totalmente el manejo. Adictivo, rapido y con el co-piloto gritando direcciones. Port arcade impecable.</div>
       <aside class="notas">
         <h4>#10 SEGA RALLY · DATOS EXTRA</h4>
@@ -212,15 +249,16 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 04 #9 SATURN BOMBERMAN -->
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><em>10</em></div><div class="g-th cur" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i><em>9</em></div><div class="g-th f" style="--w:0.600"><em>8</em></div><div class="g-th f" style="--w:0.600"><em>7</em></div><div class="g-th f" style="--w:0.600"><em>6</em></div><div class="g-th f" style="--w:0.600"><em>5</em></div><div class="g-th f" style="--w:0.600"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:0.649"><em>2</em></div><div class="g-th f" style="--w:0.647"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5952"><div class="cart-img-wrap lb-puzzle"><img class="cart-img-bg" src="img/saturn-top-mundial/saturn-bomberman.png" alt="" aria-hidden="true"><img src="img/saturn-top-mundial/saturn-bomberman.png" alt="Saturn Bomberman box art"></div><div class="cart-console">SATURN</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 09</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SATURN BOMBERMAN</div><div class="game-meta">SATURN · 1996 · HUDSON</div></div>
+      <div class="hybrid-title"><div class="game-title">SATURN BOMBERMAN</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1996</span><span class="g-chip">HUDSON</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El mejor Bomberman multiplayer jamas hecho: hasta 10 jugadores a la vez con dos multitaps. Caos puro de fiesta. Si tenias los controles y los amigos, era la gloria.</div>
       <aside class="notas">
         <h4>#9 SATURN BOMBERMAN · DATOS EXTRA</h4>
@@ -231,15 +269,16 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 05 #8 VIRTUA COP 2 -->
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i><em>9</em></div><div class="g-th cur" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></i><em>8</em></div><div class="g-th f" style="--w:0.600"><em>7</em></div><div class="g-th f" style="--w:0.600"><em>6</em></div><div class="g-th f" style="--w:0.600"><em>5</em></div><div class="g-th f" style="--w:0.600"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:0.649"><em>2</em></div><div class="g-th f" style="--w:0.647"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5905"><div class="cart-img-wrap lb-action"><img class="cart-img-bg" src="img/saturn-top-mundial/virtua-cop-2.png" alt="" aria-hidden="true"><img src="img/saturn-top-mundial/virtua-cop-2.png" alt="Virtua Cop 2 box art"></div><div class="cart-console">SATURN</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 08</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">VIRTUA COP 2</div><div class="game-meta">SATURN · 1996 · SEGA AM2</div></div>
+      <div class="hybrid-title"><div class="game-title">VIRTUA COP 2</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1996</span><span class="g-chip">SEGA AM2</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Light gun shooter de AM2: apuntar a la tele con la Virtua Gun y disparar a los criminales. Adrenalina arcade pura trasplantada a la casa, con la pistola en la mano.</div>
       <aside class="notas">
         <h4>#8 VIRTUA COP 2 · DATOS EXTRA</h4>
@@ -250,15 +289,16 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 06 #7 DRAGON FORCE -->
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-mundial/dragon-force.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></i><em>8</em></div><div class="g-th cur" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/dragon-force.png)"></i><em>7</em></div><div class="g-th f" style="--w:0.600"><em>6</em></div><div class="g-th f" style="--w:0.600"><em>5</em></div><div class="g-th f" style="--w:0.600"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:0.649"><em>2</em></div><div class="g-th f" style="--w:0.647"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5952"><div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/saturn-top-mundial/dragon-force.png" alt="" aria-hidden="true"><img src="img/saturn-top-mundial/dragon-force.png" alt="Dragon Force box art"></div><div class="cart-console">SATURN</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 07</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">DRAGON FORCE</div><div class="game-meta">SATURN · 1996 · J-FORCE / SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">DRAGON FORCE</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1996</span><span class="g-chip">J-FORCE / SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Strategy-RPG con batallas de hasta 200 unidades en pantalla a la vez. Conquistas reinos eligiendo entre 8 monarcas, cada uno con su campaña. Profundo, masivo y unico en su epoca.</div>
       <aside class="notas">
         <h4>#7 DRAGON FORCE · DATOS EXTRA</h4>
@@ -269,15 +309,16 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 07 #6 GUARDIAN HEROES -->
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-mundial/guardian-heroes.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/dragon-force.png)"></i><em>7</em></div><div class="g-th cur" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/guardian-heroes.png)"></i><em>6</em></div><div class="g-th f" style="--w:0.600"><em>5</em></div><div class="g-th f" style="--w:0.600"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:0.649"><em>2</em></div><div class="g-th f" style="--w:0.647"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5952"><div class="cart-img-wrap lb-fight"><img class="cart-img-bg" src="img/saturn-top-mundial/guardian-heroes.png" alt="" aria-hidden="true"><img src="img/saturn-top-mundial/guardian-heroes.png" alt="Guardian Heroes box art"></div><div class="cart-console">SATURN</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 06</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">GUARDIAN HEROES</div><div class="game-meta">SATURN · 1996 · TREASURE</div></div>
+      <div class="hybrid-title"><div class="game-title">GUARDIAN HEROES</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1996</span><span class="g-chip">TREASURE</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Beat'em up con sistema RPG, ramas de historia y multiples finales. De Treasure, los magos. Combate en planos de profundidad y un modo versus de hasta 6 jugadores. Un hibrido brillante de culto.</div>
       <aside class="notas">
         <h4>#6 GUARDIAN HEROES · DATOS EXTRA</h4>
@@ -288,15 +329,16 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 08 #5 VIRTUA FIGHTER 2 -->
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-mundial/virtua-fighter-2.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/dragon-force.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/guardian-heroes.png)"></i><em>6</em></div><div class="g-th cur" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-fighter-2.png)"></i><em>5</em></div><div class="g-th f" style="--w:0.600"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:0.649"><em>2</em></div><div class="g-th f" style="--w:0.647"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5952"><div class="cart-img-wrap lb-fight"><img class="cart-img-bg" src="img/saturn-top-mundial/virtua-fighter-2.png" alt="" aria-hidden="true"><img src="img/saturn-top-mundial/virtua-fighter-2.png" alt="Virtua Fighter 2 box art"></div><div class="cart-console">SATURN</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">VIRTUA FIGHTER 2</div><div class="game-meta">SATURN · 1995 · SEGA AM2</div></div>
+      <div class="hybrid-title"><div class="game-title">VIRTUA FIGHTER 2</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1995</span><span class="g-chip">SEGA AM2</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El fighting 3D que vendio el Saturn en Japon. Fluido a 60fps, profundo y tecnico como ninguno. AM2 y Yu Suzuki definieron el genero junto a Tekken. Un golpe en la mesa de Sega.</div>
       <aside class="notas">
         <h4>#5 VIRTUA FIGHTER 2 · DATOS EXTRA</h4>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 09 #4 SHINING FORCE III -->
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-mundial/shining-force-iii.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/dragon-force.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/guardian-heroes.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-fighter-2.png)"></i><em>5</em></div><div class="g-th cur" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/shining-force-iii.png)"></i><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:0.649"><em>2</em></div><div class="g-th f" style="--w:0.647"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP MUNDIAL</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5952"><div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/saturn-top-mundial/shining-force-iii.png" alt="" aria-hidden="true"><img src="img/saturn-top-mundial/shining-force-iii.png" alt="Shining Force III box art"></div><div class="cart-console">SATURN</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SHINING FORCE III</div><div class="game-meta">SATURN · 1998 · CAMELOT / SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">SHINING FORCE III</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1998</span><span class="g-chip">CAMELOT / SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>SRPG epico de Camelot. En Japon fueron TRES juegos que contaban la misma historia desde 3 perspectivas distintas. Occidente solo recibio el primero. Tactico, profundo y narrativamente ambicioso.</div>
       <aside class="notas">
         <h4>#4 SHINING FORCE III · DATOS EXTRA</h4>
@@ -326,15 +369,16 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 10 #3 RADIANT SILVERGUN (PODIO) -->
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-mundial/radiant-silvergun.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/dragon-force.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/guardian-heroes.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-fighter-2.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/shining-force-iii.png)"></i><em>4</em></div><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/saturn-top-mundial/radiant-silvergun.png)"></i><em>3</em></div><div class="g-th f" style="--w:0.649"><em>2</em></div><div class="g-th f" style="--w:0.647"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>3</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:340px;--ar:1.0000"><div class="cart-img-wrap lb-action"><img class="cart-img-bg" src="img/saturn-top-mundial/radiant-silvergun.png" alt="" aria-hidden="true"><img src="img/saturn-top-mundial/radiant-silvergun.png" alt="Radiant Silvergun box art"></div><div class="cart-console">SATURN</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">RADIANT SILVERGUN</div><div class="game-meta">SATURN · 1998 · TREASURE</div></div>
+      <div class="hybrid-title"><div class="game-title">RADIANT SILVERGUN</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1998</span><span class="g-chip">TREASURE</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Para muchos, el MEJOR shmup de la historia. De Treasure. Sistema de 7 armas que suben de nivel, historia con peso y un diseño perfecto. Solo salio en Japon en Saturn: hoy es carisimo y venerado.</div>
       <aside class="notas">
         <h4>#3 RADIANT SILVERGUN · DATOS EXTRA</h4>
@@ -345,15 +389,16 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 11 #2 PANZER DRAGOON SAGA (PODIO) -->
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-mundial/panzer-dragoon-saga.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/dragon-force.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/guardian-heroes.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-fighter-2.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/shining-force-iii.png)"></i><em>4</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/saturn-top-mundial/radiant-silvergun.png)"></i><em>3</em></div><div class="g-th cur" style="--w:0.649"><i style="background-image:url(img/saturn-top-mundial/panzer-dragoon-saga.png)"></i><em>2</em></div><div class="g-th f" style="--w:0.647"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>2</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6476"><div class="cart-img-wrap lb-rpg"><img class="cart-img-bg" src="img/saturn-top-mundial/panzer-dragoon-saga.png" alt="" aria-hidden="true"><img src="img/saturn-top-mundial/panzer-dragoon-saga.png" alt="Panzer Dragoon Saga box art"></div><div class="cart-console">SATURN</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">PANZER DRAGOON SAGA</div><div class="game-meta">SATURN · 1998 · TEAM ANDROMEDA / SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">PANZER DRAGOON SAGA</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1998</span><span class="g-chip">TEAM ANDROMEDA / SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El RPG legendario del Saturn. Combate en 360 grados volando sobre un dragon que evoluciona. Historia y atmosfera memorables. En occidente se fabricaron POCAS copias: venerado, rarisimo, mitico.</div>
       <aside class="notas">
         <h4>#2 PANZER DRAGOON SAGA · DATOS EXTRA</h4>
@@ -364,15 +409,16 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 12 #1 NIGHTS INTO DREAMS (EL TRONO) -->
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-mundial/nights.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL TRONO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/dragon-force.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/guardian-heroes.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/virtua-fighter-2.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.600"><i style="background-image:url(img/saturn-top-mundial/shining-force-iii.png)"></i><em>4</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/saturn-top-mundial/radiant-silvergun.png)"></i><em>3</em></div><div class="g-th r" style="--w:0.649"><i style="background-image:url(img/saturn-top-mundial/panzer-dragoon-saga.png)"></i><em>2</em></div><div class="g-th cur" style="--w:0.647"><i style="background-image:url(img/saturn-top-mundial/nights.png)"></i><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>1</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:417px;--ar:0.6475"><div class="cart-img-wrap lb-platform"><img class="cart-img-bg" src="img/saturn-top-mundial/nights.png" alt="" aria-hidden="true"><img src="img/saturn-top-mundial/nights.png" alt="NiGHTS into Dreams box art"></div><div class="cart-console">SATURN</div></div></div>
         <div class="tv-wrap"><div class="tarrovision"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div></div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">NiGHTS INTO DREAMS...</div><div class="game-meta">SATURN · 1996 · SONIC TEAM</div></div>
+      <div class="hybrid-title"><div class="game-title">NiGHTS INTO DREAMS...</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1996</span><span class="g-chip">SONIC TEAM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>La obra maestra original de Sonic Team para el Saturn. Volar por sueños con fluidez onirica, persiguiendo puntaje en niveles que parecen pintura en movimiento. La cara, el alma y la identidad artistica de la consola.</div>
       <aside class="notas">
         <h4>#1 NiGHTS INTO DREAMS · DATOS EXTRA</h4>
@@ -384,8 +430,9 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 13 VEREDICTO -->
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/saturn-top-mundial/virtua-fighter-2.png)"></i><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><i style="background-image:url(img/saturn-top-mundial/shining-force-iii.png)"></i><i style="background-image:url(img/saturn-top-mundial/guardian-heroes.png)"></i><i style="background-image:url(img/saturn-top-mundial/dragon-force.png)"></i><i style="background-image:url(img/saturn-top-mundial/radiant-silvergun.png)"></i><i style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></i><i style="background-image:url(img/saturn-top-mundial/panzer-dragoon-saga.png)"></i><i style="background-image:url(img/saturn-top-mundial/nights.png)"></i><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg" style="font-size:60px;">EL VEREDICTO</div>
@@ -394,8 +441,9 @@ body.read-mode .read-indicator{display:block}
   </section>
 
   <!-- 14 CIERRE -->
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">14</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/saturn-top-mundial/virtua-fighter-2.png)"></i><i style="background-image:url(img/saturn-top-mundial/sega-rally.png)"></i><i style="background-image:url(img/saturn-top-mundial/shining-force-iii.png)"></i><i style="background-image:url(img/saturn-top-mundial/guardian-heroes.png)"></i><i style="background-image:url(img/saturn-top-mundial/dragon-force.png)"></i><i style="background-image:url(img/saturn-top-mundial/radiant-silvergun.png)"></i><i style="background-image:url(img/saturn-top-mundial/virtua-cop-2.png)"></i><i style="background-image:url(img/saturn-top-mundial/panzer-dragoon-saga.png)"></i><i style="background-image:url(img/saturn-top-mundial/nights.png)"></i><i style="background-image:url(img/saturn-top-mundial/saturn-bomberman.png)"></i></div>
     <div class="divider">
       <div class="pre cy">TU TURNO</div>
       <div class="title cy" style="font-size:54px;">¿CUAL FALTO?</div>

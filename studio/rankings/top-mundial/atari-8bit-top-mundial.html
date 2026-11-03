@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-alta .hybrid-title{align-self:center !important}
 .slide-hybrid.box-alta .game-title{font-size:48px !important;line-height:1.05 !important}
 .slide-hybrid.box-alta .game-meta{font-size:22px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/archon.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/mule.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/pitfall-2.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/rescue-fractalus.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/star-raiders.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/miner-2049er.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/ballblazer.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i></div>
     <div class="portada">
       <div class="ep-tag">TOP 10 MUNDIAL</div>
       <div class="ep-title">ATARI 800XL / 65XE</div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/archon.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/mule.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/pitfall-2.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/rescue-fractalus.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/star-raiders.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/miner-2049er.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/ballblazer.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i></div>
     <div class="divider">
       <div class="pre cy">CONTEXTO</div>
       <div class="title cy">UNA FAMILIA, NO DOS MAQUINAS DISTINTAS</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th cur" style="--w:0.782"><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><em>10</em></div><div class="g-th f" style="--w:0.737"><em>9</em></div><div class="g-th f" style="--w:0.736"><em>8</em></div><div class="g-th f" style="--w:0.662"><em>7</em></div><div class="g-th f" style="--w:0.665"><em>6</em></div><div class="g-th f" style="--w:0.987"><em>5</em></div><div class="g-th f" style="--w:0.780"><em>4</em></div><div class="g-th f" style="--w:0.737"><em>3</em></div><div class="g-th f" style="--w:0.777"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>10</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7810">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-mundial/boulder-dash.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-mundial/boulder-dash.jpg" alt="Boulder Dash box art"></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Boulder Dash</div><div class="game-meta">ATARI 800XL / 65XE · 1984 · FIRST STAR SOFTWARE</div></div>
+      <div class="hybrid-title"><div class="game-title">Boulder Dash</div><div class="game-meta g-chips"><span class="g-chip">ATARI 800XL / 65XE</span><span class="g-chip y">1984</span><span class="g-chip">FIRST STAR SOFTWARE</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El clasico de excavar tunel y esquivar rocas que definio el genero puzzle-accion -tuvo tantas secuelas y clones que hoy sigue siendo un nombre reconocible.</div>
     </div>
 <aside class="notas"><h4>#10 · MAS DATOS</h4><div class="n-line">Creado por los desarrolladores canadienses Peter Liepa y Chris Gray.</div><div class="n-line">El protagonista se llama Rockford -el objetivo es recolectar diamantes cavando tuneles mientras las rocas caen y pueden aplastarte.</div><div class="n-line">Genero tantas secuelas y ports que Boulder Dash sigue siendo una franquicia activa hoy, 40 años despues.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.782"><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><em>10</em></div><div class="g-th cur" style="--w:0.737"><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i><em>9</em></div><div class="g-th f" style="--w:0.736"><em>8</em></div><div class="g-th f" style="--w:0.662"><em>7</em></div><div class="g-th f" style="--w:0.665"><em>6</em></div><div class="g-th f" style="--w:0.987"><em>5</em></div><div class="g-th f" style="--w:0.780"><em>4</em></div><div class="g-th f" style="--w:0.737"><em>3</em></div><div class="g-th f" style="--w:0.777"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>9</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7357">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-mundial/eastern-front-1941.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-mundial/eastern-front-1941.jpg" alt="Eastern Front (1941) box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Eastern Front (1941)</div><div class="game-meta">ATARI 800XL / 65XE · 1981 · CHRIS CRAWFORD / ATARI</div></div>
+      <div class="hybrid-title"><div class="game-title">Eastern Front (1941)</div><div class="game-meta g-chips"><span class="g-chip">ATARI 800XL / 65XE</span><span class="g-chip y">1981</span><span class="g-chip">CHRIS CRAWFORD / ATARI</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Wargame pionero que empezo vendido por catalogo postal de Atari Program Exchange y termino siendo la app que le vendio la maquina a miles de personas.</div>
     </div>
 <aside class="notas"><h4>#9 · MAS DATOS</h4><div class="n-line">Creado por Chris Crawford, diseñador que luego se volvio referente teorico del diseño de videojuegos.</div><div class="n-line">Vendio mas de 60.000 copias -numero enorme para la epoca- y Atari lo paso de venta por catalogo (APX) a cartucho retail oficial por su exito.</div><div class="n-line">Recrea el frente oriental de la Segunda Guerra Mundial, controlando unidades alemanas invadiendo la Union Sovietica.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.782"><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.737"><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i><em>9</em></div><div class="g-th cur" style="--w:0.736"><i style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></i><em>8</em></div><div class="g-th f" style="--w:0.662"><em>7</em></div><div class="g-th f" style="--w:0.665"><em>6</em></div><div class="g-th f" style="--w:0.987"><em>5</em></div><div class="g-th f" style="--w:0.780"><em>4</em></div><div class="g-th f" style="--w:0.737"><em>3</em></div><div class="g-th f" style="--w:0.777"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>8</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7357">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-mundial/alley-cat.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-mundial/alley-cat.jpg" alt="Alley Cat box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Alley Cat</div><div class="game-meta">ATARI 800XL / 65XE · 1983 · SYNAPSE SOFTWARE</div></div>
+      <div class="hybrid-title"><div class="game-title">Alley Cat</div><div class="game-meta g-chips"><span class="g-chip">ATARI 800XL / 65XE</span><span class="g-chip y">1983</span><span class="g-chip">SYNAPSE SOFTWARE</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformero sandbox de un gato callejero en la ciudad -tan querido que Atari lo empaqueto de fabrica con muchas 800XL y 65XE.</div>
     </div>
 <aside class="notas"><h4>#8 · MAS DATOS</h4><div class="n-line">Diseñado por Bill Williams -el jugador controla un gato que entra por ventanas, roba comida y esquiva perros.</div><div class="n-line">Al venir preinstalado en el firmware de varias maquinas de la linea XL/XE, es de los juegos que MAS gente de la epoca jugo sin siquiera comprarlo aparte.</div><div class="n-line">Hoy es tambien uno de los mas caros del mercado de coleccion -aparece de nuevo en el Top Precios.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/atari-8bit-top-mundial/rescue-fractalus.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.782"><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.737"><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:0.736"><i style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></i><em>8</em></div><div class="g-th cur" style="--w:0.662"><i style="background-image:url(img/atari-8bit-top-mundial/rescue-fractalus.jpg)"></i><em>7</em></div><div class="g-th f" style="--w:0.665"><em>6</em></div><div class="g-th f" style="--w:0.987"><em>5</em></div><div class="g-th f" style="--w:0.780"><em>4</em></div><div class="g-th f" style="--w:0.737"><em>3</em></div><div class="g-th f" style="--w:0.777"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>7</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6619">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-mundial/rescue-fractalus.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-mundial/rescue-fractalus.jpg" alt="Rescue on Fractalus! box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Rescue on Fractalus!</div><div class="game-meta">ATARI 800XL / 65XE · 1985 · LUCASFILM GAMES</div></div>
+      <div class="hybrid-title"><div class="game-title">Rescue on Fractalus!</div><div class="game-meta g-chips"><span class="g-chip">ATARI 800XL / 65XE</span><span class="g-chip y">1985</span><span class="g-chip">LUCASFILM GAMES</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El primer juego de LucasFilm Games -el estudio que despues se volveria LucasArts- con graficos pseudo-3D pioneros y una tension atmosferica unica para la epoca.</div>
     </div>
 <aside class="notas"><h4>#7 · MAS DATOS</h4><div class="n-line">Simulador de rescate en primera persona: hay que pilotar una nave por cavernas de un planeta hostil y recoger pilotos varados.</div><div class="n-line">Un detalle que se volvio leyenda: a veces el 'piloto' que rescatas es en realidad un alien hostil disfrazado que ataca el vidrio de la cabina.</div><div class="n-line">Parte de la primera camada de titulos de LucasFilm Games (1982-1985), antes de que la division se independizara como LucasArts.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/atari-8bit-top-mundial/ballblazer.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.782"><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.737"><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:0.736"><i style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></i><em>8</em></div><div class="g-th r" style="--w:0.662"><i style="background-image:url(img/atari-8bit-top-mundial/rescue-fractalus.jpg)"></i><em>7</em></div><div class="g-th cur" style="--w:0.665"><i style="background-image:url(img/atari-8bit-top-mundial/ballblazer.jpg)"></i><em>6</em></div><div class="g-th f" style="--w:0.987"><em>5</em></div><div class="g-th f" style="--w:0.780"><em>4</em></div><div class="g-th f" style="--w:0.737"><em>3</em></div><div class="g-th f" style="--w:0.777"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>6</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6643">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-mundial/ballblazer.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-mundial/ballblazer.jpg" alt="Ballblazer box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Ballblazer</div><div class="game-meta">ATARI 800XL / 65XE · 1985 · LUCASFILM GAMES</div></div>
+      <div class="hybrid-title"><div class="game-title">Ballblazer</div><div class="game-meta g-chips"><span class="g-chip">ATARI 800XL / 65XE</span><span class="g-chip y">1985</span><span class="g-chip">LUCASFILM GAMES</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Deporte futurista con perspectiva pseudo-3D a pantalla dividida -otro fundacional de LucasFilm Games que mostro de que eran capaces los graficos rapidos en 8 bits.</div>
     </div>
 <aside class="notas"><h4>#6 · MAS DATOS</h4><div class="n-line">Es basicamente 'futbol futurista' 1 contra 1 -cada jugador pilotea una nave (Rotofoil) e intenta meter una pelota de energia en la porteria rival.</div><div class="n-line">Publicado por Epyx bajo licencia de Atari para la version de computadora -la caja dice 'C-64 or Atari', doble plataforma.</div><div class="n-line">Tecnicamente notable por correr a pantalla dividida en tiempo real, algo poco comun en 8 bits de la epoca.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/atari-8bit-top-mundial/archon.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.782"><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.737"><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:0.736"><i style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></i><em>8</em></div><div class="g-th r" style="--w:0.662"><i style="background-image:url(img/atari-8bit-top-mundial/rescue-fractalus.jpg)"></i><em>7</em></div><div class="g-th r" style="--w:0.665"><i style="background-image:url(img/atari-8bit-top-mundial/ballblazer.jpg)"></i><em>6</em></div><div class="g-th cur" style="--w:0.987"><i style="background-image:url(img/atari-8bit-top-mundial/archon.jpg)"></i><em>5</em></div><div class="g-th f" style="--w:0.780"><em>4</em></div><div class="g-th f" style="--w:0.737"><em>3</em></div><div class="g-th f" style="--w:0.777"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>5</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:344px;--ar:0.9884">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-mundial/archon.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-mundial/archon.jpg" alt="Archon: The Light and the Dark box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Archon: The Light and the Dark</div><div class="game-meta">ATARI 800XL / 65XE · 1983 · FREE FALL ASSOCIATES</div></div>
+      <div class="hybrid-title"><div class="game-title">Archon: The Light and the Dark</div><div class="game-meta g-chips"><span class="g-chip">ATARI 800XL / 65XE</span><span class="g-chip y">1983</span><span class="g-chip">FREE FALL ASSOCIATES</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Ajedrez fantastico donde cada captura de pieza se resuelve con combate en tiempo real -mezcla de generos que nadie habia intentado asi antes.</div>
     </div>
 <aside class="notas"><h4>#5 · MAS DATOS</h4><div class="n-line">Diseñado por Anne Westfall, Jon Freeman y Paul Reiche III -tablero tipo ajedrez, pero al capturar una pieza se entra a una pantalla de combate en tiempo real.</div><div class="n-line">Se publico originalmente para Atari 8-bit antes de portarse a Apple II, Commodore 64 y otras plataformas.</div><div class="n-line">Tuvo secuela directa (Archon II: Adept) que tambien vive en el catalogo de la linea 8-bit.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/atari-8bit-top-mundial/miner-2049er.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.782"><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.737"><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:0.736"><i style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></i><em>8</em></div><div class="g-th r" style="--w:0.662"><i style="background-image:url(img/atari-8bit-top-mundial/rescue-fractalus.jpg)"></i><em>7</em></div><div class="g-th r" style="--w:0.665"><i style="background-image:url(img/atari-8bit-top-mundial/ballblazer.jpg)"></i><em>6</em></div><div class="g-th r" style="--w:0.987"><i style="background-image:url(img/atari-8bit-top-mundial/archon.jpg)"></i><em>5</em></div><div class="g-th cur" style="--w:0.780"><i style="background-image:url(img/atari-8bit-top-mundial/miner-2049er.jpg)"></i><em>4</em></div><div class="g-th f" style="--w:0.737"><em>3</em></div><div class="g-th f" style="--w:0.777"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>4</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7786">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-mundial/miner-2049er.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-mundial/miner-2049er.jpg" alt="Miner 2049er box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Miner 2049er</div><div class="game-meta">ATARI 800XL / 65XE · 1982 · BIG FIVE SOFTWARE</div></div>
+      <div class="hybrid-title"><div class="game-title">Miner 2049er</div><div class="game-meta g-chips"><span class="g-chip">ATARI 800XL / 65XE</span><span class="g-chip y">1982</span><span class="g-chip">BIG FIVE SOFTWARE</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformero de pantalla multiple pionero -asento buena parte de las bases del genero antes de que Nintendo definiera el molde con Mario.</div>
     </div>
 <aside class="notas"><h4>#4 · MAS DATOS</h4><div class="n-line">Creado por Bill Hogue -el jugador controla a Bounty Bob, explorando 10 niveles de una mina radioactiva pisando cada baldosa para 'limpiarla'.</div><div class="n-line">Fue un exito comercial enorme para un juego de un estudio chico -se porteo a practicamente todas las plataformas de la epoca.</div><div class="n-line">Tuvo secuela (Bounty Bob Strikes Back!) considerada por varios fans incluso mejor que el original.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/atari-8bit-top-mundial/pitfall-2.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.782"><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.737"><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:0.736"><i style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></i><em>8</em></div><div class="g-th r" style="--w:0.662"><i style="background-image:url(img/atari-8bit-top-mundial/rescue-fractalus.jpg)"></i><em>7</em></div><div class="g-th r" style="--w:0.665"><i style="background-image:url(img/atari-8bit-top-mundial/ballblazer.jpg)"></i><em>6</em></div><div class="g-th r" style="--w:0.987"><i style="background-image:url(img/atari-8bit-top-mundial/archon.jpg)"></i><em>5</em></div><div class="g-th r" style="--w:0.780"><i style="background-image:url(img/atari-8bit-top-mundial/miner-2049er.jpg)"></i><em>4</em></div><div class="g-th cur" style="--w:0.737"><i style="background-image:url(img/atari-8bit-top-mundial/pitfall-2.jpg)"></i><em>3</em></div><div class="g-th f" style="--w:0.777"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>3</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7357">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-mundial/pitfall-2.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-mundial/pitfall-2.jpg" alt="Pitfall II: Lost Caverns box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Pitfall II: Lost Caverns</div><div class="game-meta">ATARI 800XL / 65XE · 1984 · ACTIVISION (DAVID CRANE)</div></div>
+      <div class="hybrid-title"><div class="game-title">Pitfall II: Lost Caverns</div><div class="game-meta g-chips"><span class="g-chip">ATARI 800XL / 65XE</span><span class="g-chip y">1984</span><span class="g-chip">ACTIVISION (DAVID CRANE)</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El sistema de checkpoints que hoy se da por sentado en cualquier plataformero nacio aca -la version de computadora es mas larga y ambiciosa que el original de consola.</div>
     </div>
 <aside class="notas"><h4>#3 · MAS DATOS</h4><div class="n-line">David Crane (tambien creador del primer Pitfall) diseño un sistema donde el jugador nunca puede 'perder' del todo -si mueres, revives en el ultimo checkpoint en vez de reiniciar.</div><div class="n-line">La version Atari 8-bit se conoce como 'Adventurer's Edition' -tiene contenido extra y enemigos mas agresivos que la version de Atari 2600.</div><div class="n-line">Considerado por muchos historiadores de la industria una obra maestra de diseño de la epoca 8 bits.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/atari-8bit-top-mundial/star-raiders.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.782"><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.737"><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:0.736"><i style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></i><em>8</em></div><div class="g-th r" style="--w:0.662"><i style="background-image:url(img/atari-8bit-top-mundial/rescue-fractalus.jpg)"></i><em>7</em></div><div class="g-th r" style="--w:0.665"><i style="background-image:url(img/atari-8bit-top-mundial/ballblazer.jpg)"></i><em>6</em></div><div class="g-th r" style="--w:0.987"><i style="background-image:url(img/atari-8bit-top-mundial/archon.jpg)"></i><em>5</em></div><div class="g-th r" style="--w:0.780"><i style="background-image:url(img/atari-8bit-top-mundial/miner-2049er.jpg)"></i><em>4</em></div><div class="g-th r" style="--w:0.737"><i style="background-image:url(img/atari-8bit-top-mundial/pitfall-2.jpg)"></i><em>3</em></div><div class="g-th cur" style="--w:0.777"><i style="background-image:url(img/atari-8bit-top-mundial/star-raiders.jpg)"></i><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>2</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7762">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-mundial/star-raiders.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-mundial/star-raiders.jpg" alt="Star Raiders box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Star Raiders</div><div class="game-meta">ATARI 800XL / 65XE · 1979 · ATARI</div></div>
+      <div class="hybrid-title"><div class="game-title">Star Raiders</div><div class="game-meta g-chips"><span class="g-chip">ATARI 800XL / 65XE</span><span class="g-chip y">1979</span><span class="g-chip">ATARI</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El simulador espacial que vendio la linea completa de computadoras Atari -el killer app original que convencio a la gente de comprar la maquina antes que cualquier otro juego.</div>
     </div>
 <aside class="notas"><h4>#2 · MAS DATOS</h4><div class="n-line">Salio junto con el lanzamiento del Atari 400/800 en 1979 -es considerado uno de los primeros simuladores espaciales en primera persona de la historia del gaming domestico.</div><div class="n-line">Combina vista de cabina de combate con un mapa galactico estrategico -algo muy adelantado para 1979.</div><div class="n-line">Definio la identidad tecnica de toda la linea 8-bit: fue la demostracion de lo que la maquina podia hacer que otras computadoras de la epoca no.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/atari-8bit-top-mundial/mule.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL TRONO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.782"><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.737"><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:0.736"><i style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></i><em>8</em></div><div class="g-th r" style="--w:0.662"><i style="background-image:url(img/atari-8bit-top-mundial/rescue-fractalus.jpg)"></i><em>7</em></div><div class="g-th r" style="--w:0.665"><i style="background-image:url(img/atari-8bit-top-mundial/ballblazer.jpg)"></i><em>6</em></div><div class="g-th r" style="--w:0.987"><i style="background-image:url(img/atari-8bit-top-mundial/archon.jpg)"></i><em>5</em></div><div class="g-th r" style="--w:0.780"><i style="background-image:url(img/atari-8bit-top-mundial/miner-2049er.jpg)"></i><em>4</em></div><div class="g-th r" style="--w:0.737"><i style="background-image:url(img/atari-8bit-top-mundial/pitfall-2.jpg)"></i><em>3</em></div><div class="g-th r" style="--w:0.777"><i style="background-image:url(img/atari-8bit-top-mundial/star-raiders.jpg)"></i><em>2</em></div><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/atari-8bit-top-mundial/mule.jpg)"></i><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>1</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:340px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/atari-8bit-top-mundial/mule.jpg" alt="" aria-hidden="true"><img src="img/atari-8bit-top-mundial/mule.jpg" alt="M.U.L.E. box art"></div>
@@ -387,13 +433,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">M.U.L.E.</div><div class="game-meta">ATARI 800XL / 65XE · 1983 · OZARK SOFTSCAPE / ELECTRONIC ARTS</div></div>
+      <div class="hybrid-title"><div class="game-title">M.U.L.E.</div><div class="game-meta g-chips"><span class="g-chip">ATARI 800XL / 65XE</span><span class="g-chip y">1983</span><span class="g-chip">OZARK SOFTSCAPE / ELECTRONIC ARTS</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL TRONO</span>Estrategia economica para 4 jugadores simultaneos -considerado por la critica moderna uno de los diseños mas creativos de toda la historia de los videojuegos.</div>
     </div>
 <aside class="notas"><h4>#1 · MAS DATOS</h4><div class="n-line">Fue el segundo juego publicado por Electronic Arts, en su primer año de existencia (1983) -parte del lanzamiento fundacional del estudio.</div><div class="n-line">4 jugadores compiten y a la vez dependen unos de otros en una economia de oferta y demanda en un planeta alienigena -adelantado a su epoca en diseño multijugador.</div><div class="n-line">Sigue apareciendo en listas modernas de 'mejores juegos de todos los tiempos' pese a tener mas de 40 años -pocos juegos de la era 8-bit logran eso.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/archon.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/mule.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/pitfall-2.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/rescue-fractalus.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/star-raiders.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/miner-2049er.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/ballblazer.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i></div>
     <div class="divider">
       <div class="pre cy">ANALISIS DEL TOP</div>
       <div class="title cy">COMPUTADORA, NO SOLO CONSOLA</div>
@@ -401,8 +448,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">14</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/atari-8bit-top-mundial/alley-cat.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/archon.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/mule.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/pitfall-2.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/rescue-fractalus.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/boulder-dash.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/star-raiders.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/miner-2049er.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/ballblazer.jpg)"></i><i style="background-image:url(img/atari-8bit-top-mundial/eastern-front-1941.jpg)"></i></div>
     <div class="divider">
       <div class="pre cy">CIERRE</div>
       <div class="title cy">¿Y LOS PRECIOS?</div>

@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-alta .hybrid-title{align-self:center !important}
 .slide-hybrid.box-alta .game-title{font-size:48px !important;line-height:1.05 !important}
 .slide-hybrid.box-alta .game-meta{font-size:22px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/psvita-top-precios/summon-night-6-we.jpg)"></i><i style="background-image:url(img/psvita-top-precios/persona-4-golden-solid-gold-premium-edition.jpg)"></i><i style="background-image:url(img/psvita-top-precios/ar-nosurge-plus-le.jpg)"></i><i style="background-image:url(img/psvita-top-precios/revenge-of-the-bird-king.jpg)"></i><i style="background-image:url(img/psvita-top-precios/the-binding-of-isaac-rebirth.jpg)"></i><i style="background-image:url(img/psvita-top-precios/criminal-girls-2.jpg)"></i><i style="background-image:url(img/psvita-top-precios/breach-and-clear.jpg)"></i><i style="background-image:url(img/psvita-top-precios/silent-hill-book-of-memories.jpg)"></i><i style="background-image:url(img/psvita-top-precios/a-rose-in-the-twilight.jpg)"></i><i style="background-image:url(img/psvita-top-precios/ar-nosurge-plus.jpg)"></i></div>
     <div class="portada">
       <div class="ep-tag">SONY PLAYSTATION VITA · LO QUE HOY CUESTA UNA FORTUNA</div>
       <div class="ep-title">PS VITA <span class="vs">TOP PRECIOS</span></div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>PORTADA · CONTEXTO</h4><div class="n-line">Sony cerro la produccion fisica de cartuchos Vita en marzo de 2019: todo lo que existe fisico hoy es todo lo que va a existir.</div><div class="n-line">Reforge 2026-10-15: el top anterior estaba desactualizado. Esta version se armo con las fichas actuales de PriceCharting, NTSC USA, solo juegos con caja y publisher.</div><div class="n-line">Estructura: top 10 retail, 4 rarezas de tirada minima y un santo grial que oficialmente nunca salio en fisico.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/psvita-top-precios/summon-night-6-we.jpg)"></i><i style="background-image:url(img/psvita-top-precios/persona-4-golden-solid-gold-premium-edition.jpg)"></i><i style="background-image:url(img/psvita-top-precios/ar-nosurge-plus-le.jpg)"></i><i style="background-image:url(img/psvita-top-precios/revenge-of-the-bird-king.jpg)"></i><i style="background-image:url(img/psvita-top-precios/the-binding-of-isaac-rebirth.jpg)"></i><i style="background-image:url(img/psvita-top-precios/criminal-girls-2.jpg)"></i><i style="background-image:url(img/psvita-top-precios/breach-and-clear.jpg)"></i><i style="background-image:url(img/psvita-top-precios/silent-hill-book-of-memories.jpg)"></i><i style="background-image:url(img/psvita-top-precios/a-rose-in-the-twilight.jpg)"></i><i style="background-image:url(img/psvita-top-precios/ar-nosurge-plus.jpg)"></i></div>
     <div class="divider">
       <div class="pre mg">PRICEGUIDE 2026</div>
       <div class="title mg">RETAIL CIB · #10 AL #1</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>INTRO · MAS DATOS</h4><div class="n-line">Dominan los JRPG y dungeon crawlers de nicho: NIS America, Koei Tecmo, Atlus. Las ediciones limitadas pesan mas que los juegos sueltos.</div><div class="n-line">Quedan afuera de este top: A.W. Phoenix Festa (edicion de Asia), Deception IV Nightmare Princess (en Vita NA fue solo digital) y los lanzamientos de Limited Run, que van aparte.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/criminal-girls-invite-only-le.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 81</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip cur">10</div><div class="g-pip f">9</div><div class="g-pip f">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 81</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:177px;--ar:1.9209">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/criminal-girls-invite-only-le.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/criminal-girls-invite-only-le.jpg" alt="CRIMINAL GIRLS: INVITE ONLY [LIMITED EDITION] box art"></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">CRIMINAL GIRLS: INVITE ONLY [LIMITED EDITION]</div><div class="game-meta">VITA · 2015 · NIS AMERICA</div></div>
+      <div class="hybrid-title"><div class="game-title">CRIMINAL GIRLS: INVITE ONLY [LIMITED EDITION]</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2015</span><span class="g-chip">NIS AMERICA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Dungeon crawler de NIS America en su edicion limitada, con caja de coleccionista y extras que casi nadie guardo completos.</div>
     </div>
 <aside class="notas"><h4>#10 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 81, con el juego suelto en USD 70.</div><div class="n-line">Empata en el rango de los 80 dolares con Soul Sacrifice Delta (USD 80), que queda justo afuera del top.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/criminal-girls-2.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 92</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip cur">9</div><div class="g-pip f">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 92</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7810">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/criminal-girls-2.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/criminal-girls-2.jpg" alt="CRIMINAL GIRLS 2: PARTY FAVORS box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">CRIMINAL GIRLS 2: PARTY FAVORS</div><div class="game-meta">VITA · 2016 · NIS AMERICA</div></div>
+      <div class="hybrid-title"><div class="game-title">CRIMINAL GIRLS 2: PARTY FAVORS</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2016</span><span class="g-chip">NIS AMERICA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Secuela del dungeon crawler de NIS America. Hoy un completo ronda los 92 dolares, con el juego suelto en 67.</div>
     </div>
 <aside class="notas"><h4>#9 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 92, con el juego suelto en USD 67.</div><div class="n-line">Sale en octubre de 2016, cuando la Vita ya estaba en su tramo final.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/summon-night-6-we.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 120</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip cur">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 120</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7167">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/summon-night-6-we.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/summon-night-6-we.jpg" alt="SUMMON NIGHT 6: LOST BORDERS [WONDERFUL EDITION] box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SUMMON NIGHT 6: LOST BORDERS [WONDERFUL EDITION]</div><div class="game-meta">VITA · 2017 · GAIJINWORKS</div></div>
+      <div class="hybrid-title"><div class="game-title">SUMMON NIGHT 6: LOST BORDERS [WONDERFUL EDITION]</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2017</span><span class="g-chip">GAIJINWORKS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>JRPG tactico de la saga Summon Night, localizado por Gaijinworks, un publisher chico de juegos japoneses. Esta es la edicion Wonderful.</div>
     </div>
 <aside class="notas"><h4>#8 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 120, con el juego suelto en USD 70.</div><div class="n-line">PriceCharting aclara que existen dos variantes de la Wonderful Edition dentro de la misma caja.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/silent-hill-book-of-memories.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 126</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip cur">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 126</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7881">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/silent-hill-book-of-memories.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/silent-hill-book-of-memories.jpg" alt="SILENT HILL: BOOK OF MEMORIES box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SILENT HILL: BOOK OF MEMORIES</div><div class="game-meta">VITA · 2012 · KONAMI</div></div>
+      <div class="hybrid-title"><div class="game-title">SILENT HILL: BOOK OF MEMORIES</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2012</span><span class="g-chip">KONAMI</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El unico Silent Hill de la Vita, un spin-off dungeon crawler hecho por WayForward.</div>
     </div>
 <aside class="notas"><h4>#7 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 126, con el juego suelto en USD 72.</div><div class="n-line">Es un dungeon crawler isometrico con combate en tiempo real, no el survival horror clasico de la saga principal.</div><div class="n-line">Entra al lanzamiento de la Vita en 2012 y hoy es el unico Silent Hill de la consola.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/muramasa-rebirth.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 131</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip cur">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 131</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7095">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/muramasa-rebirth.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/muramasa-rebirth.jpg" alt="MURAMASA REBIRTH: BLESSING OF AMITABHA [COLLECTOR'S EDITION] box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">MURAMASA REBIRTH: BLESSING OF AMITABHA [COLLECTOR'S EDITION]</div><div class="game-meta">VITA · 2013 · AKSYS</div></div>
+      <div class="hybrid-title"><div class="game-title">MURAMASA REBIRTH: BLESSING OF AMITABHA [COLLECTOR'S EDITION]</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2013</span><span class="g-chip">AKSYS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Edicion especial de Aksys del action de Vanillaware con katanas y arte 2D pintado a mano. La caja completa es lo que hoy se paga.</div>
     </div>
 <aside class="notas"><h4>#6 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 131, con el juego suelto en USD 69.</div><div class="n-line">La imagen es la portada estandar de Muramasa Rebirth como referencia: la edicion de coleccionista es otra caja.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/valkyrie-drive-le.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 145</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip cur">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 145</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:191px;--ar:1.7801">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/valkyrie-drive-le.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/valkyrie-drive-le.jpg" alt="VALKYRIE DRIVE BHIKKHUNI [LIBERATOR'S EDITION] box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">VALKYRIE DRIVE BHIKKHUNI [LIBERATOR'S EDITION]</div><div class="game-meta">VITA · 2016 · PQUBE</div></div>
+      <div class="hybrid-title"><div class="game-title">VALKYRIE DRIVE BHIKKHUNI [LIBERATOR'S EDITION]</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2016</span><span class="g-chip">PQUBE</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Edicion Liberator's de PQube con caja de coleccionista, tarjetas de arte, banda sonora y artbook. Se vendia por la tienda del publisher.</div>
     </div>
 <aside class="notas"><h4>#5 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 145, con el juego suelto en USD 121.</div><div class="n-line">Segun reportes de la epoca, la edicion se vendio por la tienda Rice Digital a USD 79,99. Hoy cuesta casi el doble.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/a-rose-in-the-twilight.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 164</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip cur">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 164</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7810">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/a-rose-in-the-twilight.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/a-rose-in-the-twilight.jpg" alt="A ROSE IN THE TWILIGHT box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">A ROSE IN THE TWILIGHT</div><div class="game-meta">VITA · 2017 · NIS AMERICA</div></div>
+      <div class="hybrid-title"><div class="game-title">A ROSE IN THE TWILIGHT</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2017</span><span class="g-chip">NIS AMERICA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformas y puzzles de Nippon Ichi con estetica de cuento oscuro, publicado por NIS America a comienzos de 2017.</div>
     </div>
 <aside class="notas"><h4>#4 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 164, con el juego suelto en USD 135.</div><div class="n-line">Se lanzo cuando la Vita ya tenia pocos juegos nuevos, y hoy casi todo lo que sale a la venta es de segunda mano.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/ar-nosurge-plus.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 250</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip cur">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 250</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7690">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/ar-nosurge-plus.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/ar-nosurge-plus.jpg" alt="AR NOSURGE PLUS: ODE TO AN UNBORN STAR box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">AR NOSURGE PLUS: ODE TO AN UNBORN STAR</div><div class="game-meta">VITA · 2015 · KOEI TECMO</div></div>
+      <div class="hybrid-title"><div class="game-title">AR NOSURGE PLUS: ODE TO AN UNBORN STAR</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2015</span><span class="g-chip">KOEI TECMO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>JRPG de Gust, el estudio de la saga Atelier. Salio en fisico en Occidente en 2015 y hoy completo cuesta 250 dolares.</div>
     </div>
 <aside class="notas"><h4>#3 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 250, con el juego suelto en USD 194.</div><div class="n-line">Su edicion limitada, mas arriba en este mismo top, cuesta casi USD 66 mas.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/persona-4-golden-solid-gold-premium-edition.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 285</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip cur">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 285</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7429">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/persona-4-golden-solid-gold-premium-edition.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/persona-4-golden-solid-gold-premium-edition.jpg" alt="PERSONA 4 GOLDEN [SOLID GOLD PREMIUM EDITION] box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">PERSONA 4 GOLDEN [SOLID GOLD PREMIUM EDITION]</div><div class="game-meta">VITA · 2012 · ATLUS</div></div>
+      <div class="hybrid-title"><div class="game-title">PERSONA 4 GOLDEN [SOLID GOLD PREMIUM EDITION]</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2012</span><span class="g-chip">ATLUS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Edicion premium de lanzamiento con solo 10.000 copias: el juego mas un estuche Hori, una cubierta y un skin para la consola.</div>
     </div>
 <aside class="notas"><h4>#2 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 285, con el juego suelto en USD 204. En agosto estaba en USD 302.</div><div class="n-line">La ficha de PriceCharting cita la tirada oficial: solo 10.000 copias de la Premium Edition, con el juego, un estuche Hori, una cubierta de pantalla y un skin con ocho fondos.</div><div class="n-line">Persona 4 Golden es de los mejores JRPG de la Vita y tiene muy buena critica: aqui lo caro es la edicion, no el juego.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/ar-nosurge-plus-le.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 316</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip cur">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 316</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:205px;--ar:1.6585">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/ar-nosurge-plus-le.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/ar-nosurge-plus-le.jpg" alt="AR NOSURGE PLUS [LIMITED EDITION] box art"></div>
@@ -387,13 +433,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">AR NOSURGE PLUS [LIMITED EDITION]</div><div class="game-meta">VITA · 2015 · KOEI TECMO</div></div>
+      <div class="hybrid-title"><div class="game-title">AR NOSURGE PLUS [LIMITED EDITION]</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2015</span><span class="g-chip">KOEI TECMO</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL TRONO</span>La edicion limitada del mismo JRPG de Gust, en caja de coleccionista. Es el retail NTSC USA mas caro de la Vita segun PriceCharting.</div>
     </div>
 <aside class="notas"><h4>#1 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 316, con el juego suelto en USD 207. Lanzamiento: 2 de julio de 2015.</div><div class="n-line">Entra directo al #1 en esta revision: en agosto el #1 era Persona 4 Golden Solid Gold.</div><div class="n-line">La imagen muestra el set completo de la edicion limitada.</div><div class="n-cue">TRANSICION: con el trono claro, pasamos a las rarezas y tiradas minimas.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/psvita-top-precios/summon-night-6-we.jpg)"></i><i style="background-image:url(img/psvita-top-precios/persona-4-golden-solid-gold-premium-edition.jpg)"></i><i style="background-image:url(img/psvita-top-precios/ar-nosurge-plus-le.jpg)"></i><i style="background-image:url(img/psvita-top-precios/revenge-of-the-bird-king.jpg)"></i><i style="background-image:url(img/psvita-top-precios/the-binding-of-isaac-rebirth.jpg)"></i><i style="background-image:url(img/psvita-top-precios/criminal-girls-2.jpg)"></i><i style="background-image:url(img/psvita-top-precios/breach-and-clear.jpg)"></i><i style="background-image:url(img/psvita-top-precios/silent-hill-book-of-memories.jpg)"></i><i style="background-image:url(img/psvita-top-precios/a-rose-in-the-twilight.jpg)"></i><i style="background-image:url(img/psvita-top-precios/ar-nosurge-plus.jpg)"></i></div>
     <div class="divider">
       <div class="pre mg">FUERA DEL TOP · TIRADAS MINIMAS</div>
       <div class="title mg">RAREZAS &amp; LIMITED RUN</div>
@@ -401,10 +448,11 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>RAREZAS · QUE SIGNIFICA</h4><div class="n-line">Limited Run Games es una distribuidora boutique que vende tiradas fisicas numeradas de juegos que de otra forma serian solo digitales. Se venden una sola vez; agotada la tirada, no se reimprime.</div><div class="n-line">Nicalis publico en fisico varios juegos para Vita que casi no circularon: por eso valen mucho mas que cualquier retail normal.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">14</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/breach-and-clear.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">LIMITED RUN</div><div class="game-price">USD 215</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr cur">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">LIMITED RUN</div><div class="game-price">USD 215</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:377px;--ar:0.9019">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/breach-and-clear.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/breach-and-clear.jpg" alt="BREACH & CLEAR box art"></div>
@@ -416,15 +464,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">BREACH & CLEAR</div><div class="game-meta">VITA · 2015 · LIMITED RUN GAMES</div></div>
+      <div class="hybrid-title"><div class="game-title">BREACH & CLEAR</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2015</span><span class="g-chip">LIMITED RUN GAMES</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Shooter tactico de Mighty Rocket en cartucho fisico, una tirada limitada de Limited Run Games de octubre de 2015.</div>
     </div>
 <aside class="notas"><h4>RAREZA · BREACH &amp; CLEAR</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 215, con el juego suelto en USD 207. La brecha entre suelto y completo es casi nula: lo que cuesta es el cartucho.</div><div class="n-line">Limited Run Games vende tiradas numeradas una sola vez en su tienda: agotada la tirada, no se reimprime.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">15</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/1001-spikes.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NICALIS · FISICO ESCASO</div><div class="game-price">USD 568</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr cur">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NICALIS · FISICO ESCASO</div><div class="game-price">USD 568</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:405px;--ar:0.8395">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/1001-spikes.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/1001-spikes.jpg" alt="1001 SPIKES box art"></div>
@@ -436,15 +485,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">1001 SPIKES</div><div class="game-meta">VITA · 2014 · NICALIS</div></div>
+      <div class="hybrid-title"><div class="game-title">1001 SPIKES</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2014</span><span class="g-chip">NICALIS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformero de precision de Nicalis. Su version fisica de Vita casi no circulo: las copias que aparecen son escasas y se pagan caro.</div>
     </div>
 <aside class="notas"><h4>RAREZA · 1001 SPIKES</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 568, con la caja sola en USD 227.</div><div class="n-line">Segun reportes de coleccionistas, las copias fisicas que circulan serian de prueba o preview, no de una tirada de tienda. Aclararlo como rumor de coleccionistas, no como dato oficial.</div><div class="n-line">Es la expansion de 1000 Spikes (XBLIG), un plataformero de trampas mortales instantaneas.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">16</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/vvvvvv.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NICALIS · FISICO ESCASO</div><div class="game-price">USD 949</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-pip rr cur">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NICALIS · FISICO ESCASO</div><div class="game-price">USD 949</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7595">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/vvvvvv.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/vvvvvv.jpg" alt="VVVVVV box art"></div>
@@ -456,15 +506,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">VVVVVV</div><div class="game-meta">VITA · 2015 · NICALIS</div></div>
+      <div class="hybrid-title"><div class="game-title">VVVVVV</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2015</span><span class="g-chip">NICALIS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformero de gravedad invertida de Terry Cavanagh. La edicion fisica de Vita de Nicalis es de circulacion minima.</div>
     </div>
 <aside class="notas"><h4>RAREZA · VVVVVV</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 949, con la caja sola en USD 380 y sellado USD 1.230.</div><div class="n-line">Segun reportes de coleccionistas, las copias de Vita habrian sido enviadas a Sony y nunca salieron a tiendas de forma oficial. Contarlo como teoria, no como dato confirmado.</div><div class="n-line">En vez de saltar, el personaje invierte la gravedad: una mecanica minimalista y muy dificil. Banda sonora de Magnus Palsson.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">17</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/revenge-of-the-bird-king.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">LIMITED RUN</div><div class="game-price">USD 1.029</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-pip rr cur">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">LIMITED RUN</div><div class="game-price">USD 1.029</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:406px;--ar:0.8374">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/revenge-of-the-bird-king.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/revenge-of-the-bird-king.jpg" alt="REVENGE OF THE BIRD KING box art"></div>
@@ -476,15 +527,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">REVENGE OF THE BIRD KING</div><div class="game-meta">VITA · 2018 · LIMITED RUN GAMES</div></div>
+      <div class="hybrid-title"><div class="game-title">REVENGE OF THE BIRD KING</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2018</span><span class="g-chip">LIMITED RUN GAMES</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Run and gun de estilo 16 bits, editado en fisico por Limited Run Games para Vita en los ultimos meses de la consola.</div>
     </div>
 <aside class="notas"><h4>RAREZA · REVENGE OF THE BIRD KING</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 1.029, con la caja sola en USD 412 y sellado USD 1.312. Fecha en la ficha: 2 de noviembre de 2018.</div><div class="n-line">Segun la prensa de coleccionismo, se habia pensado como bonus para quienes compraran todas las ediciones Limited Run de Vita; ese plan se cancelo, pero las copias ya estaban fabricadas. Confirmar antes de decirlo en camara.</div><div class="n-line">Es la rareza mas cara del apartado; solo el grial esta mas arriba.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">18</span>
+    <div class="g-bg" style="background-image:url(img/psvita-top-precios/the-binding-of-isaac-rebirth.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 4.000</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-sep"></div><div class="g-pip gg cur">★</div></div><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 4.000</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:418px;--ar:0.6651">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/psvita-top-precios/the-binding-of-isaac-rebirth.jpg" alt="" aria-hidden="true"><img src="img/psvita-top-precios/the-binding-of-isaac-rebirth.jpg" alt="THE BINDING OF ISAAC: REBIRTH box art"></div>
@@ -496,13 +548,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">THE BINDING OF ISAAC: REBIRTH</div><div class="game-meta">VITA · 2014 · NICALIS</div></div>
+      <div class="hybrid-title"><div class="game-title">THE BINDING OF ISAAC: REBIRTH</div><div class="game-meta g-chips"><span class="g-chip">VITA</span><span class="g-chip y">2014</span><span class="g-chip">NICALIS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El grial de la Vita. Segun PriceCharting es un juego clasificado por la ESRB que nunca tuvo lanzamiento oficial en fisico. Casi no hay copias a la venta: se registran muy pocas ventas, en torno a los 4.000 dolares.</div>
     </div>
 <aside class="notas"><h4>GRIAL · BINDING OF ISAAC REBIRTH</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 4.000, con solo unas pocas ventas completadas registradas (rango historico USD 3.000 a 6.600). La ficha lo describe como 'unreleased but ESRB rated game'.</div><div class="n-line">Una nota de prensa de coleccionismo habla de copias promocionales y dice que el fisico de Vita seria casi un mito. Aclarar en camara que el precio descansa en muy pocas ventas, no en un mercado liquido.</div><div class="n-line">El juego existio en digital para Vita desde noviembre de 2014. La imagen es el arte del juego: no hay una caja retail que mostrar.</div><div class="n-line">Es el item mas caro del episodio: casi cuatro veces la rareza mas cara y doce veces el #1 del retail.</div><div class="n-cue">FRASE DE CIERRE: el juego de Vita mas caro del planeta es uno que oficialmente nunca salio en fisico.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">19</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/psvita-top-precios/summon-night-6-we.jpg)"></i><i style="background-image:url(img/psvita-top-precios/persona-4-golden-solid-gold-premium-edition.jpg)"></i><i style="background-image:url(img/psvita-top-precios/ar-nosurge-plus-le.jpg)"></i><i style="background-image:url(img/psvita-top-precios/revenge-of-the-bird-king.jpg)"></i><i style="background-image:url(img/psvita-top-precios/the-binding-of-isaac-rebirth.jpg)"></i><i style="background-image:url(img/psvita-top-precios/criminal-girls-2.jpg)"></i><i style="background-image:url(img/psvita-top-precios/breach-and-clear.jpg)"></i><i style="background-image:url(img/psvita-top-precios/silent-hill-book-of-memories.jpg)"></i><i style="background-image:url(img/psvita-top-precios/a-rose-in-the-twilight.jpg)"></i><i style="background-image:url(img/psvita-top-precios/ar-nosurge-plus.jpg)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg">DOS LIGAS DISTINTAS</div>
@@ -510,8 +563,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>ANALISIS · MAS DATOS</h4><div class="n-line">El retail 2026 es volatil: Persona 4 Golden Solid Gold bajo de USD 302 a USD 285 en dos meses. Decir siempre 'valor aproximado', nunca precio fijo.</div><div class="n-line">Las tiradas fijas y agotadas se mueven menos: los precios del apartado de rarezas se mantienen.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">20</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/psvita-top-precios/summon-night-6-we.jpg)"></i><i style="background-image:url(img/psvita-top-precios/persona-4-golden-solid-gold-premium-edition.jpg)"></i><i style="background-image:url(img/psvita-top-precios/ar-nosurge-plus-le.jpg)"></i><i style="background-image:url(img/psvita-top-precios/revenge-of-the-bird-king.jpg)"></i><i style="background-image:url(img/psvita-top-precios/the-binding-of-isaac-rebirth.jpg)"></i><i style="background-image:url(img/psvita-top-precios/criminal-girls-2.jpg)"></i><i style="background-image:url(img/psvita-top-precios/breach-and-clear.jpg)"></i><i style="background-image:url(img/psvita-top-precios/silent-hill-book-of-memories.jpg)"></i><i style="background-image:url(img/psvita-top-precios/a-rose-in-the-twilight.jpg)"></i><i style="background-image:url(img/psvita-top-precios/ar-nosurge-plus.jpg)"></i></div>
     <div class="divider">
       <div class="pre cy">TU TURNO</div>
       <div class="title cy">¿TENIAS IDEA?</div>

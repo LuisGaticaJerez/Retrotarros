@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-alta .hybrid-title{align-self:center !important}
 .slide-hybrid.box-alta .game-title{font-size:48px !important;line-height:1.05 !important}
 .slide-hybrid.box-alta .game-meta{font-size:22px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/mega-drive-top-precios/tetris.png)"></i><i style="background-image:url(img/mega-drive-top-precios/crusader-centy.png)"></i><i style="background-image:url(img/mega-drive-top-precios/sparkster.png)"></i><i style="background-image:url(img/mega-drive-top-precios/outback-joey.png)"></i><i style="background-image:url(img/mega-drive-top-precios/musha.png)"></i><i style="background-image:url(img/mega-drive-top-precios/blockbuster-championship.png)"></i><i style="background-image:url(img/mega-drive-top-precios/elemental-master.png)"></i><i style="background-image:url(img/mega-drive-top-precios/punisher.png)"></i><i style="background-image:url(img/mega-drive-top-precios/trouble-shooter.png)"></i><i style="background-image:url(img/mega-drive-top-precios/skeleton-krew.png)"></i></div>
     <div class="portada">
       <div class="ep-tag">SEGA MEGA DRIVE · LO QUE HOY CUESTA UNA FORTUNA</div>
       <div class="ep-title">MEGA DRIVE <span class="vs">TOP PRECIOS</span></div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>INTRO · DATOS BOMBA</h4><div class="n-line">Ranking por precio CIB (cartucho + caja + manual, NTSC USA) leido directo de PriceCharting en octubre 2026. Valores aproximados, fluctuan y nunca son consejo de inversion.</div><div class="n-line">Reforge 2026-10-15: el top anterior tenia a Eliminate Down como #1, pero ese juego solo salio en Japon y no es NTSC USA. Tambien faltaban juegos mas caros que su #9. Este es el top 10 real.</div><div class="n-line">Estructura: top 10 retail, 2 rarezas que nunca se vendieron en tiendas y un santo grial borrado de la historia.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-ye">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/mega-drive-top-precios/tetris.png)"></i><i style="background-image:url(img/mega-drive-top-precios/crusader-centy.png)"></i><i style="background-image:url(img/mega-drive-top-precios/sparkster.png)"></i><i style="background-image:url(img/mega-drive-top-precios/outback-joey.png)"></i><i style="background-image:url(img/mega-drive-top-precios/musha.png)"></i><i style="background-image:url(img/mega-drive-top-precios/blockbuster-championship.png)"></i><i style="background-image:url(img/mega-drive-top-precios/elemental-master.png)"></i><i style="background-image:url(img/mega-drive-top-precios/punisher.png)"></i><i style="background-image:url(img/mega-drive-top-precios/trouble-shooter.png)"></i><i style="background-image:url(img/mega-drive-top-precios/skeleton-krew.png)"></i></div>
     <div class="divider">
       <div class="pre ye">MERCADO DE COLECCION 2026</div>
       <div class="title ye">RETAIL CIB · #10 AL #1</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/punisher.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 260</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip cur">10</div><div class="g-pip f">9</div><div class="g-pip f">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 260</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/punisher.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/punisher.png" alt="THE PUNISHER box art"></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">THE PUNISHER</div><div class="game-meta">MEGA DRIVE · 1994 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">THE PUNISHER</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1994</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Beat'em up de Capcom con la licencia de Marvel. Poca gente lo guardo completo, y hoy cuesta mas de dos veces y media lo que el cartucho suelto.</div>
     </div>
 <aside class="notas"><h4>#10 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 260, con el cartucho suelto en USD 103.</div><div class="n-line">Cerro el corte del top por muy poco: Splatterhouse 3 queda justo debajo, en USD 255.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/sparkster.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 262</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip r">10</div><div class="g-pip cur">9</div><div class="g-pip f">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 262</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/sparkster.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/sparkster.png" alt="SPARKSTER box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SPARKSTER</div><div class="game-meta">MEGA DRIVE · 1994 · KONAMI</div></div>
+      <div class="hybrid-title"><div class="game-title">SPARKSTER</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1994</span><span class="g-chip">KONAMI</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Secuela espiritual de Rocket Knight Adventures, de Konami. Vendio poco y hoy se paga caro completo.</div>
     </div>
 <aside class="notas"><h4>#9 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 262, con el cartucho suelto en USD 90.</div><div class="n-line">Es el Sparkster de Genesis: en SNES existe otro juego con el mismo nombre que es distinto.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/skeleton-krew.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 281</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip cur">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 281</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/skeleton-krew.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/skeleton-krew.png" alt="SKELETON KREW box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SKELETON KREW</div><div class="game-meta">MEGA DRIVE · 1995 · CORE DESIGN</div></div>
+      <div class="hybrid-title"><div class="game-title">SKELETON KREW</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1995</span><span class="g-chip">CORE DESIGN</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Shooter de Core Design, salido en 1995, cuando la Genesis ya estaba en su ultimo tramo. Tirada corta y poca gente lo guardo en caja.</div>
     </div>
 <aside class="notas"><h4>#8 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 281, con el cartucho suelto en USD 80.</div><div class="n-line">Los late releases de 16 bits se cotizan alto porque se fabricaron menos copias.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/trouble-shooter.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 282</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip cur">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 282</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/trouble-shooter.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/trouble-shooter.png" alt="TROUBLE SHOOTER box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">TROUBLE SHOOTER</div><div class="game-meta">MEGA DRIVE · 1991 · VIC TOKAI</div></div>
+      <div class="hybrid-title"><div class="game-title">TROUBLE SHOOTER</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1991</span><span class="g-chip">VIC TOKAI</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Shooter lateral de Vic Tokai con dos heroinas armadas con jetpack. Pasaba desapercibido y hoy completo cuesta casi tres veces el cartucho suelto.</div>
     </div>
 <aside class="notas"><h4>#7 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 282, con el cartucho suelto en USD 100.</div><div class="n-line">Entra al top en esta revision: no estaba en el top anterior.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/elemental-master.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 298</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip cur">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 298</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/elemental-master.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/elemental-master.png" alt="ELEMENTAL MASTER box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">ELEMENTAL MASTER</div><div class="game-meta">MEGA DRIVE · 1993 · RENOVATION</div></div>
+      <div class="hybrid-title"><div class="game-title">ELEMENTAL MASTER</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1993</span><span class="g-chip">RENOVATION</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Shooter de Technosoft, el estudio de Thunder Force, publicado en Norteamerica por Renovation. Un shmup de culto con tirada corta.</div>
     </div>
 <aside class="notas"><h4>#6 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 298, con el cartucho suelto en USD 114.</div><div class="n-line">Entra al top en esta revision: no estaba en el top anterior.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/aero-2.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 331</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip cur">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 331</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/aero-2.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/aero-2.png" alt="AERO THE ACRO-BAT 2 box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">AERO THE ACRO-BAT 2</div><div class="game-meta">MEGA DRIVE · 1994 · SUNSOFT</div></div>
+      <div class="hybrid-title"><div class="game-title">AERO THE ACRO-BAT 2</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1994</span><span class="g-chip">SUNSOFT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Secuela del murcielago acrobata de Sunsoft. Sin la fama del primero, la caja completa es lo que hoy sube el precio.</div>
     </div>
 <aside class="notas"><h4>#5 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 331, con el cartucho suelto en USD 70.</div><div class="n-line">Es el juego con la brecha mas grande entre suelto y completo de la tabla: casi cinco veces.</div><div class="n-line">Entra al top en esta revision: no estaba en el top anterior.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/zero-squirrel.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 430</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip cur">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 430</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/zero-squirrel.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/zero-squirrel.png" alt="ZERO THE KAMIKAZE SQUIRREL box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">ZERO THE KAMIKAZE SQUIRREL</div><div class="game-meta">MEGA DRIVE · 1994 · SUNSOFT</div></div>
+      <div class="hybrid-title"><div class="game-title">ZERO THE KAMIKAZE SQUIRREL</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1994</span><span class="g-chip">SUNSOFT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Spin-off de la serie Aero con una ardilla voladora como protagonista. Es el mas raro de la familia: completo cuesta casi el triple que el cartucho suelto.</div>
     </div>
 <aside class="notas"><h4>#4 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 430, con el cartucho suelto en USD 155.</div><div class="n-line">Antes era el #5 con USD 430: el precio se mantiene y sube un puesto.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/musha.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 900</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip cur">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 900</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7286">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/musha.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/musha.png" alt="MUSHA box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">MUSHA</div><div class="game-meta">MEGA DRIVE · 1991 · SEISMIC</div></div>
+      <div class="hybrid-title"><div class="game-title">MUSHA</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1991</span><span class="g-chip">SEISMIC</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Shmup de Compile, de la familia Aleste, publicado en Norteamerica por Seismic. Para muchos, uno de los mejores shooters de Genesis, y completo cuesta 900 dolares.</div>
     </div>
 <aside class="notas"><h4>#3 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 900, con el cartucho suelto en USD 369 y sellado USD 2.250.</div><div class="n-line">Antes era el #4 con USD 834: sube un puesto.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/spiderman-carnage.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 988</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip cur">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 988</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/spiderman-carnage.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/spiderman-carnage.png" alt="SPIDER-MAN: MAXIMUM CARNAGE [QVC COLLECTOR'S EDITION] box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SPIDER-MAN: MAXIMUM CARNAGE [QVC COLLECTOR'S EDITION]</div><div class="game-meta">MEGA DRIVE · 1994 · ACCLAIM / QVC</div></div>
+      <div class="hybrid-title"><div class="game-title">SPIDER-MAN: MAXIMUM CARNAGE [QVC COLLECTOR'S EDITION]</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1994</span><span class="g-chip">ACCLAIM / QVC</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>No es solo el cartucho rojo: es el box set de QVC con comic, pines y certificado. El cartucho negro estandar vale apenas unos 54 dolares.</div>
     </div>
 <aside class="notas"><h4>#2 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 988, con el cartucho suelto en USD 450.</div><div class="n-line">El box set QVC Collector's Edition trae el cartucho rojo, un comic de tapa dura, pines y un certificado de autenticidad. Tirada de unas 5.000 copias.</div><div class="n-line">Antes era el #3 con USD 988: sube un puesto.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/crusader-centy.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 1.378</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip cur">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 1.378</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/crusader-centy.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/crusader-centy.png" alt="CRUSADER OF CENTY box art"></div>
@@ -387,13 +433,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">CRUSADER OF CENTY</div><div class="game-meta">MEGA DRIVE · 1994 · ATLUS</div></div>
+      <div class="hybrid-title"><div class="game-title">CRUSADER OF CENTY</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1994</span><span class="g-chip">ATLUS</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL TRONO</span>El 'Zelda' de la Genesis, de Atlus. Una aventura de accion con un mundo precioso que casi nadie compro en su momento. Hoy es el retail NTSC USA mas caro de la consola.</div>
     </div>
 <aside class="notas"><h4>#1 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 1.378, con el cartucho suelto en USD 500 y sellado USD 3.444. En Europa se llamo Soleil y en Japon Ragnacenty.</div><div class="n-line">Antes era el #2: sube al #1 porque Eliminate Down, el #1 anterior, solo salio en Japon y no corresponde a un top NTSC USA.</div><div class="n-cue">TRANSICION: con el trono claro, pasamos al apartado de rarezas.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/mega-drive-top-precios/tetris.png)"></i><i style="background-image:url(img/mega-drive-top-precios/crusader-centy.png)"></i><i style="background-image:url(img/mega-drive-top-precios/sparkster.png)"></i><i style="background-image:url(img/mega-drive-top-precios/outback-joey.png)"></i><i style="background-image:url(img/mega-drive-top-precios/musha.png)"></i><i style="background-image:url(img/mega-drive-top-precios/blockbuster-championship.png)"></i><i style="background-image:url(img/mega-drive-top-precios/elemental-master.png)"></i><i style="background-image:url(img/mega-drive-top-precios/punisher.png)"></i><i style="background-image:url(img/mega-drive-top-precios/trouble-shooter.png)"></i><i style="background-image:url(img/mega-drive-top-precios/skeleton-krew.png)"></i></div>
     <div class="divider">
       <div class="pre mg">FUERA DE CATALOGO</div>
       <div class="title mg">RAREZAS</div>
@@ -401,10 +448,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">14</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/outback-joey.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · PROMOCIONAL</div><div class="game-price">USD 5.054</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr cur">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · PROMOCIONAL</div><div class="game-price">USD 5.054</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7095">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/outback-joey.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/outback-joey.png" alt="OUTBACK JOEY box art"></div>
@@ -416,15 +464,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">OUTBACK JOEY</div><div class="game-meta">MEGA DRIVE · 1991 · HEARTBEAT</div></div>
+      <div class="hybrid-title"><div class="game-title">OUTBACK JOEY</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1991</span><span class="g-chip">HEARTBEAT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Nunca se vendio en tiendas: venia con el HeartBeat Catalyst, un accesorio de ejercicio donde tu pulso controlaba el juego.</div>
     </div>
 <aside class="notas"><h4>RAREZA · OUTBACK JOEY</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 5.054, con el cartucho suelto en USD 3.503.</div><div class="n-line">El HeartBeat Catalyst se conectaba al Genesis: tu ritmo cardiaco movia al canguro Joey. Producto de nicho fallido: tirada de unas 1.000 unidades.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">15</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/blockbuster-championship.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · TORNEO</div><div class="game-price">USD 5.232</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr cur">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · TORNEO</div><div class="game-price">USD 5.232</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6810">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/blockbuster-championship.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/blockbuster-championship.png" alt="BLOCKBUSTER WORLD VIDEO GAME CHAMPIONSHIP II box art"></div>
@@ -436,15 +485,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">BLOCKBUSTER WORLD VIDEO GAME CHAMPIONSHIP II</div><div class="game-meta">MEGA DRIVE · 1995 · BLOCKBUSTER</div></div>
+      <div class="hybrid-title"><div class="game-title">BLOCKBUSTER WORLD VIDEO GAME CHAMPIONSHIP II</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1995</span><span class="g-chip">BLOCKBUSTER</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El cartucho del torneo nacional de Blockbuster, unas 67 unidades. Nunca se vendio: se ordeno destruirlo al terminar el torneo.</div>
     </div>
 <aside class="notas"><h4>RAREZA · BLOCKBUSTER CHAMPIONSHIP II</h4><div class="n-line">Precio via PriceCharting (octubre 2026): USD 5.232 como cartucho SUELTO. No hay ventas CIB porque nunca tuvo empaque retail.</div><div class="n-line">Blockbuster organizo torneos en sus tiendas y este cartucho traia desafios cronometrados de NBA Jam y Judge Dredd. Fabricado por Acclaim. El equivalente Sega del Nintendo World Championships.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">16</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-top-precios/tetris.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 16.000-30.000</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:33px;--dx:-144px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-sep"></div><div class="g-pip gg cur">★</div></div><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 16.000-30.000</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:418px;--ar:0.7081">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-top-precios/tetris.png" alt="" aria-hidden="true"><img src="img/mega-drive-top-precios/tetris.png" alt="TETRIS (MEGA DRIVE · JAPON) box art"></div>
@@ -456,13 +506,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">TETRIS (MEGA DRIVE · JAPON)</div><div class="game-meta">MEGA DRIVE · 1989 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">TETRIS (MEGA DRIVE · JAPON)</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1989</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El juego mas raro de toda la Mega Drive. Sega lo iba a lanzar en 1989, pero la guerra legal entre Nintendo y Tengen por los derechos de Tetris lo mato. Sega cancelo todo y destruyo las copias: sobreviven unas 12.</div>
     </div>
 <aside class="notas"><h4>SANTO GRIAL · TETRIS MEGA DRIVE</h4><div class="n-line">Valor documentado entre USD 16.000 y 30.000 en ventas y tasaciones recientes. No aparece en PriceCharting USA, por eso se cita la venta documentada.</div><div class="n-line">OJO EN CAMARA: la anecdota de 'una copia firmada por Pajitnov se ofrecio en 1 millon' es un precio de SALIDA de una subasta de 2011 que nunca se concreto. La venta documentada mas confiable de una copia firmada fue en 2008, unos USD 13.000. Contarlo como anecdota, no como venta real.</div><div class="n-line">Es el item mas caro del episodio: mas del doble que la rareza mas cara.</div><div class="n-cue">FRASE DE CIERRE: el juego mas raro de la Mega Drive es un Tetris que Sega mando a destruir.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">17</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/mega-drive-top-precios/tetris.png)"></i><i style="background-image:url(img/mega-drive-top-precios/crusader-centy.png)"></i><i style="background-image:url(img/mega-drive-top-precios/sparkster.png)"></i><i style="background-image:url(img/mega-drive-top-precios/outback-joey.png)"></i><i style="background-image:url(img/mega-drive-top-precios/musha.png)"></i><i style="background-image:url(img/mega-drive-top-precios/blockbuster-championship.png)"></i><i style="background-image:url(img/mega-drive-top-precios/elemental-master.png)"></i><i style="background-image:url(img/mega-drive-top-precios/punisher.png)"></i><i style="background-image:url(img/mega-drive-top-precios/trouble-shooter.png)"></i><i style="background-image:url(img/mega-drive-top-precios/skeleton-krew.png)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg">EL VEREDICTO</div>
@@ -470,8 +521,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">18</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/mega-drive-top-precios/tetris.png)"></i><i style="background-image:url(img/mega-drive-top-precios/crusader-centy.png)"></i><i style="background-image:url(img/mega-drive-top-precios/sparkster.png)"></i><i style="background-image:url(img/mega-drive-top-precios/outback-joey.png)"></i><i style="background-image:url(img/mega-drive-top-precios/musha.png)"></i><i style="background-image:url(img/mega-drive-top-precios/blockbuster-championship.png)"></i><i style="background-image:url(img/mega-drive-top-precios/elemental-master.png)"></i><i style="background-image:url(img/mega-drive-top-precios/punisher.png)"></i><i style="background-image:url(img/mega-drive-top-precios/trouble-shooter.png)"></i><i style="background-image:url(img/mega-drive-top-precios/skeleton-krew.png)"></i></div>
     <div class="divider">
       <div class="pre cy">TU TURNO</div>
       <div class="title cy">¿LO SABIAS?</div>

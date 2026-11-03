@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-alta .hybrid-title{align-self:center !important}
 .slide-hybrid.box-alta .game-title{font-size:48px !important;line-height:1.05 !important}
 .slide-hybrid.box-alta .game-meta{font-size:22px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/mega-drive-infravalorados/sub-terrania.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/thunder-force-iii.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/phantasy-star-ii.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/shining-force-ii.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/ristar.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/sword-of-vermilion.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/landstalker.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i></div>
     <div class="portada">
       <div class="ep-tag">SEGA MEGA DRIVE · JOYAS QUE NADIE NOMBRA</div>
       <div class="ep-title">MEGA DRIVE <span class="vs">INFRAVALORADOS</span></div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>INTRO · DATOS BOMBA</h4><div class="n-line">Ranking de CALIDAD, no de precios: juegos de Mega Drive (Genesis) que la prensa puso bien alto y que hoy casi no salen en las listas.</div><div class="n-line">Criterio: buena critica (nota agregada alta, puestos en listas de los mejores de la historia o en las listas propias de Mega Drive), lanzamiento en NTSC USA y que no esten en el Top Mundial del canal (Sonic 1 y 2, Streets of Rage 2, Gunstar Heroes, Phantasy Star IV, Shinobi III, Ecco, Comix Zone, Castlevania Bloodlines y Earthworm Jim).</div><div class="n-line">La Genesis casi no tiene Metacritic, asi que el orden pesa primero la fuerza de la critica en tres niveles. El olvido solo desempata. Es discutible, y ese es el punto.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-ye">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/mega-drive-infravalorados/sub-terrania.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/thunder-force-iii.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/phantasy-star-ii.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/shining-force-ii.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/ristar.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/sword-of-vermilion.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/landstalker.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i></div>
     <div class="divider">
       <div class="pre ye">NO SON LOS FAMOSOS</div>
       <div class="title ye">BUENOS Y OLVIDADOS · #10 AL #1</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th cur" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i><em>10</em></div><div class="g-th f" style="--w:0.700"><em>9</em></div><div class="g-th f" style="--w:0.704"><em>8</em></div><div class="g-th f" style="--w:0.704"><em>7</em></div><div class="g-th f" style="--w:0.704"><em>6</em></div><div class="g-th f" style="--w:0.704"><em>5</em></div><div class="g-th f" style="--w:0.704"><em>4</em></div><div class="g-th f" style="--w:0.704"><em>3</em></div><div class="g-th f" style="--w:0.718"><em>2</em></div><div class="g-th f" style="--w:0.704"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>10</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-infravalorados/beyond-oasis.png" alt="" aria-hidden="true"><img src="img/mega-drive-infravalorados/beyond-oasis.png" alt="BEYOND OASIS box art"></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">BEYOND OASIS</div><div class="game-meta">MEGA DRIVE · 1995 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">BEYOND OASIS</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1995</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Aventura de accion con vista cenital hecha por Ancient. GameFan lo nombro RPG de accion del año 1995 y GamesRadar+ lo puso 38 entre los mejores de Mega Drive.</div>
     </div>
 <aside class="notas"><h4>#10 · DATOS EXTRA</h4><div class="n-line">Fuente: GameFan (1995) lo premio como Action RPG of the Year; GamesRadar+ lo ubico 38 en su lista de 2017 de mejores juegos de Mega Drive/Genesis. GameRankings 78 % (7 reseñas).</div><div class="n-line">Notas de la epoca: Mega 93 %, GamesMaster 93 %, Mean Machines Sega 93/100, Game Informer 8,75 sobre 10, EGM entre 7 y 8 sobre 10.</div><div class="n-line">Salio en Norteamerica en marzo de 1995, tras Japon en diciembre de 1994. IGN dijo en su reseña de la Consola Virtual que merece mencionarse junto a clasicos como Secret of Mana.</div><div class="n-line">Por que esta olvidado: llego tarde en la vida de la consola, con los ojos puestos en la Saturn y la PlayStation.</div><div class="n-cue">Cue Coco: preguntar si lo conocia como 'el Zelda de la Genesis'.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i><em>10</em></div><div class="g-th cur" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><em>9</em></div><div class="g-th f" style="--w:0.704"><em>8</em></div><div class="g-th f" style="--w:0.704"><em>7</em></div><div class="g-th f" style="--w:0.704"><em>6</em></div><div class="g-th f" style="--w:0.704"><em>5</em></div><div class="g-th f" style="--w:0.704"><em>4</em></div><div class="g-th f" style="--w:0.704"><em>3</em></div><div class="g-th f" style="--w:0.718"><em>2</em></div><div class="g-th f" style="--w:0.704"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>9</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-infravalorados/dynamite-headdy.png" alt="" aria-hidden="true"><img src="img/mega-drive-infravalorados/dynamite-headdy.png" alt="DYNAMITE HEADDY box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">DYNAMITE HEADDY</div><div class="game-meta">MEGA DRIVE · 1994 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">DYNAMITE HEADDY</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1994</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformas de Treasure donde la cabeza del heroe cambia de poder. Computer and Video Games le dio 92 sobre 100 y se le considera de lo mejor de la Genesis.</div>
     </div>
 <aside class="notas"><h4>#9 · DATOS EXTRA</h4><div class="n-line">Fuente: CVG 92/100, Mean Machines Sega 93/100 y Game Players 96 %; EGM entre 6 y 8 sobre 10. Segun Wikipedia, recibio 'aclamacion de la critica' y algunos lo creen de los mejores juegos de la Genesis.</div><div class="n-line">La prensa destaco su creatividad: CVG dijo que 'da nueva vida' al genero de plataformas y lo comparo con la saga Sonic.</div><div class="n-line">Lo hizo Treasure, el mismo estudio de Gunstar Heroes. Salio en Norteamerica el 28 de septiembre de 1994.</div><div class="n-line">Por que esta olvidado: salio el mismo año que Donkey Kong Country, que se llevo toda la atencion de los plataformas.</div><div class="n-cue">Cue Coco: Treasure otra vez, el estudio de Gunstar Heroes.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><em>9</em></div><div class="g-th cur" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></i><em>8</em></div><div class="g-th f" style="--w:0.704"><em>7</em></div><div class="g-th f" style="--w:0.704"><em>6</em></div><div class="g-th f" style="--w:0.704"><em>5</em></div><div class="g-th f" style="--w:0.704"><em>4</em></div><div class="g-th f" style="--w:0.704"><em>3</em></div><div class="g-th f" style="--w:0.718"><em>2</em></div><div class="g-th f" style="--w:0.704"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>8</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-infravalorados/vectorman.png" alt="" aria-hidden="true"><img src="img/mega-drive-infravalorados/vectorman.png" alt="VECTORMAN box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">VECTORMAN</div><div class="game-meta">MEGA DRIVE · 1995 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">VECTORMAN</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1995</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformas y disparos de BlueSky Software que exprimio la Genesis. EGM y GamePro lo eligieron Mejor Juego de Genesis de 1995.</div>
     </div>
 <aside class="notas"><h4>#8 · DATOS EXTRA</h4><div class="n-line">Fuente: EGM y GamePro lo premiaron como Best Genesis Game of 1995. CVG 96/100, GamePro 90 %, EGM entre 7,5 y 8,5 sobre 10, Game Informer 9 sobre 10.</div><div class="n-line">Vendio 500.000 copias en Estados Unidos solo en 1995, de los juegos mas vendidos de las fiestas de ese año. Salio el 24 de octubre de 1995.</div><div class="n-line">Hardcore Gaming 101 lo llamo una de las mejores joyas escondidas de la Genesis. La prensa noto que sus graficos se parecian a los primeros juegos de PlayStation.</div><div class="n-line">Por que esta olvidado: salio en 1995, cuando la Genesis ya se despedia y Sega apostaba todo a la Saturn.</div><div class="n-cue">Cue Coco: los graficos y la animacion, que la prensa comparo con los de PlayStation.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-infravalorados/sub-terrania.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></i><em>8</em></div><div class="g-th cur" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sub-terrania.png)"></i><em>7</em></div><div class="g-th f" style="--w:0.704"><em>6</em></div><div class="g-th f" style="--w:0.704"><em>5</em></div><div class="g-th f" style="--w:0.704"><em>4</em></div><div class="g-th f" style="--w:0.704"><em>3</em></div><div class="g-th f" style="--w:0.718"><em>2</em></div><div class="g-th f" style="--w:0.704"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>7</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-infravalorados/sub-terrania.png" alt="" aria-hidden="true"><img src="img/mega-drive-infravalorados/sub-terrania.png" alt="SUB-TERRANIA box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SUB-TERRANIA</div><div class="game-meta">MEGA DRIVE · 1994 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">SUB-TERRANIA</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1994</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Nave con gravedad dentro de cavernas, hecha por Zyrinx. GamePro le puso 98 % y Mega lo ubico 16 entre los mejores juegos de Mega Drive.</div>
     </div>
 <aside class="notas"><h4>#7 · DATOS EXTRA</h4><div class="n-line">Fuente: GamePro 98 %, Edge 9 sobre 10, Mean Machines Sega 91 %, Sega Zone 91 %, MegaTech 90 %. Mega lo puso 16 en su lista de los mejores juegos de Mega Drive de todos los tiempos.</div><div class="n-line">Edge dijo que es 'rapido, ingenioso, variado y, sobre todo, adictivo'. La musica de estilo industrial tambien se llevo elogios. Salio en Norteamerica en abril de 1994.</div><div class="n-line">Por que esta olvidado: un juego de nave con fisica de gravedad, mas exigente que un shooter normal y sin mascota que lo represente.</div><div class="n-cue">Cue Coco: preguntar si alguna vez jugo uno de naves con gravedad.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-infravalorados/sword-of-vermilion.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sub-terrania.png)"></i><em>7</em></div><div class="g-th cur" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sword-of-vermilion.png)"></i><em>6</em></div><div class="g-th f" style="--w:0.704"><em>5</em></div><div class="g-th f" style="--w:0.704"><em>4</em></div><div class="g-th f" style="--w:0.704"><em>3</em></div><div class="g-th f" style="--w:0.718"><em>2</em></div><div class="g-th f" style="--w:0.704"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>6</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-infravalorados/sword-of-vermilion.png" alt="" aria-hidden="true"><img src="img/mega-drive-infravalorados/sword-of-vermilion.png" alt="SWORD OF VERMILION box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SWORD OF VERMILION</div><div class="game-meta">MEGA DRIVE · 1990 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">SWORD OF VERMILION</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1990</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>RPG de accion de Sega AM2, con Yu Suzuki como productor. MegaTech lo llamo 'probablemente el mejor RPG de Mega Drive' y Mega lo puso 11.</div>
     </div>
 <aside class="notas"><h4>#6 · DATOS EXTRA</h4><div class="n-line">Fuente: MegaTech 93 % y 87 %, Sega Power 95 %, Computer and Video Games 91 %, Player One 94 %. Mega lo ubico 11 entre los mejores juegos de Mega Drive en 1992.</div><div class="n-line">Lo desarrollo Sega AM2, el equipo de Yu Suzuki (Out Run, Virtua Fighter). Salio en Norteamerica el 10 de noviembre de 1990.</div><div class="n-line">CVG elogio su combate de accion y dijo que su musica y efectos estaban 'entre los mejores' de la Mega Drive.</div><div class="n-line">Por que esta olvidado: nacio en 1989 y 1990, antes que los grandes RPG de 16 bits, y hoy se recuerdan mas los que vinieron despues.</div><div class="n-cue">Cue Coco: AM2 y Yu Suzuki haciendo un RPG, dato que sorprende.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-infravalorados/landstalker.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sub-terrania.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sword-of-vermilion.png)"></i><em>6</em></div><div class="g-th cur" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/landstalker.png)"></i><em>5</em></div><div class="g-th f" style="--w:0.704"><em>4</em></div><div class="g-th f" style="--w:0.704"><em>3</em></div><div class="g-th f" style="--w:0.718"><em>2</em></div><div class="g-th f" style="--w:0.704"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>5</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-infravalorados/landstalker.png" alt="" aria-hidden="true"><img src="img/mega-drive-infravalorados/landstalker.png" alt="LANDSTALKER box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">LANDSTALKER</div><div class="game-meta">MEGA DRIVE · 1993 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">LANDSTALKER</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1993</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Aventura isometrica de Climax Entertainment. GameFan le dio dos premios, Mega lo puso 5 y GamesRadar+ lo ubico 24.</div>
     </div>
 <aside class="notas"><h4>#5 · DATOS EXTRA</h4><div class="n-line">Fuente: GameFan le dio los premios a Mas Innovador (Sega) y Mejor Action/RPG; Mega lo ubico 5 en su lista de mejores de Mega Drive y GamesRadar+ 24 en 2017. MegaTech 93 %, Mega 92 %, Mega Drive Advanced Gaming 96 %.</div><div class="n-line">Segun Famitsu y Next Generation fue un 'system seller' de la Mega Drive en Japon: 34.385 copias en la primera semana y 160.000 en su vida.</div><div class="n-line">Gamasutra lo cito como ejemplo de mundo abierto en su serie Game Design Essentials. Salio en Norteamerica en octubre de 1993.</div><div class="n-line">Por que esta olvidado: una aventura isometrica de 1993 que quedo a la sombra de Zelda: A Link to the Past, de la competencia.</div><div class="n-cue">Cue Coco: la vista isometrica y los saltos de precision son su sello.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-infravalorados/thunder-force-iii.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sub-terrania.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sword-of-vermilion.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/landstalker.png)"></i><em>5</em></div><div class="g-th cur" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/thunder-force-iii.png)"></i><em>4</em></div><div class="g-th f" style="--w:0.704"><em>3</em></div><div class="g-th f" style="--w:0.718"><em>2</em></div><div class="g-th f" style="--w:0.704"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>4</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-infravalorados/thunder-force-iii.png" alt="" aria-hidden="true"><img src="img/mega-drive-infravalorados/thunder-force-iii.png" alt="THUNDER FORCE III box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">THUNDER FORCE III</div><div class="game-meta">MEGA DRIVE · 1990 · TECHNOSOFT</div></div>
+      <div class="hybrid-title"><div class="game-title">THUNDER FORCE III</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1990</span><span class="g-chip">TECHNOSOFT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Shooter de scroll lateral de Technosoft. EGM lo llamo el mejor shooter de la Genesis y lo puso 59 entre los mejores juegos de consola de la historia.</div>
     </div>
 <aside class="notas"><h4>#4 · DATOS EXTRA</h4><div class="n-line">Fuente: EGM (1997) lo listo 59 entre los mejores juegos de consola de todos los tiempos y 'el mejor shooter de la Genesis'. Mega lo puso 17 en 1992. EGM entre 7 y 9 sobre 10, MegaTech 89 %, Famitsu 31/40.</div><div class="n-line">GamePro hablo de 'graficos preciosos' y de enemigos grandes y detallados, y MegaTech elogio el parallax y el sonido. Salio en Japon en junio de 1990 y en Norteamerica en octubre de 1990.</div><div class="n-line">Por que esta olvidado: los shooters son un nicho dificil, y la saga Thunder Force nunca fue tan conocida como los grandes del genero.</div><div class="n-cue">Cue Coco: la dificultad, GamePro lo describio como muy duro.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-infravalorados/ristar.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sub-terrania.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sword-of-vermilion.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/landstalker.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/thunder-force-iii.png)"></i><em>4</em></div><div class="g-th cur" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/ristar.png)"></i><em>3</em></div><div class="g-th f" style="--w:0.718"><em>2</em></div><div class="g-th f" style="--w:0.704"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>3</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-infravalorados/ristar.png" alt="" aria-hidden="true"><img src="img/mega-drive-infravalorados/ristar.png" alt="RISTAR box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">RISTAR</div><div class="game-meta">MEGA DRIVE · 1995 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">RISTAR</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1995</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformas de Sega donde una estrella usa sus brazos elasticos para agarrar y lanzarse. 89,33 % en GameRankings y puesto 41 en la lista de GamesRadar+.</div>
     </div>
 <aside class="notas"><h4>#3 · DATOS EXTRA</h4><div class="n-line">Fuente: GameRankings 89,33 %, EGM entre 7 y 8 sobre 10, Game Informer 8,25. GamesRadar+ lo ubico 41 en su lista de 2017 de mejores juegos de Mega Drive/Genesis.</div><div class="n-line">Sus brazos se estiran en ocho direcciones: sirven para atacar, columpiarse y lanzarse como meteoro. Salio en Norteamerica en febrero de 1995, ya en la despedida de la consola.</div><div class="n-line">Por que esta olvidado: llego a fines de la era de 16 bits, a la sombra de Sonic, y Sega nunca volvio a usarlo como mascota.</div><div class="n-cue">Cue Coco: preguntar si lo conocia o lo confunde con un clon de Sonic.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-infravalorados/phantasy-star-ii.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sub-terrania.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sword-of-vermilion.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/landstalker.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/thunder-force-iii.png)"></i><em>4</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/ristar.png)"></i><em>3</em></div><div class="g-th cur" style="--w:0.718"><i style="background-image:url(img/mega-drive-infravalorados/phantasy-star-ii.png)"></i><em>2</em></div><div class="g-th f" style="--w:0.704"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>2</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7167">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-infravalorados/phantasy-star-ii.png" alt="" aria-hidden="true"><img src="img/mega-drive-infravalorados/phantasy-star-ii.png" alt="PHANTASY STAR II box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">PHANTASY STAR II</div><div class="game-meta">MEGA DRIVE · 1990 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">PHANTASY STAR II</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1990</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El primer RPG de la Mega Drive. EGM lo puso 30 entre los mejores juegos de consola de la historia y lo llamo el mejor RPG de la Genesis.</div>
     </div>
 <aside class="notas"><h4>#2 · DATOS EXTRA</h4><div class="n-line">Fuente: EGM (1997) lo listo 30 entre los mejores juegos de consola de todos los tiempos, 'el mejor RPG de la Genesis'. Mega lo puso 29 en 1992. Sega Power 94 %, ASM 56/60, Dragon 5 sobre 5, Joystick 97 %.</div><div class="n-line">Su cartucho de 6 megabits era el mas grande de cualquier consola hasta ese momento, e incluia una guia de 110 paginas. RePlay calculo unas 250 horas para completarlo.</div><div class="n-line">Salio en Norteamerica en marzo de 1990, cuatro meses antes de Final Fantasy en NES. Se le considera precursor de las historias dramaticas y personajes con peso en los RPG.</div><div class="n-line">Por que esta olvidado: Phantasy Star IV se llevo la fama de la saga y el Top Mundial.</div><div class="n-cue">Cue Coco: el dato de las 250 horas y de que salio antes que Final Fantasy en NES.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/mega-drive-infravalorados/shining-force-ii.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL TRONO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sub-terrania.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/sword-of-vermilion.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/landstalker.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/thunder-force-iii.png)"></i><em>4</em></div><div class="g-th r" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/ristar.png)"></i><em>3</em></div><div class="g-th r" style="--w:0.718"><i style="background-image:url(img/mega-drive-infravalorados/phantasy-star-ii.png)"></i><em>2</em></div><div class="g-th cur" style="--w:0.704"><i style="background-image:url(img/mega-drive-infravalorados/shining-force-ii.png)"></i><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>1</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7024">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/mega-drive-infravalorados/shining-force-ii.png" alt="" aria-hidden="true"><img src="img/mega-drive-infravalorados/shining-force-ii.png" alt="SHINING FORCE II box art"></div>
@@ -387,13 +433,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SHINING FORCE II</div><div class="game-meta">MEGA DRIVE · 1994 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">SHINING FORCE II</div><div class="game-meta g-chips"><span class="g-chip">MEGA DRIVE</span><span class="g-chip y">1994</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL MEJOR CRITICADO</span>RPG tactico de Sonic! Software Planning. 89 % en GameRankings, puesto 48 en el Top 100 de IGN y entre los diez mejores de Mega Drive segun Retro Gamer.</div>
     </div>
 <aside class="notas"><h4>#1 · DATOS EXTRA</h4><div class="n-line">Fuente: GameRankings 89 %. EGM (1997) lo puso 60 entre los mejores juegos de consola; IGN (2007) lo ubico 48 en su Top 100 de todos los tiempos; Retro Gamer lo incluyo entre los diez mejores de Mega Drive.</div><div class="n-line">Fue un exito de ventas en Japon, donde salio en octubre de 1993. En Norteamerica llego en 1994. IGN elogio su simpleza dentro de los RPG tacticos y su desafio.</div><div class="n-line">Por que esta olvidado: la saga Shining Force nunca fue masiva fuera de los fans del genero, y el RPG tactico era un nicho.</div><div class="n-cue">Cue Coco: cierre del ranking, el puesto 48 en el Top 100 de IGN es el dato bomba.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/mega-drive-infravalorados/sub-terrania.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/thunder-force-iii.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/phantasy-star-ii.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/shining-force-ii.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/ristar.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/sword-of-vermilion.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/landstalker.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg">BUENOS Y OLVIDADOS</div>
@@ -401,8 +448,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">14</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/mega-drive-infravalorados/sub-terrania.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/thunder-force-iii.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/dynamite-headdy.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/phantasy-star-ii.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/shining-force-ii.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/ristar.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/sword-of-vermilion.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/vectorman.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/landstalker.png)"></i><i style="background-image:url(img/mega-drive-infravalorados/beyond-oasis.png)"></i></div>
     <div class="divider">
       <div class="pre cy">TU TURNO</div>
       <div class="title cy">¿CUAL AGREGARIAS?</div>

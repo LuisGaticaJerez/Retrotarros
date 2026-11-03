@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-alta .hybrid-title{align-self:center !important}
 .slide-hybrid.box-alta .game-title{font-size:48px !important;line-height:1.05 !important}
 .slide-hybrid.box-alta .game-meta{font-size:22px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/ps2-top-mundial/tony-hawks-pro-skater-3.png)"></i><i style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></i><i style="background-image:url(img/ps2-top-mundial/gran-turismo-3-a-spec.png)"></i><i style="background-image:url(img/ps2-top-mundial/metal-gear-solid-2-sons-of-liberty.png)"></i><i style="background-image:url(img/ps2-top-mundial/god-of-war.png)"></i><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><i style="background-image:url(img/ps2-top-mundial/devil-may-cry.png)"></i><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><i style="background-image:url(img/ps2-top-mundial/okami.png)"></i><i style="background-image:url(img/ps2-top-mundial/grand-theft-auto-iii.png)"></i></div>
     <div class="portada">
       <div class="ep-tag">GENERACION 6 · LA CONSOLA MAS VENDIDA DE LA HISTORIA</div>
       <div class="ep-title">PLAYSTATION 2 <span class="vs">TOP MUNDIAL</span></div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>INTRO · DATOS BOMBA</h4><div class="n-line">Ranking por consenso critico y legado (nota Metacritic de la version PS2), NO por precio de mercado: eso es otro episodio.</div><div class="n-line">Reglas de este top: una sola entrada por franquicia y sin deportes anuales (Madden, NCAA, NFL 2K, Pro Evolution Soccer). Por eso hay un solo GTA, un solo Metal Gear y un solo God of War.</div><div class="n-line">Fuera por repetir franquicia: GTA Vice City y San Andreas (95), Metal Gear Solid 3 (94), God of War II (93), Tony Hawk's 4 y Final Fantasy XII. Resident Evil 4 (96 en PS2) queda fuera porque ya esta en el Top Mundial de GameCube.</div><div class="n-line">Los diez estan por sobre 90 en Metacritic y cuatro llegan a 95 o mas. Cruzado cada dato con minimo dos fuentes antes de decirlo en camara.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-ye">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/ps2-top-mundial/tony-hawks-pro-skater-3.png)"></i><i style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></i><i style="background-image:url(img/ps2-top-mundial/gran-turismo-3-a-spec.png)"></i><i style="background-image:url(img/ps2-top-mundial/metal-gear-solid-2-sons-of-liberty.png)"></i><i style="background-image:url(img/ps2-top-mundial/god-of-war.png)"></i><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><i style="background-image:url(img/ps2-top-mundial/devil-may-cry.png)"></i><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><i style="background-image:url(img/ps2-top-mundial/okami.png)"></i><i style="background-image:url(img/ps2-top-mundial/grand-theft-auto-iii.png)"></i></div>
     <div class="divider">
       <div class="pre ye">CONSENSO CRITICO 2026</div>
       <div class="title ye">TOP 10 MUNDIAL</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th cur" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><em>10</em></div><div class="g-th f" style="--w:0.707"><em>9</em></div><div class="g-th f" style="--w:0.705"><em>8</em></div><div class="g-th f" style="--w:0.705"><em>7</em></div><div class="g-th f" style="--w:0.697"><em>6</em></div><div class="g-th f" style="--w:0.705"><em>5</em></div><div class="g-th f" style="--w:0.705"><em>4</em></div><div class="g-th f" style="--w:0.709"><em>3</em></div><div class="g-th f" style="--w:0.705"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>10</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7071">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps2-top-mundial/shadow-of-the-colossus.png" alt="" aria-hidden="true"><img src="img/ps2-top-mundial/shadow-of-the-colossus.png" alt="SHADOW OF THE COLOSSUS box art"></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SHADOW OF THE COLOSSUS</div><div class="game-meta">PLAYSTATION 2 · 2005 · SONY COMPUTER ENTERTAINMENT</div></div>
+      <div class="hybrid-title"><div class="game-title">SHADOW OF THE COLOSSUS</div><div class="game-meta g-chips"><span class="g-chip">PLAYSTATION 2</span><span class="g-chip y">2005</span><span class="g-chip">SONY COMPUTER ENTERTAINMENT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Un heroe, un caballo y dieciseis colosos gigantes. Team Ico convirtio un juego de jefes en ejemplo de videojuego como arte, con 91 en Metacritic.</div>
     </div>
 <aside class="notas"><h4>#10 · SHADOW OF THE COLOSSUS</h4><div class="n-line">Metacritic 91 (PS2) y GameRankings 91 %, el 11 mejor puntuado de 2005. Famitsu 37/40, IGN 9,7, GameSpot 8,7, EGM 8,8. EGM le dio el premio a Banda Sonora del Año.</div><div class="n-line">Salio en Norteamerica el 18 de octubre de 2005. Lo dirigio Fumito Ueda y lo hizo el equipo de Ico (Team Ico), del que es sucesor espiritual. Nacio como un juego multijugador en linea llamado NICO y se rehizo como un juego para un jugador.</div><div class="n-line">Ueda ha dicho que Zelda lo inspiro y que penso a los colosos como 'mazmorras de Zelda al reves'. En Japon vendio 140.000 copias en su primera semana y fue numero uno de ventas. Entro a la lista Greatest Hits el 6 de agosto de 2006.</div><div class="n-line">Se cita como ejemplo de que los videojuegos pueden ser arte: Edge lo describio como una ficcion de enorme riqueza tematica y poder emocional, fusionada con su interactividad.</div><div class="n-line">Para la conversacion: los criticos senalaron que la tasa de cuadros bajaba en las peleas rapidas y que el caballo Agro se controla distinto a otros juegos. Eso no va en pantalla.</div><div class="n-cue">GANCHO: arrancamos con el juego que mas veces se nombra cuando alguien habla de videojuegos como arte.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><em>10</em></div><div class="g-th cur" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><em>9</em></div><div class="g-th f" style="--w:0.705"><em>8</em></div><div class="g-th f" style="--w:0.705"><em>7</em></div><div class="g-th f" style="--w:0.697"><em>6</em></div><div class="g-th f" style="--w:0.705"><em>5</em></div><div class="g-th f" style="--w:0.705"><em>4</em></div><div class="g-th f" style="--w:0.709"><em>3</em></div><div class="g-th f" style="--w:0.705"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>9</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7071">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps2-top-mundial/final-fantasy-x.png" alt="" aria-hidden="true"><img src="img/ps2-top-mundial/final-fantasy-x.png" alt="FINAL FANTASY X box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">FINAL FANTASY X</div><div class="game-meta">PLAYSTATION 2 · 2001 · SQUARE</div></div>
+      <div class="hybrid-title"><div class="game-title">FINAL FANTASY X</div><div class="game-meta g-chips"><span class="g-chip">PLAYSTATION 2</span><span class="g-chip y">2001</span><span class="g-chip">SQUARE</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El primer Final Fantasy con voces y escenarios en 3D. Famitsu le dio 39 sobre 40 y vendio mas de 8 millones de copias.</div>
     </div>
 <aside class="notas"><h4>#9 · FINAL FANTASY X</h4><div class="n-line">Metacritic 92 (PS2). Famitsu 39/40 y la revista The Play Station 29/30. IGN lo llamo el mejor juego de la serie en graficos y jugabilidad.</div><div class="n-line">Salio en Japon el 19 de julio de 2001 y en Norteamerica el 18 de diciembre de 2001. Desarrollo desde 1999, con un presupuesto de unos 32,3 millones de dolares y mas de 100 personas.</div><div class="n-line">Novedades: reemplazo el sistema de batalla ATB por el CTB (turnos condicionales), el tablero de progreso llamado Sphere Grid, voces para los personajes y areas totalmente en 3D. Fue el primer Final Fantasy de la serie principal que Nobuo Uematsu no compuso entero: Masashi Hamauzu y Junya Nakano se sumaron.</div><div class="n-line">Tuvo secuela directa, Final Fantasy X-2 (2003), con 5,4 millones de copias.</div><div class="n-line">Para la conversacion: Edge y Eurogamer fueron mas duros que el resto, y algunos criticos cuestionaron lo lineal que es. El consenso general es de aclamacion.</div><div class="n-cue">Cue Coco: preguntar por Tidus, Yuna y el blitzball.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><em>9</em></div><div class="g-th cur" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></i><em>8</em></div><div class="g-th f" style="--w:0.705"><em>7</em></div><div class="g-th f" style="--w:0.697"><em>6</em></div><div class="g-th f" style="--w:0.705"><em>5</em></div><div class="g-th f" style="--w:0.705"><em>4</em></div><div class="g-th f" style="--w:0.709"><em>3</em></div><div class="g-th f" style="--w:0.705"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>8</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:419px;--ar:0.7064">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps2-top-mundial/burnout-3-takedown.png" alt="" aria-hidden="true"><img src="img/ps2-top-mundial/burnout-3-takedown.png" alt="BURNOUT 3: TAKEDOWN box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">BURNOUT 3: TAKEDOWN</div><div class="game-meta">PLAYSTATION 2 · 2004 · ELECTRONIC ARTS</div></div>
+      <div class="hybrid-title"><div class="game-title">BURNOUT 3: TAKEDOWN</div><div class="game-meta g-chips"><span class="g-chip">PLAYSTATION 2</span><span class="g-chip y">2004</span><span class="g-chip">ELECTRONIC ARTS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Carreras arcade de Criterion donde chocar al rival es la estrategia. 93 en Metacritic para PS2, segundo mejor juego de 2004 segun su nota.</div>
     </div>
 <aside class="notas"><h4>#8 · BURNOUT 3: TAKEDOWN</h4><div class="n-line">Metacritic 93 (PS2). Segun su Metascore fue el segundo mejor juego de 2004 en PS2 y en Xbox, y el segundo juego de carreras mejor puntuado de PS2. GameSpot de Jeff Gerstmann lo llamo uno de los mejores juegos de carreras de todos los tiempos.</div><div class="n-line">Salio en Norteamerica el 8 de septiembre de 2004. Criterion empezo a desarrollarlo en junio de 2003, con la condicion de que EA no interviniera en lo creativo; EA termino comprando Criterion y la serie.</div><div class="n-line">Su mecanica estrella son los Takedowns: chocar a los rivales hasta sacarlos de la pista, lo que a la vez llena el boost. GamesTM y GameSpy le dieron nota perfecta; GameSpy lo llamo posiblemente el mejor arcade de carreras jamas hecho.</div><div class="n-line">El modo Crash se expandio y mejoro: provocar el choque mas caro en una interseccion. IGN dijo que su sistema de choques estaba muy por delante de todo lo hecho antes.</div><div class="n-line">La version de PS2 incluia una demo de Need for Speed: Underground 2.</div><div class="n-cue">Cue Coco: el modo Crash, el choque mas caro de la historia.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/ps2-top-mundial/okami.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></i><em>8</em></div><div class="g-th cur" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/okami.png)"></i><em>7</em></div><div class="g-th f" style="--w:0.697"><em>6</em></div><div class="g-th f" style="--w:0.705"><em>5</em></div><div class="g-th f" style="--w:0.705"><em>4</em></div><div class="g-th f" style="--w:0.709"><em>3</em></div><div class="g-th f" style="--w:0.705"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>7</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:419px;--ar:0.7064">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps2-top-mundial/okami.png" alt="" aria-hidden="true"><img src="img/ps2-top-mundial/okami.png" alt="OKAMI box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">OKAMI</div><div class="game-meta">PLAYSTATION 2 · 2006 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">OKAMI</div><div class="game-meta g-chips"><span class="g-chip">PLAYSTATION 2</span><span class="g-chip y">2006</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Un lobo blanco, un pincel celestial y una estetica de tinta japonesa. 93 en Metacritic y Juego del Año 2006 para IGN.</div>
     </div>
 <aside class="notas"><h4>#7 · OKAMI</h4><div class="n-line">Metacritic 93 (PS2). IGN lo nombro Juego del Año 2006 y lo puso 18 entre los mejores de PS2 de todos los tiempos en 2007. Famitsu 39/40 (el 15 juego en recibir esa nota). Eurogamer 10/10, GameSpot 9, IGN 9,1.</div><div class="n-line">Salio en Japon el 20 de abril de 2006 y en Norteamerica el 19 de septiembre de 2006. Lo hizo Clover Studio, con Hideki Kamiya como director. Esta basado en el folclore japones: la diosa del sol Amaterasu toma la forma de un lobo blanco.</div><div class="n-line">Su sello es el Celestial Brush: se pinta con el control para hacer milagros. La estetica cel-shaded estilo sumi-e nacio al cambiar el plan de graficos realistas, que exigian demasiado a la PS2.</div><div class="n-line">El juego se inspiro en la saga Zelda, una de las favoritas de Kamiya. Se vendio poco y Clover Studio cerro meses despues; hubo port para Wii en 2008.</div><div class="n-line">Para la conversacion: la prensa senalo la dificultad despareja y que la introduccion tiene mucho dialogo con voces generadas por computador.</div><div class="n-cue">Cue Coco: la estetica de tinta japonesa, ¿la habias visto en otro juego?</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/ps2-top-mundial/devil-may-cry.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/okami.png)"></i><em>7</em></div><div class="g-th cur" style="--w:0.697"><i style="background-image:url(img/ps2-top-mundial/devil-may-cry.png)"></i><em>6</em></div><div class="g-th f" style="--w:0.705"><em>5</em></div><div class="g-th f" style="--w:0.705"><em>4</em></div><div class="g-th f" style="--w:0.709"><em>3</em></div><div class="g-th f" style="--w:0.705"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>6</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6952">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps2-top-mundial/devil-may-cry.png" alt="" aria-hidden="true"><img src="img/ps2-top-mundial/devil-may-cry.png" alt="DEVIL MAY CRY box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">DEVIL MAY CRY</div><div class="game-meta">PLAYSTATION 2 · 2001 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">DEVIL MAY CRY</div><div class="game-meta g-chips"><span class="g-chip">PLAYSTATION 2</span><span class="g-chip y">2001</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Dante, espadas, pistolas y combos con estilo. Nacio como idea para un Resident Evil y fundo el genero de accion estilizada. 94 en Metacritic.</div>
     </div>
 <aside class="notas"><h4>#6 · DEVIL MAY CRY</h4><div class="n-line">Metacritic 94 (PS2). IGN lo ubico 42 en su lista de 2010 de los 100 mejores juegos de PS2. Famitsu 34/40. Game Informer dijo que 'hace que Resident Evil parezca un zombi lento'.</div><div class="n-line">Salio en Japon el 23 de agosto de 2001 y en Norteamerica el 17 de octubre de 2001. Lo hizo Capcom Production Studio 4. Empezo como la primera version de Resident Evil 4, con Hideki Kamiya de director; se volvio juego propio cuando vieron que no encajaba en esa serie.</div><div class="n-line">Algunos elementos de jugabilidad nacieron de un bug encontrado en Onimusha: Warlords. Dante lleva el nombre de Dante Alighieri, y esta libremente basado en la Divina Comedia.</div><div class="n-line">Vendio 1,1 millones de copias en Estados Unidos hasta julio de 2006 y mas de 2,16 millones en total, y dio origen a una saga con cuatro secuelas y un reboot.</div><div class="n-line">Para la conversacion: varios criticos mencionaron la dificultad y la camara, y GameSpot se quejo del final. Es contexto, no va en pantalla.</div><div class="n-cue">Cue Coco: el punto de que empezo como un Resident Evil y termino fundando otro genero.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/ps2-top-mundial/god-of-war.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/okami.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.697"><i style="background-image:url(img/ps2-top-mundial/devil-may-cry.png)"></i><em>6</em></div><div class="g-th cur" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/god-of-war.png)"></i><em>5</em></div><div class="g-th f" style="--w:0.705"><em>4</em></div><div class="g-th f" style="--w:0.709"><em>3</em></div><div class="g-th f" style="--w:0.705"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>5</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:419px;--ar:0.7064">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps2-top-mundial/god-of-war.png" alt="" aria-hidden="true"><img src="img/ps2-top-mundial/god-of-war.png" alt="GOD OF WAR box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">GOD OF WAR</div><div class="game-meta">PLAYSTATION 2 · 2005 · SONY COMPUTER ENTERTAINMENT</div></div>
+      <div class="hybrid-title"><div class="game-title">GOD OF WAR</div><div class="game-meta g-chips"><span class="g-chip">PLAYSTATION 2</span><span class="g-chip y">2005</span><span class="g-chip">SONY COMPUTER ENTERTAINMENT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Kratos, las Blades of Chaos y combates a toda escala. 94 en Metacritic: abrio una saga que pasaria de la mitologia griega a la nordica.</div>
     </div>
 <aside class="notas"><h4>#5 · GOD OF WAR</h4><div class="n-line">Metacritic 94 (PS2). IGN 9,8 y GameSpot 9,3. El critico de GameSpy dijo que era lo mejor que le paso a la mitologia griega desde que Harry Hamlin hizo de Perseo en 'Furia de Titanes'. GamesRadar le puso nota perfecta.</div><div class="n-line">Salio en Norteamerica el 22 de marzo de 2005. Lo hizo Santa Monica Studio; David Jaffe, su creador, empezo en 2002 con el nombre de trabajo 'Dark Odyssey'. Se inspiro en la pelicula Furia de Titanes y en la revista Heavy Metal.</div><div class="n-line">Jaffe conto que la idea era hacer 'Onimusha con mitologia griega'. Mecanicas: combos con las Blades of Chaos, quick time events en jefes y tambien puzzles y plataformas. La demo 'The Hydra Battle' salio el 1 de enero de 2005.</div><div class="n-line">Se relanzo en PS3 con God of War II en la God of War Collection (2009). Su secuela, God of War II, quedo fuera del top por la regla de una entrada por franquicia.</div><div class="n-cue">Cue Coco: Kratos y los combos, el inicio de una saga que cambio varias veces.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/ps2-top-mundial/gran-turismo-3-a-spec.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/okami.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.697"><i style="background-image:url(img/ps2-top-mundial/devil-may-cry.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/god-of-war.png)"></i><em>5</em></div><div class="g-th cur" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/gran-turismo-3-a-spec.png)"></i><em>4</em></div><div class="g-th f" style="--w:0.709"><em>3</em></div><div class="g-th f" style="--w:0.705"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>4</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:419px;--ar:0.7064">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps2-top-mundial/gran-turismo-3-a-spec.png" alt="" aria-hidden="true"><img src="img/ps2-top-mundial/gran-turismo-3-a-spec.png" alt="GRAN TURISMO 3: A-SPEC box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">GRAN TURISMO 3: A-SPEC</div><div class="game-meta">PLAYSTATION 2 · 2001 · SONY COMPUTER ENTERTAINMENT</div></div>
+      <div class="hybrid-title"><div class="game-title">GRAN TURISMO 3: A-SPEC</div><div class="game-meta g-chips"><span class="g-chip">PLAYSTATION 2</span><span class="g-chip y">2001</span><span class="g-chip">SONY COMPUTER ENTERTAINMENT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El simulador de manejo que estreno la PS2. 95 en Metacritic, el exclusivo mas vendido de la consola con mas de 14 millones de copias.</div>
     </div>
 <aside class="notas"><h4>#4 · GRAN TURISMO 3: A-SPEC</h4><div class="n-line">Metacritic 95 (PS2). Famitsu 39/40, IGN 9,8, GameSpot 9,4, EGM 10. GameSpot lo puso quinto mejor juego de consola de 2001 y le dio Mejor Juego de Manejo. NextGen lo llamo el primer juego imprescindible de PS2.</div><div class="n-line">Salio en Japon el 28 de abril de 2001 y en Norteamerica el 10 de julio de 2001. Lo hizo Polyphony Digital, y Kazunori Yamauchi dirigio el desarrollo. Tiene 180 autos, frente a los 650 de Gran Turismo 2, pero con un salto enorme en graficos, fisica y sonido.</div><div class="n-line">Vendio un millon de copias en su primer dia en Norteamerica, el lanzamiento de software mas rapido de la region. Mas de 14,8 millones de copias en total: es el juego mas vendido de la serie, el exclusivo mas vendido de PS2 y el segundo juego mas vendido de la consola, solo detras de GTA San Andreas.</div><div class="n-line">Con Logitech desarrollaron el volante GT Force, con force feedback. En los premios AIAS gano Mejor Juego de Carreras de Consola y fue nominado a Juego del Año de consola, que se llevo Halo: Combat Evolved.</div><div class="n-cue">Cue Coco: el volante GT Force y las licencias de autos reales.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/ps2-top-mundial/metal-gear-solid-2-sons-of-liberty.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/okami.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.697"><i style="background-image:url(img/ps2-top-mundial/devil-may-cry.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/god-of-war.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/gran-turismo-3-a-spec.png)"></i><em>4</em></div><div class="g-th cur" style="--w:0.709"><i style="background-image:url(img/ps2-top-mundial/metal-gear-solid-2-sons-of-liberty.png)"></i><em>3</em></div><div class="g-th f" style="--w:0.705"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>3</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7071">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps2-top-mundial/metal-gear-solid-2-sons-of-liberty.png" alt="" aria-hidden="true"><img src="img/ps2-top-mundial/metal-gear-solid-2-sons-of-liberty.png" alt="METAL GEAR SOLID 2: SONS OF LIBERTY box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">METAL GEAR SOLID 2: SONS OF LIBERTY</div><div class="game-meta">PLAYSTATION 2 · 2001 · KONAMI</div></div>
+      <div class="hybrid-title"><div class="game-title">METAL GEAR SOLID 2: SONS OF LIBERTY</div><div class="game-meta g-chips"><span class="g-chip">PLAYSTATION 2</span><span class="g-chip y">2001</span><span class="g-chip">KONAMI</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Stealth de Hideo Kojima con entornos de varios niveles y enemigos que actuan en escuadra. 96 en Metacritic, el exclusivo de PS2 mejor puntuado.</div>
     </div>
 <aside class="notas"><h4>#3 · METAL GEAR SOLID 2: SONS OF LIBERTY</h4><div class="n-line">Metacritic 96 (PS2), el exclusivo mejor puntuado de la consola. Game Informer 10/10, GameSpot 9,6, IGN 9,7, EGM 38,5/40, Famitsu 38/40 y 5 estrellas en Next Generation. GameSpot dijo que 'debes jugar Metal Gear Solid 2'.</div><div class="n-line">Caso raro: salio primero en Norteamerica, el 13 de noviembre de 2001, y despues en Japon, el 29 de noviembre. Lo dirigio, escribio y diseño Hideo Kojima durante cuatro años con un equipo de mas de 100 personas.</div><div class="n-line">Novedades: entornos de varios niveles, IA enemiga por escuadras y punteria en primera persona. Raiden se mantuvo oculto del marketing, que mostraba a Snake como protagonista.</div><div class="n-line">Se vendieron 500.000 copias en dos dias en Estados Unidos y fue el juego mas vendido de noviembre de 2001, con 1,8 millones de unidades. Segun el documento de diseño de Kojima, iba a llamarse Metal Gear Solid III, por los tres rascacielos mas altos de Manhattan.</div><div class="n-line">Para la conversacion: la historia dividio opiniones en su epoca y el cambio de protagonista fue polemico entre los fans. Hoy se le llama el primer videojuego posmoderno.</div><div class="n-cue">Cue Coco: el cambio de protagonista que nadie vio venir.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/ps2-top-mundial/tony-hawks-pro-skater-3.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/okami.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.697"><i style="background-image:url(img/ps2-top-mundial/devil-may-cry.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/god-of-war.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/gran-turismo-3-a-spec.png)"></i><em>4</em></div><div class="g-th r" style="--w:0.709"><i style="background-image:url(img/ps2-top-mundial/metal-gear-solid-2-sons-of-liberty.png)"></i><em>3</em></div><div class="g-th cur" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/tony-hawks-pro-skater-3.png)"></i><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>2</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:419px;--ar:0.7064">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps2-top-mundial/tony-hawks-pro-skater-3.png" alt="" aria-hidden="true"><img src="img/ps2-top-mundial/tony-hawks-pro-skater-3.png" alt="TONY HAWK'S PRO SKATER 3 box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">TONY HAWK'S PRO SKATER 3</div><div class="game-meta">PLAYSTATION 2 · 2001 · ACTIVISION</div></div>
+      <div class="hybrid-title"><div class="game-title">TONY HAWK'S PRO SKATER 3</div><div class="game-meta g-chips"><span class="g-chip">PLAYSTATION 2</span><span class="g-chip y">2001</span><span class="g-chip">ACTIVISION</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Skate arcade de Neversoft con trucos encadenados y online en PS2. 97 en Metacritic y un 10 perfecto de GameSpot.</div>
     </div>
 <aside class="notas"><h4>#2 · TONY HAWK'S PRO SKATER 3</h4><div class="n-line">Metacritic 97 (PS2), empatado con GTA III como el mejor puntuado de la consola. IGN 9,7, GameSpot 10 (uno de los 30 juegos con esa nota en su historia), Next Generation 5 de 5. Famitsu 30/40.</div><div class="n-line">Salio en Norteamerica el 30 de octubre de 2001. Lo hizo Neversoft y lo publico Activision bajo su sello O2. Fue el primer juego de PS2 con soporte en linea.</div><div class="n-line">GameSpot lo nombro mejor juego de PlayStation, Mejor Juego Alternativo de Deportes y segundo mejor juego de consola de 2001. Gano Mejor Juego de Deportes del E3 2001 y el premio de la AIAS a Deportes de Consola.</div><div class="n-line">Vendio 2,1 millones de copias en Estados Unidos hasta julio de 2006 y 77 millones de dolares. Un dato curioso: tras el 11 de septiembre cambiaron el nivel del aeropuerto, donde los terroristas pasaron a ser carteristas.</div><div class="n-line">En 2025 se publico un remake dentro de Tony Hawk's Pro Skater 3 + 4.</div><div class="n-cue">Cue Coco: la musica de la banda sonora, la mitad de la nostalgia.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/ps2-top-mundial/grand-theft-auto-iii.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL TRONO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.707"><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/okami.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.697"><i style="background-image:url(img/ps2-top-mundial/devil-may-cry.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/god-of-war.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/gran-turismo-3-a-spec.png)"></i><em>4</em></div><div class="g-th r" style="--w:0.709"><i style="background-image:url(img/ps2-top-mundial/metal-gear-solid-2-sons-of-liberty.png)"></i><em>3</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/tony-hawks-pro-skater-3.png)"></i><em>2</em></div><div class="g-th cur" style="--w:0.705"><i style="background-image:url(img/ps2-top-mundial/grand-theft-auto-iii.png)"></i><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>1</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:419px;--ar:0.7064">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps2-top-mundial/grand-theft-auto-iii.png" alt="" aria-hidden="true"><img src="img/ps2-top-mundial/grand-theft-auto-iii.png" alt="GRAND THEFT AUTO III box art"></div>
@@ -387,13 +433,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">GRAND THEFT AUTO III</div><div class="game-meta">PLAYSTATION 2 · 2001 · ROCKSTAR GAMES</div></div>
+      <div class="hybrid-title"><div class="game-title">GRAND THEFT AUTO III</div><div class="game-meta g-chips"><span class="g-chip">PLAYSTATION 2</span><span class="g-chip y">2001</span><span class="g-chip">ROCKSTAR GAMES</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL TRONO</span>El mundo abierto en 3D que cambio la industria. 97 en Metacritic, empatado como el mejor puntuado de PS2.</div>
     </div>
 <aside class="notas"><h4>#1 · GRAND THEFT AUTO III</h4><div class="n-line">Metacritic 97 (PS2) con 56 reseñas, empatado con Tony Hawk's Pro Skater 3 como el mejor puntuado de la consola y entre los seis mejores puntuados de todos los tiempos en el sitio. Game Informer 9,5, GameSpot 9,6, IGN 9,6.</div><div class="n-line">Salio en Norteamerica el 23 de octubre de 2001. Lo hizo DMA Design en Edimburgo, con un equipo central de unas 23 personas, junto a Rockstar en Nueva York. Es el primer GTA en 3D, con una Liberty City de tres islas.</div><div class="n-line">Nacio como una demo en Dreamcast hacia 1999 y el equipo lo desarrollo bajo el nombre de un proyecto 'Godzilla' para no chocar con el equipo de GTA 2. Se retraso tras el 11 de septiembre para cambiar referencias.</div><div class="n-line">GamePro lo nombro en 2007 el videojuego mas importante de todos los tiempos, IGN lo puso entre los 10 mas influyentes y Game Informer dijo en 2009 que cambio el panorama del videojuego para siempre.</div><div class="n-line">Para la conversacion: la prensa elogio el sonido y las misiones, y noto controles mejorables. Genero polemica por su violencia y contenido sexual. Las secuelas Vice City y San Andreas (95 cada una) quedaron fuera por la regla de una entrada por franquicia.</div><div class="n-cue">GANCHO FINAL: tres juegos de la misma saga sacaron 95 o mas en la misma consola; elegimos el que lo cambio todo.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/ps2-top-mundial/tony-hawks-pro-skater-3.png)"></i><i style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></i><i style="background-image:url(img/ps2-top-mundial/gran-turismo-3-a-spec.png)"></i><i style="background-image:url(img/ps2-top-mundial/metal-gear-solid-2-sons-of-liberty.png)"></i><i style="background-image:url(img/ps2-top-mundial/god-of-war.png)"></i><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><i style="background-image:url(img/ps2-top-mundial/devil-may-cry.png)"></i><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><i style="background-image:url(img/ps2-top-mundial/okami.png)"></i><i style="background-image:url(img/ps2-top-mundial/grand-theft-auto-iii.png)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg">EL VEREDICTO</div>
@@ -401,8 +448,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">14</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/ps2-top-mundial/tony-hawks-pro-skater-3.png)"></i><i style="background-image:url(img/ps2-top-mundial/burnout-3-takedown.png)"></i><i style="background-image:url(img/ps2-top-mundial/gran-turismo-3-a-spec.png)"></i><i style="background-image:url(img/ps2-top-mundial/metal-gear-solid-2-sons-of-liberty.png)"></i><i style="background-image:url(img/ps2-top-mundial/god-of-war.png)"></i><i style="background-image:url(img/ps2-top-mundial/final-fantasy-x.png)"></i><i style="background-image:url(img/ps2-top-mundial/devil-may-cry.png)"></i><i style="background-image:url(img/ps2-top-mundial/shadow-of-the-colossus.png)"></i><i style="background-image:url(img/ps2-top-mundial/okami.png)"></i><i style="background-image:url(img/ps2-top-mundial/grand-theft-auto-iii.png)"></i></div>
     <div class="divider">
       <div class="pre cy">TU TURNO</div>
       <div class="title cy">¿Y TU TOP?</div>

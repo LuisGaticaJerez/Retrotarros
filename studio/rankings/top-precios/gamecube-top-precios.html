@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-alta .hybrid-title{align-self:center !important}
 .slide-hybrid.box-alta .game-title{font-size:48px !important;line-height:1.05 !important}
 .slide-hybrid.box-alta .game-meta{font-size:22px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/gamecube-top-precios/fire-emblem-path-of-radiance.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/cubivore-survival-of-the-fittest.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/ncaa-2k3.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/gotcha-force.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/pokemon-box.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/zatch-bell.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/go-go-hypergrind.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/re-code-veronica-x.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/pso-plus.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/animal-crossing.jpg)"></i></div>
     <div class="portada">
       <div class="ep-tag">NINTENDO GAMECUBE · LO QUE HOY CUESTA UNA FORTUNA</div>
       <div class="ep-title">GAMECUBE <span class="vs">TOP PRECIOS</span></div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>INTRO · DATOS BOMBA</h4><div class="n-line">Ranking por precio CIB (Complete In Box, NTSC USA), leido directo de PriceCharting en octubre 2026. Valores aproximados, fluctuan y nunca son consejo de inversion.</div><div class="n-line">Reforge 2026-10-15: el top anterior no incluia a Disney Sports Basketball (USD 1.025) ni a Go! Go! Hypergrind y su #10 valia solo USD 66. Este es el top 10 real por CIB.</div><div class="n-line">Estructura: top 10 retail, 3 rarezas genuinamente no-retail y un santo grial que solo se vendia en una tienda de Nueva York.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-ye">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/gamecube-top-precios/fire-emblem-path-of-radiance.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/cubivore-survival-of-the-fittest.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/ncaa-2k3.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/gotcha-force.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/pokemon-box.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/zatch-bell.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/go-go-hypergrind.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/re-code-veronica-x.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/pso-plus.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/animal-crossing.jpg)"></i></div>
     <div class="divider">
       <div class="pre ye">MERCADO DE COLECCION 2026</div>
       <div class="title ye">RETAIL CIB · #10 AL #1</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/fire-emblem-path-of-radiance.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 220</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip cur">10</div><div class="g-pip f">9</div><div class="g-pip f">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 220</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7143">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/fire-emblem-path-of-radiance.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/fire-emblem-path-of-radiance.jpg" alt="FIRE EMBLEM: PATH OF RADIANCE box art"></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">FIRE EMBLEM: PATH OF RADIANCE</div><div class="game-meta">GAMECUBE · 2005 · INTELLIGENT SYSTEMS / NINTENDO</div></div>
+      <div class="hybrid-title"><div class="game-title">FIRE EMBLEM: PATH OF RADIANCE</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2005</span><span class="g-chip">INTELLIGENT SYSTEMS / NINTENDO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El unico Fire Emblem de GameCube, el que presento a Ike al mundo. Salio con una tirada limitada y hoy completo cuesta 220 dolares.</div>
     </div>
 <aside class="notas"><h4>#10 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 220, con el disco suelto en USD 152. Empata con Samurai Jack: Shadow of Aku.</div><div class="n-line">Antes era el #3: sube de precio pero baja de puesto porque entraron juegos mas caros.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/disney-sports-football.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 221</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip cur">9</div><div class="g-pip f">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 221</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/disney-sports-football.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/disney-sports-football.jpg" alt="DISNEY SPORTS FOOTBALL box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">DISNEY SPORTS FOOTBALL</div><div class="game-meta">GAMECUBE · 2002 · KONAMI</div></div>
+      <div class="hybrid-title"><div class="game-title">DISNEY SPORTS FOOTBALL</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2002</span><span class="g-chip">KONAMI</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Juego de futbol americano con personajes de Disney, de Konami. Un titulo de licencia que casi nadie guardo y hoy cuesta el doble que el disco suelto.</div>
     </div>
 <aside class="notas"><h4>#9 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 221, con el disco suelto en USD 108.</div><div class="n-line">Es de la misma serie Disney Sports que el #1 de este top.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/zatch-bell.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 250</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip cur">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 250</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/zatch-bell.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/zatch-bell.jpg" alt="ZATCH BELL! MAMODO FURY box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">ZATCH BELL! MAMODO FURY</div><div class="game-meta">GAMECUBE · 2005 · BANDAI</div></div>
+      <div class="hybrid-title"><div class="game-title">ZATCH BELL! MAMODO FURY</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2005</span><span class="g-chip">BANDAI</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Juego de pelea basado en el anime y manga Zatch Bell. Completo en caja cuesta mas de dos veces y media lo que el disco suelto.</div>
     </div>
 <aside class="notas"><h4>#8 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 250, con el disco suelto en USD 90.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/pso-plus.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 250</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip cur">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 250</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7190">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/pso-plus.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/pso-plus.jpg" alt="PHANTASY STAR ONLINE EPISODE I & II PLUS box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">PHANTASY STAR ONLINE EPISODE I & II PLUS</div><div class="game-meta">GAMECUBE · 2003 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">PHANTASY STAR ONLINE EPISODE I & II PLUS</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2003</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El RPG online de Sega que llego a GameCube con una version ampliada. Cuando los servidores cerraron, quedo el disco.</div>
     </div>
 <aside class="notas"><h4>#7 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 250, con el disco suelto en USD 167.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/ncaa-2k3.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 251</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip cur">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 251</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/ncaa-2k3.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/ncaa-2k3.jpg" alt="NCAA COLLEGE BASKETBALL 2K3 box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">NCAA COLLEGE BASKETBALL 2K3</div><div class="game-meta">GAMECUBE · 2002 · SEGA SPORTS</div></div>
+      <div class="hybrid-title"><div class="game-title">NCAA COLLEGE BASKETBALL 2K3</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2002</span><span class="g-chip">SEGA SPORTS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Juego anual de basquetbol universitario de Sega Sports. Los deportivos anuales se botaban al año siguiente: pocos quedaron completos.</div>
     </div>
 <aside class="notas"><h4>#6 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 251, con el disco suelto en USD 150.</div><div class="n-line">Muestra el patron de los deportivos anuales: valen poco sueltos y mucho completos.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/re-code-veronica-x.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 300</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip cur">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 300</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7190">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/re-code-veronica-x.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/re-code-veronica-x.jpg" alt="RESIDENT EVIL CODE: VERONICA X box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">RESIDENT EVIL CODE: VERONICA X</div><div class="game-meta">GAMECUBE · 2003 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">RESIDENT EVIL CODE: VERONICA X</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2003</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>La version GameCube de Code: Veronica. Viene en dos discos, y completo con caja, manual y los dos discos cuesta 300 dolares.</div>
     </div>
 <aside class="notas"><h4>#5 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 300, con el disco suelto en USD 210.</div><div class="n-line">Entra al top en esta revision.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/go-go-hypergrind.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 513</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip cur">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 513</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/go-go-hypergrind.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/go-go-hypergrind.jpg" alt="GO! GO! HYPERGRIND box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">GO! GO! HYPERGRIND</div><div class="game-meta">GAMECUBE · 2004 · ATLUS</div></div>
+      <div class="hybrid-title"><div class="game-title">GO! GO! HYPERGRIND</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2004</span><span class="g-chip">ATLUS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Juego de patinaje y acrobacias de Atlus, con personajes de estilo caricatura. Tirada corta de un publisher de nicho.</div>
     </div>
 <aside class="notas"><h4>#4 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 513, con el disco suelto en USD 190.</div><div class="n-line">Entra al top en esta revision: no estaba en el top anterior.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/gotcha-force.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 516</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip cur">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 516</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6976">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/gotcha-force.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/gotcha-force.jpg" alt="GOTCHA FORCE box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">GOTCHA FORCE</div><div class="game-meta">GAMECUBE · 2003 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">GOTCHA FORCE</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2003</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Capcom casi no lo promociono y se vendio poco. Hoy es de los GameCube mas buscados en caja.</div>
     </div>
 <aside class="notas"><h4>#3 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 516, con el disco suelto en USD 240.</div><div class="n-line">Antes era el #2 con USD 486.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/cubivore-survival-of-the-fittest.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 665</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip cur">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 665</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7071">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/cubivore-survival-of-the-fittest.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/cubivore-survival-of-the-fittest.jpg" alt="CUBIVORE: SURVIVAL OF THE FITTEST box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">CUBIVORE: SURVIVAL OF THE FITTEST</div><div class="game-meta">GAMECUBE · 2002 · SARU BRUNEI / ATLUS</div></div>
+      <div class="hybrid-title"><div class="game-title">CUBIVORE: SURVIVAL OF THE FITTEST</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2002</span><span class="g-chip">SARU BRUNEI / ATLUS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Atlus lo trajo a Occidente con una tirada minima incluso para sus estandares de nicho. Un juego de animales cubicos que se comen entre si.</div>
     </div>
 <aside class="notas"><h4>#2 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 665, con el disco suelto en USD 350.</div><div class="n-line">Era el #1 del top anterior: baja un puesto.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/disney-sports-basketball.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 1.025</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip cur">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 1.025</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/disney-sports-basketball.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/disney-sports-basketball.jpg" alt="DISNEY SPORTS BASKETBALL box art"></div>
@@ -387,13 +433,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">DISNEY SPORTS BASKETBALL</div><div class="game-meta">GAMECUBE · 2003 · KONAMI</div></div>
+      <div class="hybrid-title"><div class="game-title">DISNEY SPORTS BASKETBALL</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2003</span><span class="g-chip">KONAMI</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL TRONO</span>Basquetbol con personajes de Disney, de Konami. Nadie guardaba estos juegos con licencia: hoy completo cuesta mas de mil dolares, el triple que el disco suelto.</div>
     </div>
 <aside class="notas"><h4>#1 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 1.025, con el disco suelto en USD 314. Salio el 13 de enero de 2003.</div><div class="n-line">Entra directo al #1 en esta revision: es el retail NTSC USA mas caro de la consola, y no estaba en el top anterior.</div><div class="n-cue">TRANSICION: con el trono claro, pasamos al apartado de rarezas.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/gamecube-top-precios/fire-emblem-path-of-radiance.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/cubivore-survival-of-the-fittest.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/ncaa-2k3.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/gotcha-force.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/pokemon-box.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/zatch-bell.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/go-go-hypergrind.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/re-code-veronica-x.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/pso-plus.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/animal-crossing.jpg)"></i></div>
     <div class="divider">
       <div class="pre mg">FUERA DE CATALOGO</div>
       <div class="title mg">RAREZAS</div>
@@ -401,10 +448,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">14</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/zelda-collectors-edition.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · PROMOCIONAL</div><div class="game-price">USD 80</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr cur">R</div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · PROMOCIONAL</div><div class="game-price">USD 80</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7143">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/zelda-collectors-edition.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/zelda-collectors-edition.jpg" alt="THE LEGEND OF ZELDA: COLLECTOR'S EDITION box art"></div>
@@ -416,15 +464,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">THE LEGEND OF ZELDA: COLLECTOR'S EDITION</div><div class="game-meta">GAMECUBE · 2003 · NINTENDO</div></div>
+      <div class="hybrid-title"><div class="game-title">THE LEGEND OF ZELDA: COLLECTOR'S EDITION</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2003</span><span class="g-chip">NINTENDO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Disco promocional con 4 Zelda clasicos. La propia caja dice PROMOTIONAL DISC, NOT FOR RESALE: nunca se vendio suelto.</div>
     </div>
 <aside class="notas"><h4>RAREZA · ZELDA COLLECTOR'S EDITION</h4><div class="n-line">Se conseguia solo suscribiendose o renovando Nintendo Power, o registrando el GameCube y dos juegos en el sitio de Nintendo.</div><div class="n-line">Precio via PriceCharting (octubre 2026): unos USD 80. Mas barato que otras rarezas, pero igual de genuino porque jamas se vendio en retail.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">15</span>
+    <div class="g-bg g-lb lb-default"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · DEMO KIOSKO</div><div class="game-price">USD 488</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr cur">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · DEMO KIOSKO</div><div class="game-price">USD 488</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7190">
           <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">INTERACTIVE MULTI-GAME DEMO DISC VERSION 16</div><div class="sub">GAMECUBE</div></div></div>
@@ -436,15 +485,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">INTERACTIVE MULTI-GAME DEMO DISC VERSION 16</div><div class="game-meta">GAMECUBE · 2003 · NINTENDO</div></div>
+      <div class="hybrid-title"><div class="game-title">INTERACTIVE MULTI-GAME DEMO DISC VERSION 16</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2003</span><span class="g-chip">NINTENDO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Disco de demos que solo circulaba en los exhibidores de las tiendas, nunca se vendio al publico. Traia el parche del Zigzagoon shiny para Pokemon Ruby y Zafiro.</div>
     </div>
 <aside class="notas"><h4>RAREZA · DEMO DISC VERSION 16</h4><div class="n-line">Los discos de demo de Nintendo se distribuian solo a tiendas para los kioskos de prueba: debian devolverse o destruirse.</div><div class="n-line">Precio CIB via PriceCharting (octubre 2026): unos USD 488.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">16</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/animal-crossing.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · NFR</div><div class="game-price">USD 1.045</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-pip rr cur">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NO-RETAIL · NFR</div><div class="game-price">USD 1.045</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7167">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/animal-crossing.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/animal-crossing.jpg" alt="ANIMAL CROSSING [NOT FOR RESALE] box art"></div>
@@ -456,15 +506,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">ANIMAL CROSSING [NOT FOR RESALE]</div><div class="game-meta">GAMECUBE · 2004 · NINTENDO</div></div>
+      <div class="hybrid-title"><div class="game-title">ANIMAL CROSSING [NOT FOR RESALE]</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2004</span><span class="g-chip">NINTENDO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Copia promocional marcada Not For Resale, nunca destinada a la venta. La portada es la de la edicion normal: la promocional lleva el sello NFR.</div>
     </div>
 <aside class="notas"><h4>RAREZA · ANIMAL CROSSING NFR</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): unos USD 1.045, con el disco suelto en USD 758.</div><div class="n-line">Aclarar en camara: es una edicion que nunca estuvo en venta normal, por eso va en este apartado.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">17</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-top-precios/pokemon-box.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 4.443</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-sep"></div><div class="g-pip gg cur">★</div></div><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 4.443</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7214">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-top-precios/pokemon-box.jpg" alt="" aria-hidden="true"><img src="img/gamecube-top-precios/pokemon-box.jpg" alt="POKEMON BOX [BIG BOX] box art"></div>
@@ -476,13 +527,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">POKEMON BOX [BIG BOX]</div><div class="game-meta">GAMECUBE · 2004 · NINTENDO</div></div>
+      <div class="hybrid-title"><div class="game-title">POKEMON BOX [BIG BOX]</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2004</span><span class="g-chip">NINTENDO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Pokemon Box: Ruby & Sapphire en su version caja grande. En Norteamerica solo se vendia en el Pokemon Center de Nueva York: el software de Pokemon mas exclusivo que Nintendo ofrecio a los fans norteamericanos.</div>
     </div>
 <aside class="notas"><h4>SANTO GRIAL · POKEMON BOX BIG BOX</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): unos USD 4.443, con muy pocas ventas registradas. La version de caja normal vale cerca de USD 2.500 completa.</div><div class="n-line">Segun la ficha de PriceCharting, en Norteamerica solo se podia comprar en el Pokemon Center de Nueva York; en Europa venia en el paquete Pokemon Colosseum Mega Pak.</div><div class="n-line">La imagen es la caja normal, de referencia: la edicion caja grande es mas ancha.</div><div class="n-line">Es el item mas caro de todo el episodio, por lejos: mas de cuatro veces el #1 del retail.</div><div class="n-cue">FRASE DE CIERRE: el juego mas caro de GameCube es una caja de Pokemon que solo se vendia en una tienda de Nueva York.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">18</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/gamecube-top-precios/fire-emblem-path-of-radiance.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/cubivore-survival-of-the-fittest.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/ncaa-2k3.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/gotcha-force.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/pokemon-box.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/zatch-bell.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/go-go-hypergrind.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/re-code-veronica-x.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/pso-plus.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/animal-crossing.jpg)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg">EL VEREDICTO</div>
@@ -490,8 +542,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">19</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/gamecube-top-precios/fire-emblem-path-of-radiance.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/cubivore-survival-of-the-fittest.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/ncaa-2k3.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/gotcha-force.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/pokemon-box.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/zatch-bell.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/go-go-hypergrind.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/re-code-veronica-x.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/pso-plus.jpg)"></i><i style="background-image:url(img/gamecube-top-precios/animal-crossing.jpg)"></i></div>
     <div class="divider">
       <div class="pre cy">TU TURNO</div>
       <div class="title cy">¿TENIAS IDEA?</div>
