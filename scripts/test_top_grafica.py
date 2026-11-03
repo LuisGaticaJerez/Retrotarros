@@ -239,6 +239,54 @@ def test_celda_sin_caja_usa_color_de_etiqueta():
     assert len(celdas) == 10 and len(sin_caja) == 3, celdas
 
 
+# ---------------------------------------------------------------- Task 4: slide de juego, fondo y chips
+
+def test_chips_ano_amarillo_y_sin_precio():
+    import top_grafica as G
+    h = G.chips({"meta": "NES · 1992 · ACTIVE ENTERPRISES · NO LANZADO · ~USD 1.926"}, "NES")
+    assert h.count('<span class="g-chip') == 4, h
+    assert '<span class="g-chip y">1992</span>' in h
+    assert "USD" not in h
+
+
+def test_chips_demasiadas_partes_devuelve_vacio():
+    import top_grafica as G
+    assert G.chips({"meta": "A · B · C · D · E · F"}, "NES") == ""
+
+
+def test_chips_desde_ano_y_editor():
+    import top_grafica as G
+    h = G.chips({"ano": 1999, "editor": "Konami (Team Silent)"}, "PS1")
+    assert h == ('<div class="game-meta g-chips"><span class="g-chip">PS1</span>'
+                 '<span class="g-chip y">1999</span><span class="g-chip">KONAMI (TEAM SILENT)</span></div>')
+
+
+def test_item_nueva_fondo_con_caja_y_sin_caja():
+    items = [s for s in _secciones(_nueva(_data_mundial(cajas=9))) if 'class="slide-hybrid' in s]
+    assert len(items) == 10
+    assert all(s.startswith('<section class="slide g-nueva">') for s in items)
+    assert '<div class="g-bg" style="background-image:url(img/' in items[0]
+    assert '<div class="g-bg g-lb lb-default"></div>' in items[-1]      # el #1 no tiene caja
+
+
+def test_item_nueva_quita_rotulo_por_defecto():
+    html = _nueva(_data_mundial())
+    assert 'class="game-block-label' not in html
+    d = _data_mundial()
+    d["items"][0]["block_label"] = "EN 1 LISTA"                          # rotulo explicito (Top Peores): se conserva
+    assert '<div class="game-block-label cy">EN 1 LISTA</div>' in _nueva(d)
+
+
+def test_item_nueva_no_toca_tarrovision_ni_precio():
+    import re
+    for data, slug in ((_data_mundial(), SLUG_M), (_data_precios(), SLUG_P)):
+        clasica, nueva = _generar(data, slug), _nueva(data, slug)
+        tv = r'<div class="tv-wrap">(.*?)</div>\n      </div>'
+        assert re.findall(tv, clasica, re.S) == re.findall(tv, nueva, re.S) != []
+        assert re.findall(r'<div class="game-price">(.*?)</div>', clasica) == \
+               re.findall(r'<div class="game-price">(.*?)</div>', nueva)
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:

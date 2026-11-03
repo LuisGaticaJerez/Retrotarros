@@ -14,11 +14,13 @@ Sin tildes en el HTML (regla de assets visuales del canal).
 from __future__ import annotations
 
 import random
+import re
 
 import top_deck as T
 
 MIN_CAJAS_MOSAICO = 6      # con menos cajas el mosaico no se usa y portada/divisores salen como hoy
 CELDAS_MOSAICO = 10        # grilla de 5 x 2
+MAX_CHIPS = 5              # con mas partes de metadatos se conserva la linea gris de hoy
 
 
 def _inyectar(html: str, viejo: str, nuevo: str) -> str:
@@ -47,6 +49,16 @@ def css_nueva() -> str:
         "background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}\n"
         ".slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}\n"
         ".slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}\n"
+        # slide de juego: fondo con la caja y chips de datos
+        ".g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;"
+        "filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}\n"
+        ".g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));"
+        "filter:blur(22px) brightness(.45)}\n"
+        ".slide.g-nueva .slide-hybrid{position:relative;z-index:2}\n"
+        ".g-chips{display:flex;flex-wrap:wrap;gap:10px}\n"
+        ".g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;"
+        "border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}\n"
+        ".g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}\n"
     )
 
 
@@ -98,6 +110,39 @@ def slide_divisor(num: int, d: dict, data: dict, out_slug: str) -> str:
     return _con_mosaico(html, num, mos)
 
 
+def chips(it: dict, consola: str) -> str:
+    """Metadatos del juego como chips (el ano, en amarillo). Parte de it["meta"] (separado por
+    "·") o de consola, ano y editor, igual que el slide clasico. Descarta toda parte con "USD"
+    (el precio ya sale grande aparte). "" si no queda nada o hay mas de MAX_CHIPS: en ese caso el
+    slide conserva la linea de metadatos de hoy."""
+    meta = it.get("meta") or " · ".join(
+        str(x) for x in [consola, it.get("ano"), (it.get("editor") or "").upper()] if x)
+    partes = [p.strip() for p in meta.split("·") if p.strip() and "USD" not in p]
+    if not partes or len(partes) > MAX_CHIPS:
+        return ""
+    ano = next((i for i, p in enumerate(partes) if re.match(r"\d{4}", p)), None)
+    spans = "".join(f'<span class="g-chip{" y" if i == ano else ""}">{p}</span>' for i, p in enumerate(partes))
+    return f'<div class="game-meta g-chips">{spans}</div>'
+
+
+def _fondo(it: dict) -> str:
+    """Fondo del slide: la caja del juego desenfocada, o el degradado de su etiqueta si no hay caja."""
+    if it.get("img"):
+        return f'<div class="g-bg" style="background-image:url({it["img"]})"></div>'
+    return f'<div class="g-bg g-lb {it.get("lb", "lb-default")}"></div>'
+
+
 def slide_item(num: int, it: dict, consola: str, ch: int, box: str, out_slug: str,
                data: dict, indice: int) -> str:
-    return T._slide_item(num, it, consola, ch=ch, box=box, out_slug=out_slug)
+    html = T._slide_item(num, it, consola, ch=ch, box=box, out_slug=out_slug)
+    html = _inyectar(html, '<section class="slide">', '<section class="slide g-nueva">')
+    marca = f'<span class="slide-num">{num:02d}</span>\n'
+    html = _inyectar(html, marca, marca + f"    {_fondo(it)}\n")
+    chips_html = chips(it, consola)
+    if chips_html:
+        html, n = re.subn(r'<div class="game-meta">.*?</div>', lambda m: chips_html, html, count=1, flags=re.S)
+        if not n:
+            raise RuntimeError("top_grafica: no encontre game-meta en el HTML clasico")
+    # el rotulo por defecto (TOP / PODIO / EL TRONO) lo reemplaza la barra de progreso;
+    # un block_label explicito (ej. "EN 1 LISTA" en Top Peores) se conserva
+    return re.sub(r'<div class="game-block-label (?:cy|mg)">(?:TOP|PODIO|EL TRONO)</div>', "", html)
