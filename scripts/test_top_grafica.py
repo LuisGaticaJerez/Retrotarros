@@ -171,6 +171,74 @@ def test_modulo_nuevo_solo_con_la_marca():
     assert _modulo_cargado("nueva") == "True"
 
 
+# ---------------------------------------------------------------- Task 3: portada y divisores
+
+def _nueva(data: dict, slug: str = SLUG_M) -> str:
+    return _generar({**data, "grafica": "nueva"}, slug)
+
+
+def _secciones(html: str) -> list[str]:
+    """Un string por <section class="slide ...>, en orden."""
+    return ['<section class="slide' + s for s in html.split('<section class="slide')[1:]]
+
+
+def _celdas_mosaico(seccion: str) -> list[str]:
+    """Las celdas <i ...></i> del primer mosaico de la seccion, en orden."""
+    import re
+    ini = seccion.index('class="g-mos')
+    fin = seccion.index("</div>", ini)
+    return re.findall(r"<i [^>]*></i>", seccion[ini:fin])
+
+
+def test_portada_nueva_con_mosaico():
+    html = _nueva(_data_mundial())
+    portada = _secciones(html)[0]
+    assert portada.startswith('<section class="slide active g-nueva">')
+    assert 'class="g-mos"' in portada
+    assert len(_celdas_mosaico(portada)) == 10
+
+
+def test_divisores_nueva_con_tarjeta_y_color():
+    d = _data_mundial()
+    del d["cliffhanger"]["color"]                       # sin color: cian por defecto
+    secs = _secciones(_nueva(d))
+    divisores = [s for s in secs if 'class="divider"' in s]
+    assert len(divisores) == 3
+    assert divisores[0].startswith('<section class="slide g-nueva g-div g-cy">')   # intro, cian
+    assert divisores[1].startswith('<section class="slide g-nueva g-div g-mg">')   # analisis, magenta
+    assert divisores[2].startswith('<section class="slide g-nueva g-div g-cy">')   # cliffhanger sin color
+    assert all('class="g-mos tenue"' in s for s in divisores)
+    assert sum(1 for s in _secciones(_nueva(_data_precios(), SLUG_P)) if 'class="g-mos tenue"' in s) == 4
+
+
+def test_menos_de_6_cajas_sin_mosaico():
+    html = _nueva(_data_mundial(cajas=5))
+    assert "g-mos" not in html.replace(".g-mos", "")     # el CSS menciona .g-mos; el HTML no
+    assert "g-div" not in html.replace(".g-div", "")
+    assert '<section class="slide active">' in html
+
+
+def test_mosaico_determinista_y_barajado():
+    import re
+    d = _data_mundial()
+    h1, h2 = _nueva(d), _nueva(d)
+    assert h1 == h2
+    orden = re.findall(r"url\(img/[^)]*juego-(\d+)\.jpg\)", _secciones(h1)[0])
+    assert sorted(orden) == sorted(str(i) for i in range(1, 11))
+    assert orden != [str(i) for i in range(10, 0, -1)] and orden != [str(i) for i in range(1, 11)]
+
+
+def test_mosaico_con_8_items_completa_10_celdas():
+    portada = _secciones(_nueva(_data_mundial(n=8, cajas=8)))[0]
+    assert len(_celdas_mosaico(portada)) == 10
+
+
+def test_celda_sin_caja_usa_color_de_etiqueta():
+    celdas = _celdas_mosaico(_secciones(_nueva(_data_mundial(cajas=7)))[0])
+    sin_caja = [c for c in celdas if 'class="g-lb lb-default"' in c]
+    assert len(celdas) == 10 and len(sin_caja) == 3, celdas
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:
