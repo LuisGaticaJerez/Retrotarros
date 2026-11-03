@@ -156,3 +156,9 @@
 - **Alcance:** solo rankings nuevos o reforjados; ninguno migrado. Los grabados o publicados no llevan la marca (salen byte a byte iguales, verificado con hashes en `test_top_grafica.py`).
 - **Decisiones mías:** la barra se achica y se corre sola para no tocar la etiqueta ni el precio (lo encontró la prueba visual con el grial de NES, USD 3.000.000); mosaico solo con 6 o más cajas; orden del mosaico barajado de forma determinista; las siluetas de la barra conservan el ancho real de su caja para que no se mueva.
 - **Incidente:** al revisar con drivers reales, el de `ps1-top-peores` sobrescribió `docs/pautas/pauta-ps1-top-peores.md` en el repo principal con una versión vieja; se restauró a lo commiteado (`ecf6fdc`). Los drivers escriben pautas y JSON en el repo principal: no usarlos para probar.
+
+## 2026-11-03 — Gráfica nueva aplicada a los rankings sin publicar
+- **Decisión de Luis:** aplicar la gráfica nueva a los rankings no publicados, incluido PS1 Top Peores. Se migraron 24 decks (lista en `CLAUDE.md`), según el estado de YouTube del 30 de octubre.
+- **Cómo:** con `scripts/aplicar_grafica_nueva.py`, que parchea el HTML commiteado. Regenerar desde los drivers de `.cache` se descartó: están desactualizados (los de Top Peores no traen las notas largas) y habrían hecho perder contenido.
+- **Hallazgos de la medición sobre los decks reales:** los chips de metadatos largos (listas de fuentes en Top Peores) empujaban al TarroVision hasta 59 px hacia abajo; ahora los chips solo se usan si caben en 2 filas y si no queda la línea de metadatos de siempre. Con eso, en los 24 decks el TarroVision queda idéntico al clásico y la barra a 124 px o más de la etiqueta y del precio.
+- **Incidente en la revisión:** un corte mal hecho de un driver ejecutó su llamada a `build()` y reescribió HTML de Top Peores en el worktree; se restauró con git antes de continuar. Ya antes un driver había sobrescrito una pauta del repo principal (restaurada).

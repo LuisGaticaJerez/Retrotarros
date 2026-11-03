@@ -250,10 +250,18 @@ def test_celda_sin_caja_usa_color_de_etiqueta():
 
 def test_chips_ano_amarillo_y_sin_precio():
     import top_grafica as G
-    h = G.chips({"meta": "NES · 1992 · ACTIVE ENTERPRISES · NO LANZADO · ~USD 1.926"}, "NES")
+    h = G.chips({"meta": "NES · 1992 · ACTIVE · NO LANZADO · ~USD 1.926"}, "NES")
     assert h.count('<span class="g-chip') == 4, h
     assert '<span class="g-chip y">1992</span>' in h
     assert "USD" not in h
+
+
+def test_chips_que_no_caben_en_dos_filas_vuelven_a_la_linea_de_hoy():
+    import top_grafica as G
+    # un Top Peores real: la lista de fuentes ocuparia 3 o 4 filas y empujaria al TarroVision hacia abajo
+    assert G.chips({"meta": "PS1 · 2001 · ACTIVISION (DEV. BIG APE) · DEN OF GEEK (#11) + WATCHMOJO (#9)"}, "PS1") == ""
+    assert G.chips({"meta": "NES · 1992 · ACTIVE ENTERPRISES · NO LANZADO"}, "NES") == ""
+    assert G.chips({"meta": "PS1 · 1999 · KONAMI (TEAM SILENT)"}, "PS1") != ""      # 2 filas: se queda
 
 
 def test_chips_demasiadas_partes_devuelve_vacio():
@@ -416,6 +424,61 @@ def test_barra_se_corre_si_el_precio_es_muy_ancho():
 def test_barra_sin_precio_ancho_queda_centrada():
     assert _dx(_items(_nueva(_data_mundial()))[0]) == 0
     assert _dx(_items(_nueva(_data_precios(), SLUG_P))[0]) == 0
+
+
+# ---------------------------------------------------------------- Migrador de HTML ya generado
+
+def _data_peores(**extra) -> dict:
+    """Como un Top Peores real: el 'precio' es la evidencia (EN N LISTAS), meta propio, sin caja en algunos."""
+    d = _data_mundial(**extra)
+    d["header_tag"] = "NES · TOP PEORES"
+    for it in d["items"]:
+        it["price"] = f"EN {it['pos']} LISTAS"
+        it["meta"] = f"NES · {it['ano']} · EDITOR · DEN OF GEEK (#{it['pos']})"
+        it["why_label"] = f"▶ PREMIO AL JUEGO {it['pos']}"
+        it["lb"] = "lb-action"
+    return d
+
+
+def _migrada_igual_a_generada(data: dict, slug: str) -> None:
+    """migrar(HTML clasico) debe dar exactamente el HTML que genera generar_top con la marca."""
+    import aplicar_grafica_nueva as A
+    try:
+        clasica = _preparar({**data, "grafica": "clasica"}, slug).read_text(encoding="utf-8")
+        nueva = _preparar({**data, "grafica": "nueva"}, slug).read_text(encoding="utf-8")
+        migrada = A.migrar(clasica, slug)
+    finally:
+        _limpiar(slug)
+    assert migrada == nueva, "el HTML migrado difiere del generado con la marca"
+
+
+def test_migrar_equivale_mundial_cajas_mixtas():
+    _migrada_igual_a_generada(_data_mundial(), SLUG_M)
+
+
+def test_migrar_equivale_mundial_con_items_sin_caja_y_8_items():
+    _migrada_igual_a_generada(_data_mundial(n=8, cajas=6), SLUG_M)
+
+
+def test_migrar_equivale_precios_con_rarezas_y_grial():
+    _migrada_igual_a_generada(_data_precios(), SLUG_P)
+
+
+def test_migrar_equivale_peores():
+    _migrada_igual_a_generada(_data_peores(cajas=7), SLUG_X)
+
+
+def test_migrar_no_repite_si_ya_esta_migrado():
+    import aplicar_grafica_nueva as A
+    try:
+        nueva = _preparar({**_data_mundial(), "grafica": "nueva"}, SLUG_M).read_text(encoding="utf-8")
+    finally:
+        _limpiar(SLUG_M)
+    try:
+        A.migrar(nueva, SLUG_M)
+    except ValueError:
+        return
+    raise AssertionError("migrar acepto un HTML que ya tiene la grafica nueva")
 
 
 # ---------------------------------------------------------------- runner
