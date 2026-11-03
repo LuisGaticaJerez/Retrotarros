@@ -408,6 +408,13 @@ _SHARED_CSS_BLOCK_RE = re.compile(r"<style>\n\.game-price\{.*?</style>\n</head>"
 
 
 def generar_top(data: dict, out_slug: str) -> Path:
+    marca = data.get("grafica", "clasica")
+    if marca not in ("clasica", "nueva"):
+        raise ValueError(f'data["grafica"] debe ser "clasica" o "nueva", no {marca!r}')
+    G = None
+    if marca == "nueva":
+        import top_grafica as G   # solo con la marca: sin ella el camino es el de siempre
+
     base = BASE.read_text(encoding="utf-8")
     head = base[: base.index("<body>") + len("<body>")]
     foot = base[base.index('<nav class="footer">'):]
@@ -423,32 +430,37 @@ def generar_top(data: dict, out_slug: str) -> Path:
     for _it in list(data.get("items", [])) + list(data.get("rarezas", [])) + ([data["grial"]] if data.get("grial") else []):
         _auto_img(_it, out_slug)
     box = _pick_box_layout(data, out_slug)
-    head = head.replace("</head>", _shared_css(bool(data.get("tv_grande", True)), data.get("cart_px"), data.get("css_extra", ""), box), 1)
+    head = head.replace("</head>", _shared_css(bool(data.get("tv_grande", True)), data.get("cart_px"), data.get("css_extra", "") + (G.css_nueva() if G else ""), box), 1)
     head += '\n<div class="read-indicator">● MODO LECTURA (N)</div>\n'
 
     consola = data.get("consola", "NES")
     slides = []
     n = 1
-    slides.append(_slide_portada(n, data)); n += 1
-    slides.append(_slide_divider(n, data["intro"])); n += 1
+    idx = 0                            # posicion del slide de juego (retail, rarezas, grial)
+    slides.append(G.slide_portada(n, data, out_slug) if G else _slide_portada(n, data)); n += 1
+    slides.append(G.slide_divisor(n, data["intro"], data, out_slug) if G else _slide_divider(n, data["intro"])); n += 1
     for it in data["items"]:           # ya ordenados #10 -> #1
         _auto_img(it, out_slug)
-        slides.append(_slide_item(n, it, consola, box=box, out_slug=out_slug)); n += 1
+        slides.append(G.slide_item(n, it, consola, it.get("pos", 1), box, out_slug, data, idx) if G
+                      else _slide_item(n, it, consola, box=box, out_slug=out_slug)); n += 1; idx += 1
     # Apartado RAREZAS (variantes / no-retail) - opcional
     ch = 1
     if data.get("rarezas"):
         if data.get("rarezas_divider"):
-            slides.append(_slide_divider(n, data["rarezas_divider"])); n += 1
+            slides.append(G.slide_divisor(n, data["rarezas_divider"], data, out_slug) if G
+                          else _slide_divider(n, data["rarezas_divider"])); n += 1
         for it in data["rarezas"]:
             _auto_img(it, out_slug)
-            slides.append(_slide_item(n, it, consola, ch=ch, box=box, out_slug=out_slug)); n += 1; ch += 1
+            slides.append(G.slide_item(n, it, consola, ch, box, out_slug, data, idx) if G
+                          else _slide_item(n, it, consola, ch=ch, box=box, out_slug=out_slug)); n += 1; ch += 1; idx += 1
     # SANTO GRIAL - opcional (slide unico)
     if data.get("grial"):
         g = dict(data["grial"]); g["grial"] = True
         _auto_img(g, out_slug)
-        slides.append(_slide_item(n, g, consola, ch=ch, box=box, out_slug=out_slug)); n += 1
-    slides.append(_slide_divider(n, data["analisis"])); n += 1
-    slides.append(_slide_divider(n, data["cliffhanger"])); n += 1
+        slides.append(G.slide_item(n, g, consola, ch, box, out_slug, data, idx) if G
+                      else _slide_item(n, g, consola, ch=ch, box=box, out_slug=out_slug)); n += 1; idx += 1
+    slides.append(G.slide_divisor(n, data["analisis"], data, out_slug) if G else _slide_divider(n, data["analisis"])); n += 1
+    slides.append(G.slide_divisor(n, data["cliffhanger"], data, out_slug) if G else _slide_divider(n, data["cliffhanger"])); n += 1
 
     hdr = (
         '\n\n<header>\n'

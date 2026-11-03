@@ -146,3 +146,6 @@ studio/img/**/*.mp3
 
 # Memoria local del harness (Claude Code), no es del proyecto.
 /.remember/
+
+# Mockups de brainstorming (superpowers), locales de cada worktree
+.superpowers/
