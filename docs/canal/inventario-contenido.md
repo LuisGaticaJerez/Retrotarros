@@ -35,6 +35,10 @@
 >
 > **Verificación con la API de YouTube: 2026-10-30** (89 publicados + 0 programados). Desde la
 > última vez se publicó la reseña de God of War (PS2), el jue 29 oct, 20:30. Nada programado.
+>
+> **Verificación con la API de YouTube: 2026-11-02** (89 publicados + 1 programado). Sin
+> publicaciones nuevas desde el 30 oct. Quedó programado PS1 Top Peores para el dom 8 nov, 20:30
+> (Chile); ya está grabado, no tocar su HTML ni sus textos.
 
 ## Cómo leer esto
 
@@ -54,13 +58,13 @@
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
 | Reseñas | 54 | 30 | 0 | 24 |
-| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube + Infravalorados SNES) | 37 | 18 | 0 | 19 |
+| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube + Infravalorados SNES) | 37 | 18 | 1 | 18 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
 | RetroNotas | 2 | 0 | 0 | 2 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **119** | **55** | **0** | **64** |
+| **TOTAL** | **119** | **55** | **1** | **63** |
 
 Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
@@ -69,15 +73,15 @@ se contaron los 2 de Atari 8-bit (armados, sin publicar), los 10 Top Peores y el
 
 ---
 
-### 1.1 Programados (leídos de YouTube con la API, 2026-10-30)
+### 1.1 Programados (leídos de YouTube con la API, 2026-11-02)
 
 **Calendario de publicación: martes, jueves y domingo a las 20:30 (hora de Chile).** Se actualiza solo los lunes, miércoles y viernes (el día siguiente) con `scripts/youtube_estado.py` (datos en `data/youtube/estado-canal.json`). **Un video programado ya está grabado: no tocar su HTML ni sus textos.**
 
 | Publicación (hora de Chile) | Título | Contenido del repo |
 |---|---|---|
-| (nada programado) | God of War (PS2) se publicó el jue 29 oct, International Superstar Soccer el mar 27 oct | |
+| Dom 8 nov 2026, 20:30 | Ranking \| los 10 PEORES juegos de PS1 de la historia (41 min, privado, programado) | `docs/pautas/pauta-ps1-top-peores.md` |
 
-**Grabado y todavía sin fecha de publicación:** nada conocido a 2026-10-30 (SNES Top Peores se publicó el 25 oct; confirmar con Luis si hay algo grabado que no esté en YouTube). La reseña de Mighty Morphin Power Rangers se publicó el 2026-10-20. Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
+**Grabado y todavía sin fecha de publicación:** nada conocido a 2026-11-02 aparte del programado (SNES Top Peores se publicó el 25 oct; confirmar con Luis si hay algo grabado que no esté en YouTube). La reseña de Mighty Morphin Power Rangers se publicó el 2026-10-20. Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
 
 Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09).
 
@@ -118,14 +122,14 @@ Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom
 
 ---
 
-### 1.3 Backlog armado — listo para programar, sin fecha (65)
+### 1.3 Backlog armado — listo para programar, sin fecha (64)
 
 **Reseñas (25) — actualizado 2026-10-30:** Aladdin, Altered Beast, Contra, Crash
 Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star
 Fox, Yoshi's Island, Halo: Combat Evolved (Xbox), Counter-Strike (PC), Need for Speed: Underground 2, Kingdom Hearts (PS2), Age of Empires II (PC) y Diablo (PC) —armadas el 2026-10-27—, Commandos: Behind Enemy Lines (PC) y The Sims (PC) —armadas el 2026-10-28—, Gears of War (Xbox 360, armada el 2026-10-29, elegida por el canal), The Witcher (PC, armada el 2026-10-30, pedida de la comunidad), más 1 pedida: JoJo's Bizarre Adventure. Mighty Morphin Power Rangers, Metal
 Warriors, Melee, Montezuma's Revenge, International Superstar Soccer y God of War (PS2) ya se publicaron.
 
-**Rankings (19):** SNES Infravalorados (categoría nueva `rankings/infravalorados`, armado 2026-10-19), Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
+**Rankings (18):** SNES Infravalorados (categoría nueva `rankings/infravalorados`, armado 2026-10-19), Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
 Top Precios, Saturn Top Mundial + Top Precios, Atari 8-bit Top Mundial + Top Precios
 (armados, sin publicar), PS1 Top Precios (PS1 Top Mundial ya se publicó el 2026-10-18; el par fue armado 2026-09-21 — apertura del arco PS1, ver `docs/arcos/ps1.md`), GameCube Top Precios
 (GameCube Top Mundial ya se publicó el 2026-10-04; el par fue armado 2026-09-22 — apertura del arco GameCube completa, ver
@@ -135,7 +139,7 @@ armado 2026-10-04; pendiente de ok de Luis y Coco sobre el orden — ver
 `docs/pautas/pauta-atari-2600-top-peores.md`), NES Top Peores y Mega Drive Top Peores (SNES Top Peores ya se publicó el 2026-10-25)
 (tanda 1 de los Top Peores por consola, armados 2026-10-06; cuñas chistosas a pedido de Luis; pendientes de
 ok de Luis y Coco sobre el orden — ver `docs/pautas/pauta-nes-top-peores.md`, `pauta-snes-top-peores.md` y
-`pauta-mega-drive-top-peores.md`); tanda 2 (PS1, N64 y Game Boy) armada 2026-10-06, ver `pauta-ps1-top-peores.md`,
+`pauta-mega-drive-top-peores.md`); tanda 2 (PS1, N64 y Game Boy; PS1 Top Peores ya está programado para el 8 nov) armada 2026-10-06, ver `pauta-ps1-top-peores.md`,
 `pauta-n64-top-peores.md` y `pauta-gameboy-top-peores.md`; tanda 3 (Dreamcast, Saturn y GameCube) armada 2026-10-06, ver `pauta-dreamcast-top-peores.md`,
 `pauta-saturn-top-peores.md` y `pauta-gamecube-top-peores.md` (Saturn relaja la regla NTSC USA con 2 juegos solo Japon, avisado en pantalla).
 Atari 2600 Top Precios y Game Boy Top Mundial + Top Precios salieron de esta lista: ya
@@ -210,7 +214,7 @@ se publica tal cual.
 - **Reseñas:** 55 armadas, 30 publicadas (API 2026-10-30), 25 de backlog sin
   fecha, 0 programadas — el formato que más rápido está publicando, y aun así
   sigue siendo el segundo backlog más grande en volumen absoluto.
-- **Rankings:** 37 armados, 18 publicados, 0 programados (19 de backlog).
+- **Rankings:** 37 armados, 18 publicados, 1 programado (18 de backlog).
 - **Curaduría N64:** 5 armados, 0 publicados — sigue sin casa en el menú de playlists.
 - **RetroNotas:** 2 armadas, 0 publicadas — formato nuevo, sin playlist propia todavía.
 - **Colecciones sigue siendo la única categoría 100% al día** (4 armadas = 4 publicadas).
