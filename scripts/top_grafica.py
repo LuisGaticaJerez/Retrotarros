@@ -21,6 +21,7 @@ import top_deck as T
 MIN_CAJAS_MOSAICO = 6      # con menos cajas el mosaico no se usa y portada/divisores salen como hoy
 CELDAS_MOSAICO = 10        # grilla de 5 x 2
 MAX_CHIPS = 5              # con mas partes de metadatos se conserva la linea gris de hoy
+MIN_ANCHO_REL, MAX_ANCHO_REL = 0.6, 1.7   # limites de la proporcion de las miniaturas de la barra
 
 
 def _inyectar(html: str, viejo: str, nuevo: str) -> str:
@@ -59,6 +60,28 @@ def css_nueva() -> str:
         ".g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;"
         "border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}\n"
         ".g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}\n"
+        # barra de progreso: centrada y fija en la cabecera (px a 1920 x 1080)
+        ".slide.g-nueva .hybrid-head{position:relative}\n"
+        ".slide.g-nueva .hybrid-head .game-pos{max-width:420px}\n"
+        ".g-barra{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;"
+        "align-items:center;gap:6px;z-index:5}\n"
+        ".g-th{position:relative;height:72px;width:calc(72px*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);"
+        "border-radius:4px;overflow:hidden;background:#0c0720}\n"
+        ".g-th i{position:absolute;inset:0;background-size:cover;background-position:center}\n"
+        ".g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;"
+        "font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}\n"
+        ".g-th.f{border-color:rgba(255,255,255,.2)}\n"
+        ".g-th.f em{color:rgba(255,255,255,.45)}\n"
+        ".g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}\n"
+        ".g-th.cur em{color:var(--ye)}\n"
+        ".g-pip{width:40px;height:40px;flex:none;display:flex;align-items:center;justify-content:center;"
+        "border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;"
+        "font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}\n"
+        ".g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}\n"
+        ".g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}\n"
+        ".g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}\n"
+        ".g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}\n"
+        ".g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}\n"
     )
 
 
@@ -132,10 +155,56 @@ def _fondo(it: dict) -> str:
     return f'<div class="g-bg g-lb {it.get("lb", "lb-default")}"></div>'
 
 
+def secuencia(data: dict) -> list[tuple[str, dict]]:
+    """(tipo, item) en el orden de los slides de juego: retail, rarezas y grial."""
+    return ([("retail", it) for it in data.get("items", [])]
+            + [("rareza", it) for it in data.get("rarezas", [])]
+            + ([("grial", data["grial"])] if data.get("grial") else []))
+
+
+def tipo_barra(data: dict) -> str:
+    """Top Precios (trae rarezas o grial): casillas numeradas, porque con hasta 17 elementos las
+    miniaturas no caben entre la etiqueta y el precio. El resto: miniaturas."""
+    return "numeros" if data.get("rarezas") or data.get("grial") else "miniaturas"
+
+
+def ancho_rel(sz: tuple[int, int] | None) -> float:
+    """Ancho relativo de una miniatura de alto fijo: ancho/alto de la caja, limitado a 0,6 .. 1,7.
+    Sin tamano (caja ausente o ilegible): cuadrada."""
+    if not sz:
+        return 1.0
+    return round(min(MAX_ANCHO_REL, max(MIN_ANCHO_REL, sz[0] / sz[1])), 3)
+
+
+def barra(data: dict, indice: int, out_slug: str) -> str:
+    """Barra de progreso de la cabecera: un elemento por slide de juego. Los ya vistos (r) muestran
+    su caja, el actual (cur) va encendido y los que faltan (f) en oscuro liso pero con su ancho real
+    (asi la barra no se mueve al revelarse cada uno)."""
+    seq = secuencia(data)
+    numeros = tipo_barra(data) == "numeros"
+    piezas = []
+    previo = None
+    for i, (tipo, it) in enumerate(seq):
+        est = "r" if i < indice else ("cur" if i == indice else "f")
+        if numeros:
+            if previo is not None and tipo != previo:
+                piezas.append('<div class="g-sep"></div>')
+            previo = tipo
+            grupo = {"retail": "", "rareza": "rr ", "grial": "gg "}[tipo]
+            texto = {"retail": it.get("pos", ""), "rareza": "R", "grial": "★"}[tipo]
+            piezas.append(f'<div class="g-pip {grupo}{est}">{texto}</div>')
+        else:
+            w = ancho_rel(T._img_size(it, out_slug))
+            img = f'<i style="background-image:url({it["img"]})"></i>' if it.get("img") and i <= indice else ""
+            piezas.append(f'<div class="g-th {est}" style="--w:{w:.3f}">{img}<em>{it.get("pos", "")}</em></div>')
+    return '<div class="g-barra">' + "".join(piezas) + "</div>"
+
+
 def slide_item(num: int, it: dict, consola: str, ch: int, box: str, out_slug: str,
                data: dict, indice: int) -> str:
     html = T._slide_item(num, it, consola, ch=ch, box=box, out_slug=out_slug)
     html = _inyectar(html, '<section class="slide">', '<section class="slide g-nueva">')
+    html = _inyectar(html, '<div class="hybrid-head">', '<div class="hybrid-head">' + barra(data, indice, out_slug))
     marca = f'<span class="slide-num">{num:02d}</span>\n'
     html = _inyectar(html, marca, marca + f"    {_fondo(it)}\n")
     chips_html = chips(it, consola)

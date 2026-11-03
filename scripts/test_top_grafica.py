@@ -287,6 +287,72 @@ def test_item_nueva_no_toca_tarrovision_ni_precio():
                re.findall(r'<div class="game-price">(.*?)</div>', nueva)
 
 
+# ---------------------------------------------------------------- Task 5: barra de progreso
+
+def _items(html: str) -> list[str]:
+    return [s for s in _secciones(html) if 'class="slide-hybrid' in s]
+
+
+def _barra(seccion: str) -> str:
+    import re
+    m = re.search(r'<div class="g-barra">(.*?)</div></div>', seccion, re.S)
+    assert m, "la seccion no trae g-barra"
+    return m.group(1) + "</div>"
+
+
+def test_ancho_rel():
+    import top_grafica as G
+    assert G.ancho_rel((200, 300)) == 0.667
+    assert G.ancho_rel((240, 240)) == 1.0
+    assert G.ancho_rel((300, 200)) == 1.5
+    assert G.ancho_rel((100, 400)) == 0.6      # limite inferior
+    assert G.ancho_rel((400, 100)) == 1.7      # limite superior
+    assert G.ancho_rel(None) == 1.0
+
+
+def test_barra_miniaturas_estados():
+    b = _barra(_items(_nueva(_data_mundial()))[2])          # el #8: ya se vieron #10 y #9
+    assert b.count('class="g-th r"') == 2 and b.count('class="g-th cur"') == 1 and b.count('class="g-th f"') == 7
+    futuras = [x for x in b.split('<div class="g-th ')[1:] if x.startswith("f")]
+    assert len(futuras) == 7 and all("background-image" not in x for x in futuras)
+    assert '<div class="g-th r" style="--w:0.667"><i style="background-image:url(img/' in b   # vertical
+    assert 'style="--w:1.500"' in b and 'style="--w:1.000"' in b                                # horizontal y cuadrada
+
+
+def test_barra_numeros_precios():
+    import re
+    items = _items(_nueva(_data_precios(), SLUG_P))
+    assert len(items) == 14
+    b = _barra(items[0])
+    assert "g-th" not in b
+    assert b.count('class="g-pip') == 14 and b.count('class="g-sep"') == 2
+    assert '<div class="g-pip cur">10</div>' in b
+    assert len(re.findall(r'class="g-pip rr [rcuf]+">R<', b)) == 3
+    assert '<div class="g-pip gg f">★</div>' in b
+    assert '<div class="g-pip gg cur">★</div>' in _barra(items[-1])         # slide del grial
+
+
+def test_barra_8_items():
+    assert _barra(_items(_nueva(_data_mundial(n=8, cajas=8)))[0]).count('class="g-th') == 8
+
+
+def test_barra_imagen_ilegible_cuadrada():
+    d = _data_mundial()
+    d["items"][0]["img"] = "img/no-existe.jpg"             # apunta a un archivo que no existe
+    b = _barra(_items(_nueva(d))[0])
+    assert b.startswith('<div class="g-th cur" style="--w:1.000">')
+
+
+def test_barra_igual_en_todas_las_slides():
+    import re
+    def forma(b: str) -> str:
+        b = re.sub(r'<i style="background-image:url\([^)]*\)"></i>', "", b)
+        return re.sub(r'class="g-(th|pip)[^"]*"', r'class="g-\1"', b)
+    for data, slug in ((_data_mundial(), SLUG_M), (_data_precios(), SLUG_P)):
+        formas = {forma(_barra(s)) for s in _items(_nueva(data, slug))}
+        assert len(formas) == 1, "la barra cambia de forma entre slides"
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:
