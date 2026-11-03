@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-alta .hybrid-title{align-self:center !important}
 .slide-hybrid.box-alta .game-title{font-size:48px !important;line-height:1.05 !important}
 .slide-hybrid.box-alta .game-meta{font-size:22px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/saturn-top-precios/magic-knight-rayearth.png)"></i><i style="background-image:url(img/saturn-top-precios/house-of-the-dead.png)"></i><i style="background-image:url(img/saturn-top-precios/panzer-dragoon-saga.png)"></i><i style="background-image:url(img/saturn-top-precios/burning-rangers.png)"></i><i class="g-lb lb-default"></i><i style="background-image:url(img/saturn-top-precios/battlesport.jpg)"></i><i style="background-image:url(img/saturn-top-precios/mega-man-8.png)"></i><i style="background-image:url(img/saturn-top-precios/daytona-netlink.png)"></i><i style="background-image:url(img/saturn-top-precios/saturn-bomberman.png)"></i><i style="background-image:url(img/saturn-top-precios/hercs-adventures.jpg)"></i></div>
     <div class="portada">
       <div class="ep-tag">TOP 10 PRECIOS</div>
       <div class="ep-title">SEGA SATURN</div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>PORTADA · DATOS BOMBA</h4><div class="n-line">Precios CIB (Complete In Box, NTSC USA) leidos directo de PriceCharting en octubre 2026. Valores aproximados, fluctuan y nunca son consejo de inversion.</div><div class="n-line">Reforge 2026-10-15: al top anterior le faltaban juegos mas caros que su #9, #8 y #7. Este es el top 10 real por CIB.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/saturn-top-precios/magic-knight-rayearth.png)"></i><i style="background-image:url(img/saturn-top-precios/house-of-the-dead.png)"></i><i style="background-image:url(img/saturn-top-precios/panzer-dragoon-saga.png)"></i><i style="background-image:url(img/saturn-top-precios/burning-rangers.png)"></i><i class="g-lb lb-default"></i><i style="background-image:url(img/saturn-top-precios/battlesport.jpg)"></i><i style="background-image:url(img/saturn-top-precios/mega-man-8.png)"></i><i style="background-image:url(img/saturn-top-precios/daytona-netlink.png)"></i><i style="background-image:url(img/saturn-top-precios/saturn-bomberman.png)"></i><i style="background-image:url(img/saturn-top-precios/hercs-adventures.jpg)"></i></div>
     <div class="divider">
       <div class="pre cy">CONTEXTO</div>
       <div class="title cy">LA CONSOLA QUE MURIO JOVEN</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>CONTEXTO · DATOS EXTRA</h4><div class="n-line">Estructura: top 10 retail del #10 al #1 y un santo grial: un Daytona online que se pedia por correo directo a Sega.</div><div class="n-line">Lo caro no es lo bueno: cuando una consola vende poco, hasta juegos olvidables quedan escasos.</div><div class="n-cue">TRANSICION: empezamos por el fondo del top.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg g-lb lb-default"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 390</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip cur">10</div><div class="g-pip f">9</div><div class="g-pip f">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 390</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7190">
           <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">Lunacy</div><div class="sub">SATURN</div></div></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Lunacy</div><div class="game-meta">SATURN · 1997 · ATLUS</div></div>
+      <div class="hybrid-title"><div class="game-title">Lunacy</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1997</span><span class="g-chip">ATLUS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Aventura de Atlus de 1997 para Saturn. Completa en caja se paga cerca de 390 dolares, el doble que el disco suelto.</div>
     </div>
 <aside class="notas"><h4>#10 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 390, con el disco suelto en USD 193.</div><div class="n-line">Entra al top en esta revision: no estaba en el top anterior. Sin caja NTSC USA confiable disponible, el slide usa el marcador de color.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-precios/hercs-adventures.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 403</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip cur">9</div><div class="g-pip f">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 403</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5952">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-precios/hercs-adventures.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-precios/hercs-adventures.jpg" alt="Herc's Adventures box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Herc's Adventures</div><div class="game-meta">SATURN · 1997 · LUCASARTS</div></div>
+      <div class="hybrid-title"><div class="game-title">Herc's Adventures</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1997</span><span class="g-chip">LUCASARTS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Aventura de accion de LucasArts ambientada en la mitologia griega, de 1997. Hoy completo en caja cuesta mas de 400 dolares.</div>
     </div>
 <aside class="notas"><h4>#9 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 403, con el disco suelto en USD 169.</div><div class="n-line">Entra al top en esta revision.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-precios/mega-man-x4.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 406</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip cur">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 406</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5905">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-precios/mega-man-x4.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-precios/mega-man-x4.jpg" alt="Mega Man X4 box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Mega Man X4</div><div class="game-meta">SATURN · 1997 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">Mega Man X4</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1997</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>La version Saturn del X4 de Capcom. Un Mega Man famoso que, completo en esta consola, ya supera los 400 dolares.</div>
     </div>
 <aside class="notas"><h4>#8 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 406, con el disco suelto en USD 119.</div><div class="n-line">Entra al top en esta revision.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-precios/house-of-the-dead.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 445</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip cur">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 445</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5952">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-precios/house-of-the-dead.png" alt="" aria-hidden="true"><img src="img/saturn-top-precios/house-of-the-dead.png" alt="The House of the Dead box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">The House of the Dead</div><div class="game-meta">SATURN · 1998 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">The House of the Dead</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1998</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Origen de la saga de zombies con pistola de Sega, lanzado tarde en la vida del Saturn, en 1998.</div>
     </div>
 <aside class="notas"><h4>#7 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 445.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-precios/saturn-bomberman.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 500</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip cur">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 500</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5952">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-precios/saturn-bomberman.png" alt="" aria-hidden="true"><img src="img/saturn-top-precios/saturn-bomberman.png" alt="Saturn Bomberman box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Saturn Bomberman</div><div class="game-meta">SATURN · 1997 · HUDSON SOFT</div></div>
+      <div class="hybrid-title"><div class="game-title">Saturn Bomberman</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1997</span><span class="g-chip">HUDSON SOFT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Party game multijugador, de los mas queridos de la consola. La demanda de juegos de varios jugadores lo mantiene caro.</div>
     </div>
 <aside class="notas"><h4>#6 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 500.</div><div class="n-line">Tambien aparece en el Top Mundial del Saturn.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-precios/mega-man-8.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 621</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip cur">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 621</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-precios/mega-man-8.png" alt="" aria-hidden="true"><img src="img/saturn-top-precios/mega-man-8.png" alt="Mega Man 8 box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Mega Man 8</div><div class="game-meta">SATURN · 1997 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">Mega Man 8</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1997</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>La version Saturn de Mega Man 8 trae dos jefes exclusivos que la de PlayStation no tiene.</div>
     </div>
 <aside class="notas"><h4>#5 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 621.</div><div class="n-line">Dato fino para fans: los dos jefes extra son lo que hace distinta a esta version.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-precios/burning-rangers.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 700</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip cur">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 700</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5952">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-precios/burning-rangers.png" alt="" aria-hidden="true"><img src="img/saturn-top-precios/burning-rangers.png" alt="Burning Rangers box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Burning Rangers</div><div class="game-meta">SATURN · 1998 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">Burning Rangers</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1998</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El ultimo gran juego de Sonic Team para el Saturn, lanzado a fines de la vida de la consola.</div>
     </div>
 <aside class="notas"><h4>#4 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 700.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-precios/battlesport.jpg)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 900</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip cur">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 900</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5810">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-precios/battlesport.jpg" alt="" aria-hidden="true"><img src="img/saturn-top-precios/battlesport.jpg" alt="BattleSport box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">BattleSport</div><div class="game-meta">SATURN · 1997 · ACCLAIM</div></div>
+      <div class="hybrid-title"><div class="game-title">BattleSport</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1997</span><span class="g-chip">ACCLAIM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Deathsport futurista de Acclaim, de 1997. Un juego que casi nadie recuerda y que hoy cuesta casi 900 dolares completo.</div>
     </div>
 <aside class="notas"><h4>#3 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 900, con el disco suelto en USD 350.</div><div class="n-line">Entra directo al #3 en esta revision: no estaba en el top anterior.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-precios/magic-knight-rayearth.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 942</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip cur">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 942</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-precios/magic-knight-rayearth.png" alt="" aria-hidden="true"><img src="img/saturn-top-precios/magic-knight-rayearth.png" alt="Magic Knight Rayearth box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Magic Knight Rayearth</div><div class="game-meta">SATURN · 1998 · WORKING DESIGNS</div></div>
+      <div class="hybrid-title"><div class="game-title">Magic Knight Rayearth</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1998</span><span class="g-chip">WORKING DESIGNS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Publicado por Working Designs, fue el ultimo juego oficial del Saturn en Estados Unidos. Casi alcanza al #1.</div>
     </div>
 <aside class="notas"><h4>#2 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 942.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-precios/panzer-dragoon-saga.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 1.281</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip cur">1</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 1.281</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6476">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-precios/panzer-dragoon-saga.png" alt="" aria-hidden="true"><img src="img/saturn-top-precios/panzer-dragoon-saga.png" alt="Panzer Dragoon Saga box art"></div>
@@ -387,15 +433,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Panzer Dragoon Saga</div><div class="game-meta">SATURN · 1998 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">Panzer Dragoon Saga</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1998</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL TRONO</span>Se hicieron unas 30 mil copias en Norteamerica y el codigo se perdio: es el RPG mas venerado del Saturn y su retail mas caro.</div>
     </div>
 <aside class="notas"><h4>#1 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 1.281, con el disco suelto en USD 841.</div><div class="n-line">Subio frente al top anterior (USD 1.225).</div><div class="n-cue">TRANSICION: con el trono claro, vamos al santo grial.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">13</span>
+    <div class="g-bg" style="background-image:url(img/saturn-top-precios/daytona-netlink.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 6.500</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip gg cur">★</div></div><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 6.500</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.5905">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/saturn-top-precios/daytona-netlink.png" alt="" aria-hidden="true"><img src="img/saturn-top-precios/daytona-netlink.png" alt="Daytona USA: CCE NetLink Edition box art"></div>
@@ -407,13 +454,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Daytona USA: CCE NetLink Edition</div><div class="game-meta">SATURN · 1997 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">Daytona USA: CCE NetLink Edition</div><div class="game-meta g-chips"><span class="g-chip">SATURN</span><span class="g-chip y">1997</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Version online (NetLink) de Daytona CCE, que se pedia por correo directo a Sega. Poquisima gente tenia el modem: casi no se hicieron copias, y hoy cuesta cinco veces mas que el #1 del retail.</div>
     </div>
 <aside class="notas"><h4>SANTO GRIAL · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): unos USD 6.500; la venta mas reciente documentada fue de USD 6.499,99 en abril de 2026. El historial va de USD 1.750 en 2021 a USD 9.999,99 en 2022, con apenas una venta al año.</div><div class="n-line">La imagen es la caja del Daytona CCE comun, de referencia: la NetLink se vendia por pedido directo.</div><div class="n-line">Es el juego de Saturn USA mas caro documentado y esta muy por sobre el #1 del retail (Panzer Dragoon Saga, USD 1.281).</div><div class="n-cue">FRASE DE CIERRE: el juego mas caro del Saturn es un Daytona online que se pedia por correo.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">14</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/saturn-top-precios/magic-knight-rayearth.png)"></i><i style="background-image:url(img/saturn-top-precios/house-of-the-dead.png)"></i><i style="background-image:url(img/saturn-top-precios/panzer-dragoon-saga.png)"></i><i style="background-image:url(img/saturn-top-precios/burning-rangers.png)"></i><i class="g-lb lb-default"></i><i style="background-image:url(img/saturn-top-precios/battlesport.jpg)"></i><i style="background-image:url(img/saturn-top-precios/mega-man-8.png)"></i><i style="background-image:url(img/saturn-top-precios/daytona-netlink.png)"></i><i style="background-image:url(img/saturn-top-precios/saturn-bomberman.png)"></i><i style="background-image:url(img/saturn-top-precios/hercs-adventures.jpg)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg">LO CARO NO ES LO BUENO</div>
@@ -421,8 +469,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">15</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/saturn-top-precios/magic-knight-rayearth.png)"></i><i style="background-image:url(img/saturn-top-precios/house-of-the-dead.png)"></i><i style="background-image:url(img/saturn-top-precios/panzer-dragoon-saga.png)"></i><i style="background-image:url(img/saturn-top-precios/burning-rangers.png)"></i><i class="g-lb lb-default"></i><i style="background-image:url(img/saturn-top-precios/battlesport.jpg)"></i><i style="background-image:url(img/saturn-top-precios/mega-man-8.png)"></i><i style="background-image:url(img/saturn-top-precios/daytona-netlink.png)"></i><i style="background-image:url(img/saturn-top-precios/saturn-bomberman.png)"></i><i style="background-image:url(img/saturn-top-precios/hercs-adventures.jpg)"></i></div>
     <div class="divider">
       <div class="pre cy">CIERRE</div>
       <div class="title cy">¿TENIAN ALGUNO?</div>

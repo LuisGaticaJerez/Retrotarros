@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-ancha .hybrid-title{align-self:center !important}
 .slide-hybrid.box-ancha .game-title{font-size:44px !important;line-height:1.05 !important}
 .slide-hybrid.box-ancha .game-meta{font-size:21px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/ps1-infravalorados/soul-reaver.png)"></i><i style="background-image:url(img/ps1-infravalorados/einhander.jpg)"></i><i style="background-image:url(img/ps1-infravalorados/vagrant-story.png)"></i><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><i style="background-image:url(img/ps1-infravalorados/ape-escape.png)"></i><i style="background-image:url(img/ps1-infravalorados/klonoa.png)"></i><i style="background-image:url(img/ps1-infravalorados/syphon-filter.png)"></i><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><i style="background-image:url(img/ps1-infravalorados/wipeout-xl.png)"></i><i style="background-image:url(img/ps1-infravalorados/r4.png)"></i></div>
     <div class="portada">
       <div class="ep-tag">PLAYSTATION · JOYAS QUE NADIE NOMBRA</div>
       <div class="ep-title">PS1 <span class="vs">INFRAVALORADOS</span></div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>INTRO · DATOS BOMBA</h4><div class="n-line">Ranking de CALIDAD, no de precios: juegos de PS1 con notas de 84 a 93 en Metacritic o GameRankings que hoy casi no salen en las listas de mejores de la consola.</div><div class="n-line">Criterio: buena critica, lanzamiento en NTSC USA y que no esten en el Top Mundial del canal (Silent Hill, FFIX, Crash Warped, Symphony of the Night, Tekken 3, Resident Evil 2, Tony Hawk 2, Gran Turismo, Metal Gear Solid y FFVII).</div><div class="n-line">Orden: pesa primero la fuerza de la critica (nota Metacritic o, si no hay, GameRankings). El olvido solo desempata. Es discutible, y ese es el punto.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-ye">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/ps1-infravalorados/soul-reaver.png)"></i><i style="background-image:url(img/ps1-infravalorados/einhander.jpg)"></i><i style="background-image:url(img/ps1-infravalorados/vagrant-story.png)"></i><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><i style="background-image:url(img/ps1-infravalorados/ape-escape.png)"></i><i style="background-image:url(img/ps1-infravalorados/klonoa.png)"></i><i style="background-image:url(img/ps1-infravalorados/syphon-filter.png)"></i><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><i style="background-image:url(img/ps1-infravalorados/wipeout-xl.png)"></i><i style="background-image:url(img/ps1-infravalorados/r4.png)"></i></div>
     <div class="divider">
       <div class="pre ye">NO SON LOS FAMOSOS</div>
       <div class="title ye">BUENOS Y OLVIDADOS · #10 AL #1</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/ps1-infravalorados/xenogears.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><em>10</em></div><div class="g-th f" style="--w:1.000"><em>9</em></div><div class="g-th f" style="--w:1.000"><em>8</em></div><div class="g-th f" style="--w:1.000"><em>7</em></div><div class="g-th f" style="--w:1.000"><em>6</em></div><div class="g-th f" style="--w:1.000"><em>5</em></div><div class="g-th f" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>10</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-infravalorados/xenogears.png" alt="" aria-hidden="true"><img src="img/ps1-infravalorados/xenogears.png" alt="XENOGEARS box art"></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">XENOGEARS</div><div class="game-meta">PS1 · 1998 · SQUARE</div></div>
+      <div class="hybrid-title"><div class="game-title">XENOGEARS</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1998</span><span class="g-chip">SQUARE</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>RPG de Square de ambicion enorme, con una historia que mezcla ciencia ficcion, filosofia y mechas. 91 % en GameRankings.</div>
     </div>
 <aside class="notas"><h4>#10 · DATOS EXTRA</h4><div class="n-line">Fuente: GameRankings 91 % (21 reseñas) y Metacritic 84 (15 reseñas). IGN le puso 9,5 sobre 10.</div><div class="n-line">Vendio 1,19 millones de copias en el mundo, de las cuales unas 280.000 fuera de Japon, segun Wikipedia.</div><div class="n-line">Por que esta olvidado: llego al final de la era PS1 junto a otros RPG grandes de Square.</div><div class="n-cue">Cue Koko: preguntar si alguna vez llego al segundo disco.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/ps1-infravalorados/alundra.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><em>10</em></div><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><em>9</em></div><div class="g-th f" style="--w:1.000"><em>8</em></div><div class="g-th f" style="--w:1.000"><em>7</em></div><div class="g-th f" style="--w:1.000"><em>6</em></div><div class="g-th f" style="--w:1.000"><em>5</em></div><div class="g-th f" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>9</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-infravalorados/alundra.png" alt="" aria-hidden="true"><img src="img/ps1-infravalorados/alundra.png" alt="ALUNDRA box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">ALUNDRA</div><div class="game-meta">PS1 · 1998 · WORKING DESIGNS</div></div>
+      <div class="hybrid-title"><div class="game-title">ALUNDRA</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1998</span><span class="g-chip">WORKING DESIGNS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>RPG de accion con mazmorras de puzzles, localizado por Working Designs. Metacritic 86: el sexto juego mejor puntuado de PlayStation de 1997.</div>
     </div>
 <aside class="notas"><h4>#9 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 86 (9 reseñas) y GameRankings 84 % (13 reseñas); segun Wikipedia, el sexto mejor puntuado de PlayStation de 1997.</div><div class="n-line">Working Designs vendio mas de 100.000 copias en Norteamerica en un solo mes a comienzos de 1998.</div><div class="n-line">Por que esta olvidado: un RPG de accion al estilo Zelda en una consola donde todos hablaban de Final Fantasy.</div><div class="n-cue">Cue Koko: la comparacion con Zelda es lo que mas ayuda a explicarlo.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/ps1-infravalorados/klonoa.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><em>10</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><em>9</em></div><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/klonoa.png)"></i><em>8</em></div><div class="g-th f" style="--w:1.000"><em>7</em></div><div class="g-th f" style="--w:1.000"><em>6</em></div><div class="g-th f" style="--w:1.000"><em>5</em></div><div class="g-th f" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>8</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-infravalorados/klonoa.png" alt="" aria-hidden="true"><img src="img/ps1-infravalorados/klonoa.png" alt="KLONOA: DOOR TO PHANTOMILE box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">KLONOA: DOOR TO PHANTOMILE</div><div class="game-meta">PS1 · 1998 · NAMCO</div></div>
+      <div class="hybrid-title"><div class="game-title">KLONOA: DOOR TO PHANTOMILE</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1998</span><span class="g-chip">NAMCO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformas 2,5D de Namco. GameSpy lo puso 5 entre los mejores juegos de PlayStation de todos los tiempos. 87 % en GameRankings.</div>
     </div>
 <aside class="notas"><h4>#8 · DATOS EXTRA</h4><div class="n-line">Fuente: GameRankings 87 %; GameSpy lo ubico 5, Polygon 10 y GamesRadar+ 25 en sus listas de mejores juegos de PlayStation. Videogames.com lo nombro Plataformas del Año 1998.</div><div class="n-line">Nintendo Power lo llamo 'quizas el mejor plataformero de PlayStation'. Vendio al menos 200.000 copias.</div><div class="n-line">Por que esta olvidado: un plataformero de Namco al lado de Crash Bandicoot y Spyro.</div><div class="n-cue">Cue Koko: es de los juegos con mejor direccion de arte de la consola.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/ps1-infravalorados/r4.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><em>10</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/klonoa.png)"></i><em>8</em></div><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/r4.png)"></i><em>7</em></div><div class="g-th f" style="--w:1.000"><em>6</em></div><div class="g-th f" style="--w:1.000"><em>5</em></div><div class="g-th f" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>7</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-infravalorados/r4.png" alt="" aria-hidden="true"><img src="img/ps1-infravalorados/r4.png" alt="R4: RIDGE RACER TYPE 4 box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">R4: RIDGE RACER TYPE 4</div><div class="game-meta">PS1 · 1999 · NAMCO</div></div>
+      <div class="hybrid-title"><div class="game-title">R4: RIDGE RACER TYPE 4</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1999</span><span class="g-chip">NAMCO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El mejor Ridge Racer de PS1 segun la prensa. Metacritic 88, y una lista de 2023 lo puso primero entre todos los Ridge Racer.</div>
     </div>
 <aside class="notas"><h4>#7 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 88; IGN le dio 9,4 sobre 10. Push Square lo considera el mejor Ridge Racer de PS1 y Time Extension lo puso primero en su lista de mejores Ridge Racer de 2023.</div><div class="n-line">Por que esta olvidado: llego en 1999, con Gran Turismo ya instalado como el rey de las carreras en PlayStation.</div><div class="n-cue">Cue Koko: preguntar si jugo algun otro Ridge Racer.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/ps1-infravalorados/einhander.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><em>10</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/klonoa.png)"></i><em>8</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/r4.png)"></i><em>7</em></div><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/einhander.jpg)"></i><em>6</em></div><div class="g-th f" style="--w:1.000"><em>5</em></div><div class="g-th f" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>6</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-infravalorados/einhander.jpg" alt="" aria-hidden="true"><img src="img/ps1-infravalorados/einhander.jpg" alt="EINHANDER box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">EINHANDER</div><div class="game-meta">PS1 · 1998 · SQUARE</div></div>
+      <div class="hybrid-title"><div class="game-title">EINHANDER</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1998</span><span class="g-chip">SQUARE</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Shooter de Square de scroll lateral, con un sistema de armas que se roban a los enemigos. Metacritic 89 e IGN lo puso primero entre los mejores shooters 2D espaciales.</div>
     </div>
 <aside class="notas"><h4>#6 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 89 (EGM 9,25 sobre 10, IGN 9 sobre 10). En 2007 IGN lo ubico primero en su lista de mejores shooters espaciales 2D.</div><div class="n-line">Lo publico Square en Norteamerica en mayo de 1998, el mismo año que Xenogears.</div><div class="n-line">Por que esta olvidado: un shooter de Square, una compañia que todos asociaban solo con RPG.</div><div class="n-cue">Cue Koko: preguntar si sabia que Square hizo un shooter.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/ps1-infravalorados/ape-escape.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><em>10</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/klonoa.png)"></i><em>8</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/r4.png)"></i><em>7</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/einhander.jpg)"></i><em>6</em></div><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/ape-escape.png)"></i><em>5</em></div><div class="g-th f" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>5</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-infravalorados/ape-escape.png" alt="" aria-hidden="true"><img src="img/ps1-infravalorados/ape-escape.png" alt="APE ESCAPE box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">APE ESCAPE</div><div class="game-meta">PS1 · 1999 · SONY</div></div>
+      <div class="hybrid-title"><div class="game-title">APE ESCAPE</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1999</span><span class="g-chip">SONY</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Plataformas de Sony pensado para los sticks analogicos del DualShock. Metacritic 90 y 'aclamacion universal'.</div>
     </div>
 <aside class="notas"><h4>#5 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 90 (19 reseñas), 'universal acclaim'; IGN le dio 9,5 sobre 10.</div><div class="n-line">Vendio mas de 500.000 copias en total. Salio en Norteamerica el 22 de junio de 1999.</div><div class="n-line">Por que esta olvidado: Sony nunca lo convirtio en una mascota como Crash o Spyro.</div><div class="n-cue">Cue Koko: la gracia de controlar con los dos sticks es lo que lo define.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/ps1-infravalorados/syphon-filter.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><em>10</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/klonoa.png)"></i><em>8</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/r4.png)"></i><em>7</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/einhander.jpg)"></i><em>6</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/ape-escape.png)"></i><em>5</em></div><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/syphon-filter.png)"></i><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>4</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-infravalorados/syphon-filter.png" alt="" aria-hidden="true"><img src="img/ps1-infravalorados/syphon-filter.png" alt="SYPHON FILTER box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SYPHON FILTER</div><div class="game-meta">PS1 · 1999 · SONY</div></div>
+      <div class="hybrid-title"><div class="game-title">SYPHON FILTER</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1999</span><span class="g-chip">SONY</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Accion tactica en tercera persona de 989 Studios. Metacritic 90 y mas de 900.000 copias.</div>
     </div>
 <aside class="notas"><h4>#4 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 90, 'universal acclaim'; IGN 9,5 sobre 10 y GameSpot 9 sobre 10. Vendio mas de 900.000 unidades.</div><div class="n-line">Salio en Norteamerica el 16 de febrero de 1999.</div><div class="n-line">Por que esta olvidado: la saga se apago y hoy casi nadie la menciona, pese a que en su epoca compitio con Metal Gear Solid.</div><div class="n-cue">Cue Koko: comparar con Metal Gear Solid, que salio meses antes.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/ps1-infravalorados/soul-reaver.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><em>10</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/klonoa.png)"></i><em>8</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/r4.png)"></i><em>7</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/einhander.jpg)"></i><em>6</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/ape-escape.png)"></i><em>5</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/syphon-filter.png)"></i><em>4</em></div><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/soul-reaver.png)"></i><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>3</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-infravalorados/soul-reaver.png" alt="" aria-hidden="true"><img src="img/ps1-infravalorados/soul-reaver.png" alt="LEGACY OF KAIN: SOUL REAVER box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">LEGACY OF KAIN: SOUL REAVER</div><div class="game-meta">PS1 · 1999 · EIDOS</div></div>
+      <div class="hybrid-title"><div class="game-title">LEGACY OF KAIN: SOUL REAVER</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1999</span><span class="g-chip">EIDOS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Aventura gotica de Crystal Dynamics con un mundo que cambia entre dos realidades. Metacritic 91 y una actuacion de voz muy premiada.</div>
     </div>
 <aside class="notas"><h4>#3 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 91 y GameRankings 88 % (version PS1); IGN 9,3 sobre 10. GameSpot incluyo su actuacion de voz en su lista de las 10 mejores de los videojuegos.</div><div class="n-line">GameSpot considero sus graficos 'entre los mejores que ha tenido la PlayStation'.</div><div class="n-line">Por que esta olvidado: la saga Legacy of Kain nunca fue masiva fuera de los fans del genero.</div><div class="n-cue">Cue Koko: la mecanica de cambiar entre el mundo material y el espectral es el gancho.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/ps1-infravalorados/vagrant-story.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><em>10</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/klonoa.png)"></i><em>8</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/r4.png)"></i><em>7</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/einhander.jpg)"></i><em>6</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/ape-escape.png)"></i><em>5</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/syphon-filter.png)"></i><em>4</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/soul-reaver.png)"></i><em>3</em></div><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/vagrant-story.png)"></i><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>2</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-infravalorados/vagrant-story.png" alt="" aria-hidden="true"><img src="img/ps1-infravalorados/vagrant-story.png" alt="VAGRANT STORY box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">VAGRANT STORY</div><div class="game-meta">PS1 · 2000 · SQUARE</div></div>
+      <div class="hybrid-title"><div class="game-title">VAGRANT STORY</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">2000</span><span class="g-chip">SQUARE</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>RPG de accion de Square dirigido por Yasumi Matsuno. 92 en Metacritic y GameRankings, y Famitsu le dio 40 sobre 40.</div>
     </div>
 <aside class="notas"><h4>#2 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 92 (19 reseñas), GameRankings 92 % (43 reseñas), Famitsu 40/40, IGN 9,6 y GameSpot 9,6. GameRankings lo ubico decimoquinto entre los mejores juegos de PlayStation.</div><div class="n-line">Vendio 100.000 unidades en sus primeros 20 dias, aunque lo opacaron Final Fantasy IX y Chrono Cross, otros juegos de Square de esa epoca.</div><div class="n-line">Por que esta olvidado: salio en 2000, con la PS2 a punto de llegar y el catalogo de Square repleto de titulos grandes.</div><div class="n-cue">Cue Koko: Famitsu le dio nota perfecta, algo muy poco comun.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/ps1-infravalorados/wipeout-xl.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL TRONO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><em>10</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/klonoa.png)"></i><em>8</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/r4.png)"></i><em>7</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/einhander.jpg)"></i><em>6</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/ape-escape.png)"></i><em>5</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/syphon-filter.png)"></i><em>4</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/soul-reaver.png)"></i><em>3</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/vagrant-story.png)"></i><em>2</em></div><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/ps1-infravalorados/wipeout-xl.png)"></i><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>1</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/ps1-infravalorados/wipeout-xl.png" alt="" aria-hidden="true"><img src="img/ps1-infravalorados/wipeout-xl.png" alt="WIPEOUT XL box art"></div>
@@ -387,13 +433,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">WIPEOUT XL</div><div class="game-meta">PS1 · 1996 · PSYGNOSIS</div></div>
+      <div class="hybrid-title"><div class="game-title">WIPEOUT XL</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1996</span><span class="g-chip">PSYGNOSIS</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL MEJOR CRITICADO</span>Carreras futuristas a toda velocidad con musica electronica. 95 % en GameRankings: el tercer juego mejor puntuado de PlayStation.</div>
     </div>
 <aside class="notas"><h4>#1 · DATOS EXTRA</h4><div class="n-line">Fuente: GameRankings 95 % (10 fuentes), tercer mejor juego de PlayStation segun ese sitio, y Metacritic 93. IGN le dio 9 sobre 10.</div><div class="n-line">En Europa se llamo Wipeout 2097. Salio en 1996, uno de los primeros grandes juegos de la consola.</div><div class="n-line">Por que esta olvidado: llego antes de Gran Turismo, que se llevo todo el reconocimiento de las carreras en PlayStation.</div><div class="n-cue">Cue Koko: cierre del ranking, el 95 % es el dato bomba.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/ps1-infravalorados/soul-reaver.png)"></i><i style="background-image:url(img/ps1-infravalorados/einhander.jpg)"></i><i style="background-image:url(img/ps1-infravalorados/vagrant-story.png)"></i><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><i style="background-image:url(img/ps1-infravalorados/ape-escape.png)"></i><i style="background-image:url(img/ps1-infravalorados/klonoa.png)"></i><i style="background-image:url(img/ps1-infravalorados/syphon-filter.png)"></i><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><i style="background-image:url(img/ps1-infravalorados/wipeout-xl.png)"></i><i style="background-image:url(img/ps1-infravalorados/r4.png)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg">BUENOS Y OLVIDADOS</div>
@@ -401,8 +448,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">14</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/ps1-infravalorados/soul-reaver.png)"></i><i style="background-image:url(img/ps1-infravalorados/einhander.jpg)"></i><i style="background-image:url(img/ps1-infravalorados/vagrant-story.png)"></i><i style="background-image:url(img/ps1-infravalorados/xenogears.png)"></i><i style="background-image:url(img/ps1-infravalorados/ape-escape.png)"></i><i style="background-image:url(img/ps1-infravalorados/klonoa.png)"></i><i style="background-image:url(img/ps1-infravalorados/syphon-filter.png)"></i><i style="background-image:url(img/ps1-infravalorados/alundra.png)"></i><i style="background-image:url(img/ps1-infravalorados/wipeout-xl.png)"></i><i style="background-image:url(img/ps1-infravalorados/r4.png)"></i></div>
     <div class="divider">
       <div class="pre cy">TU TURNO</div>
       <div class="title cy">¿CUAL AGREGARIAS?</div>

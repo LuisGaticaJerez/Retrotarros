@@ -21,6 +21,9 @@ import top_deck as T
 MIN_CAJAS_MOSAICO = 6      # con menos cajas el mosaico no se usa y portada/divisores salen como hoy
 CELDAS_MOSAICO = 10        # grilla de 5 x 2
 MAX_CHIPS = 5              # con mas partes de metadatos se conserva la linea gris de hoy
+# estimado de lo que ocupan los chips (px a 1920 de ancho): si pasan de MAX_FILAS_CHIPS filas empujan al
+# TarroVision hacia abajo (medido en Top Peores con listas de fuentes), asi que se conserva la linea de hoy
+ANCHO_CHIPS_PX, CHIP_BASE_PX, CHIP_PX_CARACTER, CHIP_GAP_PX, MAX_FILAS_CHIPS = 460, 32, 15, 10, 2
 MIN_ANCHO_REL, MAX_ANCHO_REL = 0.6, 1.7   # limites de la proporcion de las miniaturas de la barra
 # medidas de la barra, en px a 1920 de ancho (deben coincidir con el CSS de css_nueva)
 ALTO_MINIATURA, LADO_CASILLA = 72, 40
@@ -124,8 +127,8 @@ def _con_mosaico(html: str, num: int, mos: str) -> str:
     return _inyectar(html, marca, marca + f"    {mos}\n")
 
 
-def slide_portada(num: int, data: dict, out_slug: str) -> str:
-    html = T._slide_portada(num, data)
+def portada_html(html: str, num: int, data: dict, out_slug: str) -> str:
+    """Aplica la grafica nueva al HTML clasico de la portada (lo usan slide_portada y el migrador)."""
     mos = mosaico(data, out_slug, tenue=False)
     if not mos:
         return html
@@ -133,8 +136,8 @@ def slide_portada(num: int, data: dict, out_slug: str) -> str:
     return _con_mosaico(html, num, mos)
 
 
-def slide_divisor(num: int, d: dict, data: dict, out_slug: str) -> str:
-    html = T._slide_divider(num, d)
+def divisor_html(html: str, num: int, d: dict, data: dict, out_slug: str) -> str:
+    """Aplica la grafica nueva al HTML clasico de un divisor; d es su dict (solo se lee "color")."""
     mos = mosaico(data, out_slug, tenue=True)
     if not mos:
         return html
@@ -143,15 +146,35 @@ def slide_divisor(num: int, d: dict, data: dict, out_slug: str) -> str:
     return _con_mosaico(html, num, mos)
 
 
+def slide_portada(num: int, data: dict, out_slug: str) -> str:
+    return portada_html(T._slide_portada(num, data), num, data, out_slug)
+
+
+def slide_divisor(num: int, d: dict, data: dict, out_slug: str) -> str:
+    return divisor_html(T._slide_divider(num, d), num, d, data, out_slug)
+
+
+def _filas_chips(partes: list[str]) -> int:
+    """Filas que ocuparian los chips en la columna del titulo (estimado)."""
+    filas, ancho = 1, 0
+    for p in partes:
+        w = CHIP_BASE_PX + CHIP_PX_CARACTER * len(p)
+        if ancho and ancho + CHIP_GAP_PX + w > ANCHO_CHIPS_PX:
+            filas, ancho = filas + 1, w
+        else:
+            ancho += (CHIP_GAP_PX if ancho else 0) + w
+    return filas
+
+
 def chips(it: dict, consola: str) -> str:
     """Metadatos del juego como chips (el ano, en amarillo). Parte de it["meta"] (separado por
     "·") o de consola, ano y editor, igual que el slide clasico. Descarta toda parte con "USD"
-    (el precio ya sale grande aparte). "" si no queda nada o hay mas de MAX_CHIPS: en ese caso el
-    slide conserva la linea de metadatos de hoy."""
+    (el precio ya sale grande aparte). "" si no queda nada, hay mas de MAX_CHIPS o no caben en
+    MAX_FILAS_CHIPS filas: en ese caso el slide conserva la linea de metadatos de hoy."""
     meta = it.get("meta") or " · ".join(
         str(x) for x in [consola, it.get("ano"), (it.get("editor") or "").upper()] if x)
     partes = [p.strip() for p in meta.split("·") if p.strip() and "USD" not in p]
-    if not partes or len(partes) > MAX_CHIPS:
+    if not partes or len(partes) > MAX_CHIPS or _filas_chips(partes) > MAX_FILAS_CHIPS:
         return ""
     ano = next((i for i, p in enumerate(partes) if re.match(r"\d{4}", p)), None)
     spans = "".join(f'<span class="g-chip{" y" if i == ano else ""}">{p}</span>' for i, p in enumerate(partes))
@@ -234,9 +257,8 @@ def barra(data: dict, indice: int, out_slug: str) -> str:
     return f'<div class="g-barra" style="--u:{u}px;--dx:{dx}px">' + "".join(piezas) + "</div>"
 
 
-def slide_item(num: int, it: dict, consola: str, ch: int, box: str, out_slug: str,
-               data: dict, indice: int) -> str:
-    html = T._slide_item(num, it, consola, ch=ch, box=box, out_slug=out_slug)
+def item_html(html: str, num: int, it: dict, consola: str, out_slug: str, data: dict, indice: int) -> str:
+    """Aplica la grafica nueva al HTML clasico de un slide de juego (lo usan slide_item y el migrador)."""
     html = _inyectar(html, '<section class="slide">', '<section class="slide g-nueva">')
     html = _inyectar(html, '<div class="hybrid-head">', '<div class="hybrid-head">' + barra(data, indice, out_slug))
     marca = f'<span class="slide-num">{num:02d}</span>\n'
@@ -249,3 +271,9 @@ def slide_item(num: int, it: dict, consola: str, ch: int, box: str, out_slug: st
     # el rotulo por defecto (TOP / PODIO / EL TRONO) lo reemplaza la barra de progreso;
     # un block_label explicito (ej. "EN 1 LISTA" en Top Peores) se conserva
     return re.sub(r'<div class="game-block-label (?:cy|mg)">(?:TOP|PODIO|EL TRONO)</div>', "", html)
+
+
+def slide_item(num: int, it: dict, consola: str, ch: int, box: str, out_slug: str,
+               data: dict, indice: int) -> str:
+    html = T._slide_item(num, it, consola, ch=ch, box=box, out_slug=out_slug)
+    return item_html(html, num, it, consola, out_slug, data, indice)

@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-ancha .hybrid-title{align-self:center !important}
 .slide-hybrid.box-ancha .game-title{font-size:44px !important;line-height:1.05 !important}
 .slide-hybrid.box-ancha .game-meta{font-size:21px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/dreamcast-top-precios/seaman.png)"></i><i style="background-image:url(img/dreamcast-top-precios/ecw-anarchy-rulz.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/d2.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/giga-wing-2.png)"></i><i style="background-image:url(img/dreamcast-top-precios/resident-evil-2.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/power-stone.png)"></i><i style="background-image:url(img/dreamcast-top-precios/speed-devils.png)"></i><i style="background-image:url(img/dreamcast-top-precios/jojo.png)"></i><i style="background-image:url(img/dreamcast-top-precios/illbleed.png)"></i><i style="background-image:url(img/dreamcast-top-precios/sonic-adventure-2.png)"></i></div>
     <div class="portada">
       <div class="ep-tag">TOP 10 PRECIOS</div>
       <div class="ep-title">DREAMCAST</div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>PORTADA · DATOS BOMBA</h4><div class="n-line">Precios CIB (Complete In Box, NTSC USA) leidos directo de PriceCharting en octubre 2026. Valores aproximados, fluctuan y nunca son consejo de inversion.</div><div class="n-line">Reforge 2026-10-15: el top anterior se habia armado con datos viejos y le faltaban juegos mas caros que su #8, #9 y #10. Este es el top 10 real por CIB.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/dreamcast-top-precios/seaman.png)"></i><i style="background-image:url(img/dreamcast-top-precios/ecw-anarchy-rulz.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/d2.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/giga-wing-2.png)"></i><i style="background-image:url(img/dreamcast-top-precios/resident-evil-2.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/power-stone.png)"></i><i style="background-image:url(img/dreamcast-top-precios/speed-devils.png)"></i><i style="background-image:url(img/dreamcast-top-precios/jojo.png)"></i><i style="background-image:url(img/dreamcast-top-precios/illbleed.png)"></i><i style="background-image:url(img/dreamcast-top-precios/sonic-adventure-2.png)"></i></div>
     <div class="divider">
       <div class="pre cy">CONTEXTO</div>
       <div class="title cy">LA CONSOLA QUE MURIO JOVEN</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>CONTEXTO · DATOS EXTRA</h4><div class="n-line">Soulcalibur y Shenmue, los juegos mas famosos de la consola, estan entre los mas baratos: se vendieron mucho. Lo caro es lo que casi nadie compro.</div><div class="n-line">Estructura del episodio: top 10 retail del #10 al #1, un apartado de rarezas que nunca se vendieron en tiendas normales y un santo grial japones.</div><div class="n-cue">TRANSICION: empezamos por el fondo del top.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/dreamcast-top-precios/d2.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 165</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip cur">10</div><div class="g-pip f">9</div><div class="g-pip f">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">USD 165</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0121">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-precios/d2.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-precios/d2.jpg" alt="D2 box art"></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">D2</div><div class="game-meta">DREAMCAST · 2000 · SEGA / WARP</div></div>
+      <div class="hybrid-title"><div class="game-title">D2</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">2000</span><span class="g-chip">SEGA / WARP</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Survival horror dirigido por Kenji Eno, de Warp. Sega lo publico en Norteamerica en 2000, cuando casi nadie compraba ya la consola: hoy se paga caro completo.</div>
     </div>
 <aside class="notas"><h4>#10 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 165, con el disco suelto en USD 85.</div><div class="n-line">Entra al top en esta revision: antes el #10 era una reedicion Sega All Stars de USD 75.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/dreamcast-top-precios/seaman.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 170</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip cur">9</div><div class="g-pip f">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">USD 170</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:329px;--ar:0.8967">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-precios/seaman.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-precios/seaman.png" alt="Seaman [Mic Bundle] box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Seaman [Mic Bundle]</div><div class="game-meta">DREAMCAST · 2000 · VIVARIUM / SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">Seaman [Mic Bundle]</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">2000</span><span class="g-chip">VIVARIUM / SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Simulador de mascota con micro incluido, narrado por Leonard Nimoy. La caja con el micro es la que cuesta, el disco solo vale mucho menos.</div>
     </div>
 <aside class="notas"><h4>#9 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 170 la version con micro.</div><div class="n-line">Es uno de los juegos mas raros de explicar hoy: un pez con cara humana que le habla al jugador por el microfono.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/dreamcast-top-precios/sonic-adventure-2.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 175</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip cur">8</div><div class="g-pip f">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">USD 175</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0061">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-precios/sonic-adventure-2.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-precios/sonic-adventure-2.png" alt="Sonic Adventure 2 box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Sonic Adventure 2</div><div class="game-meta">DREAMCAST · 2001 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">Sonic Adventure 2</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">2001</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El ultimo gran Sonic de Dreamcast. Ojo: la edicion estandar es la que aparece en el top. En NTSC USA no existe un 'Limited Edition' de este juego.</div>
     </div>
 <aside class="notas"><h4>#8 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 175.</div><div class="n-line">En una revision anterior se habia confundido una edicion de otro Sonic con este: es un buen ejemplo de lo facil que es mezclar variantes en coleccionismo.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/dreamcast-top-precios/ecw-anarchy-rulz.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 190</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip cur">7</div><div class="g-pip f">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">USD 190</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0152">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-precios/ecw-anarchy-rulz.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-precios/ecw-anarchy-rulz.jpg" alt="ECW Anarchy Rulz box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">ECW Anarchy Rulz</div><div class="game-meta">DREAMCAST · 2000 · ACCLAIM</div></div>
+      <div class="hybrid-title"><div class="game-title">ECW Anarchy Rulz</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">2000</span><span class="g-chip">ACCLAIM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Juego de lucha libre ECW de Acclaim. La liga quebro en 2001 y la editora en 2004, asi que ni la licencia ni el estudio existen hoy: no hay forma de reeditarlo.</div>
     </div>
 <aside class="notas"><h4>#7 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 190.</div><div class="n-line">Cuando una licencia deportiva muere con el estudio, el juego queda congelado en el tiempo y sube de precio.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/dreamcast-top-precios/jojo.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 193</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip cur">6</div><div class="g-pip f">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">USD 193</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0273">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-precios/jojo.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-precios/jojo.png" alt="JoJo's Bizarre Adventure box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">JoJo's Bizarre Adventure</div><div class="game-meta">DREAMCAST · 2000 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">JoJo's Bizarre Adventure</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">2000</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Juego de pelea de Capcom basado en el manga de Araki. El boom del anime disparo la demanda de este titulo, que salio con tirada corta.</div>
     </div>
 <aside class="notas"><h4>#6 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 193.</div><div class="n-line">Hay una reseña del canal sobre este juego, pensada para ver el contraste entre lo que cuesta hoy y lo que costaba al salir.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/dreamcast-top-precios/speed-devils.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 200</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip cur">5</div><div class="g-pip f">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">USD 200</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0152">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-precios/speed-devils.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-precios/speed-devils.png" alt="Speed Devils [Clean Cover] box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Speed Devils [Clean Cover]</div><div class="game-meta">DREAMCAST · 1999 · UBISOFT</div></div>
+      <div class="hybrid-title"><div class="game-title">Speed Devils [Clean Cover]</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">1999</span><span class="g-chip">UBISOFT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Variante real: Wal-Mart exigio una portada de reemplazo, y esa edicion 'Clean Cover' es la que hoy se paga mas que la comun.</div>
     </div>
 <aside class="notas"><h4>#5 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 200 la portada limpia.</div><div class="n-line">Confirmado en la ficha de PriceCharting como edicion propia: no es lo mismo que una 'First Run'.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/dreamcast-top-precios/resident-evil-2.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 220</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip cur">4</div><div class="g-pip f">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">USD 220</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0030">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-precios/resident-evil-2.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-precios/resident-evil-2.jpg" alt="Resident Evil 2 box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Resident Evil 2</div><div class="game-meta">DREAMCAST · 2000 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">Resident Evil 2</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">2000</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El port del clasico de Capcom a Dreamcast. No es un juego raro: es un juego famoso que, completo en esta consola, ya cuesta mas de 200 dolares.</div>
     </div>
 <aside class="notas"><h4>#4 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 220, con el disco suelto en USD 94.</div><div class="n-line">Entra al top en esta revision. Muestra que en Dreamcast tambien se encarece lo famoso.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/dreamcast-top-precios/giga-wing-2.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 284</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip cur">3</div><div class="g-pip f">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">USD 284</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-precios/giga-wing-2.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-precios/giga-wing-2.png" alt="Giga Wing 2 box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Giga Wing 2</div><div class="game-meta">DREAMCAST · 2001 · CAPCOM / TAKUMI</div></div>
+      <div class="hybrid-title"><div class="game-title">Giga Wing 2</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">2001</span><span class="g-chip">CAPCOM / TAKUMI</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Shmup de Takumi publicado en 2001, ya con la consola agonizando. Tirada corta y fans de los shoot'em up que lo buscan completo.</div>
     </div>
 <aside class="notas"><h4>#3 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 284.</div><div class="n-line">Salio a fines de 2001, cuando Sega ya habia anunciado que dejaba de fabricar la Dreamcast.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/dreamcast-top-precios/illbleed.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 335</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip cur">2</div><div class="g-pip f">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">USD 335</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:0.9939">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-precios/illbleed.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-precios/illbleed.png" alt="Illbleed box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Illbleed</div><div class="game-meta">DREAMCAST · 2001 · CRAZY GAMES / AIA</div></div>
+      <div class="hybrid-title"><div class="game-title">Illbleed</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">2001</span><span class="g-chip">CRAZY GAMES / AIA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Survival horror bizarro en un parque de terror, de Crazy Games, publicado en Norteamerica por AIA en 2001. Salio tarde en la vida de la consola y con poca gente mirando.</div>
     </div>
 <aside class="notas"><h4>#2 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 335, con el disco suelto en USD 196.</div><div class="n-line">Era el #1 del top anterior: ahora baja un puesto.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/dreamcast-top-precios/cannon-spike.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 353</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip cur">1</div><div class="g-sep"></div><div class="g-pip rr f">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">USD 353</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-precios/cannon-spike.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-precios/cannon-spike.jpg" alt="Cannon Spike box art"></div>
@@ -387,13 +433,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Cannon Spike</div><div class="game-meta">DREAMCAST · 2000 · CAPCOM / PSIKYO</div></div>
+      <div class="hybrid-title"><div class="game-title">Cannon Spike</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">2000</span><span class="g-chip">CAPCOM / PSIKYO</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL TRONO</span>Shooter de arcade de Psikyo que Capcom llevo a Dreamcast en 2000, con personajes de la casa como Mega Man, Cammy y Arthur. Es el retail mas caro de la Dreamcast hoy.</div>
     </div>
 <aside class="notas"><h4>#1 · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 353, con el disco suelto en USD 210. En Japon se llamo Gunspike.</div><div class="n-line">Entra directo al #1 en esta revision: no estaba en el top anterior.</div><div class="n-cue">TRANSICION: con el trono claro, pasamos al apartado de rarezas.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/dreamcast-top-precios/seaman.png)"></i><i style="background-image:url(img/dreamcast-top-precios/ecw-anarchy-rulz.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/d2.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/giga-wing-2.png)"></i><i style="background-image:url(img/dreamcast-top-precios/resident-evil-2.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/power-stone.png)"></i><i style="background-image:url(img/dreamcast-top-precios/speed-devils.png)"></i><i style="background-image:url(img/dreamcast-top-precios/jojo.png)"></i><i style="background-image:url(img/dreamcast-top-precios/illbleed.png)"></i><i style="background-image:url(img/dreamcast-top-precios/sonic-adventure-2.png)"></i></div>
     <div class="divider">
       <div class="pre mg">APARTADO ESPECIAL</div>
       <div class="title mg">RAREZAS Y NO-RETAIL</div>
@@ -401,10 +448,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">14</span>
+    <div class="g-bg" style="background-image:url(img/dreamcast-top-precios/power-stone.png)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">ALQUILER</div><div class="game-price">USD 218</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr cur">R</div><div class="g-pip rr f">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">ALQUILER</div><div class="game-price">USD 218</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:0.9939">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-precios/power-stone.png" alt="" aria-hidden="true"><img src="img/dreamcast-top-precios/power-stone.png" alt="Power Stone [Rental Copy] box art"></div>
@@ -416,15 +464,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Power Stone [Rental Copy]</div><div class="game-meta">DREAMCAST · 1999 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">Power Stone [Rental Copy]</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">1999</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Copia de alquiler: se rentaba en videoclubes y nunca se vendia en tiendas normales. Casi todas se gastaron o se perdieron.</div>
     </div>
 <aside class="notas"><h4>RAREZA · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 218. La portada usada aqui es la de la edicion normal, la de alquiler lleva un sello de renta.</div><div class="n-line">Las copias de alquiler solo existian para rentar: no es un juego raro, es una forma de distribucion que casi no sobrevivio.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">15</span>
+    <div class="g-bg" style="background-image:url(img/dreamcast-top-precios/airforce-delta.jpg)"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NFR</div><div class="game-price">USD 368</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr cur">R</div><div class="g-sep"></div><div class="g-pip gg f">★</div></div><div class="game-pos cy" style="font-size:24px;letter-spacing:2px;line-height:1.15;">NFR</div><div class="game-price">USD 368</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/dreamcast-top-precios/airforce-delta.jpg" alt="" aria-hidden="true"><img src="img/dreamcast-top-precios/airforce-delta.jpg" alt="AirForce Delta [Not For Resale] box art"></div>
@@ -436,15 +485,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">AirForce Delta [Not For Resale]</div><div class="game-meta">DREAMCAST · 1999 · KONAMI</div></div>
+      <div class="hybrid-title"><div class="game-title">AirForce Delta [Not For Resale]</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">1999</span><span class="g-chip">KONAMI</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Copia promocional marcada 'Not For Resale': se entregaba a prensa y tiendas, nunca se vendia al publico.</div>
     </div>
 <aside class="notas"><h4>RAREZA · DATOS EXTRA</h4><div class="n-line">Precio CIB via PriceCharting (octubre 2026): USD 368. La portada es la de la edicion normal, la promocional lleva el sello NFR.</div><div class="n-line">Aclarar en camara: es una edicion que nunca estuvo en venta normal, por eso va en este apartado y no en el top numerado.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">16</span>
+    <div class="g-bg g-lb lb-default"></div>
     <div class="slide-hybrid box-ancha">
-      <div class="hybrid-head"><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 1.200</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:40px;--dx:0px"><div class="g-pip r">10</div><div class="g-pip r">9</div><div class="g-pip r">8</div><div class="g-pip r">7</div><div class="g-pip r">6</div><div class="g-pip r">5</div><div class="g-pip r">4</div><div class="g-pip r">3</div><div class="g-pip r">2</div><div class="g-pip r">1</div><div class="g-sep"></div><div class="g-pip rr r">R</div><div class="g-pip rr r">R</div><div class="g-sep"></div><div class="g-pip gg cur">★</div></div><div class="game-pos mg" style="font-size:34px;letter-spacing:3px;"><span class="hash" style="font-size:14px;">HOLY</span> GRAIL</div><div class="game-price">USD 1.200</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.3333">
           <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">Grauen no Torikago (La Jaula Gris)</div><div class="sub">DREAMCAST</div></div></div>
@@ -456,13 +506,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">Grauen no Torikago (La Jaula Gris)</div><div class="game-meta">DREAMCAST · 2000 · SEGA (D-DIRECT)</div></div>
+      <div class="hybrid-title"><div class="game-title">Grauen no Torikago (La Jaula Gris)</div><div class="game-meta g-chips"><span class="g-chip">DREAMCAST</span><span class="g-chip y">2000</span><span class="g-chip">SEGA (D-DIRECT)</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Novela visual de terror en 6 capitulos, vendida SOLO por D-Direct, la tienda web de Sega Japon. Un set completo sellado se ubica en torno a los 1.200 dolares en ventas documentadas.</div>
     </div>
 <aside class="notas"><h4>SANTO GRIAL · DATOS EXTRA</h4><div class="n-line">Cada capitulo costaba 2.800 yenes en D-Direct. En PriceCharting el capitulo 1 suelto aparece en USD 245 en la unica venta reciente; los sets completos sellados se ubican cerca de USD 1.200 en referencias de foro y eBay.</div><div class="n-line">Hay listados por sobre USD 1.200 pero sin venta confirmada: no usar el techo de 2.500 sin aclarar que es especulativo.</div><div class="n-line">Sigue siendo por lejos mas caro que el #1 del retail (Cannon Spike, USD 353).</div><div class="n-cue">FRASE DE CIERRE: el juego mas caro de la Dreamcast es un set de terror japones que casi nadie en Occidente conoce.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">17</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/dreamcast-top-precios/seaman.png)"></i><i style="background-image:url(img/dreamcast-top-precios/ecw-anarchy-rulz.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/d2.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/giga-wing-2.png)"></i><i style="background-image:url(img/dreamcast-top-precios/resident-evil-2.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/power-stone.png)"></i><i style="background-image:url(img/dreamcast-top-precios/speed-devils.png)"></i><i style="background-image:url(img/dreamcast-top-precios/jojo.png)"></i><i style="background-image:url(img/dreamcast-top-precios/illbleed.png)"></i><i style="background-image:url(img/dreamcast-top-precios/sonic-adventure-2.png)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg">LO CARO ES LA RAREZA</div>
@@ -470,8 +521,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">18</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/dreamcast-top-precios/seaman.png)"></i><i style="background-image:url(img/dreamcast-top-precios/ecw-anarchy-rulz.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/d2.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/giga-wing-2.png)"></i><i style="background-image:url(img/dreamcast-top-precios/resident-evil-2.jpg)"></i><i style="background-image:url(img/dreamcast-top-precios/power-stone.png)"></i><i style="background-image:url(img/dreamcast-top-precios/speed-devils.png)"></i><i style="background-image:url(img/dreamcast-top-precios/jojo.png)"></i><i style="background-image:url(img/dreamcast-top-precios/illbleed.png)"></i><i style="background-image:url(img/dreamcast-top-precios/sonic-adventure-2.png)"></i></div>
     <div class="divider">
       <div class="pre cy">CIERRE</div>
       <div class="title cy">¿TENIAN ALGUNO?</div>

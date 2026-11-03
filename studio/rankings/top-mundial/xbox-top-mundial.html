@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-alta .hybrid-title{align-self:center !important}
 .slide-hybrid.box-alta .game-title{font-size:48px !important;line-height:1.05 !important}
 .slide-hybrid.box-alta .game-meta{font-size:22px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/xbox-top-mundial/halo-combat-evolved.png)"></i><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><i style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></i><i style="background-image:url(img/xbox-top-mundial/star-wars-knights-of-the-old-republic.png)"></i><i style="background-image:url(img/xbox-top-mundial/ninja-gaiden-black.png)"></i><i style="background-image:url(img/xbox-top-mundial/prince-of-persia-the-sands-of-time.png)"></i><i style="background-image:url(img/xbox-top-mundial/tom-clancys-splinter-cell-chaos-theory.png)"></i><i style="background-image:url(img/xbox-top-mundial/forza-motorsport.png)"></i><i style="background-image:url(img/xbox-top-mundial/soulcalibur-ii.png)"></i><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i></div>
     <div class="portada">
       <div class="ep-tag">GENERACION 6 · LA PRIMERA CONSOLA DE MICROSOFT</div>
       <div class="ep-title">XBOX <span class="vs">TOP MUNDIAL</span></div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>INTRO · DATOS BOMBA</h4><div class="n-line">Ranking por consenso critico y legado (nota Metacritic de la version Xbox), NO por precio de mercado: eso es otro episodio. La Xbox original salio en noviembre de 2001, con Halo como su juego de lanzamiento.</div><div class="n-line">Reglas de este top: una sola entrada por franquicia, sin deportes anuales (Madden, ESPN NFL 2K5, NCAA, NHL, NBA 2K, Winning Eleven) y un juego va solo en el Top Mundial de la consola donde salio primero. Por eso hay un solo Halo, un solo Splinter Cell y un solo Ninja Gaiden.</div><div class="n-line">Fuera por repetir franquicia: Halo 2 (95), Splinter Cell original y Pandora Tomorrow (93), Ninja Gaiden de 2004 (91) y KOTOR II (86). Fuera porque salieron primero en PS2: GTA III y Vice City (el Double Pack saca 96), GTA San Andreas (93) y Tony Hawk's 3 y 4. Burnout 3 (94 en Xbox) queda fuera porque ya esta en el Top Mundial de PS2. SSX 3 (92): la saga nacio en PS2.</div><div class="n-line">Los diez estan en 90 o mas en Metacritic y Halo llega a 97. Pregunta abierta: Prince of Persia y Soulcalibur II salieron el mismo mes en PS2, Xbox y GameCube; entran aqui por nota, pero ya estan en GameCube Infravalorados. Cruzado cada dato con minimo dos fuentes antes de decirlo en camara.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-ye">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/xbox-top-mundial/halo-combat-evolved.png)"></i><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><i style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></i><i style="background-image:url(img/xbox-top-mundial/star-wars-knights-of-the-old-republic.png)"></i><i style="background-image:url(img/xbox-top-mundial/ninja-gaiden-black.png)"></i><i style="background-image:url(img/xbox-top-mundial/prince-of-persia-the-sands-of-time.png)"></i><i style="background-image:url(img/xbox-top-mundial/tom-clancys-splinter-cell-chaos-theory.png)"></i><i style="background-image:url(img/xbox-top-mundial/forza-motorsport.png)"></i><i style="background-image:url(img/xbox-top-mundial/soulcalibur-ii.png)"></i><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i></div>
     <div class="divider">
       <div class="pre ye">CONSENSO CRITICO 2026</div>
       <div class="title ye">TOP 10 MUNDIAL</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th cur" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i><em>10</em></div><div class="g-th f" style="--w:0.714"><em>9</em></div><div class="g-th f" style="--w:0.714"><em>8</em></div><div class="g-th f" style="--w:0.700"><em>7</em></div><div class="g-th f" style="--w:0.714"><em>6</em></div><div class="g-th f" style="--w:0.714"><em>5</em></div><div class="g-th f" style="--w:0.714"><em>4</em></div><div class="g-th f" style="--w:0.714"><em>3</em></div><div class="g-th f" style="--w:0.714"><em>2</em></div><div class="g-th f" style="--w:0.697"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>10</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7143">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/xbox-top-mundial/project-gotham-racing-2.png" alt="" aria-hidden="true"><img src="img/xbox-top-mundial/project-gotham-racing-2.png" alt="PROJECT GOTHAM RACING 2 box art"></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">PROJECT GOTHAM RACING 2</div><div class="game-meta">XBOX · 2003 · MICROSOFT GAME STUDIOS</div></div>
+      <div class="hybrid-title"><div class="game-title">PROJECT GOTHAM RACING 2</div><div class="game-meta g-chips"><span class="g-chip">XBOX</span><span class="g-chip y">2003</span><span class="g-chip">MICROSOFT GAME STUDIOS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Carreras arcade en ciudades reales, de Hong Kong a Edimburgo, donde manejar con estilo suma Kudos. 90 en Metacritic y exclusivo de Xbox.</div>
     </div>
 <aside class="notas"><h4>#10 · PROJECT GOTHAM RACING 2</h4><div class="n-line">Metacritic 90 (Xbox, 50 reseñas). Famitsu Xbox 34/40 (y Famitsu 32/40), EGM 9,5, IGN 9,5, GameSpot 8,7, Game Informer 8,75. Nominado al premio de la AIAS a Mejor Juego de Carreras de Consola.</div><div class="n-line">Lo hizo Bizarre Creations (Liverpool) y lo publico Microsoft Game Studios solo para Xbox, en noviembre de 2003, como sucesor del Project Gotham Racing de 2001.</div><div class="n-line">Su sello es el sistema de Kudos: no basta con ser rapido, hay que sumar puntos derrapando, aprovechando la estela del rival o haciendo giros de 360. Se hizo un poco mas permisivo que en el primero.</div><div class="n-line">Diez ciudades nuevas mas el Nurburgring: Hong Kong, Barcelona, Moscu, Edimburgo, Washington D.C., Chicago, Florencia, Sidney, Yokohama y Estocolmo. Mas de 120 autos y juego en linea por Xbox Live; despues salieron dos paquetes descargables.</div><div class="n-line">Para la conversacion (no va en pantalla): corre a 30 cuadros por segundo, la mitad que el primero, a cambio de un salto grande en lo visual.</div><div class="n-cue">Cue Coco: ¿manejar con estilo o manejar rapido? El Kudos premia lo primero.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i><em>10</em></div><div class="g-th cur" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><em>9</em></div><div class="g-th f" style="--w:0.714"><em>8</em></div><div class="g-th f" style="--w:0.700"><em>7</em></div><div class="g-th f" style="--w:0.714"><em>6</em></div><div class="g-th f" style="--w:0.714"><em>5</em></div><div class="g-th f" style="--w:0.714"><em>4</em></div><div class="g-th f" style="--w:0.714"><em>3</em></div><div class="g-th f" style="--w:0.714"><em>2</em></div><div class="g-th f" style="--w:0.697"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>9</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7143">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/xbox-top-mundial/panzer-dragoon-orta.png" alt="" aria-hidden="true"><img src="img/xbox-top-mundial/panzer-dragoon-orta.png" alt="PANZER DRAGOON ORTA box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">PANZER DRAGOON ORTA</div><div class="game-meta">XBOX · 2003 · SEGA</div></div>
+      <div class="hybrid-title"><div class="game-title">PANZER DRAGOON ORTA</div><div class="game-meta g-chips"><span class="g-chip">XBOX</span><span class="g-chip y">2003</span><span class="g-chip">SEGA</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Un dragon, un jinete y mundos que se despliegan alrededor tuyo. Sega revivio Panzer Dragoon en Xbox: 90 en Metacritic y pieza de museo en el Smithsonian.</div>
     </div>
 <aside class="notas"><h4>#9 · PANZER DRAGOON ORTA</h4><div class="n-line">Metacritic 90 (Xbox, 41 reseñas). EGM 9, 8,5 y 9 sobre 10, Famitsu 35/40 (la Famitsu Xbox lo llamo lo mejor de Xbox hasta entonces), IGN 9,2, GameSpot 9, Game Informer 8,25.</div><div class="n-line">Lo hizo Smilebit y lo publico Sega. Salio en Japon el 19 de diciembre de 2002 y en Norteamerica a mediados de enero de 2003. Se anuncio en marzo de 2001 dentro de un acuerdo de varios juegos entre Sega y Microsoft; iba a salir en 2002 y se atraso para pulir graficos y sumar caminos alternativos.</div><div class="n-line">Nacio como 'Panzer Dragoon Vier' (cuatro en aleman) y se renombro para marcar distancia de la trilogia de Saturn. Dirigio Akihiko Mukaiyama, que habia trabajado en Panzer Dragoon Saga (que ya esta en el Top Mundial de Saturn).</div><div class="n-line">Tras el fracaso de Dreamcast, Sega dejo de fabricar consolas y apoyo mucho a la Xbox. El juego es compatible hacia atras con Xbox 360 desde abril de 2007.</div><div class="n-line">Legado: Gamasutra lo llamo el mejor Panzer Dragoon, Retro Gamer dijo que envejecio bien, entro al libro '1001 Video Games You Must Play Before You Die' y el Smithsonian American Art Museum lo eligio para la exposicion 'The Art of Video Games' (2011).</div><div class="n-line">Para la conversacion (no va en pantalla): la prensa lo vio corto, con estructura sobre rieles, y con una dificultad mas alta que los anteriores.</div><div class="n-cue">Cue Coco: la estetica del dragon, ¿la reconoces de Saturn?</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><em>9</em></div><div class="g-th cur" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></i><em>8</em></div><div class="g-th f" style="--w:0.700"><em>7</em></div><div class="g-th f" style="--w:0.714"><em>6</em></div><div class="g-th f" style="--w:0.714"><em>5</em></div><div class="g-th f" style="--w:0.714"><em>4</em></div><div class="g-th f" style="--w:0.714"><em>3</em></div><div class="g-th f" style="--w:0.714"><em>2</em></div><div class="g-th f" style="--w:0.697"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>8</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7143">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/xbox-top-mundial/half-life-2.png" alt="" aria-hidden="true"><img src="img/xbox-top-mundial/half-life-2.png" alt="HALF-LIFE 2 box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">HALF-LIFE 2</div><div class="game-meta">XBOX · 2005 · VALVE / ELECTRONIC ARTS</div></div>
+      <div class="hybrid-title"><div class="game-title">HALF-LIFE 2</div><div class="game-meta g-chips"><span class="g-chip">XBOX</span><span class="g-chip y">2005</span><span class="g-chip">VALVE / ELECTRONIC ARTS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El shooter de Valve con la pistola de gravedad llego a Xbox un año despues del PC. 90 en Metacritic en consola y 39 premios de Juego del Año en su estreno.</div>
     </div>
 <aside class="notas"><h4>#8 · HALF-LIFE 2</h4><div class="n-line">Metacritic 90 para la version Xbox (la de PC saca 96). La nota de PC viene de 81 reseñas. IGN 9,7 y GameSpot 9,2 se refieren a la version PC.</div><div class="n-line">Salio en PC el 16 de noviembre de 2004 y en Xbox el 15 de noviembre de 2005 (en Europa, el 18). La Xbox fue su primera consola; despues vino The Orange Box en Xbox 360 y PlayStation 3 en 2007. Wikipedia lo anota como publicado en Xbox por Electronic Arts.</div><div class="n-line">Valve tardo cinco años y unos 40 millones de dolares en hacerlo, y lo construyo sobre su propio motor Source, que desarrollaron en paralelo. Gabe Newell queria redefinir el genero de los shooters en primera persona.</div><div class="n-line">Su sello: la gravity gun, que permite mover objetos a distancia y convierte el entorno en arma.</div><div class="n-line">Segun Wikipedia, gano 39 premios de Juego del Año (por el estreno en PC) y se cita como uno de los shooters mas influyentes de la historia.</div><div class="n-line">Para la conversacion: es el unico del top que nacio en PC antes de llegar a consola; la version Xbox es la primera en una consola, pero no su estreno.</div><div class="n-cue">Cue Coco: la gravity gun, ¿que objeto lanzarias primero?</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/xbox-top-mundial/soulcalibur-ii.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></i><em>8</em></div><div class="g-th cur" style="--w:0.700"><i style="background-image:url(img/xbox-top-mundial/soulcalibur-ii.png)"></i><em>7</em></div><div class="g-th f" style="--w:0.714"><em>6</em></div><div class="g-th f" style="--w:0.714"><em>5</em></div><div class="g-th f" style="--w:0.714"><em>4</em></div><div class="g-th f" style="--w:0.714"><em>3</em></div><div class="g-th f" style="--w:0.714"><em>2</em></div><div class="g-th f" style="--w:0.697"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>7</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/xbox-top-mundial/soulcalibur-ii.png" alt="" aria-hidden="true"><img src="img/xbox-top-mundial/soulcalibur-ii.png" alt="SOULCALIBUR II box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SOULCALIBUR II</div><div class="game-meta">XBOX · 2003 · NAMCO</div></div>
+      <div class="hybrid-title"><div class="game-title">SOULCALIBUR II</div><div class="game-meta g-chips"><span class="g-chip">XBOX</span><span class="g-chip y">2003</span><span class="g-chip">NAMCO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Armas, peleas 3D y un invitado exclusivo por consola: en Xbox fue Spawn. Namco la trajo del arcade a casa y saco 92 en Metacritic para Xbox.</div>
     </div>
 <aside class="notas"><h4>#7 · SOULCALIBUR II</h4><div class="n-line">Metacritic 92 (Xbox y PS2) y 93 (GameCube, con 45 reseñas). Segun Wikipedia, los promedios de GameRankings son 91,3 % en PS2, 92,3 % en GameCube y 91,6 % en Xbox. Edge 9/10 en las tres.</div><div class="n-line">Salio en arcade en julio de 2002 y en las tres consolas casi a la vez: en Norteamerica a fines de agosto de 2003 (26 o 27 de agosto segun la fuente). Se construyo sobre la placa System 246 de Namco; primero iba a salir sobre la NAOMI de Sega.</div><div class="n-line">Las versiones caseras traen a Necrid, un personaje de Todd McFarlane, y un invitado por plataforma: Heihachi de Tekken en PS2, Link de Zelda en GameCube y Spawn en Xbox (tambien de McFarlane).</div><div class="n-line">Presupuesto de marketing de 9,4 millones de dolares. La version GameCube vendio unos 850.000 en Estados Unidos hasta julio de 2006 y la saga completa sumaba 2,6 millones.</div><div class="n-line">Para la conversacion: el escandalo de colusion en el EVO 2004 convirtio al juego en la oveja negra de la comunidad de peleas hasta 2010. Contexto, no va en pantalla.</div><div class="n-line">Ojo: esta tambien en GameCube Infravalorados. Ver la discusion.</div><div class="n-cue">Cue Coco: Heihachi, Link o Spawn, ¿cual invitado se queda en tu consola?</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/xbox-top-mundial/forza-motorsport.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/xbox-top-mundial/soulcalibur-ii.png)"></i><em>7</em></div><div class="g-th cur" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/forza-motorsport.png)"></i><em>6</em></div><div class="g-th f" style="--w:0.714"><em>5</em></div><div class="g-th f" style="--w:0.714"><em>4</em></div><div class="g-th f" style="--w:0.714"><em>3</em></div><div class="g-th f" style="--w:0.714"><em>2</em></div><div class="g-th f" style="--w:0.697"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>6</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7143">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/xbox-top-mundial/forza-motorsport.png" alt="" aria-hidden="true"><img src="img/xbox-top-mundial/forza-motorsport.png" alt="FORZA MOTORSPORT box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">FORZA MOTORSPORT</div><div class="game-meta">XBOX · 2005 · MICROSOFT GAME STUDIOS</div></div>
+      <div class="hybrid-title"><div class="game-title">FORZA MOTORSPORT</div><div class="game-meta g-chips"><span class="g-chip">XBOX</span><span class="g-chip y">2005</span><span class="g-chip">MICROSOFT GAME STUDIOS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>La respuesta de Microsoft a Gran Turismo: 231 autos con licencia, daño que cambia como se maneja y juego en linea. 92 en Metacritic para Xbox.</div>
     </div>
 <aside class="notas"><h4>#6 · FORZA MOTORSPORT</h4><div class="n-line">Metacritic 92 (Xbox, 73 reseñas). Famitsu 31/40. 1UP lo llamo el simulador de consola mas realista hasta entonces y el Times y Maxim le dieron cinco estrellas.</div><div class="n-line">Lo hizo Turn 10 Studios y salio el 3 de mayo de 2005 en Norteamerica (el 13 en Europa). Se anuncio en el E3 2004, tardo dos años y medio en hacerse y se atraso tres veces, desde diciembre de 2004.</div><div class="n-line">Mas de 200 autos (231), nueve clases, desde un Honda Civic hasta un Enzo Ferrari y prototipos de Le Mans como el Audi R8. Tuning de presion de neumaticos, downforce, relaciones de cambio y diferencial limitado.</div><div class="n-line">El daño es real: los choques alteran manejo, velocidad maxima y aceleracion, y se pueden perder spoilers, rayar la pintura o romper vidrios. El objetivo explicito de Microsoft era apuntar a Gran Turismo.</div><div class="n-line">Vendio mas de 100.000 copias en Norteamerica durante su mes de estreno y gano premio de oro de ELSPA en el Reino Unido.</div><div class="n-line">Para la conversacion: la caja de libretro trae la etiqueta 'For Display Only'. Es la unica caja disponible.</div><div class="n-cue">Cue Coco: el daño real, ¿manejar con cuidado o chocar sin culpa?</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/xbox-top-mundial/prince-of-persia-the-sands-of-time.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/xbox-top-mundial/soulcalibur-ii.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/forza-motorsport.png)"></i><em>6</em></div><div class="g-th cur" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/prince-of-persia-the-sands-of-time.png)"></i><em>5</em></div><div class="g-th f" style="--w:0.714"><em>4</em></div><div class="g-th f" style="--w:0.714"><em>3</em></div><div class="g-th f" style="--w:0.714"><em>2</em></div><div class="g-th f" style="--w:0.697"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>5</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7143">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/xbox-top-mundial/prince-of-persia-the-sands-of-time.png" alt="" aria-hidden="true"><img src="img/xbox-top-mundial/prince-of-persia-the-sands-of-time.png" alt="PRINCE OF PERSIA: THE SANDS OF TIME box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">PRINCE OF PERSIA: THE SANDS OF TIME</div><div class="game-meta">XBOX · 2003 · UBISOFT</div></div>
+      <div class="hybrid-title"><div class="game-title">PRINCE OF PERSIA: THE SANDS OF TIME</div><div class="game-meta g-chips"><span class="g-chip">XBOX</span><span class="g-chip y">2003</span><span class="g-chip">UBISOFT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El principe, la daga del tiempo y la posibilidad de rebobinar tus errores. Jordan Mechner revivio su saga y saco 92 en Metacritic en Xbox.</div>
     </div>
 <aside class="notas"><h4>#5 · PRINCE OF PERSIA: THE SANDS OF TIME</h4><div class="n-line">Metacritic 92 en Xbox, PS2 y GameCube (44 reseñas en la ficha de Metacritic). GameSpot lo nombro el mejor juego de noviembre de 2003 en las tres consolas.</div><div class="n-line">Lo hizo Ubisoft Montreal. La produccion completa empezo en junio de 2001 y llego a unas 65 personas. Jordan Mechner, el creador original, entro como consultor creativo, y termino siendo diseñador y guionista.</div><div class="n-line">La mecanica central es rebobinar el tiempo hasta diez segundos con la daga: corrige caidas y peleas perdidas. La historia se inspiro en el Shahnameh y en Las mil y una noches. Farah es una companera controlada por la IA que dispara con arco y resuelve puzles junto al principe.</div><div class="n-line">En el E3 2003 fue nombrado Juego del Año, gano Mejor Accion/Aventura en los Game Critics Awards 2003 y se llevo Excelencia en Diseño y Programacion en los Game Developers Choice Awards 2004, donde fue nominado a Juego del Año.</div><div class="n-line">Vendio 2 millones de copias a fines de 2003. En Norteamerica el estreno fue flojo (se cree que por la competencia de Beyond Good &amp; Evil y otros lanzamientos) y Ubisoft regalo juegos con la compra. Assassin's Creed nacio de ideas para una secuela.</div><div class="n-line">Ojo: tambien esta en GameCube Infravalorados y salio el mismo mes en PS2. Ver la discusion.</div><div class="n-cue">Cue Coco: rebobinar el tiempo, ¿cuantas veces lo habrias usado?</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/xbox-top-mundial/tom-clancys-splinter-cell-chaos-theory.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/xbox-top-mundial/soulcalibur-ii.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/forza-motorsport.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/prince-of-persia-the-sands-of-time.png)"></i><em>5</em></div><div class="g-th cur" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/tom-clancys-splinter-cell-chaos-theory.png)"></i><em>4</em></div><div class="g-th f" style="--w:0.714"><em>3</em></div><div class="g-th f" style="--w:0.714"><em>2</em></div><div class="g-th f" style="--w:0.697"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>4</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7143">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/xbox-top-mundial/tom-clancys-splinter-cell-chaos-theory.png" alt="" aria-hidden="true"><img src="img/xbox-top-mundial/tom-clancys-splinter-cell-chaos-theory.png" alt="TOM CLANCY'S SPLINTER CELL: CHAOS THEORY box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">TOM CLANCY'S SPLINTER CELL: CHAOS THEORY</div><div class="game-meta">XBOX · 2005 · UBISOFT</div></div>
+      <div class="hybrid-title"><div class="game-title">TOM CLANCY'S SPLINTER CELL: CHAOS THEORY</div><div class="game-meta g-chips"><span class="g-chip">XBOX</span><span class="g-chip y">2005</span><span class="g-chip">UBISOFT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Sam Fisher, sombras y sigilo puro. Chaos Theory pulio la formula con cooperativo y espias contra mercenarios: 94 en Metacritic para Xbox.</div>
     </div>
 <aside class="notas"><h4>#4 · TOM CLANCY'S SPLINTER CELL: CHAOS THEORY</h4><div class="n-line">Metacritic 94 en Xbox (70 reseñas), 92 en PC y 87 en PS2. 1UP le dio una A, TeamXbox 9,8, Edge 8/10 y Famitsu 31/40. IGN lo describio en 2013 como el pico de la serie.</div><div class="n-line">Lo hicieron en conjunto Ubisoft Montreal y Ubisoft Milan. Salio a fines de marzo de 2005 (el 28 o el 29, segun la fuente) en Xbox, PS2 y PC; tambien tuvo version de GameCube. Presupuesto de unos 10 millones de dolares de desarrollo y otros 10 de marketing, con unas 300 personas en el pico.</div><div class="n-line">Novedades: normal mapping, HDR y parallax mapping; un monitor de ruido que mide el sonido de Sam contra el del ambiente; modo cooperativo con siete misiones propias (Agent One y Agent Two) y el competitivo Spies vs Mercs. Michael Ironside volvio a poner la voz de Fisher y la banda sonora fue de Amon Tobin.</div><div class="n-line">Vendio 2,5 millones de copias hasta fines de marzo de 2005 y la saga ya sumaba 10 millones. La AIAS lo nomino a Accion/Aventura del Año, Diseño de Sonido y Actuacion de Personaje Masculino.</div><div class="n-line">Fuera por repetir franquicia: Splinter Cell original (93) y Pandora Tomorrow (93).</div><div class="n-line">Para la conversacion: estuvo prohibido en Corea del Sur hasta 2007 porque muestra una guerra entre las dos Coreas.</div><div class="n-cue">Cue Coco: la luz y el ruido de Sam, ¿te gusta mas el sigilo o la accion?</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/xbox-top-mundial/ninja-gaiden-black.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/xbox-top-mundial/soulcalibur-ii.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/forza-motorsport.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/prince-of-persia-the-sands-of-time.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/tom-clancys-splinter-cell-chaos-theory.png)"></i><em>4</em></div><div class="g-th cur" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/ninja-gaiden-black.png)"></i><em>3</em></div><div class="g-th f" style="--w:0.714"><em>2</em></div><div class="g-th f" style="--w:0.697"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>3</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7143">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/xbox-top-mundial/ninja-gaiden-black.png" alt="" aria-hidden="true"><img src="img/xbox-top-mundial/ninja-gaiden-black.png" alt="NINJA GAIDEN BLACK box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">NINJA GAIDEN BLACK</div><div class="game-meta">XBOX · 2005 · TECMO</div></div>
+      <div class="hybrid-title"><div class="game-title">NINJA GAIDEN BLACK</div><div class="game-meta g-chips"><span class="g-chip">XBOX</span><span class="g-chip y">2005</span><span class="g-chip">TECMO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Ryu Hayabusa, combate rapidisimo y un reto que no suelta a nadie. Team Ninja pulio su reboot en 2005 y Black saco 94 en Metacritic.</div>
     </div>
 <aside class="notas"><h4>#3 · NINJA GAIDEN BLACK</h4><div class="n-line">Metacritic 94 para Ninja Gaiden Black (32 reseñas) y 91 para el original de 2004. GameRankings del original: 93 %. GameSpot dijo que Black tenia la mejor presentacion visual y sonora de la Xbox y alabo el nuevo Mission Mode; IGN hablo de 'un dia raro y bienvenido'.</div><div class="n-line">Ninja Gaiden salio en Norteamerica el 2 de marzo de 2004; Black, el 20 de septiembre de 2005. Black reune el original con los dos paquetes descargables y contenido nuevo. Es exclusivo de Xbox.</div><div class="n-line">Desarrollo: empezo en 1999 sobre la placa arcade NAOMI de Sega, luego se penso para Dreamcast y PS2, y Tomonobu Itagaki convencio a Tecmo de hacerlo para Xbox. En el E3 2002 anunciaron que seria exclusivo de Xbox, y fue una sorpresa para la industria y los fans.</div><div class="n-line">Es un reboot de la serie de NES: Itagaki pidio un juego dificil pero atractivo, que desafie reflejos mas que memoria de trazados. EGM lo llamo una clasica instantanea que no se debia perder.</div><div class="n-line">Vendio 1,5 millones de copias entre Ninja Gaiden y Black hasta agosto de 2007. En su primer mes en Estados Unidos vendio 362.441 copias del original. La version europea del original salio censurada; Black salio sin censura con calificacion USK 18+ un año despues.</div><div class="n-line">Para la conversacion: su fama de dificil es parte del encanto, pero tambien lo que aparto a jugadores casuales. Contexto, no va en pantalla.</div><div class="n-line">Decision de formato: entra Black (94) en vez del original (91); la franquicia cuenta una sola vez.</div><div class="n-cue">Cue Coco: ¿cuanto aguantas antes de apagar la consola con este juego?</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/xbox-top-mundial/star-wars-knights-of-the-old-republic.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/xbox-top-mundial/soulcalibur-ii.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/forza-motorsport.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/prince-of-persia-the-sands-of-time.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/tom-clancys-splinter-cell-chaos-theory.png)"></i><em>4</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/ninja-gaiden-black.png)"></i><em>3</em></div><div class="g-th cur" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/star-wars-knights-of-the-old-republic.png)"></i><em>2</em></div><div class="g-th f" style="--w:0.697"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>2</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7143">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/xbox-top-mundial/star-wars-knights-of-the-old-republic.png" alt="" aria-hidden="true"><img src="img/xbox-top-mundial/star-wars-knights-of-the-old-republic.png" alt="STAR WARS: KNIGHTS OF THE OLD REPUBLIC box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">STAR WARS: KNIGHTS OF THE OLD REPUBLIC</div><div class="game-meta">XBOX · 2003 · LUCASARTS</div></div>
+      <div class="hybrid-title"><div class="game-title">STAR WARS: KNIGHTS OF THE OLD REPUBLIC</div><div class="game-meta g-chips"><span class="g-chip">XBOX</span><span class="g-chip y">2003</span><span class="g-chip">LUCASARTS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>El rol de BioWare en una galaxia muy lejana, con decisiones de luz y oscuridad y el giro que todos recuerdan. 94 en Metacritic y Juego del Año 2003.</div>
     </div>
 <aside class="notas"><h4>#2 · STAR WARS: KNIGHTS OF THE OLD REPUBLIC</h4><div class="n-line">Metacritic 94 para Xbox (72 reseñas) y GameRankings 94 %. Gano el premio a Juego del Año de los Game Developers Choice Awards, BAFTA a Mejor Juego de Xbox y los premios de la AIAS a Mejor RPG de consola y de PC. IGN lo nombro Juego del Año 2003 entre todas las plataformas.</div><div class="n-line">Lo hizo BioWare y lo publico LucasArts. Salio en Xbox en julio de 2003 (la fecha varia entre el 15, 16 y 17 segun la fuente) y en PC en noviembre de ese año. Lo dirigio Casey Hudson; James Ohlen lo diseño y Drew Karpyshyn escribio la historia, que ocurre unos 4.000 años antes de la creacion del Imperio Galactico.</div><div class="n-line">Hudson dijo que el combate fue uno de los mayores logros y riesgos del juego. BioWare corrio el juego sobre el motor Odyssey, basado en el Aurora de Neverwinter Nights pero reescrito; antes habia hecho MDK2 en consolas, lo que ayudo con la Xbox.</div><div class="n-line">Vendio 250.000 copias en sus primeros cuatro dias, el juego mas rapido de Xbox hasta ese momento, y 1,3 millones solo en Estados Unidos hasta julio de 2006, con unos 3,2 millones en total (Xbox y PC) hasta 2007. Es Xbox Platinum Series. El giro de su historia quedo segundo en la lista de Game Informer de los mejores giros de 2007.</div><div class="n-line">Legado: Obsidian hizo la secuela en 2004, BioWare lanzo el MMO The Old Republic en 2011 (un millon de suscriptores en tres dias) y hay un remake anunciado desde 2021.</div><div class="n-line">Para la conversacion: Lucasfilm rechazo propuestas de BioWare de mostrar la cultura de los Tusken Raiders, y el diseño de Revan se inspiro en ornamentos tribales africanos de los siglos XVI a XVIII.</div><div class="n-cue">Cue Coco: ¿lado luminoso o lado oscuro? Es una decision real en el juego.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/xbox-top-mundial/halo-combat-evolved.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL TRONO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.700"><i style="background-image:url(img/xbox-top-mundial/soulcalibur-ii.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/forza-motorsport.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/prince-of-persia-the-sands-of-time.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/tom-clancys-splinter-cell-chaos-theory.png)"></i><em>4</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/ninja-gaiden-black.png)"></i><em>3</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/xbox-top-mundial/star-wars-knights-of-the-old-republic.png)"></i><em>2</em></div><div class="g-th cur" style="--w:0.697"><i style="background-image:url(img/xbox-top-mundial/halo-combat-evolved.png)"></i><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>1</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6952">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/xbox-top-mundial/halo-combat-evolved.png" alt="" aria-hidden="true"><img src="img/xbox-top-mundial/halo-combat-evolved.png" alt="HALO: COMBAT EVOLVED box art"></div>
@@ -387,13 +433,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">HALO: COMBAT EVOLVED</div><div class="game-meta">XBOX · 2001 · MICROSOFT GAME STUDIOS</div></div>
+      <div class="hybrid-title"><div class="game-title">HALO: COMBAT EVOLVED</div><div class="game-meta g-chips"><span class="g-chip">XBOX</span><span class="g-chip y">2001</span><span class="g-chip">MICROSOFT GAME STUDIOS</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL TRONO</span>El juego que definio la Xbox. Bungie, el Jefe Maestro y un shooter de consola con vehiculos, dos armas y 97 en Metacritic: la nota mas alta de la consola.</div>
     </div>
 <aside class="notas"><h4>#1 · HALO: COMBAT EVOLVED</h4><div class="n-line">Metacritic 97 para Xbox con 68 reseñas (83 en PC). Edge lo llamo el juego de lanzamiento mas importante para cualquier consola. GameSpot dijo que valia la pena comprar una Xbox solo por su campaña y lo puso como uno de los mejores shooters en cualquier plataforma. IGN lo llamo un cinco estrellas sin discusion. Game Informer 9,5, GameSpot 9,7 e IGN 9,7.</div><div class="n-line">Salio el 15 de noviembre de 2001, dia del lanzamiento de la Xbox en Norteamerica (el 14 de marzo de 2002 en Europa). Microsoft compro Bungie en 2000 para tenerlo de juego de lanzamiento. Antes iba a ser para Mac y Windows: Steve Jobs lo presento en el Macworld del 21 de julio de 1999.</div><div class="n-line">Nacio como sucesor de Marathon y paso por varias formas, entre ellas un juego de tanques y un RTS, antes de ser el shooter. Cuatro meses antes del estreno se desecho el multijugador por poco entretenido y se rehizo de cero. La prensa elogio el balance de armas, los vehiculos conducibles y la IA de los enemigos; las partidas de 16 jugadores por LAN fueron una novedad en consola.</div><div class="n-line">Recibio mas de 40 premios, entre ellos Juego del Año de la AIAS, EGM, Edge e IGN. BAFTA lo nombro Mejor Juego de Consola y Rolling Stone, Mejor Banda Sonora Original. GameSpot lo puso tercero entre los mejores juegos de consola de 2001.</div><div class="n-line">Vendio un millon de copias en unos cinco meses, mas rapido que cualquier juego previo de la generacion, y mas de seis millones en el mundo hasta noviembre de 2005: el segundo juego mas vendido de Xbox. En dos meses se vendio con mas de la mitad de las consolas. Halo 2 vendio 2,38 millones el primer dia.</div><div class="n-line">Para la conversacion: el multijugador por LAN exigia armar una red local, algo que muchos criticos vieron poco practico en esos años. Contexto, no va en pantalla.</div><div class="n-line">Fuera por franquicia repetida: Halo 2 (95).</div><div class="n-cue">GANCHO FINAL: el juego que hizo que la Xbox existiera para mucha gente; cierra con el Jefe Maestro.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/xbox-top-mundial/halo-combat-evolved.png)"></i><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><i style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></i><i style="background-image:url(img/xbox-top-mundial/star-wars-knights-of-the-old-republic.png)"></i><i style="background-image:url(img/xbox-top-mundial/ninja-gaiden-black.png)"></i><i style="background-image:url(img/xbox-top-mundial/prince-of-persia-the-sands-of-time.png)"></i><i style="background-image:url(img/xbox-top-mundial/tom-clancys-splinter-cell-chaos-theory.png)"></i><i style="background-image:url(img/xbox-top-mundial/forza-motorsport.png)"></i><i style="background-image:url(img/xbox-top-mundial/soulcalibur-ii.png)"></i><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg">EL VEREDICTO</div>
@@ -401,8 +448,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">14</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/xbox-top-mundial/halo-combat-evolved.png)"></i><i style="background-image:url(img/xbox-top-mundial/panzer-dragoon-orta.png)"></i><i style="background-image:url(img/xbox-top-mundial/half-life-2.png)"></i><i style="background-image:url(img/xbox-top-mundial/star-wars-knights-of-the-old-republic.png)"></i><i style="background-image:url(img/xbox-top-mundial/ninja-gaiden-black.png)"></i><i style="background-image:url(img/xbox-top-mundial/prince-of-persia-the-sands-of-time.png)"></i><i style="background-image:url(img/xbox-top-mundial/tom-clancys-splinter-cell-chaos-theory.png)"></i><i style="background-image:url(img/xbox-top-mundial/forza-motorsport.png)"></i><i style="background-image:url(img/xbox-top-mundial/soulcalibur-ii.png)"></i><i style="background-image:url(img/xbox-top-mundial/project-gotham-racing-2.png)"></i></div>
     <div class="divider">
       <div class="pre cy">TU TURNO</div>
       <div class="title cy">¿Y TU TOP?</div>

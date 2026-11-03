@@ -160,6 +160,40 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-alta .hybrid-title{align-self:center !important}
 .slide-hybrid.box-alta .game-title{font-size:48px !important;line-height:1.05 !important}
 .slide-hybrid.box-alta .game-meta{font-size:22px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
 </head>
 <body>
@@ -174,8 +208,9 @@ body.read-mode .read-indicator{display:block}
 
 <div class="deck" id="deck">
 
-  <section class="slide active">
+  <section class="slide active g-nueva">
     <span class="slide-num">01</span>
+    <div class="g-mos"><i style="background-image:url(img/gamecube-infravalorados/prince-of-persia-the-sands-of-time.png)"></i><i style="background-image:url(img/gamecube-infravalorados/viewtiful-joe.png)"></i><i style="background-image:url(img/gamecube-infravalorados/soulcalibur-ii.png)"></i><i style="background-image:url(img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png)"></i><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><i style="background-image:url(img/gamecube-infravalorados/metroid-prime-2-echoes.png)"></i><i style="background-image:url(img/gamecube-infravalorados/tony-hawks-pro-skater-4.png)"></i><i style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></i><i style="background-image:url(img/gamecube-infravalorados/resident-evil.png)"></i></div>
     <div class="portada">
       <div class="ep-tag">NINTENDO GAMECUBE · JOYAS QUE NADIE NOMBRA</div>
       <div class="ep-title">GAMECUBE <span class="vs">INFRAVALORADOS</span></div>
@@ -183,8 +218,9 @@ body.read-mode .read-indicator{display:block}
     </div>
 <aside class="notas"><h4>INTRO · DATOS BOMBA</h4><div class="n-line">Ranking de CALIDAD, no de precios: juegos de GameCube que la prensa puso bien alto y que hoy casi no salen en las listas.</div><div class="n-line">Criterio: buena critica (nota Metacritic de la version GameCube), lanzamiento en NTSC USA y que no esten en el Top Mundial del canal (Metroid Prime, Resident Evil 4, The Wind Waker, Smash Melee, Mario Sunshine, Pikmin, F-Zero GX, Eternal Darkness, Animal Crossing y Paper Mario: La Puerta Milenaria).</div><div class="n-line">Como la GameCube si tiene Metacritic, el orden sale de la nota de la version GameCube. El olvido solo desempata. Seis de los diez salieron tambien en otras consolas: aqui cuenta la nota de la version de GameCube.</div><div class="n-line">Es discutible, y ese es el punto. Las reservas que quedaron en la banca estan en la discusion.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-ye">
     <span class="slide-num">02</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/gamecube-infravalorados/prince-of-persia-the-sands-of-time.png)"></i><i style="background-image:url(img/gamecube-infravalorados/viewtiful-joe.png)"></i><i style="background-image:url(img/gamecube-infravalorados/soulcalibur-ii.png)"></i><i style="background-image:url(img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png)"></i><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><i style="background-image:url(img/gamecube-infravalorados/metroid-prime-2-echoes.png)"></i><i style="background-image:url(img/gamecube-infravalorados/tony-hawks-pro-skater-4.png)"></i><i style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></i><i style="background-image:url(img/gamecube-infravalorados/resident-evil.png)"></i></div>
     <div class="divider">
       <div class="pre ye">NO SON LOS FAMOSOS</div>
       <div class="title ye">BUENOS Y OLVIDADOS · #10 AL #1</div>
@@ -192,10 +228,11 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th cur" style="--w:0.693"><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><em>10</em></div><div class="g-th f" style="--w:0.702"><em>9</em></div><div class="g-th f" style="--w:0.714"><em>8</em></div><div class="g-th f" style="--w:0.702"><em>7</em></div><div class="g-th f" style="--w:0.714"><em>6</em></div><div class="g-th f" style="--w:0.705"><em>5</em></div><div class="g-th f" style="--w:0.702"><em>4</em></div><div class="g-th f" style="--w:0.720"><em>3</em></div><div class="g-th f" style="--w:0.719"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>10</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.6929">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-infravalorados/nba-street-vol-2.png" alt="" aria-hidden="true"><img src="img/gamecube-infravalorados/nba-street-vol-2.png" alt="NBA STREET VOL. 2 box art"></div>
@@ -207,15 +244,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">NBA STREET VOL. 2</div><div class="game-meta">GAMECUBE · 2003 · EA SPORTS BIG</div></div>
+      <div class="hybrid-title"><div class="game-title">NBA STREET VOL. 2</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2003</span><span class="g-chip">EA SPORTS BIG</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Basquetbol callejero 3 contra 3 de EA Sports BIG. 88 en Metacritic para GameCube y nominado a Mejor Juego Deportivo de Accion en los premios AIAS.</div>
     </div>
 <aside class="notas"><h4>#10 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 88 y GameRankings 89 % para la version GameCube (la PS2 tuvo 90 y la Xbox 89). BBC Sport le dio 93 %.</div><div class="n-line">Salio en Norteamerica el 29 de abril de 2003, lo desarrollaron NuFX y EA Canada. En los premios AIAS fue nominado a Juego Deportivo de Accion del Año, que se llevo SSX 3.</div><div class="n-line">Maxim le puso 8 sobre 10 y destaco el humor involuntario del juego: ver a Yao Ming clavandole una a Bill Walton valia la entrada. La banda sonora trae hip-hop de Nelly y Nate Dogg.</div><div class="n-line">Dato de GameCube: la version de este sistema estaba planeada para Japon, pero esa salida se cancelo; en Japon solo salio la de PS2.</div><div class="n-line">Por que esta olvidado: es un juego de licencia NBA de 2003 que se reemplazo con cada entrega nueva, y la serie se recuerda mas por NBA Street V3.</div><div class="n-cue">Cue Coco: preguntar si jugo alguno de la serie NBA Street.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.693"><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><em>10</em></div><div class="g-th cur" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><em>9</em></div><div class="g-th f" style="--w:0.714"><em>8</em></div><div class="g-th f" style="--w:0.702"><em>7</em></div><div class="g-th f" style="--w:0.714"><em>6</em></div><div class="g-th f" style="--w:0.705"><em>5</em></div><div class="g-th f" style="--w:0.702"><em>4</em></div><div class="g-th f" style="--w:0.720"><em>3</em></div><div class="g-th f" style="--w:0.719"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>9</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-infravalorados/burnout-2-point-of-impact.png" alt="" aria-hidden="true"><img src="img/gamecube-infravalorados/burnout-2-point-of-impact.png" alt="BURNOUT 2: POINT OF IMPACT box art"></div>
@@ -227,15 +265,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">BURNOUT 2: POINT OF IMPACT</div><div class="game-meta">GAMECUBE · 2003 · ACCLAIM</div></div>
+      <div class="hybrid-title"><div class="game-title">BURNOUT 2: POINT OF IMPACT</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2003</span><span class="g-chip">ACCLAIM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Carreras arcade de Criterion con el modo Crash. 89 en Metacritic para GameCube y puesto 75 entre los 100 mejores juegos de Edge en 2007.</div>
     </div>
 <aside class="notas"><h4>#9 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 89 para GameCube (PS2 86, Xbox 88). Edge lo ubico 75 en su lista de los 100 mejores juegos de 2007. Nominado a Juego de Carreras del Año en los premios AIAS.</div><div class="n-line">Salio en PS2 en octubre de 2002 y en GameCube el 8 de abril de 2003. Lo desarrollo Criterion y lo publico Acclaim.</div><div class="n-line">Eurogamer lo llamo la experiencia de manejo arcade mas absorbente que habian probado y GameSpy dijo que si Gran Turismo 3 es champagne, Burnout 2 es whisky. IGN destaco la velocidad y el modo Crash.</div><div class="n-line">Fue el ultimo Burnout en GameCube y el ultimo de Acclaim: la editora quebro en 2004 y el resto de la serie lo publico Electronic Arts. La saga no volvio a una consola de Nintendo hasta Burnout Legends en 2005.</div><div class="n-line">Por que esta olvidado: las entregas siguientes pasaron a EA y no llegaron a GameCube, asi que la fama de la saga se quedo en otras consolas.</div><div class="n-cue">Cue Coco: el modo Crash, donde el objetivo es provocar el choque mas caro.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">05</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.693"><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><em>9</em></div><div class="g-th cur" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></i><em>8</em></div><div class="g-th f" style="--w:0.702"><em>7</em></div><div class="g-th f" style="--w:0.714"><em>6</em></div><div class="g-th f" style="--w:0.705"><em>5</em></div><div class="g-th f" style="--w:0.702"><em>4</em></div><div class="g-th f" style="--w:0.720"><em>3</em></div><div class="g-th f" style="--w:0.719"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>8</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7119">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-infravalorados/pikmin-2.png" alt="" aria-hidden="true"><img src="img/gamecube-infravalorados/pikmin-2.png" alt="PIKMIN 2 box art"></div>
@@ -247,15 +286,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">PIKMIN 2</div><div class="game-meta">GAMECUBE · 2004 · NINTENDO</div></div>
+      <div class="hybrid-title"><div class="game-title">PIKMIN 2</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2004</span><span class="g-chip">NINTENDO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Secuela de Pikmin, sin limite de 30 dias y con dos lideres a la vez. 90 en Metacritic y puesto 6 en el top 20 de GameCube de IGN en 2020.</div>
     </div>
 <aside class="notas"><h4>#8 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 90 (54 reseñas) y GameRankings 89,44 % (58 reseñas) para GameCube. GameSpot lo nombro mejor juego de GameCube de agosto de 2004. Nintendo Power lo puso 47 en su Top 200 y Official Nintendo Magazine, 29 entre los 100 mejores juegos de Nintendo. IGN lo ubico 6 en su lista de 2020.</div><div class="n-line">Salio en Norteamerica el 30 de agosto de 2004. Lo dirigieron Shigefumi Hino (graficos) y Masamichi Abe (diseño); Miyamoto y Tezuka fueron productores. El desarrollo duro unos dos años y medio, con seis meses de retraso a proposito para hacer mas cambios.</div><div class="n-line">Cambios que la prensa aplaudio: se quito el limite de 30 dias del primero, hay nuevos tipos de Pikmin, se controlan dos lideres a la vez y se sumo un modo multijugador. Muchos criticos lo consideraron superior a Pikmin.</div><div class="n-line">Dato curioso: la musica 'Totaka's Song' esta escondida dos veces en el juego. Despues salio para Wii con controles nuevos (2009, y en Norteamerica en 2012) y en una version remasterizada para Switch en 2023.</div><div class="n-line">Por que esta olvidado: el primer Pikmin ya esta en el Top Mundial del canal y se lleva la fama de la saga.</div><div class="n-cue">Cue Coco: sin limite de dias, por fin se puede jugar tranquilo.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.693"><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></i><em>8</em></div><div class="g-th cur" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png)"></i><em>7</em></div><div class="g-th f" style="--w:0.714"><em>6</em></div><div class="g-th f" style="--w:0.705"><em>5</em></div><div class="g-th f" style="--w:0.702"><em>4</em></div><div class="g-th f" style="--w:0.720"><em>3</em></div><div class="g-th f" style="--w:0.719"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>7</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png" alt="" aria-hidden="true"><img src="img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png" alt="STAR WARS ROGUE SQUADRON II: ROGUE LEADER box art"></div>
@@ -267,15 +307,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">STAR WARS ROGUE SQUADRON II: ROGUE LEADER</div><div class="game-meta">GAMECUBE · 2001 · LUCASARTS</div></div>
+      <div class="hybrid-title"><div class="game-title">STAR WARS ROGUE SQUADRON II: ROGUE LEADER</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2001</span><span class="g-chip">LUCASARTS</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Combates espaciales de Star Wars hechos por Factor 5, juego de lanzamiento de la consola. 90 en Metacritic y premio a Mejor Juego de Accion en el E3 2001.</div>
     </div>
 <aside class="notas"><h4>#7 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 90 y GameRankings 90,04 %. Gano el premio Game Critics Award a Mejor Juego de Accion del E3 2001. Official Nintendo Magazine lo ubico 100 entre los mejores juegos de las consolas de Nintendo. GameSpot lo dejo segundo como Mejor Juego de GameCube, tras Smash Melee.</div><div class="n-line">Salio en Norteamerica el 18 de noviembre de 2001, el dia del lanzamiento de la consola. Fue el 7 mas vendido de ese mes, el mejor tercero y el segundo mejor de todo el lanzamiento de GameCube. Vendio 1,03 millones de copias en Estados Unidos.</div><div class="n-line">Factor 5 hizo en solo 19 dias una cinematica de apertura (recreando una escena de Una Nueva Esperanza) y una demo jugable para mostrar la consola en el Space World. En el Reino Unido fue el primer juego de un tercero en debutar en el puesto 1 de un lanzamiento de consola.</div><div class="n-line">Nintendo World Report destaco graficos con bump mapping y 480p, y sonido Dolby Pro Logic II; lo llamo una obra maestra visual y sonora.</div><div class="n-line">Por que esta olvidado: le siguio Rebel Strike en 2003 y la saga se despidio ahi.</div><div class="n-cue">Cue Coco: la escena de apertura que recrea la batalla de Una Nueva Esperanza.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">07</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-infravalorados/tony-hawks-pro-skater-4.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.693"><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png)"></i><em>7</em></div><div class="g-th cur" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/tony-hawks-pro-skater-4.png)"></i><em>6</em></div><div class="g-th f" style="--w:0.705"><em>5</em></div><div class="g-th f" style="--w:0.702"><em>4</em></div><div class="g-th f" style="--w:0.720"><em>3</em></div><div class="g-th f" style="--w:0.719"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>6</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7119">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-infravalorados/tony-hawks-pro-skater-4.png" alt="" aria-hidden="true"><img src="img/gamecube-infravalorados/tony-hawks-pro-skater-4.png" alt="TONY HAWK'S PRO SKATER 4 box art"></div>
@@ -287,15 +328,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">TONY HAWK'S PRO SKATER 4</div><div class="game-meta">GAMECUBE · 2002 · ACTIVISION</div></div>
+      <div class="hybrid-title"><div class="game-title">TONY HAWK'S PRO SKATER 4</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2002</span><span class="g-chip">ACTIVISION</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Skate de Neversoft con modo carrera libre por los escenarios. 91 en Metacritic para GameCube y Mejor Juego Alternativo de Deportes de GameCube en GameSpot.</div>
     </div>
 <aside class="notas"><h4>#6 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 91 para GameCube (PS2 94). GameSpot lo nombro mejor juego de Xbox y segundo mejor de PS2 y GameCube de octubre de 2002, y le dio el premio a Mejor Juego Alternativo de Deportes en GameCube y Xbox. Nominado a Juego del Año en GameCube. AIAS lo nomino a Juego Deportivo de Consola del Año.</div><div class="n-line">Salio en Norteamerica el 23 de octubre de 2002 en GameCube, PlayStation, Xbox, PS2 y Game Boy Advance. IGN le puso 9 sobre 10 en Xbox y 9,3 en PS2, y lo llamo por lejos el mejor juego de skate.</div><div class="n-line">Su concepto de modo carrera sin limite de tiempo se mantuvo en Tony Hawk's Underground (2003) y en los siguientes de Neversoft. En 2025 se hizo un remake dentro de Pro Skater 3 + 4.</div><div class="n-line">Por que esta olvidado: el nombre de la saga se recuerda por los dos primeros, y Pro Skater 4 se ve como una entrega mas.</div><div class="n-cue">Cue Coco: preguntar cual fue su Tony Hawk favorito.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-infravalorados/resident-evil.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.693"><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/tony-hawks-pro-skater-4.png)"></i><em>6</em></div><div class="g-th cur" style="--w:0.705"><i style="background-image:url(img/gamecube-infravalorados/resident-evil.png)"></i><em>5</em></div><div class="g-th f" style="--w:0.702"><em>4</em></div><div class="g-th f" style="--w:0.720"><em>3</em></div><div class="g-th f" style="--w:0.719"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>5</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:419px;--ar:0.7064">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-infravalorados/resident-evil.png" alt="" aria-hidden="true"><img src="img/gamecube-infravalorados/resident-evil.png" alt="RESIDENT EVIL (REMAKE) box art"></div>
@@ -307,15 +349,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">RESIDENT EVIL (REMAKE)</div><div class="game-meta">GAMECUBE · 2002 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">RESIDENT EVIL (REMAKE)</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2002</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Remake exclusivo de GameCube del Resident Evil original, dirigido por Mikami. 91 en Metacritic y Famitsu le dio 39 sobre 40.</div>
     </div>
 <aside class="notas"><h4>#5 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 91 para GameCube; Famitsu 39/40 (10, 9, 10 y 10); IGN 9; GameSpot 8,9. GameSpot lo nombro mejor juego de abril de 2002. Se le considera de las entregas mas lindas y mas aterradoras de la saga.</div><div class="n-line">Salio en Japon el 22 de marzo de 2002 y en Norteamerica el 30 de abril. Lo hizo Capcom Production Studio 4 en unos 14 meses, parte de un acuerdo de exclusividad con Nintendo (Capcom Five). Shinji Mikami, director del original, decidio rehacerlo porque sentia que sus graficos habian envejecido.</div><div class="n-line">Mantuvo los fondos pre-renderizados con modelos en 3D, pero con mucho mas detalle: IGN dijo que los primeros planos de Chris y Jill parecian casi fotorrealistas. Sumo puzzles nuevos, zonas nuevas, un guion revisado y una trama que se habia cortado del original.</div><div class="n-line">Vendio unas 445.000 copias en Estados Unidos hasta noviembre de 2003 y 1,35 millones en total. Salio despues en Wii (2008, 2009 en Norteamerica) y en una version en alta definicion en 2015.</div><div class="n-line">Por que esta olvidado: Resident Evil 4 ya esta en el Top Mundial y se llevo toda la atencion; ademas el remake se asocia mas a su version en alta definicion de 2015.</div><div class="n-cue">Cue Coco: Mikami dirigio el original y su propio remake.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">09</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-infravalorados/prince-of-persia-the-sands-of-time.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-block-label cy">TOP</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.693"><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/tony-hawks-pro-skater-4.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/gamecube-infravalorados/resident-evil.png)"></i><em>5</em></div><div class="g-th cur" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/prince-of-persia-the-sands-of-time.png)"></i><em>4</em></div><div class="g-th f" style="--w:0.720"><em>3</em></div><div class="g-th f" style="--w:0.719"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>4</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7000">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-infravalorados/prince-of-persia-the-sands-of-time.png" alt="" aria-hidden="true"><img src="img/gamecube-infravalorados/prince-of-persia-the-sands-of-time.png" alt="PRINCE OF PERSIA: THE SANDS OF TIME box art"></div>
@@ -327,15 +370,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">PRINCE OF PERSIA: THE SANDS OF TIME</div><div class="game-meta">GAMECUBE · 2003 · UBISOFT</div></div>
+      <div class="hybrid-title"><div class="game-title">PRINCE OF PERSIA: THE SANDS OF TIME</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2003</span><span class="g-chip">UBISOFT</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Aventura de plataformas de Ubisoft Montreal donde el Principe rebobina el tiempo. 92 en Metacritic para GameCube, y GameSpot lo nombro mejor juego de noviembre de 2003.</div>
     </div>
 <aside class="notas"><h4>#4 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 92 para GameCube; IGN 9,6 en GameCube. GameSpot lo nombro mejor juego de noviembre de 2003 en GameCube, PS2 y Xbox. IGN dijo que valia un lugar permanente en la coleccion.</div><div class="n-line">Salio en Norteamerica el 18 de noviembre de 2003 en GameCube (PS2 y Xbox el 11 de noviembre). Lo hizo Ubisoft Montreal; Jordan Mechner, creador de la serie, fue consultor creativo, disenador y guionista. Su guion se inspiro en el Shahnameh.</div><div class="n-line">Su mecanica estrella: el Dagger of Time permite rebobinar si fallas un salto, y tambien congelar y matar enemigos. Eurogamer y Official PlayStation Magazine lo compararon con Ico por su estetica y presentacion.</div><div class="n-line">Vendio 2,4 millones de copias hasta marzo de 2004 y mas de 14 millones en total, en todas las plataformas. En Norteamerica el inicio fue flojo: la version de GameCube llevaba unas 100.000 copias en diciembre de 2003. Se especulo que pesaba que saliera junto a Beyond Good &amp; Evil.</div><div class="n-line">El exito dio paso a Warrior Within en 2004 y a una pelicula en 2010. Las ideas para una continuacion terminaron dando origen a Assassin's Creed.</div><div class="n-line">Por que esta olvidado en GameCube: se recuerda mas en PS2 y Xbox, y en GameCube vendio poco en su estreno.</div><div class="n-cue">Cue Coco: el rebobinado del tiempo cambio como se hacian las plataformas 3D.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">10</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-infravalorados/metroid-prime-2-echoes.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.693"><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/tony-hawks-pro-skater-4.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/gamecube-infravalorados/resident-evil.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/prince-of-persia-the-sands-of-time.png)"></i><em>4</em></div><div class="g-th cur" style="--w:0.720"><i style="background-image:url(img/gamecube-infravalorados/metroid-prime-2-echoes.png)"></i><em>3</em></div><div class="g-th f" style="--w:0.719"><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>3</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7190">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-infravalorados/metroid-prime-2-echoes.png" alt="" aria-hidden="true"><img src="img/gamecube-infravalorados/metroid-prime-2-echoes.png" alt="METROID PRIME 2: ECHOES box art"></div>
@@ -347,15 +391,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">METROID PRIME 2: ECHOES</div><div class="game-meta">GAMECUBE · 2004 · NINTENDO</div></div>
+      <div class="hybrid-title"><div class="game-title">METROID PRIME 2: ECHOES</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2004</span><span class="g-chip">NINTENDO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Secuela de Metroid Prime con mundo de luz y oscuridad. 92 en Metacritic, Mejor Juego de GameCube de 2004 para IGN, EGM y GameSpy.</div>
     </div>
 <aside class="notas"><h4>#3 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 92 (60 reseñas), GameRankings 92 % (69 reseñas), IGN 9,5, Game Informer 9,5, GameSpot 9,1. Gano Mejor Juego de GameCube de 2004 en IGN, EGM y GameSpy. En 2019 GameRankings lo puso 9 entre los mejores de GameCube y 281 de todos los tiempos.</div><div class="n-line">Salio en Norteamerica el 15 de noviembre de 2004. Lo hizo Retro Studios, con mas foco en la historia, una nueva mecanica de mundo de luz y oscuridad y modo multijugador. Nintendo lo promociono con paginas web ficticias dentro del universo Metroid, como 'Channel 51'.</div><div class="n-line">Vendio mas de 1,10 millones de copias en el mundo. Se relanzo mejorado en Wii en Japon (2009) y dentro de Metroid Prime: Trilogy.</div><div class="n-line">Por que esta olvidado: llego tras Metroid Prime, que ya esta en el Top Mundial, y a la sombra de ese primer juego.</div><div class="n-cue">Cue Coco: el mundo de luz y el mundo oscuro, y la historia de los Ing.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">11</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-infravalorados/soulcalibur-ii.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-block-label mg">PODIO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.693"><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/tony-hawks-pro-skater-4.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/gamecube-infravalorados/resident-evil.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/prince-of-persia-the-sands-of-time.png)"></i><em>4</em></div><div class="g-th r" style="--w:0.720"><i style="background-image:url(img/gamecube-infravalorados/metroid-prime-2-echoes.png)"></i><em>3</em></div><div class="g-th cur" style="--w:0.719"><i style="background-image:url(img/gamecube-infravalorados/soulcalibur-ii.png)"></i><em>2</em></div><div class="g-th f" style="--w:0.705"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>2</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:420px;--ar:0.7190">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-infravalorados/soulcalibur-ii.png" alt="" aria-hidden="true"><img src="img/gamecube-infravalorados/soulcalibur-ii.png" alt="SOULCALIBUR II box art"></div>
@@ -367,15 +412,16 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">SOULCALIBUR II</div><div class="game-meta">GAMECUBE · 2003 · NAMCO</div></div>
+      <div class="hybrid-title"><div class="game-title">SOULCALIBUR II</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2003</span><span class="g-chip">NAMCO</span></div></div>
       <div class="game-why"><span class="lbl">▶ POR QUE</span>Pelea con armas de Namco con Link como personaje exclusivo en GameCube. 93 en Metacritic y Mejor Juego de Pelea de Consola en los premios AIAS.</div>
     </div>
 <aside class="notas"><h4>#2 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 93 y GameRankings 92 % para GameCube (PS2 91, Xbox 92). IGN 9,2, GameSpot 8,5. Nintendo Life le dio 10 sobre 10 en una reseña retrospectiva y dijo que deja en evidencia a muchos juegos de pelea modernos.</div><div class="n-line">Salio en Norteamerica el 26 de agosto de 2003, despues del arcade de 2002. Gano Juego Mas Adictivo en los Spike Video Game Awards 2003 y Juego de Pelea de Consola del Año en los premios AIAS. Official Nintendo Magazine lo ubico 41 entre los mejores de Nintendo y Complex lo puso 14 entre los mejores de pelea.</div><div class="n-line">Su gran gancho: Link, de Zelda, como personaje invitado exclusivo de la version GameCube. Vendio cerca de un millon de copias en Estados Unidos, de los terceros mas vendidos de la consola.</div><div class="n-line">Un dato aparte: un escandalo de colusion en el EVO 2004 dejo al juego mal visto en la comunidad de peleas por años, hasta que la saga volvio a ser bienvenida en 2010.</div><div class="n-line">Por que esta olvidado: la saga se recuerda por el primero y el tercero, y la version de GameCube se confunde con la de las otras consolas.</div><div class="n-cue">Cue Coco: Link en un juego de pelea, exclusivo de GameCube.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva">
     <span class="slide-num">12</span>
+    <div class="g-bg" style="background-image:url(img/gamecube-infravalorados/viewtiful-joe.png)"></div>
     <div class="slide-hybrid box-alta">
-      <div class="hybrid-head"><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-block-label mg">EL TRONO</div></div>
+      <div class="hybrid-head"><div class="g-barra" style="--u:72px;--dx:0px"><div class="g-th r" style="--w:0.693"><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><em>10</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><em>9</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></i><em>8</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png)"></i><em>7</em></div><div class="g-th r" style="--w:0.714"><i style="background-image:url(img/gamecube-infravalorados/tony-hawks-pro-skater-4.png)"></i><em>6</em></div><div class="g-th r" style="--w:0.705"><i style="background-image:url(img/gamecube-infravalorados/resident-evil.png)"></i><em>5</em></div><div class="g-th r" style="--w:0.702"><i style="background-image:url(img/gamecube-infravalorados/prince-of-persia-the-sands-of-time.png)"></i><em>4</em></div><div class="g-th r" style="--w:0.720"><i style="background-image:url(img/gamecube-infravalorados/metroid-prime-2-echoes.png)"></i><em>3</em></div><div class="g-th r" style="--w:0.719"><i style="background-image:url(img/gamecube-infravalorados/soulcalibur-ii.png)"></i><em>2</em></div><div class="g-th cur" style="--w:0.705"><i style="background-image:url(img/gamecube-infravalorados/viewtiful-joe.png)"></i><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>1</div></div>
       <div class="hybrid-body">
         <div class="cart-wrap"><div class="cart" style="--bh:419px;--ar:0.7064">
           <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/gamecube-infravalorados/viewtiful-joe.png" alt="" aria-hidden="true"><img src="img/gamecube-infravalorados/viewtiful-joe.png" alt="VIEWTIFUL JOE box art"></div>
@@ -387,13 +433,14 @@ body.read-mode .read-indicator{display:block}
           <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
         </div></div>
       </div>
-      <div class="hybrid-title"><div class="game-title">VIEWTIFUL JOE</div><div class="game-meta">GAMECUBE · 2003 · CAPCOM</div></div>
+      <div class="hybrid-title"><div class="game-title">VIEWTIFUL JOE</div><div class="game-meta g-chips"><span class="g-chip">GAMECUBE</span><span class="g-chip y">2003</span><span class="g-chip">CAPCOM</span></div></div>
       <div class="game-why"><span class="lbl">▶ EL MEJOR CRITICADO</span>Beat 'em up con estilo de comic y poderes VFX que manipulan el tiempo. 93 en Metacritic para GameCube y Juego del Año de GameCube 2003 para IGN, USA Today y GMR.</div>
     </div>
 <aside class="notas"><h4>#1 · DATOS EXTRA</h4><div class="n-line">Fuente: Metacritic 93 para GameCube (90 en PS2). IGN lo nombro Juego de GameCube del Año y Mejor Juego de Accion de 2003; USA Today y GMR tambien lo eligieron Juego de GameCube del Año. GameSpy lo puso cuarto entre los mejores de GameCube de 2003 y le dio el premio Mas Estiloso. Nintendo Power: Diseño Mas Innovador.</div><div class="n-line">Salio en Japon el 26 de junio de 2003 y en Norteamerica el 7 de octubre de 2003. Fue parte de los Capcom Five, dirigido por Hideki Kamiya y producido por Atsushi Inaba. Joe, fanatico del cine, entra a una pelicula para rescatar a su novia Silvia y se convierte en superheroe con el V-Watch.</div><div class="n-line">Mezcla plataformas 2D con graficos en 3D con cel-shading. Los poderes VFX permiten, por ejemplo, ralentizar o acelerar el tiempo para pelear y resolver puzzles. IGN lo llamo uno de los mejores juegos de accion de GameCube y PS2.</div><div class="n-line">Las preventas en el sitio de Capcom en Norteamerica se agotaron antes de la salida. Vendio unas 275.000 copias en GameCube en el mundo, por debajo de lo que Capcom esperaba, aunque su presupuesto chico lo dejo como exito moderado segun Inaba.</div><div class="n-line">Dato bomba: Kamiya ha dicho que le gustaria hacer un remake del primero y cerrar la serie con una tercera entrega.</div><div class="n-line">Por que esta olvidado: vendio menos de lo previsto y la serie quedo dormida desde 2005, aunque sus personajes aparecen en otros juegos de Capcom.</div><div class="n-cue">Cue Coco: cierre del ranking, el 93 y los premios de Juego del Año son los datos bomba.</div></aside>  </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-mg">
     <span class="slide-num">13</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/gamecube-infravalorados/prince-of-persia-the-sands-of-time.png)"></i><i style="background-image:url(img/gamecube-infravalorados/viewtiful-joe.png)"></i><i style="background-image:url(img/gamecube-infravalorados/soulcalibur-ii.png)"></i><i style="background-image:url(img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png)"></i><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><i style="background-image:url(img/gamecube-infravalorados/metroid-prime-2-echoes.png)"></i><i style="background-image:url(img/gamecube-infravalorados/tony-hawks-pro-skater-4.png)"></i><i style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></i><i style="background-image:url(img/gamecube-infravalorados/resident-evil.png)"></i></div>
     <div class="divider">
       <div class="pre mg">ANALISIS DEL TOP</div>
       <div class="title mg">BUENOS Y OLVIDADOS</div>
@@ -401,8 +448,9 @@ body.read-mode .read-indicator{display:block}
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide g-nueva g-div g-cy">
     <span class="slide-num">14</span>
+    <div class="g-mos tenue"><i style="background-image:url(img/gamecube-infravalorados/prince-of-persia-the-sands-of-time.png)"></i><i style="background-image:url(img/gamecube-infravalorados/viewtiful-joe.png)"></i><i style="background-image:url(img/gamecube-infravalorados/soulcalibur-ii.png)"></i><i style="background-image:url(img/gamecube-infravalorados/star-wars-rogue-squadron-ii-rogue-leader.png)"></i><i style="background-image:url(img/gamecube-infravalorados/nba-street-vol-2.png)"></i><i style="background-image:url(img/gamecube-infravalorados/burnout-2-point-of-impact.png)"></i><i style="background-image:url(img/gamecube-infravalorados/metroid-prime-2-echoes.png)"></i><i style="background-image:url(img/gamecube-infravalorados/tony-hawks-pro-skater-4.png)"></i><i style="background-image:url(img/gamecube-infravalorados/pikmin-2.png)"></i><i style="background-image:url(img/gamecube-infravalorados/resident-evil.png)"></i></div>
     <div class="divider">
       <div class="pre cy">TU TURNO</div>
       <div class="title cy">¿CUAL AGREGARIAS?</div>
