@@ -95,22 +95,29 @@ def _limpiar(slug: str) -> None:
         shutil.rmtree(d)
 
 
-def _generar(data: dict, slug: str) -> str:
-    """Genera el deck con la base congelada y cajas temporales (las de data['_cajas']),
-    devuelve el HTML y borra todo lo que creo."""
+def _preparar(data: dict, slug: str) -> Path:
+    """Genera el deck con la base congelada y cajas temporales (las de data['_cajas']) y deja
+    el HTML y las cajas en su lugar; quien llama borra con _limpiar(slug)."""
     from PIL import Image
     base_original = T.BASE
     T.BASE = BASE_CONGELADA
     destino = _dir_img(slug)
     try:
         destino.mkdir(parents=True, exist_ok=True)
+        formas = data.get("_formas", FORMAS)
         for i, titulo in enumerate(data.get("_cajas", [])):
-            w, h = FORMAS[i % len(FORMAS)]
+            w, h = formas[i % len(formas)]
             Image.new("RGB", (w, h), (30 + 15 * i % 200, 40, 90)).save(destino / f"{T._slug(titulo)}.jpg")
-        salida = T.generar_top(data, slug)
-        return salida.read_text(encoding="utf-8")
+        return T.generar_top(data, slug)
     finally:
         T.BASE = base_original
+
+
+def _generar(data: dict, slug: str) -> str:
+    """Como _preparar, pero devuelve el HTML y borra todo lo que creo."""
+    try:
+        return _preparar(data, slug).read_text(encoding="utf-8")
+    finally:
         _limpiar(slug)
 
 
@@ -295,7 +302,7 @@ def _items(html: str) -> list[str]:
 
 def _barra(seccion: str) -> str:
     import re
-    m = re.search(r'<div class="g-barra">(.*?)</div></div>', seccion, re.S)
+    m = re.search(r'<div class="g-barra"[^>]*>(.*?)</div></div>', seccion, re.S)
     assert m, "la seccion no trae g-barra"
     return m.group(1) + "</div>"
 
@@ -351,6 +358,64 @@ def test_barra_igual_en_todas_las_slides():
     for data, slug in ((_data_mundial(), SLUG_M), (_data_precios(), SLUG_P)):
         formas = {forma(_barra(s)) for s in _items(_nueva(data, slug))}
         assert len(formas) == 1, "la barra cambia de forma entre slides"
+
+
+def _unidad_y_ancho(seccion: str) -> tuple[float, float]:
+    """(--u en px, ancho total en px) de la barra de una seccion, calculado como lo calcula el CSS."""
+    import re
+    u = float(re.search(r'class="g-barra" style="--u:([\d.]+)px;', seccion).group(1))
+    b = _barra(seccion)
+    n = b.count('class="g-th') + b.count('class="g-pip')
+    seps = b.count('class="g-sep"')
+    ws = [float(x) for x in re.findall(r'--w:([\d.]+)', b)]
+    elementos = sum(ws) * u if ws else n * u
+    return u, elementos + 6 * (n - 1) + 15 * seps
+
+
+def test_barra_se_achica_si_no_cabe():
+    # diez cajas muy apaisadas (1,7 de ancho relativo): la barra de 72 px de alto mediria ~1280 px
+    u, ancho = _unidad_y_ancho(_items(_nueva(_data_mundial(_formas=[(400, 100)])))[0])
+    assert u < 72 and ancho <= 801, (u, ancho)
+    # 17 casillas numeradas (6 rarezas): tambien se achican
+    d = _data_precios()
+    d["rarezas"] += [{"title": f"Rareza {i}", "ano": 1990, "editor": "E", "price": "USD 1", "badge_text": "X",
+                      "color": "cy", "why": "w"} for i in (4, 5, 6)]
+    u, ancho = _unidad_y_ancho(_items(_nueva(d, SLUG_P))[0])
+    assert u < 40 and ancho <= 801, (u, ancho)
+
+
+def test_barra_tamano_normal_no_se_achica():
+    u, _ = _unidad_y_ancho(_items(_nueva(_data_mundial()))[0])
+    assert u == 72
+    u, _ = _unidad_y_ancho(_items(_nueva(_data_precios(), SLUG_P))[0])
+    assert u == 40
+
+
+def _dx(seccion: str) -> float:
+    import re
+    m = re.search(r'class="g-barra" style="--u:[\d.]+px;--dx:(-?[\d.]+)px"', seccion)
+    assert m, "la barra no trae --dx"
+    return float(m.group(1))
+
+
+def test_barra_se_corre_si_el_precio_es_muy_ancho():
+    # NES Top Precios: el grial vale "USD 3.000.000" (caja de unos 492 px arriba a la derecha) y hay 17 casillas
+    d = _data_precios()
+    d["rarezas"] += [{"title": f"Rareza {i}", "ano": 1990, "editor": "E", "price": "USD 1", "badge_text": "X",
+                      "color": "cy", "why": "w"} for i in (4, 5, 6)]
+    d["grial"]["price"] = "USD 3.000.000"
+    seccion = _items(_nueva(d, SLUG_P))[0]
+    u, ancho = _unidad_y_ancho(seccion)
+    dx = _dx(seccion)
+    derecha, izquierda = dx + ancho / 2, dx - ancho / 2          # bordes de la barra respecto del centro de la cabecera
+    assert derecha <= 875 - 492 - 100, f"la barra llega a {derecha:.0f}px: toca el precio"
+    assert izquierda >= -875 + 360 + 100, f"la barra llega a {izquierda:.0f}px: toca la etiqueta"
+    assert u >= 28, f"las casillas quedaron demasiado chicas ({u}px)"
+
+
+def test_barra_sin_precio_ancho_queda_centrada():
+    assert _dx(_items(_nueva(_data_mundial()))[0]) == 0
+    assert _dx(_items(_nueva(_data_precios(), SLUG_P))[0]) == 0
 
 
 # ---------------------------------------------------------------- runner

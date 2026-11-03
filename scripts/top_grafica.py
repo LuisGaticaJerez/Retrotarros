@@ -22,6 +22,16 @@ MIN_CAJAS_MOSAICO = 6      # con menos cajas el mosaico no se usa y portada/divi
 CELDAS_MOSAICO = 10        # grilla de 5 x 2
 MAX_CHIPS = 5              # con mas partes de metadatos se conserva la linea gris de hoy
 MIN_ANCHO_REL, MAX_ANCHO_REL = 0.6, 1.7   # limites de la proporcion de las miniaturas de la barra
+# medidas de la barra, en px a 1920 de ancho (deben coincidir con el CSS de css_nueva)
+ALTO_MINIATURA, LADO_CASILLA = 72, 40
+GAP_BARRA = 6              # separacion entre elementos
+ANCHO_SEP = 15             # separador entre grupos: 3 px de linea + 6 px de margen por lado
+MAX_BARRA_PX = 800         # ancho maximo de la barra
+# zona libre de la cabecera (px, a 1920 de ancho; la cabecera mide 1750 y su mitad es 875)
+MITAD_CABECERA_PX = 875
+MAX_ETIQUETA_PX = 360      # ancho maximo de la etiqueta de la izquierda (igual al max-width de .game-pos en css_nueva)
+HOLGURA_PX = 100           # separacion minima entre la barra y la etiqueta / el precio
+PX_POR_CARACTER, PX_CAJA = 36, 42   # estimado (conservador) del ancho de la caja del precio o rotulo de la derecha
 
 
 def _inyectar(html: str, viejo: str, nuevo: str) -> str:
@@ -62,10 +72,10 @@ def css_nueva() -> str:
         ".g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}\n"
         # barra de progreso: centrada y fija en la cabecera (px a 1920 x 1080)
         ".slide.g-nueva .hybrid-head{position:relative}\n"
-        ".slide.g-nueva .hybrid-head .game-pos{max-width:420px}\n"
-        ".g-barra{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;"
+        ".slide.g-nueva .hybrid-head .game-pos{max-width:360px}\n"
+        ".g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;"
         "align-items:center;gap:6px;z-index:5}\n"
-        ".g-th{position:relative;height:72px;width:calc(72px*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);"
+        ".g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);"
         "border-radius:4px;overflow:hidden;background:#0c0720}\n"
         ".g-th i{position:absolute;inset:0;background-size:cover;background-position:center}\n"
         ".g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;"
@@ -74,7 +84,7 @@ def css_nueva() -> str:
         ".g-th.f em{color:rgba(255,255,255,.45)}\n"
         ".g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}\n"
         ".g-th.cur em{color:var(--ye)}\n"
-        ".g-pip{width:40px;height:40px;flex:none;display:flex;align-items:center;justify-content:center;"
+        ".g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;"
         "border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;"
         "font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}\n"
         ".g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}\n"
@@ -176,12 +186,37 @@ def ancho_rel(sz: tuple[int, int] | None) -> float:
     return round(min(MAX_ANCHO_REL, max(MIN_ANCHO_REL, sz[0] / sz[1])), 3)
 
 
+def _ancho_derecha(data: dict) -> int:
+    """Ancho estimado (px) de la caja mas ancha que va arriba a la derecha en el ranking: el precio
+    (_price_of) o un block_label explicito. 0 si ningun slide trae nada ahi."""
+    mayor = 0
+    for _, it in secuencia(data):
+        texto = re.sub(r"<[^>]+>", "", T._price_of(it) or it.get("block_label") or "")
+        if texto:
+            mayor = max(mayor, len(texto) * PX_POR_CARACTER + PX_CAJA)
+    return mayor
+
+
 def barra(data: dict, indice: int, out_slug: str) -> str:
     """Barra de progreso de la cabecera: un elemento por slide de juego. Los ya vistos (r) muestran
     su caja, el actual (cur) va encendido y los que faltan (f) en oscuro liso pero con su ancho real
     (asi la barra no se mueve al revelarse cada uno)."""
     seq = secuencia(data)
     numeros = tipo_barra(data) == "numeros"
+    n = len(seq)
+    anchos = [ancho_rel(T._img_size(it, out_slug)) for _, it in seq]
+    seps = len({tipo for tipo, _ in seq}) - 1 if numeros else 0
+    # la barra va en la zona libre de la cabecera, a >= HOLGURA_PX de la etiqueta de la izquierda y del
+    # precio o rotulo de la derecha (el mas ancho del ranking, asi no se mueve entre slides)
+    izq = -(MITAD_CABECERA_PX - MAX_ETIQUETA_PX - HOLGURA_PX)
+    der = MITAD_CABECERA_PX - _ancho_derecha(data) - HOLGURA_PX if _ancho_derecha(data) else -izq
+    ancho_max = min(MAX_BARRA_PX, der - izq)
+    # unidad (alto de la miniatura o lado de la casilla): la normal, o menos si la barra pasaria de ancho_max
+    fijo = GAP_BARRA * (n - 1) + ANCHO_SEP * seps
+    u = (min(LADO_CASILLA, (ancho_max - fijo) // n) if numeros
+         else min(ALTO_MINIATURA, int((ancho_max - fijo) // sum(anchos))))
+    ancho = (n * u if numeros else sum(anchos) * u) + fijo
+    dx = round(min(max(0, izq + ancho / 2), der - ancho / 2))      # centrada si cabe; si no, lo minimo que haga falta
     piezas = []
     previo = None
     for i, (tipo, it) in enumerate(seq):
@@ -194,10 +229,9 @@ def barra(data: dict, indice: int, out_slug: str) -> str:
             texto = {"retail": it.get("pos", ""), "rareza": "R", "grial": "★"}[tipo]
             piezas.append(f'<div class="g-pip {grupo}{est}">{texto}</div>')
         else:
-            w = ancho_rel(T._img_size(it, out_slug))
             img = f'<i style="background-image:url({it["img"]})"></i>' if it.get("img") and i <= indice else ""
-            piezas.append(f'<div class="g-th {est}" style="--w:{w:.3f}">{img}<em>{it.get("pos", "")}</em></div>')
-    return '<div class="g-barra">' + "".join(piezas) + "</div>"
+            piezas.append(f'<div class="g-th {est}" style="--w:{anchos[i]:.3f}">{img}<em>{it.get("pos", "")}</em></div>')
+    return f'<div class="g-barra" style="--u:{u}px;--dx:{dx}px">' + "".join(piezas) + "</div>"
 
 
 def slide_item(num: int, it: dict, consola: str, ch: int, box: str, out_slug: str,
