@@ -22,6 +22,7 @@ Los scripts que generan los datos: `scripts/youtube_inventario.py` (público, si
 | 2026-10-29 | [analisis-canal-2026-10-29](analisis-canal-2026-10-29.md) | Las vistas bajaron con la publicidad (84% sigue siendo pagada); los suscriptores son pocos pero ven mucho más tiempo por vista; los hashtags y tags están completos y no mueven tráfico medible. |
 | 2026-10-30 | [analisis-organico-vs-publicidad-2026-10-30](analisis-organico-vs-publicidad-2026-10-30.md) | Descarta shadow ban: sin anuncios el canal rinde 138 a 193 vistas orgánicas al día, sobre las 79 de antes de pagar. Los anuncios fueron 89 días (6 jul a 17 oct), no un par de semanas, y se apagaron el 18 oct. Gasto facturado jul a oct: 114.769 CLP (0,79 CLP por vista pagada). |
 | 2026-10-30 | [analisis-horas-validas-2026-10-30](analisis-horas-validas-2026-10-30.md) | Las horas de anuncios y de Shorts no cuentan para monetizar: las válidas son 737 de 4.000 (faltan unas 3.260). Al ritmo actual (170 horas al mes) no se alcanza; hay que duplicarlo. |
+| 2026-11-02 | [analisis-encadenado-2026-11-02](analisis-encadenado-2026-11-02.md) | Bloque "Sigue con" aplicado a los 56 videos largos y audio restaurado a es-419 en 83 videos. Medición pendiente para el 13 de noviembre: relacionados, listas y pantallas finales contra la base de 14 días (19 h, 1,8 h y 0,24 h). |
 
 ## Seguimiento
 
