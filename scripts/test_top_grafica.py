@@ -251,22 +251,38 @@ def test_celda_sin_caja_usa_color_de_etiqueta():
 def test_chips_ano_amarillo_y_sin_precio():
     import top_grafica as G
     h = G.chips({"meta": "NES · 1992 · ACTIVE · NO LANZADO · ~USD 1.926"}, "NES")
-    assert h.count('<span class="g-chip') == 4, h
+    assert h.count('<span class="g-chip') == 3, h                       # consola, ano y editor
     assert '<span class="g-chip y">1992</span>' in h
+    assert '<div class="game-meta g-extra">NO LANZADO</div>' in h       # lo demas, en la linea gris
     assert "USD" not in h
 
 
-def test_chips_que_no_caben_en_dos_filas_vuelven_a_la_linea_de_hoy():
+def test_chips_muchas_partes_van_a_la_linea_gris():
     import top_grafica as G
-    # un Top Peores real: la lista de fuentes ocuparia 3 o 4 filas y empujaria al TarroVision hacia abajo
-    assert G.chips({"meta": "PS1 · 2001 · ACTIVISION (DEV. BIG APE) · DEN OF GEEK (#11) + WATCHMOJO (#9)"}, "PS1") == ""
-    assert G.chips({"meta": "NES · 1992 · ACTIVE ENTERPRISES · NO LANZADO"}, "NES") == ""
-    assert G.chips({"meta": "PS1 · 1999 · KONAMI (TEAM SILENT)"}, "PS1") != ""      # 2 filas: se queda
+    h = G.chips({"meta": "A · B · C · D · E · F"}, "NES")
+    assert h.count('<span class="g-chip') == 3 and '<div class="game-meta g-extra">D · E · F</div>' in h
 
 
-def test_chips_demasiadas_partes_devuelve_vacio():
+def test_chips_peores_enmarca_editor_y_manda_desarrollador_y_fuentes_a_gris():
     import top_grafica as G
-    assert G.chips({"meta": "A · B · C · D · E · F"}, "NES") == ""
+    # un Top Peores real: antes volvia entero a la linea gris y quedaba un slide enmarcado y el resto no
+    h = G.chips({"meta": "PS1 · 2001 · ACTIVISION (DEV. BIG APE) · DEN OF GEEK (#11) + WATCHMOJO (#9)"}, "PS1")
+    assert h == ('<div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">2001</span>'
+                 '<span class="g-chip">ACTIVISION</span></div>'
+                 '<div class="game-meta g-extra">DEV. BIG APE · DEN OF GEEK (#11) + WATCHMOJO (#9)</div>')
+    assert G.chips({"meta": "PS1 · 1998 (PS1) · NAMCO"}, "PS1").count("(PS1)") == 1   # el ano no se toca
+
+
+def test_chips_la_nota_de_caja_del_editor_tambien_va_a_la_linea_gris():
+    import top_grafica as G
+    h = G.chips({"meta": "Atari 2600 · 1982 · ULTRAVISION (CAJA: REEDICION FROGGO) · CREATIVE LOAFING + CBR"}, "Atari 2600")
+    assert h.count('<span class="g-chip') == 3 and '<span class="g-chip">ULTRAVISION</span>' in h
+    assert '<div class="game-meta g-extra">CAJA: REEDICION FROGGO · CREATIVE LOAFING + CBR</div>' in h
+
+
+def test_chips_con_un_chip_demasiado_ancho_vuelven_a_la_linea_de_hoy():
+    import top_grafica as G
+    assert G.chips({"meta": "PS1 · 1999 · UN EDITOR CON UN NOMBRE ABSURDAMENTE LARGO PARA UN CHIP"}, "PS1") == ""
 
 
 def test_chips_desde_ano_y_editor():

@@ -20,7 +20,7 @@ import top_deck as T
 
 MIN_CAJAS_MOSAICO = 6      # con menos cajas el mosaico no se usa y portada/divisores salen como hoy
 CELDAS_MOSAICO = 10        # grilla de 5 x 2
-MAX_CHIPS = 5              # con mas partes de metadatos se conserva la linea gris de hoy
+CHIPS_PRINCIPALES = 3      # consola, ano y editor van como chips; lo demas (fuentes, evidencia) en una linea gris
 # estimado de lo que ocupan los chips (px a 1920 de ancho): si pasan de MAX_FILAS_CHIPS filas empujan al
 # TarroVision hacia abajo (medido en Top Peores con listas de fuentes), asi que se conserva la linea de hoy
 ANCHO_CHIPS_PX, CHIP_BASE_PX, CHIP_PX_CARACTER, CHIP_GAP_PX, MAX_FILAS_CHIPS = 460, 32, 15, 10, 2
@@ -70,6 +70,7 @@ def css_nueva() -> str:
         "filter:blur(22px) brightness(.45)}\n"
         ".slide.g-nueva .slide-hybrid{position:relative;z-index:2}\n"
         ".g-chips{display:flex;flex-wrap:wrap;gap:10px}\n"
+        ".g-extra{margin-top:6px}\n"
         ".g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;"
         "border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}\n"
         ".g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}\n"
@@ -163,22 +164,34 @@ def _filas_chips(partes: list[str]) -> int:
             filas, ancho = filas + 1, w
         else:
             ancho += (CHIP_GAP_PX if ancho else 0) + w
+        filas += -(-w // ANCHO_CHIPS_PX) - 1      # un chip mas ancho que la columna se parte en varias lineas
     return filas
 
 
+DEV_RE = re.compile(r"^(.+?)\s*\((DEV\.[^()]*|PORT[^()]*|CAJA[^()]*)\)$")
+
+
 def chips(it: dict, consola: str) -> str:
-    """Metadatos del juego como chips (el ano, en amarillo). Parte de it["meta"] (separado por
-    "·") o de consola, ano y editor, igual que el slide clasico. Descarta toda parte con "USD"
-    (el precio ya sale grande aparte). "" si no queda nada, hay mas de MAX_CHIPS o no caben en
-    MAX_FILAS_CHIPS filas: en ese caso el slide conserva la linea de metadatos de hoy."""
+    """Metadatos del juego: consola, ano (en amarillo) y editor como chips; el desarrollador entre
+    parentesis ("(DEV. X)") y todo lo que venga despues (fuentes, evidencia) en una linea gris debajo.
+    Parte de it["meta"] (separado por "·") o de consola, ano y editor, igual que el slide clasico.
+    Descarta toda parte con "USD" (el precio ya sale grande aparte). "" si no queda nada o los chips
+    no caben en MAX_FILAS_CHIPS filas (empujarian al TarroVision): el slide conserva la linea de hoy."""
     meta = it.get("meta") or " · ".join(
         str(x) for x in [consola, it.get("ano"), (it.get("editor") or "").upper()] if x)
     partes = [p.strip() for p in meta.split("·") if p.strip() and "USD" not in p]
-    if not partes or len(partes) > MAX_CHIPS or _filas_chips(partes) > MAX_FILAS_CHIPS:
+    principales, resto = partes[:CHIPS_PRINCIPALES], partes[CHIPS_PRINCIPALES:]
+    if len(principales) == CHIPS_PRINCIPALES:
+        m = DEV_RE.match(principales[-1])
+        if m:
+            principales[-1] = m.group(1)
+            resto.insert(0, m.group(2))
+    if not principales or _filas_chips(principales) > MAX_FILAS_CHIPS:
         return ""
-    ano = next((i for i, p in enumerate(partes) if re.match(r"\d{4}", p)), None)
-    spans = "".join(f'<span class="g-chip{" y" if i == ano else ""}">{p}</span>' for i, p in enumerate(partes))
-    return f'<div class="game-meta g-chips">{spans}</div>'
+    ano = next((i for i, p in enumerate(principales) if re.match(r"\d{4}", p)), None)
+    spans = "".join(f'<span class="g-chip{" y" if i == ano else ""}">{p}</span>' for i, p in enumerate(principales))
+    extra = f'<div class="game-meta g-extra">{" · ".join(resto)}</div>' if resto else ""
+    return f'<div class="game-meta g-chips">{spans}</div>{extra}'
 
 
 def _fondo(it: dict) -> str:
