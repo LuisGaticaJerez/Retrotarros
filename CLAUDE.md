@@ -444,6 +444,16 @@ Los rankings (Top Mundial, Top Precios, Top Peores) se ven en una TV desde lejos
 - Al regenerar cualquier deck, el driver NO necesita pasar nada: sale con la letra grande igual. No bajar esos tamaños ni quitar `_tv_css()` para "hacer caber" un texto largo: se acorta el texto o se ajusta el layout.
 - Después de regenerar, revisar las capturas (`capture-slides.py`) por desbordes, sobre todo los `why` largos.
 
+### REGLA — Gráfica nueva de los rankings (opcional; solo rankings nuevos o reforjados) — Luis 2026-11-03
+
+`top_deck.generar_top()` tiene una gráfica nueva, activada con `"grafica": "nueva"` en el `data` del driver (valores válidos: `"clasica"` o `"nueva"`; cualquier otro lanza `ValueError`). Sin la marca el HTML sale idéntico, byte a byte, al de siempre: eso protege a los rankings ya grabados o publicados, así que **nunca se agrega la marca al driver de un ranking grabado, programado o publicado** (mismo corolario que en reseñas: confirmar con Luis cuáles están sin grabar antes de regenerar). El código vive en `scripts/top_grafica.py`.
+
+- **Qué cambia:** portada con mosaico de las cajas del ranking de fondo (orden barajado, para no revelar el top); divisores (intro, análisis, cliffhanger, rarezas) con el mismo mosaico más tenue y el texto en una tarjeta de vidrio con borde de neón; slide de juego con la caja desenfocada de fondo, los metadatos como chips (año en amarillo) y una barra de progreso centrada en la cabecera que reemplaza la etiqueta `TOP`/`PODIO`/`EL TRONO` (un `block_label` explícito, como "EN 1 LISTA" en Top Peores, se conserva).
+- **Barra:** miniaturas de las cajas en Top Mundial, Top Peores e Infravalorados; casillas numeradas en Top Precios (10 retail, rarezas con "R" en magenta, grial con estrella dorada). Se achica y se corre sola para quedar siempre a 100 px o más de la etiqueta y del precio.
+- **Qué no cambia:** TarroVision, letra grande para TV (`_tv_css()`), precio grande arriba a la derecha, capa de notas, texto sin tildes, layouts de caja `alta`/`ancha`/`clasica`. Sin caja: el fondo toma el color de la etiqueta; con menos de 6 cajas el mosaico no se usa y portada y divisores salen como hoy.
+- **Pruebas:** `python scripts/test_top_grafica.py` (HTML, con hashes de regresión de lo clásico) y `python scripts/test_top_grafica_visual.py` (Chromium: TarroVision idéntico y barra sin superposiciones). Diseño en `docs/superpowers/specs/2026-11-02-rankings-grafica-design.md`.
+- **No correr drivers reales para probar:** los `.cache/gen_*.py` también escriben pautas y JSON en el repo principal (el de `ps1-top-peores` sobrescribió una pauta el 2026-11-03). Para probar, usar las fixtures de `test_top_grafica.py`.
+
 ### REGLA — Criterio de la línea de tiempo SAGA (obligatorio) — Luis 2026-06-10
 
 Qué juegos entran al hilo de un episodio SAGA (las 12 hechas siguen esto; toda saga nueva igual):
