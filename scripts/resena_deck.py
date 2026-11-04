@@ -52,6 +52,7 @@ import os
 import re
 from pathlib import Path
 
+import tarrovision as TV
 from resena_lint import ESCALA_VEREDICTO, formatear, revisar
 
 REPO = Path(__file__).resolve().parent.parent
@@ -265,7 +266,9 @@ def _slide_contexto(num: int, data: dict) -> str:
     )
 
 
-def _tv(ch: int) -> str:
+def _tv(ch: int, v: str = "clasica") -> str:
+    if TV.activa(v):
+        return TV.tv(ch, v)
     return (
         '<div class="tarrovision">'
         f'<div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH {ch:02d}</span></div>'
@@ -323,12 +326,13 @@ def _slide_tarrovision(num: int, titulo: str, ch: int, dato: str, notas_bloque, 
                        reemplazo: str = "", extra: str = "") -> str:
     """`reemplazo` sustituye el bloque EL DATO (viñetas); `extra` va debajo (compositor)."""
     dato_html = reemplazo or f'<div class="gp-dato"><span class="lbl">EL DATO</span>{_esc(dato)}</div>'
+    v = TV.variante(data)
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
         f'<div class="gp-head"><div class="gp-title">{_esc(titulo)}</div>'
         f'<div class="gp-meta">{_esc(data["consola"]).upper()} · {_esc(data["anio"])} · GAMEPLAY</div></div>'
         '<div class="gp-body">'
-        f'<div class="gp-tv">{_tv(ch)}</div>'
+        f'<div class="gp-tv{TV.clase_contenedor(v)}">{_tv(ch, v)}</div>'
         '<div class="gp-side">'
         f'{dato_html}{extra}'
         '</div></div>'
@@ -346,14 +350,15 @@ def _slide_tarrovision_dual(num: int, ch_a: int, ch_b: int, notas_bloque, data: 
     (regla Luis 2026-07-26, ajuste post-captura: "es mejor ocuparlo en mostrar
     gameplay"). Las namebox quedan VACIAS a proposito -- el nombre se escribe
     encima en la edicion posterior, no se hardcodea."""
+    v = TV.variante(data)
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
         '<div class="gp-head"><div class="gp-title">COMPARATIVA</div>'
         f'<div class="gp-meta">{_esc(data["consola"]).upper()} · {_esc(data["anio"])}</div></div>'
-        '<div class="dual-grid">'
-        f'<div class="dual-cell">{_tv(ch_a)}<div class="tv-namebox"></div></div>'
+        f'<div class="dual-grid{TV.clase_contenedor(v)}">'
+        f'<div class="dual-cell{TV.clase_contenedor(v)}">{_tv(ch_a, v)}<div class="tv-namebox"></div></div>'
         '<div class="dual-vs">VS</div>'
-        f'<div class="dual-cell">{_tv(ch_b)}<div class="tv-namebox"></div></div>'
+        f'<div class="dual-cell{TV.clase_contenedor(v)}">{_tv(ch_b, v)}<div class="tv-namebox"></div></div>'
         '</div>'
         f'{_notas(notas_bloque)}'
         '</section>'
@@ -652,6 +657,7 @@ def generar_resena(data: dict, out_slug: str, lint: bool = True) -> Path:
     css = CSS
     if _nueva(data):
         css += CSS_NUEVA
+    css += TV.css(TV.variante(data))
     if data.get("por_confirmar"):
         css += CSS_POR_CONFIRMAR
     if data.get("en_coleccion") == "familia" and data.get("familia_texto"):

@@ -17,6 +17,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+import tarrovision as TV
+
 REPO = Path(__file__).resolve().parent.parent
 PAL = {"mg": "#FF2E88", "cy": "#00E5FF", "ye": "#FFD23F", "dk": "#06030f"}
 NODE_W = 168          # ancho de cada nodo de la cinta
@@ -95,7 +97,9 @@ def _slide_game(num, g, idx, games, slug):
         '</div></section>')
 
 
-def _tv(ch: int) -> str:
+def _tv(ch: int, v: str = "clasica") -> str:
+    if TV.activa(v):
+        return TV.tv(ch, v)
     return (
         '<div class="tarrovision">'
         f'<div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH {ch:02d}</span></div>'
@@ -106,7 +110,7 @@ def _tv(ch: int) -> str:
     )
 
 
-def _slide_gameplay(num, g, idx):
+def _slide_gameplay(num, g, idx, v="clasica"):
     owned = ('<div class="gp-owned-mini">★ EN LA COLECCION</div>' if g.get("owned") else '')
     dato = g.get("dato", "")
     return (
@@ -114,7 +118,7 @@ def _slide_gameplay(num, g, idx):
         f'<div class="gp-head"><div class="gp-title">{g["title"]}</div>'
         f'<div class="gp-meta">{g["console"]} · {g["year"]} · GAMEPLAY</div></div>'
         '<div class="gp-body">'
-        f'  <div class="gp-tv">{_tv((idx % 12) + 1)}</div>'
+        f'  <div class="gp-tv{TV.clase_contenedor(v)}">{_tv((idx % 12) + 1, v)}</div>'
         '  <div class="gp-side">'
         f'    <div class="gp-dato"><span class="lbl">EL DATO</span>{dato}</div>'
         f'    {owned}'
@@ -122,7 +126,7 @@ def _slide_gameplay(num, g, idx):
         '</div></section>')
 
 
-def _slide_gameplay_dual(num, ch_a=1, ch_b=2):
+def _slide_gameplay_dual(num, ch_a=1, ch_b=2, v="clasica"):
     """Slide de comparativa (2 TarroVision + VS al medio), disponible como
     estandar para contexto historico (ej. version original vs remaster dentro
     de la linea de tiempo). Titulo SIEMPRE 'COMPARATIVA', agnostico. SIN
@@ -133,10 +137,10 @@ def _slide_gameplay_dual(num, ch_a=1, ch_b=2):
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
         '<div class="gp-head"><div class="gp-title">COMPARATIVA</div></div>'
-        '<div class="dual-grid">'
-        f'  <div class="dual-cell">{_tv(ch_a)}<div class="tv-namebox"></div></div>'
+        f'<div class="dual-grid{TV.clase_contenedor(v)}">'
+        f'  <div class="dual-cell{TV.clase_contenedor(v)}">{_tv(ch_a, v)}<div class="tv-namebox"></div></div>'
         '  <div class="dual-vs">VS</div>'
-        f'  <div class="dual-cell">{_tv(ch_b)}<div class="tv-namebox"></div></div>'
+        f'  <div class="dual-cell{TV.clase_contenedor(v)}">{_tv(ch_b, v)}<div class="tv-namebox"></div></div>'
         '</div>'
         '</section>')
 
@@ -294,13 +298,14 @@ document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.
 
 def generar_saga(data: dict, out_slug: str) -> Path:
     games = data["games"]
+    v = TV.variante(data)
     slides = []
     n = 1
     slides.append(_slide_portada(n, data)); n += 1
     slides.append(_slide_timeline(n, data, games, out_slug)); n += 1
     for i, g in enumerate(games):
         slides.append(_slide_game(n, g, i, games, out_slug)); n += 1
-        slides.append(_slide_gameplay(n, g, i)); n += 1   # TarroVision para gameplay
+        slides.append(_slide_gameplay(n, g, i, v)); n += 1   # TarroVision para gameplay
     if data.get("bonus"):
         slides.append(_slide_bonus(n, data)); n += 1
     if data.get("balance"):
@@ -310,7 +315,7 @@ def generar_saga(data: dict, out_slug: str) -> Path:
     html = (
         '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
-        f'<title>RETROTARROS · {data["doc_title"]}</title><style>{CSS}</style></head><body>'
+        f'<title>RETROTARROS · {data["doc_title"]}</title><style>{CSS}{TV.css(v)}</style></head><body>'
         '<header><div class="hdr-logo">RETROTARROS</div>'
         f'<div class="hdr-tag">{data["header_tag"]}</div>'
         '<div class="hdr-rec"><div class="dot"></div>EN VIVO</div></header>'

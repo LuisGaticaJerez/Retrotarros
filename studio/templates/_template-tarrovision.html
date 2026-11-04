@@ -774,6 +774,120 @@ nav.footer {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--dk); }
 ::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+
+/* ══ TARROVISION 2.0 (Luis 2026-11-03): visual nuevo + TV ancha 16:9 ══
+   Va al final para ganar por orden. Visual: borde de neon magenta a cyan, bisel delgado,
+   pantalla sin senal con barras de color, marcas de encuadre y NO SIGNAL (todo con
+   pseudo-elementos: desaparece solo cuando se reemplaza .tv-noscreen por <img> o <video>).
+   La clase .ancha (agregada a .tarrovision) deja la pantalla en 16:9 exacto. */
+.tarrovision {
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 14px 16px;
+  gap: 8px;
+  background:
+    linear-gradient(180deg, #1d1d25, #0a0a10) padding-box,
+    linear-gradient(135deg, var(--mg), var(--cy)) border-box;
+  box-shadow:
+    0 0 28px rgba(255,46,136,.22),
+    0 0 44px rgba(0,229,255,.16),
+    0 22px 60px rgba(0,0,0,.7),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+.tarrovision .tv-controls-top { height: 26px; }
+.tarrovision .tv-brand { font-size: 13px; }
+.tarrovision .tv-channel { font-size: 13px; padding: 2px 10px; }
+.tarrovision .tv-screen {
+  padding: 10px;
+  border-radius: 10px;
+  background: #14141a;
+  box-shadow: inset 0 0 0 2px #2c2c36, inset 0 0 14px rgba(0,0,0,.7);
+}
+.tarrovision .tv-screen-inner {
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 50px rgba(0,0,0,.9);
+}
+.tarrovision .tv-noscreen {
+  background:
+    linear-gradient(90deg,
+      rgba(200,200,200,.5) 0 14.28%, rgba(200,200,0,.5) 0 28.57%, rgba(0,200,200,.5) 0 42.85%,
+      rgba(0,200,0,.5) 0 57.14%, rgba(200,0,200,.5) 0 71.43%, rgba(200,0,0,.5) 0 85.71%,
+      rgba(0,0,200,.5) 0 100%) bottom / 100% 9% no-repeat,
+    radial-gradient(circle at 50% 50%, rgba(45,27,105,.6) 0%, #000 80%);
+}
+.tarrovision .tv-noscreen::after {
+  content: "NO SIGNAL";
+  font-family: 'Press Start 2P';
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: var(--mg);
+  text-shadow: 0 0 12px rgba(255,46,136,.5);
+}
+.tarrovision .tv-noscreen::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  pointer-events: none;
+  opacity: .75;
+  background:
+    linear-gradient(var(--cy), var(--cy)) top left / 26px 3px no-repeat,
+    linear-gradient(var(--cy), var(--cy)) top left / 3px 26px no-repeat,
+    linear-gradient(var(--cy), var(--cy)) top right / 26px 3px no-repeat,
+    linear-gradient(var(--cy), var(--cy)) top right / 3px 26px no-repeat,
+    linear-gradient(var(--cy), var(--cy)) bottom left / 26px 3px no-repeat,
+    linear-gradient(var(--cy), var(--cy)) bottom left / 3px 26px no-repeat,
+    linear-gradient(var(--cy), var(--cy)) bottom right / 26px 3px no-repeat,
+    linear-gradient(var(--cy), var(--cy)) bottom right / 3px 26px no-repeat;
+}
+.tarrovision .tv-controls-bottom {
+  height: 24px;
+  grid-template-columns: auto auto 1fr auto;
+  padding: 0 6px;
+  gap: 12px;
+}
+.tarrovision .tv-controls-bottom::after {
+  content: "";
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #8cffb0, #19b45a 60%, #07391c);
+  box-shadow: 0 0 8px rgba(25,180,90,.7);
+}
+.tarrovision .tv-knob { width: 22px; height: 22px; }
+.tarrovision .tv-knob::after { top: 4px; height: 7px; }
+.tarrovision .tv-speaker { height: 16px; }
+
+/* TV ANCHA 16:9: la pantalla mide exactamente 16:9 y la TV se ajusta al alto o al ancho libre.
+   Medidas del marco: 56 px de ancho y 118 px de alto sobre la pantalla (borde, relleno, barras, bisel). */
+.tarrovision.ancha {
+  height: auto;
+  max-height: none;
+  max-width: none;
+  aspect-ratio: auto;
+  grid-template-rows: auto auto auto;
+}
+.tarrovision.ancha .tv-screen-inner { height: auto; aspect-ratio: 16 / 9; }
+.tarrovision.ancha .tv-noscreen::after { content: "NO SIGNAL  16:9"; font-size: 20px; }
+/* contenedores con unidades de contenedor (cq): .w se agrega al contenedor de la TV ancha */
+.tv-wrap.w, .slide-tv-solo.w { container-type: size; width: 100%; }
+.tv-wrap.w .tarrovision.ancha,
+.slide-tv-solo.w .tarrovision.ancha {
+  width: calc(min(100cqw - 56px, (100cqh - 118px) * 16 / 9) + 56px);
+  max-width: none;
+}
+.slide-tv.w { max-width: 1700px; }
+/* comparativa con dos TV anchas: se reparten el ancho y el VS pasa a insignia sobre la union */
+.slide-dual.w { max-width: 1880px; padding: 20px 24px; }
+.dual-grid.w { position: relative; gap: 14px; }
+.dual-grid.w .dual-cell { flex: 1 1 0; min-width: 0; }
+.dual-cell .tarrovision.ancha { width: 100%; height: auto; max-height: none; }
+.dual-grid.w .dual-vs {
+  position: absolute; left: 50%; top: calc(50% - 38px);
+  transform: translate(-50%, -50%); z-index: 5;
+  width: 96px; height: 96px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 42px; background: var(--dk);
+  border: 3px solid var(--ye); box-shadow: 0 0 26px rgba(255,210,63,.55);
+}
 </style>
 </head>
 <body>
@@ -802,20 +916,20 @@ nav.footer {
     <div class="divider">
       <div class="pre cy">SECCION GAMEPLAY</div>
       <div class="title cy">EN VIVO</div>
-      <div class="sub">Cada slide muestra una TarroVision cuadrada con el gameplay grande, manteniendo el codigo visual del canal: bordes CRT, scanlines, paleta magenta/cian/amarillo.</div>
+      <div class="sub">TarroVision 2.0: borde de neon, pantalla ancha 16:9 para el gameplay y la version cuadrada para cortos o capturas. Paleta magenta/cian/amarillo del canal.</div>
     </div>
   </section>
 
-  <!-- 03 GAMEPLAY CON IMAGEN -->
+  <!-- 03 GAMEPLAY CON IMAGEN (TV ancha 16:9 + titulo y nota) -->
   <section class="slide">
     <span class="slide-num">03</span>
-    <div class="slide-tv">
+    <div class="slide-tv w">
       <div class="tv-head">
         <div class="tv-pos cy"><span class="hash">#</span>01</div>
         <div class="tv-block-label cy">GAMEPLAY · DEMO</div>
       </div>
-      <div class="tv-wrap">
-        <div class="tarrovision">
+      <div class="tv-wrap w">
+        <div class="tarrovision ancha">
           <div class="tv-controls-top">
             <span class="tv-led"></span>
             <span class="tv-brand">TARROVISION</span>
@@ -848,7 +962,7 @@ nav.footer {
     </div>
   </section>
 
-  <!-- 04 GAMEPLAY VACIO (placeholder) -->
+  <!-- 04 GAMEPLAY VACIO (placeholder, TV cuadrada) -->
   <section class="slide">
     <span class="slide-num">04</span>
     <div class="slide-tv">
@@ -884,16 +998,16 @@ nav.footer {
     </div>
   </section>
 
-  <!-- 05 COMPARATIVA DUAL -->
+  <!-- 05 COMPARATIVA DUAL (dos TV anchas 16:9) -->
   <section class="slide">
     <span class="slide-num">05</span>
-    <div class="slide-dual">
+    <div class="slide-dual w">
       <div class="tv-head">
         <div class="tv-block-label ye">COMPARATIVA · DUAL FEED</div>
       </div>
-      <div class="dual-grid">
+      <div class="dual-grid w">
         <div class="dual-cell">
-          <div class="tarrovision">
+          <div class="tarrovision ancha">
             <div class="tv-controls-top">
               <span class="tv-led"></span>
               <span class="tv-brand">TARROVISION A</span>
@@ -914,7 +1028,7 @@ nav.footer {
         </div>
         <div class="dual-vs">VS</div>
         <div class="dual-cell">
-          <div class="tarrovision">
+          <div class="tarrovision ancha">
             <div class="tv-controls-top">
               <span class="tv-led"></span>
               <span class="tv-brand">TARROVISION B</span>
@@ -937,11 +1051,11 @@ nav.footer {
     </div>
   </section>
 
-  <!-- 06 SOLO TV GRANDE (sin texto arriba ni abajo) -->
+  <!-- 06 SOLO TV ANCHA GRANDE (sin texto arriba ni abajo) -->
   <section class="slide">
     <span class="slide-num">06</span>
-    <div class="slide-tv-solo">
-      <div class="tarrovision">
+    <div class="slide-tv-solo w">
+      <div class="tarrovision ancha">
         <div class="tv-controls-top">
           <span class="tv-led"></span>
           <span class="tv-brand">TARROVISION</span>
@@ -1061,7 +1175,7 @@ nav.footer {
       <div class="sub" style="text-align:left; max-width:880px;">
         <strong style="color:var(--ye);">1.</strong> Copia este archivo y renombralo a <code style="color:var(--cy);">studio/&lt;slug&gt;.html</code><br><br>
         <strong style="color:var(--ye);">2.</strong> En cada slide-tv, reemplaza el bloque <code style="color:var(--cy);">.tv-noscreen</code> por <code style="color:var(--cy);">&lt;img src="..."&gt;</code> o <code style="color:var(--cy);">&lt;video src="..." autoplay muted loop&gt;&lt;/video&gt;</code><br><br>
-        <strong style="color:var(--ye);">3.</strong> Edita titulo, meta y caption. Color del LED y posicion de las perillas se mantienen automaticos.
+        <strong style="color:var(--ye);">3.</strong> Edita titulo, meta y caption. Para gameplay 16:9 usa <code style="color:var(--cy);">class="tarrovision ancha"</code> (slides 03, 05 y 06); sin <code style="color:var(--cy);">ancha</code> la TV es cuadrada (slides 04 y 07). Los contenedores de la ancha llevan la clase <code style="color:var(--cy);">w</code>.
       </div>
     </div>
   </section>
