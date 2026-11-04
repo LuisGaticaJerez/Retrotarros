@@ -270,7 +270,9 @@ def _trama(data: dict) -> dict | None:
     """Datos de la slide LA TRAMA (opcional: solo si el juego tiene lore que contar). Devuelve el
     dict validado o None si no hay `trama` o esta mal formado (el lint avisa en ese caso).
     Forma: {"titulo": "LA TRAMA" (opcional), "premisa": str, "actos": [[titulo, texto] x3],
-    "personajes": [[nombre, rol], ...] (opcional, hasta 4)}."""
+    "personajes": [[nombre, rol], ...] (opcional, hasta 4), "cinematica": True (opcional)}.
+    Con `cinematica` la slide suma una TarroVision 16:9 a la izquierda para montar la cinematica
+    y la grafica de la trama pasa a una columna a la derecha (no se pierde nada)."""
     t = data.get("trama")
     if not isinstance(t, dict) or not isinstance(t.get("premisa"), str) or not t["premisa"].strip():
         return None
@@ -298,6 +300,25 @@ def _slide_trama(num: int, data: dict) -> str:
             if isinstance(p, (list, tuple)) and len(p) >= 2 and isinstance(p[0], str) and isinstance(p[1], str)]
     personajes = ('<div class="tr-pers">' + "".join(
         f'<div class="tr-p"><b>{_esc(p[0].upper())}</b><i>{_esc(p[1])}</i></div>' for p in pers) + "</div>") if pers else ""
+    if t.get("cinematica") is True:
+        actos_v = "".join(
+            f'<div class="tr-acto"><div class="tr-n">{i}</div><div class="tr-act-t">'
+            f'<div class="tr-at">{_esc(a[0].upper())}</div><div class="tr-atxt">{_esc(a[1])}</div></div></div>'
+            for i, a in enumerate(t["actos"], 1)
+        )
+        return (
+            f'<section class="slide"><span class="slide-num">{num:02d}</span>'
+            '<div class="trama con-tv">'
+            f'<div class="tr-tv">{TV.tv(1, "ancha")}</div>'
+            '<div class="tr-lado">'
+            f'<div class="tr-head"><div class="tr-tag">{titulo}</div><div class="tr-sin">SIN SPOILERS</div></div>'
+            f'<div class="tr-premisa">{_esc(t["premisa"])}</div>'
+            f'<div class="tr-actos">{actos_v}</div>'
+            f'{personajes}'
+            '</div></div>'
+            f'{_notas(data.get("notas", {}).get("trama"))}'
+            '</section>'
+        )
     return (
         f'<section class="slide"><span class="slide-num">{num:02d}</span>'
         '<div class="trama">'
@@ -641,6 +662,25 @@ CSS_TRAMA = """
 .tr-p{border:2px solid rgba(0,229,255,.55);border-radius:6px;padding:8px 20px;text-align:center}
 .tr-p b{display:block;font-family:'Orbitron';font-weight:700;font-size:21px;color:var(--cy)}
 .tr-p i{display:block;font-style:normal;font-family:'Share Tech Mono';font-size:16px;color:rgba(255,255,255,.68);margin-top:2px}
+/* con cinematica: TarroVision 16:9 a la izquierda y la grafica de la trama en columna a la derecha */
+.trama.con-tv{flex-direction:row;justify-content:center;align-items:center;gap:44px;padding:0 44px}
+.tr-tv{flex:0 0 1090px;display:flex;align-items:center}
+.tr-tv .tarrovision.tvn.ancha{width:100%}
+.tr-lado{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:20px}
+.con-tv .tr-head{gap:14px;flex-wrap:wrap}
+.con-tv .tr-tag{font-size:15px;letter-spacing:5px}
+.con-tv .tr-premisa{font-size:29px;line-height:1.3;text-align:left;max-width:none;text-shadow:none}
+.con-tv .tr-actos{flex-direction:column;align-items:stretch;max-width:none;gap:14px}
+.con-tv .tr-acto{flex-direction:row;align-items:flex-start;text-align:left;gap:16px;padding:0}
+.con-tv .tr-acto+.tr-acto::before{top:-14px;left:26px;right:auto;width:3px;height:14px;background:linear-gradient(180deg,var(--mg),var(--cy))}
+.con-tv .tr-n{flex:none;width:54px;height:54px;font-size:19px}
+.con-tv .tr-act-t{min-width:0}
+.con-tv .tr-at{font-size:22px;margin-top:0}
+.con-tv .tr-atxt{font-size:19px;line-height:1.4;max-width:none;margin-top:3px}
+.con-tv .tr-pers{justify-content:flex-start;gap:10px}
+.con-tv .tr-p{padding:6px 14px}
+.con-tv .tr-p b{font-size:17px}
+.con-tv .tr-p i{font-size:14px}
 """
 
 SCRIPT = """
@@ -727,6 +767,8 @@ def generar_resena(data: dict, out_slug: str, lint: bool = True) -> Path:
     css += TV.css(TV.variante(data))
     if _trama(data):
         css += CSS_TRAMA
+        if _trama(data).get("cinematica") is True and TV.variante(data) != "ancha":
+            css += TV.css("ancha")   # la cinematica usa siempre la TV 16:9
     if data.get("por_confirmar"):
         css += CSS_POR_CONFIRMAR
     if data.get("en_coleccion") == "familia" and data.get("familia_texto"):

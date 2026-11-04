@@ -113,6 +113,58 @@ def test_lint_pide_el_bloque_de_notas_de_trama():
     assert not any("'trama'" in a for a in avisos)
 
 
+def test_cinematica_suma_tv_16_9_y_conserva_la_grafica():
+    d = _con_trama()
+    d["trama"]["cinematica"] = True
+    html = _generar(d)
+    assert 'class="trama con-tv"' in html and 'class="tr-tv"' in html
+    assert "tarrovision tvn ancha" in html and ".tarrovision.tvn.ancha" in html   # TV 16:9 y su CSS, aunque el DATA no la pida
+    assert html.count('class="tr-acto"') == 3 and "tr-premisa" in html and 'class="tr-p"' in html and "SIN SPOILERS" in html
+    # sin cinematica no hay TV en la slide
+    sin = _generar(_con_trama())
+    assert 'class="trama con-tv"' not in sin and 'class="tr-tv"' not in sin
+
+
+def test_lint_cinematica_debe_ser_booleano():
+    d = _con_trama()
+    d["trama"]["cinematica"] = "si"
+    errores, _ = L.revisar(d, "x")
+    assert any("trama.cinematica" in e for e in errores)
+    d["trama"]["cinematica"] = True
+    errores, _ = L.revisar(d, "x")
+    assert not any("cinematica" in e for e in errores)
+
+
+def test_visual_cinematica_16_9_exacta_y_dentro_del_slide():
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        print("  (sin Playwright: prueba visual omitida)")
+        return
+    d = _con_trama()
+    d["trama"]["cinematica"] = True
+    ruta = D.generar_resena(d, SLUG_TMP)
+    try:
+        with sync_playwright() as p:
+            b = p.chromium.launch()
+            pg = b.new_page(viewport={"width": 1920, "height": 1080})
+            pg.goto(ruta.as_uri())
+            pg.wait_for_timeout(400)
+            pg.evaluate("go(3)")
+            pg.wait_for_timeout(350)
+            m = pg.evaluate("""()=>{const s=document.querySelector('.slide.active'),dk=document.querySelector('.deck').getBoundingClientRect(),
+              t=s.querySelector('.tarrovision').getBoundingClientRect(),c=s.querySelector('.tv-screen-inner').getBoundingClientRect(),
+              l=s.querySelector('.tr-lado').getBoundingClientRect(),p=s.querySelector('.tr-p')?.getBoundingClientRect();
+              return {ratio:c.width/c.height,w:c.width,tvdentro:t.top>=dk.top&&t.bottom<=dk.bottom&&t.left>=0,
+                      ladodentro:l.top>=dk.top&&l.bottom<=dk.bottom&&l.right<=1920,sin_cruce:t.right<=l.left,
+                      persdentro:!p||p.bottom<=dk.bottom}}""")
+            b.close()
+    finally:
+        ruta.unlink()
+    assert abs(m["ratio"] - 16 / 9) < 0.01 and m["w"] >= 1000, m
+    assert m["tvdentro"] and m["ladodentro"] and m["sin_cruce"] and m["persdentro"], m
+
+
 def main() -> int:
     fallas = 0
     for nombre, fn in sorted(globals().items()):

@@ -71,6 +71,8 @@ def _errores_trama(data: dict) -> list[str]:
             errores.append("trama.personajes: cada elemento debe ser [nombre, rol] con dos textos no vacios")
     if "titulo" in t and (not isinstance(t["titulo"], str) or not t["titulo"].strip()):
         errores.append("trama.titulo debe ser un texto no vacio")
+    if "cinematica" in t and not isinstance(t["cinematica"], bool):
+        errores.append("trama.cinematica debe ser True o False")
     return errores
 
 
