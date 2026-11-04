@@ -40,6 +40,40 @@ RUTA_CAJAS = Path(__file__).resolve().parent.parent / "studio" / "resenas" / "im
 _TILDES = re.compile("[áéíóúüÁÉÍÓÚÜ]")
 
 
+def _bloques_notas(data: dict) -> tuple[str, ...]:
+    """Bloques de notas esperados: los de siempre y, si la reseña trae slide de trama, `trama`."""
+    return BLOQUES_NOTAS + (("trama",) if data.get("trama") else ())
+
+
+def _errores_trama(data: dict) -> list[str]:
+    """Valida la forma de data['trama'] (premisa, 3 actos, personajes opcionales)."""
+    t = data.get("trama")
+    if t is None:
+        return []
+    if not isinstance(t, dict):
+        return ["trama debe ser un dict con premisa, actos y (opcional) personajes"]
+    errores = []
+    if not isinstance(t.get("premisa"), str) or not t["premisa"].strip():
+        errores.append("trama.premisa debe ser un texto no vacio")
+    actos = t.get("actos")
+    n = len(actos) if isinstance(actos, (list, tuple)) else -1
+    if n != 3:
+        errores.append(f"trama.actos debe tener 3 elementos (tiene {n})")
+    elif not all(isinstance(a, (list, tuple)) and len(a) >= 2 and all(isinstance(x, str) and x.strip() for x in a[:2])
+                 for a in actos):
+        errores.append("trama.actos: cada elemento debe ser [titulo, texto] con dos textos no vacios")
+    pers = t.get("personajes")
+    if pers is not None:
+        if not isinstance(pers, (list, tuple)) or len(pers) > 4:
+            errores.append("trama.personajes debe ser una lista de hasta 4 pares [nombre, rol]")
+        elif not all(isinstance(p, (list, tuple)) and len(p) >= 2 and all(isinstance(x, str) and x.strip() for x in p[:2])
+                     for p in pers):
+            errores.append("trama.personajes: cada elemento debe ser [nombre, rol] con dos textos no vacios")
+    if "titulo" in t and (not isinstance(t["titulo"], str) or not t["titulo"].strip()):
+        errores.append("trama.titulo debe ser un texto no vacio")
+    return errores
+
+
 def _bloque(data: dict, nombre: str) -> dict:
     notas = data.get("notas") or {}
     return notas.get(nombre) or {}
@@ -82,10 +116,15 @@ def revisar(data: dict, out_slug: str) -> tuple[list[str], list[str]]:
                      and all(isinstance(t, str) and t.strip() for t in v[:2]) for v in vinetas):
             errores.append("jugabilidad_vinetas: cada elemento debe ser [titulo, texto] con dos textos no vacios")
 
-    # la marca puede ir en el titulo del bloque o en una de sus lineas
+    errores += _errores_trama(data)
+
+    # la marca puede ir en el titulo del bloque o en una de sus lineas; con slide de trama
+    # tambien vale en las notas de esa slide
     trama = [str(_bloque(data, "contexto").get("titulo") or "")] + _lineas(data, "contexto")
+    if data.get("trama"):
+        trama += [str(_bloque(data, "trama").get("titulo") or "")] + _lineas(data, "trama")
     if not any("trama resumida" in t.lower() for t in trama):
-        errores.append("notas.contexto sin una linea con 'TRAMA RESUMIDA'")
+        errores.append("notas.contexto sin una linea con 'TRAMA RESUMIDA'" + (" (ni notas.trama)" if data.get("trama") else ""))
 
     if not any("arcade" in t.lower() for t in _lineas(data, "ficha")):
         errores.append("notas.ficha no menciona 'arcade' (verificar version arcade previa)")
@@ -121,6 +160,17 @@ def _textos_nuevos(data: dict) -> list[tuple[str, str]]:
         for i, v in enumerate(vinetas):
             if isinstance(v, (list, tuple)):
                 pares += [(f"jugabilidad_vinetas[{i}]", t) for t in v[:2] if isinstance(t, str)]
+    t = data.get("trama")
+    if isinstance(t, dict):
+        for k in ("titulo", "premisa"):
+            if isinstance(t.get(k), str):
+                pares.append((f"trama.{k}", t[k]))
+        for i, a in enumerate(t.get("actos") or []):
+            if isinstance(a, (list, tuple)):
+                pares += [(f"trama.actos[{i}]", x) for x in a[:2] if isinstance(x, str)]
+        for i, p in enumerate(t.get("personajes") or []):
+            if isinstance(p, (list, tuple)):
+                pares += [(f"trama.personajes[{i}]", x) for x in p[:2] if isinstance(x, str)]
     compositor = data.get("audiovisual_compositor")
     if isinstance(compositor, str):
         pares.append(("audiovisual_compositor", compositor))
@@ -141,7 +191,7 @@ def _avisos(data: dict) -> list[str]:
     if palabras > 75:
         avisos.append(f"contexto_texto tiene {palabras} palabras (meta: 50 a 70)")
 
-    for nombre in BLOQUES_NOTAS:
+    for nombre in _bloques_notas(data):
         bloque = _bloque(data, nombre)
         if not bloque:
             avisos.append(f"falta el bloque de notas '{nombre}'")
@@ -172,7 +222,7 @@ def _avisos(data: dict) -> list[str]:
     if _bloque(data, "jugabilidad") and n_jug < 3:
         avisos.append(f"notas.jugabilidad tiene {n_jug} lineas (minimo 3 con mecanicas reales)")
 
-    todo_notas = " ".join(_texto_bloque(_bloque(data, n)) for n in BLOQUES_NOTAS).lower()
+    todo_notas = " ".join(_texto_bloque(_bloque(data, n)) for n in _bloques_notas(data)).lower()
     if "por confirmar" in todo_notas and not data.get("por_confirmar"):
         avisos.append("las notas dicen 'por confirmar' pero el campo por_confirmar esta vacio")
 
