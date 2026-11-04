@@ -123,7 +123,8 @@
           "AKU AKU",
           "la mascara guia"
         ]
-      ]
+      ],
+      "cinematica": true
     },
     "notas": {
       "trama": {
@@ -168,7 +169,8 @@
           "DIABLO",
           "señor del terror"
         ]
-      ]
+      ],
+      "cinematica": true
     },
     "notas": {
       "trama": {
@@ -358,7 +360,8 @@
           "BELGER",
           "jefe final"
         ]
-      ]
+      ],
+      "cinematica": true
     },
     "notas": {
       "trama": {
@@ -402,7 +405,8 @@
           "GENERAL RAAM",
           "el jefe Locust"
         ]
-      ]
+      ],
+      "cinematica": true
     },
     "notas": {
       "trama": {
@@ -446,7 +450,8 @@
           "CAPITAN KEYES",
           "la nave"
         ]
-      ]
+      ],
+      "cinematica": true
     },
     "notas": {
       "trama": {
@@ -538,7 +543,8 @@
           "DONALD Y GOOFY",
           "los compañeros"
         ]
-      ]
+      ],
+      "cinematica": true
     },
     "notas": {
       "trama": {
@@ -820,7 +826,8 @@
           "ALVIN",
           "el aprendiz"
         ]
-      ]
+      ],
+      "cinematica": true
     },
     "notas": {
       "trama": {
@@ -878,6 +885,56 @@
           "Los Yoshi se pasan al bebe unos a otros por cada mundo; son varios Yoshis de distintos colores, cada uno con su zona.",
           "Kamek es el hechicero (Magikoopa) que persigue al ave mensajera; Baby Bowser es el jefe final.",
           "POR CONFIRMAR: cuantos mundos y cual es el orden de los Yoshis por zona en la version original de SNES."
+        ]
+      }
+    }
+  },
+  "resena-need-for-speed-underground-2": {
+    "trama": {
+      "premisa": "Un corredor callejero pierde su auto en una emboscada y vuelve a empezar en una ciudad nueva, donde alguien controla las carreras.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Bayview, una ciudad de rascacielos y calles mojadas donde se corre de noche."
+        ],
+        [
+          "EL CONFLICTO",
+          "Caleb Reece y su equipo, los Wraiths, quieren controlar la escena manipulando los patrocinios."
+        ],
+        [
+          "LA META",
+          "Ganar carreras, destapar los barrios de Bayview y enfrentar a Caleb en un duelo final."
+        ]
+      ],
+      "personajes": [
+        [
+          "EL CORREDOR",
+          "el jugador"
+        ],
+        [
+          "RACHEL TELLER",
+          "la guia"
+        ],
+        [
+          "CALEB REECE",
+          "el rival"
+        ],
+        [
+          "NIKKI MORRIS",
+          "la ex Wraith"
+        ]
+      ],
+      "cinematica": true
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: la historia se cuenta en vinetas de comic entre carreras; es un telon de fondo, no una trama larga. Lo importante es la ciudad y el tuning.",
+          "El arranque: el jugador ya es el mejor de Olympic City cuando un Hummer H2 destruye su Nissan Skyline GT-R. Seis meses despues llega a Bayview y Rachel le presta un Nissan 350Z.",
+          "Rachel (voz de Brooke Burke) le explica la escena, los patrocinadores y la Underground Racing League; Caleb Reece (voz de David Palffy) lidera a los Wraiths.",
+          "SPOILER: se revela que Caleb era quien manejaba el Hummer, y Nikki, una Wraith, cambia de bando. No contarlo en pantalla.",
+          "POR CONFIRMAR: nombres de los barrios de Bayview y orden de desbloqueo; la version de Nintendo DS cuenta la historia distinto."
         ]
       }
     }
