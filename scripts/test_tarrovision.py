@@ -90,10 +90,12 @@ def test_css_clasica_vacio_y_tv_clasica_no_se_genera_aca():
     raise AssertionError("tv() solo genera nueva o ancha")
 
 
-def test_css_nueva_sin_reglas_de_ancha():
+def test_css_nueva_4_3_y_ancha_16_9():
     nueva, ancha = TV.css("nueva"), TV.css("ancha")
-    assert ".tarrovision.tvn{" in nueva and "aspect-ratio:16/9" not in nueva
-    assert nueva in ancha and "aspect-ratio:16/9" in ancha and ".gp-tv.tvw" in ancha
+    assert ".tarrovision.tvn{" in nueva and ".tarrovision.tvn{" in ancha
+    assert "aspect-ratio:4/3" in nueva and ".tvn.cuatro3" in nueva and "16/9" not in nueva
+    assert "aspect-ratio:16/9" in ancha and ".tvn.ancha" in ancha and "4/3" not in ancha
+    assert ".gp-tv.tvw" in nueva and ".gp-tv.tvw" in ancha
 
 
 def test_tv_marcas_y_sin_tildes():
@@ -109,8 +111,9 @@ def test_tv_marcas_y_sin_tildes():
 def test_resena_nueva_y_ancha_marcas():
     nueva = _generar(_data(grafica="nueva", jugabilidad_vinetas=VINETAS, tarrovision="nueva"))
     ancha = _generar(_data(grafica="nueva", jugabilidad_vinetas=VINETAS, tarrovision="ancha"))
-    assert nueva.count("tarrovision tvn") == 4 and "tvw" not in nueva.split("</style>")[1]
-    assert ancha.count("tarrovision tvn ancha") == 4
+    assert nueva.count("tarrovision tvn cuatro3") == 4 and "tarrovision tvn ancha" not in nueva
+    assert nueva.count('class="gp-tv tvw"') == 2 and 'class="dual-grid tvw"' in nueva
+    assert ancha.count("tarrovision tvn ancha") == 4 and "cuatro3" not in ancha.split("<body>")[1]
     assert ancha.count('class="gp-tv tvw"') == 2 and ancha.count('class="dual-cell tvw"') == 2
     assert 'class="dual-grid tvw"' in ancha and 'class="dual-grid"' not in ancha
 
@@ -128,7 +131,8 @@ def test_saga_nueva_y_ancha():
     assert 'class="gp-tv tvw"' in g and "tarrovision tvn ancha" in g
     d = S._slide_gameplay_dual(4, 1, 2, "ancha")
     assert 'class="dual-grid tvw"' in d and d.count("dual-cell tvw") == 2
-    assert "tvn" in S._slide_gameplay(3, JUEGO_SAGA, 2, "nueva") and "tvw" not in S._slide_gameplay(3, JUEGO_SAGA, 2, "nueva")
+    n = S._slide_gameplay(3, JUEGO_SAGA, 2, "nueva")
+    assert "tarrovision tvn cuatro3" in n and 'class="gp-tv tvw"' in n
     assert _h(S._slide_gameplay(3, JUEGO_SAGA, 2, "clasica")) == GOLDEN["saga_gameplay"]
 
 
@@ -182,16 +186,17 @@ def test_visual_ancha_16_9_exacta_y_dentro_del_slide():
     assert len(m[3]) == 2 and abs(m[3][0]["w"] - m[3][1]["w"]) < 1
 
 
-def test_visual_nueva_conserva_tamano_de_la_clasica():
-    nueva, clasica = _correr_visual("nueva"), _correr_visual("clasica")
-    if nueva is None:
+def test_visual_nueva_4_3_exacta_y_dentro_del_slide():
+    m = _correr_visual("nueva")
+    if m is None:
         return
-    for i in (3, 4, 5):
-        assert len(nueva[i]) == len(clasica[i]), i
-        for a, b in zip(nueva[i], clasica[i]):
-            # el marco es mas delgado, asi que la pantalla puede crecer un poco, nunca achicarse
-            assert a["w"] >= b["w"] - 4 and a["h"] >= b["h"] - 4, (i, a, b)
-            assert a["dentro"] and a["h"] > 300, (i, a)
+    for i, tvs in m.items():
+        assert tvs, f"slide {i} sin TarroVision"
+        for t in tvs:
+            assert abs(t["ratio"] - 4 / 3) < 0.01, (i, t)
+            assert t["dentro"], (i, t)
+    assert m[4][0]["h"] >= 600, m[4]            # gameplay: pantalla 4:3 grande (la clasica mide 960x623)
+    assert len(m[3]) == 2 and abs(m[3][0]["w"] - m[3][1]["w"]) < 1
 
 
 def main() -> int:
