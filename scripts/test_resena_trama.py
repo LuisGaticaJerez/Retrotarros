@@ -165,6 +165,45 @@ def test_visual_cinematica_16_9_exacta_y_dentro_del_slide():
     assert m["tvdentro"] and m["ladodentro"] and m["sin_cruce"] and m["persdentro"], m
 
 
+def test_trama_desde_json_externo(tmp_path=None):
+    """data/resenas/trama.json aporta la trama a un DATA que no la trae (reseñas regeneradas desde drivers viejos)."""
+    import json
+    import tempfile
+    entrada = {"trama": copy.deepcopy(TRAMA), "notas": {"trama": dict(NOTAS_TRAMA)}}
+    with tempfile.TemporaryDirectory() as d:
+        ruta = Path(d) / "trama.json"
+        ruta.write_text(json.dumps({SLUG_TMP: entrada}), encoding="utf-8")
+        previo = D.TRAMAS_JSON
+        D.TRAMAS_JSON = ruta
+        try:
+            html = _generar(_data(grafica="nueva"))
+            assert html.count('class="tr-acto"') == 3 and "<h4>LA TRAMA</h4>" in html
+            # un DATA que ya trae su trama manda sobre el JSON
+            propio = _con_trama()
+            propio["trama"]["premisa"] = "Premisa propia del driver."
+            assert "Premisa propia del driver." in _generar(propio)
+            # otro slug no recibe nada
+            D.TRAMAS_JSON = Path(d) / "no-existe.json"
+            assert "tr-premisa" not in _generar(_data(grafica="nueva"))
+        finally:
+            D.TRAMAS_JSON = previo
+
+
+def test_json_committed_es_valido_y_sin_tildes():
+    import json
+    import re
+    datos = json.loads(D.TRAMAS_JSON.read_text(encoding="utf-8"))
+    assert len(datos) >= 19
+    for slug, e in datos.items():
+        assert slug.startswith("resena-"), slug
+        data = {"trama": e["trama"], "notas": {"trama": e["notas"]["trama"]}}
+        assert L._errores_trama(data) == [], (slug, L._errores_trama(data))
+        assert D._trama(data) is not None, slug
+        texto = json.dumps(e, ensure_ascii=False)
+        assert not re.search("[\u00e1\u00e9\u00ed\u00f3\u00fa\u00fc\u00c1\u00c9\u00cd\u00d3\u00da\u00dc]", texto), f"tilde en {slug}"
+        assert len(e["notas"]["trama"]["lineas"]) >= 3, slug
+
+
 def main() -> int:
     fallas = 0
     for nombre, fn in sorted(globals().items()):

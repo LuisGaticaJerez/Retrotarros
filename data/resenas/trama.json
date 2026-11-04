@@ -1,0 +1,942 @@
+{
+  "resena-altered-beast": {
+    "trama": {
+      "premisa": "Zeus revive a un centurion caido para rescatar a su hija Athena, secuestrada por el señor del inframundo.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Una Grecia antigua de ruinas, cementerios y criaturas que salen de la tierra."
+        ],
+        [
+          "EL CONFLICTO",
+          "Neff, amo del inframundo, tiene prisionera a Athena y manda sus monstruos contra el heroe."
+        ],
+        [
+          "LA META",
+          "Reunir las esferas de espiritu, transformarse en bestia y llegar hasta Neff."
+        ]
+      ],
+      "personajes": [
+        [
+          "CENTURION",
+          "el heroe resucitado"
+        ],
+        [
+          "ZEUS",
+          "quien lo envia"
+        ],
+        [
+          "NEFF",
+          "el villano"
+        ]
+      ]
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: la frase de arranque 'Rise from your grave' es parte de la trama: Zeus levanta al heroe de su tumba. Decirla con voz grave.",
+          "El heroe es un soldado romano en un escenario griego: mezcla de mitologias que el juego no explica. Dato para el comentario, no para corregir.",
+          "Las esferas de espiritu son el hilo del juego: cada una lo hace mas fuerte y, a la tercera, se transforma en bestia (hombre lobo, dragon, oso, tigre).",
+          "POR CONFIRMAR antes de grabar: nombre exacto de cada bestia por nivel en la version de Genesis (cambia respecto del arcade).",
+          "TRANSICION: de la historia a la comparativa 'arcade contra Genesis'."
+        ]
+      }
+    }
+  },
+  "resena-contra": {
+    "trama": {
+      "premisa": "Un escuadron de comandos aterriza en una isla para frenar a una organizacion alienigena que quiere conquistar la Tierra.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Una isla selvatica convertida en base enemiga, con soldados, maquinas y organismos extranjeros."
+        ],
+        [
+          "EL CONFLICTO",
+          "La organizacion Red Falcon usa la isla como cabeza de playa para invadir el planeta."
+        ],
+        [
+          "LA META",
+          "Abrirse paso a tiros, nivel por nivel, hasta el corazon de la base alienigena."
+        ]
+      ],
+      "personajes": [
+        [
+          "BILL RIZER",
+          "comando, jugador 1"
+        ],
+        [
+          "LANCE BEAN",
+          "comando, jugador 2"
+        ],
+        [
+          "RED FALCON",
+          "el enemigo"
+        ]
+      ]
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: la trama es minima a proposito: dos soldados contra una invasion. El juego se cuenta con el ritmo, no con textos.",
+          "Los comandos pertenecen a la unidad Contra, que da nombre al juego. El nombre Red Falcon sale del emblema de los invasores.",
+          "Ojo con las versiones: el arcade, el NES y las ediciones europeas cambian nombres de personajes y detalles del contexto (en Europa se llamo Probotector, con robots en vez de soldados).",
+          "POR CONFIRMAR: año y lugar exacto de la isla segun cada version (los manuales no dicen lo mismo).",
+          "TRANSICION: de la trama sencilla a la comparativa entre versiones."
+        ]
+      }
+    }
+  },
+  "resena-crash-bandicoot": {
+    "trama": {
+      "premisa": "Un bandicut mutado por un cientifico loco escapa de su laboratorio y debe rescatar a su novia antes de que ella sufra el mismo experimento.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Las islas Wumpa: selva, ruinas y playas con fauna extrañamente agresiva."
+        ],
+        [
+          "EL CONFLICTO",
+          "El Dr. Neo Cortex quiere un ejercito de animales evolucionados para conquistar el mundo."
+        ],
+        [
+          "LA META",
+          "Cruzar las islas, derrotar a los secuaces de Cortex y llegar a su castillo."
+        ]
+      ],
+      "personajes": [
+        [
+          "CRASH",
+          "el bandicut rebelde"
+        ],
+        [
+          "TAWNA",
+          "la novia a rescatar"
+        ],
+        [
+          "DR. CORTEX",
+          "el villano"
+        ],
+        [
+          "AKU AKU",
+          "la mascara guia"
+        ]
+      ],
+      "cinematica": true
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: Crash falla la prueba de Cortex (la maquina no lo convence del todo) y por eso es descartado: de ahi su rebeldia. Contarlo como chiste.",
+          "Aku Aku es la mascara que lo protege: cada una que recoge es un golpe extra, y es la forma en que el juego te explica los 'puntos de vida'.",
+          "El Dr. Nitrus Brio es el cientifico que lo ayuda a mutar; suele aparecer como jefe. Dato de trivia.",
+          "POR CONFIRMAR: nombres de las islas y orden exacto de los jefes en la version original de PS1.",
+          "TRANSICION: de 'por que corre' a 'como se compara con otros plataformeros'."
+        ]
+      }
+    }
+  },
+  "resena-diablo": {
+    "trama": {
+      "premisa": "Bajo un pueblo tranquilo hay una catedral y bajo la catedral, un laberinto: ahi se despierta el señor del terror.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Tristram, un pueblo que se vacia mientras la catedral cobra vida."
+        ],
+        [
+          "EL CONFLICTO",
+          "El rey Leoric enloquecio, su hijo desaparecio y algo oscuro manda desde las profundidades."
+        ],
+        [
+          "LA META",
+          "Bajar nivel por nivel hasta enfrentar a Diablo, el origen de todo."
+        ]
+      ],
+      "personajes": [
+        [
+          "GUERRERO",
+          "tu eliges la clase"
+        ],
+        [
+          "DECKARD CAIN",
+          "el sabio del pueblo"
+        ],
+        [
+          "DIABLO",
+          "señor del terror"
+        ]
+      ],
+      "cinematica": true
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: el juego usa un pueblo con NPC, no cinematicas largas: cada personaje te cuenta la historia en frases cortas. Es el estilo.",
+          "Hay tres clases: guerrero, picara y hechicero. Cada una cuenta su 'por que llegue a Tristram' distinto en el manual.",
+          "Deckard Cain es el viejo sabio que te explica la historia en pocas palabras; su frase 'Stay awhile and listen' se volvio famosa.",
+          "NO CONTAR EN PANTALLA el final (lo que le pasa al heroe al derrotar a Diablo): es un giro que sorprende a quien no lo conoce. Si lo hablan, avisar de spoiler.",
+          "POR CONFIRMAR: nombre del arzobispo que traiciona a la ciudad (Lazarus) y la cronologia con Diablo II."
+        ]
+      }
+    }
+  },
+  "resena-earthbound": {
+    "trama": {
+      "premisa": "Un meteorito cae sobre un pueblo y un niño con poderes psiquicos debe frenar a un mal cosmico que viene del futuro.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Un pais parecido a EE.UU. de los 90, con pueblos, ciudades y monstruos comicos."
+        ],
+        [
+          "EL CONFLICTO",
+          "Un mensajero del futuro, Buzz Buzz, avisa de que Giygas arrasara el mundo si nadie lo detiene."
+        ],
+        [
+          "LA META",
+          "Visitar ocho lugares, recoger sus melodias y juntar a cuatro amigos para el enfrentamiento final."
+        ]
+      ],
+      "personajes": [
+        [
+          "NESS",
+          "el niño protagonista"
+        ],
+        [
+          "PAULA",
+          "la psiquica"
+        ],
+        [
+          "JEFF",
+          "el inventor"
+        ],
+        [
+          "POO",
+          "el principe"
+        ]
+      ]
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: la trama empieza con un meteorito en el patio de Ness; el humor y lo cotidiano (pizza, la mama, el telefono) son el centro.",
+          "Pokey Minch, el vecino, es la figura que reaparece a lo largo del juego; Giygas es el enemigo final, presentado de manera muy atipica para un RPG.",
+          "El juego se llama Mother 2 en Japon; es la segunda entrega de la saga Mother de Shigesato Itoi.",
+          "SPOILER: el final tiene una escena famosa y desconcertante; no contar en pantalla.",
+          "POR CONFIRMAR: nombre exacto de los 'santuarios' y de cada melodia; la cifra de 8 es la que se repite, verificar."
+        ]
+      }
+    }
+  },
+  "resena-earthworm-jim": {
+    "trama": {
+      "premisa": "Una lombriz comun recibe un super traje que cae del cielo y se convierte, sin querer, en heroe del espacio.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Un universo de caricatura: vacas voladoras, gatos asesinos y basureros gigantes."
+        ],
+        [
+          "EL CONFLICTO",
+          "Psy-Crow persigue el traje por orden de la Reina Slug-for-a-Butt, que quiere casarse con la princesa."
+        ],
+        [
+          "LA META",
+          "Rescatar a la Princesa What's-Her-Name antes de la boda real."
+        ]
+      ],
+      "personajes": [
+        [
+          "JIM",
+          "la lombriz heroe"
+        ],
+        [
+          "PRINCESA",
+          "la rescatada"
+        ],
+        [
+          "PSY-CROW",
+          "el cazador"
+        ],
+        [
+          "REINA SLUG",
+          "la villana"
+        ]
+      ]
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: la gracia es el absurdo: un gusano en traje espacial dispara pistolas y lanza vacas. Todo es parodia.",
+          "Los jefes: Psy-Crow, Bob the Killer Goldfish, Professor Monkey-for-a-Head, Evil the Cat y la Reina. Nombres en ingles, leerlos tal cual.",
+          "El diseño es de Doug TenNapel y el juego de Shiny Entertainment; el exito dio una serie animada.",
+          "POR CONFIRMAR: orden exacto de los jefes por nivel y el nombre oficial de cada uno en la version de Genesis."
+        ]
+      }
+    }
+  },
+  "resena-fatal-fury": {
+    "trama": {
+      "premisa": "Dos hermanos entran a un torneo para vengar a su padre, asesinado por el hombre que domina la ciudad.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "South Town: una ciudad portuaria donde un criminal organiza el torneo King of Fighters."
+        ],
+        [
+          "EL CONFLICTO",
+          "Geese Howard mato a Jeff Bogard, padre de Terry y Andy, y gobierna desde su torre."
+        ],
+        [
+          "LA META",
+          "Ganar el torneo para llegar frente a Geese y cobrar la venganza."
+        ]
+      ],
+      "personajes": [
+        [
+          "TERRY BOGARD",
+          "el hermano mayor"
+        ],
+        [
+          "ANDY BOGARD",
+          "el menor"
+        ],
+        [
+          "GEESE HOWARD",
+          "el jefe de South Town"
+        ]
+      ]
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: el torneo es la excusa para pelear, pero la historia es de venganza familiar: Terry y Andy quieren al asesino de su padre.",
+          "Joe Higashi es el tercer jugador seleccionable, amigo de los Bogard (maestro de muay thai).",
+          "Fatal Fury es la respuesta de SNK a Street Fighter II: mismos ingredientes, otra ciudad, otro tono.",
+          "POR CONFIRMAR: detalles de como murio Jeff (hay versiones distintas en manuales y secuelas)."
+        ]
+      }
+    }
+  },
+  "resena-final-fight": {
+    "trama": {
+      "premisa": "Una pandilla secuestra a la hija del alcalde y el propio alcalde sale a recuperarla, golpe a golpe, con dos amigos.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Metro City: una ciudad dominada por la pandilla Mad Gear."
+        ],
+        [
+          "EL CONFLICTO",
+          "Mad Gear secuestra a Jessica, hija del alcalde Mike Haggar, para obligarlo a ceder el control."
+        ],
+        [
+          "LA META",
+          "Recorrer la ciudad de punta a punta hasta el lider de Mad Gear."
+        ]
+      ],
+      "personajes": [
+        [
+          "HAGGAR",
+          "alcalde y ex luchador"
+        ],
+        [
+          "CODY",
+          "novio de Jessica"
+        ],
+        [
+          "GUY",
+          "ninja y amigo"
+        ],
+        [
+          "BELGER",
+          "jefe final"
+        ]
+      ],
+      "cinematica": true
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: lo comico es que el alcalde es luchador profesional y pelea el mismo. Contarlo con humor, sin burlarse.",
+          "Cody y Guy aparecen tambien en Street Fighter: el juego nacio como secuela de ese universo, dato de enlace con el contexto.",
+          "Belger es el lider final; su version en la SNES cambia respecto del arcade, sin entrar en detalles (por confirmar).",
+          "POR CONFIRMAR: cuantos personajes jugables estaban en la version de SNES (Guy no esta en la primera version)."
+        ]
+      }
+    }
+  },
+  "resena-gears-of-war": {
+    "trama": {
+      "premisa": "Despues de catorce años de guerra contra unos monstruos que salen de bajo tierra, un soldado condenado vuelve al combate.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Sera, un planeta devastado donde la humanidad ya perdio casi todo."
+        ],
+        [
+          "EL CONFLICTO",
+          "Los Locust emergieron del subsuelo el Dia de la Emergencia y arrasaron las ciudades."
+        ],
+        [
+          "LA META",
+          "Plantar una bomba en los tuneles de los Locust para cortar la guerra de raiz."
+        ]
+      ],
+      "personajes": [
+        [
+          "MARCUS FENIX",
+          "soldado y protagonista"
+        ],
+        [
+          "DOM SANTIAGO",
+          "su mejor amigo"
+        ],
+        [
+          "GENERAL RAAM",
+          "el jefe Locust"
+        ]
+      ],
+      "cinematica": true
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: hay un tono de guerra sucia: son cuatro soldados casi sin esperanza. El juego quiere que se sienta como una guerra larga.",
+          "Marcus fue encarcelado antes de que empiece la historia; Dom lo saca y lo suma al Escuadron Delta. No contar los motivos exactos sin verificarlos.",
+          "La cifra de 'catorce años' viene del propio material del juego; es la que se usa en el arranque.",
+          "POR CONFIRMAR: nombre completo de la operacion final y del arma ('Resonador') en la version original de Xbox 360."
+        ]
+      }
+    }
+  },
+  "resena-halo-combat-evolved": {
+    "trama": {
+      "premisa": "Una nave humana en fuga llega a un anillo gigante y descubre que ahi hay mas de un enemigo.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Un anillo artificial del tamano de un planeta, con selvas, montanas y ruinas antiguas."
+        ],
+        [
+          "EL CONFLICTO",
+          "El Covenant, una alianza alienigena religiosa, persigue a la humanidad y quiere el anillo."
+        ],
+        [
+          "LA META",
+          "Sobrevivir, entender para que sirve el anillo y evitar que caiga en manos equivocadas."
+        ]
+      ],
+      "personajes": [
+        [
+          "MASTER CHIEF",
+          "supersoldado"
+        ],
+        [
+          "CORTANA",
+          "la IA"
+        ],
+        [
+          "CAPITAN KEYES",
+          "la nave"
+        ]
+      ],
+      "cinematica": true
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: Master Chief casi no habla: la voz del juego la pone Cortana. Eso es parte de su encanto.",
+          "El anillo se llama Halo y es un arma, no un hogar: ese es el giro central de la historia. NO adelantar el giro en pantalla.",
+          "Los Flood aparecen a mitad del juego y cambian el tono de combate a terror; ahi esta la sorpresa principal para quien no lo conoce.",
+          "POR CONFIRMAR: nombre exacto de la nave y de la instalacion segun cada edicion; la fecha oficial de la historia."
+        ]
+      }
+    }
+  },
+  "resena-jojos-bizarre-adventure-pedido": {
+    "trama": {
+      "premisa": "Un estudiante japones y sus aliados viajan a Egipto para destruir a un vampiro inmortal que maldijo a su familia.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Un mundo moderno donde algunos humanos despiertan poderes llamados Stands."
+        ],
+        [
+          "EL CONFLICTO",
+          "Dio Brando, un vampiro, ha despertado y su influencia amenaza la vida de la madre de Jotaro."
+        ],
+        [
+          "LA META",
+          "Cruzar Asia hasta Egipto y vencer a Dio antes de que se acabe el plazo."
+        ]
+      ],
+      "personajes": [
+        [
+          "JOTARO",
+          "el protagonista"
+        ],
+        [
+          "JOSEPH JOESTAR",
+          "su abuelo"
+        ],
+        [
+          "DIO",
+          "el villano"
+        ]
+      ]
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: el juego adapta la parte 3 del manga, Stardust Crusaders; cada peleador es un personaje del viaje a Egipto.",
+          "Los Stands son espiritus de combate que acompanan a cada personaje; cada uno tiene su habilidad. Es la mecanica y el tema a la vez.",
+          "Es un juego de peleas de Capcom de 1998, basado en el manga de Hirohiko Araki. El estilo visual sigue el manga.",
+          "POR CONFIRMAR: nombres exactos de la version que salio en occidente (la version de PS1 y la de arcade tienen cambios)."
+        ]
+      }
+    }
+  },
+  "resena-kingdom-hearts": {
+    "trama": {
+      "premisa": "Un chico de una isla pierde su hogar, recibe un arma magica y viaja entre mundos de Disney para rescatar a sus amigos.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Las Islas del Destino y una cadena de mundos que van de Alicia a Hercules."
+        ],
+        [
+          "EL CONFLICTO",
+          "Los Sincorazon devoran corazones y arrasan mundos; Sora debe cerrarlos con la Llave Espada."
+        ],
+        [
+          "LA META",
+          "Encontrar a Riku y Kairi, y al rey Mickey, y detener la oscuridad."
+        ]
+      ],
+      "personajes": [
+        [
+          "SORA",
+          "el protagonista"
+        ],
+        [
+          "RIKU",
+          "su amigo"
+        ],
+        [
+          "KAIRI",
+          "la chica"
+        ],
+        [
+          "DONALD Y GOOFY",
+          "los compañeros"
+        ]
+      ],
+      "cinematica": true
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: lo especial es la mezcla: personajes de Final Fantasy y de Disney en una misma historia. Para muchos, ahi esta la nostalgia.",
+          "Sora recibe la Llave Espada, el arma que cierra las cerraduras de cada mundo; Donald y Goofy lo siguen por orden del rey Mickey.",
+          "Los Sincorazon son criaturas de la oscuridad; Maleficent es la villana que mueve los hilos. Detalle para improvisar.",
+          "POR CONFIRMAR: el nombre y la funcion de cada villano de Disney en cada mundo (cambian en las distintas versiones)."
+        ]
+      }
+    }
+  },
+  "resena-kirby-super-star": {
+    "trama": {
+      "premisa": "Un solo cartucho con varias aventuras de Kirby, cada una con su propia historia y su propio enemigo.",
+      "actos": [
+        [
+          "DYNA BLADE",
+          "Un ave gigante arrasa los campos de Dream Land y Kirby sale a detenerla."
+        ],
+        [
+          "REVENGE OF META KNIGHT",
+          "Meta Knight llega con su nave Halberd y Kirby debe pararlo."
+        ],
+        [
+          "MILKY WAY WISHES",
+          "Kirby viaja entre planetas para frenar la pelea del Sol y la Luna."
+        ]
+      ],
+      "personajes": [
+        [
+          "KIRBY",
+          "el heroe"
+        ],
+        [
+          "META KNIGHT",
+          "el rival"
+        ],
+        [
+          "MARX",
+          "el bufon"
+        ],
+        [
+          "KING DEDEDE",
+          "el rey"
+        ]
+      ],
+      "titulo": "LAS HISTORIAS"
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: no hay una historia unica; es una recopilacion de mini juegos con su propia trama cada uno.",
+          "Dyna Blade, Revenge of Meta Knight y Milky Way Wishes son las que mas se recuerdan; las otras entregas son mas cortas o competitivas.",
+          "Marx es el villano de Milky Way Wishes; ojo con su 'giro' final, no contarlo en pantalla.",
+          "POR CONFIRMAR: nombre exacto de las ocho secciones en la version de SNES y el orden en que se desbloquean."
+        ]
+      }
+    }
+  },
+  "resena-link-to-the-past": {
+    "trama": {
+      "premisa": "Un joven recibe un mensaje de auxilio de una princesa encerrada y descubre que Hyrule tiene un mundo oscuro escondido.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Hyrule, con un Mundo de la Luz y su reflejo oscuro, el Mundo Oscuro."
+        ],
+        [
+          "EL CONFLICTO",
+          "Agahnim secuestra a siete doncellas para romper el sello que protege a Ganon."
+        ],
+        [
+          "LA META",
+          "Conseguir la Espada Maestra y rescatar a las doncellas antes de que sea tarde."
+        ]
+      ],
+      "personajes": [
+        [
+          "LINK",
+          "el heroe"
+        ],
+        [
+          "ZELDA",
+          "la princesa"
+        ],
+        [
+          "AGAHNIM",
+          "el mago"
+        ],
+        [
+          "GANON",
+          "el rey oscuro"
+        ]
+      ]
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: la historia empieza de noche, con la voz telepatica de Zelda; el tio de Link ya salio a luchar. Es una apertura cinematografica para un cartucho.",
+          "El Mundo Oscuro es la version distorsionada de Hyrule; recorrerlo y entender que reglas cambian es parte del juego.",
+          "Cada doncella es una descendiente de los siete sabios; Link las rescata en cada mazmorra del Mundo Oscuro.",
+          "POR CONFIRMAR: nombre de cada pendiente y el orden de las mazmorras en el Mundo de la Luz."
+        ]
+      }
+    }
+  },
+  "resena-ocarina-of-time-pedido": {
+    "trama": {
+      "premisa": "Un niño sin hada recibe la mision de impedir que un rey oscuro consiga la Trifuerza, y su viaje atraviesa siete años.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Hyrule y el bosque Kokiri, donde Link crece sin saber que es distinto."
+        ],
+        [
+          "EL CONFLICTO",
+          "Ganondorf, rey de los Gerudo, quiere la Trifuerza y se esconde tras la lealtad aparente al rey."
+        ],
+        [
+          "LA META",
+          "Reunir las piedras, abrir el Templo del Tiempo y detener a Ganondorf."
+        ]
+      ],
+      "personajes": [
+        [
+          "LINK",
+          "el heroe"
+        ],
+        [
+          "ZELDA",
+          "la princesa"
+        ],
+        [
+          "GANONDORF",
+          "el villano"
+        ],
+        [
+          "NAVI",
+          "el hada guia"
+        ]
+      ]
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: el juego empieza con una pesadilla y con un arbol parlante, el Gran Arbol Deku, que le pide ayuda a Link. Buen gancho.",
+          "El salto de siete años es el centro de la trama: Link cambia de niño a joven y el mundo cambia con el.",
+          "Navi es la hada que acompaña a Link; la frase 'Hey! Listen!' se volvio un meme. Mencionarlo con humor.",
+          "NO CONTAR el detalle del salto temporal si hablan a gente que no lo jugo: es la sorpresa principal.",
+          "POR CONFIRMAR: orden de las piedras espirituales y de los templos segun la guia oficial."
+        ]
+      }
+    }
+  },
+  "resena-sonic-the-hedgehog": {
+    "trama": {
+      "premisa": "Un erizo azul debe liberar a los animales atrapados por un cientifico que construye un imperio de robots.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Una isla de colinas verdes, fabricas y mundos de colores brillantes."
+        ],
+        [
+          "EL CONFLICTO",
+          "El Dr. Robotnik convierte a los animales en robots y busca las Esmeraldas del Caos."
+        ],
+        [
+          "LA META",
+          "Recorrer cada zona, liberar a los animales y enfrentar a Robotnik."
+        ]
+      ],
+      "personajes": [
+        [
+          "SONIC",
+          "el erizo"
+        ],
+        [
+          "DR. ROBOTNIK",
+          "el villano"
+        ]
+      ]
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: Robotnik se llama Eggman en Japon; en occidente el nombre original fue Robotnik. No confundir.",
+          "Las Esmeraldas del Caos son el objetivo de ambos bandos; en el juego se consiguen en etapas especiales.",
+          "El juego aposto por la velocidad como idea central: la historia es un hilo muy ligero y la gracia es correr.",
+          "POR CONFIRMAR: nombre de la isla (South Island) y si aparece en la version de Mega Drive o solo en el manual."
+        ]
+      }
+    }
+  },
+  "resena-star-fox": {
+    "trama": {
+      "premisa": "Un piloto joven lidera un equipo de mercenarios para defender un sistema planetario de un cientifico exiliado.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "El sistema Lylat: planetas, estaciones espaciales y flotas enemigas."
+        ],
+        [
+          "EL CONFLICTO",
+          "Andross, un cientifico exiliado a Venom, ataca el sistema con su ejercito."
+        ],
+        [
+          "LA META",
+          "Volar nivel por nivel hasta Venom y derrotar a Andross."
+        ]
+      ],
+      "personajes": [
+        [
+          "FOX",
+          "el lider"
+        ],
+        [
+          "FALCO",
+          "el piloto"
+        ],
+        [
+          "PEPPY",
+          "el veterano"
+        ],
+        [
+          "SLIPPY",
+          "el mecanico"
+        ]
+      ]
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: los pilotos son animales antropomorfos; la gracia es que hablan por radio mientras peleas, y eso crea la sensacion de estar en un equipo.",
+          "Andross es un antiguo cientifico enviado a Venom; las rutas por Corneria, Meteo y Venom son parte de la identidad del juego.",
+          "Fox McCloud es el hijo de James McCloud, ex piloto del equipo Star Fox; el motivo de su venganza se cuenta en el manual y en secuelas.",
+          "POR CONFIRMAR: cuanto de este trasfondo aparece en el cartucho y cuanto en el manual (verificar antes de grabar)."
+        ]
+      }
+    }
+  },
+  "resena-the-witcher-pedido": {
+    "trama": {
+      "premisa": "Un brujo sin memoria persigue a un grupo de asesinos que robo los secretos de su orden.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Un continente dividido entre humanos, no humanos y monstruos."
+        ],
+        [
+          "EL CONFLICTO",
+          "Salamandra asalta Kaer Morhen, fortaleza de los brujos, y se lleva sus secretos."
+        ],
+        [
+          "LA META",
+          "Recuperar lo robado y decidir de que lado estar entre las facciones en guerra."
+        ]
+      ],
+      "personajes": [
+        [
+          "GERALT",
+          "el brujo"
+        ],
+        [
+          "TRISS",
+          "la hechicera"
+        ],
+        [
+          "VESEMIR",
+          "su maestro"
+        ],
+        [
+          "ALVIN",
+          "el aprendiz"
+        ]
+      ],
+      "cinematica": true
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: Geralt vuelve sin recuerdos; la trama usa eso para presentar el mundo al jugador. Los libros de Sapkowski ya cuentan su historia anterior.",
+          "Salamandra es una banda criminal con recursos propios; Alvin aparece como aprendiz de los brujos al principio de la historia. Detalle para improvisar.",
+          "El juego usa decisiones con consecuencias: elegir un bando cambia capitulos mas adelante. Es lo que lo hace singular.",
+          "POR CONFIRMAR: nombres de las facciones (Orden de la Rosa Ardiente, Ardillas) y el papel exacto de cada una."
+        ]
+      }
+    }
+  },
+  "resena-yoshis-island": {
+    "trama": {
+      "premisa": "Un ave mensajera pierde a un bebe, y los Yoshis se turnan para llevar a Baby Mario hasta su hermano secuestrado.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Una isla de dibujos a lapiz, con colores de crayon y enemigos graciosos."
+        ],
+        [
+          "EL CONFLICTO",
+          "Kamek, un hechicero, secuestra a Baby Luigi y trata de atrapar tambien a Baby Mario."
+        ],
+        [
+          "LA META",
+          "Cruzar la isla en Yoshi, protegiendo a Baby Mario, hasta el castillo de Baby Bowser."
+        ]
+      ],
+      "personajes": [
+        [
+          "YOSHI",
+          "el heroe"
+        ],
+        [
+          "BABY MARIO",
+          "el bebe en la espalda"
+        ],
+        [
+          "KAMEK",
+          "el hechicero"
+        ],
+        [
+          "BABY BOWSER",
+          "el jefe"
+        ]
+      ]
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: el cuidado de Baby Mario es la mecanica y la trama a la vez: cuando le pegan, el bebe llora y la cuenta atras empieza.",
+          "Los Yoshi se pasan al bebe unos a otros por cada mundo; son varios Yoshis de distintos colores, cada uno con su zona.",
+          "Kamek es el hechicero (Magikoopa) que persigue al ave mensajera; Baby Bowser es el jefe final.",
+          "POR CONFIRMAR: cuantos mundos y cual es el orden de los Yoshis por zona en la version original de SNES."
+        ]
+      }
+    }
+  },
+  "resena-need-for-speed-underground-2": {
+    "trama": {
+      "premisa": "Un corredor callejero pierde su auto en una emboscada y vuelve a empezar en una ciudad nueva, donde alguien controla las carreras.",
+      "actos": [
+        [
+          "EL MUNDO",
+          "Bayview, una ciudad de rascacielos y calles mojadas donde se corre de noche."
+        ],
+        [
+          "EL CONFLICTO",
+          "Caleb Reece y su equipo, los Wraiths, quieren controlar la escena manipulando los patrocinios."
+        ],
+        [
+          "LA META",
+          "Ganar carreras, destapar los barrios de Bayview y enfrentar a Caleb en un duelo final."
+        ]
+      ],
+      "personajes": [
+        [
+          "EL CORREDOR",
+          "el jugador"
+        ],
+        [
+          "RACHEL TELLER",
+          "la guia"
+        ],
+        [
+          "CALEB REECE",
+          "el rival"
+        ],
+        [
+          "NIKKI MORRIS",
+          "la ex Wraith"
+        ]
+      ],
+      "cinematica": true
+    },
+    "notas": {
+      "trama": {
+        "titulo": "LA TRAMA",
+        "lineas": [
+          "EN CAMARA: la historia se cuenta en vinetas de comic entre carreras; es un telon de fondo, no una trama larga. Lo importante es la ciudad y el tuning.",
+          "El arranque: el jugador ya es el mejor de Olympic City cuando un Hummer H2 destruye su Nissan Skyline GT-R. Seis meses despues llega a Bayview y Rachel le presta un Nissan 350Z.",
+          "Rachel (voz de Brooke Burke) le explica la escena, los patrocinadores y la Underground Racing League; Caleb Reece (voz de David Palffy) lidera a los Wraiths.",
+          "SPOILER: se revela que Caleb era quien manejaba el Hummer, y Nikki, una Wraith, cambia de bando. No contarlo en pantalla.",
+          "POR CONFIRMAR: nombres de los barrios de Bayview y orden de desbloqueo; la version de Nintendo DS cuenta la historia distinto."
+        ]
+      }
+    }
+  }
+}

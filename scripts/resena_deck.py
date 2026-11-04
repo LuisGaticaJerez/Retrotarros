@@ -710,11 +710,32 @@ go(0);
 """
 
 
+TRAMAS_JSON = REPO / "data" / "resenas" / "trama.json"
+
+
+def _con_trama_externa(data: dict, out_slug: str) -> dict:
+    """Si el DATA no trae `trama` y data/resenas/trama.json tiene una entrada para este slug, devuelve
+    una copia del DATA con esa trama y sus notas (notas.trama). Asi la trama sobrevive aunque la
+    reseña se regenere desde un driver viejo de .cache. Sin entrada, el DATA se devuelve igual."""
+    if data.get("trama") or not TRAMAS_JSON.exists():
+        return data
+    import json
+    entrada = json.loads(TRAMAS_JSON.read_text(encoding="utf-8")).get(out_slug)
+    if not entrada:
+        return data
+    nuevo = dict(data)
+    nuevo["trama"] = entrada["trama"]
+    if entrada.get("notas", {}).get("trama"):
+        nuevo["notas"] = {**(data.get("notas") or {}), "trama": entrada["notas"]["trama"]}
+    return nuevo
+
+
 def generar_resena(data: dict, out_slug: str, lint: bool = True) -> Path:
     """Genera studio/resenas/<out_slug>.html. Corre scripts/resena_lint.py antes de
     escribir: los errores lanzan ValueError (no se escribe nada), los avisos se
     imprimen. `lint=False` o la variable de entorno RESENA_LINT=off lo saltan
     (solo para excepciones historicas)."""
+    data = _con_trama_externa(data, out_slug)
     if lint and os.environ.get("RESENA_LINT", "").lower() != "off":
         errores, avisos = revisar(data, out_slug)
         if errores or avisos:
