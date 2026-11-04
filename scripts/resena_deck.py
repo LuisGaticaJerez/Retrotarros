@@ -266,6 +266,72 @@ def _slide_contexto(num: int, data: dict) -> str:
     )
 
 
+def _trama(data: dict) -> dict | None:
+    """Datos de la slide LA TRAMA (opcional: solo si el juego tiene lore que contar). Devuelve el
+    dict validado o None si no hay `trama` o esta mal formado (el lint avisa en ese caso).
+    Forma: {"titulo": "LA TRAMA" (opcional), "premisa": str, "actos": [[titulo, texto] x3],
+    "personajes": [[nombre, rol], ...] (opcional, hasta 4), "cinematica": True (opcional)}.
+    Con `cinematica` la slide suma una TarroVision 16:9 a la izquierda para montar la cinematica
+    y la grafica de la trama pasa a una columna a la derecha (no se pierde nada)."""
+    t = data.get("trama")
+    if not isinstance(t, dict) or not isinstance(t.get("premisa"), str) or not t["premisa"].strip():
+        return None
+    actos = t.get("actos")
+    if not isinstance(actos, (list, tuple)) or len(actos) != 3:
+        return None
+    if not all(isinstance(a, (list, tuple)) and len(a) >= 2 and all(isinstance(x, str) and x.strip() for x in a[:2])
+               for a in actos):
+        return None
+    return t
+
+
+def _slide_trama(num: int, data: dict) -> str:
+    """Slide LA TRAMA, entre CONTEXTO DE EPOCA y COMPARATIVA: premisa grande, tres actos sin
+    spoilers (el mundo, el conflicto, la meta) y, si se quiere, los personajes clave. Va solo si
+    el DATA trae `trama`; sin ella el HTML de la reseña sale como siempre."""
+    t = _trama(data)
+    titulo = _esc(str(t.get("titulo") or "LA TRAMA").upper())
+    actos = "".join(
+        f'<div class="tr-acto"><div class="tr-n">{i}</div>'
+        f'<div class="tr-at">{_esc(a[0].upper())}</div><div class="tr-atxt">{_esc(a[1])}</div></div>'
+        for i, a in enumerate(t["actos"], 1)
+    )
+    pers = [p for p in (t.get("personajes") or [])[:4]
+            if isinstance(p, (list, tuple)) and len(p) >= 2 and isinstance(p[0], str) and isinstance(p[1], str)]
+    personajes = ('<div class="tr-pers">' + "".join(
+        f'<div class="tr-p"><b>{_esc(p[0].upper())}</b><i>{_esc(p[1])}</i></div>' for p in pers) + "</div>") if pers else ""
+    if t.get("cinematica") is True:
+        actos_v = "".join(
+            f'<div class="tr-acto"><div class="tr-n">{i}</div><div class="tr-act-t">'
+            f'<div class="tr-at">{_esc(a[0].upper())}</div><div class="tr-atxt">{_esc(a[1])}</div></div></div>'
+            for i, a in enumerate(t["actos"], 1)
+        )
+        return (
+            f'<section class="slide"><span class="slide-num">{num:02d}</span>'
+            '<div class="trama con-tv">'
+            f'<div class="tr-tv">{TV.tv(1, "ancha")}</div>'
+            '<div class="tr-lado">'
+            f'<div class="tr-head"><div class="tr-tag">{titulo}</div><div class="tr-sin">SIN SPOILERS</div></div>'
+            f'<div class="tr-premisa">{_esc(t["premisa"])}</div>'
+            f'<div class="tr-actos">{actos_v}</div>'
+            f'{personajes}'
+            '</div></div>'
+            f'{_notas(data.get("notas", {}).get("trama"))}'
+            '</section>'
+        )
+    return (
+        f'<section class="slide"><span class="slide-num">{num:02d}</span>'
+        '<div class="trama">'
+        f'<div class="tr-head"><div class="tr-tag">{titulo}</div><div class="tr-sin">SIN SPOILERS</div></div>'
+        f'<div class="tr-premisa">{_esc(t["premisa"])}</div>'
+        f'<div class="tr-actos">{actos}</div>'
+        f'{personajes}'
+        '</div>'
+        f'{_notas(data.get("notas", {}).get("trama"))}'
+        '</section>'
+    )
+
+
 def _tv(ch: int, v: str = "clasica") -> str:
     if TV.activa(v):
         return TV.tv(ch, v)
@@ -579,6 +645,44 @@ CSS_NUEVA = """
 .cp-meta{font-family:'Share Tech Mono';font-size:22px;color:rgba(255,255,255,.75);margin-top:8px}
 """
 
+# CSS de la slide LA TRAMA: solo se agrega cuando el DATA trae `trama`.
+CSS_TRAMA = """
+.trama{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:38px;padding:0 70px}
+.tr-head{display:flex;align-items:center;gap:22px}
+.tr-tag{font-family:'Press Start 2P';font-size:17px;color:var(--mg);letter-spacing:6px}
+.tr-sin{font-family:'Share Tech Mono';font-size:16px;color:var(--cy);letter-spacing:3px;border:1px solid rgba(0,229,255,.5);padding:4px 12px;border-radius:3px}
+.tr-premisa{font-family:'Orbitron';font-weight:700;font-size:44px;line-height:1.28;color:#fff;text-align:center;max-width:1480px;text-shadow:0 0 26px rgba(255,46,136,.35)}
+.tr-actos{display:flex;align-items:flex-start;width:100%;max-width:1640px}
+.tr-acto{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:0 22px;position:relative}
+.tr-acto+.tr-acto::before{content:"";position:absolute;top:30px;left:-50%;right:50%;height:3px;background:linear-gradient(90deg,var(--mg),var(--cy))}
+.tr-n{position:relative;z-index:2;width:62px;height:62px;border-radius:50%;background:var(--dk);border:3px solid var(--ye);color:var(--ye);font-family:'Press Start 2P';font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(255,210,63,.5)}
+.tr-at{font-family:'Orbitron';font-weight:900;font-size:28px;color:#fff;letter-spacing:1px;margin-top:6px}
+.tr-atxt{font-family:'Share Tech Mono';font-size:23px;line-height:1.5;color:rgba(255,255,255,.84);max-width:480px}
+.tr-pers{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+.tr-p{border:2px solid rgba(0,229,255,.55);border-radius:6px;padding:8px 20px;text-align:center}
+.tr-p b{display:block;font-family:'Orbitron';font-weight:700;font-size:21px;color:var(--cy)}
+.tr-p i{display:block;font-style:normal;font-family:'Share Tech Mono';font-size:16px;color:rgba(255,255,255,.68);margin-top:2px}
+/* con cinematica: TarroVision 16:9 a la izquierda y la grafica de la trama en columna a la derecha */
+.trama.con-tv{flex-direction:row;justify-content:center;align-items:center;gap:44px;padding:0 44px}
+.tr-tv{flex:0 0 1090px;display:flex;align-items:center}
+.tr-tv .tarrovision.tvn.ancha{width:100%}
+.tr-lado{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:20px}
+.con-tv .tr-head{gap:14px;flex-wrap:wrap}
+.con-tv .tr-tag{font-size:15px;letter-spacing:5px}
+.con-tv .tr-premisa{font-size:29px;line-height:1.3;text-align:left;max-width:none;text-shadow:none}
+.con-tv .tr-actos{flex-direction:column;align-items:stretch;max-width:none;gap:14px}
+.con-tv .tr-acto{flex-direction:row;align-items:flex-start;text-align:left;gap:16px;padding:0}
+.con-tv .tr-acto+.tr-acto::before{top:-14px;left:26px;right:auto;width:3px;height:14px;background:linear-gradient(180deg,var(--mg),var(--cy))}
+.con-tv .tr-n{flex:none;width:54px;height:54px;font-size:19px}
+.con-tv .tr-act-t{min-width:0}
+.con-tv .tr-at{font-size:22px;margin-top:0}
+.con-tv .tr-atxt{font-size:19px;line-height:1.4;max-width:none;margin-top:3px}
+.con-tv .tr-pers{justify-content:flex-start;gap:10px}
+.con-tv .tr-p{padding:6px 14px}
+.con-tv .tr-p b{font-size:17px}
+.con-tv .tr-p i{font-size:14px}
+"""
+
 SCRIPT = """
 const slides=document.querySelectorAll('.slide');const prevBtn=document.getElementById('prevBtn');
 const nextBtn=document.getElementById('nextBtn');const counter=document.getElementById('counter');const bar=document.getElementById('bar');
@@ -630,6 +734,9 @@ def generar_resena(data: dict, out_slug: str, lint: bool = True) -> Path:
     num += 1
     slides.append(_slide_contexto(num, data))
     num += 1
+    if _trama(data):
+        slides.append(_slide_trama(num, data))
+        num += 1
     ch = 1
     # Slide COMPARATIVA: obligatorio en toda resena (regla Luis 2026-07-26).
     # El titulo es SIEMPRE "COMPARATIVA", agnostico sin importar que se compare
@@ -658,6 +765,10 @@ def generar_resena(data: dict, out_slug: str, lint: bool = True) -> Path:
     if _nueva(data):
         css += CSS_NUEVA
     css += TV.css(TV.variante(data))
+    if _trama(data):
+        css += CSS_TRAMA
+        if _trama(data).get("cinematica") is True and TV.variante(data) != "ancha":
+            css += TV.css("ancha")   # la cinematica usa siempre la TV 16:9
     if data.get("por_confirmar"):
         css += CSS_POR_CONFIRMAR
     if data.get("en_coleccion") == "familia" and data.get("familia_texto"):
