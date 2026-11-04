@@ -8,8 +8,9 @@ ya grabados o publicados.
 
 Valores de data["tarrovision"]:
   "clasica"  (por defecto) la TV de siempre.
-  "nueva"    mismo tamano que la clasica, con el visual nuevo (borde de neon, pantalla con
-             marcas de encuadre, barras de color en el NO SIGNAL).
+  "nueva"    visual nuevo (borde de neon, marcas de encuadre, barras de color en el NO SIGNAL) con la
+             pantalla en 4:3 exacto: un video 4:3 superpuesto en CapCut la cubre entera, sin que
+             asome el fondo por los lados (la clasica mide ~1.54:1 y deja bandas).
   "ancha"    visual nuevo con la pantalla en 16:9 exacto (la clasica mide ~1.5:1 y recorta o
              deja bandas al gameplay 16:9), mas grande en el slide de gameplay y en la comparativa.
 
@@ -27,6 +28,9 @@ VARIANTES = ("clasica", "nueva", "ancha")
 CH_X = 2 * (2 + 16) + 2 * 10                       # 56: ancho que el marco suma a la pantalla
 CH_Y = 2 * (2 + 14) + 26 + 24 + 2 * 8 + 2 * 10     # 118: alto que el marco suma (barras, huecos, bisel)
 ALTO_MAX_GAMEPLAY = 780                            # el mismo tope de alto de la TV clasica en el slide de gameplay
+
+
+CLASE_FORMATO = {"nueva": "cuatro3", "ancha": "ancha"}   # clase de la TV segun el formato de su pantalla
 
 
 def variante(data: dict) -> str:
@@ -47,8 +51,8 @@ def tv(ch: int, v: str) -> str:
     (tarrovision, tv-controls-top, tv-screen-inner, tv-noscreen...) y agrega tvn / ancha."""
     if not activa(v):
         raise ValueError(f'tv() solo genera "nueva" o "ancha", no {v!r}')
-    pista = "Inserta gameplay aqui &middot; 16:9" if v == "ancha" else "Inserta gameplay aqui"
-    clases = "tarrovision tvn ancha" if v == "ancha" else "tarrovision tvn"
+    pista = f"Inserta gameplay aqui &middot; {'16:9' if v == 'ancha' else '4:3'}"
+    clases = f"tarrovision tvn {CLASE_FORMATO[v]}"
     return (
         f'<div class="{clases}">'
         f'<div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH {ch:02d}</span></div>'
@@ -65,8 +69,9 @@ def tv(ch: int, v: str) -> str:
 
 
 def clase_contenedor(v: str) -> str:
-    """Clase extra del contenedor (gp-tv o dual-cell): `tvw` solo con la TV ancha."""
-    return " tvw" if v == "ancha" else ""
+    """Clase extra del contenedor (gp-tv, dual-cell o dual-grid): `tvw` con la TV nueva o la ancha,
+    que se dimensionan por la pantalla (4:3 o 16:9 exactos)."""
+    return " tvw" if activa(v) else ""
 
 
 def css(v: str) -> str:
@@ -108,22 +113,22 @@ def css(v: str) -> str:
         ".tvn .tv-power{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#8cffb0,#19b45a 60%,#07391c);"
         "box-shadow:0 0 8px rgba(25,180,90,.7)}\n"
     )
-    if v != "ancha":
-        return base
-    ancha = (
-        # pantalla 16:9 exacta; el TV se ajusta al ancho o al alto disponible
-        ".tarrovision.tvn.ancha{grid-template-rows:auto auto auto}\n"
-        ".tarrovision.tvn.ancha .tv-screen-inner{height:auto;aspect-ratio:16/9}\n"
+    c = CLASE_FORMATO[v]
+    w, h = (16, 9) if v == "ancha" else (4, 3)
+    tam = (
+        # pantalla con proporcion exacta (4:3 o 16:9); la TV se ajusta al ancho o al alto disponible
+        f".tarrovision.tvn.{c}{{grid-template-rows:auto auto auto}}\n"
+        f".tarrovision.tvn.{c} .tv-screen-inner{{height:auto;aspect-ratio:{w}/{h}}}\n"
         # slide de gameplay: contenedor con unidades de contenedor, la pantalla crece hasta llenar el alto
-        f".gp-tv.tvw{{container-type:size;width:100%}}\n"
-        f".gp-tv .tarrovision.tvn.ancha{{height:auto;aspect-ratio:auto;max-width:none;"
-        f"width:calc(min(100cqw - {CH_X}px,(min(100cqh,{ALTO_MAX_GAMEPLAY}px) - {CH_Y}px)*16/9) + {CH_X}px)}}\n"
+        ".gp-tv.tvw{container-type:size;width:100%}\n"
+        f".gp-tv .tarrovision.tvn.{c}{{height:auto;aspect-ratio:auto;max-width:none;"
+        f"width:calc(min(100cqw - {CH_X}px,(min(100cqh,{ALTO_MAX_GAMEPLAY}px) - {CH_Y}px)*{w}/{h}) + {CH_X}px)}}\n"
         # comparativa: dos TV que se reparten todo el ancho; el VS pasa a ser una insignia sobre la union
         ".dual-grid.tvw{position:relative;gap:14px;padding:0 4px 20px}\n"
         ".dual-grid.tvw .dual-cell{flex:1 1 0;max-width:none}\n"
-        ".dual-cell.tvw .tarrovision.tvn.ancha{height:auto;aspect-ratio:auto;width:100%;max-width:none}\n"
+        f".dual-cell.tvw .tarrovision.tvn.{c}{{height:auto;aspect-ratio:auto;width:100%;max-width:none}}\n"
         ".dual-grid.tvw .dual-vs{position:absolute;left:50%;top:calc(50% - 38px);transform:translate(-50%,-50%);z-index:5;"
         "width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;"
         "background:var(--dk);border:3px solid var(--ye);box-shadow:0 0 26px rgba(255,210,63,.55)}\n"
     )
-    return base + ancha
+    return base + tam

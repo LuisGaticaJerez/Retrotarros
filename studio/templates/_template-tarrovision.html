@@ -888,6 +888,30 @@ nav.footer {
   font-size: 42px; background: var(--dk);
   border: 3px solid var(--ye); box-shadow: 0 0 26px rgba(255,210,63,.55);
 }
+
+/* TV 4:3 (clase .cuatro3): misma TV nueva con la pantalla en 4:3 exacto. Sirve para videos 4:3
+   (juegos de consola retro, capturas viejas): al superponerlos en CapCut cubren toda la pantalla
+   y no asoma el fondo por los lados. Mismas medidas de marco que la ancha (56 x 118 px). */
+.tarrovision.cuatro3 {
+  height: auto;
+  max-height: none;
+  max-width: none;
+  aspect-ratio: auto;
+  grid-template-rows: auto auto auto;
+}
+.tarrovision.cuatro3 .tv-screen-inner { height: auto; aspect-ratio: 4 / 3; }
+.tarrovision.cuatro3 .tv-noscreen::after { content: "NO SIGNAL  4:3"; font-size: 20px; }
+.tv-wrap.w .tarrovision.cuatro3,
+.slide-tv-solo.w .tarrovision.cuatro3 {
+  width: calc(min(100cqw - 56px, (100cqh - 118px) * 4 / 3) + 56px);
+}
+.triple-cell .tv-fit .tarrovision.cuatro3 {
+  width: calc(min(100cqw - 56px, (100cqh - 118px) * 4 / 3) + 56px);
+  height: auto;
+  padding: 14px 16px;
+  gap: 8px;
+  border-radius: 16px;
+}
 </style>
 </head>
 <body>
@@ -916,7 +940,7 @@ nav.footer {
     <div class="divider">
       <div class="pre cy">SECCION GAMEPLAY</div>
       <div class="title cy">EN VIVO</div>
-      <div class="sub">TarroVision 2.0: borde de neon, pantalla ancha 16:9 para el gameplay y la version cuadrada para cortos o capturas. Paleta magenta/cian/amarillo del canal.</div>
+      <div class="sub">TarroVision 2.0: borde de neon, pantalla ancha 16:9 para el gameplay y version 4:3 para videos de consola retro. Paleta magenta/cian/amarillo del canal.</div>
     </div>
   </section>
 
@@ -962,16 +986,16 @@ nav.footer {
     </div>
   </section>
 
-  <!-- 04 GAMEPLAY VACIO (placeholder, TV cuadrada) -->
+  <!-- 04 GAMEPLAY VACIO (placeholder, TV 4:3) -->
   <section class="slide">
     <span class="slide-num">04</span>
-    <div class="slide-tv">
+    <div class="slide-tv w">
       <div class="tv-head">
         <div class="tv-pos mg"><span class="hash">#</span>02</div>
         <div class="tv-block-label mg">GAMEPLAY · SLOT LIBRE</div>
       </div>
-      <div class="tv-wrap">
-        <div class="tarrovision">
+      <div class="tv-wrap w">
+        <div class="tarrovision cuatro3">
           <div class="tv-controls-top">
             <span class="tv-led"></span>
             <span class="tv-brand">TARROVISION</span>
@@ -1087,7 +1111,7 @@ nav.footer {
         <!-- TV 1 -->
         <div class="triple-cell">
           <div class="tv-fit">
-            <div class="tarrovision">
+            <div class="tarrovision cuatro3">
               <div class="tv-controls-top">
                 <span class="tv-led"></span>
                 <span class="tv-brand">TARROVISION</span>
@@ -1113,7 +1137,7 @@ nav.footer {
         <!-- TV 2 -->
         <div class="triple-cell">
           <div class="tv-fit">
-            <div class="tarrovision">
+            <div class="tarrovision cuatro3">
               <div class="tv-controls-top">
                 <span class="tv-led"></span>
                 <span class="tv-brand">TARROVISION</span>
@@ -1139,7 +1163,7 @@ nav.footer {
         <!-- TV 3 -->
         <div class="triple-cell">
           <div class="tv-fit">
-            <div class="tarrovision">
+            <div class="tarrovision cuatro3">
               <div class="tv-controls-top">
                 <span class="tv-led"></span>
                 <span class="tv-brand">TARROVISION</span>
@@ -1175,7 +1199,7 @@ nav.footer {
       <div class="sub" style="text-align:left; max-width:880px;">
         <strong style="color:var(--ye);">1.</strong> Copia este archivo y renombralo a <code style="color:var(--cy);">studio/&lt;slug&gt;.html</code><br><br>
         <strong style="color:var(--ye);">2.</strong> En cada slide-tv, reemplaza el bloque <code style="color:var(--cy);">.tv-noscreen</code> por <code style="color:var(--cy);">&lt;img src="..."&gt;</code> o <code style="color:var(--cy);">&lt;video src="..." autoplay muted loop&gt;&lt;/video&gt;</code><br><br>
-        <strong style="color:var(--ye);">3.</strong> Edita titulo, meta y caption. Para gameplay 16:9 usa <code style="color:var(--cy);">class="tarrovision ancha"</code> (slides 03, 05 y 06); sin <code style="color:var(--cy);">ancha</code> la TV es cuadrada (slides 04 y 07). Los contenedores de la ancha llevan la clase <code style="color:var(--cy);">w</code>.
+        <strong style="color:var(--ye);">3.</strong> Edita titulo, meta y caption. Para gameplay 16:9 usa <code style="color:var(--cy);">class="tarrovision ancha"</code> (slides 03, 05 y 06); para videos 4:3 usa <code style="color:var(--cy);">class="tarrovision cuatro3"</code> (slides 04 y 07), asi el video cubre toda la pantalla. Los contenedores de ambas llevan la clase <code style="color:var(--cy);">w</code>.
       </div>
     </div>
   </section>
