@@ -3,6 +3,7 @@
 > Estado: PROPUESTA v2 para que Luis la revise. No se movió ni se borró nada del repo del canal.
 > v2 (2026-11-05, noche): reemplaza la partición TarroTeaser / TarroShorts / TarroBot de la v1 por la que describió Luis: TarroDL absorbe Teaser y Shorts, TarroStudio contiene a TarroOBS, TarroBot queda como mascota independiente, y todas se pueden usar entre sí.
 > Fecha: 2026-11-05. Base: `master` en `215f04d`. Autor: sesión de Claude (rama `claude/funny-wozniak-5c7e9e`).
+> v3 (2026-11-05, noche): Luis aprobó el plan y decidió que **TarroOBS se fusiona en TarroStudio** (Studio lo contiene). Ejecución en curso, ver "Estado de ejecución" al final.
 > Meta: el repo del canal queda solo con contenido (pautas, discusiones, estudio, decks, reseñas, shorts, docs) y las herramientas viven en repos propios dentro de `D:\Recursos Retrotarros\TarroTools\`, como ya hacen TarroDL, TarroTVOS y TarroOBS.
 
 ## 1. Resumen y lo que necesito que decidas
@@ -16,7 +17,7 @@
 | **TarroDL** (existe) | Descargador, creador de clips y mosaicos; ahora también el taller de contenido grabado | Hoy: descargas, clips, mosaico. Suma: **TarroTeaser** (`tarroteaser.py`, `teaser_jobs.py`, `generate-teaser.py`), **TarroShorts** (`tarroshort_render.py`, `tarroshort_jobs.py`, `tarroshort_datos.py`, plantilla) y **CapCut Ready** (`capcut_ready.py`) |
 | **TarroStudio** (nuevo nombre) | Multiherramienta para streaming; concentra todo lo que se desarrolla en vivo | Panel de control, concentrador de chat (Twitch, Discord, YouTube), recetas; orquesta a TarroBot y contiene a **TarroOBS** |
 | **TarroBot** | La mascota y ayudante de los directos | Avatar, voz (TTS y escucha), datos curiosos, cola de pauta, quiz, LLM y su cache |
-| **TarroOBS** (existe, lo lleva otra sesión) | Control de OBS | Cliente OBS, lower-third, música, grabación; TarroStudio lo contiene |
+| **TarroOBS** (se fusiona en TarroStudio, decisión de Luis) | Control de OBS | Pasa a ser un módulo de TarroStudio (`obs/`): cliente, lower-third, música, grabación. El repo `TarroOBS` queda como origen de la copia y se archiva cuando el módulo esté probado dentro de TarroStudio |
 | **TarroTVOS** (existe) | Fuera de este plan | |
 
 El repo del canal queda con contenido (pautas, discusiones, estudio, decks, reseñas, shorts HTML, docs).
@@ -29,18 +30,18 @@ El repo del canal queda con contenido (pautas, discusiones, estudio, decks, rese
 
 1. TarroDL gana **TarroTeaser** (no se usa en vivo, es CLI con entradas y salidas claras).
 2. TarroDL gana **TarroShorts** y **CapCut Ready**.
-3. El panel completo se mueve tal cual a **TarroStudio** (con TarroOBS adentro), todavía con Bot dentro del mismo proceso.
+3. El panel completo se mueve tal cual a **TarroStudio** (con OBS incorporado como módulo), todavía con Bot dentro del mismo proceso.
 4. **TarroBot** se extrae de TarroStudio como herramienta propia, con un contrato de conversación entre las dos.
 5. Mudanza de las carpetas del Drive al formato definitivo y recorte del repo del canal, una herramienta a la vez.
 
 **Decisiones que necesito de ti** (mi recomendación va primero):
 
 1. **TarroDL hoy usa solo librería estándar de Python** (y llama a `yt-dlp` y `ffmpeg` como programas externos). Teaser y Shorts necesitan librerías pesadas: Whisper, edge-tts, Playwright, mutagen, anthropic. Recomiendo que TarroDL siga arrancando sin ellas y que Teaser y Shorts sean **módulos opcionales** que se activan al instalar sus requisitos (`requirements-teaser.txt`, `requirements-shorts.txt`), con un aviso claro en pantalla cuando falte algo. Alternativa: que TarroDL dependa de todo siempre; más simple de programar, pero cualquier PC con TarroDL tendría que instalar Whisper (~250 MB de modelo más sus librerías).
-2. **"TarroStudio contiene a TarroOBS": ¿copia o fusión?** Recomiendo que **TarroOBS siga siendo su propio repo** (usable solo, con su página mínima, como ya plantea su handoff) y que TarroStudio lo incluya en su paquete (copia vendida con prueba de desfase, igual que `_studio_layout`). Así TarroStudio "lo contiene" al ejecutarse y entregarse, y TarroOBS sigue independiente. Si prefieres fusionar el repo, la otra sesión tendría que dejar de mantenerlo aparte; dímelo antes de que avance más.
+2. **RESUELTA por Luis: TarroOBS se fusiona en TarroStudio** (Studio lo contiene). Consecuencias: el código OBS vive como módulo de TarroStudio, no como repo aparte con copia vendida; la sesión que hoy trabaja en `TarroOBS` (lower-third, música, servidor simulado, página mínima) debe seguir ahí solo hasta que exista el repo TarroStudio (fase 3) y entonces portar su trabajo adentro; hasta ese día `TarroOBS` es el lugar de trabajo de OBS y sus commits se portan por copia. El 'TarroOBS usable solo' del handoff de esa sesión se reemplaza por 'TarroStudio sin TarroBot abierto'.
 3. **¿Quién es dueña del avatar de la pantalla?** OBS lo muestra como fuente de navegador en `http://localhost:8765/`. Recomiendo **TarroBot** (es su cara), que conserve el puerto 8765 y la ruta `/`, para no romper las escenas de OBS ya armadas. TarroStudio pasa a otro puerto (propongo 8770). Lo confirmo mirando tus escenas de OBS antes de la fase 4.
 4. **Recetas** (`tarrobot-recetas.json`: "Arrancar episodio" cambia escena, espera, saluda...) son orquestación de OBS más voz. Recomiendo que vivan en **TarroStudio**, que llama a TarroBot para hablar y a TarroOBS para cambiar escena.
 5. **¿Teaser y Short se lanzan desde el panel del directo o solo desde TarroDL?** Hoy hay botones en el panel. Recomiendo que los botones de TarroStudio **llamen a TarroDL si está abierto** en vez de repetir la lógica. Si prefieres que el panel de streaming no los tenga, mejor aún.
-6. **Instalador.** Hoy hay uno solo ("TarroBot Studio v1.5.3"). Recomiendo que el PC de grabación instale **una suite** (TarroStudio + TarroBot + TarroOBS) desde un único `install.bat`, y que TarroBot también pueda correr solo. TarroDL sigue con su propia publicación a Drive.
+6. **Instalador.** Hoy hay uno solo ("TarroBot Studio v1.5.3"). Recomiendo que el PC de grabación instale **una suite** (TarroStudio, que ya trae OBS, más TarroBot) desde un único `install.bat`, y que TarroBot también pueda correr solo. TarroDL sigue con su propia publicación a Drive.
 7. **Pautas y base de datos.** Recomiendo que las pautas (`studio/pautas/*.tarrobot.json`, el guion del episodio) **se queden en el canal**, y que `data/tarrobot-database.json` (datos curiosos que TarroBot edita en vivo) **se vaya a TarroBot**. Variable nueva `RETROTARROS_PAUTAS_DIR`.
 8. **¿`_studio_layout.py` canónico en el canal y copia vendida en cada herramienta, con prueba de desfase?** Recomiendo que sí (4.4).
 9. **¿Historial de git?** Para TarroDL y TarroOBS se hizo "extracción inicial" sin historial. Recomiendo repetir y anotar el commit de origen.
@@ -149,7 +150,7 @@ Esto es lo que hay que cortar en la fase 4 (separar TarroBot de TarroStudio). Ho
 | Recetas | `/api/receta/run` y `studio/tarrobot-recetas.json` | Pasos de OBS más pasos de voz (`saludar`, etc.) | Studio las ejecuta: OBS directo, voz vía Bot |
 | Chat -> voz | `/api/social/say`, `respond`, `dictate`, `read-pinned-queue`, auto-respond | Studio recibe el chat; Bot habla y razona (LLM) | Studio llama a Bot (`decir`, `responder`) |
 | Cola y OBS | Al iniciar cola: grabación automática; al avanzar dato: lower-third automático (~3816, ~3871) | Bot (cola) -> Studio (OBS) | Bot emite `cola:inicio` y `cola:dato-avanzo`; Studio reacciona |
-| Música de fondo | `/api/obs/musica/*` | Studio -> OBS | Va entera a Studio y TarroOBS |
+| Música de fondo | `/api/obs/musica/*` | Studio -> OBS | Va entera a Studio (módulo OBS) |
 | Tarjetas de interfaz | `_template-tarrobot-control.html` (145 KB, una sola página con todas las tarjetas) | Todo | Cada herramienta sirve las tarjetas suyas; Studio muestra las de Bot incrustadas o enlazadas |
 | Estadísticas LLM | `/api/llm/stats`, modo barato | Bot | Bot; Studio muestra la tarjeta |
 
@@ -158,7 +159,7 @@ Reparto de las rutas del panel actual (por prefijo):
 | Va a | Rutas |
 |---|---|
 | **TarroDL** | `/api/teaser/*` (4), `/api/tarroshort/*` (4), `/api/capcut/preparar` (1) |
-| **TarroStudio y TarroOBS** | `/api/obs/*` (20, entre ellas música y lower-third), `/api/social/*` (21), `/api/recetas`, `/api/receta/run`, `/control` |
+| **TarroStudio (con OBS)** | `/api/obs/*` (20, entre ellas música y lower-third), `/api/social/*` (21), `/api/recetas`, `/api/receta/run`, `/control` |
 | **TarroBot** | `/` y `/ws/live` (avatar), `/api/state`, `/api/cuentame`, `/api/opinar`, `/api/precio`, `/api/random`, `/api/saludar`, `/api/despedir`, `/api/despertar`, `/api/escuchando`, `/api/personal`, `/api/como-estas`, `/api/que-hacemos`, `/api/catchphrase`, `/api/audio-finished`, `/api/listen`, `/api/voz` (2), `/api/quiz/*` (3), `/api/queue/*` (13, más `short-export`), `/api/pauta/auto-tema`, `/api/episodio/exportar-descripcion`, `/api/session/*` (2), `/api/llm/*` (3), `/api/ping` |
 
 ### 3.4 Qué escriben las herramientas en el canal
@@ -183,24 +184,24 @@ Fuera de alcance, candidatos futuros (también son herramientas dentro del repo 
 
 ### 4.2 Qué va a cada herramienta
 
-| Pieza | TarroDL | TarroStudio | TarroBot | TarroOBS |
-|---|---|---|---|---|
-| `tarroteaser.py`, `teaser_jobs.py`, `generate-teaser.py` | X | | | |
-| `tarroshort_render.py`, `tarroshort_jobs.py`, `tarroshort_datos.py`, `_template-tarroshort.html` | X | | | |
-| `capcut_ready.py` | X | | | |
-| `social_manager.py`, `message_store.py`, `connectors/` | | X | | |
-| `auto_respond.py` | | X (decide y filtra) | responde cuando Studio se lo pide | |
-| Recetas (`tarrobot-recetas.json`) | | X | | |
-| Rutas `/api/obs/*`, tarjeta CONTROL OBS | | X (interfaz y orquestación) | | X (lógica) |
-| `obs_*.py`, `obs-aliases.json` | | incluye copia | | X (fuente) |
-| `tarrobot.py` (voz, pautas, LLM, melodías), `llm_resolver.py` | | | X | |
-| `tarrobot-tray.py` | | X (arranca la suite) | | |
-| `_template-tarrobot-live.html`, `-slide.html` (avatar y slide) | | | X | |
-| `_template-tarrobot-control.html` | | X (se parte) | tarjetas de Bot | |
-| `data/tarrobot-database.json`, melodías | | | X | |
-| `installers/tarrobot-studio/` | | X (suite) | también corre solo | |
-| `Iniciar-TarroBot.bat`, `HANDOFF-tarrobot-studio.md`, `docs/tarrobot/` | | X | X (cada uno su parte) | |
-| `_studio_layout.py` | copia | copia | copia | |
+| Pieza | TarroDL | TarroStudio (incluye OBS) | TarroBot |
+|---|---|---|---|
+| `tarroteaser.py`, `teaser_jobs.py`, `generate-teaser.py` | X | | |
+| `tarroshort_render.py`, `tarroshort_jobs.py`, `tarroshort_datos.py`, `_template-tarroshort.html` | X | | |
+| `capcut_ready.py` | X | | |
+| `social_manager.py`, `message_store.py`, `connectors/` | | X | |
+| `auto_respond.py` | | X (decide y filtra) | responde cuando Studio se lo pide |
+| Recetas (`tarrobot-recetas.json`) | | X | |
+| Rutas `/api/obs/*`, tarjeta CONTROL OBS | | X (interfaz, orquestación y lógica OBS) | |
+| `obs_*.py`, `obs-aliases.json` | | X (módulo `obs/`) | |
+| `tarrobot.py` (voz, pautas, LLM, melodías), `llm_resolver.py` | | | X |
+| `tarrobot-tray.py` | | X (arranca la suite) | |
+| `_template-tarrobot-live.html`, `-slide.html` (avatar y slide) | | | X |
+| `_template-tarrobot-control.html` | | X (se parte) | tarjetas de Bot |
+| `data/tarrobot-database.json`, melodías | | | X |
+| `installers/tarrobot-studio/` | | X (suite) | también corre solo |
+| `Iniciar-TarroBot.bat`, `HANDOFF-tarrobot-studio.md`, `docs/tarrobot/` | | X | X (cada uno su parte) |
+| `_studio_layout.py` | copia | copia | copia |
 
 ### 4.3 Cómo se usan entre sí (el contrato de interoperación)
 
@@ -215,7 +216,7 @@ Contenido compartido: **la carpeta de contenido del canal** (`RETROTARROS_STUDIO
 
 - TarroDL baja un gameplay y corta clips -> TarroShorts los usa como B-roll en la TarroVisión.
 - TarroDL hace el teaser de un master -> TarroStudio muestra el estado del trabajo en el panel del directo.
-- TarroStudio recibe un mensaje del chat -> pide a TarroBot que lo lea o lo responda -> TarroOBS cambia la escena mientras habla.
+- TarroStudio recibe un mensaje del chat -> pide a TarroBot que lo lea o lo responda -> el módulo OBS de TarroStudio cambia la escena mientras habla.
 - TarroBot narra un short -> TarroDL lo renderiza.
 
 ### 4.4 `_studio_layout.py` y el cliente común
@@ -273,7 +274,7 @@ Regla general (la misma de la sesión de TarroOBS): **se migra por copia**. La h
 
 ### Fase 3: el panel completo se muda a TarroStudio (riesgo alto)
 
-- Repo `TarroTools\TarroStudio`. Se mueve **tal cual**, con TarroBot todavía adentro del mismo proceso y con las copias de TarroOBS. Sin cortar nada: es solo cambiar de casa, de nombre y de instalador.
+- Repo `TarroTools\TarroStudio`. Se mueve **tal cual**, con TarroBot todavía adentro del mismo proceso y con el código de OBS incorporado como módulo propio (fusión: se porta lo que haya avanzado en el repo `TarroOBS`). Sin cortar nada: es solo cambiar de casa, de nombre y de instalador.
 - Los botones de teaser y short pasan a llamar a TarroDL (decisión 5) o se esconden si no está.
 - `studio/tarrobot-out` se crea al arrancar (hallazgo 2).
 - `_ejecutar_sync_drive` apunta al `publicar-en-drive.ps1` de TarroStudio.
@@ -306,7 +307,7 @@ Transición (fases 1 a 4): el panel y sus módulos siguen leyendo `Studio\Tarrob
 | TarroDL | `Studio\Tools\TarroDL` (ya existe) | `tarrodl.py`, `ui\`, `tarrodl_taller\` e `iniciar-tarrodl.cmd`; los requisitos pesados se instalan solo en el PC que haga teasers o shorts |
 | TarroStudio | `Studio\Tarrobot\` | `scripts\` del panel, `connectors\`, plantillas, recetas, instalador, `INSTALL-INFO.txt` |
 | TarroBot (fase 4) | `Studio\Tarrobot\` | `tarrobot.py`, `llm_resolver.py`, avatar, base de datos, melodías |
-| TarroOBS | `Studio\Tarrobot\scripts\` | `obs_*.py` y `studio\obs-aliases.json`; su sesión decide si pasa a `Studio\Tools\TarroOBS` |
+| (OBS, dentro de TarroStudio) | `Studio\Tarrobot\scripts\` | `obs_*.py` y `studio\obs-aliases.json`, publicados por TarroStudio |
 
 Nunca se publica `tests/`, `.git`, `.cache` ni `__pycache__`.
 
@@ -363,4 +364,12 @@ Antes necesito tus respuestas a las decisiones 1, 5 y 10 de la sección 1 (las q
 
 ## 10. Preguntas abiertas (resumen)
 
-Las 11 de la sección 1. Las más urgentes son la 1 (TarroDL con módulos opcionales), la 2 (TarroOBS como repo propio incluido por Studio, que además afecta a la otra sesión) y la 3 (puerto y avatar).
+Las 11 de la sección 1. Las más urgentes son la 1 (TarroDL con módulos opcionales), la 2 (resuelta: OBS se fusiona en Studio; falta avisar a la sesión de TarroOBS) y la 3 (puerto y avatar).
+
+## Estado de ejecución
+
+- **Decisiones tomadas por Luis (2026-11-05):** aprueba el plan y se parte según él; TarroOBS se fusiona en TarroStudio. Las decisiones 1, 5 y 10 de la sección 1 se toman con mi recomendación (módulos opcionales en TarroDL, botones del panel que llaman a TarroDL, `RETROTARROS_STUDIO_ROOT` explícita en edición).
+- **Fase 1 (TarroDL gana TarroTeaser): hecha, sin push.** Repo `D:\Recursos Retrotarros\TarroTools\TarroDL`, rama `claude/tarrodl-taller-teaser` (worktree `.claude\worktrees\taller-teaser`), commit `a1dc6b5`. Pestaña TARROTEASER, rutas `/api/teaser` y `/api/teaser_status`, módulo en `tarrodl_taller/teaser/`. **95 pruebas verdes** (72 de base más 23 nuevas, una de punta a punta con ffmpeg real y Whisper simulado) y la pestaña revisada en el navegador. No se tocó `main`, el canal, el Drive ni el estudio.
+- **Pendiente de la fase 1:** `generate-teaser.py` (versión "todo incluido") no se copió; falta la prueba del teaser con Whisper real sobre un master tuyo (lo hago cuando me des uno); falta decidir si se mergea la rama a `main` de TarroDL.
+- **Fase 0 parcial:** foto base del espejo del Drive y foto de las 102 rutas guardadas en la carpeta de notas de la sesión; la prueba de desfase de `_studio_layout.py` queda en el canal (`scripts/test_studio_layout_copias.py`).
+- **Siguiente:** fase 2 (TarroShorts y CapCut Ready a TarroDL), una vez que apruebes la fase 1.
