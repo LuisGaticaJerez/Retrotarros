@@ -362,7 +362,7 @@ async def _check_browser_sources(client, alias: dict) -> Check:
         return _check_warn(
             "browser_sources", "Browser Sources (TarroBot live)",
             "no se detecto ningun Browser Source en OBS",
-            "Agrega un Browser Source apuntando a http://localhost:8001/live para ver la TarroVision en escena",
+            "Agrega un Browser Source apuntando a http://localhost:8765/?mode=overlay para ver la TarroVision en escena",
         )
 
     # Buscar uno que apunte a tarrobot live o slide HTML del estudio
@@ -375,7 +375,7 @@ async def _check_browser_sources(client, alias: dict) -> Check:
             url = settings.get("url", "") or settings.get("local_file", "") or ""
             urls.append(url[:80])
             url_low = url.lower()
-            if "tarrobot" in url_low or "localhost:8001" in url_low or "127.0.0.1:8001" in url_low:
+            if "tarrobot" in url_low or any(h in url_low for h in ("localhost:8765", "127.0.0.1:8765", "localhost:8001", "127.0.0.1:8001")):   # 8001 = escenas viejas
                 tarrobot_found = True
         except Exception:
             continue
@@ -389,7 +389,7 @@ async def _check_browser_sources(client, alias: dict) -> Check:
     return _check_warn(
         "browser_sources", "Browser Sources (TarroBot live)",
         f"{len(browser_inputs)} browser source(s) pero ninguno apunta a TarroBot",
-        "Agrega un Browser Source con URL http://localhost:8001/live (la TarroVision)",
+        "Agrega un Browser Source con URL http://localhost:8765/?mode=overlay (la TarroVision)",
         {"urls": urls},
     )
 
