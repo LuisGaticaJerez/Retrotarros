@@ -138,18 +138,6 @@ Hallazgos:
 | `docs/pautas/pauta-<slug>.md` | `generate-teaser.py` | `REPO/docs/pautas` |
 | Master MP4 de videos | TarroTeaser | Ruta que se pasa por argumento |
 
-### 3.4 Qué escriben las herramientas en el canal
-
-| Salida | Escribe | Va al git del canal |
-|---|---|---|
-| `studio/teasers/<slug>/` | TarroTeaser | Parcial (hay 2 HTML versionados) |
-| `studio/shorts/shorts-html/<categoria>/tarroshort-*.html` | TarroShorts | Sí (contenido) |
-| `studio/shorts/guion-datos-*.txt`, `highlights/*.json` | TarroShorts | Sí |
-| `studio/shorts/tarroshort-*.mp4`, `audio/` | TarroShorts | No (ignorado); van al Drive |
-| `studio/pautas/*.tarrobot.json` | TarroBot (cola/pauta auto) | Sí |
-| `studio/pautas/audio/` (MP3) | TarroBot | No (ignorado) |
-| `studio/tarrobot-out/` | TarroBot | No (ignorado) |
-
 ### 3.3 Dónde hoy Studio y Bot están pegados dentro del panel
 
 Esto es lo que hay que cortar en la fase 4 (separar TarroBot de TarroStudio). Hoy todo vive en un proceso, con un solo `ConnectionManager` de WebSocket, una cola (`QueueManager`) y un rastreador de audio:
@@ -172,6 +160,18 @@ Reparto de las rutas del panel actual (por prefijo):
 | **TarroDL** | `/api/teaser/*` (4), `/api/tarroshort/*` (4), `/api/capcut/preparar` (1) |
 | **TarroStudio y TarroOBS** | `/api/obs/*` (20, entre ellas música y lower-third), `/api/social/*` (21), `/api/recetas`, `/api/receta/run`, `/control` |
 | **TarroBot** | `/` y `/ws/live` (avatar), `/api/state`, `/api/cuentame`, `/api/opinar`, `/api/precio`, `/api/random`, `/api/saludar`, `/api/despedir`, `/api/despertar`, `/api/escuchando`, `/api/personal`, `/api/como-estas`, `/api/que-hacemos`, `/api/catchphrase`, `/api/audio-finished`, `/api/listen`, `/api/voz` (2), `/api/quiz/*` (3), `/api/queue/*` (13, más `short-export`), `/api/pauta/auto-tema`, `/api/episodio/exportar-descripcion`, `/api/session/*` (2), `/api/llm/*` (3), `/api/ping` |
+
+### 3.4 Qué escriben las herramientas en el canal
+
+| Salida | Escribe | Va al git del canal |
+|---|---|---|
+| `studio/teasers/<slug>/` | TarroTeaser | Parcial (hay 2 HTML versionados) |
+| `studio/shorts/shorts-html/<categoria>/tarroshort-*.html` | TarroShorts | Sí (contenido) |
+| `studio/shorts/guion-datos-*.txt`, `highlights/*.json` | TarroShorts | Sí |
+| `studio/shorts/tarroshort-*.mp4`, `audio/` | TarroShorts | No (ignorado); van al Drive |
+| `studio/pautas/*.tarrobot.json` | TarroBot (cola/pauta auto) | Sí |
+| `studio/pautas/audio/` (MP3) | TarroBot | No (ignorado) |
+| `studio/tarrobot-out/` | TarroBot | No (ignorado) |
 
 ## 4. Partición propuesta
 
