@@ -1,39 +1,57 @@
-# Plan: separar TarroBot Studio del repo del canal
+# Plan: separar TarroBot Studio del repo del canal (v2, con la visión de Luis)
 
-> Estado: PROPUESTA para que Luis la revise. No se movió ni se borró nada del repo del canal.
+> Estado: PROPUESTA v2 para que Luis la revise. No se movió ni se borró nada del repo del canal.
+> v2 (2026-11-05, noche): reemplaza la partición TarroTeaser / TarroShorts / TarroBot de la v1 por la que describió Luis: TarroDL absorbe Teaser y Shorts, TarroStudio contiene a TarroOBS, TarroBot queda como mascota independiente, y todas se pueden usar entre sí.
 > Fecha: 2026-11-05. Base: `master` en `215f04d`. Autor: sesión de Claude (rama `claude/funny-wozniak-5c7e9e`).
 > Meta: el repo del canal queda solo con contenido (pautas, discusiones, estudio, decks, reseñas, shorts, docs) y las herramientas viven en repos propios dentro de `D:\Recursos Retrotarros\TarroTools\`, como ya hacen TarroDL, TarroTVOS y TarroOBS.
 
 ## 1. Resumen y lo que necesito que decidas
 
-**Lo que encontré, en una línea:** TarroBot Studio se puede sacar sin tocar el estudio porque ya funciona "plano" en el Drive: el PC de grabación corre desde `G:\Mi unidad\Studio\Tarrobot\` con la misma estructura `scripts\`, `studio\templates\`, `data\`. Si cada repo nuevo conserva esa estructura y se publica en esa misma carpeta, el estudio no nota el cambio. Lo comprobé armando una copia plana en una carpeta temporal: el panel importa y levanta sus 102 rutas sin tocar el repo.
+**La visión (palabras de Luis):** el canal es la motivación; de ahí nacen herramientas que apoyan la creación de contenido, y cualquiera debería poder usar a cualquiera cuando haga falta, tanto para contenido grabado como en vivo. Cada herramienta es independiente, pero puede existir compartiendo contenido y llamando a las otras.
 
-**Propuesta de partición (recomendada):** tres repos de herramienta, más TarroOBS que ya existe.
+**Las herramientas y lo que contienen:**
 
-| Repo | Qué lleva | Dónde se usa |
+| Herramienta | Rol | Contiene (desde el repo del canal) |
 |---|---|---|
-| `TarroTeaser` | `tarroteaser.py`, `teaser_jobs.py`, `capcut_ready.py`, `generate-teaser.py` | PC de edición (CLI) y botón del panel |
-| `TarroShorts` | `tarroshort_render.py`, `tarroshort_jobs.py`, `tarroshort_datos.py`, `_template-tarroshort.html` | PC de edición (CLI) y botón del panel |
-| `TarroBot` | panel, CLI de TarroBot, bandeja, chat social, LLM, plantillas del panel, instalador, entrega al estudio | PC de grabación (en vivo) |
-| `TarroOBS` (existe) | cliente OBS y apoyo; lo lleva otra sesión | PC de grabación |
+| **TarroDL** (existe) | Descargador, creador de clips y mosaicos; ahora también el taller de contenido grabado | Hoy: descargas, clips, mosaico. Suma: **TarroTeaser** (`tarroteaser.py`, `teaser_jobs.py`, `generate-teaser.py`), **TarroShorts** (`tarroshort_render.py`, `tarroshort_jobs.py`, `tarroshort_datos.py`, plantilla) y **CapCut Ready** (`capcut_ready.py`) |
+| **TarroStudio** (nuevo nombre) | Multiherramienta para streaming; concentra todo lo que se desarrolla en vivo | Panel de control, concentrador de chat (Twitch, Discord, YouTube), recetas; orquesta a TarroBot y contiene a **TarroOBS** |
+| **TarroBot** | La mascota y ayudante de los directos | Avatar, voz (TTS y escucha), datos curiosos, cola de pauta, quiz, LLM y su cache |
+| **TarroOBS** (existe, lo lleva otra sesión) | Control de OBS | Cliente OBS, lower-third, música, grabación; TarroStudio lo contiene |
+| **TarroTVOS** (existe) | Fuera de este plan | |
 
-**Orden de migración, de menor a mayor riesgo:** TarroTeaser, luego TarroShorts, luego TarroBot (con el recorte de OBS al final de todo). Teaser y Shorts no se usan mientras se graba en vivo, así que un error ahí no arruina una grabación.
+El repo del canal queda con contenido (pautas, discusiones, estudio, decks, reseñas, shorts HTML, docs).
+
+**Lo que encontré, en una línea:** nada del contenido importa a TarroBot Studio (la dependencia va solo de herramienta a contenido), y el estudio corre "plano" desde `Studio\Tarrobot\` en el Drive, así que se puede mover por etapas sin que el PC de grabación lo note. Comprobé que el panel actual levanta (102 rutas) desde una copia plana en una carpeta temporal.
+
+**Lo que cambia respecto de la v1 y por qué importa:** en la v1 el panel se movía entero a un repo. Con tu visión hay que **partir el panel actual en dos** (Studio y Bot) y mandar sus botones de teaser y short a TarroDL. El panel de hoy es un solo proceso de 4.751 líneas con estado compartido, así que esa partición es lo más delicado y va al final (fases 3 y 4). La sección 3.3 lista los puntos exactos donde hoy Studio y Bot están pegados.
+
+**Orden de migración, de menor a mayor riesgo:**
+
+1. TarroDL gana **TarroTeaser** (no se usa en vivo, es CLI con entradas y salidas claras).
+2. TarroDL gana **TarroShorts** y **CapCut Ready**.
+3. El panel completo se mueve tal cual a **TarroStudio** (con TarroOBS adentro), todavía con Bot dentro del mismo proceso.
+4. **TarroBot** se extrae de TarroStudio como herramienta propia, con un contrato de conversación entre las dos.
+5. Mudanza de las carpetas del Drive al formato definitivo y recorte del repo del canal, una herramienta a la vez.
 
 **Decisiones que necesito de ti** (mi recomendación va primero):
 
-1. **¿Tres repos o uno solo?** Recomiendo tres. La alternativa de un solo repo `TarroBot` con todo adentro es más barata (no hace falta el truco de rutas hermanas de la sección 5.4) pero deja a TarroTeaser y TarroShorts atados al ciclo del panel. Si prefieres lo simple, se hace un repo y la fase 1 y 2 se juntan.
-2. **¿Las pautas de TarroBot (`studio/pautas/*.tarrobot.json`) se quedan en el repo del canal?** Recomiendo que sí: son el guion de cada episodio, es contenido, y el CLAUDE.md ya dice que "el JSON se versiona". La herramienta las lee desde una variable nueva (`RETROTARROS_PAUTAS_DIR`) y el sync del canal sigue copiándolas al Drive como hoy.
-3. **¿`data/tarrobot-database.json` (la base de datos curiosos de TarroBot) se va con la herramienta?** Recomiendo que sí: la herramienta la edita en vivo (`agregar_dato`). Hoy pesa 8,8 KB.
-4. **¿`_studio_layout.py` queda canónico en el repo del canal y las herramientas llevan una copia vendida, con una prueba que avisa si se desfasan?** Recomiendo que sí (sección 4.3).
-5. **¿Se conserva el historial de git al extraer?** Para TarroDL y TarroOBS se hizo "extracción inicial" sin historial. Recomiendo repetir eso y dejar en el README el commit de origen. Si quieres historial, se puede hacer con `git filter-repo`, pero cuesta más y el valor es bajo.
-6. **¿El PC de edición se configura con `RETROTARROS_STUDIO_ROOT` apuntando al `studio\` del repo del canal?** Hoy funciona por casualidad (el repo del canal y la herramienta eran la misma carpeta). Al separarlos hay que decirlo explícito. Recomiendo `setx RETROTARROS_STUDIO_ROOT "D:\Recursos Retrotarros\repo\studio"` en el PC de edición.
-7. **Pregunta de hecho:** ¿hoy está corriendo TarroBot Studio en el PC de grabación? El spec de julio decía "no hay PC de estudio con TarroBot instalado"; sin embargo el Drive tiene `logs\tarrobot-tray.log` y `INSTALL-INFO.txt` con sync del 2026-11-04. Si ya está instalado, el plan lo trata como en producción (que es la lectura más prudente).
+1. **TarroDL hoy usa solo librería estándar de Python** (y llama a `yt-dlp` y `ffmpeg` como programas externos). Teaser y Shorts necesitan librerías pesadas: Whisper, edge-tts, Playwright, mutagen, anthropic. Recomiendo que TarroDL siga arrancando sin ellas y que Teaser y Shorts sean **módulos opcionales** que se activan al instalar sus requisitos (`requirements-teaser.txt`, `requirements-shorts.txt`), con un aviso claro en pantalla cuando falte algo. Alternativa: que TarroDL dependa de todo siempre; más simple de programar, pero cualquier PC con TarroDL tendría que instalar Whisper (~250 MB de modelo más sus librerías).
+2. **"TarroStudio contiene a TarroOBS": ¿copia o fusión?** Recomiendo que **TarroOBS siga siendo su propio repo** (usable solo, con su página mínima, como ya plantea su handoff) y que TarroStudio lo incluya en su paquete (copia vendida con prueba de desfase, igual que `_studio_layout`). Así TarroStudio "lo contiene" al ejecutarse y entregarse, y TarroOBS sigue independiente. Si prefieres fusionar el repo, la otra sesión tendría que dejar de mantenerlo aparte; dímelo antes de que avance más.
+3. **¿Quién es dueña del avatar de la pantalla?** OBS lo muestra como fuente de navegador en `http://localhost:8765/`. Recomiendo **TarroBot** (es su cara), que conserve el puerto 8765 y la ruta `/`, para no romper las escenas de OBS ya armadas. TarroStudio pasa a otro puerto (propongo 8770). Lo confirmo mirando tus escenas de OBS antes de la fase 4.
+4. **Recetas** (`tarrobot-recetas.json`: "Arrancar episodio" cambia escena, espera, saluda...) son orquestación de OBS más voz. Recomiendo que vivan en **TarroStudio**, que llama a TarroBot para hablar y a TarroOBS para cambiar escena.
+5. **¿Teaser y Short se lanzan desde el panel del directo o solo desde TarroDL?** Hoy hay botones en el panel. Recomiendo que los botones de TarroStudio **llamen a TarroDL si está abierto** en vez de repetir la lógica. Si prefieres que el panel de streaming no los tenga, mejor aún.
+6. **Instalador.** Hoy hay uno solo ("TarroBot Studio v1.5.3"). Recomiendo que el PC de grabación instale **una suite** (TarroStudio + TarroBot + TarroOBS) desde un único `install.bat`, y que TarroBot también pueda correr solo. TarroDL sigue con su propia publicación a Drive.
+7. **Pautas y base de datos.** Recomiendo que las pautas (`studio/pautas/*.tarrobot.json`, el guion del episodio) **se queden en el canal**, y que `data/tarrobot-database.json` (datos curiosos que TarroBot edita en vivo) **se vaya a TarroBot**. Variable nueva `RETROTARROS_PAUTAS_DIR`.
+8. **¿`_studio_layout.py` canónico en el canal y copia vendida en cada herramienta, con prueba de desfase?** Recomiendo que sí (4.4).
+9. **¿Historial de git?** Para TarroDL y TarroOBS se hizo "extracción inicial" sin historial. Recomiendo repetir y anotar el commit de origen.
+10. **PC de edición:** `setx RETROTARROS_STUDIO_ROOT "D:\Recursos Retrotarros\repo\studio"` (hoy funciona por casualidad, porque la herramienta y el canal eran la misma carpeta).
+11. **Pregunta de hecho:** ¿hoy está corriendo TarroBot Studio en el PC de grabación? El spec de julio decía que no, pero el Drive tiene `logs\tarrobot-tray.log` y un sync del 2026-11-04. Lo trato como producción.
 
 ## 2. Inventario de TarroBot Studio dentro del repo del canal
 
 Tamaños medidos en `215f04d`. "Canal" = lo que la pieza lee o escribe del contenido del canal.
 
-### 2.1 Panel y núcleo (repo `TarroBot`)
+### 2.1 Panel y núcleo (se reparte entre TarroStudio y TarroBot, ver 3.3 y 4.2)
 
 | Pieza | Líneas | Qué hace | Qué usa del canal | Quién la usa |
 |---|---|---|---|---|
@@ -58,7 +76,7 @@ Tamaños medidos en `215f04d`. "Canal" = lo que la pieza lee o escribe del conte
 | `HANDOFF-tarrobot-studio.md`, `docs/tarrobot/` | 296 + 313 + 226 | Handoff, changelog, handoff viejo | Nada | Documentación |
 | `scripts/obs_{controller,healthcheck,recorder,setup}.py`, `studio/obs-aliases.json` | 4 módulos y un JSON | OBS | Nada | Panel. **Ya copiado a TarroOBS** (otra sesión) |
 
-### 2.2 TarroTeaser (repo `TarroTeaser`)
+### 2.2 TarroTeaser (pasa a TarroDL)
 
 | Pieza | Líneas | Qué hace | Qué usa del canal | Quién la usa |
 |---|---|---|---|---|
@@ -67,7 +85,7 @@ Tamaños medidos en `215f04d`. "Canal" = lo que la pieza lee o escribe del conte
 | `scripts/capcut_ready.py` | 271 | Prepara carpeta "CapCut ready" (teaser, cartelas, audio) | `find_html`, capturas de `capture-slides`, `STUDIO/teasers`; escribe en `REPO/recordings/<slug>/capcut-ready` (ignorado) | `tarrobot-live.py` (`/api/capcut/...`) |
 | `scripts/generate-teaser.py` | 898 | Versión "todo incluido" (backup) | Lee `docs/pautas/pauta-<slug>.md` del canal | Solo Luis, a mano |
 
-### 2.3 TarroShorts (repo `TarroShorts`)
+### 2.3 TarroShorts (pasa a TarroDL)
 
 | Pieza | Líneas | Qué hace | Qué usa del canal | Quién la usa |
 |---|---|---|---|---|
@@ -120,7 +138,7 @@ Hallazgos:
 | `docs/pautas/pauta-<slug>.md` | `generate-teaser.py` | `REPO/docs/pautas` |
 | Master MP4 de videos | TarroTeaser | Ruta que se pasa por argumento |
 
-### 3.3 Qué escriben las herramientas en el canal
+### 3.4 Qué escriben las herramientas en el canal
 
 | Salida | Escribe | Va al git del canal |
 |---|---|---|
@@ -132,145 +150,194 @@ Hallazgos:
 | `studio/pautas/audio/` (MP3) | TarroBot | No (ignorado) |
 | `studio/tarrobot-out/` | TarroBot | No (ignorado) |
 
+### 3.3 Dónde hoy Studio y Bot están pegados dentro del panel
+
+Esto es lo que hay que cortar en la fase 4 (separar TarroBot de TarroStudio). Hoy todo vive en un proceso, con un solo `ConnectionManager` de WebSocket, una cola (`QueueManager`) y un rastreador de audio:
+
+| Punto de contacto | Dónde | Quién habla con quién | Cómo queda separado |
+|---|---|---|---|
+| Auto-escena al hablar | `_hook_pre_hablar` / `_hook_post_hablar` (líneas ~909 y ~931), `/api/obs/auto-escena` | Bot habla -> Studio cambia escena | Bot emite eventos `hablando:inicio` y `hablando:fin` por WebSocket; Studio los escucha |
+| Close-up y "gracias" | `/api/obs/close-up`, `/api/obs/gracias` (~1416 y ~1469) | Studio cambia escena y pide frases a Bot | Studio llama a `POST /api/decir` de Bot |
+| Recetas | `/api/receta/run` y `studio/tarrobot-recetas.json` | Pasos de OBS más pasos de voz (`saludar`, etc.) | Studio las ejecuta: OBS directo, voz vía Bot |
+| Chat -> voz | `/api/social/say`, `respond`, `dictate`, `read-pinned-queue`, auto-respond | Studio recibe el chat; Bot habla y razona (LLM) | Studio llama a Bot (`decir`, `responder`) |
+| Cola y OBS | Al iniciar cola: grabación automática; al avanzar dato: lower-third automático (~3816, ~3871) | Bot (cola) -> Studio (OBS) | Bot emite `cola:inicio` y `cola:dato-avanzo`; Studio reacciona |
+| Música de fondo | `/api/obs/musica/*` | Studio -> OBS | Va entera a Studio y TarroOBS |
+| Tarjetas de interfaz | `_template-tarrobot-control.html` (145 KB, una sola página con todas las tarjetas) | Todo | Cada herramienta sirve las tarjetas suyas; Studio muestra las de Bot incrustadas o enlazadas |
+| Estadísticas LLM | `/api/llm/stats`, modo barato | Bot | Bot; Studio muestra la tarjeta |
+
+Reparto de las rutas del panel actual (por prefijo):
+
+| Va a | Rutas |
+|---|---|
+| **TarroDL** | `/api/teaser/*` (4), `/api/tarroshort/*` (4), `/api/capcut/preparar` (1) |
+| **TarroStudio y TarroOBS** | `/api/obs/*` (20, entre ellas música y lower-third), `/api/social/*` (21), `/api/recetas`, `/api/receta/run`, `/control` |
+| **TarroBot** | `/` y `/ws/live` (avatar), `/api/state`, `/api/cuentame`, `/api/opinar`, `/api/precio`, `/api/random`, `/api/saludar`, `/api/despedir`, `/api/despertar`, `/api/escuchando`, `/api/personal`, `/api/como-estas`, `/api/que-hacemos`, `/api/catchphrase`, `/api/audio-finished`, `/api/listen`, `/api/voz` (2), `/api/quiz/*` (3), `/api/queue/*` (13, más `short-export`), `/api/pauta/auto-tema`, `/api/episodio/exportar-descripcion`, `/api/session/*` (2), `/api/llm/*` (3), `/api/ping` |
+
 ## 4. Partición propuesta
 
-### 4.1 Repos y qué se queda en el canal
+### 4.1 Qué se queda en el canal
 
-**Se queda en el repo del canal** (es contenido o canal): pautas y discusiones, `studio/` (HTMLs, imágenes, capturas, shorts HTML, guiones, highlights), `docs/` (incluidos `modus-operandi`, `descripciones`, `canal`), `data/coleccion`, `data/resenas`, `data/youtube`, los decks (`top_deck`, `coleccion_deck`, `saga_deck`, `resena_deck`, `special_deck`, `retronota_deck`, `tarrovision`, `top_grafica` y sus pruebas), `capture-slides.py`, `fetch_boxart*.py`, `sync-to-drive.ps1`, `studio/pautas/*.tarrobot.json`, branding y merch (`branding_tarrobot.py`, `merch_poleras.py`, `tarjetas_qr.py`, `studio/branding`), `_studio_layout.py` canónico.
+Es contenido o canal: pautas y discusiones, `studio/` (HTMLs, imágenes, capturas, shorts HTML, guiones, highlights), `docs/` (incluidos `modus-operandi`, `descripciones`, `canal`), `data/coleccion`, `data/resenas`, `data/youtube`, los decks (`top_deck`, `coleccion_deck`, `saga_deck`, `resena_deck`, `special_deck`, `retronota_deck`, `tarrovision`, `top_grafica` y sus pruebas), `capture-slides.py`, `fetch_boxart*.py`, `sync-to-drive.ps1`, `studio/pautas/*.tarrobot.json`, branding y merch (`branding_tarrobot.py`, `merch_poleras.py`, `tarjetas_qr.py`, `studio/branding`) y `_studio_layout.py` canónico.
 
-**Se va** a repos propios: lo de las tablas 2.1, 2.2 y 2.3.
+Fuera de alcance, candidatos futuros (también son herramientas dentro del repo del canal): los scripts `youtube_*.py` y los generadores de decks. Los decks cambian casi a diario por sesiones de contenido y están acoplados a reglas del CLAUDE.md; separarlos sin una razón fuerte solo agrega conflictos entre sesiones.
 
-**Fuera de alcance de este plan, candidatos futuros** (también son herramientas dentro del repo del canal, pero no son TarroBot): los scripts `youtube_*.py` y sus pruebas, y los generadores de decks. Los decks cambian casi a diario por sesiones de contenido y están acoplados a reglas del CLAUDE.md; separarlos sin una razón fuerte solo agrega conflictos entre sesiones. Los dejo anotados, no propuestos.
+### 4.2 Qué va a cada herramienta
 
-### 4.2 Estructura de cada repo: la regla que evita romper el estudio
+| Pieza | TarroDL | TarroStudio | TarroBot | TarroOBS |
+|---|---|---|---|---|
+| `tarroteaser.py`, `teaser_jobs.py`, `generate-teaser.py` | X | | | |
+| `tarroshort_render.py`, `tarroshort_jobs.py`, `tarroshort_datos.py`, `_template-tarroshort.html` | X | | | |
+| `capcut_ready.py` | X | | | |
+| `social_manager.py`, `message_store.py`, `connectors/` | | X | | |
+| `auto_respond.py` | | X (decide y filtra) | responde cuando Studio se lo pide | |
+| Recetas (`tarrobot-recetas.json`) | | X | | |
+| Rutas `/api/obs/*`, tarjeta CONTROL OBS | | X (interfaz y orquestación) | | X (lógica) |
+| `obs_*.py`, `obs-aliases.json` | | incluye copia | | X (fuente) |
+| `tarrobot.py` (voz, pautas, LLM, melodías), `llm_resolver.py` | | | X | |
+| `tarrobot-tray.py` | | X (arranca la suite) | | |
+| `_template-tarrobot-live.html`, `-slide.html` (avatar y slide) | | | X | |
+| `_template-tarrobot-control.html` | | X (se parte) | tarjetas de Bot | |
+| `data/tarrobot-database.json`, melodías | | | X | |
+| `installers/tarrobot-studio/` | | X (suite) | también corre solo | |
+| `Iniciar-TarroBot.bat`, `HANDOFF-tarrobot-studio.md`, `docs/tarrobot/` | | X | X (cada uno su parte) | |
+| `_studio_layout.py` | copia | copia | copia | |
 
-**Cada repo conserva la misma estructura de carpetas que hoy tiene el espejo del Drive** (`scripts/`, `studio/templates/`, `data/`). Así su `publicar-en-drive.ps1` copia carpeta a carpeta, y en el PC de grabación `RETROTARROS_REPO` sigue apuntando a `Studio\Tarrobot\` con los mismos archivos en los mismos lugares. Ningún `import` cambia. Es el patrón que usa TarroDL.
+### 4.3 Cómo se usan entre sí (el contrato de interoperación)
 
-Ejemplo, TarroTeaser:
+Tu criterio: independientes, pero capaces de compartir contenido y usarse unas a otras. Propongo cuatro reglas simples:
 
-```
-TarroTeaser/
-  scripts/tarroteaser.py  teaser_jobs.py  capcut_ready.py  generate-teaser.py  _studio_layout.py (copia)
-  tests/
-  README.md  HANDOFF.md  requirements.txt  publicar-en-drive.ps1
-```
+1. **Cada herramienta funciona sola.** Si le falta una compañera, la función que depende de ella se oculta o avisa ("TarroBot no está abierto"); nada se cae. Prueba obligatoria en cada repo: arrancar sin las otras.
+2. **Cada herramienta ofrece una API local en HTTP** (`127.0.0.1`, solo local) con `GET /api/ping` que responde `{herramienta, version, puerto, capacidades}`. TarroDL ya es un servidor local y TarroBot ya tiene `/api/ping`.
+3. **Descubrimiento por archivo de ejecución.** Al arrancar, cada herramienta escribe `%LOCALAPPDATA%\TarroTools\<herramienta>.json` con puerto y PID (TarroDL usa puerto aleatorio, así que no se puede asumir uno fijo). Quien quiera llamar a otra lee ese archivo. Un cliente mínimo de unas 40 líneas con solo librería estándar (`tarrotools_cliente.py`: `descubrir()`, `llamar()`) se copia en cada repo, con la misma prueba de desfase de `_studio_layout`.
+4. **Eventos en vivo por WebSocket** desde TarroBot (`hablando:inicio`, `hablando:fin`, `cola:inicio`, `cola:dato-avanzo`, `quiz:...`) y desde TarroStudio (`escena:cambio`, `grabacion:...`), para que las demás reaccionen sin acoplarse.
 
-### 4.3 `_studio_layout.py`: un archivo, tres consumidores
+Contenido compartido: **la carpeta de contenido del canal** (`RETROTARROS_STUDIO_ROOT` para HTMLs, capturas, teasers y shorts; `RETROTARROS_PAUTAS_DIR` para pautas) y una carpeta de intercambio `TarroTools\_compartido` (o `Studio\Tools\_compartido` en el Drive) para clips y masters que una produce y otra consume. Ejemplos que ya tienen sentido:
 
-Opciones: (a) copia vendida en cada herramienta con una prueba de desfase, (b) repo `TarroCommon` instalado como paquete, (c) que las herramientas lo carguen del repo del canal.
+- TarroDL baja un gameplay y corta clips -> TarroShorts los usa como B-roll en la TarroVisión.
+- TarroDL hace el teaser de un master -> TarroStudio muestra el estado del trabajo en el panel del directo.
+- TarroStudio recibe un mensaje del chat -> pide a TarroBot que lo lea o lo responda -> TarroOBS cambia la escena mientras habla.
+- TarroBot narra un short -> TarroDL lo renderiza.
 
-Recomiendo (a). Son ~100 líneas que cambian solo cuando nace una categoría nueva. (b) agrega un repo y un paso de instalación para un archivo chico. (c) no sirve en el PC de grabación, que no tiene el repo del canal. La prueba de desfase vive en el repo del canal (`scripts/test_studio_layout_copias.py`): si encuentra las carpetas de las herramientas hermanas, compara hashes y falla si difieren; si no las encuentra, se salta. Cada herramienta lo anuncia en su README.
+### 4.4 `_studio_layout.py` y el cliente común
 
-### 4.4 Resolución de rutas: variables de entorno
+Opciones: (a) copia vendida en cada herramienta con una prueba de desfase, (b) repo `TarroCommon` instalado como paquete, (c) cargarla del repo del canal.
 
-| Variable | Significado hoy | Significado después | Cambio |
+Recomiendo (a). Son ~100 líneas que cambian solo cuando nace una categoría nueva. (b) agrega un repo y un paso de instalación para un archivo chico; (c) no sirve en el PC de grabación, que no tiene el repo del canal. La prueba vive en el canal (`scripts/test_studio_layout_copias.py`): si encuentra las carpetas de las herramientas hermanas, compara hashes y falla si difieren; si no, se salta. Lo mismo para `tarrotools_cliente.py`.
+
+### 4.5 Estructura de cada repo: la regla que evita romper el estudio
+
+Mientras dure la transición, **cada repo conserva la estructura plana que hoy tiene el espejo del Drive** (`scripts/`, `studio/templates/`, `data/`). Así su `publicar-en-drive.ps1` copia carpeta a carpeta y en el PC de grabación `RETROTARROS_REPO` sigue apuntando a `Studio\Tarrobot\` con los archivos en los mismos lugares. Ningún `import` cambia. Es el patrón de TarroDL.
+
+TarroDL es la excepción por estar ya hecho: su código es un archivo grande (`tarrodl.py`, 1.728 líneas) más `ui/`. Teaser y Shorts entran como paquete aparte (`tarrodl_taller/` con `teaser/` y `shorts/`) para no tocar el archivo grande, y TarroDL los carga solo si están sus librerías.
+
+### 4.6 Resolución de rutas: variables de entorno
+
+| Variable | Hoy | Después | Cambio |
 |---|---|---|---|
-| `RETROTARROS_REPO` | Raíz de la app: en el PC de grabación es `Studio\Tarrobot`; en edición es el repo | Raíz de la **herramienta** (la carpeta que tiene `scripts/`). No cambia de significado en el estudio | En edición ya no coincide con el repo del canal: se resuelve sola (padre de `scripts/`), no hace falta setearla |
-| `RETROTARROS_STUDIO_ROOT` | Contenido del canal; si falta, `REPO/studio` | Igual. **Pasa a ser obligatoria en edición** | `setx RETROTARROS_STUDIO_ROOT "D:\Recursos Retrotarros\repo\studio"`; en el estudio sigue `G:\Mi unidad\Studio` |
-| `RETROTARROS_TEASER_OUT` | Override de salida del teaser | Sin cambios | Ninguno |
-| `RETROTARROS_FFMPEG` | Ruta de ffmpeg | Sin cambios | Ninguno |
-| `RETROTARROS_PAUTAS_DIR` | No existe | Carpeta de `*.tarrobot.json`. Por defecto `REPO/studio/pautas` (comportamiento actual) | **Nueva.** En edición apunta a `...\repo\studio\pautas` |
-| `RETROTARROS_CANAL_REPO` | No existe | Repo del canal, para `generate-teaser.py` (lee `docs/pautas`) | **Nueva, opcional.** Solo edición |
-| `TARROTOOLS_ROOT` | No existe | Carpeta con los repos hermanos (`TarroBot`, `TarroTeaser`, `TarroShorts`, `TarroOBS`). Solo desarrollo | **Nueva.** Ver 5.4 |
-| `ANTHROPIC_API_KEY` | `install.bat` la guarda | Sin cambios | Ninguno |
+| `RETROTARROS_REPO` | Raíz de la app: en el PC de grabación es `Studio\Tarrobot`; en edición es el repo | Raíz de la **herramienta** (la carpeta con `scripts/`). Igual en el estudio | En edición ya no coincide con el repo del canal: se resuelve sola (padre de `scripts/`) |
+| `RETROTARROS_STUDIO_ROOT` | Contenido del canal; si falta, `REPO/studio` | Igual. **Obligatoria en edición** | `setx RETROTARROS_STUDIO_ROOT "D:\Recursos Retrotarros\repo\studio"`; en el estudio sigue `G:\Mi unidad\Studio` |
+| `RETROTARROS_TEASER_OUT`, `RETROTARROS_FFMPEG`, `ANTHROPIC_API_KEY` | Existentes | Sin cambios | Ninguno |
+| `RETROTARROS_PAUTAS_DIR` | No existe | Carpeta de `*.tarrobot.json`; por defecto `REPO/studio/pautas` | **Nueva** |
+| `RETROTARROS_CANAL_REPO` | No existe | Repo del canal (`generate-teaser.py` lee `docs/pautas`) | **Nueva, opcional** |
+| `TARROTOOLS_ROOT` | No existe | Carpeta con los repos de herramientas, para quien necesite encontrar a otra sin archivo de ejecución | **Nueva, opcional** |
 
 ## 5. Orden de migración, de menor a mayor riesgo
 
-Regla general para cada herramienta (la misma que usa la sesión de TarroOBS): **se migra por copia**. La herramienta nueva gana el código, el repo del canal conserva el suyo hasta un **paso de recorte** aparte, que necesita tu dale. Nada se borra del canal mientras la copia no esté probada con un uso real.
+Regla general (la misma de la sesión de TarroOBS): **se migra por copia**. La herramienta nueva gana el código; el repo del canal conserva el suyo hasta un **paso de recorte** aparte, que necesita tu dale. Nada se borra del canal mientras la copia no esté probada con un uso real. Push a GitHub solo con tu dale.
 
 ### Fase 0: red de seguridad (en el repo del canal, sin mover nada)
 
-1. **Foto base del espejo del Drive**: lista de archivos y hash de `Studio\Tarrobot\` hoy. Es la vara de medir: el espejo que produzcan los scripts nuevos tiene que ser idéntico, salvo los cambios que decidamos a propósito.
-2. **Prueba de humo del panel**: importar `tarrobot-live.py` contra una copia plana del espejo y comparar la lista de rutas con una foto (hoy 102 rutas: 96 decoradores más montajes y rutas de documentación). Ya la corrí a mano con éxito en una carpeta temporal.
-3. **Pruebas de caracterización de rutas**: dado cierto `RETROTARROS_REPO` y `RETROTARROS_STUDIO_ROOT`, a dónde apunta cada módulo (`REPO`, `STUDIO`, salidas de teaser y short). Hoy no existe ninguna prueba para todo el bloque TarroBot (`scripts/test_*.py` cubre reseñas, rankings y YouTube, nada de esto).
-4. **Cerrar los hallazgos de la sección 8** que conviene arreglar antes de mover (en especial el 1 y el 2).
+1. **Foto base del espejo del Drive**: lista de archivos y hash de `Studio\Tarrobot\` hoy. El espejo que produzcan los scripts nuevos tiene que ser idéntico, salvo cambios hechos a propósito.
+2. **Prueba de humo del panel**: importar `tarrobot-live.py` contra una copia plana del espejo y comparar la lista de rutas con una foto (hoy 102). Ya la corrí a mano con éxito.
+3. **Pruebas de caracterización de rutas**: dado cierto `RETROTARROS_REPO` y `RETROTARROS_STUDIO_ROOT`, a dónde apunta cada módulo. Hoy no existe ninguna prueba para todo el bloque TarroBot (`scripts/test_*.py` cubre reseñas, rankings y YouTube).
+4. **Cerrar los hallazgos 1 y 2 de la sección 8** antes de mover.
+5. **Confirmar con Luis las escenas de OBS** (¿usan una fuente de navegador a `localhost:8765`?), por la decisión 3.
 
-### Fase 1: TarroTeaser (riesgo bajo)
+### Fase 1: TarroDL gana TarroTeaser (riesgo bajo)
 
-Por qué primero: CLI con entrada y salida claras, sin tráfico en vivo, solo `_studio_layout` como dependencia, se usa ~1 vez por semana en el PC de edición.
+- Por qué primero: CLI con entrada y salida claras, sin tráfico en vivo, solo `_studio_layout` como dependencia, ~1 uso por semana en el PC de edición.
+- En TarroDL: paquete opcional `tarrodl_taller/teaser/` con `tarroteaser.py`, `teaser_jobs.py` y `generate-teaser.py`; pestaña "Teaser" en la interfaz; `requirements-teaser.txt` (Whisper y compañía). Rutas del servidor de TarroDL: `/api/teaser/*`, con la misma forma que las del panel actual.
+- Variables: `RETROTARROS_STUDIO_ROOT` obligatoria en edición; `.cache/whisper` pasa a la carpeta de TarroDL (se copia el cache actual para no re-transcribir).
+- Pruebas: **las 72 de TarroDL siguen verdes** (criterio duro: la base no se rompe), más las nuevas: clasificación de tipo de episodio por slug, resolución de salida, selección de segmentos con una transcripción de ejemplo (sin Whisper real), cola de trabajos, y TarroDL arranca sin las librerías del teaser mostrando el aviso.
+- Hecho cuando: pruebas verdes; el teaser de un mismo master sale igual desde TarroDL y desde el canal; el espejo de Drive no cambia (TarroDL publica a `Studio\Tools\TarroDL`, y el panel de hoy sigue usando su copia).
 
-- Repo `TarroTools\TarroTeaser`, GitHub `LuisGaticaJerez/TarroTeaser`.
-- Variables: `RETROTARROS_STUDIO_ROOT` obligatoria en edición; `RETROTARROS_CANAL_REPO` opcional para `generate-teaser.py`. `.cache/whisper` pasa a vivir en la carpeta de la herramienta (se puede copiar el cache actual para no re-transcribir).
-- Entrega: el panel del estudio importa `teaser_jobs` y `tarroteaser` de `scripts/` del espejo. `publicar-en-drive.ps1` de TarroTeaser copia esos 4 archivos más `_studio_layout.py` a `Studio\Tarrobot\scripts\`. Mismo destino que hoy.
-- Pruebas: clasificación de tipo de episodio por slug, resolución de salida (`RETROTARROS_TEASER_OUT` y `STUDIO`), selección de segmentos con una transcripción de ejemplo (sin Whisper real), importabilidad de `teaser_jobs` sin FastAPI. Una prueba de integración opcional con un MP4 corto y ffmpeg.
-- Hecho cuando: pruebas verdes, `python scripts\tarroteaser.py <mp4> --slug <slug>` genera un teaser igual de bueno que el del canal sobre el mismo master, y el espejo de Drive producido por `publicar-en-drive.ps1` coincide con la foto base en esos archivos.
+### Fase 2: TarroDL gana TarroShorts y CapCut Ready (riesgo bajo a medio)
 
-### Fase 2: TarroShorts (riesgo bajo a medio)
+- Más decisiones que Teaser: lee pautas y HTMLs, escribe HTML versionado y tiene drivers sueltos en `.cache/gen_tarroshort*.py`. Dependencias: Playwright, edge-tts, mutagen, anthropic.
+- Salidas: el HTML de `shorts-html`, los guiones y `highlights` (contenido versionado) van a `STUDIO_ROOT`; los MP4 y `audio/` (regenerables) a una carpeta de trabajo de TarroDL, con un paso explícito de copia al Drive. Es la parte con más decisiones y la que más puede sorprender; la dejo detallada al arrancar la fase.
+- Los drivers de `.cache/` se ajustan (solo viven en el PC de Luis).
+- `_template-tarroshort.html` viaja con TarroShorts (hoy no llega al Drive: hallazgo 1).
+- CapCut Ready toma teaser y capturas y arma la carpeta; va junto a Teaser porque su insumo principal es el teaser.
+- Pruebas: mapa de `short_category`, armado de HTML desde una pauta de ejemplo, `tarroshort_datos` con un dict de ejemplo contra un HTML de referencia, cola de trabajos.
+- Hecho cuando: un short real (`tarroshort-datos-pacman`) se renderiza de punta a punta desde TarroDL con los mismos textos y duración (el MP4 no será bit a bit igual por el TTS).
 
-Por qué segundo: igual que Teaser pero toca más contenido (lee pautas y HTMLs, escribe HTML versionado) y tiene drivers sueltos en `.cache/`.
+### Fase 3: el panel completo se muda a TarroStudio (riesgo alto)
 
-- Repo `TarroTools\TarroShorts`.
-- Variables: `RETROTARROS_STUDIO_ROOT` (HTMLs y salida de `shorts-html`), `RETROTARROS_PAUTAS_DIR` (lee `*.tarrobot.json`). Las salidas que hoy cuelgan de `REPO/studio/shorts` (MP4, `audio/`, `highlights/`) pasan a una carpeta de trabajo de la herramienta, con un paso explícito que copia a `STUDIO` lo que es contenido versionado. **Esta es la parte con más decisiones y la que más puede sorprender**: lo documento en la fase, no lo resuelvo acá.
-- Los drivers `.cache/gen_tarroshort*.py` (gitignored) hoy hacen `import tarroshort_datos` por ruta relativa. Hay que ajustarles el `sys.path` a `TARROTOOLS_ROOT\TarroShorts\scripts`. Son pocos y viven solo en el PC de Luis.
-- `_template-tarroshort.html` hoy **no** se sincroniza al Drive (ver hallazgo 1 en la sección 8): al publicar desde `TarroShorts` queda incluido.
-- Pruebas: mapa de `short_category`, armado de HTML desde una pauta de ejemplo (`--from-pauta` con una pauta chica de fixtures), `tarroshort_datos` con un dict de ejemplo (compara contra un HTML de referencia), cola de `tarroshort_jobs`.
-- Hecho cuando: un short real (por ejemplo `tarroshort-datos-pacman`) se rinde de punta a punta desde el repo nuevo y sale igual (mismos textos y duración; el MP4 no será bit a bit idéntico por el TTS) y el panel lo dispara desde la tarjeta.
+- Repo `TarroTools\TarroStudio`. Se mueve **tal cual**, con TarroBot todavía adentro del mismo proceso y con las copias de TarroOBS. Sin cortar nada: es solo cambiar de casa, de nombre y de instalador.
+- Los botones de teaser y short pasan a llamar a TarroDL (decisión 5) o se esconden si no está.
+- `studio/tarrobot-out` se crea al arrancar (hallazgo 2).
+- `_ejecutar_sync_drive` apunta al `publicar-en-drive.ps1` de TarroStudio.
+- Versión: primera publicación desde el repo nuevo como `v2.0.0` (nueva generación, para no confundir con los tags `v1.x` del canal).
+- Pruebas: la foto de rutas (102), `/api/ping` y `/api/state` con `TestClient`, importabilidad con y sin `RETROTARROS_STUDIO_ROOT`, flujo de pauta sobre una carpeta temporal, mock de `edge_tts` y `anthropic`.
+- Hecho cuando: el espejo del Drive producido por el `publicar-en-drive.ps1` nuevo coincide con la foto base, y tú haces una prueba de 10 minutos en el PC de grabación (abrir panel, cargar pauta, hablar un dato, cambiar escena en OBS).
 
-### Fase 3: TarroBot, el panel y el núcleo (riesgo alto)
+### Fase 4: TarroBot sale de TarroStudio (riesgo más alto)
 
-Por qué al final: es lo que usa el estudio en vivo, lo instala `install.bat` y tiene el mayor tamaño.
+- Se corta por los puntos de la sección 3.3: Bot pasa a un proceso propio en el puerto 8765 con el avatar en `/` (decisión 3); Studio a otro puerto. Entre los dos: HTTP y WebSocket (sección 4.3).
+- Primero se define el contrato (nombres de rutas y de eventos) y se escribe una **prueba de contrato**: un TarroBot falso y un TarroStudio falso se hablan por ese contrato. Solo después se corta el código.
+- Comportamiento sin compañera: Studio sin Bot muestra "TarroBot no está abierto" y deja usar OBS y chat; Bot sin Studio habla, lleva la cola y el quiz sin escenas.
+- La tarjeta de interfaz de 145 KB se parte: Studio con OBS, chat y recetas; Bot con voz, cola, quiz y LLM.
+- Hecho cuando: la prueba de contrato y las de cada herramienta pasan, y repites en el estudio la prueba de 10 minutos con los dos procesos, incluido el chat leído por Bot y la escena cambiando mientras habla.
 
-- Repo `TarroTools\TarroBot`.
-- `tarrobot.py` mantiene `REPO` desde `RETROTARROS_REPO` o el padre de `scripts/` y sigue funcionando plano en el Drive. `studio/tarrobot-out` se crea al arrancar (hallazgo 2).
-- Las rutas `/api/teaser/*`, `/api/tarroshort/*`, `/api/capcut/*` del panel importan módulos que viven en otros repos. En el espejo del Drive están planos y no pasa nada. En el PC de edición hace falta el truco de 5.4.
-- `_ejecutar_sync_drive` pasa a llamar al `publicar-en-drive.ps1` de TarroBot.
-- El instalador (`installers/tarrobot-studio/`) y su paquete `-slim.zip` salen del repo nuevo; `build-package.ps1` ajusta sus rutas de origen. Versión sigue en 1.5.3 hasta que se publique la primera versión desde el repo nuevo (tag `v1.6.0` propuesto, para no confundir con los tags `v1.x` del canal).
-- Pruebas: la foto de rutas (102), `/api/ping` y `/api/state` con `TestClient`, importabilidad con la variable `RETROTARROS_REPO` sin `RETROTARROS_STUDIO_ROOT`, y con ambas; flujo de pauta (crear, guardar, cargar) sobre una carpeta temporal; mock de `edge_tts` y de `anthropic`.
-- Hecho cuando: el espejo del Drive producido por los `publicar-en-drive.ps1` de las cuatro herramientas coincide con la foto base, y alguien (tú) hace en el PC de grabación una prueba de 10 minutos: abrir el panel, cargar una pauta, hablar un dato, cambiar escena en OBS y disparar un short.
+### Fase 5: mudanza de Drive y recorte del canal (aparte, con tu dale por herramienta)
 
-### Fase 4: recorte en el repo del canal (aparte, con tu dale por herramienta)
+- **Drive**: hoy todo cuelga de `Studio\Tarrobot\`. El formato final es `Studio\Tools\<Herramienta>\` (como TarroDL). Es un paso deliberado, con reconfiguración única en el PC de grabación (`RETROTARROS_REPO` nuevo y reinstalar accesos directos). Hasta entonces se mantiene el espejo plano y compatible.
+- **Canal**: borrar lo migrado; reescribir `sync-tarrobot-to-drive.ps1` (queda solo lo que es contenido: pautas JSON, MP4 de shorts, branding de poleras, `_modus-operandi`) o absorberlo en `sync-to-drive.ps1`; actualizar las referencias de texto: CLAUDE.md (secciones TarroTeaser, TarroShorts, "workflow obligatorio" paso 3) y los ~10 a 18 documentos que mencionan los scripts. El atajo "corré el tarroteaser" pasa a TarroDL.
+- La regla "los DOS scripts siempre al cerrar" pasa a "`sync-to-drive.ps1` más el `publicar-en-drive.ps1` de cada herramienta que cambió". Propongo un `TarroTools\publicar-todo.ps1` que llame a todos.
 
-Solo cuando una herramienta lleve al menos una sesión real de grabación o edición sin problemas:
+## 6. Cómo llega cada herramienta a los PC
 
-- Borrar del canal los scripts y plantillas que migraron.
-- Reescribir `sync-tarrobot-to-drive.ps1` (queda solo lo que es contenido: pautas JSON, MP4 de shorts, branding de poleras, `_modus-operandi`; o se absorbe en `sync-to-drive.ps1`).
-- Actualizar las referencias de texto: CLAUDE.md (secciones TarroTeaser, TarroShorts, "workflow obligatorio" paso 3, "Capa de notas", "Cómo arrancar una sesión") y ~10 a 18 documentos que mencionan los scripts (`flujo-rankings.md`, `convenciones-tarroshorts.md`, `HANDOFF.md`, etc.). El atajo "corré el tarroteaser" pasa a `python D:\Recursos Retrotarros\TarroTools\TarroTeaser\scripts\tarroteaser.py ...`.
-- Regla del CLAUDE.md "los DOS scripts siempre al cerrar" pasa a "`sync-to-drive.ps1` más el `publicar-en-drive.ps1` de cada herramienta que cambió". Propongo un `TarroTools\publicar-todo.ps1` que llame a los cuatro, para no depender de la memoria de nadie.
-- Recortar `tarrobot-live.py` para que use TarroOBS (decisión de la sesión de OBS, en coordinación).
+### 6.1 PC de grabación (estudio)
 
-### 5.4 Cómo se encuentran las herramientas entre sí en el PC de edición
+Transición (fases 1 a 4): el panel y sus módulos siguen leyendo `Studio\Tarrobot\` con las mismas variables; cada `publicar-en-drive.ps1` escribe ahí lo suyo. TarroDL sigue en `Studio\Tools\TarroDL`. Cuando una herramienta pasa a la mudanza (fase 5), su `publicar-en-drive.ps1` cambia de destino.
 
-En el Drive todo está plano, así que el panel encuentra `teaser_jobs` y `tarroshort_jobs` sin trucos. En el PC de edición las herramientas están en carpetas hermanas. Propuesta mínima: al inicio de `tarrobot-live.py`, un bloque que agrega a `sys.path` las carpetas `scripts/` de `TarroTeaser`, `TarroShorts` y `TarroOBS` si existen bajo `TARROTOOLS_ROOT` (por defecto, la carpeta padre de `TarroBot`). Si no existen (caso Drive), no hace nada. Son unas 10 líneas y no cambia el comportamiento en el estudio.
-
-## 6. Cómo llega cada herramienta al PC de grabación
-
-### 6.1 Principio
-
-El PC de grabación no cambia: sigue leyendo `Studio\Tarrobot\` (con `RETROTARROS_REPO`) y `Studio\` (con `RETROTARROS_STUDIO_ROOT`), y no necesita Git. Cada herramienta tiene su `publicar-en-drive.ps1` (como TarroDL) que copia **solo lo necesario para correr**, nunca `tests/`, `.git`, `.cache` ni `__pycache__`.
-
-| Herramienta | Destino en Drive | Qué publica |
+| Herramienta | Destino en transición | Qué publica |
 |---|---|---|
-| TarroTeaser | `Studio\Tarrobot\scripts\` | `tarroteaser.py`, `teaser_jobs.py`, `capcut_ready.py`, `generate-teaser.py`, `_studio_layout.py` |
-| TarroShorts | `Studio\Tarrobot\scripts\` y `...\studio\templates\` | los 3 `.py` de short, `_template-tarroshort.html`, `_studio_layout.py` |
-| TarroBot | `Studio\Tarrobot\` | el resto de `scripts\`, `connectors\`, plantillas del panel, `tarrobot-recetas.json`, `data\tarrobot-database.json`, melodías, instalador, `INSTALL-INFO.txt` |
-| TarroOBS | `Studio\Tarrobot\scripts\` (hoy) | los 4 `obs_*.py` y `studio\obs-aliases.json`; su sesión decide si pasa a `Studio\Tools\TarroOBS` |
+| TarroDL | `Studio\Tools\TarroDL` (ya existe) | `tarrodl.py`, `ui\`, `tarrodl_taller\` e `iniciar-tarrodl.cmd`; los requisitos pesados se instalan solo en el PC que haga teasers o shorts |
+| TarroStudio | `Studio\Tarrobot\` | `scripts\` del panel, `connectors\`, plantillas, recetas, instalador, `INSTALL-INFO.txt` |
+| TarroBot (fase 4) | `Studio\Tarrobot\` | `tarrobot.py`, `llm_resolver.py`, avatar, base de datos, melodías |
+| TarroOBS | `Studio\Tarrobot\scripts\` | `obs_*.py` y `studio\obs-aliases.json`; su sesión decide si pasa a `Studio\Tools\TarroOBS` |
 
-Dos scripts que escriben el mismo archivo (`_studio_layout.py`) son seguros porque tienen que ser idénticos; la prueba de desfase de 4.3 lo vigila.
+Nunca se publica `tests/`, `.git`, `.cache` ni `__pycache__`.
 
 ### 6.2 Lo que sigue publicando el canal
 
-`sync-to-drive.ps1` (o un bloque nuevo en él) copia a `Studio\Tarrobot\studio\`: `pautas\*.tarrobot.json`, y los `tarroshort-*.mp4` finales. Es contenido, no código. El `/MIR` de `pautas` no debe correrse desde un worktree que no tenga `pautas\audio` (borraría los MP3 precargados del Drive); mejor `/E` sin `/MIR`, o `/XD audio`. Anotado en la sección 8.
+`sync-to-drive.ps1` (o un bloque nuevo) copia a `Studio\Tarrobot\studio\`: `pautas\*.tarrobot.json` y los `tarroshort-*.mp4` finales. El `/MIR` de `pautas` no debe correrse desde un worktree sin `pautas\audio` (borraría los MP3 precargados del Drive); usar `/E` o `/XD audio`.
 
 ### 6.3 Qué hace Luis una vez por PC
 
-- **PC de grabación:** nada nuevo (ya tiene las dos variables). Si hace falta reinstalar, `install.bat` sigue igual.
-- **PC de edición:** `setx RETROTARROS_STUDIO_ROOT "D:\Recursos Retrotarros\repo\studio"` y `setx RETROTARROS_PAUTAS_DIR "D:\Recursos Retrotarros\repo\studio\pautas"`. Si la carpeta de herramientas no está en `D:\Recursos Retrotarros\TarroTools`, también `TARROTOOLS_ROOT`.
+- **PC de grabación:** nada en las fases 1 a 3; en la fase 4, probar y, en la fase 5, la reconfiguración única.
+- **PC de edición:** `setx RETROTARROS_STUDIO_ROOT "D:\Recursos Retrotarros\repo\studio"` y `setx RETROTARROS_PAUTAS_DIR "D:\Recursos Retrotarros\repo\studio\pautas"`. TarroDL en ese PC instala los requisitos de Teaser y Shorts.
 
 ## 7. Riesgos y cómo se cubren
 
 | Riesgo | Cómo se cubre |
 |---|---|
-| Romper la grabación en vivo | Fase 3 al final; el espejo del Drive se compara contra la foto base antes de publicar; prueba de 10 minutos con Luis |
-| Desfase de `_studio_layout.py` entre repos | Prueba en el canal que compara hashes; README de cada herramienta lo declara |
-| Sesiones de contenido tocan scripts que se movieron | El recorte (fase 4) se hace una herramienta a la vez, con aviso, y el CLAUDE.md se actualiza en el mismo commit |
-| Pérdida de pautas, audio precargado o MP4 en Drive | Ningún script nuevo usa `/MIR` sobre carpetas con archivos que solo viven en Drive; `-DryRun` primero |
-| Drivers de `.cache/` apuntando a rutas viejas | Se ajustan en la fase 2; viven solo en el PC de Luis |
-| Dos sesiones en paralelo (regla del CLAUDE.md) | Cada fase en rama o repo propio; push solo con tu dale; `git fetch` y `git log origin/master..master` antes de cualquier push |
-| Se pierde el historial de git | Se deja el commit de origen en el README de cada repo; el repo del canal conserva todo |
+| Romper la grabación en vivo | Fases 3 y 4 al final; espejo del Drive comparado con la foto base; prueba de 10 minutos contigo |
+| Las escenas de OBS dejan de ver el avatar (cambio de puerto o de ruta) | Bot conserva 8765 y `/`; se verifica contra tus escenas en la fase 0 |
+| TarroDL pierde su simpleza (solo librería estándar) | Teaser y Shorts son módulos opcionales; las 72 pruebas de TarroDL son criterio duro; TarroDL arranca sin las librerías pesadas |
+| Puertos en conflicto (TarroDL no tiene puerto fijo; TarroBot usa 8765) | Archivo de ejecución por herramienta; puertos por defecto documentados (Bot 8765, Studio 8770, el resto aleatorio) |
+| Studio y Bot se llaman en círculo | Contrato escrito antes de cortar, con prueba de contrato; los eventos van solo de Bot a Studio y las órdenes de Studio a Bot |
+| Desfase de `_studio_layout.py` o del cliente común | Prueba en el canal que compara hashes |
+| Sesiones de contenido tocan scripts que se movieron | El recorte se hace una herramienta a la vez, con aviso, y el CLAUDE.md se actualiza en el mismo commit |
+| Pérdida de pautas, audio o MP4 en Drive | Ningún script nuevo usa `/MIR` sobre carpetas con archivos que solo viven en Drive; `-DryRun` primero |
+| Drivers de `.cache/` apuntando a rutas viejas | Se ajustan en la fase 2 |
+| Dos sesiones en paralelo | Cada fase en rama o repo propio; push solo con tu dale; `git fetch` y `git log origin/master..master` antes de cualquier push |
+| Se pierde el historial de git | Se anota el commit de origen en cada README; el canal conserva todo |
 
 ## 8. Hallazgos de paso (bugs o riesgos que ya existen hoy)
 
-Los encontré al leer; ninguno lo arreglé (fuera de alcance), pero conviene resolver los 1 a 3 antes de mover:
+Los encontré al leer; ninguno lo arreglé (fuera de alcance), pero conviene resolver los 1 y 2 antes de mover:
 
 1. **`_template-tarroshort.html` no está en el sync al Drive.** `tarroshort_render.py` y `tarroshort_datos.py` lo leen de `REPO/studio/templates`. En el espejo de `Studio\Tarrobot\studio\templates\` no está. Si alguna vez se renderiza un short en el PC de grabación desde el Drive, falla. En el PC de edición no pasa porque corre desde el repo.
 2. **El panel se cae al importar si falta `studio/tarrobot-out/`.** Está en `.gitignore`, así que un clon limpio no lo trae: `tarrobot-live.py` línea ~1015 monta `StaticFiles` sobre esa carpeta y levanta `RuntimeError`. Lo comprobé en la prueba de humo. En el repo nuevo hay que crearla al arrancar (`mkdir(exist_ok=True)`).
@@ -284,16 +351,16 @@ Los encontré al leer; ninguno lo arreglé (fuera de alcance), pero conviene res
 
 ## 9. Lo que haría en el paso 3, con tu dale
 
-Si apruebas el plan, parto por **TarroTeaser** y su fase 0 mínima:
+Parto por la **fase 1: TarroDL gana TarroTeaser**, en una rama de TarroDL y sin tocar el canal:
 
-1. Crear `D:\Recursos Retrotarros\TarroTools\TarroTeaser` con estructura `scripts/`, `tests/`, `README.md`, `HANDOFF.md`, `requirements.txt`, `publicar-en-drive.ps1`, copia de los 4 scripts más `_studio_layout.py`.
-2. Escribir las pruebas descritas en la fase 1 y correrlas.
-3. Generar un teaser de prueba desde un master que ya tengas, con el repo nuevo y con el del canal, y comparar los cortes elegidos.
-4. Correr `publicar-en-drive.ps1` en modo prueba (`-DryRun`) y comparar el resultado con la foto base del espejo.
-5. Commit en el repo nuevo. **No empujo a GitHub ni creo el repo remoto sin tu dale**, y **no toco** el repo del canal, el Drive ni el estudio.
+1. Correr las 72 pruebas de TarroDL y anotar la línea base (tiempo y resultado).
+2. Agregar `tarrodl_taller/teaser/` con los 3 scripts y `_studio_layout.py` (copia), cargados de forma opcional; ruta `/api/teaser/*` y pestaña en la interfaz.
+3. Escribir las pruebas de la fase 1 y correr todo junto (72 más las nuevas).
+4. Generar un teaser de prueba desde un master que ya tengas, con TarroDL y con el canal, y comparar los cortes elegidos.
+5. Commit en TarroDL. **No empujo a GitHub, no publico en el Drive de verdad, no toco el canal ni el estudio** sin tu dale.
 
-Lo que no haré sin que lo pidas: borrar nada del canal, publicar en el Drive de verdad, crear repos en GitHub.
+Antes necesito tus respuestas a las decisiones 1, 5 y 10 de la sección 1 (las que afectan esta fase). Las demás pueden esperar a las fases 3 y 4.
 
 ## 10. Preguntas abiertas (resumen)
 
-Las 7 de la sección 1, más: ¿quieres que el repo nuevo de cada herramienta nazca con sus pruebas obligatorias en un `README` ("cómo probar"), como TarroDL? ¿Y quieres el `TarroTools\publicar-todo.ps1`? Las dos las daría por sí salvo que me digas lo contrario.
+Las 11 de la sección 1. Las más urgentes son la 1 (TarroDL con módulos opcionales), la 2 (TarroOBS como repo propio incluido por Studio, que además afecta a la otra sesión) y la 3 (puerto y avatar).
