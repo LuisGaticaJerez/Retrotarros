@@ -1,16 +1,46 @@
 {
-  "fecha": "2026-11-02",
-  "generado": "2026-11-02T19:51:34+00:00",
+  "fecha": "2026-11-06",
+  "generado": "2026-11-06T19:00:50+00:00",
   "videos": [
     {
-      "id": "HLN4VHPSpLA",
+      "id": "3d6Qw7AI9pk",
+      "titulo": "Need for Speed Underground 2: ¿sigue siendo el rey del tuning? | RetroReseña",
+      "estado": "programado",
+      "privacidad": "private",
+      "publicacion_programada": "2026-11-10T03:00:00Z",
+      "subido": "2026-11-04T19:31:36Z",
+      "vistas": 0,
+      "duracion": "PT23M21S"
+    },
+    {
+      "id": "RKvfSx1UK6o",
       "titulo": "Ranking |  los 10 PEORES juegos de PS1 de la historia",
       "estado": "programado",
       "privacidad": "private",
       "publicacion_programada": "2026-11-08T23:30:00Z",
-      "subido": "2026-11-02T04:36:16Z",
+      "subido": "2026-11-03T23:01:41Z",
       "vistas": 0,
       "duracion": "PT41M21S"
+    },
+    {
+      "id": "Ak9sksl598E",
+      "titulo": "The Legend of Zelda: Ocarina of Time (1998): ¿envejeció bien la obra maestra de N64? | RetroReseñas",
+      "estado": "publicado",
+      "privacidad": "public",
+      "publicacion_programada": null,
+      "subido": "2026-11-06T00:03:10Z",
+      "vistas": 18,
+      "duracion": "PT32M15S"
+    },
+    {
+      "id": "Fs7i_Ps8ZiU",
+      "titulo": "Yoshi's Island: el juego que se veía a propósito como dibujo de crayón | RetroReseña",
+      "estado": "publicado",
+      "privacidad": "public",
+      "publicacion_programada": null,
+      "subido": "2026-11-03T23:30:18Z",
+      "vistas": 57,
+      "duracion": "PT18M36S"
     },
     {
       "id": "jSBcr_VcPWw",
@@ -19,7 +49,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-29T23:30:36Z",
-      "vistas": 144,
+      "vistas": 183,
       "duracion": "PT29M36S"
     },
     {
@@ -29,7 +59,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-27T23:30:23Z",
-      "vistas": 273,
+      "vistas": 275,
       "duracion": "PT22M14S"
     },
     {
@@ -39,7 +69,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-25T23:30:35Z",
-      "vistas": 223,
+      "vistas": 227,
       "duracion": "PT40M47S"
     },
     {
@@ -49,7 +79,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-22T23:30:29Z",
-      "vistas": 104,
+      "vistas": 106,
       "duracion": "PT23M26S"
     },
     {
@@ -59,7 +89,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-20T23:30:35Z",
-      "vistas": 170,
+      "vistas": 172,
       "duracion": "PT23M37S"
     },
     {
@@ -69,7 +99,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-18T23:30:00Z",
-      "vistas": 1059,
+      "vistas": 1061,
       "duracion": "PT39M53S"
     },
     {
@@ -89,7 +119,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-13T23:30:25Z",
-      "vistas": 148,
+      "vistas": 150,
       "duracion": "PT23M57S"
     },
     {
@@ -99,7 +129,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-11T23:30:00Z",
-      "vistas": 924,
+      "vistas": 925,
       "duracion": "PT34M36S"
     },
     {
@@ -109,7 +139,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-08T23:30:06Z",
-      "vistas": 339,
+      "vistas": 343,
       "duracion": "PT22M51S"
     },
     {
@@ -119,7 +149,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-07T01:00:11Z",
-      "vistas": 438,
+      "vistas": 440,
       "duracion": "PT17M40S"
     },
     {
@@ -139,7 +169,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-01T23:30:29Z",
-      "vistas": 294,
+      "vistas": 295,
       "duracion": "PT25M43S"
     },
     {
@@ -149,7 +179,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-29T23:30:24Z",
-      "vistas": 129,
+      "vistas": 130,
       "duracion": "PT16M8S"
     },
     {
@@ -169,7 +199,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-24T23:30:23Z",
-      "vistas": 441,
+      "vistas": 442,
       "duracion": "PT11M39S"
     },
     {
@@ -179,7 +209,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-22T23:30:26Z",
-      "vistas": 694,
+      "vistas": 697,
       "duracion": "PT13M47S"
     },
     {
@@ -199,7 +229,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-17T23:30:34Z",
-      "vistas": 925,
+      "vistas": 927,
       "duracion": "PT11M28S"
     },
     {
@@ -209,7 +239,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-15T23:30:21Z",
-      "vistas": 720,
+      "vistas": 721,
       "duracion": "PT21M16S"
     },
     {
@@ -219,7 +249,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-13T23:30:35Z",
-      "vistas": 1102,
+      "vistas": 1104,
       "duracion": "PT37M38S"
     },
     {
@@ -229,7 +259,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-10T23:30:14Z",
-      "vistas": 139,
+      "vistas": 140,
       "duracion": "PT13M48S"
     },
     {
@@ -239,7 +269,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-08T23:30:19Z",
-      "vistas": 501,
+      "vistas": 502,
       "duracion": "PT17M27S"
     },
     {
@@ -249,7 +279,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-08T21:32:36Z",
-      "vistas": 35380,
+      "vistas": 35381,
       "duracion": "PT58S"
     },
     {
@@ -379,7 +409,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-14T00:30:29Z",
-      "vistas": 142,
+      "vistas": 143,
       "duracion": "PT11M40S"
     },
     {
@@ -389,7 +419,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-12T00:30:28Z",
-      "vistas": 293,
+      "vistas": 294,
       "duracion": "PT11M58S"
     },
     {
@@ -419,7 +449,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-06T02:00:34Z",
-      "vistas": 116,
+      "vistas": 118,
       "duracion": "PT11M39S"
     },
     {
@@ -489,7 +519,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-07-27T02:10:36Z",
-      "vistas": 1449,
+      "vistas": 1454,
       "duracion": "PT9M6S"
     },
     {
@@ -519,7 +549,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-07-17T17:18:28Z",
-      "vistas": 471,
+      "vistas": 472,
       "duracion": "PT46S"
     },
     {
@@ -739,7 +769,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-06-08T02:00:08Z",
-      "vistas": 202,
+      "vistas": 204,
       "duracion": "PT35M2S"
     },
     {
@@ -819,7 +849,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-06-01T02:00:22Z",
-      "vistas": 149,
+      "vistas": 151,
       "duracion": "PT43M31S"
     },
     {
@@ -839,7 +869,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-05-25T02:00:06Z",
-      "vistas": 2117,
+      "vistas": 2118,
       "duracion": "PT34M50S"
     },
     {
