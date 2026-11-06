@@ -11,8 +11,8 @@ from pathlib import Path
 
 CANONICA = Path(__file__).resolve().parent / "_studio_layout.py"
 PATRONES = (
-    "*/tarrodl_taller/teaser/_studio_layout.py",
-    "*/.claude/worktrees/*/tarrodl_taller/teaser/_studio_layout.py",
+    "*/tarrodl_taller/_studio_layout.py",
+    "*/.claude/worktrees/*/tarrodl_taller/_studio_layout.py",
     "*/scripts/_studio_layout.py",
 )
 
