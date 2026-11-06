@@ -28,7 +28,7 @@ from typing import Any, Optional
 # closeup-cartucho, closeup-caja.
 #
 # Sources clave:
-#   - 'tarrobot-live': Browser Source apuntando a http://localhost:8001/live
+#   - 'tarrobot-live': Browser Source apuntando a http://localhost:8765/?mode=overlay
 #     que se inserta en la escena tarrobot.
 #   - 'lower-third': Text source para titulos dinamicos (Sprint 18 D).
 #
@@ -69,7 +69,7 @@ RETROTARROS_TEMPLATE = {
             input_name="tarrobot-live",
             input_kind="browser_source",
             input_settings={
-                "url": "http://localhost:8001/live",
+                "url": "http://localhost:8765/?mode=overlay",  # el avatar de TarroBot (antes decia :8001/live, una ruta que no existe)
                 "width": 1920,
                 "height": 1080,
                 "reroute_audio": False,
