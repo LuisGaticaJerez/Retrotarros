@@ -73,11 +73,27 @@ if (-not $DryRun) {
     }
 }
 
+# TarroStudio (repo propio, D:\Recursos Retrotarros\TarroTools\TarroStudio) publica con su propio publicar-en-drive.ps1 los
+# scripts, plantillas y la base de datos de TarroBot, y deja la marca .publicado-por-tarrostudio en el destino. Si la marca
+# existe, este script NO los pisa con su copia vieja (lo que sigue sincronizando son los datos del canal: pautas, shorts, etc.).
+$propiosDeStudio = Test-Path (Join-Path $Destino ".publicado-por-tarrostudio")
+function Es-DeStudio([string]$Rel) {
+    return ($Rel -like "scripts\*") -or ($Rel -like "studio	emplates\_template-tarrobot*") -or ($Rel -like "studio	emplates\_template-tarroshort*") -or
+           ($Rel -in @("studio\obs-aliases.json", "studio	arrobot-recetas.json", "data	arrobot-database.json"))
+}
+if ($propiosDeStudio) { Write-Host "TarroStudio publica sus propios archivos (marca .publicado-por-tarrostudio): se saltan scripts, plantillas y base de datos." -ForegroundColor Yellow }
+
 # Funcion helper: copia un archivo o directorio si existe, manteniendo estructura
 $totalCopied = 0
 $totalSkipped = 0
 function Sync-Item {
     param([string]$Rel, [switch]$Recursive)
+
+    if ($propiosDeStudio -and (Es-DeStudio $Rel)) {
+        Write-Host "  [STUDIO] $Rel  (lo publica TarroStudio)" -ForegroundColor DarkYellow
+        $script:totalSkipped++
+        return
+    }
 
     $src = Join-Path $RepoRoot $Rel
     $dst = Join-Path $Destino $Rel
