@@ -403,3 +403,13 @@ Medido el 2026-11-06 con una búsqueda de quién usa cada script migrado. Nada d
 2. Mudar el Drive de `Studio\Tarrobot` a `Studio\Tools\<Herramienta>\` (cambia la ruta que abre el estudio: se hace con el estudio al lado y `publicar-todo.ps1`).
 3. Borrar del canal los scripts de la lista de arriba, ajustar los drivers de `.cache/gen_tarroshort*.py`, y reescribir las secciones de CLAUDE.md y los docs que nombran esos scripts (unos 10 a 18 archivos).
 4. Resolver `tarrobot.py` y archivar el repo TarroOBS con una nota que redirija a TarroStudio.
+
+## Fase 5: hecha en el canal (2026-11-06, a la espera de merge); el Drive no se movió
+
+- **Qué se hizo, a pedido de Luis para separar los chats:** el canal dejó de contener código de herramientas. Se quitaron 18 scripts, `scripts/connectors/`, `installers/tarrobot-studio/`, `Iniciar-TarroBot.bat` y el handoff viejo (el historial se copió a `TarroStudio/docs/HISTORIAL-tarrobot-studio-2026-05.md`). Verificado antes de borrar que cada uno vive en TarroStudio o TarroDL. Las 10 pruebas del canal siguen verdes y todos los scripts restantes compilan.
+- **Qué se quedó:** `tarrobot.py` (lo importan `branding_tarrobot`, `youtube_propuesta` y el reparto de branding), `capture-slides.py`, `_studio_layout.py`, y las plantillas, recetas, melodías y base de datos que `tarrobot.py` necesita.
+- **`sync-tarrobot-to-drive.ps1` reescrito:** solo datos del canal (producción por episodio, pautas, melodías, shorts MP4, branding, modus operandi). Ya no hay guarda por marca porque ya no copia scripts; avisa si falta la marca `.publicado-por-tarrostudio`. Probado con `-DryRun` contra una carpeta temporal, con y sin marca.
+- **Error mío corregido de paso:** la guarda del PR 14 tenía `studio\templates` y `data\tarrobot-database.json` con un tabulador en vez de la barra (el escape `\t` de mi parche), así que solo protegía `scripts\*` y `obs-aliases`. Nunca se llegó a correr el sync entre el merge y esta corrección.
+- **TarroOBS:** HANDOFF con aviso de archivado que redirige a TarroStudio (`main`, `ff7e6ca`). El repo en GitHub no se archivó (queda para cuando Luis quiera).
+- **Lo que NO se hizo:** mudar el Drive a `Studio\Tools\<Herramienta>\` (cambiaría la ruta que abre el estudio y no se puede probar desde el PC de edición), `publicar-todo.ps1`, y decidir el destino final de `tarrobot.py`. El instalador de Windows (`install.bat`, `build-package.ps1`) ahora vive solo en TarroStudio; el ZIP que ya está en el Drive no cambia.
+- **Los .cache/gen_tarroshort*.py** (gitignored) siguen importando los scripts de `scripts/`: hay que apuntarlos a TarroDL (ruta en CLAUDE.md) antes de volver a usarlos.

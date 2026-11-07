@@ -2,6 +2,10 @@
 
 > Estado de sesión a sesión. **Leer ANTES de cualquier acción**, después `CLAUDE.md`, `docs/modus-operandi/flujo-rankings.md` (recetas y trampas) y los docs del escenario.
 
+## Aviso (2026-11-06): las herramientas ya no viven en este repo
+
+TarroDL, TarroStudio, TarroBot y TarroLauncher tienen repo propio en `D:\Recursos Retrotarros\TarroTools\` (ver la tabla en `CLAUDE.md` y `docs/tarrobot/plan-separacion-tarrobot-studio.md`). **Trabajo sobre una herramienta = sesión aparte en su repo.** Este repo es solo contenido. Quedan aquí `tarrobot.py`, `capture-slides.py` y `_studio_layout.py`. El sync `sync-tarrobot-to-drive.ps1` lleva solo datos; el panel se publica con `publicar-en-drive.ps1` de TarroStudio.
+
 ## Estado actual (2026-10-21)
 
 **Hecho en la última tanda (todo pusheado salvo lo indicado):**

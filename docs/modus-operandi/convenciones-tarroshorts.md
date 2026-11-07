@@ -128,7 +128,7 @@ Acordado con Luis (2026-06-17):
 
 ## Render y sync
 
-- **Render MP4:** `python scripts/tarroshort_render.py <slug> --render` → `studio/shorts/<slug>.mp4` (gitignored, va al Drive por sync). TarroBot narra con edge-tts es-CL-CatalinaNeural.
+- **Render MP4:** `python "D:\Recursos Retrotarros\TarroTools\TarroDL\tarrodl_taller\shorts\tarroshort_render.py" <slug> --render` (el script vive en TarroDL desde 2026-11-06) → `studio/shorts/<slug>.mp4` (gitignored, va al Drive por sync). TarroBot narra con edge-tts es-CL-CatalinaNeural.
 - **Texto hablado con tildes (`data-say`):** el display va SIN tildes (regla del canal), el hablado va aparte CON tildes y pausas para que el TTS pronuncie bien. Ver `CLAUDE.md` sección "TarroShorts de DATOS".
 - **Re-render = limpiar audio:** si cambian los textos hablados, borrar `studio/shorts/audio/<slug>/` antes de re-rendir o queda la voz vieja.
 - **Sync al Drive:** `scripts/sync-tarrobot-to-drive.ps1` (sube el short MP4 + HTML a `G:\Mi unidad\Studio\tarrobot`). Ver `CLAUDE.md` sección "Workflow obligatorio al cerrar cambios".
@@ -140,7 +140,7 @@ Dos bugs reales encontrados por Luis mirando el MP4 final de `tarroshort-master-
 1. **Se filtraba la intro entre escenas.** Apareció la intro completa (TarroBot + título) tapando el arranque de la escena del item 1. Causa: cada escena se graba en un browser context nuevo que carga la página desde cero (arranca siempre en el slide intro por default) y recién después el script cambia al slide correcto vía JS; ese cambio depende de que carguen las Google Fonts por red, con timing variable. El recorte fijo de 1s (`LOOP_TRIM_START`) a veces no alcanzaba a saltarse ese arranque, y el loop final quedaba "contaminado" con el frame de la intro.
 2. **Glitch/estática en el frame exacto del corte hacia la siguiente escena** (se vio en la transición hacia el cierre). Causa: el concat final usaba `-c copy` para pegar streams h264 codificados por separado en procesos distintos; si los límites de GOP/keyframe no calzan exactamente, ffmpeg no tira error pero deja un frame corrupto justo en el corte.
 
-**Fix en `scripts/tarroshort_render.py`:** `LOOP_TRIM_START` subido de 1.0s a 2.5s y `REC_SECONDS` de 4.5s a 6.0s (más margen antes de usar el loop); el concat final ahora **siempre re-encodea** (se sacó el intento de `-c copy`). Afecta a cualquier TarroShort, no solo a los de precios SEGA.
+**Fix en `tarroshort_render.py` (hoy en TarroDL):** `LOOP_TRIM_START` subido de 1.0s a 2.5s y `REC_SECONDS` de 4.5s a 6.0s (más margen antes de usar el loop); el concat final ahora **siempre re-encodea** (se sacó el intento de `-c copy`). Afecta a cualquier TarroShort, no solo a los de precios SEGA.
 
 **REGLA de verificación (obligatoria desde ahora):** un short nuevo o re-renderizado NO se da por bueno solo con capturas de pantalla del navegador (`mcp__Claude_Browser` verifica el HTML/CSS, no el pipeline de grabación). Antes de avisar a Luis que un MP4 está listo, revisar el **video real** frame por frame:
 ```bash

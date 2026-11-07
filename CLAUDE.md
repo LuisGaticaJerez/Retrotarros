@@ -20,13 +20,29 @@ Todo el material Retrotarros vive bajo `D:\Recursos Retrotarros\`:
 
 **El repo NO está más en OneDrive.** El backup es GitHub (`master` siempre pusheado). No buscar el repo en `C:\Users\Balbr\OneDrive\Documentos\GitHub\Retrotarros\` — esa ubicación queda obsoleta.
 
+## Herramientas del canal: viven en repos propios (separación, 2026-11-06)
+
+El código de las herramientas ya NO está en este repo; este repo es solo contenido (pautas, HTML del estudio, docs, datos, generadores de decks/reseñas). Cada herramienta tiene su repo en `D:\Recursos Retrotarros\TarroTools\` y su propio `HANDOFF.md`: **el trabajo sobre una herramienta se hace en su repo, en una sesión aparte**.
+
+| Herramienta | Repo (GitHub, privado) | Qué es |
+|---|---|---|
+| **TarroDL** | `TarroTools\TarroDL` | Descargador, clips B-roll, **TarroTeaser**, **TarroShort** y **CapCut Ready**. |
+| **TarroStudio** | `TarroTools\TarroStudio` | Panel de streaming: OBS, chat, recetas, cola de pauta. Hoy contiene el TarroBot del panel (`tarrobot-live.py`). Se publica al Drive con su `publicar-en-drive.ps1`. |
+| **TarroBot** | `TarroTools\TarroBot` | La mascota como herramienta propia: hablar en pantalla, exportar MP3, grabar video con un texto. |
+| **TarroLauncher** | `TarroTools\TarroLauncher` | Ventana que abre y revisa las demás. |
+| TarroOBS | `TarroTools\TarroOBS` | Archivado: su código quedó dentro de TarroStudio. |
+
+Plan completo, contrato entre herramientas y estado: `docs/tarrobot/plan-separacion-tarrobot-studio.md`. Se quedan aquí: `scripts/tarrobot.py` (núcleo que usan `branding_tarrobot`, `youtube_propuesta` y el reparto de branding), `capture-slides.py` y `_studio_layout.py` (los usan los generadores de decks), y las plantillas, recetas y base de datos de TarroBot mientras `tarrobot.py` siga aquí. **No crear scripts de herramientas en este repo.**
+
 ## TarroTeaser — generador automático de teasers
 
 **Comando atajo:** cuando Luis dice **"hacé el teaser con el tarroteaser"** o **"corré el tarroteaser"**, esto significa ejecutar:
 
 ```bash
-python scripts/tarroteaser.py <ruta-al-video-master.mp4> --slug <slug-del-episodio>
+python "D:\Recursos Retrotarros\TarroTools\TarroDL\tarrodl_taller\teaser\tarroteaser.py" <ruta-al-video-master.mp4> --slug <slug-del-episodio>
 ```
+
+(Desde 2026-11-06 el script vive en TarroDL; también se usa desde su pestaña TARROTEASER.)
 
 **Qué hace:** genera un teaser CRUDO vertical 1080×1920 con 5 cortes concatenados:
 1. **Inicio divertido** del primer tercio del video
@@ -59,7 +75,7 @@ Output: `D:\Recursos Retrotarros\Drive\Studio\<slug>\teasers\<slug>-tarroteaser-
 - ffmpeg para corte + vertical 1080×1920 con blur background
 - Sin OpenAI API, sin internet (Whisper corre local)
 
-**Script complementario:** `scripts/generate-teaser.py` es la versión "todo incluido" (overlays, intro, outro VHS card, música 8 Bits Rock, trivia card). Queda como backup para cuando quieras un teaser completo sin editar. TarroTeaser es la opción por defecto.
+**Script complementario:** `generate-teaser.py` (hoy en el repo de TarroStudio, `scripts/`) es la versión "todo incluido" (overlays, intro, outro VHS card, música 8 Bits Rock, trivia card). Queda como backup para cuando quieras un teaser completo sin editar. TarroTeaser es la opción por defecto.
 
 ## Qué es esto
 
@@ -353,7 +369,7 @@ Cualquier sesión que modifique HTMLs / imágenes / box arts / pautas / discusio
 2. **Regenerar capturas** (si tocaste HTMLs) — `python scripts/capture-slides.py <slug>` para CADA HTML nuevo/modificado. Episodio nuevo SIEMPRE genera capturas antes de sincronizar.
 3. **Sync a Drive — LOS DOS scripts, SIEMPRE (regla de Luis 2026-06-07):**
    - **`scripts/sync-to-drive.ps1`** → `G:\Mi unidad\Studio\<slug>\` (HTML + img + **capturas** por episodio) + `Studio\pautas\*.docx` (pauta y discusión convertidas con pandoc). **Este es el que usa el PC de grabación.** Es el que mas se me olvida — NUNCA saltarlo al cerrar un episodio.
-   - **`scripts/sync-tarrobot-to-drive.ps1`** → `G:\Mi unidad\Studio\tarrobot\` (la app TarroBot: scripts + HTMLs + JSON + shorts MP4 + branding).
+   - **`scripts/sync-tarrobot-to-drive.ps1`** → `G:\Mi unidad\Studio\tarrobot\` (SOLO datos del canal: HTML de producción, pautas JSON, melodías, shorts MP4, branding, modus operandi). Desde 2026-11-06 ya no copia scripts, plantillas ni base de datos: **TarroStudio** los publica desde su repo con `publicar-en-drive.ps1` (deja la marca `.publicado-por-tarrostudio`). Correr los dos cuando cambie algo de cada lado.
    - **Modo rapido (2026-10-21):** para uno o dos episodios usar `sync-to-drive.ps1 -Episodios <slug>,<slug>` (~6 s) y `sync-tarrobot-to-drive.ps1 -Rapido` (~2 s). El barrido completo (~10 min) queda para cambios masivos, TarroDL, shorts MP4 o el instalador. Detalle en `docs/modus-operandi/flujo-rankings.md`.
    - Correr AMBOS. El primero es el critico para que Luis pueda grabar; el segundo para la app/estudio TarroBot.
 4. **Avisar a Luis** del SHA del último commit + qué cambió.
@@ -510,13 +526,13 @@ El episodio de precios SIEMPRE se arma en tres bloques, igual que `snes-top-prec
 
 Lane nueva de shorts conducidos por **TarroBot** (mascota) sobre un **tema curioso libre** (no atado a la colección): presenta el tema, suelta 5 datos y reacciona al gameplay en cada TarroVisión (placeholder para CapCut). Distinto a los TarroShorts derivados de episodios y a los guiones narrados por Luis (`docs/canal/guiones-shorts.md`).
 
-- **Generador:** `scripts/tarroshort_datos.py` (`generar_short_datos(data, slug)`), clona `_template-tarroshort.html`.
+- **Generador:** `tarroshort_datos.py` (`generar_short_datos(data, slug)`), hoy en `TarroTools\TarroDL\tarrodl_taller\shorts\`; desde un driver, `sys.path.insert(0, r"D:\Recursos Retrotarros\TarroTools\TarroDL\tarrodl_taller\shorts")` y `from tarroshort_datos import generar_short_datos`. Clona `_template-tarroshort.html`.
 - **Flag `modo`:** `"countdown"` (ranking #5→#1, rank-badge) o `"lista"` (5 datos con etiqueta `DATO N`).
 - **Salidas:** `studio/tarroshort-<slug>.html` + `studio/shorts/guion-<slug>.txt` (líneas habladas de TarroBot para el TTS).
 - **Investigación curada acá** (no LLM en estudio): el driver `.cache/gen_tarroshorts_batch.py` lleva los datos a mano. Tono **dato + reacción meme**.
 - Slug siempre con prefijo `datos-` (ej. `datos-zelda-feos`). El gameplay va en la TarroVisión vacía en CapCut.
 - **Intro (regla):** toda intro arranca diciendo **"Soy TarroBot de Retrotarros"** y es **corta**.
-- **Display vs hablado (`data-say`):** el texto en **pantalla va SIN tildes** (regla del canal). El texto **hablado va aparte** en los campos `saludo_say` / `say` / `sub_say` **CON tildes y pausas** (comas y `...`), para que el TTS pronuncie bien el español y deje un beat antes/después de los **nombres en inglés**. El render (`tarroshort_render.py`) lee `data-say` si existe, si no, el `textContent`. Las tildes solo viven dentro de `data-say` (no son visibles).
+- **Display vs hablado (`data-say`):** el texto en **pantalla va SIN tildes** (regla del canal). El texto **hablado va aparte** en los campos `saludo_say` / `say` / `sub_say` **CON tildes y pausas** (comas y `...`), para que el TTS pronuncie bien el español y deje un beat antes/después de los **nombres en inglés**. El render (`tarroshort_render.py`, en TarroDL) lee `data-say` si existe, si no, el `textContent`. Las tildes solo viven dentro de `data-say` (no son visibles).
 - **Re-render = limpiar audio:** el render reutiliza los MP3 por escena. Si cambian los textos hablados, borrar `studio/shorts/audio/tarroshort-<slug>/` antes de re-rendir, o quedará la voz vieja.
 - **Gotcha pronunciación (es-CL-CatalinaNeural):** una palabra **española pegada a una inglesa** puede salir anglicada (ej. "Matrix jugable" → "jugable" en inglés). Fix en el `say`: separar con coma/pausa o **reescribir** evitando el roce (ej. "meterte dentro de Matrix"). El display no se toca. Misma idea para cualquier palabra ES que suene rara junto a EN.
 
@@ -524,11 +540,11 @@ Lane nueva de shorts conducidos por **TarroBot** (mascota) sobre un **tema curio
 
 > **Estilo VIGENTE de los shorts:** ver `docs/modus-operandi/convenciones-tarroshorts.md` ANTES de crear/editar uno. Ahí está el molde actual (`item-tag` en vez del viejo `rank-badge`, box arts con padding-hack, letras grandes, teaser vs top directo). No copiar un short antiguo sin revisar ese doc — el molde mejoró en el tiempo.
 
-`scripts/tarroshort_render.py` arma el MP4 vertical donde TarroBot presenta y comenta (voz edge-tts es-CL-CatalinaNeural +12Hz). Reacciones CON tildes (TTS). Bajo 60s.
+`tarroshort_render.py` (en `TarroTools\TarroDL\tarrodl_taller\shorts\`, o la pestaña TARROSHORT de TarroDL) arma el MP4 vertical donde TarroBot presenta y comenta (voz edge-tts es-CL-CatalinaNeural +12Hz). Reacciones CON tildes (TTS). Bajo 60s.
 
 - **Tops** (mundial/precios): `construir_desde_pauta(<slug>)` desde el JSON `studio/pautas/<slug>.tarrobot.json` (#10→#1, muestra los primeros y teasea el resto al canal).
 - **Colección**: short curado con **uno de cada categoría** (decisión Luis para n64-coleccion). Driver curado en `.cache/` que arma el HTML del short con `_template-tarroshort.html` + reacciones manuales en `studio/shorts/highlights/<slug>.json`.
-- Render: `python scripts/tarroshort_render.py tarroshort-<slug>`. Output `studio/shorts/tarroshort-<slug>.mp4` (gitignored, va al Drive por sync).
+- Render: `python "D:\Recursos Retrotarros\TarroTools\TarroDL\tarrodl_taller\shorts\tarroshort_render.py" tarroshort-<slug>` (con `RETROTARROS_STUDIO_ROOT` apuntando a `studio\` de este repo). Output `studio/shorts/tarroshort-<slug>.mp4` (gitignored, va al Drive por sync).
 - El short deja un cuadro vacío (placeholder) para montar gameplay encima en CapCut — no trae box ni gameplay embebido.
 
 ## Fuente de verdad de la colección (GameEye)
@@ -545,7 +561,7 @@ El Bash sandbox bloquea here-strings con rutas del sistema (`G:\Mi`, `D:\Recurso
 printf '%s\n' "titulo" "" "linea cuerpo" > .git/COMMIT_EDITMSG_TMP.txt && git commit -F .git/COMMIT_EDITMSG_TMP.txt && rm -f .git/COMMIT_EDITMSG_TMP.txt
 ```
 - **Sin** `Co-Authored-By` ni firmas automatizadas en commits del canal.
-- Sync del estudio TarroBot: `scripts/sync-tarrobot-to-drive.ps1` (sube scripts + HTMLs + pautas + shorts MP4 + branding a `G:\Mi unidad\Studio\tarrobot`). Distinto de `sync-to-drive.ps1` (pautas DOCX).
+- Sync del estudio TarroBot: `scripts/sync-tarrobot-to-drive.ps1` (sube HTMLs + pautas + shorts MP4 + branding a `G:\Mi unidad\Studio\tarrobot`; los scripts del panel los publica TarroStudio). Distinto de `sync-to-drive.ps1` (pautas DOCX).
 - `Remove-Item` inline con rutas del sistema también se bloquea → borrar con `python -c "import glob,os; ..."` o desde un `.ps1`.
 
 ## Cómo arrancar una sesión

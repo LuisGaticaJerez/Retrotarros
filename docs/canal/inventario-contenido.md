@@ -208,7 +208,7 @@ Curiosidades históricas (Luis solo) y batería/performance (Koko solo). Documen
 
 ### TarroTeaser (no es contenido final, es insumo de edición)
 
-`scripts/tarroteaser.py` corta un teaser crudo del video master para editar en CapCut. No
+`tarroteaser.py` (en TarroDL, `tarrodl_taller/teaser/`) corta un teaser crudo del video master para editar en CapCut. No
 se publica tal cual.
 
 ---
