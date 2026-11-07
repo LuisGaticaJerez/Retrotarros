@@ -384,3 +384,22 @@ Las 11 de la sección 1. Las más urgentes son la 1 (TarroDL con módulos opcion
 - **Pendiente:** `generate-teaser.py` no se copió a TarroDL (sí viaja en el puente de TarroStudio); falta la prueba del teaser con Whisper real sobre un master tuyo; los drivers de `.cache/gen_tarroshort*.py` siguen apuntando a los scripts del canal (se ajustan al recorte, fase 5).
 - **Fase 0 parcial:** foto base del espejo del Drive y foto de las 102 rutas del panel en la carpeta de notas de la sesión; la prueba de desfase de `_studio_layout.py` está en el canal (`scripts/test_studio_layout_copias.py`) y ya busca la copia nueva en `tarrodl_taller/`.
 - **Siguiente:** prueba de 10 minutos en el PC de grabación con la publicación de TarroStudio (el "hecho cuando" de la fase 3), crear los repos en GitHub y subir (con tu dale), y luego la fase 4 (TarroBot sale de TarroStudio, con el contrato HTTP y WebSocket y los botones de teaser, short y CapCut llamando a TarroDL).
+- **Costura con TarroBot (2026-11-06, TarroStudio `main`, commit `262a9a3`, subido):** `scripts/bot_cliente.py`. Decir, dictar y leer los fijados de Studio pasan por `bot.decir(...)`; con `TARROSTUDIO_BOT=local` (por defecto) es la función de voz de siempre, con `TARROSTUDIO_BOT=remoto` es `POST /api/decir` a TarroBot por su archivo de ejecución (502 si no está abierto). 62 pruebas verdes. **Cortar el proceso pasa a ser casi solo cambiar esa variable**, pero quedan tres cosas que solo se miden en el estudio: el acuse de `por-hablar` entre procesos, el `audio_url` relativo al puerto de TarroBot y `respond` (que aún razona con el LLM dentro de Studio). **No se publicó al Drive**: el estudio sigue con la versión de las 32 piezas anteriores.
+- **`edge-tts` en el instalador (2026-11-06):** `installers/tarrobot-studio/requirements.txt` pasó de `>=7.0` a `>=7.3.1`. En el PC de edición ya está la 7.3.1.
+
+## Plan de recorte del canal (fase 5, a la espera de tu dale por herramienta)
+
+Medido el 2026-11-06 con una búsqueda de quién usa cada script migrado. Nada de esto se ha tocado.
+
+**Se pueden quitar del canal cuando se reescriba el sync** (solo los nombra `sync-tarrobot-to-drive.ps1`, o nadie): `auto_respond`, `capcut_ready`, `generate-teaser`, `llm_resolver`, `message_store`, `obs_controller`, `obs_healthcheck`, `obs_recorder`, `obs_setup`, `social_manager`, `tarrobot-live`, `tarrobot-probar-voces`, `tarrobot-tray`, `tarroshort_jobs`, `tarroshort_render`, `tarroshort_datos`, `tarroteaser`, `teaser_jobs`, y `scripts/connectors/` (solo lo usa el panel). Los dueños quedan en TarroStudio y TarroDL.
+
+**No se pueden quitar tal cual** (otros scripts del canal los importan):
+- `capture-slides.py`: lo usan `top_deck`, `retronota_deck`, `sync-to-drive` y es la regla de capturas de todo el canal. Se queda en el canal.
+- `_studio_layout.py`: lo usan `top_deck` y dos pruebas. Se queda; la prueba de desfase vigila las copias.
+- `tarrobot.py`: lo usan `branding_tarrobot`, `youtube_propuesta`, `distribuir-branding-drive` y `sync-to-drive`. Antes de quitarlo hay que decidir si esos cuatro importan el de TarroBot o si se queda como núcleo compartido.
+
+**Orden propuesto, con tu dale en cada paso:**
+1. Reescribir `sync-tarrobot-to-drive.ps1` para que solo lleve datos del canal (pautas JSON, recetas, base de datos, shorts MP4, branding) y deje de copiar scripts. La guarda por marca ya hace casi eso hoy.
+2. Mudar el Drive de `Studio\Tarrobot` a `Studio\Tools\<Herramienta>\` (cambia la ruta que abre el estudio: se hace con el estudio al lado y `publicar-todo.ps1`).
+3. Borrar del canal los scripts de la lista de arriba, ajustar los drivers de `.cache/gen_tarroshort*.py`, y reescribir las secciones de CLAUDE.md y los docs que nombran esos scripts (unos 10 a 18 archivos).
+4. Resolver `tarrobot.py` y archivar el repo TarroOBS con una nota que redirija a TarroStudio.
