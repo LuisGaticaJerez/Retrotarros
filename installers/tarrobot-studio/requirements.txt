@@ -1,7 +1,7 @@
 fastapi>=0.110
 uvicorn[standard]>=0.27
 jinja2>=3.1
-edge-tts>=7.0
+edge-tts>=7.3.1
 anthropic>=0.39
 openai-whisper>=20240930
 mutagen>=1.47
