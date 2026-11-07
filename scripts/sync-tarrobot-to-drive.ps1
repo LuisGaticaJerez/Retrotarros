@@ -8,27 +8,18 @@
 #   .\scripts\sync-tarrobot-to-drive.ps1 -Destino "G:\Mi unidad\Studio\tarrobot"
 #   .\scripts\sync-tarrobot-to-drive.ps1 -DryRun        (solo muestra que copiaria)
 #
-# Que sincroniza:
-#   - scripts/tarrobot.py
-#   - scripts/tarrobot-live.py
-#   - scripts/tarrobot-tray.py
-#   - scripts Sprint 17-18 (TarroTeaser + OBS Assistant + CapCut Ready)
-#   - studio/templates/_template-tarrobot-live.html
-#   - studio/templates/_template-tarrobot-control.html
-#   - studio/templates/_template-tarrobot-slide.html  (si existe)
-#   - (2026-07-23: studio/*.html, img/ y captures/ de episodios DEJARON de
-#     sincronizarse aca -- TarroBot ya no mantiene su propia copia del
-#     contenido de estudio. Ese contenido vive en G:\Mi unidad\Studio\ y se
-#     lee via RETROTARROS_STUDIO_ROOT, poblado por scripts/sync-to-drive.ps1)
+# Que sincroniza (SOLO datos del canal; desde la fase 5 de la separacion, 2026-11-06):
+#   - carpetas de produccion por episodio: <slug>.html y gameboxes (Studio\<slug>\)
 #   - studio/pautas/*.tarrobot.json + audio/*
 #   - studio/melodias/* (.mid, .midi, soundfont.sf2 si existe)
-#   - studio/shorts/tarroshort-*.mp4 (shorts finales · fix 2026-06-03; NO la carpeta audio/)
-#   - studio/branding/* (kit visual de TarroBot para redes · fix 2026-06-03)
-#   - data/tarrobot-database.json
+#   - studio/shorts/tarroshort-*.mp4 (shorts finales; NO la carpeta audio/)
+#   - studio/branding/poleras -> Imagenes retrotarros\Branding\Poleras
+#   - docs/modus-operandi -> Studio\_modus-operandi (respaldo)
 #
-# Que NO sincroniza:
+# Que NO sincroniza (lo publica cada herramienta desde su propio repo):
+#   - scripts, plantillas, recetas y base de datos de TarroBot: TarroStudio (publicar-en-drive.ps1)
+#   - el instalador del estudio: vive en el repo de TarroStudio
 #   - .venv, .git, videos master, capturas
-#   - El instalador del estudio (ese se distribuye solo la primera vez)
 
 param(
     [string]$Destino = "G:\Mi unidad\Studio\tarrobot",
@@ -50,7 +41,7 @@ $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $RepoRoot = (Resolve-Path (Join-Path $ScriptRoot "..")).Path
 
 Write-Host "============================================================" -ForegroundColor Cyan
-Write-Host "  TarroBot -> Drive sync" -ForegroundColor Cyan
+Write-Host "  Canal -> Drive (datos del canal)" -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Repo origen: $RepoRoot" -ForegroundColor Gray
@@ -73,27 +64,18 @@ if (-not $DryRun) {
     }
 }
 
-# TarroStudio (repo propio, D:\Recursos Retrotarros\TarroTools\TarroStudio) publica con su propio publicar-en-drive.ps1 los
-# scripts, plantillas y la base de datos de TarroBot, y deja la marca .publicado-por-tarrostudio en el destino. Si la marca
-# existe, este script NO los pisa con su copia vieja (lo que sigue sincronizando son los datos del canal: pautas, shorts, etc.).
-$propiosDeStudio = Test-Path (Join-Path $Destino ".publicado-por-tarrostudio")
-function Es-DeStudio([string]$Rel) {
-    return ($Rel -like "scripts\*") -or ($Rel -like "studio	emplates\_template-tarrobot*") -or ($Rel -like "studio	emplates\_template-tarroshort*") -or
-           ($Rel -in @("studio\obs-aliases.json", "studio	arrobot-recetas.json", "data	arrobot-database.json"))
+# Los scripts, plantillas y la base de datos de TarroBot los publica TarroStudio (D:\Recursos Retrotarros\TarroTools\TarroStudio,
+# publicar-en-drive.ps1), que deja la marca .publicado-por-tarrostudio. Este script ya no los copia.
+if (-not (Test-Path (Join-Path $Destino ".publicado-por-tarrostudio"))) {
+    Write-Host "[AVISO] No hay marca .publicado-por-tarrostudio en el destino: TarroStudio todavia no se publico aqui." -ForegroundColor Yellow
+    Write-Host "        Este script solo lleva datos del canal; el panel se publica desde el repo de TarroStudio." -ForegroundColor Yellow
 }
-if ($propiosDeStudio) { Write-Host "TarroStudio publica sus propios archivos (marca .publicado-por-tarrostudio): se saltan scripts, plantillas y base de datos." -ForegroundColor Yellow }
 
 # Funcion helper: copia un archivo o directorio si existe, manteniendo estructura
 $totalCopied = 0
 $totalSkipped = 0
 function Sync-Item {
     param([string]$Rel, [switch]$Recursive)
-
-    if ($propiosDeStudio -and (Es-DeStudio $Rel)) {
-        Write-Host "  [STUDIO] $Rel  (lo publica TarroStudio)" -ForegroundColor DarkYellow
-        $script:totalSkipped++
-        return
-    }
 
     $src = Join-Path $RepoRoot $Rel
     $dst = Join-Path $Destino $Rel
@@ -126,46 +108,7 @@ function Sync-Item {
     $script:totalCopied++
 }
 
-# 1. Scripts Python de TarroBot
-Write-Host "Scripts:" -ForegroundColor Cyan
-Sync-Item "scripts\tarrobot.py"
-Sync-Item "scripts\tarrobot-live.py"
-Sync-Item "scripts\tarrobot-tray.py"
-Sync-Item "scripts\obs_controller.py"
-# Sprint 13: modulo social (chat multi-plataforma Twitch/Discord/YouTube)
-Sync-Item "scripts\message_store.py"
-Sync-Item "scripts\social_manager.py"
-Sync-Item "scripts\connectors" -Recursive
-# Sprint 15: resolver LLM (pauta enriquecida + cache local + telemetria + modo barato)
-Sync-Item "scripts\llm_resolver.py"
-# Sprint 16: auto-respond toggle (modulo dedicado con config persistida)
-Sync-Item "scripts\auto_respond.py"
-# Sprint 17: TarroTeaser + job manager + utilidades de captura (Retrotarros Studio Suite)
-Sync-Item "scripts\tarroteaser.py"
-Sync-Item "scripts\teaser_jobs.py"
-Sync-Item "scripts\generate-teaser.py"
-Sync-Item "scripts\capture-slides.py"
-Sync-Item "scripts\_studio_layout.py"
-# Sprint 18: OBS healthcheck + auto-setup + auto-record + lower-thirds + CapCut Ready
-Sync-Item "scripts\obs_healthcheck.py"
-Sync-Item "scripts\obs_setup.py"
-Sync-Item "scripts\obs_recorder.py"
-Sync-Item "scripts\capcut_ready.py"
-# Sprint 19: TarroShort (MP4 vertical para redes con TarroBot leyendo)
-Sync-Item "scripts\tarroshort_render.py"
-Sync-Item "scripts\tarroshort_jobs.py"
-Write-Host ""
-
-# 2. Templates HTML
-Write-Host "Templates:" -ForegroundColor Cyan
-Sync-Item "studio\templates\_template-tarrobot-live.html"
-Sync-Item "studio\templates\_template-tarrobot-control.html"
-Sync-Item "studio\templates\_template-tarrobot-slide.html"
-Sync-Item "studio\obs-aliases.json"
-Sync-Item "studio\tarrobot-recetas.json"
-Write-Host ""
-
-# 2b. CARPETAS DE PRODUCCION por episodio: "G:\Mi unidad\Studio\<slug>\"
+# 1. CARPETAS DE PRODUCCION por episodio: "G:\Mi unidad\Studio\<slug>\"
 # (renombrado de "2d" a "2b" el 2026-07-23 al eliminar los bloques 2b/2b-bis/2c/2c-bis
 # que mirroreaban studio/ completo -- ver spec 2026-07-23-tarrobot-studio-root-split)
 # FIX 2026-06-19 (desfase): estas carpetas (la fuente de produccion de Luis) tenian
@@ -184,7 +127,7 @@ $StudioSrc = Join-Path $RepoRoot "studio"
 $prodOk = 0; $prodSkip = 0
 if ((Test-Path $ProdRoot) -and -not $Rapido) {
     Get-ChildItem $ProdRoot -Directory -ErrorAction SilentlyContinue |
-        Where-Object { $_.Name -notmatch "^(tarrobot|TarroBot-Instalador|pautas|_template)" } |
+        Where-Object { $_.Name -notmatch "^(tarrobot|TarroBot-Instalador|Tools|pautas|_template)" } |
         ForEach-Object {
             $slug    = $_.Name
             $prodDir = $_.FullName
@@ -213,31 +156,17 @@ if ((Test-Path $ProdRoot) -and -not $Rapido) {
 Write-Host "  Produccion actualizada: $prodOk  |  sin HTML fuente: $prodSkip" -ForegroundColor Gray
 Write-Host ""
 
-# 3. DB
-Write-Host "Database:" -ForegroundColor Cyan
-Sync-Item "data\tarrobot-database.json"
-Write-Host ""
-
-# 4. Pautas completas (JSON + audio precargado)
+# 2. Pautas completas (JSON + audio precargado)
 Write-Host "Pautas (JSON + audio):" -ForegroundColor Cyan
 Sync-Item "studio\pautas" -Recursive
 Write-Host ""
 
-# 5. Melodias (MIDIs + soundfont)
+# 3. Melodias (MIDIs + soundfont)
 Write-Host "Melodias (MIDIs + soundfont):" -ForegroundColor Cyan
 if (-not $Rapido) { Sync-Item "studio\melodias" -Recursive }
 Write-Host ""
 
-# 5a. Cache de salida de TarroBot (decks de prueba + TTS cacheado). Es dato propio
-# de la app, no contenido de estudio -- se quedo sin sync desde que Task 6 saco los
-# bloques que mirroreaban studio/ completo (2026-07-23). Sin esto, el sync generico
-# (sync-to-drive.ps1) lo recogia por error como si fuera una categoria de episodios
-# mas en la raiz del Drive (tenia 2 HTML de prueba sueltos ahi).
-Write-Host "Cache de salida TarroBot (TTS + decks de prueba):" -ForegroundColor Cyan
-if (-not $Rapido) { Sync-Item "studio\tarrobot-out" -Recursive }
-Write-Host ""
-
-# 5b. Shorts verticales (MP4 finales de TarroShort). Solo los tarroshort-*.mp4,
+# 4. Shorts verticales (MP4 finales de TarroShort). Solo los tarroshort-*.mp4,
 #     NO la carpeta audio/ (intermedios de render). Fix 2026-06-03.
 Write-Host "Shorts TarroShort (MP4 finales):" -ForegroundColor Cyan
 $shortsDir = Join-Path $RepoRoot "studio\shorts"
@@ -247,7 +176,7 @@ if ((Test-Path $shortsDir) -and -not $Rapido) {
 }
 Write-Host ""
 
-# 5c. Branding -> carpeta CANONICA de imagenes (no duplicar en Studio). Fix 2026-06-10.
+# 5. Branding -> carpeta CANONICA de imagenes (no duplicar en Studio). Fix 2026-06-10.
 #     Va a "G:\Mi unidad\Imagenes retrotarros\Branding\<subcarpeta>" en vez de
 #     Studio\tarrobot\studio\branding (que era el duplicado). Subcarpetas nuevas,
 #     no pisa las manuales de Luis (Avatars, Banners, Logo, Stickers, etc.).
@@ -275,58 +204,7 @@ foreach ($rel in $brandingMap.Keys) {
 }
 Write-Host ""
 
-# 6. Instalador vigente -> carpeta unica en Drive (borra versiones viejas con /MIR)
-# La carpeta Tarrobot\TarroBot-Instalador\ en Drive siempre tiene UN SOLO ZIP: el
-# actual. Asi Luis entra a Tarrobot/ y solo ve el correcto. No hay confusion de
-# versiones.
-# FIX 2026-07-23: vivia como carpeta HERMANA de Tarrobot/ (fuera de ella) para que
-# Luis la encontrara sin navegar adentro. Con la regla de que todo lo propio de
-# TarroBot vive DENTRO de Tarrobot/, se movio adentro (decision de Luis).
-Write-Host "Instalador vigente -> Drive:" -ForegroundColor Cyan
-
-# 6a. LIMPIEZA: el instalador oficial vive en Tarrobot\TarroBot-Instalador\.
-# Cualquier TarroBot-Studio-v*.zip o *Setup*.exe suelto DENTRO de $Destino (raiz o
-# installer\) es legacy de versiones viejas (1.5.1/1.5.2) y confunde. Se borran.
-# Solo toca esos patrones: NO toca install.bat, .venv, desktop.ini ni logs (instalacion real).
-# Fix 2026-06-19: aparecieron zombies 1.5.1/1.5.2 que hicieron creer que la version era vieja.
-if (-not $DryRun) {
-    $zombiePatterns = @("TarroBot-Studio-v*.zip", "TarroBot-Studio-Setup-v*.exe")
-    $zombieDirs = @($Destino, (Join-Path $Destino "installer"))
-    foreach ($zd in $zombieDirs) {
-        if (Test-Path $zd) {
-            foreach ($pat in $zombiePatterns) {
-                Get-ChildItem -Path $zd -Filter $pat -File -ErrorAction SilentlyContinue | ForEach-Object {
-                    Remove-Item -LiteralPath $_.FullName -Force
-                    Write-Host "  [LIMPIEZA] instalador viejo borrado: $($_.Name)" -ForegroundColor Yellow
-                }
-            }
-        }
-    }
-}
-
-$DistDir = Resolve-Path (Join-Path $ScriptRoot "..\installers\tarrobot-studio\dist")
-$InstallerZip = Get-ChildItem -Path $DistDir -Filter "TarroBot-Studio-v*-slim.zip" |
-    Sort-Object Name -Descending | Select-Object -First 1
-if ($InstallerZip -and -not $Rapido) {
-    $InstallerDest = Join-Path $Destino "TarroBot-Instalador"
-    if (-not $DryRun) {
-        if (-not (Test-Path $InstallerDest)) { New-Item -ItemType Directory -Path $InstallerDest -Force | Out-Null }
-        # /MIR: borra todo lo que no sea el ZIP actual (elimina versiones viejas)
-        $tempDir = Join-Path $env:TEMP "tarrobot-installer-sync"
-        if (-not (Test-Path $tempDir)) { New-Item -ItemType Directory -Path $tempDir -Force | Out-Null }
-        Copy-Item $InstallerZip.FullName -Destination $tempDir -Force
-        & robocopy $tempDir $InstallerDest /MIR /NJH /NJS /NDL /NP /NC /NS | Out-Null
-        Remove-Item -Recurse -Force $tempDir
-        Write-Host "  [INSTALL] $($InstallerZip.Name) -> TarroBot-Instalador\" -ForegroundColor Green
-    } else {
-        Write-Host "  [DRY ]   $($InstallerZip.Name) -> TarroBot-Instalador\" -ForegroundColor Yellow
-    }
-} else {
-    Write-Host "  [SKIP]   No se encontro ZIP de instalador en dist\" -ForegroundColor DarkGray
-}
-Write-Host ""
-
-# 6b. Modus operandi + memoria -> carpeta hermana en el Drive (respaldo).
+# 6. Modus operandi + memoria -> carpeta hermana en el Drive (respaldo).
 # La fuente canonica es el repo (docs\modus-operandi\). Esto es el respaldo que Luis
 # pidio para tenerlo aparte, junto al resto del estudio. /MIR: el repo manda, se espeja.
 # NO editar la copia del Drive a mano; se pisa en cada sync.
@@ -344,45 +222,6 @@ if (Test-Path $MoSrc) {
     Write-Host "  [SKIP]   docs\modus-operandi no existe en el repo" -ForegroundColor DarkGray
 }
 Write-Host ""
-
-# 7. .env file con la ruta para que install.bat la sugiera (opcional)
-if (-not $DryRun) {
-    $infoPath = Join-Path $Destino "INSTALL-INFO.txt"
-    @"
-TarroBot - Carpeta sincronizada desde Drive
-============================================
-
-Esta carpeta es un mirror parcial del repo Retrotarros (solo lo que
-TarroBot necesita). La sincroniza Luis con:
-
-  .\scripts\sync-tarrobot-to-drive.ps1
-
-Para usar desde el PC del estudio:
-
-1. Al correr install.bat, en el paso [6/8] "Configurando ubicacion
-   del repo Retrotarros", pega esta ruta:
-
-   $Destino
-
-2. install.bat valida que existan scripts/tarrobot-live.py y
-   data/tarrobot-database.json. Si la estructura quedo bien, queda
-   guardado como RETROTARROS_REPO.
-
-2b. ADEMAS, configura la variable RETROTARROS_STUDIO_ROOT apuntando a
-    la raiz de Studio (el contenido real de episodios/shorts, NO esta
-    carpeta tarrobot). Corre una vez en el PC del estudio:
-
-      setx RETROTARROS_STUDIO_ROOT "$(Split-Path -Parent $Destino)"
-
-    Sin esto, TarroBot no encuentra las capturas/box arts de los
-    episodios (viven en Studio\, no en Studio\tarrobot\).
-
-3. De ahi en adelante, cualquier cambio que Luis haga en su PC y
-   sincronice con este script va a aparecer automatico en el estudio.
-
-Ultima sincronizacion: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
-"@ | Set-Content -Path $infoPath -Encoding UTF8
-}
 
 Write-Host ""
 Write-Host "============================================================" -ForegroundColor Green
