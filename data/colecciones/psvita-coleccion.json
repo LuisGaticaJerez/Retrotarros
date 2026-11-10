@@ -1,0 +1,374 @@
+{
+  "doc_title": "PS Vita · Coleccion completa",
+  "header_tag": "ESTUDIO · PS VITA COLECCION · 91 JUEGOS · GEN 8",
+  "portada": {
+    "tag": "GENERACION 8 · PORTATIL · SONY · 2011-2019",
+    "title_vs": "COLECCION",
+    "title_rest": "PS VITA",
+    "sub": "EL CATALOGO COMPLETO POR GENERO",
+    "count": "91 JUEGOS · 9 CATEGORIAS · 27 JOYAS · OLED"
+  },
+  "categorias": [
+    {
+      "name": "EXCLUSIVOS / ACCION",
+      "count": 19,
+      "juegos": [
+        "Assassin's Creed Chronicles",
+        "Assassin's Creed III: Liberation",
+        "Batman: Arkham Origins Blackgate",
+        "Dragon's Crown",
+        "Freedom Wars",
+        "God Eater 2",
+        "God Eater 2: Rage Burst",
+        "God of War Collection",
+        "Gravity Rush",
+        "J-Stars Victory Vs+",
+        "Jak and Daxter Collection",
+        "Ninja Gaiden Sigma Plus",
+        "One Piece: Unlimited World Red",
+        "Soul Sacrifice",
+        "Touch My Katamari",
+        "Toukiden: Kiwami",
+        "Uncharted: Golden Abyss",
+        "Walking Dead: A Telltale Games Series - The Complete First Season",
+        "Wolf Among Us"
+      ],
+      "joyas": [
+        {
+          "title": "UNCHARTED: GOLDEN ABYSS",
+          "ano": 2011,
+          "editor": "SCE BEND"
+        },
+        {
+          "title": "GRAVITY RUSH",
+          "ano": 2012,
+          "editor": "SCE JAPAN"
+        },
+        {
+          "title": "SOUL SACRIFICE",
+          "ano": 2013,
+          "editor": "SCE"
+        }
+      ]
+    },
+    {
+      "name": "JRPG / RPG",
+      "count": 14,
+      "juegos": [
+        "Borderlands 2",
+        "Criminal Girls: Invite Only",
+        "Danganronpa 2: Goodbye Despair",
+        "Final Fantasy X / X-2 HD Remaster",
+        "God Wars: Future Past",
+        "Hyperdimension Neptunia Re;Birth2: Sisters Generation",
+        "Lost Dimension",
+        "Mind Zero",
+        "Natural Doctrine",
+        "Persona 4 Golden",
+        "Ragnarok Odyssey",
+        "Sword Art Online: Lost Song",
+        "Valhalla Knights 3",
+        "Zero Escape: Virtue's Last Reward"
+      ],
+      "joyas": [
+        {
+          "title": "PERSONA 4 GOLDEN",
+          "ano": 2012,
+          "editor": "ATLUS"
+        },
+        {
+          "title": "FINAL FANTASY X / X-2 HD",
+          "ano": 2013,
+          "editor": "SQUARE ENIX"
+        },
+        {
+          "title": "DANGANRONPA 2",
+          "ano": 2014,
+          "editor": "SPIKE CHUNSOFT"
+        }
+      ]
+    },
+    {
+      "name": "PELEA",
+      "count": 11,
+      "juegos": [
+        "Arcana Heart 3: LOVE MAX!!!!!",
+        "BlazBlue: Chrono Phantasma",
+        "BlazBlue: Continuum Shift Extend",
+        "Dead or Alive 5 Plus",
+        "Dengeki Bunko: Fighting Climax",
+        "Injustice: Gods Among Us - Ultimate Edition",
+        "Mortal Kombat",
+        "PlayStation All-Stars Battle Royale",
+        "Reality Fighters",
+        "Street Fighter X Tekken",
+        "Ultimate Marvel Vs. Capcom 3"
+      ],
+      "joyas": [
+        {
+          "title": "ULTIMATE MARVEL VS. CAPCOM 3",
+          "ano": 2011,
+          "editor": "CAPCOM"
+        },
+        {
+          "title": "MORTAL KOMBAT",
+          "ano": 2012,
+          "editor": "NETHERREALM"
+        },
+        {
+          "title": "STREET FIGHTER X TEKKEN",
+          "ano": 2012,
+          "editor": "CAPCOM"
+        }
+      ]
+    },
+    {
+      "name": "PLATAFORMAS / INDIE",
+      "count": 8,
+      "juegos": [
+        "Child of Light",
+        "LittleBigPlanet PS Vita",
+        "Rayman Legends",
+        "Rayman Origins",
+        "SUPERBEAT: XONiC",
+        "Shantae: Half-Genie Hero [Risky Beats Edition]",
+        "Tearaway",
+        "Terraria"
+      ],
+      "joyas": [
+        {
+          "title": "RAYMAN LEGENDS",
+          "ano": 2013,
+          "editor": "UBISOFT"
+        },
+        {
+          "title": "TEARAWAY",
+          "ano": 2013,
+          "editor": "MEDIA MOLECULE"
+        },
+        {
+          "title": "LITTLEBIGPLANET PS VITA",
+          "ano": 2012,
+          "editor": "SONY"
+        }
+      ]
+    },
+    {
+      "name": "SHOOTER",
+      "count": 6,
+      "juegos": [
+        "Call of Duty: Black Ops Declassified",
+        "Killzone: Mercenary",
+        "Resistance: Burning Skies",
+        "Spy Hunter",
+        "Unit 13",
+        "Velocity 2X: Critical Mass Edition"
+      ],
+      "joyas": [
+        {
+          "title": "KILLZONE: MERCENARY",
+          "ano": 2013,
+          "editor": "GUERRILLA"
+        },
+        {
+          "title": "RESISTANCE: BURNING SKIES",
+          "ano": 2012,
+          "editor": "NIHILISTIC"
+        },
+        {
+          "title": "CALL OF DUTY: BLACK OPS DECLASSIFIED",
+          "ano": 2012,
+          "editor": "NSTUDIOS"
+        }
+      ]
+    },
+    {
+      "name": "CARRERAS",
+      "count": 4,
+      "juegos": [
+        "F1 2011",
+        "ModNation Racers: Road Trip",
+        "Need for Speed: Most Wanted",
+        "Wipeout 2048"
+      ],
+      "joyas": [
+        {
+          "title": "WIPEOUT 2048",
+          "ano": 2012,
+          "editor": "SCE STUDIO LIVERPOOL"
+        },
+        {
+          "title": "NEED FOR SPEED: MOST WANTED",
+          "ano": 2012,
+          "editor": "CRITERION"
+        },
+        {
+          "title": "MODNATION RACERS: ROAD TRIP",
+          "ano": 2012,
+          "editor": "SAN DIEGO"
+        }
+      ]
+    },
+    {
+      "name": "DEPORTES",
+      "count": 6,
+      "juegos": [
+        "Dead or Alive Xtreme 3: Venus",
+        "FIFA 15",
+        "FIFA Soccer",
+        "Hot Shots Golf: World Invitational",
+        "MLB 13: The Show",
+        "Virtua Tennis 4: World Tour Edition"
+      ],
+      "joyas": [
+        {
+          "title": "HOT SHOTS GOLF: WORLD INVITATIONAL",
+          "ano": 2011,
+          "editor": "CLAP HANZ"
+        },
+        {
+          "title": "MLB 13: THE SHOW",
+          "ano": 2013,
+          "editor": "SAN DIEGO"
+        },
+        {
+          "title": "VIRTUA TENNIS 4",
+          "ano": 2012,
+          "editor": "SEGA"
+        }
+      ]
+    },
+    {
+      "name": "LEGO / FAMILIA",
+      "count": 17,
+      "juegos": [
+        "Angry Birds Star Wars",
+        "Disney Infinity: Marvel Super Heroes (2.0 Edition)",
+        "Invizimals: The Alliance",
+        "LEGO Batman 2: DC Super Heroes",
+        "LEGO Batman 3: Beyond Gotham",
+        "LEGO Harry Potter: Years 5-7",
+        "LEGO Jurassic World",
+        "LEGO Marvel Super Heroes: Universe in Peril",
+        "LEGO Marvel's Avengers",
+        "LEGO Movie Videogame",
+        "LEGO Ninjago Nindroids",
+        "LEGO The Hobbit",
+        "LEGO The Lord of the Rings",
+        "Little Deviants",
+        "Michael Jackson The Experience HD",
+        "Minecraft: PlayStation Vita Edition",
+        "Smart as..."
+      ],
+      "joyas": [
+        {
+          "title": "LEGO MARVEL SUPER HEROES",
+          "ano": 2014,
+          "editor": "TT GAMES"
+        },
+        {
+          "title": "MINECRAFT: PS VITA EDITION",
+          "ano": 2014,
+          "editor": "MOJANG"
+        },
+        {
+          "title": "ANGRY BIRDS STAR WARS",
+          "ano": 2013,
+          "editor": "ROVIO"
+        }
+      ]
+    },
+    {
+      "name": "HORROR / SIGILO",
+      "count": 6,
+      "juegos": [
+        "Corpse Party: Blood Drive [EverAfter Edition]",
+        "Metal Gear Solid HD Collection",
+        "Senran Kagura: Estival Versus",
+        "Shinobido 2: Revenge of Zen",
+        "Silent Hill: Book of Memories",
+        "Yomawari: Midnight Shadows"
+      ],
+      "joyas": [
+        {
+          "title": "METAL GEAR SOLID HD COLLECTION",
+          "ano": 2012,
+          "editor": "KONAMI"
+        },
+        {
+          "title": "SILENT HILL: BOOK OF MEMORIES",
+          "ano": 2012,
+          "editor": "KONAMI"
+        },
+        {
+          "title": "YOMAWARI: MIDNIGHT SHADOWS",
+          "ano": 2017,
+          "editor": "NIS"
+        }
+      ]
+    }
+  ],
+  "hardware_titulo": "HARDWARE",
+  "hardware_sub": "LA PORTATIL MAS POTENTE DE SU ERA",
+  "hardware": [
+    {
+      "name": "PS VITA SLIM (PCH-2000)",
+      "tag": "BLANCA · 2013",
+      "color": "mg",
+      "desc": "El modelo Slim con pantalla LCD, mas liviano y con bateria mejorada. La joya portatil del estudio."
+    },
+    {
+      "name": "PANTALLA OLED (FAT)",
+      "tag": "PCH-1000",
+      "color": "cy",
+      "desc": "El primer modelo con OLED: colores que ninguna portatil de su epoca podia igualar."
+    },
+    {
+      "name": "TARJETAS PROPIETARIAS",
+      "tag": "MEMORY CARD",
+      "color": "ye",
+      "desc": "El talon de Aquiles: memorias carisimas y exclusivas. Parte de la historia (y el precio) de la Vita."
+    }
+  ],
+  "balance": {
+    "row1": [
+      {
+        "label": "JUEGOS",
+        "big": "91",
+        "sub": "fisicos en la coleccion",
+        "color": "mg"
+      },
+      {
+        "label": "CATEGORIAS",
+        "big": "9",
+        "sub": "generos cubiertos",
+        "color": "cy"
+      },
+      {
+        "label": "JOYAS",
+        "big": "27",
+        "sub": "destacadas",
+        "color": "ye"
+      }
+    ],
+    "row2": [
+      {
+        "label": "CONSOLA",
+        "big": "VITA",
+        "sub": "la portatil incomprendida",
+        "color": "mg"
+      },
+      {
+        "label": "FUERTE",
+        "big": "JRPG",
+        "sub": "el genero que la salvo",
+        "color": "cy"
+      }
+    ]
+  },
+  "cierre": {
+    "pre": "PROXIMO CAPITULO",
+    "title": "SIGUE LA SAGA",
+    "sub": "Cuentanos cual fue tu juego favorito de PS Vita en los comentarios. Si quieres que cubramos otra consola, deja la sugerencia. Suscribete para no perderte lo que viene."
+  }
+}

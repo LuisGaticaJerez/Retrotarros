@@ -169,3 +169,10 @@
 - **Qué se quedó:** `tarrobot.py` (lo usan branding y propuestas de YouTube), `capture-slides.py` y `_studio_layout.py` (los usan los generadores de decks), y las plantillas, recetas y base de datos de TarroBot que `tarrobot.py` necesita.
 - **Sync:** `sync-tarrobot-to-drive.ps1` pasó a llevar solo datos del canal; el panel se publica con `publicar-en-drive.ps1` de TarroStudio. De paso se corrigió un error de la guarda del PR 14: `studio\templates` y `data\tarrobot-database.json` habían quedado con un tabulador en vez de la barra y no se protegían.
 - **No se movió el Drive** (`Studio\Tarrobot` sigue igual): el estudio no se puede probar desde el PC de edición.
+
+## 2026-11-10 - Gráfica nueva de las colecciones
+- **Decisión de Luis:** aprobó el rediseño visual de las colecciones (maquetas con datos de NES) y dio el dale para implementar el arreglo del generador (Fase 0) y la gráfica nueva (Fase 1). Reforge de colecciones y colecciones nuevas quedan por decidir.
+- **Hallazgo:** `coleccion_deck.py` estaba roto desde el retiro del 2026-10-21: su base era el HTML publicado de N64. Los drivers de N64 y SNES se perdieron (vivían en `.cache/`). Arreglo: base versionada en `studio/templates/_base-coleccion.html` y datos en `data/colecciones/*.json`.
+- **Verificación:** el generador clásico con la base restaurada produce HTML idéntico al del generador original (probado con datos de prueba, NES y N64). El deck de NES publicado ya difería en tamaños de fuente porque la base se ajustó después; no se intentó reproducirlo.
+- **Gráfica nueva:** opt-in con `grafica="nueva"` (`scripts/coleccion_grafica.py`), solo colecciones nuevas o reforjadas. 22 pruebas de HTML y 2 visuales.
+- **Pendiente:** cajas de las joyas (69 entre NES, N64 y SNES) y fotos de hardware; la slide RAREZAS (periféricos) del SNES; el SNES publicado decía "panorama N64" en el cierre (en el JSON quedó "SNES").

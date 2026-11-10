@@ -29,7 +29,7 @@ def _repo() -> Path:
 
 
 REPO = _repo()
-BASE = REPO / "studio" / "colecciones" / "n64-coleccion.html"  # fuente de CSS/JS canonico
+BASE = REPO / "studio" / "templates" / "_base-coleccion.html"  # CSS/JS canonico (versionado; antes vivia en un HTML publicado que se retira)
 
 
 def _dots(label: str, width: int = 44) -> str:
@@ -165,14 +165,14 @@ def _slide_balance(num: int, data: dict) -> str:
         for c in b["row1"])
     row2 = "".join(
         f'<div class="num-card {c["color"]}"><h3>{c["label"]}</h3><span class="big">{c["big"]}</span><p>{c["sub"]}</p></div>'
-        for c in b["row2"])
+        for c in b.get("row2", []))
     return (
         '  <section class="slide">\n'
         f'    <span class="slide-num">{num:02d}</span>\n'
         '    <h1>BALANCE FINAL</h1>\n'
         '    <h2 class="mg">LA COLECCION EN NUMEROS</h2>\n'
         f'    <div class="numbers-grid">{row1}</div>\n'
-        f'    <div class="numbers-grid" style="grid-template-columns:repeat({len(b["row2"])},1fr);max-width:880px;margin-top:18px;">{row2}</div>\n'
+        + (f'    <div class="numbers-grid" style="grid-template-columns:repeat({len(b["row2"])},1fr);max-width:880px;margin-top:18px;">{row2}</div>\n' if b.get("row2") else "") +
         '  </section>'
     )
 
@@ -278,7 +278,22 @@ def _escribir_lista_md(data: dict, out_slug: str) -> Path:
     return out_md
 
 
-def generar_deck(data: dict, out_slug: str) -> Path:
+def generar_deck(data: dict, out_slug: str, out_dir: Path | None = None, lista: bool = True) -> Path:
+    """Genera el deck de una coleccion.
+
+    out_dir: carpeta de salida (por defecto studio/colecciones); lista: escribir tambien
+    docs/descripciones/lista-paneo-<slug>.md. Con los valores por defecto nada cambia
+    respecto del generador de siempre; las pruebas pasan una carpeta temporal y lista=False.
+
+    data["grafica"]: "clasica" (por defecto, HTML identico al de siempre) o "nueva"
+    (scripts/coleccion_grafica.py). Cualquier otro valor lanza ValueError.
+    """
+    marca = data.get("grafica", "clasica")
+    if marca not in ("clasica", "nueva"):
+        raise ValueError(f'data["grafica"] debe ser "clasica" o "nueva", no {marca!r}')
+    if marca == "nueva":
+        import coleccion_grafica as G   # solo con la marca: sin ella el camino es el de siempre
+        return G.generar(data, out_slug, out_dir=out_dir, lista=lista)
     base = BASE.read_text(encoding="utf-8")
     # CSS + head: todo hasta <body>
     head = base[: base.index("<body>") + len("<body>")]
@@ -294,7 +309,8 @@ def generar_deck(data: dict, out_slug: str) -> Path:
     for ci, c in enumerate(cats, start=1):
         slides.append(_slide_paneo(n, ci, total_cats, c["name"], c["count"], ci)); n += 1
         slides.append(_slide_triple(n, c["name"], c["joyas"])); n += 1
-    slides.append(_slide_hardware(n, data)); n += 1
+    if data.get("hardware"):   # SNES se publico sin slide de hardware
+        slides.append(_slide_hardware(n, data)); n += 1
     slides.append(_slide_balance(n, data)); n += 1
     slides.append(_slide_cierre(n, data)); n += 1
 
@@ -313,13 +329,13 @@ def generar_deck(data: dict, out_slug: str) -> Path:
     head = re.sub(r"<title>.*?</title>",
                   f'<title>RETROTARROS · {data["doc_title"]}</title>', head, flags=re.DOTALL)
 
-    out_dir = REPO / "studio" / "colecciones"
+    out_dir = Path(out_dir) if out_dir else REPO / "studio" / "colecciones"
     out_dir.mkdir(parents=True, exist_ok=True)
     out = out_dir / f"{out_slug}.html"
     out.write_text(head + hdr + foot, encoding="utf-8")
 
     # REGLA: cada coleccion genera ademas su lista MD por categoria (consultar/compartir)
-    lista = _escribir_lista_md(data, out_slug)
-    print("LISTA ->", lista)
+    if lista:
+        print("LISTA ->", _escribir_lista_md(data, out_slug))
 
     return out

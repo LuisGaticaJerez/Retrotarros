@@ -1,0 +1,262 @@
+{
+  "doc_title": "N64 · Coleccion completa",
+  "header_tag": "ESTUDIO · N64 COLECCION · 58 JUEGOS · GEN 5",
+  "portada": {
+    "tag": "GENERACION 5 · 64 BITS · NINTENDO · 1996-2002",
+    "title_vs": "COLECCION",
+    "title_rest": "N64",
+    "sub": "EL CATALOGO COMPLETO POR GENERO",
+    "count": "58 JUEGOS · 8 CATEGORIAS · 24 JOYAS · 6 CONSOLAS"
+  },
+  "categorias": [
+    {
+      "name": "FPS",
+      "count": 5,
+      "joyas": [
+        {
+          "title": "GOLDENEYE 007",
+          "ano": 1997,
+          "editor": "RARE"
+        },
+        {
+          "title": "PERFECT DARK",
+          "ano": 2000,
+          "editor": "RARE"
+        },
+        {
+          "title": "TUROK",
+          "ano": 1997,
+          "editor": "IGUANA"
+        }
+      ]
+    },
+    {
+      "name": "ACCION",
+      "count": 6,
+      "joyas": [
+        {
+          "title": "JET FORCE GEMINI",
+          "ano": 1999,
+          "editor": "RARE"
+        },
+        {
+          "title": "BLAST CORPS",
+          "ano": 1997,
+          "editor": "RARE"
+        },
+        {
+          "title": "SW: ROGUE SQUADRON",
+          "ano": 1998,
+          "editor": "FACTOR 5"
+        }
+      ]
+    },
+    {
+      "name": "PLATAFORMAS",
+      "count": 6,
+      "joyas": [
+        {
+          "title": "SUPER MARIO 64",
+          "ano": 1996,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "BANJO-KAZOOIE",
+          "ano": 1998,
+          "editor": "RARE"
+        },
+        {
+          "title": "DONKEY KONG 64",
+          "ano": 1999,
+          "editor": "RARE"
+        }
+      ]
+    },
+    {
+      "name": "AVENTURA / RPG",
+      "count": 3,
+      "joyas": [
+        {
+          "title": "ZELDA: OCARINA OF TIME",
+          "ano": 1998,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "ZELDA: MAJORA'S MASK",
+          "ano": 2000,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "DONALD DUCK: GOIN' QUACKERS",
+          "ano": 2000,
+          "editor": "UBISOFT"
+        }
+      ]
+    },
+    {
+      "name": "CARRERAS",
+      "count": 11,
+      "joyas": [
+        {
+          "title": "MARIO KART 64",
+          "ano": 1996,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "DIDDY KONG RACING",
+          "ano": 1997,
+          "editor": "RARE"
+        },
+        {
+          "title": "F-ZERO X",
+          "ano": 1998,
+          "editor": "NINTENDO"
+        }
+      ]
+    },
+    {
+      "name": "LUCHA",
+      "count": 6,
+      "joyas": [
+        {
+          "title": "SUPER SMASH BROS.",
+          "ano": 1999,
+          "editor": "HAL"
+        },
+        {
+          "title": "KILLER INSTINCT GOLD",
+          "ano": 1996,
+          "editor": "RARE"
+        },
+        {
+          "title": "MORTAL KOMBAT 4",
+          "ano": 1998,
+          "editor": "MIDWAY"
+        }
+      ]
+    },
+    {
+      "name": "DEPORTES",
+      "count": 17,
+      "joyas": [
+        {
+          "title": "1080 SNOWBOARDING",
+          "ano": 1998,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "MARIO TENNIS",
+          "ano": 2000,
+          "editor": "CAMELOT"
+        },
+        {
+          "title": "ISS 2000",
+          "ano": 1999,
+          "editor": "KONAMI"
+        }
+      ]
+    },
+    {
+      "name": "PARTY · PUZZLE · SIM",
+      "count": 4,
+      "joyas": [
+        {
+          "title": "MARIO PARTY 3",
+          "ano": 2001,
+          "editor": "HUDSON"
+        },
+        {
+          "title": "POKEMON STADIUM",
+          "ano": 2000,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "PILOTWINGS 64",
+          "ano": 1996,
+          "editor": "PARADIGM"
+        }
+      ]
+    }
+  ],
+  "hardware_titulo": "HARDWARE",
+  "hardware_sub": "LA COLECCION DE CONSOLAS DEL ESTUDIO",
+  "hardware": [
+    {
+      "name": "NINTENDO 64",
+      "tag": "STANDARD",
+      "color": "mg",
+      "desc": "El gris clasico. La referencia. La del 99% de chilenos. Ahi empezo todo."
+    },
+    {
+      "name": "N64 GOLD",
+      "tag": "CONMEMORATIVA",
+      "color": "ye",
+      "desc": "Edicion dorada de coleccionista. Muy rara en Latam, pieza de orgullo."
+    },
+    {
+      "name": "PIKACHU N64",
+      "tag": "POKEMON · JP/US",
+      "color": "cy",
+      "desc": "Azul + amarillo con Pikachu en relieve. La mas dificil de conseguir fuera de Japon."
+    },
+    {
+      "name": "FUNTASTIC FIRE",
+      "tag": "NARANJA",
+      "color": "mg",
+      "desc": "Linea Funtastic 2000. Plastico semi-transparente naranja fuego."
+    },
+    {
+      "name": "FUNTASTIC GRAPE",
+      "tag": "MORADO",
+      "color": "cy",
+      "desc": "La mas famosa del trio Funtastic. Morado uva translucido."
+    },
+    {
+      "name": "FUNTASTIC ICE",
+      "tag": "AZUL HIELO",
+      "color": "ye",
+      "desc": "Azul translucido. Completa el trio Funtastic principal del estudio."
+    }
+  ],
+  "balance": {
+    "row1": [
+      {
+        "label": "JUEGOS",
+        "big": "58",
+        "sub": "cartuchos en la coleccion",
+        "color": "mg"
+      },
+      {
+        "label": "CATEGORIAS",
+        "big": "8",
+        "sub": "generos cubiertos",
+        "color": "cy"
+      },
+      {
+        "label": "JOYAS",
+        "big": "24",
+        "sub": "destacadas en gameplay",
+        "color": "ye"
+      }
+    ],
+    "row2": [
+      {
+        "label": "CONSOLAS",
+        "big": "6",
+        "sub": "variantes en el estudio",
+        "color": "mg"
+      },
+      {
+        "label": "STUDIOS",
+        "big": "RARE",
+        "sub": "el rey del N64",
+        "color": "cy"
+      }
+    ]
+  },
+  "cierre": {
+    "pre": "PROXIMO CAPITULO",
+    "title": "SIGUE LA SAGA",
+    "sub": "Cuentanos cual fue tu favorita en los comentarios. Si quieres que cubramos otra consola, deja la sugerencia. Suscribete para no perderte lo que viene en el canal."
+  }
+}

@@ -1,7 +1,7 @@
 # Gráfica nueva de las colecciones
 
 **Fecha:** 2026-11-10
-**Estado:** propuesta, pendiente de aprobación de Luis. Solo diseño: no se implementó ni se regeneró ningún episodio.
+**Estado:** diseño aprobado por Luis el 2026-11-10 (viendo las maquetas). Implementadas la Fase 0 y la Fase 1 (ver sección 9); sin push, PR ni sync. No se regeneró ni se tocó ninguna colección publicada.
 **Tamaño:** proyecto (módulo nuevo `scripts/coleccion_grafica.py`, enganches en `scripts/coleccion_deck.py`, pruebas, datos de las colecciones al repo)
 
 Maquetas: [`2026-11-10-colecciones-grafica-mockups/`](2026-11-10-colecciones-grafica-mockups/) (HTML navegable `mock-nes-nueva.html`, capturas 1920x1080 en `capturas/`, comparación con lo de hoy en `antes-nes-mosaico.jpg`, script `mock_coleccion.py` que las arma).
@@ -77,7 +77,7 @@ Detalles de decisión:
 
 ### Pruebas (`scripts/test_coleccion_grafica.py`, sin pytest)
 
-- **Regresión byte a byte:** hash golden del HTML clásico generado con un `DATA` de prueba, con y sin `grafica="clasica"`. Además, como los HTML publicados están en git (`29e93c1^`), se puede comprobar en una carpeta temporal que el generador restaurado reproduce el deck de NES publicado (si no lo reproduce, anoto la diferencia en vez de forzarla).
+- **Regresión byte a byte:** hash golden del HTML clásico generado con un `DATA` de prueba, con y sin `grafica="clasica"`. Además se comprobó una vez que el generador con la base restaurada produce el mismo HTML que el generador original (ver sección 9). El deck de NES publicado no se puede usar de referencia: ya difería en tamaños de fuente porque la base se ajustó después de publicarlo.
 - Con la marca: mosaico, tarjetas, chips; con y sin cajas; categorías de 3 a 9; hardware de 1 a 6 equipos; `ValueError` con un valor inválido.
 - **Prueba visual con Chromium** (como `test_top_grafica_visual.py`): ninguna slide desborda su alto (`scrollHeight` mayor que `clientHeight`), el texto visible no baja de 20 px, la TarroVision ancha mide 16:9 exacto.
 - Las pruebas crean cajas temporales y no dependen de imágenes del estudio.
@@ -114,3 +114,18 @@ El pedido original hablaba de migrar "solo las no grabadas ni publicadas". Hoy e
 - `scripts/fetch_boxart_wiki.py` envía en su `User-Agent` un correo personal a Wikipedia. Para la fase 2 conviene cambiarlo por un nombre genérico de cliente; no lo cambié aquí (fuera de alcance).
 - El deck de SNES dice "110 juegos" y el CSV tiene 114 filas de SNES: la diferencia son 3 consolas y 1 accesorio, o sea consistente; lo anoto para que nadie lo "corrija" al reconstruir.
 - Los hashes de regresión del clásico deben generarse con la base restaurada, no con otra copia: si la base cambia, cambian los hashes.
+
+## 9. Implementado (2026-11-10)
+
+Fase 0:
+- `studio/templates/_base-coleccion.html` (CSS/JS base versionado, recuperado de `git show 29e93c1^:studio/colecciones/n64-coleccion.html`, sin las slides) y `scripts/fixtures_coleccion_grafica/base_congelada.html` para las pruebas. `BASE` de `coleccion_deck.py` apunta ahí.
+- `data/colecciones/{nes,n64,snes,psvita}-coleccion.json`: NES y Vita salen de los drivers de `.cache/`; N64 y SNES se reconstruyeron parseando el HTML publicado. Estos dos no traen la lista `juegos` por categoría. El SNES no incluye la slide RAREZAS (Super Scope y Super Game Boy) del deck publicado, y su cierre decía "panorama N64": el JSON dice SNES.
+- `generar_deck(data, slug, out_dir=None, lista=True)`: con los valores por defecto nada cambia. Hardware y fila 2 del balance pasaron a ser opcionales (SNES no los tenía); para cualquier dato que ya funcionaba la salida es idéntica.
+- Verificación de regresión: salida idéntica al generador original para el dato de prueba, NES y N64 (comparación directa con `git show HEAD:scripts/coleccion_deck.py`).
+
+Fase 1:
+- `scripts/coleccion_grafica.py` y la marca `grafica="nueva"` como en la sección 5; campos opcionales y comportamientos tal como están en el docstring del módulo y en `CLAUDE.md`.
+- `scripts/test_coleccion_grafica.py` (22 pruebas, hashes de regresión en `fixtures_coleccion_grafica/golden.json`) y `scripts/test_coleccion_grafica_visual.py` (2 pruebas en Chromium sobre los 4 JSON).
+- La prueba visual encontró y se corrigieron tres problemas de la maqueta: el mosaico hacía desbordar la slide de portada y cierre (ahora va en un envoltorio recortado), la caja inclinada de las celdas del triple desbordaba la celda (bajó a 215 px) y el índice de 8 o 9 categorías cortaba el conteo (versión compacta con miniaturas más bajas).
+
+Por hacer en la siguiente fase (con el dale de Luis): cajas de las joyas, fotos de hardware, `proximo` del cierre, reconstruir la lista `juegos` y la slide RAREZAS de SNES si se reforja, y las capturas de un deck real con `capture-slides.py` al generar el primero.
