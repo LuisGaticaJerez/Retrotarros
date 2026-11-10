@@ -1,0 +1,229 @@
+{
+  "doc_title": "SNES · Coleccion completa",
+  "header_tag": "ESTUDIO · SNES COLECCION · 110 JUEGOS · GEN 4",
+  "portada": {
+    "tag": "GENERACION 4 · 16 BITS · NINTENDO · 1990-1996",
+    "title_vs": "COLECCION",
+    "title_rest": "SNES",
+    "sub": "EL CATALOGO COMPLETO POR GENERO",
+    "count": "110 JUEGOS · 9 CATEGORIAS · 27 JOYAS"
+  },
+  "categorias": [
+    {
+      "name": "PLATAFORMAS",
+      "count": 32,
+      "joyas": [
+        {
+          "title": "SUPER MARIO WORLD",
+          "ano": 1990,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "DONKEY KONG COUNTRY",
+          "ano": 1994,
+          "editor": "RARE"
+        },
+        {
+          "title": "YOSHI'S ISLAND",
+          "ano": 1995,
+          "editor": "NINTENDO"
+        }
+      ]
+    },
+    {
+      "name": "LUCHA",
+      "count": 17,
+      "joyas": [
+        {
+          "title": "STREET FIGHTER II",
+          "ano": 1992,
+          "editor": "CAPCOM"
+        },
+        {
+          "title": "MORTAL KOMBAT II",
+          "ano": 1994,
+          "editor": "MIDWAY"
+        },
+        {
+          "title": "KILLER INSTINCT",
+          "ano": 1995,
+          "editor": "RARE"
+        }
+      ]
+    },
+    {
+      "name": "DEPORTES",
+      "count": 14,
+      "joyas": [
+        {
+          "title": "NBA JAM T.E.",
+          "ano": 1995,
+          "editor": "MIDWAY"
+        },
+        {
+          "title": "ISS DELUXE",
+          "ano": 1995,
+          "editor": "KONAMI"
+        },
+        {
+          "title": "SUPER TENNIS",
+          "ano": 1991,
+          "editor": "TONKIN HOUSE"
+        }
+      ]
+    },
+    {
+      "name": "ACCION",
+      "count": 12,
+      "joyas": [
+        {
+          "title": "CONTRA III",
+          "ano": 1992,
+          "editor": "KONAMI"
+        },
+        {
+          "title": "SUPER STAR WARS",
+          "ano": 1992,
+          "editor": "JVC"
+        },
+        {
+          "title": "X-MEN: MUTANT APOCALYPSE",
+          "ano": 1994,
+          "editor": "CAPCOM"
+        }
+      ]
+    },
+    {
+      "name": "ARCADE",
+      "count": 10,
+      "joyas": [
+        {
+          "title": "SUPER R-TYPE",
+          "ano": 1991,
+          "editor": "IREM"
+        },
+        {
+          "title": "WILD GUNS",
+          "ano": 1994,
+          "editor": "NATSUME"
+        },
+        {
+          "title": "AERO FIGHTERS",
+          "ano": 1994,
+          "editor": "VIDEO SYSTEM"
+        }
+      ]
+    },
+    {
+      "name": "AVENTURA / RPG",
+      "count": 9,
+      "joyas": [
+        {
+          "title": "A LINK TO THE PAST",
+          "ano": 1991,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "SUPER MARIO RPG",
+          "ano": 1996,
+          "editor": "SQUARE"
+        },
+        {
+          "title": "MYSTICAL NINJA",
+          "ano": 1991,
+          "editor": "KONAMI"
+        }
+      ]
+    },
+    {
+      "name": "BEAT 'EM UP",
+      "count": 8,
+      "joyas": [
+        {
+          "title": "FINAL FIGHT",
+          "ano": 1991,
+          "editor": "CAPCOM"
+        },
+        {
+          "title": "CAPTAIN COMMANDO",
+          "ano": 1995,
+          "editor": "CAPCOM"
+        },
+        {
+          "title": "BATMAN RETURNS",
+          "ano": 1993,
+          "editor": "KONAMI"
+        }
+      ]
+    },
+    {
+      "name": "PUZZLE",
+      "count": 5,
+      "joyas": [
+        {
+          "title": "TETRIS 2",
+          "ano": 1994,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "WARIO'S WOODS",
+          "ano": 1994,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "KIRBY'S AVALANCHE",
+          "ano": 1995,
+          "editor": "NINTENDO"
+        }
+      ]
+    },
+    {
+      "name": "CARRERAS",
+      "count": 3,
+      "joyas": [
+        {
+          "title": "SUPER MARIO KART",
+          "ano": 1992,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "F-ZERO",
+          "ano": 1990,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "RPM RACING",
+          "ano": 1991,
+          "editor": "INTERPLAY"
+        }
+      ]
+    }
+  ],
+  "balance": {
+    "row1": [
+      {
+        "label": "TOTAL",
+        "big": "110",
+        "sub": "juegos en la coleccion",
+        "color": "mg"
+      },
+      {
+        "label": "CATEGORIAS",
+        "big": "9",
+        "sub": "generos cubiertos",
+        "color": "cy"
+      },
+      {
+        "label": "JOYAS",
+        "big": "27",
+        "sub": "destacadas en gameplay",
+        "color": "ye"
+      }
+    ]
+  },
+  "cierre": {
+    "pre": "PROXIMO CAPITULO",
+    "title": "SIGUE LA SAGA",
+    "sub": "Cuentanos cual fue tu favorita en los comentarios. Si quieres que cubramos otra consola, deja la sugerencia. Suscribete para no perderte el panorama SNES."
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "doc_title": "NES · Coleccion completa",
+  "header_tag": "ESTUDIO · NES COLECCION · 34 JUEGOS · GEN 3",
+  "portada": {
+    "tag": "GENERACION 3 · 8 BITS · NINTENDO · 1983-1994",
+    "title_vs": "COLECCION",
+    "title_rest": "NES",
+    "sub": "EL CATALOGO COMPLETO POR GENERO",
+    "count": "34 JUEGOS · 6 CATEGORIAS · 18 JOYAS · HARDWARE"
+  },
+  "categorias": [
+    {
+      "name": "PLATAFORMAS",
+      "count": 7,
+      "juegos": [
+        "Super Mario Bros. 3",
+        "Super Mario Bros. 2",
+        "Kirby's Adventure",
+        "DuckTales",
+        "Chip 'n Dale: Rescue Rangers",
+        "Tiny Toon Adventures",
+        "Legend of Kage"
+      ],
+      "joyas": [
+        {
+          "title": "SUPER MARIO BROS. 3",
+          "ano": 1990,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "KIRBY'S ADVENTURE",
+          "ano": 1993,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "DUCKTALES",
+          "ano": 1989,
+          "editor": "CAPCOM"
+        }
+      ]
+    },
+    {
+      "name": "ACCION",
+      "count": 9,
+      "juegos": [
+        "Legend of Zelda [5 Screw]",
+        "Metroid",
+        "Mega Man 5",
+        "Double Dragon",
+        "Teenage Mutant Ninja Turtles III: The Manhattan Project",
+        "After Burner",
+        "Skull & Crossbones",
+        "Simpsons: Bartman Meets Radioactive Man",
+        "Tom & Jerry: The Ultimate Game of Cat and Mouse!"
+      ],
+      "joyas": [
+        {
+          "title": "THE LEGEND OF ZELDA",
+          "ano": 1987,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "METROID",
+          "ano": 1987,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "MEGA MAN 5",
+          "ano": 1992,
+          "editor": "CAPCOM"
+        }
+      ]
+    },
+    {
+      "name": "AVENTURA",
+      "count": 5,
+      "juegos": [
+        "Super Mario Bros. / Duck Hunt",
+        "8 Eyes",
+        "Dragon's Lair",
+        "Addams Family",
+        "Teenage Mutant Ninja Turtles"
+      ],
+      "joyas": [
+        {
+          "title": "SUPER MARIO BROS. / DUCK HUNT",
+          "ano": 1988,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "8 EYES",
+          "ano": 1990,
+          "editor": "TAXAN"
+        },
+        {
+          "title": "DRAGON'S LAIR",
+          "ano": 1990,
+          "editor": "CSG IMAGESOFT"
+        }
+      ]
+    },
+    {
+      "name": "DEPORTES / LUCHA",
+      "count": 3,
+      "juegos": [
+        "Punch-Out!!",
+        "R.C. Pro-Am",
+        "WWF King of the Ring"
+      ],
+      "joyas": [
+        {
+          "title": "PUNCH-OUT!!",
+          "ano": 1987,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "R.C. PRO-AM",
+          "ano": 1988,
+          "editor": "RARE"
+        },
+        {
+          "title": "WWF KING OF THE RING",
+          "ano": 1993,
+          "editor": "LJN"
+        }
+      ]
+    },
+    {
+      "name": "PUZZLE",
+      "count": 3,
+      "juegos": [
+        "Dr. Mario",
+        "Yoshi",
+        "Wario's Woods"
+      ],
+      "joyas": [
+        {
+          "title": "DR. MARIO",
+          "ano": 1990,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "YOSHI",
+          "ano": 1992,
+          "editor": "NINTENDO"
+        },
+        {
+          "title": "WARIO'S WOODS",
+          "ano": 1994,
+          "editor": "NINTENDO"
+        }
+      ]
+    },
+    {
+      "name": "ARCADE · SHOOTER · SIM",
+      "count": 7,
+      "juegos": [
+        "Top Gun",
+        "Silent Service",
+        "Captain Skyhawk",
+        "Top Gun: The Second Mission",
+        "North & South",
+        "Dragon Spirit: The New Legend",
+        "Barker Bill's Trick Shooting"
+      ],
+      "joyas": [
+        {
+          "title": "TOP GUN",
+          "ano": 1987,
+          "editor": "KONAMI"
+        },
+        {
+          "title": "SILENT SERVICE",
+          "ano": 1989,
+          "editor": "KONAMI"
+        },
+        {
+          "title": "CAPTAIN SKYHAWK",
+          "ano": 1990,
+          "editor": "RARE"
+        }
+      ]
+    }
+  ],
+  "hardware_titulo": "HARDWARE",
+  "hardware_sub": "EL FIERRO NES DEL ESTUDIO",
+  "hardware": [
+    {
+      "name": "NES ACTION SET",
+      "tag": "STANDARD · 1988",
+      "color": "mg",
+      "desc": "El pack gris clasico con la Zapper y el combo Super Mario Bros / Duck Hunt. Asi entro la NES a millones de casas."
+    },
+    {
+      "name": "NES CLASSIC EDITION",
+      "tag": "MINI · 2016",
+      "color": "cy",
+      "desc": "La reedicion mini de Nintendo con 30 juegos via HDMI. El homenaje moderno a la consola que empezo todo."
+    },
+    {
+      "name": "LA ZAPPER",
+      "tag": "LIGHT GUN",
+      "color": "ye",
+      "desc": "La pistola naranja de Duck Hunt y Barker Bill's. Apuntar a la tele de tubo era pura magia ochentera."
+    }
+  ],
+  "balance": {
+    "row1": [
+      {
+        "label": "JUEGOS",
+        "big": "34",
+        "sub": "cartuchos en la coleccion",
+        "color": "mg"
+      },
+      {
+        "label": "CATEGORIAS",
+        "big": "6",
+        "sub": "generos cubiertos",
+        "color": "cy"
+      },
+      {
+        "label": "JOYAS",
+        "big": "18",
+        "sub": "destacadas en gameplay",
+        "color": "ye"
+      }
+    ],
+    "row2": [
+      {
+        "label": "CONSOLA",
+        "big": "NES",
+        "sub": "la que empezo todo",
+        "color": "mg"
+      },
+      {
+        "label": "STUDIOS",
+        "big": "CAPCOM",
+        "sub": "rey 3rd-party del NES",
+        "color": "cy"
+      }
+    ]
+  },
+  "cierre": {
+    "pre": "PROXIMO CAPITULO",
+    "title": "SIGUE LA SAGA",
+    "sub": "Cuentanos cual fue tu favorita en los comentarios. Si quieres que cubramos otra consola, deja la sugerencia. Suscribete para no perderte lo que viene en el canal."
+  }
+}
