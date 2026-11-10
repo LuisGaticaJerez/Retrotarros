@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · MAQUETA grafica nueva colecciones</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --mg: #FF2E88;
+  --cy: #00E5FF;
+  --ye: #FFD23F;
+  --pu: #2D1B69;
+  --bo: #F5F0E8;
+  --dk: #06030f;
+  --card-bg: rgba(12, 6, 32, 0.92);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--dk);
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bo);
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+
+/* ── HEADER ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  z-index: 200;
+  background: rgba(6, 3, 15, 0.97);
+  border-bottom: 2px solid var(--mg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size:23px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size:14px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size:9px; color: var(--mg); }
+.dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+/* ── DECK ── */
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 32px 48px; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size:10px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+
+/* ── PORTADA ── */
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; padding: 0; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size:13px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size:101px; letter-spacing: 1.5px; line-height: 1; color: #fff; margin-bottom: 22px; }
+.portada .ep-title .vs { color: var(--mg); text-shadow: 0 0 26px rgba(255,46,136,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size:21px; color: var(--ye); letter-spacing: 4px; margin-bottom: 18px; }
+.portada .ep-count { font-family: 'Press Start 2P'; font-size:14px; color: var(--bo); letter-spacing: 4px; padding: 10px 18px; border: 1px solid var(--cy); margin-top: 14px; }
+
+/* ── INDICE ── */
+.idx { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 0 24px; }
+.idx-title { font-family: 'Press Start 2P'; font-size:16px; color: var(--mg); letter-spacing: 6px; margin-bottom: 22px; text-shadow: 0 0 14px rgba(255,46,136,.5); }
+.idx-list { display: flex; flex-direction: column; gap: 7px; min-width: 760px; max-width: 880px; width: 100%; }
+.idx-item { display: grid; grid-template-columns: 28px 38px 1fr 130px; gap: 12px; align-items: baseline; padding: 8px 16px; background: rgba(12,6,32,.6); border-left: 3px solid rgba(0,229,255,.25); font-family: 'Share Tech Mono'; font-size:17px; color: var(--bo); }
+.idx-item.active { border-left-color: var(--mg); background: rgba(255,46,136,.07); }
+.idx-cursor { color: var(--cy); }
+.idx-item.active .idx-cursor { color: var(--mg); }
+.idx-num { font-family: 'Press Start 2P'; font-size:13px; color: var(--ye); }
+.idx-dots { color: rgba(255,255,255,.18); letter-spacing: 2px; }
+.idx-count { font-family: 'Press Start 2P'; font-size:12px; color: var(--cy); text-align: right; }
+.idx-total { margin-top: 18px; font-family: 'Press Start 2P'; font-size:15px; color: var(--mg); letter-spacing: 5px; text-shadow: 0 0 14px rgba(255,46,136,.5); }
+.idx-hint { margin-top: 8px; font-family: 'Share Tech Mono'; font-size:14px; color: rgba(255,255,255,.4); letter-spacing: 3px; }
+
+/* ── SLIDE PANEO · TARROVISION GRANDE ── */
+.slide-paneo { display: grid; grid-template-columns: 380px 1fr; gap: 22px; height: 100%; padding: 6px 8px; align-items: stretch; }
+.paneo-banner { background: linear-gradient(180deg, rgba(255,46,136,.18) 0%, rgba(45,27,105,.6) 100%); border-left: 5px solid var(--mg); border-radius: 6px; padding: 18px 18px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+.paneo-cat-num { font-family: 'Press Start 2P'; font-size:12px; color: var(--ye); letter-spacing: 3px; margin-bottom: 4px; }
+.paneo-cat-name { font-family: 'Orbitron'; font-weight: 900; font-size:34px; line-height: 1.15; color: #fff; text-shadow: 0 0 16px rgba(255,46,136,.5); margin-bottom: 6px; letter-spacing: 6px; word-break: keep-all; }
+.paneo-cat-count { font-family: 'Press Start 2P'; font-size:13px; color: var(--cy); letter-spacing: 3px; margin-top: 2px; padding-top: 6px; border-top: 1px solid rgba(0,229,255,.25); }
+.paneo-tv-wrap { display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden; }
+
+/* ── TARROVISION CRT ── */
+.tarrovision {
+  position: relative;
+  height: 100%;
+  max-height: 860px;
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%);
+  border-radius: 22px;
+  padding: 22px 26px;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 22px 60px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(0,0,0,.4);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+}
+.tv-controls-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 0 6px; }
+.tv-led { width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, var(--mg) 60%, #7a0030 100%); box-shadow: 0 0 10px rgba(255,46,136,.8), inset 0 0 2px rgba(0,0,0,.5); }
+.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size:13px; color: var(--ye); letter-spacing: 4px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
+.tv-channel { font-family: 'Share Tech Mono'; font-size:14px; color: var(--cy); letter-spacing: 2px; padding: 4px 10px; border: 1px solid rgba(0,229,255,.4); border-radius: 2px; background: rgba(0,229,255,.06); }
+.tv-screen { position: relative; background: #2a2a2f; border-radius: 14px; padding: 16px; box-shadow: inset 0 0 0 2px #3a3a3f, inset 0 0 14px rgba(0,0,0,.6); min-height: 0; }
+.tv-screen-inner { position: relative; width: 100%; height: 100%; background: #000; border-radius: 18px / 8px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 40px rgba(0,0,0,.95); }
+.tv-screen-inner img, .tv-screen-inner video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tv-screen-inner::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,.0) 0px, rgba(0,0,0,.0) 2px, rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 3px); z-index: 3; mix-blend-mode: multiply; }
+.tv-screen-inner::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255,255,255,.08) 0%, transparent 55%), radial-gradient(ellipse 90% 50% at 50% 100%, rgba(0,229,255,.06) 0%, transparent 60%); z-index: 4; }
+.tv-noscreen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, rgba(45,27,105,.6) 0%, #000 80%), repeating-linear-gradient(0deg, #0a0a14 0px, #0a0a14 1px, #14142a 1px, #14142a 2px); color: rgba(255,255,255,.35); text-align: center; padding: 30px; z-index: 2; }
+.tv-noscreen .tv-noscreen-big { font-family: 'Press Start 2P'; font-size:18px; color: var(--mg); letter-spacing: 4px; margin-bottom: 12px; text-shadow: 0 0 12px rgba(255,46,136,.5); }
+.tv-noscreen .tv-noscreen-sub { font-family: 'Share Tech Mono'; font-size:14px; letter-spacing: 2px; color: rgba(0,229,255,.55); }
+.tv-controls-bottom { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 14px; padding: 4px 6px 0; }
+.tv-knob { width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #5a5a60 0%, #2a2a30 60%, #0a0a0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.6); position: relative; }
+.tv-knob::after { content: ""; position: absolute; top: 6px; left: 50%; width: 2px; height: 10px; background: var(--ye); transform-origin: bottom center; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 4px rgba(255,210,63,.6); }
+.tv-knob.cy::after { background: var(--cy); box-shadow: 0 0 4px rgba(0,229,255,.6); transform: translateX(-50%) rotate(-30deg); }
+.tv-speaker { height: 28px; background: repeating-linear-gradient(90deg, #0a0a0e 0px, #0a0a0e 3px, #1a1a1f 3px, #1a1a1f 6px); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6); }
+
+/* ── SLIDE TRIPLE (3 TVs juntas) ── */
+.slide-triple { padding: 18px 24px; }
+.slide-triple-inner { display: grid; grid-template-rows: auto 1fr; gap: 12px; height: 100%; max-width: 1820px; margin: 0 auto; justify-items: center; }
+.triple-head { width: 100%; display: flex; justify-content: center; align-items: center; }
+.tv-block-label { font-family: 'Press Start 2P'; font-size:13px; letter-spacing: 4px; padding: 8px 16px; border: 1px solid var(--mg); color: var(--mg); background: rgba(255,46,136,.06); }
+.triple-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; min-height: 0; align-items: stretch; justify-items: stretch; width: 100%; }
+.triple-cell { display: grid; grid-template-rows: 1fr auto; align-items: stretch; justify-items: center; gap: 10px; min-height: 0; min-width: 0; height: 100%; overflow: hidden; }
+.triple-cell .tv-fit { container-type: size; min-height: 0; min-width: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.triple-cell .tv-fit .tarrovision { width: min(100cqh, 100cqw); height: min(100cqh, 100cqw); max-width: none; max-height: none; aspect-ratio: auto; padding: 16px 18px; border-radius: 18px; gap: 10px; }
+.triple-cell .tv-brand { font-size:12px; letter-spacing: 3px; }
+.triple-cell .tv-channel { font-size:13px; padding: 3px 9px; }
+.triple-cell .tv-knob { width: 30px; height: 30px; }
+.triple-cell .tv-speaker { height: 24px; }
+.triple-cell .tv-noscreen .tv-noscreen-big { font-size:16px; }
+.triple-cell .tv-noscreen .tv-noscreen-sub { font-size:13px; }
+
+/* ── NAMEBOX ── */
+.tv-namebox { display: inline-flex; flex-direction: column; align-items: center; gap: 3px; padding: 7px 22px; border: 1px solid var(--cy); background: rgba(0,229,255,.04); position: relative; border-radius: 2px; max-width: 92%; }
+.tv-namebox::before, .tv-namebox::after { content: ""; position: absolute; width: 7px; height: 7px; background: var(--dk); border: 1px solid var(--cy); }
+.tv-namebox::before { top: -4px; left: -4px; }
+.tv-namebox::after { bottom: -4px; right: -4px; }
+.tv-namebox .tv-title { font-family: 'Orbitron'; font-weight: 900; font-size:20px; color: #fff; letter-spacing: .5px; }
+.tv-namebox .tv-meta { font-family: 'Share Tech Mono'; font-size:12px; letter-spacing: 2px; color: rgba(0,229,255,.6); }
+.tv-namebox.ye { border-color: var(--ye); background: rgba(255,210,63,.04); }
+.tv-namebox.ye::before, .tv-namebox.ye::after { border-color: var(--ye); }
+.tv-namebox.ye .tv-meta { color: rgba(255,210,63,.6); }
+
+/* ── DIVIDER ── */
+.divider { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.divider .pre { font-family: 'Press Start 2P'; font-size:13px; letter-spacing: 6px; margin-bottom: 24px; }
+.divider .pre.cy { color: var(--cy); }
+.divider .pre.mg { color: var(--mg); }
+.divider .title { font-family: 'Orbitron'; font-weight: 900; font-size:90px; letter-spacing: 2px; line-height: 1; color: #fff; margin-bottom: 22px; }
+.divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
+.divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.divider .sub { font-family: 'Share Tech Mono'; font-size:21px; color: rgba(255,255,255,.7); letter-spacing: 2px; max-width: 880px; line-height: 1.6; }
+
+/* ── NUMBERS GRID (rarezas + balance) ── */
+.slide h1 { font-family: 'Orbitron'; font-weight: 900; font-size:78px; color: #fff; letter-spacing: 1px; text-align: center; margin-bottom: 8px; line-height: 1; }
+.slide h2 { font-family: 'Share Tech Mono'; font-size:21px; letter-spacing: 4px; text-align: center; margin-bottom: 26px; color: rgba(255,255,255,.7); }
+.slide h2.mg { color: var(--mg); }
+.numbers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1340px; margin: 0 auto; padding: 0 30px; }
+.num-card { background: var(--card-bg); border: 1px solid rgba(255,255,255,.08); border-top: 3px solid var(--cy); padding: 22px 18px; text-align: center; }
+.num-card.mg { border-top-color: var(--mg); }
+.num-card.ye { border-top-color: var(--ye); }
+.num-card.cy { border-top-color: var(--cy); }
+.num-card h3 { font-family: 'Press Start 2P'; font-size:12px; color: var(--ye); letter-spacing: 3px; margin-bottom: 12px; }
+.num-card .big { display: block; font-family: 'Orbitron'; font-weight: 900; font-size:87px; color: #fff; line-height: 1; margin-bottom: 8px; }
+.num-card.mg .big { color: var(--mg); text-shadow: 0 0 18px rgba(255,46,136,.45); }
+.num-card.cy .big { color: var(--cy); text-shadow: 0 0 18px rgba(0,229,255,.45); }
+.num-card.ye .big { color: var(--ye); text-shadow: 0 0 18px rgba(255,210,63,.45); }
+.num-card p { font-family: 'Share Tech Mono'; font-size:15px; color: rgba(255,255,255,.7); line-height: 1.45; }
+
+/* ── CONSOLAS GRID (bloque especial N64) ── */
+.consolas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 1340px; margin: 0 auto; padding: 0 30px; }
+.consola-card { background: var(--card-bg); border: 1px solid rgba(255,255,255,.08); border-top: 3px solid var(--cy); padding: 18px 16px; text-align: center; }
+.consola-card.mg { border-top-color: var(--mg); }
+.consola-card.ye { border-top-color: var(--ye); }
+.consola-card.cy { border-top-color: var(--cy); }
+.consola-card h3 { font-family: 'Press Start 2P'; font-size:12px; color: var(--ye); letter-spacing: 3px; margin-bottom: 10px; min-height: 30px; display: flex; align-items: center; justify-content: center; }
+.consola-card .tag { display: inline-block; font-family: 'Press Start 2P'; font-size:9px; padding: 4px 8px; border: 1px solid; margin-bottom: 10px; letter-spacing: 2px; }
+.consola-card.mg .tag { color: var(--mg); border-color: var(--mg); }
+.consola-card.cy .tag { color: var(--cy); border-color: var(--cy); }
+.consola-card.ye .tag { color: var(--ye); border-color: var(--ye); }
+.consola-card p { font-family: 'Share Tech Mono'; font-size:14px; color: rgba(255,255,255,.7); line-height: 1.5; }
+
+/* ── NAV FOOTER ── */
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size:10px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size:12px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(255,46,136,.5); }
+.nav-hint { font-family: 'Share Tech Mono'; font-size:13px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size:13px; color: var(--ye); margin: 0 2px; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+
+/* ===== GRAFICA NUEVA DE COLECCIONES (maqueta) ===== */
+.g-nueva .g-mos{position:absolute;inset:-24px;display:grid;grid-template-columns:repeat(var(--cols),1fr);grid-template-rows:repeat(var(--filas),1fr);filter:blur(9px) brightness(.38) saturate(1.25);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.26) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center top}
+.fb.mg{background:linear-gradient(135deg,#7a0f46,#FF2E88)}.fb.cy{background:linear-gradient(135deg,#065a68,#00a8c0)}.fb.ye{background:linear-gradient(135deg,#7a5c00,#d9a800)}
+.g-portada,.g-cierre,.g-indice,.g-paneo,.g-triple,.g-hard,.g-bal{position:relative;z-index:2;height:100%}
+/* portada */
+.g-portada{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;text-shadow:0 0 30px #000,0 0 10px #000}
+.g-sello{font:400 22px 'Press Start 2P';color:var(--ye);letter-spacing:6px;padding:12px 24px;border:2px solid var(--ye);background:rgba(6,3,15,.6)}
+.g-ptag{font:400 26px 'Press Start 2P';color:var(--cy);letter-spacing:6px}
+.g-ptitle{font:900 170px 'Orbitron';color:#fff;line-height:1;letter-spacing:2px}.g-ptitle .vs{color:var(--mg);text-shadow:0 0 34px rgba(255,46,136,.7)}
+.g-psub{font:400 38px 'Share Tech Mono';color:var(--ye);letter-spacing:6px}
+.g-pills{display:flex;gap:28px;margin-top:14px}
+.g-pill{display:flex;flex-direction:column;align-items:center;padding:16px 44px;background:rgba(6,3,15,.78);border:2px solid;border-radius:6px;min-width:260px}
+.g-pill b{font:900 76px 'Orbitron';line-height:1}.g-pill span{font:400 20px 'Press Start 2P';letter-spacing:3px;margin-top:10px;color:#fff}
+.g-pill.mg{border-color:var(--mg)}.g-pill.mg b{color:var(--mg)}.g-pill.cy{border-color:var(--cy)}.g-pill.cy b{color:var(--cy)}.g-pill.ye{border-color:var(--ye)}.g-pill.ye b{color:var(--ye)}
+/* indice */
+.g-indice{display:flex;flex-direction:column;align-items:center;gap:22px;padding-top:8px}
+.g-ititle{font:400 34px 'Press Start 2P';color:var(--mg);letter-spacing:8px;text-shadow:0 0 16px rgba(255,46,136,.5)}
+.g-igrid{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:22px;width:100%;max-width:1780px;flex:1;align-content:stretch}
+.g-icard{display:grid;grid-template-columns:auto 1fr;grid-template-rows:1fr auto;gap:6px 22px;padding:22px 26px;background:rgba(12,6,32,.82);border-left:6px solid var(--acc);border-radius:6px;align-items:center}
+.g-icard.mg{--acc:var(--mg)}.g-icard.cy{--acc:var(--cy)}.g-icard.ye{--acc:var(--ye)}
+.g-inum{font:900 64px 'Orbitron';color:var(--acc);grid-row:1}
+.g-itxt{grid-row:1}.g-iname{font:900 38px 'Orbitron';color:#fff;line-height:1.1;letter-spacing:2px}
+.g-icount{font:400 26px 'Share Tech Mono';color:rgba(255,255,255,.75);margin-top:8px}.g-icount b{font:900 56px 'Orbitron';color:var(--acc);margin-right:10px;vertical-align:middle}
+.g-ithumbs{grid-column:1/3;display:flex;gap:12px;height:150px}.g-ithumbs img,.g-ithumbs b{height:100%;width:auto;aspect-ratio:.7;object-fit:cover;border-radius:3px;box-shadow:0 4px 14px rgba(0,0,0,.6)}
+.g-itotal{font:400 28px 'Press Start 2P';color:var(--cy);letter-spacing:6px}
+/* paneo */
+.g-paneo{display:grid;grid-template-columns:600px 1fr;gap:34px;align-items:stretch}
+.g-paneo.mg{--acc:var(--mg)}.g-paneo.cy{--acc:var(--cy)}.g-paneo.ye{--acc:var(--ye)}
+.g-pcard{display:flex;flex-direction:column;justify-content:center;gap:12px;padding:30px;background:linear-gradient(180deg,rgba(12,6,32,.9),rgba(45,27,105,.6));border-left:8px solid var(--acc);border-radius:8px}
+.g-pnum{font:400 24px 'Press Start 2P';color:var(--ye);letter-spacing:4px}
+.g-pname{font:900 50px 'Orbitron';color:#fff;line-height:1.08;letter-spacing:3px;text-shadow:0 0 18px rgba(255,46,136,.4)}
+.g-pbig{font:900 170px 'Orbitron';color:var(--acc);line-height:.95;margin-top:10px;text-shadow:0 0 26px currentColor}
+.g-pbigl{font:400 24px 'Press Start 2P';color:#fff;letter-spacing:3px;line-height:1.5}
+.g-ptease{margin-top:14px;padding-top:16px;border-top:1px solid rgba(255,255,255,.2)}.g-ptease>span{font:400 20px 'Press Start 2P';color:var(--cy);letter-spacing:3px}
+.g-pthumbs{display:flex;gap:14px;margin-top:14px;height:150px}.g-pthumbs img,.g-pthumbs b{height:100%;aspect-ratio:.7;object-fit:cover;border-radius:3px;box-shadow:0 4px 14px rgba(0,0,0,.6)}
+.g-paneo .gp-tv{display:flex;align-items:center;justify-content:center;min-width:0}
+.g-paneo .gp-tv.tvw{container-type:size;width:100%}
+/* triple */
+.g-triple{display:flex;flex-direction:column;gap:14px;max-width:1830px;margin:0 auto}
+.g-triple.mg{--acc:var(--mg)}.g-triple.cy{--acc:var(--cy)}.g-triple.ye{--acc:var(--ye)}
+.g-thead{align-self:center;font:400 26px 'Press Start 2P';letter-spacing:5px;color:#fff;padding:10px 22px;border:2px solid var(--acc);background:rgba(6,3,15,.7)}.g-thead span{color:var(--acc)}
+.g-tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;flex:1;min-height:0}
+.g-cell{position:relative;display:flex;flex-direction:column;gap:14px;padding:18px;border-radius:10px;overflow:hidden;background:rgba(12,6,32,.9);isolation:isolate}
+.g-cell::before{content:"";position:absolute;inset:-30px;background:var(--bg) center/cover;filter:blur(22px) brightness(.32) saturate(1.3);z-index:-1}
+.g-cell.nobg::before{background:linear-gradient(135deg,#2D1B69,#4a2a99)}
+.g-celltv{display:flex;justify-content:center}.g-celltv .tarrovision.tvn{width:100%;height:auto;aspect-ratio:auto;max-width:none}
+.g-cellinfo{display:flex;gap:20px;align-items:center;min-height:0;flex:1}
+.g-caja{height:100%;max-height:250px;aspect-ratio:.7;object-fit:cover;border-radius:4px;box-shadow:0 8px 24px rgba(0,0,0,.7),0 0 0 2px rgba(255,255,255,.12);transform:rotate(-3deg);flex:none}
+.g-caja.fb{display:flex;align-items:center;justify-content:center;padding:10px;text-align:center}.g-caja.fb span{font:900 20px 'Orbitron';color:#fff;line-height:1.2}
+.g-celltxt{display:flex;flex-direction:column;gap:12px;min-width:0}
+.g-celltag{align-self:flex-start;font:400 16px 'Press Start 2P';color:#04121a;background:var(--cy);padding:7px 12px;letter-spacing:2px}
+.g-celltitle{font:900 36px 'Orbitron';color:#fff;line-height:1.1}
+.g-chips{display:flex;gap:10px;flex-wrap:wrap}.g-chips span{font:400 24px 'Share Tech Mono';color:var(--cy);border:2px solid rgba(0,229,255,.5);background:rgba(0,229,255,.08);padding:4px 14px;border-radius:20px}.g-chips span.y{color:var(--ye);border-color:rgba(255,210,63,.6);background:rgba(255,210,63,.1)}
+/* hardware */
+.g-hard{display:flex;flex-direction:column;align-items:center;gap:10px}
+.g-htitle{font:900 90px 'Orbitron';color:#fff;line-height:1}.g-hsub{font:400 30px 'Share Tech Mono';color:var(--mg);letter-spacing:6px;margin-bottom:12px}
+.g-hgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;width:100%;max-width:1780px;flex:1;min-height:0}
+.g-hcard{display:flex;flex-direction:column;gap:14px;padding:22px 24px;background:var(--card-bg);border-top:6px solid var(--acc);border-radius:6px}
+.g-hcard.mg{--acc:var(--mg)}.g-hcard.cy{--acc:var(--cy)}.g-hcard.ye{--acc:var(--ye)}
+.g-hfoto{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;border-radius:6px;background:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 14px,transparent 14px 28px),linear-gradient(135deg,#1a1230,#2D1B69);border:2px dashed rgba(255,255,255,.25)}
+.g-hfoto span{font:400 22px 'Press Start 2P';color:rgba(255,255,255,.4);letter-spacing:4px}
+.g-hname{font:900 38px 'Orbitron';color:#fff;line-height:1.1}.g-hcard p{font:400 26px 'Share Tech Mono';color:rgba(255,255,255,.82);line-height:1.4}
+/* balance */
+.g-bal{display:flex;flex-direction:column;align-items:center;gap:6px}
+.g-btitle{font:900 90px 'Orbitron';color:#fff;line-height:1}.g-bsub{font:400 30px 'Share Tech Mono';color:var(--mg);letter-spacing:6px;margin-bottom:16px}
+.g-bgrid{display:grid;grid-template-columns:520px 1fr;gap:34px;width:100%;max-width:1780px;flex:1;min-height:0}
+.g-bstats{display:flex;flex-direction:column;gap:18px}
+.g-stat{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;background:var(--card-bg);border-top:5px solid var(--c);border-radius:6px}
+.g-stat.mg,.g-xcard.mg{--c:var(--mg)}.g-stat.cy,.g-xcard.cy{--c:var(--cy)}.g-stat.ye,.g-xcard.ye{--c:var(--ye)}
+.g-stat h3,.g-xcard h3{font:400 20px 'Press Start 2P';color:var(--ye);letter-spacing:4px}.g-stat b{font:900 120px 'Orbitron';color:var(--c);line-height:1;text-shadow:0 0 22px currentColor}.g-stat p,.g-xcard p{font:400 24px 'Share Tech Mono';color:rgba(255,255,255,.78)}
+.g-bchart{display:flex;flex-direction:column;gap:14px;padding:26px 32px;background:var(--card-bg);border-radius:6px}
+.g-bct{font:400 22px 'Press Start 2P';color:var(--cy);letter-spacing:4px;margin-bottom:6px}
+.g-brow{display:grid;grid-template-columns:400px 1fr 70px;gap:20px;align-items:center}
+.g-brow.mg{--c:var(--mg)}.g-brow.cy{--c:var(--cy)}.g-brow.ye{--c:var(--ye)}
+.g-bl{font:900 24px 'Orbitron';color:#fff;letter-spacing:1px}.g-bt{height:34px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden}.g-bt i{display:block;height:100%;background:var(--c);box-shadow:0 0 14px var(--c)}.g-brow b{font:900 36px 'Orbitron';color:var(--c);text-align:right}
+.g-bx{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:auto}
+.g-xcard{display:flex;flex-direction:column;align-items:center;padding:14px;border-top:4px solid var(--c);background:rgba(255,255,255,.04)}.g-xcard b{font:900 64px 'Orbitron';color:var(--c);line-height:1.1}
+/* cierre */
+.g-cierre{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;text-align:center}
+.g-cpre{font:400 26px 'Press Start 2P';color:var(--cy);letter-spacing:8px}
+.g-ctitle{font:900 120px 'Orbitron';color:var(--cy);text-shadow:0 0 30px rgba(0,229,255,.6);line-height:1}
+.g-csig{display:flex;align-items:center;gap:30px;padding:22px 34px;background:rgba(6,3,15,.8);border:2px solid var(--mg);border-radius:10px;box-shadow:0 0 30px rgba(255,46,136,.35)}
+.g-cthumb{width:320px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#2D1B69,#FF2E88);border-radius:6px}.g-cthumb span{font:400 16px 'Press Start 2P';color:var(--ye);letter-spacing:3px}.g-cthumb b{font:900 64px 'Orbitron';color:#fff}
+.g-ctxt{text-align:left}.g-csl{font:400 20px 'Press Start 2P';color:var(--mg);letter-spacing:4px}.g-cname{font:900 52px 'Orbitron';color:#fff;margin-top:10px;line-height:1.1}
+.g-cta{display:flex;gap:26px;font:400 24px 'Press Start 2P';letter-spacing:3px}.g-cta span{padding:14px 22px;border:2px solid;background:rgba(6,3,15,.7)}
+.g-cta .mg{color:var(--mg);border-color:var(--mg)}.g-cta .cy{color:var(--cy);border-color:var(--cy)}.g-cta .ye{color:var(--ye);border-color:var(--ye)}
+.tarrovision.tvn{border:2px solid transparent;border-radius:16px;padding:14px 16px;gap:8px;background:linear-gradient(180deg,#1d1d25,#0a0a10) padding-box,linear-gradient(135deg,var(--mg),var(--cy)) border-box;box-shadow:0 0 28px rgba(255,46,136,.22),0 0 44px rgba(0,229,255,.16),0 22px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08)}
+.tvn .tv-controls-top{height:26px}
+.tvn .tv-brand{font-size:13px;text-shadow:0 0 10px rgba(255,210,63,.45)}
+.tvn .tv-channel{font-size:13px;padding:2px 10px}
+.tvn .tv-screen{padding:10px;border-radius:10px;background:#14141a;box-shadow:inset 0 0 0 2px #2c2c36,inset 0 0 14px rgba(0,0,0,.7)}
+.tvn .tv-screen-inner{border-radius:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),inset 0 0 50px rgba(0,0,0,.9)}
+.tvn .tv-screen-inner::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;background:linear-gradient(115deg,rgba(255,255,255,.045) 0,rgba(255,255,255,.045) 12%,transparent 12.2%)}
+.tvn .tv-bars{position:absolute;left:0;right:0;bottom:0;height:9%;opacity:.5;background:linear-gradient(90deg,#c8c8c8 0 14.28%,#c8c800 0 28.57%,#00c8c8 0 42.85%,#00c800 0 57.14%,#c800c8 0 71.43%,#c80000 0 85.71%,#0000c8 0 100%)}
+.tvn .tv-noscreen-big{font-size:24px}
+.tvn .tv-noscreen-sub{font-size:15px;letter-spacing:1px}
+.tvn .tv-c{position:absolute;width:26px;height:26px;border:0 solid var(--cy);opacity:.75;z-index:4}
+.tvn .tv-c.tl{top:14px;left:14px;border-top-width:3px;border-left-width:3px}
+.tvn .tv-c.tr{top:14px;right:14px;border-top-width:3px;border-right-width:3px}
+.tvn .tv-c.bl{bottom:14px;left:14px;border-bottom-width:3px;border-left-width:3px}
+.tvn .tv-c.br{bottom:14px;right:14px;border-bottom-width:3px;border-right-width:3px}
+.tvn .tv-controls-bottom{height:24px;grid-template-columns:auto auto 1fr auto;padding:0 6px;gap:12px}
+.tvn .tv-knob{width:22px;height:22px}
+.tvn .tv-knob::after{top:4px;height:7px}
+.tvn .tv-speaker{height:16px}
+.tvn .tv-power{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#8cffb0,#19b45a 60%,#07391c);box-shadow:0 0 8px rgba(25,180,90,.7)}
+.tarrovision.tvn.cuatro3{grid-template-rows:auto auto auto}
+.tarrovision.tvn.cuatro3 .tv-screen-inner{height:auto;aspect-ratio:4/3}
+.gp-tv.tvw{container-type:size;width:100%}
+.gp-tv .tarrovision.tvn.cuatro3{height:auto;aspect-ratio:auto;max-width:none;width:calc(min(100cqw - 56px,(min(100cqh,780px) - 118px)*4/3) + 56px)}
+.dual-grid.tvw{position:relative;gap:14px;padding:0 4px 20px}
+.dual-grid.tvw .dual-cell{flex:1 1 0;max-width:none}
+.dual-cell.tvw .tarrovision.tvn.cuatro3{height:auto;aspect-ratio:auto;width:100%;max-width:none}
+.dual-grid.tvw .dual-vs{position:absolute;left:50%;top:calc(50% - 38px);transform:translate(-50%,-50%);z-index:5;width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;background:var(--dk);border:3px solid var(--ye);box-shadow:0 0 26px rgba(255,210,63,.55)}
+.tarrovision.tvn{border:2px solid transparent;border-radius:16px;padding:14px 16px;gap:8px;background:linear-gradient(180deg,#1d1d25,#0a0a10) padding-box,linear-gradient(135deg,var(--mg),var(--cy)) border-box;box-shadow:0 0 28px rgba(255,46,136,.22),0 0 44px rgba(0,229,255,.16),0 22px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.08)}
+.tvn .tv-controls-top{height:26px}
+.tvn .tv-brand{font-size:13px;text-shadow:0 0 10px rgba(255,210,63,.45)}
+.tvn .tv-channel{font-size:13px;padding:2px 10px}
+.tvn .tv-screen{padding:10px;border-radius:10px;background:#14141a;box-shadow:inset 0 0 0 2px #2c2c36,inset 0 0 14px rgba(0,0,0,.7)}
+.tvn .tv-screen-inner{border-radius:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),inset 0 0 50px rgba(0,0,0,.9)}
+.tvn .tv-screen-inner::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;background:linear-gradient(115deg,rgba(255,255,255,.045) 0,rgba(255,255,255,.045) 12%,transparent 12.2%)}
+.tvn .tv-bars{position:absolute;left:0;right:0;bottom:0;height:9%;opacity:.5;background:linear-gradient(90deg,#c8c8c8 0 14.28%,#c8c800 0 28.57%,#00c8c8 0 42.85%,#00c800 0 57.14%,#c800c8 0 71.43%,#c80000 0 85.71%,#0000c8 0 100%)}
+.tvn .tv-noscreen-big{font-size:24px}
+.tvn .tv-noscreen-sub{font-size:15px;letter-spacing:1px}
+.tvn .tv-c{position:absolute;width:26px;height:26px;border:0 solid var(--cy);opacity:.75;z-index:4}
+.tvn .tv-c.tl{top:14px;left:14px;border-top-width:3px;border-left-width:3px}
+.tvn .tv-c.tr{top:14px;right:14px;border-top-width:3px;border-right-width:3px}
+.tvn .tv-c.bl{bottom:14px;left:14px;border-bottom-width:3px;border-left-width:3px}
+.tvn .tv-c.br{bottom:14px;right:14px;border-bottom-width:3px;border-right-width:3px}
+.tvn .tv-controls-bottom{height:24px;grid-template-columns:auto auto 1fr auto;padding:0 6px;gap:12px}
+.tvn .tv-knob{width:22px;height:22px}
+.tvn .tv-knob::after{top:4px;height:7px}
+.tvn .tv-speaker{height:16px}
+.tvn .tv-power{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#8cffb0,#19b45a 60%,#07391c);box-shadow:0 0 8px rgba(25,180,90,.7)}
+.tarrovision.tvn.ancha{grid-template-rows:auto auto auto}
+.tarrovision.tvn.ancha .tv-screen-inner{height:auto;aspect-ratio:16/9}
+.gp-tv.tvw{container-type:size;width:100%}
+.gp-tv .tarrovision.tvn.ancha{height:auto;aspect-ratio:auto;max-width:none;width:calc(min(100cqw - 56px,(min(100cqh,780px) - 118px)*16/9) + 56px)}
+.dual-grid.tvw{position:relative;gap:14px;padding:0 4px 20px}
+.dual-grid.tvw .dual-cell{flex:1 1 0;max-width:none}
+.dual-cell.tvw .tarrovision.tvn.ancha{height:auto;aspect-ratio:auto;width:100%;max-width:none}
+.dual-grid.tvw .dual-vs{position:absolute;left:50%;top:calc(50% - 38px);transform:translate(-50%,-50%);z-index:5;width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;background:var(--dk);border:3px solid var(--ye);box-shadow:0 0 26px rgba(255,210,63,.55)}
+
+</style>
+</head>
+<body>
+
+<header><div class="hdr-logo">RETROTARROS</div><div class="hdr-tag">ESTUDIO · NES COLECCION · 34 JUEGOS · GEN 3</div><div class="hdr-rec"><div class="dot"></div>EN VIVO</div></header>
+
+<div class="deck" id="deck">
+
+<section class="slide active g-nueva"><span class="slide-num">01</span><div class="g-mos" style="--cols:6;--filas:2"><i style="background-image:url('img/punch-out.jpg')"></i><i style="background-image:url('img/super-mario-bros-duck-hunt.jpg')"></i><i style="background-image:url('img/dr-mario.jpg')"></i><i style="background-image:url('img/super-mario-bros-3.jpg')"></i><i style="background-image:url('img/top-gun.jpg')"></i><i class="fb cy"></i><i class="fb ye"></i><i class="fb cy"></i><i style="background-image:url('img/dragon-s-lair.jpg')"></i><i class="fb cy"></i><i style="background-image:url('img/the-legend-of-zelda.jpg')"></i><i style="background-image:url('img/kirby-s-adventure.jpg')"></i></div><div class="g-portada"><div class="g-sello">COLECCION RETROTARROS</div><div class="g-ptag">GENERACION 3 · 8 BITS · NINTENDO · 1983-1994</div><div class="g-ptitle"><span class="vs">COLECCION</span> NES</div><div class="g-psub">EL CATALOGO COMPLETO POR GENERO</div><div class="g-pills"><div class="g-pill mg"><b>34</b><span>JUEGOS</span></div><div class="g-pill cy"><b>6</b><span>CATEGORIAS</span></div><div class="g-pill ye"><b>18</b><span>JOYAS</span></div></div></div></section>
+
+<section class="slide g-nueva"><span class="slide-num">02</span><div class="g-indice"><div class="g-ititle">SELECCIONA TU CATEGORIA</div><div class="g-igrid" style="--cols:3"><div class="g-icard mg"><div class="g-inum">01</div><div class="g-itxt"><div class="g-iname">PLATAFORMAS</div><div class="g-icount"><b>7</b> TITULOS</div></div><div class="g-ithumbs"><img src="img/super-mario-bros-3.jpg" alt=""><img src="img/kirby-s-adventure.jpg" alt=""><b class="fb mg"></b></div></div><div class="g-icard cy"><div class="g-inum">02</div><div class="g-itxt"><div class="g-iname">ACCION</div><div class="g-icount"><b>9</b> TITULOS</div></div><div class="g-ithumbs"><img src="img/the-legend-of-zelda.jpg" alt=""><img src="img/metroid.jpg" alt=""><b class="fb cy"></b></div></div><div class="g-icard ye"><div class="g-inum">03</div><div class="g-itxt"><div class="g-iname">AVENTURA</div><div class="g-icount"><b>5</b> TITULOS</div></div><div class="g-ithumbs"><img src="img/super-mario-bros-duck-hunt.jpg" alt=""><b class="fb ye"></b><img src="img/dragon-s-lair.jpg" alt=""></div></div><div class="g-icard mg"><div class="g-inum">04</div><div class="g-itxt"><div class="g-iname">DEPORTES / LUCHA</div><div class="g-icount"><b>3</b> TITULOS</div></div><div class="g-ithumbs"><img src="img/punch-out.jpg" alt=""><b class="fb mg"></b><b class="fb mg"></b></div></div><div class="g-icard cy"><div class="g-inum">05</div><div class="g-itxt"><div class="g-iname">PUZZLE</div><div class="g-icount"><b>3</b> TITULOS</div></div><div class="g-ithumbs"><img src="img/dr-mario.jpg" alt=""><b class="fb cy"></b><b class="fb cy"></b></div></div><div class="g-icard ye"><div class="g-inum">06</div><div class="g-itxt"><div class="g-iname">ARCADE · SHOOTER · SIM</div><div class="g-icount"><b>7</b> TITULOS</div></div><div class="g-ithumbs"><img src="img/top-gun.jpg" alt=""><b class="fb ye"></b><b class="fb ye"></b></div></div></div><div class="g-itotal">34 JUEGOS · PRESS START</div></div></section>
+
+<section class="slide g-nueva"><span class="slide-num">03</span><div class="g-paneo mg"><div class="g-pcard"><div class="g-pnum">CAT 01/06</div><div class="g-pname">PLATAFORMAS</div><div class="g-pbig">7</div><div class="g-pbigl">TITULOS EN LA COLECCION</div><div class="g-ptease"><span>SIGUEN 3 JOYAS</span><div class="g-pthumbs"><img src="img/super-mario-bros-3.jpg" alt=""><img src="img/kirby-s-adventure.jpg" alt=""><b class="fb mg"></b></div></div></div><div class="gp-tv tvw"><div class="tarrovision tvn ancha"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-bars"></div><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui &middot; 16:9</div></div><i class="tv-c tl"></i><i class="tv-c tr"></i><i class="tv-c bl"></i><i class="tv-c br"></i></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div><div class="tv-power"></div></div></div></div></div></section>
+
+<section class="slide g-nueva"><span class="slide-num">04</span><div class="g-triple mg"><div class="g-thead"><span>PLATAFORMAS</span> · 3 JOYAS DESTACADAS</div><div class="g-tgrid"><div class="g-cell" style="--bg:url('img/super-mario-bros-3.jpg')"><div class="g-celltv"><div class="tarrovision tvn cuatro3"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-bars"></div><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui &middot; 4:3</div></div><i class="tv-c tl"></i><i class="tv-c tr"></i><i class="tv-c bl"></i><i class="tv-c br"></i></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div><div class="tv-power"></div></div></div></div><div class="g-cellinfo"><img class="g-caja" src="img/super-mario-bros-3.jpg" alt=""><div class="g-celltxt"><div class="g-celltag">EN LA COLECCION</div><div class="g-celltitle">SUPER MARIO BROS. 3</div><div class="g-chips"><span class="y">1990</span><span>NINTENDO</span></div></div></div></div><div class="g-cell" style="--bg:url('img/kirby-s-adventure.jpg')"><div class="g-celltv"><div class="tarrovision tvn cuatro3"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-bars"></div><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui &middot; 4:3</div></div><i class="tv-c tl"></i><i class="tv-c tr"></i><i class="tv-c bl"></i><i class="tv-c br"></i></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div><div class="tv-power"></div></div></div></div><div class="g-cellinfo"><img class="g-caja" src="img/kirby-s-adventure.jpg" alt=""><div class="g-celltxt"><div class="g-celltag">EN LA COLECCION</div><div class="g-celltitle">KIRBY'S ADVENTURE</div><div class="g-chips"><span class="y">1993</span><span>NINTENDO</span></div></div></div></div><div class="g-cell nobg"><div class="g-celltv"><div class="tarrovision tvn cuatro3"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-bars"></div><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui &middot; 4:3</div></div><i class="tv-c tl"></i><i class="tv-c tr"></i><i class="tv-c bl"></i><i class="tv-c br"></i></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div><div class="tv-power"></div></div></div></div><div class="g-cellinfo"><div class="g-caja fb mg"><span>DUCKTALES</span></div><div class="g-celltxt"><div class="g-celltag">EN LA COLECCION</div><div class="g-celltitle">DUCKTALES</div><div class="g-chips"><span class="y">1989</span><span>CAPCOM</span></div></div></div></div></div></div></section>
+
+<section class="slide g-nueva"><span class="slide-num">05</span><div class="g-paneo cy"><div class="g-pcard"><div class="g-pnum">CAT 02/06</div><div class="g-pname">ACCION</div><div class="g-pbig">9</div><div class="g-pbigl">TITULOS EN LA COLECCION</div><div class="g-ptease"><span>SIGUEN 3 JOYAS</span><div class="g-pthumbs"><img src="img/the-legend-of-zelda.jpg" alt=""><img src="img/metroid.jpg" alt=""><b class="fb cy"></b></div></div></div><div class="gp-tv tvw"><div class="tarrovision tvn ancha"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-bars"></div><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui &middot; 16:9</div></div><i class="tv-c tl"></i><i class="tv-c tr"></i><i class="tv-c bl"></i><i class="tv-c br"></i></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div><div class="tv-power"></div></div></div></div></div></section>
+
+<section class="slide g-nueva"><span class="slide-num">06</span><div class="g-triple cy"><div class="g-thead"><span>ACCION</span> · 3 JOYAS DESTACADAS</div><div class="g-tgrid"><div class="g-cell" style="--bg:url('img/the-legend-of-zelda.jpg')"><div class="g-celltv"><div class="tarrovision tvn cuatro3"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-bars"></div><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui &middot; 4:3</div></div><i class="tv-c tl"></i><i class="tv-c tr"></i><i class="tv-c bl"></i><i class="tv-c br"></i></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div><div class="tv-power"></div></div></div></div><div class="g-cellinfo"><img class="g-caja" src="img/the-legend-of-zelda.jpg" alt=""><div class="g-celltxt"><div class="g-celltag">EN LA COLECCION</div><div class="g-celltitle">THE LEGEND OF ZELDA</div><div class="g-chips"><span class="y">1987</span><span>NINTENDO</span></div></div></div></div><div class="g-cell" style="--bg:url('img/metroid.jpg')"><div class="g-celltv"><div class="tarrovision tvn cuatro3"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-bars"></div><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui &middot; 4:3</div></div><i class="tv-c tl"></i><i class="tv-c tr"></i><i class="tv-c bl"></i><i class="tv-c br"></i></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div><div class="tv-power"></div></div></div></div><div class="g-cellinfo"><img class="g-caja" src="img/metroid.jpg" alt=""><div class="g-celltxt"><div class="g-celltag">EN LA COLECCION</div><div class="g-celltitle">METROID</div><div class="g-chips"><span class="y">1987</span><span>NINTENDO</span></div></div></div></div><div class="g-cell nobg"><div class="g-celltv"><div class="tarrovision tvn cuatro3"><div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div><div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-bars"></div><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui &middot; 4:3</div></div><i class="tv-c tl"></i><i class="tv-c tr"></i><i class="tv-c bl"></i><i class="tv-c br"></i></div></div><div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div><div class="tv-power"></div></div></div></div><div class="g-cellinfo"><div class="g-caja fb cy"><span>MEGA MAN 5</span></div><div class="g-celltxt"><div class="g-celltag">EN LA COLECCION</div><div class="g-celltitle">MEGA MAN 5</div><div class="g-chips"><span class="y">1992</span><span>CAPCOM</span></div></div></div></div></div></div></section>
+
+<section class="slide g-nueva"><span class="slide-num">07</span><div class="g-hard"><div class="g-htitle">HARDWARE</div><div class="g-hsub">EL FIERRO NES DEL ESTUDIO</div><div class="g-hgrid"><div class="g-hcard mg"><div class="g-hfoto"><span>FOTO DEL EQUIPO</span></div><div class="g-hname">NES ACTION SET</div><div class="g-chips"><span class="y">STANDARD · 1988</span></div><p>El pack gris clasico con la Zapper y el combo Super Mario Bros / Duck Hunt. Asi entro la NES a millones de casas.</p></div><div class="g-hcard cy"><div class="g-hfoto"><span>FOTO DEL EQUIPO</span></div><div class="g-hname">NES CLASSIC EDITION</div><div class="g-chips"><span class="y">MINI · 2016</span></div><p>La reedicion mini de Nintendo con 30 juegos via HDMI. El homenaje moderno a la consola que empezo todo.</p></div><div class="g-hcard ye"><div class="g-hfoto"><span>FOTO DEL EQUIPO</span></div><div class="g-hname">LA ZAPPER</div><div class="g-chips"><span class="y">LIGHT GUN</span></div><p>La pistola naranja de Duck Hunt y Barker Bill's. Apuntar a la tele de tubo era pura magia ochentera.</p></div></div></div></section>
+
+<section class="slide g-nueva"><span class="slide-num">08</span><div class="g-bal"><div class="g-btitle">BALANCE FINAL</div><div class="g-bsub">LA COLECCION EN NUMEROS</div><div class="g-bgrid"><div class="g-bstats"><div class="g-stat mg"><h3>JUEGOS</h3><b>34</b><p>cartuchos en la coleccion</p></div><div class="g-stat cy"><h3>CATEGORIAS</h3><b>6</b><p>generos cubiertos</p></div><div class="g-stat ye"><h3>JOYAS</h3><b>18</b><p>destacadas en gameplay</p></div></div><div class="g-bchart"><div class="g-bct">JUEGOS POR CATEGORIA</div><div class="g-brow mg"><span class="g-bl">PLATAFORMAS</span><span class="g-bt"><i style="width:78%"></i></span><b>7</b></div><div class="g-brow cy"><span class="g-bl">ACCION</span><span class="g-bt"><i style="width:100%"></i></span><b>9</b></div><div class="g-brow ye"><span class="g-bl">AVENTURA</span><span class="g-bt"><i style="width:56%"></i></span><b>5</b></div><div class="g-brow mg"><span class="g-bl">DEPORTES / LUCHA</span><span class="g-bt"><i style="width:33%"></i></span><b>3</b></div><div class="g-brow cy"><span class="g-bl">PUZZLE</span><span class="g-bt"><i style="width:33%"></i></span><b>3</b></div><div class="g-brow ye"><span class="g-bl">ARCADE · SHOOTER · SIM</span><span class="g-bt"><i style="width:78%"></i></span><b>7</b></div><div class="g-bx"><div class="g-xcard mg"><h3>CONSOLA</h3><b>NES</b><p>la que empezo todo</p></div><div class="g-xcard cy"><h3>STUDIO REY</h3><b>CAPCOM</b><p>rey 3rd-party del NES</p></div></div></div></div></div></section>
+
+<section class="slide g-nueva"><span class="slide-num">09</span><div class="g-mos tenue" style="--cols:6;--filas:2"><i style="background-image:url('img/punch-out.jpg')"></i><i style="background-image:url('img/super-mario-bros-duck-hunt.jpg')"></i><i style="background-image:url('img/dr-mario.jpg')"></i><i style="background-image:url('img/super-mario-bros-3.jpg')"></i><i style="background-image:url('img/top-gun.jpg')"></i><i class="fb cy"></i><i class="fb ye"></i><i class="fb cy"></i><i style="background-image:url('img/dragon-s-lair.jpg')"></i><i class="fb cy"></i><i style="background-image:url('img/the-legend-of-zelda.jpg')"></i><i style="background-image:url('img/kirby-s-adventure.jpg')"></i></div><div class="g-cierre"><div class="g-cpre">PROXIMO CAPITULO</div><div class="g-ctitle">SIGUE LA SAGA</div><div class="g-csig"><div class="g-cthumb"><span>RANKING</span><b>NES</b></div><div class="g-ctxt"><div class="g-csl">SIGUE CON</div><div class="g-cname">NES TOP MUNDIAL</div></div></div><div class="g-cta"><span class="mg">CUENTANOS TU FAVORITA</span><span class="cy">PIDE OTRA CONSOLA</span><span class="ye">SUSCRIBETE</span></div></div></section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 21</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+});
+go(0);
+</script>
+
+</body>
+</html>
