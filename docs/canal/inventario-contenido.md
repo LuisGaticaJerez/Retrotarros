@@ -119,7 +119,7 @@ Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom
 **Specials (2):** Día del Padre (`retro-padres-gamer`), Mes del Mar / Glorias Navales
 (`retro-glorias-navales`).
 
-**Colecciones (4, al día):** N64, SNES, NES, PS Vita. **Reforges NES y N64 con gráfica nueva armados el 2026-11-10, sin grabar** (`studio/colecciones/<slug>.html`, kit y discusión en `docs/`).
+**Colecciones (4, al día):** N64, SNES, NES, PS Vita. **Reforges NES, N64 y SNES con gráfica nueva armados el 2026-11-10, sin grabar** (`studio/colecciones/<slug>.html`, kit y discusión en `docs/`).
 
 **Abriendo el tarro (1):** Los tesoros numismáticos de Arturo.
 

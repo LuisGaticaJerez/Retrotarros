@@ -239,6 +239,13 @@ def _escribir_lista_md(data: dict, out_slug: str) -> Path:
             norm_juegos = [_norm(g) for g in juegos]
             joya_idx = set()
             for j in c.get("joyas", []):
+                if j.get("juego"):  # titulo exacto del juego en la lista (cuando la joya va abreviada)
+                    nx = _norm(j["juego"])
+                    for i, ng in enumerate(norm_juegos):
+                        if ng == nx and i not in joya_idx:
+                            joya_idx.add(i)
+                            break
+                    continue
                 nj = _norm(j["title"])
                 best, best_score = None, 0
                 for i, ng in enumerate(norm_juegos):

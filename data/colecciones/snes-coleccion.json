@@ -1,229 +1,463 @@
 {
-  "doc_title": "SNES · Coleccion completa",
-  "header_tag": "ESTUDIO · SNES COLECCION · 110 JUEGOS · GEN 4",
-  "portada": {
-    "tag": "GENERACION 4 · 16 BITS · NINTENDO · 1990-1996",
-    "title_vs": "COLECCION",
-    "title_rest": "SNES",
-    "sub": "EL CATALOGO COMPLETO POR GENERO",
-    "count": "110 JUEGOS · 9 CATEGORIAS · 27 JOYAS"
-  },
-  "categorias": [
+ "doc_title": "SNES · Coleccion completa",
+ "header_tag": "ESTUDIO · SNES COLECCION · 110 JUEGOS · GEN 4",
+ "portada": {
+  "tag": "GENERACION 4 · 16 BITS · NINTENDO · 1990-1996",
+  "title_vs": "COLECCION",
+  "title_rest": "SNES",
+  "sub": "EL CATALOGO COMPLETO POR GENERO",
+  "count": "110 JUEGOS · 9 CATEGORIAS · 27 JOYAS · HARDWARE"
+ },
+ "categorias": [
+  {
+   "name": "PLATAFORMAS",
+   "count": 32,
+   "joyas": [
     {
-      "name": "PLATAFORMAS",
-      "count": 32,
-      "joyas": [
-        {
-          "title": "SUPER MARIO WORLD",
-          "ano": 1990,
-          "editor": "NINTENDO"
-        },
-        {
-          "title": "DONKEY KONG COUNTRY",
-          "ano": 1994,
-          "editor": "RARE"
-        },
-        {
-          "title": "YOSHI'S ISLAND",
-          "ano": 1995,
-          "editor": "NINTENDO"
-        }
-      ]
+     "title": "SUPER MARIO WORLD",
+     "ano": 1991,
+     "editor": "NINTENDO",
+     "juego": "Super Mario World",
+     "nota": "Editor: Nintendo. Desarrollo: Nintendo EAD. Genero: Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: 1991 (NTSC USA)."
     },
     {
-      "name": "LUCHA",
-      "count": 17,
-      "joyas": [
-        {
-          "title": "STREET FIGHTER II",
-          "ano": 1992,
-          "editor": "CAPCOM"
-        },
-        {
-          "title": "MORTAL KOMBAT II",
-          "ano": 1994,
-          "editor": "MIDWAY"
-        },
-        {
-          "title": "KILLER INSTINCT",
-          "ano": 1995,
-          "editor": "RARE"
-        }
-      ]
+     "title": "DONKEY KONG COUNTRY",
+     "ano": 1994,
+     "editor": "NINTENDO",
+     "juego": "Donkey Kong Country",
+     "nota": "Editor: Nintendo. Desarrollo: Rare. Genero: Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: 1994 (NTSC USA)."
     },
     {
-      "name": "DEPORTES",
-      "count": 14,
-      "joyas": [
-        {
-          "title": "NBA JAM T.E.",
-          "ano": 1995,
-          "editor": "MIDWAY"
-        },
-        {
-          "title": "ISS DELUXE",
-          "ano": 1995,
-          "editor": "KONAMI"
-        },
-        {
-          "title": "SUPER TENNIS",
-          "ano": 1991,
-          "editor": "TONKIN HOUSE"
-        }
-      ]
-    },
-    {
-      "name": "ACCION",
-      "count": 12,
-      "joyas": [
-        {
-          "title": "CONTRA III",
-          "ano": 1992,
-          "editor": "KONAMI"
-        },
-        {
-          "title": "SUPER STAR WARS",
-          "ano": 1992,
-          "editor": "JVC"
-        },
-        {
-          "title": "X-MEN: MUTANT APOCALYPSE",
-          "ano": 1994,
-          "editor": "CAPCOM"
-        }
-      ]
-    },
-    {
-      "name": "ARCADE",
-      "count": 10,
-      "joyas": [
-        {
-          "title": "SUPER R-TYPE",
-          "ano": 1991,
-          "editor": "IREM"
-        },
-        {
-          "title": "WILD GUNS",
-          "ano": 1994,
-          "editor": "NATSUME"
-        },
-        {
-          "title": "AERO FIGHTERS",
-          "ano": 1994,
-          "editor": "VIDEO SYSTEM"
-        }
-      ]
-    },
-    {
-      "name": "AVENTURA / RPG",
-      "count": 9,
-      "joyas": [
-        {
-          "title": "A LINK TO THE PAST",
-          "ano": 1991,
-          "editor": "NINTENDO"
-        },
-        {
-          "title": "SUPER MARIO RPG",
-          "ano": 1996,
-          "editor": "SQUARE"
-        },
-        {
-          "title": "MYSTICAL NINJA",
-          "ano": 1991,
-          "editor": "KONAMI"
-        }
-      ]
-    },
-    {
-      "name": "BEAT 'EM UP",
-      "count": 8,
-      "joyas": [
-        {
-          "title": "FINAL FIGHT",
-          "ano": 1991,
-          "editor": "CAPCOM"
-        },
-        {
-          "title": "CAPTAIN COMMANDO",
-          "ano": 1995,
-          "editor": "CAPCOM"
-        },
-        {
-          "title": "BATMAN RETURNS",
-          "ano": 1993,
-          "editor": "KONAMI"
-        }
-      ]
-    },
-    {
-      "name": "PUZZLE",
-      "count": 5,
-      "joyas": [
-        {
-          "title": "TETRIS 2",
-          "ano": 1994,
-          "editor": "NINTENDO"
-        },
-        {
-          "title": "WARIO'S WOODS",
-          "ano": 1994,
-          "editor": "NINTENDO"
-        },
-        {
-          "title": "KIRBY'S AVALANCHE",
-          "ano": 1995,
-          "editor": "NINTENDO"
-        }
-      ]
-    },
-    {
-      "name": "CARRERAS",
-      "count": 3,
-      "joyas": [
-        {
-          "title": "SUPER MARIO KART",
-          "ano": 1992,
-          "editor": "NINTENDO"
-        },
-        {
-          "title": "F-ZERO",
-          "ano": 1990,
-          "editor": "NINTENDO"
-        },
-        {
-          "title": "RPM RACING",
-          "ano": 1991,
-          "editor": "INTERPLAY"
-        }
-      ]
+     "title": "YOSHI'S ISLAND",
+     "ano": 1995,
+     "editor": "NINTENDO",
+     "juego": "Super Mario World 2: Yoshi's Island",
+     "nota": "Editor: Nintendo. Desarrollo: Nintendo EAD. Genero: Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: 1995 (NTSC USA)."
     }
-  ],
-  "balance": {
-    "row1": [
-      {
-        "label": "TOTAL",
-        "big": "110",
-        "sub": "juegos en la coleccion",
-        "color": "mg"
-      },
-      {
-        "label": "CATEGORIAS",
-        "big": "9",
-        "sub": "generos cubiertos",
-        "color": "cy"
-      },
-      {
-        "label": "JOYAS",
-        "big": "27",
-        "sub": "destacadas en gameplay",
-        "color": "ye"
-      }
-    ]
+   ],
+   "juegos": [
+    "Addams Family",
+    "Aero the Acro-Bat 2",
+    "Animaniacs",
+    "Bugs Bunny Rabbit Rampage",
+    "Chuck Rock",
+    "Donkey Kong Country",
+    "Donkey Kong Country 2: Diddy's Kong Quest",
+    "Donkey Kong Country 3: Dixie Kong's Double Trouble!",
+    "E. Super Donkey Kong",
+    "Earthworm Jim",
+    "Earthworm Jim 2",
+    "Flintstones",
+    "Harley's Humongous Adventure",
+    "Home Alone",
+    "Jungle Book",
+    "Krusty's Super Fun House",
+    "Lion King",
+    "Maui Mallard in Cold Shadow",
+    "Mickey Mania",
+    "Pinocchio",
+    "Pitfall: The Mayan Adventure",
+    "Porky Pig's Haunted Holiday",
+    "Radical Rex",
+    "Simpsons: Bart's Nightmare",
+    "Speedy Gonzales: Los Gatos Bandidos",
+    "Super Bonk",
+    "Super Mario All-Stars",
+    "Super Mario World",
+    "Super Mario World 2: Yoshi's Island",
+    "Taz-Mania",
+    "Tiny Toon Adventures: Buster Busts Loose!",
+    "Toy Story"
+   ]
   },
-  "cierre": {
-    "pre": "PROXIMO CAPITULO",
-    "title": "SIGUE LA SAGA",
-    "sub": "Cuentanos cual fue tu favorita en los comentarios. Si quieres que cubramos otra consola, deja la sugerencia. Suscribete para no perderte el panorama SNES."
+  {
+   "name": "LUCHA",
+   "count": 17,
+   "joyas": [
+    {
+     "title": "STREET FIGHTER II",
+     "ano": 1992,
+     "editor": "CAPCOM",
+     "juego": "Street Fighter II",
+     "nota": "Editor: Capcom. Desarrollo: Capcom. Genero: Fighting. En la coleccion: cartucho suelto. Ano de lanzamiento: 1992 (NTSC USA)."
+    },
+    {
+     "title": "MORTAL KOMBAT II",
+     "ano": 1994,
+     "editor": "ACCLAIM",
+     "juego": "Mortal Kombat II",
+     "nota": "Editor: Acclaim Entertainment. Desarrollo: Sculptured Software. Genero: Fighting. En la coleccion: cartucho suelto. Ano de lanzamiento: 1994 (NTSC USA)."
+    },
+    {
+     "title": "KILLER INSTINCT",
+     "ano": 1995,
+     "editor": "NINTENDO",
+     "juego": "Killer Instinct",
+     "nota": "Editor: Nintendo. Desarrollo: Rare. Genero: Fighting. En la coleccion: cartucho suelto. Ano de lanzamiento: 1995 (NTSC USA)."
+    }
+   ],
+   "juegos": [
+    "Art of Fighting",
+    "Fatal Fury 2",
+    "Killer Instinct",
+    "Mighty Morphin Power Rangers: The Fighting Edition",
+    "Mortal Kombat",
+    "Mortal Kombat 3",
+    "Mortal Kombat II",
+    "Power Instinct",
+    "Samurai Shodown",
+    "Shaq-Fu",
+    "Street Fighter Alpha 2",
+    "Street Fighter II",
+    "Street Fighter II Turbo",
+    "Super Street Fighter II",
+    "Teenage Mutant Ninja Turtles: Tournament Fighters",
+    "Ultimate Mortal Kombat 3",
+    "World Heroes 2"
+   ]
+  },
+  {
+   "name": "DEPORTES",
+   "count": 14,
+   "joyas": [
+    {
+     "title": "NBA JAM T.E.",
+     "ano": 1995,
+     "editor": "ACCLAIM",
+     "juego": "NBA Jam Tournament Edition",
+     "nota": "Editor: Acclaim Entertainment. Desarrollo: Iguana Entertainment. Genero: Sports. En la coleccion: cartucho suelto. Ano de lanzamiento: 1995 (NTSC USA)."
+    },
+    {
+     "title": "ISS DELUXE",
+     "ano": 1995,
+     "editor": "KONAMI",
+     "juego": "International Superstar Soccer Deluxe",
+     "nota": "Editor: Konami. Desarrollo: Konami. Genero: Sports. En la coleccion: cartucho suelto. Ano de lanzamiento: 1995 (NTSC USA)."
+    },
+    {
+     "title": "SUPER TENNIS",
+     "ano": 1991,
+     "editor": "NINTENDO",
+     "juego": "Super Tennis",
+     "nota": "Editor: Nintendo. Desarrollo: Nintendo. Genero: Sports. En la coleccion: cartucho suelto. Ano de lanzamiento: 1991 (NTSC USA)."
+    }
+   ],
+   "juegos": [
+    "Campeonato Brasileiro 95",
+    "FIFA International Soccer",
+    "George Foreman's KO Boxing",
+    "Head-On Soccer",
+    "International Superstar Soccer",
+    "International Superstar Soccer Deluxe",
+    "Looney Tunes B-Ball",
+    "Madden NFL '94",
+    "NBA Jam Tournament Edition",
+    "NCAA Basketball",
+    "Ronaldinho Soccer 98",
+    "Super Goal! 2",
+    "Super Soccer",
+    "Super Tennis"
+   ]
+  },
+  {
+   "name": "ACCION",
+   "count": 12,
+   "joyas": [
+    {
+     "title": "CONTRA III",
+     "ano": 1992,
+     "editor": "KONAMI",
+     "juego": "Contra III: The Alien Wars",
+     "nota": "Editor: Konami. Desarrollo: Konami. Genero: Action, Platformer, Shoot 'em up. En la coleccion: cartucho suelto. Ano de lanzamiento: 1992 (NTSC USA)."
+    },
+    {
+     "title": "SUPER STAR WARS",
+     "ano": 1992,
+     "editor": "JVC",
+     "juego": "Super Star Wars",
+     "nota": "Editor: JVC Musical Industries. Desarrollo: Sculptured Software. Genero: Action. En la coleccion: cartucho suelto. Ano de lanzamiento: 1992 (NTSC USA)."
+    },
+    {
+     "title": "X-MEN: MUTANT APOCALYPSE",
+     "ano": 1994,
+     "editor": "CAPCOM",
+     "juego": "X-Men: Mutant Apocalypse",
+     "nota": "Editor: Capcom (el CSV dice Avalon Hill, dato dudoso). Desarrollo: Capcom. Genero: Action. En la coleccion: cartucho suelto. Ano de lanzamiento: 1994 (NTSC USA)."
+    }
+   ],
+   "juegos": [
+    "Beavis and Butt-head",
+    "Contra III: The Alien Wars",
+    "Daffy Duck: The Marvin Missions",
+    "Lawnmower Man",
+    "Mega Man X",
+    "Spider-Man & X-Men: Arcade's Revenge",
+    "Super Star Wars",
+    "Super Star Wars: Return of the Jedi",
+    "Super Star Wars: The Empire Strikes Back [Majesco]",
+    "Terminator 2: Judgment Day",
+    "Warlock",
+    "X-Men: Mutant Apocalypse"
+   ]
+  },
+  {
+   "name": "ARCADE",
+   "count": 10,
+   "joyas": [
+    {
+     "title": "SUPER R-TYPE",
+     "ano": 1991,
+     "editor": "NINTENDO",
+     "juego": "Super R-Type",
+     "nota": "Editor: Nintendo. Desarrollo: Irem. Genero: Shoot 'em up. En la coleccion: cartucho suelto. Ano de lanzamiento: 1991 (NTSC USA)."
+    },
+    {
+     "title": "WILD GUNS",
+     "ano": 1995,
+     "editor": "NATSUME",
+     "juego": "Wild Guns",
+     "nota": "Editor: Natsume. Desarrollo: Natsume. Genero: Action, First-person shooter. En la coleccion: cartucho suelto. Ano de lanzamiento: 1995 (NTSC USA)."
+    },
+    {
+     "title": "AERO FIGHTERS",
+     "ano": 1994,
+     "editor": "TECMO",
+     "juego": "Aero Fighters",
+     "nota": "Editor: Tecmo. Desarrollo: Video System Co.. Genero: Shoot 'em up. En la coleccion: cartucho suelto. Ano de lanzamiento: 1994 (NTSC USA)."
+    }
+   ],
+   "juegos": [
+    "Aero Fighters",
+    "Battle Clash",
+    "Bazooka Blitzkrieg",
+    "Joe & Mac",
+    "Jungle Strike",
+    "Metal Combat: Falcon's Revenge",
+    "Super Pinball: Behind the Mask",
+    "Super R-Type",
+    "Wild Guns",
+    "Williams Arcade's Greatest Hits"
+   ],
+   "notas": [
+    "Super Scope: Battle Clash, Bazooka Blitzkrieg y Metal Combat (Falcon's Revenge) se juegan con la bazuca. Super Scope 6 va en Puzzle.",
+    "Los 10 de la categoria: Aero Fighters, Battle Clash, Bazooka Blitzkrieg, Joe & Mac, Jungle Strike, Metal Combat: Falcon's Revenge, Super Pinball: Behind the Mask, Super R-Type, Wild Guns, Williams Arcade's Greatest Hits."
+   ]
+  },
+  {
+   "name": "AVENTURA / RPG",
+   "count": 9,
+   "joyas": [
+    {
+     "title": "A LINK TO THE PAST",
+     "ano": 1992,
+     "editor": "NINTENDO",
+     "juego": "Legend of Zelda: A Link to the Past",
+     "nota": "Editor: Nintendo. Desarrollo: Nintendo EAD. Genero: Action, Adventure. En la coleccion: cartucho suelto. Ano de lanzamiento: 1992 (NTSC USA)."
+    },
+    {
+     "title": "SUPER MARIO RPG",
+     "ano": 1996,
+     "editor": "NINTENDO",
+     "juego": "Super Mario RPG: Legend of the Seven Stars",
+     "nota": "Editor: Nintendo. Desarrollo: Squaresoft. Genero: RPG, Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: 1996 (NTSC USA)."
+    },
+    {
+     "title": "MYSTICAL NINJA",
+     "ano": 1992,
+     "editor": "KONAMI",
+     "juego": "Legend of the Mystical Ninja",
+     "nota": "Editor: Konami. Desarrollo: Konami. Genero: Action, Adventure. En la coleccion: cartucho suelto. Ano de lanzamiento: 1992 (NTSC USA)."
+    }
+   ],
+   "juegos": [
+    "Addams Family Values",
+    "Flashback: The Quest for Identity",
+    "Jurassic Park",
+    "Legend of the Mystical Ninja",
+    "Legend of Zelda: A Link to the Past",
+    "Pac-Man 2: The New Adventures",
+    "Scooby-Doo Mystery",
+    "Super Mario RPG: Legend of the Seven Stars",
+    "Timon & Pumbaa's Jungle Games"
+   ]
+  },
+  {
+   "name": "BEAT 'EM UP",
+   "count": 8,
+   "joyas": [
+    {
+     "title": "FINAL FIGHT",
+     "ano": 1991,
+     "editor": "CAPCOM",
+     "juego": "Final Fight",
+     "nota": "Editor: Capcom. Desarrollo: Capcom. Genero: Action, Fighting. En la coleccion: cartucho suelto. Ano de lanzamiento: 1991 (NTSC USA)."
+    },
+    {
+     "title": "CAPTAIN COMMANDO",
+     "ano": 1995,
+     "editor": "CAPCOM",
+     "juego": "Captain Commando",
+     "nota": "Editor: Capcom. Desarrollo: Capcom. Genero: Action, Fighting, Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: 1995 (NTSC USA)."
+    },
+    {
+     "title": "BATMAN RETURNS",
+     "ano": 1993,
+     "editor": "KONAMI",
+     "juego": "Batman Returns",
+     "nota": "Editor: Konami. Desarrollo: Konami. Genero: Action, Fighting. En la coleccion: cartucho suelto. Ano de lanzamiento: 1993 (NTSC USA)."
+    }
+   ],
+   "juegos": [
+    "Batman Forever",
+    "Batman Returns",
+    "Battletoads & Double Dragon",
+    "Captain Commando",
+    "Death and Return of Superman",
+    "Final Fight",
+    "Final Fight 3",
+    "Tick"
+   ]
+  },
+  {
+   "name": "PUZZLE",
+   "count": 5,
+   "joyas": [
+    {
+     "title": "TETRIS 2",
+     "ano": 1994,
+     "editor": "NINTENDO",
+     "juego": "Tetris 2",
+     "nota": "Editor: Nintendo. Desarrollo: Nintendo. Genero: Puzzle. En la coleccion: cartucho suelto. Ano de lanzamiento: 1994 (NTSC USA)."
+    },
+    {
+     "title": "WARIO'S WOODS",
+     "ano": 1994,
+     "editor": "NINTENDO",
+     "juego": "Wario's Woods",
+     "nota": "Editor: Nintendo. Desarrollo: Intelligent Systems. Genero: Puzzle. En la coleccion: cartucho suelto. Ano de lanzamiento: 1994 (NTSC USA)."
+    },
+    {
+     "title": "KIRBY'S AVALANCHE",
+     "ano": 1995,
+     "editor": "NINTENDO",
+     "juego": "Kirby's Avalanche",
+     "nota": "Editor: Nintendo. Desarrollo: Compile. Genero: Puzzle. En la coleccion: cartucho suelto. Ano de lanzamiento: 1995 (NTSC USA)."
+    }
+   ],
+   "juegos": [
+    "Kirby's Avalanche",
+    "Mario is Missing!",
+    "Super Scope 6",
+    "Tetris 2",
+    "Wario's Woods"
+   ],
+   "notas": [
+    "Super Scope 6 es el cartucho de la bazuca que mas puzzle tiene; por eso entra aqui y no en Arcade.",
+    "Los 5 de la categoria: Kirby's Avalanche, Mario is Missing!, Super Scope 6, Tetris 2, Wario's Woods."
+   ]
+  },
+  {
+   "name": "CARRERAS",
+   "count": 3,
+   "joyas": [
+    {
+     "title": "SUPER MARIO KART",
+     "ano": 1992,
+     "editor": "NINTENDO",
+     "juego": "Super Mario Kart",
+     "nota": "Editor: Nintendo. Desarrollo: Nintendo EAD. Genero: Racing. En la coleccion: cartucho suelto. Ano de lanzamiento: 1992 (NTSC USA)."
+    },
+    {
+     "title": "F-ZERO",
+     "ano": 1991,
+     "editor": "NINTENDO",
+     "juego": "F-Zero",
+     "nota": "Editor: Nintendo. Desarrollo: Nintendo EAD. Genero: Racing. En la coleccion: cartucho suelto. Ano de lanzamiento: 1991 (NTSC USA)."
+    },
+    {
+     "title": "RPM RACING",
+     "ano": 1991,
+     "editor": "INTERPLAY",
+     "juego": "RPM Racing",
+     "nota": "Editor: Interplay Entertainment. Desarrollo: Blizzard Entertainment. Genero: Racing. En la coleccion: cartucho suelto. Ano de lanzamiento: 1991 (NTSC USA)."
+    }
+   ],
+   "juegos": [
+    "F-Zero",
+    "RPM Racing",
+    "Super Mario Kart"
+   ]
   }
+ ],
+ "balance": {
+  "row1": [
+   {
+    "label": "JUEGOS",
+    "big": "110",
+    "sub": "cartuchos en la coleccion",
+    "color": "mg"
+   },
+   {
+    "label": "CATEGORIAS",
+    "big": "9",
+    "sub": "generos cubiertos",
+    "color": "cy"
+   },
+   {
+    "label": "JOYAS",
+    "big": "27",
+    "sub": "destacadas en gameplay",
+    "color": "ye"
+   }
+  ],
+  "row2": [
+   {
+    "label": "CONSOLAS",
+    "big": "3",
+    "sub": "variantes en el estudio",
+    "color": "mg"
+   },
+   {
+    "label": "EDITOR",
+    "big": "NINTENDO",
+    "sub": "22 juegos de la coleccion",
+    "color": "cy"
+   }
+  ]
+ },
+ "cierre": {
+  "pre": "PROXIMO CAPITULO",
+  "title": "SIGUE LA SAGA",
+  "sub": "Cuentanos cual fue tu favorita en los comentarios. Si quieres que cubramos otra consola, deja la sugerencia. Suscribete para no perderte lo que viene en el canal."
+ },
+ "grafica": "nueva",
+ "tarrovision": "nueva",
+ "hardware_titulo": "HARDWARE",
+ "hardware_sub": "EL FIERRO SNES DEL ESTUDIO",
+ "hardware": [
+  {
+   "name": "SUPER NINTENDO",
+   "tag": "STANDARD · 1991",
+   "color": "mg",
+   "desc": "La consola gris de la coleccion, completa en caja. La Super Nintendo llego a Norteamerica en agosto de 1991."
+  },
+  {
+   "name": "SNES DONKEY KONG SET",
+   "tag": "PACK · DKC",
+   "color": "cy",
+   "desc": "El pack de la consola con Donkey Kong Country, el juego que mostro los graficos pre-renderizados de Rare."
+  },
+  {
+   "name": "SNES CLASSIC EDITION",
+   "tag": "MINI · 2017",
+   "color": "ye",
+   "desc": "La reedicion mini de Nintendo con 21 juegos y salida HDMI. El homenaje moderno a la consola de 16 bits."
+  },
+  {
+   "name": "SUPER GAME BOY",
+   "tag": "ACCESORIO · 1994",
+   "color": "mg",
+   "desc": "El adaptador que corre los cartuchos de Game Boy en la tele y hace de puente entre las dos consolas."
+  }
+ ]
 }
