@@ -120,8 +120,12 @@ def test_cinematica_suma_tv_16_9_y_conserva_la_grafica():
     assert 'class="trama con-tv"' in html and 'class="tr-tv"' in html
     assert "tarrovision tvn ancha" in html and ".tarrovision.tvn.ancha" in html   # TV 16:9 y su CSS, aunque el DATA no la pida
     assert html.count('class="tr-acto"') == 3 and "tr-premisa" in html and 'class="tr-p"' in html and "SIN SPOILERS" in html
-    # sin cinematica no hay TV en la slide
-    sin = _generar(_con_trama())
+    # por defecto (sin la marca) la slide lleva TV; solo "cinematica": False la quita
+    por_defecto = _generar(_con_trama())
+    assert 'class="trama con-tv"' in por_defecto and 'class="tr-tv"' in por_defecto
+    d_sin = _con_trama()
+    d_sin["trama"]["cinematica"] = False
+    sin = _generar(d_sin)
     assert 'class="trama con-tv"' not in sin and 'class="tr-tv"' not in sin
 
 

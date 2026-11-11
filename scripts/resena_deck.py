@@ -270,8 +270,8 @@ def _trama(data: dict) -> dict | None:
     """Datos de la slide LA TRAMA (opcional: solo si el juego tiene lore que contar). Devuelve el
     dict validado o None si no hay `trama` o esta mal formado (el lint avisa en ese caso).
     Forma: {"titulo": "LA TRAMA" (opcional), "premisa": str, "actos": [[titulo, texto] x3],
-    "personajes": [[nombre, rol], ...] (opcional, hasta 4), "cinematica": True (opcional)}.
-    Con `cinematica` la slide suma una TarroVision 16:9 a la izquierda para montar la cinematica
+    "personajes": [[nombre, rol], ...] (opcional, hasta 4), "cinematica": False (opcional)}.
+    La slide lleva SIEMPRE (Luis 2026-11-11) una TarroVision 16:9 a la izquierda para montar la cinematica
     y la grafica de la trama pasa a una columna a la derecha (no se pierde nada)."""
     t = data.get("trama")
     if not isinstance(t, dict) or not isinstance(t.get("premisa"), str) or not t["premisa"].strip():
@@ -283,6 +283,12 @@ def _trama(data: dict) -> dict | None:
                for a in actos):
         return None
     return t
+
+
+def _con_tv(t: dict) -> bool:
+    """La slide LA TRAMA lleva TarroVision 16:9 por defecto (Luis 2026-11-11: si hablamos harto de
+    la trama hay que mostrar mas que letras). Solo se apaga con `"cinematica": False` explicito."""
+    return t.get("cinematica") is not False
 
 
 def _slide_trama(num: int, data: dict) -> str:
@@ -300,7 +306,7 @@ def _slide_trama(num: int, data: dict) -> str:
             if isinstance(p, (list, tuple)) and len(p) >= 2 and isinstance(p[0], str) and isinstance(p[1], str)]
     personajes = ('<div class="tr-pers">' + "".join(
         f'<div class="tr-p"><b>{_esc(p[0].upper())}</b><i>{_esc(p[1])}</i></div>' for p in pers) + "</div>") if pers else ""
-    if t.get("cinematica") is True:
+    if _con_tv(t):
         actos_v = "".join(
             f'<div class="tr-acto"><div class="tr-n">{i}</div><div class="tr-act-t">'
             f'<div class="tr-at">{_esc(a[0].upper())}</div><div class="tr-atxt">{_esc(a[1])}</div></div></div>'
@@ -788,7 +794,7 @@ def generar_resena(data: dict, out_slug: str, lint: bool = True) -> Path:
     css += TV.css(TV.variante(data))
     if _trama(data):
         css += CSS_TRAMA
-        if _trama(data).get("cinematica") is True and TV.variante(data) != "ancha":
+        if _con_tv(_trama(data)) and TV.variante(data) != "ancha":
             css += TV.css("ancha")   # la cinematica usa siempre la TV 16:9
     if data.get("por_confirmar"):
         css += CSS_POR_CONFIRMAR
