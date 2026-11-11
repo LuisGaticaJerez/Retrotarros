@@ -16,18 +16,28 @@
         {
           "title": "GOLDENEYE 007",
           "ano": 1997,
-          "editor": "RARE"
+          "editor": "RARE",
+          "nota": "Editor: Nintendo. Desarrollo: Rare. Genero: Action, First-person shooter, Stealth. En la coleccion: cartucho suelto. Ano de lanzamiento: 1997 (NTSC USA)."
         },
         {
           "title": "PERFECT DARK",
           "ano": 2000,
-          "editor": "RARE"
+          "editor": "RARE",
+          "nota": "Editor: Rare. Desarrollo: Rare. Genero: Action, First-person shooter, Stealth. En la coleccion: cartucho suelto. Ano de lanzamiento: 2000 (NTSC USA)."
         },
         {
           "title": "TUROK",
           "ano": 1997,
-          "editor": "IGUANA"
+          "editor": "IGUANA",
+          "nota": "Editor: Acclaim Entertainment. Desarrollo: Iguana Entertainment. Genero: First-person shooter. En la coleccion: cartucho suelto. Ano de lanzamiento: 1997 (NTSC USA)."
         }
+      ],
+      "juegos": [
+        "Duke Nukem 64",
+        "GoldenEye 007",
+        "Perfect Dark",
+        "South Park",
+        "Turok: Dinosaur Hunter"
       ]
     },
     {
@@ -37,18 +47,30 @@
         {
           "title": "JET FORCE GEMINI",
           "ano": 1999,
-          "editor": "RARE"
+          "editor": "RARE",
+          "nota": "Editor: Rare. Desarrollo: Rare. Genero: Action, Adventure, Third-person shooter. En la coleccion: cartucho suelto. Ano de lanzamiento: 1999 (NTSC USA)."
         },
         {
           "title": "BLAST CORPS",
           "ano": 1997,
-          "editor": "RARE"
+          "editor": "RARE",
+          "nota": "Editor: Nintendo. Desarrollo: Rare. Genero: Action, Puzzle. En la coleccion: cartucho suelto. Ano de lanzamiento: 1997 (NTSC USA)."
         },
         {
-          "title": "SW: ROGUE SQUADRON",
+          "title": "STAR WARS: ROGUE SQUADRON",
           "ano": 1998,
-          "editor": "FACTOR 5"
+          "editor": "FACTOR 5",
+          "img": "sw-rogue-squadron",
+          "nota": "Editor: LucasArts Entertainment Company LLC. Desarrollo: Factor 5 GmbH. Genero: Action, First-person shooter. En la coleccion: cartucho suelto. Ano de lanzamiento: 1998 (NTSC USA)."
         }
+      ],
+      "juegos": [
+        "BattleTanx",
+        "Blast Corps",
+        "Jet Force Gemini",
+        "Star Wars: Rogue Squadron",
+        "Star Wars: Shadows of the Empire",
+        "Superman: The New Superman Adventures"
       ]
     },
     {
@@ -58,18 +80,29 @@
         {
           "title": "SUPER MARIO 64",
           "ano": 1996,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo EAD. Genero: Action, Adventure, Puzzle, Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: 1996 (NTSC USA)."
         },
         {
           "title": "BANJO-KAZOOIE",
           "ano": 1998,
-          "editor": "RARE"
+          "editor": "RARE",
+          "nota": "Editor: Nintendo. Desarrollo: Rare. Genero: Action, Adventure, Puzzle, Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: 1998 (NTSC USA)."
         },
         {
           "title": "DONKEY KONG 64",
           "ano": 1999,
-          "editor": "RARE"
+          "editor": "RARE",
+          "nota": "Editor: Nintendo. Desarrollo: Rare. Genero: Action, Adventure, Puzzle, Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: 1999 (NTSC USA)."
         }
+      ],
+      "juegos": [
+        "Banjo-Kazooie",
+        "Conker's Bad Fur Day",
+        "Donkey Kong 64",
+        "Rayman 2: The Great Escape",
+        "Super Mario 64",
+        "Yoshi's Story"
       ]
     },
     {
@@ -79,18 +112,26 @@
         {
           "title": "ZELDA: OCARINA OF TIME",
           "ano": 1998,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo EAD. Genero: Action, Adventure, RPG, Puzzle, Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: 1998 (NTSC USA)."
         },
         {
           "title": "ZELDA: MAJORA'S MASK",
           "ano": 2000,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo EAD. Genero: Action, Adventure. En la coleccion: cartucho suelto. Ano de lanzamiento: 2000 (NTSC USA)."
         },
         {
           "title": "DONALD DUCK: GOIN' QUACKERS",
           "ano": 2000,
-          "editor": "UBISOFT"
+          "editor": "UBISOFT",
+          "nota": "Editor: Ubisoft Entertainment. Desarrollo: Disney Interactive. Genero: Adventure, RPG. En la coleccion: cartucho suelto. Ano de lanzamiento (NTSC USA): POR CONFIRMAR con una segunda fuente."
         }
+      ],
+      "juegos": [
+        "Donald Duck: Goin' Quackers",
+        "Legend of Zelda: Majora's Mask",
+        "Legend of Zelda: Ocarina of Time"
       ]
     },
     {
@@ -100,18 +141,34 @@
         {
           "title": "MARIO KART 64",
           "ano": 1996,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo EAD. Genero: Racing. En la coleccion: cartucho suelto. Ano de lanzamiento: 1996 (NTSC USA)."
         },
         {
           "title": "DIDDY KONG RACING",
           "ano": 1997,
-          "editor": "RARE"
+          "editor": "RARE",
+          "nota": "Editor: Rare. Desarrollo: Rare. Genero: Racing. En la coleccion: cartucho suelto. Ano de lanzamiento: 1997 (NTSC USA)."
         },
         {
           "title": "F-ZERO X",
           "ano": 1998,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo EAD. Genero: Racing. En la coleccion: cartucho suelto. Ano de lanzamiento: 1998 (NTSC USA)."
         }
+      ],
+      "juegos": [
+        "Cruis'n Exotica",
+        "Cruis'n USA",
+        "Cruis'n World",
+        "Diddy Kong Racing",
+        "Excitebike 64",
+        "F-Zero X",
+        "F1 Pole Position 64",
+        "Mario Kart 64",
+        "Star Wars Episode I: Racer",
+        "Top Gear Hyper-Bike",
+        "Wave Race 64"
       ]
     },
     {
@@ -121,18 +178,29 @@
         {
           "title": "SUPER SMASH BROS.",
           "ano": 1999,
-          "editor": "HAL"
+          "editor": "HAL",
+          "nota": "Editor: Nintendo. Desarrollo: HAL Laboratory. Genero: Fighting. En la coleccion: cartucho suelto. Ano de lanzamiento: 1999 (NTSC USA)."
         },
         {
           "title": "KILLER INSTINCT GOLD",
           "ano": 1996,
-          "editor": "RARE"
+          "editor": "RARE",
+          "nota": "Editor: Nintendo. Desarrollo: Rare. Genero: Fighting. En la coleccion: cartucho suelto. Ano de lanzamiento: 1996 (NTSC USA)."
         },
         {
           "title": "MORTAL KOMBAT 4",
           "ano": 1998,
-          "editor": "MIDWAY"
+          "editor": "MIDWAY",
+          "nota": "Editor: Midway Games. Desarrollo: Eurocom Entertainment Software. Genero: Fighting. En la coleccion: cartucho suelto. Ano de lanzamiento: 1998 (NTSC USA)."
         }
+      ],
+      "juegos": [
+        "Killer Instinct Gold",
+        "Mortal Kombat 4",
+        "Mortal Kombat Trilogy",
+        "Ready 2 Rumble Boxing: Round 2",
+        "Super Smash Bros.",
+        "War Gods"
       ]
     },
     {
@@ -142,18 +210,40 @@
         {
           "title": "1080 SNOWBOARDING",
           "ano": 1998,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo EAD. Genero: Sports. En la coleccion: cartucho suelto. Ano de lanzamiento: 1998 (NTSC USA)."
         },
         {
           "title": "MARIO TENNIS",
           "ano": 2000,
-          "editor": "CAMELOT"
+          "editor": "CAMELOT",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo. Genero: Sports. En la coleccion: cartucho suelto. Ano de lanzamiento: 2000 (NTSC USA)."
         },
         {
           "title": "ISS 2000",
-          "ano": 1999,
-          "editor": "KONAMI"
+          "ano": 2000,
+          "editor": "KONAMI",
+          "nota": "Editor: Konami. Desarrollo: Konami. Genero: Sports. En la coleccion: cartucho suelto. Ano de lanzamiento: 2000 (NTSC USA)."
         }
+      ],
+      "juegos": [
+        "1080° Snowboarding",
+        "FIFA Soccer 64",
+        "International Superstar Soccer '98",
+        "International Superstar Soccer 2000",
+        "International Superstar Soccer 64",
+        "Kobe Bryant in NBA Courtside",
+        "Mario Golf",
+        "Mario Tennis",
+        "NBA Hangtime",
+        "NBA Live 99",
+        "Tony Hawk's Pro Skater",
+        "Tony Hawk's Pro Skater 2",
+        "Twisted Edge Extreme Snowboarding",
+        "Virtual Pool 64",
+        "WCW Mayhem",
+        "WCW/nWo Revenge",
+        "Wayne Gretzky's 3D Hockey"
       ]
     },
     {
@@ -163,18 +253,27 @@
         {
           "title": "MARIO PARTY 3",
           "ano": 2001,
-          "editor": "HUDSON"
+          "editor": "HUDSON",
+          "nota": "Editor: Nintendo. Desarrollo: Hudson Entertainment. Genero: Action, Adventure, Strategy, Sports. En la coleccion: cartucho suelto. Ano de lanzamiento: 2001 (NTSC USA)."
         },
         {
           "title": "POKEMON STADIUM",
           "ano": 2000,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: HAL Laboratory, Nintendo EAD. Genero: Strategy. En la coleccion: cartucho suelto. Ano de lanzamiento: 2000 (NTSC USA)."
         },
         {
           "title": "PILOTWINGS 64",
           "ano": 1996,
-          "editor": "PARADIGM"
+          "editor": "PARADIGM",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo EAD, Nintendo R&D3. Genero: Flight Sim. En la coleccion: cartucho suelto. Ano de lanzamiento: 1996 (NTSC USA)."
         }
+      ],
+      "juegos": [
+        "Dr. Mario 64",
+        "Mario Party 3",
+        "Pilotwings 64",
+        "Pokémon Stadium"
       ]
     }
   ],
@@ -185,19 +284,19 @@
       "name": "NINTENDO 64",
       "tag": "STANDARD",
       "color": "mg",
-      "desc": "El gris clasico. La referencia. La del 99% de chilenos. Ahi empezo todo."
+      "desc": "El gris clasico. La referencia. Ahi empezo todo."
     },
     {
       "name": "N64 GOLD",
       "tag": "CONMEMORATIVA",
       "color": "ye",
-      "desc": "Edicion dorada de coleccionista. Muy rara en Latam, pieza de orgullo."
+      "desc": "Edicion dorada de coleccionista, una pieza de orgullo de la coleccion."
     },
     {
       "name": "PIKACHU N64",
       "tag": "POKEMON · JP/US",
       "color": "cy",
-      "desc": "Azul + amarillo con Pikachu en relieve. La mas dificil de conseguir fuera de Japon."
+      "desc": "Azul + amarillo con Pikachu en relieve. La edicion Pokemon de la N64."
     },
     {
       "name": "FUNTASTIC FIRE",
@@ -209,7 +308,7 @@
       "name": "FUNTASTIC GRAPE",
       "tag": "MORADO",
       "color": "cy",
-      "desc": "La mas famosa del trio Funtastic. Morado uva translucido."
+      "desc": "Morado uva translucido, de la linea Funtastic 2000."
     },
     {
       "name": "FUNTASTIC ICE",
@@ -247,9 +346,9 @@
         "color": "mg"
       },
       {
-        "label": "STUDIOS",
+        "label": "STUDIO",
         "big": "RARE",
-        "sub": "el rey del N64",
+        "sub": "9 juegos de la coleccion",
         "color": "cy"
       }
     ]
@@ -258,5 +357,7 @@
     "pre": "PROXIMO CAPITULO",
     "title": "SIGUE LA SAGA",
     "sub": "Cuentanos cual fue tu favorita en los comentarios. Si quieres que cubramos otra consola, deja la sugerencia. Suscribete para no perderte lo que viene en el canal."
-  }
+  },
+  "grafica": "nueva",
+  "tarrovision": "nueva"
 }

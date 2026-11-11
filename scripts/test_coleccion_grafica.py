@@ -254,6 +254,30 @@ def test_nueva_indice_de_9_categorias_usa_el_compacto():
     assert 'g-igrid r3' not in _generar(_data(6, grafica="nueva"))
 
 
+def test_nueva_respeta_la_proporcion_de_las_cajas():
+    from PIL import Image
+    import coleccion_grafica as G
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        Image.new("RGB", (378, 263)).save(tmp / "a.jpg")
+        Image.new("RGB", (100, 200)).save(tmp / "b.png")
+        (tmp / "c.jpg").write_bytes(b"no es una imagen")
+        assert abs(G._aspecto(tmp / "a.jpg") - 378 / 263) < 0.001
+        assert G._aspecto(tmp / "b.png") == 0.5
+        assert G._aspecto(tmp / "c.jpg") == G.AR_VERTICAL and G._aspecto(tmp / "no-existe.jpg") == G.AR_VERTICAL
+    # en el deck: la caja apaisada lleva su --ar y la tira de miniaturas se achica para entrar en la tarjeta
+    d = _data(grafica="nueva")
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        (tmp / "img" / SLUG).mkdir(parents=True)
+        for k in (1, 2, 3):
+            Image.new("RGB", (378, 263)).save(tmp / "img" / SLUG / f"joya-1-{k}.jpg")
+        h = _generar(d, out=tmp)
+    assert "--ar:1.437" in h
+    th = [int(x) for x in re.findall(r'class="g-ithumbs" style="--th:(\d+)px"', h)]
+    assert th[0] < 150 and th[1] == 150, th            # 3 apaisadas no caben a 150 px de alto; las verticales (respaldo) si
+
+
 # ---------------------------------------------------------------- datos versionados
 
 def test_datos_versionados_de_las_colecciones():

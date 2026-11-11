@@ -75,11 +75,41 @@ def _buscar_img(out_dir: Path, slug: str, valor: str | None, por_defecto: str) -
     return None
 
 
+AR_VERTICAL = 0.7   # proporcion (ancho / alto) que se asume sin imagen: caja vertical de cartucho
+
+
+def _aspecto(ruta: Path) -> float:
+    """Ancho / alto de un PNG o JPEG leyendo solo el encabezado; AR_VERTICAL si no se puede leer."""
+    try:
+        b = ruta.read_bytes()[:200000]
+        if b[:8] == bytes([137, 80, 78, 71, 13, 10, 26, 10]):
+            w, h = int.from_bytes(b[16:20], "big"), int.from_bytes(b[20:24], "big")
+        elif b[:2] == bytes([255, 216]):
+            i = 2
+            while i < len(b) - 9:
+                if b[i] != 255:
+                    i += 1
+                    continue
+                marca = b[i + 1]
+                if marca in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+                    h, w = int.from_bytes(b[i + 5:i + 7], "big"), int.from_bytes(b[i + 7:i + 9], "big")
+                    break
+                i += 2 + int.from_bytes(b[i + 2:i + 4], "big")
+            else:
+                return AR_VERTICAL
+        else:
+            return AR_VERTICAL
+        return round(w / h, 3) if w and h else AR_VERTICAL
+    except (OSError, ValueError):
+        return AR_VERTICAL
+
+
 def _cajas(data: dict, out_dir: Path, slug: str) -> None:
-    """Completa joya["_caja"] (ruta relativa o None) en una copia del data que recibe el generador."""
+    """Completa joya["_caja"] (ruta relativa o None) y joya["_ar"] (proporcion) en una copia del data que recibe el generador."""
     for c in data["categorias"]:
         for j in c["joyas"]:
             j["_caja"] = _buscar_img(out_dir, slug, j.get("img"), _slug(j["title"]))
+            j["_ar"] = _aspecto(out_dir / j["_caja"]) if j["_caja"] else AR_VERTICAL
     for h in data.get("hardware") or []:
         h["_foto"] = _buscar_img(out_dir, slug, h.get("img"), "hw-" + _slug(h["name"]))
 
@@ -102,15 +132,20 @@ def _mosaico(data: dict, slug: str, tenue: bool = False) -> str:
     return f'<div class="g-mosw"><div class="g-mos{" tenue" if tenue else ""}" style="--cols:{cols};--filas:{filas}">{celdas}</div></div>'
 
 
-def _miniaturas(c: dict, acc: str) -> str:
-    return "".join(
-        (f'<img src="{j["_caja"]}" alt="">' if j.get("_caja") else f'<b class="fb {acc}"></b>')
-        for j in c["joyas"])
+def _miniaturas(clase: str, c: dict, acc: str, alto_max: int, ancho: int, hueco: int) -> str:
+    """Tira de las cajas de una categoria. Cada caja conserva su proporcion; el alto comun se achica
+    para que la tira entre en `ancho` px (las cajas apaisadas de N64 o SNES son mucho mas anchas que las verticales)."""
+    joyas = c["joyas"]
+    suma = sum(j.get("_ar", AR_VERTICAL) for j in joyas) or 1
+    alto = min(alto_max, (ancho - hueco * (len(joyas) - 1)) / suma)
+    piezas = "".join(
+        (f'<img src="{j["_caja"]}" alt="">' if j.get("_caja") else f'<b class="fb {acc}"></b>') for j in joyas)
+    return f'<div class="{clase}" style="--th:{alto:.0f}px">{piezas}</div>'
 
 
 def _caja(j: dict, acc: str) -> str:
     if j.get("_caja"):
-        return f'<img class="g-caja" src="{j["_caja"]}" alt="">'
+        return f'<img class="g-caja" style="--ar:{j.get("_ar", AR_VERTICAL)}" src="{j["_caja"]}" alt="">'
     return f'<div class="g-caja fb {acc}"><span>{_esc(j["title"])}</span></div>'
 
 
@@ -168,6 +203,7 @@ def _s_indice(n: int, data: dict) -> str:
     cats = data["categorias"]
     cols = _columnas_indice(len(cats))
     filas = -(-len(cats) // cols)
+    ancho_tarjeta = int((1780 - 22 * (cols - 1)) / cols) - 60   # ancho util de la tira de cajas (tarjeta menos relleno y borde)
     tarjetas = []
     for i, c in enumerate(cats, 1):
         acc = ACENTOS[(i - 1) % 3]
@@ -175,7 +211,7 @@ def _s_indice(n: int, data: dict) -> str:
             f'<div class="g-icard {acc}"><div class="g-inum">{i:02d}</div>'
             f'<div class="g-itxt"><div class="g-iname">{c["name"]}</div>'
             f'<div class="g-icount"><b>{c["count"]}</b> TITULOS</div></div>'
-            f'<div class="g-ithumbs">{_miniaturas(c, acc)}</div></div>')
+            f'{_miniaturas("g-ithumbs", c, acc, 84 if filas >= 3 else 150, ancho_tarjeta, 12)}</div>')
     juegos = _totales(data)[0]
     return (
         f'  <section class="slide g-nueva">\n    <span class="slide-num">{n:02d}</span>\n'
@@ -201,7 +237,7 @@ def _s_paneo(n: int, ci: int, total: int, c: dict) -> str:
         f'    <div class="g-paneo {acc}"><div class="g-pcard">'
         f'<div class="g-pnum">CAT {ci:02d}/{total:02d}</div><div class="g-pname {_clase_nombre(c["name"])}">{c["name"]}</div>'
         f'<div class="g-pbig">{c["count"]}</div><div class="g-pbigl">TITULOS EN LA COLECCION</div>'
-        f'<div class="g-ptease"><span>SIGUEN {len(c["joyas"])} JOYAS</span><div class="g-pthumbs">{_miniaturas(c, acc)}</div></div></div>'
+        f'<div class="g-ptease"><span>SIGUEN {len(c["joyas"])} JOYAS</span>{_miniaturas("g-pthumbs", c, acc, 150, 530, 14)}</div></div>'
         f'<div class="gp-tv tvw">{TV.tv(ci, "ancha")}</div></div>\n{notas}\n  </section>'
     )
 
@@ -222,8 +258,8 @@ def _s_triple(n: int, ci: int, c: dict, variante: str) -> str:
         celdas.append(
             f'<div class="g-cell{"" if j.get("_caja") else " nobg"}"{bg}>'
             f'<div class="g-celltv">{TV.tv(k, variante)}</div>'
-            f'<div class="g-cellinfo">{_caja(j, acc)}<div class="g-celltxt">'
-            f'<div class="g-celltag">EN LA COLECCION</div><div class="g-celltitle">{_esc(j["title"])}</div>'
+            f'<div class="g-cellinfo"><div class="g-celltag">EN LA COLECCION</div>{_caja(j, acc)}<div class="g-celltxt">'
+            f'<div class="g-celltitle{" l" if max(len(w) for w in j["title"].split()) >= 10 else ""}">{_esc(j["title"])}</div>'
             f'{_chips(j)}</div></div></div>')
     notas = _notas(f"JOYAS · {c['name']}", [f"{j['title']}: {j['nota']}" for j in c["joyas"] if j.get("nota")])
     return (
@@ -340,12 +376,12 @@ def css_nueva() -> str:
         ".g-itxt{grid-row:1;min-width:0}.g-iname{font:900 38px 'Orbitron';color:#fff;line-height:1.1;letter-spacing:2px}\n"
         ".g-icount{font:400 26px 'Share Tech Mono';color:rgba(255,255,255,.75);margin-top:8px}"
         ".g-icount b{font:900 56px 'Orbitron';color:var(--acc);margin-right:10px;vertical-align:middle}\n"
-        ".g-ithumbs{grid-column:1/3;display:flex;gap:12px;height:150px}"
-        ".g-ithumbs img,.g-ithumbs b{height:100%;width:auto;aspect-ratio:.7;object-fit:cover;border-radius:3px;"
-        "box-shadow:0 4px 14px rgba(0,0,0,.6)}\n"
+        ".g-ithumbs{grid-column:1/3;display:flex;gap:12px;height:var(--th,150px)}"
+        ".g-ithumbs img,.g-ithumbs b{height:100%;width:auto;border-radius:3px;box-shadow:0 4px 14px rgba(0,0,0,.6)}"
+        ".g-ithumbs b{aspect-ratio:.7}\n"
         # indice compacto (3 filas o mas): mismo apilado, todo mas bajo
         ".g-igrid.r3 .g-icard{padding:12px 22px;gap:4px 18px}\n"
-        ".g-igrid.r3 .g-ithumbs{height:84px;gap:10px}\n"
+        ".g-igrid.r3 .g-ithumbs{gap:10px}\n"
         ".g-igrid.r3 .g-inum{font-size:50px}.g-igrid.r3 .g-iname{font-size:30px}"
         ".g-igrid.r3 .g-icount{font-size:24px;margin-top:2px}.g-igrid.r3 .g-icount b{font-size:40px}\n"
         ".g-itotal{font:400 28px 'Press Start 2P';color:var(--cy);letter-spacing:6px}\n"
@@ -361,8 +397,9 @@ def css_nueva() -> str:
         ".g-pbigl{font:400 24px 'Press Start 2P';color:#fff;letter-spacing:3px;line-height:1.5}\n"
         ".g-ptease{margin-top:14px;padding-top:16px;border-top:1px solid rgba(255,255,255,.2)}"
         ".g-ptease>span{font:400 20px 'Press Start 2P';color:var(--cy);letter-spacing:3px}\n"
-        ".g-pthumbs{display:flex;gap:14px;margin-top:14px;height:150px}"
-        ".g-pthumbs img,.g-pthumbs b{height:100%;aspect-ratio:.7;object-fit:cover;border-radius:3px;box-shadow:0 4px 14px rgba(0,0,0,.6)}\n"
+        ".g-pthumbs{display:flex;gap:14px;margin-top:14px;height:var(--th,150px)}"
+        ".g-pthumbs img,.g-pthumbs b{height:100%;width:auto;border-radius:3px;box-shadow:0 4px 14px rgba(0,0,0,.6)}"
+        ".g-pthumbs b{aspect-ratio:.7}\n"
         ".g-paneo .gp-tv{display:flex;align-items:center;justify-content:center;min-width:0}\n"
         ".g-paneo .gp-tv.tvw{container-type:size;width:100%}\n"
         # triple
@@ -378,14 +415,16 @@ def css_nueva() -> str:
         ".g-cell.nobg::before{background:linear-gradient(135deg,#2D1B69,#4a2a99)}\n"
         ".g-celltv{display:flex;justify-content:center}"
         ".g-celltv .tarrovision.tvn{width:100%;height:auto;aspect-ratio:auto;max-width:none}\n"
-        ".g-cellinfo{display:flex;gap:20px;align-items:center;min-height:0;flex:1}\n"
-        ".g-caja{height:100%;max-height:215px;aspect-ratio:.7;object-fit:cover;border-radius:4px;"
+        ".g-cellinfo{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto 1fr;gap:12px 20px;align-items:center;min-height:0;flex:1}\n"
+        # la caja conserva su proporcion (--ar = ancho / alto): vertical hasta 215 px de alto, apaisada hasta 235 px de ancho
+        ".g-caja{height:min(215px,calc(235px / var(--ar,.7)));width:auto;border-radius:4px;"
         "box-shadow:0 8px 24px rgba(0,0,0,.7),0 0 0 2px rgba(255,255,255,.12);transform:rotate(-3deg);flex:none}\n"
-        ".g-caja.fb{display:flex;align-items:center;justify-content:center;padding:10px;text-align:center}"
+        ".g-caja.fb{height:215px;aspect-ratio:.7;display:flex;align-items:center;justify-content:center;padding:10px;text-align:center}"
         ".g-caja.fb span{font:900 20px 'Orbitron';color:#fff;line-height:1.2}\n"
         ".g-celltxt{display:flex;flex-direction:column;gap:12px;min-width:0}\n"
-        ".g-celltag{align-self:flex-start;font:400 20px 'Press Start 2P';color:#04121a;background:var(--cy);padding:7px 12px;letter-spacing:2px}\n"
-        ".g-celltitle{font:900 36px 'Orbitron';color:#fff;line-height:1.1;overflow-wrap:anywhere}\n"
+        ".g-celltag{grid-column:1/3;justify-self:start;font:400 20px 'Press Start 2P';color:#04121a;background:var(--cy);padding:7px 12px;letter-spacing:2px}\n"
+        ".g-celltitle.l{font-size:28px}\n"
+        ".g-celltitle{font:900 36px 'Orbitron';color:#fff;line-height:1.1;overflow-wrap:break-word}\n"
         ".g-chips{display:flex;gap:10px;flex-wrap:wrap}"
         ".g-chips span{font:400 24px 'Share Tech Mono';color:var(--cy);border:2px solid rgba(0,229,255,.5);"
         "background:rgba(0,229,255,.08);padding:4px 14px;border-radius:20px}"
