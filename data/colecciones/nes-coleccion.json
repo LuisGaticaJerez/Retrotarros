@@ -25,17 +25,20 @@
         {
           "title": "SUPER MARIO BROS. 3",
           "ano": 1990,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo R&D4. Genero: Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         },
         {
           "title": "KIRBY'S ADVENTURE",
           "ano": 1993,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: HAL Laboratory, Inc.. Genero: Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         },
         {
           "title": "DUCKTALES",
           "ano": 1989,
-          "editor": "CAPCOM"
+          "editor": "CAPCOM",
+          "nota": "Editor: Capcom. Desarrollo: Capcom. Genero: Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         }
       ]
     },
@@ -57,17 +60,20 @@
         {
           "title": "THE LEGEND OF ZELDA",
           "ano": 1987,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo. Genero: Action, Adventure. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         },
         {
           "title": "METROID",
           "ano": 1987,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Intelligent Systems, Nintendo R&D1. Genero: Action, Adventure, Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         },
         {
           "title": "MEGA MAN 5",
           "ano": 1992,
-          "editor": "CAPCOM"
+          "editor": "CAPCOM",
+          "nota": "Editor: Capcom. Desarrollo: Capcom. Genero: Action, Platformer. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         }
       ]
     },
@@ -85,17 +91,20 @@
         {
           "title": "SUPER MARIO BROS. / DUCK HUNT",
           "ano": 1988,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo. Genero: Adventure, First-person shooter. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         },
         {
           "title": "8 EYES",
           "ano": 1990,
-          "editor": "TAXAN"
+          "editor": "TAXAN",
+          "nota": "Editor: Taxan. Desarrollo: Thinking Rabbit. Genero: Adventure. En la coleccion: cartucho suelto. Ano de lanzamiento (NTSC USA): POR CONFIRMAR con una segunda fuente."
         },
         {
           "title": "DRAGON'S LAIR",
           "ano": 1990,
-          "editor": "CSG IMAGESOFT"
+          "editor": "CSG IMAGESOFT",
+          "nota": "Editor: CSG Imagesoft. Desarrollo: Motivetime Ltd.. Genero: Adventure. En la coleccion: cartucho suelto. Ano de lanzamiento (NTSC USA): POR CONFIRMAR con una segunda fuente."
         }
       ]
     },
@@ -111,17 +120,20 @@
         {
           "title": "PUNCH-OUT!!",
           "ano": 1987,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo R&D3. Genero: Fighting, Sports. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         },
         {
           "title": "R.C. PRO-AM",
           "ano": 1988,
-          "editor": "RARE"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Rare. Genero: Action, Racing. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         },
         {
           "title": "WWF KING OF THE RING",
           "ano": 1993,
-          "editor": "LJN"
+          "editor": "LJN",
+          "nota": "Editor: LJN. Desarrollo: Eastridge Technology. Genero: Fighting, Sports. En la coleccion: cartucho suelto. Ano de lanzamiento (NTSC USA): POR CONFIRMAR con una segunda fuente."
         }
       ]
     },
@@ -137,17 +149,20 @@
         {
           "title": "DR. MARIO",
           "ano": 1990,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Nintendo R&D1. Genero: Puzzle. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         },
         {
           "title": "YOSHI",
           "ano": 1992,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Game Freak. Genero: Puzzle. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         },
         {
           "title": "WARIO'S WOODS",
           "ano": 1994,
-          "editor": "NINTENDO"
+          "editor": "NINTENDO",
+          "nota": "Editor: Nintendo. Desarrollo: Intelligent Systems, Nintendo R&D1. Genero: Puzzle. En la coleccion: con caja. Ano de lanzamiento: NTSC USA."
         }
       ]
     },
@@ -167,17 +182,20 @@
         {
           "title": "TOP GUN",
           "ano": 1987,
-          "editor": "KONAMI"
+          "editor": "KONAMI",
+          "nota": "Editor: Konami. Desarrollo: Konami. Genero: Flight Sim. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         },
         {
           "title": "SILENT SERVICE",
           "ano": 1989,
-          "editor": "KONAMI"
+          "editor": "ULTRA GAMES",
+          "nota": "Editor: Ultra Games. Desarrollo: Rare. Genero: Strategy. En la coleccion: cartucho suelto. Ano de lanzamiento (NTSC USA): POR CONFIRMAR con una segunda fuente."
         },
         {
           "title": "CAPTAIN SKYHAWK",
           "ano": 1990,
-          "editor": "RARE"
+          "editor": "MILTON BRADLEY",
+          "nota": "Editor: Milton Bradley. Desarrollo: Rare. Genero: Shoot 'em up. En la coleccion: cartucho suelto. Ano de lanzamiento: NTSC USA."
         }
       ]
     }
@@ -233,9 +251,9 @@
         "color": "mg"
       },
       {
-        "label": "STUDIOS",
-        "big": "CAPCOM",
-        "sub": "rey 3rd-party del NES",
+        "label": "STUDIO",
+        "big": "KONAMI",
+        "sub": "el tercero con mas juegos aqui (5)",
         "color": "cy"
       }
     ]
@@ -244,5 +262,6 @@
     "pre": "PROXIMO CAPITULO",
     "title": "SIGUE LA SAGA",
     "sub": "Cuentanos cual fue tu favorita en los comentarios. Si quieres que cubramos otra consola, deja la sugerencia. Suscribete para no perderte lo que viene en el canal."
-  }
+  },
+  "grafica": "nueva"
 }
