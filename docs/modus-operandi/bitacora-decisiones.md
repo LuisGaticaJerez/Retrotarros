@@ -183,3 +183,10 @@
 - **Correcciones de datos contra el CSV:** el chip de editor es siempre el editor (R.C. Pro-Am: Nintendo; Captain Skyhawk: Milton Bradley; Silent Service: Ultra Games) y el studio del balance pasa de Capcom (3 juegos) a Konami (5). El kit dejó de decir "mi colección" (la colección es del canal).
 - **Por confirmar:** años de Dragon's Lair, 8 Eyes, WWF King of the Ring y Silent Service (marcados en las notas del deck); fotos del hardware; video del "Sigue con"; qué pasa con el video original de junio.
 - **Cambio de proceso:** `fetch_boxart_wiki.py` ya no envía un correo personal en el `User-Agent` y acepta `dst_dir`.
+
+## 2026-11-10 - Reforge de la colección N64
+- **Decisión de Luis:** reforjar N64 y SNES con la gráfica nueva (después de NES). Este es el de N64.
+- **Hecho:** deck de 21 slides con las 24 cajas reales (16 reutilizadas de rankings, sagas y curaduría; 8 bajadas de Wikipedia), lista de paneo con los 58 juegos por categoría (nueva), capturas, kit y discusión actualizados.
+- **Cambio de la gráfica:** las cajas de N64 son apaisadas; el módulo ahora respeta la proporción real de cada caja (miniaturas con alto común que entra en la tarjeta, caja del triple vertical hasta 215 px de alto o apaisada hasta 235 de ancho), la etiqueta "EN LA COLECCION" pasó a una fila propia y los títulos con palabras largas bajan a 28 px. El deck de NES se regeneró con estos ajustes.
+- **Datos corregidos:** ISS 2000 pasó de 1999 (Japón) a 2000 (NTSC USA); Rogue Squadron con título completo; studio del balance Rare con 9 juegos; se quitaron afirmaciones sin respaldo de las descripciones del hardware.
+- **Por confirmar:** año de Donald Duck: Goin' Quackers (N64); fotos del hardware (6 equipos); video del "Sigue con"; qué pasa con el video original de junio.

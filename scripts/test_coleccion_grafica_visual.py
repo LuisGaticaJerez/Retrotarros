@@ -55,9 +55,11 @@ def _cajas_de_prueba(data: dict, carpeta: Path, slug: str) -> None:
     from PIL import Image
     (carpeta / "img" / slug).mkdir(parents=True, exist_ok=True)
     colores = [(220, 40, 90), (30, 160, 200), (230, 190, 40)]
+    apaisadas = slug.startswith(("n64", "snes"))          # las cajas de N64 y SNES son apaisadas (~1,44:1)
     for i, c in enumerate(data["categorias"]):
         for k, j in enumerate(c["joyas"]):
-            Image.new("RGB", (260, 375), colores[(i + k) % 3]).save(carpeta / "img" / slug / f"{D_slug(j['title'])}.jpg")
+            tam = (378, 263) if apaisadas and (i + k) % 3 else (260, 375)   # mezcla apaisadas y verticales
+            Image.new("RGB", tam, colores[(i + k) % 3]).save(carpeta / "img" / slug / f"{D_slug(j['title'])}.jpg")
 
 
 def D_slug(s: str) -> str:
@@ -100,7 +102,7 @@ def test_las_colecciones_versionadas_se_ven_bien():
         slug = ruta.stem
         with tempfile.TemporaryDirectory() as tmp:
             tmp = Path(tmp)
-            if slug.startswith("nes"):
+            if slug.startswith(("nes", "n64")):                  # NES vertical, N64 mezcla: el resto prueba el respaldo
                 _cajas_de_prueba(data, tmp, slug)
             data["grafica"] = "nueva"
             if slug.startswith("nes"):
