@@ -266,7 +266,7 @@ def test_datos_versionados_de_las_colecciones():
         assert sum(c["count"] for c in cats) == int(d["balance"]["row1"][0]["big"]), ruta.name
         assert len(cats) == int(d["balance"]["row1"][1]["big"]), ruta.name
         assert sum(len(c["joyas"]) for c in cats) == int(d["balance"]["row1"][2]["big"]), ruta.name
-        for marca in ({}, {"grafica": "nueva"}):                 # los datos generan en las dos graficas
+        for marca in ({"grafica": "clasica"}, {"grafica": "nueva"}):   # los datos generan en las dos graficas
             _generar({**d, **marca})
 
 

@@ -176,3 +176,10 @@
 - **Verificación:** el generador clásico con la base restaurada produce HTML idéntico al del generador original (probado con datos de prueba, NES y N64). El deck de NES publicado ya difería en tamaños de fuente porque la base se ajustó después; no se intentó reproducirlo.
 - **Gráfica nueva:** opt-in con `grafica="nueva"` (`scripts/coleccion_grafica.py`), solo colecciones nuevas o reforjadas. 22 pruebas de HTML y 2 visuales.
 - **Pendiente:** cajas de las joyas (69 entre NES, N64 y SNES) y fotos de hardware; la slide RAREZAS (periféricos) del SNES; el SNES publicado decía "panorama N64" en el cierre (en el JSON quedó "SNES").
+
+## 2026-11-10 - Reforge de la colección NES
+- **Decisión de Luis:** NES es la primera colección reforjada con la gráfica nueva.
+- **Hecho:** deck con 17 slides y 17 de 18 cajas reales (10 reutilizadas de rankings, sagas y shorts; 7 bajadas de Wikipedia; Silent Service sale con placa porque la única caja que hay es la de Apple IIGS). Capturas generadas, lista de paneo, kit de YouTube y discusión restaurados del historial y actualizados.
+- **Correcciones de datos contra el CSV:** el chip de editor es siempre el editor (R.C. Pro-Am: Nintendo; Captain Skyhawk: Milton Bradley; Silent Service: Ultra Games) y el studio del balance pasa de Capcom (3 juegos) a Konami (5). El kit dejó de decir "mi colección" (la colección es del canal).
+- **Por confirmar:** años de Dragon's Lair, 8 Eyes, WWF King of the Ring y Silent Service (marcados en las notas del deck); fotos del hardware; video del "Sigue con"; qué pasa con el video original de junio.
+- **Cambio de proceso:** `fetch_boxart_wiki.py` ya no envía un correo personal en el `User-Agent` y acepta `dst_dir`.

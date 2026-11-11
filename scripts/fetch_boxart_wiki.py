@@ -17,7 +17,7 @@ import json, sys, time, urllib.request, urllib.parse
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-UA = "RetrotarrosBot/1.0 (canal retrogaming; contacto luis.gatica.jerez@gmail.com)"
+UA = "RetrotarrosBot/1.0 (canal retrogaming)"
 API = "https://en.wikipedia.org/w/api.php"
 
 
@@ -60,9 +60,9 @@ def _img_url(query: str):
     return None, None
 
 
-def descargar(out_dir: str, juegos: list, progress=print) -> dict:
+def descargar(out_dir: str, juegos: list, progress=print, dst_dir=None) -> dict:
     """juegos: lista de (key, query). query = nombre del juego + 'video game'."""
-    dst = REPO / "studio" / "img" / out_dir
+    dst = Path(dst_dir) if dst_dir else REPO / "studio" / "img" / out_dir   # dst_dir: carpeta exacta (ej. studio/colecciones/img/<slug>)
     dst.mkdir(parents=True, exist_ok=True)
     res = {"ok": [], "fail": []}
     for key, query in juegos:
