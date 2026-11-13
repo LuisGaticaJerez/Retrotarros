@@ -1,9 +1,9 @@
-# Pauta — PS1 Infravalorados
+# Pauta — PS1 Joyas ocultas
 
 > Episodio: los juegos de PlayStation muy bien criticados que hoy casi nadie nombra (ranking de CALIDAD, no de precios)
-> HTML: `studio/rankings/infravalorados/ps1-infravalorados.html`
-> Formato: ranking #10 → #1 · 14 slides · mismo generador que SNES Infravalorados (`top_deck.py`, sin precios)
-> Driver: `.cache/gen_ps1_infravalorados.py` (gitignored)
+> HTML: `studio/rankings/joyas-ocultas/ps1-joyas-ocultas.html`
+> Formato: ranking #10 → #1 · 14 slides · mismo generador que SNES Joyas ocultas (`top_deck.py`, sin precios)
+> Driver: `.cache/gen_ps1_joyas_ocultas.py` (gitignored)
 
 ## Gancho / Cold open
 
@@ -45,6 +45,6 @@ Ver notas teleprompter en el HTML (tecla N). Cada slide trae la fuente de la cr�
 ## Notas de producción
 
 - Box arts: 10 de 10 cajas NTSC USA (9 de libretro, Einhänder de Wikipedia). Verificadas visualmente.
-- Capturas generadas el 2026-10-21 (`python scripts/capture-slides.py ps1-infravalorados`).
+- Capturas generadas el 2026-10-21 (`python scripts/capture-slides.py ps1-joyas-ocultas`).
 - Sin pastilla de precio: es un ranking de calidad.
 - Reservas que quedaron afuera: Persona 2: Eternal Punishment (GameRankings 84 %), Tomba! (GameRankings 84 %), Final Fantasy Tactics (Metacritic 83), Suikoden II (Metacritic 82), Twisted Metal 2 (GameRankings 86 %), Spyro 2 (GameRankings 87 %), Oddworld: Abe's Oddysee (GameRankings 88 %), PaRappa the Rapper (Metacritic 92, demasiado conocido).

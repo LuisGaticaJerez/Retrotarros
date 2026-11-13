@@ -1,6 +1,6 @@
-# Discusion — PS1 Infravalorados
+# Discusion — PS1 Joyas ocultas
 
-Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-ps1-infravalorados.md`.
+Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-ps1-joyas-ocultas.md`.
 
 ## La lista (del #10 al #1, ordenada por fuerza de la critica)
 

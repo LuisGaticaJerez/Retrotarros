@@ -2,7 +2,7 @@
 
 Lee el cuadro de recepcion (Video game reviews) del wikitexto de cada articulo y muestra Metacritic (MC),
 GameRankings (GR), Famitsu, IGN, GameSpot, EGM, Game Informer. Sirve para armar rankings de calidad
-(Infravalorados) en minutos. Los numeros vienen de Wikipedia, que cita esas fuentes: confirmarlos antes de
+(Joyas ocultas) en minutos. Los numeros vienen de Wikipedia, que cita esas fuentes: confirmarlos antes de
 decirlos en camara.
 
 Uso:

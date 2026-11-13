@@ -1,6 +1,6 @@
-# Discusion — GameCube Infravalorados
+# Discusion — GameCube Joyas ocultas
 
-Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-gamecube-infravalorados.md`.
+Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-gamecube-joyas-ocultas.md`.
 
 ## La lista (del #10 al #1, ordenada por la nota Metacritic de GameCube)
 
@@ -26,7 +26,7 @@ Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-gamecube-infr
 
 ## Para conversar antes de grabar
 
-- **Ojo con "infravalorado":** siguiendo la regla de la critica, entraron juegos bastante conocidos: Soulcalibur II, Prince of Persia: Sands of Time, Resident Evil (remake) y Tony Hawk's 4. Los mas olvidados de verdad son Viewtiful Joe, Burnout 2, Rogue Leader y NBA Street Vol. 2. Si prefieren un ranking mas "olvidado", las reservas con nota 87 o 86 son Super Monkey Ball 2, Beyond Good & Evil, SSX Tricky, Tales of Symphonia y Four Swords Adventures. ¿Lo dejamos por critica pura o movemos alguno?
+- **Ojo con "joyas ocultas":** siguiendo la regla de la critica, entraron juegos bastante conocidos: Soulcalibur II, Prince of Persia: Sands of Time, Resident Evil (remake) y Tony Hawk's 4. Los mas olvidados de verdad son Viewtiful Joe, Burnout 2, Rogue Leader y NBA Street Vol. 2. Si prefieren un ranking mas "olvidado", las reservas con nota 87 o 86 son Super Monkey Ball 2, Beyond Good & Evil, SSX Tricky, Tales of Symphonia y Four Swords Adventures. ¿Lo dejamos por critica pura o movemos alguno?
 - **Viewtiful Joe #1:** empata en 93 con Soulcalibur II y gana por olvido. Tiene tres premios de Juego de GameCube del Año (IGN, USA Today, GMR), asi que el cierre se sostiene bien. ¿Prefieren que el #1 sea Soulcalibur II (Link exclusivo)?
 - **Metroid Prime 2 #3:** tiene a su hermano Metroid Prime #1 en el Top Mundial. Buen gancho: la secuela que quedo a la sombra.
 - **Pikmin 2:** igual, el Pikmin original esta en el Top Mundial. La prensa en general lo considero superior al primero.

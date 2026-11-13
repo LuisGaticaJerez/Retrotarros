@@ -27,7 +27,7 @@
 # genera TarroBot al vuelo (gitignored, no son episodios reales). Se excluyen del
 # barrido generico para que no aparezcan como categoria falsa en la raiz del Drive.
 #
-# Modo incremental (2026-10-21): .\scripts\sync-to-drive.ps1 -Episodios ps1-infravalorados,snes-top-precios
+# Modo incremental (2026-10-21): .\scripts\sync-to-drive.ps1 -Episodios ps1-joyas-ocultas,snes-top-precios
 #   copia SOLO esos episodios (HTML + imagenes + capturas + pauta/discusion DOCX) y salta TarroDL.
 #   Sin -Episodios hace el barrido completo de siempre (unos 10 min).
 #
@@ -96,6 +96,7 @@ function Get-DriveCategoryPath {
             "top-mundial" { "Top Mundial" }
             "top-precios" { "Top Precios" }
             "top-peores" { "Top Peores" }
+            "joyas-ocultas" { "Joyas Ocultas" }
             default {
                 if ($_.Length -gt 0) { $_.Substring(0,1).ToUpperInvariant() + $_.Substring(1) }
                 else { $_ }

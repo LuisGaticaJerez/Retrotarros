@@ -19,9 +19,9 @@
 
 **Pendiente del reforge:** auditar con esta receta los Top Precios ya publicados que no se han revisado: NES, N64, Master System, Atari 2600 y Game Boy. PS1: mirar Einhänder y Castlevania Chronicles contra el #10 (USD 350).
 
-## 2. Infravalorados (formato nuevo, 2026-10-19)
+## 2. Joyas ocultas (formato nuevo, 2026-10-19; se llamó "Infravalorados" hasta el 2026-11-13)
 
-Ranking de **calidad**, sin precios. Categoría de salida `studio/rankings/infravalorados/` (slug `<consola>-infravalorados`, regla en `scripts/_studio_layout.py`).
+Ranking de **calidad**, sin precios. Categoría de salida `studio/rankings/joyas-ocultas/` (slug `<consola>-joyas-ocultas`, regla en `scripts/_studio_layout.py`).
 
 **Regla de orden (Luis): pesa más la crítica que el olvido.** Se ordena por la nota Metacritic, o GameRankings si no hay Metacritic. En SNES se usaron 3 niveles de fuerza de la crítica porque muchos no tienen nota agregada (también valen puestos en listas: IGN Top 100 SNES, Super Play, Nintendo Power). El olvido solo desempata. Tono siempre positivo.
 
@@ -30,10 +30,10 @@ Ranking de **calidad**, sin precios. Categoría de salida `studio/rankings/infra
 2. `python scripts/wiki_reception.py "<titulo Wikipedia>" ...` → MC, GR, Famitsu, IGN (segundos, sin navegador).
 3. Quedarse con 10, ordenar con la regla, anotar las reservas en la discusión.
 4. Box arts (libretro o `fetch_boxart_wiki.py`).
-5. Driver copiando `.cache/gen_snes_infravalorados.py` o `.cache/gen_ps1_infravalorados.py`: `items` sin `price`, `why_label` "▶ EL MEJOR CRITICADO" en el #1, `sorted([...], key=lambda x: -x["pos"])`.
+5. Driver copiando `.cache/gen_snes_joyas_ocultas.py` o `.cache/gen_ps1_joyas_ocultas.py`: `items` sin `price`, `why_label` "▶ EL MEJOR CRITICADO" en el #1, `sorted([...], key=lambda x: -x["pos"])`.
 6. Docs: pauta, discusión (incluye qué confirmar en cámara) y kit.
 
-**Hechos:** SNES (Tetris Attack #1), PS1 (Wipeout XL #1) y Mega Drive (Shining Force II #1, 2026-10-22; la Genesis casi no tiene Metacritic, se usaron 3 niveles con EGM 1997, IGN 2007 y las listas de Mega/GamesRadar+). GameCube (Viewtiful Joe #1, 2026-10-22; la GameCube sí tiene Metacritic: se ordena por la nota de la versión GameCube, y en las multiplataforma cuenta solo esa; `wiki_reception.py` no lee los artículos que usan claves `MC_NGC` o `mc1`, ahí hay que extraer la nota de la plataforma a mano del wikitexto). Los box arts de Infravalorados viven en `studio/rankings/infravalorados/img/<slug>/`. Siguientes sugeridos: PS2, N64 (ya existe `n64-joyas-ocultas` como curaduría).
+**Hechos:** SNES (Tetris Attack #1), PS1 (Wipeout XL #1) y Mega Drive (Shining Force II #1, 2026-10-22; la Genesis casi no tiene Metacritic, se usaron 3 niveles con EGM 1997, IGN 2007 y las listas de Mega/GamesRadar+). GameCube (Viewtiful Joe #1, 2026-10-22; la GameCube sí tiene Metacritic: se ordena por la nota de la versión GameCube, y en las multiplataforma cuenta solo esa; `wiki_reception.py` no lee los artículos que usan claves `MC_NGC` o `mc1`, ahí hay que extraer la nota de la plataforma a mano del wikitexto). Los box arts de Joyas ocultas viven en `studio/rankings/joyas-ocultas/img/<slug>/`. Siguientes sugeridos: PS2, N64 (ya existe `n64-joyas-ocultas` como curaduría).
 
 ## 2b. Top Mundial por consola con Metacritic (PS2, Xbox; 2026-10-22)
 

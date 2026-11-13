@@ -1,4 +1,4 @@
-# Descripción YouTube — PS1 Infravalorados
+# Descripción YouTube — PS1 Joyas ocultas
 
 Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos estimados; ajustar a los tiempos del corte final.
 
@@ -7,7 +7,7 @@ Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Ca
 ## Títulos sugeridos (elegir uno)
 
 1. **10 juegos de PS1 muy buenos que casi nadie recuerda** — 52 chars. (Recomendado)
-2. **PS1 infravalorados: notas de 90 y nadie los nombra** — 51 chars.
+2. **PS1 joyas ocultas: notas de 90 y nadie los nombra** — 50 chars.
 3. **Los mejores juegos de PlayStation que no son FFVII ni Metal Gear** — 63 chars.
 
 ---
@@ -61,11 +61,11 @@ mejores juegos de ps1 olvidados, juegos de ps1 infravalorados, juegos de playsta
 
 ## Notas de producción
 
-- **Miniatura sugerida:** caja de Wipeout XL o Vagrant Story + texto "PS1 INFRAVALORADOS" + TarroBot.
-- Fuente de datos: `docs/pautas/pauta-ps1-infravalorados.md` y `docs/discusiones/discusion-ps1-infravalorados.md`.
+- **Miniatura sugerida:** caja de Wipeout XL o Vagrant Story + texto "PS1 JOYAS OCULTAS" + TarroBot.
+- Fuente de datos: `docs/pautas/pauta-ps1-joyas-ocultas.md` y `docs/discusiones/discusion-ps1-joyas-ocultas.md`.
 
 ---
 
-**Slug:** `ps1-infravalorados`
+**Slug:** `ps1-joyas-ocultas`
 **Formato:** Ranking de calidad (episodio largo, horizontal)
 **Última actualización:** 2026-10-21

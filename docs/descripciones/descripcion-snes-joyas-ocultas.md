@@ -1,4 +1,4 @@
-# Descripción YouTube — SNES Infravalorados
+# Descripción YouTube — SNES Joyas ocultas
 
 Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos estimados; ajustar a los tiempos del corte final.
 
@@ -7,7 +7,7 @@ Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Ca
 ## Títulos sugeridos (elegir uno)
 
 1. **10 juegos de SNES muy buenos que casi nadie recuerda** — 55 chars. (Recomendado)
-2. **SNES infravalorados: notas de 80 y 90 % y hoy casi nadie los nombra** — 70 chars, largo para móvil.
+2. **SNES joyas ocultas: notas de 80 y 90 % y hoy casi nadie los nombra** — 69 chars, largo para móvil.
 3. **Los mejores juegos de SNES que no son Mario ni Zelda** — 54 chars.
 
 ---
@@ -61,11 +61,11 @@ mejores juegos de snes olvidados, juegos de snes infravalorados, juegos de super
 
 ## Notas de producción
 
-- **Miniatura sugerida:** caja de Tetris Attack + texto "SNES INFRAVALORADOS" + TarroBot.
-- Fuente de datos: `docs/pautas/pauta-snes-infravalorados.md` y `docs/discusiones/discusion-snes-infravalorados.md`.
+- **Miniatura sugerida:** caja de Tetris Attack + texto "SNES JOYAS OCULTAS" + TarroBot.
+- Fuente de datos: `docs/pautas/pauta-snes-joyas-ocultas.md` y `docs/discusiones/discusion-snes-joyas-ocultas.md`.
 
 ---
 
-**Slug:** `snes-infravalorados`
+**Slug:** `snes-joyas-ocultas`
 **Formato:** Ranking de calidad (episodio largo, horizontal)
 **Última actualización:** 2026-10-20

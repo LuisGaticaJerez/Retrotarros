@@ -1,6 +1,6 @@
-# Discusion — SNES Infravalorados
+# Discusion — SNES Joyas ocultas
 
-Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-snes-infravalorados.md`.
+Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-snes-joyas-ocultas.md`.
 
 ## La lista (del #10 al #1, ordenada por fuerza de la critica)
 

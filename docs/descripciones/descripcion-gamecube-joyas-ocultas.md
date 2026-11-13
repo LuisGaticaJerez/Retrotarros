@@ -1,4 +1,4 @@
-# Descripción YouTube — GameCube Infravalorados
+# Descripción YouTube — GameCube Joyas ocultas
 
 Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos estimados; ajustar a los tiempos del corte final.
 
@@ -7,7 +7,7 @@ Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Ca
 ## Títulos sugeridos (elegir uno)
 
 1. **10 juegos de GameCube muy buenos que casi nadie recuerda** — 55 chars. (Recomendado)
-2. **GameCube infravalorados: los que la prensa amó y nadie nombra** — 60 chars.
+2. **GameCube joyas ocultas: los que la prensa amó y nadie nombra** — 59 chars.
 3. **Los mejores juegos de GameCube que no son Metroid Prime ni Zelda** — 63 chars.
 
 ---
@@ -61,11 +61,11 @@ mejores juegos de gamecube olvidados, juegos de gamecube infravalorados, juegos 
 
 ## Notas de producción
 
-- **Miniatura sugerida:** caja de Viewtiful Joe o Soulcalibur II (con Link) + texto "GAMECUBE INFRAVALORADOS" + TarroBot.
-- Fuente de datos: `docs/pautas/pauta-gamecube-infravalorados.md` y `docs/discusiones/discusion-gamecube-infravalorados.md`.
+- **Miniatura sugerida:** caja de Viewtiful Joe o Soulcalibur II (con Link) + texto "GAMECUBE JOYAS OCULTAS" + TarroBot.
+- Fuente de datos: `docs/pautas/pauta-gamecube-joyas-ocultas.md` y `docs/discusiones/discusion-gamecube-joyas-ocultas.md`.
 
 ---
 
-**Slug:** `gamecube-infravalorados`
+**Slug:** `gamecube-joyas-ocultas`
 **Formato:** Ranking de calidad (episodio largo, horizontal)
 **Última actualización:** 2026-10-22

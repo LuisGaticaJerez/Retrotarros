@@ -27,7 +27,7 @@
 >
 > **Verificación con la API de YouTube: 2026-10-21** (85 publicados + 1 programado). Se publicó
 > la reseña de Mighty Morphin Power Rangers (mar 20 oct, 20:30); Montezuma's Revenge pasó a jueves 22 oct. Se
-> sumó al conteo el Infravalorados de SNES (armado, sin publicar).
+> sumó al conteo el Joyas ocultas de SNES (armado, sin publicar).
 >
 > **Verificación con la API de YouTube: 2026-10-26** (87 publicados + 0 programados). Desde la
 > última vez se publicaron Montezuma's Revenge (jue 22 oct, 20:30) y SNES Top Peores (dom 25
@@ -63,7 +63,7 @@
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
 | Reseñas | 56 | 32 | 1 | 23 |
-| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube + Infravalorados SNES) | 37 | 18 | 1 | 18 |
+| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube + Joyas ocultas SNES) | 37 | 18 | 1 | 18 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
@@ -74,7 +74,7 @@
 Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
 superadas, playlist muerta, no cuentan como activo). Los Rankings suman 36 armados porque
-se contaron los 2 de Atari 8-bit (armados, sin publicar), los 10 Top Peores y el Infravalorados de SNES.
+se contaron los 2 de Atari 8-bit (armados, sin publicar), los 10 Top Peores y el Joyas ocultas de SNES.
 
 ---
 
@@ -135,7 +135,7 @@ Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, Kirby Super Star,
 Fox, Yoshi's Island, Halo: Combat Evolved (Xbox), Counter-Strike (PC), Need for Speed: Underground 2, Kingdom Hearts (PS2), Age of Empires II (PC) y Diablo (PC) —armadas el 2026-10-27—, Commandos: Behind Enemy Lines (PC) y The Sims (PC) —armadas el 2026-10-28—, Gears of War (Xbox 360, armada el 2026-10-29, elegida por el canal), The Witcher (PC, armada el 2026-10-30, pedida de la comunidad), más 1 pedida: JoJo's Bizarre Adventure. Mighty Morphin Power Rangers, Metal
 Warriors, Melee, Montezuma's Revenge, International Superstar Soccer y God of War (PS2) ya se publicaron.
 
-**Rankings (18):** SNES Infravalorados (categoría nueva `rankings/infravalorados`, armado 2026-10-19), Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
+**Rankings (18):** SNES Joyas ocultas (categoría nueva `rankings/joyas-ocultas`, armado 2026-10-19), Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial +
 Top Precios, Saturn Top Mundial + Top Precios, Atari 8-bit Top Mundial + Top Precios
 (armados, sin publicar), PS1 Top Precios (PS1 Top Mundial ya se publicó el 2026-10-18; el par fue armado 2026-09-21 — apertura del arco PS1, ver `docs/arcos/ps1.md`), GameCube Top Precios
 (GameCube Top Mundial ya se publicó el 2026-10-04; el par fue armado 2026-09-22 — apertura del arco GameCube completa, ver
