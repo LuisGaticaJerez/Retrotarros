@@ -1,6 +1,6 @@
-# Discusion — Mega Drive Infravalorados
+# Discusion — Mega Drive Joyas ocultas
 
-Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-mega-drive-infravalorados.md`.
+Para Luis y Coco antes de grabar. Corresponde a `docs/pautas/pauta-mega-drive-joyas-ocultas.md`.
 
 ## La lista (del #10 al #1, ordenada por fuerza de la critica)
 

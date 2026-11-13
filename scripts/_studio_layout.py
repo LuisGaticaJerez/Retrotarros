@@ -37,7 +37,9 @@ EPISODE_CATEGORY_RULES: list[tuple[str, str]] = [
     (r"-top-mundial$", "rankings/top-mundial"),
     (r"-top-precios$", "rankings/top-precios"),
     (r"-top-peores$", "rankings/top-peores"),
-    (r"-infravalorados$", "rankings/infravalorados"),
+    # n64-joyas-ocultas es la curaduria N64 previa (carpeta curaduria-n64, regla de abajo):
+    # el formato por consola "Joyas ocultas" (antes Infravalorados, renombrado 2026-11-13) la excluye.
+    (r"^(?!n64-)[a-z0-9-]+-joyas-ocultas$", "rankings/joyas-ocultas"),
     (r"-coleccion$", "colecciones"),
     (r"^saga-", "sagas"),
     (r"^retro-", "specials"),

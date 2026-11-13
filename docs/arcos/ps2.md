@@ -2,7 +2,7 @@
 
 **Generación 6 · 2000-2013 · La consola más vendida de la historia**
 
-> Arco nuevo, abierto el 2026-10-22 junto con Xbox y Wii: Luis quiere partir cada una de estas consolas por su Top Mundial antes de los otros formatos (Top Precios, Top Peores, Infravalorados).
+> Arco nuevo, abierto el 2026-10-22 junto con Xbox y Wii: Luis quiere partir cada una de estas consolas por su Top Mundial antes de los otros formatos (Top Precios, Top Peores, Joyas ocultas).
 
 ---
 
@@ -22,7 +22,7 @@
 | 1 | `ps2-top-mundial` | Ranking · crítica | Armado, sin grabar (HTML, capturas, pauta, discusión y kit listos) | [pauta](../pautas/pauta-ps2-top-mundial.md) | [discusión](../discusiones/discusion-ps2-top-mundial.md) | [html](../../studio/rankings/top-mundial/ps2-top-mundial.html) |
 | 2 | `ps2-top-precios` | Ranking · mercado | Idea | — | — | — |
 | 3 | `ps2-top-peores` | Ranking · humor | Idea (hay mucha evidencia de "peores" para PS2) | — | — | — |
-| 4 | `ps2-infravalorados` | Ranking · calidad olvidada | Idea con candidatos ya investigados (ver abajo) | — | — | — |
+| 4 | `ps2-joyas-ocultas` | Ranking · calidad olvidada | Idea con candidatos ya investigados (ver abajo) | — | — | — |
 
 ---
 
@@ -36,7 +36,7 @@ Reglas de Luis (2026-10-22): **una entrada por franquicia** y **sin deportes anu
 
 Un juego va en el Top Mundial de la consola donde salió primero y no se repite en los de las otras. Por eso Resident Evil 4 (96 en PS2) queda en GameCube, donde salió primero (enero de 2005; PS2 en octubre) y ya es #2. Se acordó no poner bonus track: la explicación va en una frase hablada y en las notas de la portada. Aplica a Xbox y Wii (RE4 Wii Edition queda fuera).
 
-### 2. Candidatos para PS2 Infravalorados (decidido con Luis, 2026-10-22)
+### 2. Candidatos para PS2 Joyas ocultas (decidido con Luis, 2026-10-22)
 
 Los juegos que quedaron fuera del Top Mundial por criterio de legado, con nota alta y sin repetir franquicia, van a este ranking en vez de perderse. Notas de Metacritic de PS2 (lista "Best Games on PS2" y fichas): Virtua Fighter 4 (94, candidato a #1 por crítica), SSX (93), Guitar Hero II (92), Guitar Hero (91), Ratchet & Clank: Up Your Arsenal (91), Twisted Metal: Black (91), Klonoa 2 (91) y Dead or Alive 2 Hardcore (91). Prince of Persia: Sands of Time (92) y Soulcalibur II (92) son muy conocidos: evaluar si entran. Reglas del formato: no pueden estar en el Top Mundial de PS2, pesa más la crítica que el olvido y va sin precios. Resident Evil 4 no entra: ya está en el Top Mundial de GameCube.
 
@@ -44,7 +44,7 @@ Los juegos que quedaron fuera del Top Mundial por criterio de legado, con nota a
 
 ## Conexiones cruzadas
 
-- **Prince of Persia y Soulcalibur II (2026-10-22):** el Top Mundial de Xbox los incluye por nota (92). Luis aprobó dejarlos en Xbox (2026-10-22): salen de los candidatos de PS2 Infravalorados. SSX 3 (92 en Xbox) quedó fuera de Xbox porque la saga nació en PS2.
+- **Prince of Persia y Soulcalibur II (2026-10-22):** el Top Mundial de Xbox los incluye por nota (92). Luis aprobó dejarlos en Xbox (2026-10-22): salen de los candidatos de PS2 Joyas ocultas. SSX 3 (92 en Xbox) quedó fuera de Xbox porque la saga nació en PS2.
 - **Regla de una entrada por franquicia:** nace en este arco. Aplicable a Xbox y Wii; GameCube y las consolas anteriores no la usaron.
 - **Resident Evil 4:** aparece en el Top Mundial de GameCube; se evita repetirlo en PS2 y, si se mantiene el criterio, tampoco debería repetirse en Wii.
 - **Okami** salió también en Wii en 2008 (posible cruce con el Top Mundial de Wii) y comparte director con Devil May Cry: Hideki Kamiya.

@@ -63,7 +63,7 @@ mejores juegos de xbox, top 10 xbox, mejores juegos de xbox original, juegos de 
 
 - **Miniatura sugerida:** caja de Halo: Combat Evolved o de KOTOR + texto "XBOX TOP 10" + TarroBot.
 - Fuente de datos: `docs/pautas/pauta-xbox-top-mundial.md` y `docs/discusiones/discusion-xbox-top-mundial.md`.
-- Antes de subir: resolver con Luis la pregunta abierta sobre Prince of Persia y Soulcalibur II (también están en GameCube Infravalorados) y, si cambia el top, ajustar títulos, descripción y capítulos.
+- Antes de subir: resolver con Luis la pregunta abierta sobre Prince of Persia y Soulcalibur II (también están en GameCube Joyas ocultas) y, si cambia el top, ajustar títulos, descripción y capítulos.
 
 ---
 

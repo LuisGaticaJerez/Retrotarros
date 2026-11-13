@@ -1,9 +1,9 @@
-# Pauta — SNES Infravalorados
+# Pauta — SNES Joyas ocultas
 
 > Episodio: los juegos de SNES muy bien criticados que hoy casi nadie nombra (ranking de CALIDAD, no de precios)
-> HTML: `studio/rankings/infravalorados/snes-infravalorados.html`
+> HTML: `studio/rankings/joyas-ocultas/snes-joyas-ocultas.html`
 > Formato: ranking #10 → #1 · 14 slides · generado con `top_deck.py` sin precios (formato nuevo, primera consola)
-> Driver: `.cache/gen_snes_infravalorados.py` (gitignored)
+> Driver: `.cache/gen_snes_joyas_ocultas.py` (gitignored)
 
 ## Gancho / Cold open
 
@@ -45,6 +45,6 @@ Ver notas teleprompter en el HTML (tecla N). Cada slide trae: fuente de la crít
 ## Notas de producción
 
 - Box arts: 10 de 10 con caja NTSC USA. 8 de libretro-thumbnails y 2 (Tetris Attack, Rock n' Roll Racing) de PriceCharting, que no estaban en libretro. Verificadas visualmente.
-- Capturas generadas el 2026-10-20 (`python scripts/capture-slides.py snes-infravalorados`).
-- Categoría nueva: `rankings/infravalorados` (regla agregada en `scripts/_studio_layout.py`).
+- Capturas generadas el 2026-10-20 (`python scripts/capture-slides.py snes-joyas-ocultas`).
+- Categoría nueva: `rankings/joyas-ocultas` (regla agregada en `scripts/_studio_layout.py`).
 - Sin pastilla de precio: es un ranking de calidad.

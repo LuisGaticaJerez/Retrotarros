@@ -1,9 +1,9 @@
-# Pauta — Mega Drive Infravalorados
+# Pauta — Mega Drive Joyas ocultas
 
 > Episodio: los juegos de Mega Drive (Genesis) muy bien criticados que hoy casi nadie nombra (ranking de CALIDAD, no de precios)
-> HTML: `studio/rankings/infravalorados/mega-drive-infravalorados.html`
-> Formato: ranking #10 → #1 · 14 slides · mismo generador que SNES y PS1 Infravalorados (`top_deck.py`, sin precios)
-> Driver: `.cache/gen_mega_drive_infravalorados.py` (gitignored)
+> HTML: `studio/rankings/joyas-ocultas/mega-drive-joyas-ocultas.html`
+> Formato: ranking #10 → #1 · 14 slides · mismo generador que SNES y PS1 Joyas ocultas (`top_deck.py`, sin precios)
+> Driver: `.cache/gen_mega_drive_joyas_ocultas.py` (gitignored)
 
 ## Gancho / Cold open
 
@@ -48,6 +48,6 @@ Ver notas teleprompter en el HTML (tecla N). Cada slide trae la fuente de la cr�
 ## Notas de producción
 
 - Box arts: 10 de 10 cajas NTSC USA de libretro (`Sega - Mega Drive - Genesis`). Verificadas visualmente en un mosaico.
-- Capturas generadas el 2026-10-22 (`python scripts/capture-slides.py mega-drive-infravalorados`). Imágenes en `studio/rankings/infravalorados/img/mega-drive-infravalorados/`.
+- Capturas generadas el 2026-10-22 (`python scripts/capture-slides.py mega-drive-joyas-ocultas`). Imágenes en `studio/rankings/joyas-ocultas/img/mega-drive-joyas-ocultas/`.
 - Sin pastilla de precio: es un ranking de calidad.
 - Reservas que quedaron afuera: Mega Turrican (GamesRadar+ #36), Streets of Rage (revista Mega #6, EGM 36/40; demasiado conocido), Streets of Rage 3 (GameRankings 83 %), ToeJam & Earl in Panic on Funkotron (GamesRadar+ #10 y Mega #14, pero la recepción es dividida), Castle of Illusion (Mega #21, GamesRadar+ #35; muy conocido) y World of Illusion (GamesRadar+ #22), Aladdin (EGM: Mejor juego de Genesis 1993; muy conocido).

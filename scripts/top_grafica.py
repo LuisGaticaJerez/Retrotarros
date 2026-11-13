@@ -1,7 +1,7 @@
 """
 top_grafica.py - Retrotarros Studio Suite
 =========================================
-Grafica nueva de los rankings (Top Mundial, Top Precios, Top Peores, Infravalorados).
+Grafica nueva de los rankings (Top Mundial, Top Precios, Top Peores, Joyas ocultas).
 Se activa SOLO con data["grafica"] = "nueva" en generar_top() (scripts/top_deck.py);
 sin la marca este modulo ni se importa y el HTML sale identico al de siempre.
 

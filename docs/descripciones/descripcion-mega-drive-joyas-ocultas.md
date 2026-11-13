@@ -1,4 +1,4 @@
-# Descripción YouTube — Mega Drive Infravalorados
+# Descripción YouTube — Mega Drive Joyas ocultas
 
 Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Capítulos estimados; ajustar a los tiempos del corte final.
 
@@ -7,7 +7,7 @@ Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Ca
 ## Títulos sugeridos (elegir uno)
 
 1. **10 juegos de Mega Drive muy buenos que casi nadie recuerda** — 57 chars. (Recomendado)
-2. **Mega Drive infravalorados: los que la prensa amó y nadie nombra** — 62 chars.
+2. **Mega Drive joyas ocultas: los que la prensa amó y nadie nombra** — 61 chars.
 3. **Los mejores juegos de Genesis que no son Sonic ni Streets of Rage** — 63 chars.
 
 ---
@@ -61,11 +61,11 @@ mejores juegos de mega drive olvidados, juegos de genesis infravalorados, juegos
 
 ## Notas de producción
 
-- **Miniatura sugerida:** caja de Shining Force II o Phantasy Star II + texto "MEGA DRIVE INFRAVALORADOS" + TarroBot.
-- Fuente de datos: `docs/pautas/pauta-mega-drive-infravalorados.md` y `docs/discusiones/discusion-mega-drive-infravalorados.md`.
+- **Miniatura sugerida:** caja de Shining Force II o Phantasy Star II + texto "MEGA DRIVE JOYAS OCULTAS" + TarroBot.
+- Fuente de datos: `docs/pautas/pauta-mega-drive-joyas-ocultas.md` y `docs/discusiones/discusion-mega-drive-joyas-ocultas.md`.
 
 ---
 
-**Slug:** `mega-drive-infravalorados`
+**Slug:** `mega-drive-joyas-ocultas`
 **Formato:** Ranking de calidad (episodio largo, horizontal)
 **Última actualización:** 2026-10-22

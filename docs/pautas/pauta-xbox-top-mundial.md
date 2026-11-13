@@ -44,9 +44,9 @@ Ranking por consenso crítico y legado (nota Metacritic de la versión Xbox), NO
 - **GTA Double Pack** (96, GTA III y Vice City), **GTA: San Andreas** (93), **Tony Hawk's Pro Skater 3** (93) y **4** (90): salieron primero en PS2.
 - **Burnout 3: Takedown** (94 en Xbox): ya está en el Top Mundial de PS2. **Burnout Revenge** (89): misma franquicia.
 - **Madden NFL 2002-2006, ESPN NFL 2K5 y NFL 2K2, NCAA Football, NHL 2K3 y ESPN NHL, NBA 2K2 y 2K3, MVP Baseball, Winning Eleven 8 y 9, Tiger Woods PGA Tour**: deportes anuales o de temporada.
-- **SSX 3** (92): la franquicia nació en la PS2; es candidata de PS2 Infravalorados.
-- **Dejados fuera por criterio de legado y nota** (sin repetir franquicia ni ser deporte): **Jade Empire** (89), **The Chronicles of Riddick: Escape from Butcher Bay** (89), **Max Payne** (89, nació en PC), **Psychonauts** (88), **JSRF: Jet Set Radio Future** (88), **Oddworld: Stranger's Wrath** (88), **TimeSplitters 2** (88), **Crimson Skies: High Road to Revenge** (88), **Top Spin** (89), **Fight Night Round 2** (88) y **Fable** (85). Ver arco: candidatos de Xbox Infravalorados.
-- **Pregunta abierta:** Prince of Persia: The Sands of Time (92) y Soulcalibur II (92) salieron el mismo mes en PS2, Xbox y GameCube, y ya están en GameCube Infravalorados. Entran aquí por la regla de nota; ver la discusión.
+- **SSX 3** (92): la franquicia nació en la PS2; es candidata de PS2 Joyas ocultas.
+- **Dejados fuera por criterio de legado y nota** (sin repetir franquicia ni ser deporte): **Jade Empire** (89), **The Chronicles of Riddick: Escape from Butcher Bay** (89), **Max Payne** (89, nació en PC), **Psychonauts** (88), **JSRF: Jet Set Radio Future** (88), **Oddworld: Stranger's Wrath** (88), **TimeSplitters 2** (88), **Crimson Skies: High Road to Revenge** (88), **Top Spin** (89), **Fight Night Round 2** (88) y **Fable** (85). Ver arco: candidatos de Xbox Joyas ocultas.
+- **Pregunta abierta:** Prince of Persia: The Sands of Time (92) y Soulcalibur II (92) salieron el mismo mes en PS2, Xbox y GameCube, y ya están en GameCube Joyas ocultas. Entran aquí por la regla de nota; ver la discusión.
 
 ## Veredicto (slide 13)
 

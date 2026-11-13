@@ -1,9 +1,9 @@
-# Pauta — GameCube Infravalorados
+# Pauta — GameCube Joyas ocultas
 
 > Episodio: los juegos de GameCube muy bien criticados que hoy casi nadie nombra (ranking de CALIDAD, no de precios)
-> HTML: `studio/rankings/infravalorados/gamecube-infravalorados.html`
-> Formato: ranking #10 → #1 · 14 slides · mismo generador que SNES, PS1 y Mega Drive Infravalorados (`top_deck.py`, sin precios)
-> Driver: `.cache/gen_gamecube_infravalorados.py` (gitignored)
+> HTML: `studio/rankings/joyas-ocultas/gamecube-joyas-ocultas.html`
+> Formato: ranking #10 → #1 · 14 slides · mismo generador que SNES, PS1 y Mega Drive Joyas ocultas (`top_deck.py`, sin precios)
+> Driver: `.cache/gen_gamecube_joyas_ocultas.py` (gitignored)
 
 ## Gancho / Cold open
 
@@ -47,7 +47,7 @@ Ver notas teleprompter en el HTML (tecla N). Cada slide trae la fuente de la cr�
 ## Notas de producción
 
 - Box arts: 10 de 10 cajas NTSC USA de libretro (`Nintendo - GameCube`). Verificadas visualmente en un mosaico.
-- Capturas generadas el 2026-10-22 (`python scripts/capture-slides.py gamecube-infravalorados`), 14 PNG, revisadas sin desbordes. Imágenes en `studio/rankings/infravalorados/img/gamecube-infravalorados/`.
+- Capturas generadas el 2026-10-22 (`python scripts/capture-slides.py gamecube-joyas-ocultas`), 14 PNG, revisadas sin desbordes. Imágenes en `studio/rankings/joyas-ocultas/img/gamecube-joyas-ocultas/`.
 - Sin pastilla de precio: es un ranking de calidad.
 - Reservas que quedaron afuera (nota Metacritic de GameCube): Super Monkey Ball 2 (87, Famitsu 31/40), Mario Kart: Double Dash!! (87; muy conocido), Beyond Good & Evil (87), SSX Tricky (87), Tales of Symphonia (86), The Legend of Zelda: Four Swords Adventures (86), Ikaruga (85, Famitsu 36/40), Metal Gear Solid: The Twin Snakes (85), Fire Emblem: Path of Radiance (85; ya está en el Top Precios), Skies of Arcadia Legends (84, EGM 9/9/9,5) y Luigi's Mansion (78).
 - Phantasy Star Online Episode I & II quedó descartado: la nota de Wikipedia (89) no queda claramente asociada a la versión de GameCube.
