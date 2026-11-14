@@ -296,6 +296,33 @@ def _tv_css() -> str:
     )
 
 
+# Factor de la caja ancha sobre --bh (2026-11-14): sobraba espacio en 1080p y la caja ancha se veia chica.
+CART_K = {"alta": 1.0, "ancha": 1.12}
+
+
+def _cart_h(box: str) -> str:
+    k = CART_K[box]
+    return "min(var(--bh),40vh)" if k == 1 else f"min(calc(var(--bh)*{k}),42vh)"
+
+
+def _cart_mx(box: str) -> str:
+    k = CART_K[box]
+    return "var(--bh)" if k == 1 else f"calc(var(--bh)*{k})"
+
+
+# El "por que" de los layouts de caja se agranda solo hasta llenar su panel: arranca en 40 px y baja de a 1 hasta que
+# cabe, sin pasar de 32 px (el tamano de letra para TV de siempre).
+FIT_JS = (
+    '<script id="g-fit">\n'
+    "(function(){function fit(){document.querySelectorAll('.slide-hybrid.box-alta .game-why,.slide-hybrid.box-ancha .game-why')"
+    ".forEach(function(w){var h=w.closest('.slide-hybrid'),fs=40;w.style.setProperty('font-size',fs+'px','important');"
+    "while(fs>32&&w.getBoundingClientRect().bottom>h.getBoundingClientRect().bottom+1){fs--;w.style.setProperty('font-size',fs+'px','important');}});}\n"
+    "window.addEventListener('load',fit);window.addEventListener('resize',fit);"
+    "if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);})();\n"
+    "</script>\n"
+)
+
+
 def _box_css(box: str) -> str:
     """CSS de los layouts de caja "alta" y "ancha" (ver BOX_MAX). Vacio para "clasica".
     Filas: cabecera (auto) / caja + titulo (auto, alto de la caja) / "por que" (1fr, pegado a la caja y llena hasta abajo; 2026-11-14:
@@ -312,7 +339,7 @@ def _box_css(box: str) -> str:
         "gap:26px 40px !important;max-width:1800px !important}\n"
         f"{c} .cart-wrap{{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;"
         "height:auto !important;min-height:auto !important}\n"
-        f"{c} .cart{{height:min(var(--bh),40vh) !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;"
+        f"{c} .cart{{height:{_cart_h(box)} !important;max-height:{_cart_mx(box)} !important;width:auto !important;aspect-ratio:var(--ar) !important;"
         "background:none !important;box-shadow:none !important;border-radius:0 !important}\n"
         f"{c} .cart::before{{display:none !important}}\n"
         f"{c} .cart-img-wrap{{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;"
@@ -401,11 +428,13 @@ def _shared_css(tv_grande: bool = False, cart_px: int | None = None, extra_css: 
         + (f".cart{{width:min(100%,{int(cart_px)}px) !important}}\n" if cart_px else "")
         + _box_css(box)
         + extra_css
-        + "</style>\n</head>"
+        + "</style>\n"
+        + (FIT_JS if box in BOX_MAX else "")
+        + "</head>"
     )
 
 
-_SHARED_CSS_BLOCK_RE = re.compile(r"<style>\n\.game-price\{.*?</style>\n</head>", re.DOTALL)
+_SHARED_CSS_BLOCK_RE = re.compile(r"<style>\n\.game-price\{.*?</style>\n(?:<script id=\"g-fit\">.*?</script>\n)?</head>", re.DOTALL)
 
 
 def generar_top(data: dict, out_slug: str) -> Path:

@@ -9,6 +9,7 @@ Uso:  python scripts/arreglar_hueco_cajas.py <slug> [<slug> ...]          (modo 
       python scripts/arreglar_hueco_cajas.py --todos [--aplicar]          (todos los decks con layout de caja)
 Solo sin grabar ni publicar: confirmar con Luis antes de aplicarlo a un deck.
 """
+import re
 import sys
 from pathlib import Path
 
@@ -17,23 +18,40 @@ import top_deck  # noqa: E402
 from _studio_layout import STUDIO, find_html  # noqa: E402
 
 
-def _viejo(nuevo: str) -> str:
-    v = nuevo.replace("grid-template-rows:auto auto 1fr !important;", "grid-template-rows:auto 1fr auto !important;")
-    v = v.replace(".cart{height:min(var(--bh),40vh) !important;", ".cart{height:100% !important;")
+def _v2(nuevo: str, box: str) -> str:
+    """CSS de la primera version del arreglo (caja sin factor), para actualizar decks ya parchados."""
+    return nuevo.replace(f"height:{top_deck._cart_h(box)} !important;max-height:{top_deck._cart_mx(box)} !important;",
+                         "height:min(var(--bh),40vh) !important;max-height:var(--bh) !important;")
+
+
+def _v1(nuevo: str, box: str) -> str:
+    """CSS original (antes del 2026-11-14): fila de la caja 1fr, caja al 100 % de su fila."""
+    v = _v2(nuevo, box)
+    v = v.replace("grid-template-rows:auto auto 1fr !important;", "grid-template-rows:auto 1fr auto !important;")
+    v = v.replace("height:min(var(--bh),40vh) !important;", "height:100% !important;")
     v = v.replace("height:auto !important;min-height:auto !important}", "height:auto !important;min-height:0 !important}")
-    lineas = [l for l in v.split("\n") if ".game-why{align-self:stretch" not in l]
-    return "\n".join(lineas)
+    return "\n".join(l for l in v.split("\n") if ".game-why{align-self:stretch" not in l)
 
 
 def parchear(html: str):
-    """Devuelve (nuevo_html, cajas_cambiadas)."""
+    """Devuelve (nuevo_html, cajas_cambiadas). Acepta decks sin parchar, con la primera version o ya al dia."""
     cambiadas = []
+    con_layout = False
     for box in ("alta", "ancha"):
         nuevo = top_deck._box_css(box)
-        viejo = _viejo(nuevo)
-        if viejo in html:
-            html = html.replace(viejo, nuevo)
-            cambiadas.append(box)
+        if nuevo in html:
+            con_layout = True
+            continue
+        for viejo in (_v2(nuevo, box), _v1(nuevo, box)):
+            if viejo != nuevo and viejo in html:
+                html = html.replace(viejo, nuevo)
+                cambiadas.append(box)
+                con_layout = True
+                break
+    if con_layout and top_deck.FIT_JS not in html:
+        html = re.sub(r'<script id="g-fit">.*?</script>\n', "", html, flags=re.DOTALL)
+        html = html.replace("</head>", top_deck.FIT_JS + "</head>", 1)
+        cambiadas.append("fit-js")
     return html, cambiadas
 
 

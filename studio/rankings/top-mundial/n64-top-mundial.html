@@ -150,7 +150,7 @@ body.read-mode .read-indicator{display:block}
 .portada .ep-sub{font-size:34px !important}
 .slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
 .slide-hybrid.box-ancha .cart-wrap{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;height:auto !important;min-height:auto !important}
-.slide-hybrid.box-ancha .cart{height:min(var(--bh),40vh) !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
+.slide-hybrid.box-ancha .cart{height:min(calc(var(--bh)*1.12),42vh) !important;max-height:calc(var(--bh)*1.12) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
 .slide-hybrid.box-ancha .cart::before{display:none !important}
 .slide-hybrid.box-ancha .cart-img-wrap{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;background:none !important;box-shadow:none !important;overflow:visible !important}
 .slide-hybrid.box-ancha .cart-img-wrap img.cart-img-bg{display:none !important}
@@ -162,6 +162,10 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-ancha .game-title{font-size:44px !important;line-height:1.05 !important}
 .slide-hybrid.box-ancha .game-meta{font-size:21px !important}
 </style>
+<script id="g-fit">
+(function(){function fit(){document.querySelectorAll('.slide-hybrid.box-alta .game-why,.slide-hybrid.box-ancha .game-why').forEach(function(w){var h=w.closest('.slide-hybrid'),fs=40;w.style.setProperty('font-size',fs+'px','important');while(fs>32&&w.getBoundingClientRect().bottom>h.getBoundingClientRect().bottom+1){fs--;w.style.setProperty('font-size',fs+'px','important');}});}
+window.addEventListener('load',fit);window.addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);})();
+</script>
 </head>
 <body>
 <div class="read-indicator">● MODO LECTURA (N)</div>

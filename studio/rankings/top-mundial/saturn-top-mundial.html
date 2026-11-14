@@ -187,6 +187,10 @@ body.read-mode .read-indicator{display:block}
 .g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
 .g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
+<script id="g-fit">
+(function(){function fit(){document.querySelectorAll('.slide-hybrid.box-alta .game-why,.slide-hybrid.box-ancha .game-why').forEach(function(w){var h=w.closest('.slide-hybrid'),fs=40;w.style.setProperty('font-size',fs+'px','important');while(fs>32&&w.getBoundingClientRect().bottom>h.getBoundingClientRect().bottom+1){fs--;w.style.setProperty('font-size',fs+'px','important');}});}
+window.addEventListener('load',fit);window.addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);})();
+</script>
 </head>
 <body>
 
