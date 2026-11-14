@@ -29,6 +29,8 @@ REPO = T.REPO
 SECCION_RE = re.compile(r'<section class="slide[^"]*">.*?</section>', re.DOTALL)
 ROTULOS_POR_DEFECTO = {"TOP", "PODIO", "EL TRONO"}
 CSS_FIN = "</style>\n</head>"
+# Desde el 2026-11-14 los layouts de caja agregan un <script id="g-fit"> entre el </style> y el </head>.
+CSS_FIN_RE = re.compile(r"</style>\n(?:<script id=\"g-fit\">.*?</script>\n)?</head>", re.DOTALL)
 
 
 def _buscar(patron: str, texto: str, grupo: int = 1, flags: int = re.DOTALL) -> str | None:
@@ -70,8 +72,8 @@ def migrar(html: str, slug: str) -> str:
     """HTML clasico de un ranking -> el mismo ranking con la grafica nueva. ValueError si ya la tiene."""
     if "g-nueva" in html:
         raise ValueError("el HTML ya tiene la grafica nueva")
-    if html.count(CSS_FIN) != 1:
-        raise ValueError(f"esperaba un solo bloque de estilos compartido, hay {html.count(CSS_FIN)}")
+    if len(CSS_FIN_RE.findall(html)) != 1:
+        raise ValueError(f"esperaba un solo bloque de estilos compartido, hay {len(CSS_FIN_RE.findall(html))}")
     secciones = SECCION_RE.findall(html)
     items: list[dict] = []
     rarezas: list[dict] = []
@@ -110,7 +112,8 @@ def migrar(html: str, slug: str) -> str:
         return s
 
     resultado = SECCION_RE.sub(sustituir, html)
-    return resultado.replace(CSS_FIN, G.css_nueva() + CSS_FIN, 1)
+    m = CSS_FIN_RE.search(resultado)
+    return resultado[: m.start()] + G.css_nueva() + resultado[m.start():]
 
 
 def _ruta(slug: str) -> Path:

@@ -148,9 +148,9 @@ body.read-mode .read-indicator{display:block}
 .divider .pre{font-size:22px !important;letter-spacing:5px !important}
 .divider .sub{font-size:34px !important;line-height:1.5 !important;max-width:1500px !important;letter-spacing:1px !important}
 .portada .ep-sub{font-size:34px !important}
-.slide-hybrid.box-alta{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto 1fr auto !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
-.slide-hybrid.box-alta .cart-wrap{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;height:auto !important;min-height:0 !important}
-.slide-hybrid.box-alta .cart{height:100% !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
+.slide-hybrid.box-alta{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
+.slide-hybrid.box-alta .cart-wrap{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;height:auto !important;min-height:auto !important}
+.slide-hybrid.box-alta .cart{height:min(var(--bh),40vh) !important;max-height:var(--bh) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
 .slide-hybrid.box-alta .cart::before{display:none !important}
 .slide-hybrid.box-alta .cart-img-wrap{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;background:none !important;box-shadow:none !important;overflow:visible !important}
 .slide-hybrid.box-alta .cart-img-wrap img.cart-img-bg{display:none !important}
@@ -158,6 +158,7 @@ body.read-mode .read-indicator{display:block}
 .slide-hybrid.box-alta .cart-fallback{border-radius:6px;box-shadow:0 0 0 2px var(--cy),0 0 34px rgba(0,229,255,.35),0 18px 40px rgba(0,0,0,.65)}
 .slide-hybrid.box-alta .cart-console{position:absolute !important;top:100% !important;bottom:auto !important;left:0 !important;transform:none !important;margin-top:8px;font-size:11px !important;color:rgba(255,255,255,.45) !important}
 .slide-hybrid.box-alta .hybrid-title{align-self:center !important}
+.slide-hybrid.box-alta .game-why{align-self:stretch !important;display:flex !important;flex-direction:column !important;justify-content:center !important}
 .slide-hybrid.box-alta .game-title{font-size:48px !important;line-height:1.05 !important}
 .slide-hybrid.box-alta .game-meta{font-size:22px !important}
 .g-nueva{}
@@ -196,6 +197,10 @@ body.read-mode .read-indicator{display:block}
 .g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
 .g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
 </style>
+<script id="g-fit">
+(function(){function fit(){document.querySelectorAll('.slide-hybrid.box-alta .game-why,.slide-hybrid.box-ancha .game-why').forEach(function(w){var h=w.closest('.slide-hybrid'),fs=40;w.style.setProperty('font-size',fs+'px','important');while(fs>32&&w.getBoundingClientRect().bottom>h.getBoundingClientRect().bottom+1){fs--;w.style.setProperty('font-size',fs+'px','important');}});}
+window.addEventListener('load',fit);window.addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);})();
+</script>
 </head>
 <body>
 <div class="read-indicator">● MODO LECTURA (N)</div>
