@@ -3,7 +3,8 @@
 Guarda data/youtube/estado-canal.json (el ultimo) y una copia por dia en data/youtube/historial/estado-AAAA-MM-DD.json, y muestra los
 cambios contra la corrida anterior (videos nuevos publicados, nuevos programados, fechas que cambiaron).
 Usa el token de .cache/youtube/token.json (el de youtube_aplicar.py). Si caduco, vuelve a abrir el navegador para autorizar.
-Uso: python scripts/youtube_estado.py
+Al terminar hace un commit local (sin push) solo del estado y su historial, para que no quede huerfano. --no-commit lo omite.
+Uso: python scripts/youtube_estado.py [--no-commit]
 """
 import json
 import sys
@@ -66,6 +67,26 @@ def main() -> None:
         print("  fecha programada cambio:", [v["titulo"][:45] for v in cambios])
     else:
         print("\n(primera corrida: sin base para comparar)")
+    if "--no-commit" not in sys.argv:
+        commitear(hoy)
+
+
+def commitear(hoy: str) -> None:
+    """Commit local (sin push) SOLO de data/youtube/estado-canal.json y su historial, para que el estado no quede huerfano
+    y las otras sesiones lo vean. No toca nada mas del arbol de trabajo ni de otros archivos en staging."""
+    import subprocess
+    rutas = ["data/youtube/estado-canal.json", "data/youtube/historial"]
+    def git(*a):
+        return subprocess.run(["git", *a], cwd=REPO, capture_output=True, text=True, encoding="utf-8")
+    if not git("status", "--porcelain", "--", *rutas).stdout.strip():
+        print("\nCommit: sin cambios en el estado, nada que commitear.")
+        return
+    a = git("add", "--", *rutas)
+    c = git("commit", "-m", f"chore(canal): estado del canal {hoy}", "--", *rutas) if a.returncode == 0 else a
+    if c.returncode == 0:
+        print("\nCommit local hecho:", git("log", "-1", "--format=%h %s").stdout.strip(), "(sin push)")
+    else:
+        print("\nNo pude commitear el estado:", (c.stderr or c.stdout).strip())
 
 
 if __name__ == "__main__":

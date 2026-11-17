@@ -32,6 +32,7 @@ BASURA = {"#fyp", "#fypシ", "#love", "#happy", "#inspiration", "#viral", "#inst
 
 
 def servicio():
+    from google.auth.exceptions import RefreshError
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
     from google_auth_oauthlib.flow import InstalledAppFlow
@@ -40,8 +41,11 @@ def servicio():
     creds = Credentials.from_authorized_user_file(str(token), SCOPES) if token.exists() else None
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
+            try:
+                creds.refresh(Request())
+            except RefreshError:
+                creds = None   # token caducado o revocado: se vuelve a pedir el permiso en el navegador
+        if not creds or not creds.valid:
             if not secret.exists():
                 sys.exit(f"Falta {secret}. Mira las instrucciones al inicio de este archivo.")
             creds = InstalledAppFlow.from_client_secrets_file(str(secret), SCOPES).run_local_server(port=0)
