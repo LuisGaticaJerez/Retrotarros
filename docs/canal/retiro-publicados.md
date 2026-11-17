@@ -12,9 +12,10 @@ Por cada elemento publicado, en el repo y en el Drive (`G:\Mi unidad\Studio\`):
 2. Las **imágenes** propias del elemento (`img/<slug>/`, cajas, fotos de hardware).
 3. El **kit de YouTube** (`docs/descripciones/descripcion-<slug>.md`).
 4. La **discusión** (`docs/discusiones/discusion-<slug>.md`), si existe.
-5. Su carpeta en el Drive y los `.docx` de pauta y discusión de `Studio\pautas\`.
+5. La **pauta** (`docs/pautas/`, `studio/pautas/<slug>.tarrobot.json`) y los **shorts derivados** (HTML, audio, MP4).
+6. Su carpeta en el Drive, los `.docx` de pauta y discusión de `Studio\Pautas\` y las copias en `Studio\Tarrobot\`.
 
-**Se conservan siempre:** la pauta (`docs/pautas/pauta-<slug>.md`), los shorts derivados (HTML, guion, MP4) y todo lo que queda en el historial de git (se puede recuperar).
+**Se conserva siempre:** el historial de git (se puede recuperar). Las pautas y los shorts derivados se conservaban hasta el 2026-11-17; desde ese día Luis pidió retirarlos también, así que en un retiro nuevo se borran junto con lo demás (pauta, `.tarrobot.json`, HTML, guion y MP4 del short, y sus copias en el Drive y en `Tarrobot\`), salvo que diga otra cosa.
 
 ## Excepciones: lo que NO se retira
 
@@ -35,12 +36,7 @@ Los demás rankings publicados (Master System Top Mundial y Top Precios, Mega Dr
 
 ## Pendientes de retiro (al 2026-11-17)
 
-Reseñas ya publicadas que siguen en el estudio, esperando el dale de Luis:
-
-- `resena-yoshis-island`
-- `resena-ocarina-of-time-pedido`
-- `resena-need-for-speed-underground-2`
-- `resena-contra`
+Ninguno. Lo publicado que no entra al reforge se retiró el 2026-11-17.
 
 ## Registro de retiros hechos
 
@@ -50,5 +46,6 @@ Reseñas ya publicadas que siguen en el estudio, esperando el dale de Luis:
 | 2026-10-19 | Reseñas Metal Warriors y Melee; Specials Día del Padre y Mes del Mar (se conservan pautas, discusiones y shorts) |
 | 2026-10-21 | Reseña Mighty Morphin Power Rangers, las 4 colecciones (N64, NES, SNES, PS Vita) y la saga Zelda |
 | 2026-10-26 | Reseña Montezuma's Revenge |
+| 2026-11-17 | Reseñas Yoshi's Island, Ocarina of Time, Need for Speed Underground 2 y Contra; rankings Master System (Top Mundial y Top Precios), Mega Drive Top Mundial, Atari 2600 (Top Mundial, Top Precios y Top Peores), Game Boy (Top Mundial, Top Precios y Top Peores), GameCube Top Mundial, PS1 (Top Mundial y Top Peores), N64 Top Peores, SNES Top Peores y SNES Joyas ocultas. Esta vez se borró **todo**: HTML, capturas, imágenes, kit, discusión, **pauta** y `.tarrobot.json`, el short de Master System Top Precios, y las carpetas y `.docx` del Drive. Solo queda el historial de git |
 
 Cada retiro nuevo suma una fila aquí.

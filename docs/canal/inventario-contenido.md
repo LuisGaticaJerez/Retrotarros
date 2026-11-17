@@ -97,6 +97,8 @@ se contaron los 2 de Atari 8-bit (armados, sin publicar), los 10 Top Peores y el
 
 Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09). Qué se retira, qué se exceptúa (rankings y reforges), pendientes y registro: `docs/canal/retiro-publicados.md`.
 
+**Retiro del estudio 2026-11-17:** se retiraron 4 reseñas (Yoshi's Island, Ocarina of Time, NFS Underground 2, Contra) y 11 rankings (Master System, Mega Drive Top Mundial, Atari 2600, Game Boy, GameCube Top Mundial, PS1 Top Mundial y Top Peores, N64 Top Peores, SNES Top Peores y Joyas ocultas), con pautas, discusiones, kits, HTML, capturas, imágenes y el short de Master System Top Precios (repo y Drive). Quedan solo los 7 rankings del reforge. Detalle en `docs/canal/retiro-publicados.md`.
+
 **Retiro del estudio 2026-10-26:** se retiró la reseña de Montezuma's Revenge (HTML, capturas, imágenes, kit y carpeta del Drive).
 
 **Retiro del estudio 2026-10-21:** se retiraron la reseña de Mighty Morphin Power Rangers, las 4 Colecciones (N64, NES, SNES, PS Vita) y la saga Zelda, con HTML, capturas, imágenes, kits de YouTube y discusiones (repo y Drive); se conservan las pautas y los shorts. **Los Rankings publicados (Top Mundial, Top Precios, Top Peores) NO se retiran hasta hacer los "reforge" (decisión de Luis 2026-10-21).**
