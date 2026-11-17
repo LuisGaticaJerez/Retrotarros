@@ -207,6 +207,7 @@ Fuente de verdad: archivos `.md` en `docs/`. Los `.docx` originales quedan archi
 | `docs/canal/briefings-compositores.md` | Fichas de compositores (Kondo, Uematsu, Mitsuda, Yamaoka, Wise, Kirkhope, etc.). Documento vivo. |
 | `docs/canal/guiones-shorts.md` | Guiones lane Luis: timings, B-roll, título YouTube, caption, hashtags, datos de respaldo. Documento vivo. |
 | `docs/canal/guia-youtube-viral.md` | **Playbook de virality YouTube** (título, miniatura, descripción, hashtags, capítulos). Toda `descripcion-{slug}.md` lo sigue. |
+| `docs/canal/retiro-publicados.md` | **Retiro de lo publicado del estudio:** qué se retira (HTML, capturas, imágenes, kit, discusión), excepciones (rankings y reforges), pendientes y registro. Se consulta en cada revisión del inventario. |
 | `docs/canal/rendimiento/` | **Informes de rendimiento del canal** (análisis de vistas y suscriptores, pruebas de anuncios, propuestas de hashtags) con un `README.md` que trae el índice y la tabla de seguimiento. Regla de uso en "Rendimiento del canal y anuncios". |
 | `docs/descripciones/descripcion-{slug}.md` | Descripción YouTube lista para pegar (episodios largos): títulos, resumen, capítulos con timestamps, hashtags, tags. Sigue `docs/canal/guia-youtube-viral.md`. Automático al cerrar el episodio (ver "Kit de publicación YouTube automático"). |
 | `docs/descripciones/descripcion-tarroshort-{slug}.md` | Igual que arriba, para TarroShorts. Sin capítulos ni tags de campo (no aplican a shorts). |

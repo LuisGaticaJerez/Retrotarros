@@ -95,7 +95,7 @@ se contaron los 2 de Atari 8-bit (armados, sin publicar), los 10 Top Peores y el
 
 **Grabado y todavía sin fecha de publicación:** nada conocido a 2026-11-17 aparte de los 2 programados (confirmar con Luis si hay algo grabado que no esté en YouTube). La reseña de Mighty Morphin Power Rangers se publicó el 2026-10-20. Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
 
-Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09).
+Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09). Qué se retira, qué se exceptúa (rankings y reforges), pendientes y registro: `docs/canal/retiro-publicados.md`.
 
 **Retiro del estudio 2026-10-26:** se retiró la reseña de Montezuma's Revenge (HTML, capturas, imágenes, kit y carpeta del Drive).
 
