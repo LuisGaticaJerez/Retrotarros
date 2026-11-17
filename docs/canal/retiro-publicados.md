@@ -20,11 +20,11 @@ Por cada elemento publicado, en el repo y en el Drive (`G:\Mi unidad\Studio\`):
 
 | Qué | Hasta cuándo | Por qué |
 |---|---|---|
-| **Rankings a reforjar** (Luis 2026-11-17): los grabados con baja calidad de audio y video, que son los publicados **antes del PS Vita Top Mundial (17 ago)**, más ese mismo. Candidatos: N64 Top Mundial y Top Precios, SNES Top Mundial y Top Precios, NES Top Mundial y Top Precios, PS Vita Top Mundial, y por confirmar Master System Top Mundial y Top Precios y Mega Drive Top Mundial | Hasta terminar su reforge | Calidad antigua; necesita los archivos a mano |
+| **Rankings a reforjar** (Luis 2026-11-17): los grabados con baja calidad de audio y video, que son los publicados **antes del PS Vita Top Mundial (17 ago)**, más ese mismo. Son 7: N64 Top Mundial y Top Precios, SNES Top Mundial y Top Precios, NES Top Mundial y Top Precios y PS Vita Top Mundial | Hasta terminar su reforge | Calidad antigua; necesita los archivos a mano |
 | **Reforges de colecciones NES, N64 y SNES** (`data/colecciones/*.json`, `studio/colecciones/`) | Hasta que se graben y publiquen | Armados el 2026-11-10 con gráfica nueva, sin grabar |
 | **Cualquier programado o grabado sin publicar** | Hasta que salga en YouTube | Ya está filmado: el archivo debe coincidir con el video |
 
-Los rankings publicados **después** del PS Vita Top Mundial (Atari 2600, Game Boy, GameCube, PS1 Top Mundial, N64 Top Peores, SNES Top Peores, PS1 Top Peores, SNES Joyas ocultas) no se reforjan, así que **sí se retiran** como cualquier otro publicado, con el dale de Luis. Falta confirmar si Master System y Mega Drive (publicados antes del PS Vita) entran al reforge.
+Los demás rankings publicados (Master System Top Mundial y Top Precios, Mega Drive Top Mundial, Atari 2600, Game Boy, GameCube, PS1 Top Mundial, N64 Top Peores, SNES Top Peores, PS1 Top Peores, SNES Joyas ocultas) no se reforjan (Luis 2026-11-17, incluye Master System y Mega Drive): **sí se retiran** como cualquier otro publicado, con el dale de Luis.
 
 ## Cómo se aplica en la revisión del inventario
 
