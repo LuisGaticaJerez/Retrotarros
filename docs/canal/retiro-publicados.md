@@ -20,12 +20,11 @@ Por cada elemento publicado, en el repo y en el Drive (`G:\Mi unidad\Studio\`):
 
 | Qué | Hasta cuándo | Por qué |
 |---|---|---|
-| **Rankings publicados** (Top Mundial, Top Precios, Top Peores, Joyas ocultas) | Hasta hacer los reforge (Luis 2026-10-21) | Los va a rehacer y necesita los archivos a mano |
-| **Los 6 rankings del reforge**: N64 Top Mundial y Top Precios, SNES Top Mundial y Top Precios, NES Top Mundial y Top Precios | Hasta terminar su reforge (Luis 2026-10-23) | Publicados entre el 19 mayo y el 28 junio 2026, los primeros del canal |
+| **Rankings a reforjar** (Luis 2026-11-17): los grabados con baja calidad de audio y video, que son los publicados **antes del PS Vita Top Mundial (17 ago)**, más ese mismo. Candidatos: N64 Top Mundial y Top Precios, SNES Top Mundial y Top Precios, NES Top Mundial y Top Precios, PS Vita Top Mundial, y por confirmar Master System Top Mundial y Top Precios y Mega Drive Top Mundial | Hasta terminar su reforge | Calidad antigua; necesita los archivos a mano |
 | **Reforges de colecciones NES, N64 y SNES** (`data/colecciones/*.json`, `studio/colecciones/`) | Hasta que se graben y publiquen | Armados el 2026-11-10 con gráfica nueva, sin grabar |
 | **Cualquier programado o grabado sin publicar** | Hasta que salga en YouTube | Ya está filmado: el archivo debe coincidir con el video |
 
-Pendiente de confirmar con Luis: los rankings publicados después del 28 de junio (Master System, Mega Drive, Vita, Atari 2600, Game Boy, GameCube, PS1 Top Mundial, N64 Top Peores, PS1 Top Peores, SNES Top Peores, SNES Joyas ocultas) no entran al reforge. Mientras no diga otra cosa, se tratan como excepción por la regla de los rankings.
+Los rankings publicados **después** del PS Vita Top Mundial (Atari 2600, Game Boy, GameCube, PS1 Top Mundial, N64 Top Peores, SNES Top Peores, PS1 Top Peores, SNES Joyas ocultas) no se reforjan, así que **sí se retiran** como cualquier otro publicado, con el dale de Luis. Falta confirmar si Master System y Mega Drive (publicados antes del PS Vita) entran al reforge.
 
 ## Cómo se aplica en la revisión del inventario
 
