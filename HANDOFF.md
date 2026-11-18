@@ -10,14 +10,14 @@ TarroDL, TarroStudio, TarroBot y TarroLauncher tienen repo propio en `D:\Recurso
 
 **Hecho (en la rama `claude/suspicious-shtern-dbffe5`, sin push ni PR hasta el dale de Luis):** `retro-peliculas-mejores` (HTML en `studio/specials/`, 14 slides, gráfica nueva, notas ocultas de 450 a 550 palabras por juego, 10 cajas NTSC USA), pauta, discusión, kit de YouTube y capturas. Diseño y plan: `docs/superpowers/specs/2026-11-18-retro-peliculas-mejores-design.md` y `docs/superpowers/plans/2026-11-18-retro-peliculas-mejores.md`. Para esto `top_deck.generar_top` aprendió un campo `consola` por juego (especiales multi-consola); sin la clave todo sale igual.
 
-**Top (de #1 a #10):** GoldenEye 007, Riddick: Escape from Butcher Bay, Aladdin (Genesis), Super Star Wars, Die Hard Trilogy, El Retorno del Rey (PS2), The Warriors, Spider-Man 2, The Lion King, King Kong. Orden por bandas de nota y legado; difiere del orden de partida del diseño (ver pauta, "Cambios respecto del top de partida").
+**Top (de #1 a #10):** GoldenEye 007, Aladdin (Genesis), Riddick: Escape from Butcher Bay, Super Star Wars, Die Hard Trilogy, El Retorno del Rey (PS2), The Warriors, Spider-Man 2, The Lion King, King Kong. Orden por bandas de nota y legado; difiere del orden de partida del diseño (ver pauta, "Cambios respecto del top de partida").
 
 **Falta:**
 1. Dale de Luis para push de la rama, PR, merge y syncs (`sync-to-drive.ps1 -Episodios retro-peliculas-mejores` y `sync-tarrobot-to-drive.ps1 -Rapido`).
-2. Que Luis y Coco respondan las preguntas de `docs/discusiones/discusion-retro-peliculas-mejores.md` (Aladdin #3, Riddick y Warriors como "juego de película", GoldenEye en el #1).
+2. Que Luis y Coco respondan las preguntas de `docs/discusiones/discusion-retro-peliculas-mejores.md` (Aladdin #2, Riddick y Warriors como "juego de película", GoldenEye en el #1).
 3. Lo "por confirmar" de la pauta (fechas de estreno, fecha NA de Die Hard Trilogy, cifras de una sola fuente).
 4. **Siguiente sesión: el episodio de los peores juegos de película** (`retro-peliculas-peores`), mismas reglas; el cliffhanger de este deck ya lo teasea. Las cuñas deben ser chistosas con humor al juego, nunca a las personas.
-5. Segundo top de mejores solo si el banco de reservas llega a 10 juegos con nota sobre 75 (hoy hay 7).
+5. Segundo top de mejores solo si el banco de reservas llega a 10 juegos con nota sobre 75 (hoy hay 6 dentro del corte de 2006 y 3 de ellos repiten película o franquicia del primer top).
 6. Pendiente aparte: `scripts/wiki_reception.py` manda un dato personal en la identificación de su cliente HTTP y el bloqueo de privacidad lo frena; cambiarla por un nombre genérico (las consultas de esta sesión usaron un cliente propio en el scratchpad).
 
 ## Estado actual (2026-10-21)

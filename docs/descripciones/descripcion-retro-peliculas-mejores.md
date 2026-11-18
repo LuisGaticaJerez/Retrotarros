@@ -6,7 +6,7 @@ Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Lo
 
 ## Títulos sugeridos (elegir uno)
 
-1. **Los 10 MEJORES juegos de películas de la historia (de N64 a PS2)** (Recomendado)
+1. **Los 10 MEJORES juegos de películas de la historia (de SNES a Xbox)** (Recomendado)
 2. **GoldenEye, Aladdin, Spider-Man 2: los 10 mejores juegos de película según la crítica**
 3. **10 juegos de película que sí valieron la pena**
 
@@ -17,7 +17,7 @@ Doc para copiar/pegar al subir el video. Español chileno neutro, con tildes. Lo
 ```
 Hubo una época en que cada estreno traía su juego, y casi nadie esperaba mucho de él 🎬 Hoy vamos con los que sí valieron la pena: los 10 mejores juegos basados en películas, de cualquier consola hasta 2006, ordenados según la crítica.
 
-GoldenEye 007 se lleva el primer lugar (Metacritic 96), pero la pelea fuerte está en el medio: Aladdin de Genesis, con animadores de Disney dibujando cada cuadro, y Super Star Wars, que llevó la película de 1977 a los 16 bits y terminó siendo el mejor juego de película de 1992 para la revista EGM.
+GoldenEye 007 se lleva el primer lugar (Metacritic 96), pero la pelea fuerte está en el medio: Aladdin de Genesis, con el equipo de animación de Disney detrás de la animación, y Super Star Wars, que llevó la película de 1977 a los 16 bits y terminó siendo el mejor juego de película de 1992 para la revista EGM.
 
 Entran juegos que adaptan una película concreta o salieron junto a su estreno, de cualquier consola: Duro de Matar en PS1, El Retorno del Rey en PS2, The Warriors, Spider-Man 2, The Lion King, King Kong y The Chronicles of Riddick, que salió diez días antes que su película.
 
@@ -34,8 +34,8 @@ Cuéntanos en los comentarios: ¿qué juego de película te marcó cuando eras c
 14:00 #6 El Señor de los Anillos: El Retorno del Rey
 17:00 #5 Die Hard Trilogy
 20:00 #4 Super Star Wars
-23:00 #3 Disney's Aladdin
-26:00 #2 The Chronicles of Riddick: Escape from Butcher Bay
+23:00 #3 The Chronicles of Riddick: Escape from Butcher Bay
+26:00 #2 Disney's Aladdin
 29:00 #1 GoldenEye 007
 32:00 Veredicto: el cine se volvió juego
 33:30 Cierre y lo que viene

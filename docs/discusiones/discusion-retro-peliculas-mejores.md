@@ -17,21 +17,21 @@ Entra el juego que adapta una película concreta o salió pegado a su estreno, s
 6. The Lord of the Rings: The Return of the King (PS2, 2003)
 5. Die Hard Trilogy (PS1, 1996)
 4. Super Star Wars (SNES, 1992)
-3. Disney's Aladdin (Genesis, 1993)
-2. The Chronicles of Riddick: Escape from Butcher Bay (Xbox, 2004)
+3. The Chronicles of Riddick: Escape from Butcher Bay (Xbox, 2004)
+2. Disney's Aladdin (Genesis, 1993)
 1. GoldenEye 007 (N64, 1997)
 
 ## Cómo lo ordenamos
 
-Por la nota de la crítica de la versión que sale en pantalla (Metacritic o GameRankings). Los de 16 bit no tienen agregador, así que ahí promediamos las revistas de la época. Agrupamos en bandas (88 o más, 84 a 87, 80 a 83) y dentro de cada banda manda el legado, porque uno o dos puntos entre un agregador de hoy y una revista de 1993 es ruido.
+Por la nota de la crítica de la versión que sale en pantalla (Metacritic o GameRankings). Los de 16 bit casi no tienen agregador (Aladdin y The Lion King no tienen), así que ahí promediamos las revistas de la época. Agrupamos en bandas (88 o más, 84 a 87, 80 a 83) y dentro de cada banda manda el legado, porque uno o dos puntos entre un agregador de hoy y una revista de 1993 es ruido.
 
 ## Preguntas para discutir antes de grabar
 
-1. **Aladdin en el #3.** Sube mucho respecto de lo que pensábamos al principio: su promedio de época es ~88 y es el juego con más legado del especial (4 millones de copias). Ojo: ese 88 es una estimación nuestra, no un agregador. ¿Lo dejamos ahí o lo bajamos a la banda 2?
-2. **Riddick en el #2.** Es una precuela de Pitch Black y salió diez días antes de la película, o sea que entra por estar atado al estreno. ¿Les parece que cuenta como "juego de película" o lo sacamos por no adaptar la historia de la película?
+1. **Aladdin en el #2.** Sube mucho respecto de lo que pensábamos al principio: su promedio de época es ~88 y su legado (4 millones de copias) es el mayor del especial después de GoldenEye. Ojo: ese 88 es una estimación nuestra, no un agregador. ¿Lo dejamos sobre Riddick (89) o lo bajamos?
+2. **Riddick en el #3.** Es una precuela de Pitch Black y salió diez días antes de la película, o sea que entra por estar atado al estreno. ¿Les parece que cuenta como "juego de película" o lo sacamos por no adaptar la historia de la película?
 3. **The Warriors.** Adapta una película de 1979 con el elenco original y cuenta hechos previos a la película. ¿Lo contamos como adaptación o como secuela?
 4. **GoldenEye repetido.** Ya está en el Top Mundial de N64. Aquí lo contamos desde la película (Brosnan, 1995). ¿Les parece bien o prefieren que no vaya en el #1?
-5. **King Kong en el #10.** Tiene la nota más baja (82) y entra igual. ¿Entra otro de la lista de reservas (Aladdin de Capcom, Racer, Spider-Man 2002)?
+5. **King Kong en el #10.** Tiene la nota más baja del top (82) y entra igual. Los siguientes candidatos válidos (Scarface 76, Indiana Jones' Greatest Adventures 75, Toy Story 2 75) quedan varios puntos más abajo. ¿Lo dejamos?
 
 ## Qué tenemos que confirmar en cámara
 
@@ -39,7 +39,7 @@ Cada slide trae una línea "POR CONFIRMAR" al final de sus notas. Lo importante:
 
 ## Si hay segundo top
 
-El banco de reservas hoy tiene 7 juegos con nota sobre 75 (Spider-Man 2002, Aladdin de Capcom, Scarface, Racer, Indiana Jones' Greatest Adventures, Toy Story 2 y Ghostbusters 2009, que queda fuera del corte de 2006). Para un segundo top 10 faltan por verificar Batman Returns de Konami, Batman de NES, Jurassic Park, RoboCop vs. Terminator, Alien Trilogy y The Godfather. Lo decidimos cuando este esté grabado. Si sale, va como episodio independiente con título propio, sin "Parte 2".
+El banco de reservas hoy tiene 6 juegos con nota sobre 75 dentro del corte de 2006 (Spider-Man 2002, Aladdin de Capcom, Scarface, Racer, Indiana Jones' Greatest Adventures y Toy Story 2; Ghostbusters 2009 queda fuera) y 3 de ellos repiten película o franquicia del primer top (Aladdin de Capcom, Spider-Man 2002 y Racer), así que habría que decidir si cuentan. Para un segundo top 10 faltan por verificar Batman Returns de Konami, Batman de NES, Jurassic Park, RoboCop vs. Terminator, Alien Trilogy y The Godfather. Lo decidimos cuando este esté grabado. Si sale, va como episodio independiente con título propio, sin "Parte 2".
 
 ## Lo que viene después
 
