@@ -1,6 +1,6 @@
 {
-  "fecha": "2026-11-17",
-  "generado": "2026-11-17T12:25:16+00:00",
+  "fecha": "2026-11-18",
+  "generado": "2026-11-18T19:45:51+00:00",
   "videos": [
     {
       "id": "Cpzu3qUQZnQ",
@@ -15,11 +15,11 @@
     {
       "id": "wuiB05cwgFs",
       "titulo": "The Witcher (2007): ¿envejeció bien el primer juego del brujo Geralt? | RetroReseña",
-      "estado": "programado",
-      "privacidad": "private",
-      "publicacion_programada": "2026-11-17T23:30:00Z",
-      "subido": "2026-11-17T03:42:33Z",
-      "vistas": 0,
+      "estado": "publicado",
+      "privacidad": "public",
+      "publicacion_programada": null,
+      "subido": "2026-11-17T23:30:08Z",
+      "vistas": 19,
       "duracion": "PT29M45S"
     },
     {
@@ -29,7 +29,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-15T23:30:03Z",
-      "vistas": 72,
+      "vistas": 110,
       "duracion": "PT35M2S"
     },
     {
@@ -39,7 +39,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-12T23:30:22Z",
-      "vistas": 107,
+      "vistas": 110,
       "duracion": "PT17M40S"
     },
     {
@@ -49,7 +49,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-11T02:31:31Z",
-      "vistas": 481,
+      "vistas": 621,
       "duracion": "PT23M21S"
     },
     {
@@ -59,7 +59,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-08T23:30:39Z",
-      "vistas": 53,
+      "vistas": 54,
       "duracion": "PT41M21S"
     },
     {
@@ -69,7 +69,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-06T00:03:10Z",
-      "vistas": 259,
+      "vistas": 260,
       "duracion": "PT32M15S"
     },
     {
@@ -79,7 +79,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-03T23:30:18Z",
-      "vistas": 66,
+      "vistas": 68,
       "duracion": "PT18M36S"
     },
     {
@@ -89,7 +89,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-29T23:30:36Z",
-      "vistas": 189,
+      "vistas": 192,
       "duracion": "PT29M36S"
     },
     {
@@ -99,7 +99,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-27T23:30:23Z",
-      "vistas": 284,
+      "vistas": 287,
       "duracion": "PT22M14S"
     },
     {
@@ -109,7 +109,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-25T23:30:35Z",
-      "vistas": 230,
+      "vistas": 232,
       "duracion": "PT40M47S"
     },
     {
@@ -129,7 +129,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-20T23:30:35Z",
-      "vistas": 177,
+      "vistas": 179,
       "duracion": "PT23M37S"
     },
     {
@@ -139,7 +139,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-18T23:30:00Z",
-      "vistas": 1316,
+      "vistas": 1412,
       "duracion": "PT39M53S"
     },
     {
@@ -269,7 +269,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-17T23:30:34Z",
-      "vistas": 928,
+      "vistas": 929,
       "duracion": "PT11M28S"
     },
     {
@@ -289,7 +289,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-13T23:30:35Z",
-      "vistas": 1110,
+      "vistas": 1111,
       "duracion": "PT37M38S"
     },
     {
@@ -319,7 +319,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-08T21:32:36Z",
-      "vistas": 35384,
+      "vistas": 35385,
       "duracion": "PT58S"
     },
     {
@@ -489,7 +489,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-06T02:00:34Z",
-      "vistas": 120,
+      "vistas": 121,
       "duracion": "PT11M39S"
     },
     {
@@ -559,7 +559,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-07-27T02:10:36Z",
-      "vistas": 1460,
+      "vistas": 1462,
       "duracion": "PT9M6S"
     },
     {
@@ -649,7 +649,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-07-07T00:30:38Z",
-      "vistas": 24772,
+      "vistas": 24773,
       "duracion": "PT1M3S"
     },
     {
@@ -809,7 +809,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-06-08T02:00:08Z",
-      "vistas": 227,
+      "vistas": 228,
       "duracion": "PT35M2S"
     },
     {
@@ -909,7 +909,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-05-25T02:00:06Z",
-      "vistas": 2120,
+      "vistas": 2122,
       "duracion": "PT34M50S"
     },
     {
