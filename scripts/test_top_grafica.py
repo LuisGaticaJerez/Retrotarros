@@ -497,6 +497,35 @@ def test_migrar_no_repite_si_ya_esta_migrado():
     raise AssertionError("migrar acepto un HTML que ya tiene la grafica nueva")
 
 
+# ---------------------------------------------------------------- consola propia por juego (especiales multi-consola)
+
+def _con_consola_propia(**extra) -> dict:
+    d = _data_mundial(**extra)
+    d["items"][5]["consola"] = "PS2 / XBOX"          # items va de #10 a #1: el indice 5 es el #5 ("Juego 5")
+    return d
+
+
+def test_item_consola_propia_clasica():
+    html = _generar(_con_consola_propia(), SLUG_M)
+    assert html.count('<div class="cart-console">PS2 / XBOX</div>') == 1
+    assert html.count('<div class="cart-console">NES</div>') == 9
+    assert "NES · 1990" not in html.split("Juego 5")[1].split("</section>")[0]   # el meta del #5 usa su consola
+
+
+def test_item_consola_propia_nueva():
+    html = _nueva(_con_consola_propia())
+    assert html.count('<div class="cart-console">PS2 / XBOX</div>') == 1
+    item5 = [s for s in _secciones(html) if "Juego 5" in s and 'class="slide-hybrid' in s][0]
+    assert '<span class="g-chip">PS2 / XBOX</span>' in item5
+    assert '<span class="g-chip">NES</span>' not in item5
+
+
+def test_item_sin_caja_con_consola_propia():
+    html = _generar(_con_consola_propia(cajas=0), SLUG_M)
+    assert '<div class="sub">PS2 / XBOX</div>' in html          # cart-fallback con la consola del juego
+    assert html.count('<div class="sub">NES</div>') == 9
+
+
 # ---------------------------------------------------------------- runner
 
 def main() -> int:

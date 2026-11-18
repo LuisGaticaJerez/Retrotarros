@@ -471,8 +471,8 @@ def generar_top(data: dict, out_slug: str) -> Path:
     slides.append(G.slide_divisor(n, data["intro"], data, out_slug) if G else _slide_divider(n, data["intro"])); n += 1
     for it in data["items"]:           # ya ordenados #10 -> #1
         _auto_img(it, out_slug)
-        slides.append(G.slide_item(n, it, consola, it.get("pos", 1), box, out_slug, data, idx) if G
-                      else _slide_item(n, it, consola, box=box, out_slug=out_slug)); n += 1; idx += 1
+        slides.append(G.slide_item(n, it, it.get("consola", consola), it.get("pos", 1), box, out_slug, data, idx) if G
+                      else _slide_item(n, it, it.get("consola", consola), box=box, out_slug=out_slug)); n += 1; idx += 1
     # Apartado RAREZAS (variantes / no-retail) - opcional
     ch = 1
     if data.get("rarezas"):
@@ -481,14 +481,14 @@ def generar_top(data: dict, out_slug: str) -> Path:
                           else _slide_divider(n, data["rarezas_divider"])); n += 1
         for it in data["rarezas"]:
             _auto_img(it, out_slug)
-            slides.append(G.slide_item(n, it, consola, ch, box, out_slug, data, idx) if G
-                          else _slide_item(n, it, consola, ch=ch, box=box, out_slug=out_slug)); n += 1; ch += 1; idx += 1
+            slides.append(G.slide_item(n, it, it.get("consola", consola), ch, box, out_slug, data, idx) if G
+                          else _slide_item(n, it, it.get("consola", consola), ch=ch, box=box, out_slug=out_slug)); n += 1; ch += 1; idx += 1
     # SANTO GRIAL - opcional (slide unico)
     if data.get("grial"):
         g = dict(data["grial"]); g["grial"] = True
         _auto_img(g, out_slug)
-        slides.append(G.slide_item(n, g, consola, ch, box, out_slug, data, idx) if G
-                      else _slide_item(n, g, consola, ch=ch, box=box, out_slug=out_slug)); n += 1; idx += 1
+        slides.append(G.slide_item(n, g, g.get("consola", consola), ch, box, out_slug, data, idx) if G
+                      else _slide_item(n, g, g.get("consola", consola), ch=ch, box=box, out_slug=out_slug)); n += 1; idx += 1
     slides.append(G.slide_divisor(n, data["analisis"], data, out_slug) if G else _slide_divider(n, data["analisis"])); n += 1
     slides.append(G.slide_divisor(n, data["cliffhanger"], data, out_slug) if G else _slide_divider(n, data["cliffhanger"])); n += 1
 
