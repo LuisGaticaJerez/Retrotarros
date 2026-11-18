@@ -77,3 +77,15 @@ Umbral: 75 o su equivalente en crítica de época. Hoy hay **7 con nota sobre 75
 | Disney's Tarzan | PS1/N64 | GR PS1/N64 71,1% (PC 82) | bajo el umbral en consola |
 
 Fuera por nota baja (sin entrar al banco): The Incredibles (MC 62 a 64), Batman Begins (65 a 66), Shrek 2 (72), Spider-Man (2002) en GBA/PC.
+
+## Estructura del deck (14 slides)
+
+Portada con mosaico (gráfica nueva), divisor de intro (criterio del especial), 10 slides de juego de #10 a #1 con barra de progreso, divisor de análisis ("El cine se volvió juego") y divisor cliffhanger que teasea el especial de los peores. Cada slide de juego trae su consola propia (campo `consola` por juego, agregado a `top_deck.py` para los especiales multi-consola) y una nota oculta de 450 a 550 palabras. Slug `retro-peliculas-mejores`, carpeta `studio/specials/`, cajas en `studio/specials/img/retro-peliculas-mejores/`.
+
+## Entregables y estado
+
+- HTML: `studio/specials/retro-peliculas-mejores.html` (generado con `.cache/gen_retro_peliculas_mejores.py`, que no escribe pautas ni JSON).
+- Discusión: `docs/discusiones/discusion-retro-peliculas-mejores.md`.
+- Kit YouTube: `docs/descripciones/descripcion-retro-peliculas-mejores.md`.
+- Capturas: `studio/specials/captures/retro-peliculas-mejores/` (se regeneran con `capture-slides.py`).
+- Pendiente: grabación, fechas por confirmar, elegir el "Sigue con" al publicar, y decidir si hay segundo top (ver banco de reservas).
