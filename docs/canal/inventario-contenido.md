@@ -54,6 +54,11 @@
 > **Verificación con la API de YouTube: 2026-11-18** (96 publicados + 1 programado). Desde la
 > última vez se publicó la reseña de The Witcher (2007, pedida, mar 17 nov, 20:30). Queda
 > programado solo Dreamcast Top Mundial (dom 22 nov, 20:30), ya grabado, no tocar.
+>
+> **Verificación con la API de YouTube: 2026-11-20** (97 publicados + 2 programados). Desde la
+> última vez se publicó la reseña de Final Fight (jue 19 nov, 20:30). Quedan programados Dreamcast
+> Top Mundial (dom 22 nov, 20:30) y la reseña de Diablo (mar 24 nov, 20:30); ambos ya grabados,
+> no tocar.
 
 ## Cómo leer esto
 
@@ -72,14 +77,14 @@
 
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
-| Reseñas | 56 | 35 | 0 | 21 |
+| Reseñas | 56 | 36 | 1 | 19 |
 | Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube + Joyas ocultas SNES) | 37 | 20 | 1 | 16 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
 | RetroNotas | 2 | 0 | 0 | 2 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **121** | **62** | **1** | **58** |
+| **TOTAL** | **121** | **63** | **2** | **56** |
 
 Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
@@ -88,15 +93,16 @@ se contaron los 2 de Atari 8-bit (armados, sin publicar), los 10 Top Peores y el
 
 ---
 
-### 1.1 Programados (leídos de YouTube con la API, 2026-11-18)
+### 1.1 Programados (leídos de YouTube con la API, 2026-11-20)
 
 **Calendario de publicación: martes, jueves y domingo a las 20:30 (hora de Chile).** Se actualiza solo los lunes, miércoles y viernes (el día siguiente) con `scripts/youtube_estado.py` (datos en `data/youtube/estado-canal.json`). **Un video programado ya está grabado: no tocar su HTML ni sus textos.**
 
 | Publicación (hora de Chile) | Título | Contenido del repo |
 |---|---|---|
 | Dom 22 nov 2026, 20:30 | Los 10 MEJORES juegos de Sega Dreamcast de la historia (44 min, privado, programado) | `studio/rankings/top-mundial/dreamcast-top-mundial.html`, `docs/descripciones/descripcion-dreamcast-top-mundial.md` |
+| Mar 24 nov 2026, 20:30 | Diablo (1996): ¿sigue dando miedo bajar un nivel más? \| RetroReseñas (31 min, privado, programado) | `studio/resenas/resena-diablo.html`, `docs/descripciones/descripcion-resena-diablo.md` |
 
-**Grabado y todavía sin fecha de publicación:** nada conocido a 2026-11-18 aparte del programado (confirmar con Luis si hay algo grabado que no esté en YouTube). La reseña de Mighty Morphin Power Rangers se publicó el 2026-10-20. Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
+**Grabado y todavía sin fecha de publicación:** nada conocido a 2026-11-20 aparte de los programados (confirmar con Luis si hay algo grabado que no esté en YouTube). La reseña de Mighty Morphin Power Rangers se publicó el 2026-10-20. Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
 
 Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09). Qué se retira, qué se exceptúa (rankings y reforges), pendientes y registro: `docs/canal/retiro-publicados.md`.
 
@@ -110,7 +116,7 @@ Tras la publicación, esos HTML y kits se retiran del estudio como el resto de l
 
 ### 1.2 Publicados (26 + Abriendo el Tarro + 2 G-OLD, más las Reseñas nuevas de abajo)
 
-**Reseñas (35) — API de YouTube 2026-11-18, del más reciente al más antiguo:** The Witcher (pedida, 17 nov), Contra (12 nov), Need for Speed Underground 2 (10 nov), The Legend of Zelda: Ocarina of Time (pedida, 5 nov), Yoshi's Island (3 nov), God of War (PS2, 29 oct), International Superstar Soccer (27 oct),
+**Reseñas (36) — API de YouTube 2026-11-20, del más reciente al más antiguo:** Final Fight (19 nov), The Witcher (pedida, 17 nov), Contra (12 nov), Need for Speed Underground 2 (10 nov), The Legend of Zelda: Ocarina of Time (pedida, 5 nov), Yoshi's Island (3 nov), God of War (PS2, 29 oct), International Superstar Soccer (27 oct),
 Montezuma's Revenge (pedida), Mighty Morphin Power Rangers (pedida), Melee (pedida), Metal Warriors (pedida), Worms Armageddon (pedida), Samurai Shodown (pedida), Doom (pedida), King of Fighters '94,
 Battletoads, Super Mario World, Street Fighter II, Golden Axe, Metal Gear Solid (pedida),
 Chrono Trigger, The Legend of Zelda (pedida), Cadillacs and Dinosaurs (pedida), Jewel Master
@@ -139,9 +145,9 @@ Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom
 
 ---
 
-### 1.3 Backlog armado — listo para programar, sin fecha (58)
+### 1.3 Backlog armado — listo para programar, sin fecha (56)
 
-**Reseñas (21) — actualizado 2026-11-18 (Yoshi's Island, Ocarina of Time, Need for Speed: Underground 2, Contra y The Witcher ya se publicaron; la lista de abajo es la histórica del 2026-10-30, el conteo sale de `studio/resenas/`):** Aladdin, Altered Beast, Contra, Crash
+**Reseñas (19) — actualizado 2026-11-20 (Yoshi's Island, Ocarina of Time, Need for Speed: Underground 2, Contra, The Witcher y Final Fight ya se publicaron; Diablo está programado para el mar 24 nov; la lista de abajo es la histórica del 2026-10-30, el conteo sale de `studio/resenas/`):** Aladdin, Altered Beast, Contra, Crash
 Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star
 Fox, Yoshi's Island, Halo: Combat Evolved (Xbox), Counter-Strike (PC), Need for Speed: Underground 2, Kingdom Hearts (PS2), Age of Empires II (PC) y Diablo (PC) —armadas el 2026-10-27—, Commandos: Behind Enemy Lines (PC) y The Sims (PC) —armadas el 2026-10-28—, Gears of War (Xbox 360, armada el 2026-10-29, elegida por el canal), The Witcher (PC, armada el 2026-10-30, pedida de la comunidad), más 1 pedida: JoJo's Bizarre Adventure. Mighty Morphin Power Rangers, Metal
 Warriors, Melee, Montezuma's Revenge, International Superstar Soccer y God of War (PS2) ya se publicaron.
