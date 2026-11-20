@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RETROTARROS · JUEGOS DE PELICULA: LOS PEORES</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+:root {
+  --mg: #FF2E88; --cy: #00E5FF; --ye: #FFD23F; --pu: #2D1B69;
+  --bo: #F5F0E8; --dk: #06030f; --card-bg: rgba(12, 6, 32, 0.92);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--dk); font-family: 'Share Tech Mono', monospace; color: var(--bo); }
+body {
+  background-image:
+    radial-gradient(ellipse 100% 50% at 50% -5%, rgba(255,46,136,.12) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px),
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(255,255,255,.014) 39px, rgba(255,255,255,.014) 40px);
+}
+header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 200; background: rgba(6, 3, 15, 0.97); border-bottom: 2px solid var(--mg); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+.hdr-logo { font-family: 'Orbitron'; font-weight: 900; font-size:23px; color: var(--mg); text-shadow: 0 0 14px rgba(255,46,136,.6); letter-spacing: 3px; }
+.hdr-tag { font-family: 'Share Tech Mono'; font-size:14px; color: var(--ye); letter-spacing: 3px; }
+.hdr-rec { display: flex; align-items: center; gap: 8px; font-family: 'Press Start 2P'; font-size:9px; color: var(--mg); }
+.dot { width: 10px; height: 10px; background: var(--mg); border-radius: 50%; animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+.deck { position: fixed; top: 56px; left: 0; right: 0; bottom: 64px; overflow: hidden; }
+.slide { position: absolute; inset: 0; padding: 28px 44px; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity .22s; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide-num { position: absolute; top: 16px; right: 24px; font-family: 'Press Start 2P'; font-size:10px; color: rgba(255,255,255,.22); letter-spacing: 2px; }
+.portada { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.portada .ep-tag { font-family: 'Press Start 2P'; font-size:13px; color: var(--cy); letter-spacing: 5px; margin-bottom: 22px; }
+.portada .ep-title { font-family: 'Orbitron'; font-weight: 900; font-size:71px; letter-spacing: 1.5px; line-height: 1.05; color: #fff; margin-bottom: 18px; max-width: 1100px; }
+.portada .ep-title .vs { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.portada .ep-sub { font-family: 'Share Tech Mono'; font-size:21px; color: var(--ye); letter-spacing: 4px; }
+.divider { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100%; }
+.divider .pre { font-family: 'Press Start 2P'; font-size:13px; letter-spacing: 6px; margin-bottom: 24px; }
+.divider .pre.cy { color: var(--cy); } .divider .pre.mg { color: var(--mg); }
+.divider .title { font-family: 'Orbitron'; font-weight: 900; font-size:90px; letter-spacing: 2px; line-height: 1; color: #fff; margin-bottom: 22px; }
+.divider .title.cy { color: var(--cy); text-shadow: 0 0 22px rgba(0,229,255,.5); }
+.divider .title.mg { color: var(--mg); text-shadow: 0 0 22px rgba(255,46,136,.55); }
+.divider .sub { font-family: 'Share Tech Mono'; font-size:21px; color: rgba(255,255,255,.7); letter-spacing: 2px; max-width: 800px; line-height: 1.6; }
+
+/* HIBRIDO */
+.slide-hybrid { display: grid; grid-template-rows: auto 1fr auto auto; height: 100%; gap: 14px; max-width: 1400px; margin: 0 auto; }
+.hybrid-head { display: flex; align-items: center; justify-content: space-between; }
+.game-pos { font-family: 'Orbitron'; font-weight: 900; font-size:74px; line-height: 1; letter-spacing: 1px; }
+.game-pos.cy { color: var(--cy); text-shadow: 0 0 20px rgba(0,229,255,.55); }
+.game-pos.mg { color: var(--mg); text-shadow: 0 0 20px rgba(255,46,136,.6); }
+.game-pos .hash { font-size:32px; color: rgba(255,255,255,.35); margin-right: 4px; }
+.game-block-label { font-family: 'Press Start 2P'; font-size:10px; letter-spacing: 3px; padding: 6px 12px; border: 1px solid; }
+.game-block-label.cy { color: var(--cy); border-color: var(--cy); }
+.game-block-label.mg { color: var(--mg); border-color: var(--mg); }
+.hybrid-body { display: grid; grid-template-columns: 38% 1fr; gap: 32px; align-items: center; justify-items: center; min-height: 0; }
+.cart-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; }
+.cart { position: relative; width: min(100%, 380px); aspect-ratio: 5/4; max-height: 100%; background: linear-gradient(180deg, #1f1f24 0%, #0d0d12 100%); border-radius: 12px 12px 6px 6px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08); }
+.cart::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 78%; height: 14%; background: linear-gradient(180deg, #2a2a2f 0%, #1a1a1f 100%); border-radius: 0 0 6px 6px; box-shadow: inset 0 -1px 0 rgba(0,0,0,.6); z-index: 3; }
+.cart-img-wrap { position: absolute; inset: 14% 10% 10%; border-radius: 4px; overflow: hidden; background: var(--label-1, #2D1B69); box-shadow: inset 0 0 0 3px rgba(255,255,255,.07), inset 0 0 0 6px rgba(0,0,0,.25), 0 4px 14px rgba(0,0,0,.4); }
+.cart-img-wrap img { display: block; width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 2; }
+.cart-img-wrap img.cart-img-bg { object-fit: cover; filter: blur(22px) brightness(0.55) saturate(1.2); transform: scale(1.1); z-index: 1; position: absolute; inset: 0; }
+.cart-fallback { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; background: linear-gradient(135deg, var(--label-1, #2D1B69) 0%, var(--label-2, #4a2a99) 100%); text-align: center; }
+.cart-fallback::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 22%; background: linear-gradient(180deg, rgba(255,255,255,.16) 0%, transparent 100%); pointer-events: none; }
+.cart-fallback .title { font-family: 'Orbitron'; font-weight: 900; font-size: clamp(14px, 1.8vw, 22px); line-height: 1.05; color: #fff; letter-spacing: .5px; text-shadow: 0 2px 4px rgba(0,0,0,.5); z-index: 2; }
+.cart-fallback .sub { font-family: 'Press Start 2P'; font-size:9px; letter-spacing: 2px; color: rgba(255,255,255,.7); margin-top: 8px; z-index: 2; }
+.cart-console { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); font-family: 'Press Start 2P'; font-size:8px; letter-spacing: 3px; color: rgba(255,255,255,.22); z-index: 4; }
+.lb-default { --label-1:#2D1B69; --label-2:#4a2a99; }
+.lb-mario   { --label-1:#a01818; --label-2:#d62828; }
+.lb-zelda   { --label-1:#1a4a1a; --label-2:#2f7a2f; }
+.lb-rpg     { --label-1:#5a1a8a; --label-2:#8a2fc4; }
+.lb-action  { --label-1:#a01818; --label-2:#d62828; }
+.lb-metroid { --label-1:#3a1a6b; --label-2:#5a2a9b; }
+.lb-yoshi   { --label-1:#1a6b3a; --label-2:#2f9b5a; }
+.lb-dkc     { --label-1:#7a3a1a; --label-2:#b85820; }
+.lb-eb      { --label-1:#c2872f; --label-2:#e8b04a; }
+.lb-kart    { --label-1:#c25c00; --label-2:#ff8a1f; }
+.lb-fox     { --label-1:#1a2a4a; --label-2:#3a5fa0; }
+
+.tv-wrap { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-height: 0; container-type: size; }
+.tarrovision { width: min(100cqh, 100cqw); height: min(100cqh, 100cqw); max-width: 100%; max-height: 100%; background: linear-gradient(180deg, #1a1a1f 0%, #0d0d12 100%); border-radius: 22px; padding: 18px 22px; box-shadow: 0 0 0 2px rgba(255,255,255,.04), 0 18px 50px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08), inset 0 -2px 0 rgba(0,0,0,.4); display: grid; grid-template-rows: auto 1fr auto; gap: 10px; }
+.tv-controls-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px; }
+.tv-led { width: 9px; height: 9px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8fb8 0%, var(--mg) 60%, #7a0030 100%); box-shadow: 0 0 10px rgba(255,46,136,.8), inset 0 0 2px rgba(0,0,0,.5); }
+.tv-brand { flex: 1; text-align: center; font-family: 'Press Start 2P'; font-size:12px; color: var(--ye); letter-spacing: 3px; text-shadow: 0 0 8px rgba(255,210,63,.4); }
+.tv-channel { font-family: 'Share Tech Mono'; font-size:13px; color: var(--cy); letter-spacing: 2px; padding: 3px 9px; border: 1px solid rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
+.tv-screen { position: relative; background: #2a2a2f; border-radius: 12px; padding: 14px; box-shadow: inset 0 0 0 2px #3a3a3f, inset 0 0 14px rgba(0,0,0,.6); min-height: 0; }
+.tv-screen-inner { position: relative; width: 100%; height: 100%; background: #000; border-radius: 16px / 8px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 0 40px rgba(0,0,0,.95); }
+.tv-screen-inner img, .tv-screen-inner video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tv-screen-inner::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.18) 2px, rgba(0,0,0,.18) 3px); z-index: 3; mix-blend-mode: multiply; }
+.tv-screen-inner::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 110% 70% at 50% 0%, rgba(255,255,255,.08) 0%, transparent 55%), radial-gradient(ellipse 90% 50% at 50% 100%, rgba(0,229,255,.06) 0%, transparent 60%); z-index: 4; }
+.tv-noscreen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, rgba(45,27,105,.6) 0%, #000 80%), repeating-linear-gradient(0deg, #0a0a14 0px, #0a0a14 1px, #14142a 1px, #14142a 2px); color: rgba(255,255,255,.35); text-align: center; padding: 24px; z-index: 2; }
+.tv-noscreen .tv-noscreen-big { font-family: 'Press Start 2P'; font-size:16px; color: var(--mg); letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 12px rgba(255,46,136,.5); }
+.tv-noscreen .tv-noscreen-sub { font-family: 'Share Tech Mono'; font-size:13px; letter-spacing: 2px; color: rgba(0,229,255,.55); }
+.tv-controls-bottom { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 12px; padding: 2px 4px 0; }
+.tv-knob { width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #5a5a60 0%, #2a2a30 60%, #0a0a0e 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 -2px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.6); position: relative; }
+.tv-knob::after { content: ""; position: absolute; top: 5px; left: 50%; width: 2px; height: 9px; background: var(--ye); transform-origin: bottom center; transform: translateX(-50%) rotate(45deg); box-shadow: 0 0 4px rgba(255,210,63,.6); }
+.tv-knob.cy::after { background: var(--cy); box-shadow: 0 0 4px rgba(0,229,255,.6); transform: translateX(-50%) rotate(-30deg); }
+.tv-speaker { height: 22px; background: repeating-linear-gradient(90deg, #0a0a0e 0px, #0a0a0e 3px, #1a1a1f 3px, #1a1a1f 6px); border-radius: 4px; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), inset 0 -1px 0 rgba(0,0,0,.6); }
+
+.hybrid-title { text-align: center; display: flex; flex-direction: column; gap: 4px; }
+.game-title { font-family: 'Orbitron'; font-weight: 900; font-size:30px; color: #fff; letter-spacing: 1px; line-height: 1.1; }
+.game-meta { font-family: 'Share Tech Mono'; font-size:14px; color: rgba(255,255,255,.5); letter-spacing: 2px; }
+.game-why { max-width: 1200px; margin: 0 auto; padding: 12px 22px; background: rgba(255,255,255,.04); border-left: 4px solid var(--ye); font-family: 'Share Tech Mono'; font-size:16.7px; line-height: 1.55; color: rgba(255,255,255,.86); text-align: left; }
+.game-why .lbl { display: block; font-family: 'Press Start 2P'; font-size:9px; color: var(--ye); letter-spacing: 2px; margin-bottom: 6px; }
+
+nav.footer { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: rgba(6, 3, 15, 0.97); border-top: 2px solid var(--cy); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 200; }
+.nav-btn { background: transparent; border: 2px solid var(--cy); color: var(--cy); font-family: 'Press Start 2P'; font-size:10px; padding: 10px 18px; letter-spacing: 2px; cursor: pointer; transition: all .15s; border-radius: 2px; }
+.nav-btn:hover:not(:disabled) { background: var(--cy); color: #000; }
+.nav-btn:disabled { opacity: .25; cursor: not-allowed; }
+.nav-center { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; margin: 0 24px; }
+.nav-counter { font-family: 'Press Start 2P'; font-size:12px; color: var(--mg); letter-spacing: 3px; }
+.nav-progress { width: 100%; max-width: 480px; height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+.nav-progress .bar { height: 100%; background: linear-gradient(90deg, var(--mg), var(--cy)); width: 0; transition: width .25s; box-shadow: 0 0 8px rgba(255,46,136,.5); }
+.nav-hint { font-family: 'Share Tech Mono'; font-size:13px; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+.nav-hint kbd { display: inline-block; padding: 2px 8px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 3px; font-family: 'Share Tech Mono'; font-size:13px; color: var(--ye); margin: 0 2px; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dk); }
+::-webkit-scrollbar-thumb { background: var(--mg); border-radius: 3px; }
+</style>
+<style>
+.game-price{font-family:'Orbitron';font-weight:900;font-size:48px;line-height:1;color:var(--ye);text-shadow:3px 3px 0 #000, 0 0 26px rgba(255,210,63,.7);letter-spacing:1px;white-space:nowrap;border:3px solid var(--ye);padding:8px 18px;border-radius:6px;background:rgba(255,210,63,.07);align-self:flex-start}
+.notas{position:absolute;top:0;right:0;width:460px;height:100%;z-index:150;display:none;flex-direction:column;gap:10px;padding:26px 22px 30px;overflow-y:auto;background:linear-gradient(90deg,rgba(6,3,15,.55) 0%,rgba(6,3,15,.96) 26%);border-left:2px solid var(--ye);backdrop-filter:blur(2px)}
+body.read-mode .slide.active .notas{display:flex}
+.notas h4{font-family:'Press Start 2P';font-size:9px;color:var(--ye);letter-spacing:2px;margin-top:4px}
+.notas h4:first-child{margin-top:0}
+.notas .n-line{font-family:'Share Tech Mono';font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.92);border-left:3px solid var(--cy);padding:3px 0 3px 11px}
+.notas .n-cue{border-left-color:var(--mg);color:var(--ye)}
+.notas .n-cue b{color:#fff}
+.read-indicator{position:fixed;top:64px;right:16px;z-index:300;font-family:'Press Start 2P';font-size:8px;color:#000;background:var(--ye);padding:6px 10px;border-radius:3px;display:none;box-shadow:0 0 14px rgba(255,210,63,.5)}
+body.read-mode .read-indicator{display:block}
+.game-title{font-size:44px !important}
+.game-meta{font-size:19px !important}
+.game-why{font-size:26px !important;line-height:1.5 !important}
+.game-why .lbl{font-size:13px !important}
+.hybrid-body{display:contents}
+.slide-hybrid{max-width:1750px;grid-template-columns:40% 1fr;grid-template-rows:auto auto auto 1fr;grid-template-areas:"head head" "cart tv" "title tv" "why tv";gap:20px 44px}
+.hybrid-head{grid-area:head}
+.cart-wrap{grid-area:cart;align-self:start}
+.cart{width:min(100%,620px)}
+.tv-wrap{grid-area:tv;align-items:flex-start}
+.tarrovision{width:100%;height:100%;aspect-ratio:auto;max-width:100%;max-height:100%}
+.hybrid-title{grid-area:title;text-align:left;align-items:flex-start}
+.game-why{grid-area:why;max-width:none}
+.game-title{font-size:52px !important}
+.game-meta{font-size:24px !important;line-height:1.35 !important}
+.game-why{font-size:32px !important;line-height:1.4 !important}
+.game-why .lbl{font-size:19px !important;margin-bottom:10px !important;line-height:1.5 !important}
+.slide-hybrid{grid-template-columns:46% 1fr !important}
+.cart{width:min(100%,440px) !important}
+.divider .pre{font-size:22px !important;letter-spacing:5px !important}
+.divider .sub{font-size:34px !important;line-height:1.5 !important;max-width:1500px !important;letter-spacing:1px !important}
+.portada .ep-sub{font-size:34px !important}
+.slide-hybrid.box-ancha{grid-template-columns:auto minmax(0,1fr) 51% !important;grid-template-rows:auto auto 1fr !important;grid-template-areas:"head head head" "cart title tv" "why why tv" !important;gap:26px 40px !important;max-width:1800px !important}
+.slide-hybrid.box-ancha .cart-wrap{align-self:stretch !important;justify-content:flex-start !important;align-items:flex-start !important;height:auto !important;min-height:auto !important}
+.slide-hybrid.box-ancha .cart{height:min(calc(var(--bh)*1.12),42vh) !important;max-height:calc(var(--bh)*1.12) !important;width:auto !important;aspect-ratio:var(--ar) !important;background:none !important;box-shadow:none !important;border-radius:0 !important}
+.slide-hybrid.box-ancha .cart::before{display:none !important}
+.slide-hybrid.box-ancha .cart-img-wrap{position:relative !important;inset:auto !important;width:100% !important;height:100% !important;background:none !important;box-shadow:none !important;overflow:visible !important}
+.slide-hybrid.box-ancha .cart-img-wrap img.cart-img-bg{display:none !important}
+.slide-hybrid.box-ancha .cart-img-wrap img:not(.cart-img-bg){width:100% !important;height:100% !important;object-fit:fill !important;border-radius:6px;box-shadow:0 0 0 2px var(--cy),0 0 34px rgba(0,229,255,.35),0 18px 40px rgba(0,0,0,.65)}
+.slide-hybrid.box-ancha .cart-fallback{border-radius:6px;box-shadow:0 0 0 2px var(--cy),0 0 34px rgba(0,229,255,.35),0 18px 40px rgba(0,0,0,.65)}
+.slide-hybrid.box-ancha .cart-console{position:absolute !important;top:100% !important;bottom:auto !important;left:0 !important;transform:none !important;margin-top:8px;font-size:11px !important;color:rgba(255,255,255,.45) !important}
+.slide-hybrid.box-ancha .hybrid-title{align-self:center !important}
+.slide-hybrid.box-ancha .game-why{align-self:stretch !important;display:flex !important;flex-direction:column !important;justify-content:center !important}
+.slide-hybrid.box-ancha .game-title{font-size:44px !important;line-height:1.05 !important}
+.slide-hybrid.box-ancha .game-meta{font-size:21px !important}
+.g-nueva{}
+.g-nueva .slide-num{z-index:3}
+.g-mos{position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);filter:blur(10px) brightness(.35) saturate(1.2);z-index:0}
+.g-mos.tenue{filter:blur(12px) brightness(.24) saturate(1.2)}
+.g-mos i{display:block;background-size:cover;background-position:center}
+.g-mos i.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99))}
+.slide.g-nueva .portada,.slide.g-nueva .divider{position:relative;z-index:2}
+.slide.g-nueva .portada{text-shadow:0 0 30px #000,0 0 10px #000}
+.slide.g-div{display:flex;align-items:center;justify-content:center}
+.slide.g-div .divider{height:auto;width:min(1500px,78%);padding:48px 64px;background:rgba(6,3,15,.72);border:3px solid;border-radius:14px}
+.slide.g-div.g-cy .divider{border-color:var(--cy);box-shadow:0 0 40px rgba(0,229,255,.3)}
+.slide.g-div.g-mg .divider{border-color:var(--mg);box-shadow:0 0 40px rgba(255,46,136,.3)}
+.g-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(22px) brightness(.3) saturate(1.3);z-index:0}
+.g-bg.g-lb{background:linear-gradient(135deg,var(--label-1,#2D1B69),var(--label-2,#4a2a99));filter:blur(22px) brightness(.45)}
+.slide.g-nueva .slide-hybrid{position:relative;z-index:2}
+.g-chips{display:flex;flex-wrap:wrap;gap:10px}
+.g-extra{margin-top:6px}
+.g-chip{font-family:'Orbitron';font-weight:700;font-size:22px;letter-spacing:1px;padding:6px 14px;border:2px solid rgba(0,229,255,.7);border-radius:6px;color:var(--cy);background:rgba(6,3,15,.55)}
+.g-chip.y{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 16px rgba(255,210,63,.5)}
+.slide.g-nueva .hybrid-head{position:relative}
+.slide.g-nueva .hybrid-head .game-pos{max-width:360px}
+.g-barra{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + var(--dx,0px)),-50%);display:flex;align-items:center;gap:6px;z-index:5}
+.g-th{position:relative;height:var(--u);width:calc(var(--u)*var(--w));flex:none;border:2px solid rgba(0,229,255,.75);border-radius:4px;overflow:hidden;background:#0c0720}
+.g-th i{position:absolute;inset:0;background-size:cover;background-position:center}
+.g-th em{position:absolute;left:4px;bottom:0;font-style:normal;font-family:'Orbitron';font-weight:900;font-size:19px;color:#fff;text-shadow:0 0 4px #000,0 0 4px #000}
+.g-th.f{border-color:rgba(255,255,255,.2)}
+.g-th.f em{color:rgba(255,255,255,.45)}
+.g-th.cur{border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-th.cur em{color:var(--ye)}
+.g-pip{width:var(--u);height:var(--u);flex:none;display:flex;align-items:center;justify-content:center;border:2px solid rgba(0,229,255,.75);background:rgba(0,229,255,.18);border-radius:4px;font-family:'Orbitron';font-weight:900;font-size:16px;color:#fff}
+.g-pip.f{border-color:rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.35)}
+.g-pip.rr{border-color:rgba(255,46,136,.8);color:var(--mg);background:transparent}
+.g-pip.gg{border-color:rgba(255,210,63,.85);color:var(--ye);background:transparent}
+.g-pip.cur{background:var(--ye);color:var(--dk);border-color:var(--ye);box-shadow:0 0 18px rgba(255,210,63,.8)}
+.g-sep{width:3px;height:30px;flex:none;margin:0 6px;background:rgba(255,255,255,.28)}
+</style>
+<script id="g-fit">
+(function(){function fit(){document.querySelectorAll('.slide-hybrid.box-alta .game-why,.slide-hybrid.box-ancha .game-why').forEach(function(w){var h=w.closest('.slide-hybrid'),fs=40;w.style.setProperty('font-size',fs+'px','important');while(fs>32&&w.getBoundingClientRect().bottom>h.getBoundingClientRect().bottom+1){fs--;w.style.setProperty('font-size',fs+'px','important');}});}
+window.addEventListener('load',fit);window.addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);})();
+</script>
+</head>
+<body>
+<div class="read-indicator">● MODO LECTURA (N)</div>
+
+
+<header>
+  <div class="hdr-logo">RETROTARROS</div>
+  <div class="hdr-tag">ESPECIAL · JUEGOS DE PELICULA · LOS PEORES</div>
+  <div class="hdr-rec"><div class="dot"></div>EN VIVO</div>
+</header>
+
+<div class="deck" id="deck">
+
+  <section class="slide active">
+    <span class="slide-num">01</span>
+    <div class="portada">
+      <div class="ep-tag">ESPECIAL MULTI-CONSOLA · EL LADO B DEL CINE</div>
+      <div class="ep-title">JUEGOS DE PELICULA <span class="vs">LOS PEORES</span></div>
+      <div class="ep-sub">LOS 10 PEORES SEGUN LAS LISTAS DE LA CRITICA</div>
+    </div>
+<aside class="notas"><h4>INTRO · TONO Y CRITERIO DEL EPISODIO</h4><div class="n-line">Este es el lado B del especial de juegos de pelicula: los diez peores segun la critica, de cualquier consola hasta 2006. Es un top para reirnos. El humor apunta al juego y a lo que paso con el (plazos, licencias, camaras, paredes invisibles), nunca a las personas que lo hicieron ni a quienes lo quieren. Los chistes mas fuertes van en estas notas, no en pantalla.</div><div class="n-line">Entra el juego que adapta una pelicula concreta o salio atado a su estreno. Quedan fuera las series de TV (Superman 64 se basa en la serie animada, no en una pelicula) y los juegos que solo comparten universo, como Star Wars: Masters of Teras Kasi o Jaws Unleashed. Un juego por pelicula y ninguno repetido con el episodio de los mejores.</div><div class="n-line">El orden sale de contar en cuantas listas de peores juegos de pelicula aparece cada uno. Cruzamos doce listas (GamesRadar, WatchMojo en sus versiones de 20 y de 10, Shortlist, Entertainment.ie, Attack of the Fanboy, TheTopTens, WhatCulture, VidaExtra, Richard Lewis, TheGamer y la de WatchMojo para PS2) y contamos solo las veces que el juego figura como entrada. Si hay empate, desempata la posicion en la lista mas larga, la de GamesRadar. Eso es un criterio nuestro, no un puntaje oficial.</div><div class="n-line">Resultado: E.T. aparece en 10 de las 12, Charlie's Angels en 9, Back to the Future en 8, Fight Club en 7, y Street Fighter, Bad Boys y Catwoman en 6. Los tres del borde tienen 5. Quedaron fuera con 4: Robocop (2003), Home Alone y Enter the Matrix.</div><div class="n-line">Tres de los diez ya estan en rankings por consola: E.T. (Atari 2600), Friday the 13th (NES) y la secuela de Back to the Future (NES, otro juego). Aqui los contamos por la pelicula, no por la consola. Decidan si los dejamos o los reemplazamos por los de 4 listas.</div><div class="n-line">Dato de contexto para la intro: cuatro de los diez son de la era de 8 bits (1982 a 1990), dos son de los 32 bits (1995 y 1999) y cuatro de la era PS2 (2003 y 2004). Todos tienen en comun lo mismo: salieron con apuro para llegar a la fecha del estreno.</div><div class="n-line">Cada dato esta cruzado con por lo menos dos fuentes. Lo que no se pudo cruzar queda como por confirmar al final de cada bloque: dilo en camara con cuidado o saltatelo.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">02</span>
+    <div class="divider">
+      <div class="pre ye">CRITERIO DEL ESPECIAL</div>
+      <div class="title ye">TOP 10 JUEGOS DE PELICULA: DEL MALO AL PEOR</div>
+      <div class="sub">Contamos en cuantas de 12 listas de peores juegos de pelicula aparece cada uno, de cualquier consola hasta 2006. Si empatan, manda la posicion en la lista de GamesRadar. Nos reimos del juego, no de la gente. Empezamos desde el #10.</div>
+    </div>
+<aside class="notas"><h4>METODOLOGIA (DEFENDIBLE)</h4><div class="n-line">Listas usadas (12): GamesRadar, 50 peores juegos de pelicula; WatchMojo, 20 y 10 peores; Shortlist; Entertainment.ie; Attack of the Fanboy; TheTopTens; WhatCulture; VidaExtra (21, orden alfabetico); Richard Lewis; TheGamer (25 juegos con licencia, solo conocimos del #25 al #16 en la pagina cargada) y WatchMojo de los peores de PS2. Se cuenta el juego solo si figura como entrada propia, y se unen versiones de la misma pelicula.</div><div class="n-line">Fuera por regla: series de TV y juegos que solo comparten universo con la pelicula (Superman 64 es de la serie animada; Star Wars: Masters of Teras Kasi y Jaws Unleashed comparten universo, no adaptan una pelicula). Un juego por pelicula. Tampoco entra nada que ya este en el episodio de los mejores (el cierre de ese deck teasea este).</div><div class="n-line">Corte de epoca: hasta 2006, igual que el de los mejores. Por eso quedan fuera Iron Man, Aliens: Colonial Marines, Rambo: The Video Game o Ghostbusters (2016), aunque aparezcan en varias listas.</div><div class="n-line">Empates: 6 listas (Street Fighter, Bad Boys, Catwoman) y 5 (Total Recall, Friday the 13th, Tomorrow Never Dies). Desempata la posicion en GamesRadar, la lista mas larga. Es un criterio nuestro y lo decimos al aire.</div><div class="n-cue">Apertura de criterio en 20 segundos. Remate: 'el orden lo decidimos nosotros, contando listas; si no estan de acuerdo, comenten'.</div></aside>  </section>
+
+  <section class="slide g-nueva">
+    <span class="slide-num">03</span>
+    <div class="g-bg" style="background-image:url(img/retro-peliculas-peores/tomorrow-never-dies.jpg)"></div>
+    <div class="slide-hybrid box-ancha">
+      <div class="hybrid-head"><div class="g-barra" style="--u:69px;--dx:-54px"><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/tomorrow-never-dies.jpg)"></i><em>10</em></div><div class="g-th f" style="--w:0.708"><em>9</em></div><div class="g-th f" style="--w:1.000"><em>8</em></div><div class="g-th f" style="--w:0.804"><em>7</em></div><div class="g-th f" style="--w:1.000"><em>6</em></div><div class="g-th f" style="--w:1.000"><em>5</em></div><div class="g-th f" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>10</div><div class="game-price">EN 5 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/retro-peliculas-peores/tomorrow-never-dies.jpg" alt="" aria-hidden="true"><img src="img/retro-peliculas-peores/tomorrow-never-dies.jpg" alt="TOMORROW NEVER DIES box art"></div>
+          <div class="cart-console">PS1</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 10</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">TOMORROW NEVER DIES</div><div class="game-meta g-chips"><span class="g-chip">PS1</span><span class="g-chip y">1999</span><span class="g-chip">EA / MGM (BLACK OPS)</span></div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL AGENTE QUE NO PUEDE SALTAR</span>Dos anos de desarrollo para un shooter donde Bond no salta, no trepa y no se agacha, y al que le sacaron el multijugador. Todos lo compararon con GoldenEye. Eso si: vendio mas de 3 millones.</div>
+    </div>
+<aside class="notas"><h4>#10 · TOMORROW NEVER DIES</h4><div class="n-line">LA PELICULA Y EL JUEGO: Tomorrow Never Dies es la pelicula de James Bond de 1997 con Pierce Brosnan. El juego salio en PlayStation el 16 de noviembre de 1999 en Norteamerica y el 25 de noviembre en el Reino Unido, justo el mes en que se estreno la siguiente Bond, The World Is Not Enough. Lo hizo Black Ops Entertainment y lo publicaron Electronic Arts y MGM Interactive: fue el primer juego de 007 que EA publico despues de quedarse con la licencia.</div><div class="n-line">EL DESARROLLO: empezo en 1997, antes del estreno de la pelicula, y duro unos dos anos. La idea original era contar una historia que seguia despues del final de la pelicula, pero los grupos de prueba querian ver las escenas conocidas, asi que se cambio. Se retraso varias veces, y a la salida le habian sacado niveles y el modo para dos jugadores.</div><div class="n-line">COMO SE JUEGA: es un shooter en tercera persona con algo de sigilo. Bond camina, corre, rueda y se mueve de lado, y cuando apuntas la camara pasa a primera persona. Tiene niveles de esqui y de manejo para distinguirse de GoldenEye, que era en primera persona. La critica se quejo de la camara, de que Bond no puede saltar, trepar ni agacharse, de que gira lento y de que las escenas de la pelicula entre niveles se ven cortadas.</div><div class="n-line">LA CRITICA: no es un desastre total. En GameRankings tiene resenas mixtas; en Japon, Famitsu le dio 27 de 40. NextGen dijo que si le quitas la licencia de Bond queda un shooter en tercera persona muy basico, y GamePro y IGN repiten lo mismo: es inevitable compararlo con GoldenEye y pierde. Varios criticos lo comparan con Syphon Filter, que salia mejor parado. Lo que si se salva casi por unanimidad es la musica, de Tommy Tallarico. IGN llego a decir que el disco de la banda sonora vale mas que el juego del que viene.</div><div class="n-line">LAS LISTAS: aparece en GamesRadar (cerca del final de la lista de 50, posicion exacta por confirmar; su peor elemento: cambiar el shooter en primera persona que era GoldenEye por uno en tercera), en WatchMojo (#7 de los diez peores), en Shortlist, en Attack of the Fanboy (#10) y en VidaExtra.</div><div class="n-line">POR QUE ESTA AQUI: es el peor de los diez en el sentido mas suave. No es injugable ni mentiroso: es el primo que llega a la reunion familiar con el mismo traje que el campeon de la familia, pero sin el multijugador. Y aun asi vendio: segun el estudio, sobre 3,2 millones de copias en el mundo, y el premio Platino de ELSPA por pasar las 300.000 en el Reino Unido.</div><div class="n-line">POR CONFIRMAR: la posicion exacta en la lista de GamesRadar, la cifra de 3,2 millones de copias (la da el desarrollador, una sola fuente) y la fecha de salida en Norteamerica (16 de noviembre de 1999 segun Wikipedia).</div><div class="n-cue">RETO 30 SEG: esquiar sin chocar con un arbol. CHISTE: 'dos anos para hacerlo y le sacaron el multijugador: el unico espia al que le dijeron no, y encima sin permiso para saltar'. Transicion al #9: 'de un espia que no puede saltar a un campamento donde nadie puede salvarse. Subimos a 1989'.</div></aside>  </section>
+
+  <section class="slide g-nueva">
+    <span class="slide-num">04</span>
+    <div class="g-bg" style="background-image:url(img/retro-peliculas-peores/friday-the-13th.jpg)"></div>
+    <div class="slide-hybrid box-ancha">
+      <div class="hybrid-head"><div class="g-barra" style="--u:69px;--dx:-54px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/tomorrow-never-dies.jpg)"></i><em>10</em></div><div class="g-th cur" style="--w:0.708"><i style="background-image:url(img/retro-peliculas-peores/friday-the-13th.jpg)"></i><em>9</em></div><div class="g-th f" style="--w:1.000"><em>8</em></div><div class="g-th f" style="--w:0.804"><em>7</em></div><div class="g-th f" style="--w:1.000"><em>6</em></div><div class="g-th f" style="--w:1.000"><em>5</em></div><div class="g-th f" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>9</div><div class="game-price">EN 5 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:0.7061">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/retro-peliculas-peores/friday-the-13th.jpg" alt="" aria-hidden="true"><img src="img/retro-peliculas-peores/friday-the-13th.jpg" alt="FRIDAY THE 13TH box art"></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 09</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">FRIDAY THE 13TH</div><div class="game-meta g-chips"><span class="g-chip">NES</span><span class="g-chip y">1989</span><span class="g-chip">LJN (ATLUS)</span></div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL CAMPAMENTO CON LABERINTO INCLUIDO</span>Seis consejeros, alarmas, un bosque disenado para perderte y un Jason en colores pastel. Electronic Gaming Monthly lo puso 8 entre los peores de la historia y Nintendo Power, 6.</div>
+    </div>
+<aside class="notas"><h4>#9 · FRIDAY THE 13TH</h4><div class="n-line">LA PELICULA Y EL JUEGO: Friday the 13th es un juego de LJN para el NES, hecho por Atlus y lanzado solo en Norteamerica en febrero de 1989. Adapta la saga de terror de Jason Voorhees. Atlus, si, la misma de Persona. Su fundador supervisaba ocho juegos para el mercado norteamericano en esa epoca. Un programador que trabajo ahi como tester conto que era muy dificil avanzar y que era una moda de ciertos publicadores hacer juegos muy duros para Estados Unidos.</div><div class="n-line">COMO SE JUEGA: eliges a uno de seis consejeros del campamento Crystal Lake, cada uno con distinto nivel de correr, saltar, lanzar y remar. Empiezas con una piedra como arma. La meta es encontrar y derrotar a Jason tres veces y sobrevivir tres dias y tres noches. Hay cabanas, cuevas, un lago y bosques. Cada cierto rato suena una alarma: Jason esta atacando a alguien y tienes que ir hasta alla o cambiar al consejero atacado. Si no llegas a tiempo, mueren los consejeros o los ninos. Dentro de las cabanas, la pelea contra Jason recuerda a Punch-Out!!. En una cueva escondida puedes pelear con su mama, una cabeza flotante estilo Medusa.</div><div class="n-line">LA TRAMPA DEL MAPA: los bosques y la cueva estan disenados para desorientarte, con cuartos cerrados escondidos. Es un survival donde el verdadero monstruo es el mapa. Ademas, la musica es un loop de sintetizador que ni siquiera alcanza a ser melodia: ese fue el peor elemento segun GamesRadar.</div><div class="n-line">LAS LISTAS: aparece en GamesRadar (cerca del lugar 19, por confirmar), en WatchMojo (#3 de la lista de 20 y #8 de la de 10), en Entertainment.ie (#10) y en TheTopTens. Son 5 listas. Ademas Wikipedia recoge tres rankings propios: Electronic Gaming Monthly (1997) lo puso 8 entre los peores juegos de consola de la historia, Nintendo Power (septiembre de 1997) lo puso 6 entre los peores juegos de todos los tiempos, y GamePro lo puso 10 entre los peores basados en pelicula.</div><div class="n-line">LA CITA DE NINTENDO POWER: despues de jugar unos minutos, escribio la revista, 'querias que Jason matara a todos los consejeros y despues a ti, lo que fuera para que se acabara'. Por confirmar el texto exacto antes de citarlo en camara.</div><div class="n-line">LA CAJA: GamesRadar se rio de la caja, con un Jason rodeado de colores pastel de neon, y comento que solo LJN pensaria en eso. En 2013 la empresa NECA hizo una figura de Jason con esa paleta turquesa y morada, y en 2017 los desarrolladores del juego Friday the 13th: The Game agregaron un aspecto retro de ese Jason como pedido de disculpas por los problemas del lanzamiento. O sea: el juego perdio y el color pastel gano.</div><div class="n-line">ESTA EN OTRO TOP: es el #1 del Top Peores del NES. Aqui lo vemos por la pelicula. Si Luis y Coco prefieren no repetirlo, el reemplazo seria Robocop (2003) con 4 listas.</div><div class="n-line">POR CONFIRMAR: la posicion exacta en GamesRadar y el texto exacto de la cita de Nintendo Power.</div><div class="n-cue">RETO 30 SEG: llegar a la primera alarma antes de que Jason termine su turno. CHISTE: 'es el unico juego donde el campamento tiene mas laberintos que casas'. Plantar el hilo LJN: 'ojo con este sello, lo vamos a ver otra vez en el #3'.</div></aside>  </section>
+
+  <section class="slide g-nueva">
+    <span class="slide-num">05</span>
+    <div class="g-bg g-lb lb-default"></div>
+    <div class="slide-hybrid box-ancha">
+      <div class="hybrid-head"><div class="g-barra" style="--u:69px;--dx:-54px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/tomorrow-never-dies.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.708"><i style="background-image:url(img/retro-peliculas-peores/friday-the-13th.jpg)"></i><em>9</em></div><div class="g-th cur" style="--w:1.000"><em>8</em></div><div class="g-th f" style="--w:0.804"><em>7</em></div><div class="g-th f" style="--w:1.000"><em>6</em></div><div class="g-th f" style="--w:1.000"><em>5</em></div><div class="g-th f" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>8</div><div class="game-price">EN 5 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.3333">
+          <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">TOTAL RECALL</div><div class="sub">NES</div></div></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 08</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">TOTAL RECALL</div><div class="game-meta g-chips"><span class="g-chip">NES</span><span class="g-chip y">1990</span><span class="g-chip">ACCLAIM (INTERPLAY)</span></div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL ARNOLD DE TRES BRAZOS</span>En otras consolas el juego funciono; en el NES lo rehizo otro equipo y quedo 5 en el Top 10 de peores de Electronic Gaming Monthly. Cuando Arnold pega un puno, parece que tuviera tres brazos.</div>
+    </div>
+<aside class="notas"><h4>#8 · TOTAL RECALL</h4><div class="n-line">LA PELICULA Y EL JUEGO: Total Recall es la pelicula de 1990 de Paul Verhoeven con Arnold Schwarzenegger, basada en un relato de Philip K. Dick. El juego del NES salio en 1990 y lo publico Acclaim. Lo hizo otro equipo: Interplay, subcontratado por Acclaim. Mientras tanto, la version de Ocean para ZX Spectrum, Commodore 64 y Amstrad CPC tuvo muy buena critica (Crash le puso 94 por ciento) y llego al #2 de ventas del Spectrum en el Reino Unido. O sea: el mismo juego se arruino al pasar por el NES.</div><div class="n-line">LO QUE DIJO INTERPLAY: defendio los cambios diciendo que estaban mas cerca del espiritu del relato corto original, que segun ellos se lee como un plataformas.</div><div class="n-line">COMO SE JUEGA: plataformas con peleas y escenas de carreras de arriba hacia abajo, controlas a Douglas Quaid. Segun GamesRadar, el juego pensado para ninos te pone a pelear contra villanos que parecen enanos con trajes rosados, y los graficos dejan una imagen fantasma cuando algo se mueve rapido: cuando Arnold da un puno parece que tuviera tres brazos. Una revista alemana, Power Play, le puso 39 por ciento al NES y dijo que se parecia a un Double Dragon recortado.</div><div class="n-line">LAS LISTAS: GamesRadar (#5), Shortlist, TheTopTens, Richard Lewis y VidaExtra: 5 listas. Wikipedia suma dos rankings de la epoca: Electronic Gaming Monthly lo puso 5 en su Top 10 de los peores juegos de la historia (1997), y Seanbaby, de la misma revista, lo ubico 15 entre sus 20 peores de todos los tiempos.</div><div class="n-line">LA RESENA QUE CAMBIO LA REVISTA: en EGM, Steve Harris lo llamo 'un nuevo punto mas bajo' para el NES y Ed Semrad lo encontro una decepcion sorprendente, sobre todo viniendo de Acclaim. Segun la propia revista, Acclaim retiro sus avisos de EGM en respuesta. Es un dato de una sola fuente: por confirmar antes de decirlo con esa fuerza.</div><div class="n-line">EL CONCURSO MAS TRISTE: Nintendo Power promociono el juego en agosto de 1990 con un concurso de correo. El primer premio era un uniforme de policia marciano y un viaje a Hollywood con la oportunidad de conocer a Schwarzenegger. Anos despues la propia revista admitio que fue su peor promocion: el ganador conocio a Arnold a fines de 1991, y fue solo un apreton de manos rapido.</div><div class="n-line">POR QUE ESTA AQUI: no es el mas conocido, pero es el que mas pierde contra su propio hermano: una version genial en Spectrum y una desastrosa en NES con el mismo titulo. Un buen dato para decir: 'ojo, no es la pelicula; es que el NES se llevo la peor mitad'.</div><div class="n-line">POR CONFIRMAR: que Acclaim retiro los avisos de EGM, la fecha exacta del NES y el numero de copias vendidas.</div><div class="n-cue">RETO 30 SEG: contar los brazos de Arnold durante un puno. CHISTE: 'un juego donde te dan un viaje a Hollywood y no te alcanza para conocer a Arnold hasta un ano despues: ni el concurso respetaba el plazo'. Gancho al #7: 'de Marte a Gotham: la gata que cae de pie en la pelicula, pero no en este juego'.</div></aside>  </section>
+
+  <section class="slide g-nueva">
+    <span class="slide-num">06</span>
+    <div class="g-bg" style="background-image:url(img/retro-peliculas-peores/catwoman.jpg)"></div>
+    <div class="slide-hybrid box-ancha">
+      <div class="hybrid-head"><div class="g-barra" style="--u:69px;--dx:-54px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/tomorrow-never-dies.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.708"><i style="background-image:url(img/retro-peliculas-peores/friday-the-13th.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><em>8</em></div><div class="g-th cur" style="--w:0.804"><i style="background-image:url(img/retro-peliculas-peores/catwoman.jpg)"></i><em>7</em></div><div class="g-th f" style="--w:1.000"><em>6</em></div><div class="g-th f" style="--w:1.000"><em>5</em></div><div class="g-th f" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>7</div><div class="game-price">EN 6 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:0.8030">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/retro-peliculas-peores/catwoman.jpg" alt="" aria-hidden="true"><img src="img/retro-peliculas-peores/catwoman.jpg" alt="CATWOMAN box art"></div>
+          <div class="cart-console">PS2 / XBOX / GC</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 07</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">CATWOMAN</div><div class="game-meta g-chips"><span class="g-chip">PS2 / XBOX / GC</span><span class="g-chip y">2004</span><span class="g-chip">EA GAMES (ARGONAUT)</span></div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO A LA GATA SIN CAMARA</span>Salio el mismo dia que la pelicula y saco entre 45 y 47 de 100 en Metacritic. La camara no alcanza a seguir los saltos de una gata que siempre cae de pie.</div>
+    </div>
+<aside class="notas"><h4>#7 · CATWOMAN</h4><div class="n-line">LA PELICULA Y EL JUEGO: Catwoman salio en Norteamerica el 23 de julio de 2004, el mismo dia que la pelicula. Lo hizo Argonaut Games y lo publico Electronic Arts para PS2, Xbox, GameCube y PC, con una version de Game Boy Advance aparte. EA y Warner Bros. anunciaron el 12 de febrero de 2004 un acuerdo por varios anos para hacer juegos de Catwoman. Termino siendo uno solo.</div><div class="n-line">EL DESARROLLO: segun el sitio britanico CVG, cuando se mostro en el E3 de 2004 llevaba ocho meses de trabajo. En una entrevista de 2022, el fundador de Argonaut, Jez San, conto que fue el mayor esfuerzo de la empresa por el apuro: unas 100 personas, cuando lo normal en esa generacion era de 30 a 40 y Argonaut venia de equipos de unas 15. Por confirmar la cifra: es de una sola fuente.</div><div class="n-line">COMO SE JUEGA: es un juego de plataformas en tercera persona. Catwoman trepa muros, se cuelga de postes, resuelve puzzles y pelea con combos simples que se pueden mejorar. Hay algo de exploracion parecido a Tomb Raider. La voz de la heroina es la de Jennifer Hale y el modelo imita a la protagonista de la pelicula. La critica se quejo de la camara, que no podia seguir los saltos de una gata, de la actuacion de voz y de que el combate es simple. Segun GamesRadar, los niveles son pocos y la perspectiva hace dificil ver lo que viene por delante. WatchMojo agrega que cada nivel esta pensado para lucir las acrobacias, pero sin la camara que las muestre.</div><div class="n-line">LA CRITICA: segun Metacritic, GameCube 47, PC 46, PS2 46 y Xbox 45, o sea resenas negativas en todas. La version de Game Boy Advance saco 61. Es de las notas mas bajas de este especial.</div><div class="n-line">LAS LISTAS: GamesRadar (cerca del #15, por confirmar), WatchMojo (#5 de los diez peores), Shortlist, Attack of the Fanboy (#2), WatchMojo PS2 y VidaExtra: 6 listas.</div><div class="n-line">EL FINAL TRISTE: el fracaso de la pelicula en cine afecto las ventas del juego, y Argonaut, que venia con dinero escaso por el salto entre generaciones, entro en liquidacion solo tres meses despues del lanzamiento. Fue el ultimo juego de la empresa en 19 anos, hasta que se relanzo en 2024. Es el unico juego de este top que cerro una empresa, y no hay que reirse de eso: reirse del juego, si.</div><div class="n-line">PARA EL CHISTE: la heroina cae siempre de pie, pero el juego no. Y la camara es la unica que nunca cae tras ella.</div><div class="n-line">SOBRE LA PELICULA: GamesRadar la menciona para decir que cambio el personaje, la historia y la calidad. No hace falta repetirlo: es el juego el que esta en el top.</div><div class="n-line">POR CONFIRMAR: la cifra de 100 personas del estudio, el numero de ocho meses de desarrollo (WatchMojo lo da como total, Wikipedia como el tiempo al llegar al E3) y la posicion exacta en la lista de GamesRadar.</div><div class="n-cue">RETO 30 SEG: saltar entre dos postes sin perder la camara. CHISTE: 'una gata que siempre cae de pie, en un juego que siempre cae de cara'. Transicion al #6: 'del gato con camara loca pasamos a dos policias que si salen en la caja, pero no en el juego'.</div></aside>  </section>
+
+  <section class="slide g-nueva">
+    <span class="slide-num">07</span>
+    <div class="g-bg g-lb lb-default"></div>
+    <div class="slide-hybrid box-ancha">
+      <div class="hybrid-head"><div class="g-barra" style="--u:69px;--dx:-54px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/tomorrow-never-dies.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.708"><i style="background-image:url(img/retro-peliculas-peores/friday-the-13th.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><em>8</em></div><div class="g-th r" style="--w:0.804"><i style="background-image:url(img/retro-peliculas-peores/catwoman.jpg)"></i><em>7</em></div><div class="g-th cur" style="--w:1.000"><em>6</em></div><div class="g-th f" style="--w:1.000"><em>5</em></div><div class="g-th f" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>6</div><div class="game-price">EN 6 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.3333">
+          <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">BAD BOYS: MIAMI TAKEDOWN</div><div class="sub">PS2 / XBOX / GC</div></div></div>
+          <div class="cart-console">PS2 / XBOX / GC</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 06</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">BAD BOYS: MIAMI TAKEDOWN</div><div class="game-meta g-chips"><span class="g-chip">PS2 / XBOX / GC</span><span class="g-chip y">2004</span><span class="g-chip">CRAVE / EMPIRE (BLITZ)</span></div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO A LA CAJA QUE PROMETIA MAS</span>Los dos policias salen en la caja, pero no dentro del juego: sus caras no se autorizaron. Cada nivel se resuelve igual, matando a todos lo mas rapido posible.</div>
+    </div>
+<aside class="notas"><h4>#6 · BAD BOYS: MIAMI TAKEDOWN</h4><div class="n-line">LA PELICULA Y EL JUEGO: Bad Boys: Miami Takedown se basa en Bad Boys II, la pelicula de 2003 con Will Smith y Martin Lawrence. El juego salio en 2004 para GameCube, PC, PS2 y Xbox, despues de que la pelicula ya estaba en DVD y VHS. Lo desarrollo Blitz Games y lo publico Crave Entertainment en Norteamerica y Empire Interactive en Europa, donde se llama simplemente Bad Boys II.</div><div class="n-line">COMO SE JUEGA: controlas a los detectives Marcus Burnett y Mike Lowrey en niveles que se alternan. Son cinco actos. La historia sigue despues de los hechos de la pelicula: un narco, mafia rusa, un grupo llamado los Baby Demons y una agente de la TNT que se llama Lee-Ann Reid. Segun la idea del juego, cada policia tiene un estilo distinto. Segun GamesRadar, en la practica todos los niveles se resuelven igual: matar a todos los malos lo mas rapido y bruscamente posible. VidaExtra lo describe como una version simplona de un GTA III, con escenarios muy acotados y a pie.</div><div class="n-line">EL DATO MAS FAMOSO: ni Will Smith ni Martin Lawrence autorizaron que sus rostros salieran en el juego, aunque aparecen en la caja. GamesRadar dice que por eso es menos un juego de la pelicula que un shooter cualquiera, y WatchMojo se pregunta como es que se podia pagar el rostro de las estrellas para la portada y no para el juego. Por confirmar el detalle de la autorizacion con una tercera fuente.</div><div class="n-line">LA CRITICA: Wikipedia lo registra con resenas generalmente desfavorables en todas las plataformas segun Metacritic. GameTrailers lo puso #10 de sus peores juegos de la historia. Una lista tras otra dice lo mismo: dialogos flojos, actuacion de voz de las peores, historia sin sentido, incluso para los estandares de Bad Boys.</div><div class="n-line">LAS LISTAS: GamesRadar (cerca del #14, por confirmar), WatchMojo (#18 de la lista de 20), Shortlist, TheTopTens, WatchMojo PS2 y VidaExtra: 6 listas.</div><div class="n-line">EL GIRO: segun Wikipedia, a pesar de las malas resenas, fue el juego de mayor venta de Blitz Games en el Reino Unido. Dato simpatico para contrastar: la critica lo odio y la gente lo compro, o por lo menos lo compraron los que vieron la caja con las caras de los dos policias.</div><div class="n-line">COMO CONTARLO: es un buen ejemplo del apuro tipico de la era PS2: llegar despues del DVD, con la caja bonita y el interior de otro juego. El humor va a la caja que promete lo que el juego no entrega.</div><div class="n-line">TRANSICION CON EL #5: 'de dos policias con caras que no estan en el juego a un juego con las caras de todo el elenco, pero a los que les cuesta moverse'.</div><div class="n-line">POR CONFIRMAR: la fecha exacta de salida en Norteamerica (2004), el detalle de que los dos actores no autorizaron sus rostros (lo dicen GamesRadar y WatchMojo, que parecen citarse entre si) y la posicion exacta en GamesRadar.</div><div class="n-cue">RETO 30 SEG: avanzar un nivel sin que nadie reconozca al detective. CHISTE: 'ponen la cara de los actores en la caja y la del vecino en el juego: como esos ofertones con foto de catalogo'. Gancho al #5: 'y ahora la pelicula de un juego que a su vez se vuelve juego: la serpiente que se muerde la cola'.</div></aside>  </section>
+
+  <section class="slide g-nueva">
+    <span class="slide-num">08</span>
+    <div class="g-bg" style="background-image:url(img/retro-peliculas-peores/street-fighter-the-movie.jpg)"></div>
+    <div class="slide-hybrid box-ancha">
+      <div class="hybrid-head"><div class="g-barra" style="--u:69px;--dx:-54px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/tomorrow-never-dies.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.708"><i style="background-image:url(img/retro-peliculas-peores/friday-the-13th.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><em>8</em></div><div class="g-th r" style="--w:0.804"><i style="background-image:url(img/retro-peliculas-peores/catwoman.jpg)"></i><em>7</em></div><div class="g-th r" style="--w:1.000"><em>6</em></div><div class="g-th cur" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/street-fighter-the-movie.jpg)"></i><em>5</em></div><div class="g-th f" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>5</div><div class="game-price">EN 6 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.0000">
+          <div class="cart-img-wrap lb-default"><img class="cart-img-bg" src="img/retro-peliculas-peores/street-fighter-the-movie.jpg" alt="" aria-hidden="true"><img src="img/retro-peliculas-peores/street-fighter-the-movie.jpg" alt="STREET FIGHTER: THE MOVIE box art"></div>
+          <div class="cart-console">PS1 / SATURN</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 05</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">STREET FIGHTER: THE MOVIE</div><div class="game-meta g-chips"><span class="g-chip">PS1 / SATURN</span><span class="g-chip y">1995</span><span class="g-chip">CAPCOM / ACCLAIM</span></div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL JUEGO DE LA PELICULA DEL JUEGO</span>Actores digitalizados, lentitud y controles con retraso. Se agoto en un mes en Estados Unidos y fue juego de lanzamiento de PlayStation, pero la critica casi no lo perdono.</div>
+    </div>
+<aside class="notas"><h4>#5 · STREET FIGHTER: THE MOVIE</h4><div class="n-line">LA PELICULA Y EL JUEGO: Street Fighter: The Movie es el juego de la pelicula de 1994 con Jean-Claude Van Damme, que a su vez es la pelicula del juego de peleas de Capcom. En 1995 salieron dos juegos distintos con el mismo nombre. Uno es el arcade, hecho por Incredible Technologies y publicado por Capcom. El otro es el de consola, para PlayStation y Sega Saturn, hecho y publicado por Capcom (en Occidente lo distribuyo Acclaim). No es un port del arcade: es otro juego con la misma idea.</div><div class="n-line">COMO SE JUEGA: es parecido a Super Street Fighter II Turbo, pero con actores digitalizados en vez de dibujos. La version de consola tiene cuatro modos: Movie Battle, que sigue la trama de la pelicula con Guile; Street Battle, estilo arcade; Versus; y un modo de prueba contra toda la plantilla. Hay ataques especiales mas fuertes que se hacen con dos botones. Al terminar Movie Battle te muestran el videoclip de la cancion de la pelicula.</div><div class="n-line">EL DATO TRISTE: Raul Julia, que hizo de M. Bison en la pelicula, iba a repetir el papel, pero estaba muy enfermo y fallecio en octubre de 1994. Lo reemplazo su doble de riesgo. Cuidado al contarlo: no es chiste, es dato.</div><div class="n-line">LA CRITICA: Wikipedia dice que la version de PlayStation fue un exito comercial (se agoto en tiendas dentro de un mes desde su lanzamiento en Norteamerica en septiembre de 1995) pero un fracaso de critica. Fue juego de lanzamiento de la PlayStation en America. Las resenas hablan de lentitud, de sprites turbios que no se parecen a los actores y de controles con retraso. GamePro dio una resena negativa a la version de Saturn, algo raro en esa revista. Next Generation hizo una de las pocas resenas totalmente positivas, y despues llamo a la version PlayStation 'un gran paso en falso'. USgamer la incluye entre los peores juegos de lanzamiento de la PlayStation y UGO la puso 102 en sus 102 peores juegos de la historia.</div><div class="n-line">LAS LISTAS: GamesRadar (#2, segun el orden de la lista, por confirmar), WatchMojo (#10 de los 20), Shortlist, Attack of the Fanboy (#1), TheTopTens (#2) y Richard Lewis: 6 listas. GamesRadar escribe que cada juego de su lista pierde algo al pasar de la pantalla grande y que adaptar algo que ya habia sido adaptado de un juego era tentar a la suerte.</div><div class="n-line">SOBRE EL CHISTE: aqui el humor es la serpiente que se muerde la cola. Un juego se vuelve pelicula, la pelicula se vuelve juego, y el juego de la pelicula juega peor que el juego original de la pelicula. 'Es el juego de la pelicula del juego, y el juego de la pelicula del juego es peor que el juego'.</div><div class="n-line">EL HILO ACCLAIM: Acclaim aparece en este top dos veces, publicando este y subcontratando el Total Recall del #8. Util para el cierre.</div><div class="n-line">POR CONFIRMAR: la posicion exacta en GamesRadar, el orden dentro de la lista de TheTopTens y la fecha exacta de salida (septiembre de 1995 en Norteamerica).</div><div class="n-cue">RETO 30 SEG: pelear contra el tiempo de carga. CHISTE: 'un juego donde el mejor movimiento especial es esperar'. Gancho al #4: 'ahora un juego que llego cinco anos despues de la pelicula: la gran fiesta ya habia terminado'.</div></aside>  </section>
+
+  <section class="slide g-nueva">
+    <span class="slide-num">09</span>
+    <div class="g-bg g-lb lb-default"></div>
+    <div class="slide-hybrid box-ancha">
+      <div class="hybrid-head"><div class="g-barra" style="--u:69px;--dx:-54px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/tomorrow-never-dies.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.708"><i style="background-image:url(img/retro-peliculas-peores/friday-the-13th.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><em>8</em></div><div class="g-th r" style="--w:0.804"><i style="background-image:url(img/retro-peliculas-peores/catwoman.jpg)"></i><em>7</em></div><div class="g-th r" style="--w:1.000"><em>6</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/street-fighter-the-movie.jpg)"></i><em>5</em></div><div class="g-th cur" style="--w:1.000"><em>4</em></div><div class="g-th f" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos cy"><span class="hash">#</span>4</div><div class="game-price">EN 7 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.3333">
+          <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">FIGHT CLUB</div><div class="sub">PS2 / XBOX</div></div></div>
+          <div class="cart-console">PS2 / XBOX</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 04</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">FIGHT CLUB</div><div class="game-meta g-chips"><span class="g-chip">PS2 / XBOX</span><span class="g-chip y">2004</span><span class="g-chip">VIVENDI (GENUINE GAMES)</span></div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO A LA PRIMERA REGLA</span>Llego cinco anos despues de la pelicula, con 36 y 37 de 100 en Metacritic. Copia ideas de Tekken y Mortal Kombat, y el premio por terminar el modo historia es desbloquear a Fred Durst.</div>
+    </div>
+<aside class="notas"><h4>#4 · FIGHT CLUB</h4><div class="n-line">LA PELICULA Y EL JUEGO: Fight Club es el juego de la pelicula de 1999, hecho por Genuine Games y publicado por Vivendi Universal Games para PS2 y Xbox. Salio el 16 de noviembre de 2004 en Norteamerica y el 10 de diciembre en las regiones PAL. Es decir, cinco anos despues del estreno. No siguio el estreno: llego a una fiesta que ya habia terminado. Por confirmar la fecha de estreno de la pelicula (octubre de 1999).</div><div class="n-line">COMO SE JUEGA: es un juego de peleas en 3D con vista lateral. Segun Wikipedia, copia ideas de varios juegos de la generacion: los combos por zonas de altura de Tekken 4, el dano localizado de Tao Feng, los lanzamientos contra la pared de Dead or Alive 3, el uso del entorno de Mortal Kombat: Deception y el aire realista y sucio de Def Jam. Hay 12 personajes de la novela y la pelicula, incluidos Tyler Durden y Robert Paulson. En el modo Hardcore las lesiones se arrastran de una pelea a otra, hasta que tu luchador debe retirarse, y hay pequenas escenas de rayos X que muestran los huesos rotos.</div><div class="n-line">EL MODO HISTORIA: un personaje original, llamado solo Protagonista, entra al club despues de terminar con su novia y sube de rango hasta ser la mano derecha de Tyler. Al terminar, se desbloquea a Fred Durst, de Limp Bizkit, como personaje jugable, porque el propio cantante pidio salir en cualquier juego que usara su musica. Es dato de Wikipedia, y GamesRadar y WatchMojo lo usan como remate: tu premio por terminar el juego es otro luchador.</div><div class="n-line">LA CRITICA: segun Wikipedia, Metacritic le dio 37 en Xbox y 36 en PS2, y GameRankings, 40,11 y 36,84. Los fans de la novela y la pelicula lo descartaron como un intento de exprimir el exito, y la critica dijo que copia demasiado de otros juegos, que repite movimientos y que tiene mala animacion. No tuvo exito comercial.</div><div class="n-line">DATO CURIOSO: Electronic Gaming Monthly puso a Fight Club cuarto en su lista de los diez politicos de videojuego por la aparicion de Abraham Lincoln en la version de PS2. Game Informer lo puso #10 en su lista de 2011, 'diez juegos de pelea que querriamos olvidar'.</div><div class="n-line">LAS LISTAS: GamesRadar (cerca del #27, por confirmar), WatchMojo (#13 de los 20), Shortlist, TheTopTens, WatchMojo PS2, Richard Lewis y VidaExtra: 7 listas.</div><div class="n-line">COMO CONTARLO: la primera regla del club es no hablar del club. El juego cumplio tan bien la regla que casi nadie lo compro. El humor va a eso, y al hecho de que una historia sobre rechazar el consumo termino como producto de consumo. Ese giro lo hace Richard Lewis en su lista, y vale usarlo como idea, no como cita.</div><div class="n-line">POR CONFIRMAR: la fecha exacta de estreno de la pelicula, la posicion en GamesRadar y que Fred Durst haya pedido salir en el juego (Wikipedia lo dice sin citar la fuente).</div><div class="n-cue">RETO 30 SEG: que el luchador termine una pelea con el menor dano posible. CHISTE: 'la primera regla del Fight Club es no hablar del Fight Club; la segunda, que tampoco se compra'. Plantar el #3: 'ahora uno de los mas famosos: tanto que el guionista de la pelicula pidio que no lo compraran'.</div></aside>  </section>
+
+  <section class="slide g-nueva">
+    <span class="slide-num">10</span>
+    <div class="g-bg g-lb lb-default"></div>
+    <div class="slide-hybrid box-ancha">
+      <div class="hybrid-head"><div class="g-barra" style="--u:69px;--dx:-54px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/tomorrow-never-dies.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.708"><i style="background-image:url(img/retro-peliculas-peores/friday-the-13th.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><em>8</em></div><div class="g-th r" style="--w:0.804"><i style="background-image:url(img/retro-peliculas-peores/catwoman.jpg)"></i><em>7</em></div><div class="g-th r" style="--w:1.000"><em>6</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/street-fighter-the-movie.jpg)"></i><em>5</em></div><div class="g-th r" style="--w:1.000"><em>4</em></div><div class="g-th cur" style="--w:1.000"><em>3</em></div><div class="g-th f" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>3</div><div class="game-price">EN 8 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.3333">
+          <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">BACK TO THE FUTURE</div><div class="sub">NES</div></div></div>
+          <div class="cart-console">NES</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 03</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">BACK TO THE FUTURE</div><div class="game-meta g-chips"><span class="g-chip">NES</span><span class="g-chip y">1989</span><span class="g-chip">LJN</span></div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL RELOJ QUE NUNCA ALCANZA</span>Juntar relojes, repetir y llegar a 88 millas por hora en un solo intento. El propio guionista de la pelicula, Bob Gale, lo llamo uno de los peores juegos de la historia.</div>
+    </div>
+<aside class="notas"><h4>#3 · BACK TO THE FUTURE</h4><div class="n-line">LA PELICULA Y EL JUEGO: Back to the Future es un juego de LJN para el NES, de 1989, basado libremente en la pelicula de 1985. Tiene una secuela en 1990, Back to the Future Part II &amp; III, que es otro juego y ya esta en el Top Peores del NES. Aqui hablamos del primero.</div><div class="n-line">COMO SE JUEGA: controlas a Marty McFly en 1955 recogiendo relojes para pasar de nivel. La foto de la familia en la parte de abajo se va desvaneciendo y, si desaparece del todo, pierdes una vida. Con 100 relojes la foto vuelve a verse completa. Hay bolas de bolos para destruir enemigos y un skate para ir mas rapido. Al final de cada etapa hay un minijuego: defender el cafe de la pandilla de Biff, bloquear los besos que lanza Lorraine y afinar la guitarra en el baile. La critica los compara con Paperboy.</div><div class="n-line">EL NIVEL FINAL: manejas el DeLorean de noche, esquivando rayos y obstaculos, y tienes que llegar a 88 millas por hora justo al final. Es un solo intento, sin importar cuantas vidas te queden. Si fallas, la pantalla dice 'Tough luck Marty! It looks like you are stuck here'. Algo asi como: 'mala suerte, Marty, te quedaste aqui'.</div><div class="n-line">LA MUSICA: solo hay dos temas, ambos de la pelicula, una version de The Power of Love y Johnny B. Goode, y los dos suenan acelerados por razones que no se conocen.</div><div class="n-line">LA CRITICA: el guionista de la pelicula, Bob Gale, lo ha llamado uno de los peores juegos de la historia, y ha dicho en entrevistas que los fans no lo compren. Segun Gale, LJN rechazo sus pedidos de participar en el desarrollo y cuando le mostraron el juego, le dijeron que ya era tarde para cambiar algo. La revista VideoGames and Computer Entertainment le dio 4, con 2 en sonido y musica, y dijo que casi es imposible terminarlo sin la camara lenta del control NES Advantage y que da ganas de sacar el cartucho y tirarlo por la ventana.</div><div class="n-line">LAS LISTAS: GamesRadar (#8), WatchMojo (#5 de los 20 y #2 de los 10), Entertainment.ie (#9, pero con la version de Commodore 64), Attack of the Fanboy (#5), TheTopTens (#4), TheGamer (#17) y VidaExtra: 8 listas. GamesRadar dice que su peor elemento es la repeticion: solo se pueden juntar tantos relojes antes de aburrirse, justo lo contrario de la variedad de la pelicula.</div><div class="n-line">EL HILO LJN: LJN aparece aqui y en el #9. Una empresa con tres letras que vendia el sello como garantia: mucho nombre, poco juego.</div><div class="n-line">POR QUE #3: es el tercero que mas se repite: siempre en la lista, siempre con la misma queja. Y tiene lo mejor que un juego malo puede tener: el propio guionista de la pelicula pidiendo que no lo compres.</div><div class="n-line">POR CONFIRMAR: quien desarrollo el juego (Wikipedia solo dice LJN; otras fuentes hablan de Beam Software) y la fecha exacta de salida de 1989.</div><div class="n-cue">RETO 30 SEG: llegar a 88 millas por hora justo al final. CHISTE: 'el unico juego donde el viaje en el tiempo es llegar al final de un nivel, y se pierde igual'. Gancho al #2: 'subimos al #2: tres angeles, cero ganas'.</div></aside>  </section>
+
+  <section class="slide g-nueva">
+    <span class="slide-num">11</span>
+    <div class="g-bg g-lb lb-default"></div>
+    <div class="slide-hybrid box-ancha">
+      <div class="hybrid-head"><div class="g-barra" style="--u:69px;--dx:-54px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/tomorrow-never-dies.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.708"><i style="background-image:url(img/retro-peliculas-peores/friday-the-13th.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><em>8</em></div><div class="g-th r" style="--w:0.804"><i style="background-image:url(img/retro-peliculas-peores/catwoman.jpg)"></i><em>7</em></div><div class="g-th r" style="--w:1.000"><em>6</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/street-fighter-the-movie.jpg)"></i><em>5</em></div><div class="g-th r" style="--w:1.000"><em>4</em></div><div class="g-th r" style="--w:1.000"><em>3</em></div><div class="g-th cur" style="--w:1.000"><em>2</em></div><div class="g-th f" style="--w:1.000"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>2</div><div class="game-price">EN 9 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.3333">
+          <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">CHARLIE'S ANGELS</div><div class="sub">PS2 / GAMECUBE</div></div></div>
+          <div class="cart-console">PS2 / GAMECUBE</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 02</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">CHARLIE'S ANGELS</div><div class="game-meta g-chips"><span class="g-chip">PS2 / GAMECUBE</span><span class="g-chip y">2003</span><span class="g-chip">UBISOFT (NEKO)</span></div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO A LA PARED INVISIBLE</span>Paredes invisibles, peleas repetidas y 23 de 100 en Metacritic, la nota mas baja de este top. La version de GameCube tiene el puntaje mas bajo de todo GameRankings.</div>
+    </div>
+<aside class="notas"><h4>#2 · CHARLIE'S ANGELS</h4><div class="n-line">LA PELICULA Y EL JUEGO: Charlie's Angels es un juego de 2003 hecho por Neko Entertainment y publicado por Ubi Soft para PS2 y GameCube. Segun Wikipedia esta basado en la pelicula de 2000, que a su vez viene de la serie de los anos 70, aunque se desbloquean tambien trailers y fotos de Full Throttle, la pelicula de 2003. Por confirmar con cual de las dos peliculas se conecta.</div><div class="n-line">COMO SE JUEGA: es un beat 'em up muy simple. Peleas contra grupos de enemigos con combos de punos y patadas o con armas. Mientras peleas aparecen paredes invisibles que no te dejan avanzar hasta que derrotes a todos. Puedes cambiar de Angel, pero no durante una pelea, y no hace falta para terminar el juego. A veces una de ellas debe apretar un boton, tirar una palanca o abrir un computador para que otra pueda seguir. Los desbloqueables, como trailers y fotos, se encuentran buscando rollos de pelicula y memorias escondidas en cada nivel.</div><div class="n-line">LA TRAMA: el juego parte con la reunion en la oficina de Charlie: alguien robo la Estatua de la Libertad. La primera mision empieza en la pasarela de un concurso de belleza en una playa, con las Angeles en traje de bano. Desde ahi cada una pelea hasta el puerto. Son tres personajes, Natalie, Dylan y Alex, y, segun GamesRadar, las Angeles nunca se detienen a usar disfraces, que era lo mejor de la serie.</div><div class="n-line">LA CRITICA: segun Wikipedia, tiene 24 por ciento en GameRankings y 23 de 100 en Metacritic, 'generalmente desfavorable'. La version de GameCube tiene el puntaje mas bajo de todo GameRankings. Es la nota mas baja de este top. GamesRadar, ademas de ponerlo #4 en su lista de peores juegos de pelicula, lo puso 50 en otra lista de los peores juegos de la historia, y comento que era peor que la pelicula en que se basaba. Es dato de Wikipedia; por confirmar con la nota original.</div><div class="n-line">LAS LISTAS: GamesRadar (#4), WatchMojo (#6 de los 20 y #3 de los 10), Shortlist, Entertainment.ie (#8), Attack of the Fanboy (#3), TheTopTens, WatchMojo PS2 y VidaExtra: 9 listas. ComicBook.com dice que podria ser el peor juego de pelicula jamas hecho, por no tener una historia coherente.</div><div class="n-line">EL PEOR ELEMENTO SEGUN GAMESRADAR: la camisa de fuerza de las paredes invisibles. Es un juego donde el enemigo mas peligroso es el pasillo.</div><div class="n-line">COMO CONTARLO: el humor va a la estructura. Tres heroinas capaces de todo y un juego que no las deja cruzar de una esquina a la otra sin permiso. Un buen remate: 'tres angeles, y ninguno con permiso para abrir la puerta'.</div><div class="n-line">POR QUE #2: es de los que mas se repiten y de los que mas bajo puntaje tiene. Lo separa del #1 una sola lista y el peso de la leyenda.</div><div class="n-line">POR CONFIRMAR: que pelicula adapta (2000 segun Wikipedia, con extras de la de 2003) y el dato de la lista de los 50 peores de GamesRadar.</div><div class="n-cue">RETO 30 SEG: cruzar una puerta sin que aparezca un muro invisible. CHISTE: 'tres angeles que pueden con todo, menos con una pared que no existe'. Gancho al #1: 'y el numero uno... es el que llego con cinco semanas para existir'.</div></aside>  </section>
+
+  <section class="slide g-nueva">
+    <span class="slide-num">12</span>
+    <div class="g-bg g-lb lb-default"></div>
+    <div class="slide-hybrid box-ancha">
+      <div class="hybrid-head"><div class="g-barra" style="--u:69px;--dx:-54px"><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/tomorrow-never-dies.jpg)"></i><em>10</em></div><div class="g-th r" style="--w:0.708"><i style="background-image:url(img/retro-peliculas-peores/friday-the-13th.jpg)"></i><em>9</em></div><div class="g-th r" style="--w:1.000"><em>8</em></div><div class="g-th r" style="--w:0.804"><i style="background-image:url(img/retro-peliculas-peores/catwoman.jpg)"></i><em>7</em></div><div class="g-th r" style="--w:1.000"><em>6</em></div><div class="g-th r" style="--w:1.000"><i style="background-image:url(img/retro-peliculas-peores/street-fighter-the-movie.jpg)"></i><em>5</em></div><div class="g-th r" style="--w:1.000"><em>4</em></div><div class="g-th r" style="--w:1.000"><em>3</em></div><div class="g-th r" style="--w:1.000"><em>2</em></div><div class="g-th cur" style="--w:1.000"><em>1</em></div></div><div class="game-pos mg"><span class="hash">#</span>1</div><div class="game-price">EN 10 LISTAS</div></div>
+      <div class="hybrid-body">
+        <div class="cart-wrap"><div class="cart" style="--bh:330px;--ar:1.3333">
+          <div class="cart-img-wrap lb-default"><div class="cart-fallback"><div class="title">E.T. THE EXTRA-TERRESTRIAL</div><div class="sub">ATARI 2600</div></div></div>
+          <div class="cart-console">ATARI 2600</div>
+        </div></div>
+        <div class="tv-wrap"><div class="tarrovision">
+          <div class="tv-controls-top"><span class="tv-led"></span><span class="tv-brand">TARROVISION</span><span class="tv-channel">CH 01</span></div>
+          <div class="tv-screen"><div class="tv-screen-inner"><div class="tv-noscreen"><div class="tv-noscreen-big">NO SIGNAL</div><div class="tv-noscreen-sub">Inserta gameplay aqui</div></div></div></div>
+          <div class="tv-controls-bottom"><div class="tv-knob"></div><div class="tv-knob cy"></div><div class="tv-speaker"></div></div>
+        </div></div>
+      </div>
+      <div class="hybrid-title"><div class="game-title">E.T. THE EXTRA-TERRESTRIAL</div><div class="game-meta g-chips"><span class="g-chip">ATARI 2600</span><span class="g-chip y">1982</span><span class="g-chip">ATARI</span></div></div>
+      <div class="game-why"><span class="lbl">▶ PREMIO AL HOYO MAS FAMOSO DE LA HISTORIA</span>Cinco semanas para hacerlo, pozos de los que cuesta salir y millones de cartuchos devueltos. Aparece en 10 de las 12 listas: el que todos nombran primero.</div>
+    </div>
+<aside class="notas"><h4>#1 · E.T. THE EXTRA-TERRESTRIAL</h4><div class="n-line">LA PELICULA Y EL JUEGO: E.T. the Extra-Terrestrial es un juego de aventuras de Atari para el Atari 2600, de 1982 (diciembre segun la mayoria de las fuentes, por confirmar), basado en la pelicula de Steven Spielberg. Lo disenio Howard Scott Warshaw, el de Yars' Revenge y Raiders of the Lost Ark. Atari pago entre 20 y 25 millones de dolares por la licencia, una cifra altisima para la epoca. Cuando el director ejecutivo de Atari escucho la idea, dijo que era una idea tonta.</div><div class="n-line">EL PLAZO: las negociaciones terminaron a fines de julio de 1982 y el juego tenia que estar listo el 1 de septiembre para Navidad. Wikipedia dice poco mas de cinco semanas y otra lista dice seis (por confirmar). Cuando le mostraron el diseno, Spielberg le habria preguntado si no se podia hacer algo mas parecido a Pac-Man. Warshaw lo hizo a su manera, y despues dijo que quizas la idea de Spielberg tenia merito.</div><div class="n-line">COMO SE JUEGA: controlas a E.T. desde arriba y tienes que juntar tres piezas de un telefono que estan escondidas en pozos. Cada accion gasta energia, y se recupera con dulces Reese's Pieces. Si juntas las tres piezas, llamas a tu planeta y debes llegar al lugar de recogida antes de que se acabe el tiempo. Lo famoso son los pozos: caes, levitas para salir, y vuelves a caer. GamesRadar lo llama una crisis existencial tan exigente que hizo llorar a ninos.</div><div class="n-line">LAS VENTAS: no fue un fracaso inmediato. Vendio mas de 2,6 millones de copias hasta fines de 1982 y estuvo entre los cuatro mas vendidos de Billboard en diciembre. Pero volvieron al menos 669.000 copias en 1983, y segun el director ejecutivo de entonces, tres millones y medio de los cuatro millones fabricados volvieron a la empresa.</div><div class="n-line">EL BASURAL: la leyenda dice que Atari enterro los cartuchos en un vertedero de Alamogordo, Nuevo Mexico. En abril de 2014 una excavacion lo confirmo: habia cartuchos de E.T. entre otros juegos. El ex gerente que estuvo a cargo admitio que se enterraron 728.000 cartuchos de varios juegos, no solo E.T. Segun el documental Atari: Game Over, solo el 10 por ciento de unos 1.300 recuperados eran E.T.</div><div class="n-line">LAS LISTAS: GamesRadar (#1), WatchMojo (#1 de los 20 y #1 de los 10), Shortlist, Entertainment.ie (#1), Attack of the Fanboy (#4), TheTopTens (#1), WhatCulture (#3), Richard Lewis y VidaExtra: 10 listas, el que mas se repite. Wikipedia suma que Seanbaby lo puso #1 entre los 20 peores juegos de todos los tiempos en la revista EGM, GameTrailers lo ubico segundo en su lista, y GamePro lo llamo el segundo peor juego de pelicula.</div><div class="n-line">POR QUE #1: es el que todos nombran primero. Se le atribuye ser el primer juego de pelicula de mala calidad, aunque Wikipedia dice que su peso en la crisis de 1983 se exagero: esa crisis ya venia andando. Tambien cuidado con Warshaw: no expresa arrepentimiento y cree que hizo un buen juego para el tiempo que tuvo. Reirse del juego, no de el.</div><div class="n-line">POR CONFIRMAR: las semanas del plazo, la cifra de 2,6 millones y las posiciones exactas en las listas.</div><div class="n-cue">REMATE: 'ni el vertedero lo quiso del todo: solo uno de cada diez cartuchos que sacaron era E.T.'. Coco: redoble de bateria y pasar al cierre.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">13</span>
+    <div class="divider">
+      <div class="pre mg">LO QUE DEJA EL TOP</div>
+      <div class="title mg">EL ESTRENO NO ESPERA</div>
+      <div class="sub">Cuatro son de 8 bits, dos de los 32 bits y cuatro de la era PS2. Casi todos salieron con apuro para llegar a la fecha de la pelicula, y dos sellos se repiten: LJN y Acclaim. Un nombre famoso vendia solo, y se nota.</div>
+    </div>
+<aside class="notas"><h4>PARA EL CIERRE</h4><div class="n-line">Anos: E.T. (1982), Back to the Future y Friday the 13th (1989), Total Recall (1990), Street Fighter (1995), Tomorrow Never Dies (1999), Charlie's Angels (2003) y Catwoman, Bad Boys y Fight Club (2004). Cuatro de la era 8 bits, dos de los 32 bits y cuatro de la era PS2.</div><div class="n-line">Hilos: LJN (Back to the Future y Friday the 13th) y Acclaim (Total Recall, que subcontrato a Interplay, y la edicion occidental de Street Fighter: The Movie). Catwoman salio el mismo dia que su pelicula y la empresa que lo hizo, Argonaut, entro en liquidacion tres meses despues. Fight Club llego cinco anos tarde.</div><div class="n-line">Matiz para no cargar la mano: no todo juego de pelicula era malo. El especial de los mejores tiene diez que valieron la pena, y varios de estos vendieron bien igual (Bad Boys fue el mayor exito de su estudio en el Reino Unido, Street Fighter se agoto en un mes y Tomorrow Never Dies paso los 3 millones segun su estudio). Lo malo no siempre es parejo, ni lo que vende es bueno.</div><div class="n-line">Sobre las listas: Wikipedia dice que el peso de E.T. en la crisis de 1983 se exagero, y que la crisis ya venia andando.</div><div class="n-cue">TRANSICION: 'si quieres el lado A, el especial de los mejores esta en el otro capitulo'. Sin prometer fechas.</div></aside>  </section>
+
+  <section class="slide">
+    <span class="slide-num">14</span>
+    <div class="divider">
+      <div class="pre cy">FIN DE LA FUNCION</div>
+      <div class="title cy">CORTEN: LA PELICULA SE ACABO</div>
+      <div class="sub">El cine y los juegos siguen juntos. Cuentanos cual juego de pelicula te hizo devolver el cartucho, y cual de los mejores te hizo perdonar a todos estos.</div>
+    </div>
+<aside class="notas"><h4>CIERRE FIJO</h4><div class="n-line">Cierre con bateria (episodio largo): Coco toca un tema del cine en bateria. Aprovechar el redoble para la revelacion del #1 (E.T.) y volver al final.</div><div class="n-line">CTA sugerido: 'cuentanos tu juego de pelicula favorito y el que mas te dolio'. No prometer fecha ni consola concreta al aire.</div><div class="n-line">Gancho: preguntar si ellos habrian puesto otro #1, o si dejarian fuera a los que ya estan en el Top Peores de su consola (E.T. y Friday the 13th).</div><div class="n-cue">LINEA FIJA: 'si te gusto este top, dinos que juego de pelicula te marco y cual quieres ver en el proximo'.</div></aside>  </section>
+
+</div>
+
+<nav class="footer">
+  <button class="nav-btn" id="prevBtn">◀ ANTERIOR</button>
+  <div class="nav-center">
+    <div class="nav-counter" id="counter">01 / 14</div>
+    <div class="nav-progress"><div class="bar" id="bar"></div></div>
+  </div>
+  <div class="nav-hint"><kbd>←</kbd> <kbd>→</kbd> NAVEGAR · <kbd id="notasBtn" style="cursor:pointer" title="Mostrar/ocultar notas">N</kbd> NOTAS</div>
+  <button class="nav-btn" id="nextBtn">SIGUIENTE ▶</button>
+</nav>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const counter = document.getElementById('counter');
+const bar = document.getElementById('bar');
+let current = 0;
+const total = slides.length;
+function pad(n) { return String(n).padStart(2, '0'); }
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+  counter.textContent = pad(current + 1) + ' / ' + pad(total);
+  bar.style.width = ((current + 1) / total * 100) + '%';
+}
+prevBtn.addEventListener('click', () => go(current - 1));
+nextBtn.addEventListener('click', () => go(current + 1));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') { go(0); }
+  if (e.key === 'End') { go(total - 1); }
+  if (e.key === 'n' || e.key === 'N') { setRead(!document.body.classList.contains('read-mode')); }
+});
+function setRead(on) { document.body.classList.toggle('read-mode', on); }
+if (new URLSearchParams(location.search).get('notas') === '1') setRead(true);
+const notasBtn = document.getElementById('notasBtn');
+if (notasBtn) notasBtn.addEventListener('click', () => setRead(!document.body.classList.contains('read-mode')));
+const deckEl = document.getElementById('deck');
+deckEl.addEventListener('click', (e) => {
+  if (e.target.closest('.notas, button, a, kbd, input, textarea, select')) return;
+  const w = window.innerWidth;
+  if (e.clientX < w * 0.2) { go(current - 1); }
+  else if (e.clientX > w * 0.8) { go(current + 1); }
+});
+go(0);
+</script>
+
+</body>
+</html>
