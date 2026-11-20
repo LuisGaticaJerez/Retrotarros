@@ -6,6 +6,19 @@
 
 TarroDL, TarroStudio, TarroBot y TarroLauncher tienen repo propio en `D:\Recursos Retrotarros\TarroTools\` (ver la tabla en `CLAUDE.md` y `docs/tarrobot/plan-separacion-tarrobot-studio.md`). **Trabajo sobre una herramienta = sesión aparte en su repo.** Este repo es solo contenido. Quedan aquí `tarrobot.py`, `capture-slides.py` y `_studio_layout.py`. El sync `sync-tarrobot-to-drive.ps1` lleva solo datos; el panel se publica con `publicar-en-drive.ps1` de TarroStudio.
 
+## Especial de juegos de película (2026-11-20): armado el de los peores
+
+**Hecho (en la rama `claude/ecstatic-wright-aea0c3`, sin push ni PR hasta el dale de Luis):** `retro-peliculas-peores` (HTML en `studio/specials/`, 14 slides, gráfica nueva, notas ocultas de 450 a 550 palabras por juego, 10 cajas NTSC USA), pauta, discusión, kit de YouTube y capturas. Es el segundo capítulo independiente del especial; mismo método y reglas que `retro-peliculas-mejores`, sin tocarlo. Driver y notas en `.cache/gen_retro_peliculas_peores.py` y `.cache/notas_retro_peliculas_peores.py` (gitignored).
+
+**Top (de #1 a #10), orden = en cuántas de 12 listas de peores juegos de película aparece cada uno, desempate por la posición en la lista de GamesRadar:** E.T. (Atari 2600, 10 listas), Charlie's Angels (PS2/GC, 9), Back to the Future (NES, 8), Fight Club (PS2/Xbox, 7), Street Fighter: The Movie (PS1/Saturn, 6), Bad Boys: Miami Takedown (6), Catwoman (6), Total Recall (NES, 5), Friday the 13th (NES, 5), Tomorrow Never Dies (PS1, 5). Quedaron en el banco con 4 listas: Robocop (2003), Home Alone y Enter the Matrix.
+
+**Falta:**
+0. Las 10 cajas ya están (verificadas en mosaico). Wikimedia bloqueó la descarga con 429 por más de una hora, así que 6 salieron de los repositorios de miniaturas de Libretro en GitHub (`raw.githubusercontent.com/libretro-thumbnails/<plataforma>/master/Named_Boxarts/<Titulo> (USA).png`, que no tiene ese bloqueo; el nombre exacto se busca con la API de árboles de git). Charlie's Angels es la caja de GameCube (la de PS2 solo existe en versión europea) y Street Fighter es la de PS1 de EE. UU.
+1. Dale de Luis para push de la rama, PR, merge y syncs (`sync-to-drive.ps1 -Episodios retro-peliculas-peores` y `sync-tarrobot-to-drive.ps1 -Rapido`).
+2. Que Luis y Coco respondan `docs/discusiones/discusion-retro-peliculas-peores.md`: E.T. (fue #1 del Top Peores de Atari 2600, publicado) y Friday the 13th (#1 del Top Peores del NES) se repiten en otros rankings; Friday the 13th adapta la saga y no una película concreta; Tomorrow Never Dies en el #10 es el menos malo del top.
+3. Lo "por confirmar" de la pauta (posiciones exactas en GamesRadar, semanas de plazo de E.T., que Acclaim retiró sus avisos de EGM, los rostros de Bad Boys).
+4. Elegir el "Sigue con" cruzado entre los dos capítulos al publicar.
+
 ## Especial de juegos de película (2026-11-18): armado el de los mejores
 
 **Hecho (en la rama `claude/suspicious-shtern-dbffe5`, sin push ni PR hasta el dale de Luis):** `retro-peliculas-mejores` (HTML en `studio/specials/`, 14 slides, gráfica nueva, notas ocultas de 450 a 550 palabras por juego, 10 cajas NTSC USA), pauta, discusión, kit de YouTube y capturas. Diseño y plan: `docs/superpowers/specs/2026-11-18-retro-peliculas-mejores-design.md` y `docs/superpowers/plans/2026-11-18-retro-peliculas-mejores.md`. Para esto `top_deck.generar_top` aprendió un campo `consola` por juego (especiales multi-consola); sin la clave todo sale igual.
