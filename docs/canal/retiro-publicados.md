@@ -47,5 +47,6 @@ Ninguno. Lo publicado que no entra al reforge se retiró el 2026-11-17.
 | 2026-10-21 | Reseña Mighty Morphin Power Rangers, las 4 colecciones (N64, NES, SNES, PS Vita) y la saga Zelda |
 | 2026-10-26 | Reseña Montezuma's Revenge |
 | 2026-11-17 | Reseñas Yoshi's Island, Ocarina of Time, Need for Speed Underground 2 y Contra; rankings Master System (Top Mundial y Top Precios), Mega Drive Top Mundial, Atari 2600 (Top Mundial, Top Precios y Top Peores), Game Boy (Top Mundial, Top Precios y Top Peores), GameCube Top Mundial, PS1 (Top Mundial y Top Peores), N64 Top Peores, SNES Top Peores y SNES Joyas ocultas. Esta vez se borró **todo**: HTML, capturas, imágenes, kit, discusión, **pauta** y `.tarrobot.json`, el short de Master System Top Precios, y las carpetas y `.docx` del Drive. Solo queda el historial de git |
+| 2026-11-20 | Reseñas The Witcher (pedida) y Final Fight: HTML, capturas, imágenes propias (caja y portada), kit de YouTube y carpetas del Drive. Se conservaron las cajas compartidas de las colecciones y del Top Precios SNES |
 
 Cada retiro nuevo suma una fila aquí.
