@@ -1,7 +1,17 @@
 {
-  "fecha": "2026-11-18",
-  "generado": "2026-11-18T19:45:51+00:00",
+  "fecha": "2026-11-20",
+  "generado": "2026-11-20T13:13:41+00:00",
   "videos": [
+    {
+      "id": "6aRBfJZjjgA",
+      "titulo": "Diablo (1996): ¿sigue dando miedo bajar un nivel más? | RetroReseñas",
+      "estado": "programado",
+      "privacidad": "private",
+      "publicacion_programada": "2026-11-24T23:30:00Z",
+      "subido": "2026-11-20T02:18:18Z",
+      "vistas": 0,
+      "duracion": "PT31M32S"
+    },
     {
       "id": "Cpzu3qUQZnQ",
       "titulo": "Los 10 MEJORES juegos de Sega Dreamcast de la historia",
@@ -13,13 +23,23 @@
       "duracion": "PT43M37S"
     },
     {
+      "id": "7PEfEDbYnwg",
+      "titulo": "Final Fight: la secuela directa de Street Fighter (y eso casi nadie lo sabe) | RetroReseñas",
+      "estado": "publicado",
+      "privacidad": "public",
+      "publicacion_programada": null,
+      "subido": "2026-11-19T23:30:37Z",
+      "vistas": 34,
+      "duracion": "PT23M21S"
+    },
+    {
       "id": "wuiB05cwgFs",
       "titulo": "The Witcher (2007): ¿envejeció bien el primer juego del brujo Geralt? | RetroReseña",
       "estado": "publicado",
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-17T23:30:08Z",
-      "vistas": 19,
+      "vistas": 157,
       "duracion": "PT29M45S"
     },
     {
@@ -29,7 +49,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-15T23:30:03Z",
-      "vistas": 110,
+      "vistas": 125,
       "duracion": "PT35M2S"
     },
     {
@@ -39,7 +59,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-12T23:30:22Z",
-      "vistas": 110,
+      "vistas": 112,
       "duracion": "PT17M40S"
     },
     {
@@ -49,7 +69,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-11T02:31:31Z",
-      "vistas": 621,
+      "vistas": 727,
       "duracion": "PT23M21S"
     },
     {
@@ -59,7 +79,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-08T23:30:39Z",
-      "vistas": 54,
+      "vistas": 58,
       "duracion": "PT41M21S"
     },
     {
@@ -69,7 +89,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-06T00:03:10Z",
-      "vistas": 260,
+      "vistas": 263,
       "duracion": "PT32M15S"
     },
     {
@@ -89,7 +109,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-29T23:30:36Z",
-      "vistas": 192,
+      "vistas": 193,
       "duracion": "PT29M36S"
     },
     {
@@ -109,7 +129,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-25T23:30:35Z",
-      "vistas": 232,
+      "vistas": 234,
       "duracion": "PT40M47S"
     },
     {
@@ -139,7 +159,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-18T23:30:00Z",
-      "vistas": 1412,
+      "vistas": 1476,
       "duracion": "PT39M53S"
     },
     {
@@ -149,7 +169,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-15T23:30:25Z",
-      "vistas": 408,
+      "vistas": 410,
       "duracion": "PT19M43S"
     },
     {
@@ -169,7 +189,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-11T23:30:00Z",
-      "vistas": 929,
+      "vistas": 932,
       "duracion": "PT34M36S"
     },
     {
@@ -289,7 +309,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-13T23:30:35Z",
-      "vistas": 1111,
+      "vistas": 1112,
       "duracion": "PT37M38S"
     },
     {
@@ -299,7 +319,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-10T23:30:14Z",
-      "vistas": 140,
+      "vistas": 141,
       "duracion": "PT13M48S"
     },
     {
@@ -319,7 +339,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-08T21:32:36Z",
-      "vistas": 35385,
+      "vistas": 35386,
       "duracion": "PT58S"
     },
     {
@@ -349,7 +369,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-02T00:30:35Z",
-      "vistas": 309,
+      "vistas": 311,
       "duracion": "PT14M28S"
     },
     {
@@ -389,7 +409,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-28T00:30:26Z",
-      "vistas": 879,
+      "vistas": 880,
       "duracion": "PT14M47S"
     },
     {
@@ -429,7 +449,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-19T00:30:38Z",
-      "vistas": 292,
+      "vistas": 293,
       "duracion": "PT12M49S"
     },
     {
@@ -489,7 +509,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-06T02:00:34Z",
-      "vistas": 121,
+      "vistas": 122,
       "duracion": "PT11M39S"
     },
     {
@@ -549,7 +569,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-07-27T13:23:21Z",
-      "vistas": 4871,
+      "vistas": 4874,
       "duracion": "PT43S"
     },
     {
@@ -559,7 +579,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-07-27T02:10:36Z",
-      "vistas": 1462,
+      "vistas": 1463,
       "duracion": "PT9M6S"
     },
     {
@@ -649,7 +669,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-07-07T00:30:38Z",
-      "vistas": 24773,
+      "vistas": 24774,
       "duracion": "PT1M3S"
     },
     {
@@ -809,7 +829,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-06-08T02:00:08Z",
-      "vistas": 228,
+      "vistas": 229,
       "duracion": "PT35M2S"
     },
     {
@@ -909,7 +929,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-05-25T02:00:06Z",
-      "vistas": 2122,
+      "vistas": 2123,
       "duracion": "PT34M50S"
     },
     {
@@ -949,7 +969,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-05-16T02:00:06Z",
-      "vistas": 351,
+      "vistas": 353,
       "duracion": "PT25M28S"
     },
     {
