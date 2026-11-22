@@ -25,7 +25,9 @@ Por cada elemento publicado, en el repo y en el Drive (`G:\Mi unidad\Studio\`):
 | **Reforges de colecciones NES, N64 y SNES** (`data/colecciones/*.json`, `studio/colecciones/`) | Hasta que se graben y publiquen | Armados el 2026-11-10 con gráfica nueva, sin grabar |
 | **Cualquier programado o grabado sin publicar** | Hasta que salga en YouTube | Ya está filmado: el archivo debe coincidir con el video |
 
-Los demás rankings publicados (Master System Top Mundial y Top Precios, Mega Drive Top Mundial, Atari 2600, Game Boy, GameCube, PS1 Top Mundial, N64 Top Peores, SNES Top Peores, PS1 Top Peores, SNES Joyas ocultas) no se reforjan (Luis 2026-11-17, incluye Master System y Mega Drive): **sí se retiran** como cualquier otro publicado, con el dale de Luis.
+**Error corregido el 2026-11-22:** el retiro del 2026-11-17 incluyó por error **Atari 2600 Top Peores** y **Game Boy Top Peores**, que NO están publicados en YouTube (solo lo están los Top Peores de N64, SNES y PS1). Se restauraron desde el historial de git. Antes de retirar un ranking, confirmar su título exacto en `data/youtube/estado-canal.json`: "Atari 2600" o "Game Boy" a secas no alcanza, hay que comprobar cada uno de sus tipos (Top Mundial, Top Precios, Top Peores).
+
+Los demás rankings publicados (Master System Top Mundial y Top Precios, Mega Drive Top Mundial, Atari 2600 (Top Mundial y Top Precios), Game Boy (Top Mundial y Top Precios), GameCube, PS1 Top Mundial, N64 Top Peores, SNES Top Peores, PS1 Top Peores, SNES Joyas ocultas) no se reforjan (Luis 2026-11-17, incluye Master System y Mega Drive): **sí se retiran** como cualquier otro publicado, con el dale de Luis.
 
 ## Cómo se aplica en la revisión del inventario
 
@@ -46,7 +48,7 @@ Ninguno. Lo publicado que no entra al reforge se retiró el 2026-11-17.
 | 2026-10-19 | Reseñas Metal Warriors y Melee; Specials Día del Padre y Mes del Mar (se conservan pautas, discusiones y shorts) |
 | 2026-10-21 | Reseña Mighty Morphin Power Rangers, las 4 colecciones (N64, NES, SNES, PS Vita) y la saga Zelda |
 | 2026-10-26 | Reseña Montezuma's Revenge |
-| 2026-11-17 | Reseñas Yoshi's Island, Ocarina of Time, Need for Speed Underground 2 y Contra; rankings Master System (Top Mundial y Top Precios), Mega Drive Top Mundial, Atari 2600 (Top Mundial, Top Precios y Top Peores), Game Boy (Top Mundial, Top Precios y Top Peores), GameCube Top Mundial, PS1 (Top Mundial y Top Peores), N64 Top Peores, SNES Top Peores y SNES Joyas ocultas. Esta vez se borró **todo**: HTML, capturas, imágenes, kit, discusión, **pauta** y `.tarrobot.json`, el short de Master System Top Precios, y las carpetas y `.docx` del Drive. Solo queda el historial de git |
+| 2026-11-17 | Reseñas Yoshi's Island, Ocarina of Time, Need for Speed Underground 2 y Contra; rankings Master System (Top Mundial y Top Precios), Mega Drive Top Mundial, Atari 2600 (Top Mundial, Top Precios y Top Peores), Game Boy (Top Mundial, Top Precios y Top Peores), GameCube Top Mundial, PS1 (Top Mundial y Top Peores), N64 Top Peores, SNES Top Peores y SNES Joyas ocultas. Esta vez se borró **todo**: HTML, capturas, imágenes, kit, discusión, **pauta** y `.tarrobot.json`, el short de Master System Top Precios, y las carpetas y `.docx` del Drive. Solo queda el historial de git. **Atari 2600 Top Peores y Game Boy Top Peores se retiraron por error (no estaban publicados) y se restauraron el 2026-11-22** |
 | 2026-11-20 | Reseñas The Witcher (pedida) y Final Fight: HTML, capturas, imágenes propias (caja y portada), kit de YouTube y carpetas del Drive. Se conservaron las cajas compartidas de las colecciones y del Top Precios SNES |
 
 Cada retiro nuevo suma una fila aquí.
