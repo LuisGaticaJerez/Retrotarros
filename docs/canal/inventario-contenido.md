@@ -77,14 +77,14 @@
 
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
-| Reseñas | 56 | 36 | 1 | 19 |
+| Reseñas | 63 | 36 | 1 | 26 |
 | Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube + Joyas ocultas SNES) | 37 | 20 | 1 | 16 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 5 | 2 | 0 | 3 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
 | RetroNotas | 2 | 0 | 0 | 2 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **121** | **63** | **2** | **56** |
+| **TOTAL** | **128** | **63** | **2** | **63** |
 
 Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
@@ -147,9 +147,9 @@ Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom
 
 ---
 
-### 1.3 Backlog armado — listo para programar, sin fecha (56)
+### 1.3 Backlog armado — listo para programar, sin fecha (63)
 
-**Reseñas (19) — actualizado 2026-11-20 (Yoshi's Island, Ocarina of Time, Need for Speed: Underground 2, Contra, The Witcher y Final Fight ya se publicaron; Diablo está programado para el mar 24 nov; la lista de abajo es la histórica del 2026-10-30, el conteo sale de `studio/resenas/`):** Aladdin, Altered Beast, Contra, Crash
+**Reseñas (26) — actualizado 2026-11-22: se sumaron 7 reseñas de juegos de origen arcade, armadas el 2026-11-22 con el póster oficial del arcade como imagen principal y gráfica nueva (PR 30 a 36, ya en master y en Drive, sin grabar): Tumble Pop (arcade 1991, port Game Boy), Snow Bros., Michael Jackson's Moonwalker (arcade y Mega Drive, 1990), Bubble Bobble (arcade 1986), Double Dragon (arcade 1987), Captain Commando y Metal Slug (1996). Tumble Pop, Moonwalker y Captain Commando tienen aún el "Sigue con" por elegir al publicar; a las siete les falta `proxima` tras grabar. Detalle anterior, 2026-11-20 (Yoshi's Island, Ocarina of Time, Need for Speed: Underground 2, Contra, The Witcher y Final Fight ya se publicaron; Diablo está programado para el mar 24 nov; la lista de abajo es la histórica del 2026-10-30, el conteo sale de `studio/resenas/`):** Aladdin, Altered Beast, Contra, Crash
 Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star
 Fox, Yoshi's Island, Halo: Combat Evolved (Xbox), Counter-Strike (PC), Need for Speed: Underground 2, Kingdom Hearts (PS2), Age of Empires II (PC) y Diablo (PC) —armadas el 2026-10-27—, Commandos: Behind Enemy Lines (PC) y The Sims (PC) —armadas el 2026-10-28—, Gears of War (Xbox 360, armada el 2026-10-29, elegida por el canal), The Witcher (PC, armada el 2026-10-30, pedida de la comunidad), más 1 pedida: JoJo's Bizarre Adventure. Mighty Morphin Power Rangers, Metal
 Warriors, Melee, Montezuma's Revenge, International Superstar Soccer y God of War (PS2) ya se publicaron.
