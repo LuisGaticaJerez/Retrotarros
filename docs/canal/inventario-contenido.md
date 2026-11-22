@@ -60,6 +60,17 @@
 > Top Mundial (dom 22 nov, 20:30) y la reseña de Diablo (mar 24 nov, 20:30); ambos ya grabados,
 > no tocar.
 
+> **Consolidación completa contra el disco: 2026-11-22** (estudio/ y docs/ revisados archivo por archivo,
+> más `data/youtube/estado-canal.json` del 2026-11-20). Correcciones: Rankings 40 armados / 19 de backlog
+> (faltaban PS2 y Xbox Top Mundial y los 3 Joyas ocultas de GameCube, Mega Drive y PS1; sobraban
+> Atari 2600 Top Peores y Game Boy Top Peores, que ya no están en el estudio, ver abajo); Specials 7
+> armados (suman los 2 especiales de juegos de película); RetroNotas 3 (suma Consola pirata LATAM);
+> Abriendo el tarro 2 publicados (Arturo y Rodrigo); Reseñas con la lista real de backlog. **Hallazgo
+> pendiente de Luis:** el retiro del 2026-11-17 borró también `atari-2600-top-peores` y `gameboy-top-peores`
+> (HTML, pauta, kit, imágenes), que **no están publicados en YouTube** (los únicos Top Peores publicados
+> son N64, SNES y PS1). Siguen en el historial de git (commit `e3dbd5e`, padre `e3dbd5e^`); se pueden
+> restaurar con tu dale.
+
 ## Cómo leer esto
 
 - **Publicado** = está subido a YouTube ahora mismo (verificado en vivo).
@@ -78,18 +89,19 @@
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
 | Reseñas | 63 | 36 | 1 | 26 |
-| Rankings (Top Mundial + Top Precios, 12 consolas + Top Peores: piloto Atari 2600 + NES, SNES, Mega Drive, PS1, N64, Game Boy, Dreamcast, Saturn y GameCube + Joyas ocultas SNES) | 37 | 20 | 1 | 16 |
+| Rankings (Top Mundial + Top Precios, Top Peores y Joyas ocultas por consola; los publicados que ya se retiraron siguen contados) | 40 | 20 | 1 | 19 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
-| Specials | 5 | 2 | 0 | 3 |
+| Specials | 7 | 2 | 0 | 5 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
-| RetroNotas | 2 | 0 | 0 | 2 |
+| RetroNotas | 3 | 0 | 0 | 3 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **128** | **63** | **2** | **63** |
+| **TOTAL** | **134** | **63** | **2** | **69** |
 
-Aparte, fuera de esta tabla: **Abriendo el tarro** (1 publicado, formato dependiente de
+Aparte, fuera de esta tabla: **Abriendo el tarro** (2 publicados: Arturo y Rodrigo; formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
-superadas, playlist muerta, no cuentan como activo). Los Rankings suman 36 armados porque
-se contaron los 2 de Atari 8-bit (armados, sin publicar), los 10 Top Peores y el Joyas ocultas de SNES.
+superadas, playlist muerta, no cuentan como activo). **Colecciones** (4 de 4 publicadas) tiene además 3 reforges
+(NES, N64, SNES, con gráfica nueva, armados el 2026-11-10, sin grabar) que no suman a la tabla. Los Rankings
+no incluyen a Atari 2600 Top Peores ni a Game Boy Top Peores mientras no se restauren (ver nota de cabecera).
 
 ---
 
@@ -140,49 +152,37 @@ Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom
 
 **Colecciones (4, al día):** N64, SNES, NES, PS Vita. **Reforges NES, N64 y SNES con gráfica nueva armados el 2026-11-10, sin grabar** (`studio/colecciones/<slug>.html`, kit y discusión en `docs/`).
 
-**Abriendo el tarro (1):** Los tesoros numismáticos de Arturo.
+**Abriendo el tarro (2):** Los tesoros numismáticos de Arturo (16 jul) y Rodrigo, el mercader de aventuras (13 sep).
 
 **G-OLD archivado (2, discontinuado, no se repite):** "Coleccion RetroTarros N64" y
 "Ranking Retrotarros vs el mundo N64" — versiones viejas de los primeros pasos del canal.
 
 ---
 
-### 1.3 Backlog armado — listo para programar, sin fecha (63)
+### 1.3 Backlog armado — listo para programar, sin fecha (69)
 
-**Reseñas (26) — actualizado 2026-11-22: se sumaron 7 reseñas de juegos de origen arcade, armadas el 2026-11-22 con el póster oficial del arcade como imagen principal y gráfica nueva (PR 30 a 36, ya en master y en Drive, sin grabar): Tumble Pop (arcade 1991, port Game Boy), Snow Bros., Michael Jackson's Moonwalker (arcade y Mega Drive, 1990), Bubble Bobble (arcade 1986), Double Dragon (arcade 1987), Captain Commando y Metal Slug (1996). Tumble Pop, Moonwalker y Captain Commando tienen aún el "Sigue con" por elegir al publicar; a las siete les falta `proxima` tras grabar. Detalle anterior, 2026-11-20 (Yoshi's Island, Ocarina of Time, Need for Speed: Underground 2, Contra, The Witcher y Final Fight ya se publicaron; Diablo está programado para el mar 24 nov; la lista de abajo es la histórica del 2026-10-30, el conteo sale de `studio/resenas/`):** Aladdin, Altered Beast, Contra, Crash
-Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Final Fight, Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star
-Fox, Yoshi's Island, Halo: Combat Evolved (Xbox), Counter-Strike (PC), Need for Speed: Underground 2, Kingdom Hearts (PS2), Age of Empires II (PC) y Diablo (PC) —armadas el 2026-10-27—, Commandos: Behind Enemy Lines (PC) y The Sims (PC) —armadas el 2026-10-28—, Gears of War (Xbox 360, armada el 2026-10-29, elegida por el canal), The Witcher (PC, armada el 2026-10-30, pedida de la comunidad), más 1 pedida: JoJo's Bizarre Adventure. Mighty Morphin Power Rangers, Metal
-Warriors, Melee, Montezuma's Revenge, International Superstar Soccer y God of War (PS2) ya se publicaron.
+**Reseñas (26) — consolidado 2026-11-22 contra `studio/resenas/` (27 HTML: 26 de backlog + Diablo programada):** Age of Empires II (PC), Aladdin, Altered Beast, Commandos: Behind Enemy Lines (PC), Counter-Strike (PC), Crash Bandicoot, Earthbound, Earthworm Jim, Fatal Fury, Gears of War (Xbox 360), Halo: Combat Evolved (Xbox), JoJo's Bizarre Adventure (pedida), Kingdom Hearts (PS2), Kirby Super Star, A Link to the Past, Sonic the Hedgehog, Sonic the Hedgehog 2, Star Fox y The Sims (PC). Más **7 reseñas de juegos de origen arcade armadas el 2026-11-22**, con el póster oficial del arcade como imagen principal y gráfica nueva (PR 30 a 36, ya en master y en Drive, sin grabar): Tumble Pop (arcade 1991, port Game Boy), Snow Bros., Michael Jackson's Moonwalker (arcade y Mega Drive, 1990), Bubble Bobble (arcade 1986), Double Dragon (arcade 1987), Captain Commando y Metal Slug (1996). Tumble Pop, Moonwalker y Captain Commando tienen aún el "Sigue con" por elegir al publicar; a las siete les falta `proxima` tras grabar. Programada: Diablo (mar 24 nov). Ya publicadas y retiradas del estudio: Contra, Final Fight, The Witcher, Yoshi's Island, Ocarina of Time, Need for Speed: Underground 2, Mighty Morphin Power Rangers, Metal Warriors, Melee, Montezuma's Revenge, International Superstar Soccer y God of War (PS2).
 
-**Rankings (16) — actualizado 2026-11-17 (SNES Joyas ocultas y PS1 Top Peores ya se publicaron; Dreamcast Top Mundial está programado; el resto del texto es histórico):** Mega Drive Top Precios, PS Vita Top Precios, Dreamcast Top Mundial (programado) +
-Top Precios, Saturn Top Mundial + Top Precios, Atari 8-bit Top Mundial + Top Precios
-(armados, sin publicar), PS1 Top Precios (PS1 Top Mundial ya se publicó el 2026-10-18; el par fue armado 2026-09-21 — apertura del arco PS1, ver `docs/arcos/ps1.md`), GameCube Top Precios
-(GameCube Top Mundial ya se publicó el 2026-10-04; el par fue armado 2026-09-22 — apertura del arco GameCube completa, ver
-`docs/arcos/gamecube.md`; Top Precios con la auditoría canon aplicada desde el arranque),
-Atari 2600 Top Peores (PILOTO de un formato nuevo, espejo del Top Mundial con tono divertido,
-armado 2026-10-04; pendiente de ok de Luis y Coco sobre el orden — ver
-`docs/pautas/pauta-atari-2600-top-peores.md`), NES Top Peores y Mega Drive Top Peores (SNES Top Peores ya se publicó el 2026-10-25)
-(tanda 1 de los Top Peores por consola, armados 2026-10-06; cuñas chistosas a pedido de Luis; pendientes de
-ok de Luis y Coco sobre el orden — ver `docs/pautas/pauta-nes-top-peores.md`, `pauta-snes-top-peores.md` y
-`pauta-mega-drive-top-peores.md`); tanda 2 (PS1, N64 y Game Boy; PS1 Top Peores ya está programado para el 8 nov) armada 2026-10-06, ver `pauta-ps1-top-peores.md`,
-`pauta-n64-top-peores.md` y `pauta-gameboy-top-peores.md`; tanda 3 (Dreamcast, Saturn y GameCube) armada 2026-10-06, ver `pauta-dreamcast-top-peores.md`,
-`pauta-saturn-top-peores.md` y `pauta-gamecube-top-peores.md` (Saturn relaja la regla NTSC USA con 2 juegos solo Japon, avisado en pantalla).
-Atari 2600 Top Precios y Game Boy Top Mundial + Top Precios salieron de esta lista: ya
-están publicados en el canal (verificado en vivo 2026-09-21/22), el doc los tenía mal
-clasificados como backlog.
+**Rankings (19) — consolidado 2026-11-22 contra `studio/rankings/` (Dreamcast Top Mundial está programado para el dom 22 nov y no cuenta acá):**
+- **Top Mundial (4):** Atari 8-bit, PS2, Saturn y Xbox.
+- **Top Precios (7):** Atari 8-bit, Dreamcast, GameCube, Mega Drive, PS1, PS Vita y Saturn (Top Precios con la auditoría canon de grial y rarezas aplicada).
+- **Top Peores (5):** Dreamcast, GameCube, Mega Drive, NES y Saturn (Saturn relaja la regla NTSC USA con 2 juegos solo Japón, avisado en pantalla). Todos con gráfica nueva y notas largas; ver sus pautas en `docs/pautas/`.
+- **Joyas ocultas (3):** GameCube, Mega Drive y PS1 (el de SNES ya se publicó el 15 nov; el de N64 está en Curaduría N64).
+- **Por restaurar, con tu dale (2):** Atari 2600 Top Peores (el piloto del formato) y Game Boy Top Peores. El retiro del 2026-11-17 los borró creyéndolos publicados, pero no existen en YouTube. Siguen en el historial de git (`git show e3dbd5e^:studio/rankings/top-peores/atari-2600-top-peores.html`, igual para `gameboy-top-peores` y sus pautas, kits e imágenes).
+- **Publicados que se conservan para su reforge (7):** N64, SNES y NES Top Mundial y Top Precios, y PS Vita Top Mundial (no son backlog; ver `docs/canal/retiro-publicados.md`).
 
 **Sagas (11):** Donkey Kong, Kirby, Mario, Mega Man, Metal Gear, Metroid, Mortal Kombat,
 Resident Evil, Smash Bros, Sonic, Street Fighter. **Sigue siendo el mayor backlog del
 canal en volumen** (11 de 12 sin publicar).
 
-**Specials (3):** Cuadrilla del Frío (`retro-cuadrilla-frio`), Día del Trabajador
-(`retro-dia-trabajador`), Día del Gato (`retro-dia-del-gato`).
+**Specials (5):** Cuadrilla del Frío (`retro-cuadrilla-frio`), Día del Trabajador
+(`retro-dia-trabajador`), Día del Gato (`retro-dia-del-gato`) y, armados el 2026-11-18 y el 2026-11-20 (PR 28 y 29, en master y en Drive, sin grabar), los dos capítulos del especial de juegos de película: **Mejores** (`retro-peliculas-mejores`) y **Peores** (`retro-peliculas-peores`), multi-consola, 10 juegos cada uno, con gráfica nueva y notas largas. Quedan abiertas las preguntas de la discusión para Luis y Coco y los puntos "por confirmar" de las notas.
 
 **Curaduría N64-only (5):** Hardware Raro, Joyas Ocultas, Kirkhope Rare (biográfico
 compositor), Nintendo vs PlayStation, No-Latam. **Sigue sin playlist de destino
 asignada** (pendiente de decidir con Luis — ver sección 4).
 
-**RetroNotas (2):** Lost Localizations, Chilean Arcade Scene. Formato nuevo (agosto 2026),
+**RetroNotas (3):** Lost Localizations, Chilean Arcade Scene y Consola pirata LATAM. Formato nuevo (agosto 2026),
 0 publicadas todavía — sin playlist propia definida.
 
 ---
@@ -236,13 +236,14 @@ se publica tal cual.
 
 - **Sagas:** 12 armadas, 1 publicada (11 de backlog) — **sigue siendo la brecha más
   grande del canal**, sin cambios desde julio.
-- **Reseñas:** 55 armadas, 30 publicadas (API 2026-10-30), 25 de backlog sin
-  fecha, 0 programadas — el formato que más rápido está publicando, y aun así
-  sigue siendo el segundo backlog más grande en volumen absoluto.
-- **Rankings:** 37 armados, 18 publicados, 1 programado (18 de backlog).
+- **Reseñas:** 63 armadas, 36 publicadas, 1 programada (Diablo) y 26 de backlog sin
+  fecha — el formato que más rápido está publicando, y aun así sigue siendo el mayor
+  backlog en volumen absoluto tras sumar las 7 de arcade.
+- **Rankings:** 40 armados, 20 publicados, 1 programado (Dreamcast Top Mundial) y 19 de backlog.
+- **Specials:** 7 armados, 2 publicados, 5 de backlog (con los dos de juegos de película).
 - **Curaduría N64:** 5 armados, 0 publicados — sigue sin casa en el menú de playlists.
-- **RetroNotas:** 2 armadas, 0 publicadas — formato nuevo, sin playlist propia todavía.
-- **Colecciones sigue siendo la única categoría 100% al día** (4 armadas = 4 publicadas).
+- **RetroNotas:** 3 armadas, 0 publicadas — formato nuevo, sin playlist propia todavía.
+- **Colecciones sigue siendo la única categoría 100% al día** (4 armadas = 4 publicadas), con 3 reforges armados sin grabar.
 
 ## 4. Pendiente de decidir con Luis
 
@@ -255,6 +256,8 @@ se publica tal cual.
    "Programado" en YouTube Studio (1 cada 3-4 días, casi todo Reseñas) sugiere que Reseñas
    se está usando como la cadencia principal mientras Sagas queda estancado.
 4. Si los shorts de B-roll simple (sin TarroBot) siguen siendo un formato válido aparte.
+5. **Restaurar Atari 2600 Top Peores y Game Boy Top Peores** desde el historial de git (se borraron el 2026-11-17 sin estar publicados). Con tu dale se restauran archivos, pauta, kit e imágenes y se vuelven a sumar al backlog (Rankings pasaría a 42 armados y 21 de backlog).
+6. **Reauditar la sección 2 (shorts):** la API del 2026-11-20 muestra unos 30 videos de hasta 2 minutos publicados (13 de hasta 60 s y 17 entre 1 y 2 min), contra los 22 que cuenta esta sección. Falta cruzarlos uno a uno por título.
 
 ---
 
