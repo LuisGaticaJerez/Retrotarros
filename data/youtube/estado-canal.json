@@ -1,6 +1,6 @@
 {
-  "fecha": "2026-11-20",
-  "generado": "2026-11-20T13:13:41+00:00",
+  "fecha": "2026-11-23",
+  "generado": "2026-11-23T13:59:38+00:00",
   "videos": [
     {
       "id": "6aRBfJZjjgA",
@@ -15,11 +15,11 @@
     {
       "id": "Cpzu3qUQZnQ",
       "titulo": "Los 10 MEJORES juegos de Sega Dreamcast de la historia",
-      "estado": "programado",
-      "privacidad": "private",
-      "publicacion_programada": "2026-11-22T23:30:00Z",
-      "subido": "2026-11-11T01:51:05Z",
-      "vistas": 0,
+      "estado": "publicado",
+      "privacidad": "public",
+      "publicacion_programada": null,
+      "subido": "2026-11-22T23:30:13Z",
+      "vistas": 62,
       "duracion": "PT43M37S"
     },
     {
@@ -29,7 +29,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-19T23:30:37Z",
-      "vistas": 34,
+      "vistas": 156,
       "duracion": "PT23M21S"
     },
     {
@@ -39,7 +39,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-17T23:30:08Z",
-      "vistas": 157,
+      "vistas": 180,
       "duracion": "PT29M45S"
     },
     {
@@ -49,7 +49,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-15T23:30:03Z",
-      "vistas": 125,
+      "vistas": 129,
       "duracion": "PT35M2S"
     },
     {
@@ -59,7 +59,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-12T23:30:22Z",
-      "vistas": 112,
+      "vistas": 114,
       "duracion": "PT17M40S"
     },
     {
@@ -69,7 +69,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-11T02:31:31Z",
-      "vistas": 727,
+      "vistas": 824,
       "duracion": "PT23M21S"
     },
     {
@@ -79,7 +79,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-08T23:30:39Z",
-      "vistas": 58,
+      "vistas": 60,
       "duracion": "PT41M21S"
     },
     {
@@ -89,7 +89,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-06T00:03:10Z",
-      "vistas": 263,
+      "vistas": 264,
       "duracion": "PT32M15S"
     },
     {
@@ -99,7 +99,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-11-03T23:30:18Z",
-      "vistas": 68,
+      "vistas": 69,
       "duracion": "PT18M36S"
     },
     {
@@ -119,7 +119,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-27T23:30:23Z",
-      "vistas": 287,
+      "vistas": 289,
       "duracion": "PT22M14S"
     },
     {
@@ -129,7 +129,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-25T23:30:35Z",
-      "vistas": 234,
+      "vistas": 237,
       "duracion": "PT40M47S"
     },
     {
@@ -139,7 +139,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-22T23:30:29Z",
-      "vistas": 111,
+      "vistas": 112,
       "duracion": "PT23M26S"
     },
     {
@@ -149,7 +149,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-20T23:30:35Z",
-      "vistas": 179,
+      "vistas": 180,
       "duracion": "PT23M37S"
     },
     {
@@ -159,7 +159,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-18T23:30:00Z",
-      "vistas": 1476,
+      "vistas": 1582,
       "duracion": "PT39M53S"
     },
     {
@@ -179,7 +179,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-13T23:30:25Z",
-      "vistas": 150,
+      "vistas": 152,
       "duracion": "PT23M57S"
     },
     {
@@ -199,7 +199,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-08T23:30:06Z",
-      "vistas": 348,
+      "vistas": 350,
       "duracion": "PT22M51S"
     },
     {
@@ -209,7 +209,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-10-07T01:00:11Z",
-      "vistas": 441,
+      "vistas": 442,
       "duracion": "PT17M40S"
     },
     {
@@ -299,7 +299,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-09-15T23:30:21Z",
-      "vistas": 721,
+      "vistas": 724,
       "duracion": "PT21M16S"
     },
     {
@@ -459,7 +459,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-17T00:30:28Z",
-      "vistas": 178,
+      "vistas": 179,
       "duracion": "PT30M53S"
     },
     {
@@ -479,7 +479,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-12T00:30:28Z",
-      "vistas": 295,
+      "vistas": 297,
       "duracion": "PT11M58S"
     },
     {
@@ -509,7 +509,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-08-06T02:00:34Z",
-      "vistas": 122,
+      "vistas": 123,
       "duracion": "PT11M39S"
     },
     {
@@ -829,7 +829,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-06-08T02:00:08Z",
-      "vistas": 229,
+      "vistas": 234,
       "duracion": "PT35M2S"
     },
     {
@@ -949,7 +949,7 @@
       "privacidad": "public",
       "publicacion_programada": null,
       "subido": "2026-05-20T03:38:22Z",
-      "vistas": 105,
+      "vistas": 106,
       "duracion": "PT32M53S"
     },
     {
