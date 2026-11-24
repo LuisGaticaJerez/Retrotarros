@@ -60,6 +60,10 @@
 > Top Mundial (dom 22 nov, 20:30) y la reseña de Diablo (mar 24 nov, 20:30); ambos ya grabados,
 > no tocar.
 
+> **Verificación con la API de YouTube: 2026-11-23** (98 publicados + 1 programado). Desde la
+> última vez se publicó Dreamcast Top Mundial (dom 22 nov, 20:30). Queda programada solo la reseña
+> de Diablo (mar 24 nov, 20:30), ya grabada, no tocar.
+
 > **Consolidación completa contra el disco: 2026-11-22** (estudio/ y docs/ revisados archivo por archivo,
 > más `data/youtube/estado-canal.json` del 2026-11-20). Correcciones: Rankings 42 armados / 21 de backlog
 > (faltaban PS2 y Xbox Top Mundial y los 3 Joyas ocultas de GameCube, Mega Drive y PS1); Specials 7
@@ -88,13 +92,13 @@
 | Categoría | Armados | Publicados | Programados | Backlog sin fecha |
 |---|---:|---:|---:|---:|
 | Reseñas | 63 | 36 | 1 | 26 |
-| Rankings (Top Mundial + Top Precios, Top Peores y Joyas ocultas por consola; los publicados que ya se retiraron siguen contados) | 42 | 20 | 1 | 21 |
+| Rankings (Top Mundial + Top Precios, Top Peores y Joyas ocultas por consola; los publicados que ya se retiraron siguen contados) | 42 | 21 | 0 | 21 |
 | Sagas de videojuegos | 12 | 1 | 0 | 11 |
 | Specials | 7 | 2 | 0 | 5 |
 | Curaduría N64-only | 5 | 0 | 0 | 5 |
 | RetroNotas | 3 | 0 | 0 | 3 |
 | Colecciones | 4 | 4 | 0 | 0 |
-| **TOTAL** | **136** | **63** | **2** | **71** |
+| **TOTAL** | **136** | **64** | **1** | **71** |
 
 Aparte, fuera de esta tabla: **Abriendo el tarro** (2 publicados: Arturo y Rodrigo; formato dependiente de
 invitado, no tiene "backlog" fijo) y **2 episodios G-OLD** archivados (versiones viejas
@@ -103,16 +107,15 @@ superadas, playlist muerta, no cuentan como activo). **Colecciones** (4 de 4 pub
 
 ---
 
-### 1.1 Programados (leídos de YouTube con la API, 2026-11-20)
+### 1.1 Programados (leídos de YouTube con la API, 2026-11-23)
 
 **Calendario de publicación: martes, jueves y domingo a las 20:30 (hora de Chile).** Se actualiza solo los lunes, miércoles y viernes (el día siguiente) con `scripts/youtube_estado.py` (datos en `data/youtube/estado-canal.json`). **Un video programado ya está grabado: no tocar su HTML ni sus textos.**
 
 | Publicación (hora de Chile) | Título | Contenido del repo |
 |---|---|---|
-| Dom 22 nov 2026, 20:30 | Los 10 MEJORES juegos de Sega Dreamcast de la historia (44 min, privado, programado) | `studio/rankings/top-mundial/dreamcast-top-mundial.html`, `docs/descripciones/descripcion-dreamcast-top-mundial.md` |
 | Mar 24 nov 2026, 20:30 | Diablo (1996): ¿sigue dando miedo bajar un nivel más? \| RetroReseñas (31 min, privado, programado) | `studio/resenas/resena-diablo.html`, `docs/descripciones/descripcion-resena-diablo.md` |
 
-**Grabado y todavía sin fecha de publicación:** nada conocido a 2026-11-20 aparte de los programados (confirmar con Luis si hay algo grabado que no esté en YouTube). La reseña de Mighty Morphin Power Rangers se publicó el 2026-10-20. Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
+**Grabado y todavía sin fecha de publicación:** nada conocido a 2026-11-23 aparte de los programados (confirmar con Luis si hay algo grabado que no esté en YouTube). La reseña de Mighty Morphin Power Rangers se publicó el 2026-10-20. Todo lo demás del backlog (resto de reseñas y rankings) sigue sin grabar y se puede actualizar.
 
 Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09). Qué se retira, qué se exceptúa (rankings y reforges), pendientes y registro: `docs/canal/retiro-publicados.md`.
 
@@ -138,7 +141,7 @@ Pitfall: The Mayan Adventure (pedida), Mortal Kombat, Super Mario Bros. 3. Sus H
 del Drive y kits de YouTube (`docs/descripciones/`) se retiraron el 2026-10-09 (siguen en el historial de git).
 Metal Warriors y Melee se retiraron el 2026-10-19, igual que los 2 Specials publicados (Día del Padre y Mes del Mar: HTML, capturas, imágenes, kit y carpeta del Drive; se conservan sus pautas, discusiones y shorts).
 
-**Rankings (20):** SNES Joyas ocultas (dom 15 nov), PS1 Top Peores (dom 8 nov), Master System Top Mundial + Top Precios, Mega Drive Top Mundial, NES
+**Rankings (21):** Dreamcast Top Mundial (dom 22 nov), SNES Joyas ocultas (dom 15 nov), PS1 Top Peores (dom 8 nov), Master System Top Mundial + Top Precios, Mega Drive Top Mundial, NES
 Top Mundial + Top Precios, SNES Top Mundial + Top Precios, N64 Top Mundial + Top Precios,
 PS Vita Top Mundial, Atari 2600 Top Mundial + Top Precios, Game Boy Top Mundial + Top
 Precios, GameCube Top Mundial, PS1 Top Mundial (dom 18 oct), N64 Top Peores (dom 11 oct), SNES Top Peores (dom 25 oct).
