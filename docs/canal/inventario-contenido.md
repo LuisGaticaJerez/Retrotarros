@@ -119,6 +119,8 @@ superadas, playlist muerta, no cuentan como activo). **Colecciones** (4 de 4 pub
 
 Tras la publicación, esos HTML y kits se retiran del estudio como el resto de lo ya publicado (regla de 2026-10-09). Qué se retira, qué se exceptúa (rankings y reforges), pendientes y registro: `docs/canal/retiro-publicados.md`.
 
+**Retiro del estudio 2026-11-23:** se retiró el ranking Dreamcast Top Mundial (HTML, capturas, imágenes, kit, pauta y carpeta y `.docx` del Drive).
+
 **Retiro del estudio 2026-11-20:** se retiraron las reseñas The Witcher (pedida) y Final Fight (HTML, capturas, imágenes, kit y carpetas del Drive).
 
 **Retiro del estudio 2026-11-17:** se retiraron 4 reseñas (Yoshi's Island, Ocarina of Time, NFS Underground 2, Contra) y 11 rankings (Master System, Mega Drive Top Mundial, Atari 2600, Game Boy, GameCube Top Mundial, PS1 Top Mundial y Top Peores, N64 Top Peores, SNES Top Peores y Joyas ocultas), con pautas, discusiones, kits, HTML, capturas, imágenes y el short de Master System Top Precios (repo y Drive). Quedan solo los 7 rankings del reforge. Detalle en `docs/canal/retiro-publicados.md`.
